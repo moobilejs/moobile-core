@@ -137,7 +137,7 @@ p small {
 
 .window {
 	background: #424242 url(../images/mootools.png) no-repeat center center;
-	height: 460px;
+	height: 414px;
 	overflow: hidden;
 	width: 320px;
 }
@@ -152,15 +152,15 @@ p small {
 	float: left;
 	font-size: 15px;
 	font-weight: normal;
-	height: 460px;
-	min-height: 460px;
+	height: 414px;
+	min-height: 414px;
 	text-shadow: 0px 1px 0px #ffffff;
 	overflow: hidden;
 	width: 320px;
 }
 
 .view-scroll-element {
-	height: 460px;
+	height: 414px;
 	overflow: hidden;
 	width: 320px;
 }
@@ -169,7 +169,7 @@ p small {
 	background: #ffffff url(../images/view-bg-striped.png);
 	border-top: 1px solid #a0adb7;
 	border-bottom: 1px solid #a0adb7;
-	min-height: 420px;
+	min-height: 374px;
 	padding: 20px;
 	width: 280px;
 }
@@ -182,13 +182,13 @@ p small {
 	-moz-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	background: #ffffff;
-	height: 460px;
+	height: 414px;
 	width: 640px;
 }
 /* Fix transition 3d avec un width de 320 a la place */
 
 .navigation-view-wrapper {
-	height: 460px;
+	height: 414px;
 	width: 640px;
 }
 
