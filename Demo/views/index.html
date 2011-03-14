@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<title>Mootools Mobile</title>
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" href="../css/iphone.css" />
+		<link rel="stylesheet" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/moobile.js"></script>
+		<script type="text/javascript" src="../js/demo.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+		// <![CDATA["
+
+			window.application = new Moobile.Application.iPhone();
+			window.application.addEvent(Event.READY, function() {
+				this.viewControllerStack.pushViewControllerFrom('home.html');
+			});
+
+		// "]]>
+		</script>
+
+		<div id="window" class="iphone"></div>
+
+	</body>
+</html>

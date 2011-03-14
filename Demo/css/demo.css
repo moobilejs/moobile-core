@@ -1,0 +1,52 @@
+/*
+    Document   : demo.css
+    Created on : Mar 9, 2011, 9:23:52 PM
+    Author     : jpdery
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.demo-fx-tween {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	border: 1px solid #bbbbbb;
+	border-bottom: none;
+	background: #ffffff;
+	color: #000000;
+	cursor: pointer;
+	display: block;
+	font-size: 17px;
+	font-weight: bold;
+	list-style: none;
+	list-style-position: outside;
+	margin-bottom: 20px;
+	padding: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.demo-fx-morph {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	border: 1px solid #bbbbbb;
+	border-bottom: none;
+	background: #ffffff;
+	color: #000000;
+	cursor: pointer;
+	display: block;
+	font-size: 17px;
+	font-weight: bold;
+	list-style: none;
+	list-style-position: outside;
+	margin-bottom: 20px;
+	padding: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+}

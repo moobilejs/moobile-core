@@ -1,0 +1,402 @@
+/* Reset
+-----------------------------------------------------------------------------*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    line-height: 1;
+}
+
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary {
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+ins {
+    background-color: #ff9;
+    color: #000;
+    text-decoration: none;
+}
+
+mark {
+    background-color: #ff9;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted #000;
+    cursor: help;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #cccccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+input, select {
+    vertical-align: middle;
+}
+
+iframe {
+	border: none;
+}
+
+/* Body
+-----------------------------------------------------------------------------*/
+
+body {
+	font-size: 15px;
+	font-weight: bold;
+	font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Header Text
+-----------------------------------------------------------------------------*/
+
+h2 {
+	color: #4c596e;
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+
+h3 {
+	color: #4c596e;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+
+p {
+	margin-bottom: 12px;
+}
+
+p small {
+	font-size: 12px;
+}
+
+/* UI Window
+-----------------------------------------------------------------------------*/
+
+.window {
+	background: #424242 url(../images/mootools.png) no-repeat center center;
+	height: 460px;
+	overflow: hidden;
+	width: 320px;
+}
+
+/* UI View
+-----------------------------------------------------------------------------*/
+
+.view {
+	background: #e2e7ed;
+	color: #4c596e;
+	display: block;
+	float: left;
+	font-size: 15px;
+	font-weight: normal;
+	height: 460px;
+	min-height: 460px;
+	text-shadow: 0px 1px 0px #ffffff;
+	overflow: hidden;
+	width: 320px;
+}
+
+.view-scroll-element {
+	height: 460px;
+	overflow: hidden;
+	width: 320px;
+}
+
+.view-wrapper {
+	background: #ffffff url(../images/view-bg-striped.png);
+	border-top: 1px solid #a0adb7;
+	border-bottom: 1px solid #a0adb7;
+	min-height: 420px;
+	padding: 20px;
+	width: 280px;
+}
+
+/* UI Navigation View
+-----------------------------------------------------------------------------*/
+
+.navigation-view {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	background: #ffffff;
+	height: 460px;
+	width: 640px;
+}
+/* Fix transition 3d avec un width de 320 a la place */
+
+.navigation-view-wrapper {
+	height: 460px;
+	width: 640px;
+}
+
+/* UI List
+-----------------------------------------------------------------------------*/
+
+.ui-list .ui-list-item {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	border: 1px solid #bbbbbb;
+	border-bottom: none;
+	background: #ffffff;
+	color: #000000;
+	cursor: pointer;
+	display: block;
+	font-size: 17px;
+	font-weight: bold;
+	list-style: none;
+	list-style-position: outside;
+	padding: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.ui-list .ui-list-item:first-child {
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+}
+
+.ui-list .ui-list-item:last-child {
+	-moz-border-radius-bottomleft: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	border: 1px solid #bbbbbb;
+}
+
+.list li.table-view-cell-selected {
+	background: #f4f4f4;
+}
+
+/* UI Button
+-----------------------------------------------------------------------------*/
+
+.button {
+	-webkit-box-sizing: border-box;
+	-webkit-border-radius: 8px;
+	-moz-box-sizing: border-box;
+	-moz-border-radius: 8px;
+	-o-border-radius: 8px;
+	-o-box-sizing: border-box;
+	border: 1px solid #bbbbbb;
+	background: #ffffff;
+	color: #000000;
+	cursor: pointer;
+	font-size: 17px;
+	font-weight: bold;
+	font-family: "Helvetica Neue", sans-serif;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+}
+
+/* Transition - Slide
+-----------------------------------------------------------------------------*/
+
+.transition-slide-enter { -webkit-transform: translateX(0%); }
+.transition-slide-leave { -webkit-transform: translateX(-50%); }
+
+.transition-slide-enter.commit-transition {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transform: translateX(-50%);
+}
+
+.transition-slide-leave.commit-transition {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transform: translateX(0%);
+}
+
+/* Transition Cubic
+-----------------------------------------------------------------------------*/
+
+.transition-cubic-viewport {
+	-webkit-perspective: 800;
+}
+
+.transition-cubic {
+	-webkit-transform: translateZ(-160px);
+	-webkit-transform-style: preserve-3d;
+	position: absolute;
+	width: 50% !important;
+}
+
+.transition-cubic.transition-cubic-enter .cubic-face-leave {
+	-webkit-transform: rotateY(0deg) translateZ(160px);
+	position: absolute;
+}
+
+.transition-cubic.transition-cubic-enter .cubic-face-enter {
+	-webkit-transform: rotateY(90deg) translateZ(160px);
+	position: absolute;
+}
+
+.transition-cubic.transition-cubic-enter.commit-transition {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 500ms;
+
+	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-transform: translateZ(-160px) rotateY(-90deg);
+}
+
+.transition-cubic.transition-cubic-leave .cubic-face-leave {
+	-webkit-transform: rotateY(0deg) translateZ(160px);
+	position: absolute;
+}
+
+.transition-cubic.transition-cubic-leave .cubic-face-enter {
+	-webkit-transform: rotateY(-90deg) translateZ(160px);
+	position: absolute;
+}
+
+.transition-cubic.transition-cubic-leave.commit-transition {
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-transform: translateZ(-160px) rotateY(90deg);
+}
+
+.touchScroll {
+	position: relative;
+}
+
+/* Touch Scroll
+-----------------------------------------------------------------------------*/
+
+.touchScroll {
+	position: relative;
+}
+
+.touchScrollBars {
+	display: -webkit-box;
+	padding: 3px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483647;
+	-webkit-box-align: end;
+	-webkit-box-pack: end;
+	-webkit-box-sizing: border-box;
+}
+
+.touchScrollTrack {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.touchScrollTrackX {
+	height: 6px;
+}
+
+.touchScrollTrackY {
+	float: right;
+	width: 6px;
+}
+
+.touchScrollBarsBoth {
+	padding-bottom: 12px;
+	padding-right: 12px;
+}
+
+.touchScrollBarsBoth .touchScrollTrackX {
+	-webkit-transform: translateY(9px);
+}
+
+.touchScrollBarsBoth .touchScrollTrackY {
+	-webkit-transform: translateX(3px);
+}
+
+.touchScrollHandle {
+	border: 1px solid;
+	min-height: 4px;
+	min-width: 4px;
+	-webkit-transition-property: -webkit-transform, height, width;
+	-webkit-border-radius: 3px;
+
+	/* COLOR VARIANTS */
+/* Default */
+	border-color: rgba(255, 255, 255, 0.15);
+	background: rgba(0, 0, 0, 0.5);
+/**/
+
+/* White
+	border-color: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.5);
+/**/
+
+/* Black
+	border-color: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.5);
+/**/
+}

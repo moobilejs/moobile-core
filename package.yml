@@ -1,0 +1,44 @@
+name: "Moobile"
+
+exports: "moobile.js"
+
+web: "[mootools.net](http://mootools.net)"
+
+description: "MooTools for mobile devices"
+
+license: "[MIT License](http://mootools.net/license.txt)"
+
+copyright: "&copy; Jean-Philippe Dery (jeanphilippe.dery@gmail.com)"
+
+authors: "Jean-Philippe Dery (jeanphilippe.dery@gmail.com)"
+
+sources:
+
+  - "Vendor/iscroll/src/iscroll-lite.js"
+
+  - "Source/Application/Application.js"
+  - "Source/Application/Application.iPhone.js"
+  - "Source/Core/Core.js"
+  - "Source/Debug/Debug.js"
+  - "Source/Browser/Browser.Platform.js"
+  - "Source/Event/Event.js"
+  - "Source/Event/Event.ClickIn.js"
+  - "Source/Event/Event.TouchIn.js"
+  - "Source/Exception/Exception.js"
+  - "Source/Fx/Fx.CSS3.js"
+  - "Source/Fx/Fx.CSS3.Tween.js"
+  - "Source/Fx/Fx.CSS3.Morph.js"
+  - "Source/History/History.js"
+  - "Source/History/History.ViewController.js"
+  - "Source/Request/Request.js"
+  - "Source/Request/Request.ViewController.js"
+  - "Source/Scroller/Scroller.js"
+  - "Source/UI/UI.Control.js"
+  - "Source/View/View.js"
+  - "Source/View/View.Navigation.js"
+  - "Source/ViewController/ViewController.js"
+  - "Source/ViewController/ViewController.Stack.js"
+  - "Source/ViewControllerTransition/ViewControllerTransition.js"
+  - "Source/ViewControllerTransition/ViewControllerTransition.Slide.js"
+  - "Source/ViewControllerTransition/ViewControllerTransition.Cubic.js"
+  - "Source/Window/Window.js"
