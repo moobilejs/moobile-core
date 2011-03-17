@@ -12,7 +12,6 @@ authors:
 
 requires:
 	- Core
-	- History.ViewController
 	- Request.ViewController
 	- ViewController
 
@@ -28,20 +27,15 @@ Moobile.ViewController.Stack = new Class({
 
 	Binds: [
 		'pushTransitionCompleted',
-		'popTransitionCompleted',
-		'onHistoryForward',
-		'onHistoryBack'
+		'popTransitionCompleted'
 	],
 
 	viewControllers: [],
-
-	history: null,
 
 	request: null,
 
 	initialize: function(view) {
 		this.parent(view);
-		this.history = new Moobile.History.ViewController();
 		this.request = new Moobile.Request.ViewController(this);
 		this.view.hide();
 		return this;
@@ -60,14 +54,10 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	attachEvents: function() {
-		this.history.addEvent('forward', this.onHistoryForward);
-		this.history.addEvent('back', this.onHistoryBack);
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		this.history.removeEvent('forward', this.onHistoryForward);
-		this.history.removeEvent('back', this.onHistoryBack);
 		return this.parent();
 	},
 
@@ -115,8 +105,6 @@ Moobile.ViewController.Stack = new Class({
 			}
 		}
 
-		this.history.push(viewController);
-
 		return this;
 	},
 
@@ -151,9 +139,6 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidLeave();
 		this.viewControllers.pop()
 			.viewDidRemove();
-
-		this.history.pop();
-
 		return this;
 	},
 
@@ -178,18 +163,6 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	viewDidLeave: function() {
-		return this;
-	},
-
-	/* still buggy */
-
-	onHistoryBack: function(viewController) {
-		this.popViewController();
-		return this;
-	},
-
-	onHistoryForward: function(viewController) {
-		this.pushViewController(viewController);
 		return this;
 	}
 

@@ -28,8 +28,6 @@ sources:
   - "Source/Fx/Fx.CSS3.js"
   - "Source/Fx/Fx.CSS3.Tween.js"
   - "Source/Fx/Fx.CSS3.Morph.js"
-  - "Source/History/History.js"
-  - "Source/History/History.ViewController.js"
   - "Source/Request/Request.js"
   - "Source/Request/Request.ViewController.js"
   - "Source/Scroller/Scroller.js"
