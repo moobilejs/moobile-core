@@ -9011,7 +9011,7 @@ Event.READY = Browser.Platform.phonegap ? 'deviceready' : 'domready';
 Event.PINCH = 'pinch';
 Event.SWIPE = 'swipe';
 
-Event.CLICK			= Browser.Platform.desktop ? 'clickin'   : 'touchin';
+Event.CLICK			= Browser.Platform.desktop ? 'clickover' : 'touchover';
 Event.MOUSE_DOWN	= Browser.Platform.desktop ? 'mousedown' : 'touchstart';
 Event.MOUSE_MOVE	= Browser.Platform.desktop ? 'mousemove' : 'touchmove';
 Event.MOUSE_UP		= Browser.Platform.desktop ? 'mouseup'   : 'touchend';
@@ -9030,7 +9030,7 @@ if (Browser.Platform.phonegap) Element.NativeEvents.deviceready = 1;
 /*
 ---
 
-name: Event.ClickIn
+name: Event.ClickOver
 
 description: Provide a click event that is not triggered when the user clicks
              and move the mouse.
@@ -9043,7 +9043,7 @@ author:
 requires:
 
 provides:
-	- Event.ClickIn
+	- Event.ClickOver
 
 ...
 */
@@ -9087,7 +9087,7 @@ provides:
 		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
-	Element.Events.clickin = {
+	Element.Events.clickover = {
 
 		base: 'click',
 
@@ -9114,10 +9114,10 @@ provides:
 /*
 ---
 
-name: Event.TouchIn
+name: Event.TouchOver
 
-description: Provide a click event that is not triggered when the user clicks
-             and move the mouse.
+description: Provide a touch event that is not triggered when the user touch
+             and moves.
 
 license: MIT-style license.
 
@@ -9127,7 +9127,7 @@ author:
 requires:
 
 provides:
-	- Event.TouchIn
+	- Event.TouchOver
 
 ...
 */
@@ -9171,7 +9171,7 @@ provides:
 		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
-	Element.Events.touchin = {
+	Element.Events.touchover = {
 
 		base: 'touchend',
 
@@ -9575,8 +9575,8 @@ requires:
 	- Browser.Platform
 	- Exception
 	- Event
-	- Event.ClickIn
-	- Event.TouchIn
+	- Event.ClickOver
+	- Event.TouchOver
 	- Fx.CSS3
 	- Fx.CSS3.Tween
 	- Fx.CSS3.Morph

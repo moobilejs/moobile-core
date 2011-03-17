@@ -61,8 +61,8 @@ requires:
 	- Browser.Platform
 	- Exception
 	- Event
-	- Event.ClickIn
-	- Event.TouchIn
+	- Event.ClickOver
+	- Event.TouchOver
 	- Fx.CSS3
 	- Fx.CSS3.Tween
 	- Fx.CSS3.Morph

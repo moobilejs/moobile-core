@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Event.ClickIn
+name: Event.ClickOver
 
 description: Provide a click event that is not triggered when the user clicks
              and move the mouse.
@@ -14,7 +14,7 @@ author:
 requires:
 
 provides:
-	- Event.ClickIn
+	- Event.ClickOver
 
 ...
 */
@@ -58,7 +58,7 @@ provides:
 		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
-	Element.Events.clickin = {
+	Element.Events.clickover = {
 
 		base: 'click',
 

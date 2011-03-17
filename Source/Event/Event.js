@@ -23,7 +23,7 @@ Event.READY = Browser.Platform.phonegap ? 'deviceready' : 'domready';
 Event.PINCH = 'pinch';
 Event.SWIPE = 'swipe';
 
-Event.CLICK			= Browser.Platform.desktop ? 'clickin'   : 'touchin';
+Event.CLICK			= Browser.Platform.desktop ? 'clickover' : 'touchover';
 Event.MOUSE_DOWN	= Browser.Platform.desktop ? 'mousedown' : 'touchstart';
 Event.MOUSE_MOVE	= Browser.Platform.desktop ? 'mousemove' : 'touchmove';
 Event.MOUSE_UP		= Browser.Platform.desktop ? 'mouseup'   : 'touchend';

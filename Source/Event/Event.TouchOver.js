@@ -1,10 +1,10 @@
 /*
 ---
 
-name: Event.TouchIn
+name: Event.TouchOver
 
-description: Provide a click event that is not triggered when the user clicks
-             and move the mouse.
+description: Provide a touch event that is not triggered when the user touch
+             and moves.
 
 license: MIT-style license.
 
@@ -14,7 +14,7 @@ author:
 requires:
 
 provides:
-	- Event.TouchIn
+	- Event.TouchOver
 
 ...
 */
@@ -58,7 +58,7 @@ provides:
 		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
-	Element.Events.touchin = {
+	Element.Events.touchover = {
 
 		base: 'touchend',
 
