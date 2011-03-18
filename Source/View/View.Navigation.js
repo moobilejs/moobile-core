@@ -27,8 +27,8 @@ Moobile.View.Navigation = new Class({
 
 	options: {
 		className: 'navigation-view',
-		scroll: false,
-		scrollRefresh: -1
+		scrollable: false,
+		wrappable: true
 	}
 
 });

@@ -36,10 +36,6 @@ Moobile.View = new Class({
 
 	parentView: null,
 
-	scroller: null,
-
-	movable: null,
-
 	wrapper: null,
 
 	childViews: [],
@@ -48,18 +44,19 @@ Moobile.View = new Class({
 
 	childControls: [],
 
+	scroller: null,
+
 	options: {
 		className: 'view',
-		scroll: true,
-		scrollRefresh: -1,
-		wrap: true
+		scrollable: true,
+		wrappable: true
 	},
 
 	initialize: function(element, options) {
 		this.setElement(element);
 		this.setOptions(options);
-		if (this.options.scroll) this.scroll();
-		if (this.options.wrap) this.wrap();
+		if (this.options.wrappable) this.attachWrapper();
+		if (this.options.scrollable) this.attachScroller();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent(element, options);
@@ -69,14 +66,8 @@ Moobile.View = new Class({
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-		if (this.wrapper) {
-			this.wrapper.destroy();
-			this.wrapper = null;
-		}
-		if (this.scroller) {
-			this.scroller.destroy();
-			this.scroller = null;
-		}
+		if (this.options.wrappable) this.detachWrapper();
+		if (this.options.scrollable) this.detachScroller();
 		this.parent();
 		return this;
 	},
@@ -109,69 +100,49 @@ Moobile.View = new Class({
 		this.childControls = [];
 	},
 
-	setWindow: function(window) {
-		this.window = window;
+	attachScroller: function() {
+		this.scroller = new Moobile.Scroller(this.element);
+		this.scroller.attach();
+		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
 		return this;
 	},
 
-	getWindow: function() {
-		return this.window;
-	},
-
-	setParentView: function(parentView) {
-		this.parentView = parentView;
-		return this;
-	},
-
-	getParentView: function() {
-		return this.parentView;
-	},
-
-	scroll: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-scroll-wrapper').set('html', this.element.get('html'));
-		this.movable = new Element('div.' + this.options.className + '-scroll-element');
-		this.movable.adopt(this.wrapper);
-		this.element.empty();
-		this.element.adopt(this.movable);
-		this.enableScroller();
-		if (document.preventScroll == undefined) {
-			document.preventScroll = true;
-			document.addEventListener('touchmove', function(e) {
-				e.preventDefault();
-			});
-		}
+	detachScroller: function() {
+		this.scroller.detach();
+		this.scroller = null;
+		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
 		return this;
 	},
 
 	enableScroller: function() {
-		if (this.scroller == null && this.movable) {
-			this.scroller = new Moobile.Scroller(this.movable);
-			this.scroller.refresh();
-		}
+		if (this.scroller) this.scroller.enable();
 		return this;
 	},
 
 	disableScroller: function() {
-		if (this.scroller && this.movable) {
-			this.scroller.destroy();
-			this.scroller = null;
-		}
+		if (this.scroller) this.scroller.disable();
 		return this;
 	},
 
 	updateScroller: function() {
-		if (this.scroller && this.movable) {
-			this.scroller.refresh();
-		}
+		if (this.scroller) this.scroller.refresh();
 		return this;
 	},
 
-	wrap: function() {
+	attachWrapper: function() {
 		var content = this.getContent();
 		var element = new Element('div.' + this.options.className + '-wrapper').set('html', content.get('html'));
 		content.empty();
 		content.adopt(element);
 		this.wrapper = element;
+		return this;
+	},
+
+	detachWrapper: function() {
+		var content = this.wrapper.get('html');
+		this.wrapper.destroy();
+		this.wrapper = null;
+		this.element.set('html', content);
 		return this;
 	},
 
@@ -311,6 +282,24 @@ Moobile.View = new Class({
 		}
 		content.adopt.apply(content, arguments);
 		return this;
+	},
+
+	setWindow: function(window) {
+		this.window = window;
+		return this;
+	},
+
+	getWindow: function() {
+		return this.window;
+	},
+
+	setParentView: function(parentView) {
+		this.parentView = parentView;
+		return this;
+	},
+
+	getParentView: function() {
+		return this.parentView;
 	},
 
 	getContent: function() {

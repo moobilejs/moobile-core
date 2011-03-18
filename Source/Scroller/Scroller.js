@@ -3,12 +3,11 @@
 
 name: Scroller
 
-description: Provide an extension of the iScroll class.
+description: Provide a wrapper for iScroll scroller.
 
 license: MIT-style license.
 
 authors:
-	- Christoph Pojer
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
@@ -20,40 +19,86 @@ provides:
 ...
 */
 
-var Scroller = function(){};
-Scroller.prototype = iScroll.prototype;
-
 Moobile.Scroller = new Class({
 
-	Extends: Scroller,
+	Static: {
+		instances: 0
+	},
 
-	initialize: function(element, options){
-		this.element = document.id(element);
-		this.setup();
+	Implements: [Events, Options],
+	
+	content: null,
+
+	element: null,
+
+	wrapper: null,
+	
+	scroller: null,
+
+	enabled: true,
+
+	initialize: function(content) {
+		this.content = content;
 		return this;
 	},
 
-	setup: function(){
-		iScroll.call(this, this.element, {
-			desktopCompatibility: true,
-			hScroll: false,
-			vScroll: true
-		});
+	attach: function() {
+		this.enabled = true;
+		this.wrapper = new Element('div.scroller-wrapper').set('html', this.content.get('html'));
+		this.element = new Element('div.scroller-element');
+		this.element.adopt(this.wrapper);
+		this.content.empty();
+		this.content.adopt(this.element);
+		this.scroller = new iScroll(this.content, {desktopCompatibility: true, hScroll: false, vScroll: true});
+		this.scroller.refresh();
+		if (++Moobile.Scroller.instances == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
+		return this;
 	},
 
-	_start: function(e) {
-		this.start = e.touches ? e.touches[0].pageY : e.pageY;
-		this.parent(e);
+	detach: function() {
+		this.enabled = false;
+		this.scroller.destroy();
+		this.scroller = null;
+		this.content.set('html', this.wrapper.get('html'));
+		this.wrapper.destroy();
+		this.element.destroy();
+		if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+		return this;
 	},
 
-	_move: function(e) {
-		if (Math.abs(this.start - (e.touches ? e.touches[0].pageY : e.pageY)) > 3) Element.disableCustomEvents();
-		this.parent(e);
+	enable: function() {
+		if (this.enabled == false) {
+			this.enabled = true;
+			this.scroller = new iScroll(this.content, { desktopCompatibility: true, hScroll: false, vScroll: true });
+			this.scroller.refresh();
+		}
+		return this;
 	},
 
-	_end: function(e) {
-		(function() { Element.enableCustomEvents(); }).delay(1);
-		this.parent(e);
+	disable: function() {
+		if (this.enabled == true) {
+			this.enabled = false;
+			this.scroller.destroy();
+			this.scroller = null;
+		}
+		return this;
+	},
+
+	refresh: function() {
+		if (this.enabled) this.scroller.refresh();
+		return this;
+	},
+
+	destroy: function() {
+		if (this.enabled) {
+			this.enabled = false;
+			this.scroller.destroy();
+			this.scroller = null;
+		}
+	},
+
+	onDocumentTouchMove: function(e) {
+		e.preventDefault();
 	}
 
 });
