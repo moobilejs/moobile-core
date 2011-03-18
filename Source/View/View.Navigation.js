@@ -13,6 +13,7 @@ authors:
 requires:
 	- Core
 	- View
+	- View.Stack
 
 provides:
 	- View.Navigation
@@ -22,7 +23,7 @@ provides:
 
 Moobile.View.Navigation = new Class({
 
-	Extends: Moobile.View,
+	Extends: Moobile.View.Stack,
 
 	options: {
 		className: 'navigation-view',

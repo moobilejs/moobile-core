@@ -9633,7 +9633,7 @@ Moobile.Application = new Class({
 	},
 
 	startup: function() {
-		this.viewControllerStack = new Moobile.ViewController.Stack();
+		this.viewControllerStack = new Moobile.ViewController.Navigation();
 		this.viewControllerWindow = new Moobile.Window(this.options.window);
 		this.viewControllerWindow.setViewController(this.viewControllerStack);
 		return this;
@@ -10001,19 +10001,15 @@ Moobile.View = new Class({
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-
 		if (this.wrapper) {
 			this.wrapper.destroy();
 			this.wrapper = null;
 		}
-
 		if (this.scroller) {
 			this.scroller.destroy();
 			this.scroller = null;
 		}
-
 		this.parent();
-
 		return this;
 	},
 
@@ -10063,8 +10059,6 @@ Moobile.View = new Class({
 		return this.parentView;
 	},
 
-	/* scroller */
-
 	scroll: function() {
 		this.wrapper = new Element('div.' + this.options.className + '-scroll-wrapper').set('html', this.element.get('html'));
 		this.movable = new Element('div.' + this.options.className + '-scroll-element');
@@ -10104,8 +10098,6 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	/* wrapper */
-
 	wrap: function() {
 		var content = this.getContent();
 		var element = new Element('div.' + this.options.className + '-wrapper').set('html', content.get('html'));
@@ -10114,8 +10106,6 @@ Moobile.View = new Class({
 		this.wrapper = element;
 		return this;
 	},
-
-	/* child views */
 
 	addChildView: function(view) {
 		this.childViews.push(view);
@@ -10143,8 +10133,6 @@ Moobile.View = new Class({
 		if (parent) parent.removeChildView(this);
 		return this;
 	},
-
-	/* child controls */
 
 	attachChildControls: function() {
 		this.element.getElements('[data-role=control]').each(this.attachChildControl);
@@ -10199,8 +10187,6 @@ Moobile.View = new Class({
 		if (removed) control.dispose();
 		return this;
 	},
-
-	/* child elements */
 
 	attachChildElements: function() {
 		this.element.getElements('[data-role=element]').each(this.attachChildElement);
@@ -10268,6 +10254,50 @@ Moobile.View = new Class({
 /*
 ---
 
+name: View.Stack
+
+description: Provide the view that will contains the view controller stack
+             child views. This view must have a wrapper that will be double
+             size of the original view.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- View
+
+provides:
+	- View.Stack
+
+...
+*/
+
+Moobile.View.Stack = new Class({
+
+	Extends: Moobile.View,
+
+	options: {
+		className: 'stack-view',
+		scroll: false,
+		scrollRefresh: -1,
+		wrap: true
+	},
+
+	initialize: function(element, options) {
+		this.parent(element, options);
+		this.element.addClass('stack-view');
+		this.wrapper.addClass('stack-view-wrapper');
+		return this;
+	}
+
+});
+
+/*
+---
+
 name: View.Navigation
 
 description: Provides the view that represents the navigation stack.
@@ -10280,6 +10310,7 @@ authors:
 requires:
 	- Core
 	- View
+	- View.Stack
 
 provides:
 	- View.Navigation
@@ -10289,7 +10320,7 @@ provides:
 
 Moobile.View.Navigation = new Class({
 
-	Extends: Moobile.View,
+	Extends: Moobile.View.Stack,
 
 	options: {
 		className: 'navigation-view',
@@ -10513,7 +10544,7 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Navigation(new Element('div'));
+		this.view = view || new Moobile.View.Stack(new Element('div'));
 	},
 
 	startup: function() {
@@ -10635,6 +10666,40 @@ Moobile.ViewController.Stack = new Class({
 
 	viewDidLeave: function() {
 		return this;
+	}
+
+});
+
+/*
+---
+
+name: ViewController.Navigation
+
+description: Provide navigation function to the view controller stack such as
+             a navigation bar and navigation bar buttons.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- Request.ViewController
+	- ViewController
+
+provides:
+	- ViewController.Navigation
+
+...
+*/
+
+Moobile.ViewController.Navigation = new Class({
+
+	Extends: Moobile.ViewController.Stack,
+
+	loadView: function(view) {
+		this.view = view || new Moobile.View.Navigation(new Element('div'));
 	}
 
 });

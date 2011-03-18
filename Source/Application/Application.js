@@ -40,7 +40,7 @@ Moobile.Application = new Class({
 	},
 
 	startup: function() {
-		this.viewControllerStack = new Moobile.ViewController.Stack();
+		this.viewControllerStack = new Moobile.ViewController.Navigation();
 		this.viewControllerWindow = new Moobile.Window(this.options.window);
 		this.viewControllerWindow.setViewController(this.viewControllerStack);
 		return this;

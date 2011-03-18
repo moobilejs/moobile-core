@@ -174,10 +174,10 @@ p small {
 	width: 280px;
 }
 
-/* UI Navigation View
+/* UI Stack View
 -----------------------------------------------------------------------------*/
 
-.navigation-view {
+.stack-view {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-o-box-sizing: border-box;
@@ -187,7 +187,7 @@ p small {
 }
 /* Fix transition 3d avec un width de 320 a la place */
 
-.navigation-view-wrapper {
+.stack-view-wrapper {
 	height: 414px;
 	width: 640px;
 }

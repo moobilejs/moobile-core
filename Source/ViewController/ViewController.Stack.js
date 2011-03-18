@@ -42,7 +42,7 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Navigation(new Element('div'));
+		this.view = view || new Moobile.View.Stack(new Element('div'));
 	},
 
 	startup: function() {

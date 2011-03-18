@@ -69,19 +69,15 @@ Moobile.View = new Class({
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-
 		if (this.wrapper) {
 			this.wrapper.destroy();
 			this.wrapper = null;
 		}
-
 		if (this.scroller) {
 			this.scroller.destroy();
 			this.scroller = null;
 		}
-
 		this.parent();
-
 		return this;
 	},
 
@@ -131,8 +127,6 @@ Moobile.View = new Class({
 		return this.parentView;
 	},
 
-	/* scroller */
-
 	scroll: function() {
 		this.wrapper = new Element('div.' + this.options.className + '-scroll-wrapper').set('html', this.element.get('html'));
 		this.movable = new Element('div.' + this.options.className + '-scroll-element');
@@ -172,8 +166,6 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	/* wrapper */
-
 	wrap: function() {
 		var content = this.getContent();
 		var element = new Element('div.' + this.options.className + '-wrapper').set('html', content.get('html'));
@@ -182,8 +174,6 @@ Moobile.View = new Class({
 		this.wrapper = element;
 		return this;
 	},
-
-	/* child views */
 
 	addChildView: function(view) {
 		this.childViews.push(view);
@@ -211,8 +201,6 @@ Moobile.View = new Class({
 		if (parent) parent.removeChildView(this);
 		return this;
 	},
-
-	/* child controls */
 
 	attachChildControls: function() {
 		this.element.getElements('[data-role=control]').each(this.attachChildControl);
@@ -267,8 +255,6 @@ Moobile.View = new Class({
 		if (removed) control.dispose();
 		return this;
 	},
-
-	/* child elements */
 
 	attachChildElements: function() {
 		this.element.getElements('[data-role=element]').each(this.attachChildElement);
