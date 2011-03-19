@@ -10283,8 +10283,7 @@ Moobile.View = new Class({
 
 	addChildControl: function(control) {
 		this.attachChildControl(control);
-		var content = this.getContent();
-		content.adopt(control);
+		this.adopt(control);
 		return this;
 	},
 
@@ -10328,8 +10327,7 @@ Moobile.View = new Class({
 
 	addChildElement: function(element) {
 		this.attachChildElement(element);
-		var content = this.getContent();
-		content.adopt(element);
+		this.adopt(element);
 		return this;
 	},
 
