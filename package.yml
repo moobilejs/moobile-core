@@ -32,6 +32,8 @@ sources:
   - "Source/Request/Request.ViewController.js"
   - "Source/Scroller/Scroller.js"
   - "Source/UI/UI.Control.js"
+  - "Source/UI/UI.Button.js"
+  - "Source/UI/UI.NavigationBar.js"
   - "Source/View/View.js"
   - "Source/View/View.Stack.js"
   - "Source/View/View.Navigation.js"

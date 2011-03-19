@@ -159,10 +159,19 @@ p small {
 	width: 320px;
 }
 
+.with-navigation-bar .view {
+	height: 370px;
+	position: relative;
+}
+
 .view-scroll-element {
 	height: 414px;
 	overflow: hidden;
 	width: 320px;
+}
+
+.with-navigation-bar .view-scroll-element {
+	height: 370px;
 }
 
 .view-wrapper {
@@ -172,6 +181,10 @@ p small {
 	min-height: 374px;
 	padding: 20px;
 	width: 280px;
+}
+
+.with-navigation-bar .view-wrapper {
+	min-height: 332px;
 }
 
 /* UI Stack View
@@ -190,6 +203,14 @@ p small {
 .stack-view-wrapper {
 	height: 414px;
 	width: 640px;
+}
+
+/* UI Navigation Bar
+-----------------------------------------------------------------------------*/
+
+.ui-navigation-bar {
+	background: url(../images/ui-navigation-bar.png) no-repeat;
+	height: 44px;
 }
 
 /* UI List

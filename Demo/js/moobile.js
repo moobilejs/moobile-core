@@ -8312,6 +8312,11 @@ UI.Element = new Class({
 		this.element.adopt.apply(this.element, arguments);
 		return this;
 	},
+	
+	inject: function(element, where) {
+		this.element.inject(element, where);
+		return this;
+	},
 
 	empty: function() {
 		this.element.empty();
@@ -9947,6 +9952,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Extras/UI.Control
 
 provides:
 	- UI.Control
@@ -9954,6 +9960,7 @@ provides:
 ...
 */
 
+/*
 Class.refactor(UI.Control, {
 
 	Binds: ['onClick'],
@@ -9971,6 +9978,113 @@ Class.refactor(UI.Control, {
 	onClick: function() {
 		this.fireEvent(Event.CLICK);
 		return this;
+	}
+
+});
+*/
+
+/*
+---
+
+name: UI.Button
+
+description: Provides a button.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- UI.Control
+
+provides:
+	- UI.Button
+
+...
+*/
+
+UI.Button = new Class({
+
+	Extends: UI.Control,
+
+	Binds: ['onClick'],
+
+	attachEvents: function() {
+		this.element.addEvent(Event.CLICK, this.onClick);
+		return this.parent();
+	},
+
+	detachEvents: function() {
+		this.element.removeEvent(Event.CLICK, this.onClick);
+		return this.parent();
+	},
+
+	onClick: function() {
+		this.fireEvent(Event.CLICK);
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: UI.NavigationBar
+
+description: Provide the navigation bar of a navigation view.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Extras/UI.Element
+
+provides:
+	- UI.NavigationBar
+
+...
+*/
+
+UI.NavigationBar = new Class({
+
+	Extends: UI.Control,
+
+	left: null,
+
+	right: null,
+
+	title: null,
+
+	options: {
+		className: 'ui-navigation-bar'
+	},
+
+	initialize: function(element, options) {
+		this.parent(element || this.create(), options);
+		return this;
+	},
+
+	create: function() {
+		return new Element('div').adopt(
+			new Element('div.' + this.options.className + '-lf'),
+			new Element('div.' + this.options.className + '-title'),
+			new Element('div.' + this.options.className + '-rg')
+		);
+	},
+
+	setTitle: function(title, animated) {
+
+	},
+
+	setLeftButton: function(button, animated) {
+
+	},
+
+	setRightButton: function(button, animated) {
+
 	}
 
 });
@@ -10355,10 +10469,21 @@ Moobile.View.Navigation = new Class({
 
 	Extends: Moobile.View.Stack,
 
+	navigationBar: null,
+
 	options: {
 		className: 'navigation-view',
-		scrollable: false,
-		wrappable: true
+		navigationBar: true
+	},
+
+	initialize: function(element, options) {
+		this.parent(element, options);
+		if (this.options.navigationBar) {
+			this.navigationBar = new UI.NavigationBar();
+			this.navigationBar.inject(this.element, 'top');
+			this.element.addClass('with-navigation-bar');
+		}
+		return this;
 	}
 
 });
