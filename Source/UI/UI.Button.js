@@ -1,9 +1,9 @@
 /*
 ---
 
-name: UI.Control
+name: UI.Button
 
-description: Provides base events for the UI control object.
+description: Provides a button.
 
 license: MIT-style license.
 
@@ -11,16 +11,17 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Extras/UI.Control
+	- UI.Control
 
 provides:
-	- UI.Control
+	- UI.Button
 
 ...
 */
 
-/*
-Class.refactor(UI.Control, {
+UI.Button = new Class({
+
+	Extends: UI.Control,
 
 	Binds: ['onClick'],
 
@@ -40,4 +41,3 @@ Class.refactor(UI.Control, {
 	}
 
 });
-*/
