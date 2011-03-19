@@ -10051,13 +10051,7 @@ provides:
 UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
-
-	left: null,
-
-	right: null,
-
-	title: null,
-
+	
 	options: {
 		className: 'ui-navigation-bar'
 	},
@@ -10068,23 +10062,16 @@ UI.NavigationBar = new Class({
 	},
 
 	create: function() {
-		return new Element('div').adopt(
-			new Element('div.' + this.options.className + '-lf'),
-			new Element('div.' + this.options.className + '-title'),
-			new Element('div.' + this.options.className + '-rg')
-		);
+		return new Element('div');
 	},
 
-	setTitle: function(title, animated) {
-
+	setTitle: function(title) {
+		this.element.set('html', title);
+		return this;
 	},
 
-	setLeftButton: function(button, animated) {
-
-	},
-
-	setRightButton: function(button, animated) {
-
+	getTitle: function() {
+		return this.element.get('html');
 	}
 
 });
@@ -10473,17 +10460,42 @@ Moobile.View.Navigation = new Class({
 
 	options: {
 		className: 'navigation-view',
-		navigationBar: true
+		navigationBar: true,
+		navigationBarVisible: true
 	},
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		if (this.options.navigationBar) {
-			this.navigationBar = new UI.NavigationBar();
-			this.navigationBar.inject(this.element, 'top');
-			this.element.addClass('with-navigation-bar');
-		}
+		if (this.options.navigationBar) this.attachNavigationBar();
 		return this;
+	},
+
+	destroy: function() {
+		if (this.options.navigationBar) this.detachNavigationBar();
+		return this.parent();
+	},
+
+	attachNavigationBar: function() {
+		this.element.addClass('navigation-bar-enabled');
+		this.navigationBar = new UI.NavigationBar();
+		this.navigationBar.inject(this.element, 'top');
+		return this;
+	},
+
+	detachNavigationBar: function() {
+		this.element.removeClass('navigation-bar-enabled');
+		this.navigationBar.destroy();
+		this.navigationBar = null;
+		return this;
+	},
+
+	setTitle: function(title) {
+		if (this.navigationBar) this.navigationBar.setTitle(title);
+		return this;
+	},
+
+	getTitle: function() {
+		return this.navigationBar ? this.navigationBar.getTitle() : null;
 	}
 
 });

@@ -22,13 +22,7 @@ provides:
 UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
-
-	left: null,
-
-	right: null,
-
-	title: null,
-
+	
 	options: {
 		className: 'ui-navigation-bar'
 	},
@@ -39,23 +33,16 @@ UI.NavigationBar = new Class({
 	},
 
 	create: function() {
-		return new Element('div').adopt(
-			new Element('div.' + this.options.className + '-lf'),
-			new Element('div.' + this.options.className + '-title'),
-			new Element('div.' + this.options.className + '-rg')
-		);
+		return new Element('div');
 	},
 
-	setTitle: function(title, animated) {
-
+	setTitle: function(title) {
+		this.element.set('html', title);
+		return this;
 	},
 
-	setLeftButton: function(button, animated) {
-
-	},
-
-	setRightButton: function(button, animated) {
-
+	getTitle: function() {
+		return this.element.get('html');
 	}
 
 });

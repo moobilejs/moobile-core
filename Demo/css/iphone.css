@@ -156,6 +156,7 @@ p small {
 	min-height: 414px;
 	text-shadow: 0px 1px 0px #ffffff;
 	overflow: hidden;
+	position: relative;
 	width: 320px;
 }
 
@@ -210,7 +211,14 @@ p small {
 
 .ui-navigation-bar {
 	background: url(../images/ui-navigation-bar.png) no-repeat;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
 	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+	width: 320px;
 }
 
 /* UI List
