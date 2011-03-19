@@ -10474,14 +10474,14 @@ Moobile.View.Navigation = new Class({
 	},
 
 	attachNavigationBar: function() {
-		this.element.addClass('navigation-bar-enabled');
+		this.element.addClass('ui-navigation-bar-enabled');
 		this.navigationBar = new UI.NavigationBar();
 		this.navigationBar.inject(this.element, 'top');
 		return this;
 	},
 
 	detachNavigationBar: function() {
-		this.element.removeClass('navigation-bar-enabled');
+		this.element.removeClass('ui-navigation-bar-enabled');
 		this.navigationBar.destroy();
 		this.navigationBar = null;
 		return this;

@@ -205,6 +205,11 @@ p small {
 	width: 100%;							/* Important */
 }
 
+.ui-navigation-bar-enabled .view {
+	height: 371px;							/* Important */
+	min-height: 371px;						/* Important */
+}
+
 /* UI List
 -----------------------------------------------------------------------------*/
 
