@@ -132,17 +132,18 @@ p small {
 	font-size: 12px;
 }
 
-/* UI Window
+/* Window
 -----------------------------------------------------------------------------*/
 
 .window {
 	background: #424242 url(../images/mootools.png) no-repeat center center;
-	height: 414px;
+	height: 415px;
+	min-height: 415px;
 	overflow: hidden;
 	width: 320px;
 }
 
-/* UI View
+/* View
 -----------------------------------------------------------------------------*/
 
 .view {
@@ -152,43 +153,28 @@ p small {
 	float: left;
 	font-size: 15px;
 	font-weight: normal;
-	height: 414px;
-	min-height: 414px;
+	height: 415px;							/* Important */
+	min-height: 415px;						/* Important */
+	overflow: hidden;						/* Important */
+	position: relative;						/* Important */
+	text-align: left;
 	text-shadow: 0px 1px 0px #ffffff;
-	overflow: hidden;
-	position: relative;
-	width: 320px;
+	width: 320px;							/* Important */
 }
 
-.with-navigation-bar .view {
-	height: 370px;
-	position: relative;
-}
-
-.view-scroll-element {
-	height: 414px;
-	overflow: hidden;
-	width: 320px;
-}
-
-.with-navigation-bar .view-scroll-element {
-	height: 370px;
-}
+.view-scroll-element { /* Inherit */ }
+.view-scroll-wrapper { /* Inherit */ }
 
 .view-wrapper {
-	background: #ffffff url(../images/view-bg-striped.png);
+	-webkit-box-sizing: border-box;			/* Important */
+	background: #ffffff url(../images/background-striped.png);
 	border-top: 1px solid #a0adb7;
 	border-bottom: 1px solid #a0adb7;
-	min-height: 374px;
+	min-height: 375px;						/* Important */
 	padding: 20px;
-	width: 280px;
 }
 
-.with-navigation-bar .view-wrapper {
-	min-height: 332px;
-}
-
-/* UI Stack View
+/* Stack View
 -----------------------------------------------------------------------------*/
 
 .stack-view {
@@ -196,14 +182,12 @@ p small {
 	-moz-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	background: #ffffff;
-	height: 414px;
-	width: 640px;
+	height: 100%;							/* Important */
 }
-/* Fix transition 3d avec un width de 320 a la place */
 
 .stack-view-wrapper {
-	height: 414px;
-	width: 640px;
+	height: 100%;							/* Important */
+	width: 200%;							/* Important */
 }
 
 /* UI Navigation Bar
@@ -214,11 +198,11 @@ p small {
 	color: #ffffff;
 	font-size: 20px;
 	font-weight: bold;
-	height: 44px;
+	height: 44px;							/* Important */
 	line-height: 44px;
 	text-align: center;
 	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
-	width: 320px;
+	width: 100%;							/* Important */
 }
 
 /* UI List
@@ -314,6 +298,7 @@ p small {
 .transition-cubic {
 	-webkit-transform: translateZ(-160px);
 	-webkit-transform-style: preserve-3d;
+	-webkit-transform-origin: 100% 50%;
 	position: absolute;
 	width: 50% !important;
 }
@@ -331,7 +316,6 @@ p small {
 .transition-cubic.transition-cubic-enter.commit-transition {
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 500ms;
-
 	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-transform: translateZ(-160px) rotateY(-90deg);
 }
@@ -351,81 +335,4 @@ p small {
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-transform: translateZ(-160px) rotateY(90deg);
-}
-
-.touchScroll {
-	position: relative;
-}
-
-/* Touch Scroll
------------------------------------------------------------------------------*/
-
-.touchScroll {
-	position: relative;
-}
-
-.touchScrollBars {
-	display: -webkit-box;
-	padding: 3px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 2147483647;
-	-webkit-box-align: end;
-	-webkit-box-pack: end;
-	-webkit-box-sizing: border-box;
-}
-
-.touchScrollTrack {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-.touchScrollTrackX {
-	height: 6px;
-}
-
-.touchScrollTrackY {
-	float: right;
-	width: 6px;
-}
-
-.touchScrollBarsBoth {
-	padding-bottom: 12px;
-	padding-right: 12px;
-}
-
-.touchScrollBarsBoth .touchScrollTrackX {
-	-webkit-transform: translateY(9px);
-}
-
-.touchScrollBarsBoth .touchScrollTrackY {
-	-webkit-transform: translateX(3px);
-}
-
-.touchScrollHandle {
-	border: 1px solid;
-	min-height: 4px;
-	min-width: 4px;
-	-webkit-transition-property: -webkit-transform, height, width;
-	-webkit-border-radius: 3px;
-
-	/* COLOR VARIANTS */
-/* Default */
-	border-color: rgba(255, 255, 255, 0.15);
-	background: rgba(0, 0, 0, 0.5);
-/**/
-
-/* White
-	border-color: rgba(255, 255, 255, 0.5);
-	background: rgba(255, 255, 255, 0.5);
-/**/
-
-/* Black
-	border-color: rgba(0, 0, 0, 0.5);
-	background: rgba(0, 0, 0, 0.5);
-/**/
 }
