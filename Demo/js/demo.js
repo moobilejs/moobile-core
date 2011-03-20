@@ -22,7 +22,6 @@ Demo.ViewController.Home = new Class({
 	test: null,
 
 	startup: function() {
-		this.viewControllerStack.view.setTitle('Moobile');
 		this.transitionSlideButton = this.view.transitionSlideButton;
 		this.transitionCubicButton = this.view.transitionCubicButton;
 		this.button1 = this.view.button1;

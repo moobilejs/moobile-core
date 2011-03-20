@@ -47,6 +47,7 @@ Moobile.View = new Class({
 	scroller: null,
 
 	options: {
+		title: 'View',
 		className: 'view',
 		scrollable: true,
 		wrappable: true
@@ -298,6 +299,10 @@ Moobile.View = new Class({
 
 	getParentView: function() {
 		return this.parentView;
+	},
+
+	getTitle: function() {
+		return this.element.getProperty('data-title') || this.options.title;
 	},
 
 	getContent: function() {

@@ -9960,28 +9960,50 @@ provides:
 ...
 */
 
-/*
+(function() {
+
+var setElement = UI.Control.prototype.setElement;
+
 Class.refactor(UI.Control, {
 
-	Binds: ['onClick'],
+	style: null,
 
-	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.onClick);
-		return this.parent();
+	options: {
+		className: '',
+		styleName: ''
 	},
 
-	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.onClick);
-		return this.parent();
+	initialize: function(element, options) {
+		this.setElement(element);
+		this.setOptions(options);
+		this.setStyle(this.options.styleName);
+		return this.parent(element, options);
 	},
 
-	onClick: function() {
-		this.fireEvent(Event.CLICK);
+	setElement: function(element) {
+		setElement.call(this, element);
+		if (this.element == null) this.element = this.create()
 		return this;
+	},
+
+	create: function() {
+		return new Element('div');
+	},
+
+	setStyle: function(style) {
+		this.removeClass(this.style);
+		this.addClass(style);
+		this.style = style;
+		return this;
+	},
+
+	getStyle: function() {
+		return this.style;
 	}
 
 });
-*/
+
+})();
 
 /*
 ---
@@ -10000,6 +10022,7 @@ requires:
 
 provides:
 	- UI.Button
+	- UI.ButtonStyle
 
 ...
 */
@@ -10008,31 +10031,100 @@ UI.Button = new Class({
 
 	Extends: UI.Control,
 
-	Binds: ['onClick'],
+	Binds: [
+		'onClick',
+		'onMouseDown',
+		'onMouseUp'
+	],
+	
+	content: null,
+
+	options: {
+		className: 'ui-button',
+		styleName: 'ui-button-normal'
+	},
+
+	initialize: function(element, options) {
+		this.setElement(element);
+		this.setOptions(options);
+		this.attachContent();
+		return this.parent(element, options);
+	},
+
+	destroy: function() {
+		this.detachContent();
+		return this.parent();
+	},
+
+	create: function() {
+		return new Element('div').adopt(
+			new Element('span[data-role=button-content].' + this.options.className + '-content')
+		);
+	},
+
+	attachContent: function() {
+		this.content = this.element.getElement('[data-role=button-content]');
+		return this;
+	},
+
+	detachContent: function() {
+		this.content = null;
+		return this;
+	},
 
 	attachEvents: function() {
 		this.element.addEvent(Event.CLICK, this.onClick);
+		this.element.addEvent(Event.MOUSE_DOWN, this.onMouseDown);
+		this.element.addEvent(Event.MOUSE_UP, this.onMouseUp)
 		return this.parent();
 	},
 
 	detachEvents: function() {
 		this.element.removeEvent(Event.CLICK, this.onClick);
+		this.element.removeEvent(Event.MOUSE_DOWN, this.onMouseDown);
+		this.element.removeEvent(Event.MOUSE_UP, this.onMouseUp)
 		return this.parent();
+	},
+
+	setText: function(text) {
+		if (this.content) {
+			this.content.set('html', text);
+		} else {
+			this.value = text;
+		}
+		return this;
 	},
 
 	onClick: function() {
 		this.fireEvent(Event.CLICK);
 		return this;
+	},
+
+	onMouseDown: function() {
+		this.element.addClass('state-down');
+		this.fireEvent(Event.MOUSE_DOWN);
+		return this;
+	},
+
+	onMouseUp: function() {
+		this.element.removeClass('state-down');
+		this.fireEvent(Event.MOUSE_UP);
+		return this;
 	}
 
 });
+
+UI.ButtonStyle = {
+	NORMAL: 'ui-button-normal'
+};
 
 /*
 ---
 
 name: UI.NavigationBar
 
-description: Provide the navigation bar of a navigation view.
+description: Provide the navigation bar control that contains a title and two
+             areas for buttons.
 
 license: MIT-style license.
 
@@ -10040,7 +10132,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Extras/UI.Element
+	- Extras/UI.Control
 
 provides:
 	- UI.NavigationBar
@@ -10051,30 +10143,219 @@ provides:
 UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
-	
+
+	view: null,
+
+	title: null,
+
+	buttons: {},
+
 	options: {
-		className: 'ui-navigation-bar'
+		className: 'ui-navigation-bar',
+		styleName: 'ui-navigation-bar-normal'
 	},
 
 	initialize: function(element, options) {
-		this.parent(element || this.create(), options);
-		return this;
+		this.setElement(element);
+		this.setOptions(options);
+		this.attachTitle();
+		return this.parent(element, options);
 	},
 
 	create: function() {
-		return new Element('div');
+		return new Element('div').adopt(
+			new Element('div[data-role=navigation-bar-title].' + this.options.className + '-title'),
+			new Element('div[data-role=navigation-bar-button-left].' + this.options.className + '-button-left'),
+			new Element('div[data-role=navigation-bar-button-right].' + this.options.className + '-button-right')
+		);
 	},
 
-	setTitle: function(title) {
-		this.element.set('html', title);
+	destroy: function() {
+		this.hide();
+		this.detachTitle();
 		return this;
 	},
 
-	getTitle: function() {
-		return this.element.get('html');
+	attachTitle: function() {
+		this.title = this.element.getElement('[data-role=navigation-bar-title]');
+		return this;
+	},
+
+	detachTitle: function() {
+		this.title.destroy();
+		this.title = null;
+		return this;
+	},
+
+	setView: function(view) {
+		this.view = view;
+		return this;
+	},
+
+	getView: function() {
+		return this.view;
+	},
+
+	setTitle: function(title) {
+		this.title.set('html', title);
+		return this;
+	},
+
+	removeTitle: function() {
+		this.title.set('html', '');
+	},
+
+	setButton: function(button, where) {
+		var element = this.element.getElement('[data-role=navigation-bar-button-' + where + ']');
+		if (element) {
+			if (this.buttons[where]) {
+				this.buttons[where].destroy();
+				this.buttons[where] = null;
+			}
+			this.buttons[where] = button;
+			this.buttons[where].inject(element);
+		}
+		return this;
+	},
+
+	setLeftButton: function(button) {
+		this.setButton(button, 'left');
+		return this;
+	},
+
+	setRightButton: function(button) {
+		this.setButton(button, 'right');
+		return this;
+	},
+
+	removeButton: function(where) {
+		var button = this.buttons[where];
+		if (button) {
+			button.destroy();
+			button = null;
+		}
+		delete this.buttons[where];
+		return this;
+	},
+
+	removeLeftButton: function() {
+		this.removeButton('left');
+		return this;
+	},
+
+	removeRightButton: function() {
+		this.removeButton('right');
+		return this;
+	},
+
+	removeButtons: function() {
+		Object.each(this.buttons, function(button) {
+			if (button) {
+				button.destroy();
+				button = null;
+			}
+		});
+		this.buttons = null;
+		this.buttons = {};
+		return this;
+	},
+
+	show: function() {
+		this.parent();
+		this.view.addClass(this.options.className + '-visible');
+		return this;
+	},
+
+	hide: function() {
+		this.parent();
+		this.view.removeClass(this.options.className + '-visible');
+		return this;
 	}
 
 });
+
+/*
+---
+
+name: UI.NavigationBarStyle
+
+description: Provide constants for navigation bar button styles.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- UI.NavigationBarStyle
+
+...
+*/
+
+UI.NavigationBarStyle = {
+	NORMAL: 'ui-navigation-bar-normal'
+};
+
+/*
+---
+
+name: UI.BarButton
+
+description: Provides a button used inside a bar such as the navigation bar.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- UI.Button
+
+provides:
+	- UI.BarButton
+
+...
+*/
+
+UI.BarButton = new Class({
+
+	Extends: UI.Button,
+
+	options: {
+		className: 'ui-bar-button',
+		styleName: 'ui-bar-button-normal'
+	}	
+
+});
+
+/*
+---
+
+name: UI.BarButtonStyle
+
+description: Provide constants for bar button styles.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- UI.BarButtonStyle
+
+...
+*/
+
+UI.BarButtonStyle = {
+	NORMAL: 'ui-bar-button-normal',
+	ACTIVE: 'ui-bar-button-active',
+	BACK:	'ui-bar-button-back'
+};
+
 
 /*
 ---
@@ -10125,6 +10406,7 @@ Moobile.View = new Class({
 	scroller: null,
 
 	options: {
+		title: 'View',
 		className: 'view',
 		scrollable: true,
 		wrappable: true
@@ -10378,6 +10660,10 @@ Moobile.View = new Class({
 		return this.parentView;
 	},
 
+	getTitle: function() {
+		return this.element.getProperty('data-title') || this.options.title;
+	},
+
 	getContent: function() {
 		return this.wrapper || this.element;
 	}
@@ -10458,13 +10744,13 @@ Moobile.View.Navigation = new Class({
 
 	options: {
 		className: 'navigation-view',
-		navigationBar: true,
-		navigationBarVisible: true
+		navigationBarVisible: true,
+		navigationBarElement: null
 	},
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		if (this.options.navigationBar) this.attachNavigationBar();
+		this.attachNavigationBar();
 		return this;
 	},
 
@@ -10474,26 +10760,19 @@ Moobile.View.Navigation = new Class({
 	},
 
 	attachNavigationBar: function() {
-		this.element.addClass('ui-navigation-bar-enabled');
-		this.navigationBar = new UI.NavigationBar();
+		this.navigationBar = new UI.NavigationBar(this.options.navigationBarElement);
+		this.navigationBar.setView(this);
+		this.navigationBar.dispose();
 		this.navigationBar.inject(this.element, 'top');
+		this.navigationBar.hide();
+		if (this.options.navigationBarVisible) this.navigationBar.show();
 		return this;
 	},
 
 	detachNavigationBar: function() {
-		this.element.removeClass('ui-navigation-bar-enabled');
 		this.navigationBar.destroy();
 		this.navigationBar = null;
 		return this;
-	},
-
-	setTitle: function(title) {
-		if (this.navigationBar) this.navigationBar.setTitle(title);
-		return this;
-	},
-
-	getTitle: function() {
-		return this.navigationBar ? this.navigationBar.getTitle() : null;
 	}
 
 });
@@ -10599,7 +10878,7 @@ Moobile.ViewController = new Class({
 	},
 
 	getTitle: function() {
-		return '';
+		return this.view.getTitle();
 	},
 
 	setViewControllerStack: function(viewControllerStack) {
@@ -10663,6 +10942,18 @@ Moobile.ViewController = new Class({
 	viewDidRemove: function() {
 		this.view.removeFromParentView();
 		return this;
+	},
+
+	navigationBarVisible: function() {
+		return true;
+	},
+
+	navigationBarLeftButton: function() {
+		return null;
+	},
+
+	navigationBarRightButton: function() {
+		return null;
 	}
 
 });
@@ -10852,9 +11143,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
-	- Request.ViewController
-	- ViewController
+	- ViewController.Stack
 
 provides:
 	- ViewController.Navigation
@@ -10866,8 +11155,111 @@ Moobile.ViewController.Navigation = new Class({
 
 	Extends: Moobile.ViewController.Stack,
 
+	Binds: [
+		'pushTransitionCompleted',
+		'popTransitionCompleted',
+		'onBackButtonClick'
+	],
+
+	navigationBar: null,
+
+	startup: function() {
+		this.navigationBar = this.view.navigationBar;
+		return this.parent();
+	},
+
+	shutdown: function() {
+		this.navigationBar = null;
+		return this.parent();
+	},
+
 	loadView: function(view) {
 		this.view = view || new Moobile.View.Navigation(new Element('div'));
+		return this;
+	},
+
+	pushViewController: function(viewController, viewControllerTransition) {
+
+		if (viewController.navigationBarVisible()) {
+			this.navigationBar.show();
+		} else {
+			this.navigationBar.hide();
+		}
+
+		this.navigationBar.removeTitle();
+		this.navigationBar.removeButtons();
+
+		var navigationLeftButton = viewController.navigationBarLeftButton();
+		if (navigationLeftButton == null) {
+
+			if (this.viewControllers.length > 0) {
+
+				var text = this.viewControllers.getLast().getTitle();
+
+				navigationLeftButton = new UI.BarButton();
+				navigationLeftButton.setStyle(UI.BarButtonStyle.BACK);
+				navigationLeftButton.setText(text);
+				navigationLeftButton.addEvent(Event.CLICK, this.onBackButtonClick);
+			}
+		}
+
+		if (navigationLeftButton) {
+			this.navigationBar.setLeftButton(navigationLeftButton);
+		}
+
+		var navigationRightButton = viewController.navigationBarRightButton();
+		if (navigationRightButton) {
+			this.navigationBar.setRightButton(navigationRightButton);
+		}
+
+		this.navigationBar.setTitle(viewController.getTitle());
+
+		return this.parent(viewController, viewControllerTransition);
+	},
+
+	popViewController: function() {
+		
+		var viewController = this.viewControllers.getLast(1);
+		
+		if (viewController.navigationBarVisible()) {
+			this.navigationBar.show();
+		} else {
+			this.navigationBar.hide();
+		}
+
+		this.navigationBar.removeTitle();
+		this.navigationBar.removeButtons();
+
+		var navigationLeftButton = viewController.navigationBarLeftButton();
+		if (navigationLeftButton == null) {
+
+			if (this.viewControllers.length > 2) {
+
+				var text = this.viewControllers.getLast().getTitle();
+
+				navigationLeftButton = new UI.BarButton();
+				navigationLeftButton.setStyle(UI.BarButtonStyle.BACK);
+				navigationLeftButton.setText(text);
+				navigationLeftButton.addEvent(Event.CLICK, this.onBackButtonClick);
+			}
+		}
+
+		if (navigationLeftButton) {
+			this.navigationBar.setLeftButton(navigationLeftButton);
+		}
+
+		var navigationRightButton = viewController.navigationBarRightButton();
+		if (navigationRightButton) {
+			this.navigationBar.setRightButton(navigationRightButton);
+		}
+
+		this.navigationBar.setTitle(viewController.getTitle());
+
+		return this.parent();
+	},
+
+	onBackButtonClick: function(e) {
+		this.popViewController();
 	}
 
 });

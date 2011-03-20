@@ -198,16 +198,66 @@ p small {
 	color: #ffffff;
 	font-size: 20px;
 	font-weight: bold;
-	height: 44px;							/* Important */
+	height: 44px;							
 	line-height: 44px;
 	text-align: center;
 	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
-	width: 100%;							/* Important */
+	width: 100%;							
 }
 
-.ui-navigation-bar-enabled .view {
-	height: 371px;							/* Important */
-	min-height: 371px;						/* Important */
+.ui-navigation-bar-title {
+	height: 44px;
+	line-height: 44px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+
+.ui-navigation-bar-button-left {
+	float: left;
+	height: 44px;
+	line-height: 44px;
+	position: relative;
+}
+
+.ui-navigation-bar-button-right {
+	float: right;
+	height: 44px;
+	line-height: 44px;
+	position: relative;
+}
+
+.ui-navigation-bar-visible .view {
+	height: 371px;							
+	min-height: 371px;						
+}
+
+/* UI Bar Button
+-----------------------------------------------------------------------------*/
+
+.ui-bar-button {
+	background-image:
+		url(../images/ui-bar-button-normal-left.png),
+		url(../images/ui-bar-button-normal-right.png);
+	background-position: top left, top right;
+	background-repeat: no-repeat, no-repeat;
+	float: left;
+	font-size: 12px;
+	font-weight: 400;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 7px;
+	margin-right: 6px;
+	margin-left: 6px;
+	text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+	
+}
+
+.ui-bar-button-content {
+	background-image: url(../images/ui-bar-button-normal-center.png);
+	display: block;
 }
 
 /* UI List

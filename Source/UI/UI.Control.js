@@ -19,25 +19,47 @@ provides:
 ...
 */
 
-/*
+(function() {
+
+var setElement = UI.Control.prototype.setElement;
+
 Class.refactor(UI.Control, {
 
-	Binds: ['onClick'],
+	style: null,
 
-	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.onClick);
-		return this.parent();
+	options: {
+		className: '',
+		styleName: ''
 	},
 
-	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.onClick);
-		return this.parent();
+	initialize: function(element, options) {
+		this.setElement(element);
+		this.setOptions(options);
+		this.setStyle(this.options.styleName);
+		return this.parent(element, options);
 	},
 
-	onClick: function() {
-		this.fireEvent(Event.CLICK);
+	setElement: function(element) {
+		setElement.call(this, element);
+		if (this.element == null) this.element = this.create()
 		return this;
+	},
+
+	create: function() {
+		return new Element('div');
+	},
+
+	setStyle: function(style) {
+		this.removeClass(this.style);
+		this.addClass(style);
+		this.style = style;
+		return this;
+	},
+
+	getStyle: function() {
+		return this.style;
 	}
 
 });
-*/
+
+})();

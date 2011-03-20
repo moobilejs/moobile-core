@@ -99,7 +99,7 @@ Moobile.ViewController = new Class({
 	},
 
 	getTitle: function() {
-		return '';
+		return this.view.getTitle();
 	},
 
 	setViewControllerStack: function(viewControllerStack) {
@@ -163,6 +163,18 @@ Moobile.ViewController = new Class({
 	viewDidRemove: function() {
 		this.view.removeFromParentView();
 		return this;
+	},
+
+	navigationBarVisible: function() {
+		return true;
+	},
+
+	navigationBarLeftButton: function() {
+		return null;
+	},
+
+	navigationBarRightButton: function() {
+		return null;
 	}
 
 });

@@ -12,3 +12,5 @@ Controller
 
 History
  Fix the history to make it works like the file browser on git hub
+
+- Remove leftovers of css transition once done.

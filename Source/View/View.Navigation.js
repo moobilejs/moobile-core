@@ -29,13 +29,13 @@ Moobile.View.Navigation = new Class({
 
 	options: {
 		className: 'navigation-view',
-		navigationBar: true,
-		navigationBarVisible: true
+		navigationBarVisible: true,
+		navigationBarElement: null
 	},
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		if (this.options.navigationBar) this.attachNavigationBar();
+		this.attachNavigationBar();
 		return this;
 	},
 
@@ -45,26 +45,19 @@ Moobile.View.Navigation = new Class({
 	},
 
 	attachNavigationBar: function() {
-		this.element.addClass('ui-navigation-bar-enabled');
-		this.navigationBar = new UI.NavigationBar();
+		this.navigationBar = new UI.NavigationBar(this.options.navigationBarElement);
+		this.navigationBar.setView(this);
+		this.navigationBar.dispose();
 		this.navigationBar.inject(this.element, 'top');
+		this.navigationBar.hide();
+		if (this.options.navigationBarVisible) this.navigationBar.show();
 		return this;
 	},
 
 	detachNavigationBar: function() {
-		this.element.removeClass('ui-navigation-bar-enabled');
 		this.navigationBar.destroy();
 		this.navigationBar = null;
 		return this;
-	},
-
-	setTitle: function(title) {
-		if (this.navigationBar) this.navigationBar.setTitle(title);
-		return this;
-	},
-
-	getTitle: function() {
-		return this.navigationBar ? this.navigationBar.getTitle() : null;
 	}
 
 });
