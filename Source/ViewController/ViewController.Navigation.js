@@ -25,8 +25,8 @@ Moobile.ViewController.Navigation = new Class({
 	Extends: Moobile.ViewController.Stack,
 
 	Binds: [
-		'pushTransitionCompleted',
-		'popTransitionCompleted',
+		'onPushTransitionCompleted',
+		'onPopTransitionCompleted',
 		'onBackButtonClick'
 	],
 
@@ -48,86 +48,61 @@ Moobile.ViewController.Navigation = new Class({
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
-
-		if (viewController.navigationBarVisible()) {
-			this.navigationBar.show();
-		} else {
-			this.navigationBar.hide();
-		}
-
-		this.navigationBar.removeTitle();
-		this.navigationBar.removeButtons();
-
-		var navigationLeftButton = viewController.navigationBarLeftButton();
-		if (navigationLeftButton == null) {
-
-			if (this.viewControllers.length > 0) {
-
-				var text = this.viewControllers.getLast().getTitle();
-
-				navigationLeftButton = new UI.BarButton();
-				navigationLeftButton.setStyle(UI.BarButtonStyle.BACK);
-				navigationLeftButton.setText(text);
-				navigationLeftButton.addEvent(Event.CLICK, this.onBackButtonClick);
-			}
-		}
-
-		if (navigationLeftButton) {
-			this.navigationBar.setLeftButton(navigationLeftButton);
-		}
-
-		var navigationRightButton = viewController.navigationBarRightButton();
-		if (navigationRightButton) {
-			this.navigationBar.setRightButton(navigationRightButton);
-		}
-
-		this.navigationBar.setTitle(viewController.getTitle());
-
-		return this.parent(viewController, viewControllerTransition);
+		this.parent(viewController, viewControllerTransition);
+		this.updateNavigationBar();
+		return this;
 	},
 
 	popViewController: function() {
-		
-		var viewController = this.viewControllers.getLast(1);
-		
-		if (viewController.navigationBarVisible()) {
+		this.parent();
+		this.updateNavigationBar();
+		return this;
+	},
+
+	updateNavigationBar: function() {
+		var topViewControllerIndex = this.viewControllers.indexOf(this.topViewController);
+		if (topViewControllerIndex > -1) {
+			
 			this.navigationBar.show();
-		} else {
-			this.navigationBar.hide();
-		}
+			if (this.topViewController.navigationBarVisible() == false) {
+				this.navigationBar.hide();
+			}
+			
+			this.navigationBar.removeTitle();
+			this.navigationBar.removeButtons();			
+			
+			var navigationLeftButton = this.topViewController.navigationBarLeftButton();
+			if (navigationLeftButton == null) {
+				var previousViewControllerIndex = topViewControllerIndex - 1;
+				if (previousViewControllerIndex >= 0) {
+					var backButtonTitle = this.viewControllers[previousViewControllerIndex].getTitle();
+					if (backButtonTitle) {
+						var navigationBackButton = new UI.BarButton();
+						navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
+						navigationBackButton.setText(backButtonTitle);
+						navigationBackButton.addEvent(Event.CLICK, this.onBackButtonClick);
+						this.navigationBar.setLeftButton(navigationBackButton);
+					}
+				}
+			} else {
+				this.navigationBar.setLeftButton(navigationLeftButton);
+			}
 
-		this.navigationBar.removeTitle();
-		this.navigationBar.removeButtons();
+			var navigationRightButton = this.topViewController.navigationBarRightButton();
+			if (navigationRightButton) {
+				this.navigationBar.setRightButton(navigationRightButton);
+			}
 
-		var navigationLeftButton = viewController.navigationBarLeftButton();
-		if (navigationLeftButton == null) {
-
-			if (this.viewControllers.length > 2) {
-
-				var text = this.viewControllers.getLast().getTitle();
-
-				navigationLeftButton = new UI.BarButton();
-				navigationLeftButton.setStyle(UI.BarButtonStyle.BACK);
-				navigationLeftButton.setText(text);
-				navigationLeftButton.addEvent(Event.CLICK, this.onBackButtonClick);
+			var navigationBarTitle = this.topViewController.getTitle();
+			if (navigationBarTitle) {
+				this.navigationBar.setTitle(navigationBarTitle);
 			}
 		}
 
-		if (navigationLeftButton) {
-			this.navigationBar.setLeftButton(navigationLeftButton);
-		}
-
-		var navigationRightButton = viewController.navigationBarRightButton();
-		if (navigationRightButton) {
-			this.navigationBar.setRightButton(navigationRightButton);
-		}
-
-		this.navigationBar.setTitle(viewController.getTitle());
-
-		return this.parent();
+		return this;
 	},
 
-	onBackButtonClick: function(e) {
+	onBackButtonClick: function() {
 		this.popViewController();
 	}
 

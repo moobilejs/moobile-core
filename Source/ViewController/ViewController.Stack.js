@@ -26,17 +26,19 @@ Moobile.ViewController.Stack = new Class({
 	Extends: Moobile.ViewController,
 
 	Binds: [
-		'pushTransitionCompleted',
-		'popTransitionCompleted'
+		'onPopTransitionCompleted',
+		'onPushTransitionCompleted'
 	],
 
-	viewControllers: [],
+	topViewController: null,
 
-	request: null,
+	viewControllers: [],
+	
+	viewControllerRequest: null,
 
 	initialize: function(view) {
 		this.parent(view);
-		this.request = new Moobile.Request.ViewController(this);
+		this.viewControllerRequest = new Moobile.Request.ViewController(this);
 		this.view.hide();
 		return this;
 	},
@@ -62,8 +64,8 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	pushViewControllerFrom: function(remote) {
-		this.request.cancel();
-		this.request.getViewController(remote);
+		this.viewControllerRequest.cancel();
+		this.viewControllerRequest.getViewController(remote);
 		return this;
 	},
 
@@ -97,18 +99,20 @@ Moobile.ViewController.Stack = new Class({
 
 			if (transition) {
 				transition.startup(viewController);
-				transition.chain(this.pushTransitionCompleted);
+				transition.chain(this.onPushTransitionCompleted);
 				transition.prepare('enter');
 				transition.execute('enter');
 			} else {
-				this.pushTransitionCompleted();
+				this.onPushTransitionCompleted();
 			}
 		}
+
+		this.topViewController = viewController;
 
 		return this;
 	},
 
-	pushTransitionCompleted: function() {
+	onPushTransitionCompleted: function() {
 		this.viewControllers.getLast()
 			.viewDidEnter();
 		this.viewControllers.getLast(1)
@@ -122,17 +126,18 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(0).viewWillLeave();
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
-				transition.chain(this.popTransitionCompleted)
+				transition.chain(this.onPopTransitionCompleted)
 				transition.prepare('leave');
 				transition.execute('leave');
 			} else {
-				this.popTransitionCompleted();
+				this.onPopTransitionCompleted();
 			}
+			this.topViewController = this.viewControllers.getLast(1);
 		}
 		return this;
 	},
 
-	popTransitionCompleted: function() {
+	onPopTransitionCompleted: function() {
 		this.viewControllers.getLast(1)
 			.viewDidEnter();
 		this.viewControllers.getLast()

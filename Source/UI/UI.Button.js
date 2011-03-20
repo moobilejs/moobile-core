@@ -94,13 +94,13 @@ UI.Button = new Class({
 	},
 
 	onMouseDown: function() {
-		this.element.addClass('state-down');
+		this.element.addClass(this.options.className + '-down');
 		this.fireEvent(Event.MOUSE_DOWN);
 		return this;
 	},
 
 	onMouseUp: function() {
-		this.element.removeClass('state-down');
+		this.element.removeClass(this.options.className + '-down');
 		this.fireEvent(Event.MOUSE_UP);
 		return this;
 	}

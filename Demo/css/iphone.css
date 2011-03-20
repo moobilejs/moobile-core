@@ -194,14 +194,14 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .ui-navigation-bar {
-	background: url(../images/ui-navigation-bar.png) no-repeat;
+	background: url(../images/ui-navigation-bar/normal.png) no-repeat;
 	color: #ffffff;
 	font-size: 20px;
 	font-weight: bold;
 	height: 44px;							
 	line-height: 44px;
 	text-align: center;
-	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 	width: 100%;							
 }
 
@@ -236,14 +236,13 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .ui-bar-button {
-	background-image:
-		url(../images/ui-bar-button-normal-left.png),
-		url(../images/ui-bar-button-normal-right.png);
-	background-position: top left, top right;
-	background-repeat: no-repeat, no-repeat;
+	background:
+		url(../images/ui-bar-button/normal/left.png) no-repeat top left,
+		url(../images/ui-bar-button/normal/right.png) no-repeat top right;
+	cursor: pointer;
 	float: left;
 	font-size: 12px;
-	font-weight: 400;
+	font-weight: 500;
 	height: 30px;
 	line-height: 30px;
 	padding-left: 5px;
@@ -251,13 +250,26 @@ p small {
 	margin: 7px;
 	margin-right: 6px;
 	margin-left: 6px;
-	text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
-	
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.ui-bar-button-content {
-	background-image: url(../images/ui-bar-button-normal-center.png);
+.ui-bar-button .ui-bar-button-content {
+	background: url(../images/ui-bar-button/normal/center.png) repeat-x;
 	display: block;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.ui-bar-button.ui-bar-button-back {
+	background:
+		url(../images/ui-bar-button/back/left.png) no-repeat top left,
+		url(../images/ui-bar-button/back/right.png) no-repeat top right;
+	padding-left: 12px;
+	padding-right: 5px;
+}
+
+.ui-bar-button.ui-bar-button-back .ui-bar-button-content {
+	background: url(../images/ui-bar-button/back/center.png) repeat-x;
 }
 
 /* UI List
