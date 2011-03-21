@@ -24,7 +24,7 @@
 
 [submodule "mootools-class-extras"]
 	path = Vendor/mootools-class-extras
-	urlgit://github.com/cpojer/mootools-class-extras.git
+	url = git://github.com/cpojer/mootools-class-extras.git
 
 [submodule "iscroll"]
 	path = Vendor/iscroll
