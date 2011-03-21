@@ -7846,7 +7846,9 @@ Class.extend({
 		var instance = new klass;
 		delete klass.$prototyping;
 		var params = Array.prototype.slice.call(arguments, 1);
-		instance.initialize.apply(instance, params);
+		if (instance.initialize) {
+			instance.initialize.apply(instance, params);
+		}		
 		return instance;
 	}
 
@@ -8387,6 +8389,34 @@ UI.Control = new Class({
 
 	idDisabled: function() {
 		return this.disabled;
+	}
+
+});
+
+/*
+---
+
+name: Class.Binds
+
+description: A clean Class.Binds Implementation
+
+authors: Scott Kyle (@appden), Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Class, Core/Function]
+
+provides: Class.Binds
+
+...
+*/
+
+Class.Binds = new Class({
+
+	$bound: {},
+
+	bound: function(name){
+		return this.$bound[name] ? this.$bound[name] : this.$bound[name] = this[name].bind(this);
 	}
 
 });
@@ -9295,9 +9325,7 @@ Fx.CSS3 = new Class({
 
 	Extends: Fx.CSS,
 
-	Binds: [
-		'onComplete'
-	],
+	Implements: [Class.Binds],
 
 	running: false,
 
@@ -9312,12 +9340,12 @@ Fx.CSS3 = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent('transitionend', this.onComplete);
+		this.element.addEvent('transitionend', this.bound('onComplete'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent('transitionend', this.onComplete);
+		this.element.removeEvent('transitionend', this.bound('onComplete'));
 		return this;
 	},
 
@@ -9571,6 +9599,7 @@ requires:
 	- Extras/String.Extras
 	- Extras/UI.Control
 	- Extras/UI.Element
+	- Class-Extras/Class.Binds
 	- Mobile/Click
 	- Mobile/Pinch
 	- Mobile/Swipe
@@ -9619,9 +9648,7 @@ provides:
 
 Moobile.Application = new Class({
 
-	Implements: [Events, Options],
-
-	Binds: ['onReady'],
+	Implements: [Events, Options, Class.Binds],
 
 	viewControllerStack: null,
 
@@ -9651,12 +9678,12 @@ Moobile.Application = new Class({
 	},
 
 	attachEvents: function() {
-		window.addEvent(Event.READY, this.onReady);
+		window.addEvent(Event.READY, this.bound('onReady'));
 		return this;
 	},
 
 	detachEvents: function() {
-		window.removeEvent(Event.READY, this.onReady);
+		window.removeEvent(Event.READY, this.bound('onReady'));
 		return this;
 	},
 
@@ -9727,6 +9754,8 @@ Moobile.Request = new Class({
 
 	Extends: Request,
 
+	Implements: [Class.Binds],
+
 	options: {
 		isSuccess: function() {
 			var status = this.status;
@@ -9766,8 +9795,6 @@ Moobile.Request.ViewController = new Class({
 
 	Extends: Moobile.Request,
 
-	Binds: ['gotViewController'],
-
 	viewControllerStack: null,
 
 	options: {
@@ -9785,12 +9812,12 @@ Moobile.Request.ViewController = new Class({
 	},
 
 	attachEvents: function() {
-		this.addEvent('success', this.gotViewController);
+		this.addEvent('success', this.bound('gotViewController'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.removeEvent('success', this.gotViewController);
+		this.removeEvent('success', this.bound('gotViewController'));
 		return this;
 	},
 
@@ -9966,6 +9993,8 @@ var setElement = UI.Control.prototype.setElement;
 
 Class.refactor(UI.Control, {
 
+	Implements: [Class.Binds],
+
 	style: null,
 
 	options: {
@@ -10030,12 +10059,6 @@ provides:
 UI.Button = new Class({
 
 	Extends: UI.Control,
-
-	Binds: [
-		'onClick',
-		'onMouseDown',
-		'onMouseUp'
-	],
 	
 	content: null,
 
@@ -10057,7 +10080,7 @@ UI.Button = new Class({
 	},
 
 	create: function() {
-		return new Element('div').adopt(
+		return this.parent().adopt(
 			new Element('span[data-role=button-content].' + this.options.className + '-content')
 		);
 	},
@@ -10073,16 +10096,16 @@ UI.Button = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.onClick);
-		this.element.addEvent(Event.MOUSE_DOWN, this.onMouseDown);
-		this.element.addEvent(Event.MOUSE_UP, this.onMouseUp)
+		this.element.addEvent(Event.CLICK, this.bound('onClick'));
+		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
+		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.onClick);
-		this.element.removeEvent(Event.MOUSE_DOWN, this.onMouseDown);
-		this.element.removeEvent(Event.MOUSE_UP, this.onMouseUp)
+		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
+		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
+		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
 		return this.parent();
 	},
 
@@ -10383,14 +10406,6 @@ Moobile.View = new Class({
 
 	Extends: UI.Element,
 
-	Binds: [
-		'removeChildView',
-		'attachChildControl',
-		'removeChildControl',
-		'attachChildElement',
-		'removeChildElement'
-	],
-
 	window: null,
 
 	parentView: null,
@@ -10433,12 +10448,10 @@ Moobile.View = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent('orientationchange', this.onOrientationChange);
   		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent('orientationchange', this.onOrientationChange);
 		return this;
 	},
 
@@ -10515,7 +10528,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildViews: function() {
-		this.childViews.each(this.removeChildView);
+		this.childViews.each(this.removeChildView.bind(this));
 		this.childViews = null;
 		this.childViews = [];
 		return this;
@@ -10534,7 +10547,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildControls: function() {
-		this.element.getElements('[data-role=control]').each(this.attachChildControl);
+		this.element.getElements('[data-role=control]').each(this.attachChildControl.bind(this));
 		return this;
 	},
 
@@ -10574,7 +10587,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildControls: function() {
-		this.childControls.each(this.removeChildElement);
+		this.childControls.each(this.removeChildElement.bind(this));
 		this.childControls = null;
 		this.childControls = [];
 		return this;
@@ -10587,7 +10600,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildElements: function() {
-		this.element.getElements('[data-role=element]').each(this.attachChildElement);
+		this.element.getElements('[data-role=element]').each(this.attachChildElement.bind(this));
 		return this;
 	},
 
@@ -10618,7 +10631,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildElements: function() {
-		this.childElements.each(this.removeChildElement);
+		this.childElements.each(this.removeChildElement.bind(this));
 		this.childElements = null;
 		this.childElements = [];
 		return this;
@@ -10800,7 +10813,7 @@ provides:
 
 Moobile.ViewController = new Class({
 
-	Implements: [Events, Options],
+	Implements: [Events, Options, Class.Binds],
 
 	view: null,
 
@@ -10986,11 +10999,6 @@ Moobile.ViewController.Stack = new Class({
 
 	Extends: Moobile.ViewController,
 
-	Binds: [
-		'onPopTransitionCompleted',
-		'onPushTransitionCompleted'
-	],
-
 	topViewController: null,
 
 	viewControllers: [],
@@ -11060,7 +11068,7 @@ Moobile.ViewController.Stack = new Class({
 
 			if (transition) {
 				transition.startup(viewController);
-				transition.chain(this.onPushTransitionCompleted);
+				transition.chain(this.bound('onPushTransitionCompleted'));
 				transition.prepare('enter');
 				transition.execute('enter');
 			} else {
@@ -11087,7 +11095,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(0).viewWillLeave();
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
-				transition.chain(this.onPopTransitionCompleted)
+				transition.chain(this.bound('onPopTransitionCompleted'));
 				transition.prepare('leave');
 				transition.execute('leave');
 			} else {
@@ -11160,12 +11168,6 @@ Moobile.ViewController.Navigation = new Class({
 
 	Extends: Moobile.ViewController.Stack,
 
-	Binds: [
-		'onPushTransitionCompleted',
-		'onPopTransitionCompleted',
-		'onBackButtonClick'
-	],
-
 	navigationBar: null,
 
 	startup: function() {
@@ -11216,7 +11218,7 @@ Moobile.ViewController.Navigation = new Class({
 						var navigationBackButton = new UI.BarButton();
 						navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
 						navigationBackButton.setText(backButtonTitle);
-						navigationBackButton.addEvent(Event.CLICK, this.onBackButtonClick);
+						navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
 						this.navigationBar.setLeftButton(navigationBackButton);
 					}
 				}
@@ -11267,15 +11269,13 @@ provides:
 
 Moobile.ViewControllerTransition = new Class({
 
-	Implements: [Chain],
-
-	Binds: ['onTransitionComplete'],
+	Implements: [Chain, Class.Binds],
+	
+	running: false,
 
 	viewController: null,
 
 	viewControllerStack: null,
-
-	running: false,
 
 	startup: function(viewController) {
 		this.viewController = viewController;
@@ -11310,10 +11310,10 @@ Moobile.ViewControllerTransition = new Class({
 	},
 
 	start: function(direction) {
-		return this.onTransitionComplete();
+		return this.complete();
 	},
 
-	onTransitionComplete: function(e) {
+	complete: function() {
 		if (this.running == true) {
 			this.running = false;
 			this.detachEvents();
@@ -11358,12 +11358,12 @@ Moobile.ViewControllerTransition.Slide = new Class({
 	},
 
 	attachEvents: function() {
-		this.wrapper.addEvent('transitionend', this.onTransitionComplete);
+		this.wrapper.addEvent('transitionend', this.bound('onTransitionComplete'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.wrapper.removeEvent('transitionend', this.onTransitionComplete);
+		this.wrapper.removeEvent('transitionend', this.bound('onTransitionComplete'));
 		return this;
 	},
 
@@ -11397,7 +11397,7 @@ Moobile.ViewControllerTransition.Slide = new Class({
 			this.wrapper.removeClass('transition-slide-enter');
 			this.wrapper.removeClass('transition-slide-leave');
 			this.wrapper.removeClass('commit-transition');
-			this.parent(e);
+			this.complete();
 		}
 		return this;
 	}
@@ -11438,12 +11438,12 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 	},
 
 	attachEvents: function() {
-		this.wrapper.addEvent('transitionend', this.onTransitionComplete);
+		this.wrapper.addEvent('transitionend', this.bound('onTransitionComplete'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.wrapper.removeEvent('transitionend', this.onTransitionComplete);
+		this.wrapper.removeEvent('transitionend', this.bound('onTransitionComplete'));
 		return this;
 	},
 
@@ -11490,7 +11490,7 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 			this.viewControllerStack.getViewControllerAt(1).view
 				.removeClass('cubic-face-enter')
 				.removeClass('cubic-face-leave');
-			this.parent(e);
+			this.complete();
 		}
 		return this;
 	}

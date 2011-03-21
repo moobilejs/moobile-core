@@ -23,6 +23,8 @@ Moobile.Request = new Class({
 
 	Extends: Request,
 
+	Implements: [Class.Binds],
+
 	options: {
 		isSuccess: function() {
 			var status = this.status;

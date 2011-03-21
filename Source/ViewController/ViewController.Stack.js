@@ -25,11 +25,6 @@ Moobile.ViewController.Stack = new Class({
 
 	Extends: Moobile.ViewController,
 
-	Binds: [
-		'onPopTransitionCompleted',
-		'onPushTransitionCompleted'
-	],
-
 	topViewController: null,
 
 	viewControllers: [],
@@ -99,7 +94,7 @@ Moobile.ViewController.Stack = new Class({
 
 			if (transition) {
 				transition.startup(viewController);
-				transition.chain(this.onPushTransitionCompleted);
+				transition.chain(this.bound('onPushTransitionCompleted'));
 				transition.prepare('enter');
 				transition.execute('enter');
 			} else {
@@ -126,7 +121,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(0).viewWillLeave();
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
-				transition.chain(this.onPopTransitionCompleted)
+				transition.chain(this.bound('onPopTransitionCompleted'));
 				transition.prepare('leave');
 				transition.execute('leave');
 			} else {

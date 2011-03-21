@@ -21,9 +21,7 @@ provides:
 
 Moobile.Application = new Class({
 
-	Implements: [Events, Options],
-
-	Binds: ['onReady'],
+	Implements: [Events, Options, Class.Binds],
 
 	viewControllerStack: null,
 
@@ -53,12 +51,12 @@ Moobile.Application = new Class({
 	},
 
 	attachEvents: function() {
-		window.addEvent(Event.READY, this.onReady);
+		window.addEvent(Event.READY, this.bound('onReady'));
 		return this;
 	},
 
 	detachEvents: function() {
-		window.removeEvent(Event.READY, this.onReady);
+		window.removeEvent(Event.READY, this.bound('onReady'));
 		return this;
 	},
 

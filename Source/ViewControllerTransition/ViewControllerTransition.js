@@ -21,15 +21,13 @@ provides:
 
 Moobile.ViewControllerTransition = new Class({
 
-	Implements: [Chain],
-
-	Binds: ['onTransitionComplete'],
+	Implements: [Chain, Class.Binds],
+	
+	running: false,
 
 	viewController: null,
 
 	viewControllerStack: null,
-
-	running: false,
 
 	startup: function(viewController) {
 		this.viewController = viewController;
@@ -64,10 +62,10 @@ Moobile.ViewControllerTransition = new Class({
 	},
 
 	start: function(direction) {
-		return this.onTransitionComplete();
+		return this.complete();
 	},
 
-	onTransitionComplete: function(e) {
+	complete: function() {
 		if (this.running == true) {
 			this.running = false;
 			this.detachEvents();

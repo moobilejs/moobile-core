@@ -23,12 +23,6 @@ provides:
 UI.Button = new Class({
 
 	Extends: UI.Control,
-
-	Binds: [
-		'onClick',
-		'onMouseDown',
-		'onMouseUp'
-	],
 	
 	content: null,
 
@@ -50,7 +44,7 @@ UI.Button = new Class({
 	},
 
 	create: function() {
-		return new Element('div').adopt(
+		return this.parent().adopt(
 			new Element('span[data-role=button-content].' + this.options.className + '-content')
 		);
 	},
@@ -66,16 +60,16 @@ UI.Button = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.onClick);
-		this.element.addEvent(Event.MOUSE_DOWN, this.onMouseDown);
-		this.element.addEvent(Event.MOUSE_UP, this.onMouseUp)
+		this.element.addEvent(Event.CLICK, this.bound('onClick'));
+		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
+		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.onClick);
-		this.element.removeEvent(Event.MOUSE_DOWN, this.onMouseDown);
-		this.element.removeEvent(Event.MOUSE_UP, this.onMouseUp)
+		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
+		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
+		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
 		return this.parent();
 	},
 

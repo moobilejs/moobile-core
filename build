@@ -15,6 +15,7 @@ $pkg = new Packager(array(
 	dirname(__FILE__) . "/Vendor/mootools-extras",
 	dirname(__FILE__) . "/Vendor/mootools-custom-event",
 	dirname(__FILE__) . "/Vendor/mootools-mobile",
+	dirname(__FILE__) . "/Vendor/mootools-class-extras",
 ));
 
 $selected = array(

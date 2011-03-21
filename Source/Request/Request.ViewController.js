@@ -28,8 +28,6 @@ Moobile.Request.ViewController = new Class({
 
 	Extends: Moobile.Request,
 
-	Binds: ['gotViewController'],
-
 	viewControllerStack: null,
 
 	options: {
@@ -47,12 +45,12 @@ Moobile.Request.ViewController = new Class({
 	},
 
 	attachEvents: function() {
-		this.addEvent('success', this.gotViewController);
+		this.addEvent('success', this.bound('gotViewController'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.removeEvent('success', this.gotViewController);
+		this.removeEvent('success', this.bound('gotViewController'));
 		return this;
 	},
 

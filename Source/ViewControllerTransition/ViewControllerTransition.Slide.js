@@ -32,12 +32,12 @@ Moobile.ViewControllerTransition.Slide = new Class({
 	},
 
 	attachEvents: function() {
-		this.wrapper.addEvent('transitionend', this.onTransitionComplete);
+		this.wrapper.addEvent('transitionend', this.bound('onTransitionComplete'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.wrapper.removeEvent('transitionend', this.onTransitionComplete);
+		this.wrapper.removeEvent('transitionend', this.bound('onTransitionComplete'));
 		return this;
 	},
 
@@ -71,7 +71,7 @@ Moobile.ViewControllerTransition.Slide = new Class({
 			this.wrapper.removeClass('transition-slide-enter');
 			this.wrapper.removeClass('transition-slide-leave');
 			this.wrapper.removeClass('commit-transition');
-			this.parent(e);
+			this.complete();
 		}
 		return this;
 	}

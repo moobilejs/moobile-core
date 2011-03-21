@@ -25,6 +25,8 @@ var setElement = UI.Control.prototype.setElement;
 
 Class.refactor(UI.Control, {
 
+	Implements: [Class.Binds],
+
 	style: null,
 
 	options: {

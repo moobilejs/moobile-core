@@ -52,6 +52,7 @@ requires:
 	- Extras/String.Extras
 	- Extras/UI.Control
 	- Extras/UI.Element
+	- Class-Extras/Class.Binds
 	- Mobile/Click
 	- Mobile/Pinch
 	- Mobile/Swipe

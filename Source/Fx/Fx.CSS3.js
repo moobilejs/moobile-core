@@ -93,9 +93,7 @@ Fx.CSS3 = new Class({
 
 	Extends: Fx.CSS,
 
-	Binds: [
-		'onComplete'
-	],
+	Implements: [Class.Binds],
 
 	running: false,
 
@@ -110,12 +108,12 @@ Fx.CSS3 = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent('transitionend', this.onComplete);
+		this.element.addEvent('transitionend', this.bound('onComplete'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent('transitionend', this.onComplete);
+		this.element.removeEvent('transitionend', this.bound('onComplete'));
 		return this;
 	},
 

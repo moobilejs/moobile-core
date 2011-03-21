@@ -21,7 +21,7 @@ provides:
 
 Moobile.ViewController = new Class({
 
-	Implements: [Events, Options],
+	Implements: [Events, Options, Class.Binds],
 
 	view: null,
 

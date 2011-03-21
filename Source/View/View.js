@@ -24,14 +24,6 @@ Moobile.View = new Class({
 
 	Extends: UI.Element,
 
-	Binds: [
-		'removeChildView',
-		'attachChildControl',
-		'removeChildControl',
-		'attachChildElement',
-		'removeChildElement'
-	],
-
 	window: null,
 
 	parentView: null,
@@ -74,12 +66,10 @@ Moobile.View = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent('orientationchange', this.onOrientationChange);
   		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent('orientationchange', this.onOrientationChange);
 		return this;
 	},
 
@@ -156,7 +146,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildViews: function() {
-		this.childViews.each(this.removeChildView);
+		this.childViews.each(this.removeChildView.bind(this));
 		this.childViews = null;
 		this.childViews = [];
 		return this;
@@ -175,7 +165,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildControls: function() {
-		this.element.getElements('[data-role=control]').each(this.attachChildControl);
+		this.element.getElements('[data-role=control]').each(this.attachChildControl.bind(this));
 		return this;
 	},
 
@@ -215,7 +205,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildControls: function() {
-		this.childControls.each(this.removeChildElement);
+		this.childControls.each(this.removeChildElement.bind(this));
 		this.childControls = null;
 		this.childControls = [];
 		return this;
@@ -228,7 +218,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildElements: function() {
-		this.element.getElements('[data-role=element]').each(this.attachChildElement);
+		this.element.getElements('[data-role=element]').each(this.attachChildElement.bind(this));
 		return this;
 	},
 
@@ -259,7 +249,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildElements: function() {
-		this.childElements.each(this.removeChildElement);
+		this.childElements.each(this.removeChildElement.bind(this));
 		this.childElements = null;
 		this.childElements = [];
 		return this;

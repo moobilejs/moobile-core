@@ -24,12 +24,6 @@ Moobile.ViewController.Navigation = new Class({
 
 	Extends: Moobile.ViewController.Stack,
 
-	Binds: [
-		'onPushTransitionCompleted',
-		'onPopTransitionCompleted',
-		'onBackButtonClick'
-	],
-
 	navigationBar: null,
 
 	startup: function() {
@@ -80,7 +74,7 @@ Moobile.ViewController.Navigation = new Class({
 						var navigationBackButton = new UI.BarButton();
 						navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
 						navigationBackButton.setText(backButtonTitle);
-						navigationBackButton.addEvent(Event.CLICK, this.onBackButtonClick);
+						navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
 						this.navigationBar.setLeftButton(navigationBackButton);
 					}
 				}
