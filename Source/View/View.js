@@ -48,8 +48,8 @@ Moobile.View = new Class({
 	initialize: function(element, options) {
 		this.setElement(element);
 		this.setOptions(options);
-		if (this.options.wrappable) this.attachWrapper();
-		if (this.options.scrollable) this.attachScroller();
+		if (this.options.wrappable) this.injectWrapper();
+		if (this.options.scrollable) this.injectScroller();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent(element, options);
@@ -59,8 +59,8 @@ Moobile.View = new Class({
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-		if (this.options.wrappable) this.detachWrapper();
-		if (this.options.scrollable) this.detachScroller();
+		if (this.options.wrappable) this.destroyWrapper();
+		if (this.options.scrollable) this.destroyScroller();
 		this.parent();
 		return this;
 	},
@@ -91,14 +91,14 @@ Moobile.View = new Class({
 		this.childControls = [];
 	},
 
-	attachScroller: function() {
+	injectScroller: function() {
 		this.scroller = new Moobile.Scroller(this.element);
 		this.scroller.attach();
 		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
 		return this;
 	},
 
-	detachScroller: function() {
+	destroyScroller: function() {
 		this.scroller.detach();
 		this.scroller = null;
 		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
@@ -120,7 +120,7 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	attachWrapper: function() {
+	injectWrapper: function() {
 		var content = this.getContent();
 		var element = new Element('div.' + this.options.className + '-wrapper').set('html', content.get('html'));
 		content.empty();
@@ -129,7 +129,7 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	detachWrapper: function() {
+	destroyWrapper: function() {
 		var content = this.wrapper.get('html');
 		this.wrapper.destroy();
 		this.wrapper = null;
