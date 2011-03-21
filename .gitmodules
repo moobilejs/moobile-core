@@ -22,6 +22,10 @@
 	path = Vendor/mootools-custom-event
 	url = git://github.com/cpojer/mootools-custom-event.git
 
+[submodule "mootools-class-extras"]
+	path = Vendor/mootools-class-extras
+	urlgit://github.com/cpojer/mootools-class-extras.git
+
 [submodule "iscroll"]
 	path = Vendor/iscroll
 	url = git://github.com/cubiq/iscroll.git
