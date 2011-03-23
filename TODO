@@ -2,15 +2,18 @@ Controls:
  - UI.Button
  - UI.List
  - UI.ListItem
- - UI.TitleBar
- - UI.NavigationBar
 
+Controllers:
+ - DocumentView
+ - DocumentViewController
+   (Call pushViewControllerFrom for (almost) every links (a))
 
-Controller
- DocumentView
- DocumentViewController
+ViewController, View or Window:
+ - Prevent the user input while a page is in a transition.
+
+Application:
+ - Show a nice error screen if the browser is not supported.
 
 History
- Fix the history to make it works like the file browser on git hub
+ - Fix the history
 
-- Remove leftovers of css transition once done.
