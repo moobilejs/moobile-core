@@ -12,7 +12,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Extras/UI.Control
+	- UI.Control
 
 provides:
 	- UI.NavigationBar
@@ -26,44 +26,62 @@ UI.NavigationBar = new Class({
 
 	view: null,
 
-	title: null,
+	wrapper: null,
 
-	buttons: {},
+	caption: null,
+
+	buttons: null,
 
 	options: {
 		className: 'ui-navigation-bar',
 		styleName: 'ui-navigation-bar-normal'
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.attachTitle();
-		return this.parent(element, options);
-	},
-
-	create: function() {
-		return new Element('div').adopt(
-			new Element('div[data-role=navigation-bar-title].' + this.options.className + '-title'),
-			new Element('div[data-role=navigation-bar-button-left].' + this.options.className + '-button-left'),
-			new Element('div[data-role=navigation-bar-button-right].' + this.options.className + '-button-right')
-		);
+	setup: function() {
+		this.parent();
+		this.injectCaption();
+		return this;
 	},
 
 	destroy: function() {
 		this.hide();
-		this.detachTitle();
+		this.destroyCaption();
+		return this.parent();
+	},
+
+	injectCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.element.get('html'));
+		this.element.empty();
+		this.element.adopt(this.caption);
 		return this;
 	},
 
-	attachTitle: function() {
-		this.title = this.element.getElement('[data-role=navigation-bar-title]');
+	destroyCaption: function() {
+		this.caption.destroy();
+		this.caption = null;
 		return this;
 	},
 
-	detachTitle: function() {
-		this.title.destroy();
-		this.title = null;
+	setTitle: function(title) {
+		this.caption.set('html', title);
+		return this;
+	},
+
+	getTitle: function() {
+		return this.caption.get('html');
+	},
+
+	setButton: function(button, where) {
+		var element = this.element.getElement('div.' + this.options.className + '-button-' + where);
+		if (element) {
+			element.dispose();
+			element = null;
+		}
+		if (button) {
+			element = new Element('div.' + this.options.className + '-button-' + where);
+			element.adopt(button);
+			this.element.adopt(element);
+		}
 		return this;
 	},
 
@@ -74,70 +92,6 @@ UI.NavigationBar = new Class({
 
 	getView: function() {
 		return this.view;
-	},
-
-	setTitle: function(title) {
-		this.title.set('html', title);
-		return this;
-	},
-
-	removeTitle: function() {
-		this.title.set('html', '');
-	},
-
-	setButton: function(button, where) {
-		var element = this.element.getElement('[data-role=navigation-bar-button-' + where + ']');
-		if (element) {
-			if (this.buttons[where]) {
-				this.buttons[where].destroy();
-				this.buttons[where] = null;
-			}
-			this.buttons[where] = button;
-			this.buttons[where].inject(element);
-		}
-		return this;
-	},
-
-	setLeftButton: function(button) {
-		this.setButton(button, 'left');
-		return this;
-	},
-
-	setRightButton: function(button) {
-		this.setButton(button, 'right');
-		return this;
-	},
-
-	removeButton: function(where) {
-		var button = this.buttons[where];
-		if (button) {
-			button.destroy();
-			button = null;
-		}
-		delete this.buttons[where];
-		return this;
-	},
-
-	removeLeftButton: function() {
-		this.removeButton('left');
-		return this;
-	},
-
-	removeRightButton: function() {
-		this.removeButton('right');
-		return this;
-	},
-
-	removeButtons: function() {
-		Object.each(this.buttons, function(button) {
-			if (button) {
-				button.destroy();
-				button = null;
-			}
-		});
-		this.buttons = null;
-		this.buttons = {};
-		return this;
 	},
 
 	show: function() {

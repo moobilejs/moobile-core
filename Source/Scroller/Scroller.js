@@ -42,7 +42,7 @@ Moobile.Scroller = new Class({
 		return this;
 	},
 
-	attach: function() {
+	setup: function() {
 		this.enabled = true;
 		this.wrapper = new Element('div.scroller-wrapper').set('html', this.content.get('html'));
 		this.element = new Element('div.scroller-element');
@@ -55,14 +55,17 @@ Moobile.Scroller = new Class({
 		return this;
 	},
 
-	detach: function() {
-		this.enabled = false;
-		this.scroller.destroy();
-		this.scroller = null;
-		this.content.set('html', this.wrapper.get('html'));
-		this.wrapper.destroy();
-		this.element.destroy();
-		if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+	destroy: function() {
+		if (this.enabled == true) {
+			this.enabled = false;
+			this.scroller.destroy();
+			this.scroller = null;
+			this.wrapper.destroy();
+			this.wrapper = null;
+			this.element.destroy();
+			this.element = null;
+			if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+		}
 		return this;
 	},
 
@@ -87,14 +90,6 @@ Moobile.Scroller = new Class({
 	refresh: function() {
 		if (this.enabled) this.scroller.refresh();
 		return this;
-	},
-
-	destroy: function() {
-		if (this.enabled) {
-			this.enabled = false;
-			this.scroller.destroy();
-			this.scroller = null;
-		}
 	},
 
 	onDocumentTouchMove: function(e) {

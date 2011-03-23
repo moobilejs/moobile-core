@@ -3,15 +3,14 @@
 
 name: UI.Control
 
-description: Provides base events for the UI control object.
+description: Provides the base class for any types of controls.
 
 license: MIT-style license.
 
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
 requires:
-	- Extras/UI.Control
+	- Core/Class
+	- Core/Class.Extras
+	- UI.Element
 
 provides:
 	- UI.Control
@@ -19,36 +18,29 @@ provides:
 ...
 */
 
-(function() {
+UI.Control = new Class({
 
-var setElement = UI.Control.prototype.setElement;
+	Extends: UI.Element,
 
-Class.refactor(UI.Control, {
+	disabled: false,
 
-	Implements: [Class.Binds],
+	name: null,
 
 	style: null,
 
 	options: {
 		className: '',
-		styleName: ''
+		styleName: '',
+		disabledClassName: 'disabled'
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.setStyle(this.options.styleName);
-		return this.parent(element, options);
-	},
-
-	setElement: function(element) {
-		setElement.call(this, element);
-		if (this.element == null) this.element = this.create()
+	setName: function(name) {
+		this.name = name;
 		return this;
 	},
 
-	create: function() {
-		return new Element('div');
+	getName: function() {
+		return this.name;
 	},
 
 	setStyle: function(style) {
@@ -60,8 +52,24 @@ Class.refactor(UI.Control, {
 
 	getStyle: function() {
 		return this.style;
+	},
+
+	setDisabled: function(disabled) {
+		if (this.disabled != disabled) {
+			this.disabled = disabled;
+			if (this.disabled) {
+				this.addClass(this.options.disabledClassName);
+				this.attachEvents();
+			} else {
+				this.removeClass(this.options.disabledClassName);
+				this.detachEvents();
+			}
+		}
+		return this;
+	},
+
+	idDisabled: function() {
+		return this.disabled;
 	}
 
 });
-
-})();

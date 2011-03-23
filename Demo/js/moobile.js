@@ -7859,47 +7859,6 @@ Class.extend({
 /*
 ---
 
-name: Class.Element
-
-description: Provides a set of methods for classes that handles an element such
-             as the toElement method.
-
-license: MIT-style license.
-
-requires:
-	- Core/Class
-	- Core/Class.Extras
-	- Core/Element
-
-provides:
-	- Class.Element
-
-...
-*/
-
-Class.Element = new Class({
-
-	element: null,
-
-	setElement: function(element) {
-		if (this.element == null) this.element = document.id(element);
-		if (this.element == null) this.element = document.getElement(element);
-		return this;
-	},
-
-	getElement: function(selector) {
-		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
-	},
-
-	toElement: function() {
-		return this.element;
-	}
-
-})
-
-/*
----
-
 name: Element.Extras
 
 description: Provides extra methods for the element class.
@@ -8134,264 +8093,6 @@ String.implement({
 });
 
 
-
-/*
----
-
-script: Element.Shortcuts.js
-
-name: Element.Shortcuts
-
-description: Extends the Element native object to include some shortcut methods.
-
-license: MIT-style license
-
-authors:
-  - Aaron Newton
-
-requires:
-  - Core/Element.Style
-  - /MooTools.More
-
-provides: [Element.Shortcuts]
-
-...
-*/
-
-Element.implement({
-
-	isDisplayed: function(){
-		return this.getStyle('display') != 'none';
-	},
-
-	isVisible: function(){
-		var w = this.offsetWidth,
-			h = this.offsetHeight;
-		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.style.display != 'none';
-	},
-
-	toggle: function(){
-		return this[this.isDisplayed() ? 'hide' : 'show']();
-	},
-
-	hide: function(){
-		var d;
-		try {
-			//IE fails here if the element is not in the dom
-			d = this.getStyle('display');
-		} catch(e){}
-		if (d == 'none') return this;
-		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
-	},
-
-	show: function(display){
-		if (!display && this.isDisplayed()) return this;
-		display = display || this.retrieve('element:_originalDisplay') || 'block';
-		return this.setStyle('display', (display == 'none') ? 'block' : display);
-	},
-
-	swapClass: function(remove, add){
-		return this.removeClass(remove).addClass(add);
-	}
-
-});
-
-Document.implement({
-
-	clearSelection: function(){
-		if (window.getSelection){
-			var selection = window.getSelection();
-			if (selection && selection.removeAllRanges) selection.removeAllRanges();
-		} else if (document.selection && document.selection.empty){
-			try {
-				//IE fails here if selected element is not in dom
-				document.selection.empty();
-			} catch(e){}
-		}
-	}
-
-});
-
-
-/*
----
-
-name: UI.Element
-
-description: Provide the base class for every classes that use an element at
-             core.
-
-license: MIT-style license.
-
-requires:
-	- Core/Class
-	- Core/Class.Extras
-	- Core/DOMReady
-	- Core/Element
-	- Core/Element.Style
-	- Core/Element.Event
-	- Core/Element.Dimensions
-	- Core/Fx.Tween
-	- Core/Fx.Morph
-	- More/Class.Binds
-	- More/Element.Shortcuts
-	- Class.Element
-
-provides:
-	- UI.Element
-
-...
-*/
-
-if (!window.UI) window.UI = {};
-
-UI.Element = new Class({
-
-	Implements: [
-		Events,
-		Options,
-		Class.Element
-	],
-
-	options: {
-		className: ''
-	},
-
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.element.addClass(this.options.className);
-		this.attachEvents();
-		return this;
-	},
-
-	destroy: function() {
-		this.detachEvents();
-		this.element.destroy();
-		this.element = null;
-		return this;
-	},
-
-	attachEvents: function() {
-		return this;
-	},
-
-	detachEvents: function() {
-		return this;
-	},
-
-	show: function() {
-		this.element.show();
-		return this;
-	},
-
-	hide: function() {
-		this.element.hide();
-		return this;
-	},
-
-	fade: function(how) {
-		this.element.fade(how);
-		return this;
-	},
-
-	addClass: function(name) {
-		this.element.addClass(name);
-		return this;
-	},
-
-	removeClass: function(name) {
-		this.element.removeClass(name);
-		return this;
-	},
-
-	toggleClass: function(name) {
-		this.element.toggleClass(name);
-		return this;
-	},
-
-	adopt: function() {
-		this.element.adopt.apply(this.element, arguments);
-		return this;
-	},
-	
-	inject: function(element, where) {
-		this.element.inject(element, where);
-		return this;
-	},
-
-	empty: function() {
-		this.element.empty();
-		return this;
-	},
-
-	dispose: function() {
-		this.element.dispose();
-		return this;
-	}
-
-});
-
-/*
----
-
-name: UI.Control
-
-description: Provides the base class for any types of controls.
-
-license: MIT-style license.
-
-requires:
-	- Core/Class
-	- Core/Class.Extras
-	- UI.Element
-
-provides:
-	- UI.Control
-
-...
-*/
-
-UI.Control = new Class({
-
-	Extends: UI.Element,
-
-	name: null,
-
-	disabled: false,
-
-	options: {
-		disabledClassName: 'disabled'
-	},
-
-	setName: function(name) {
-		this.name = name;
-		return this;
-	},
-
-	getName: function() {
-		return this.name;
-	},
-
-	setDisabled: function(disabled) {
-		if (this.disabled != disabled) {
-			this.disabled = disabled;
-			if (this.disabled) {
-				this.addClass(this.options.disabledClassName);
-				this.attachEvents();
-			} else {
-				this.removeClass(this.options.disabledClassName);
-				this.detachEvents();
-			}
-		}
-		return this;
-	},
-
-	idDisabled: function() {
-		return this.disabled;
-	}
-
-});
 
 /*
 ---
@@ -9590,15 +9291,12 @@ requires:
 	- More/Object.Extras
 	- More/String.Extras
 	- Extras/Class.Extras
-	- Extras/Class.Element
 	- Extras/Element.Extras
 	- Extras/Element.Properties
 	- Extras/Selector.Apply
 	- Extras/Selector.Attach
 	- Extras/Array.Extras
 	- Extras/String.Extras
-	- Extras/UI.Control
-	- Extras/UI.Element
 	- Class-Extras/Class.Binds
 	- Mobile/Click
 	- Mobile/Pinch
@@ -9905,7 +9603,7 @@ Moobile.Scroller = new Class({
 		return this;
 	},
 
-	attach: function() {
+	setup: function() {
 		this.enabled = true;
 		this.wrapper = new Element('div.scroller-wrapper').set('html', this.content.get('html'));
 		this.element = new Element('div.scroller-element');
@@ -9918,14 +9616,17 @@ Moobile.Scroller = new Class({
 		return this;
 	},
 
-	detach: function() {
-		this.enabled = false;
-		this.scroller.destroy();
-		this.scroller = null;
-		this.content.set('html', this.wrapper.get('html'));
-		this.wrapper.destroy();
-		this.element.destroy();
-		if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+	destroy: function() {
+		if (this.enabled == true) {
+			this.enabled = false;
+			this.scroller.destroy();
+			this.scroller = null;
+			this.wrapper.destroy();
+			this.wrapper = null;
+			this.element.destroy();
+			this.element = null;
+			if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+		}
 		return this;
 	},
 
@@ -9952,14 +9653,6 @@ Moobile.Scroller = new Class({
 		return this;
 	},
 
-	destroy: function() {
-		if (this.enabled) {
-			this.enabled = false;
-			this.scroller.destroy();
-			this.scroller = null;
-		}
-	},
-
 	onDocumentTouchMove: function(e) {
 		e.preventDefault();
 	}
@@ -9969,17 +9662,239 @@ Moobile.Scroller = new Class({
 /*
 ---
 
-name: UI.Control
+script: Element.Shortcuts.js
 
-description: Provides base events for the UI control object.
+name: Element.Shortcuts
+
+description: Extends the Element native object to include some shortcut methods.
+
+license: MIT-style license
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/Element.Style
+  - /MooTools.More
+
+provides: [Element.Shortcuts]
+
+...
+*/
+
+Element.implement({
+
+	isDisplayed: function(){
+		return this.getStyle('display') != 'none';
+	},
+
+	isVisible: function(){
+		var w = this.offsetWidth,
+			h = this.offsetHeight;
+		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.style.display != 'none';
+	},
+
+	toggle: function(){
+		return this[this.isDisplayed() ? 'hide' : 'show']();
+	},
+
+	hide: function(){
+		var d;
+		try {
+			//IE fails here if the element is not in the dom
+			d = this.getStyle('display');
+		} catch(e){}
+		if (d == 'none') return this;
+		return this.store('element:_originalDisplay', d || '').setStyle('display', 'none');
+	},
+
+	show: function(display){
+		if (!display && this.isDisplayed()) return this;
+		display = display || this.retrieve('element:_originalDisplay') || 'block';
+		return this.setStyle('display', (display == 'none') ? 'block' : display);
+	},
+
+	swapClass: function(remove, add){
+		return this.removeClass(remove).addClass(add);
+	}
+
+});
+
+Document.implement({
+
+	clearSelection: function(){
+		if (window.getSelection){
+			var selection = window.getSelection();
+			if (selection && selection.removeAllRanges) selection.removeAllRanges();
+		} else if (document.selection && document.selection.empty){
+			try {
+				//IE fails here if selected element is not in dom
+				document.selection.empty();
+			} catch(e){}
+		}
+	}
+
+});
+
+
+/*
+---
+
+name: UI.Element
+
+description: Provide a refactorized UI.Element class where the initialize call
+             the setup method before attaching events.
 
 license: MIT-style license.
 
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+requires:
+	- Core/Class
+	- Core/Class.Extras
+	- Core/DOMReady
+	- Core/Element
+	- Core/Element.Style
+	- Core/Element.Event
+	- Core/Element.Dimensions
+	- Core/Fx.Tween
+	- Core/Fx.Morph
+	- More/Class.Binds
+	- More/Element.Shortcuts
+	- Class-Extras/Class.Binds
+
+provides:
+	- UI.Element
+
+...
+*/
+
+if (!window.UI) window.UI = {};
+
+UI.Element = new Class({
+
+	Implements: [
+		Events,
+		Options,
+		Class.Binds
+	],
+
+	element: null,
+
+	options: {
+		className: ''
+	},
+
+	initialize: function(element, options) {
+		this.setElement(element);
+		this.setOptions(options);
+		this.element.addClass(this.options.className);
+		this.setup();
+		this.attachEvents();
+		return this;
+	},
+
+	create: function() {
+		return new Element('div');
+	},
+
+	setup: function() {
+		return this;
+	},
+
+	destroy: function() {
+		this.detachEvents();
+		this.element.destroy();
+		this.element = null;
+		return this;
+	},
+
+	attachEvents: function() {
+		return this;
+	},
+
+	detachEvents: function() {
+		return this;
+	},
+
+	setElement: function(element) {
+		if (this.element == null) this.element = document.id(element);
+		if (this.element == null) this.element = document.getElement(element);
+		if (this.element == null) this.element = this.create();
+		return this;
+	},
+
+	getElement: function(selector) {
+		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
+	},
+
+	toElement: function() {
+		return this.element;
+	},
+
+	show: function() {
+		this.element.show();
+		return this;
+	},
+
+	hide: function() {
+		this.element.hide();
+		return this;
+	},
+
+	fade: function(how) {
+		this.element.fade(how);
+		return this;
+	},
+
+	addClass: function(name) {
+		this.element.addClass(name);
+		return this;
+	},
+
+	removeClass: function(name) {
+		this.element.removeClass(name);
+		return this;
+	},
+
+	toggleClass: function(name) {
+		this.element.toggleClass(name);
+		return this;
+	},
+
+	adopt: function() {
+		this.element.adopt.apply(this.element, arguments);
+		return this;
+	},
+
+	inject: function(element, where) {
+		this.element.inject(element, where);
+		return this;
+	},
+
+	empty: function() {
+		this.element.empty();
+		return this;
+	},
+
+	dispose: function() {
+		this.element.dispose();
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: UI.Control
+
+description: Provides the base class for any types of controls.
+
+license: MIT-style license.
 
 requires:
-	- Extras/UI.Control
+	- Core/Class
+	- Core/Class.Extras
+	- UI.Element
 
 provides:
 	- UI.Control
@@ -9987,36 +9902,29 @@ provides:
 ...
 */
 
-(function() {
+UI.Control = new Class({
 
-var setElement = UI.Control.prototype.setElement;
+	Extends: UI.Element,
 
-Class.refactor(UI.Control, {
+	disabled: false,
 
-	Implements: [Class.Binds],
+	name: null,
 
 	style: null,
 
 	options: {
 		className: '',
-		styleName: ''
+		styleName: '',
+		disabledClassName: 'disabled'
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.setStyle(this.options.styleName);
-		return this.parent(element, options);
-	},
-
-	setElement: function(element) {
-		setElement.call(this, element);
-		if (this.element == null) this.element = this.create()
+	setName: function(name) {
+		this.name = name;
 		return this;
 	},
 
-	create: function() {
-		return new Element('div');
+	getName: function() {
+		return this.name;
 	},
 
 	setStyle: function(style) {
@@ -10028,11 +9936,27 @@ Class.refactor(UI.Control, {
 
 	getStyle: function() {
 		return this.style;
+	},
+
+	setDisabled: function(disabled) {
+		if (this.disabled != disabled) {
+			this.disabled = disabled;
+			if (this.disabled) {
+				this.addClass(this.options.disabledClassName);
+				this.attachEvents();
+			} else {
+				this.removeClass(this.options.disabledClassName);
+				this.detachEvents();
+			}
+		}
+		return this;
+	},
+
+	idDisabled: function() {
+		return this.disabled;
 	}
 
 });
-
-})();
 
 /*
 ---
@@ -10059,39 +9983,57 @@ provides:
 UI.Button = new Class({
 
 	Extends: UI.Control,
-	
-	content: null,
+
+	value: false,
+
+	wrapper: null,
+
+	caption: null,
 
 	options: {
 		className: 'ui-button',
 		styleName: 'ui-button-normal'
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.attachContent();
-		return this.parent(element, options);
-	},
-
-	destroy: function() {
-		this.detachContent();
+	setup: function() {
+		if (this.isNative() == false) {
+			this.injectWrapper();
+			this.injectCaption();
+		}
 		return this.parent();
 	},
 
-	create: function() {
-		return this.parent().adopt(
-			new Element('span[data-role=button-content].' + this.options.className + '-content')
-		);
+	destroy: function() {
+		if (this.isNative() == false) {
+			this.destroyCaption();
+			this.destroyWrapper();
+		}
+		return this.parent();
 	},
 
-	attachContent: function() {
-		this.content = this.element.getElement('[data-role=button-content]');
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+		this.element.empty();
+		this.element.adopt(this.wrapper);
 		return this;
 	},
 
-	detachContent: function() {
-		this.content = null;
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
+		return this;
+	},
+
+	injectCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.wrapper.get('html'));
+		this.wrapper.empty();
+		this.wrapper.adopt(this.caption);
+		return this;
+	},
+
+	destroyCaption: function() {
+		this.caption.destroy();
+		this.caption = null;
 		return this;
 	},
 
@@ -10110,12 +10052,16 @@ UI.Button = new Class({
 	},
 
 	setText: function(text) {
-		if (this.content) {
-			this.content.set('html', text);
+		if (this.isNative() == false) {
+			this.caption.set('html', text);
 		} else {
-			this.value = text;
+			this.element.set('value', text);
 		}
 		return this;
+	},
+
+	isNative: function() {
+		return this.element.get('tag') == 'input';
 	},
 
 	onClick: function() {
@@ -10137,10 +10083,6 @@ UI.Button = new Class({
 
 });
 
-UI.ButtonStyle = {
-	NORMAL: 'ui-button-normal'
-};
-
 /*
 ---
 
@@ -10155,7 +10097,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Extras/UI.Control
+	- UI.Control
 
 provides:
 	- UI.NavigationBar
@@ -10169,44 +10111,62 @@ UI.NavigationBar = new Class({
 
 	view: null,
 
-	title: null,
+	wrapper: null,
 
-	buttons: {},
+	caption: null,
+
+	buttons: null,
 
 	options: {
 		className: 'ui-navigation-bar',
 		styleName: 'ui-navigation-bar-normal'
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.attachTitle();
-		return this.parent(element, options);
-	},
-
-	create: function() {
-		return new Element('div').adopt(
-			new Element('div[data-role=navigation-bar-title].' + this.options.className + '-title'),
-			new Element('div[data-role=navigation-bar-button-left].' + this.options.className + '-button-left'),
-			new Element('div[data-role=navigation-bar-button-right].' + this.options.className + '-button-right')
-		);
+	setup: function() {
+		this.parent();
+		this.injectCaption();
+		return this;
 	},
 
 	destroy: function() {
 		this.hide();
-		this.detachTitle();
+		this.destroyCaption();
+		return this.parent();
+	},
+
+	injectCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.element.get('html'));
+		this.element.empty();
+		this.element.adopt(this.caption);
 		return this;
 	},
 
-	attachTitle: function() {
-		this.title = this.element.getElement('[data-role=navigation-bar-title]');
+	destroyCaption: function() {
+		this.caption.destroy();
+		this.caption = null;
 		return this;
 	},
 
-	detachTitle: function() {
-		this.title.destroy();
-		this.title = null;
+	setTitle: function(title) {
+		this.caption.set('html', title);
+		return this;
+	},
+
+	getTitle: function() {
+		return this.caption.get('html');
+	},
+
+	setButton: function(button, where) {
+		var element = this.element.getElement('div.' + this.options.className + '-button-' + where);
+		if (element) {
+			element.dispose();
+			element = null;
+		}
+		if (button) {
+			element = new Element('div.' + this.options.className + '-button-' + where);
+			element.adopt(button);
+			this.element.adopt(element);
+		}
 		return this;
 	},
 
@@ -10217,70 +10177,6 @@ UI.NavigationBar = new Class({
 
 	getView: function() {
 		return this.view;
-	},
-
-	setTitle: function(title) {
-		this.title.set('html', title);
-		return this;
-	},
-
-	removeTitle: function() {
-		this.title.set('html', '');
-	},
-
-	setButton: function(button, where) {
-		var element = this.element.getElement('[data-role=navigation-bar-button-' + where + ']');
-		if (element) {
-			if (this.buttons[where]) {
-				this.buttons[where].destroy();
-				this.buttons[where] = null;
-			}
-			this.buttons[where] = button;
-			this.buttons[where].inject(element);
-		}
-		return this;
-	},
-
-	setLeftButton: function(button) {
-		this.setButton(button, 'left');
-		return this;
-	},
-
-	setRightButton: function(button) {
-		this.setButton(button, 'right');
-		return this;
-	},
-
-	removeButton: function(where) {
-		var button = this.buttons[where];
-		if (button) {
-			button.destroy();
-			button = null;
-		}
-		delete this.buttons[where];
-		return this;
-	},
-
-	removeLeftButton: function() {
-		this.removeButton('left');
-		return this;
-	},
-
-	removeRightButton: function() {
-		this.removeButton('right');
-		return this;
-	},
-
-	removeButtons: function() {
-		Object.each(this.buttons, function(button) {
-			if (button) {
-				button.destroy();
-				button = null;
-			}
-		});
-		this.buttons = null;
-		this.buttons = {};
-		return this;
 	},
 
 	show: function() {
@@ -10374,9 +10270,11 @@ provides:
 */
 
 UI.BarButtonStyle = {
+
 	NORMAL: 'ui-bar-button-normal',
 	ACTIVE: 'ui-bar-button-active',
 	BACK:	'ui-bar-button-back'
+	
 };
 
 
@@ -10427,14 +10325,12 @@ Moobile.View = new Class({
 		wrappable: true
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
+	setup: function() {
 		if (this.options.wrappable) this.injectWrapper();
-		if (this.options.scrollable) this.injectScroller();
+		//if (this.options.scrollable) this.injectScroller();
 		this.attachChildElements();
 		this.attachChildControls();
-		return this.parent(element, options);
+		return this.parent();
 	},
 
 	destroy: function() {
@@ -10442,7 +10338,7 @@ Moobile.View = new Class({
 		this.destroyChildElements();
 		this.destroyChildControls();
 		if (this.options.wrappable) this.destroyWrapper();
-		if (this.options.scrollable) this.destroyScroller();
+		//if (this.options.scrollable) this.destroyScroller();
 		this.parent();
 		return this;
 	},
@@ -10475,15 +10371,14 @@ Moobile.View = new Class({
 
 	injectScroller: function() {
 		this.scroller = new Moobile.Scroller(this.element);
-		this.scroller.attach();
+		this.scroller.setup();
 		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
 		return this;
 	},
 
 	destroyScroller: function() {
-		this.scroller.detach();
+		this.scroller.destroy();
 		this.scroller = null;
-		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
 		return this;
 	},
 
@@ -10512,10 +10407,8 @@ Moobile.View = new Class({
 	},
 
 	destroyWrapper: function() {
-		var content = this.wrapper.get('html');
 		this.wrapper.destroy();
 		this.wrapper = null;
-		this.element.set('html', content);
 		return this;
 	},
 
@@ -10717,8 +10610,8 @@ Moobile.View.Stack = new Class({
 		wrappable: true
 	},
 
-	initialize: function(element, options) {
-		this.parent(element, options);
+	setup: function() {
+		this.parent();
 		this.element.addClass('stack-view');
 		this.wrapper.addClass('stack-view-wrapper');
 		return this;
@@ -10761,18 +10654,18 @@ Moobile.View.Navigation = new Class({
 		navigationBarElement: null
 	},
 
-	initialize: function(element, options) {
-		this.parent(element, options);
-		this.attachNavigationBar();
+	setup: function() {
+		this.parent();
+		this.injectNavigationBar();
 		return this;
 	},
 
 	destroy: function() {
-		if (this.options.navigationBar) this.detachNavigationBar();
+		this.destroyNavigationBar();
 		return this.parent();
 	},
 
-	attachNavigationBar: function() {
+	injectNavigationBar: function() {
 		this.navigationBar = new UI.NavigationBar(this.options.navigationBarElement);
 		this.navigationBar.setView(this);
 		this.navigationBar.dispose();
@@ -10782,7 +10675,7 @@ Moobile.View.Navigation = new Class({
 		return this;
 	},
 
-	detachNavigationBar: function() {
+	destroyNavigationBar: function() {
 		this.navigationBar.destroy();
 		this.navigationBar = null;
 		return this;
@@ -10814,6 +10707,10 @@ provides:
 Moobile.ViewController = new Class({
 
 	Implements: [Events, Options, Class.Binds],
+
+	$navigationBarLeftButton: null,
+
+	$navigationBarRightButton: null,
 
 	view: null,
 
@@ -10931,6 +10828,20 @@ Moobile.ViewController = new Class({
 		return this.transition;
 	},
 
+	getNavigationBarLeftButton: function() {
+		if (this.$navigationBarLeftButton == null) {
+			this.$navigationBarLeftButton = this.navigationBarLeftButton();
+		}
+		return this.$navigationBarLeftButton;
+	},
+
+	getNavigationBarRightButton: function() {
+		if (this.$navigationBarRightButton == null) {
+			this.$navigationBarRightButton = this.navigationBarRightButton();
+		}
+		return this.$navigationBarRightButton;
+	},
+
 	viewWillEnter: function() {
 		this.view.show();
 		return this;
@@ -10970,7 +10881,6 @@ Moobile.ViewController = new Class({
 	}
 
 });
-
 
 /*
 ---
@@ -11206,10 +11116,11 @@ Moobile.ViewController.Navigation = new Class({
 				this.navigationBar.hide();
 			}
 			
-			this.navigationBar.removeTitle();
-			this.navigationBar.removeButtons();			
+			this.navigationBar.setTitle('');
+			this.navigationBar.setButton(null, 'left');
+			this.navigationBar.setButton(null, 'right');
 			
-			var navigationLeftButton = this.topViewController.navigationBarLeftButton();
+			var navigationLeftButton = this.topViewController.getNavigationBarLeftButton();
 			if (navigationLeftButton == null) {
 				var previousViewControllerIndex = topViewControllerIndex - 1;
 				if (previousViewControllerIndex >= 0) {
@@ -11219,16 +11130,16 @@ Moobile.ViewController.Navigation = new Class({
 						navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
 						navigationBackButton.setText(backButtonTitle);
 						navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
-						this.navigationBar.setLeftButton(navigationBackButton);
+						this.navigationBar.setButton(navigationBackButton, 'left');
 					}
 				}
 			} else {
-				this.navigationBar.setLeftButton(navigationLeftButton);
+				this.navigationBar.setButton(navigationLeftButton, 'left');
 			}
 
-			var navigationRightButton = this.topViewController.navigationBarRightButton();
+			var navigationRightButton = this.topViewController.getNavigationBarRightButton();
 			if (navigationRightButton) {
-				this.navigationBar.setRightButton(navigationRightButton);
+				this.navigationBar.setButton(navigationRightButton, 'right');
 			}
 
 			var navigationBarTitle = this.topViewController.getTitle();

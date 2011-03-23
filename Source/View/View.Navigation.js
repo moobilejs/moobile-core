@@ -33,18 +33,18 @@ Moobile.View.Navigation = new Class({
 		navigationBarElement: null
 	},
 
-	initialize: function(element, options) {
-		this.parent(element, options);
-		this.attachNavigationBar();
+	setup: function() {
+		this.parent();
+		this.injectNavigationBar();
 		return this;
 	},
 
 	destroy: function() {
-		if (this.options.navigationBar) this.detachNavigationBar();
+		this.destroyNavigationBar();
 		return this.parent();
 	},
 
-	attachNavigationBar: function() {
+	injectNavigationBar: function() {
 		this.navigationBar = new UI.NavigationBar(this.options.navigationBarElement);
 		this.navigationBar.setView(this);
 		this.navigationBar.dispose();
@@ -54,7 +54,7 @@ Moobile.View.Navigation = new Class({
 		return this;
 	},
 
-	detachNavigationBar: function() {
+	destroyNavigationBar: function() {
 		this.navigationBar.destroy();
 		this.navigationBar = null;
 		return this;

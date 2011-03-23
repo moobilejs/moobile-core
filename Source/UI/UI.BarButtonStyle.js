@@ -19,7 +19,9 @@ provides:
 */
 
 UI.BarButtonStyle = {
+
 	NORMAL: 'ui-bar-button-normal',
 	ACTIVE: 'ui-bar-button-active',
 	BACK:	'ui-bar-button-back'
+	
 };

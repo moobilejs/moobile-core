@@ -18,9 +18,9 @@ sources:
 
   - "Source/Application/Application.js"
   - "Source/Application/Application.iPhone.js"
+  - "Source/Browser/Browser.Platform.js"
   - "Source/Core/Core.js"
   - "Source/Debug/Debug.js"
-  - "Source/Browser/Browser.Platform.js"
   - "Source/Event/Event.js"
   - "Source/Event/Event.ClickOver.js"
   - "Source/Event/Event.TouchOver.js"
@@ -33,6 +33,7 @@ sources:
   - "Source/Scroller/Scroller.js"
   - "Source/UI/UI.Control.js"
   - "Source/UI/UI.Button.js"
+  - "Source/UI/UI.Element.js"
   - "Source/UI/UI.NavigationBar.js"
   - "Source/UI/UI.NavigationBarStyle.js"
   - "Source/UI/UI.BarButton.js"

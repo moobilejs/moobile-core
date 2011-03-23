@@ -23,39 +23,57 @@ provides:
 UI.Button = new Class({
 
 	Extends: UI.Control,
-	
-	content: null,
+
+	value: false,
+
+	wrapper: null,
+
+	caption: null,
 
 	options: {
 		className: 'ui-button',
 		styleName: 'ui-button-normal'
 	},
 
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.attachContent();
-		return this.parent(element, options);
-	},
-
-	destroy: function() {
-		this.detachContent();
+	setup: function() {
+		if (this.isNative() == false) {
+			this.injectWrapper();
+			this.injectCaption();
+		}
 		return this.parent();
 	},
 
-	create: function() {
-		return this.parent().adopt(
-			new Element('span[data-role=button-content].' + this.options.className + '-content')
-		);
+	destroy: function() {
+		if (this.isNative() == false) {
+			this.destroyCaption();
+			this.destroyWrapper();
+		}
+		return this.parent();
 	},
 
-	attachContent: function() {
-		this.content = this.element.getElement('[data-role=button-content]');
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+		this.element.empty();
+		this.element.adopt(this.wrapper);
 		return this;
 	},
 
-	detachContent: function() {
-		this.content = null;
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
+		return this;
+	},
+
+	injectCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.wrapper.get('html'));
+		this.wrapper.empty();
+		this.wrapper.adopt(this.caption);
+		return this;
+	},
+
+	destroyCaption: function() {
+		this.caption.destroy();
+		this.caption = null;
 		return this;
 	},
 
@@ -74,12 +92,16 @@ UI.Button = new Class({
 	},
 
 	setText: function(text) {
-		if (this.content) {
-			this.content.set('html', text);
+		if (this.isNative() == false) {
+			this.caption.set('html', text);
 		} else {
-			this.value = text;
+			this.element.set('value', text);
 		}
 		return this;
+	},
+
+	isNative: function() {
+		return this.element.get('tag') == 'input';
 	},
 
 	onClick: function() {
@@ -100,7 +122,3 @@ UI.Button = new Class({
 	}
 
 });
-
-UI.ButtonStyle = {
-	NORMAL: 'ui-button-normal'
-};
