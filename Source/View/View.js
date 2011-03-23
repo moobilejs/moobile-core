@@ -47,7 +47,7 @@ Moobile.View = new Class({
 
 	setup: function() {
 		if (this.options.wrappable) this.injectWrapper();
-		//if (this.options.scrollable) this.injectScroller();
+		if (this.options.scrollable) this.injectScroller();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent();
@@ -58,7 +58,7 @@ Moobile.View = new Class({
 		this.destroyChildElements();
 		this.destroyChildControls();
 		if (this.options.wrappable) this.destroyWrapper();
-		//if (this.options.scrollable) this.destroyScroller();
+		if (this.options.scrollable) this.destroyScroller();
 		this.parent();
 		return this;
 	},
