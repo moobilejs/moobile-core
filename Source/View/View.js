@@ -75,18 +75,21 @@ Moobile.View = new Class({
 		this.childViews.each(function(view) { view.destroy(); });
 		this.childViews = null;
 		this.childViews = [];
+		return this;
 	},
 
 	destroyChildElements: function() {
 		this.childElements.each(function(element) { element.destroy(); });
 		this.childElements = null;
 		this.childElements = [];
+		return this;
 	},
 
 	destroyChildControls: function() {
 		this.childControls.each(function(control) { control.destroy(); });
 		this.childControls = null;
 		this.childControls = [];
+		return this;
 	},
 
 	injectScroller: function() {
