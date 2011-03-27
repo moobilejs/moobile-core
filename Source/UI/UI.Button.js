@@ -26,9 +26,7 @@ UI.Button = new Class({
 
 	value: false,
 
-	wrapper: null,
-
-	caption: null,
+	content: null,
 
 	options: {
 		className: 'ui-button',
@@ -36,44 +34,25 @@ UI.Button = new Class({
 	},
 
 	setup: function() {
-		if (this.isNative() == false) {
-			this.injectWrapper();
-			this.injectCaption();
-		}
+		if (this.isNative() == false) this.injectContent();
 		return this.parent();
 	},
 
 	destroy: function() {
-		if (this.isNative() == false) {
-			this.destroyCaption();
-			this.destroyWrapper();
-		}
+		if (this.isNative() == false) this.destroyContent();
 		return this.parent();
 	},
 
-	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
 		this.element.empty();
-		this.element.adopt(this.wrapper);
+		this.element.adopt(this.content);
 		return this;
 	},
 
-	destroyWrapper: function() {
-		this.wrapper.destroy();
-		this.wrapper = null;
-		return this;
-	},
-
-	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.wrapper.get('html'));
-		this.wrapper.empty();
-		this.wrapper.adopt(this.caption);
-		return this;
-	},
-
-	destroyCaption: function() {
-		this.caption.destroy();
-		this.caption = null;
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
@@ -92,10 +71,10 @@ UI.Button = new Class({
 	},
 
 	setText: function(text) {
-		if (this.isNative() == false) {
-			this.caption.set('html', text);
-		} else {
+		if (this.isNative()) {
 			this.element.set('value', text);
+		} else {
+			this.content.set('html', text);
 		}
 		return this;
 	},

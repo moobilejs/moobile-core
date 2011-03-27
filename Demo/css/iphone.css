@@ -259,7 +259,7 @@ p small {
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.ui-bar-button .ui-bar-button-wrapper {
+.ui-bar-button .ui-bar-button-content {
 	background: url(../images/ui-bar-button/normal/center.png) repeat-x;
 	display: block;
 	padding-left: 3px;
@@ -274,7 +274,7 @@ p small {
 	padding-right: 5px;
 }
 
-.ui-bar-button.ui-bar-button-back .ui-bar-button-wrapper {
+.ui-bar-button.ui-bar-button-back .ui-bar-button-content {
 	background: url(../images/ui-bar-button/back/center.png) repeat-x;
 }
 
