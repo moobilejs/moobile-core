@@ -33,6 +33,7 @@ sources:
   - "Source/Scroller/Scroller.js"
   - "Source/UI/UI.Control.js"
   - "Source/UI/UI.Button.js"
+  - "Source/UI/UI.ButtonStyle.js"
   - "Source/UI/UI.Element.js"
   - "Source/UI/UI.NavigationBar.js"
   - "Source/UI/UI.NavigationBarStyle.js"

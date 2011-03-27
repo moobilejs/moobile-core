@@ -13,6 +13,7 @@ authors:
 
 requires:
 	- UI.Control
+	- UI.NavigationBarStyle
 
 provides:
 	- UI.NavigationBar
@@ -34,7 +35,7 @@ UI.NavigationBar = new Class({
 
 	options: {
 		className: 'ui-navigation-bar',
-		styleName: 'ui-navigation-bar-normal'
+		styleName: UI.NavigationBarStyle.NORMAL
 	},
 
 	setup: function() {

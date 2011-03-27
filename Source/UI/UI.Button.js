@@ -12,10 +12,10 @@ authors:
 
 requires:
 	- UI.Control
+	- UI.ButtonStyle
 
 provides:
 	- UI.Button
-	- UI.ButtonStyle
 
 ...
 */
@@ -32,7 +32,7 @@ UI.Button = new Class({
 
 	options: {
 		className: 'ui-button',
-		styleName: 'ui-button-normal'
+		styleName: UI.ButtonStyle.NORMAL
 	},
 
 	setup: function() {

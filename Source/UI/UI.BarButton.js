@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- UI.Button
+	- UI.BarButtonStyle
 
 provides:
 	- UI.BarButton
@@ -25,7 +26,7 @@ UI.BarButton = new Class({
 
 	options: {
 		className: 'ui-bar-button',
-		styleName: 'ui-bar-button-normal'
+		styleName: UI.BarButtonStyle.NORMAL
 	}	
 
 });
