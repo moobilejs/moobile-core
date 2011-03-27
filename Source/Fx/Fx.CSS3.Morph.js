@@ -40,14 +40,10 @@ Fx.CSS3.Morph = new Class({
 
 		this.attachEvents();
 
-		this.setup.delay(1, this);
-		this.apply.delay(2, this);
-		this.run.delay(3, this);
-
-		return this;
+		return this.parent();
 	},
 
-	setup: function() {
+	setTransitionInitialState: function() {
 		this.element.setStyle('transition', null);
 		Object.each(this.from, function(value, property) {
 			if (value.length) {
@@ -57,15 +53,15 @@ Fx.CSS3.Morph = new Class({
 				this.element.setStyle(property, value);
 			}
 		}, this);
-		return this;
+		return this.parent();
 	},
 
-	apply: function() {
+	setTransitionParameters: function() {
 		this.element.setStyle('transition', 'all ' + this.options.duration + 'ms ' + this.options.transition)
-		return this;
+		return this.parent();
 	},
 
-	run: function() {
+	play: function() {
 		Object.each(this.to, function(value, property) {
 			if (value.length) {
 				value = Array.from(value);
@@ -74,7 +70,7 @@ Fx.CSS3.Morph = new Class({
 				this.element.setStyle(property, value);
 			}
 		}, this);
-		return this;
+		return this.parent();
 	}
 
 });

@@ -9050,6 +9050,27 @@ Fx.CSS3 = new Class({
 		return this;
 	},
 
+	start: function() {
+		this.setTransitionInitialState.delay(1, this);
+		this.setTransitionParameters.delay(2, this);
+		this.play.delay(3, this);
+		return this;
+	},
+
+	setTransitionInitialState: function() {
+		return this;
+	},
+
+	setTransitionParameters: function() {
+		return this;
+	},
+
+	play: function() {
+		this.running = true;
+		this.time = Date.now();
+		return this;
+	},
+
 	stop: function() {
 		if (this.running) {
 			this.running = false;
@@ -9061,6 +9082,7 @@ Fx.CSS3 = new Class({
 				this.fireEvent('stop', this.element);
 			}
 			this.detachEvents();
+			this.element.setStyle(this.transition, null);
 		}
 		return this;
 	},
@@ -9140,27 +9162,23 @@ Fx.CSS3.Tween = new Class({
 
 		this.attachEvents();
 
-		this.setup.delay(1, this);
-		this.apply.delay(2, this);
-		this.run.delay(3, this);
-
-		return this;
+		return this.parent();
 	},
 
-	setup: function() {
+	setTransitionInitialState: function() {
 		this.element.setStyle(this.transition, null);
 		this.element.setStyle(this.property, this.from);
-		return this;
+		return this.parent();
 	},
 
-	apply: function() {
+	setTransitionParameters: function() {
 		this.element.setStyle(this.transition, this.property + ' ' + this.options.duration + 'ms ' + this.options.transition);
-		return this;
+		return this.parent();
 	},
 
-	run: function() {
+	play: function() {
 		this.element.setStyle(this.property, this.to);
-		return this;
+		return this.parent();
 	}
 
 });
@@ -9207,14 +9225,10 @@ Fx.CSS3.Morph = new Class({
 
 		this.attachEvents();
 
-		this.setup.delay(1, this);
-		this.apply.delay(2, this);
-		this.run.delay(3, this);
-
-		return this;
+		return this.parent();
 	},
 
-	setup: function() {
+	setTransitionInitialState: function() {
 		this.element.setStyle('transition', null);
 		Object.each(this.from, function(value, property) {
 			if (value.length) {
@@ -9224,15 +9238,15 @@ Fx.CSS3.Morph = new Class({
 				this.element.setStyle(property, value);
 			}
 		}, this);
-		return this;
+		return this.parent();
 	},
 
-	apply: function() {
+	setTransitionParameters: function() {
 		this.element.setStyle('transition', 'all ' + this.options.duration + 'ms ' + this.options.transition)
-		return this;
+		return this.parent();
 	},
 
-	run: function() {
+	play: function() {
 		Object.each(this.to, function(value, property) {
 			if (value.length) {
 				value = Array.from(value);
@@ -9241,7 +9255,7 @@ Fx.CSS3.Morph = new Class({
 				this.element.setStyle(property, value);
 			}
 		}, this);
-		return this;
+		return this.parent();
 	}
 
 });

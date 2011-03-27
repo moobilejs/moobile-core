@@ -117,6 +117,27 @@ Fx.CSS3 = new Class({
 		return this;
 	},
 
+	start: function() {
+		this.setTransitionInitialState.delay(1, this);
+		this.setTransitionParameters.delay(2, this);
+		this.play.delay(3, this);
+		return this;
+	},
+
+	setTransitionInitialState: function() {
+		return this;
+	},
+
+	setTransitionParameters: function() {
+		return this;
+	},
+
+	play: function() {
+		this.running = true;
+		this.time = Date.now();
+		return this;
+	},
+
 	stop: function() {
 		if (this.running) {
 			this.running = false;
@@ -128,6 +149,7 @@ Fx.CSS3 = new Class({
 				this.fireEvent('stop', this.element);
 			}
 			this.detachEvents();
+			this.element.setStyle(this.transition, null);
 		}
 		return this;
 	},

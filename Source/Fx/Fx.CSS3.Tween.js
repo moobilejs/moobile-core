@@ -40,27 +40,23 @@ Fx.CSS3.Tween = new Class({
 
 		this.attachEvents();
 
-		this.setup.delay(1, this);
-		this.apply.delay(2, this);
-		this.run.delay(3, this);
-
-		return this;
+		return this.parent();
 	},
 
-	setup: function() {
+	setTransitionInitialState: function() {
 		this.element.setStyle(this.transition, null);
 		this.element.setStyle(this.property, this.from);
-		return this;
+		return this.parent();
 	},
 
-	apply: function() {
+	setTransitionParameters: function() {
 		this.element.setStyle(this.transition, this.property + ' ' + this.options.duration + 'ms ' + this.options.transition);
-		return this;
+		return this.parent();
 	},
 
-	run: function() {
+	play: function() {
 		this.element.setStyle(this.property, this.to);
-		return this;
+		return this.parent();
 	}
 
 });
