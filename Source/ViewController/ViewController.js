@@ -27,6 +27,8 @@ Moobile.ViewController = new Class({
 
 	$navigationBarRightButton: null,
 
+	window: null,
+
 	view: null,
 
 	viewControllerStack: null,
@@ -76,6 +78,7 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
+		this.window = this.view.getWindow();
 		this.attachEvents();
 		return this;
 	},
@@ -88,6 +91,7 @@ Moobile.ViewController = new Class({
 		this.viewControllerStack = null;
 		this.modalViewController = null;
 		this.transition = null;
+		this.window = null;
 		return this;
 	},
 

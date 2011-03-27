@@ -68,7 +68,7 @@ Moobile.ViewController.Stack = new Class({
 		viewController.setViewControllerStack(this);
 		viewController.setViewControllerPanel(this.viewControllerPanel);
 		this.viewControllers.push(viewController);
-
+		
 		if (this.viewControllers.length == 1) {
 			this.view.addChildView(viewController.view);
 			this.view.fade('hide');
@@ -79,13 +79,14 @@ Moobile.ViewController.Stack = new Class({
 			new Fx.CSS3.Tween(this.view).start('opacity', 0, 1);
 		} else {
 
+			this.window.disableUserInput();
+
 			var transition = viewControllerTransition || viewController.getTransition();
 			if (transition && typeOf(transition) == 'class') {
 				transition = Class.instanciate(transition);
 			}
 
 			viewController.setTransition(transition);
-
 			this.view.addChildView(viewController.view);
 			viewController.doStartup();
 			viewController.viewWillEnter();
@@ -112,6 +113,7 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidEnter();
 		this.viewControllers.getLast(1)
 			.viewDidLeave();
+		this.window.enableUserInput();
 		return this;
 	},
 
@@ -119,6 +121,9 @@ Moobile.ViewController.Stack = new Class({
 		if (this.viewControllers.length) {
 			this.viewControllers.getLast(1).viewWillEnter();
 			this.viewControllers.getLast(0).viewWillLeave();
+
+			this.window.disableUserInput();
+
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
 				transition.chain(this.bound('onPopTransitionCompleted'));
@@ -139,6 +144,7 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidLeave();
 		this.viewControllers.pop()
 			.viewDidRemove();
+		this.window.enableUserInput();
 		return this;
 	},
 
@@ -150,20 +156,24 @@ Moobile.ViewController.Stack = new Class({
 		return this.viewControllers.getLast(offset);
 	},
 
+	getTopViewController: function() {
+		return this.topViewController;
+	},
+
 	viewWillEnter: function() {
-		return this;
+		return this; // Prevent default behavior
 	},
 
 	viewDidEnter: function() {
-		return this;
+		return this; // Prevent default behavior
 	},
 
 	viewWillLeave: function() {
-		return this;
+		return this; // Prevent default behavior
 	},
 
 	viewDidLeave: function() {
-		return this;
+		return this; // Prevent default behavior
 	}
 
 });

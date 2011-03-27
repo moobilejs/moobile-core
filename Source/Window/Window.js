@@ -26,6 +26,8 @@ Moobile.Window = new Class({
 
 	viewController: null,
 
+	mask: null,
+
 	options: {
 		className: 'window'
 	},
@@ -51,6 +53,31 @@ Moobile.Window = new Class({
 
 	getViewController: function() {
 		return this.viewController;
+	},
+
+	disableUserInput: function() {
+
+		if (this.mask == null) {
+			this.mask = new Element('div');
+			this.mask.setStyle('opacity', 0);
+			this.mask.setStyle('background-color', '#ffffff');
+		}
+
+		var size = this.element.getSize();
+		this.mask.setStyle('width', size.x);
+		this.mask.setStyle('height', size.y);
+		this.mask.setStyle('position', 'absolute');
+		this.mask.setStyle('top', 0);
+		this.mask.setStyle('left', 0);
+
+		this.adopt(this.mask);
+
+		return this;
+	},
+
+	enableUserInput: function() {
+		if (this.mask) this.mask.dispose();
+		return this;
 	},
 
 	adopt: function() {
