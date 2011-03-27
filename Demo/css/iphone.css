@@ -107,6 +107,12 @@ body {
 	font-family: "Helvetica Neue", sans-serif;
 }
 
+input, select, textarea {
+	font-size: 15px;
+	font-weight: bold;
+	font-family: "Helvetica Neue", sans-serif;
+}
+
 /* Header Text
 -----------------------------------------------------------------------------*/
 
@@ -270,6 +276,34 @@ p small {
 
 .ui-bar-button.ui-bar-button-back .ui-bar-button-wrapper {
 	background: url(../images/ui-bar-button/back/center.png) repeat-x;
+}
+
+/* UI Button
+-----------------------------------------------------------------------------*/
+
+.ui-button {
+	-o-border-radius: 10px;
+	-o-box-sizing: border-box;
+	-moz-border-radius: 10px;
+	-moz-box-sizing: border-box;
+	-webkit-border-radius: 10px;
+	-webkit-box-sizing: border-box;
+	border: 1px solid #bbbbbb;
+	background: #ffffff;
+	color: #000000;
+	font-size: 17px;
+	font-weight: bold;
+	padding-top: 13px;
+	padding-bottom: 13px;
+	text-align: center;
+	width: 100%;
+}
+
+.ui-button.ui-button-down {
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
+	background-image: -moz-linear-gradient(center bottom, #058DF5 0%, #0160E6 100%);
+	color: #ffffff;
+	text-shadow: none;
 }
 
 /* UI List
