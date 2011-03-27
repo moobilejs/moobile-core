@@ -20,8 +20,16 @@ provides:
 
 UI.BarButtonStyle = {
 
-	NORMAL: 'ui-bar-button-normal',
-	ACTIVE: 'ui-bar-button-active',
-	BACK:	'ui-bar-button-back'
-	
+	NORMAL: {
+		className: '',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	BACK: {
+		className: 'ui-bar-button-back',
+		onAttach: function() {},
+		onDetach: function() {}
+	}
+
 };

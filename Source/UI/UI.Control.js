@@ -44,14 +44,27 @@ UI.Control = new Class({
 	},
 
 	setStyle: function(style) {
-		this.removeClass(this.style);
-		this.addClass(style);
+		this.removeCurrentStyle();
 		this.style = style;
+		if (this.style.onAttach) this.style.onAttach.call(this);
+		this.addClass(this.style.className);
 		return this;
 	},
 
 	getStyle: function() {
 		return this.style;
+	},
+
+	removeStyle: function(style) {
+		if (style.onDetach) style.onDetach.call(this);
+		this.removeClass(this.style.className);
+		return this;
+	},
+
+	removeCurrentStyle: function() {
+		if (this.style) this.removeStyle(this.style);
+		this.style = null;
+		return this;
 	},
 
 	setDisabled: function(disabled) {

@@ -19,5 +19,11 @@ provides:
 */
 
 UI.NavigationBarStyle = {
-	NORMAL: 'ui-navigation-bar-normal'
+
+	NORMAL: {
+		className: '',
+		onAttach: function() {},
+		onDetach: function() {}
+	}
+
 };
