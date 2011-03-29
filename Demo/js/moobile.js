@@ -8761,6 +8761,9 @@ Event.GESTURE_START		= 'gesturestart';
 Event.GESTURE_CHANGE	= 'gesturechange';
 Event.GESTURE_END		= 'gestureend';
 
+Event.SELECT			= 'select';
+Event.DESELECT			= 'deselect';
+
 if (Browser.Platform.phonegap) Element.NativeEvents.deviceready = 1;
 
 /*
@@ -9932,6 +9935,11 @@ UI.Control = new Class({
 		disabledClassName: 'disabled'
 	},
 
+	setup: function() {
+		this.name = this.element.getProperty('data-name');
+		return this.parent();
+	},
+
 	setName: function(name) {
 		this.name = name;
 		return this;
@@ -9942,14 +9950,27 @@ UI.Control = new Class({
 	},
 
 	setStyle: function(style) {
-		this.removeClass(this.style);
-		this.addClass(style);
+		this.removeCurrentStyle();
 		this.style = style;
+		if (this.style.onAttach) this.style.onAttach.call(this);
+		this.addClass(this.style.className);
 		return this;
 	},
 
 	getStyle: function() {
 		return this.style;
+	},
+
+	removeStyle: function(style) {
+		if (style.onDetach) style.onDetach.call(this);
+		this.removeClass(this.style.className);
+		return this;
+	},
+
+	removeCurrentStyle: function() {
+		if (this.style) this.removeStyle(this.style);
+		this.style = null;
+		return this;
 	},
 
 	setDisabled: function(disabled) {
@@ -9975,6 +9996,37 @@ UI.Control = new Class({
 /*
 ---
 
+name: UI.ButtonStyle
+
+description: Provide constants for button styles.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- UI.ButtonStyle
+
+...
+*/
+
+UI.ButtonStyle = {
+
+	NORMAL: {
+		className: '',
+		onAttach: function() {},
+		onDetach: function() {}
+	}
+	
+};
+
+
+/*
+---
+
 name: UI.Button
 
 description: Provides a button.
@@ -9986,10 +10038,10 @@ authors:
 
 requires:
 	- UI.Control
+	- UI.ButtonStyle
 
 provides:
 	- UI.Button
-	- UI.ButtonStyle
 
 ...
 */
@@ -10000,54 +10052,33 @@ UI.Button = new Class({
 
 	value: false,
 
-	wrapper: null,
-
-	caption: null,
+	content: null,
 
 	options: {
 		className: 'ui-button',
-		styleName: 'ui-button-normal'
+		styleName: UI.ButtonStyle.NORMAL
 	},
 
 	setup: function() {
-		if (this.isNative() == false) {
-			this.injectWrapper();
-			this.injectCaption();
-		}
+		if (this.isNative() == false) this.injectContent();
 		return this.parent();
 	},
 
 	destroy: function() {
-		if (this.isNative() == false) {
-			this.destroyCaption();
-			this.destroyWrapper();
-		}
+		if (this.isNative() == false) this.destroyContent();
 		return this.parent();
 	},
 
-	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
 		this.element.empty();
-		this.element.adopt(this.wrapper);
+		this.element.adopt(this.content);
 		return this;
 	},
 
-	destroyWrapper: function() {
-		this.wrapper.destroy();
-		this.wrapper = null;
-		return this;
-	},
-
-	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.wrapper.get('html'));
-		this.wrapper.empty();
-		this.wrapper.adopt(this.caption);
-		return this;
-	},
-
-	destroyCaption: function() {
-		this.caption.destroy();
-		this.caption = null;
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
@@ -10066,10 +10097,10 @@ UI.Button = new Class({
 	},
 
 	setText: function(text) {
-		if (this.isNative() == false) {
-			this.caption.set('html', text);
-		} else {
+		if (this.isNative()) {
 			this.element.set('value', text);
+		} else {
+			this.content.set('html', text);
 		}
 		return this;
 	},
@@ -10078,24 +10109,57 @@ UI.Button = new Class({
 		return this.element.get('tag') == 'input';
 	},
 
-	onClick: function() {
-		this.fireEvent(Event.CLICK);
+	onClick: function(e) {
+		e.target = this;
+		this.fireEvent(Event.CLICK, e);
 		return this;
 	},
 
-	onMouseDown: function() {
+	onMouseDown: function(e) {
+		e.target = this;
 		this.element.addClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_DOWN);
+		this.fireEvent(Event.MOUSE_DOWN, e);
 		return this;
 	},
 
-	onMouseUp: function() {
+	onMouseUp: function(e) {
+		e.target = this;
 		this.element.removeClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_UP);
+		this.fireEvent(Event.MOUSE_UP, e);
 		return this;
 	}
 
 });
+
+/*
+---
+
+name: UI.NavigationBarStyle
+
+description: Provide constants for navigation bar button styles.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- UI.NavigationBarStyle
+
+...
+*/
+
+UI.NavigationBarStyle = {
+
+	NORMAL: {
+		className: '',
+		onAttach: function() {},
+		onDetach: function() {}
+	}
+
+};
 
 /*
 ---
@@ -10112,6 +10176,7 @@ authors:
 
 requires:
 	- UI.Control
+	- UI.NavigationBarStyle
 
 provides:
 	- UI.NavigationBar
@@ -10133,7 +10198,7 @@ UI.NavigationBar = new Class({
 
 	options: {
 		className: 'ui-navigation-bar',
-		styleName: 'ui-navigation-bar-normal'
+		styleName: UI.NavigationBarStyle.NORMAL
 	},
 
 	setup: function() {
@@ -10210,62 +10275,6 @@ UI.NavigationBar = new Class({
 /*
 ---
 
-name: UI.NavigationBarStyle
-
-description: Provide constants for navigation bar button styles.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-
-provides:
-	- UI.NavigationBarStyle
-
-...
-*/
-
-UI.NavigationBarStyle = {
-	NORMAL: 'ui-navigation-bar-normal'
-};
-
-/*
----
-
-name: UI.BarButton
-
-description: Provides a button used inside a bar such as the navigation bar.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- UI.Button
-
-provides:
-	- UI.BarButton
-
-...
-*/
-
-UI.BarButton = new Class({
-
-	Extends: UI.Button,
-
-	options: {
-		className: 'ui-bar-button',
-		styleName: 'ui-bar-button-normal'
-	}	
-
-});
-
-/*
----
-
 name: UI.BarButtonStyle
 
 description: Provide constants for bar button styles.
@@ -10285,12 +10294,320 @@ provides:
 
 UI.BarButtonStyle = {
 
-	NORMAL: 'ui-bar-button-normal',
-	ACTIVE: 'ui-bar-button-active',
-	BACK:	'ui-bar-button-back'
-	
+	NORMAL: {
+		className: '',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	BACK: {
+		className: 'ui-bar-button-back',
+		onAttach: function() {},
+		onDetach: function() {}
+	}
+
 };
 
+/*
+---
+
+name: UI.BarButton
+
+description: Provides a button used inside a bar such as the navigation bar.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- UI.Button
+	- UI.BarButtonStyle
+
+provides:
+	- UI.BarButton
+
+...
+*/
+
+UI.BarButton = new Class({
+
+	Extends: UI.Button,
+
+	options: {
+		className: 'ui-bar-button',
+		styleName: UI.BarButtonStyle.NORMAL
+	}	
+
+});
+
+/*
+---
+
+name: UI.ListItem
+
+description: Provide an item of a list.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- UI.Control
+
+provides:
+	- UI.ListItem
+
+...
+*/
+
+UI.ListItem = new Class({
+
+	Extends: UI.Control,
+
+	wrapper: null,
+
+	selected: false,
+
+	options: {
+		className: 'ui-list-item',
+		selectable: true
+	},
+
+	initialize: function(element, options) {
+		this.parent(element, options);
+		this.selectable = this.options.selectable;
+		return this;
+	},
+
+	setup: function() {
+		this.injectWrapper();
+		return this.parent();
+	},
+
+	destroy: function() {
+		this.injectWrapper();
+		return this.parent();
+	},
+
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+		this.element.empty();
+		this.element.adopt(this.wrapper);
+		return this;
+	},
+
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
+		return this;
+	},
+
+	attachEvents: function() {
+		this.element.addEvent(Event.CLICK, this.bound('onClick'));
+		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
+		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		return this.parent();
+	},
+
+	detachEvents: function() {
+		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
+		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
+		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		return this.parent();
+	},
+
+	setSelectable: function(selectable) {
+		this.options.selectable = selectable;
+	},
+
+	toggleSelected: function() {
+		return this.setSelected(!this.selected);
+	},
+
+	setSelected: function(selected) {
+		if (this.selected != selected) {
+			this.selected = selected;
+			if (this.selected) {
+				this.addClass(this.options.className + '-selected');
+				this.fireEvent(Event.SELECT, this);
+			} else {
+				this.removeClass(this.options.className + '-selected');
+				this.fireEvent(Event.DESELECT, this);
+			}			
+		}
+		return this;
+	},
+
+	isSelected: function() {
+		return this.selected;
+	},
+
+	onClick: function(e) {
+		e.target = this;
+		this.fireEvent(Event.CLICK, e);
+		if (this.options.selectable) this.toggleSelected();
+		return this;
+	},
+
+	onMouseDown: function(e) {
+		e.target = this;
+		this.fireEvent(Event.MOUSE_DOWN, e);		
+		if (this.options.selectable) this.element.addClass(this.options.className + '-down');
+		return this;
+	},
+
+	onMouseUp: function(e) {
+		e.target = this;
+		this.fireEvent(Event.MOUSE_UP, e);		
+		if (this.options.selectable) this.element.removeClass(this.options.className + '-down');
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: UI.List
+
+description: Provide a list of items.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- UI.Control
+	- UI.ListItem
+
+provides:
+	- UI.List
+
+...
+*/
+
+UI.List = new Class({
+
+	Extends: UI.Control,
+
+	items: [],
+
+	selectedItems: [],
+
+	options: {
+		className: 'ui-list',
+		selectable: true,
+		multiple: false
+	},
+
+	setup: function() {
+		this.attachItems();
+		return this.parent();
+	},
+
+	destroy: function() {
+		this.destroyItems();
+		return this.parent();
+	},
+
+	destroyItems: function() {
+		this.items.each(function(item) { item.destroy(); });
+		this.items = null;
+		this.items = [];
+		return this;
+	},
+
+	attachItems: function() {
+		this.element.getElements('[data-role=list-item]').each(this.attachItem.bind(this));
+		return this;
+	},
+
+	attachItem: function(element) {
+		var item = new UI.ListItem(element);
+		item.setSelectable(this.options.selectable);
+		item.addEvent(Event.SELECT, this.bound('onSelect'));
+		item.addEvent(Event.DESELECT, this.bound('onDeselect'));
+		this.items.push(item);
+		return this;
+	},
+
+	detachItems: function() {
+		this.item = null;
+		this.item = [];
+		return this;
+	},
+
+	detachItem:function(item) {
+		this.item.remove(item);
+		return this;
+	},
+
+	setSelectable: function(selectable) {
+		this.options.selectable = selectable;
+		this.items.each(function(item) { item.setSelectable(selectable) });
+		return this;
+	},
+
+	setSelectedItem: function(item) {
+		this.setItemAsSelected(item.setSelected(true));
+		return this;
+	},
+
+	setSelectedItems: function() {
+		Array.each(arguments, function(item) { this.setSelectedItem(item) }.bind(this));
+		return this;
+	},
+
+	removeSelectedItem: function(item) {
+		this.setItemAsDeselected(item.setSelected(false));
+	},
+
+	removeSelectedItems: function() {
+		Array.each(arguments, function(item) { this.removeSelectedItem(item) }.bind(this));
+		return this;
+	},
+
+	clearSelectedItems: function() {
+		this.removeSelectedItems.apply(this, this.selectedItems);
+	},
+
+	setItemAsSelected: function(item) {
+		if (this.options.multiple == false) {
+			this.selectedItems.each(function(item) { item.setSelected(false); });
+			this.selectedItems = null;
+			this.selectedItems = []
+		}
+		this.selectedItems.push(item);
+		this.fireEvent(Event.SELECT, item);
+		return this;
+	},
+
+	setItemAsDeselected: function(item) {
+		this.selectedItems.remove(item);
+		this.fireEvent(Event.DESELECT, item);
+		return this;
+	},
+
+	getSelectedItem: function() {
+		return this.selectedItems.getLast();
+	},
+
+	getSelectedItems: function() {
+		return this.selectedItems;
+	},
+
+	onSelect: function(item) {
+		return this.setItemAsSelected(item);
+	},
+
+	onDeselect: function(item) {
+		return this.setItemAsDeselected(item);
+	}
+
+});
 
 /*
 ---
@@ -10369,18 +10686,21 @@ Moobile.View = new Class({
 		this.childViews.each(function(view) { view.destroy(); });
 		this.childViews = null;
 		this.childViews = [];
+		return this;
 	},
 
 	destroyChildElements: function() {
 		this.childElements.each(function(element) { element.destroy(); });
 		this.childElements = null;
 		this.childElements = [];
+		return this;
 	},
 
 	destroyChildControls: function() {
 		this.childControls.each(function(control) { control.destroy(); });
 		this.childControls = null;
 		this.childControls = [];
+		return this;
 	},
 
 	injectScroller: function() {
