@@ -34,6 +34,11 @@ UI.Control = new Class({
 		disabledClassName: 'disabled'
 	},
 
+	setup: function() {
+		this.name = this.element.getProperty('data-name');
+		return this.parent();
+	},
+
 	setName: function(name) {
 		this.name = name;
 		return this;
