@@ -37,4 +37,7 @@ Event.GESTURE_START		= 'gesturestart';
 Event.GESTURE_CHANGE	= 'gesturechange';
 Event.GESTURE_END		= 'gestureend';
 
+Event.SELECT			= 'select';
+Event.DESELECT			= 'deselect';
+
 if (Browser.Platform.phonegap) Element.NativeEvents.deviceready = 1;
