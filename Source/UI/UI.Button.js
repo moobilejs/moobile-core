@@ -83,20 +83,23 @@ UI.Button = new Class({
 		return this.element.get('tag') == 'input';
 	},
 
-	onClick: function() {
-		this.fireEvent(Event.CLICK);
+	onClick: function(e) {
+		e.target = this;
+		this.fireEvent(Event.CLICK, e);
 		return this;
 	},
 
-	onMouseDown: function() {
+	onMouseDown: function(e) {
+		e.target = this;
 		this.element.addClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_DOWN);
+		this.fireEvent(Event.MOUSE_DOWN, e);
 		return this;
 	},
 
-	onMouseUp: function() {
+	onMouseUp: function(e) {
+		e.target = this;
 		this.element.removeClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_UP);
+		this.fireEvent(Event.MOUSE_UP, e);
 		return this;
 	}
 
