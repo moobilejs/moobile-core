@@ -39,6 +39,8 @@ sources:
   - "Source/UI/UI.NavigationBarStyle.js"
   - "Source/UI/UI.BarButton.js"
   - "Source/UI/UI.BarButtonStyle.js"
+  - "Source/UI/UI.List.js"
+  - "Source/UI/UI.ListItem.js"
   - "Source/View/View.js"
   - "Source/View/View.Stack.js"
   - "Source/View/View.Navigation.js"
