@@ -171,7 +171,7 @@ p small {
 .view-scroll-element { /* Inherit */ }
 .view-scroll-wrapper { /* Inherit */ }
 
-.view-wrapper {
+.view-content {
 	-webkit-box-sizing: border-box;			/* Important */
 	background: #ffffff url(../images/background-striped.png);
 	border-top: 1px solid #a0adb7;
@@ -191,7 +191,7 @@ p small {
 	height: 100%;							/* Important */
 }
 
-.stack-view-wrapper {
+.stack-view-content {
 	height: 100%;							/* Important */
 	width: 200%;							/* Important */
 }

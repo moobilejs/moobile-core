@@ -28,14 +28,13 @@ Moobile.View.Stack = new Class({
 
 	options: {
 		className: 'stack-view',
-		scrollable: false,
-		wrappable: true
+		scrollable: false
 	},
 
 	setup: function() {
 		this.parent();
 		this.element.addClass('stack-view');
-		this.wrapper.addClass('stack-view-wrapper');
+		this.content.addClass('stack-view-content');
 		return this;
 	}
 

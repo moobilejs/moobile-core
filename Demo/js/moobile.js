@@ -10639,7 +10639,7 @@ Moobile.View = new Class({
 
 	parentView: null,
 
-	wrapper: null,
+	content: null,
 
 	childViews: [],
 
@@ -10652,12 +10652,11 @@ Moobile.View = new Class({
 	options: {
 		title: 'View',
 		className: 'view',
-		scrollable: true,
-		wrappable: true
+		scrollable: true
 	},
 
 	setup: function() {
-		if (this.options.wrappable) this.injectWrapper();
+		this.injectContent();
 		if (this.options.scrollable) this.injectScroller();
 		this.attachChildElements();
 		this.attachChildControls();
@@ -10668,7 +10667,7 @@ Moobile.View = new Class({
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-		if (this.options.wrappable) this.destroyWrapper();
+		this.destroyContent();
 		if (this.options.scrollable) this.destroyScroller();
 		this.parent();
 		return this;
@@ -10706,7 +10705,7 @@ Moobile.View = new Class({
 	injectScroller: function() {
 		this.scroller = new Moobile.Scroller(this.element);
 		this.scroller.setup();
-		this.wrapper = this.element.getElement('div.' + this.options.className + '-wrapper');
+		this.content = this.element.getElement('div.' + this.options.className + '-content');
 		return this;
 	},
 
@@ -10731,18 +10730,16 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	injectWrapper: function() {
-		var content = this.getContent();
-		var element = new Element('div.' + this.options.className + '-wrapper').set('html', content.get('html'));
-		content.empty();
-		content.adopt(element);
-		this.wrapper = element;
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
+		this.element.empty();
+		this.element.adopt(this.content);
 		return this;
 	},
 
-	destroyWrapper: function() {
-		this.wrapper.destroy();
-		this.wrapper = null;
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
@@ -10875,7 +10872,7 @@ Moobile.View = new Class({
 		var where = arguments[arguments.lenght - 1];
 		if (typeof where == 'string') {
 			if (where == 'element') content = this.element;
-			if (where == 'wrapper') content = this.wrapper;
+			if (where == 'content') content = this.content;
 			Array.prototype.pop.call(arguments);
 		}
 		content.adopt.apply(content, arguments);
@@ -10905,7 +10902,7 @@ Moobile.View = new Class({
 	},
 
 	getContent: function() {
-		return this.wrapper || this.element;
+		return this.content || this.element;
 	}
 
 });
@@ -10940,14 +10937,13 @@ Moobile.View.Stack = new Class({
 
 	options: {
 		className: 'stack-view',
-		scrollable: false,
-		wrappable: true
+		scrollable: false
 	},
 
 	setup: function() {
 		this.parent();
 		this.element.addClass('stack-view');
-		this.wrapper.addClass('stack-view-wrapper');
+		this.content.addClass('stack-view-content');
 		return this;
 	}
 
