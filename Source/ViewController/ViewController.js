@@ -49,7 +49,7 @@ Moobile.ViewController = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View(new Element('div'));
+		this.view = view || new Moobile.View.Scroll(new Element('div'));
 		return this;
 	},
 
@@ -162,28 +162,30 @@ Moobile.ViewController = new Class({
 	},
 
 	viewWillEnter: function() {
+		this.view.willEnter();
 		this.view.show();
 		return this;
 	},
 
 	viewDidEnter: function() {
-		this.view.enableScroller();
-		this.view.updateScroller();
+		this.view.didEnter();
 		return this;
 	},
 
 	viewWillLeave: function() {
+		this.view.willLeave();
 		return this;
 	},
 
 	viewDidLeave: function() {
+		this.view.didLeave();
 		this.view.hide();
-		this.view.disableScroller();
 		return this;
 	},
 
 	viewDidRemove: function() {
 		this.view.removeFromParentView();
+		this.view.didRemove();
 		return this;
 	},
 

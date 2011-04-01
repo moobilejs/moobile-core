@@ -28,6 +28,8 @@ Moobile.View = new Class({
 
 	parentView: null,
 
+	wrapper: null,
+
 	content: null,
 
 	childViews: [],
@@ -36,28 +38,25 @@ Moobile.View = new Class({
 
 	childControls: [],
 
-	scroller: null,
-
 	options: {
 		title: 'View',
-		className: 'view',
-		scrollable: true
+		className: 'view'
 	},
 
 	setup: function() {
 		this.injectContent();
-		if (this.options.scrollable) this.injectScroller();
+		this.injectWrapper();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent();
 	},
 
 	destroy: function() {
+		this.destroyContent();
+		this.destroyWrapper();
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-		this.destroyContent();
-		if (this.options.scrollable) this.destroyScroller();
 		this.parent();
 		return this;
 	},
@@ -91,36 +90,21 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	injectScroller: function() {
-		this.scroller = new Moobile.Scroller(this.element);
-		this.scroller.setup();
-		this.content = this.element.getElement('div.' + this.options.className + '-content');
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
+		this.element.empty();
+		this.element.adopt(this.wrapper);
 		return this;
 	},
 
-	destroyScroller: function() {
-		this.scroller.destroy();
-		this.scroller = null;
-		return this;
-	},
-
-	enableScroller: function() {
-		if (this.scroller) this.scroller.enable();
-		return this;
-	},
-
-	disableScroller: function() {
-		if (this.scroller) this.scroller.disable();
-		return this;
-	},
-
-	updateScroller: function() {
-		if (this.scroller) this.scroller.refresh();
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
 		return this;
 	},
 
 	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
+		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
 		this.element.empty();
 		this.element.adopt(this.content);
 		return this;
@@ -132,11 +116,11 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChildView: function(view) {
+	addChildView: function(view, where, context) {
 		this.childViews.push(view);
 		view.setParentView(this);
 		view.setWindow(this.window);
-		this.adopt(view);
+		this.grab(view, where, context);
 		return this;
 	},
 
@@ -166,15 +150,8 @@ Moobile.View = new Class({
 
 	attachChildControl: function(element) {
 		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
-		var name = element.getProperty('data-name');
-		if (name) {
-			control.name = name;
-			control.member = control.name.camelize();
-			if (this[control.member] == null || this[control.member] == undefined) {
-				this[control.member] = control;
-			}
-		}
-		this.childControls.push(control);
+		this.pushChildControl(control);
+		this.bindChildControl(control);
 		return this;
 	},
 
@@ -189,9 +166,27 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChildControl: function(control) {
-		this.attachChildControl(control);
-		this.adopt(control);
+	addChildControl: function(control, where, context) {
+		this.pushChildControl(control);
+		this.bindChildControl(control);
+		this.grab(control, where, context);
+		return this;
+	},
+
+	pushChildControl: function(control) {
+		control.setView(this);
+		control.setWindow(this.window);
+		this.childControls.push(control);
+		return this;
+	},
+
+	bindChildControl: function(control) {
+		if (control.name) {
+			control.member = control.name.camelize();
+			if (this[control.member] == null || this[control.member] == undefined) {
+				this[control.member] = control;
+			}
+		}
 		return this;
 	},
 
@@ -233,9 +228,9 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChildElement: function(element) {
+	addChildElement: function(element, where, context) {
 		this.attachChildElement(element);
-		this.adopt(element);
+		this.grab(element, where, context);
 		return this;
 	},
 
@@ -253,18 +248,6 @@ Moobile.View = new Class({
 	removeChildElement: function(element) {
 		var removed = this.childElements.remove(element);
 		if (removed) element.dispose();
-		return this;
-	},
-
-	adopt: function() {
-		var content = this.getContent();
-		var where = arguments[arguments.lenght - 1];
-		if (typeof where == 'string') {
-			if (where == 'element') content = this.element;
-			if (where == 'content') content = this.content;
-			Array.prototype.pop.call(arguments);
-		}
-		content.adopt.apply(content, arguments);
 		return this;
 	},
 
@@ -290,8 +273,68 @@ Moobile.View = new Class({
 		return this.element.getProperty('data-title') || this.options.title;
 	},
 
+	getWrapper: function() {
+		return this.wrapper;
+	},
+
 	getContent: function() {
-		return this.content || this.element;
+		return this.content;
+	},
+
+	getContentSize: function() {
+		return this.content.getSize();
+	},
+
+	getContentAreaSize: function() {
+		var prev = this.wrapper.getPrevious();
+		var next = this.wrapper.getNext();
+		var size = this.getSize();
+		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
+		if (next) size.y = size.y - next.getPosition().y;
+		return size;
+	},
+
+	getSize: function() {
+		return this.element.getSize();
+	},
+
+	adopt: function() {
+		this.content.adopt.apply(this.element, arguments);
+		return this;
+	},
+
+	grab: function(element, where, context) {
+		if (context) {
+			context = document.id(context);
+			context.inject(element, where);
+		} else {
+			if (where == 'top' || where == 'bottom') {
+				this.element.grab(element, where);
+			} else {
+				this.content.grab(element, where);
+			}
+		}
+		return this;
+	},
+
+	willEnter: function() {
+		return this;
+	},
+
+	didEnter: function() {
+		return this;
+	},
+
+	willLeave: function() {
+		return this;
+	},
+
+	didLeave: function() {
+		return this;
+	},
+
+	didRemove: function() {
+		return this;
 	}
 
 });

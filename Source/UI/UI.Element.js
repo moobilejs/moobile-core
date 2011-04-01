@@ -40,6 +40,8 @@ UI.Element = new Class({
 
 	element: null,
 
+	name: null,
+
 	options: {
 		className: ''
 	},
@@ -58,6 +60,7 @@ UI.Element = new Class({
 	},
 
 	setup: function() {
+		this.name = this.element.getProperty('data-name');
 		return this;
 	},
 
@@ -121,13 +124,18 @@ UI.Element = new Class({
 		return this;
 	},
 
+	inject: function(element, where) {
+		this.element.inject(element, where);
+		return this;
+	},
+
 	adopt: function() {
 		this.element.adopt.apply(this.element, arguments);
 		return this;
 	},
 
-	inject: function(element, where) {
-		this.element.inject(element, where);
+	grab: function(element, where) {
+		this.element.grab(element, where);
 		return this;
 	},
 

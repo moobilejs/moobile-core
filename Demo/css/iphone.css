@@ -143,41 +143,50 @@ p small {
 
 .window {
 	background: #424242 url(../images/mootools.png) no-repeat center center;
-	height: 415px;
-	min-height: 415px;
-	overflow: hidden;
-	width: 320px;
+	height: 460px;						/* Important */
+	overflow: hidden;					/* Important */
+	width: 320px;						/* Important */
+}
+
+.window-content {
+	height: 460px;						/* Important */
+	overflow: hidden;					/* Important */
+	width: 320px;						/* Important */
 }
 
 /* View
 -----------------------------------------------------------------------------*/
 
 .view {
-	background: #e2e7ed;
-	color: #4c596e;
-	display: block;
-	float: left;
-	font-size: 15px;
-	font-weight: normal;
-	height: 415px;							/* Important */
-	min-height: 415px;						/* Important */
+	-webkit-box-sizing: border-box;			/* Important */
+	background-image: url(../images/background-striped.png);
+	float: left;							/* Important */
+	height: 460px;							/* Important */
 	overflow: hidden;						/* Important */
 	position: relative;						/* Important */
-	text-align: left;
-	text-shadow: 0px 1px 0px #ffffff;
 	width: 320px;							/* Important */
 }
 
-.view-scroll-element { /* Inherit */ }
-.view-scroll-wrapper { /* Inherit */ }
+.view-wrapper {
+	-webkit-box-sizing: border-box;			/* Important */
+	position: relative;						/* Important */
+}
 
 .view-content {
 	-webkit-box-sizing: border-box;			/* Important */
-	background: #ffffff url(../images/background-striped.png);
-	border-top: 1px solid #a0adb7;
-	border-bottom: 1px solid #a0adb7;
-	min-height: 375px;						/* Important */
+	color: #4c596e;
+	font-size: 15px;
+	font-weight: normal;
+	text-align: left;
+	text-shadow: 0px 1px 0px #ffffff;
 	padding: 20px;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+
+.ui-navigation-bar-visible .view {
+	top: -44px;								/* Important */
+	padding-top: 44px;						/* Important */
 }
 
 /* Stack View
@@ -188,34 +197,36 @@ p small {
 	-moz-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	background: #ffffff;
-	height: 100%;							/* Important */
+	height: 460px;							/* Important */
+	width: 320px;							/* Important */
 }
 
 .stack-view-content {
-	height: 100%;							/* Important */
-	width: 200%;							/* Important */
+	height: 460px;							/* Important */
+	width: 640px;							/* Important */
 }
 
 /* UI Navigation Bar
 -----------------------------------------------------------------------------*/
 
 .ui-navigation-bar {
-	background: url(../images/ui-navigation-bar/normal.png) no-repeat;
-	color: #ffffff;
-	font-size: 20px;
-	font-weight: bold;
-	height: 44px;							
-	line-height: 44px;
-	text-align: center;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-	width: 100%;							
+	background: url(../images/ui-navigation-bar/translucent.png) no-repeat;
+	height: 44px;
+	position: relative;						/* Important */
+	width: 100%;
+	z-index: 50;
 }
 
 .ui-navigation-bar-caption {
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
 	height: 44px;
 	line-height: 44px;
 	position: absolute;
+
 	text-align: center;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 	width: 100%;
 }
 
@@ -233,11 +244,6 @@ p small {
 	position: relative;
 }
 
-.ui-navigation-bar-visible .view {
-	height: 371px;							
-	min-height: 371px;						
-}
-
 /* UI Bar Button
 -----------------------------------------------------------------------------*/
 
@@ -246,6 +252,7 @@ p small {
 		url(../images/ui-bar-button/normal/left.png) no-repeat top left,
 		url(../images/ui-bar-button/normal/right.png) no-repeat top right;
 	cursor: pointer;
+	color: #ffffff;
 	float: left;
 	font-size: 12px;
 	font-weight: 500;

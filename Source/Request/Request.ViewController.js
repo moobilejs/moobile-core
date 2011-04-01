@@ -32,7 +32,7 @@ Moobile.Request.ViewController = new Class({
 
 	options: {
 		method: 'get',
-		defaultView: 'Moobile.View',
+		defaultView: 'Moobile.View.Scroll',
 		defaultController: 'Moobile.ViewController',
 		defaultTransition: 'Moobile.ViewControllerTransition.Slide'
 	},

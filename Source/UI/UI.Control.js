@@ -22,30 +22,17 @@ UI.Control = new Class({
 
 	Extends: UI.Element,
 
+	window: null,
+
+	view: null,
+
 	disabled: false,
 
-	name: null,
-
 	style: null,
-
+	
 	options: {
 		className: '',
-		styleName: '',
-		disabledClassName: 'disabled'
-	},
-
-	setup: function() {
-		this.name = this.element.getProperty('data-name');
-		return this.parent();
-	},
-
-	setName: function(name) {
-		this.name = name;
-		return this;
-	},
-
-	getName: function() {
-		return this.name;
+		styleName: ''
 	},
 
 	setStyle: function(style) {
@@ -76,10 +63,10 @@ UI.Control = new Class({
 		if (this.disabled != disabled) {
 			this.disabled = disabled;
 			if (this.disabled) {
-				this.addClass(this.options.disabledClassName);
+				this.addClass(this.options.className + '-disabled');
 				this.attachEvents();
 			} else {
-				this.removeClass(this.options.disabledClassName);
+				this.removeClass(this.options.className + '-disabled');
 				this.detachEvents();
 			}
 		}
@@ -88,6 +75,24 @@ UI.Control = new Class({
 
 	idDisabled: function() {
 		return this.disabled;
+	},
+
+	setWindow: function(window) {
+		this.window = window;
+		return this;
+	},
+
+	getWindow: function() {
+		return this.window;
+	},
+
+	setView: function(view) {
+		this.view = view;
+		return this;
+	},
+
+	getView: function() {
+		return this.view;
 	}
 
 });

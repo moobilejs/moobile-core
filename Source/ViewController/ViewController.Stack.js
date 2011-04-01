@@ -143,8 +143,11 @@ Moobile.ViewController.Stack = new Class({
 		this.viewControllers.getLast()
 			.viewDidLeave();
 		this.viewControllers.pop()
-			.viewDidRemove();
+			.viewDidRemove()
+			.doShutdown();
+
 		this.window.enableUserInput();
+		
 		return this;
 	},
 

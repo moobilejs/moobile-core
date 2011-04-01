@@ -49,7 +49,7 @@ UI.ListItem = new Class({
 	},
 
 	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
 		this.element.empty();
 		this.element.adopt(this.wrapper);
 		return this;

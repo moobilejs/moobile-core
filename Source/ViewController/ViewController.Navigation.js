@@ -24,75 +24,46 @@ Moobile.ViewController.Navigation = new Class({
 
 	Extends: Moobile.ViewController.Stack,
 
-	navigationBar: null,
-
-	startup: function() {
-		this.navigationBar = this.view.navigationBar;
-		return this.parent();
-	},
-
-	shutdown: function() {
-		this.navigationBar = null;
-		return this.parent();
-	},
-
-	loadView: function(view) {
-		this.view = view || new Moobile.View.Navigation(new Element('div'));
-		return this;
-	},
-
 	pushViewController: function(viewController, viewControllerTransition) {
-		this.parent(viewController, viewControllerTransition);
-		this.updateNavigationBar();
-		return this;
-	},
+		
+		var navigationBar = new UI.NavigationBar();
 
-	popViewController: function() {
-		this.parent();
-		this.updateNavigationBar();
-		return this;
-	},
+		viewController.view.addChildControl(navigationBar, 'top');
 
-	updateNavigationBar: function() {
-		var topViewControllerIndex = this.viewControllers.indexOf(this.topViewController);
-		if (topViewControllerIndex > -1) {
-			
-			this.navigationBar.show();
-			if (this.topViewController.navigationBarVisible() == false) {
-				this.navigationBar.hide();
-			}
-			
-			this.navigationBar.setTitle('');
-			this.navigationBar.setButton(null, 'left');
-			this.navigationBar.setButton(null, 'right');
-			
-			var navigationLeftButton = this.topViewController.getNavigationBarLeftButton();
-			if (navigationLeftButton == null) {
-				var previousViewControllerIndex = topViewControllerIndex - 1;
-				if (previousViewControllerIndex >= 0) {
-					var backButtonTitle = this.viewControllers[previousViewControllerIndex].getTitle();
-					if (backButtonTitle) {
-						var navigationBackButton = new UI.BarButton();
-						navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
-						navigationBackButton.setText(backButtonTitle);
-						navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
-						this.navigationBar.setButton(navigationBackButton, 'left');
-					}
-				}
-			} else {
-				this.navigationBar.setButton(navigationLeftButton, 'left');
-			}
-
-			var navigationRightButton = this.topViewController.getNavigationBarRightButton();
-			if (navigationRightButton) {
-				this.navigationBar.setButton(navigationRightButton, 'right');
-			}
-
-			var navigationBarTitle = this.topViewController.getTitle();
-			if (navigationBarTitle) {
-				this.navigationBar.setTitle(navigationBarTitle);
-			}
+		navigationBar.show();
+		if (viewController.navigationBarVisible() == false) {
+			navigationBar.hide();
 		}
+
+		var navigationLeftButton = viewController.getNavigationBarLeftButton();
+		if (navigationLeftButton == null) {
+			if (this.viewControllers.length > 0) {
+				var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
+				if (backButtonTitle) {
+					var navigationBackButton = new UI.BarButton();
+					navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
+					navigationBackButton.setText(backButtonTitle);
+					navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
+					navigationBar.setButton(navigationBackButton, 'left');
+				}
+			}
+		} else {
+			navigationBar.setButton(navigationLeftButton, 'left');
+		}
+
+		var navigationRightButton = viewController.getNavigationBarRightButton();
+		if (navigationRightButton) {
+			navigationBar.setButton(navigationRightButton, 'right');
+		}
+
+		var navigationBarTitle = viewController.getTitle();
+		if (navigationBarTitle) {
+			navigationBar.setTitle(navigationBarTitle);
+		}
+		
+		viewController.navigationBar = navigationBar;
+
+		this.parent(viewController, viewControllerTransition);
 
 		return this;
 	},

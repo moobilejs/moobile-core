@@ -25,10 +25,6 @@ UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
 
-	view: null,
-
-	wrapper: null,
-
 	caption: null,
 
 	buttons: null,
@@ -51,7 +47,7 @@ UI.NavigationBar = new Class({
 	},
 
 	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.element.get('html'));
+		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.element.getElements());
 		this.element.empty();
 		this.element.adopt(this.caption);
 		return this;
@@ -78,32 +74,25 @@ UI.NavigationBar = new Class({
 			element.dispose();
 			element = null;
 		}
+
 		if (button) {
 			element = new Element('div.' + this.options.className + '-button-' + where);
 			element.adopt(button);
 			this.element.adopt(element);
 		}
-		return this;
-	},
 
-	setView: function(view) {
-		this.view = view;
 		return this;
-	},
-
-	getView: function() {
-		return this.view;
 	},
 
 	show: function() {
-		this.parent();
 		this.view.addClass(this.options.className + '-visible');
+		this.parent();
 		return this;
 	},
 
 	hide: function() {
-		this.parent();
 		this.view.removeClass(this.options.className + '-visible');
+		this.parent();
 		return this;
 	}
 

@@ -56,7 +56,6 @@ Moobile.Window = new Class({
 	},
 
 	disableUserInput: function() {
-
 		if (this.mask == null) {
 			this.mask = new Element('div');
 			this.mask.setStyle('opacity', 0);
@@ -83,6 +82,10 @@ Moobile.Window = new Class({
 	adopt: function() {
 		this.element.adopt.apply(this.element, arguments);
 		return this;
+	},
+
+	grab: function(element) {
+		this.element.grab(element);
 	}
 
 });

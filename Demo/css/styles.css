@@ -18,18 +18,19 @@ body {
 	font-size: 17px;
 	font-weight: bold;
 	font-family: "Helvetica Neue", sans-serif;
+	height: 716px;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 40px;
-	padding-top: 170px;
-	padding-bottom: 270px;
-	width: 320px;
+	width: 368px;
 }
 
 #device-content {
 	background: url(../images/mootools.png) no-repeat center center;
 	overflow: hidden;
-	height: 414px;
+	left: 24px;
+	height: 460px;
+	position: relative;
+	top: 138px;
 	width: 320px;
 }
 

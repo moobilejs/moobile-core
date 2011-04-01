@@ -26,31 +26,19 @@ Moobile.Scroller = new Class({
 	},
 
 	Implements: [Events, Options],
-	
-	content: null,
 
 	element: null,
-
-	wrapper: null,
 	
 	scroller: null,
 
-	enabled: true,
+	enabled: false,
 
-	initialize: function(content) {
-		this.content = content;
+	initialize: function(element) {
+		this.element = element;
 		return this;
 	},
 
 	setup: function() {
-		this.enabled = true;
-		this.wrapper = new Element('div.scroller-wrapper').set('html', this.content.get('html'));
-		this.element = new Element('div.scroller-element');
-		this.element.adopt(this.wrapper);
-		this.content.empty();
-		this.content.adopt(this.element);
-		this.scroller = new iScroll(this.content, {desktopCompatibility: true, hScroll: false, vScroll: true});
-		this.scroller.refresh();
 		if (++Moobile.Scroller.instances == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
 		return this;
 	},
@@ -60,10 +48,6 @@ Moobile.Scroller = new Class({
 			this.enabled = false;
 			this.scroller.destroy();
 			this.scroller = null;
-			this.wrapper.destroy();
-			this.wrapper = null;
-			this.element.destroy();
-			this.element = null;
 			if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
 		}
 		return this;
@@ -72,8 +56,10 @@ Moobile.Scroller = new Class({
 	enable: function() {
 		if (this.enabled == false) {
 			this.enabled = true;
-			this.scroller = new iScroll(this.content, { desktopCompatibility: true, hScroll: false, vScroll: true });
+			this.scroller = new iScroll(this.element, { desktopCompatibility: true, hScroll: false, vScroll: true });
 			this.scroller.refresh();
+
+			this.element.setStyle('overflow', 'visible');
 		}
 		return this;
 	},

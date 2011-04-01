@@ -7892,8 +7892,13 @@ Element.implement
 		if (match) string = match[1];
 		this.set('html', string);
 		return this
+	},
+	
+	getContents: function() {
+		return Array.from(this.childNodes);	
 	}
 });
+
 
 /*
 ---
@@ -9514,7 +9519,7 @@ Moobile.Request.ViewController = new Class({
 
 	options: {
 		method: 'get',
-		defaultView: 'Moobile.View',
+		defaultView: 'Moobile.View.Scroll',
 		defaultController: 'Moobile.ViewController',
 		defaultTransition: 'Moobile.ViewControllerTransition.Slide'
 	},
@@ -9604,31 +9609,19 @@ Moobile.Scroller = new Class({
 	},
 
 	Implements: [Events, Options],
-	
-	content: null,
 
 	element: null,
-
-	wrapper: null,
 	
 	scroller: null,
 
-	enabled: true,
+	enabled: false,
 
-	initialize: function(content) {
-		this.content = content;
+	initialize: function(element) {
+		this.element = element;
 		return this;
 	},
 
 	setup: function() {
-		this.enabled = true;
-		this.wrapper = new Element('div.scroller-wrapper').set('html', this.content.get('html'));
-		this.element = new Element('div.scroller-element');
-		this.element.adopt(this.wrapper);
-		this.content.empty();
-		this.content.adopt(this.element);
-		this.scroller = new iScroll(this.content, {desktopCompatibility: true, hScroll: false, vScroll: true});
-		this.scroller.refresh();
 		if (++Moobile.Scroller.instances == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
 		return this;
 	},
@@ -9638,10 +9631,6 @@ Moobile.Scroller = new Class({
 			this.enabled = false;
 			this.scroller.destroy();
 			this.scroller = null;
-			this.wrapper.destroy();
-			this.wrapper = null;
-			this.element.destroy();
-			this.element = null;
 			if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
 		}
 		return this;
@@ -9650,8 +9639,10 @@ Moobile.Scroller = new Class({
 	enable: function() {
 		if (this.enabled == false) {
 			this.enabled = true;
-			this.scroller = new iScroll(this.content, { desktopCompatibility: true, hScroll: false, vScroll: true });
+			this.scroller = new iScroll(this.element, { desktopCompatibility: true, hScroll: false, vScroll: true });
 			this.scroller.refresh();
+
+			this.element.setStyle('overflow', 'visible');
 		}
 		return this;
 	},
@@ -9796,6 +9787,8 @@ UI.Element = new Class({
 
 	element: null,
 
+	name: null,
+
 	options: {
 		className: ''
 	},
@@ -9814,6 +9807,7 @@ UI.Element = new Class({
 	},
 
 	setup: function() {
+		this.name = this.element.getProperty('data-name');
 		return this;
 	},
 
@@ -9877,13 +9871,18 @@ UI.Element = new Class({
 		return this;
 	},
 
+	inject: function(element, where) {
+		this.element.inject(element, where);
+		return this;
+	},
+
 	adopt: function() {
 		this.element.adopt.apply(this.element, arguments);
 		return this;
 	},
 
-	inject: function(element, where) {
-		this.element.inject(element, where);
+	grab: function(element, where) {
+		this.element.grab(element, where);
 		return this;
 	},
 
@@ -9923,30 +9922,17 @@ UI.Control = new Class({
 
 	Extends: UI.Element,
 
+	window: null,
+
+	view: null,
+
 	disabled: false,
 
-	name: null,
-
 	style: null,
-
+	
 	options: {
 		className: '',
-		styleName: '',
-		disabledClassName: 'disabled'
-	},
-
-	setup: function() {
-		this.name = this.element.getProperty('data-name');
-		return this.parent();
-	},
-
-	setName: function(name) {
-		this.name = name;
-		return this;
-	},
-
-	getName: function() {
-		return this.name;
+		styleName: ''
 	},
 
 	setStyle: function(style) {
@@ -9977,10 +9963,10 @@ UI.Control = new Class({
 		if (this.disabled != disabled) {
 			this.disabled = disabled;
 			if (this.disabled) {
-				this.addClass(this.options.disabledClassName);
+				this.addClass(this.options.className + '-disabled');
 				this.attachEvents();
 			} else {
-				this.removeClass(this.options.disabledClassName);
+				this.removeClass(this.options.className + '-disabled');
 				this.detachEvents();
 			}
 		}
@@ -9989,6 +9975,24 @@ UI.Control = new Class({
 
 	idDisabled: function() {
 		return this.disabled;
+	},
+
+	setWindow: function(window) {
+		this.window = window;
+		return this;
+	},
+
+	getWindow: function() {
+		return this.window;
+	},
+
+	setView: function(view) {
+		this.view = view;
+		return this;
+	},
+
+	getView: function() {
+		return this.view;
 	}
 
 });
@@ -10070,7 +10074,7 @@ UI.Button = new Class({
 	},
 
 	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
+		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
 		this.element.empty();
 		this.element.adopt(this.content);
 		return this;
@@ -10188,10 +10192,6 @@ UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
 
-	view: null,
-
-	wrapper: null,
-
 	caption: null,
 
 	buttons: null,
@@ -10214,7 +10214,7 @@ UI.NavigationBar = new Class({
 	},
 
 	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').set('html', this.element.get('html'));
+		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.element.getElements());
 		this.element.empty();
 		this.element.adopt(this.caption);
 		return this;
@@ -10241,32 +10241,25 @@ UI.NavigationBar = new Class({
 			element.dispose();
 			element = null;
 		}
+
 		if (button) {
 			element = new Element('div.' + this.options.className + '-button-' + where);
 			element.adopt(button);
 			this.element.adopt(element);
 		}
-		return this;
-	},
 
-	setView: function(view) {
-		this.view = view;
 		return this;
-	},
-
-	getView: function() {
-		return this.view;
 	},
 
 	show: function() {
-		this.parent();
 		this.view.addClass(this.options.className + '-visible');
+		this.parent();
 		return this;
 	},
 
 	hide: function() {
-		this.parent();
 		this.view.removeClass(this.options.className + '-visible');
+		this.parent();
 		return this;
 	}
 
@@ -10392,7 +10385,7 @@ UI.ListItem = new Class({
 	},
 
 	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').set('html', this.element.get('html'));
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
 		this.element.empty();
 		this.element.adopt(this.wrapper);
 		return this;
@@ -10639,6 +10632,8 @@ Moobile.View = new Class({
 
 	parentView: null,
 
+	wrapper: null,
+
 	content: null,
 
 	childViews: [],
@@ -10651,24 +10646,23 @@ Moobile.View = new Class({
 
 	options: {
 		title: 'View',
-		className: 'view',
-		scrollable: true
+		className: 'view'
 	},
 
 	setup: function() {
 		this.injectContent();
-		if (this.options.scrollable) this.injectScroller();
+		this.injectWrapper();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent();
 	},
 
 	destroy: function() {
+		this.destroyContent();
+		this.destroyWrapper();
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
-		this.destroyContent();
-		if (this.options.scrollable) this.destroyScroller();
 		this.parent();
 		return this;
 	},
@@ -10702,36 +10696,21 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	injectScroller: function() {
-		this.scroller = new Moobile.Scroller(this.element);
-		this.scroller.setup();
-		this.content = this.element.getElement('div.' + this.options.className + '-content');
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
+		this.element.empty();
+		this.element.adopt(this.wrapper);
 		return this;
 	},
 
-	destroyScroller: function() {
-		this.scroller.destroy();
-		this.scroller = null;
-		return this;
-	},
-
-	enableScroller: function() {
-		if (this.scroller) this.scroller.enable();
-		return this;
-	},
-
-	disableScroller: function() {
-		if (this.scroller) this.scroller.disable();
-		return this;
-	},
-
-	updateScroller: function() {
-		if (this.scroller) this.scroller.refresh();
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
 		return this;
 	},
 
 	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
+		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
 		this.element.empty();
 		this.element.adopt(this.content);
 		return this;
@@ -10743,11 +10722,11 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChildView: function(view) {
+	addChildView: function(view, where, context) {
 		this.childViews.push(view);
 		view.setParentView(this);
 		view.setWindow(this.window);
-		this.adopt(view);
+		this.grab(view, where, context);
 		return this;
 	},
 
@@ -10777,15 +10756,8 @@ Moobile.View = new Class({
 
 	attachChildControl: function(element) {
 		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
-		var name = element.getProperty('data-name');
-		if (name) {
-			control.name = name;
-			control.member = control.name.camelize();
-			if (this[control.member] == null || this[control.member] == undefined) {
-				this[control.member] = control;
-			}
-		}
-		this.childControls.push(control);
+		this.pushChildControl(control);
+		this.bindChildControl(control);
 		return this;
 	},
 
@@ -10800,9 +10772,27 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChildControl: function(control) {
-		this.attachChildControl(control);
-		this.adopt(control);
+	addChildControl: function(control, where, context) {
+		this.pushChildControl(control);
+		this.bindChildControl(control);
+		this.grab(control, where, context);
+		return this;
+	},
+
+	pushChildControl: function(control) {
+		control.setView(this);
+		control.setWindow(this.window);
+		this.childControls.push(control);
+		return this;
+	},
+
+	bindChildControl: function(control) {
+		if (control.name) {
+			control.member = control.name.camelize();
+			if (this[control.member] == null || this[control.member] == undefined) {
+				this[control.member] = control;
+			}
+		}
 		return this;
 	},
 
@@ -10844,9 +10834,9 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChildElement: function(element) {
+	addChildElement: function(element, where, context) {
 		this.attachChildElement(element);
-		this.adopt(element);
+		this.grab(element, where, context);
 		return this;
 	},
 
@@ -10864,18 +10854,6 @@ Moobile.View = new Class({
 	removeChildElement: function(element) {
 		var removed = this.childElements.remove(element);
 		if (removed) element.dispose();
-		return this;
-	},
-
-	adopt: function() {
-		var content = this.getContent();
-		var where = arguments[arguments.lenght - 1];
-		if (typeof where == 'string') {
-			if (where == 'element') content = this.element;
-			if (where == 'content') content = this.content;
-			Array.prototype.pop.call(arguments);
-		}
-		content.adopt.apply(content, arguments);
 		return this;
 	},
 
@@ -10901,10 +10879,146 @@ Moobile.View = new Class({
 		return this.element.getProperty('data-title') || this.options.title;
 	},
 
+	getWrapper: function() {
+		return this.wrapper;
+	},
+
 	getContent: function() {
-		return this.content || this.element;
+		return this.content;
+	},
+
+	getContentSize: function() {
+		return this.content.getSize();
+	},
+
+	getContentAreaSize: function() {
+		var prev = this.wrapper.getPrevious();
+		var next = this.wrapper.getNext();
+		var size = this.getSize();
+		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
+		if (next) size.y = size.y - next.getPosition().y;
+		return size;
+	},
+
+	getSize: function() {
+		return this.element.getSize();
+	},
+
+	adopt: function() {
+		this.content.adopt.apply(this.element, arguments);
+		return this;
+	},
+
+	grab: function(element, where, context) {
+		if (context) {
+			context = document.id(context);
+			context.inject(element, where);
+		} else {
+			if (where == 'top' || where == 'bottom') {
+				this.element.grab(element, where);
+			} else {
+				this.content.grab(element, where);
+			}
+		}
+		return this;
+	},
+
+	willEnter: function() {
+		return this;
+	},
+
+	didEnter: function() {
+		return this;
+	},
+
+	willLeave: function() {
+		return this;
+	},
+
+	didLeave: function() {
+		return this;
+	},
+
+	didRemove: function() {
+		return this;
 	}
 
+});
+
+/*
+---
+
+name: View.Scroll
+
+description: Provide a view that scrolls when the content is larger that the
+             window.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- View
+
+provides:
+	- View.Scroll
+
+...
+*/
+
+Moobile.View.Scroll = new Class({
+
+	Extends: Moobile.View,
+
+	scroller: null,
+
+	setup: function() {
+		this.parent();
+		this.attachScroller();
+		return this;
+	},
+
+	destroy: function() {
+		this.detachScroller();
+		this.parent();
+		return this;
+	},
+
+	attachScroller: function() {
+		this.scroller = new Moobile.Scroller(this.wrapper);
+		this.scroller.setup();
+		return this;
+	},
+
+	detachScroller: function() {
+		this.scroller.destroy();
+		this.scroller = null;
+		return this;
+	},
+
+	enableScroller: function() {
+		this.wrapper.setStyle('height', this.getContentAreaSize().y);
+		this.scroller.enable();
+		this.scroller.refresh();
+		return this;
+	},
+
+	disableScroller: function() {
+		this.scroller.disable();
+		return this;
+	},
+
+	didEnter: function() {
+		this.enableScroller();
+		return this.parent();
+	},
+
+	didLeave: function() {
+		this.disableScroller();
+		return this.parent();
+	}
+   
 });
 
 /*
@@ -10936,78 +11050,14 @@ Moobile.View.Stack = new Class({
 	Extends: Moobile.View,
 
 	options: {
-		className: 'stack-view',
-		scrollable: false
+		className: 'stack-view'
 	},
 
 	setup: function() {
 		this.parent();
 		this.element.addClass('stack-view');
+		this.wrapper.addClass('stack-view-wrapper');
 		this.content.addClass('stack-view-content');
-		return this;
-	}
-
-});
-
-/*
----
-
-name: View.Navigation
-
-description: Provides the view that represents the navigation stack.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- View
-	- View.Stack
-
-provides:
-	- View.Navigation
-
-...
-*/
-
-Moobile.View.Navigation = new Class({
-
-	Extends: Moobile.View.Stack,
-
-	navigationBar: null,
-
-	options: {
-		className: 'navigation-view',
-		navigationBarVisible: true,
-		navigationBarElement: null
-	},
-
-	setup: function() {
-		this.parent();
-		this.injectNavigationBar();
-		return this;
-	},
-
-	destroy: function() {
-		this.destroyNavigationBar();
-		return this.parent();
-	},
-
-	injectNavigationBar: function() {
-		this.navigationBar = new UI.NavigationBar(this.options.navigationBarElement);
-		this.navigationBar.setView(this);
-		this.navigationBar.dispose();
-		this.navigationBar.inject(this.element, 'top');
-		this.navigationBar.hide();
-		if (this.options.navigationBarVisible) this.navigationBar.show();
-		return this;
-	},
-
-	destroyNavigationBar: function() {
-		this.navigationBar.destroy();
-		this.navigationBar = null;
 		return this;
 	}
 
@@ -11064,7 +11114,7 @@ Moobile.ViewController = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View(new Element('div'));
+		this.view = view || new Moobile.View.Scroll(new Element('div'));
 		return this;
 	},
 
@@ -11177,28 +11227,30 @@ Moobile.ViewController = new Class({
 	},
 
 	viewWillEnter: function() {
+		this.view.willEnter();
 		this.view.show();
 		return this;
 	},
 
 	viewDidEnter: function() {
-		this.view.enableScroller();
-		this.view.updateScroller();
+		this.view.didEnter();
 		return this;
 	},
 
 	viewWillLeave: function() {
+		this.view.willLeave();
 		return this;
 	},
 
 	viewDidLeave: function() {
+		this.view.didLeave();
 		this.view.hide();
-		this.view.disableScroller();
 		return this;
 	},
 
 	viewDidRemove: function() {
 		this.view.removeFromParentView();
+		this.view.didRemove();
 		return this;
 	},
 
@@ -11361,8 +11413,11 @@ Moobile.ViewController.Stack = new Class({
 		this.viewControllers.getLast()
 			.viewDidLeave();
 		this.viewControllers.pop()
-			.viewDidRemove();
+			.viewDidRemove()
+			.doShutdown();
+
 		this.window.enableUserInput();
+		
 		return this;
 	},
 
@@ -11422,75 +11477,46 @@ Moobile.ViewController.Navigation = new Class({
 
 	Extends: Moobile.ViewController.Stack,
 
-	navigationBar: null,
-
-	startup: function() {
-		this.navigationBar = this.view.navigationBar;
-		return this.parent();
-	},
-
-	shutdown: function() {
-		this.navigationBar = null;
-		return this.parent();
-	},
-
-	loadView: function(view) {
-		this.view = view || new Moobile.View.Navigation(new Element('div'));
-		return this;
-	},
-
 	pushViewController: function(viewController, viewControllerTransition) {
-		this.parent(viewController, viewControllerTransition);
-		this.updateNavigationBar();
-		return this;
-	},
+		
+		var navigationBar = new UI.NavigationBar();
 
-	popViewController: function() {
-		this.parent();
-		this.updateNavigationBar();
-		return this;
-	},
+		viewController.view.addChildControl(navigationBar, 'top');
 
-	updateNavigationBar: function() {
-		var topViewControllerIndex = this.viewControllers.indexOf(this.topViewController);
-		if (topViewControllerIndex > -1) {
-			
-			this.navigationBar.show();
-			if (this.topViewController.navigationBarVisible() == false) {
-				this.navigationBar.hide();
-			}
-			
-			this.navigationBar.setTitle('');
-			this.navigationBar.setButton(null, 'left');
-			this.navigationBar.setButton(null, 'right');
-			
-			var navigationLeftButton = this.topViewController.getNavigationBarLeftButton();
-			if (navigationLeftButton == null) {
-				var previousViewControllerIndex = topViewControllerIndex - 1;
-				if (previousViewControllerIndex >= 0) {
-					var backButtonTitle = this.viewControllers[previousViewControllerIndex].getTitle();
-					if (backButtonTitle) {
-						var navigationBackButton = new UI.BarButton();
-						navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
-						navigationBackButton.setText(backButtonTitle);
-						navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
-						this.navigationBar.setButton(navigationBackButton, 'left');
-					}
-				}
-			} else {
-				this.navigationBar.setButton(navigationLeftButton, 'left');
-			}
-
-			var navigationRightButton = this.topViewController.getNavigationBarRightButton();
-			if (navigationRightButton) {
-				this.navigationBar.setButton(navigationRightButton, 'right');
-			}
-
-			var navigationBarTitle = this.topViewController.getTitle();
-			if (navigationBarTitle) {
-				this.navigationBar.setTitle(navigationBarTitle);
-			}
+		navigationBar.show();
+		if (viewController.navigationBarVisible() == false) {
+			navigationBar.hide();
 		}
+
+		var navigationLeftButton = viewController.getNavigationBarLeftButton();
+		if (navigationLeftButton == null) {
+			if (this.viewControllers.length > 0) {
+				var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
+				if (backButtonTitle) {
+					var navigationBackButton = new UI.BarButton();
+					navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
+					navigationBackButton.setText(backButtonTitle);
+					navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
+					navigationBar.setButton(navigationBackButton, 'left');
+				}
+			}
+		} else {
+			navigationBar.setButton(navigationLeftButton, 'left');
+		}
+
+		var navigationRightButton = viewController.getNavigationBarRightButton();
+		if (navigationRightButton) {
+			navigationBar.setButton(navigationRightButton, 'right');
+		}
+
+		var navigationBarTitle = viewController.getTitle();
+		if (navigationBarTitle) {
+			navigationBar.setTitle(navigationBarTitle);
+		}
+		
+		viewController.navigationBar = navigationBar;
+
+		this.parent(viewController, viewControllerTransition);
 
 		return this;
 	},
@@ -11810,7 +11836,6 @@ Moobile.Window = new Class({
 	},
 
 	disableUserInput: function() {
-
 		if (this.mask == null) {
 			this.mask = new Element('div');
 			this.mask.setStyle('opacity', 0);
@@ -11837,6 +11862,10 @@ Moobile.Window = new Class({
 	adopt: function() {
 		this.element.adopt.apply(this.element, arguments);
 		return this;
+	},
+
+	grab: function(element) {
+		this.element.grab(element);
 	}
 
 });

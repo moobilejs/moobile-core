@@ -44,7 +44,7 @@ UI.Button = new Class({
 	},
 
 	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').set('html', this.element.get('html'));
+		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
 		this.element.empty();
 		this.element.adopt(this.content);
 		return this;
