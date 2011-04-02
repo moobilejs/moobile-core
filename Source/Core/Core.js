@@ -42,6 +42,7 @@ requires:
 	- More/Date.Extras
 	- More/Object.Extras
 	- More/String.Extras
+	- Extras/Console.Trace
 	- Extras/Class.Extras
 	- Extras/Element.Extras
 	- Extras/Element.Properties
@@ -49,21 +50,19 @@ requires:
 	- Extras/Selector.Attach
 	- Extras/Array.Extras
 	- Extras/String.Extras
+	- Extras/Fx.CSS3
+	- Extras/Fx.CSS3.Tween
+	- Extras/Fx.CSS3.Morph
 	- Class-Extras/Class.Binds
 	- Mobile/Click
 	- Mobile/Pinch
 	- Mobile/Swipe
 	- Mobile/Touch
 	- Mobile/Touchhold
-	- Debug
 	- Browser.Platform
-	- Exception
 	- Event
 	- Event.ClickOver
 	- Event.TouchOver
-	- Fx.CSS3
-	- Fx.CSS3.Tween
-	- Fx.CSS3.Morph
 
 provides:
 	- Core

@@ -36,9 +36,7 @@ provides:
 		if (down) {
 			valid = !moved(e);
 			if (valid == false) {
-				this.removeEvent('mouseup', onMouseUp);
-				this.fireEvent('mouseup', e);
-				this.addEvent('mouseup', onMouseUp)
+				this.removeEvent('mouseup', onMouseUp).fireEvent('mouseup', e).addEvent('mouseup', onMouseUp);
 			}
 		}
 	};

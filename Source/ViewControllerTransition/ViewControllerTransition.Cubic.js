@@ -61,7 +61,7 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 			return this;
 		}
 
-		throw new Moobile.Exception.ViewControllerTransition('Unsupported direction');
+		throw new Error('Unsupported direction');
 
 		return this;
 	},

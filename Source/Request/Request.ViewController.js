@@ -79,7 +79,7 @@ Moobile.Request.ViewController = new Class({
 			return this;
 		}
 
-		throw new Moobile.Exception.ViewControllerRequest('Cannot find a view');
+		throw new Error('Cannot find a view element from the response');
 
 		return this;
 	},

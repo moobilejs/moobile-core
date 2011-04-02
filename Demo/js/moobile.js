@@ -7806,6 +7806,34 @@ String.implement({
 /*
 ---
 
+name: Console.Trace
+
+description: Provide a trace method that allow multiple arguments and check
+             if console.log exists before executing.
+
+license: MIT-style license.
+
+author:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- Console.Trace
+
+...
+*/
+
+if (!window.console) window.console = {};
+
+window.trace = window.console.trace = function() {
+	if (console) Array.from(arguments).each(function(a) { console.log(a) });
+}
+
+
+/*
+---
+
 name: Class.Extras
 
 description: Provides extra methods to the class object.
@@ -8098,6 +8126,337 @@ String.implement({
 });
 
 
+
+/*
+---
+
+name: Fx.CSS3
+
+description: Provides webkit CSS 3 transitions support. Inspired by
+             Fx.Tween.CSS3
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core/Class
+	- Core/Class.Extras
+	- Core/Element.Event
+	- Core/Element.Style
+	- Core/Fx.CSS
+	- More/Class.Binds
+
+provides:
+	- Fx.CSS3
+
+...
+*/
+
+(function() {
+
+	/* vendor prefix */
+
+	var prefix = '';
+	if (Browser.safari || Browser.chrome) {
+		prefix = 'webkit';
+	} else if (Browser.firefox) {
+		prefix = 'Moz';
+	} else if (Browser.opera) {
+		prefix = 'o';
+	} else if (Browser.ie) {
+		prefix = 'ms';
+	}
+
+	/* events */
+
+	Element.NativeEvents[prefix + 'TransitionStart'] = 2;
+	Element.NativeEvents[prefix + 'TransitionEnd'] = 2;
+	Element.Events.transitionstart = { base: (prefix + 'TransitionStart') };
+	Element.Events.transitionend = { base: (prefix + 'TransitionEnd') };
+
+	/* styles */
+
+	var setStyle = Element.prototype.setStyle;
+	var getStyle = Element.prototype.getStyle;
+
+	var setOpacity = Element.prototype.setOpacity;
+	var getOpacity = Element.prototype.getOpacity;
+
+	Element.implement({
+
+		setOpacity: function(value) {
+			setOpacity.call(this, value);
+			this.style.visibility = 'visible';
+			return this;
+		},
+
+		getOpacity: function() {
+			return getOpacity.call(this);
+		},
+
+		setStyle: function(style, value) {
+			var v = this.toVendor(style);
+			return this.hasStyle(v) ? setStyle.call(this, v, value) : setStyle.call(this, style, value);
+		},
+
+		getStyle: function(style) {
+			var v = this.toVendor(style);
+			return this.hasStyle(v) ? getStyle.call(this, v) : getStyle.call(this, style);
+		},
+
+		hasStyle: function(style) {
+			return this.style[style] != undefined;
+		},
+
+		toVendor: function(style) {
+			return prefix + style.capitalize().camelCase();
+		}
+
+	});
+
+})();
+
+Fx.CSS3 = new Class({
+
+	Extends: Fx.CSS,
+
+	Binds: ['onComplete'],
+
+	running: false,
+
+	options: { transition: 'ease-in' },
+
+	initialize: function(element, options){
+		this.element = document.id(element);
+		this.parent(options);
+		this.duration = Fx.Durations[this.options.duration] || this.options.duration.toInt();
+		this.transition = 'transition';
+		return this;
+	},
+
+	attachEvents: function() {
+		this.element.addEvent('transitionend', this.onComplete);
+		return this;
+	},
+
+	detachEvents: function() {
+		this.element.removeEvent('transitionend', this.onComplete);
+		return this;
+	},
+
+	start: function() {
+		this.setTransitionInitialState.delay(1, this);
+		this.setTransitionParameters.delay(2, this);
+		this.play.delay(3, this);
+		return this;
+	},
+
+	setTransitionInitialState: function() {
+		return this;
+	},
+
+	setTransitionParameters: function() {
+		return this;
+	},
+
+	play: function() {
+		this.running = true;
+		this.time = Date.now();
+		return this;
+	},
+
+	stop: function() {
+		if (this.running) {
+			this.running = false;
+			if (this.time + this.options.duration <= Date.now()) {
+				this.fireEvent('complete', this.element);
+				var chain = this.callChain();
+				if (chain == false) this.fireEvent('chainComplete', this.element);
+			} else {
+				this.fireEvent('stop', this.element);
+			}
+			this.detachEvents();
+			this.element.setStyle(this.transition, null);
+		}
+		return this;
+	},
+
+	cancel: function() {
+		if (this.running) {
+			this.running = false;
+			this.fireEvent('cancel', this.element);
+			this.clearChain();
+			this.detachEvents();
+		}
+		return this;
+	},
+
+	pause: function() {
+		throw new Error('Pause is not yet supported.');
+		return this;
+	},
+
+	resume: function() {
+		throw new Error('Resume is not yet supported.');
+		return this;
+	},
+
+	isRunning: function() {
+		return this.running;
+	},
+
+	onComplete: function(e) {
+		if (this.element == e.target) {
+			this.stop();
+		}
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: Fx.CSS3.Tween
+
+description: Provide CSS 3 tweening.
+
+license: MIT-style license.
+
+authors:
+	- Mootools Authors (http://mootools.net)
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Fx.CSS3
+
+provides:
+	- Fx.CSS3.Tween
+
+...
+*/
+Fx.CSS3.Tween = new Class({
+
+	Extends: Fx.CSS3,
+
+	start: function(property, from, to) {
+
+		if (this.check(property, from, to) == false) return this;
+
+		var args = Array.flatten(arguments);
+		var prop = this.options.property || args.shift();
+		var parsed = this.prepare(this.element, prop, args);
+
+		this.property = prop;
+
+		this.to = Array.flatten(Array.from(parsed.to))[0];
+		this.to = this.to.parser.serve(this.to.value);
+
+		this.from = Array.flatten(Array.from(parsed.from))[0];
+		this.from = this.from.parser.serve(this.from.value);
+
+		this.attachEvents();
+
+		return this.parent();
+	},
+
+	setTransitionInitialState: function() {
+		this.element.setStyle(this.transition, null);
+		this.element.setStyle(this.property, this.from);
+		return this.parent();
+	},
+
+	setTransitionParameters: function() {
+		this.element.setStyle(this.transition, this.property + ' ' + this.options.duration + 'ms ' + this.options.transition);
+		return this.parent();
+	},
+
+	play: function() {
+		this.element.setStyle(this.property, this.to);
+		return this.parent();
+	}
+
+});
+
+/*
+---
+
+name: Fx.CSS3.Morph
+
+description: Provide CSS 3 morphing.
+
+license: MIT-style license.
+
+authors:
+	- Mootools Authors (http://mootools.net)
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Fx.CSS3
+
+provides:
+	- Fx.CSS3.Morph
+
+...
+*/
+
+Fx.CSS3.Morph = new Class({
+
+	Extends: Fx.CSS3,
+
+	start: function(properties) {
+
+		if (this.check(properties) == false) return this;
+
+		if (typeof properties == 'string') properties = this.search(properties);
+
+		this.from = {};
+		this.to = {};
+
+		for (var p in properties){
+			var parsed = this.prepare(this.element, p, properties[p]);
+			this.from[p] = parsed.from;
+			this.to[p] = parsed.to;
+		}
+
+		this.attachEvents();
+
+		return this.parent();
+	},
+
+	setTransitionInitialState: function() {
+		this.element.setStyle('transition', null);
+		Object.each(this.from, function(value, property) {
+			if (value.length) {
+				value = Array.from(value);
+				value = Array.flatten(value)[0];
+				value = value.parser.serve(value.value);
+				this.element.setStyle(property, value);
+			}
+		}, this);
+		return this.parent();
+	},
+
+	setTransitionParameters: function() {
+		this.element.setStyle('transition', 'all ' + this.options.duration + 'ms ' + this.options.transition)
+		return this.parent();
+	},
+
+	play: function() {
+		Object.each(this.to, function(value, property) {
+			if (value.length) {
+				value = Array.from(value);
+				value = Array.flatten(value)[0];
+				value = value.parser.serve(value.value);
+				this.element.setStyle(property, value);
+			}
+		}, this);
+		return this.parent();
+	}
+
+});
 
 /*
 ---
@@ -8606,31 +8965,6 @@ Element.defineCustomEvent(name, {
 /*
 ---
 
-name: Debug
-
-description: Provides methods for ease of debugging.
-
-license: MIT-style license.
-
-author:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-
-provides:
-	- Debug
-
-...
-*/
-
-window.trace = function() {
-	if (console) Array.from(arguments).each(function(a) { console.log(a) });
-}
-
-
-/*
----
-
 name: Browser.Platform
 
 description: Provides extra indication about the current platform such as
@@ -8663,69 +8997,6 @@ Browser.Platform.mobile =
 Browser.Platform.phonegap =
 	window.device &&
 	window.device.phonegap;
-
-/*
----
-
-name: Exception
-
-description: Provides exceptions class based on Error class.
-
-license: MIT-style license.
-
-author:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	Debug
-
-provides:
-	- Exception
-
-...
-*/
-
-if (!window.Moobile) window.Moobile = {};
-
-Error.prototype.explain = function() {
-	Moobile.debug('Error:', this.message);
-	Moobile.debug('Stack:', this.stack);
-};
-
-// Moobile.Exception
-
-Moobile.Exception = function(message) {
-	this.name = 'Moobile.Exception';
-	this.message = message;
-};
-Moobile.Exception.prototype = new Error;
-
-// Moobile.Exception.ViewControllerRequest
-
-Moobile.Exception.ViewControllerRequest = function(message) {
-	this.name = 'Moobile.Exception.ViewControllerRequest';
-	this.message = message;
-};
-
-Moobile.Exception.ViewControllerRequest.prototype = new Moobile.Exception;
-
-// Moobile.Exception.ViewControllerTransition
-
-Moobile.Exception.ViewControllerTransition = function(message) {
-	this.name = 'Moobile.Exception.ViewControllerTransition';
-	this.message = message;
-};
-
-Moobile.Exception.ViewControllerTransition.prototype = new Moobile.Exception;
-
-// Moobile.Exception.History
-
-Moobile.Exception.History = function(message) {
-	this.name = 'Moobile.Exception.History';
-	this.message = message;
-};
-
-Moobile.Exception.History.prototype = new Moobile.Exception;
 
 /*
 ---
@@ -8809,9 +9080,7 @@ provides:
 		if (down) {
 			valid = !moved(e);
 			if (valid == false) {
-				this.removeEvent('mouseup', onMouseUp);
-				this.fireEvent('mouseup', e);
-				this.addEvent('mouseup', onMouseUp)
+				this.removeEvent('mouseup', onMouseUp).fireEvent('mouseup', e).addEvent('mouseup', onMouseUp);
 			}
 		}
 	};
@@ -8942,335 +9211,6 @@ provides:
 /*
 ---
 
-name: Fx.CSS3
-
-description: Provides webkit CSS 3 transitions support. Inspired by
-             Fx.Tween.CSS3
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core/Class
-	- Core/Class.Extras
-	- Core/Element.Event
-	- Core/Element.Style
-	- Core/Fx.CSS
-	- More/Class.Binds
-
-provides:
-	- Fx.CSS3
-
-...
-*/
-
-(function() {
-
-	/* vendor prefix */
-
-	var prefix = '';
-	if (Browser.safari || Browser.chrome) {
-		prefix = 'webkit';
-	} else if (Browser.firefox) {
-		prefix = 'Moz';
-	} else if (Browser.opera) {
-		prefix = 'o';
-	} else if (Browser.ie) {
-		prefix = 'ms';
-	}
-
-	/* events */
-
-	Element.NativeEvents[prefix + 'TransitionStart'] = 2;
-	Element.NativeEvents[prefix + 'TransitionEnd'] = 2;
-	Element.Events.transitionstart = { base: (prefix + 'TransitionStart') };
-	Element.Events.transitionend = { base: (prefix + 'TransitionEnd') };
-
-	/* styles */
-
-	var setStyle = Element.prototype.setStyle;
-	var getStyle = Element.prototype.getStyle;
-
-	var setOpacity = Element.prototype.setOpacity;
-	var getOpacity = Element.prototype.getOpacity;
-
-	Element.implement({
-
-		setOpacity: function(value) {
-			setOpacity.call(this, value);
-			this.style.visibility = 'visible';
-			return this;
-		},
-
-		getOpacity: function() {
-			return getOpacity.call(this);
-		},
-
-		setStyle: function(style, value) {
-			var v = this.toVendor(style);
-			return this.hasStyle(v) ? setStyle.call(this, v, value) : setStyle.call(this, style, value);
-		},
-
-		getStyle: function(style) {
-			var v = this.toVendor(style);
-			return this.hasStyle(v) ? getStyle.call(this, v) : getStyle.call(this, style);
-		},
-
-		hasStyle: function(style) {
-			return this.style[style] != undefined;
-		},
-
-		toVendor: function(style) {
-			return prefix + style.capitalize().camelCase();
-		}
-
-	});
-
-})();
-
-Fx.CSS3 = new Class({
-
-	Extends: Fx.CSS,
-
-	Implements: [Class.Binds],
-
-	running: false,
-
-	options: { transition: 'ease-in' },
-
-	initialize: function(element, options){
-		this.element = document.id(element);
-		this.parent(options);
-		this.duration = Fx.Durations[this.options.duration] || this.options.duration.toInt();
-		this.transition = 'transition';
-		return this;
-	},
-
-	attachEvents: function() {
-		this.element.addEvent('transitionend', this.bound('onComplete'));
-		return this;
-	},
-
-	detachEvents: function() {
-		this.element.removeEvent('transitionend', this.bound('onComplete'));
-		return this;
-	},
-
-	start: function() {
-		this.setTransitionInitialState.delay(1, this);
-		this.setTransitionParameters.delay(2, this);
-		this.play.delay(3, this);
-		return this;
-	},
-
-	setTransitionInitialState: function() {
-		return this;
-	},
-
-	setTransitionParameters: function() {
-		return this;
-	},
-
-	play: function() {
-		this.running = true;
-		this.time = Date.now();
-		return this;
-	},
-
-	stop: function() {
-		if (this.running) {
-			this.running = false;
-			if (this.time + this.options.duration <= Date.now()) {
-				this.fireEvent('complete', this.element);
-				var chain = this.callChain();
-				if (chain == false) this.fireEvent('chainComplete', this.element);
-			} else {
-				this.fireEvent('stop', this.element);
-			}
-			this.detachEvents();
-			this.element.setStyle(this.transition, null);
-		}
-		return this;
-	},
-
-	cancel: function() {
-		if (this.running) {
-			this.running = false;
-			this.fireEvent('cancel', this.element);
-			this.clearChain();
-			this.detachEvents();
-		}
-		return this;
-	},
-
-	pause: function() {
-		throw new Error('Pause is not yet supported.');
-		return this;
-	},
-
-	resume: function() {
-		throw new Error('Resume is not yet supported.');
-		return this;
-	},
-
-	isRunning: function() {
-		return this.running;
-	},
-
-	onComplete: function(e) {
-		if (this.element == e.target) {
-			this.stop();
-		}
-		return this;
-	}
-
-});
-
-/*
----
-
-name: Fx.CSS3.Tween
-
-description: Provide CSS 3 tweening.
-
-license: MIT-style license.
-
-authors:
-	- Mootools Authors (http://mootools.net)
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Fx.CSS3
-
-provides:
-	- Fx.CSS3.Tween
-
-...
-*/
-Fx.CSS3.Tween = new Class({
-
-	Extends: Fx.CSS3,
-
-	start: function(property, from, to) {
-		if (this.check(property, from, to) == false) return this;
-
-		var args = Array.flatten(arguments);
-		var prop = this.options.property || args.shift();
-		var parsed = this.prepare(this.element, prop, args);
-
-		this.property = prop;
-
-		this.to = Array.flatten(Array.from(parsed.to))[0];
-		this.to = this.to.parser.serve(this.to.value);
-
-		this.from = Array.flatten(Array.from(parsed.from))[0];
-		this.from = this.from.parser.serve(this.from.value);
-
-		this.attachEvents();
-
-		return this.parent();
-	},
-
-	setTransitionInitialState: function() {
-		this.element.setStyle(this.transition, null);
-		this.element.setStyle(this.property, this.from);
-		return this.parent();
-	},
-
-	setTransitionParameters: function() {
-		this.element.setStyle(this.transition, this.property + ' ' + this.options.duration + 'ms ' + this.options.transition);
-		return this.parent();
-	},
-
-	play: function() {
-		this.element.setStyle(this.property, this.to);
-		return this.parent();
-	}
-
-});
-
-/*
----
-
-name: Fx.CSS3.Morph
-
-description: Provide CSS 3 morphing.
-
-license: MIT-style license.
-
-authors:
-	- Mootools Authors (http://mootools.net)
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Fx.CSS3
-
-provides:
-	- Fx.CSS3.Morph
-
-...
-*/
-
-Fx.CSS3.Morph = new Class({
-
-	Extends: Fx.CSS3,
-
-	start: function(properties) {
-		if (this.check(properties) == false) return this;
-
-		if (typeof properties == 'string') properties = this.search(properties);
-
-		this.from = {};
-		this.to = {};
-
-		for (var p in properties){
-			var parsed = this.prepare(this.element, p, properties[p]);
-			this.from[p] = parsed.from;
-			this.to[p] = parsed.to;
-		}
-
-		this.attachEvents();
-
-		return this.parent();
-	},
-
-	setTransitionInitialState: function() {
-		this.element.setStyle('transition', null);
-		Object.each(this.from, function(value, property) {
-			if (value.length) {
-				value = Array.from(value);
-				value = Array.flatten(value)[0];
-				value = value.parser.serve(value.value);
-				this.element.setStyle(property, value);
-			}
-		}, this);
-		return this.parent();
-	},
-
-	setTransitionParameters: function() {
-		this.element.setStyle('transition', 'all ' + this.options.duration + 'ms ' + this.options.transition)
-		return this.parent();
-	},
-
-	play: function() {
-		Object.each(this.to, function(value, property) {
-			if (value.length) {
-				value = Array.from(value);
-				value = Array.flatten(value)[0];
-				value = value.parser.serve(value.value);
-				this.element.setStyle(property, value);
-			}
-		}, this);
-		return this.parent();
-	}
-
-});
-
-/*
----
-
 name: Core
 
 description: Provide the mobile namespace and requires all components from
@@ -9312,6 +9252,7 @@ requires:
 	- More/Date.Extras
 	- More/Object.Extras
 	- More/String.Extras
+	- Extras/Console.Trace
 	- Extras/Class.Extras
 	- Extras/Element.Extras
 	- Extras/Element.Properties
@@ -9319,21 +9260,19 @@ requires:
 	- Extras/Selector.Attach
 	- Extras/Array.Extras
 	- Extras/String.Extras
+	- Extras/Fx.CSS3
+	- Extras/Fx.CSS3.Tween
+	- Extras/Fx.CSS3.Morph
 	- Class-Extras/Class.Binds
 	- Mobile/Click
 	- Mobile/Pinch
 	- Mobile/Swipe
 	- Mobile/Touch
 	- Mobile/Touchhold
-	- Debug
 	- Browser.Platform
-	- Exception
 	- Event
 	- Event.ClickOver
 	- Event.TouchOver
-	- Fx.CSS3
-	- Fx.CSS3.Tween
-	- Fx.CSS3.Morph
 
 provides:
 	- Core
@@ -9566,7 +9505,7 @@ Moobile.Request.ViewController = new Class({
 			return this;
 		}
 
-		throw new Moobile.Exception.ViewControllerRequest('Cannot find a view');
+		throw new Error('Cannot find a view element from the response');
 
 		return this;
 	},
@@ -10642,8 +10581,6 @@ Moobile.View = new Class({
 
 	childControls: [],
 
-	scroller: null,
-
 	options: {
 		title: 'View',
 		className: 'view'
@@ -11662,7 +11599,7 @@ Moobile.ViewControllerTransition.Slide = new Class({
 			return this;
 		}
 
-		throw new Moobile.Exception.ViewControllerTransition('Unsupported direction');
+		throw new Error('Unsupported direction');
 
 		return this;
 	},
@@ -11748,7 +11685,7 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 			return this;
 		}
 
-		throw new Moobile.Exception.ViewControllerTransition('Unsupported direction');
+		throw new Error('Unsupported direction');
 
 		return this;
 	},
