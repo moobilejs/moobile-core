@@ -36,9 +36,7 @@ provides:
 		if (down) {
 			valid = !moved(e);
 			if (valid == false) {
-				this.removeEvent('touchend', onTouchEnd);
-				this.fireEvent('touchend', e);
-				this.addEvent('touchend', onTouchEnd);
+				this.removeEvent('touchend', onTouchEnd).fireEvent('touchend', e).addEvent('touchend', onTouchEnd);
 			}
 		}
 	};
