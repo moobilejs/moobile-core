@@ -9162,9 +9162,7 @@ provides:
 		if (down) {
 			valid = !moved(e);
 			if (valid == false) {
-				this.removeEvent('touchend', onTouchEnd);
-				this.fireEvent('touchend', e);
-				this.addEvent('touchend', onTouchEnd);
+				this.removeEvent('touchend', onTouchEnd).fireEvent('touchend', e).addEvent('touchend', onTouchEnd);
 			}
 		}
 	};
@@ -10131,9 +10129,13 @@ UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
 
-	caption: null,
+	wrapper: null,
 
-	buttons: null,
+	content: null,
+
+	leftButton: null,
+
+	rightButton: null,
 
 	options: {
 		className: 'ui-navigation-bar',
@@ -10141,52 +10143,81 @@ UI.NavigationBar = new Class({
 	},
 
 	setup: function() {
-		this.parent();
-		this.injectCaption();
-		return this;
+		this.injectContent();
+		this.injectWrapper();
+		return this.parent()
 	},
 
 	destroy: function() {
-		this.hide();
-		this.destroyCaption();
+		this.destroyContent();
+		this.destroyWrapper();
 		return this.parent();
 	},
 
-	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.element.getElements());
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
 		this.element.empty();
-		this.element.adopt(this.caption);
+		this.element.adopt(this.wrapper);
 		return this;
 	},
 
-	destroyCaption: function() {
-		this.caption.destroy();
-		this.caption = null;
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
+		return this;
+	},
+
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
+		this.element.empty();
+		this.element.adopt(this.content);
+		return this;
+	},
+
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
 	setTitle: function(title) {
-		this.caption.set('html', title);
+		this.content.set('html', title);
 		return this;
 	},
 
 	getTitle: function() {
-		return this.caption.get('html');
+		return this.content.get('html');
 	},
 
-	setButton: function(button, where) {
-		var element = this.element.getElement('div.' + this.options.className + '-button-' + where);
-		if (element) {
-			element.dispose();
-			element = null;
-		}
+	setLeftButton: function(button) {
+		this.removeLeftButton();
+		this.leftButton = button;
+		this.leftButton.addClass(this.options.className + '-left');
+		this.leftButton.inject(this.wrapper);
+		return this;
+	},
 
-		if (button) {
-			element = new Element('div.' + this.options.className + '-button-' + where);
-			element.adopt(button);
-			this.element.adopt(element);
-		}
+	setRightButton: function(button) {
+		this.removeRightButton();
+		this.rightButton = button;
+		this.rightButton.addClass(this.options.className + '-right');
+		this.rightButton.inject(this.wrapper);
+		return this;
+	},
 
+	removeLeftButton: function() {
+		if (this.leftButton) {
+			this.leftButton.destroy();
+			this.leftButton = null;
+		}
+		return this;
+	},
+
+	removeRightButton: function() {
+		if (this.rightButton) {
+			this.rightButton.destroy();
+			this.rightButton = null;
+		}
 		return this;
 	},
 
@@ -11025,10 +11056,6 @@ Moobile.ViewController = new Class({
 
 	Implements: [Events, Options, Class.Binds],
 
-	$navigationBarLeftButton: null,
-
-	$navigationBarRightButton: null,
-
 	window: null,
 
 	view: null,
@@ -11149,20 +11176,6 @@ Moobile.ViewController = new Class({
 		return this.transition;
 	},
 
-	getNavigationBarLeftButton: function() {
-		if (this.$navigationBarLeftButton == null) {
-			this.$navigationBarLeftButton = this.navigationBarLeftButton();
-		}
-		return this.$navigationBarLeftButton;
-	},
-
-	getNavigationBarRightButton: function() {
-		if (this.$navigationBarRightButton == null) {
-			this.$navigationBarRightButton = this.navigationBarRightButton();
-		}
-		return this.$navigationBarRightButton;
-	},
-
 	viewWillEnter: function() {
 		this.view.willEnter();
 		this.view.show();
@@ -11190,11 +11203,7 @@ Moobile.ViewController = new Class({
 		this.view.didRemove();
 		return this;
 	},
-
-	navigationBarVisible: function() {
-		return true;
-	},
-
+	
 	navigationBarLeftButton: function() {
 		return null;
 	},
@@ -11420,12 +11429,7 @@ Moobile.ViewController.Navigation = new Class({
 
 		viewController.view.addChildControl(navigationBar, 'top');
 
-		navigationBar.show();
-		if (viewController.navigationBarVisible() == false) {
-			navigationBar.hide();
-		}
-
-		var navigationLeftButton = viewController.getNavigationBarLeftButton();
+		var navigationLeftButton = viewController.navigationBarLeftButton();
 		if (navigationLeftButton == null) {
 			if (this.viewControllers.length > 0) {
 				var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
@@ -11434,16 +11438,16 @@ Moobile.ViewController.Navigation = new Class({
 					navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
 					navigationBackButton.setText(backButtonTitle);
 					navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
-					navigationBar.setButton(navigationBackButton, 'left');
+					navigationBar.setLeftButton(navigationBackButton);
 				}
 			}
 		} else {
-			navigationBar.setButton(navigationLeftButton, 'left');
+			navigationBar.setLeftButton(navigationLeftButton);
 		}
 
-		var navigationRightButton = viewController.getNavigationBarRightButton();
+		var navigationRightButton = viewController.navigationBarRightButton();
 		if (navigationRightButton) {
-			navigationBar.setButton(navigationRightButton, 'right');
+			navigationBar.setRightButton(navigationRightButton);
 		}
 
 		var navigationBarTitle = viewController.getTitle();

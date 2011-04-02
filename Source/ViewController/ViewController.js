@@ -23,10 +23,6 @@ Moobile.ViewController = new Class({
 
 	Implements: [Events, Options, Class.Binds],
 
-	$navigationBarLeftButton: null,
-
-	$navigationBarRightButton: null,
-
 	window: null,
 
 	view: null,
@@ -147,20 +143,6 @@ Moobile.ViewController = new Class({
 		return this.transition;
 	},
 
-	getNavigationBarLeftButton: function() {
-		if (this.$navigationBarLeftButton == null) {
-			this.$navigationBarLeftButton = this.navigationBarLeftButton();
-		}
-		return this.$navigationBarLeftButton;
-	},
-
-	getNavigationBarRightButton: function() {
-		if (this.$navigationBarRightButton == null) {
-			this.$navigationBarRightButton = this.navigationBarRightButton();
-		}
-		return this.$navigationBarRightButton;
-	},
-
 	viewWillEnter: function() {
 		this.view.willEnter();
 		this.view.show();
@@ -188,11 +170,7 @@ Moobile.ViewController = new Class({
 		this.view.didRemove();
 		return this;
 	},
-
-	navigationBarVisible: function() {
-		return true;
-	},
-
+	
 	navigationBarLeftButton: function() {
 		return null;
 	},

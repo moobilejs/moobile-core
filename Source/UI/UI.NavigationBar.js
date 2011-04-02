@@ -25,9 +25,13 @@ UI.NavigationBar = new Class({
 
 	Extends: UI.Control,
 
-	caption: null,
+	wrapper: null,
 
-	buttons: null,
+	content: null,
+
+	leftButton: null,
+
+	rightButton: null,
 
 	options: {
 		className: 'ui-navigation-bar',
@@ -35,52 +39,81 @@ UI.NavigationBar = new Class({
 	},
 
 	setup: function() {
-		this.parent();
-		this.injectCaption();
-		return this;
+		this.injectContent();
+		this.injectWrapper();
+		return this.parent()
 	},
 
 	destroy: function() {
-		this.hide();
-		this.destroyCaption();
+		this.destroyContent();
+		this.destroyWrapper();
 		return this.parent();
 	},
 
-	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.element.getElements());
+	injectWrapper: function() {
+		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
 		this.element.empty();
-		this.element.adopt(this.caption);
+		this.element.adopt(this.wrapper);
 		return this;
 	},
 
-	destroyCaption: function() {
-		this.caption.destroy();
-		this.caption = null;
+	destroyWrapper: function() {
+		this.wrapper.destroy();
+		this.wrapper = null;
+		return this;
+	},
+
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
+		this.element.empty();
+		this.element.adopt(this.content);
+		return this;
+	},
+
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
 	setTitle: function(title) {
-		this.caption.set('html', title);
+		this.content.set('html', title);
 		return this;
 	},
 
 	getTitle: function() {
-		return this.caption.get('html');
+		return this.content.get('html');
 	},
 
-	setButton: function(button, where) {
-		var element = this.element.getElement('div.' + this.options.className + '-button-' + where);
-		if (element) {
-			element.dispose();
-			element = null;
-		}
+	setLeftButton: function(button) {
+		this.removeLeftButton();
+		this.leftButton = button;
+		this.leftButton.addClass(this.options.className + '-left');
+		this.leftButton.inject(this.wrapper);
+		return this;
+	},
 
-		if (button) {
-			element = new Element('div.' + this.options.className + '-button-' + where);
-			element.adopt(button);
-			this.element.adopt(element);
-		}
+	setRightButton: function(button) {
+		this.removeRightButton();
+		this.rightButton = button;
+		this.rightButton.addClass(this.options.className + '-right');
+		this.rightButton.inject(this.wrapper);
+		return this;
+	},
 
+	removeLeftButton: function() {
+		if (this.leftButton) {
+			this.leftButton.destroy();
+			this.leftButton = null;
+		}
+		return this;
+	},
+
+	removeRightButton: function() {
+		if (this.rightButton) {
+			this.rightButton.destroy();
+			this.rightButton = null;
+		}
 		return this;
 	},
 

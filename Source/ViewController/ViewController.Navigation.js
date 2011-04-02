@@ -30,12 +30,7 @@ Moobile.ViewController.Navigation = new Class({
 
 		viewController.view.addChildControl(navigationBar, 'top');
 
-		navigationBar.show();
-		if (viewController.navigationBarVisible() == false) {
-			navigationBar.hide();
-		}
-
-		var navigationLeftButton = viewController.getNavigationBarLeftButton();
+		var navigationLeftButton = viewController.navigationBarLeftButton();
 		if (navigationLeftButton == null) {
 			if (this.viewControllers.length > 0) {
 				var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
@@ -44,16 +39,16 @@ Moobile.ViewController.Navigation = new Class({
 					navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
 					navigationBackButton.setText(backButtonTitle);
 					navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
-					navigationBar.setButton(navigationBackButton, 'left');
+					navigationBar.setLeftButton(navigationBackButton);
 				}
 			}
 		} else {
-			navigationBar.setButton(navigationLeftButton, 'left');
+			navigationBar.setLeftButton(navigationLeftButton);
 		}
 
-		var navigationRightButton = viewController.getNavigationBarRightButton();
+		var navigationRightButton = viewController.navigationBarRightButton();
 		if (navigationRightButton) {
-			navigationBar.setButton(navigationRightButton, 'right');
+			navigationBar.setRightButton(navigationRightButton);
 		}
 
 		var navigationBarTitle = viewController.getTitle();
