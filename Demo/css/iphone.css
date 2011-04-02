@@ -221,6 +221,11 @@ p small {
 	z-index: 50;							/* Important */
 }
 
+.ui-navigation-bar-wrapper {
+	height: 44px;							/* Important */
+	width: 100%;							/* Important */
+}
+
 .ui-navigation-bar-content {
 	color: #ffffff;
 	font-size: 20px;
@@ -382,7 +387,7 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .transition-slide-enter { -webkit-transform: translateX(0%); }
-.transition-slide-leave { -webkit-transform: translateX(-50%); }
+.transition-slide-leave { -webkit-transform: translateX(-50%);   }
 
 .transition-slide-enter.commit-transition {
 	-webkit-transition-property: -webkit-transform;
@@ -396,6 +401,71 @@ p small {
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
 	-webkit-transform: translateX(0%);
+}
+
+/* Navigation Bar */
+
+.transition-slide-enter .transition-slide-element-to-enter,
+.transition-slide-enter .transition-slide-element-to-leave,
+.transition-slide-leave .transition-slide-element-to-enter,
+.transition-slide-leave .transition-slide-element-to-leave {
+	overflow: visible;
+}
+
+/* Navigation Bar On Enter */
+
+.transition-slide-enter .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+	-webkit-transform: translateX(-75%);
+	opacity: 0;
+}
+
+.transition-slide-enter .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+	-webkit-transform: translateX(0%);
+	opacity: 1;
+}
+
+.transition-slide-enter.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transform: translateX(0%);
+	opacity: 1;
+}
+
+.transition-slide-enter.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transform: translateX(75%);
+	opacity: 0;
+}
+
+/* Navigation Bar On Leave */
+
+.transition-slide-leave .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+	-webkit-transform: translateX(75%);
+	opacity: 0;
+}
+
+.transition-slide-leave .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+	-webkit-transform: translateX(0);
+	opacity: 1;
+}
+
+.transition-slide-leave.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transform: translateX(0%);
+	opacity: 1;
+}
+
+.transition-slide-leave.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transform: translateX(-75%);
+	opacity: 0;
 }
 
 /* Transition Cubic
