@@ -25,7 +25,6 @@ sources:
   - "Source/Event/Event.TouchOver.js"
   - "Source/Request/Request.js"
   - "Source/Request/Request.ViewController.js"
-  - "Source/Scroller/Scroller.js"
   - "Source/UI/UI.Control.js"
   - "Source/UI/UI.Button.js"
   - "Source/UI/UI.ButtonStyle.js"

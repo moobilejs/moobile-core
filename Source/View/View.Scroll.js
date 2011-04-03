@@ -22,9 +22,15 @@ provides:
 
 Moobile.View.Scroll = new Class({
 
+	Static: {
+		scrollers: 0
+	},
+
 	Extends: Moobile.View,
 
 	scroller: null,
+
+	scrollerContentHeight: null,
 
 	setup: function() {
 		this.parent();
@@ -39,37 +45,62 @@ Moobile.View.Scroll = new Class({
 	},
 
 	attachScroller: function() {
-		this.scroller = new Moobile.Scroller(this.wrapper);
-		this.scroller.setup();
+		if (++Moobile.View.Scroll.scrollers == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
 		return this;
 	},
 
 	detachScroller: function() {
-		this.scroller.destroy();
-		this.scroller = null;
+		if (--Moobile.View.Scroll.scrollers == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
 		return this;
 	},
 
+	createScroller: function() {
+		return new iScroll(this.wrapper, { desktopCompatibility: true, hScroll: false, vScroll: true });
+	},
+
 	enableScroller: function() {
-		this.wrapper.setStyle('height', this.getContentAreaSize().y);
-		this.scroller.enable();
-		this.scroller.refresh();
+		if (this.scroller == null) {
+			this.scroller = this.createScroller();
+			var extent = this.getContentExtent();
+			this.wrapper.setStyle('overflow', 'visible');
+			this.wrapper.setStyle('height', extent.y);
+			this.content.setStyle('min-height', extent.y);
+			this.updateScroller.periodical(250, this);
+		}
 		return this;
 	},
 
 	disableScroller: function() {
-		this.scroller.disable();
+		if (this.scroller) {
+			this.scroller.destroy();
+			this.scroller = null;
+		}
+		return this;
+	},
+
+	updateScroller: function() {
+		if (this.scroller) {
+			if (this.scrollerContentHeight != this.content.getScrollSize().y) {
+				this.scrollerContentHeight = this.content.getScrollSize().y;
+				this.scroller.refresh();
+			}
+		}
 		return this;
 	},
 
 	didEnter: function() {
 		this.enableScroller();
+		this.updateScroller();
 		return this.parent();
 	},
 
 	didLeave: function() {
 		this.disableScroller();
 		return this.parent();
+	},
+
+	onDocumentTouchMove: function(e) {
+		e.preventDefault();
 	}
    
 });

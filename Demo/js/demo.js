@@ -111,14 +111,16 @@ Demo.ViewController.Fx = new Class({
 			this.fxMorph.start({
 				'background-color':		'#ffffff',
 				'color':				'#000000',
-				'padding-left':         0
+				'padding-top':          0,
+				'padding-bottom':       0
 			});
 		} else {
 			this.morphSelected = true;
 			this.fxMorph.start({
 				'background-color':		'#3f7ce4',
 				'color':				'#ffffff',
-				'padding-left':         25
+				'padding-top':          550,
+				'padding-bottom':       550
 			});
 		}
 	}

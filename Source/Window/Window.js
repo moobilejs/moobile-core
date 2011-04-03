@@ -29,14 +29,9 @@ Moobile.Window = new Class({
 	mask: null,
 
 	options: {
-		className: 'window'
-	},
-
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.element.addClass(this.options.className);
-		return this;
+		className: 'window',
+		wrapper: true,
+		content: true
 	},
 
 	setViewController: function(viewController) {
@@ -56,6 +51,7 @@ Moobile.Window = new Class({
 	},
 
 	disableUserInput: function() {
+
 		if (this.mask == null) {
 			this.mask = new Element('div');
 			this.mask.setStyle('opacity', 0);

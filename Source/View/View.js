@@ -40,20 +40,22 @@ Moobile.View = new Class({
 
 	options: {
 		title: 'View',
-		className: 'view'
+		className: 'view',
+		wrapper: true,
+		content: true
 	},
 
 	setup: function() {
-		this.injectContent();
-		this.injectWrapper();
+		if (this.options.wrapper) this.injectContent();
+		if (this.options.content) this.injectWrapper();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent();
 	},
 
 	destroy: function() {
-		this.destroyContent();
-		this.destroyWrapper();
+		if (this.options.content) this.destroyContent();
+		if (this.options.wrapper) this.destroyWrapper();
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
@@ -281,21 +283,21 @@ Moobile.View = new Class({
 		return this.content;
 	},
 
+	getSize: function() {
+		return this.element.getSize();
+	},
+
 	getContentSize: function() {
 		return this.content.getSize();
 	},
 
-	getContentAreaSize: function() {
+	getContentExtent: function() {
 		var prev = this.wrapper.getPrevious();
 		var next = this.wrapper.getNext();
 		var size = this.getSize();
 		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
 		if (next) size.y = size.y - next.getPosition().y;
 		return size;
-	},
-
-	getSize: function() {
-		return this.element.getSize();
 	},
 
 	adopt: function() {

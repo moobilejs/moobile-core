@@ -9521,92 +9521,6 @@ Moobile.Request.ViewController = new Class({
 /*
 ---
 
-name: Scroller
-
-description: Provide a wrapper for iScroll scroller.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-
-provides:
-	- Scroller
-
-...
-*/
-
-Moobile.Scroller = new Class({
-
-	Static: {
-		instances: 0
-	},
-
-	Implements: [Events, Options],
-
-	element: null,
-	
-	scroller: null,
-
-	enabled: false,
-
-	initialize: function(element) {
-		this.element = element;
-		return this;
-	},
-
-	setup: function() {
-		if (++Moobile.Scroller.instances == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
-		return this;
-	},
-
-	destroy: function() {
-		if (this.enabled == true) {
-			this.enabled = false;
-			this.scroller.destroy();
-			this.scroller = null;
-			if (--Moobile.Scroller.instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
-		}
-		return this;
-	},
-
-	enable: function() {
-		if (this.enabled == false) {
-			this.enabled = true;
-			this.scroller = new iScroll(this.element, { desktopCompatibility: true, hScroll: false, vScroll: true });
-			this.scroller.refresh();
-
-			this.element.setStyle('overflow', 'visible');
-		}
-		return this;
-	},
-
-	disable: function() {
-		if (this.enabled == true) {
-			this.enabled = false;
-			this.scroller.destroy();
-			this.scroller = null;
-		}
-		return this;
-	},
-
-	refresh: function() {
-		if (this.enabled) this.scroller.refresh();
-		return this;
-	},
-
-	onDocumentTouchMove: function(e) {
-		e.preventDefault();
-	}
-
-});
-
-/*
----
-
 script: Element.Shortcuts.js
 
 name: Element.Shortcuts
@@ -10614,20 +10528,22 @@ Moobile.View = new Class({
 
 	options: {
 		title: 'View',
-		className: 'view'
+		className: 'view',
+		wrapper: true,
+		content: true
 	},
 
 	setup: function() {
-		this.injectContent();
-		this.injectWrapper();
+		if (this.options.wrapper) this.injectContent();
+		if (this.options.content) this.injectWrapper();
 		this.attachChildElements();
 		this.attachChildControls();
 		return this.parent();
 	},
 
 	destroy: function() {
-		this.destroyContent();
-		this.destroyWrapper();
+		if (this.options.content) this.destroyContent();
+		if (this.options.wrapper) this.destroyWrapper();
 		this.destroyChildViews();
 		this.destroyChildElements();
 		this.destroyChildControls();
@@ -10855,21 +10771,21 @@ Moobile.View = new Class({
 		return this.content;
 	},
 
+	getSize: function() {
+		return this.element.getSize();
+	},
+
 	getContentSize: function() {
 		return this.content.getSize();
 	},
 
-	getContentAreaSize: function() {
+	getContentExtent: function() {
 		var prev = this.wrapper.getPrevious();
 		var next = this.wrapper.getNext();
 		var size = this.getSize();
 		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
 		if (next) size.y = size.y - next.getPosition().y;
 		return size;
-	},
-
-	getSize: function() {
-		return this.element.getSize();
 	},
 
 	adopt: function() {
@@ -10937,9 +10853,15 @@ provides:
 
 Moobile.View.Scroll = new Class({
 
+	Static: {
+		scrollers: 0
+	},
+
 	Extends: Moobile.View,
 
 	scroller: null,
+
+	scrollerContentHeight: null,
 
 	setup: function() {
 		this.parent();
@@ -10954,37 +10876,62 @@ Moobile.View.Scroll = new Class({
 	},
 
 	attachScroller: function() {
-		this.scroller = new Moobile.Scroller(this.wrapper);
-		this.scroller.setup();
+		if (++Moobile.View.Scroll.scrollers == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
 		return this;
 	},
 
 	detachScroller: function() {
-		this.scroller.destroy();
-		this.scroller = null;
+		if (--Moobile.View.Scroll.scrollers == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
 		return this;
 	},
 
+	createScroller: function() {
+		return new iScroll(this.wrapper, { desktopCompatibility: true, hScroll: false, vScroll: true });
+	},
+
 	enableScroller: function() {
-		this.wrapper.setStyle('height', this.getContentAreaSize().y);
-		this.scroller.enable();
-		this.scroller.refresh();
+		if (this.scroller == null) {
+			this.scroller = this.createScroller();
+			var extent = this.getContentExtent();
+			this.wrapper.setStyle('overflow', 'visible');
+			this.wrapper.setStyle('height', extent.y);
+			this.content.setStyle('min-height', extent.y);
+			this.updateScroller.periodical(250, this);
+		}
 		return this;
 	},
 
 	disableScroller: function() {
-		this.scroller.disable();
+		if (this.scroller) {
+			this.scroller.destroy();
+			this.scroller = null;
+		}
+		return this;
+	},
+
+	updateScroller: function() {
+		if (this.scroller) {
+			if (this.scrollerContentHeight != this.content.getScrollSize().y) {
+				this.scrollerContentHeight = this.content.getScrollSize().y;
+				this.scroller.refresh();
+			}
+		}
 		return this;
 	},
 
 	didEnter: function() {
 		this.enableScroller();
+		this.updateScroller();
 		return this.parent();
 	},
 
 	didLeave: function() {
 		this.disableScroller();
 		return this.parent();
+	},
+
+	onDocumentTouchMove: function(e) {
+		e.preventDefault();
 	}
    
 });
@@ -11623,15 +11570,12 @@ Moobile.ViewControllerTransition.Slide = new Class({
 			this.wrapper.removeClass('transition-slide-enter');
 			this.wrapper.removeClass('transition-slide-leave');
 			this.wrapper.removeClass('commit-transition');
-
 			this.viewControllerStack.getViewControllerAt(0).view
 				.removeClass('transition-slide-element-to-leave')
 				.removeClass('transition-slide-element-to-enter');
-
 			this.viewControllerStack.getViewControllerAt(1).view
 				.removeClass('transition-slide-element-to-leave')
 				.removeClass('transition-slide-element-to-enter');
-
 			this.complete();
 		}
 		return this;
@@ -11763,14 +11707,9 @@ Moobile.Window = new Class({
 	mask: null,
 
 	options: {
-		className: 'window'
-	},
-
-	initialize: function(element, options) {
-		this.setElement(element);
-		this.setOptions(options);
-		this.element.addClass(this.options.className);
-		return this;
+		className: 'window',
+		wrapper: true,
+		content: true
 	},
 
 	setViewController: function(viewController) {
@@ -11790,6 +11729,7 @@ Moobile.Window = new Class({
 	},
 
 	disableUserInput: function() {
+
 		if (this.mask == null) {
 			this.mask = new Element('div');
 			this.mask.setStyle('opacity', 0);
