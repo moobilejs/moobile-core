@@ -27,10 +27,14 @@ Moobile.View.Scroll = new Class({
 	},
 
 	Extends: Moobile.View,
+		
+	contentSize: null,
 
 	scroller: null,
-
-	scrollerContentHeight: null,
+	
+	scrollerUpdateInterval: null,
+	
+	scrolled: null,
 
 	setup: function() {
 		this.parent();
@@ -61,17 +65,30 @@ Moobile.View.Scroll = new Class({
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
+
 			var extent = this.getContentExtent();
 			this.wrapper.setStyle('overflow', 'visible');
 			this.wrapper.setStyle('height', extent.y);
+			this.wrapper.setStyle('min-height', extent.y);
 			this.content.setStyle('min-height', extent.y);
-			this.updateScroller.periodical(250, this);
+
+			this.updateScroller();
+
+			clearInterval(this.scrollerUpdateInterval);
+			this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+
+			if (this.scrolled) {
+				this.scroller.scrollTo(0, -this.scrolled);
+			}
 		}
 		return this;
 	},
 
 	disableScroller: function() {
 		if (this.scroller) {
+			this.scrolled = this.content.getStyle('transform');
+			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/)
+			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();
 			this.scroller = null;
 		}
@@ -80,17 +97,16 @@ Moobile.View.Scroll = new Class({
 
 	updateScroller: function() {
 		if (this.scroller) {
-			if (this.scrollerContentHeight != this.content.getScrollSize().y) {
-				this.scrollerContentHeight = this.content.getScrollSize().y;
+			if (this.contentSize != this.content.getScrollSize().y) {
+				this.contentSize = this.content.getScrollSize().y;
 				this.scroller.refresh();
 			}
 		}
 		return this;
 	},
 
-	didEnter: function() {
+	willEnter: function() {
 		this.enableScroller();
-		this.updateScroller();
 		return this.parent();
 	},
 

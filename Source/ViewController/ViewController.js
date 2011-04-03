@@ -144,8 +144,8 @@ Moobile.ViewController = new Class({
 	},
 
 	viewWillEnter: function() {
-		this.view.willEnter();
 		this.view.show();
+		this.view.willEnter();
 		return this;
 	},
 
