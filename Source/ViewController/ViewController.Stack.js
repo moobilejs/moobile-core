@@ -76,7 +76,7 @@ Moobile.ViewController.Stack = new Class({
 			viewController.viewDidEnter();
 		} else {
 
-			this.window.disableUserInput();
+			this.window.setUserInputEnabled(false);
 
 			var transition = viewControllerTransition || viewController.getTransition();
 			if (transition && typeOf(transition) == 'class') {
@@ -110,7 +110,9 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidEnter();
 		this.viewControllers.getLast(1)
 			.viewDidLeave();
-		this.window.enableUserInput();
+
+		this.window.setUserInputEnabled(true);
+
 		return this;
 	},
 
@@ -119,7 +121,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(1).viewWillEnter();
 			this.viewControllers.getLast(0).viewWillLeave();
 
-			this.window.disableUserInput();
+			this.window.setUserInputEnabled(false);
 
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
@@ -143,7 +145,7 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidRemove()
 			.doShutdown();
 
-		this.window.enableUserInput();
+		this.window.setUserInputEnabled(true);
 		
 		return this;
 	},
@@ -158,6 +160,11 @@ Moobile.ViewController.Stack = new Class({
 
 	getTopViewController: function() {
 		return this.topViewController;
+	},
+
+	orientationDidChange: function(orientation) {
+		this.viewControllers.each(function(viewController) { viewController.orientationDidChange(orientation) });
+		return this.parent();
 	}
 
 });

@@ -33,3 +33,5 @@ Browser.Platform.mobile =
 Browser.Platform.phonegap =
 	window.device &&
 	window.device.phonegap;
+
+Browser.Platform.simulator = false;

@@ -141,9 +141,7 @@ p small {
 /* Window
 -----------------------------------------------------------------------------*/
 
-.window,
-.window-wrapper,
-.window-content {
+.window {
 	background-color: #424242;
 	background-image: url(../images/mootools.png);
 	background-repeat: no-repeat;
@@ -151,6 +149,23 @@ p small {
 	height: 460px;						/* Important */
 	overflow: hidden;					/* Important */
 	width: 320px;						/* Important */
+}
+
+.window-input-mask {
+	background: #ffffff;				/* Important */
+	height: 100%;						/* Important */
+	left: 0px;							/* Important */
+	opacity: 0;							/* Important */
+	position: absolute;					/* Important */
+	top: 0px;							/* Important */
+	width: 100%;						/* Important */
+}
+
+@media screen and (min-width: 321px) {
+	.window {
+		height: 300px;					
+		width: 480px;					
+	}
 }
 
 /* View
@@ -176,16 +191,23 @@ p small {
 	color: #4c596e;
 	font-size: 15px;
 	font-weight: normal;
-	text-align: left;
-	text-shadow: 0px 1px 0px #ffffff;
 	padding: 20px;
 	padding-left: 9px;
 	padding-right: 9px;
+	text-align: left;
+	text-shadow: 0px 1px 0px #ffffff;
 }
 
 .ui-navigation-bar-visible .view {
 	top: -44px;								/* Important */
 	padding-top: 44px;						/* Important */
+}
+
+@media screen and (min-width: 321px) {
+	.view {
+		height: 300px;						
+		width: 480px;						
+	}
 }
 
 /* Stack View
@@ -259,7 +281,7 @@ p small {
 	color: #ffffff;
 	float: left;
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: bold;
 	height: 44px;
 	line-height: 44px;
 	padding-left: 5px;

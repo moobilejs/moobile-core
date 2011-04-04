@@ -143,6 +143,11 @@ Moobile.ViewController = new Class({
 		return this.transition;
 	},
 
+	orientationDidChange: function(orientation) {
+		this.view.orientationDidChange(orientation);
+		return this;
+	},
+
 	viewWillEnter: function() {
 		this.view.show();
 		this.view.willEnter();

@@ -22,20 +22,42 @@ provides:
 
 Moobile.Window = new Class({
 
+	Static: {
+		PORTRAIT: 2,
+		LANDSCAPE: 3
+	},
+
 	Extends: Moobile.View,
 
 	viewController: null,
 
-	mask: null,
+	userInputEnabled: true,
+
+	userInputMask: null,
 
 	options: {
-		className: 'window',
-		wrapper: true,
-		content: true
+		className: 'window'
+	},
+
+	setup: function() {
+		this.options.wrapper = false;
+		this.options.content = false;
+		this.position();
+		this.parent();
+		return this.parent();
+	},
+
+	attachEvents: function() {
+		document.body.addEvent(Event.ORIENTATION_CHANGE, this.bound('onOrientationChange'));
+		return this.parent();
+	},
+
+	detachEvents: function() {
+		document.body.removeEvent(Event.ORIENTATION_CHANGE, this.bound('onOrientationChange'));
+		return this;
 	},
 
 	setViewController: function(viewController) {
-		this.empty();
 		this.viewController = viewController;
 		this.addChildView(this.viewController.view);
 		this.viewController.view.setParentView(null);
@@ -50,38 +72,48 @@ Moobile.Window = new Class({
 		return this.viewController;
 	},
 
-	disableUserInput: function() {
-
-		if (this.mask == null) {
-			this.mask = new Element('div');
-			this.mask.setStyle('opacity', 0);
-			this.mask.setStyle('background-color', '#ffffff');
+	getOrientation: function() {
+		var o = Math.abs(window.orientation);
+		switch (o) {
+			case  0: return Moobile.Window.PORTRAIT;
+			case 90: return Moobile.Window.LANDSCAPE;
 		}
+	},
 
-		var size = this.element.getSize();
-		this.mask.setStyle('width', size.x);
-		this.mask.setStyle('height', size.y);
-		this.mask.setStyle('position', 'absolute');
-		this.mask.setStyle('top', 0);
-		this.mask.setStyle('left', 0);
-
-		this.adopt(this.mask);
-
+	setUserInputEnabled: function(enabled) {
+		if (this.userInputEnabled != enabled) {
+			this.userInputEnabled = enabled;
+			return this.userInputEnabled ? this.destroyUserInputMask() : this.injectUserInputMask();
+		}
 		return this;
 	},
 
-	enableUserInput: function() {
-		if (this.mask) this.mask.dispose();
+	isUserInputEnabled: function() {
+		return this.userInputEnabled;
+	},
+
+	injectUserInputMask: function() {
+		this.userInputMask = new Element('div.' + this.options.className + '-input-mask');
+		this.userInputMask.inject(this.element);
 		return this;
 	},
 
-	adopt: function() {
-		this.element.adopt.apply(this.element, arguments);
+	destroyUserInputMask: function() {
+		this.userInputMask.destroy();
+		this.userInputMask = null;
 		return this;
 	},
 
-	grab: function(element) {
-		this.element.grab(element);
+	position: function() {
+		var fn = function() { window.scrollTo(0, 1) };
+		fn.delay(50);
+		return this;
+	},
+
+	onOrientationChange: function(e) {
+		this.viewController.orientationDidChange(this.getOrientation());
+		this.position();
+		return this;
 	}
 
 });

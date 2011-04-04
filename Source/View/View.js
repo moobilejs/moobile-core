@@ -301,7 +301,7 @@ Moobile.View = new Class({
 	},
 
 	adopt: function() {
-		this.content.adopt.apply(this.element, arguments);
+		(this.content || this.element).adopt.apply(this.element, arguments);
 		return this;
 	},
 
@@ -310,12 +310,14 @@ Moobile.View = new Class({
 			context = document.id(context);
 			context.inject(element, where);
 		} else {
-			if (where == 'top' || where == 'bottom') {
-				this.element.grab(element, where);
-			} else {
-				this.content.grab(element, where);
-			}
+			var content = this.content || this.element;
+			if (where == 'top' || where == 'bottom') content = this.element;
+			content.grab(element, where);
 		}
+		return this;
+	},
+
+	orientationDidChange: function() {
 		return this;
 	},
 
