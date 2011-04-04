@@ -154,18 +154,22 @@ p small {
 
 .window-input-mask {
 	background: #ffffff;				/* Important */
-	height: 100%;						/* Important */
+	height: 460px;						/* Important */
 	left: 0px;							/* Important */
 	opacity: 0;							/* Important */
 	position: absolute;					/* Important */
 	top: 0px;							/* Important */
-	width: 100%;						/* Important */
+	width: 320px;						/* Important */
 }
 
 @media screen and (min-width: 321px) {
 	.window {
 		height: 300px;					
-		width: 480px;					
+		width: 480px;
+	}
+	.window-input-mask {
+		height: 300px;
+		width: 480px;
 	}
 }
 
