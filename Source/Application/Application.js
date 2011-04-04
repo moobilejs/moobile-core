@@ -25,7 +25,7 @@ Moobile.Application = new Class({
 
 	viewControllerStack: null,
 
-	viewControllerWindow: null,
+	window: null,
 
 	options: {
 		window: 'window'
@@ -38,14 +38,32 @@ Moobile.Application = new Class({
 	},
 
 	startup: function() {
-		this.viewControllerStack = new Moobile.ViewController.Navigation();
-		this.viewControllerWindow = new Moobile.Window(this.options.window);
-		this.viewControllerWindow.setViewController(this.viewControllerStack);
+		this.viewControllerStack = this.createViewControllerStack();
+		this.window = this.createWindow();
+		this.window.setViewController(this.viewControllerStack);
 		return this;
 	},
 
 	shutdown: function() {
-		this.viewControllerWindow.destroy();
+		this.destroyViewControllerStack();
+		this.destroyWindow();
+		return this;
+	},
+
+	createWindow: function() {
+		return new Moobile.Window(this.options.window);
+	},
+
+	createViewControllerStack: function() {
+		return new Moobile.ViewController.Stack();
+	},
+
+	destroyWindow: function() {
+		this.window.destroy();
+		return this;
+	},
+
+	destroyViewControllerStack: function() {
 		this.viewControllerStack.shutdown();
 		return this;
 	},

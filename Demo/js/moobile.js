@@ -9309,7 +9309,7 @@ Moobile.Application = new Class({
 
 	viewControllerStack: null,
 
-	viewControllerWindow: null,
+	window: null,
 
 	options: {
 		window: 'window'
@@ -9322,14 +9322,32 @@ Moobile.Application = new Class({
 	},
 
 	startup: function() {
-		this.viewControllerStack = new Moobile.ViewController.Navigation();
-		this.viewControllerWindow = new Moobile.Window(this.options.window);
-		this.viewControllerWindow.setViewController(this.viewControllerStack);
+		this.viewControllerStack = this.createViewControllerStack();
+		this.window = this.createWindow();
+		this.window.setViewController(this.viewControllerStack);
 		return this;
 	},
 
 	shutdown: function() {
-		this.viewControllerWindow.destroy();
+		this.destroyViewControllerStack();
+		this.destroyWindow();
+		return this;
+	},
+
+	createWindow: function() {
+		return new Moobile.Window(this.options.window);
+	},
+
+	createViewControllerStack: function() {
+		return new Moobile.ViewController.Stack();
+	},
+
+	destroyWindow: function() {
+		this.window.destroy();
+		return this;
+	},
+
+	destroyViewControllerStack: function() {
 		this.viewControllerStack.shutdown();
 		return this;
 	},
@@ -9376,12 +9394,8 @@ Moobile.Application.iPhone = new Class({
 
 	Extends: Moobile.Application,
 
-	startup: function() {
-		this.parent();
-		this.viewControllerWindow.addClass('iphone');
-		if (Browser.Platform.desktop) this.viewControllerWindow.addClass('desktop');
-		if (Browser.Platform.phonegap) this.viewControllerWindow.addClass('phonegap');
-		return this;
+	createViewControllerStack: function() {
+		return new Moobile.ViewController.Navigation();
 	}
 
 })
@@ -11250,12 +11264,9 @@ Moobile.ViewController.Stack = new Class({
 		
 		if (this.viewControllers.length == 1) {
 			this.view.addChildView(viewController.view);
-			this.view.fade('hide');
-			this.view.show();
 			viewController.doStartup();
 			viewController.viewWillEnter();
 			viewController.viewDidEnter();
-			new Fx.CSS3.Tween(this.view).start('opacity', 0, 1);
 		} else {
 
 			this.window.disableUserInput();
@@ -11340,22 +11351,6 @@ Moobile.ViewController.Stack = new Class({
 
 	getTopViewController: function() {
 		return this.topViewController;
-	},
-
-	viewWillEnter: function() {
-		return this; // Prevent default behavior
-	},
-
-	viewDidEnter: function() {
-		return this; // Prevent default behavior
-	},
-
-	viewWillLeave: function() {
-		return this; // Prevent default behavior
-	},
-
-	viewDidLeave: function() {
-		return this; // Prevent default behavior
 	}
 
 });
