@@ -102,6 +102,7 @@ iframe {
 -----------------------------------------------------------------------------*/
 
 body {
+	-webkit-text-size-adjust: 100%;			/* Important */
 	font-size: 15px;
 	font-weight: bold;
 	font-family: "Helvetica Neue", sans-serif;

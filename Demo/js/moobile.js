@@ -10914,18 +10914,8 @@ Moobile.View.Scroll = new Class({
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
-
-			var extent = this.getContentExtent();
-			this.wrapper.setStyle('overflow', 'visible');
-			this.wrapper.setStyle('height', extent.y);
-			this.wrapper.setStyle('min-height', extent.y);
-			this.content.setStyle('min-height', extent.y);
-
 			this.updateScroller();
-
-			clearInterval(this.scrollerUpdateInterval);
-			this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
-
+			this.updateScrollerAutomatically();
 			if (this.scrolled) {
 				this.scroller.scrollTo(0, -this.scrolled);
 			}
@@ -10948,10 +10938,26 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller) {
 			if (this.contentSize != this.content.getScrollSize().y) {
 				this.contentSize = this.content.getScrollSize().y;
+				var extent = this.getContentExtent();
+				this.wrapper.setStyle('overflow', 'visible');
+				this.wrapper.setStyle('height', extent.y);
+				this.wrapper.setStyle('min-height', extent.y);
+				this.content.setStyle('min-height', extent.y);
 				this.scroller.refresh();
 			}
 		}
 		return this;
+	},
+
+	updateScrollerAutomatically: function() {
+		clearInterval(this.scrollerUpdateInterval);
+		this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+		return this;
+	},
+
+	orientationDidChange: function() {
+		this.updateScroller();
+		return this.parent();
 	},
 
 	willEnter: function() {
@@ -11763,7 +11769,6 @@ Moobile.Window = new Class({
 	},
 
 	setViewController: function(viewController) {
-		this.empty();
 		this.viewController = viewController;
 		this.addChildView(this.viewController.view);
 		this.viewController.view.setParentView(null);
