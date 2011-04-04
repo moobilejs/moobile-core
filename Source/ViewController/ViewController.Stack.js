@@ -71,12 +71,9 @@ Moobile.ViewController.Stack = new Class({
 		
 		if (this.viewControllers.length == 1) {
 			this.view.addChildView(viewController.view);
-			this.view.fade('hide');
-			this.view.show();
 			viewController.doStartup();
 			viewController.viewWillEnter();
 			viewController.viewDidEnter();
-			new Fx.CSS3.Tween(this.view).start('opacity', 0, 1);
 		} else {
 
 			this.window.disableUserInput();
@@ -161,22 +158,6 @@ Moobile.ViewController.Stack = new Class({
 
 	getTopViewController: function() {
 		return this.topViewController;
-	},
-
-	viewWillEnter: function() {
-		return this; // Prevent default behavior
-	},
-
-	viewDidEnter: function() {
-		return this; // Prevent default behavior
-	},
-
-	viewWillLeave: function() {
-		return this; // Prevent default behavior
-	},
-
-	viewDidLeave: function() {
-		return this; // Prevent default behavior
 	}
 
 });
