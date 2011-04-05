@@ -65,6 +65,7 @@ Moobile.View.Scroll = new Class({
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
+			this.wrapper.setStyle('overflow', 'visible');
 			this.updateScroller();
 			this.updateScrollerAutomatically(true);
 			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
@@ -88,8 +89,7 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller) {
 			if (this.contentSize != this.content.getScrollSize().y) {
 				this.contentSize = this.content.getScrollSize().y;
-				var extent = this.getContentExtent();
-				this.wrapper.setStyle('overflow', 'visible');
+				var extent = this.getContentExtent();				
 				this.wrapper.setStyle('height', extent.y);
 				this.wrapper.setStyle('min-height', extent.y);
 				this.content.setStyle('min-height', extent.y);
