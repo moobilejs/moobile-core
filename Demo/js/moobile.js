@@ -10805,19 +10805,21 @@ Moobile.View = new Class({
 	},
 
 	adopt: function() {
-		(this.content || this.element).adopt.apply(this.element, arguments);
+		var content = this.content || this.element;
+		content.adopt.apply(content, arguments);
 		return this;
 	},
 
 	grab: function(element, where, context) {
+
 		if (context) {
 			context = document.id(context);
 			context.inject(element, where);
-		} else {
-			var content = this.content || this.element;
-			if (where == 'top' || where == 'bottom') content = this.element;
-			content.grab(element, where);
+			return this;
 		}
+
+		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
+				
 		return this;
 	},
 
@@ -10914,6 +10916,7 @@ Moobile.View.Scroll = new Class({
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
+			this.wrapper.setStyle('overflow', 'visible');
 			this.updateScroller();
 			this.updateScrollerAutomatically(true);
 			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
@@ -10937,8 +10940,7 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller) {
 			if (this.contentSize != this.content.getScrollSize().y) {
 				this.contentSize = this.content.getScrollSize().y;
-				var extent = this.getContentExtent();
-				this.wrapper.setStyle('overflow', 'visible');
+				var extent = this.getContentExtent();				
 				this.wrapper.setStyle('height', extent.y);
 				this.wrapper.setStyle('min-height', extent.y);
 				this.content.setStyle('min-height', extent.y);
@@ -11284,9 +11286,9 @@ Moobile.ViewController.Stack = new Class({
 			if (transition && typeOf(transition) == 'class') {
 				transition = Class.instanciate(transition);
 			}
-
-			viewController.setTransition(transition);
+			
 			this.view.addChildView(viewController.view);
+			viewController.setTransition(transition);
 			viewController.doStartup();
 			viewController.viewWillEnter();
 
@@ -11430,7 +11432,7 @@ Moobile.ViewController.Navigation = new Class({
 			navigationBar.setTitle(navigationBarTitle);
 		}
 		
-		viewController.navigationBar = navigationBar;
+		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
 
 		this.parent(viewController, viewControllerTransition);
 
@@ -11805,7 +11807,7 @@ Moobile.Window = new Class({
 	},
 
 	injectUserInputMask: function() {
-		this.userInputMask = new Element('div.' + this.options.className + '-input-mask');
+		this.userInputMask = new Element('div.' + this.options.className + '-mask');
 		this.userInputMask.inject(this.element);
 		return this;
 	},

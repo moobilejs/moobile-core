@@ -99,7 +99,7 @@ Moobile.Window = new Class({
 	},
 
 	injectUserInputMask: function() {
-		this.userInputMask = new Element('div.' + this.options.className + '-input-mask');
+		this.userInputMask = new Element('div.' + this.options.className + '-mask');
 		this.userInputMask.inject(this.element);
 		return this;
 	},

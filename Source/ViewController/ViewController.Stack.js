@@ -82,9 +82,9 @@ Moobile.ViewController.Stack = new Class({
 			if (transition && typeOf(transition) == 'class') {
 				transition = Class.instanciate(transition);
 			}
-
-			viewController.setTransition(transition);
+			
 			this.view.addChildView(viewController.view);
+			viewController.setTransition(transition);
 			viewController.doStartup();
 			viewController.viewWillEnter();
 

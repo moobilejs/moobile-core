@@ -50,13 +50,13 @@ Moobile.ViewController.Navigation = new Class({
 		if (navigationRightButton) {
 			navigationBar.setRightButton(navigationRightButton);
 		}
-
+	
 		var navigationBarTitle = viewController.getTitle();
 		if (navigationBarTitle) {
 			navigationBar.setTitle(navigationBarTitle);
 		}
-		
-		viewController.navigationBar = navigationBar;
+				
+		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
 
 		this.parent(viewController, viewControllerTransition);
 

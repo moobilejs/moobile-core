@@ -301,19 +301,21 @@ Moobile.View = new Class({
 	},
 
 	adopt: function() {
-		(this.content || this.element).adopt.apply(this.element, arguments);
+		var content = this.content || this.element;
+		content.adopt.apply(content, arguments);
 		return this;
 	},
 
 	grab: function(element, where, context) {
+
 		if (context) {
 			context = document.id(context);
 			context.inject(element, where);
-		} else {
-			var content = this.content || this.element;
-			if (where == 'top' || where == 'bottom') content = this.element;
-			content.grab(element, where);
+			return this;
 		}
+
+		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
+				
 		return this;
 	},
 
