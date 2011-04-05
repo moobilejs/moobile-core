@@ -152,7 +152,7 @@ p small {
 	width: 320px;						/* Important */
 }
 
-.window-input-mask {
+.window-mask {
 	background: #ffffff;				/* Important */
 	height: 460px;						/* Important */
 	left: 0px;							/* Important */
@@ -542,4 +542,26 @@ p small {
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-transform: translateZ(-160px) rotateY(90deg);
+}
+
+@media screen and (min-width: 321px) {
+
+	.transition-cubic {
+		-webkit-transform: translateZ(-240px);
+	}
+
+	.transition-cubic.transition-cubic-enter .cubic-face-leave { -webkit-transform: rotateY(0deg) translateZ(240px); }
+	.transition-cubic.transition-cubic-enter .cubic-face-enter { -webkit-transform: rotateY(90deg) translateZ(240px); }
+
+	.transition-cubic.transition-cubic-enter.commit-transition {
+		-webkit-transform: translateZ(-240px) rotateY(-90deg);
+	}
+
+	.transition-cubic.transition-cubic-leave .cubic-face-leave { -webkit-transform: rotateY(0deg) translateZ(240px); }
+	.transition-cubic.transition-cubic-leave .cubic-face-enter { -webkit-transform: rotateY(-90deg) translateZ(240px); }
+
+	.transition-cubic.transition-cubic-leave.commit-transition {
+		-webkit-transform: translateZ(-240px) rotateY(90deg);
+	}
+
 }
