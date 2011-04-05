@@ -43,7 +43,6 @@ Moobile.Window = new Class({
 		this.options.wrapper = false;
 		this.options.content = false;
 		this.position();
-		this.parent();
 		return this.parent();
 	},
 
@@ -80,12 +79,19 @@ Moobile.Window = new Class({
 		}
 	},
 
-	setUserInputEnabled: function(enabled) {
-		if (this.userInputEnabled != enabled) {
-			this.userInputEnabled = enabled;
-			return this.userInputEnabled ? this.destroyUserInputMask() : this.injectUserInputMask();
+	enableUserInput: function() {
+		if (this.userInputEnabled == false) {
+			this.userInputEnabled = true;
+			this.destroyUserInputMask();
 		}
 		return this;
+	},
+
+	disableUserInput: function() {
+		if (this.userInputEnabled == true) {
+			this.userInputEnabled = false;
+			this.injectUserInputMask();
+		}
 	},
 
 	isUserInputEnabled: function() {

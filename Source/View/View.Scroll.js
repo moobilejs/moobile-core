@@ -66,16 +66,15 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
 			this.updateScroller();
-			this.updateScrollerAutomatically();
-			if (this.scrolled) {
-				this.scroller.scrollTo(0, -this.scrolled);
-			}
+			this.updateScrollerAutomatically(true);
+			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
 		}
 		return this;
 	},
 
 	disableScroller: function() {
 		if (this.scroller) {
+			this.updateScrollerAutomatically(false);
 			this.scrolled = this.content.getStyle('transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/)
 			this.scrolled = this.scrolled[2];
@@ -100,15 +99,10 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	updateScrollerAutomatically: function() {
+	updateScrollerAutomatically: function(automatically) {
 		clearInterval(this.scrollerUpdateInterval);
-		this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+		if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
 		return this;
-	},
-
-	orientationDidChange: function() {
-		this.updateScroller();
-		return this.parent();
 	},
 
 	willEnter: function() {

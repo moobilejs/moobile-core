@@ -10915,16 +10915,15 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
 			this.updateScroller();
-			this.updateScrollerAutomatically();
-			if (this.scrolled) {
-				this.scroller.scrollTo(0, -this.scrolled);
-			}
+			this.updateScrollerAutomatically(true);
+			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
 		}
 		return this;
 	},
 
 	disableScroller: function() {
 		if (this.scroller) {
+			this.updateScrollerAutomatically(false);
 			this.scrolled = this.content.getStyle('transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/)
 			this.scrolled = this.scrolled[2];
@@ -10949,15 +10948,10 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	updateScrollerAutomatically: function() {
+	updateScrollerAutomatically: function(automatically) {
 		clearInterval(this.scrollerUpdateInterval);
-		this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+		if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
 		return this;
-	},
-
-	orientationDidChange: function() {
-		this.updateScroller();
-		return this.parent();
 	},
 
 	willEnter: function() {
@@ -11284,7 +11278,7 @@ Moobile.ViewController.Stack = new Class({
 			viewController.viewDidEnter();
 		} else {
 
-			this.window.setUserInputEnabled(false);
+			this.window.disableUserInput();
 
 			var transition = viewControllerTransition || viewController.getTransition();
 			if (transition && typeOf(transition) == 'class') {
@@ -11319,7 +11313,7 @@ Moobile.ViewController.Stack = new Class({
 		this.viewControllers.getLast(1)
 			.viewDidLeave();
 
-		this.window.setUserInputEnabled(true);
+		this.window.enableUserInput();
 
 		return this;
 	},
@@ -11329,7 +11323,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(1).viewWillEnter();
 			this.viewControllers.getLast(0).viewWillLeave();
 
-			this.window.setUserInputEnabled(false);
+			this.window.disableUserInput();
 
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
@@ -11339,6 +11333,7 @@ Moobile.ViewController.Stack = new Class({
 			} else {
 				this.onPopTransitionCompleted();
 			}
+
 			this.topViewController = this.viewControllers.getLast(1);
 		}
 		return this;
@@ -11353,7 +11348,7 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidRemove()
 			.doShutdown();
 
-		this.window.setUserInputEnabled(true);
+		this.window.enableUserInput();
 		
 		return this;
 	},
@@ -11754,7 +11749,6 @@ Moobile.Window = new Class({
 		this.options.wrapper = false;
 		this.options.content = false;
 		this.position();
-		this.parent();
 		return this.parent();
 	},
 
@@ -11791,12 +11785,19 @@ Moobile.Window = new Class({
 		}
 	},
 
-	setUserInputEnabled: function(enabled) {
-		if (this.userInputEnabled != enabled) {
-			this.userInputEnabled = enabled;
-			return this.userInputEnabled ? this.destroyUserInputMask() : this.injectUserInputMask();
+	enableUserInput: function() {
+		if (this.userInputEnabled == false) {
+			this.userInputEnabled = true;
+			this.destroyUserInputMask();
 		}
 		return this;
+	},
+
+	disableUserInput: function() {
+		if (this.userInputEnabled == true) {
+			this.userInputEnabled = false;
+			this.injectUserInputMask();
+		}
 	},
 
 	isUserInputEnabled: function() {

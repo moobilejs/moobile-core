@@ -76,7 +76,7 @@ Moobile.ViewController.Stack = new Class({
 			viewController.viewDidEnter();
 		} else {
 
-			this.window.setUserInputEnabled(false);
+			this.window.disableUserInput();
 
 			var transition = viewControllerTransition || viewController.getTransition();
 			if (transition && typeOf(transition) == 'class') {
@@ -111,7 +111,7 @@ Moobile.ViewController.Stack = new Class({
 		this.viewControllers.getLast(1)
 			.viewDidLeave();
 
-		this.window.setUserInputEnabled(true);
+		this.window.enableUserInput();
 
 		return this;
 	},
@@ -121,7 +121,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(1).viewWillEnter();
 			this.viewControllers.getLast(0).viewWillLeave();
 
-			this.window.setUserInputEnabled(false);
+			this.window.disableUserInput();
 
 			var transition = this.viewControllers.getLast().getTransition();
 			if (transition) {
@@ -131,6 +131,7 @@ Moobile.ViewController.Stack = new Class({
 			} else {
 				this.onPopTransitionCompleted();
 			}
+
 			this.topViewController = this.viewControllers.getLast(1);
 		}
 		return this;
@@ -145,7 +146,7 @@ Moobile.ViewController.Stack = new Class({
 			.viewDidRemove()
 			.doShutdown();
 
-		this.window.setUserInputEnabled(true);
+		this.window.enableUserInput();
 		
 		return this;
 	},
