@@ -27,10 +27,6 @@ Moobile.ViewController = new Class({
 
 	view: null,
 
-	viewControllerStack: null,
-
-	viewControllerPanel: null,
-
 	modalViewController: null,
 
 	transition: null,
@@ -83,8 +79,6 @@ Moobile.ViewController = new Class({
 		this.detachEvents();
 		this.view.destroy();
 		this.view = null;
-		this.viewControllerPanel = null;
-		this.viewControllerStack = null;
 		this.modalViewController = null;
 		this.transition = null;
 		this.window = null;
@@ -104,24 +98,6 @@ Moobile.ViewController = new Class({
 
 	getTitle: function() {
 		return this.view.getTitle();
-	},
-
-	setViewControllerStack: function(viewControllerStack) {
-		this.viewControllerStack = viewControllerStack;
-		return this;
-	},
-
-	getViewControllerStack: function() {
-		return this.viewControllerStack;
-	},
-
-	setViewControllerPanel: function(viewControllerPanel) {
-		this.viewControllerPanel = viewControllerPanel;
-		return this;
-	},
-
-	getViewControllerPanel: function() {
-		return this.viewControllerPanel;
 	},
 
 	presentModalViewController: function(viewController, viewControllerTransition) {

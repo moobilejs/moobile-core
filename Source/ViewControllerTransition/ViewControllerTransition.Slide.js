@@ -26,9 +26,9 @@ Moobile.ViewControllerTransition.Slide = new Class({
 
 	wrapper: null,
 
-	startup: function(viewController) {
-		this.wrapper = viewController.getViewControllerStack().view.getContent();
-		return this.parent(viewController);
+	startup: function(viewController, viewControllerStack) {
+		this.wrapper = viewControllerStack.view.getContent();
+		return this.parent(viewController, viewControllerStack);
 	},
 
 	attachEvents: function() {

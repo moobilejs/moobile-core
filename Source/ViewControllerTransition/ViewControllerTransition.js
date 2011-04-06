@@ -29,9 +29,9 @@ Moobile.ViewControllerTransition = new Class({
 
 	viewControllerStack: null,
 
-	startup: function(viewController) {
+	startup: function(viewController, viewControllerStack) {
 		this.viewController = viewController;
-		this.viewControllerStack = viewController.getViewControllerStack();
+		this.viewControllerStack = viewControllerStack;
 		this.attachEvents();
 		return this;
 	},

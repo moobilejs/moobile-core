@@ -65,8 +65,8 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
-		viewController.setViewControllerStack(this);
-		viewController.setViewControllerPanel(this.viewControllerPanel);
+		viewController.viewControllerStack = this;
+		viewController.viewControllerPanel = this.viewControllerPanel;
 		this.viewControllers.push(viewController);
 		
 		if (this.viewControllers.length == 1) {
@@ -91,7 +91,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(1).viewWillLeave();
 
 			if (transition) {
-				transition.startup(viewController);
+				transition.startup(viewController, this);
 				transition.chain(this.bound('onPushTransitionCompleted'));
 				transition.prepare('enter');
 				transition.execute('enter');

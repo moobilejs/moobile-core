@@ -11043,10 +11043,6 @@ Moobile.ViewController = new Class({
 
 	view: null,
 
-	viewControllerStack: null,
-
-	viewControllerPanel: null,
-
 	modalViewController: null,
 
 	transition: null,
@@ -11099,8 +11095,6 @@ Moobile.ViewController = new Class({
 		this.detachEvents();
 		this.view.destroy();
 		this.view = null;
-		this.viewControllerPanel = null;
-		this.viewControllerStack = null;
 		this.modalViewController = null;
 		this.transition = null;
 		this.window = null;
@@ -11120,24 +11114,6 @@ Moobile.ViewController = new Class({
 
 	getTitle: function() {
 		return this.view.getTitle();
-	},
-
-	setViewControllerStack: function(viewControllerStack) {
-		this.viewControllerStack = viewControllerStack;
-		return this;
-	},
-
-	getViewControllerStack: function() {
-		return this.viewControllerStack;
-	},
-
-	setViewControllerPanel: function(viewControllerPanel) {
-		this.viewControllerPanel = viewControllerPanel;
-		return this;
-	},
-
-	getViewControllerPanel: function() {
-		return this.viewControllerPanel;
 	},
 
 	presentModalViewController: function(viewController, viewControllerTransition) {
@@ -11269,8 +11245,8 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
-		viewController.setViewControllerStack(this);
-		viewController.setViewControllerPanel(this.viewControllerPanel);
+		viewController.viewControllerStack = this;
+		viewController.viewControllerPanel = this.viewControllerPanel;
 		this.viewControllers.push(viewController);
 		
 		if (this.viewControllers.length == 1) {
@@ -11295,7 +11271,7 @@ Moobile.ViewController.Stack = new Class({
 			this.viewControllers.getLast(1).viewWillLeave();
 
 			if (transition) {
-				transition.startup(viewController);
+				transition.startup(viewController, this);
 				transition.chain(this.bound('onPushTransitionCompleted'));
 				transition.prepare('enter');
 				transition.execute('enter');
@@ -11426,12 +11402,12 @@ Moobile.ViewController.Navigation = new Class({
 		if (navigationRightButton) {
 			navigationBar.setRightButton(navigationRightButton);
 		}
-
+	
 		var navigationBarTitle = viewController.getTitle();
 		if (navigationBarTitle) {
 			navigationBar.setTitle(navigationBarTitle);
 		}
-		
+				
 		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
 
 		this.parent(viewController, viewControllerTransition);
@@ -11476,9 +11452,9 @@ Moobile.ViewControllerTransition = new Class({
 
 	viewControllerStack: null,
 
-	startup: function(viewController) {
+	startup: function(viewController, viewControllerStack) {
 		this.viewController = viewController;
-		this.viewControllerStack = viewController.getViewControllerStack();
+		this.viewControllerStack = viewControllerStack;
 		this.attachEvents();
 		return this;
 	},
@@ -11551,9 +11527,9 @@ Moobile.ViewControllerTransition.Slide = new Class({
 
 	wrapper: null,
 
-	startup: function(viewController) {
-		this.wrapper = viewController.getViewControllerStack().view.getContent();
-		return this.parent(viewController);
+	startup: function(viewController, viewControllerStack) {
+		this.wrapper = viewControllerStack.view.getContent();
+		return this.parent(viewController, viewControllerStack);
 	},
 
 	attachEvents: function() {
@@ -11641,9 +11617,9 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 
 	wrapper: null,
 
-	startup: function(viewController) {
-		this.wrapper = viewController.getViewControllerStack().view.getContent();
-		return this.parent(viewController);
+	startup: function(viewController, viewControllerStack) {
+		this.wrapper = viewControllerStack.view.getContent();
+		return this.parent(viewController, viewControllerStack);
 	},
 
 	attachEvents: function() {
