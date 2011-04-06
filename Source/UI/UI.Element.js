@@ -48,6 +48,7 @@ UI.Element = new Class({
 
 	initialize: function(element, options) {
 		this.setElement(element);
+		this.setElementOptions();
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
 		this.setup();
@@ -76,6 +77,15 @@ UI.Element = new Class({
 	},
 
 	detachEvents: function() {
+		return this;
+	},
+
+	setElementOptions: function() {
+		var options = this.element.getProperty('data-options');
+		if (options) {
+			options = JSON.decode('{' + options + '}');
+			Object.append(this.options, options);
+		}
 		return this;
 	},
 
