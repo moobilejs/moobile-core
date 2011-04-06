@@ -22,19 +22,24 @@ UI.Control = new Class({
 
 	Extends: UI.Element,
 
-	disabled: false,
-
 	style: null,
-	
+
+	disabled: false,
+		
 	options: {
 		className: '',
-		styleName: ''
+		styleName: null
+	},
+
+	setup: function() {
+		if (this.options.styleName) this.setStyle(this.options.styleName);
+		return this.parent();
 	},
 
 	setStyle: function(style) {
-		this.removeCurrentStyle();
+		this.removeStyle();
 		this.style = style;
-		if (this.style.onAttach) this.style.onAttach.call(this);
+		this.style.onAttach.call(this);
 		this.addClass(this.style.className);
 		return this;
 	},
@@ -43,15 +48,12 @@ UI.Control = new Class({
 		return this.style;
 	},
 
-	removeStyle: function(style) {
-		if (style.onDetach) style.onDetach.call(this);
-		this.removeClass(this.style.className);
-		return this;
-	},
-
-	removeCurrentStyle: function() {
-		if (this.style) this.removeStyle(this.style);
-		this.style = null;
+	removeStyle: function() {
+		if (this.style) {
+			this.style.onDetach.call(this);
+			this.removeClass(this.style.className);
+			this.style = null;
+		}
 		return this;
 	},
 

@@ -9799,20 +9799,27 @@ UI.Control = new Class({
 
 	Extends: UI.Element,
 
-	disabled: false,
-
 	style: null,
-	
+
+	disabled: false,
+		
 	options: {
 		className: '',
-		styleName: ''
+		styleName: null
+	},
+
+	setup: function() {
+		this.setStyle(this.options.styleName);
+		return this.parent();
 	},
 
 	setStyle: function(style) {
 		this.removeCurrentStyle();
-		this.style = style;
-		if (this.style.onAttach) this.style.onAttach.call(this);
-		this.addClass(this.style.className);
+		if (style) {
+			this.style = style;
+			this.style.onAttach.call(this);
+			this.addClass(this.style.className);
+		}
 		return this;
 	},
 
@@ -9821,8 +9828,10 @@ UI.Control = new Class({
 	},
 
 	removeStyle: function(style) {
-		if (style.onDetach) style.onDetach.call(this);
-		this.removeClass(this.style.className);
+		if (style) {
+			style.onDetach.call(this);
+			this.removeClass(style.className);
+		}
 		return this;
 	},
 
@@ -10012,8 +10021,26 @@ provides:
 
 UI.NavigationBarStyle = {
 
-	NORMAL: {
-		className: '',
+	blueOpaque: {
+		className: 'style-blue-opaque',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	blueTranslucent: {
+		className: 'style-blue-translucent',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	blackOpaque: {
+		className: 'style-black-opaque',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	blackTranslucent: {
+		className: 'style-black-translucent',
 		onAttach: function() {},
 		onDetach: function() {}
 	}
@@ -10057,7 +10084,7 @@ UI.NavigationBar = new Class({
 
 	options: {
 		className: 'ui-navigation-bar',
-		styleName: UI.NavigationBarStyle.NORMAL
+		styleName: UI.NavigationBarStyle.blueTranslucent
 	},
 
 	setup: function() {
@@ -10115,19 +10142,19 @@ UI.NavigationBar = new Class({
 		return this;
 	},
 
-	setRightButton: function(button) {
-		this.removeRightButton();
-		this.rightButton = button;
-		this.rightButton.addClass(this.options.className + '-right');
-		this.rightButton.inject(this.wrapper);
-		return this;
-	},
-
 	removeLeftButton: function() {
 		if (this.leftButton) {
 			this.leftButton.destroy();
 			this.leftButton = null;
 		}
+		return this;
+	},
+
+	setRightButton: function(button) {
+		this.removeRightButton();
+		this.rightButton = button;
+		this.rightButton.addClass(this.options.className + '-right');
+		this.rightButton.inject(this.wrapper);
 		return this;
 	},
 

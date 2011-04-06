@@ -35,7 +35,7 @@ UI.NavigationBar = new Class({
 
 	options: {
 		className: 'ui-navigation-bar',
-		styleName: UI.NavigationBarStyle.NORMAL
+		styleName: UI.NavigationBarStyle.blueTranslucent
 	},
 
 	setup: function() {
@@ -93,19 +93,19 @@ UI.NavigationBar = new Class({
 		return this;
 	},
 
-	setRightButton: function(button) {
-		this.removeRightButton();
-		this.rightButton = button;
-		this.rightButton.addClass(this.options.className + '-right');
-		this.rightButton.inject(this.wrapper);
-		return this;
-	},
-
 	removeLeftButton: function() {
 		if (this.leftButton) {
 			this.leftButton.destroy();
 			this.leftButton = null;
 		}
+		return this;
+	},
+
+	setRightButton: function(button) {
+		this.removeRightButton();
+		this.rightButton = button;
+		this.rightButton.addClass(this.options.className + '-right');
+		this.rightButton.inject(this.wrapper);
 		return this;
 	},
 

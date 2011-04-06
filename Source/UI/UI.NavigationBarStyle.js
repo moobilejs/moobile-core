@@ -20,8 +20,26 @@ provides:
 
 UI.NavigationBarStyle = {
 
-	NORMAL: {
-		className: '',
+	blueOpaque: {
+		className: 'style-blue-opaque',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	blueTranslucent: {
+		className: 'style-blue-translucent',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	blackOpaque: {
+		className: 'style-black-opaque',
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	blackTranslucent: {
+		className: 'style-black-translucent',
 		onAttach: function() {},
 		onDetach: function() {}
 	}

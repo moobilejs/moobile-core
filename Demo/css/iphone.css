@@ -241,7 +241,8 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .ui-navigation-bar {
-	background: url(../images/ui-navigation-bar/translucent.png) no-repeat;
+	background-repeat: repeat-x;
+	background-position: top left;
 	height: 44px;							/* Important */
 	position: relative;						/* Important */
 	width: 100%;							/* Important */
@@ -273,6 +274,24 @@ p small {
 .ui-navigation-bar-right {
 	float: right;
 	position: relative;
+}
+
+/* UI Navigation Bar Styles */
+
+.ui-navigation-bar.style-blue-opaque {
+	background-image: url(../images/ui-navigation-bar-blue-opaque.png);
+}
+
+.ui-navigation-bar.style-blue-translucent {
+	background-image: url(../images/ui-navigation-bar-blue-translucent.png);
+}
+
+.ui-navigation-bar.style-black-opaque {
+	background-image: url(../images/ui-navigation-bar-black-opaque.png);
+}
+
+.ui-navigation-bar.style-black-translucent {
+	background-image: url(../images/ui-navigation-bar-black-translucent.png);
 }
 
 /* UI Bar Button
