@@ -9799,10 +9799,6 @@ UI.Control = new Class({
 
 	Extends: UI.Element,
 
-	window: null,
-
-	view: null,
-
 	disabled: false,
 
 	style: null,
@@ -9852,24 +9848,6 @@ UI.Control = new Class({
 
 	idDisabled: function() {
 		return this.disabled;
-	},
-
-	setWindow: function(window) {
-		this.window = window;
-		return this;
-	},
-
-	getWindow: function() {
-		return this.window;
-	},
-
-	setView: function(view) {
-		this.view = view;
-		return this;
-	},
-
-	getView: function() {
-		return this.view;
 	}
 
 });
@@ -10690,8 +10668,8 @@ Moobile.View = new Class({
 	},
 
 	pushChildControl: function(control) {
-		control.setView(this);
-		control.setWindow(this.window);
+		control.view = this;
+		control.window = this.window;
 		this.childControls.push(control);
 		return this;
 	},

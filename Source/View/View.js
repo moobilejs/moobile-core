@@ -176,8 +176,8 @@ Moobile.View = new Class({
 	},
 
 	pushChildControl: function(control) {
-		control.setView(this);
-		control.setWindow(this.window);
+		control.view = this;
+		control.window = this.window;
 		this.childControls.push(control);
 		return this;
 	},

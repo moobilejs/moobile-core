@@ -22,10 +22,6 @@ UI.Control = new Class({
 
 	Extends: UI.Element,
 
-	window: null,
-
-	view: null,
-
 	disabled: false,
 
 	style: null,
@@ -75,24 +71,6 @@ UI.Control = new Class({
 
 	idDisabled: function() {
 		return this.disabled;
-	},
-
-	setWindow: function(window) {
-		this.window = window;
-		return this;
-	},
-
-	getWindow: function() {
-		return this.window;
-	},
-
-	setView: function(view) {
-		this.view = view;
-		return this;
-	},
-
-	getView: function() {
-		return this.view;
 	}
 
 });
