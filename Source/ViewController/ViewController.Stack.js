@@ -41,23 +41,7 @@ Moobile.ViewController.Stack = new Class({
 	loadView: function(view) {
 		this.view = view || new Moobile.View.Stack(new Element('div'));
 	},
-
-	startup: function() {
-		return this.parent();
-	},
-
-	shutdown: function() {
-		return this.parent();
-	},
-
-	attachEvents: function() {
-		return this.parent();
-	},
-
-	detachEvents: function() {
-		return this.parent();
-	},
-
+	
 	pushViewControllerFrom: function(remote) {
 		this.viewControllerRequest.cancel();
 		this.viewControllerRequest.getViewController(remote);
