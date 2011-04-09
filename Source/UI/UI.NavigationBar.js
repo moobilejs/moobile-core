@@ -12,8 +12,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- UI.Control
-	- UI.NavigationBarStyle
+	- UI.Bar
 
 provides:
 	- UI.NavigationBar
@@ -23,73 +22,55 @@ provides:
 
 UI.NavigationBar = new Class({
 
-	Extends: UI.Control,
+	Extends: UI.Bar,
 
-	wrapper: null,
-
-	content: null,
+	caption: null,
 
 	leftButton: null,
 
 	rightButton: null,
 
 	options: {
-		className: 'ui-navigation-bar',
-		styleName: UI.NavigationBarStyle.blueTranslucent
+		className: 'ui-navigation-bar'
 	},
 
 	setup: function() {
-		this.injectContent();
-		this.injectWrapper();
-		return this.parent()
-	},
-
-	destroy: function() {
-		this.destroyContent();
-		this.destroyWrapper();
+		this.injectCaption();
 		return this.parent();
 	},
 
-	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
+	destroy: function() {
+		this.destroyCaption();
+		return this.parent();
+	},
+
+	injectCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.element.getContents());
 		this.element.empty();
-		this.element.adopt(this.wrapper);
+		this.element.adopt(this.caption);
 		return this;
 	},
 
-	destroyWrapper: function() {
-		this.wrapper.destroy();
-		this.wrapper = null;
-		return this;
-	},
-
-	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-		this.element.empty();
-		this.element.adopt(this.content);
-		return this;
-	},
-
-	destroyContent: function() {
-		this.content.destroy();
-		this.content = null;
+	destroyCaption: function() {
+		this.caption.destroy();
+		this.caption = null;
 		return this;
 	},
 
 	setTitle: function(title) {
-		this.content.set('html', title);
+		this.caption.set('html', title);
 		return this;
 	},
 
 	getTitle: function() {
-		return this.content.get('html');
+		return this.caption.get('html');
 	},
 
 	setLeftButton: function(button) {
 		this.removeLeftButton();
 		this.leftButton = button;
 		this.leftButton.addClass(this.options.className + '-left');
-		this.leftButton.inject(this.wrapper);
+		this.leftButton.inject(this.content);
 		return this;
 	},
 
@@ -105,7 +86,7 @@ UI.NavigationBar = new Class({
 		this.removeRightButton();
 		this.rightButton = button;
 		this.rightButton.addClass(this.options.className + '-right');
-		this.rightButton.inject(this.wrapper);
+		this.rightButton.inject(this.content);
 		return this;
 	},
 
@@ -114,18 +95,6 @@ UI.NavigationBar = new Class({
 			this.rightButton.destroy();
 			this.rightButton = null;
 		}
-		return this;
-	},
-
-	show: function() {
-		this.view.addClass(this.options.className + '-visible');
-		this.parent();
-		return this;
-	},
-
-	hide: function() {
-		this.view.removeClass(this.options.className + '-visible');
-		this.parent();
 		return this;
 	}
 

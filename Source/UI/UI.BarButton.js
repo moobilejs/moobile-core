@@ -26,7 +26,7 @@ UI.BarButton = new Class({
 
 	options: {
 		className: 'ui-bar-button',
-		styleName: UI.BarButtonStyle.NORMAL
+		styleName: UI.BarButtonStyle.Default
 	}	
 
 });

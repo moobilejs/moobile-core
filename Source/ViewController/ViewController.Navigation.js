@@ -36,7 +36,7 @@ Moobile.ViewController.Navigation = new Class({
 				var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
 				if (backButtonTitle) {
 					var navigationBackButton = new UI.BarButton();
-					navigationBackButton.setStyle(UI.BarButtonStyle.BACK);
+					navigationBackButton.setStyle(UI.BarButtonStyle.Back);
 					navigationBackButton.setText(backButtonTitle);
 					navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
 					navigationBar.setLeftButton(navigationBackButton);

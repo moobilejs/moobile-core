@@ -20,10 +20,10 @@ provides:
 
 UI.ButtonStyle = {
 
-	NORMAL: {
-		className: '',
-		onAttach: function() {},
-		onDetach: function() {}
+	Default: {
+		className: 'style-default',
+		attach: function() {},
+		detach: function() {}
 	}
 	
 };

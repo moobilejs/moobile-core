@@ -125,3 +125,85 @@ Demo.ViewController.Fx = new Class({
 		}
 	}
 });
+
+Demo.ViewController.UI = new Class({
+
+	Extends: Moobile.ViewController,
+
+	barStyleList: null,
+
+	barButtonStyleList: null,
+
+	barButton: null,
+
+	startup: function() {
+		this.barStyleList = this.view.barStyleList;
+		this.barButtonStyleList = this.view.barButtonStyleList;
+		return this.parent();
+	},
+
+	shutdown: function() {
+		this.barStyleList = null;
+		this.barButtonStyleList = null;
+		return this.parent();
+	},
+
+	attachEvents: function() {
+		this.barStyleList.addEvent(Event.SELECT, this.bound('onBarStyleListSelect'));
+		this.barButtonStyleList.addEvent(Event.SELECT, this.bound('onBarButtonStyleListSelect'));
+		return this.parent();
+	},
+
+	detachEvents: function() {
+		this.barStyleList.removeEvent(Event.SELECT, this.bound('onBarStyleListSelect'));
+		this.barButtonStyleList.removeEvent(Event.SELECT, this.bound('onBarButtonStyleListSelect'));
+		return this.parent();
+	},
+
+	onBarStyleListSelect: function(item) {
+		switch (item.name) {
+			case 'default-opaque':
+				this.navigationBar.setStyle(UI.BarStyle.DefaultOpaque);
+				break;
+			case 'default-translucent':
+				this.navigationBar.setStyle(UI.BarStyle.DefaultTranslucent);
+				break;
+			case 'black-opaque':
+				this.navigationBar.setStyle(UI.BarStyle.BlackOpaque);
+				break;
+			case 'black-translucent':
+				this.navigationBar.setStyle(UI.BarStyle.BlackTranslucent);
+				break;
+		}
+	},
+
+	onBarButtonStyleListSelect: function(item) {
+		switch (item.name) {
+			case 'default':
+				this.barButton.setStyle(UI.BarButtonStyle.Default);
+				break;
+			case 'active':
+				this.barButton.setStyle(UI.BarButtonStyle.Active);
+				break;
+			case 'black':
+				this.barButton.setStyle(UI.BarButtonStyle.Black);
+				break;
+			case 'warning':
+				this.barButton.setStyle(UI.BarButtonStyle.Warning);
+				break;
+			case 'back':
+				this.barButton.setStyle(UI.BarButtonStyle.Back);
+				break;
+			case 'forward':
+				this.barButton.setStyle(UI.BarButtonStyle.Forward);
+				break;
+		}
+	},
+
+	navigationBarRightButton: function() {
+		this.barButton = new UI.BarButton();
+		this.barButton.setText('Button');
+		return this.barButton;
+	}
+
+})

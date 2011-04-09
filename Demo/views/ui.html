@@ -1,9 +1,35 @@
-<div data-role="view" data-title="UI">
+<div data-title="UI" data-role="view"  data-controller="Demo.ViewController.UI">
 
 	<h2>User Interface Elements</h2>
 
 	<input type="button" value="Button (Input)" data-role="control" data-control="UI.Button" />
 
 	<div data-role="control" data-control="UI.Button">Button inside a div</div>
+	
+	<br />
+
+	<h3>Bar Styles:<h3>
+
+	<div data-role="control" data-control="UI.List" data-name="bar-style-list">
+		<ul>
+			<li data-role="list-item" data-name="default-opaque">Default Opaque</li>
+			<li data-role="list-item" data-name="default-translucent">Default Translucent</li>
+			<li data-role="list-item" data-name="black-opaque">Black Opaque</li>
+			<li data-role="list-item" data-name="black-translucent">Black Translucent</li>
+		</ul>
+	</div>
+
+	<h3>Bar Button Styles:</h3>
+
+	<div data-role="control" data-control="UI.List" data-name="bar-button-style-list">
+		<ul>
+			<li data-role="list-item" data-name="default">Default</li>
+			<li data-role="list-item" data-name="active">Active</li>
+			<li data-role="list-item" data-name="black">Black</li>
+			<li data-role="list-item" data-name="warning">Warning</li>
+			<li data-role="list-item" data-name="back">Back</li>
+			<li data-role="list-item" data-name="forward">Forward</li>
+		</ul>
+	</div>
 
 </div>

@@ -39,7 +39,7 @@ UI.Control = new Class({
 	setStyle: function(style) {
 		this.removeStyle();
 		this.style = style;
-		this.style.onAttach.call(this);
+		this.style.attach.call(this);
 		this.addClass(this.style.className);
 		return this;
 	},
@@ -50,7 +50,7 @@ UI.Control = new Class({
 
 	removeStyle: function() {
 		if (this.style) {
-			this.style.onDetach.call(this);
+			this.style.detach.call(this);
 			this.removeClass(this.style.className);
 			this.style = null;
 		}
@@ -71,8 +71,12 @@ UI.Control = new Class({
 		return this;
 	},
 
-	idDisabled: function() {
+	isDisabled: function() {
 		return this.disabled;
+	},
+
+	isNative: function() {
+		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
 	}
 
 });

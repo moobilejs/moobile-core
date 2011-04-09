@@ -24,22 +24,20 @@ UI.Button = new Class({
 
 	Extends: UI.Control,
 
-	value: false,
-
 	content: null,
 
 	options: {
 		className: 'ui-button',
-		styleName: UI.ButtonStyle.NORMAL
+		styleName: UI.ButtonStyle.Default
 	},
 
 	setup: function() {
-		if (this.isNative() == false) this.injectContent();
+		if (!this.isNative()) this.injectContent();
 		return this.parent();
 	},
 
 	destroy: function() {
-		if (this.isNative() == false) this.destroyContent();
+		if (!this.isNative()) this.destroyContent();
 		return this.parent();
 	},
 
@@ -77,10 +75,6 @@ UI.Button = new Class({
 			this.content.set('html', text);
 		}
 		return this;
-	},
-
-	isNative: function() {
-		return this.element.get('tag') == 'input';
 	},
 
 	onClick: function(e) {

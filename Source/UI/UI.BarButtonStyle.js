@@ -20,16 +20,40 @@ provides:
 
 UI.BarButtonStyle = {
 
-	NORMAL: {
-		className: '',
-		onAttach: function() {},
-		onDetach: function() {}
+	Default: {
+		className: 'style-default',
+		attach: function() {},
+		detach: function() {}
 	},
 
-	BACK: {
-		className: 'ui-bar-button-back',
-		onAttach: function() {},
-		onDetach: function() {}
+	Active: {
+		className: 'style-active',
+		attach: function() {},
+		detach: function() {}
+	},
+
+	Black: {
+		className: 'style-black',
+		attach: function() {},
+		detach: function() {}
+	},
+
+	Warning: {
+		className: 'style-warning',
+		attach: function() {},
+		detach: function() {}
+	},
+
+	Back: {
+		className: 'style-back',
+		attach: function() {},
+		detach: function() {}
+	},
+
+	Forward: {
+		className: 'style-forward',
+		attach: function() {},
+		detach: function() {}
 	}
 
 };

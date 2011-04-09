@@ -237,103 +237,6 @@ p small {
 	width: 200%;							/* Important */
 }
 
-/* UI Navigation Bar
------------------------------------------------------------------------------*/
-
-.ui-navigation-bar {
-	background-repeat: repeat-x;
-	background-position: top left;
-	height: 44px;							/* Important */
-	position: relative;						/* Important */
-	width: 100%;							/* Important */
-	z-index: 50;							/* Important */
-}
-
-.ui-navigation-bar-wrapper {
-	height: 44px;							/* Important */
-	width: 100%;							/* Important */
-}
-
-.ui-navigation-bar-content {
-	color: #ffffff;
-	font-size: 20px;
-	font-weight: bold;
-	height: 44px;
-	line-height: 44px;
-	position: absolute;
-	text-align: center;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-	width: 100%;
-}
-
-.ui-navigation-bar-left {
-	float: left;
-	position: relative;
-}
-
-.ui-navigation-bar-right {
-	float: right;
-	position: relative;
-}
-
-/* UI Navigation Bar Styles */
-
-.ui-navigation-bar.style-blue-opaque {
-	background-image: url(../images/ui-navigation-bar-blue-opaque.png);
-}
-
-.ui-navigation-bar.style-blue-translucent {
-	background-image: url(../images/ui-navigation-bar-blue-translucent.png);
-}
-
-.ui-navigation-bar.style-black-opaque {
-	background-image: url(../images/ui-navigation-bar-black-opaque.png);
-}
-
-.ui-navigation-bar.style-black-translucent {
-	background-image: url(../images/ui-navigation-bar-black-translucent.png);
-}
-
-/* UI Bar Button
------------------------------------------------------------------------------*/
-
-.ui-bar-button {
-	background:
-		url(../images/ui-bar-button/normal/left.png) no-repeat center left,
-		url(../images/ui-bar-button/normal/right.png) no-repeat center right;
-	cursor: pointer;
-	color: #ffffff;
-	float: left;
-	font-size: 12px;
-	font-weight: bold;
-	height: 44px;
-	line-height: 44px;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-right: 6px;
-	margin-left: 6px;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.ui-bar-button .ui-bar-button-content {
-	background: url(../images/ui-bar-button/normal/center.png) center center repeat-x;
-	display: block;
-	padding-left: 3px;
-	padding-right: 3px;
-}
-
-.ui-bar-button.ui-bar-button-back {
-	background:
-		url(../images/ui-bar-button/back/left.png) no-repeat center left,
-		url(../images/ui-bar-button/back/right.png) no-repeat center right;
-	padding-left: 12px;
-	padding-right: 5px;
-}
-
-.ui-bar-button.ui-bar-button-back .ui-bar-button-content {
-	background: url(../images/ui-bar-button/back/center.png) center center repeat-x;
-}
-
 /* UI Button
 -----------------------------------------------------------------------------*/
 
@@ -360,6 +263,157 @@ p small {
 	background-image: -moz-linear-gradient(center bottom, #058DF5 0%, #0160E6 100%);
 	color: #ffffff;
 	text-shadow: none;
+}
+
+/* UI Bar Button
+-----------------------------------------------------------------------------*/
+
+.ui-bar-button {
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-top: 7px;
+	margin-bottom: 5px;
+	overflow: hidden;
+	padding-left: 4px;
+	padding-right: 4px;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* UI Bar Button Styles */
+
+.ui-bar-button.style-default {
+	-webkit-border-image: url(../images/ui-bar-button.png) 0 5 330 repeat repeat;
+	border-width: 0px 5px;
+}
+
+.ui-bar-button.ui-bar-button-down.style-default {
+	-webkit-border-image: url(../images/ui-bar-button.png) 30 5 300 repeat repeat;
+	border-width: 0px 5px;
+}
+
+/* Active */
+
+.ui-bar-button.style-active {
+	-webkit-border-image: url(../images/ui-bar-button.png) 60 5 270 repeat repeat;
+	border-width: 0px 5px;
+}
+
+.ui-bar-button.ui-bar-button-down.style-active {
+	-webkit-border-image: url(../images/ui-bar-button.png) 90 5 240 repeat repeat;
+	border-width: 0px 5px;
+}
+
+/* Black */
+
+.ui-bar-button.style-black {
+	-webkit-border-image: url(../images/ui-bar-button.png) 120 5 210 repeat repeat;
+	border-width: 0px 5px;
+}
+
+.ui-bar-button.ui-bar-button-down.style-black {
+	-webkit-border-image: url(../images/ui-bar-button.png) 150 5 180 repeat repeat;
+	border-width: 0px 5px;
+}
+
+/* Warning */
+
+.ui-bar-button.style-warning {
+	-webkit-border-image: url(../images/ui-bar-button.png) 180 5 150 repeat repeat;
+	border-width: 0px 5px;
+}
+
+.ui-bar-button.ui-bar-button-down.style-warning {
+	-webkit-border-image: url(../images/ui-bar-button.png) 210 5 120 repeat repeat;
+	border-width: 0px 5px;
+}
+
+/* Back */
+
+.ui-bar-button.style-back {
+	-webkit-border-image: url(../images/ui-bar-button.png) 240 5 90 15 repeat repeat;
+	border-width: 0px 5px 0px 15px;
+	padding-left: 0px;
+	padding-right: 4px;
+}
+
+.ui-bar-button.ui-bar-button-down.style-back {
+	-webkit-border-image: url(../images/ui-bar-button.png) 270 5 60 15 repeat repeat;
+	border-width: 0px 5px 0px 15px;
+}
+
+/* Forward */
+
+.ui-bar-button.style-forward {
+	-webkit-border-image: url(../images/ui-bar-button.png) 300 15 30 5 repeat repeat;
+	border-width: 0px 15px 0px 5px;
+	padding-left: 4px;
+	padding-right: 0px;
+}
+
+.ui-bar-button.ui-bar-button-down.style-forward {
+	-webkit-border-image: url(../images/ui-bar-button.png) 330 15 0 5 repeat repeat;
+	border-width: 0px 15px 0px 5px;
+}
+
+/* UI Navigation Bar
+-----------------------------------------------------------------------------*/
+
+.ui-navigation-bar {
+	height: 44px;							/* Important */
+	position: relative;						/* Important */
+	width: 100%;							/* Important */
+	z-index: 50;							/* Important */
+}
+
+.ui-navigation-bar-content {
+	height: 44px;							/* Important */
+	width: 100%;							/* Important */
+}
+
+.ui-navigation-bar-caption {
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
+	height: 44px;							/* Important */
+	line-height: 44px;
+	position: absolute;
+	text-align: center;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+	width: 100%;							/* Important */
+}
+
+.ui-navigation-bar-left {
+	float: left;
+	position: relative;
+}
+
+.ui-navigation-bar-right {
+	float: right;
+	position: relative;
+}
+
+/* UI Navigation Bar Styles */
+
+.ui-navigation-bar.style-blue-opaque {
+	background: url(../images/ui-bar.png) no-repeat 0px 0px;
+}
+
+.ui-navigation-bar.style-blue-translucent {
+	background: url(../images/ui-bar.png) no-repeat 0px -44px;
+}
+
+.ui-navigation-bar.style-black-opaque {
+	background: url(../images/ui-bar.png) no-repeat 0px -88px;
+}
+
+.ui-navigation-bar.style-black-translucent {
+	background: url(../images/ui-bar.png) no-repeat 0px -132px;
 }
 
 /* UI List
@@ -460,17 +514,17 @@ p small {
 
 /* Navigation Bar On Enter */
 
-.transition-slide-enter .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+.transition-slide-enter .transition-slide-element-to-enter .ui-navigation-bar-content {
 	-webkit-transform: translateX(-75%);
 	opacity: 0;
 }
 
-.transition-slide-enter .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+.transition-slide-enter .transition-slide-element-to-leave .ui-navigation-bar-content {
 	-webkit-transform: translateX(0%);
 	opacity: 1;
 }
 
-.transition-slide-enter.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+.transition-slide-enter.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -478,7 +532,7 @@ p small {
 	opacity: 1;
 }
 
-.transition-slide-enter.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+.transition-slide-enter.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -488,17 +542,17 @@ p small {
 
 /* Navigation Bar On Leave */
 
-.transition-slide-leave .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+.transition-slide-leave .transition-slide-element-to-enter .ui-navigation-bar-content {
 	-webkit-transform: translateX(75%);
 	opacity: 0;
 }
 
-.transition-slide-leave .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+.transition-slide-leave .transition-slide-element-to-leave .ui-navigation-bar-content {
 	-webkit-transform: translateX(0);
 	opacity: 1;
 }
 
-.transition-slide-leave.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-wrapper {
+.transition-slide-leave.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -506,7 +560,7 @@ p small {
 	opacity: 1;
 }
 
-.transition-slide-leave.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-wrapper {
+.transition-slide-leave.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
