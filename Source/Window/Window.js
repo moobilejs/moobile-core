@@ -42,7 +42,6 @@ Moobile.Window = new Class({
 	setup: function() {
 		this.options.wrapper = false;
 		this.options.content = false;
-		this.position();
 		return this.parent();
 	},
 

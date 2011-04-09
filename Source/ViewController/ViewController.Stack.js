@@ -54,10 +54,19 @@ Moobile.ViewController.Stack = new Class({
 		this.viewControllers.push(viewController);
 		
 		if (this.viewControllers.length == 1) {
+			
+			this.view.fade('hide');
+			this.view.show();
+
 			this.view.addChildView(viewController.view);
 			viewController.doStartup();
 			viewController.viewWillEnter();
 			viewController.viewDidEnter();
+
+			this.view.fade('show');
+
+			this.window.position.delay(50);
+
 		} else {
 
 			this.window.disableUserInput();
@@ -150,6 +159,16 @@ Moobile.ViewController.Stack = new Class({
 	orientationDidChange: function(orientation) {
 		this.viewControllers.each(function(viewController) { viewController.orientationDidChange(orientation) });
 		return this.parent();
+	},
+
+	/* Prevent default behavior */
+
+	viewWillEnter: function() {
+		return this;
+	},
+
+	viewDidEnter: function() {
+		return this;
 	}
 
 });
