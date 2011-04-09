@@ -39,6 +39,7 @@ sources:
   - "Source/View/View.js"
   - "Source/View/View.Scroll.js"
   - "Source/View/View.Stack.js"
+  - "Source/View/View.Navigation.js"
   - "Source/ViewController/ViewController.js"
   - "Source/ViewController/ViewController.Stack.js"
   - "Source/ViewController/ViewController.Navigation.js"

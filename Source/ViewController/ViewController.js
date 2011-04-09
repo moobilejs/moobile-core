@@ -150,14 +150,6 @@ Moobile.ViewController = new Class({
 		this.view.removeFromParentView();
 		this.view.didRemove();
 		return this;
-	},
-	
-	navigationBarLeftButton: function() {
-		return null;
-	},
-
-	navigationBarRightButton: function() {
-		return null;
 	}
 
 });

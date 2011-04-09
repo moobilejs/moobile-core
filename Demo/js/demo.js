@@ -139,6 +139,11 @@ Demo.ViewController.UI = new Class({
 	startup: function() {
 		this.barStyleList = this.view.barStyleList;
 		this.barButtonStyleList = this.view.barButtonStyleList;
+
+		this.barButton = new UI.BarButton();
+		this.barButton.setText('Button');
+		this.navigationBar.setRightButton(this.barButton);
+
 		return this.parent();
 	},
 
@@ -198,12 +203,6 @@ Demo.ViewController.UI = new Class({
 				this.barButton.setStyle(UI.BarButtonStyle.Forward);
 				break;
 		}
-	},
-
-	navigationBarRightButton: function() {
-		this.barButton = new UI.BarButton();
-		this.barButton.setText('Button');
-		return this.barButton;
 	}
 
 })
