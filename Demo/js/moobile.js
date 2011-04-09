@@ -9509,9 +9509,14 @@ Moobile.Request.ViewController = new Class({
 		if (element) {
 
 			var v = this.createInstanceFrom(element, 'data-view', this.options.defaultView, element);
-			var c = this.createInstanceFrom(element, 'data-controller', this.options.defaultController, v);
-			var t = this.createInstanceFrom(element, 'data-transition', this.options.defaultTransition);
-
+			var c = this.createInstanceFrom(element, 'data-view-controller', this.options.defaultController, v);
+			var t = this.createInstanceFrom(element, 'data-view-controller-transition', this.options.defaultTransition);
+trace(
+	element,
+	element.getProperty('data-view'),
+	element.getProperty('data-view-controller'),
+	element.getProperty('data-view-controller-transition')
+);
 			c.setTransition(t);
 
 			this.viewControllerStack.pushViewController(c, t);
