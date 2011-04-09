@@ -57,6 +57,7 @@ Moobile.ViewController = new Class({
 		if (this.started == false) {
 			this.started = true;
 			this.startup();
+			this.attachEvents();
 		}
 		return this;
 	},
@@ -64,6 +65,7 @@ Moobile.ViewController = new Class({
 	doShutdown: function() {
 		if (this.started == true) {
 			this.started = false;
+			this.detachEvents();
 			this.shutdown();
 		}
 		return this;
@@ -71,12 +73,10 @@ Moobile.ViewController = new Class({
 
 	startup: function() {
 		this.window = this.view.getWindow();
-		this.attachEvents();
 		return this;
 	},
 
 	shutdown: function() {
-		this.detachEvents();
 		this.view.destroy();
 		this.view = null;
 		this.modalViewController = null;
