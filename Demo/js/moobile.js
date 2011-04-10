@@ -11885,7 +11885,6 @@ Moobile.Window = new Class({
 	},
 
 	position: function() {
-		alert(document.body.getSize().y);
 		var fn = function() { window.scrollTo(0, 0) };
 		fn.delay(100);
 		return this;
