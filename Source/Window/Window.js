@@ -110,8 +110,8 @@ Moobile.Window = new Class({
 	},
 
 	position: function() {
-		var fn = function() { window.scrollTo(0, 1) };
-		fn.delay(50);
+		var fn = function() { window.scrollTo(0, 0) };
+		fn.delay(100);
 		return this;
 	},
 

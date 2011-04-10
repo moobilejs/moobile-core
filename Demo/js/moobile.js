@@ -11341,7 +11341,7 @@ Moobile.ViewControllerStack = new Class({
 
 			this.view.fade('show');
 
-			this.window.position.delay(50);
+			this.window.position();
 
 		} else {
 
@@ -11885,8 +11885,9 @@ Moobile.Window = new Class({
 	},
 
 	position: function() {
-		var fn = function() { window.scrollTo(0, 1) };
-		fn.delay(50);
+		alert(document.body.getSize().y);
+		var fn = function() { window.scrollTo(0, 0) };
+		fn.delay(100);
 		return this;
 	},
 

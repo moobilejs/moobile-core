@@ -65,7 +65,7 @@ Moobile.ViewControllerStack = new Class({
 
 			this.view.fade('show');
 
-			this.window.position.delay(50);
+			this.window.position();
 
 		} else {
 

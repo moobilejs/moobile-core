@@ -162,13 +162,30 @@ p small {
 	width: 320px;						/* Important */
 }
 
-@media screen and (min-width: 321px) {
+/* Landscape */
+@media screen and (width: 480px) and (height: 300px) {
 	.window {
 		height: 300px;					
 		width: 480px;
 	}
 	.window-input-mask {
 		height: 300px;
+		width: 480px;
+	}
+}
+
+/* Safari Mobile Portrait */
+@media screen and (width:320px) and (height: 356px) {
+	.window {
+		height: 416px;
+		width: 320px;
+	}
+}
+
+/* Safari Mobile Landscape */
+@media screen and (width: 480px) and (height: 208px) {
+	.window {
+		height: 268px;
 		width: 480px;
 	}
 }
@@ -208,10 +225,27 @@ p small {
 	padding-top: 44px;						/* Important */
 }
 
-@media screen and (min-width: 321px) {
+/* Landscape */
+@media screen and (width: 480px) and (height: 300px) {
 	.view {
-		height: 300px;						
-		width: 480px;						
+		height: 300px;
+		width: 480px;
+	}
+}
+
+/* Safari Mobile Portrait */
+@media screen and (width:320px) and (height: 356px) {
+	.view {
+		height: 416px;
+		width: 320px;
+	}
+}
+
+/* Safari Mobile Landscape */
+@media screen and (width: 480px) and (height: 208px) {
+	.view {
+		height: 268px;
+		width: 480px;
 	}
 }
 
@@ -273,9 +307,6 @@ p small {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	cursor: pointer;
-	color: #ffffff;
-	font-size: 12px;
-	font-weight: bold;
 	height: 30px;
 	line-height: 30px;
 	margin-left: 6px;
@@ -285,8 +316,21 @@ p small {
 	overflow: hidden;
 	padding-left: 4px;
 	padding-right: 4px;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 	user-select: none;
+}
+
+.ui-bar-button-content {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: bold;
+	max-width: 50px;
+	overflow: hidden;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+	text-overflow: ellipsis;
+	user-select: none;
+	white-space: nowrap;
 }
 
 /* UI Bar Button Styles */
