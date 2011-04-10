@@ -1,7 +1,7 @@
 /*
 ---
 
-name: View.Navigation
+name: NavigationView
 
 description: Provide a view for the navigation view controller.
 
@@ -11,20 +11,20 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- View.Stack
+	- ViewStack
 
 provides:
-	- View.Navigation
+	- NavigationView
 
 ...
 */
 
-Moobile.View.Navigation = new Class({
+Moobile.ViewStack.Navigation = new Class({
 
-	Extends: Moobile.View.Stack,
+	Extends: Moobile.ViewStack,
 
 	options: {
-		className: 'navigation-view'
+		className: 'navigation-view-stack'
 	}
 
 });

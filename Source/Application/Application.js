@@ -55,7 +55,7 @@ Moobile.Application = new Class({
 	},
 
 	createViewControllerStack: function() {
-		return new Moobile.ViewController.Stack();
+		return new Moobile.ViewControllerStack();
 	},
 
 	destroyWindow: function() {

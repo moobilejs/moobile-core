@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewController.Stack
+name: ViewControllerStack
 
 description: Provides a way to navigate from view to view and comming back.
 
@@ -16,12 +16,12 @@ requires:
 	- ViewController
 
 provides:
-	- ViewController.Stack
+	- ViewControllerStack
 
 ...
 */
 
-Moobile.ViewController.Stack = new Class({
+Moobile.ViewControllerStack = new Class({
 
 	Extends: Moobile.ViewController,
 
@@ -39,7 +39,7 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Stack(new Element('div'));
+		this.view = view || new Moobile.ViewStack(new Element('div'));
 	},
 	
 	pushViewControllerFrom: function(remote) {

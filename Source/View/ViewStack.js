@@ -1,7 +1,7 @@
 /*
 ---
 
-name: View.Stack
+name: ViewStack
 
 description: Provide the view that will contains the view controller stack
              child views. This view must have a wrapper that will be double
@@ -17,24 +17,24 @@ requires:
 	- View
 
 provides:
-	- View.Stack
+	- ViewStack
 
 ...
 */
 
-Moobile.View.Stack = new Class({
+Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
 
 	options: {
-		className: 'stack-view'
+		className: 'view-stack'
 	},
 
 	setup: function() {
 		this.parent();
-		this.element.addClass('stack-view');
-		this.wrapper.addClass('stack-view-wrapper');
-		this.content.addClass('stack-view-content');
+		this.element.addClass('view-stack');
+		this.wrapper.addClass('view-stack-wrapper');
+		this.content.addClass('view-stack-content');
 		return this;
 	}
 

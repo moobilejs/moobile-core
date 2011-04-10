@@ -1,7 +1,7 @@
 /*
 ---
 
-name: UI.NavigationBar
+name: UI.Bar.Navigation
 
 description: Provide the navigation bar control that contains a title and two
              areas for buttons.
@@ -15,12 +15,12 @@ requires:
 	- UI.Bar
 
 provides:
-	- UI.NavigationBar
+	- UI.Bar.Navigation
 
 ...
 */
 
-UI.NavigationBar = new Class({
+UI.Bar.Navigation = new Class({
 
 	Extends: UI.Bar,
 

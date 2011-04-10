@@ -24,7 +24,7 @@ Moobile.Application.iPhone = new Class({
 	Extends: Moobile.Application,
 
 	createViewControllerStack: function() {
-		return new Moobile.ViewController.Navigation();
+		return new Moobile.ViewControllerStack.Navigation();
 	}
 
 })

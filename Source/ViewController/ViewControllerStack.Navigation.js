@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewController.Navigation
+name: ViewControllerStack.Navigation
 
 description: Provide navigation function to the view controller stack such as
              a navigation bar and navigation bar buttons.
@@ -12,25 +12,25 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- ViewController.Stack
+	- ViewControllerStack
 
 provides:
-	- ViewController.Navigation
+	- ViewControllerStack.Navigation
 
 ...
 */
 
-Moobile.ViewController.Navigation = new Class({
+Moobile.ViewControllerStack.Navigation = new Class({
 
-	Extends: Moobile.ViewController.Stack,
+	Extends: Moobile.ViewControllerStack,
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Navigation(new Element('div'));
+		this.view = view || new Moobile.ViewStack.Navigation(new Element('div'));
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
 		
-		var navigationBar = new UI.NavigationBar();
+		var navigationBar = new UI.Bar.Navigation();
 
 		viewController.view.addChildControl(navigationBar, 'top');
 

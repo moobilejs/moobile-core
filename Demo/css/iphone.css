@@ -215,10 +215,10 @@ p small {
 	}
 }
 
-/* Stack View
+/* View Stack
 -----------------------------------------------------------------------------*/
 
-.stack-view {
+.view-stack {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-o-box-sizing: border-box;
@@ -227,12 +227,12 @@ p small {
 	width: 100%;							/* Important */
 }
 
-.stack-view-wrapper {
+.view-stack-wrapper {
 	height: 100%;							/* Important */
 	width: 100%;							/* Important */
 }
 
-.stack-view-content {
+.view-stack-content {
 	height: 100%;							/* Important */
 	width: 200%;							/* Important */
 }

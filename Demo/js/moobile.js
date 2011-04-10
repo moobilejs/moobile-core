@@ -9341,7 +9341,7 @@ Moobile.Application = new Class({
 	},
 
 	createViewControllerStack: function() {
-		return new Moobile.ViewController.Stack();
+		return new Moobile.ViewControllerStack();
 	},
 
 	destroyWindow: function() {
@@ -9397,7 +9397,7 @@ Moobile.Application.iPhone = new Class({
 	Extends: Moobile.Application,
 
 	createViewControllerStack: function() {
-		return new Moobile.ViewController.Navigation();
+		return new Moobile.ViewControllerStack.Navigation();
 	}
 
 })
@@ -9511,12 +9511,7 @@ Moobile.Request.ViewController = new Class({
 			var v = this.createInstanceFrom(element, 'data-view', this.options.defaultView, element);
 			var c = this.createInstanceFrom(element, 'data-view-controller', this.options.defaultController, v);
 			var t = this.createInstanceFrom(element, 'data-view-controller-transition', this.options.defaultTransition);
-trace(
-	element,
-	element.getProperty('data-view'),
-	element.getProperty('data-view-controller'),
-	element.getProperty('data-view-controller-transition')
-);
+
 			c.setTransition(t);
 
 			this.viewControllerStack.pushViewController(c, t);
@@ -10116,7 +10111,7 @@ UI.Bar = new Class({
 /*
 ---
 
-name: UI.NavigationBar
+name: UI.Bar.Navigation
 
 description: Provide the navigation bar control that contains a title and two
              areas for buttons.
@@ -10130,12 +10125,12 @@ requires:
 	- UI.Bar
 
 provides:
-	- UI.NavigationBar
+	- UI.Bar.Navigation
 
 ...
 */
 
-UI.NavigationBar = new Class({
+UI.Bar.Navigation = new Class({
 
 	Extends: UI.Bar,
 
@@ -11049,7 +11044,7 @@ Moobile.View.Scroll = new Class({
 /*
 ---
 
-name: View.Stack
+name: ViewStack
 
 description: Provide the view that will contains the view controller stack
              child views. This view must have a wrapper that will be double
@@ -11065,24 +11060,24 @@ requires:
 	- View
 
 provides:
-	- View.Stack
+	- ViewStack
 
 ...
 */
 
-Moobile.View.Stack = new Class({
+Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
 
 	options: {
-		className: 'stack-view'
+		className: 'view-stack'
 	},
 
 	setup: function() {
 		this.parent();
-		this.element.addClass('stack-view');
-		this.wrapper.addClass('stack-view-wrapper');
-		this.content.addClass('stack-view-content');
+		this.element.addClass('view-stack');
+		this.wrapper.addClass('view-stack-wrapper');
+		this.content.addClass('view-stack-content');
 		return this;
 	}
 
@@ -11091,7 +11086,7 @@ Moobile.View.Stack = new Class({
 /*
 ---
 
-name: View.Navigation
+name: NavigationView
 
 description: Provide a view for the navigation view controller.
 
@@ -11101,20 +11096,20 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- View.Stack
+	- ViewStack
 
 provides:
-	- View.Navigation
+	- NavigationView
 
 ...
 */
 
-Moobile.View.Navigation = new Class({
+Moobile.ViewStack.Navigation = new Class({
 
-	Extends: Moobile.View.Stack,
+	Extends: Moobile.ViewStack,
 
 	options: {
-		className: 'navigation-view'
+		className: 'navigation-view-stack'
 	}
 
 });
@@ -11221,6 +11216,10 @@ Moobile.ViewController = new Class({
 		return this.view.getTitle();
 	},
 
+	presetModalViewControllerFrom: function(url) {
+		return this;
+	},
+
 	presentModalViewController: function(viewController, viewControllerTransition) {
 		// TODO: implementation
 		return this;
@@ -11278,7 +11277,7 @@ Moobile.ViewController = new Class({
 /*
 ---
 
-name: ViewController.Stack
+name: ViewControllerStack
 
 description: Provides a way to navigate from view to view and comming back.
 
@@ -11293,12 +11292,12 @@ requires:
 	- ViewController
 
 provides:
-	- ViewController.Stack
+	- ViewControllerStack
 
 ...
 */
 
-Moobile.ViewController.Stack = new Class({
+Moobile.ViewControllerStack = new Class({
 
 	Extends: Moobile.ViewController,
 
@@ -11316,7 +11315,7 @@ Moobile.ViewController.Stack = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Stack(new Element('div'));
+		this.view = view || new Moobile.ViewStack(new Element('div'));
 	},
 	
 	pushViewControllerFrom: function(remote) {
@@ -11453,7 +11452,7 @@ Moobile.ViewController.Stack = new Class({
 /*
 ---
 
-name: ViewController.Navigation
+name: ViewControllerStack.Navigation
 
 description: Provide navigation function to the view controller stack such as
              a navigation bar and navigation bar buttons.
@@ -11464,25 +11463,25 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- ViewController.Stack
+	- ViewControllerStack
 
 provides:
-	- ViewController.Navigation
+	- ViewControllerStack.Navigation
 
 ...
 */
 
-Moobile.ViewController.Navigation = new Class({
+Moobile.ViewControllerStack.Navigation = new Class({
 
-	Extends: Moobile.ViewController.Stack,
+	Extends: Moobile.ViewControllerStack,
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Navigation(new Element('div'));
+		this.view = view || new Moobile.ViewStack.Navigation(new Element('div'));
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
 		
-		var navigationBar = new UI.NavigationBar();
+		var navigationBar = new UI.Bar.Navigation();
 
 		viewController.view.addChildControl(navigationBar, 'top');
 

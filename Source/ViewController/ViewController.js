@@ -100,6 +100,10 @@ Moobile.ViewController = new Class({
 		return this.view.getTitle();
 	},
 
+	presetModalViewControllerFrom: function(url) {
+		return this;
+	},
+
 	presentModalViewController: function(viewController, viewControllerTransition) {
 		// TODO: implementation
 		return this;
