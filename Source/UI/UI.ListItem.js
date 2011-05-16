@@ -19,9 +19,9 @@ provides:
 ...
 */
 
-UI.ListItem = new Class({
+Moobile.UI.ListItem = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	wrapper: null,
 

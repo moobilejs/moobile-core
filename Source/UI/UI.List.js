@@ -20,9 +20,9 @@ provides:
 ...
 */
 
-UI.List = new Class({
+Moobile.UI.List = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	items: [],
 
@@ -57,7 +57,7 @@ UI.List = new Class({
 	},
 
 	attachItem: function(element) {
-		var item = new UI.ListItem(element);
+		var item = new Moobile.UI.ListItem(element);
 		item.setSelectable(this.options.selectable);
 		item.addEvent(Event.SELECT, this.bound('onSelect'));
 		item.addEvent(Event.DESELECT, this.bound('onDeselect'));

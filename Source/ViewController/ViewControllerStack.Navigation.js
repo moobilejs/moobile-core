@@ -29,27 +29,27 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
-		
-		var navigationBar = new UI.Bar.Navigation();
+
+		var navigationBar = new Moobile.UI.Bar.Navigation();
 
 		viewController.view.addChildControl(navigationBar, 'top');
 
 		if (this.viewControllers.length > 0) {
 			var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
 			if (backButtonTitle) {
-				var navigationBackButton = new UI.BarButton();
-				navigationBackButton.setStyle(UI.BarButtonStyle.Back);
+				var navigationBackButton = new Moobile.UI.BarButton();
+				navigationBackButton.setStyle(Moobile.UI.BarButtonStyle.Back);
 				navigationBackButton.setText(backButtonTitle);
 				navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
 				navigationBar.setLeftButton(navigationBackButton);
 			}
 		}
-	
+
 		var navigationBarTitle = viewController.getTitle();
 		if (navigationBarTitle) {
 			navigationBar.setTitle(navigationBarTitle);
 		}
-				
+
 		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
 
 		return this.parent(viewController, viewControllerTransition);

@@ -73,3 +73,5 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 window.Moobile.version = '0.1.0dev';
 window.Moobile.build = '%build%';
+
+window.Moobile.UI = {};

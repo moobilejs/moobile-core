@@ -1,5 +1,5 @@
 Controls:
- - UI.Button
+ - Moobile.UI.Button
  - UI.List
  - UI.ListItem
 

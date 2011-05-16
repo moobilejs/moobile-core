@@ -18,9 +18,9 @@ provides:
 ...
 */
 
-UI.Control = new Class({
+Moobile.UI.Control = new Class({
 
-	Extends: UI.Element,
+	Extends: Moobile.UI.Element,
 
 	style: null,
 

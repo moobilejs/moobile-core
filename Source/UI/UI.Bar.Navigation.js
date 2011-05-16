@@ -20,9 +20,9 @@ provides:
 ...
 */
 
-UI.Bar.Navigation = new Class({
+Moobile.UI.Bar.Navigation = new Class({
 
-	Extends: UI.Bar,
+	Extends: Moobile.UI.Bar,
 
 	caption: null,
 

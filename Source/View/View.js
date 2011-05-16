@@ -22,7 +22,7 @@ provides:
 
 Moobile.View = new Class({
 
-	Extends: UI.Element,
+	Extends: Moobile.UI.Element,
 
 	window: null,
 
@@ -140,7 +140,7 @@ Moobile.View = new Class({
 	},
 
 	removeFromParentView: function() {
-		var parent = this.parentView || this.window;
+		var parent = this.parentView || this.window;
 		if (parent) parent.removeChildView(this);
 		return this;
 	},
@@ -151,7 +151,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildControl: function(element) {
-		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
+		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
 		this.pushChildControl(control);
 		this.bindChildControl(control);
 		return this;
@@ -185,7 +185,7 @@ Moobile.View = new Class({
 	bindChildControl: function(control) {
 		if (control.name) {
 			control.member = control.name.camelize();
-			if (this[control.member] == null || this[control.member] == undefined) {
+			if (this[control.member] == null || this[control.member] == undefined) {
 				this[control.member] = control;
 			}
 		}
@@ -272,7 +272,7 @@ Moobile.View = new Class({
 	},
 
 	getTitle: function() {
-		return this.element.getProperty('data-title') || this.options.title;
+		return this.element.getProperty('data-title') || this.options.title;
 	},
 
 	getWrapper: function() {
@@ -301,7 +301,7 @@ Moobile.View = new Class({
 	},
 
 	adopt: function() {
-		var content = this.content || this.element;
+		var content = this.content || this.element;
 		content.adopt.apply(content, arguments);
 		return this;
 	},
@@ -314,8 +314,8 @@ Moobile.View = new Class({
 			return this;
 		}
 
-		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
-				
+		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
+
 		return this;
 	},
 

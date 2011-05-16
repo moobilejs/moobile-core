@@ -20,15 +20,15 @@ provides:
 ...
 */
 
-UI.Button = new Class({
+Moobile.UI.Button = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	content: null,
 
 	options: {
 		className: 'ui-button',
-		styleName: UI.ButtonStyle.Default
+		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
 	setup: function() {

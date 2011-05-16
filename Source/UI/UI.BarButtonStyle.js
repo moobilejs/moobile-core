@@ -18,7 +18,7 @@ provides:
 ...
 */
 
-UI.BarButtonStyle = {
+Moobile.UI.BarButtonStyle = {
 
 	Default: {
 		className: 'style-default',

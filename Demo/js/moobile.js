@@ -9284,6 +9284,8 @@ if (!window.Moobile) window.Moobile = {};
 window.Moobile.version = '0.1.0dev';
 window.Moobile.build = '%build%';
 
+window.Moobile.UI = {};
+
 /*
 ---
 
@@ -9644,7 +9646,7 @@ provides:
 
 if (!window.UI) window.UI = {};
 
-UI.Element = new Class({
+Moobile.UI.Element = new Class({
 
 	Implements: [
 		Events,
@@ -9795,9 +9797,9 @@ provides:
 ...
 */
 
-UI.Control = new Class({
+Moobile.UI.Control = new Class({
 
-	Extends: UI.Element,
+	Extends: Moobile.UI.Element,
 
 	style: null,
 
@@ -9878,7 +9880,7 @@ provides:
 ...
 */
 
-UI.ButtonStyle = {
+Moobile.UI.ButtonStyle = {
 
 	Default: {
 		className: 'style-default',
@@ -9911,15 +9913,15 @@ provides:
 ...
 */
 
-UI.Button = new Class({
+Moobile.UI.Button = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	content: null,
 
 	options: {
 		className: 'ui-button',
-		styleName: UI.ButtonStyle.Default
+		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
 	setup: function() {
@@ -10010,7 +10012,7 @@ provides:
 ...
 */
 
-UI.BarStyle = {
+Moobile.UI.BarStyle = {
 
 	DefaultOpaque: {
 		className: 'style-blue-opaque',
@@ -10060,15 +10062,15 @@ provides:
 ...
 */
 
-UI.Bar = new Class({
+Moobile.UI.Bar = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	content: null,
 
 	options: {
 		className: 'ui-bar',
-		styleName: UI.BarStyle.DefaultOpaque
+		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
 	setup: function() {
@@ -10130,9 +10132,9 @@ provides:
 ...
 */
 
-UI.Bar.Navigation = new Class({
+Moobile.UI.Bar.Navigation = new Class({
 
-	Extends: UI.Bar,
+	Extends: Moobile.UI.Bar,
 
 	caption: null,
 
@@ -10230,7 +10232,7 @@ provides:
 ...
 */
 
-UI.BarButtonStyle = {
+Moobile.UI.BarButtonStyle = {
 
 	Default: {
 		className: 'style-default',
@@ -10292,13 +10294,13 @@ provides:
 ...
 */
 
-UI.BarButton = new Class({
+Moobile.UI.BarButton = new Class({
 
-	Extends: UI.Button,
+	Extends: Moobile.UI.Button,
 
 	options: {
 		className: 'ui-bar-button',
-		styleName: UI.BarButtonStyle.Default
+		styleName: Moobile.UI.BarButtonStyle.Default
 	}	
 
 });
@@ -10324,9 +10326,9 @@ provides:
 ...
 */
 
-UI.ListItem = new Class({
+Moobile.UI.ListItem = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	wrapper: null,
 
@@ -10451,9 +10453,9 @@ provides:
 ...
 */
 
-UI.List = new Class({
+Moobile.UI.List = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	items: [],
 
@@ -10488,7 +10490,7 @@ UI.List = new Class({
 	},
 
 	attachItem: function(element) {
-		var item = new UI.ListItem(element);
+		var item = new Moobile.UI.ListItem(element);
 		item.setSelectable(this.options.selectable);
 		item.addEvent(Event.SELECT, this.bound('onSelect'));
 		item.addEvent(Event.DESELECT, this.bound('onDeselect'));
@@ -10595,7 +10597,7 @@ provides:
 
 Moobile.View = new Class({
 
-	Extends: UI.Element,
+	Extends: Moobile.UI.Element,
 
 	window: null,
 
@@ -10713,7 +10715,7 @@ Moobile.View = new Class({
 	},
 
 	removeFromParentView: function() {
-		var parent = this.parentView || this.window;
+		var parent = this.parentView || this.window;
 		if (parent) parent.removeChildView(this);
 		return this;
 	},
@@ -10724,7 +10726,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildControl: function(element) {
-		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
+		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
 		this.pushChildControl(control);
 		this.bindChildControl(control);
 		return this;
@@ -10758,7 +10760,7 @@ Moobile.View = new Class({
 	bindChildControl: function(control) {
 		if (control.name) {
 			control.member = control.name.camelize();
-			if (this[control.member] == null || this[control.member] == undefined) {
+			if (this[control.member] == null || this[control.member] == undefined) {
 				this[control.member] = control;
 			}
 		}
@@ -10845,7 +10847,7 @@ Moobile.View = new Class({
 	},
 
 	getTitle: function() {
-		return this.element.getProperty('data-title') || this.options.title;
+		return this.element.getProperty('data-title') || this.options.title;
 	},
 
 	getWrapper: function() {
@@ -10874,7 +10876,7 @@ Moobile.View = new Class({
 	},
 
 	adopt: function() {
-		var content = this.content || this.element;
+		var content = this.content || this.element;
 		content.adopt.apply(content, arguments);
 		return this;
 	},
@@ -10887,8 +10889,8 @@ Moobile.View = new Class({
 			return this;
 		}
 
-		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
-				
+		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
+
 		return this;
 	},
 
@@ -11480,27 +11482,27 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
-		
-		var navigationBar = new UI.Bar.Navigation();
+
+		var navigationBar = new Moobile.UI.Bar.Navigation();
 
 		viewController.view.addChildControl(navigationBar, 'top');
 
 		if (this.viewControllers.length > 0) {
 			var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
 			if (backButtonTitle) {
-				var navigationBackButton = new UI.BarButton();
-				navigationBackButton.setStyle(UI.BarButtonStyle.Back);
+				var navigationBackButton = new Moobile.UI.BarButton();
+				navigationBackButton.setStyle(Moobile.UI.BarButtonStyle.Back);
 				navigationBackButton.setText(backButtonTitle);
 				navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
 				navigationBar.setLeftButton(navigationBackButton);
 			}
 		}
-	
+
 		var navigationBarTitle = viewController.getTitle();
 		if (navigationBarTitle) {
 			navigationBar.setTitle(navigationBarTitle);
 		}
-				
+
 		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
 
 		return this.parent(viewController, viewControllerTransition);
@@ -11841,7 +11843,6 @@ Moobile.ViewControllerTransition.Fade = new Class({
 	},
 
 	onTransitionComplete: function(e) {
-		trace('completed');
 		if (this.running && e.target == this.element) {
 			this.element.removeClass('transition-fade');
 			this.element.removeClass('transition-fade-enter');

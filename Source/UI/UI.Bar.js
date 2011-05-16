@@ -20,15 +20,15 @@ provides:
 ...
 */
 
-UI.Bar = new Class({
+Moobile.UI.Bar = new Class({
 
-	Extends: UI.Control,
+	Extends: Moobile.UI.Control,
 
 	content: null,
 
 	options: {
 		className: 'ui-bar',
-		styleName: UI.BarStyle.DefaultOpaque
+		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
 	setup: function() {

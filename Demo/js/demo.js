@@ -144,7 +144,7 @@ Demo.ViewController.UI = new Class({
 		this.barStyleList = this.view.barStyleList;
 		this.barButtonStyleList = this.view.barButtonStyleList;
 
-		this.barButton = new UI.BarButton();
+		this.barButton = new Moobile.UI.BarButton();
 		this.barButton.setText('Button');
 		this.navigationBar.setRightButton(this.barButton);
 
@@ -172,16 +172,16 @@ Demo.ViewController.UI = new Class({
 	onBarStyleListSelect: function(item) {
 		switch (item.name) {
 			case 'default-opaque':
-				this.navigationBar.setStyle(UI.BarStyle.DefaultOpaque);
+				this.navigationBar.setStyle(Moobile.UI.BarStyle.DefaultOpaque);
 				break;
 			case 'default-translucent':
-				this.navigationBar.setStyle(UI.BarStyle.DefaultTranslucent);
+				this.navigationBar.setStyle(Moobile.UI.BarStyle.DefaultTranslucent);
 				break;
 			case 'black-opaque':
-				this.navigationBar.setStyle(UI.BarStyle.BlackOpaque);
+				this.navigationBar.setStyle(Moobile.UI.BarStyle.BlackOpaque);
 				break;
 			case 'black-translucent':
-				this.navigationBar.setStyle(UI.BarStyle.BlackTranslucent);
+				this.navigationBar.setStyle(Moobile.UI.BarStyle.BlackTranslucent);
 				break;
 		}
 	},
@@ -189,22 +189,22 @@ Demo.ViewController.UI = new Class({
 	onBarButtonStyleListSelect: function(item) {
 		switch (item.name) {
 			case 'default':
-				this.barButton.setStyle(UI.BarButtonStyle.Default);
+				this.barButton.setStyle(Moobile.UI.BarButtonStyle.Default);
 				break;
 			case 'active':
-				this.barButton.setStyle(UI.BarButtonStyle.Active);
+				this.barButton.setStyle(Moobile.UI.BarButtonStyle.Active);
 				break;
 			case 'black':
-				this.barButton.setStyle(UI.BarButtonStyle.Black);
+				this.barButton.setStyle(Moobile.UI.BarButtonStyle.Black);
 				break;
 			case 'warning':
-				this.barButton.setStyle(UI.BarButtonStyle.Warning);
+				this.barButton.setStyle(Moobile.UI.BarButtonStyle.Warning);
 				break;
 			case 'back':
-				this.barButton.setStyle(UI.BarButtonStyle.Back);
+				this.barButton.setStyle(Moobile.UI.BarButtonStyle.Back);
 				break;
 			case 'forward':
-				this.barButton.setStyle(UI.BarButtonStyle.Forward);
+				this.barButton.setStyle(Moobile.UI.BarButtonStyle.Forward);
 				break;
 		}
 	}

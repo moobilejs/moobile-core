@@ -18,7 +18,7 @@ provides:
 ...
 */
 
-UI.BarStyle = {
+Moobile.UI.BarStyle = {
 
 	DefaultOpaque: {
 		className: 'style-blue-opaque',

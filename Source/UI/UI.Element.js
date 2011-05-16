@@ -30,7 +30,7 @@ provides:
 
 if (!window.UI) window.UI = {};
 
-UI.Element = new Class({
+Moobile.UI.Element = new Class({
 
 	Implements: [
 		Events,

@@ -18,7 +18,7 @@ provides:
 ...
 */
 
-UI.ButtonStyle = {
+Moobile.UI.ButtonStyle = {
 
 	Default: {
 		className: 'style-default',

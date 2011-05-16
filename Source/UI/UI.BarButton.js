@@ -20,13 +20,13 @@ provides:
 ...
 */
 
-UI.BarButton = new Class({
+Moobile.UI.BarButton = new Class({
 
-	Extends: UI.Button,
+	Extends: Moobile.UI.Button,
 
 	options: {
 		className: 'ui-bar-button',
-		styleName: UI.BarButtonStyle.Default
+		styleName: Moobile.UI.BarButtonStyle.Default
 	}	
 
 });
