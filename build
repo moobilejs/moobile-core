@@ -8,16 +8,6 @@ require dirname(__FILE__) . '/Packager/packager.php';
 $executable = array_shift($argv);
 $package = dirname(__FILE__);
 
-$pkg = new Packager(array(
-	$package,
-	dirname(__FILE__) . "/Vendor/mootools-core",
-	dirname(__FILE__) . "/Vendor/mootools-more",
-	dirname(__FILE__) . "/Vendor/mootools-extras",
-	dirname(__FILE__) . "/Vendor/mootools-custom-event",
-	dirname(__FILE__) . "/Vendor/mootools-mobile",
-	dirname(__FILE__) . "/Vendor/mootools-class-extras",
-));
-
 $selected = array(
 	'components' => array(),
 	'files' => array(),
@@ -29,36 +19,43 @@ $selected = array(
 
 $build = 'components';
 
+$wihtout_core_more = false;
+
 foreach ($argv as $arg){
 
 	if ($arg == '+packages'){
 		$build = 'add-packages';
 		continue;
 	}
-	
+
 	if ($arg == '-blocks'){
 		$build = 'blocks';
 		continue;
 	}
-	
+
 	if ($arg == '+use-only'){
 		$build = 'use-only';
 		if ($selected['use-only'] == null) $selected['use-only'] = array();
 		continue;
 	}
-	
+
 	if ($arg == '-packages'){
 		$build = 'remove-packages';
 		continue;
 	}
-	
+
 	if ($arg == '+components'){
 		$build = 'components';
 		continue;
 	}
-	
+
 	if ($arg == '+files'){
 		$build = 'files';
+		continue;
+	}
+
+	if ($arg == '-without-core-more') {
+		$wihtout_core_more = true;
 		continue;
 	}
 
@@ -88,6 +85,22 @@ foreach ($files as $file){
 	}
 }
 
+$pkgs = array(
+	$package,
+	dirname(__FILE__) . "/Vendor/mootools-core",
+	dirname(__FILE__) . "/Vendor/mootools-more",
+	dirname(__FILE__) . "/Vendor/mootools-extras",
+	dirname(__FILE__) . "/Vendor/mootools-custom-event",
+	dirname(__FILE__) . "/Vendor/mootools-mobile",
+	dirname(__FILE__) . "/Vendor/mootools-class-extras",
+);
+
+if ($wihtout_core_more) {
+	unset($pkgs[1]);
+	unset($pkgs[2]);
+}
+
+$pkg = new Packager($pkgs);
 $pkg->validate($files, $components, $wildcards);
 
 foreach ($components as $component){
