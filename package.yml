@@ -46,4 +46,5 @@ sources:
   - "Source/ViewControllerTransition/ViewControllerTransition.js"
   - "Source/ViewControllerTransition/ViewControllerTransition.Slide.js"
   - "Source/ViewControllerTransition/ViewControllerTransition.Cubic.js"
+  - "Source/ViewControllerTransition/ViewControllerTransition.Fade.js"
   - "Source/Window/Window.js"

@@ -147,25 +147,26 @@ p small {
 	background-image: url(../images/mootools.png);
 	background-repeat: no-repeat;
 	background-position: center center;
-	height: 460px;						/* Important */
-	overflow: hidden;					/* Important */
-	width: 320px;						/* Important */
+	height: 460px;							/* Important */
+	overflow: hidden;						/* Important */
+	width: 320px;							/* Important */
 }
 
 .window-mask {
-	background: #ffffff;				/* Important */
-	height: 460px;						/* Important */
-	left: 0px;							/* Important */
-	opacity: 0;							/* Important */
-	position: absolute;					/* Important */
-	top: 0px;							/* Important */
-	width: 320px;						/* Important */
+	background: #ffffff;					/* Important */
+	height: 460px;							/* Important */
+	left: 0px;								/* Important */
+	opacity: 0;								/* Important */
+	position: absolute;						/* Important */
+	top: 0px;								/* Important */
+	width: 320px;							/* Important */
+	z-index: 1000;							/* Important */
 }
 
 /* Landscape */
 @media screen and (width: 480px) and (height: 300px) {
 	.window {
-		height: 300px;					
+		height: 300px;
 		width: 480px;
 	}
 	.window-input-mask {
@@ -194,6 +195,7 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .view {
+	-webkit-backface-visibility: hidden;	/* Important */
 	-webkit-box-sizing: border-box;			/* Important */
 	background-image: url(../images/background-striped.png);
 	float: left;							/* Important */
@@ -529,6 +531,26 @@ p small {
 	height: 45px;
 	line-height: 45px;
 	text-align: center;
+}
+
+/* Transition - Fade
+-----------------------------------------------------------------------------*/
+
+.transition-fade-enter { opacity: 1; position: absolute; z-index: 100; }
+.transition-fade-leave { opacity: 0; position: absolute; z-index: 100; }
+
+.transition-fade-enter.commit-transition {
+	-webkit-transition-property: all;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	opacity: 0;
+}
+
+.transition-fade-leave.commit-transition {
+	-webkit-transition-property: all;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	opacity: 1;
 }
 
 /* Transition - Slide

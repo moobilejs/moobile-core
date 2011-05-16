@@ -38,23 +38,27 @@ Demo.ViewController.Home = new Class({
 				this.viewControllerStack.pushViewControllerFrom('transition-slide.html');
 				break;
 
-			case 'transition-cubic': 
+			case 'transition-cubic':
 				this.viewControllerStack.pushViewControllerFrom('transition-cubic.html');
 				break;
 
-			case 'ui': 
+			case 'transition-fade':
+				this.viewControllerStack.pushViewControllerFrom('transition-fade.html');
+				break;
+
+			case 'ui':
 				this.viewControllerStack.pushViewControllerFrom('ui.html');
 				break;
 
 			case 'fx':
 				this.viewControllerStack.pushViewControllerFrom('fx.html');
 				break;
-			
+
 			case 'licence':
 				this.viewControllerStack.pushViewControllerFrom('licence.html');
 				break;
 		}
-		
+
 		this.list.clearSelectedItems();
 	}
 });
