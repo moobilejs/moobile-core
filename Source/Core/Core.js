@@ -43,7 +43,11 @@ requires:
 	- More/Object.Extras
 	- More/String.Extras
 	- Extras/Console.Trace
+	- Extras/Class.Element
+	- Extras/Class.Binds
 	- Extras/Class.Extras
+	- Extras/Class.Mutator.Protected
+	- Extras/Class.Mutator.Static
 	- Extras/Element.Extras
 	- Extras/Element.Properties
 	- Extras/Selector.Apply
@@ -53,7 +57,6 @@ requires:
 	- Extras/Fx.CSS3
 	- Extras/Fx.CSS3.Tween
 	- Extras/Fx.CSS3.Morph
-	- Class-Extras/Class.Binds
 	- Mobile/Click
 	- Mobile/Pinch
 	- Mobile/Swipe
