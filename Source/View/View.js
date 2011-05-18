@@ -48,19 +48,27 @@ Moobile.View = new Class({
 	setup: function() {
 		if (this.options.wrapper) this.injectContent();
 		if (this.options.content) this.injectWrapper();
-		this.attachChildElements();
-		this.attachChildControls();
 		return this.parent();
 	},
 
 	destroy: function() {
+		this.destroyChildElements();
+		this.destroyChildControls();	
+		this.destroyChildViews();
 		if (this.options.content) this.destroyContent();
 		if (this.options.wrapper) this.destroyWrapper();
-		this.destroyChildViews();
-		this.destroyChildElements();
-		this.destroyChildControls();
 		this.parent();
 		return this;
+	},
+	
+	startup: function() {
+		this.attachChildElements();
+		this.attachChildControls();	
+		return this;
+	},
+	
+	shutdown: function() {
+		return this.destroy();
 	},
 
 	attachEvents: function() {

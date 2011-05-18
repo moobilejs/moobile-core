@@ -72,12 +72,13 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
+		this.view.startup();
 		this.window = this.view.getWindow();
 		return this;
 	},
 
 	shutdown: function() {
-		this.view.destroy();
+		this.view.shutdown();
 		this.view = null;
 		this.modalViewController = null;
 		this.transition = null;

@@ -36,13 +36,13 @@ Moobile.View.Scroll = new Class({
 	
 	scrolled: null,
 
-	setup: function() {
+	startup: function() {
 		this.parent();
 		this.attachScroller();
 		return this;
 	},
-
-	destroy: function() {
+	
+	shutdown: function() {
 		this.detachScroller();
 		this.parent();
 		return this;

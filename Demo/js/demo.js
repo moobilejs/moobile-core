@@ -9,13 +9,15 @@ Demo.ViewController.Home = new Class({
 	list: null,
 
 	startup: function() {
+		this.parent();
 		this.list = this.view.list;
-		return this.parent();
+		return this;
 	},
 
 	shutdown: function() {
 		this.list = null;
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	attachEvents: function() {
