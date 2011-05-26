@@ -53,20 +53,20 @@ Moobile.View = new Class({
 
 	destroy: function() {
 		this.destroyChildElements();
-		this.destroyChildControls();	
+		this.destroyChildControls();
 		this.destroyChildViews();
 		if (this.options.content) this.destroyContent();
 		if (this.options.wrapper) this.destroyWrapper();
 		this.parent();
 		return this;
 	},
-	
+
 	startup: function() {
 		this.attachChildElements();
-		this.attachChildControls();	
+		this.attachChildControls();
 		return this;
 	},
-	
+
 	shutdown: function() {
 		return this.destroy();
 	},
@@ -318,7 +318,7 @@ Moobile.View = new Class({
 
 		if (context) {
 			context = document.id(context);
-			context.inject(element, where);
+			element.inject(context, where);
 			return this;
 		}
 

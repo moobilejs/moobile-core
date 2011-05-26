@@ -86,6 +86,10 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
+	isStarted: function() {
+		return this.started;
+	},
+
 	getId: function() {
 		if (this.identifier == null) {
 			this.identifier = String.uniqueID();

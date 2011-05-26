@@ -30,11 +30,10 @@ Moobile.Request.ViewController = new Class({
 
 	viewControllerStack: null,
 
+	viewControllerCache: {},
+
 	options: {
-		method: 'get',
-		defaultView: 'Moobile.View.Scroll',
-		defaultController: 'Moobile.ViewController',
-		defaultTransition: 'Moobile.ViewControllerTransition.Slide'
+		method: 'get'
 	},
 
 	initialize: function(viewControllerStack, options) {
@@ -45,36 +44,64 @@ Moobile.Request.ViewController = new Class({
 	},
 
 	attachEvents: function() {
-		this.addEvent('success', this.bound('gotViewController'));
+		this.addEvent('success', this.bound('onViewControlleRequestSuccess'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.removeEvent('success', this.bound('gotViewController'));
+		this.removeEvent('success', this.bound('onViewControlleRequestSuccess'));
 		return this;
 	},
 
-	getViewController: function(remote, fn) {
+	loadViewController: function(remote, fn) {
+
+		this.addEvent('load:once', fn);
+
+		var cached = this.getViewControllerCache(remote);
+		if (cached) {
+			this.fireEvent('load', cached);
+			return this;
+		}
+
+		this.setViewControllerCache(remote, null);
 		this.options.url = remote;
 		this.send();
+
 		return this;
 	},
 
-	gotViewController: function(response) {
+	setViewControllerCache: function(remote, viewController) {
+		this.viewControllerCache[remote] = viewController;
+		return this;
+	},
 
-		var element = new Element('div')
-			.ingest(response)
-			.getElement('[data-role=view]');
+	getViewControllerCache: function(remote) {
+		return this.hasViewControllerCache(remote) ? this.viewControllerCache[remote] : null;
+	},
+
+	hasViewControllerCache: function(remote) {
+		return this.viewControllerCache[remote] && this.viewControllerCache[remote].isStarted();
+	},
+
+	onViewControlleRequestSuccess: function(response) {
+
+		var element = new Element('div').ingest(response).getElement('[data-role=view]');
 
 		if (element) {
 
-			var v = this.createInstanceFrom(element, 'data-view', this.options.defaultView, element);
-			var c = this.createInstanceFrom(element, 'data-view-controller', this.options.defaultController, v);
-			var t = this.createInstanceFrom(element, 'data-view-controller-transition', this.options.defaultTransition);
+			var defaultView = this.viewControllerStack.getDefaultViewClass();
+			var defaultViewController = this.viewControllerStack.getDefaultViewControllerClass();
+			var defaultViewControllerTransition = this.viewControllerStack.getDefaultViewControllerTransitionClass();
+
+			var v = this.createInstanceFrom(element, 'data-view', defaultView, element);
+			var c = this.createInstanceFrom(element, 'data-view-controller', defaultViewController, v);
+			var t = this.createInstanceFrom(element, 'data-view-controller-transition', defaultViewControllerTransition);
 
 			c.setTransition(t);
 
-			this.viewControllerStack.pushViewController(c, t);
+			this.setViewControllerCache(this.options.url, c);
+
+			this.fireEvent('load', c);
 
 			return this;
 		}
@@ -85,11 +112,11 @@ Moobile.Request.ViewController = new Class({
 	},
 
 	createInstanceFrom: function(element, attribute, defaults) {
-		var property = element.getProperty(attribute) || defaults;
+		var prop = element.getProperty(attribute) || defaults;
 		var args = Array.prototype.slice.call(arguments, 3);
-		args.add(property);
-		var instance = Class.from.apply(Class, args);
-		return instance;
+		args.add(prop);
+		var inst = Class.from.apply(Class, args);
+		return inst;
 	}
 
 });

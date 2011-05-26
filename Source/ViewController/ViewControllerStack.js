@@ -28,7 +28,7 @@ Moobile.ViewControllerStack = new Class({
 	topViewController: null,
 
 	viewControllers: [],
-	
+
 	viewControllerRequest: null,
 
 	initialize: function(view) {
@@ -41,20 +41,32 @@ Moobile.ViewControllerStack = new Class({
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack(new Element('div'));
 	},
-	
-	pushViewControllerFrom: function(remote) {
+
+	pushViewControllerFrom: function(viewControllerRemote, viewControllerTransition) {
 		this.viewControllerRequest.cancel();
-		this.viewControllerRequest.getViewController(remote);
+		this.viewControllerRequest.loadViewController(
+			viewControllerRemote,
+			function(viewController) {
+				this.pushViewController(viewController, viewControllerTransition);
+			}.bind(this)
+		);
 		return this;
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
-		viewController.viewControllerStack = this;
-		viewController.viewControllerPanel = this.viewControllerPanel;
-		this.viewControllers.push(viewController);
-		
+
+		var viewControllerIndex = this.viewControllers.indexOf(viewController);
+		if (viewControllerIndex == -1) {
+			viewController.viewControllerStack = this;
+			viewController.viewControllerPanel = this.viewControllerPanel;
+			this.viewControllers.push(viewController);
+		} else {
+			this.viewControllers.remove(viewController);
+			this.viewControllers.push(viewController);
+		}
+
 		if (this.viewControllers.length == 1) {
-			
+
 			this.view.fade('hide');
 			this.view.show();
 
@@ -75,7 +87,7 @@ Moobile.ViewControllerStack = new Class({
 			if (transition && typeOf(transition) == 'class') {
 				transition = Class.instanciate(transition);
 			}
-			
+
 			this.view.addChildView(viewController.view);
 			viewController.setTransition(transition);
 			viewController.doStartup();
@@ -110,7 +122,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	popViewController: function() {
-		if (this.viewControllers.length) {
+		if (this.viewControllers.length > 1) {
 			this.viewControllers.getLast(1).viewWillEnter();
 			this.viewControllers.getLast(0).viewWillLeave();
 
@@ -130,6 +142,29 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
+	popViewControllerUntil: function(viewController) {
+		if (this.viewControllers.length > 1) {
+
+			this.window.disableUserInput();
+
+			var index = this.viewControllers.indexOf(viewController);
+			if (index > -1) {
+				for (var i = this.viewControllers.length - 2; i >= index; i--) {
+					var removedViewController = this.viewControllers[i];
+					removedViewController.viewWillLeave();
+					removedViewController.viewDidLeave();
+					removedViewController.viewDidRemove();
+					removedViewController.doShutdown();
+					this.viewControllers.splice(i, 1);
+				}
+			}
+
+			this.popViewController();
+		}
+
+		return this;
+	},
+
 	onPopTransitionCompleted: function() {
 		this.viewControllers.getLast(1)
 			.viewDidEnter();
@@ -140,12 +175,16 @@ Moobile.ViewControllerStack = new Class({
 			.doShutdown();
 
 		this.window.enableUserInput();
-		
+
 		return this;
 	},
 
 	getViewControllers: function() {
 		return this.viewControllers;
+	},
+
+	getViewControllersCount: function() {
+		return this.viewControllers.length;
 	},
 
 	getViewControllerAt: function(offset) {
@@ -154,6 +193,18 @@ Moobile.ViewControllerStack = new Class({
 
 	getTopViewController: function() {
 		return this.topViewController;
+	},
+
+	getDefaultViewClass: function() {
+		return 'Moobile.View';
+	},
+
+	getDefaultViewControllerClass: function() {
+		return 'Moobile.ViewController';
+	},
+
+	getDefaultViewControllerTransitionClass: function() {
+		return 'Moobile.ViewControllerTransition.Slide';
 	},
 
 	orientationDidChange: function(orientation) {

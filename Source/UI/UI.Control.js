@@ -25,7 +25,7 @@ Moobile.UI.Control = new Class({
 	style: null,
 
 	disabled: false,
-		
+
 	options: {
 		className: '',
 		styleName: null
@@ -62,10 +62,10 @@ Moobile.UI.Control = new Class({
 			this.disabled = disabled;
 			if (this.disabled) {
 				this.addClass(this.options.className + '-disabled');
-				this.attachEvents();
+				this.detachEvents();
 			} else {
 				this.removeClass(this.options.className + '-disabled');
-				this.detachEvents();
+				this.attachEvents();
 			}
 		}
 		return this;
