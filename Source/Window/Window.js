@@ -39,10 +39,11 @@ Moobile.Window = new Class({
 		className: 'window'
 	},
 
-	setup: function() {
+	initialize: function(element, options) {
+		this.parent(element, options);
 		this.options.wrapper = false;
 		this.options.content = false;
-		return this.parent();
+		return this;
 	},
 
 	attachEvents: function() {
@@ -60,7 +61,7 @@ Moobile.Window = new Class({
 		this.addChildView(this.viewController.view);
 		this.viewController.view.setParentView(null);
 		this.viewController.view.setWindow(this);
-		this.viewController.doStartup();
+		this.viewController.activate();
 		this.viewController.viewWillEnter();
 		this.viewController.viewDidEnter();
 		return this;

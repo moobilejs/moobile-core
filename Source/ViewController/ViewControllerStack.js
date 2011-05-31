@@ -59,11 +59,11 @@ Moobile.ViewControllerStack = new Class({
 		if (viewControllerIndex == -1) {
 			viewController.viewControllerStack = this;
 			viewController.viewControllerPanel = this.viewControllerPanel;
-			this.viewControllers.push(viewController);
 		} else {
 			this.viewControllers.remove(viewController);
-			this.viewControllers.push(viewController);
 		}
+
+		this.viewControllers.push(viewController);
 
 		if (this.viewControllers.length == 1) {
 
@@ -71,7 +71,7 @@ Moobile.ViewControllerStack = new Class({
 			this.view.show();
 
 			this.view.addChildView(viewController.view);
-			viewController.doStartup();
+			viewController.activate();
 			viewController.viewWillEnter();
 			viewController.viewDidEnter();
 
@@ -90,7 +90,7 @@ Moobile.ViewControllerStack = new Class({
 
 			this.view.addChildView(viewController.view);
 			viewController.setTransition(transition);
-			viewController.doStartup();
+			viewController.activate();
 			viewController.viewWillEnter();
 
 			this.viewControllers.getLast(1).viewWillLeave();
@@ -149,12 +149,12 @@ Moobile.ViewControllerStack = new Class({
 
 			var index = this.viewControllers.indexOf(viewController);
 			if (index > -1) {
-				for (var i = this.viewControllers.length - 2; i >= index; i--) {
+				for (var i = this.viewControllers.length - 2; i > index; i--) {
 					var removedViewController = this.viewControllers[i];
 					removedViewController.viewWillLeave();
 					removedViewController.viewDidLeave();
 					removedViewController.viewDidRemove();
-					removedViewController.doShutdown();
+					removedViewController.deactivate();
 					this.viewControllers.splice(i, 1);
 				}
 			}
@@ -172,7 +172,7 @@ Moobile.ViewControllerStack = new Class({
 			.viewDidLeave();
 		this.viewControllers.pop()
 			.viewDidRemove()
-			.doShutdown();
+			.deactivate();
 
 		this.window.enableUserInput();
 

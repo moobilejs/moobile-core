@@ -33,7 +33,7 @@ Moobile.ViewController = new Class({
 
 	identifier: null,
 
-	started: false,
+	activated: false,
 
 	initialize: function(view) {
 		this.loadView(view);
@@ -41,7 +41,7 @@ Moobile.ViewController = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View.Scroll(new Element('div'));
+		this.view = view || new Moobile.View(new Element('div'));
 		return this;
 	},
 
@@ -53,18 +53,18 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	doStartup: function() {
-		if (this.started == false) {
-			this.started = true;
+	activate: function() {
+		if (this.activated == false) {
+			this.activated = true;
 			this.startup();
 			this.attachEvents();
 		}
 		return this;
 	},
 
-	doShutdown: function() {
-		if (this.started == true) {
-			this.started = false;
+	deactivate: function() {
+		if (this.activated == true) {
+			this.activated = false;
 			this.detachEvents();
 			this.shutdown();
 		}
@@ -72,13 +72,13 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
-		this.view.startup();
+		this.view.activate();
 		this.window = this.view.getWindow();
 		return this;
 	},
 
 	shutdown: function() {
-		this.view.shutdown();
+		this.view.deactivate();
 		this.view = null;
 		this.modalViewController = null;
 		this.transition = null;

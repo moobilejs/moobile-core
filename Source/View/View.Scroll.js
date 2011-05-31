@@ -27,13 +27,13 @@ Moobile.View.Scroll = new Class({
 	},
 
 	Extends: Moobile.View,
-		
+
 	contentSize: null,
 
 	scroller: null,
-	
+
 	scrollerUpdateInterval: null,
-	
+
 	scrolled: null,
 
 	startup: function() {
@@ -41,7 +41,7 @@ Moobile.View.Scroll = new Class({
 		this.attachScroller();
 		return this;
 	},
-	
+
 	shutdown: function() {
 		this.detachScroller();
 		this.parent();
@@ -89,7 +89,7 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller) {
 			if (this.contentSize != this.content.getScrollSize().y) {
 				this.contentSize = this.content.getScrollSize().y;
-				var extent = this.getContentExtent();				
+				var extent = this.getContentExtent();
 				this.wrapper.setStyle('height', extent.y);
 				this.wrapper.setStyle('min-height', extent.y);
 				this.content.setStyle('min-height', extent.y);
@@ -118,5 +118,5 @@ Moobile.View.Scroll = new Class({
 	onDocumentTouchMove: function(e) {
 		e.preventDefault();
 	}
-   
+
 });

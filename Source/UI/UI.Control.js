@@ -22,18 +22,19 @@ Moobile.UI.Control = new Class({
 
 	Extends: Moobile.UI.Element,
 
-	style: null,
-
 	disabled: false,
+
+	style: null,
 
 	options: {
 		className: '',
 		styleName: null
 	},
 
-	setup: function() {
+	assemble: function() {
+		this.parent();
 		if (this.options.styleName) this.setStyle(this.options.styleName);
-		return this.parent();
+		return this;
 	},
 
 	setStyle: function(style) {

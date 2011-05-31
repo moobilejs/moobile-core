@@ -3,8 +3,7 @@
 
 name: UI.Element
 
-description: Provide a refactorized UI.Element class where the initialize call
-             the setup method before attaching events.
+description: Provides an element handled by a view.
 
 license: MIT-style license.
 
@@ -51,7 +50,7 @@ Moobile.UI.Element = new Class({
 		this.setElementOptions();
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
-		this.setup();
+		this.assemble();
 		this.attachEvents();
 		return this;
 	},
@@ -60,15 +59,13 @@ Moobile.UI.Element = new Class({
 		return new Element('div');
 	},
 
-	setup: function() {
+	assemble: function() {
 		this.name = this.element.getProperty('data-name');
 		return this;
 	},
 
-	destroy: function() {
-		this.detachEvents();
-		this.element.destroy();
-		this.element = null;
+	dismantle: function() {
+		this.name = null;
 		return this;
 	},
 
@@ -83,8 +80,7 @@ Moobile.UI.Element = new Class({
 	setElementOptions: function() {
 		var options = this.element.getProperty('data-options');
 		if (options) {
-			options = JSON.decode('{' + options + '}');
-			Object.append(this.options, options);
+			Object.append(this.options,  JSON.decode('{' + options + '}'));
 		}
 		return this;
 	},
@@ -156,6 +152,14 @@ Moobile.UI.Element = new Class({
 
 	dispose: function() {
 		this.element.dispose();
+		return this;
+	},
+
+	destroy: function() {
+		this.detachEvents();
+		this.dismantle();
+		this.element.destroy();
+		this.element = null;
 		return this;
 	}
 

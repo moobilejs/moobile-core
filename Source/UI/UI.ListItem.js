@@ -32,20 +32,16 @@ Moobile.UI.ListItem = new Class({
 		selectable: true
 	},
 
-	initialize: function(element, options) {
-		this.parent(element, options);
-		this.selectable = this.options.selectable;
+	assemble: function() {
+		this.parent();
+		this.injectWrapper();
 		return this;
 	},
 
-	setup: function() {
-		this.injectWrapper();
-		return this.parent();
-	},
-
-	destroy: function() {
-		this.injectWrapper();
-		return this.parent();
+	dismantle: function() {
+		this.destroyWrapper();
+		this.parent();
+		return this;
 	},
 
 	injectWrapper: function() {
@@ -65,14 +61,16 @@ Moobile.UI.ListItem = new Class({
 		this.element.addEvent(Event.CLICK, this.bound('onClick'));
 		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
 		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	detachEvents: function() {
 		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
 		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
 		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	setSelectable: function(selectable) {
@@ -92,7 +90,7 @@ Moobile.UI.ListItem = new Class({
 			} else {
 				this.removeClass(this.options.className + '-selected');
 				this.fireEvent(Event.DESELECT, this);
-			}			
+			}
 		}
 		return this;
 	},
@@ -110,14 +108,14 @@ Moobile.UI.ListItem = new Class({
 
 	onMouseDown: function(e) {
 		e.target = this;
-		this.fireEvent(Event.MOUSE_DOWN, e);		
+		this.fireEvent(Event.MOUSE_DOWN, e);
 		if (this.options.selectable) this.element.addClass(this.options.className + '-down');
 		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
-		this.fireEvent(Event.MOUSE_UP, e);		
+		this.fireEvent(Event.MOUSE_UP, e);
 		if (this.options.selectable) this.element.removeClass(this.options.className + '-down');
 		return this;
 	}

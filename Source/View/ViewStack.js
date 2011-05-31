@@ -30,7 +30,7 @@ Moobile.ViewStack = new Class({
 		className: 'view-stack'
 	},
 
-	setup: function() {
+	startup: function() {
 		this.parent();
 		this.element.addClass('view-stack');
 		this.wrapper.addClass('view-stack-wrapper');

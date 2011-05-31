@@ -31,26 +31,32 @@ Moobile.UI.Button = new Class({
 		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
-	setup: function() {
-		if (!this.isNative()) this.injectContent();
-		return this.parent();
+	assemble: function() {
+		this.parent();
+		this.injectContent();
+		return this;
 	},
 
-	destroy: function() {
-		if (!this.isNative()) this.destroyContent();
-		return this.parent();
+	dismantle: function() {
+		this.destroyContent();
+		this.parent();
+		return this;
 	},
 
 	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-		this.element.empty();
-		this.element.adopt(this.content);
+		if (this.isNative() == false) {
+			this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
+			this.element.empty();
+			this.element.adopt(this.content);
+		}
 		return this;
 	},
 
 	destroyContent: function() {
-		this.content.destroy();
-		this.content = null;
+		if (this.isNative() == false) {
+			this.content.destroy();
+			this.content = null;
+		}
 		return this;
 	},
 
@@ -58,14 +64,16 @@ Moobile.UI.Button = new Class({
 		this.element.addEvent(Event.CLICK, this.bound('onClick'));
 		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
 		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	detachEvents: function() {
 		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
 		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
 		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	setText: function(text) {

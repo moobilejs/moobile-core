@@ -38,6 +38,8 @@ Moobile.View = new Class({
 
 	childControls: [],
 
+	activated: false,
+
 	options: {
 		title: 'View',
 		className: 'view',
@@ -45,19 +47,44 @@ Moobile.View = new Class({
 		content: true
 	},
 
-	setup: function() {
-		if (this.options.wrapper) this.injectContent();
-		if (this.options.content) this.injectWrapper();
-		return this.parent();
+	initialize: function(element, options) {
+		this.setElement(element);
+		this.setElementOptions();
+		this.setOptions(options);
+		this.element.addClass(this.options.className);
+		this.assemble();
+		return this;
 	},
 
-	destroy: function() {
-		this.destroyChildElements();
-		this.destroyChildControls();
-		this.destroyChildViews();
-		if (this.options.content) this.destroyContent();
-		if (this.options.wrapper) this.destroyWrapper();
+	assemble: function() {
 		this.parent();
+		if (this.options.wrapper) this.injectContent();
+		if (this.options.content) this.injectWrapper();
+		return this;
+	},
+
+	dismantle: function() {
+		if (this.options.wrapper) this.destroyContent();
+		if (this.options.content) this.destroyWrapper();
+		this.parent();
+		return this;
+	},
+
+	activate: function() {
+		if (this.activated == false) {
+			this.activated = true;
+			this.startup();
+			this.attachEvents();
+		}
+		return this;
+	},
+
+	deactivate: function() {
+		if (this.activated == true) {
+			this.activated = false;
+			this.detachEvents();
+			this.shutdown();
+		}
 		return this;
 	},
 
@@ -68,19 +95,25 @@ Moobile.View = new Class({
 	},
 
 	shutdown: function() {
-		return this.destroy();
+		this.destroyChildElements();
+		this.destroyChildControls();
+		this.destroyChildViews();
+		this.destroy();
+		return this;
 	},
 
 	attachEvents: function() {
-  		return this;
+  		this.parent();
+		return this;
 	},
 
 	detachEvents: function() {
+		this.parent();
 		return this;
 	},
 
 	destroyChildViews: function() {
-		this.childViews.each(function(view) { view.destroy(); });
+		this.childViews.each(function(view) { view.deactivate(); });
 		this.childViews = null;
 		this.childViews = [];
 		return this;
@@ -130,6 +163,7 @@ Moobile.View = new Class({
 		this.childViews.push(view);
 		view.setParentView(this);
 		view.setWindow(this.window);
+		view.activate();
 		this.grab(view, where, context);
 		return this;
 	},
@@ -324,6 +358,13 @@ Moobile.View = new Class({
 
 		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
 
+		return this;
+	},
+
+	destroy: function() {
+		this.dismantle();
+		this.element.destroy();
+		this.element = null;
 		return this;
 	},
 

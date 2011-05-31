@@ -34,20 +34,22 @@ Moobile.UI.Bar.Navigation = new Class({
 		className: 'ui-navigation-bar'
 	},
 
-	setup: function() {
+	assemble: function() {
+		this.parent();
 		this.injectCaption();
-		return this.parent();
+		return this;
 	},
 
-	destroy: function() {
+	dismantle: function() {
 		this.destroyCaption();
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.element.getContents());
-		this.element.empty();
-		this.element.adopt(this.caption);
+		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.content.getContents());
+		this.content.empty();
+		this.content.adopt(this.caption);
 		return this;
 	},
 

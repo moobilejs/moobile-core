@@ -34,14 +34,16 @@ Moobile.UI.List = new Class({
 		multiple: false
 	},
 
-	setup: function() {
+	assemble: function() {
+		this.parent();
 		this.attachItems();
-		return this.parent();
+		return this;
 	},
 
-	destroy: function() {
+	dismantle: function() {
 		this.destroyItems();
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	destroyItems: function() {

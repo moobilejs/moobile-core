@@ -31,14 +31,16 @@ Moobile.UI.Bar = new Class({
 		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
-	setup: function() {
+	assemble: function() {
+		this.parent();
 		this.injectContent();
-		return this.parent();
+		return this;
 	},
 
-	destroy: function() {
+	dismantle: function() {
 		this.destroyContent();
-		return this.parent();
+		this.parent();
+		return this;
 	},
 
 	injectContent: function() {
