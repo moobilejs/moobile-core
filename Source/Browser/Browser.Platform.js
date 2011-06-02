@@ -12,6 +12,7 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core/Browser
 
 provides:
 	- Browser.Platform

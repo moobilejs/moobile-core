@@ -16,8 +16,6 @@ sources:
 
   - "Vendor/iscroll/src/iscroll-lite.js"
 
-  - "Source/Application/Application.js"
-  - "Source/Application/Application.iPhone.js"
   - "Source/Browser/Browser.Platform.js"
   - "Source/Core/Core.js"
   - "Source/Event/Event.js"

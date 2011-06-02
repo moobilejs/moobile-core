@@ -7,13 +7,3 @@ Controllers:
  - DocumentView
  - DocumentViewController
    (Call pushViewControllerFrom for (almost) every links (a))
-
-ViewController, View or Window:
- - Prevent the user input while a page is in a transition.
-
-Application:
- - Show a nice error screen if the browser is not supported.
-
-History
- - Fix the history
-
