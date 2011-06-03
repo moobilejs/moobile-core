@@ -36,6 +36,11 @@ Moobile.View.Scroll = new Class({
 
 	scrolled: null,
 
+	options: {
+		createWrapper: true,
+		createContent: true
+	},
+
 	startup: function() {
 		this.parent();
 		this.attachScroller();
