@@ -10674,8 +10674,8 @@ Moobile.View = new Class({
 	options: {
 		title: 'View',
 		className: 'view',
-		wrapper: true,
-		content: true
+		createWrapper: false,
+		createContent: true
 	},
 
 	initialize: function(element, options) {
@@ -10689,14 +10689,14 @@ Moobile.View = new Class({
 
 	assemble: function() {
 		this.parent();
-		if (this.options.wrapper) this.injectContent();
-		if (this.options.content) this.injectWrapper();
+		if (this.options.createContent) this.injectContent();
+		if (this.options.createWrapper) this.injectWrapper();
 		return this;
 	},
 
 	dismantle: function() {
-		if (this.options.wrapper) this.destroyContent();
-		if (this.options.content) this.destroyWrapper();
+		if (this.options.createContent) this.destroyContent();
+		if (this.options.createWrapper) this.destroyWrapper();
 		this.parent();
 		return this;
 	},
@@ -10766,7 +10766,6 @@ Moobile.View = new Class({
 
 	injectWrapper: function() {
 		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
-		this.element.empty();
 		this.element.adopt(this.wrapper);
 		return this;
 	},
@@ -10779,7 +10778,6 @@ Moobile.View = new Class({
 
 	injectContent: function() {
 		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-		this.element.empty();
 		this.element.adopt(this.content);
 		return this;
 	},
@@ -10825,8 +10823,8 @@ Moobile.View = new Class({
 
 	attachChildControl: function(element) {
 		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
-		this.pushChildControl(control);
-		this.bindChildControl(control);
+		this.childControls.push(control);
+		this.memberize(control);
 		return this;
 	},
 
@@ -10842,26 +10840,8 @@ Moobile.View = new Class({
 	},
 
 	addChildControl: function(control, where, context) {
-		this.pushChildControl(control);
-		this.bindChildControl(control);
 		this.grab(control, where, context);
-		return this;
-	},
-
-	pushChildControl: function(control) {
-		control.view = this;
-		control.window = this.window;
-		this.childControls.push(control);
-		return this;
-	},
-
-	bindChildControl: function(control) {
-		if (control.name) {
-			control.member = control.name.camelize();
-			if (this[control.member] == null || this[control.member] == undefined) {
-				this[control.member] = control;
-			}
-		}
+		this.memberize(control);
 		return this;
 	},
 
@@ -10889,6 +10869,7 @@ Moobile.View = new Class({
 
 	attachChildElement: function(element) {
 		this.childElements.push(element);
+		this.memberize(element);
 		return this;
 	},
 
@@ -10923,6 +10904,16 @@ Moobile.View = new Class({
 	removeChildElement: function(element) {
 		var removed = this.childElements.remove(element);
 		if (removed) element.dispose();
+		return this;
+	},
+
+	memberize: function(element) {
+		if (element.name) {
+			element._prop = element.name.camelize();
+			if (this[element._prop] == null || this[element._prop] == undefined) {
+				this[element._prop] = element;
+			}
+		}
 		return this;
 	},
 
@@ -11063,6 +11054,11 @@ Moobile.View.Scroll = new Class({
 
 	scrolled: null,
 
+	options: {
+		createWrapper: true,
+		createContent: true
+	},
+
 	startup: function() {
 		this.parent();
 		this.attachScroller();
@@ -11177,13 +11173,14 @@ Moobile.ViewStack = new Class({
 	Extends: Moobile.View,
 
 	options: {
-		className: 'view-stack'
+		className: 'view-stack',
+		createWrapper: false,
+		createContent: true
 	},
 
 	startup: function() {
 		this.parent();
 		this.element.addClass('view-stack');
-		this.wrapper.addClass('view-stack-wrapper');
 		this.content.addClass('view-stack-content');
 		return this;
 	}
