@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title>Moobile iPhone Application</title>
+		<link rel="stylesheet" href="css/styles.css" />
+		<script type="text/javascript" src="js/moobile-core.js"></script>
+		<script type="text/javascript" src="js/moobile-app.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+		// <![CDATA["
+
+			window.addEvent(Event.READY, function() {
+
+				/**
+				 *
+				 */
+				var sideViewControllerStack = new Moobile.ViewControllerStack.Navigation();
+				var mainViewControllerStack = new Moobile.ViewControllerStack.Navigation();
+				var viewControllerPanel = new Moobile.ViewControllerPanel.Split(
+					sideViewControllerStack,
+					mainViewControllerStack
+				);
+
+				/**
+				 * Create a new window and assign the view controller stack.
+				 */
+				var mainWindow = new Moobile.Window('main-window')
+					.setViewController(viewControllerPanel);
+
+				/**
+				 * Load the default views
+				 */
+				sideViewControllerStack.pushViewControllerFrom('views/default-side-panel.html');
+				mainViewControllerStack.pushViewControllerFrom('views/default-main-panel.html');
+
+			});
+
+		// "]]>
+		</script>
+
+		<div id="main-window"></div>
+
+	</body>
+</html>
