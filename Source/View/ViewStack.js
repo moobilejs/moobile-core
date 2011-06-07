@@ -24,19 +24,17 @@ provides:
 
 Moobile.ViewStack = new Class({
 
+	/**
+	 * This view does not have much code right now as it serves as an extension
+	 * point for future features I may not have thought of yet.
+	 */
+
 	Extends: Moobile.View,
 
 	options: {
 		className: 'view-stack',
 		createWrapper: false,
 		createContent: true
-	},
-
-	startup: function() {
-		this.parent();
-		this.element.addClass('view-stack');
-		this.content.addClass('view-stack-content');
-		return this;
 	}
 
 });
