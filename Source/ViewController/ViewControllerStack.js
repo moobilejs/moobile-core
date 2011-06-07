@@ -40,6 +40,7 @@ Moobile.ViewControllerStack = new Class({
 
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack(new Element('div'));
+		return this;
 	},
 
 	pushViewControllerFrom: function(viewControllerRemote, viewControllerTransition) {

@@ -26,6 +26,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack.Navigation(new Element('div'));
+		return this;
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {

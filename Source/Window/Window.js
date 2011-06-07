@@ -36,14 +36,9 @@ Moobile.Window = new Class({
 	userInputMask: null,
 
 	options: {
-		className: 'window'
-	},
-
-	initialize: function(element, options) {
-		this.parent(element, options);
-		this.options.wrapper = false;
-		this.options.content = false;
-		return this;
+		className: 'window',
+		createWrapper: false,
+		createContent: false
 	},
 
 	attachEvents: function() {
