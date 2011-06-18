@@ -37,15 +37,15 @@ Demo.ViewController.Home = new Class({
 		switch (item.name) {
 
 			case 'transition-slide':
-				this.viewControllerStack.pushViewControllerFrom('views/transition-slide.html');
+				this.viewControllerStack.pushViewControllerFrom('views/transition-slide.html', new Moobile.ViewControllerTransition.Slide);
 				break;
 
 			case 'transition-cubic':
-				this.viewControllerStack.pushViewControllerFrom('views/transition-cubic.html');
+				this.viewControllerStack.pushViewControllerFrom('views/transition-cubic.html', new Moobile.ViewControllerTransition.Cubic);
 				break;
 
 			case 'transition-fade':
-				this.viewControllerStack.pushViewControllerFrom('views/transition-fade.html');
+				this.viewControllerStack.pushViewControllerFrom('views/transition-fade.html' , new Moobile.ViewControllerTransition.Fade);
 				break;
 
 			case 'ui':

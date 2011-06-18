@@ -9523,8 +9523,6 @@ Moobile.Request.ViewController = new Class({
 			var c = this.createInstanceFrom(element, 'data-view-controller', defaultViewController, v);
 			var t = this.createInstanceFrom(element, 'data-view-controller-transition', defaultViewControllerTransition);
 
-			c.setTransition(t);
-
 			this.setViewControllerCache(this.options.url, c);
 
 			this.fireEvent('load', c);
@@ -11170,19 +11168,17 @@ provides:
 
 Moobile.ViewStack = new Class({
 
+	/**
+	 * This view does not have much code right now as it serves as an extension
+	 * point for future features I may not have thought of yet.
+	 */
+
 	Extends: Moobile.View,
 
 	options: {
 		className: 'view-stack',
 		createWrapper: false,
 		createContent: true
-	},
-
-	startup: function() {
-		this.parent();
-		this.element.addClass('view-stack');
-		this.content.addClass('view-stack-content');
-		return this;
 	}
 
 });
@@ -11210,10 +11206,54 @@ provides:
 
 Moobile.ViewStack.Navigation = new Class({
 
+	/**
+	 * This view does not have much code right now as it serves as an extension
+	 * point for future features I may not have thought of yet.
+	 */
+
 	Extends: Moobile.ViewStack,
 
 	options: {
 		className: 'navigation-view-stack'
+	}
+
+});
+
+/*
+---
+
+name: ViewPanel
+
+description: Provide the view that will contains the different panels.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- View
+
+provides:
+	- ViewPanel
+
+...
+*/
+
+Moobile.ViewPanel = new Class({
+
+	/**
+	 * This view does not have much code right now as it serves as an extension
+	 * point for future features I may not have thought of yet.
+	 */
+
+	Extends: Moobile.View,
+
+	options: {
+		className: 'view-panel',
+		createWrapper: false,
+		createContent: false
 	}
 
 });
@@ -11246,6 +11286,12 @@ Moobile.ViewController = new Class({
 	window: null,
 
 	view: null,
+
+	viewControllerTransition: null,
+
+	viewControllerStack: null,
+
+	viewControllerPanel: null,
 
 	modalViewController: null,
 
@@ -11301,6 +11347,9 @@ Moobile.ViewController = new Class({
 		this.view.deactivate();
 		this.view = null;
 		this.modalViewController = null;
+		this.viewControllerTransition = null;
+		this.viewControllerStack = null;
+		this.viewControllerPanel = null;
 		this.transition = null;
 		this.window = null;
 		return this;
@@ -11337,15 +11386,6 @@ Moobile.ViewController = new Class({
 	dismissModalViewController: function() {
 		// TODO: implementation
 		return this;
-	},
-
-	setTransition: function(transition) {
-		this.transition = transition;
-		return this;
-	},
-
-	getTransition: function() {
-		return this.transition;
 	},
 
 	orientationDidChange: function(orientation) {
@@ -11410,21 +11450,21 @@ Moobile.ViewControllerStack = new Class({
 
 	Extends: Moobile.ViewController,
 
-	topViewController: null,
-
 	viewControllers: [],
 
 	viewControllerRequest: null,
 
+	topViewController: null,
+
 	initialize: function(view) {
 		this.parent(view);
 		this.viewControllerRequest = new Moobile.Request.ViewController(this);
-		this.view.hide();
 		return this;
 	},
 
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack(new Element('div'));
+		return this;
 	},
 
 	pushViewControllerFrom: function(viewControllerRemote, viewControllerTransition) {
@@ -11440,6 +11480,8 @@ Moobile.ViewControllerStack = new Class({
 
 	pushViewController: function(viewController, viewControllerTransition) {
 
+		this.window.disableUserInput();
+
 		var viewControllerIndex = this.viewControllers.indexOf(viewController);
 		if (viewControllerIndex == -1) {
 			viewController.viewControllerStack = this;
@@ -11450,45 +11492,29 @@ Moobile.ViewControllerStack = new Class({
 
 		this.viewControllers.push(viewController);
 
-		if (this.viewControllers.length == 1) {
+		this.view.addChildView(viewController.view);
+		viewController.activate();
+		viewController.viewWillEnter();
 
-			this.view.fade('hide');
-			this.view.show();
-
-			this.view.addChildView(viewController.view);
-			viewController.activate();
-			viewController.viewWillEnter();
-			viewController.viewDidEnter();
-
-			this.view.fade('show');
-
-			this.window.position();
-
-		} else {
-
-			this.window.disableUserInput();
-
-			var transition = viewControllerTransition || viewController.getTransition();
-			if (transition && typeOf(transition) == 'class') {
-				transition = Class.instanciate(transition);
-			}
-
-			this.view.addChildView(viewController.view);
-			viewController.setTransition(transition);
-			viewController.activate();
-			viewController.viewWillEnter();
-
-			this.viewControllers.getLast(1).viewWillLeave();
-
-			if (transition) {
-				transition.startup(viewController, this);
-				transition.chain(this.bound('onPushTransitionCompleted'));
-				transition.prepare('enter');
-				transition.execute('enter');
-			} else {
-				this.onPushTransitionCompleted();
-			}
+		var viewControllerBefore = this.viewControllers.getLast(1);
+		if (viewControllerBefore) {
+			viewControllerBefore.viewWillLeave();
 		}
+
+		var viewToShow = viewController.view;
+		var viewToHide = viewControllerBefore ? viewControllerBefore.view : null;
+
+		viewControllerTransition = viewControllerTransition || new Moobile.ViewControllerTransition.Slide();
+		viewControllerTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
+		viewControllerTransition.enter(
+			viewToShow,
+			viewToHide,
+			this.view,
+			this.view.getContent(),
+			this.viewControllers.length == 1
+		);
+
+		viewController.viewControllerTransition = viewControllerTransition;
 
 		this.topViewController = viewController;
 
@@ -11496,10 +11522,12 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	onPushTransitionCompleted: function() {
-		this.viewControllers.getLast()
+		this.viewControllers.getLast(0)
 			.viewDidEnter();
-		this.viewControllers.getLast(1)
-			.viewDidLeave();
+		if (this.viewControllers.length > 1) {
+			this.viewControllers.getLast(1)
+				.viewDidLeave();
+		}
 
 		this.window.enableUserInput();
 
@@ -11507,45 +11535,49 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	popViewController: function() {
-		if (this.viewControllers.length > 1) {
-			this.viewControllers.getLast(1).viewWillEnter();
-			this.viewControllers.getLast(0).viewWillLeave();
 
-			this.window.disableUserInput();
+		if (this.viewControllers.length <= 1)
+			return this;
 
-			var transition = this.viewControllers.getLast().getTransition();
-			if (transition) {
-				transition.chain(this.bound('onPopTransitionCompleted'));
-				transition.prepare('leave');
-				transition.execute('leave');
-			} else {
-				this.onPopTransitionCompleted();
-			}
+		this.window.disableUserInput();
 
-			this.topViewController = this.viewControllers.getLast(1);
-		}
+		var viewController = this.viewControllers.getLast();
+		var viewControllerBefore = this.viewControllers.getLast(1);
+		viewController.viewWillLeave();
+		viewControllerBefore.viewWillEnter();
+
+		var viewControllerTransition = this.topViewController.viewControllerTransition;
+		viewControllerTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
+		viewControllerTransition.leave(
+			viewControllerBefore.view,
+			viewController.view,
+			this.view,
+			this.view.getContent()
+		);
+
+		this.topViewController = this.viewControllers.getLast(1);
+
 		return this;
 	},
 
 	popViewControllerUntil: function(viewController) {
-		if (this.viewControllers.length > 1) {
 
-			this.window.disableUserInput();
+		if (this.viewControllers.length <= 1)
+			return this;
 
-			var index = this.viewControllers.indexOf(viewController);
-			if (index > -1) {
-				for (var i = this.viewControllers.length - 2; i > index; i--) {
-					var removedViewController = this.viewControllers[i];
-					removedViewController.viewWillLeave();
-					removedViewController.viewDidLeave();
-					removedViewController.viewDidRemove();
-					removedViewController.deactivate();
-					this.viewControllers.splice(i, 1);
-				}
+		var index = this.viewControllers.indexOf(viewController);
+		if (index > -1) {
+			for (var i = this.viewControllers.length - 2; i > index; i--) {
+				var removedViewController = this.viewControllers[i];
+				removedViewController.viewWillLeave();
+				removedViewController.viewDidLeave();
+				removedViewController.viewDidRemove();
+				removedViewController.deactivate();
+				this.viewControllers.splice(i, 1);
 			}
-
-			this.popViewController();
 		}
+
+		this.popViewController();
 
 		return this;
 	},
@@ -11553,7 +11585,7 @@ Moobile.ViewControllerStack = new Class({
 	onPopTransitionCompleted: function() {
 		this.viewControllers.getLast(1)
 			.viewDidEnter();
-		this.viewControllers.getLast()
+		this.viewControllers.getLast(0)
 			.viewDidLeave();
 		this.viewControllers.pop()
 			.viewDidRemove()
@@ -11566,14 +11598,6 @@ Moobile.ViewControllerStack = new Class({
 
 	getViewControllers: function() {
 		return this.viewControllers;
-	},
-
-	getViewControllersCount: function() {
-		return this.viewControllers.length;
-	},
-
-	getViewControllerAt: function(offset) {
-		return this.viewControllers.getLast(offset);
 	},
 
 	getTopViewController: function() {
@@ -11595,16 +11619,6 @@ Moobile.ViewControllerStack = new Class({
 	orientationDidChange: function(orientation) {
 		this.viewControllers.each(function(viewController) { viewController.orientationDidChange(orientation) });
 		return this.parent();
-	},
-
-	/* Prevent default behavior */
-
-	viewWillEnter: function() {
-		return this;
-	},
-
-	viewDidEnter: function() {
-		return this;
 	}
 
 });
@@ -11637,6 +11651,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack.Navigation(new Element('div'));
+		return this;
 	},
 
 	pushViewController: function(viewController, viewControllerTransition) {
@@ -11675,6 +11690,114 @@ Moobile.ViewControllerStack.Navigation = new Class({
 /*
 ---
 
+name: ViewControllerPanel
+
+description: Provide a way to have side by side view controllers.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+
+provides:
+	- ViewControllerPanel
+
+...
+*/
+
+Moobile.ViewControllerPanel = new Class({
+
+	Extends: Moobile.ViewController,
+
+	viewControllers: {},
+
+	loadView: function(view) {
+		this.view = view || new Moobile.ViewPanel(new Element('div'));
+		return this;
+	},
+
+	setViewController: function(name, viewController) {
+		this.viewControllers[name] = viewController;
+		this.view.addChildView(viewController.view);
+		viewController.viewControllerPanel = this;
+		viewController.activate();
+		viewController.viewWillEnter();
+		viewController.viewDidEnter();
+		viewController.view.addClass(name);
+		return this;
+	},
+
+	getViewController: function(name) {
+		return this.viewControllers[name] ? this.viewControllers[name] : null;
+	}
+
+});
+
+/*
+---
+
+name: ViewControllerPanel.Split
+
+description: Provide a way to have side by side view controllers.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- ViewControllerPanel
+
+provides:
+	- ViewControllerPanel.Split
+
+...
+*/
+
+Moobile.ViewControllerPanel.Split = new Class({
+
+	Extends: Moobile.ViewControllerPanel,
+
+	mainViewController: null,
+
+	sideViewController: null,
+
+	options: {
+		mainViewControllerClassName: 'view-panel-main-pane',
+		sideViewControllerClassName: 'view-panel-side-pane'
+	},
+
+	initialize: function(sideViewController, mainViewController, view) {
+		this.parent(view);
+		this.sideViewController = sideViewController;
+		this.mainViewController = mainViewController;
+		return this;
+	},
+
+	startup: function() {
+		this.parent();
+		this.setViewController(this.options.sideViewControllerClassName, this.sideViewController);
+		this.setViewController(this.options.mainViewControllerClassName, this.mainViewController);
+		return this;
+	},
+
+	getMainViewController: function() {
+		return this.mainViewController;
+	},
+
+	getSideViewController: function() {
+		return this.sideViewController;
+	}
+
+});
+
+/*
+---
+
 name: ViewControllerTransition
 
 description: Provides the base class for view controller transition effects.
@@ -11695,55 +11818,65 @@ provides:
 
 Moobile.ViewControllerTransition = new Class({
 
-	Implements: [Chain, Class.Binds],
-	
+	Implements: [
+		Events,
+		Options,
+		Chain,
+		Class.Binds
+	],
+
+	transitionElement: null,
+
 	running: false,
 
-	viewController: null,
-
-	viewControllerStack: null,
-
-	startup: function(viewController, viewControllerStack) {
-		this.viewController = viewController;
-		this.viewControllerStack = viewControllerStack;
-		this.attachEvents();
-		return this;
-	},
-
 	attachEvents: function() {
+		this.transitionElement.addEvent('transitionend', this.bound('end'));
 		return this;
 	},
 
 	detachEvents: function() {
+		this.transitionElement.removeEvent('transitionend', this.bound('end'));
 		return this;
 	},
 
-	prepare: function(direction) {
-		return this.setup(direction);
+	setTransitionElement: function(transitionElement) {
+		this.transitionElement = document.id(transitionElement);
+		return this;
 	},
 
-	execute: function(direction) {
+	getTransitionElement: function() {
+		return this.transitionElement;
+	},
+
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+		return this;
+	},
+
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+		return this;
+	},
+
+	start: function(callback) {
+		this.addEvent('ended:once', callback);
+		this.play.delay(5, this);
+		return this;
+	},
+
+	play: function() {
 		if (this.running == false) {
 			this.running = true;
 			this.attachEvents();
-			this.start.delay(5, this, direction);
+			this.transitionElement.addClass('commit-transition');
 		}
-		return this;
 	},
 
-	setup: function(direction) {
-		return this;
-	},
-
-	start: function(direction) {
-		return this.complete();
-	},
-
-	complete: function() {
-		if (this.running == true) {
+	end: function(e) {
+		if (this.running && e.target == this.transitionElement) {
 			this.running = false;
+			this.transitionElement.removeClass('commit-transition');
 			this.detachEvents();
-			this.callChain();
+			this.fireEvent('ended');
+			this.fireEvent('complete');
 		}
 		return this;
 	}
@@ -11776,65 +11909,50 @@ Moobile.ViewControllerTransition.Slide = new Class({
 
 	Extends: Moobile.ViewControllerTransition,
 
-	wrapper: null,
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 
-	startup: function(viewController, viewControllerStack) {
-		this.wrapper = viewControllerStack.view.getContent();
-		return this.parent(viewController, viewControllerStack);
-	},
+		this.setTransitionElement(wrapper);
 
-	attachEvents: function() {
-		this.wrapper.addEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
+		wrapper.addClass('transition-slide');
+		wrapper.addClass('transition-slide-enter');
 
-	detachEvents: function() {
-		this.wrapper.removeEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
+		viewToShow.addClass('transition-slide-view-to-show');
 
-	setup: function(direction) {
-
-		if (direction == 'enter') {
-			this.wrapper.addClass('transition-slide');
-			this.wrapper.addClass('transition-slide-enter');
-			this.viewControllerStack.getViewControllerAt(0).view.addClass('transition-slide-element-to-enter');
-			this.viewControllerStack.getViewControllerAt(1).view.addClass('transition-slide-element-to-leave');
-			return this;
+		if (firstViewIn) {
+			viewToShow.addClass('transition-slide-view-to-show-first');
+		} else {
+			viewToHide.addClass('transition-slide-view-to-hide');
 		}
 
-		if (direction == 'leave') {
-			this.wrapper.addClass('transition-slide');
-			this.wrapper.addClass('transition-slide-leave');
-			this.viewControllerStack.getViewControllerAt(0).view.addClass('transition-slide-element-to-leave');
-			this.viewControllerStack.getViewControllerAt(1).view.addClass('transition-slide-element-to-enter');
-			return this;
-		}
-
-		throw new Error('Unsupported direction');
+		this.start(function() {
+			wrapper.removeClass('transition-slide');
+			wrapper.removeClass('transition-slide-enter');
+			viewToShow.removeClass('transition-slide-view-to-show');
+			viewToShow.removeClass('transition-slide-view-to-show-first');
+			if (viewToHide) {
+				viewToHide.removeClass('transition-slide-view-to-hide');
+			}
+		});
 
 		return this;
 	},
 
-	start: function(direction) {
-		this.wrapper.addClass('commit-transition');
-		return this;
-	},
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
 
-	onTransitionComplete: function(e) {
-		if (this.running && e.target == this.wrapper) {
-			this.wrapper.removeClass('transition-slide');
-			this.wrapper.removeClass('transition-slide-enter');
-			this.wrapper.removeClass('transition-slide-leave');
-			this.wrapper.removeClass('commit-transition');
-			this.viewControllerStack.getViewControllerAt(0).view
-				.removeClass('transition-slide-element-to-leave')
-				.removeClass('transition-slide-element-to-enter');
-			this.viewControllerStack.getViewControllerAt(1).view
-				.removeClass('transition-slide-element-to-leave')
-				.removeClass('transition-slide-element-to-enter');
-			this.complete();
-		}
+		this.setTransitionElement(wrapper);
+
+		wrapper.addClass('transition-slide');
+		wrapper.addClass('transition-slide-leave');
+		viewToShow.addClass('transition-slide-view-to-show');
+		viewToHide.addClass('transition-slide-view-to-hide');
+
+		this.start(function() {
+			wrapper.removeClass('transition-slide');
+			wrapper.removeClass('transition-slide-leave');
+			viewToShow.removeClass('transition-slide-view-to-show');
+			viewToHide.removeClass('transition-slide-view-to-hide');
+		});
+
 		return this;
 	}
 
@@ -11865,69 +11983,54 @@ provides:
 Moobile.ViewControllerTransition.Cubic = new Class({
 
 	Extends: Moobile.ViewControllerTransition,
+	
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 
-	wrapper: null,
-
-	startup: function(viewController, viewControllerStack) {
-		this.wrapper = viewControllerStack.view.getContent();
-		return this.parent(viewController, viewControllerStack);
-	},
-
-	attachEvents: function() {
-		this.wrapper.addEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
-
-	detachEvents: function() {
-		this.wrapper.removeEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
-
-	setup: function(direction) {
-
-		this.viewControllerStack.view.addClass('transition-cubic-viewport');
-
-		if (direction == 'enter') {
-			this.wrapper.addClass('transition-cubic');
-			this.wrapper.addClass('transition-cubic-enter');
-			this.viewControllerStack.getViewControllerAt(0).view.addClass('cubic-face-enter');
-			this.viewControllerStack.getViewControllerAt(1).view.addClass('cubic-face-leave');
-			return this;
-		}
-
-		if (direction == 'leave') {
-			this.wrapper.addClass('transition-cubic');
-			this.wrapper.addClass('transition-cubic-leave');
-			this.viewControllerStack.getViewControllerAt(0).view.addClass('cubic-face-leave');
-			this.viewControllerStack.getViewControllerAt(1).view.addClass('cubic-face-enter');
-			return this;
-		}
-
-		throw new Error('Unsupported direction');
+		if (firstViewIn) {
+	
+			alert('Not yet supported...')
+			
+		} else {
+			
+			this.setTransitionElement(wrapper);
+			
+			parentView.addClass('transition-cubic-viewport');
+			wrapper.addClass('transition-cubic');
+			wrapper.addClass('transition-cubic-enter');
+			viewToShow.addClass('transition-cubic-view-to-show');
+			viewToHide.addClass('transition-cubic-view-to-hide');
+			
+			this.start(function() {
+				parentView.removeClass('transition-cubic-viewport');
+				wrapper.removeClass('transition-cubic');
+				wrapper.removeClass('transition-cubic-enter');
+				viewToShow.removeClass('transition-cubic-view-to-show');
+				viewToHide.removeClass('transition-cubic-view-to-hide');
+			});
+			
+		}				
 
 		return this;
 	},
 
-	start: function(direction) {
-		this.wrapper.addClass('commit-transition');
-		return this;
-	},
-
-	onTransitionComplete: function(e) {
-		if (this.running && e.target == this.wrapper) {
-			this.wrapper.removeClass('transition-cubic');
-			this.wrapper.removeClass('transition-cubic-enter');
-			this.wrapper.removeClass('transition-cubic-leave');
-			this.wrapper.removeClass('commit-transition');
-			this.viewControllerStack.view.removeClass('transition-cubic-viewport');
-			this.viewControllerStack.getViewControllerAt(0).view
-				.removeClass('cubic-face-enter')
-				.removeClass('cubic-face-leave');
-			this.viewControllerStack.getViewControllerAt(1).view
-				.removeClass('cubic-face-enter')
-				.removeClass('cubic-face-leave');
-			this.complete();
-		}
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+		
+		this.setTransitionElement(wrapper);
+			
+		parentView.addClass('transition-cubic-viewport');
+		wrapper.addClass('transition-cubic');
+		wrapper.addClass('transition-cubic-leave');
+		viewToHide.addClass('transition-cubic-view-to-hide');
+		viewToShow.addClass('transition-cubic-view-to-show');
+		
+		this.start(function() {
+			parentView.removeClass('transition-cubic-viewport');
+			wrapper.removeClass('transition-cubic');
+			wrapper.removeClass('transition-cubic-leave');
+			viewToHide.removeClass('transition-cubic-view-to-hide');
+			viewToShow.removeClass('transition-cubic-view-to-show');
+		});
+		
 		return this;
 	}
 
@@ -11959,55 +12062,56 @@ Moobile.ViewControllerTransition.Fade = new Class({
 
 	Extends: Moobile.ViewControllerTransition,
 
-	element: null,
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 
-	startup: function(viewController, viewControllerStack) {
-		this.element = viewControllerStack.getViewControllerAt(1).view.getElement();
-		return this.parent(viewController, viewControllerStack);
-	},
-
-	attachEvents: function() {
-		this.element.addEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
-
-	detachEvents: function() {
-		this.element.removeEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
-
-	setup: function(direction) {
-
-		if (direction == 'enter') {
-			this.element.addClass('transition-fade');
-			this.element.addClass('transition-fade-enter');
-			return this;
+		if (firstViewIn) {
+		
+			this.setTransitionElement(viewToShow);
+			
+			viewToShow.addClass('transition-fade');
+			viewToShow.addClass('transition-fade-enter-first');
+			
+			this.start(function() {
+				viewToShow.removeClass('transition-fade');
+				viewToShow.removeClass('transition-fade-enter-first');
+			});
+			
+		} else {
+			
+			this.setTransitionElement(viewToHide);
+			
+			wrapper.addClass('transition-fade');
+			wrapper.addClass('transition-fade-enter');
+			viewToHide.addClass('transition-fade-view-to-hide');
+			viewToShow.addClass('transition-fade-view-to-show');
+			
+			this.start(function() {
+				wrapper.removeClass('transition-fade');
+				wrapper.removeClass('transition-fade-enter');
+				viewToHide.removeClass('transition-fade-view-to-hide');
+				viewToShow.removeClass('transition-fade-view-to-show');
+			});
 		}
 
-		if (direction == 'leave') {
-			this.element.addClass('transition-fade');
-			this.element.addClass('transition-fade-leave');
-			return this;
-		}
-
-		throw new Error('Unsupported direction');
-
 		return this;
 	},
 
-	start: function(direction) {
-		this.element.addClass('commit-transition');
-		return this;
-	},
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+		
+		this.setTransitionElement(viewToHide);
+			
+		wrapper.addClass('transition-fade');
+		wrapper.addClass('transition-fade-leave');
+		viewToHide.addClass('transition-fade-view-to-hide');
+		viewToShow.addClass('transition-fade-view-to-show');
 
-	onTransitionComplete: function(e) {
-		if (this.running && e.target == this.element) {
-			this.element.removeClass('transition-fade');
-			this.element.removeClass('transition-fade-enter');
-			this.element.removeClass('transition-fade-leave');
-			this.element.removeClass('commit-transition');
-			this.complete();
-		}
+		this.start(function() {
+			wrapper.removeClass('transition-fade');
+			wrapper.removeClass('transition-fade-leave');
+			viewToHide.removeClass('transition-fade-view-to-hide');
+			viewToShow.removeClass('transition-fade-view-to-show');
+		});
+
 		return this;
 	}
 
@@ -12051,14 +12155,9 @@ Moobile.Window = new Class({
 	userInputMask: null,
 
 	options: {
-		className: 'window'
-	},
-
-	initialize: function(element, options) {
-		this.parent(element, options);
-		this.options.wrapper = false;
-		this.options.content = false;
-		return this;
+		className: 'window',
+		createWrapper: false,
+		createContent: false
 	},
 
 	attachEvents: function() {

@@ -97,8 +97,6 @@ Moobile.Request.ViewController = new Class({
 			var c = this.createInstanceFrom(element, 'data-view-controller', defaultViewController, v);
 			var t = this.createInstanceFrom(element, 'data-view-controller-transition', defaultViewControllerTransition);
 
-			c.setTransition(t);
-
 			this.setViewControllerCache(this.options.url, c);
 
 			this.fireEvent('load', c);

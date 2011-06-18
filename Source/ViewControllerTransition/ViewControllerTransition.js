@@ -21,55 +21,65 @@ provides:
 
 Moobile.ViewControllerTransition = new Class({
 
-	Implements: [Chain, Class.Binds],
-	
+	Implements: [
+		Events,
+		Options,
+		Chain,
+		Class.Binds
+	],
+
+	transitionElement: null,
+
 	running: false,
 
-	viewController: null,
-
-	viewControllerStack: null,
-
-	startup: function(viewController, viewControllerStack) {
-		this.viewController = viewController;
-		this.viewControllerStack = viewControllerStack;
-		this.attachEvents();
-		return this;
-	},
-
 	attachEvents: function() {
+		this.transitionElement.addEvent('transitionend', this.bound('end'));
 		return this;
 	},
 
 	detachEvents: function() {
+		this.transitionElement.removeEvent('transitionend', this.bound('end'));
 		return this;
 	},
 
-	prepare: function(direction) {
-		return this.setup(direction);
+	setTransitionElement: function(transitionElement) {
+		this.transitionElement = document.id(transitionElement);
+		return this;
 	},
 
-	execute: function(direction) {
+	getTransitionElement: function() {
+		return this.transitionElement;
+	},
+
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+		return this;
+	},
+
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+		return this;
+	},
+
+	start: function(callback) {
+		this.addEvent('ended:once', callback);
+		this.play.delay(5, this);
+		return this;
+	},
+
+	play: function() {
 		if (this.running == false) {
 			this.running = true;
 			this.attachEvents();
-			this.start.delay(5, this, direction);
+			this.transitionElement.addClass('commit-transition');
 		}
-		return this;
 	},
 
-	setup: function(direction) {
-		return this;
-	},
-
-	start: function(direction) {
-		return this.complete();
-	},
-
-	complete: function() {
-		if (this.running == true) {
+	end: function(e) {
+		if (this.running && e.target == this.transitionElement) {
 			this.running = false;
+			this.transitionElement.removeClass('commit-transition');
 			this.detachEvents();
-			this.callChain();
+			this.fireEvent('ended');
+			this.fireEvent('complete');
 		}
 		return this;
 	}

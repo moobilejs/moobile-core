@@ -266,6 +266,24 @@ p small {
 	width: 200%;							/* Important */
 }
 
+/* Navigation View Stack
+-----------------------------------------------------------------------------*/
+
+.navigation-view-stack {
+	-webkit-backface-visibility: hidden;	/* Important */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	background: #ffffff;
+	height: 100%;							/* Important */
+	width: 100%;							/* Important */
+}
+
+.navigation-view-stack-content {
+	height: 100%;							/* Important */
+	width: 200%;							/* Important */
+}
+
 /* UI Button
 -----------------------------------------------------------------------------*/
 
@@ -529,28 +547,55 @@ p small {
 /* Transition - Fade
 -----------------------------------------------------------------------------*/
 
-.transition-fade-enter { opacity: 1; position: absolute; z-index: 100; }
-.transition-fade-leave { opacity: 0; position: absolute; z-index: 100; }
+/* Enter */
 
-.transition-fade-enter.commit-transition {
-	-webkit-transition-property: all;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	opacity: 0;
+.transition-fade-enter .transition-fade-view-to-show {
+	-webkit-transform: translateX(-100%);
+	opacity: 1;
+	z-index: 90;
 }
 
-.transition-fade-leave.commit-transition {
-	-webkit-transition-property: all;
+.transition-fade-enter .transition-fade-view-to-hide {
+	-webkit-transition-property: opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
 	opacity: 1;
+	z-index: 100;
+}
+
+.transition-fade-enter .transition-fade-view-to-hide.commit-transition {
+	opacity: 0;
+}
+
+/* Leave */
+
+.transition-fade-leave .transition-fade-view-to-show {
+	opacity: 1;
+	z-index: 90;
+}
+
+.transition-fade-leave .transition-fade-view-to-hide {
+	-webkit-transform: translateX(-100%);
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 500ms;
+	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	opacity: 1;
+	z-index: 100;
+}
+
+.transition-fade-leave .transition-fade-view-to-hide.commit-transition {
+	opacity: 0;
 }
 
 /* Transition - Slide
 -----------------------------------------------------------------------------*/
 
 .transition-slide-enter { -webkit-transform: translateX(0%); }
-.transition-slide-leave { -webkit-transform: translateX(-50%);   }
+.transition-slide-leave { -webkit-transform: translateX(-50%); }
+
+.transition-slide-enter .transition-slide-view-to-show-first {
+	-webkit-transform: translateX(100%);
+}
 
 .transition-slide-enter.commit-transition {
 	-webkit-transition-property: -webkit-transform;
@@ -568,26 +613,26 @@ p small {
 
 /* Navigation Bar */
 
-.transition-slide-enter .transition-slide-element-to-enter,
-.transition-slide-enter .transition-slide-element-to-leave,
-.transition-slide-leave .transition-slide-element-to-enter,
-.transition-slide-leave .transition-slide-element-to-leave {
+.transition-slide-enter .transition-slide-view-to-show,
+.transition-slide-enter .transition-slide-view-to-hide,
+.transition-slide-leave .transition-slide-view-to-show,
+.transition-slide-leave .transition-slide-view-to-hide {
 	overflow: visible;
 }
 
-/* Navigation Bar On Enter */
+/* Navigation Bar Enter */
 
-.transition-slide-enter .transition-slide-element-to-enter .ui-navigation-bar-content {
+.transition-slide-enter .transition-slide-view-to-show .ui-navigation-bar-content {
 	-webkit-transform: translateX(-75%);
 	opacity: 0;
 }
 
-.transition-slide-enter .transition-slide-element-to-leave .ui-navigation-bar-content {
+.transition-slide-enter .transition-slide-view-to-hide .ui-navigation-bar-content {
 	-webkit-transform: translateX(0%);
 	opacity: 1;
 }
 
-.transition-slide-enter.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-content {
+.transition-slide-enter.commit-transition .transition-slide-view-to-show .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -595,7 +640,7 @@ p small {
 	opacity: 1;
 }
 
-.transition-slide-enter.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-content {
+.transition-slide-enter.commit-transition .transition-slide-view-to-hide .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -603,19 +648,19 @@ p small {
 	opacity: 0;
 }
 
-/* Navigation Bar On Leave */
+/* Navigation Bar Leave */
 
-.transition-slide-leave .transition-slide-element-to-enter .ui-navigation-bar-content {
+.transition-slide-leave .transition-slide-view-to-show .ui-navigation-bar-content {
 	-webkit-transform: translateX(75%);
 	opacity: 0;
 }
 
-.transition-slide-leave .transition-slide-element-to-leave .ui-navigation-bar-content {
+.transition-slide-leave .transition-slide-view-to-hide .ui-navigation-bar-content {
 	-webkit-transform: translateX(0);
 	opacity: 1;
 }
 
-.transition-slide-leave.commit-transition .transition-slide-element-to-enter .ui-navigation-bar-content {
+.transition-slide-leave.commit-transition .transition-slide-view-to-show .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -623,7 +668,7 @@ p small {
 	opacity: 1;
 }
 
-.transition-slide-leave.commit-transition .transition-slide-element-to-leave .ui-navigation-bar-content {
+.transition-slide-leave.commit-transition .transition-slide-view-to-hide .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -638,6 +683,8 @@ p small {
 	-webkit-perspective: 800;
 }
 
+/* Enter */
+
 .transition-cubic {
 	-webkit-transform: translateZ(-160px);
 	-webkit-transform-style: preserve-3d;
@@ -646,34 +693,36 @@ p small {
 	width: 50% !important;
 }
 
-.transition-cubic.transition-cubic-enter .cubic-face-leave {
+.transition-cubic-enter .transition-cubic-view-to-hide {
 	-webkit-transform: rotateY(0deg) translateZ(160px);
 	position: absolute;
 }
 
-.transition-cubic.transition-cubic-enter .cubic-face-enter {
+.transition-cubic-enter .transition-cubic-view-to-show {
 	-webkit-transform: rotateY(90deg) translateZ(160px);
 	position: absolute;
 }
 
-.transition-cubic.transition-cubic-enter.commit-transition {
+.transition-cubic-enter.commit-transition {
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-transform: translateZ(-160px) rotateY(-90deg);
 }
 
-.transition-cubic.transition-cubic-leave .cubic-face-leave {
+/* Leave */
+
+.transition-cubic-leave .transition-cubic-view-to-hide {
 	-webkit-transform: rotateY(0deg) translateZ(160px);
 	position: absolute;
 }
 
-.transition-cubic.transition-cubic-leave .cubic-face-enter {
+.transition-cubic-leave .transition-cubic-view-to-show {
 	-webkit-transform: rotateY(-90deg) translateZ(160px);
 	position: absolute;
 }
 
-.transition-cubic.transition-cubic-leave.commit-transition {
+.transition-cubic-leave.commit-transition {
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
@@ -686,17 +735,17 @@ p small {
 		-webkit-transform: translateZ(-240px);
 	}
 
-	.transition-cubic.transition-cubic-enter .cubic-face-leave { -webkit-transform: rotateY(0deg) translateZ(240px); }
-	.transition-cubic.transition-cubic-enter .cubic-face-enter { -webkit-transform: rotateY(90deg) translateZ(240px); }
+	.transition-cubic-enter .transition-cubic-view-to-hide { -webkit-transform: rotateY(0deg) translateZ(240px); }
+	.transition-cubic-enter .transition-cubic-view-to-show { -webkit-transform: rotateY(90deg) translateZ(240px); }
 
-	.transition-cubic.transition-cubic-enter.commit-transition {
+	.transition-cubic-enter.commit-transition {
 		-webkit-transform: translateZ(-240px) rotateY(-90deg);
 	}
 
-	.transition-cubic.transition-cubic-leave .cubic-face-leave { -webkit-transform: rotateY(0deg) translateZ(240px); }
-	.transition-cubic.transition-cubic-leave .cubic-face-enter { -webkit-transform: rotateY(-90deg) translateZ(240px); }
+	.transition-cubic-leave .transition-cubic-view-to-hide { -webkit-transform: rotateY(0deg) translateZ(240px); }
+	.transition-cubic-leave .transition-cubic-view-to-show { -webkit-transform: rotateY(-90deg) translateZ(240px); }
 
-	.transition-cubic.transition-cubic-leave.commit-transition {
+	.transition-cubic-leave.commit-transition {
 		-webkit-transform: translateZ(-240px) rotateY(90deg);
 	}
 

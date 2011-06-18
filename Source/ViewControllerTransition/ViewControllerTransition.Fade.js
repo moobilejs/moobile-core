@@ -24,55 +24,56 @@ Moobile.ViewControllerTransition.Fade = new Class({
 
 	Extends: Moobile.ViewControllerTransition,
 
-	element: null,
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 
-	startup: function(viewController, viewControllerStack) {
-		this.element = viewControllerStack.getViewControllerAt(1).view.getElement();
-		return this.parent(viewController, viewControllerStack);
-	},
-
-	attachEvents: function() {
-		this.element.addEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
-
-	detachEvents: function() {
-		this.element.removeEvent('transitionend', this.bound('onTransitionComplete'));
-		return this;
-	},
-
-	setup: function(direction) {
-
-		if (direction == 'enter') {
-			this.element.addClass('transition-fade');
-			this.element.addClass('transition-fade-enter');
-			return this;
+		if (firstViewIn) {
+		
+			this.setTransitionElement(viewToShow);
+			
+			viewToShow.addClass('transition-fade');
+			viewToShow.addClass('transition-fade-enter-first');
+			
+			this.start(function() {
+				viewToShow.removeClass('transition-fade');
+				viewToShow.removeClass('transition-fade-enter-first');
+			});
+			
+		} else {
+			
+			this.setTransitionElement(viewToHide);
+			
+			wrapper.addClass('transition-fade');
+			wrapper.addClass('transition-fade-enter');
+			viewToHide.addClass('transition-fade-view-to-hide');
+			viewToShow.addClass('transition-fade-view-to-show');
+			
+			this.start(function() {
+				wrapper.removeClass('transition-fade');
+				wrapper.removeClass('transition-fade-enter');
+				viewToHide.removeClass('transition-fade-view-to-hide');
+				viewToShow.removeClass('transition-fade-view-to-show');
+			});
 		}
 
-		if (direction == 'leave') {
-			this.element.addClass('transition-fade');
-			this.element.addClass('transition-fade-leave');
-			return this;
-		}
-
-		throw new Error('Unsupported direction');
-
 		return this;
 	},
 
-	start: function(direction) {
-		this.element.addClass('commit-transition');
-		return this;
-	},
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+		
+		this.setTransitionElement(viewToHide);
+			
+		wrapper.addClass('transition-fade');
+		wrapper.addClass('transition-fade-leave');
+		viewToHide.addClass('transition-fade-view-to-hide');
+		viewToShow.addClass('transition-fade-view-to-show');
 
-	onTransitionComplete: function(e) {
-		if (this.running && e.target == this.element) {
-			this.element.removeClass('transition-fade');
-			this.element.removeClass('transition-fade-enter');
-			this.element.removeClass('transition-fade-leave');
-			this.element.removeClass('commit-transition');
-			this.complete();
-		}
+		this.start(function() {
+			wrapper.removeClass('transition-fade');
+			wrapper.removeClass('transition-fade-leave');
+			viewToHide.removeClass('transition-fade-view-to-hide');
+			viewToShow.removeClass('transition-fade-view-to-show');
+		});
+
 		return this;
 	}
 

@@ -27,6 +27,12 @@ Moobile.ViewController = new Class({
 
 	view: null,
 
+	viewControllerTransition: null,
+
+	viewControllerStack: null,
+
+	viewControllerPanel: null,
+
 	modalViewController: null,
 
 	transition: null,
@@ -81,6 +87,9 @@ Moobile.ViewController = new Class({
 		this.view.deactivate();
 		this.view = null;
 		this.modalViewController = null;
+		this.viewControllerTransition = null;
+		this.viewControllerStack = null;
+		this.viewControllerPanel = null;
 		this.transition = null;
 		this.window = null;
 		return this;
@@ -117,15 +126,6 @@ Moobile.ViewController = new Class({
 	dismissModalViewController: function() {
 		// TODO: implementation
 		return this;
-	},
-
-	setTransition: function(transition) {
-		this.transition = transition;
-		return this;
-	},
-
-	getTransition: function() {
-		return this.transition;
 	},
 
 	orientationDidChange: function(orientation) {

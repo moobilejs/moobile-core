@@ -25,16 +25,15 @@ Moobile.ViewControllerStack = new Class({
 
 	Extends: Moobile.ViewController,
 
-	topViewController: null,
-
 	viewControllers: [],
 
 	viewControllerRequest: null,
 
+	topViewController: null,
+
 	initialize: function(view) {
 		this.parent(view);
 		this.viewControllerRequest = new Moobile.Request.ViewController(this);
-		this.view.hide();
 		return this;
 	},
 
@@ -56,6 +55,8 @@ Moobile.ViewControllerStack = new Class({
 
 	pushViewController: function(viewController, viewControllerTransition) {
 
+		this.window.disableUserInput();
+
 		var viewControllerIndex = this.viewControllers.indexOf(viewController);
 		if (viewControllerIndex == -1) {
 			viewController.viewControllerStack = this;
@@ -66,45 +67,29 @@ Moobile.ViewControllerStack = new Class({
 
 		this.viewControllers.push(viewController);
 
-		if (this.viewControllers.length == 1) {
+		this.view.addChildView(viewController.view);
+		viewController.activate();
+		viewController.viewWillEnter();
 
-			this.view.fade('hide');
-			this.view.show();
-
-			this.view.addChildView(viewController.view);
-			viewController.activate();
-			viewController.viewWillEnter();
-			viewController.viewDidEnter();
-
-			this.view.fade('show');
-
-			this.window.position();
-
-		} else {
-
-			this.window.disableUserInput();
-
-			var transition = viewControllerTransition || viewController.getTransition();
-			if (transition && typeOf(transition) == 'class') {
-				transition = Class.instanciate(transition);
-			}
-
-			this.view.addChildView(viewController.view);
-			viewController.setTransition(transition);
-			viewController.activate();
-			viewController.viewWillEnter();
-
-			this.viewControllers.getLast(1).viewWillLeave();
-
-			if (transition) {
-				transition.startup(viewController, this);
-				transition.chain(this.bound('onPushTransitionCompleted'));
-				transition.prepare('enter');
-				transition.execute('enter');
-			} else {
-				this.onPushTransitionCompleted();
-			}
+		var viewControllerBefore = this.viewControllers.getLast(1);
+		if (viewControllerBefore) {
+			viewControllerBefore.viewWillLeave();
 		}
+
+		var viewToShow = viewController.view;
+		var viewToHide = viewControllerBefore ? viewControllerBefore.view : null;
+
+		viewControllerTransition = viewControllerTransition || new Moobile.ViewControllerTransition.Slide();
+		viewControllerTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
+		viewControllerTransition.enter(
+			viewToShow,
+			viewToHide,
+			this.view,
+			this.view.getContent(),
+			this.viewControllers.length == 1
+		);
+
+		viewController.viewControllerTransition = viewControllerTransition;
 
 		this.topViewController = viewController;
 
@@ -112,10 +97,12 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	onPushTransitionCompleted: function() {
-		this.viewControllers.getLast()
+		this.viewControllers.getLast(0)
 			.viewDidEnter();
-		this.viewControllers.getLast(1)
-			.viewDidLeave();
+		if (this.viewControllers.length > 1) {
+			this.viewControllers.getLast(1)
+				.viewDidLeave();
+		}
 
 		this.window.enableUserInput();
 
@@ -123,45 +110,49 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	popViewController: function() {
-		if (this.viewControllers.length > 1) {
-			this.viewControllers.getLast(1).viewWillEnter();
-			this.viewControllers.getLast(0).viewWillLeave();
 
-			this.window.disableUserInput();
+		if (this.viewControllers.length <= 1)
+			return this;
 
-			var transition = this.viewControllers.getLast().getTransition();
-			if (transition) {
-				transition.chain(this.bound('onPopTransitionCompleted'));
-				transition.prepare('leave');
-				transition.execute('leave');
-			} else {
-				this.onPopTransitionCompleted();
-			}
+		this.window.disableUserInput();
 
-			this.topViewController = this.viewControllers.getLast(1);
-		}
+		var viewController = this.viewControllers.getLast();
+		var viewControllerBefore = this.viewControllers.getLast(1);
+		viewController.viewWillLeave();
+		viewControllerBefore.viewWillEnter();
+
+		var viewControllerTransition = this.topViewController.viewControllerTransition;
+		viewControllerTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
+		viewControllerTransition.leave(
+			viewControllerBefore.view,
+			viewController.view,
+			this.view,
+			this.view.getContent()
+		);
+
+		this.topViewController = this.viewControllers.getLast(1);
+
 		return this;
 	},
 
 	popViewControllerUntil: function(viewController) {
-		if (this.viewControllers.length > 1) {
 
-			this.window.disableUserInput();
+		if (this.viewControllers.length <= 1)
+			return this;
 
-			var index = this.viewControllers.indexOf(viewController);
-			if (index > -1) {
-				for (var i = this.viewControllers.length - 2; i > index; i--) {
-					var removedViewController = this.viewControllers[i];
-					removedViewController.viewWillLeave();
-					removedViewController.viewDidLeave();
-					removedViewController.viewDidRemove();
-					removedViewController.deactivate();
-					this.viewControllers.splice(i, 1);
-				}
+		var index = this.viewControllers.indexOf(viewController);
+		if (index > -1) {
+			for (var i = this.viewControllers.length - 2; i > index; i--) {
+				var removedViewController = this.viewControllers[i];
+				removedViewController.viewWillLeave();
+				removedViewController.viewDidLeave();
+				removedViewController.viewDidRemove();
+				removedViewController.deactivate();
+				this.viewControllers.splice(i, 1);
 			}
-
-			this.popViewController();
 		}
+
+		this.popViewController();
 
 		return this;
 	},
@@ -169,7 +160,7 @@ Moobile.ViewControllerStack = new Class({
 	onPopTransitionCompleted: function() {
 		this.viewControllers.getLast(1)
 			.viewDidEnter();
-		this.viewControllers.getLast()
+		this.viewControllers.getLast(0)
 			.viewDidLeave();
 		this.viewControllers.pop()
 			.viewDidRemove()
@@ -182,14 +173,6 @@ Moobile.ViewControllerStack = new Class({
 
 	getViewControllers: function() {
 		return this.viewControllers;
-	},
-
-	getViewControllersCount: function() {
-		return this.viewControllers.length;
-	},
-
-	getViewControllerAt: function(offset) {
-		return this.viewControllers.getLast(offset);
 	},
 
 	getTopViewController: function() {
@@ -211,16 +194,6 @@ Moobile.ViewControllerStack = new Class({
 	orientationDidChange: function(orientation) {
 		this.viewControllers.each(function(viewController) { viewController.orientationDidChange(orientation) });
 		return this.parent();
-	},
-
-	/* Prevent default behavior */
-
-	viewWillEnter: function() {
-		return this;
-	},
-
-	viewDidEnter: function() {
-		return this;
 	}
 
 });
