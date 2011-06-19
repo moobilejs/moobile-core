@@ -18,9 +18,9 @@ sources:
 
   - "Source/Browser/Browser.Platform.js"
   - "Source/Core/Core.js"
-  - "Source/Event/Event.js"
-  - "Source/Event/Event.ClickOver.js"
-  - "Source/Event/Event.TouchOver.js"
+  - "Source/Event/Event.Mobile.js"
+  - "Source/Event/Event.Ready.js"
+  - "Source/Event/Event.Click.js"
   - "Source/Request/Request.js"
   - "Source/Request/Request.ViewController.js"
   - "Source/UI/UI.Control.js"

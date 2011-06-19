@@ -63,9 +63,9 @@ requires:
 	- Mobile/Touch
 	- Mobile/Touchhold
 	- Browser.Platform
-	- Event
-	- Event.ClickOver
-	- Event.TouchOver
+	- Event.Ready
+	- Event.Click
+	- Event.Mobile
 
 provides:
 	- Core

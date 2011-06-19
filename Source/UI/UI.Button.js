@@ -61,17 +61,17 @@ Moobile.UI.Button = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.bound('onClick'));
-		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
-		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		this.element.addEvent('click', this.bound('onClick'));
+		this.element.addEvent('mouseup', this.bound('onMouseUp'))
+		this.element.addEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
-		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
-		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		this.element.removeEvent('click', this.bound('onClick'));
+		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
+		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
 	},
@@ -87,21 +87,21 @@ Moobile.UI.Button = new Class({
 
 	onClick: function(e) {
 		e.target = this;
-		this.fireEvent(Event.CLICK, e);
+		this.fireEvent('click', e);
 		return this;
 	},
 
 	onMouseDown: function(e) {
 		e.target = this;
 		this.element.addClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_DOWN, e);
+		this.fireEvent('mousedown', e);
 		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
 		this.element.removeClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_UP, e);
+		this.fireEvent('mouseup', e);
 		return this;
 	}
 

@@ -61,8 +61,8 @@ Moobile.UI.List = new Class({
 	attachItem: function(element) {
 		var item = new Moobile.UI.ListItem(element);
 		item.setSelectable(this.options.selectable);
-		item.addEvent(Event.SELECT, this.bound('onSelect'));
-		item.addEvent(Event.DESELECT, this.bound('onDeselect'));
+		item.addEvent('select', this.bound('onSelect'));
+		item.addEvent('deselect', this.bound('onDeselect'));
 		this.items.push(item);
 		return this;
 	},
@@ -114,13 +114,13 @@ Moobile.UI.List = new Class({
 			this.selectedItems = []
 		}
 		this.selectedItems.push(item);
-		this.fireEvent(Event.SELECT, item);
+		this.fireEvent('select', item);
 		return this;
 	},
 
 	setItemAsDeselected: function(item) {
 		this.selectedItems.remove(item);
-		this.fireEvent(Event.DESELECT, item);
+		this.fireEvent('deselect', item);
 		return this;
 	},
 

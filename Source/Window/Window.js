@@ -42,12 +42,12 @@ Moobile.Window = new Class({
 	},
 
 	attachEvents: function() {
-		document.body.addEvent(Event.ORIENTATION_CHANGE, this.bound('onOrientationChange'));
+		document.body.addEvent('orientationchange', this.bound('onOrientationChange'));
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		document.body.removeEvent(Event.ORIENTATION_CHANGE, this.bound('onOrientationChange'));
+		document.body.removeEvent('orientationchange', this.bound('onOrientationChange'));
 		return this;
 	},
 

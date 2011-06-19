@@ -9102,9 +9102,11 @@ Element.defineCustomEvent(name, {
 /*
 ---
 
-name: Event
+name: Event.Ready
 
-description: Provide contants for each events.
+description: Provides an event that indicates the app is loaded. This event is
+             based on the domready event or other third party events such as
+			 deviceready on phonegap.
 
 license: MIT-style license.
 
@@ -9112,44 +9114,90 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Custom-Event/Element.defineCustomEvent
+	- Browser.Platform
 
 provides:
-	- Event
+	- Event.Ready
 
 ...
 */
 
-Event.READY = Browser.Platform.phonegap ? 'deviceready' : 'domready';
+(function() {
 
-Event.PINCH = 'pinch';
-Event.SWIPE = 'swipe';
+	Element.NativeEvents.deviceready = 1;
 
-Event.CLICK			= Browser.Platform.desktop ? 'clickover' : 'touchover';
-Event.MOUSE_DOWN	= Browser.Platform.desktop ? 'mousedown' : 'touchstart';
-Event.MOUSE_MOVE	= Browser.Platform.desktop ? 'mousemove' : 'touchmove';
-Event.MOUSE_UP		= Browser.Platform.desktop ? 'mouseup'   : 'touchend';
+	var domready = Browser.Platform.phonegap ? 'deviceready' : 'domready';
 
-Event.TOUCH_HOLD	= 'touchhold';
-Event.TOUCH_CANCEL	= 'touchcancel';
+	var onReady = function(e) {
+		this.fireEvent('ready');
+	};
 
-Event.ORIENTATION_CHANGE = 'orientationchange';
+	Element.defineCustomEvent('ready', {
 
-Event.GESTURE_START		= 'gesturestart';
-Event.GESTURE_CHANGE	= 'gesturechange';
-Event.GESTURE_END		= 'gestureend';
+		onSetup: function(){
+			this.addEvent(domready, onReady);
+		},
 
-Event.SELECT			= 'select';
-Event.DESELECT			= 'deselect';
+		onTeardown: function(){
+			this.removeEvent(domready, onReady);
+		}
 
-if (Browser.Platform.phonegap) Element.NativeEvents.deviceready = 1;
+	});
+
+})();
+
+
+
 
 /*
 ---
 
-name: Event.ClickOver
+name: Browser.Mobile
 
-description: Provide a click event that is not triggered when the user clicks
-             and move the mouse.
+description: Provides useful information about the browser environment
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Browser]
+
+provides: Browser.Mobile
+
+...
+*/
+
+(function(){
+
+Browser.Device = {
+	name: 'other'
+};
+
+if (Browser.Platform.ios){
+	var device = navigator.userAgent.toLowerCase().match(/(ip(ad|od|hone))/)[0];
+	
+	Browser.Device[device] = true;
+	Browser.Device.name = device;
+}
+
+if (this.devicePixelRatio == 2)
+	Browser.hasHighResolution = true;
+
+Browser.isMobile = !['mac', 'linux', 'win'].contains(Browser.Platform.name);
+
+}).call(this);
+
+
+/*
+---
+
+name: Event.Click
+
+description: Provides a click event that is not triggered when the user clicks
+             and moves the mouse. This overrides the default click event. It's
+			 important to include Mobile/Click before this class otherwise the
+			 click event will be deleted.
 
 license: MIT-style license.
 
@@ -9157,9 +9205,13 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Custom-Event/Element.defineCustomEvent
+	- Mobile/Browser.Mobile
+	- Mobile/Click
+	- Mobile/Touch
 
 provides:
-	- Event.ClickOver
+	- Event.Click
 
 ...
 */
@@ -9171,7 +9223,20 @@ provides:
 	var down = false;
 	var valid = true;
 
+	var mousemove = 'mousemove';
+	var mousedown = 'mousedown';
+	var mouseup = 'mouseup';
+	var click = 'click';
+
+	if (Browser.isMobile) {
+		mousemove = 'touchmove';
+		mousedown = 'touchstart';
+		mouseup = 'touchend';
+		click = 'touchend';
+	}
+
 	var onMouseDown = function(e) {
+		valid = true;
 		down = true;
 		x = e.page.x;
 		y = e.page.y;
@@ -9181,7 +9246,7 @@ provides:
 		if (down) {
 			valid = !moved(e);
 			if (valid == false) {
-				this.removeEvent('mouseup', onMouseUp).fireEvent('mouseup', e).addEvent('mouseup', onMouseUp);
+				this.removeEvent(mouseup, onMouseUp).fireEvent(mouseup, e).addEvent(mouseup, onMouseUp);
 			}
 		}
 	};
@@ -9201,37 +9266,36 @@ provides:
 		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
-	Element.Events.clickover = {
+	Element.defineCustomEvent('click', {
 
-		base: 'click',
+		base: click,
 
 		onAdd: function() {
-			this.addEvent('mousedown', onMouseDown);
-			this.addEvent('mousemove', onMouseMove);
-			this.addEvent('mouseup', onMouseUp);
+			this.addEvent(mousedown, onMouseDown);
+			this.addEvent(mousemove, onMouseMove);
+			this.addEvent(mouseup, onMouseUp);
 		},
 
 		onRemove: function() {
-			this.removeEvent('mousedown', onMouseDown);
-			this.removeEvent('mousemove', onMouseMove);
-			this.removeEvent('mouseup', onMouseUp);
+			this.removeEvent(mousedown, onMouseDown);
+			this.removeEvent(mousemove, onMouseMove);
+			this.removeEvent(mouseup, onMouseUp);
 		},
 
 		condition: function(e) {
 			return valid;
 		}
 
-	};
+	});
 
 })();
 
 /*
 ---
 
-name: Event.TouchOver
+name: Event.Mobile
 
-description: Provide a touch event that is not triggered when the user touch
-             and moves.
+description:
 
 license: MIT-style license.
 
@@ -9239,73 +9303,36 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Custom-Event/Element.defineCustomEvent
+	- Mobile/Browser.Mobile
+	- Mobile/Click
+	- Mobile/Touch
 
 provides:
-	- Event.TouchOver
+	- Event.Mobile
 
 ...
 */
 
-(function(){
+if (Browser.isMobile) {
 
-	var x = 0;
-	var y = 0;
-	var down = false;
-	var valid = true;
+	delete Element.NativeEvents['mousedown'];
+	delete Element.NativeEvents['mousemove'];
+	delete Element.NativeEvents['mouseup'];
 
-	var onTouchStart = function(e) {
-		x = e.page.x;
-		y = e.page.y;
-		down = true;
-	};
+	Element.defineCustomEvent('mousedown', {
+		base: 'touchstart'
+	});
 
-	var onTouchMove = function(e) {
-		if (down) {
-			valid = !moved(e);
-			if (valid == false) {
-				this.removeEvent('touchend', onTouchEnd).fireEvent('touchend', e).addEvent('touchend', onTouchEnd);
-			}
-		}
-	};
+	Element.defineCustomEvent('mousemove', {
+		base: 'touchmove'
+	});
 
-	var onTouchEnd = function(e) {
-		if (down) {
-			down = false;
-			valid = !moved(e);
-		}
-	};
+	Element.defineCustomEvent('mouseup', {
+		base: 'touchend'
+	});
 
-	var moved = function(e) {
-		var xmax = x + 3;
-		var xmin = x - 3;
-		var ymax = y + 3;
-		var ymin = y - 3;
-		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
-	};
-
-	Element.Events.touchover = {
-
-		base: 'touchend',
-
-		onAdd: function() {
-			this.addEvent('touchstart', onTouchStart);
-			this.addEvent('touchmove', onTouchMove);
-			this.addEvent('touchend', onTouchEnd);
-		},
-
-		onRemove: function() {
-			this.removeEvent('touchstart', onTouchStart);
-			this.removeEvent('touchmove', onTouchMove);
-			this.removeEvent('touchend', onTouchEnd);
-		},
-
-		condition: function(e) {
-			return valid;
-		}
-
-	};
-
-})();
+}
 
 /*
 ---
@@ -9372,9 +9399,9 @@ requires:
 	- Mobile/Touch
 	- Mobile/Touchhold
 	- Browser.Platform
-	- Event
-	- Event.ClickOver
-	- Event.TouchOver
+	- Event.Ready
+	- Event.Click
+	- Event.Mobile
 
 provides:
 	- Core
@@ -9996,17 +10023,17 @@ Moobile.UI.Button = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.bound('onClick'));
-		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
-		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		this.element.addEvent('click', this.bound('onClick'));
+		this.element.addEvent('mouseup', this.bound('onMouseUp'))
+		this.element.addEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
-		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
-		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		this.element.removeEvent('click', this.bound('onClick'));
+		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
+		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
 	},
@@ -10022,21 +10049,21 @@ Moobile.UI.Button = new Class({
 
 	onClick: function(e) {
 		e.target = this;
-		this.fireEvent(Event.CLICK, e);
+		this.fireEvent('click', e);
 		return this;
 	},
 
 	onMouseDown: function(e) {
 		e.target = this;
 		this.element.addClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_DOWN, e);
+		this.fireEvent('mousedown', e);
 		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
 		this.element.removeClass(this.options.className + '-down');
-		this.fireEvent(Event.MOUSE_UP, e);
+		this.fireEvent('mouseup', e);
 		return this;
 	}
 
@@ -10419,17 +10446,17 @@ Moobile.UI.ListItem = new Class({
 	},
 
 	attachEvents: function() {
-		this.element.addEvent(Event.CLICK, this.bound('onClick'));
-		this.element.addEvent(Event.MOUSE_UP, this.bound('onMouseUp'))
-		this.element.addEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		this.element.addEvent('click', this.bound('onClick'));
+		this.element.addEvent('mouseup', this.bound('onMouseUp'))
+		this.element.addEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent(Event.CLICK, this.bound('onClick'));
-		this.element.removeEvent(Event.MOUSE_UP, this.bound('onMouseUp'));
-		this.element.removeEvent(Event.MOUSE_DOWN, this.bound('onMouseDown'));
+		this.element.removeEvent('click', this.bound('onClick'));
+		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
+		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
 	},
@@ -10447,10 +10474,10 @@ Moobile.UI.ListItem = new Class({
 			this.selected = selected;
 			if (this.selected) {
 				this.addClass(this.options.className + '-selected');
-				this.fireEvent(Event.SELECT, this);
+				this.fireEvent('select', this);
 			} else {
 				this.removeClass(this.options.className + '-selected');
-				this.fireEvent(Event.DESELECT, this);
+				this.fireEvent('deselect', this);
 			}
 		}
 		return this;
@@ -10462,21 +10489,21 @@ Moobile.UI.ListItem = new Class({
 
 	onClick: function(e) {
 		e.target = this;
-		this.fireEvent(Event.CLICK, e);
+		this.fireEvent('click', e);
 		if (this.options.selectable) this.toggleSelected();
 		return this;
 	},
 
 	onMouseDown: function(e) {
 		e.target = this;
-		this.fireEvent(Event.MOUSE_DOWN, e);
+		this.fireEvent('mousedown', e);
 		if (this.options.selectable) this.element.addClass(this.options.className + '-down');
 		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
-		this.fireEvent(Event.MOUSE_UP, e);
+		this.fireEvent('mouseup', e);
 		if (this.options.selectable) this.element.removeClass(this.options.className + '-down');
 		return this;
 	}
@@ -10546,8 +10573,8 @@ Moobile.UI.List = new Class({
 	attachItem: function(element) {
 		var item = new Moobile.UI.ListItem(element);
 		item.setSelectable(this.options.selectable);
-		item.addEvent(Event.SELECT, this.bound('onSelect'));
-		item.addEvent(Event.DESELECT, this.bound('onDeselect'));
+		item.addEvent('select', this.bound('onSelect'));
+		item.addEvent('deselect', this.bound('onDeselect'));
 		this.items.push(item);
 		return this;
 	},
@@ -10599,13 +10626,13 @@ Moobile.UI.List = new Class({
 			this.selectedItems = []
 		}
 		this.selectedItems.push(item);
-		this.fireEvent(Event.SELECT, item);
+		this.fireEvent('select', item);
 		return this;
 	},
 
 	setItemAsDeselected: function(item) {
 		this.selectedItems.remove(item);
-		this.fireEvent(Event.DESELECT, item);
+		this.fireEvent('deselect', item);
 		return this;
 	},
 
@@ -11666,7 +11693,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 				var navigationBackButton = new Moobile.UI.BarButton();
 				navigationBackButton.setStyle(Moobile.UI.BarButtonStyle.Back);
 				navigationBackButton.setText(backButtonTitle);
-				navigationBackButton.addEvent(Event.CLICK, this.bound('onBackButtonClick'));
+				navigationBackButton.addEvent('click', this.bound('onBackButtonClick'));
 				navigationBar.setLeftButton(navigationBackButton);
 			}
 		}
@@ -12161,12 +12188,12 @@ Moobile.Window = new Class({
 	},
 
 	attachEvents: function() {
-		document.body.addEvent(Event.ORIENTATION_CHANGE, this.bound('onOrientationChange'));
+		document.body.addEvent('orientationchange', this.bound('onOrientationChange'));
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		document.body.removeEvent(Event.ORIENTATION_CHANGE, this.bound('onOrientationChange'));
+		document.body.removeEvent('orientationchange', this.bound('onOrientationChange'));
 		return this;
 	},
 

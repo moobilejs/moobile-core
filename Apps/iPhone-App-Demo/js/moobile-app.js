@@ -21,12 +21,12 @@ Demo.ViewController.Home = new Class({
 	},
 
 	attachEvents: function() {
-		this.list.addEvent(Event.SELECT, this.bound('onListItemSelect'));
+		this.list.addEvent('select', this.bound('onListItemSelect'));
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		this.list.removeEvent(Event.DESELECT, this.bound('onListItemSelect'));
+		this.list.removeEvent('deselect', this.bound('onListItemSelect'));
 		return this.parent();
 	},
 
@@ -89,14 +89,14 @@ Demo.ViewController.UI = new Class({
 	},
 
 	attachEvents: function() {
-		this.barStyleList.addEvent(Event.SELECT, this.bound('onBarStyleListSelect'));
-		this.barButtonStyleList.addEvent(Event.SELECT, this.bound('onBarButtonStyleListSelect'));
+		this.barStyleList.addEvent('select', this.bound('onBarStyleListSelect'));
+		this.barButtonStyleList.addEvent('select', this.bound('onBarButtonStyleListSelect'));
 		return this.parent();
 	},
 
 	detachEvents: function() {
-		this.barStyleList.removeEvent(Event.SELECT, this.bound('onBarStyleListSelect'));
-		this.barButtonStyleList.removeEvent(Event.SELECT, this.bound('onBarButtonStyleListSelect'));
+		this.barStyleList.removeEvent('select', this.bound('onBarStyleListSelect'));
+		this.barButtonStyleList.removeEvent('select', this.bound('onBarButtonStyleListSelect'));
 		return this.parent();
 	},
 
