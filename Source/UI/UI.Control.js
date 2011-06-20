@@ -31,9 +31,27 @@ Moobile.UI.Control = new Class({
 		styleName: null
 	},
 
-	assemble: function() {
-		this.parent();
+	initialize: function(element, options) {
+		this.parent(element, options);
+		this.setup();
+		this.attachEvents();
+		return this;
+	},
+
+	setup: function() {
 		if (this.options.styleName) this.setStyle(this.options.styleName);
+		return this;
+	},
+
+	teardown: function() {
+		return this;
+	},
+
+	attachEvents: function() {
+		return this;
+	},
+
+	detachEvents: function() {
 		return this;
 	},
 
@@ -78,6 +96,13 @@ Moobile.UI.Control = new Class({
 
 	isNative: function() {
 		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
+	},
+
+	destroy: function() {
+		this.detachEvents();
+		this.teardown();
+		this.parent();
+		return this;
 	}
 
 });

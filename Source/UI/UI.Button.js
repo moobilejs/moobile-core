@@ -31,13 +31,13 @@ Moobile.UI.Button = new Class({
 		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.injectContent();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyContent();
 		this.parent();
 		return this;

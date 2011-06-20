@@ -10,7 +10,9 @@ Demo.ViewController.Home = new Class({
 
 	startup: function() {
 		this.parent();
+		trace('-------------');
 		this.list = this.view.list;
+
 		return this;
 	},
 

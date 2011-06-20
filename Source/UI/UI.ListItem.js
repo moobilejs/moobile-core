@@ -32,13 +32,13 @@ Moobile.UI.ListItem = new Class({
 		selectable: true
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.injectWrapper();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyWrapper();
 		this.parent();
 		return this;

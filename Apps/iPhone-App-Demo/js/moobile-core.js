@@ -9730,31 +9730,12 @@ Moobile.UI.Element = new Class({
 		this.setElementOptions();
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
-		this.assemble();
-		this.attachEvents();
+		this.name = this.element.getProperty('data-name');
 		return this;
 	},
 
 	create: function() {
 		return new Element('div');
-	},
-
-	assemble: function() {
-		this.name = this.element.getProperty('data-name');
-		return this;
-	},
-
-	dismantle: function() {
-		this.name = null;
-		return this;
-	},
-
-	attachEvents: function() {
-		return this;
-	},
-
-	detachEvents: function() {
-		return this;
 	},
 
 	setElementOptions: function() {
@@ -9836,8 +9817,6 @@ Moobile.UI.Element = new Class({
 	},
 
 	destroy: function() {
-		this.detachEvents();
-		this.dismantle();
 		this.element.destroy();
 		this.element = null;
 		return this;
@@ -9878,9 +9857,27 @@ Moobile.UI.Control = new Class({
 		styleName: null
 	},
 
-	assemble: function() {
-		this.parent();
+	initialize: function(element, options) {
+		this.parent(element, options);
+		this.setup();
+		this.attachEvents();
+		return this;
+	},
+
+	setup: function() {
 		if (this.options.styleName) this.setStyle(this.options.styleName);
+		return this;
+	},
+
+	teardown: function() {
+		return this;
+	},
+
+	attachEvents: function() {
+		return this;
+	},
+
+	detachEvents: function() {
 		return this;
 	},
 
@@ -9925,6 +9922,13 @@ Moobile.UI.Control = new Class({
 
 	isNative: function() {
 		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
+	},
+
+	destroy: function() {
+		this.detachEvents();
+		this.teardown();
+		this.parent();
+		return this;
 	}
 
 });
@@ -9993,13 +9997,13 @@ Moobile.UI.Button = new Class({
 		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.injectContent();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyContent();
 		this.parent();
 		return this;
@@ -10150,13 +10154,13 @@ Moobile.UI.Bar = new Class({
 		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.injectContent();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyContent();
 		this.parent();
 		return this;
@@ -10225,13 +10229,13 @@ Moobile.UI.Bar.Navigation = new Class({
 		className: 'ui-navigation-bar'
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.injectCaption();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyCaption();
 		this.parent();
 		return this;
@@ -10420,13 +10424,13 @@ Moobile.UI.ListItem = new Class({
 		selectable: true
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.injectWrapper();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyWrapper();
 		this.parent();
 		return this;
@@ -10546,13 +10550,13 @@ Moobile.UI.List = new Class({
 		multiple: false
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.attachItems();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyItems();
 		this.parent();
 		return this;
@@ -10704,25 +10708,20 @@ Moobile.View = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.setElement(element);
-		this.setElementOptions();
-		this.setOptions(options);
-		this.element.addClass(this.options.className);
-		this.assemble();
+		this.parent(element, options);
+		this.setup();
 		return this;
 	},
 
-	assemble: function() {
-		this.parent();
+	setup: function() {
 		if (this.options.createContent) this.injectContent();
 		if (this.options.createWrapper) this.injectWrapper();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		if (this.options.createContent) this.destroyContent();
 		if (this.options.createWrapper) this.destroyWrapper();
-		this.parent();
 		return this;
 	},
 
@@ -10759,12 +10758,10 @@ Moobile.View = new Class({
 	},
 
 	attachEvents: function() {
-  		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		this.parent();
 		return this;
 	},
 
@@ -10817,7 +10814,6 @@ Moobile.View = new Class({
 		this.childViews.push(view);
 		view.setParentView(this);
 		view.setWindow(this.window);
-		view.activate();
 		this.grab(view, where, context);
 		return this;
 	},
@@ -11009,9 +11005,9 @@ Moobile.View = new Class({
 	},
 
 	destroy: function() {
-		this.dismantle();
-		this.element.destroy();
-		this.element = null;
+		this.detachEvents();
+		this.teardown();
+		this.parent();
 		return this;
 	},
 

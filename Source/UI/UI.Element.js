@@ -50,31 +50,12 @@ Moobile.UI.Element = new Class({
 		this.setElementOptions();
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
-		this.assemble();
-		this.attachEvents();
+		this.name = this.element.getProperty('data-name');
 		return this;
 	},
 
 	create: function() {
 		return new Element('div');
-	},
-
-	assemble: function() {
-		this.name = this.element.getProperty('data-name');
-		return this;
-	},
-
-	dismantle: function() {
-		this.name = null;
-		return this;
-	},
-
-	attachEvents: function() {
-		return this;
-	},
-
-	detachEvents: function() {
-		return this;
 	},
 
 	setElementOptions: function() {
@@ -156,8 +137,6 @@ Moobile.UI.Element = new Class({
 	},
 
 	destroy: function() {
-		this.detachEvents();
-		this.dismantle();
 		this.element.destroy();
 		this.element = null;
 		return this;

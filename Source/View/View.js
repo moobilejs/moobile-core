@@ -48,25 +48,20 @@ Moobile.View = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.setElement(element);
-		this.setElementOptions();
-		this.setOptions(options);
-		this.element.addClass(this.options.className);
-		this.assemble();
+		this.parent(element, options);
+		this.setup();
 		return this;
 	},
 
-	assemble: function() {
-		this.parent();
+	setup: function() {
 		if (this.options.createContent) this.injectContent();
 		if (this.options.createWrapper) this.injectWrapper();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		if (this.options.createContent) this.destroyContent();
 		if (this.options.createWrapper) this.destroyWrapper();
-		this.parent();
 		return this;
 	},
 
@@ -103,12 +98,10 @@ Moobile.View = new Class({
 	},
 
 	attachEvents: function() {
-  		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		this.parent();
 		return this;
 	},
 
@@ -161,7 +154,6 @@ Moobile.View = new Class({
 		this.childViews.push(view);
 		view.setParentView(this);
 		view.setWindow(this.window);
-		view.activate();
 		this.grab(view, where, context);
 		return this;
 	},
@@ -353,9 +345,9 @@ Moobile.View = new Class({
 	},
 
 	destroy: function() {
-		this.dismantle();
-		this.element.destroy();
-		this.element = null;
+		this.detachEvents();
+		this.teardown();
+		this.parent();
 		return this;
 	},
 

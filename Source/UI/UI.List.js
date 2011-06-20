@@ -34,13 +34,13 @@ Moobile.UI.List = new Class({
 		multiple: false
 	},
 
-	assemble: function() {
+	setup: function() {
 		this.parent();
 		this.attachItems();
 		return this;
 	},
 
-	dismantle: function() {
+	teardown: function() {
 		this.destroyItems();
 		this.parent();
 		return this;
