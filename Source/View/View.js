@@ -185,7 +185,7 @@ Moobile.View = new Class({
 	attachChildControl: function(element) {
 		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
 		this.childControls.push(control);
-		this.memberize(control);
+		Object.member(this, control, control.name);
 		return this;
 	},
 
@@ -202,7 +202,7 @@ Moobile.View = new Class({
 
 	addChildControl: function(control, where, context) {
 		this.grab(control, where, context);
-		this.memberize(control);
+		Object.member(this, control, control.name);
 		return this;
 	},
 
@@ -230,7 +230,7 @@ Moobile.View = new Class({
 
 	attachChildElement: function(element) {
 		this.childElements.push(element);
-		this.memberize(element);
+		Object.member(this, element, element.getProperty('data-name'));
 		return this;
 	},
 
@@ -265,16 +265,6 @@ Moobile.View = new Class({
 	removeChildElement: function(element) {
 		var removed = this.childElements.remove(element);
 		if (removed) element.dispose();
-		return this;
-	},
-
-	memberize: function(element) {
-		if (element.name) {
-			element._prop = element.name.camelize();
-			if (this[element._prop] == null || this[element._prop] == undefined) {
-				this[element._prop] = element;
-			}
-		}
 		return this;
 	},
 

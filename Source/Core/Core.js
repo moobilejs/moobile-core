@@ -63,6 +63,7 @@ requires:
 	- Mobile/Touch
 	- Mobile/Touchhold
 	- Browser.Platform
+	- Object
 	- Event.Ready
 	- Event.Click
 	- Event.Mobile

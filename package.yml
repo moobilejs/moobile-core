@@ -18,6 +18,7 @@ sources:
 
   - "Source/Browser/Browser.Platform.js"
   - "Source/Core/Core.js"
+  - "Source/Types/Object.js"
   - "Source/Event/Event.Mobile.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.Click.js"

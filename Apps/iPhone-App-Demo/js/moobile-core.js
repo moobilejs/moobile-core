@@ -9102,6 +9102,40 @@ Element.defineCustomEvent(name, {
 /*
 ---
 
+name: Object
+
+description: Provides extra methods to the object class.
+
+license: MIT-style license.
+
+author:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- Object
+
+...
+*/
+
+Object.extend({
+
+	member: function(source, reference, name) {
+		if (name) {
+			name = name.camelize();
+			if (source[name] == null || source[name] == undefined) {
+				source[name] = reference;
+			}
+		}
+		return source;
+	}
+
+})
+
+/*
+---
+
 name: Event.Ready
 
 description: Provides an event that indicates the app is loaded. This event is
@@ -9399,6 +9433,7 @@ requires:
 	- Mobile/Touch
 	- Mobile/Touchhold
 	- Browser.Platform
+	- Object
 	- Event.Ready
 	- Event.Click
 	- Event.Mobile
@@ -10845,7 +10880,7 @@ Moobile.View = new Class({
 	attachChildControl: function(element) {
 		var control = Class.from(element.getProperty('data-control') || 'UI.Control', element);
 		this.childControls.push(control);
-		this.memberize(control);
+		Object.member(this, control, control.name);
 		return this;
 	},
 
@@ -10862,7 +10897,7 @@ Moobile.View = new Class({
 
 	addChildControl: function(control, where, context) {
 		this.grab(control, where, context);
-		this.memberize(control);
+		Object.member(this, control, control.name);
 		return this;
 	},
 
@@ -10890,7 +10925,7 @@ Moobile.View = new Class({
 
 	attachChildElement: function(element) {
 		this.childElements.push(element);
-		this.memberize(element);
+		Object.member(this, element, element.getProperty('data-name'));
 		return this;
 	},
 
@@ -10925,16 +10960,6 @@ Moobile.View = new Class({
 	removeChildElement: function(element) {
 		var removed = this.childElements.remove(element);
 		if (removed) element.dispose();
-		return this;
-	},
-
-	memberize: function(element) {
-		if (element.name) {
-			element._prop = element.name.camelize();
-			if (this[element._prop] == null || this[element._prop] == undefined) {
-				this[element._prop] = element;
-			}
-		}
 		return this;
 	},
 
