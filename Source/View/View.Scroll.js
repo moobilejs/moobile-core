@@ -37,17 +37,17 @@ Moobile.View.Scroll = new Class({
 	scrolled: null,
 
 	options: {
-		createWrapper: true,
-		createContent: true
+		withWrapper: true,
+		withContent: true
 	},
 
-	startup: function() {
-		this.parent();
+	init: function() {
 		this.attachScroller();
+		this.parent();
 		return this;
 	},
 
-	shutdown: function() {
+	release: function() {
 		this.detachScroller();
 		this.parent();
 		return this;
@@ -82,7 +82,7 @@ Moobile.View.Scroll = new Class({
 		if (this.scroller) {
 			this.updateScrollerAutomatically(false);
 			this.scrolled = this.content.getStyle('transform');
-			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/)
+			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();
 			this.scroller = null;
@@ -110,12 +110,13 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	willEnter: function() {
+	show: function() {
+		this.parent();
 		this.enableScroller();
-		return this.parent();
+		return this;
 	},
 
-	didLeave: function() {
+	hide: function() {
 		this.disableScroller();
 		return this.parent();
 	},

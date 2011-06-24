@@ -78,13 +78,13 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
-		this.view.activate();
+		this.view.startup();
 		this.window = this.view.getWindow();
 		return this;
 	},
 
 	shutdown: function() {
-		this.view.deactivate();
+		this.view.destroy();
 		this.view = null;
 		this.modalViewController = null;
 		this.viewControllerTransition = null;
@@ -135,29 +135,24 @@ Moobile.ViewController = new Class({
 
 	viewWillEnter: function() {
 		this.view.show();
-		this.view.willEnter();
 		return this;
 	},
 
 	viewDidEnter: function() {
-		this.view.didEnter();
 		return this;
 	},
 
 	viewWillLeave: function() {
-		this.view.willLeave();
 		return this;
 	},
 
 	viewDidLeave: function() {
-		this.view.didLeave();
 		this.view.hide();
 		return this;
 	},
 
 	viewDidRemove: function() {
 		this.view.removeFromParentView();
-		this.view.didRemove();
 		return this;
 	}
 

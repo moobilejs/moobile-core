@@ -51,11 +51,16 @@ Moobile.UI.Element = new Class({
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
 		this.name = this.element.getProperty('data-name');
+		this.build();
 		return this;
 	},
 
 	create: function() {
 		return new Element('div');
+	},
+
+	build: function() {
+		return this;
 	},
 
 	setElementOptions: function() {
@@ -75,6 +80,10 @@ Moobile.UI.Element = new Class({
 
 	getElement: function(selector) {
 		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
+	},
+
+	getElements: function(selector) {
+		return this.element.getElements(selector);
 	},
 
 	toElement: function() {

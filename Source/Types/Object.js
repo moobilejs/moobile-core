@@ -28,6 +28,14 @@ Object.extend({
 			}
 		}
 		return source;
+	},
+
+	assertTypeOf: function(object, type, error) {
+		if (!typeOf(object, type)) throw new Error(error);
+	},
+
+	assertInstanceOf: function(object, instance, error) {
+		if (!instanceOf(object, instance)) throw new Error(error);
 	}
 
 })
