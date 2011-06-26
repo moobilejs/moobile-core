@@ -33,13 +33,7 @@ Moobile.ViewController = new Class({
 
 	viewControllerPanel: null,
 
-	modalViewController: null,
-
-	transition: null,
-
-	identifier: null,
-
-	activated: false,
+	started: false,
 
 	initialize: function(view) {
 		this.loadView(view);
@@ -47,7 +41,7 @@ Moobile.ViewController = new Class({
 	},
 
 	loadView: function(view) {
-		this.view = view || new Moobile.View(new Element('div'));
+		this.view = view || new Moobile.View();
 		return this;
 	},
 
@@ -59,39 +53,25 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	activate: function() {
-		if (this.activated == false) {
-			this.activated = true;
-			this.startup();
+	startup: function() {
+		if (this.started == false) {
+			this.started = true;
+			this.window = this.view.getWindow();
+			this.init();
 			this.attachEvents();
 		}
 		return this;
 	},
 
-	deactivate: function() {
-		if (this.activated == true) {
-			this.activated = false;
-			this.detachEvents();
-			this.shutdown();
-		}
-		return this;
-	},
-
-	startup: function() {
-		this.view.startup();
-		this.window = this.view.getWindow();
-		return this;
-	},
-
-	shutdown: function() {
-		this.view.destroy();
-		this.view = null;
-		this.modalViewController = null;
+	destroy: function() {
+		this.started = false;
+		this.detachEvents();
 		this.viewControllerTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
-		this.transition = null;
 		this.window = null;
+		this.view = null;
+		this.release();
 		return this;
 	},
 
@@ -99,42 +79,19 @@ Moobile.ViewController = new Class({
 		return this.started;
 	},
 
-	getId: function() {
-		if (this.identifier == null) {
-			this.identifier = String.uniqueID();
-		}
-		return this.identifier;
+	init: function() {
+		return this;
 	},
 
-	getHash: function() {
-		return this.getTitle().length ? this.getTitle().slug() : this.getId();
+	release: function() {
+		return this;
 	},
 
 	getTitle: function() {
 		return this.view.getTitle();
 	},
 
-	presetModalViewControllerFrom: function(url) {
-		return this;
-	},
-
-	presentModalViewController: function(viewController, viewControllerTransition) {
-		// TODO: implementation
-		return this;
-	},
-
-	dismissModalViewController: function() {
-		// TODO: implementation
-		return this;
-	},
-
-	orientationDidChange: function(orientation) {
-		this.view.orientationDidChange(orientation);
-		return this;
-	},
-
 	viewWillEnter: function() {
-		this.view.show();
 		return this;
 	},
 
@@ -147,12 +104,6 @@ Moobile.ViewController = new Class({
 	},
 
 	viewDidLeave: function() {
-		this.view.hide();
-		return this;
-	},
-
-	viewDidRemove: function() {
-		this.view.removeFromParentView();
 		return this;
 	}
 

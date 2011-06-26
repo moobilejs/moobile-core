@@ -31,8 +31,8 @@ Moobile.ViewPanel = new Class({
 
 	options: {
 		className: 'view-panel',
-		createWrapper: false,
-		createContent: false
+		withWrapper: false,
+		withContent: false
 	}
 
 });

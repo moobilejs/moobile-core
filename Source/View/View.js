@@ -38,10 +38,11 @@ Moobile.View = new Class({
 
 	childElements: [],
 
+	navigationBar: null,
+
 	started: false,
 
 	options: {
-		title: 'View',
 		className: 'view',
 		withContent: true,
 		withWrapper: false
@@ -76,17 +77,12 @@ Moobile.View = new Class({
 			this.attachChildElements();
 			this.init();
 			this.attachEvents();
-			this.ready();
 		}
 		return this;
 	},
 
-	init: function() {
-		return this;
-	},
-
-	ready: function() {
-		return this;
+	isStarted: function() {
+		return this.started;
 	},
 
 	destroy: function() {
@@ -101,6 +97,10 @@ Moobile.View = new Class({
 		this.content = null;
 		this.wrapper = null;
 		this.parent();
+		return this;
+	},
+
+	init: function() {
 		return this;
 	},
 
@@ -280,6 +280,13 @@ Moobile.View = new Class({
 		return this.childElements;
 	},
 
+	bindChildElement: function(element) {
+		this.childElements.push(element);
+		this.didBindChildElement(element);
+		Object.member(this, element, element.get('data-name'));
+		return this;
+	},
+
 	removeChildElement: function(element) {
 		var removed = this.childElements.remove(element);
 		if (removed) {
@@ -298,7 +305,7 @@ Moobile.View = new Class({
 	},
 
 	attachChildElement: function(element) {
-		this.bindChildControl(element);
+		this.bindChildElement(element);
 		return this;
 	},
 
@@ -337,7 +344,7 @@ Moobile.View = new Class({
 	},
 
 	getTitle: function() {
-		return this.element.getProperty('data-title') || this.options.title;
+		return this.element.get('data-title') || 'Untitled';
 	},
 
 	getWrapper: function() {
@@ -382,10 +389,6 @@ Moobile.View = new Class({
 			return this;
 		}
 		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
-		return this;
-	},
-
-	orientationDidChange: function() {
 		return this;
 	},
 

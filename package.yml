@@ -41,6 +41,7 @@ sources:
   - "Source/View/ViewStack.Navigation.js"
   - "Source/View/ViewPanel.js"
   - "Source/ViewController/ViewController.js"
+  - "Source/ViewController/ViewControllerCollection.js"
   - "Source/ViewController/ViewControllerStack.js"
   - "Source/ViewController/ViewControllerStack.Navigation.js"
   - "Source/ViewController/ViewControllerPanel.js"

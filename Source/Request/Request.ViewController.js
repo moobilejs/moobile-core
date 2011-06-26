@@ -28,78 +28,73 @@ Moobile.Request.ViewController = new Class({
 
 	Extends: Moobile.Request,
 
-	viewControllerStack: null,
-
-	viewControllerCache: {},
+	cache: {},
 
 	options: {
 		method: 'get'
 	},
 
-	initialize: function(viewControllerStack, options) {
+	initialize: function(options) {
 		this.parent(options);
-		this.viewControllerStack = viewControllerStack;
 		this.attachEvents();
 		return this;
 	},
 
 	attachEvents: function() {
-		this.addEvent('success', this.bound('onViewControlleRequestSuccess'));
+		this.addEvent('success', this.bound('loaded'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.removeEvent('success', this.bound('onViewControlleRequestSuccess'));
+		this.removeEvent('success', this.bound('loaded'));
 		return this;
 	},
 
-	loadViewController: function(remote, fn) {
+	setCache: function(url, viewController) {
+		this.cache[url] = viewController;
+		return this;
+	},
 
-		this.addEvent('load:once', fn);
+	getCache: function(url) {
+		return this.hasCache(url) ? this.cache[url] : null;
+	},
 
-		var cached = this.getViewControllerCache(remote);
-		if (cached) {
-			this.fireEvent('load', cached);
+	hasCache: function(url) {
+		return this.cache[url] && this.cache[url].isStarted();
+	},
+
+	load: function(url, callback) {
+
+		var viewController = this.getCache(url);
+		if (viewController) {
+			callback.call(this, viewController);
 			return this;
 		}
 
-		this.setViewControllerCache(remote, null);
-		this.options.url = remote;
+		this.addEvent('load:once', callback);
+		this.setCache(url, null);
+		this.options.url = url;
 		this.send();
 
 		return this;
 	},
 
-	setViewControllerCache: function(remote, viewController) {
-		this.viewControllerCache[remote] = viewController;
-		return this;
-	},
-
-	getViewControllerCache: function(remote) {
-		return this.hasViewControllerCache(remote) ? this.viewControllerCache[remote] : null;
-	},
-
-	hasViewControllerCache: function(remote) {
-		return this.viewControllerCache[remote] && this.viewControllerCache[remote].isStarted();
-	},
-
-	onViewControlleRequestSuccess: function(response) {
-
+	loaded: function(response) {
 		var element = new Element('div').ingest(response).getElement('[data-role=view]');
-
 		if (element) {
 
-			var defaultView = this.viewControllerStack.getDefaultViewClass();
-			var defaultViewController = this.viewControllerStack.getDefaultViewControllerClass();
-			var defaultViewControllerTransition = this.viewControllerStack.getDefaultViewControllerTransitionClass();
+			var view = null;
+			var viewName = element.get('data-view') || 'Moobile.View';
+			if (viewName) {
+				view = Class.from(viewName, element);
+			}
 
-			var v = this.createInstanceFrom(element, 'data-view', defaultView, element);
-			var c = this.createInstanceFrom(element, 'data-view-controller', defaultViewController, v);
-			var t = this.createInstanceFrom(element, 'data-view-controller-transition', defaultViewControllerTransition);
+			var viewControllerName = element.get('data-view-controller') || 'Moobile.ViewController';
+			var viewController = Class.from(viewControllerName, view);
 
-			this.setViewControllerCache(this.options.url, c);
+			this.setCache(this.options.url, viewController);
 
-			this.fireEvent('load', c);
+			this.fireEvent('load', viewController);
 
 			return this;
 		}
@@ -107,14 +102,6 @@ Moobile.Request.ViewController = new Class({
 		throw new Error('Cannot find a view element from the response');
 
 		return this;
-	},
-
-	createInstanceFrom: function(element, attribute, defaults) {
-		var prop = element.getProperty(attribute) || defaults;
-		var args = Array.prototype.slice.call(arguments, 3);
-		args.add(prop);
-		var inst = Class.from.apply(Class, args);
-		return inst;
 	}
 
 });

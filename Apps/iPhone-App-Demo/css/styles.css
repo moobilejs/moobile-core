@@ -262,6 +262,7 @@ p small {
 }
 
 .view-stack-content {
+	-webkit-backface-visibility: hidden;	/* Important */
 	height: 100%;							/* Important */
 	width: 200%;							/* Important */
 }
@@ -280,6 +281,7 @@ p small {
 }
 
 .navigation-view-stack-content {
+	-webkit-backface-visibility: hidden;	/* Important */
 	height: 100%;							/* Important */
 	width: 200%;							/* Important */
 }

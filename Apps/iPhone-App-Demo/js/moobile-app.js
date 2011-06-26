@@ -8,15 +8,13 @@ Demo.ViewController.Home = new Class({
 
 	list: null,
 
-	startup: function() {
-		this.parent();
-		trace('-------------');
+	init: function() {
 		this.list = this.view.list;
-
+		this.parent();
 		return this;
 	},
 
-	shutdown: function() {
+	release: function() {
 		this.list = null;
 		this.parent();
 		return this;
@@ -35,7 +33,7 @@ Demo.ViewController.Home = new Class({
 	onListItemSelect: function(item) {
 
 		var from = '';
-
+trace('TEST');
 		switch (item.name) {
 
 			case 'transition-slide':
@@ -57,6 +55,10 @@ Demo.ViewController.Home = new Class({
 			case 'licence':
 				this.viewControllerStack.pushViewControllerFrom('views/licence.html');
 				break;
+
+			case 'chained':
+				this.viewControllerStack.pushViewControllerFrom('views/chained.html');
+				break;
 		}
 
 		this.list.clearSelectedItems();
@@ -73,17 +75,18 @@ Demo.ViewController.UI = new Class({
 
 	barButton: null,
 
-	startup: function() {
-		this.parent();
+	init: function() {
+
 		this.barStyleList = this.view.barStyleList;
 		this.barButtonStyleList = this.view.barButtonStyleList;
 		this.barButton = new Moobile.UI.BarButton();
 		this.barButton.setText('Button');
 		this.navigationBar.setRightButton(this.barButton);
+		this.parent();
 		return this;
 	},
 
-	shutdown: function() {
+	release: function() {
 		this.barStyleList = null;
 		this.barButtonStyleList = null;
 		this.parent();
@@ -142,4 +145,32 @@ Demo.ViewController.UI = new Class({
 		}
 	}
 
-})
+});
+
+Demo.ViewController.Chained = new Class({
+
+	Extends: Moobile.ViewController,
+
+	button: null,
+
+	init: function() {
+		this.button = this.view.button;
+		this.parent();
+		return this;
+	},
+
+	attachEvents: function() {
+		this.button.addEvent('click', this.bound('onButtonClick'));
+		return this.parent();
+	},
+
+	detachEvents: function() {
+		this.button.removeEvent('click', this.bound('onButtonClick'));
+		return this.parent();
+	},
+
+	onButtonClick: function() {
+		this.viewControllerStack.pushViewControllerFrom('views/default.html');
+	}
+
+});
