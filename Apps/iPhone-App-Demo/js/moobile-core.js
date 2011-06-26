@@ -10310,6 +10310,10 @@ Moobile.UI.Bar.Navigation = new Class({
 		return this;
 	},
 
+	getLeftButton: function(button) {
+		return this.leftButton;
+	},
+
 	removeLeftButton: function() {
 		if (this.leftButton) {
 			this.leftButton.destroy();
@@ -10324,6 +10328,10 @@ Moobile.UI.Bar.Navigation = new Class({
 		this.rightButton.addClass(this.options.className + '-right');
 		this.rightButton.inject(this.content);
 		return this;
+	},
+
+	getRightButton: function() {
+		return this.rightButton;
 	},
 
 	removeRightButton: function() {
@@ -10795,6 +10803,7 @@ Moobile.View = new Class({
 		this.window = null;
 		this.content = null;
 		this.wrapper = null;
+		this.navigationBar = null;
 		this.parent();
 		return this;
 	},
@@ -11363,6 +11372,15 @@ Moobile.ViewStack.Navigation = new Class({
 
 	options: {
 		className: 'navigation-view-stack'
+	},
+
+	willAddChildView: function(childView) {
+		if (childView.navigationBar == null) {
+			var navigationBar = new Moobile.UI.Bar.Navigation();
+			childView.addChildControl(navigationBar, 'top');
+			childView.navigationBar = navigationBar;
+		}
+		return this;
 	}
 
 });
@@ -11440,6 +11458,8 @@ Moobile.ViewController = new Class({
 	viewControllerStack: null,
 
 	viewControllerPanel: null,
+
+	navigationBar: null,
 
 	started: false,
 
@@ -11646,6 +11666,8 @@ Moobile.ViewControllerStack = new Class({
 
 		viewController.viewControllerTransition = viewControllerTransition;
 
+		this.willPushViewController(viewControllerPushed);
+
 		return this;
 	},
 
@@ -11659,6 +11681,8 @@ Moobile.ViewControllerStack = new Class({
 		}
 
 		viewControllerPushed.viewDidEnter();
+
+		this.didPushViewController(viewControllerPushed);
 
 		this.window.enableUserInput();
 
@@ -11709,6 +11733,8 @@ Moobile.ViewControllerStack = new Class({
 			this.view.getContent()
 		);
 
+		this.willPopViewController(viewControllerPopped);
+
 		return this;
 	},
 
@@ -11723,8 +11749,26 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerPopped.view.removeFromParentView();
 		viewControllerPopped.destroy();
 
+		this.didPopViewController(viewControllerPopped);
+
 		this.window.enableUserInput();
 
+		return this;
+	},
+
+	willPushViewController: function(viewController) {
+		return this;
+	},
+
+	didPushViewController: function(viewController) {
+		return this;
+	},
+
+	willPopViewController: function(viewController) {
+		return this;
+	},
+
+	didPopViewController: function(viewController) {
 		return this;
 	}
 });
@@ -11760,31 +11804,29 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		return this;
 	},
 
-	pushViewController: function(viewController, viewControllerTransition) {
+	willPushViewController: function(viewController) {
 
-		var navigationBar = new Moobile.UI.Bar.Navigation();
+		viewController.navigationBar = viewController.view.navigationBar;
 
-		viewController.view.addChildControl(navigationBar, 'top');
+		if (this.viewControllers.length > 1) {
 
-		if (this.viewControllers.length > 0) {
-			var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
-			if (backButtonTitle) {
-				var navigationBackButton = new Moobile.UI.BarButton();
-				navigationBackButton.setStyle(Moobile.UI.BarButtonStyle.Back);
-				navigationBackButton.setText(backButtonTitle);
-				navigationBackButton.addEvent('click', this.bound('onBackButtonClick'));
-				navigationBar.setLeftButton(navigationBackButton);
+			var backButton = viewController.navigationBar.getLeftButton();
+			if (backButton == null) {
+
+				var text = this.viewControllers.getLast(1).getTitle() || 'Back';
+
+				backButton = new Moobile.UI.BarButton();
+				backButton.setStyle(Moobile.UI.BarButtonStyle.Back);
+				backButton.setText(text);
+				backButton.addEvent('click', this.bound('onBackButtonClick'));
+
+				viewController.navigationBar.setLeftButton(backButton);
 			}
 		}
 
-		var navigationBarTitle = viewController.getTitle();
-		if (navigationBarTitle) {
-			navigationBar.setTitle(navigationBarTitle);
-		}
+		viewController.navigationBar.setTitle(viewController.getTitle());
 
-		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
-
-		return this.parent(viewController, viewControllerTransition);
+		return this;
 	},
 
 	onBackButtonClick: function() {

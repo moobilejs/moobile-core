@@ -25,35 +25,33 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	Extends: Moobile.ViewControllerStack,
 
 	loadView: function(view) {
-		this.view = view || new Moobile.ViewStack.Navigation(new Element('div'));
+		this.view = view || new Moobile.ViewStack.Navigation();
 		return this;
 	},
 
-	pushViewController: function(viewController, viewControllerTransition) {
+	willPushViewController: function(viewController) {
 
-		var navigationBar = new Moobile.UI.Bar.Navigation();
+		viewController.navigationBar = viewController.view.navigationBar;
 
-		viewController.view.addChildControl(navigationBar, 'top');
+		if (this.viewControllers.length > 1) {
 
-		if (this.viewControllers.length > 0) {
-			var backButtonTitle = this.viewControllers[this.viewControllers.length - 1].getTitle();
-			if (backButtonTitle) {
-				var navigationBackButton = new Moobile.UI.BarButton();
-				navigationBackButton.setStyle(Moobile.UI.BarButtonStyle.Back);
-				navigationBackButton.setText(backButtonTitle);
-				navigationBackButton.addEvent('click', this.bound('onBackButtonClick'));
-				navigationBar.setLeftButton(navigationBackButton);
+			var backButton = viewController.navigationBar.getLeftButton();
+			if (backButton == null) {
+
+				var text = this.viewControllers.getLast(1).getTitle() || 'Back';
+
+				backButton = new Moobile.UI.BarButton();
+				backButton.setStyle(Moobile.UI.BarButtonStyle.Back);
+				backButton.setText(text);
+				backButton.addEvent('click', this.bound('onBackButtonClick'));
+
+				viewController.navigationBar.setLeftButton(backButton);
 			}
 		}
 
-		var navigationBarTitle = viewController.getTitle();
-		if (navigationBarTitle) {
-			navigationBar.setTitle(navigationBarTitle);
-		}
+		viewController.navigationBar.setTitle(viewController.getTitle());
 
-		viewController.navigationBar = viewController.view.navigationBar = navigationBar;
-
-		return this.parent(viewController, viewControllerTransition);
+		return this;
 	},
 
 	onBackButtonClick: function() {

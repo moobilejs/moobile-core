@@ -96,6 +96,7 @@ Moobile.View = new Class({
 		this.window = null;
 		this.content = null;
 		this.wrapper = null;
+		this.navigationBar = null;
 		this.parent();
 		return this;
 	},

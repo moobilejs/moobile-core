@@ -45,9 +45,11 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	pushViewControllerFrom: function(url, viewControllerTransition) {
-		this.loadViewControllerFrom(url, function(viewController) {
-			this.pushViewController(viewController, viewControllerTransition);
-		}.bind(this));
+		this.loadViewControllerFrom(url,
+			function(viewController) {
+				this.pushViewController(viewController, viewControllerTransition);
+			}.bind(this)
+		);
 		return this;
 	},
 
@@ -92,6 +94,8 @@ Moobile.ViewControllerStack = new Class({
 
 		viewController.viewControllerTransition = viewControllerTransition;
 
+		this.willPushViewController(viewControllerPushed);
+
 		return this;
 	},
 
@@ -105,6 +109,8 @@ Moobile.ViewControllerStack = new Class({
 		}
 
 		viewControllerPushed.viewDidEnter();
+
+		this.didPushViewController(viewControllerPushed);
 
 		this.window.enableUserInput();
 
@@ -155,6 +161,8 @@ Moobile.ViewControllerStack = new Class({
 			this.view.getContent()
 		);
 
+		this.willPopViewController(viewControllerPopped);
+
 		return this;
 	},
 
@@ -169,8 +177,26 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerPopped.view.removeFromParentView();
 		viewControllerPopped.destroy();
 
+		this.didPopViewController(viewControllerPopped);
+
 		this.window.enableUserInput();
 
+		return this;
+	},
+
+	willPushViewController: function(viewController) {
+		return this;
+	},
+
+	didPushViewController: function(viewController) {
+		return this;
+	},
+
+	willPopViewController: function(viewController) {
+		return this;
+	},
+
+	didPopViewController: function(viewController) {
 		return this;
 	}
 });

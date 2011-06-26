@@ -76,6 +76,10 @@ Moobile.UI.Bar.Navigation = new Class({
 		return this;
 	},
 
+	getLeftButton: function(button) {
+		return this.leftButton;
+	},
+
 	removeLeftButton: function() {
 		if (this.leftButton) {
 			this.leftButton.destroy();
@@ -90,6 +94,10 @@ Moobile.UI.Bar.Navigation = new Class({
 		this.rightButton.addClass(this.options.className + '-right');
 		this.rightButton.inject(this.content);
 		return this;
+	},
+
+	getRightButton: function() {
+		return this.rightButton;
 	},
 
 	removeRightButton: function() {

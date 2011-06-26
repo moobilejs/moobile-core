@@ -33,6 +33,8 @@ Moobile.ViewController = new Class({
 
 	viewControllerPanel: null,
 
+	navigationBar: null,
+
 	started: false,
 
 	initialize: function(view) {

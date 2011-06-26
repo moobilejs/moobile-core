@@ -30,6 +30,17 @@ Moobile.ViewStack.Navigation = new Class({
 
 	options: {
 		className: 'navigation-view-stack'
+	},
+
+	willAddChildView: function(childView) {
+
+		if (childView.navigationBar == null)
+			return this;
+
+		var navigationBar = new Moobile.UI.Bar.Navigation();
+		childView.addChildControl(navigationBar, 'top');
+		childView.navigationBar = navigationBar;
+		return this;
 	}
 
 });
