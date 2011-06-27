@@ -24,6 +24,10 @@ Moobile.UI.Control = new Class({
 
 	disabled: false,
 
+	selected: false,
+
+	highlighted: false,
+
 	style: null,
 
 	options: {
@@ -32,18 +36,30 @@ Moobile.UI.Control = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.parent(element, options);
-		this.setup();
+		this.parent(element);
+		this.init();
 		this.attachEvents();
 		return this;
 	},
 
-	setup: function() {
+	destroy: function() {
+		this.detachEvents();
+		this.release();
+		this.parent();
+		return this;
+	},
+
+	build: function() {
+		this.parent();
 		if (this.options.styleName) this.setStyle(this.options.styleName);
 		return this;
 	},
 
-	teardown: function() {
+	init: function() {
+		return this;
+	},
+
+	release: function() {
 		return this;
 	},
 
@@ -80,11 +96,41 @@ Moobile.UI.Control = new Class({
 		if (this.disabled != disabled) {
 			this.disabled = disabled;
 			if (this.disabled) {
-				this.addClass(this.options.className + '-disabled');
 				this.detachEvents();
+				this.addClass(this.options.className + '-disabled');
+				this.fireEvent('disable', this);
 			} else {
-				this.removeClass(this.options.className + '-disabled');
 				this.attachEvents();
+				this.removeClass(this.options.className + '-disabled');
+				this.fireEvent('enable', this);
+			}
+		}
+		return this;
+	},
+
+	setSelected: function(selected) {
+		if (this.selected != selected) {
+			this.selected = selected;
+			if (this.selected) {
+				this.addClass(this.options.className + '-selected');
+				this.fireEvent('select', this);
+			} else {
+				this.removeClass(this.options.className + '-selected');
+				this.fireEvent('deselect', this);
+			}
+		}
+		return this;
+	},
+
+	setHighlighted: function(highlighted) {
+		if (this.highlighted != highlighted) {
+			this.highlighted = highlighted;
+			if (this.highlighted) {
+				this.addClass(this.options.className + '-highlighted');
+				this.fireEvent('highlight', this);
+			} else {
+				this.removeClass(this.options.className + '-highlighted');
+				this.fireEvent('unhighlight', this);
 			}
 		}
 		return this;
@@ -94,15 +140,16 @@ Moobile.UI.Control = new Class({
 		return this.disabled;
 	},
 
-	isNative: function() {
-		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
+	isSelected: function() {
+		return this.selected;
 	},
 
-	destroy: function() {
-		this.detachEvents();
-		this.teardown();
-		this.parent();
-		return this;
+	isHighlighted: function() {
+		return this.highlighted;
+	},
+
+	isNative: function() {
+		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
 	}
 
 });

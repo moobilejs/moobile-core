@@ -33,7 +33,7 @@ Demo.ViewController.Home = new Class({
 	onListItemSelect: function(item) {
 
 		var from = '';
-trace('TEST');
+
 		switch (item.name) {
 
 			case 'transition-slide':
@@ -61,7 +61,10 @@ trace('TEST');
 				break;
 		}
 
-		this.list.clearSelectedItems();
+	},
+
+	viewWillEnter: function() {
+		this.list.removeSelectedItems();
 	}
 });
 

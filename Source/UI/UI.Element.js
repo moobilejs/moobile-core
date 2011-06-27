@@ -50,7 +50,7 @@ Moobile.UI.Element = new Class({
 		this.setElementOptions();
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
-		this.name = this.element.getProperty('data-name');
+		this.name = this.element.get('data-name');
 		this.build();
 		return this;
 	},
@@ -64,9 +64,11 @@ Moobile.UI.Element = new Class({
 	},
 
 	setElementOptions: function() {
-		var options = this.element.getProperty('data-options');
+		var options = this.element.get('data-options');
 		if (options) {
-			Object.append(this.options,  JSON.decode('{' + options + '}'));
+			options = '{' + options + '}';
+			options = JSON.decode(options);
+			Object.append(this.options, options);
 		}
 		return this;
 	},
@@ -92,16 +94,19 @@ Moobile.UI.Element = new Class({
 
 	show: function() {
 		this.element.show();
+		this.fireEvent('show');
 		return this;
 	},
 
 	hide: function() {
 		this.element.hide();
+		this.fireEvent('hide');
 		return this;
 	},
 
 	fade: function(how) {
 		this.element.fade(how);
+		this.fireEvent('fade', how);
 		return this;
 	},
 

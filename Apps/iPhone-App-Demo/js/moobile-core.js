@@ -9760,7 +9760,7 @@ Moobile.UI.Element = new Class({
 		this.setElementOptions();
 		this.setOptions(options);
 		this.element.addClass(this.options.className);
-		this.name = this.element.getProperty('data-name');
+		this.name = this.element.get('data-name');
 		this.build();
 		return this;
 	},
@@ -9774,9 +9774,11 @@ Moobile.UI.Element = new Class({
 	},
 
 	setElementOptions: function() {
-		var options = this.element.getProperty('data-options');
+		var options = this.element.get('data-options');
 		if (options) {
-			Object.append(this.options,  JSON.decode('{' + options + '}'));
+			options = '{' + options + '}';
+			options = JSON.decode(options);
+			Object.append(this.options, options);
 		}
 		return this;
 	},
@@ -9802,16 +9804,19 @@ Moobile.UI.Element = new Class({
 
 	show: function() {
 		this.element.show();
+		this.fireEvent('show');
 		return this;
 	},
 
 	hide: function() {
 		this.element.hide();
+		this.fireEvent('hide');
 		return this;
 	},
 
 	fade: function(how) {
 		this.element.fade(how);
+		this.fireEvent('fade', how);
 		return this;
 	},
 
@@ -9889,6 +9894,10 @@ Moobile.UI.Control = new Class({
 
 	disabled: false,
 
+	selected: false,
+
+	highlighted: false,
+
 	style: null,
 
 	options: {
@@ -9897,18 +9906,30 @@ Moobile.UI.Control = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.parent(element, options);
-		this.setup();
+		this.parent(element);
+		this.init();
 		this.attachEvents();
 		return this;
 	},
 
-	setup: function() {
+	destroy: function() {
+		this.detachEvents();
+		this.release();
+		this.parent();
+		return this;
+	},
+
+	build: function() {
+		this.parent();
 		if (this.options.styleName) this.setStyle(this.options.styleName);
 		return this;
 	},
 
-	teardown: function() {
+	init: function() {
+		return this;
+	},
+
+	release: function() {
 		return this;
 	},
 
@@ -9945,11 +9966,41 @@ Moobile.UI.Control = new Class({
 		if (this.disabled != disabled) {
 			this.disabled = disabled;
 			if (this.disabled) {
-				this.addClass(this.options.className + '-disabled');
 				this.detachEvents();
+				this.addClass(this.options.className + '-disabled');
+				this.fireEvent('disable', this);
 			} else {
-				this.removeClass(this.options.className + '-disabled');
 				this.attachEvents();
+				this.removeClass(this.options.className + '-disabled');
+				this.fireEvent('enable', this);
+			}
+		}
+		return this;
+	},
+
+	setSelected: function(selected) {
+		if (this.selected != selected) {
+			this.selected = selected;
+			if (this.selected) {
+				this.addClass(this.options.className + '-selected');
+				this.fireEvent('select', this);
+			} else {
+				this.removeClass(this.options.className + '-selected');
+				this.fireEvent('deselect', this);
+			}
+		}
+		return this;
+	},
+
+	setHighlighted: function(highlighted) {
+		if (this.highlighted != highlighted) {
+			this.highlighted = highlighted;
+			if (this.highlighted) {
+				this.addClass(this.options.className + '-highlighted');
+				this.fireEvent('highlight', this);
+			} else {
+				this.removeClass(this.options.className + '-highlighted');
+				this.fireEvent('unhighlight', this);
 			}
 		}
 		return this;
@@ -9959,18 +10010,20 @@ Moobile.UI.Control = new Class({
 		return this.disabled;
 	},
 
-	isNative: function() {
-		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
+	isSelected: function() {
+		return this.selected;
 	},
 
-	destroy: function() {
-		this.detachEvents();
-		this.teardown();
-		this.parent();
-		return this;
+	isHighlighted: function() {
+		return this.highlighted;
+	},
+
+	isNative: function() {
+		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
 	}
 
 });
+
 
 /*
 ---
@@ -10036,31 +10089,28 @@ Moobile.UI.Button = new Class({
 		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
-	setup: function() {
-		this.parent();
-		this.injectContent();
-		return this;
-	},
-
-	teardown: function() {
-		this.destroyContent();
+	build: function() {
+		this.buildContent();
 		this.parent();
 		return this;
 	},
 
-	injectContent: function() {
+	init: function() {
+		this.parent();
+		return this;
+	},
+
+	release: function() {
+		this.content = null;
+		this.parent();
+		return this;
+	},
+
+	buildContent: function() {
 		if (this.isNative() == false) {
-			this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-			this.element.empty();
+			this.content = new Element('div.' + this.options.className + '-content');
+			this.content.adopt(this.element.getContents());
 			this.element.adopt(this.content);
-		}
-		return this;
-	},
-
-	destroyContent: function() {
-		if (this.isNative() == false) {
-			this.content.destroy();
-			this.content = null;
 		}
 		return this;
 	},
@@ -10188,48 +10238,40 @@ Moobile.UI.Bar = new Class({
 
 	content: null,
 
+	caption: null,
+
 	options: {
 		className: 'ui-bar',
 		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
-	setup: function() {
+	build: function() {
 		this.parent();
-		this.injectContent();
+		this.buildContent();
+		this.buildCaption();
 		return this;
 	},
 
-	teardown: function() {
-		this.destroyContent();
-		this.parent();
-		return this;
-	},
-
-	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-		this.element.empty();
+	buildContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content');
+		this.content.adopt(this.element.getContents());
 		this.element.adopt(this.content);
 		return this;
 	},
 
-	destroyContent: function() {
-		this.content.destroy();
+	buildCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption');
+		this.caption.adopt(this.content.getContents());
+		this.content.adopt(this.caption);
+		return this;
+	},
+
+	release: function() {
 		this.content = null;
-		return this;
-	},
-
-	show: function() {
-		this.view.addClass(this.options.className + '-visible');
-		this.parent();
-		return this;
-	},
-
-	hide: function() {
-		this.view.removeClass(this.options.className + '-visible');
+		this.caption = null;
 		this.parent();
 		return this;
 	}
-
 });
 
 /*
@@ -10258,8 +10300,6 @@ Moobile.UI.Bar.Navigation = new Class({
 
 	Extends: Moobile.UI.Bar,
 
-	caption: null,
-
 	leftButton: null,
 
 	rightButton: null,
@@ -10268,37 +10308,19 @@ Moobile.UI.Bar.Navigation = new Class({
 		className: 'ui-navigation-bar'
 	},
 
-	setup: function() {
-		this.parent();
-		this.injectCaption();
-		return this;
-	},
-
-	teardown: function() {
-		this.destroyCaption();
+	release: function() {
+		this.leftButton = null;
+		this.rightButton = null;
 		this.parent();
 		return this;
 	},
 
-	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.content.getContents());
-		this.content.empty();
-		this.content.adopt(this.caption);
+	setText: function(text) {
+		this.caption.set('html', text);
 		return this;
 	},
 
-	destroyCaption: function() {
-		this.caption.destroy();
-		this.caption = null;
-		return this;
-	},
-
-	setTitle: function(title) {
-		this.caption.set('html', title);
-		return this;
-	},
-
-	getTitle: function() {
+	getText: function() {
 		return this.caption.get('html');
 	},
 
@@ -10462,41 +10484,39 @@ Moobile.UI.ListItem = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	wrapper: null,
-
-	selected: false,
+	content: null,
 
 	options: {
-		className: 'ui-list-item',
-		selectable: true
+		className: 'ui-list-item'
 	},
 
-	setup: function() {
-		this.parent();
-		this.injectWrapper();
-		return this;
-	},
-
-	teardown: function() {
-		this.destroyWrapper();
+	init: function() {
+		this.injectContent();
 		this.parent();
 		return this;
 	},
 
-	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
-		this.element.empty();
-		this.element.adopt(this.wrapper);
+	release: function() {
+		this.destroyContent();
+		this.parent();
 		return this;
 	},
 
-	destroyWrapper: function() {
-		this.wrapper.destroy();
-		this.wrapper = null;
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content');
+		this.content.adopt(this.element.getContents());
+		this.element.adopt(this.content);
+		return this;
+	},
+
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
 	attachEvents: function() {
+		this.element.addEvent('swipe', this.bound('onSwipe'));
 		this.element.addEvent('click', this.bound('onClick'));
 		this.element.addEvent('mouseup', this.bound('onMouseUp'))
 		this.element.addEvent('mousedown', this.bound('onMouseDown'));
@@ -10505,6 +10525,7 @@ Moobile.UI.ListItem = new Class({
 	},
 
 	detachEvents: function() {
+		this.element.removeEvent('swipe', this.bound('onSwipe'));
 		this.element.removeEvent('click', this.bound('onClick'));
 		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
@@ -10512,53 +10533,29 @@ Moobile.UI.ListItem = new Class({
 		return this;
 	},
 
-	setSelectable: function(selectable) {
-		this.options.selectable = selectable;
-	},
-
-	toggleSelected: function() {
-		return this.setSelected(!this.selected);
-	},
-
-	setSelected: function(selected) {
-		if (this.selected != selected) {
-			this.selected = selected;
-			if (this.selected) {
-				this.addClass(this.options.className + '-selected');
-				this.fireEvent('select', this);
-			} else {
-				this.removeClass(this.options.className + '-selected');
-				this.fireEvent('deselect', this);
-			}
-		}
+	onSwipe: function(e) {
+		e.target = this;
+		this.fireEvent('swipe', e);
 		return this;
-	},
-
-	isSelected: function() {
-		return this.selected;
 	},
 
 	onClick: function(e) {
 		e.target = this;
 		this.fireEvent('click', e);
-		if (this.options.selectable) this.toggleSelected();
-		return this;
-	},
-
-	onMouseDown: function(e) {
-		e.target = this;
-		this.fireEvent('mousedown', e);
-		if (this.options.selectable) this.element.addClass(this.options.className + '-down');
 		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
 		this.fireEvent('mouseup', e);
-		if (this.options.selectable) this.element.removeClass(this.options.className + '-down');
+		return this;
+	},
+
+	onMouseDown: function(e) {
+		e.target = this;
+		this.fireEvent('mousedown', e);
 		return this;
 	}
-
 });
 
 /*
@@ -10593,95 +10590,97 @@ Moobile.UI.List = new Class({
 
 	options: {
 		className: 'ui-list',
-		selectable: true,
-		multiple: false
+		multiple: false,
+		selectable: true
 	},
 
-	setup: function() {
-		this.parent();
+	init: function() {
 		this.attachItems();
+		this.parent();
 		return this;
 	},
 
-	teardown: function() {
+	release: function() {
 		this.destroyItems();
 		this.parent();
 		return this;
 	},
 
-	destroyItems: function() {
-		this.items.each(function(item) { item.destroy(); });
-		this.items = null;
+	addItem: function(item, where, context) {
+		this.attachItem(item);
+		this.grab(item, where, context);
+		return this;
+	},
+
+	removeItem: function(item) {
+		this.detachItem(item);
+		item.dispose();
+		return this;
+	},
+
+	removeItems: function() {
+		this.items.each(this.bound('removeItem'));
 		this.items = [];
 		return this;
 	},
 
 	attachItems: function() {
-		this.element.getElements('[data-role=list-item]').each(this.attachItem.bind(this));
+		this.element.getElements('[data-role=list-item]').each(this.bound('attachItem'));
 		return this;
 	},
 
 	attachItem: function(element) {
-		var item = new Moobile.UI.ListItem(element);
-		item.setSelectable(this.options.selectable);
-		item.addEvent('select', this.bound('onSelect'));
-		item.addEvent('deselect', this.bound('onDeselect'));
+		var item = element instanceof Element ? new Moobile.UI.ListItem(element) : element;
+		item.addEvent('click', this.bound('onClick'));
+		item.addEvent('mouseup', this.bound('onMouseUp'));
+		item.addEvent('mousedown', this.bound('onMouseDown'));
 		this.items.push(item);
 		return this;
 	},
 
-	detachItems: function() {
-		this.item = null;
-		this.item = [];
+	destroyItems: function() {
+		this.items.each(this.bound('destroyItem'));
+		this.items = [];
 		return this;
 	},
 
-	detachItem:function(item) {
-		this.item.remove(item);
-		return this;
-	},
-
-	setSelectable: function(selectable) {
-		this.options.selectable = selectable;
-		this.items.each(function(item) { item.setSelectable(selectable) });
+	destroyItem: function(item) {
+		item.destroy();
 		return this;
 	},
 
 	setSelectedItem: function(item) {
-		this.setItemAsSelected(item.setSelected(true));
-		return this;
-	},
-
-	setSelectedItems: function() {
-		Array.each(arguments, function(item) { this.setSelectedItem(item) }.bind(this));
-		return this;
-	},
-
-	removeSelectedItem: function(item) {
-		this.setItemAsDeselected(item.setSelected(false));
-	},
-
-	removeSelectedItems: function() {
-		Array.each(arguments, function(item) { this.removeSelectedItem(item) }.bind(this));
-		return this;
-	},
-
-	clearSelectedItems: function() {
-		this.removeSelectedItems.apply(this, this.selectedItems);
-	},
-
-	setItemAsSelected: function(item) {
-		if (this.options.multiple == false) {
-			this.selectedItems.each(function(item) { item.setSelected(false); });
-			this.selectedItems = null;
-			this.selectedItems = []
+		if (this.options.multiple) {
+			if (item.isSelected()) {
+				this.removeSelectedItem(item);
+				return this
+			}
+		} else {
+			var selectedItem = this.getSelectedItem();
+			if (selectedItem) {
+				this.removeSelectedItem(selectedItem);
+			}
 		}
+		item.setSelected(true);
 		this.selectedItems.push(item);
 		this.fireEvent('select', item);
 		return this;
 	},
 
-	setItemAsDeselected: function(item) {
+	setSelectedItemIndex: function(index) {
+		var item = this.items[index];
+		if (item) this.setSelectedItem(item);
+		return this;
+	},
+
+	removeSelectedItems: function() {
+		this.selectedItems.each(this.bound('removeSelectedItem'));
+		this.selectedItems = [];
+		return this;
+	},
+
+	removeSelectedItem: function(item) {
+		item.setSelected(false);
 		this.selectedItems.remove(item);
 		this.fireEvent('deselect', item);
 		return this;
@@ -10695,15 +10694,29 @@ Moobile.UI.List = new Class({
 		return this.selectedItems;
 	},
 
-	onSelect: function(item) {
-		return this.setItemAsSelected(item);
+	onClick: function(e) {
+		var item = e.target;
+		if (this.options.selectable) this.setSelectedItem(item);
+		this.fireEvent('click', e);
+		return this;
 	},
 
-	onDeselect: function(item) {
-		return this.setItemAsDeselected(item);
+	onMouseUp: function(e) {
+		var item = e.target;
+		if (this.options.selectable) item.setHighlighted(false);
+		this.fireEvent('mouseup', e);
+		return this;
+	},
+
+	onMouseDown: function(e) {
+		var item = e.target;
+		if (this.options.selectable) item.setHighlighted(true);
+		this.fireEvent('mousedown', e);
+		return this;
 	}
 
 });
+
 
 /*
 ---
@@ -11861,7 +11874,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 			}
 		}
 
-		viewController.navigationBar.setTitle(viewController.getTitle());
+		viewController.navigationBar.setText(viewController.getTitle());
 
 		return this;
 	},

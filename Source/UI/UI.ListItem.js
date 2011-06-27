@@ -23,41 +23,39 @@ Moobile.UI.ListItem = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	wrapper: null,
-
-	selected: false,
+	content: null,
 
 	options: {
-		className: 'ui-list-item',
-		selectable: true
+		className: 'ui-list-item'
 	},
 
-	setup: function() {
-		this.parent();
-		this.injectWrapper();
-		return this;
-	},
-
-	teardown: function() {
-		this.destroyWrapper();
+	init: function() {
+		this.injectContent();
 		this.parent();
 		return this;
 	},
 
-	injectWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper').adopt(this.element.getContents());
-		this.element.empty();
-		this.element.adopt(this.wrapper);
+	release: function() {
+		this.destroyContent();
+		this.parent();
 		return this;
 	},
 
-	destroyWrapper: function() {
-		this.wrapper.destroy();
-		this.wrapper = null;
+	injectContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content');
+		this.content.adopt(this.element.getContents());
+		this.element.adopt(this.content);
+		return this;
+	},
+
+	destroyContent: function() {
+		this.content.destroy();
+		this.content = null;
 		return this;
 	},
 
 	attachEvents: function() {
+		this.element.addEvent('swipe', this.bound('onSwipe'));
 		this.element.addEvent('click', this.bound('onClick'));
 		this.element.addEvent('mouseup', this.bound('onMouseUp'))
 		this.element.addEvent('mousedown', this.bound('onMouseDown'));
@@ -66,6 +64,7 @@ Moobile.UI.ListItem = new Class({
 	},
 
 	detachEvents: function() {
+		this.element.removeEvent('swipe', this.bound('onSwipe'));
 		this.element.removeEvent('click', this.bound('onClick'));
 		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
@@ -73,51 +72,27 @@ Moobile.UI.ListItem = new Class({
 		return this;
 	},
 
-	setSelectable: function(selectable) {
-		this.options.selectable = selectable;
-	},
-
-	toggleSelected: function() {
-		return this.setSelected(!this.selected);
-	},
-
-	setSelected: function(selected) {
-		if (this.selected != selected) {
-			this.selected = selected;
-			if (this.selected) {
-				this.addClass(this.options.className + '-selected');
-				this.fireEvent('select', this);
-			} else {
-				this.removeClass(this.options.className + '-selected');
-				this.fireEvent('deselect', this);
-			}
-		}
+	onSwipe: function(e) {
+		e.target = this;
+		this.fireEvent('swipe', e);
 		return this;
-	},
-
-	isSelected: function() {
-		return this.selected;
 	},
 
 	onClick: function(e) {
 		e.target = this;
 		this.fireEvent('click', e);
-		if (this.options.selectable) this.toggleSelected();
-		return this;
-	},
-
-	onMouseDown: function(e) {
-		e.target = this;
-		this.fireEvent('mousedown', e);
-		if (this.options.selectable) this.element.addClass(this.options.className + '-down');
 		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
 		this.fireEvent('mouseup', e);
-		if (this.options.selectable) this.element.removeClass(this.options.className + '-down');
+		return this;
+	},
+
+	onMouseDown: function(e) {
+		e.target = this;
+		this.fireEvent('mousedown', e);
 		return this;
 	}
-
 });

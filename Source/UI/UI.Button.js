@@ -31,31 +31,28 @@ Moobile.UI.Button = new Class({
 		styleName: Moobile.UI.ButtonStyle.Default
 	},
 
-	setup: function() {
+	build: function() {
 		this.parent();
-		this.injectContent();
+		this.buildContent();
 		return this;
 	},
 
-	teardown: function() {
-		this.destroyContent();
+	init: function() {
 		this.parent();
 		return this;
 	},
 
-	injectContent: function() {
+	release: function() {
+		this.content = null;
+		this.parent();
+		return this;
+	},
+
+	buildContent: function() {
 		if (this.isNative() == false) {
-			this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-			this.element.empty();
+			this.content = new Element('div.' + this.options.className + '-content');
+			this.content.adopt(this.element.getContents());
 			this.element.adopt(this.content);
-		}
-		return this;
-	},
-
-	destroyContent: function() {
-		if (this.isNative() == false) {
-			this.content.destroy();
-			this.content = null;
 		}
 		return this;
 	},

@@ -26,46 +26,38 @@ Moobile.UI.Bar = new Class({
 
 	content: null,
 
+	caption: null,
+
 	options: {
 		className: 'ui-bar',
 		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
-	setup: function() {
+	build: function() {
 		this.parent();
-		this.injectContent();
+		this.buildContent();
+		this.buildCaption();
 		return this;
 	},
 
-	teardown: function() {
-		this.destroyContent();
-		this.parent();
-		return this;
-	},
-
-	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content').adopt(this.element.getContents());
-		this.element.empty();
+	buildContent: function() {
+		this.content = new Element('div.' + this.options.className + '-content');
+		this.content.adopt(this.element.getContents());
 		this.element.adopt(this.content);
 		return this;
 	},
 
-	destroyContent: function() {
-		this.content.destroy();
+	buildCaption: function() {
+		this.caption = new Element('div.' + this.options.className + '-caption');
+		this.caption.adopt(this.content.getContents());
+		this.content.adopt(this.caption);
+		return this;
+	},
+
+	release: function() {
 		this.content = null;
-		return this;
-	},
-
-	show: function() {
-		this.view.addClass(this.options.className + '-visible');
-		this.parent();
-		return this;
-	},
-
-	hide: function() {
-		this.view.removeClass(this.options.className + '-visible');
+		this.caption = null;
 		this.parent();
 		return this;
 	}
-
 });

@@ -517,7 +517,8 @@ p small {
 }
 
 .ui-list-item.ui-list-item-down,
-.ui-list-item.ui-list-item-selected {
+.ui-list-item.ui-list-item-selected,
+.ui-list-item.ui-list-item-highlighted {
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
 	background-image: -moz-linear-gradient(center bottom, #058DF5 0%, #0160E6 100%);
 	color: #ffffff;

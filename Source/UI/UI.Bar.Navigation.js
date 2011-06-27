@@ -24,8 +24,6 @@ Moobile.UI.Bar.Navigation = new Class({
 
 	Extends: Moobile.UI.Bar,
 
-	caption: null,
-
 	leftButton: null,
 
 	rightButton: null,
@@ -34,37 +32,19 @@ Moobile.UI.Bar.Navigation = new Class({
 		className: 'ui-navigation-bar'
 	},
 
-	setup: function() {
-		this.parent();
-		this.injectCaption();
-		return this;
-	},
-
-	teardown: function() {
-		this.destroyCaption();
+	release: function() {
+		this.leftButton = null;
+		this.rightButton = null;
 		this.parent();
 		return this;
 	},
 
-	injectCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption').adopt(this.content.getContents());
-		this.content.empty();
-		this.content.adopt(this.caption);
+	setText: function(text) {
+		this.caption.set('html', text);
 		return this;
 	},
 
-	destroyCaption: function() {
-		this.caption.destroy();
-		this.caption = null;
-		return this;
-	},
-
-	setTitle: function(title) {
-		this.caption.set('html', title);
-		return this;
-	},
-
-	getTitle: function() {
+	getText: function() {
 		return this.caption.get('html');
 	},
 

@@ -51,7 +51,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 			}
 		}
 
-		viewController.navigationBar.setTitle(viewController.getTitle());
+		viewController.navigationBar.setText(viewController.getTitle());
 
 		return this;
 	},
