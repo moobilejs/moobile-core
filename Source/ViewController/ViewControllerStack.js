@@ -91,7 +91,7 @@ Moobile.ViewControllerStack = new Class({
 			viewToShow,
 			viewToHide,
 			this.view,
-			this.view.getContent(),
+			this.view.getContentElement(),
 			this.viewControllers.length == 1
 		);
 
@@ -162,7 +162,7 @@ Moobile.ViewControllerStack = new Class({
 			viewControllerBefore.view,
 			viewControllerPopped.view,
 			this.view,
-			this.view.getContent()
+			this.view.getContentElement()
 		);
 
 		return this;

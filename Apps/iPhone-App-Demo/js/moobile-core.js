@@ -10724,7 +10724,7 @@ Moobile.UI.List = new Class({
 name: View
 
 description: Provides an element on the screen and the interfaces for managing
-             the content in that area.
+             the contentElement in that area.
 
 license: MIT-style license.
 
@@ -10748,10 +10748,6 @@ Moobile.View = new Class({
 
 	window: null,
 
-	wrapper: null,
-
-	content: null,
-
 	childViews: [],
 
 	childControls: [],
@@ -10760,32 +10756,36 @@ Moobile.View = new Class({
 
 	navigationBar: null,
 
+	wrapperElement: null,
+
+	contentElement: null,
+
 	started: false,
 
 	options: {
 		className: 'view',
-		withContent: true,
-		withWrapper: false
+		withContentElement: true,
+		withWrapperElement: false
 	},
 
 	build: function() {
-		if (this.options.withContent) this.buildContent();
-		if (this.options.withWrapper) this.buildWrapper();
 		this.parent();
+		if (this.options.withContentElement) this.buildContentElement();
+		if (this.options.withWrapperElement) this.buildWrapperElement();
 		return this;
 	},
 
-	buildWrapper: function() {
-		this.wrapper = new Element('div.' + this.options.className + '-wrapper');
-		this.wrapper.adopt(this.element.getContents());
-		this.element.adopt(this.wrapper);
+	buildWrapperElement: function() {
+		this.wrapperElement = new Element('div.' + this.options.className + '-wrapper');
+		this.wrapperElement.adopt(this.element.getContents());
+		this.element.adopt(this.wrapperElement);
 		return this;
 	},
 
-	buildContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content');
-		this.content.adopt(this.element.getContents());
-		this.element.adopt(this.content);
+	buildContentElement: function() {
+		this.contentElement = new Element('div.' + this.options.className + '-content');
+		this.contentElement.adopt(this.element.getContents());
+		this.element.adopt(this.contentElement);
 		return this;
 	},
 
@@ -10814,8 +10814,8 @@ Moobile.View = new Class({
 		this.release();
 		this.parentView = null;
 		this.window = null;
-		this.content = null;
-		this.wrapper = null;
+		this.contentElement = null;
+		this.wrapperElement = null;
 		this.navigationBar = null;
 		this.parent();
 		return this;
@@ -10993,7 +10993,7 @@ Moobile.View = new Class({
 
 	getChildElement: function(name) {
 		return this.childElements.find(function(element) {
-			return (element.name || element.get('data-name')) == name;
+			return (element.name || element.get('data-name')) == name;
 		});
 	},
 
@@ -11068,37 +11068,20 @@ Moobile.View = new Class({
 		return this.element.get('data-title') || 'Untitled';
 	},
 
-	getWrapper: function() {
-		return this.wrapper;
+	getWrapperElement: function() {
+		return this.wrapperElement;
 	},
 
-	getContent: function() {
-		return this.content;
+	getContentElement: function() {
+		return this.contentElement;
 	},
 
 	getSize: function() {
 		return this.element.getSize();
 	},
 
-	getWrapperSize: function() {
-		return this.wrapper ? this.wrapper.getSize() : null;
-	},
-
-	getContentSize: function() {
-		return this.content ? this.content.getSize() : null;
-	},
-
-	getContentExtent: function() {
-		var prev = this.wrapper.getPrevious();
-		var next = this.wrapper.getNext();
-		var size = this.getSize();
-		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
-		if (next) size.y = size.y - next.getPosition().y;
-		return size;
-	},
-
 	adopt: function() {
-		var content = this.content || this.element;
+		var content = this.contentElement || this.element;
 		content.adopt.apply(content, arguments);
 		return this;
 	},
@@ -11109,7 +11092,7 @@ Moobile.View = new Class({
 			element.inject(context, where);
 			return this;
 		}
-		(where == 'top' || where == 'bottom' ? this.element : this.content || this.element).grab(element, where);
+		(where == 'top' || where == 'bottom' ? this.element : this.contentElement || this.element).grab(element, where);
 		return this;
 	},
 
@@ -11252,8 +11235,8 @@ Moobile.View.Scroll = new Class({
 	scrolled: null,
 
 	options: {
-		withWrapper: true,
-		withContent: true
+		withWrapperElement: true,
+		withContentElement: true
 	},
 
 	init: function() {
@@ -11325,15 +11308,23 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	show: function() {
-		this.parent();
+	getContentExtent: function() {
+		var prev = this.wrapperElement.getPrevious();
+		var next = this.wrapperElement.getNext();
+		var size = this.getSize();
+		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
+		if (next) size.y = size.y - next.getPosition().y;
+		return size;
+	},
+
+	viewDidShow: function() {
 		this.enableScroller();
 		return this;
 	},
 
-	hide: function() {
+	viewDidHide: function() {
 		this.disableScroller();
-		return this.parent();
+		return this;
 	},
 
 	onDocumentTouchMove: function(e) {
@@ -11377,8 +11368,8 @@ Moobile.ViewStack = new Class({
 
 	options: {
 		className: 'view-stack',
-		withWrapper: false,
-		withContent: true
+		withWrapperElement: false,
+		withContentElement: true
 	}
 
 });
@@ -11464,8 +11455,8 @@ Moobile.ViewPanel = new Class({
 
 	options: {
 		className: 'view-panel',
-		withWrapper: false,
-		withContent: false
+		withWrapperElement: false,
+		withContentElement: false
 	}
 
 });
@@ -12033,7 +12024,7 @@ Moobile.ViewControllerStack = new Class({
 			viewToShow,
 			viewToHide,
 			this.view,
-			this.view.getContent(),
+			this.view.getContentElement(),
 			this.viewControllers.length == 1
 		);
 
@@ -12104,7 +12095,7 @@ Moobile.ViewControllerStack = new Class({
 			viewControllerBefore.view,
 			viewControllerPopped.view,
 			this.view,
-			this.view.getContent()
+			this.view.getContentElement()
 		);
 
 		return this;

@@ -33,8 +33,8 @@ Moobile.ViewStack = new Class({
 
 	options: {
 		className: 'view-stack',
-		withWrapper: false,
-		withContent: true
+		withWrapperElement: false,
+		withContentElement: true
 	}
 
 });

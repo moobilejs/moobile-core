@@ -37,8 +37,8 @@ Moobile.View.Scroll = new Class({
 	scrolled: null,
 
 	options: {
-		withWrapper: true,
-		withContent: true
+		withWrapperElement: true,
+		withContentElement: true
 	},
 
 	init: function() {
@@ -110,15 +110,23 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	show: function() {
-		this.parent();
+	getContentExtent: function() {
+		var prev = this.wrapperElement.getPrevious();
+		var next = this.wrapperElement.getNext();
+		var size = this.getSize();
+		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
+		if (next) size.y = size.y - next.getPosition().y;
+		return size;
+	},
+
+	viewDidShow: function() {
 		this.enableScroller();
 		return this;
 	},
 
-	hide: function() {
+	viewDidHide: function() {
 		this.disableScroller();
-		return this.parent();
+		return this;
 	},
 
 	onDocumentTouchMove: function(e) {
