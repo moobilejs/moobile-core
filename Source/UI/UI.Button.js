@@ -24,7 +24,7 @@ Moobile.UI.Button = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	content: null,
+	contentElement: null,
 
 	options: {
 		className: 'ui-button',
@@ -33,7 +33,7 @@ Moobile.UI.Button = new Class({
 
 	build: function() {
 		this.parent();
-		this.buildContent();
+		this.buildContentElement();
 		return this;
 	},
 
@@ -43,16 +43,16 @@ Moobile.UI.Button = new Class({
 	},
 
 	release: function() {
-		this.content = null;
+		this.contentElement = null;
 		this.parent();
 		return this;
 	},
 
-	buildContent: function() {
+	buildContentElement: function() {
 		if (this.isNative() == false) {
-			this.content = new Element('div.' + this.options.className + '-content');
-			this.content.adopt(this.element.getContents());
-			this.element.adopt(this.content);
+			this.contentElement = new Element('div.' + this.options.className + '-content');
+			this.contentElement.adopt(this.element.getContents());
+			this.element.adopt(this.contentElement);
 		}
 		return this;
 	},
@@ -77,7 +77,7 @@ Moobile.UI.Button = new Class({
 		if (this.isNative()) {
 			this.element.set('value', text);
 		} else {
-			this.content.set('html', text);
+			this.contentElement.set('html', text);
 		}
 		return this;
 	},

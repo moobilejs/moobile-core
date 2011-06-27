@@ -10082,7 +10082,7 @@ Moobile.UI.Button = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	content: null,
+	contentElement: null,
 
 	options: {
 		className: 'ui-button',
@@ -10091,7 +10091,7 @@ Moobile.UI.Button = new Class({
 
 	build: function() {
 		this.parent();
-		this.buildContent();
+		this.buildContentElement();
 		return this;
 	},
 
@@ -10101,16 +10101,16 @@ Moobile.UI.Button = new Class({
 	},
 
 	release: function() {
-		this.content = null;
+		this.contentElement = null;
 		this.parent();
 		return this;
 	},
 
-	buildContent: function() {
+	buildContentElement: function() {
 		if (this.isNative() == false) {
-			this.content = new Element('div.' + this.options.className + '-content');
-			this.content.adopt(this.element.getContents());
-			this.element.adopt(this.content);
+			this.contentElement = new Element('div.' + this.options.className + '-content');
+			this.contentElement.adopt(this.element.getContents());
+			this.element.adopt(this.contentElement);
 		}
 		return this;
 	},
@@ -10135,7 +10135,7 @@ Moobile.UI.Button = new Class({
 		if (this.isNative()) {
 			this.element.set('value', text);
 		} else {
-			this.content.set('html', text);
+			this.contentElement.set('html', text);
 		}
 		return this;
 	},
@@ -10236,9 +10236,9 @@ Moobile.UI.Bar = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	content: null,
+	contentElement: null,
 
-	caption: null,
+	captionElement: null,
 
 	options: {
 		className: 'ui-bar',
@@ -10247,30 +10247,39 @@ Moobile.UI.Bar = new Class({
 
 	build: function() {
 		this.parent();
-		this.buildContent();
-		this.buildCaption();
+		this.buildContentElement();
+		this.buildCaptionElement();
 		return this;
 	},
 
-	buildContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content');
-		this.content.adopt(this.element.getContents());
-		this.element.adopt(this.content);
+	buildContentElement: function() {
+		this.contentElement = new Element('div.' + this.options.className + '-content');
+		this.contentElement.adopt(this.element.getContents());
+		this.element.adopt(this.contentElement);
 		return this;
 	},
 
-	buildCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption');
-		this.caption.adopt(this.content.getContents());
-		this.content.adopt(this.caption);
+	buildCaptionElement: function() {
+		this.captionElement = new Element('div.' + this.options.className + '-caption');
+		this.captionElement.adopt(this.contentElement.getContents());
+		this.contentElement.adopt(this.captionElement);
 		return this;
 	},
 
 	release: function() {
-		this.content = null;
-		this.caption = null;
+		this.contentElement = null;
+		this.captionElement = null;
 		this.parent();
 		return this;
+	},
+
+	setText: function(text) {
+		this.captionElement.set('html', text);
+		return this;
+	},
+
+	getText: function() {
+		return this.captionElement.get('html');
 	}
 });
 
@@ -10315,20 +10324,11 @@ Moobile.UI.Bar.Navigation = new Class({
 		return this;
 	},
 
-	setText: function(text) {
-		this.caption.set('html', text);
-		return this;
-	},
-
-	getText: function() {
-		return this.caption.get('html');
-	},
-
 	setLeftButton: function(button) {
 		this.removeLeftButton();
 		this.leftButton = button;
 		this.leftButton.addClass(this.options.className + '-left');
-		this.leftButton.inject(this.content);
+		this.leftButton.inject(this.contentElement);
 		return this;
 	},
 
@@ -10348,7 +10348,7 @@ Moobile.UI.Bar.Navigation = new Class({
 		this.removeRightButton();
 		this.rightButton = button;
 		this.rightButton.addClass(this.options.className + '-right');
-		this.rightButton.inject(this.content);
+		this.rightButton.inject(this.contentElement);
 		return this;
 	},
 
@@ -10484,34 +10484,28 @@ Moobile.UI.ListItem = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	content: null,
+	contentElement: null,
 
 	options: {
 		className: 'ui-list-item'
 	},
 
-	init: function() {
-		this.injectContent();
+	build: function() {
 		this.parent();
+		this.buildContentElement();
 		return this;
 	},
 
 	release: function() {
-		this.destroyContent();
+		this.contentElement = null;
 		this.parent();
 		return this;
 	},
 
-	injectContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content');
-		this.content.adopt(this.element.getContents());
-		this.element.adopt(this.content);
-		return this;
-	},
-
-	destroyContent: function() {
-		this.content.destroy();
-		this.content = null;
+	buildContentElement: function() {
+		this.contentElement = new Element('div.' + this.options.className + '-content');
+		this.contentElement.adopt(this.element.getContents());
+		this.element.adopt(this.contentElement);
 		return this;
 	},
 
@@ -11262,13 +11256,13 @@ Moobile.View.Scroll = new Class({
 	},
 
 	createScroller: function() {
-		return new iScroll(this.wrapper, { desktopCompatibility: true, hScroll: false, vScroll: true });
+		return new iScroll(this.wrapperElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
 	},
 
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
-			this.wrapper.setStyle('overflow', 'visible');
+			this.wrapperElement.setStyle('overflow', 'visible');
 			this.updateScroller();
 			this.updateScrollerAutomatically(true);
 			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
@@ -11279,7 +11273,7 @@ Moobile.View.Scroll = new Class({
 	disableScroller: function() {
 		if (this.scroller) {
 			this.updateScrollerAutomatically(false);
-			this.scrolled = this.content.getStyle('transform');
+			this.scrolled = this.contentElement.getStyle('transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();
@@ -11290,12 +11284,12 @@ Moobile.View.Scroll = new Class({
 
 	updateScroller: function() {
 		if (this.scroller) {
-			if (this.contentSize != this.content.getScrollSize().y) {
-				this.contentSize = this.content.getScrollSize().y;
+			if (this.contentSize != this.contentElement.getScrollSize().y) {
+				this.contentSize = this.contentElement.getScrollSize().y;
 				var extent = this.getContentExtent();
-				this.wrapper.setStyle('height', extent.y);
-				this.wrapper.setStyle('min-height', extent.y);
-				this.content.setStyle('min-height', extent.y);
+				this.wrapperElement.setStyle('height', extent.y);
+				this.wrapperElement.setStyle('min-height', extent.y);
+				this.contentElement.setStyle('min-height', extent.y);
 				this.scroller.refresh();
 			}
 		}
@@ -11317,12 +11311,12 @@ Moobile.View.Scroll = new Class({
 		return size;
 	},
 
-	viewDidShow: function() {
+	didShow: function() {
 		this.enableScroller();
 		return this;
 	},
 
-	viewDidHide: function() {
+	didHide: function() {
 		this.disableScroller();
 		return this;
 	},
@@ -12167,8 +12161,6 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	willPushViewController: function(viewController) {
 
-		trace(viewController.view);
-
 		viewController.navigationBar = viewController.view.navigationBar;
 
 		if (this.viewControllers.length > 1) {
@@ -12340,14 +12332,14 @@ Moobile.Window = new Class({
 
 	options: {
 		className: 'window',
-		withWrapper: false,
-		withContent: false
+		withWrapperElement: false,
+		withContentElement: false
 	},
 
 	bindChildView: function(view) {
 		this.parent(view);
 		view.setWindow(this);
-		view.setParentView(this);
+		view.setParentView(null);
 		return this;
 	},
 

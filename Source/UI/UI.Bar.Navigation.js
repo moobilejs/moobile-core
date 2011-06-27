@@ -39,20 +39,11 @@ Moobile.UI.Bar.Navigation = new Class({
 		return this;
 	},
 
-	setText: function(text) {
-		this.caption.set('html', text);
-		return this;
-	},
-
-	getText: function() {
-		return this.caption.get('html');
-	},
-
 	setLeftButton: function(button) {
 		this.removeLeftButton();
 		this.leftButton = button;
 		this.leftButton.addClass(this.options.className + '-left');
-		this.leftButton.inject(this.content);
+		this.leftButton.inject(this.contentElement);
 		return this;
 	},
 
@@ -72,7 +63,7 @@ Moobile.UI.Bar.Navigation = new Class({
 		this.removeRightButton();
 		this.rightButton = button;
 		this.rightButton.addClass(this.options.className + '-right');
-		this.rightButton.inject(this.content);
+		this.rightButton.inject(this.contentElement);
 		return this;
 	},
 

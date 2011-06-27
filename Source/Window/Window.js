@@ -32,14 +32,14 @@ Moobile.Window = new Class({
 
 	options: {
 		className: 'window',
-		withWrapper: false,
-		withContent: false
+		withWrapperElement: false,
+		withContentElement: false
 	},
 
 	bindChildView: function(view) {
 		this.parent(view);
 		view.setWindow(this);
-		view.setParentView(this);
+		view.setParentView(null);
 		return this;
 	},
 

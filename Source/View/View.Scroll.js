@@ -64,13 +64,13 @@ Moobile.View.Scroll = new Class({
 	},
 
 	createScroller: function() {
-		return new iScroll(this.wrapper, { desktopCompatibility: true, hScroll: false, vScroll: true });
+		return new iScroll(this.wrapperElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
 	},
 
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
-			this.wrapper.setStyle('overflow', 'visible');
+			this.wrapperElement.setStyle('overflow', 'visible');
 			this.updateScroller();
 			this.updateScrollerAutomatically(true);
 			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
@@ -81,7 +81,7 @@ Moobile.View.Scroll = new Class({
 	disableScroller: function() {
 		if (this.scroller) {
 			this.updateScrollerAutomatically(false);
-			this.scrolled = this.content.getStyle('transform');
+			this.scrolled = this.contentElement.getStyle('transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();
@@ -92,12 +92,12 @@ Moobile.View.Scroll = new Class({
 
 	updateScroller: function() {
 		if (this.scroller) {
-			if (this.contentSize != this.content.getScrollSize().y) {
-				this.contentSize = this.content.getScrollSize().y;
+			if (this.contentSize != this.contentElement.getScrollSize().y) {
+				this.contentSize = this.contentElement.getScrollSize().y;
 				var extent = this.getContentExtent();
-				this.wrapper.setStyle('height', extent.y);
-				this.wrapper.setStyle('min-height', extent.y);
-				this.content.setStyle('min-height', extent.y);
+				this.wrapperElement.setStyle('height', extent.y);
+				this.wrapperElement.setStyle('min-height', extent.y);
+				this.contentElement.setStyle('min-height', extent.y);
 				this.scroller.refresh();
 			}
 		}
@@ -119,12 +119,12 @@ Moobile.View.Scroll = new Class({
 		return size;
 	},
 
-	viewDidShow: function() {
+	didShow: function() {
 		this.enableScroller();
 		return this;
 	},
 
-	viewDidHide: function() {
+	didHide: function() {
 		this.disableScroller();
 		return this;
 	},

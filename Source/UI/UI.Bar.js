@@ -24,9 +24,9 @@ Moobile.UI.Bar = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	content: null,
+	contentElement: null,
 
-	caption: null,
+	captionElement: null,
 
 	options: {
 		className: 'ui-bar',
@@ -35,29 +35,38 @@ Moobile.UI.Bar = new Class({
 
 	build: function() {
 		this.parent();
-		this.buildContent();
-		this.buildCaption();
+		this.buildContentElement();
+		this.buildCaptionElement();
 		return this;
 	},
 
-	buildContent: function() {
-		this.content = new Element('div.' + this.options.className + '-content');
-		this.content.adopt(this.element.getContents());
-		this.element.adopt(this.content);
+	buildContentElement: function() {
+		this.contentElement = new Element('div.' + this.options.className + '-content');
+		this.contentElement.adopt(this.element.getContents());
+		this.element.adopt(this.contentElement);
 		return this;
 	},
 
-	buildCaption: function() {
-		this.caption = new Element('div.' + this.options.className + '-caption');
-		this.caption.adopt(this.content.getContents());
-		this.content.adopt(this.caption);
+	buildCaptionElement: function() {
+		this.captionElement = new Element('div.' + this.options.className + '-caption');
+		this.captionElement.adopt(this.contentElement.getContents());
+		this.contentElement.adopt(this.captionElement);
 		return this;
 	},
 
 	release: function() {
-		this.content = null;
-		this.caption = null;
+		this.contentElement = null;
+		this.captionElement = null;
 		this.parent();
 		return this;
+	},
+
+	setText: function(text) {
+		this.captionElement.set('html', text);
+		return this;
+	},
+
+	getText: function() {
+		return this.captionElement.get('html');
 	}
 });
