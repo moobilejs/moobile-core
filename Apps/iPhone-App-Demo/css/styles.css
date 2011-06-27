@@ -511,6 +511,24 @@ p small {
 	text-shadow: none;
 }
 
+/* UI Slider
+-----------------------------------------------------------------------------*/
+
+.ui-slider-track {
+	-webkit-border-radius: 5px;
+	background: url(../images/ui-slider-track.png) 0px 0px;
+	height: 9px;
+}
+
+.ui-slider-handle {
+	-webkit-border-radius: 5px;
+	background: url(../images/ui-slider-handle.png) no-repeat center center;
+	height: 24px;
+	position: absolute;
+	margin-top: -6px;
+	width: 24px;
+}
+
 /* UI Button
 -----------------------------------------------------------------------------*/
 
