@@ -11853,9 +11853,9 @@ Moobile.View = new Class({
 		view.setWindow(this.window);
 		view.setParentView(this);
 		view.parentViewDidChange(this);
+		this.didBindChildView(view);
 		view.startup();
 		view.attachEvents();
-		this.didBindChildView(view);
 		Object.member(this, view, view.name);
 		return this;
 	},
@@ -12817,6 +12817,7 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
+//		trace(this.view.element, this.view.window, '----------------------------------');
 		if (this.started == false) {
 			this.started = true;
 			this.window = this.view.getWindow();
@@ -13320,65 +13321,6 @@ Moobile.ViewControllerPanel = new Class({
 /*
 ---
 
-name: ViewControllerPanel.Split
-
-description: Provide a way to have side by side view controllers.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- ViewControllerPanel
-
-provides:
-	- ViewControllerPanel.Split
-
-...
-*/
-
-Moobile.ViewControllerPanel.Split = new Class({
-
-	Extends: Moobile.ViewControllerPanel,
-
-	mainViewController: null,
-
-	sideViewController: null,
-
-	options: {
-		mainViewControllerClassName: 'view-panel-main-pane',
-		sideViewControllerClassName: 'view-panel-side-pane'
-	},
-
-	initialize: function(sideViewController, mainViewController, view) {
-		this.parent(view);
-		this.sideViewController = sideViewController;
-		this.mainViewController = mainViewController;
-		return this;
-	},
-
-	startup: function() {
-		this.parent();
-		this.setViewController(this.options.sideViewControllerClassName, this.sideViewController);
-		this.setViewController(this.options.mainViewControllerClassName, this.mainViewController);
-		return this;
-	},
-
-	getMainViewController: function() {
-		return this.mainViewController;
-	},
-
-	getSideViewController: function() {
-		return this.sideViewController;
-	}
-
-});
-
-/*
----
-
 name: Window
 
 description: Provides the area where the views will be stored and displayed.
@@ -13430,11 +13372,15 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	bindChildView: function(view) {
-		this.parent(view);
+	didBindChildView: function(view) {
 		view.setWindow(this);
 		view.setParentView(null);
+		this.parent(view);
 		return this;
+	},
+
+	filterChildView: function(element) {
+		return element.getParent('[data-role=view]') == null;
 	},
 
 	setViewController: function(viewController) {

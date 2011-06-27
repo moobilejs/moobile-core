@@ -21,28 +21,17 @@ provides:
 
 Moobile.ViewControllerPanel = new Class({
 
-	Extends: Moobile.ViewController,
-
-	viewControllers: {},
+	Extends: Moobile.ViewControllerCollection,
 
 	loadView: function(view) {
-		this.view = view || new Moobile.ViewPanel(new Element('div'));
+		this.view = view || new Moobile.ViewPanel();
+		Object.assertInstanceOf(this.view, Moobile.ViewPanel, 'Moobile.ViewControllerPanel view must be an intance of Moobile.ViewPanel');
 		return this;
 	},
 
-	setViewController: function(name, viewController) {
-		this.viewControllers[name] = viewController;
-		this.view.addChildView(viewController.view);
+	didBindViewController: function(viewController) {
 		viewController.viewControllerPanel = this;
-		viewController.activate();
-		viewController.viewWillEnter();
-		viewController.viewDidEnter();
-		viewController.view.addClass(name);
+		this.parent();
 		return this;
-	},
-
-	getViewController: function(name) {
-		return this.viewControllers[name] ? this.viewControllers[name] : null;
 	}
-
 });

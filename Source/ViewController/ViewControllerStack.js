@@ -29,12 +29,7 @@ Moobile.ViewControllerStack = new Class({
 
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack();
-		return this;
-	},
-
-	bindViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.viewControllerStack = this;
+		Object.assertInstanceOf(this.view, Moobile.ViewStack, 'Moobile.ViewControllerStack view must be an intance of Moobile.ViewStack');
 		return this;
 	},
 
@@ -189,6 +184,12 @@ Moobile.ViewControllerStack = new Class({
 
 		this.window.enableUserInput();
 
+		return this;
+	},
+
+	didBindViewController: function(viewController) {
+		viewController.viewControllerStack = this;
+		this.parent();
 		return this;
 	},
 

@@ -166,9 +166,9 @@ Moobile.View = new Class({
 		view.setWindow(this.window);
 		view.setParentView(this);
 		view.parentViewDidChange(this);
+		this.didBindChildView(view);
 		view.startup();
 		view.attachEvents();
-		this.didBindChildView(view);
 		Object.member(this, view, view.name);
 		return this;
 	},

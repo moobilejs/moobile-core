@@ -26,7 +26,13 @@ Moobile.ViewControllerCollection = new Class({
 
 	viewControllers: [],
 
-	destroy: function() {
+	init: function() {
+		this.attachViewControllers();
+		this.parent();
+		return this;
+	},
+
+	release: function() {
 		this.destroyViewControllers();
 		this.parent();
 		return this;
@@ -50,6 +56,10 @@ Moobile.ViewControllerCollection = new Class({
 		return this.viewControllers;
 	},
 
+	getLength: function() {
+		return this.viewControllers.length;
+	},
+
 	removeViewController: function(viewController) {
 		var removed = this.viewControllers.remove(viewController);
 		if (removed) {
@@ -68,11 +78,11 @@ Moobile.ViewControllerCollection = new Class({
 	bindViewController: function(viewController) {
 		Object.assertInstanceOf(viewController, Moobile.ViewController, 'ViewControllers must inherit Moobile.ViewController');
 		this.viewControllers.push(viewController);
-		viewController.parentViewController = this;
 		viewController.viewControllerStack = this.viewControllerStack;
 		viewController.viewControllerPanel = this.viewControllerPanel;
-		viewController.startup();
+		viewController.parentViewController = this;
 		this.didBindViewController(viewController);
+		viewController.startup();
 		Object.member(this, viewController, viewController.view.getProperty('data-view-controller-name'));
 		return this;
 	},

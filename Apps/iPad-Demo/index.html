@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<title>Moobile iPhone Application</title>
+		<link rel="stylesheet" href="css/styles.css" />
+		<script type="text/javascript" src="js/moobile-core.js"></script>
+		<script type="text/javascript" src="js/moobile-app.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+		// <![CDATA["
+
+			window.addEvent('ready', function() {
+
+				var mainWindow = new Moobile.Window('main-window')
+				mainWindow.startup();
+
+				var viewController = mainWindow.getViewController();
+				var mainViewController = viewController.getViewControllers()[0];
+				var sideViewController = viewController.getViewControllers()[1];
+
+				trace(mainWindow);
+
+				sideViewController.pushViewControllerFrom('views/side.html');
+				mainViewController.pushViewControllerFrom('views/main.html');
+
+			});
+
+		// "]]>
+		</script>
+
+		<div id="main-window">
+			<div data-role="view" data-view="Moobile.ViewPanel" data-view-controller="Moobile.ViewControllerPanel">
+				<div data-role="view" data-view="Moobile.ViewStack.Navigation" data-view-controller="Moobile.ViewControllerStack.Navigation" data-view-controller-name="side-view-controller" class="view-panel-side-pane"></div>
+				<div data-role="view" data-view="Moobile.ViewStack.Navigation" data-view-controller="Moobile.ViewControllerStack.Navigation" data-view-controller-name="main-view-controller" class="view-panel-main-pane"></div>
+			</div>
+		</div>
+
+	</body>
+</html>

@@ -26,8 +26,9 @@
 				/**
 				 * Create a new window and assign the view controller stack.
 				 */
-				var mainWindow = new Moobile.Window('main-window')
-					.setViewController(viewControllerStack);
+				var mainWindow = new Moobile.Window('main-window');
+				mainWindow.startup();
+				mainWindow.setViewController(viewControllerStack);
 
 				/**
 				 * Load the default view.

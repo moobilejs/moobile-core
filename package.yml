@@ -51,5 +51,4 @@ sources:
   - "Source/ViewController/ViewControllerStack.js"
   - "Source/ViewController/ViewControllerStack.Navigation.js"
   - "Source/ViewController/ViewControllerPanel.js"
-  - "Source/ViewController/ViewControllerPanel.Split.js"
   - "Source/Window/Window.js"

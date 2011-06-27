@@ -46,6 +46,7 @@ Moobile.ViewController = new Class({
 
 	loadView: function(view) {
 		this.view = view || new Moobile.View();
+		Object.assertInstanceOf(this.view, Moobile.View, 'Moobile.ViewController view must be an intance of Moobile.View');
 		return this;
 	},
 
@@ -58,6 +59,7 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
+//		trace(this.view.element, this.view.window, '----------------------------------');
 		if (this.started == false) {
 			this.started = true;
 			this.window = this.view.getWindow();

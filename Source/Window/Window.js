@@ -26,6 +26,8 @@ Moobile.Window = new Class({
 
 	viewController: null,
 
+	viewControllerCollection: null,
+
 	userInputEnabled: true,
 
 	userInputMask: null,
@@ -36,22 +38,50 @@ Moobile.Window = new Class({
 		withContentElement: false
 	},
 
-	bindChildView: function(view) {
-		this.parent(view);
-		view.setWindow(this);
-		view.setParentView(null);
+	init: function() {
+		this.viewControllerCollection = new Moobile.ViewControllerCollection(this);
+		this.viewControllerCollection.startup();
+		this.parent();
 		return this;
 	},
 
+	release: function() {
+		this.viewControllerCollection.destroy();
+		this.viewControllerCollection = null;
+		this.parent();
+		return this;
+	},
+
+	didBindChildView: function(view) {
+		view.setWindow(this);
+		view.setParentView(null);
+		this.parent(view);
+		return this;
+	},
+
+	filterChildView: function(element) {
+		return element.getParent('[data-role=view]') == null;
+	},
+
 	setViewController: function(viewController) {
-		this.addChildView(viewController.view);
+
+		if (this.viewController) {
+			this.viewControllerCollection.removeViewController(this.viewController);
+			this.viewController.view.destroy();
+			this.viewController.view = null;
+			this.viewController.destroy();
+			this.viewController = null;
+		}
+
+		this.viewControllerCollection.addViewController(viewController);
+
 		this.viewController = viewController;
-		this.viewController.startup();
+
 		return this;
 	},
 
 	getViewController: function() {
-		return this.viewController;
+		return this.viewController || this.viewControllerCollection.getViewControllers()[0];
 	},
 
 	getOrientation: function() {
