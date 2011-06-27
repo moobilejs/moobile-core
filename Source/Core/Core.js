@@ -38,6 +38,7 @@ requires:
 	- More/Events.Pseudos
 	- More/Class.Refactor
 	- More/Class.Binds
+	- More/Class.Occlude
 	- More/Array.Extras
 	- More/Date.Extras
 	- More/Object.Extras

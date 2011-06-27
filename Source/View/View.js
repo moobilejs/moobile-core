@@ -48,6 +48,12 @@ Moobile.View = new Class({
 		withWrapperElement: false
 	},
 
+	initialize: function(element, options) {
+		this.parent(element, options);
+		if (this.occlude('view', this.element)) return this.occluded;
+		return this;
+	},
+
 	build: function() {
 		this.parent();
 		if (this.options.withContentElement) this.buildContentElement();

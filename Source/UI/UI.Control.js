@@ -36,7 +36,8 @@ Moobile.UI.Control = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.parent(element);
+		this.parent(element, options);
+		if (this.occlude('control', this.element)) return this.occluded;
 		this.init();
 		this.attachEvents();
 		return this;

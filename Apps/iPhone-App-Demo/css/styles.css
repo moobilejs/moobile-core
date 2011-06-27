@@ -299,102 +299,204 @@ p small {
 
 .ui-bar-button {
 	-webkit-user-select: none;
+	-webkit-background-size: 0px 0px;
 	cursor: pointer;
 	height: 30px;
 	line-height: 30px;
 	overflow: hidden;
-	padding-left: 4px;
-	padding-right: 4px;
 	user-select: none;
 }
 
 .ui-bar-button-content {
 	-webkit-user-select: none;
+	border-right-style: solid;
+	border-left-style: solid;
 	color: #ffffff;
 	font-size: 12px;
 	font-weight: bold;
+	margin-top: 1px;
+	height: 27px;
+	line-height: 28px;
 	overflow: hidden;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 	text-overflow: ellipsis;
 	text-align: center;
-	user-select: none;
 	white-space: nowrap;
 }
 
 /* UI Bar Button Styles */
 
 .ui-bar-button.style-default {
-	-webkit-border-image: url(../images/ui-bar-button.png) 0 5 330 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 0 5 330 stretch stretch;;
+	background: url(../images/ui-bar-button.png) -5px -0px repeat-x;
+	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-default {
-	-webkit-border-image: url(../images/ui-bar-button.png) 30 5 300 repeat repeat;
-	border-width: 0px 5px;
+	-webkit-border-image: url(../images/ui-bar-button.png) 30 5 300 stretch stretch;
+	background-position: -5px -30px;
+}
+
+.ui-bar-button.style-default .ui-bar-button-content {
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
 /* Active */
 
 .ui-bar-button.style-active {
-	-webkit-border-image: url(../images/ui-bar-button.png) 60 5 270 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 60 5 270 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -60px repeat-x;
+	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-active {
-	-webkit-border-image: url(../images/ui-bar-button.png) 90 5 240 repeat repeat;
-	border-width: 0px 5px;
+	-webkit-border-image: url(../images/ui-bar-button.png) 90 5 240 stretch stretch;
+	background-position: -5px -90px;
+}
+
+.ui-bar-button.style-active .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
 /* Black */
 
 .ui-bar-button.style-black {
-	-webkit-border-image: url(../images/ui-bar-button.png) 120 5 210 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 120 5 210 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -120px repeat-x;
+	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-black {
-	-webkit-border-image: url(../images/ui-bar-button.png) 150 5 180 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 150 5 180 stretch stretch;
+	background-position: -5px -150px;
 	border-width: 0px 5px;
+}
+
+.ui-bar-button.style-black .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
 /* Warning */
 
 .ui-bar-button.style-warning {
-	-webkit-border-image: url(../images/ui-bar-button.png) 180 5 150 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 180 5 150 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -180px repeat-x;
+	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-warning {
-	-webkit-border-image: url(../images/ui-bar-button.png) 210 5 120 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 210 5 120 stretch stretch;
+	background-position: -5px -210px;
 	border-width: 0px 5px;
+}
+
+.ui-bar-button.style-warning .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
 /* Back */
 
 .ui-bar-button.style-back {
-	-webkit-border-image: url(../images/ui-bar-button.png) 240 5 90 15 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 240 5 90 15 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -240px repeat-x;
+	background-clip: padding-box;
 	border-width: 0px 5px 0px 15px;
 	padding-left: 0px;
 	padding-right: 4px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-back {
-	-webkit-border-image: url(../images/ui-bar-button.png) 270 5 60 15 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 270 5 60 15 stretch stretch;
 	border-width: 0px 5px 0px 15px;
+	background-position: -5px -270px;
+}
+
+.ui-bar-button.style-back .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
 /* Forward */
 
 .ui-bar-button.style-forward {
-	-webkit-border-image: url(../images/ui-bar-button.png) 300 15 30 5 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 300 15 30 5 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -300px repeat-x;
+	background-clip: padding-box;
 	border-width: 0px 15px 0px 5px;
 	padding-left: 4px;
 	padding-right: 0px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-forward {
-	-webkit-border-image: url(../images/ui-bar-button.png) 330 15 0 5 repeat repeat;
+	-webkit-border-image: url(../images/ui-bar-button.png) 330 15 0 5 stretch stretch;
+	background-position: -5px -330px;
 	border-width: 0px 15px 0px 5px;
+}
+
+.ui-bar-button.style-forward .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* UI Button Group
+-----------------------------------------------------------------------------*/
+
+.ui-button-group {
+	-webkit-box-orient: horizontal;
+	-webkit-box-align: center;
+	display: -webkit-box;
+}
+
+.ui-button-group > * {
+	-webkit-box-flex: 1;
+	display: block;
+}
+
+.ui-button-group .ui-bar-button {
+	-webkit-background-size: auto;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	float: none;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.ui-button-group .ui-bar-button .ui-bar-button-content {
+	border-left-width: 1px;
+	border-right-width: 1px;
+}
+
+.ui-button-group .ui-bar-button:first-child {
+	background: none;
+	border-left-width: 5px;
+}
+
+.ui-button-group .ui-bar-button:first-child .ui-bar-button-content {
+	border-left-width: 0px;
+	padding-left: 1px;
+}
+
+.ui-button-group .ui-bar-button:last-child {
+	background: none;
+	border-right-width: 5px;
+}
+
+.ui-button-group .ui-bar-button:last-child .ui-bar-button-content {
+	border-right-width: 0px;
+	padding-right: 1px;
 }
 
 /* UI Navigation Bar

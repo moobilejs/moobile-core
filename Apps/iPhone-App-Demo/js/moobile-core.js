@@ -6596,6 +6596,46 @@ Class.Mutators.initialize = function(initialize){
 /*
 ---
 
+script: Class.Occlude.js
+
+name: Class.Occlude
+
+description: Prevents a class from being applied to a DOM element twice.
+
+license: MIT-style license.
+
+authors:
+  - Aaron Newton
+
+requires:
+  - Core/Class
+  - Core/Element
+  - /MooTools.More
+
+provides: [Class.Occlude]
+
+...
+*/
+
+Class.Occlude = new Class({
+
+	occlude: function(property, element){
+		element = document.id(element || this.element);
+		var instance = element.retrieve(property || this.property);
+		if (instance && !this.occluded)
+			return (this.occluded = instance);
+
+		this.occluded = false;
+		element.store(property || this.property, this);
+		return this.occluded;
+	}
+
+});
+
+
+/*
+---
+
 script: Array.Extras.js
 
 name: Array.Extras
@@ -9416,6 +9456,7 @@ requires:
 	- More/Events.Pseudos
 	- More/Class.Refactor
 	- More/Class.Binds
+	- More/Class.Occlude
 	- More/Array.Extras
 	- More/Date.Extras
 	- More/Object.Extras
@@ -9744,7 +9785,8 @@ Moobile.UI.Element = new Class({
 	Implements: [
 		Events,
 		Options,
-		Class.Binds
+		Class.Binds,
+		Class.Occlude
 	],
 
 	element: null,
@@ -9759,7 +9801,7 @@ Moobile.UI.Element = new Class({
 		this.setElement(element);
 		this.setElementOptions();
 		this.setOptions(options);
-		this.element.addClass(this.options.className);
+		if (this.occlude('element', this.element)) return this.occluded;
 		this.name = this.element.get('data-name');
 		this.build();
 		return this;
@@ -9770,6 +9812,7 @@ Moobile.UI.Element = new Class({
 	},
 
 	build: function() {
+		this.element.addClass(this.options.className);
 		return this;
 	},
 
@@ -9906,7 +9949,8 @@ Moobile.UI.Control = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.parent(element);
+		this.parent(element, options);
+		if (this.occlude('control', this.element)) return this.occluded;
 		this.init();
 		this.attachEvents();
 		return this;
@@ -10165,6 +10209,109 @@ Moobile.UI.Button = new Class({
 		e.target = this;
 		this.element.removeClass(this.options.className + '-down');
 		this.fireEvent('mouseup', e);
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: UI.ButtonGroup
+
+description:
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- UI.Control
+
+provides:
+	- UI.ButtonGroup
+
+...
+*/
+
+Moobile.UI.ButtonGroup = new Class({
+
+	Extends: Moobile.UI.Control,
+
+	buttons: [],
+
+	selectedButton: null,
+
+	options: {
+		className: 'ui-button-group',
+		orientation: 'horizontal',
+		defaultButtonIndex: -1
+	},
+
+	build: function() {
+		this.parent();
+		this.element.addClass(this.options.className + '-' + this.options.orientation);
+		return this;
+	},
+
+	init: function() {
+		this.attachButtons();
+		if (this.options.defaultButtonIndex > -1) this.setSelectedButtonIndex(this.options.defaultButtonIndex);
+		this.parent();
+		return this;
+	},
+
+	release: function() {
+		this.buttons = null;
+		this.parent();
+		return this;
+	},
+
+	attachButtons: function() {
+		this.element.getElements('[data-role=control]').each(this.attachButton.bind(this));
+		return this;
+	},
+
+	attachButton: function(element) {
+		var button = Class.from(element.getProperty('data-control') || 'Moobile.UI.Button', element);
+		this.buttons.push(button);
+		return this;
+	},
+
+	attachEvents: function() {
+		this.buttons.each(function(button) { button.addEvent('click', this.bound('onButtonClick')); }, this);
+		this.parent();
+		return this;
+	},
+
+	detachEvents: function() {
+		this.buttons.each(function(button) { button.removeEvent('click', this.bound('onButtonClick')); }, this);
+		this.parent();
+		return this;
+	},
+
+	setSelectedButton: function(button) {
+		if (this.selectedButton != button) {
+			if (this.selectedButton) {
+				this.selectedButton.setSelected(false);
+				this.selectedButton = null;
+			}
+			this.selectedButton = button;
+			this.selectedButton.setSelected(true);
+			this.fireEvent('change', this.selectedButton);
+		}
+		return this;
+	},
+
+	setSelectedButtonIndex: function(index) {
+		var button = this.buttons[index];
+		if (button) this.setSelectedButton(button);
+		return this;
+	},
+
+	onButtonClick: function(e) {
+		this.setSelectedButton(e.target);
 		return this;
 	}
 
@@ -11572,6 +11719,12 @@ Moobile.View = new Class({
 		className: 'view',
 		withContentElement: true,
 		withWrapperElement: false
+	},
+
+	initialize: function(element, options) {
+		this.parent(element, options);
+		if (this.occlude('view', this.element)) return this.occluded;
+		return this;
 	},
 
 	build: function() {

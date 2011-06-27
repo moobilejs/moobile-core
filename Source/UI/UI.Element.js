@@ -34,7 +34,8 @@ Moobile.UI.Element = new Class({
 	Implements: [
 		Events,
 		Options,
-		Class.Binds
+		Class.Binds,
+		Class.Occlude
 	],
 
 	element: null,
@@ -49,7 +50,7 @@ Moobile.UI.Element = new Class({
 		this.setElement(element);
 		this.setElementOptions();
 		this.setOptions(options);
-		this.element.addClass(this.options.className);
+		if (this.occlude('element', this.element)) return this.occluded;
 		this.name = this.element.get('data-name');
 		this.build();
 		return this;
@@ -60,6 +61,7 @@ Moobile.UI.Element = new Class({
 	},
 
 	build: function() {
+		this.element.addClass(this.options.className);
 		return this;
 	},
 

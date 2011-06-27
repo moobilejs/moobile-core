@@ -27,6 +27,7 @@ sources:
   - "Source/UI/UI.Control.js"
   - "Source/UI/UI.Button.js"
   - "Source/UI/UI.ButtonStyle.js"
+  - "Source/UI/UI.ButtonGroup.js"
   - "Source/UI/UI.Element.js"
   - "Source/UI/UI.Bar.js"
   - "Source/UI/UI.BarStyle.js"
