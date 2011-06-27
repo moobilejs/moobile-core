@@ -29,7 +29,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		return this;
 	},
 
-	willPushViewController: function(viewController) {
+	didAddViewController: function(viewController) {
 
 		viewController.navigationBar = viewController.view.navigationBar;
 

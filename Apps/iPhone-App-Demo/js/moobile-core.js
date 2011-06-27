@@ -9878,6 +9878,20 @@ Moobile.UI.Element = new Class({
 		return this;
 	},
 
+	getProperty: function(name) {
+		return this.element.get(name);
+	},
+
+	setProperty: function(name, value) {
+		this.element.set(name, value);
+		return this;
+	},
+
+	removeProperty: function(name) {
+		this.element.erase(name);
+		return this;
+	},
+
 	inject: function(element, where) {
 		this.element.inject(element, where);
 		return this;
@@ -12777,6 +12791,8 @@ Moobile.ViewController = new Class({
 
 	viewControllerPanel: null,
 
+	parentViewController: null,
+
 	navigationBar: null,
 
 	started: false,
@@ -12815,6 +12831,7 @@ Moobile.ViewController = new Class({
 		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
+		this.parentViewController = null;
 		this.window = null;
 		this.view = null;
 		this.release();
@@ -12883,10 +12900,97 @@ Moobile.ViewControllerCollection = new Class({
 
 	viewControllers: [],
 
+	destroy: function() {
+		this.destroyViewControllers();
+		this.parent();
+		return this;
+	},
+
+	addViewController: function(viewController, where, context) {
+		this.willAddViewController(viewController);
+		this.view.addChildView(viewController.view, where, context);
+		this.bindViewController(viewController);
+		this.didAddViewController(viewController);
+		return this;
+	},
+
+	getViewController: function(name) {
+		return this.viewControllers.find(function(viewController) {
+			return viewController.view.getProperty('data-view-controller-name') == name;
+		});
+	},
+
 	getViewControllers: function() {
 		return this.viewControllers;
-	}
+	},
 
+	removeViewController: function(viewController) {
+		var removed = this.viewControllers.remove(viewController);
+		if (removed) {
+			this.willRemoveViewController(viewController);
+			viewController.view.removeFromParentView();
+			this.didRemoveViewController(viewController);
+		}
+		return this;
+	},
+
+	attachViewControllers: function() {
+		this.view.getChildViews().each(this.bound('attachViewController'));
+		return this;
+	},
+
+	bindViewController: function(viewController) {
+		Object.assertInstanceOf(viewController, Moobile.ViewController, 'ViewControllers must inherit Moobile.ViewController');
+		this.viewControllers.push(viewController);
+		viewController.parentViewController = this;
+		viewController.viewControllerStack = this.viewControllerStack;
+		viewController.viewControllerPanel = this.viewControllerPanel;
+		viewController.startup();
+		this.didBindViewController(viewController);
+		Object.member(this, viewController, viewController.view.getProperty('data-view-controller-name'));
+		return this;
+	},
+
+	attachViewController: function(view) {
+		var viewController = view.getProperty('data-view-controller');
+		if (viewController) {
+			viewController = Class.from(viewController, view);
+			this.bindViewController(viewController);
+		}
+		return this;
+	},
+
+	destroyViewControllers: function() {
+		this.viewControllers.each(this.bound('destroyViewController'));
+		this.viewControllers = [];
+		return this;
+	},
+
+	destroyViewController: function(viewController) {
+		viewController.destroy();
+		viewController = null;
+		return this;
+	},
+
+	willAddViewController: function(viewController) {
+		return this;
+	},
+
+	didAddViewController: function(viewController) {
+		return this;
+	},
+
+	didBindViewController: function(viewController) {
+		return this;
+	},
+
+	willRemoveViewController: function(viewController) {
+		return this;
+	},
+
+	didRemoveViewController: function(viewController) {
+		return this;
+	}
 
 });
 
@@ -12921,6 +13025,12 @@ Moobile.ViewControllerStack = new Class({
 
 	loadView: function(view) {
 		this.view = view || new Moobile.ViewStack();
+		return this;
+	},
+
+	bindViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.viewControllerStack = this;
 		return this;
 	},
 
@@ -12959,13 +13069,9 @@ Moobile.ViewControllerStack = new Class({
 			this.viewControllers.remove(viewControllerPushed);
 		}
 
-		this.viewControllers.push(viewControllerPushed);
-
-		this.view.addChildView(viewController.view);
-
 		this.willPushViewController(viewControllerPushed);
 
-		viewControllerPushed.startup();
+		this.addViewController(viewControllerPushed);
 		viewControllerPushed.view.show();
 		viewControllerPushed.viewWillEnter();
 
@@ -12987,7 +13093,7 @@ Moobile.ViewControllerStack = new Class({
 			this.viewControllers.length == 1
 		);
 
-		viewController.viewTransition = viewTransition;
+		viewControllerPushed.viewTransition = viewTransition;
 
 		return this;
 	},
@@ -13018,12 +13124,15 @@ Moobile.ViewControllerStack = new Class({
 		var viewControllerIndex = this.viewControllers.indexOf(viewController);
 		if (viewControllerIndex > -1) {
 			for (var i = this.viewControllers.length - 2; i > viewControllerIndex; i--) {
-				this.viewControllers[i].viewWillLeave();
-				this.viewControllers[i].viewDidLeave();
-				this.viewControllers[i].view.removeFromParentView();
-				this.viewControllers[i].view.destroy();
-				this.viewControllers[i].destroy();
-				this.viewControllers.splice(i, 1);
+
+				var viewControllerToRemove = this.viewControllers[i];
+				viewControllerToRemove.viewWillLeave();
+				viewControllerToRemove.viewDidLeave();
+				this.removeViewController(viewControllerToRemove);
+				viewControllerToRemove.view.destroy();
+				viewControllerToRemove.view = null;
+				viewControllerToRemove.destroy();
+
 			}
 		}
 
@@ -13062,11 +13171,14 @@ Moobile.ViewControllerStack = new Class({
 
 	onPopTransitionCompleted: function() {
 
-		var viewControllerPopped = this.viewControllers.pop();
-		var viewControllerBefore = this.viewControllers.getLast(0);
+		var viewControllerPopped = this.viewControllers.getLast(0);
+		var viewControllerBefore = this.viewControllers.getLast(1);
 		viewControllerBefore.viewDidEnter();
 		viewControllerPopped.viewDidLeave();
-		viewControllerPopped.view.removeFromParentView();
+
+		this.removeViewController(viewControllerPopped);
+		viewControllerPopped.view.destroy();
+		viewControllerPopped.view = null;
 		viewControllerPopped.destroy();
 
 		this.didPopViewController(viewControllerPopped);
@@ -13124,7 +13236,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		return this;
 	},
 
-	willPushViewController: function(viewController) {
+	didAddViewController: function(viewController) {
 
 		viewController.navigationBar = viewController.view.navigationBar;
 

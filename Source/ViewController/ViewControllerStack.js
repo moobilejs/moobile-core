@@ -32,6 +32,12 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
+	bindViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.viewControllerStack = this;
+		return this;
+	},
+
 	loadViewControllerFrom: function(url, callback) {
 
 		if (this.viewControllerRequest == null) {
@@ -67,13 +73,9 @@ Moobile.ViewControllerStack = new Class({
 			this.viewControllers.remove(viewControllerPushed);
 		}
 
-		this.viewControllers.push(viewControllerPushed);
-
-		this.view.addChildView(viewController.view);
-
 		this.willPushViewController(viewControllerPushed);
 
-		viewControllerPushed.startup();
+		this.addViewController(viewControllerPushed);
 		viewControllerPushed.view.show();
 		viewControllerPushed.viewWillEnter();
 
@@ -95,7 +97,7 @@ Moobile.ViewControllerStack = new Class({
 			this.viewControllers.length == 1
 		);
 
-		viewController.viewTransition = viewTransition;
+		viewControllerPushed.viewTransition = viewTransition;
 
 		return this;
 	},
@@ -126,12 +128,15 @@ Moobile.ViewControllerStack = new Class({
 		var viewControllerIndex = this.viewControllers.indexOf(viewController);
 		if (viewControllerIndex > -1) {
 			for (var i = this.viewControllers.length - 2; i > viewControllerIndex; i--) {
-				this.viewControllers[i].viewWillLeave();
-				this.viewControllers[i].viewDidLeave();
-				this.viewControllers[i].view.removeFromParentView();
-				this.viewControllers[i].view.destroy();
-				this.viewControllers[i].destroy();
-				this.viewControllers.splice(i, 1);
+
+				var viewControllerToRemove = this.viewControllers[i];
+				viewControllerToRemove.viewWillLeave();
+				viewControllerToRemove.viewDidLeave();
+				this.removeViewController(viewControllerToRemove);
+				viewControllerToRemove.view.destroy();
+				viewControllerToRemove.view = null;
+				viewControllerToRemove.destroy();
+
 			}
 		}
 
@@ -170,11 +175,14 @@ Moobile.ViewControllerStack = new Class({
 
 	onPopTransitionCompleted: function() {
 
-		var viewControllerPopped = this.viewControllers.pop();
-		var viewControllerBefore = this.viewControllers.getLast(0);
+		var viewControllerPopped = this.viewControllers.getLast(0);
+		var viewControllerBefore = this.viewControllers.getLast(1);
 		viewControllerBefore.viewDidEnter();
 		viewControllerPopped.viewDidLeave();
-		viewControllerPopped.view.removeFromParentView();
+
+		this.removeViewController(viewControllerPopped);
+		viewControllerPopped.view.destroy();
+		viewControllerPopped.view = null;
 		viewControllerPopped.destroy();
 
 		this.didPopViewController(viewControllerPopped);

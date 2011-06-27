@@ -127,6 +127,20 @@ Moobile.UI.Element = new Class({
 		return this;
 	},
 
+	getProperty: function(name) {
+		return this.element.get(name);
+	},
+
+	setProperty: function(name, value) {
+		this.element.set(name, value);
+		return this;
+	},
+
+	removeProperty: function(name) {
+		this.element.erase(name);
+		return this;
+	},
+
 	inject: function(element, where) {
 		this.element.inject(element, where);
 		return this;

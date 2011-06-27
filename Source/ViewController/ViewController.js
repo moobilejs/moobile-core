@@ -33,6 +33,8 @@ Moobile.ViewController = new Class({
 
 	viewControllerPanel: null,
 
+	parentViewController: null,
+
 	navigationBar: null,
 
 	started: false,
@@ -71,6 +73,7 @@ Moobile.ViewController = new Class({
 		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
+		this.parentViewController = null;
 		this.window = null;
 		this.view = null;
 		this.release();
