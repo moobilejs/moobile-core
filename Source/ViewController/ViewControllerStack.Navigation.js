@@ -31,6 +31,8 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	willPushViewController: function(viewController) {
 
+		trace(viewController.view);
+
 		viewController.navigationBar = viewController.view.navigationBar;
 
 		if (this.viewControllers.length > 1) {

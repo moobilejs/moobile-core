@@ -70,6 +70,9 @@ Moobile.ViewControllerStack = new Class({
 		this.viewControllers.push(viewControllerPushed);
 
 		this.view.addChildView(viewController.view);
+
+		this.willPushViewController(viewControllerPushed);
+
 		viewControllerPushed.startup();
 		viewControllerPushed.view.show();
 		viewControllerPushed.viewWillEnter();
@@ -93,8 +96,6 @@ Moobile.ViewControllerStack = new Class({
 		);
 
 		viewController.viewControllerTransition = viewControllerTransition;
-
-		this.willPushViewController(viewControllerPushed);
 
 		return this;
 	},
@@ -148,6 +149,9 @@ Moobile.ViewControllerStack = new Class({
 
 		var viewControllerPopped = this.viewControllers.getLast(0);
 		var viewControllerBefore = this.viewControllers.getLast(1);
+
+		this.willPopViewController(viewControllerPopped);
+
 		viewControllerPopped.viewWillLeave();
 		viewControllerBefore.viewWillEnter();
 		viewControllerBefore.view.show();
@@ -161,8 +165,6 @@ Moobile.ViewControllerStack = new Class({
 			this.view.getContent()
 		);
 
-		this.willPopViewController(viewControllerPopped);
-
 		return this;
 	},
 
@@ -170,9 +172,7 @@ Moobile.ViewControllerStack = new Class({
 
 		var viewControllerPopped = this.viewControllers.pop();
 		var viewControllerBefore = this.viewControllers.getLast(0);
-
 		viewControllerBefore.viewDidEnter();
-
 		viewControllerPopped.viewDidLeave();
 		viewControllerPopped.view.removeFromParentView();
 		viewControllerPopped.destroy();
