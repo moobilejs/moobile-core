@@ -10084,6 +10084,8 @@ Moobile.UI.Button = new Class({
 
 	contentElement: null,
 
+	captionElement: null,
+
 	options: {
 		className: 'ui-button',
 		styleName: Moobile.UI.ButtonStyle.Default
@@ -10091,28 +10093,31 @@ Moobile.UI.Button = new Class({
 
 	build: function() {
 		this.parent();
-		this.buildContentElement();
-		return this;
-	},
-
-	init: function() {
-		this.parent();
+		if (this.isNative() == false) {
+			this.buildContentElement();
+			this.buildCaptionElement();
+		}
 		return this;
 	},
 
 	release: function() {
 		this.contentElement = null;
+		this.captionElement = null;
 		this.parent();
 		return this;
 	},
 
 	buildContentElement: function() {
-		if (this.isNative() == false) {
-			this.contentElement = new Element('div.' + this.options.className + '-content');
-			this.contentElement.adopt(this.element.getContents());
-			this.element.adopt(this.contentElement);
-		}
+		this.contentElement = new Element('div.' + this.options.className + '-content');
+		this.contentElement.adopt(this.element.getContents());
+		this.element.adopt(this.contentElement);
 		return this;
+	},
+
+	buildCaptionElement: function() {
+		this.captionElement = new Element('div.' + this.options.className + '-caption');
+		this.captionElement.adopt(this.contentElement.getContents());
+		this.contentElement.adopt(this.captionElement);
 	},
 
 	attachEvents: function() {
@@ -10132,11 +10137,14 @@ Moobile.UI.Button = new Class({
 	},
 
 	setText: function(text) {
+
 		if (this.isNative()) {
 			this.element.set('value', text);
-		} else {
-			this.contentElement.set('html', text);
+			return this;
 		}
+
+		this.captionElement.set('html', text);
+
 		return this;
 	},
 
