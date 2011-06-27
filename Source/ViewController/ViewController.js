@@ -27,7 +27,7 @@ Moobile.ViewController = new Class({
 
 	view: null,
 
-	viewControllerTransition: null,
+	viewTransition: null,
 
 	viewControllerStack: null,
 
@@ -68,7 +68,7 @@ Moobile.ViewController = new Class({
 	destroy: function() {
 		this.started = false;
 		this.detachEvents();
-		this.viewControllerTransition = null;
+		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.window = null;

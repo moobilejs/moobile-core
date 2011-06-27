@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewControllerTransition.Fade
+name: ViewTransition.Fade
 
 description: Provide a fade-in fade-out view controller transition effect.
 
@@ -12,41 +12,41 @@ authors:
 
 requires:
 	- Core
-	- ViewControllerTransition
+	- ViewTransition
 
 provides:
-	- ViewControllerTransition.Fade
+	- ViewTransition.Fade
 
 ...
 */
 
-Moobile.ViewControllerTransition.Fade = new Class({
+Moobile.ViewTransition.Fade = new Class({
 
-	Extends: Moobile.ViewControllerTransition,
+	Extends: Moobile.ViewTransition,
 
 	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 
 		if (firstViewIn) {
-		
+
 			this.setTransitionElement(viewToShow);
-			
+
 			viewToShow.addClass('transition-fade');
 			viewToShow.addClass('transition-fade-enter-first');
-			
+
 			this.start(function() {
 				viewToShow.removeClass('transition-fade');
 				viewToShow.removeClass('transition-fade-enter-first');
 			});
-			
+
 		} else {
-			
+
 			this.setTransitionElement(viewToHide);
-			
+
 			wrapper.addClass('transition-fade');
 			wrapper.addClass('transition-fade-enter');
 			viewToHide.addClass('transition-fade-view-to-hide');
 			viewToShow.addClass('transition-fade-view-to-show');
-			
+
 			this.start(function() {
 				wrapper.removeClass('transition-fade');
 				wrapper.removeClass('transition-fade-enter');
@@ -59,9 +59,9 @@ Moobile.ViewControllerTransition.Fade = new Class({
 	},
 
 	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-		
+
 		this.setTransitionElement(viewToHide);
-			
+
 		wrapper.addClass('transition-fade');
 		wrapper.addClass('transition-fade-leave');
 		viewToHide.addClass('transition-fade-view-to-hide');

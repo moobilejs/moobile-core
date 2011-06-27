@@ -10090,8 +10090,8 @@ Moobile.UI.Button = new Class({
 	},
 
 	build: function() {
-		this.buildContent();
 		this.parent();
+		this.buildContent();
 		return this;
 	},
 
@@ -11473,6 +11473,328 @@ Moobile.ViewPanel = new Class({
 /*
 ---
 
+name: ViewTransition
+
+description: Provides the base class for view controller transition effects.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+
+provides:
+	- ViewTransition
+
+...
+*/
+
+Moobile.ViewTransition = new Class({
+
+	Implements: [
+		Events,
+		Options,
+		Chain,
+		Class.Binds
+	],
+
+	transitionElement: null,
+
+	running: false,
+
+	attachEvents: function() {
+		this.transitionElement.addEvent('transitionend', this.bound('end'));
+		return this;
+	},
+
+	detachEvents: function() {
+		this.transitionElement.removeEvent('transitionend', this.bound('end'));
+		return this;
+	},
+
+	setTransitionElement: function(transitionElement) {
+		this.transitionElement = document.id(transitionElement);
+		return this;
+	},
+
+	getTransitionElement: function() {
+		return this.transitionElement;
+	},
+
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+		return this;
+	},
+
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+		return this;
+	},
+
+	start: function(callback) {
+		this.addEvent('ended:once', callback);
+		this.play.delay(5, this);
+		return this;
+	},
+
+	play: function() {
+		if (this.running == false) {
+			this.running = true;
+			this.attachEvents();
+			this.transitionElement.addClass('commit-transition');
+		}
+	},
+
+	end: function(e) {
+		if (this.running && e.target == this.transitionElement) {
+			this.running = false;
+			this.transitionElement.removeClass('commit-transition');
+			this.detachEvents();
+			this.fireEvent('ended');
+			this.fireEvent('complete');
+		}
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: ViewTransition.Slide
+
+description: Provide a slide view controller transition effect.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- ViewTransition
+
+provides:
+	- ViewTransition.Slide
+
+...
+*/
+
+Moobile.ViewTransition.Slide = new Class({
+
+	Extends: Moobile.ViewTransition,
+
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+
+		this.setTransitionElement(wrapper);
+
+		wrapper.addClass('transition-slide');
+		wrapper.addClass('transition-slide-enter');
+
+		viewToShow.addClass('transition-slide-view-to-show');
+
+		if (firstViewIn) {
+			viewToShow.addClass('transition-slide-view-to-show-first');
+		} else {
+			viewToHide.addClass('transition-slide-view-to-hide');
+		}
+
+		this.start(function() {
+			wrapper.removeClass('transition-slide');
+			wrapper.removeClass('transition-slide-enter');
+			viewToShow.removeClass('transition-slide-view-to-show');
+			viewToShow.removeClass('transition-slide-view-to-show-first');
+			if (viewToHide) {
+				viewToHide.removeClass('transition-slide-view-to-hide');
+			}
+		});
+
+		return this;
+	},
+
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+
+		this.setTransitionElement(wrapper);
+
+		wrapper.addClass('transition-slide');
+		wrapper.addClass('transition-slide-leave');
+		viewToShow.addClass('transition-slide-view-to-show');
+		viewToHide.addClass('transition-slide-view-to-hide');
+
+		this.start(function() {
+			wrapper.removeClass('transition-slide');
+			wrapper.removeClass('transition-slide-leave');
+			viewToShow.removeClass('transition-slide-view-to-show');
+			viewToHide.removeClass('transition-slide-view-to-hide');
+		});
+
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: ViewTransition.Cubic
+
+description: Provide a cubic view controller transition effect.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- ViewTransition
+
+provides:
+	- ViewTransition.Cubic
+
+...
+*/
+
+Moobile.ViewTransition.Cubic = new Class({
+
+	Extends: Moobile.ViewTransition,
+
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+
+		if (firstViewIn) {
+
+			alert('Not yet supported...')
+
+		} else {
+
+			this.setTransitionElement(wrapper);
+
+			parentView.addClass('transition-cubic-viewport');
+			wrapper.addClass('transition-cubic');
+			wrapper.addClass('transition-cubic-enter');
+			viewToShow.addClass('transition-cubic-view-to-show');
+			viewToHide.addClass('transition-cubic-view-to-hide');
+
+			this.start(function() {
+				parentView.removeClass('transition-cubic-viewport');
+				wrapper.removeClass('transition-cubic');
+				wrapper.removeClass('transition-cubic-enter');
+				viewToShow.removeClass('transition-cubic-view-to-show');
+				viewToHide.removeClass('transition-cubic-view-to-hide');
+			});
+
+		}
+
+		return this;
+	},
+
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+
+		this.setTransitionElement(wrapper);
+
+		parentView.addClass('transition-cubic-viewport');
+		wrapper.addClass('transition-cubic');
+		wrapper.addClass('transition-cubic-leave');
+		viewToHide.addClass('transition-cubic-view-to-hide');
+		viewToShow.addClass('transition-cubic-view-to-show');
+
+		this.start(function() {
+			parentView.removeClass('transition-cubic-viewport');
+			wrapper.removeClass('transition-cubic');
+			wrapper.removeClass('transition-cubic-leave');
+			viewToHide.removeClass('transition-cubic-view-to-hide');
+			viewToShow.removeClass('transition-cubic-view-to-show');
+		});
+
+		return this;
+	}
+
+});
+
+/*
+---
+
+name: ViewTransition.Fade
+
+description: Provide a fade-in fade-out view controller transition effect.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+	- ViewTransition
+
+provides:
+	- ViewTransition.Fade
+
+...
+*/
+
+Moobile.ViewTransition.Fade = new Class({
+
+	Extends: Moobile.ViewTransition,
+
+	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+
+		if (firstViewIn) {
+
+			this.setTransitionElement(viewToShow);
+
+			viewToShow.addClass('transition-fade');
+			viewToShow.addClass('transition-fade-enter-first');
+
+			this.start(function() {
+				viewToShow.removeClass('transition-fade');
+				viewToShow.removeClass('transition-fade-enter-first');
+			});
+
+		} else {
+
+			this.setTransitionElement(viewToHide);
+
+			wrapper.addClass('transition-fade');
+			wrapper.addClass('transition-fade-enter');
+			viewToHide.addClass('transition-fade-view-to-hide');
+			viewToShow.addClass('transition-fade-view-to-show');
+
+			this.start(function() {
+				wrapper.removeClass('transition-fade');
+				wrapper.removeClass('transition-fade-enter');
+				viewToHide.removeClass('transition-fade-view-to-hide');
+				viewToShow.removeClass('transition-fade-view-to-show');
+			});
+		}
+
+		return this;
+	},
+
+	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+
+		this.setTransitionElement(viewToHide);
+
+		wrapper.addClass('transition-fade');
+		wrapper.addClass('transition-fade-leave');
+		viewToHide.addClass('transition-fade-view-to-hide');
+		viewToShow.addClass('transition-fade-view-to-show');
+
+		this.start(function() {
+			wrapper.removeClass('transition-fade');
+			wrapper.removeClass('transition-fade-leave');
+			viewToHide.removeClass('transition-fade-view-to-hide');
+			viewToShow.removeClass('transition-fade-view-to-show');
+		});
+
+		return this;
+	}
+
+});
+
+/*
+---
+
 name: ViewController
 
 description: Provides a way to handle the different states and events of a view.
@@ -11499,7 +11821,7 @@ Moobile.ViewController = new Class({
 
 	view: null,
 
-	viewControllerTransition: null,
+	viewTransition: null,
 
 	viewControllerStack: null,
 
@@ -11540,7 +11862,7 @@ Moobile.ViewController = new Class({
 	destroy: function() {
 		this.started = false;
 		this.detachEvents();
-		this.viewControllerTransition = null;
+		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.window = null;
@@ -11664,16 +11986,16 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	pushViewControllerFrom: function(url, viewControllerTransition) {
+	pushViewControllerFrom: function(url, viewTransition) {
 		this.loadViewControllerFrom(url,
 			function(viewController) {
-				this.pushViewController(viewController, viewControllerTransition);
+				this.pushViewController(viewController, viewTransition);
 			}.bind(this)
 		);
 		return this;
 	},
 
-	pushViewController: function(viewController, viewControllerTransition) {
+	pushViewController: function(viewController, viewTransition) {
 
 		this.window.disableUserInput();
 
@@ -11705,9 +12027,9 @@ Moobile.ViewControllerStack = new Class({
 		var viewToShow = viewControllerPushed.view;
 		var viewToHide = viewControllerBefore ? viewControllerBefore.view : null;
 
-		viewControllerTransition = viewControllerTransition || new Moobile.ViewControllerTransition.Slide();
-		viewControllerTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
-		viewControllerTransition.enter(
+		viewTransition = viewTransition || new Moobile.ViewTransition.Slide();
+		viewTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
+		viewTransition.enter(
 			viewToShow,
 			viewToHide,
 			this.view,
@@ -11715,7 +12037,7 @@ Moobile.ViewControllerStack = new Class({
 			this.viewControllers.length == 1
 		);
 
-		viewController.viewControllerTransition = viewControllerTransition;
+		viewController.viewTransition = viewTransition;
 
 		return this;
 	},
@@ -11776,9 +12098,9 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerBefore.viewWillEnter();
 		viewControllerBefore.view.show();
 
-		var viewControllerTransition = viewControllerPopped.viewControllerTransition;
-		viewControllerTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
-		viewControllerTransition.leave(
+		var viewTransition = viewControllerPopped.viewTransition;
+		viewTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
+		viewTransition.leave(
 			viewControllerBefore.view,
 			viewControllerPopped.view,
 			this.view,
@@ -11989,328 +12311,6 @@ Moobile.ViewControllerPanel.Split = new Class({
 
 	getSideViewController: function() {
 		return this.sideViewController;
-	}
-
-});
-
-/*
----
-
-name: ViewControllerTransition
-
-description: Provides the base class for view controller transition effects.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-
-provides:
-	- ViewControllerTransition
-
-...
-*/
-
-Moobile.ViewControllerTransition = new Class({
-
-	Implements: [
-		Events,
-		Options,
-		Chain,
-		Class.Binds
-	],
-
-	transitionElement: null,
-
-	running: false,
-
-	attachEvents: function() {
-		this.transitionElement.addEvent('transitionend', this.bound('end'));
-		return this;
-	},
-
-	detachEvents: function() {
-		this.transitionElement.removeEvent('transitionend', this.bound('end'));
-		return this;
-	},
-
-	setTransitionElement: function(transitionElement) {
-		this.transitionElement = document.id(transitionElement);
-		return this;
-	},
-
-	getTransitionElement: function() {
-		return this.transitionElement;
-	},
-
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
-		return this;
-	},
-
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-		return this;
-	},
-
-	start: function(callback) {
-		this.addEvent('ended:once', callback);
-		this.play.delay(5, this);
-		return this;
-	},
-
-	play: function() {
-		if (this.running == false) {
-			this.running = true;
-			this.attachEvents();
-			this.transitionElement.addClass('commit-transition');
-		}
-	},
-
-	end: function(e) {
-		if (this.running && e.target == this.transitionElement) {
-			this.running = false;
-			this.transitionElement.removeClass('commit-transition');
-			this.detachEvents();
-			this.fireEvent('ended');
-			this.fireEvent('complete');
-		}
-		return this;
-	}
-
-});
-
-/*
----
-
-name: ViewControllerTransition.Slide
-
-description: Provide a slide view controller transition effect.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- ViewControllerTransition
-
-provides:
-	- ViewControllerTransition.Slide
-
-...
-*/
-
-Moobile.ViewControllerTransition.Slide = new Class({
-
-	Extends: Moobile.ViewControllerTransition,
-
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
-
-		this.setTransitionElement(wrapper);
-
-		wrapper.addClass('transition-slide');
-		wrapper.addClass('transition-slide-enter');
-
-		viewToShow.addClass('transition-slide-view-to-show');
-
-		if (firstViewIn) {
-			viewToShow.addClass('transition-slide-view-to-show-first');
-		} else {
-			viewToHide.addClass('transition-slide-view-to-hide');
-		}
-
-		this.start(function() {
-			wrapper.removeClass('transition-slide');
-			wrapper.removeClass('transition-slide-enter');
-			viewToShow.removeClass('transition-slide-view-to-show');
-			viewToShow.removeClass('transition-slide-view-to-show-first');
-			if (viewToHide) {
-				viewToHide.removeClass('transition-slide-view-to-hide');
-			}
-		});
-
-		return this;
-	},
-
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-
-		this.setTransitionElement(wrapper);
-
-		wrapper.addClass('transition-slide');
-		wrapper.addClass('transition-slide-leave');
-		viewToShow.addClass('transition-slide-view-to-show');
-		viewToHide.addClass('transition-slide-view-to-hide');
-
-		this.start(function() {
-			wrapper.removeClass('transition-slide');
-			wrapper.removeClass('transition-slide-leave');
-			viewToShow.removeClass('transition-slide-view-to-show');
-			viewToHide.removeClass('transition-slide-view-to-hide');
-		});
-
-		return this;
-	}
-
-});
-
-/*
----
-
-name: ViewControllerTransition.Cubic
-
-description: Provide a cubic view controller transition effect.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- ViewControllerTransition
-
-provides:
-	- ViewControllerTransition.Cubic
-
-...
-*/
-
-Moobile.ViewControllerTransition.Cubic = new Class({
-
-	Extends: Moobile.ViewControllerTransition,
-	
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
-
-		if (firstViewIn) {
-	
-			alert('Not yet supported...')
-			
-		} else {
-			
-			this.setTransitionElement(wrapper);
-			
-			parentView.addClass('transition-cubic-viewport');
-			wrapper.addClass('transition-cubic');
-			wrapper.addClass('transition-cubic-enter');
-			viewToShow.addClass('transition-cubic-view-to-show');
-			viewToHide.addClass('transition-cubic-view-to-hide');
-			
-			this.start(function() {
-				parentView.removeClass('transition-cubic-viewport');
-				wrapper.removeClass('transition-cubic');
-				wrapper.removeClass('transition-cubic-enter');
-				viewToShow.removeClass('transition-cubic-view-to-show');
-				viewToHide.removeClass('transition-cubic-view-to-hide');
-			});
-			
-		}				
-
-		return this;
-	},
-
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-		
-		this.setTransitionElement(wrapper);
-			
-		parentView.addClass('transition-cubic-viewport');
-		wrapper.addClass('transition-cubic');
-		wrapper.addClass('transition-cubic-leave');
-		viewToHide.addClass('transition-cubic-view-to-hide');
-		viewToShow.addClass('transition-cubic-view-to-show');
-		
-		this.start(function() {
-			parentView.removeClass('transition-cubic-viewport');
-			wrapper.removeClass('transition-cubic');
-			wrapper.removeClass('transition-cubic-leave');
-			viewToHide.removeClass('transition-cubic-view-to-hide');
-			viewToShow.removeClass('transition-cubic-view-to-show');
-		});
-		
-		return this;
-	}
-
-});
-
-/*
----
-
-name: ViewControllerTransition.Fade
-
-description: Provide a fade-in fade-out view controller transition effect.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- ViewControllerTransition
-
-provides:
-	- ViewControllerTransition.Fade
-
-...
-*/
-
-Moobile.ViewControllerTransition.Fade = new Class({
-
-	Extends: Moobile.ViewControllerTransition,
-
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
-
-		if (firstViewIn) {
-		
-			this.setTransitionElement(viewToShow);
-			
-			viewToShow.addClass('transition-fade');
-			viewToShow.addClass('transition-fade-enter-first');
-			
-			this.start(function() {
-				viewToShow.removeClass('transition-fade');
-				viewToShow.removeClass('transition-fade-enter-first');
-			});
-			
-		} else {
-			
-			this.setTransitionElement(viewToHide);
-			
-			wrapper.addClass('transition-fade');
-			wrapper.addClass('transition-fade-enter');
-			viewToHide.addClass('transition-fade-view-to-hide');
-			viewToShow.addClass('transition-fade-view-to-show');
-			
-			this.start(function() {
-				wrapper.removeClass('transition-fade');
-				wrapper.removeClass('transition-fade-enter');
-				viewToHide.removeClass('transition-fade-view-to-hide');
-				viewToShow.removeClass('transition-fade-view-to-show');
-			});
-		}
-
-		return this;
-	},
-
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-		
-		this.setTransitionElement(viewToHide);
-			
-		wrapper.addClass('transition-fade');
-		wrapper.addClass('transition-fade-leave');
-		viewToHide.addClass('transition-fade-view-to-hide');
-		viewToShow.addClass('transition-fade-view-to-show');
-
-		this.start(function() {
-			wrapper.removeClass('transition-fade');
-			wrapper.removeClass('transition-fade-leave');
-			viewToHide.removeClass('transition-fade-view-to-hide');
-			viewToShow.removeClass('transition-fade-view-to-show');
-		});
-
-		return this;
 	}
 
 });

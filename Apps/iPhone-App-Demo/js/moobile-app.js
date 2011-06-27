@@ -37,15 +37,15 @@ Demo.ViewController.Home = new Class({
 		switch (item.name) {
 
 			case 'transition-slide':
-				this.viewControllerStack.pushViewControllerFrom('views/transition-slide.html', new Moobile.ViewControllerTransition.Slide);
+				this.viewControllerStack.pushViewControllerFrom('views/transition-slide.html', new Moobile.ViewTransition.Slide);
 				break;
 
 			case 'transition-cubic':
-				this.viewControllerStack.pushViewControllerFrom('views/transition-cubic.html', new Moobile.ViewControllerTransition.Cubic);
+				this.viewControllerStack.pushViewControllerFrom('views/transition-cubic.html', new Moobile.ViewTransition.Cubic);
 				break;
 
 			case 'transition-fade':
-				this.viewControllerStack.pushViewControllerFrom('views/transition-fade.html' , new Moobile.ViewControllerTransition.Fade);
+				this.viewControllerStack.pushViewControllerFrom('views/transition-fade.html' , new Moobile.ViewTransition.Fade);
 				break;
 
 			case 'ui':
@@ -79,7 +79,6 @@ Demo.ViewController.UI = new Class({
 	barButton: null,
 
 	init: function() {
-
 		this.barStyleList = this.view.barStyleList;
 		this.barButtonStyleList = this.view.barButtonStyleList;
 		this.barButton = new Moobile.UI.BarButton();

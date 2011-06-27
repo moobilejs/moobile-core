@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewControllerTransition
+name: ViewTransition
 
 description: Provides the base class for view controller transition effects.
 
@@ -14,12 +14,12 @@ requires:
 	- Core
 
 provides:
-	- ViewControllerTransition
+	- ViewTransition
 
 ...
 */
 
-Moobile.ViewControllerTransition = new Class({
+Moobile.ViewTransition = new Class({
 
 	Implements: [
 		Events,

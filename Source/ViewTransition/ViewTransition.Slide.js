@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewControllerTransition.Slide
+name: ViewTransition.Slide
 
 description: Provide a slide view controller transition effect.
 
@@ -12,17 +12,17 @@ authors:
 
 requires:
 	- Core
-	- ViewControllerTransition
+	- ViewTransition
 
 provides:
-	- ViewControllerTransition.Slide
+	- ViewTransition.Slide
 
 ...
 */
 
-Moobile.ViewControllerTransition.Slide = new Class({
+Moobile.ViewTransition.Slide = new Class({
 
-	Extends: Moobile.ViewControllerTransition,
+	Extends: Moobile.ViewTransition,
 
 	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 

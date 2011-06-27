@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewControllerTransition.Cubic
+name: ViewTransition.Cubic
 
 description: Provide a cubic view controller transition effect.
 
@@ -12,34 +12,34 @@ authors:
 
 requires:
 	- Core
-	- ViewControllerTransition
+	- ViewTransition
 
 provides:
-	- ViewControllerTransition.Cubic
+	- ViewTransition.Cubic
 
 ...
 */
 
-Moobile.ViewControllerTransition.Cubic = new Class({
+Moobile.ViewTransition.Cubic = new Class({
 
-	Extends: Moobile.ViewControllerTransition,
-	
+	Extends: Moobile.ViewTransition,
+
 	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
 
 		if (firstViewIn) {
-	
+
 			alert('Not yet supported...')
-			
+
 		} else {
-			
+
 			this.setTransitionElement(wrapper);
-			
+
 			parentView.addClass('transition-cubic-viewport');
 			wrapper.addClass('transition-cubic');
 			wrapper.addClass('transition-cubic-enter');
 			viewToShow.addClass('transition-cubic-view-to-show');
 			viewToHide.addClass('transition-cubic-view-to-hide');
-			
+
 			this.start(function() {
 				parentView.removeClass('transition-cubic-viewport');
 				wrapper.removeClass('transition-cubic');
@@ -47,22 +47,22 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 				viewToShow.removeClass('transition-cubic-view-to-show');
 				viewToHide.removeClass('transition-cubic-view-to-hide');
 			});
-			
-		}				
+
+		}
 
 		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-		
+
 		this.setTransitionElement(wrapper);
-			
+
 		parentView.addClass('transition-cubic-viewport');
 		wrapper.addClass('transition-cubic');
 		wrapper.addClass('transition-cubic-leave');
 		viewToHide.addClass('transition-cubic-view-to-hide');
 		viewToShow.addClass('transition-cubic-view-to-show');
-		
+
 		this.start(function() {
 			parentView.removeClass('transition-cubic-viewport');
 			wrapper.removeClass('transition-cubic');
@@ -70,7 +70,7 @@ Moobile.ViewControllerTransition.Cubic = new Class({
 			viewToHide.removeClass('transition-cubic-view-to-hide');
 			viewToShow.removeClass('transition-cubic-view-to-show');
 		});
-		
+
 		return this;
 	}
 

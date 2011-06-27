@@ -44,16 +44,16 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	pushViewControllerFrom: function(url, viewControllerTransition) {
+	pushViewControllerFrom: function(url, viewTransition) {
 		this.loadViewControllerFrom(url,
 			function(viewController) {
-				this.pushViewController(viewController, viewControllerTransition);
+				this.pushViewController(viewController, viewTransition);
 			}.bind(this)
 		);
 		return this;
 	},
 
-	pushViewController: function(viewController, viewControllerTransition) {
+	pushViewController: function(viewController, viewTransition) {
 
 		this.window.disableUserInput();
 
@@ -85,9 +85,9 @@ Moobile.ViewControllerStack = new Class({
 		var viewToShow = viewControllerPushed.view;
 		var viewToHide = viewControllerBefore ? viewControllerBefore.view : null;
 
-		viewControllerTransition = viewControllerTransition || new Moobile.ViewControllerTransition.Slide();
-		viewControllerTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
-		viewControllerTransition.enter(
+		viewTransition = viewTransition || new Moobile.ViewTransition.Slide();
+		viewTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
+		viewTransition.enter(
 			viewToShow,
 			viewToHide,
 			this.view,
@@ -95,7 +95,7 @@ Moobile.ViewControllerStack = new Class({
 			this.viewControllers.length == 1
 		);
 
-		viewController.viewControllerTransition = viewControllerTransition;
+		viewController.viewTransition = viewTransition;
 
 		return this;
 	},
@@ -156,9 +156,9 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerBefore.viewWillEnter();
 		viewControllerBefore.view.show();
 
-		var viewControllerTransition = viewControllerPopped.viewControllerTransition;
-		viewControllerTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
-		viewControllerTransition.leave(
+		var viewTransition = viewControllerPopped.viewTransition;
+		viewTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
+		viewTransition.leave(
 			viewControllerBefore.view,
 			viewControllerPopped.view,
 			this.view,
