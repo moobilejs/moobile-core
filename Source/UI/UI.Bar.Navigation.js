@@ -24,6 +24,10 @@ Moobile.UI.Bar.Navigation = new Class({
 
 	Extends: Moobile.UI.Bar,
 
+	leftElement: null,
+
+	rightElement: null,
+
 	leftButton: null,
 
 	rightButton: null,
@@ -32,9 +36,30 @@ Moobile.UI.Bar.Navigation = new Class({
 		className: 'ui-navigation-bar'
 	},
 
+	build: function() {
+		this.parent();
+		this.buildLeftElement();
+		this.buildRightElement();
+		return this;
+	},
+
+	buildLeftElement: function() {
+		this.leftElement = new Element('div.' + this.options.className + '-left');
+		this.leftElement.inject(this.captionElement, 'before');
+		return this;
+	},
+
+	buildRightElement: function() {
+		this.rightElement = new Element('div.' + this.options.className + '-right');
+		this.rightElement.inject(this.captionElement, 'after');
+		return this;
+	},
+
 	release: function() {
 		this.leftButton = null;
+		this.leftElement = null;
 		this.rightButton = null;
+		this.rightElement = null;
 		this.parent();
 		return this;
 	},
@@ -42,8 +67,7 @@ Moobile.UI.Bar.Navigation = new Class({
 	setLeftButton: function(button) {
 		this.removeLeftButton();
 		this.leftButton = button;
-		this.leftButton.addClass(this.options.className + '-left');
-		this.leftButton.inject(this.contentElement);
+		this.leftButton.inject(this.leftElement);
 		return this;
 	},
 
@@ -62,8 +86,7 @@ Moobile.UI.Bar.Navigation = new Class({
 	setRightButton: function(button) {
 		this.removeRightButton();
 		this.rightButton = button;
-		this.rightButton.addClass(this.options.className + '-right');
-		this.rightButton.inject(this.contentElement);
+		this.rightButton.inject(this.rightElement);
 		return this;
 	},
 
