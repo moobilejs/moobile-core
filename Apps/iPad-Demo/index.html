@@ -19,10 +19,8 @@
 				mainWindow.startup();
 
 				var viewController = mainWindow.getViewController();
-				var mainViewController = viewController.getViewControllers()[0];
-				var sideViewController = viewController.getViewControllers()[1];
-
-				trace(mainWindow);
+				var mainViewController = viewController.getViewControllers()[1];
+				var sideViewController = viewController.getViewControllers()[0];
 
 				sideViewController.pushViewControllerFrom('views/side.html');
 				mainViewController.pushViewControllerFrom('views/main.html');
