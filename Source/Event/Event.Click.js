@@ -18,6 +18,7 @@ requires:
 	- Mobile/Browser.Mobile
 	- Mobile/Click
 	- Mobile/Touch
+	- Event.Mobile
 
 provides:
 	- Event.Click
@@ -32,18 +33,6 @@ provides:
 	var down = false;
 	var valid = true;
 
-	var mousemove = 'mousemove';
-	var mousedown = 'mousedown';
-	var mouseup = 'mouseup';
-	var click = 'click';
-
-	if (Browser.isMobile) {
-		mousemove = 'touchmove';
-		mousedown = 'touchstart';
-		mouseup = 'touchend';
-		click = 'touchend';
-	}
-
 	var onMouseDown = function(e) {
 		valid = true;
 		down = true;
@@ -55,7 +44,7 @@ provides:
 		if (down) {
 			valid = !moved(e);
 			if (valid == false) {
-				this.removeEvent(mouseup, onMouseUp).fireEvent(mouseup, e).addEvent(mouseup, onMouseUp);
+				this.removeEvent('mouseup', onMouseUp).fireEvent('mouseup', e).addEvent('mouseup', onMouseUp);
 			}
 		}
 	};
@@ -77,18 +66,18 @@ provides:
 
 	Element.defineCustomEvent('click', {
 
-		base: click,
+		base: 'click',
 
 		onAdd: function() {
-			this.addEvent(mousedown, onMouseDown);
-			this.addEvent(mousemove, onMouseMove);
-			this.addEvent(mouseup, onMouseUp);
+			this.addEvent('mousedown', onMouseDown);
+			this.addEvent('mousemove', onMouseMove);
+			this.addEvent('mouseup', onMouseUp);
 		},
 
 		onRemove: function() {
-			this.removeEvent(mousedown, onMouseDown);
-			this.removeEvent(mousemove, onMouseMove);
-			this.removeEvent(mouseup, onMouseUp);
+			this.removeEvent('mousedown', onMouseDown);
+			this.removeEvent('mousemove', onMouseMove);
+			this.removeEvent('mouseup', onMouseUp);
 		},
 
 		condition: function(e) {
