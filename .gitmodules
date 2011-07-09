@@ -10,10 +10,6 @@
 	path = Vendor/mootools-more
 	url = git://github.com/mootools/mootools-more.git
 
-[submodule "mootools-extras"]
-	path = Vendor/mootools-extras
-	url = git://github.com/jpdery/mootools-extras.git
-
 [submodule "mootools-mobile"]
 	path = Vendor/mootools-mobile
 	url = git://github.com/cpojer/mootools-mobile.git
