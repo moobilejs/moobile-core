@@ -3,7 +3,7 @@
 
 name: ViewPanel
 
-description: Provide the view that will contains the different panels.
+description: The view that must be used in conjunction with a ViewControllerPanel.
 
 license: MIT-style license.
 
@@ -12,7 +12,6 @@ authors:
 
 requires:
 	- Core
-	- View
 
 provides:
 	- ViewPanel
@@ -22,17 +21,12 @@ provides:
 
 Moobile.ViewPanel = new Class({
 
-	/**
-	 * This view does not have much code right now as it serves as an extension
-	 * point for future features I may not have thought of yet.
-	 */
-
 	Extends: Moobile.View,
-
-	options: {
-		className: 'view-panel',
-		withWrapperElement: false,
-		withContentElement: false
+	
+	build: function() {
+		this.parent();
+		this.addClass(this.options.className + '-panel');
+		return this;
 	}
 
 });

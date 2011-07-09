@@ -27,12 +27,6 @@ Moobile.ViewControllerStack = new Class({
 
 	viewControllerRequest: null,
 
-	loadView: function(view) {
-		this.view = view || new Moobile.ViewStack();
-		Object.assertInstanceOf(this.view, Moobile.ViewStack, 'Moobile.ViewControllerStack view must be an intance of Moobile.ViewStack');
-		return this;
-	},
-
 	loadViewControllerFrom: function(url, callback) {
 
 		if (this.viewControllerRequest == null) {
@@ -88,7 +82,6 @@ Moobile.ViewControllerStack = new Class({
 			viewToShow,
 			viewToHide,
 			this.view,
-			this.view.getContentElement(),
 			this.viewControllers.length == 1
 		);
 
@@ -161,8 +154,7 @@ Moobile.ViewControllerStack = new Class({
 		viewTransition.leave(
 			viewControllerBefore.view,
 			viewControllerPopped.view,
-			this.view,
-			this.view.getContentElement()
+			this.view
 		);
 
 		return this;

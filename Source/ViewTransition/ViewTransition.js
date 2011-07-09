@@ -51,11 +51,11 @@ Moobile.ViewTransition = new Class({
 		return this.transitionElement;
 	},
 
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
 		return this;
 	},
 
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+	leave: function(viewToShow, viewToHide, parentView) {
 		return this;
 	},
 

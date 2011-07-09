@@ -40,13 +40,23 @@ Moobile.ViewController = new Class({
 	started: false,
 
 	initialize: function(view) {
-		this.loadView(view);
+		this.attachView(view);
 		return this;
 	},
 
-	loadView: function(view) {
-		this.view = view || new Moobile.View();
-		Object.assertInstanceOf(this.view, Moobile.View, 'Moobile.ViewController view must be an intance of Moobile.View');
+	loadView: function(element) {
+		this.view = new Moobile.View(element);
+		return this;
+	},
+	
+	attachView: function(view) {
+		if (view instanceof Element) return this.loadView(view);
+		this.view = view;
+		return this;
+	},
+
+	detachView: function() {
+		this.view = null;
 		return this;
 	},
 
@@ -59,7 +69,6 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
-//		trace(this.view.element, this.view.window, '----------------------------------');
 		if (this.started == false) {
 			this.started = true;
 			this.window = this.view.getWindow();
@@ -76,9 +85,10 @@ Moobile.ViewController = new Class({
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
+		this.navigationBar = null;
 		this.window = null;
-		this.view = null;
 		this.release();
+		this.detachView();
 		return this;
 	},
 

@@ -102,9 +102,10 @@ iframe {
 -----------------------------------------------------------------------------*/
 
 body {
+	-webkit-user-select: none;
 	-webkit-text-size-adjust: 100%;			/* Important */
 	font-size: 15px;
-	font-weight: bold;
+	font-weight: normal;
 	font-family: "Helvetica Neue", sans-serif;
 }
 
@@ -122,6 +123,8 @@ h2 {
 	font-size: 17px;
 	font-weight: bold;
 	margin-bottom: 12px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 h3 {
@@ -129,10 +132,14 @@ h3 {
 	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 12px;
+	padding-left: 8px;
+	padding-right: 8px;	
 }
 
 p {
 	margin-bottom: 12px;
+	padding-left: 8px;
+	padding-right: 8px;	
 }
 
 p small {
@@ -149,14 +156,19 @@ p small {
 	width: 320px;							/* Important */
 }
 
+.window-content {
+	height: 100%;							/* Important */
+	width: 100%;							/* Important */	
+}
+
 .window-mask {
 	background: #ffffff;					/* Important */
-	height: 460px;							/* Important */
+	height: 100%;							/* Important */
 	left: 0px;								/* Important */
 	opacity: 0;								/* Important */
 	position: absolute;						/* Important */
 	top: 0px;								/* Important */
-	width: 320px;							/* Important */
+	width: 100%;							/* Important */
 	z-index: 1000;							/* Important */
 }
 
@@ -188,6 +200,13 @@ p small {
 	}
 }
 
+/* Content
+-----------------------------------------------------------------------------*/
+
+.content {
+	padding: 8px;
+}
+
 /* View
 -----------------------------------------------------------------------------*/
 
@@ -201,71 +220,35 @@ p small {
 	width: 100%;							/* Important */
 }
 
-.view-wrapper {
-	-webkit-box-sizing: border-box;			/* Important */
-	position: relative;						/* Important */
-}
-
 .view-content {
-	-webkit-box-sizing: border-box;			/* Important */
-	color: #4c596e;
-	font-size: 15px;
-	font-weight: normal;
-	padding: 20px;
-	padding-left: 9px;
-	padding-right: 9px;
-	text-align: left;
-	text-shadow: 0px 1px 0px #ffffff;
-}
-
-.ui-navigation-bar-visible .view {
-	top: -44px;								/* Important */
-	padding-top: 44px;						/* Important */
-}
-
-/* View Stack
------------------------------------------------------------------------------*/
-
-.view-stack {
-	-webkit-backface-visibility: hidden;	/* Important */
-	-webkit-box-sizing: border-box;
-	background: #ffffff;
 	height: 100%;							/* Important */
+	position: relative;						/* Important */	
 	width: 100%;							/* Important */
 }
 
-.view-stack-content {
-	-webkit-box-orient: horizontal;			/* Important */
-	display: -webkit-box;					/* Important */
-	height: 100%;							/* Important */
-	width: 200%;							/* Important */
-}
-
-.view-stack-content > .view {
-	-webkit-box-flex: 0;					/* Important */
-	width: 50%;								/* Important */
-}
-
-/* Navigation View Stack
+/* View Scroll
 -----------------------------------------------------------------------------*/
 
-.navigation-view-stack {
-	-webkit-backface-visibility: hidden;	/* Important */
-	-webkit-box-sizing: border-box;
-	height: 100%;							/* Important */
-	width: 100%;							/* Important */
+.view.view-scroll .view-content {
+	-webkit-box-orient: vertical;			/* Important */
+	display: -webkit-box;					/* Important */   
 }
 
-.navigation-view-stack-content {
-	-webkit-box-orient: horizontal;			/* Important */
-	display: -webkit-box;					/* Important */
-	height: 100%;							/* Important */
-	width: 200%;							/* Important */
-}
-
-.navigation-view-stack-content > .view {
+.view.view-scroll .view-content > * {
 	-webkit-box-flex: 0;					/* Important */
-	width: 50%;								/* Important */
+}
+
+.view.view-scroll .view-content .view-scroll-outer {
+	-webkit-box-flex: 1;					/* Important */
+	-webkit-backface-visibility: hidden;	/* Important */
+	height: 100%;							/* Important */	
+	overflow: visible !important;			/* Important */
+	position: relative;						/* Important */
+	width: 100%;							/* Important */	
+}
+
+.view.view-scroll .view-content .view-scroll-inner {
+	/* Nothing yet */
 }
 
 /* UI Button
@@ -273,8 +256,7 @@ p small {
 
 .ui-button {
 	-webkit-border-radius: 10px;
-	-webkit-box-sizing: border-box;
-	-webkit-user-select: none;
+	-webkit-box-sizing: border-box;	
 	border: 1px solid #bbbbbb;
 	background: #ffffff;
 	color: #000000;
@@ -283,7 +265,6 @@ p small {
 	padding-top: 13px;
 	padding-bottom: 13px;
 	text-align: center;
-	user-select: none;
 	width: 100%;
 }
 
@@ -298,17 +279,14 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .ui-bar-button {
-	-webkit-user-select: none;
 	-webkit-background-size: 0px 0px;
 	cursor: pointer;
 	height: 30px;
 	line-height: 30px;
 	overflow: hidden;
-	user-select: none;
 }
 
 .ui-bar-button-content {
-	-webkit-user-select: none;
 	border-right-style: solid;
 	border-left-style: solid;
 	color: #ffffff;
@@ -529,7 +507,6 @@ p small {
 	text-overflow: ellipsis;				/* Important */
 	text-align: center;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-	user-select: none;
 	white-space: nowrap;					/* Important */
 }
 
@@ -659,7 +636,7 @@ p small {
 /* Enter */
 
 .transition-fade-enter .transition-fade-view-to-show {
-	-webkit-transform: translateX(-100%);
+	-webkit-transform: translateY(-100%);
 	opacity: 1;
 	z-index: 90;
 }
@@ -684,7 +661,7 @@ p small {
 }
 
 .transition-fade-leave .transition-fade-view-to-hide {
-	-webkit-transform: translateX(-100%);
+	-webkit-transform: translateY(-100%);
 	-webkit-transition-property: opacity;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
@@ -699,18 +676,39 @@ p small {
 /* Transition - Slide
 -----------------------------------------------------------------------------*/
 
+.transition-slide {
+	-webkit-backface-visibility: hidden;	/* Important */
+	height: 100%;
+	width: 100%;
+}
+
+.transition-slide .transition-slide-view-to-show,
+.transition-slide .transition-slide-view-to-hide {
+	overflow: visible;
+}
+
 .transition-slide-enter { -webkit-transform: translateX(0%); }
-.transition-slide-leave { -webkit-transform: translateX(-50%); }
+.transition-slide-leave { -webkit-transform: translateX(-100%); }
+
+.transition-slide-enter .transition-slide-view-to-show {
+	-webkit-transform: translateX(100%) translateY(-100%);
+	z-index: 60;
+}
 
 .transition-slide-enter .transition-slide-view-to-show-first {
-	-webkit-transform: translateX(100%);
+	-webkit-transform: translateX(100%) translateY(0%);
 }
 
 .transition-slide-enter.commit-transition {
 	-webkit-transition-property: -webkit-transform;
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	-webkit-transform: translateX(-50%);
+	-webkit-transform: translateX(-100%);
+}
+
+.transition-slide-leave .transition-slide-view-to-hide {
+	-webkit-transform: translateX(100%) translateY(-100%);
+	z-index: 60;
 }
 
 .transition-slide-leave.commit-transition {
@@ -718,15 +716,6 @@ p small {
 	-webkit-transition-duration: 500ms;
 	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
 	-webkit-transform: translateX(0%);
-}
-
-/* Navigation Bar */
-
-.transition-slide-enter .transition-slide-view-to-show,
-.transition-slide-enter .transition-slide-view-to-hide,
-.transition-slide-leave .transition-slide-view-to-show,
-.transition-slide-leave .transition-slide-view-to-hide {
-	overflow: visible;
 }
 
 /* Navigation Bar Enter */
@@ -798,6 +787,7 @@ p small {
 	-webkit-transform: translateZ(-160px);
 	-webkit-transform-style: preserve-3d;
 	-webkit-transform-origin: 160px 160px;
+	height: 100%;
 	position: absolute;
 	width: 320px !important;
 }

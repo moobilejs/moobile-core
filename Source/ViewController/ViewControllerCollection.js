@@ -76,14 +76,13 @@ Moobile.ViewControllerCollection = new Class({
 	},
 
 	bindViewController: function(viewController) {
-		Object.assertInstanceOf(viewController, Moobile.ViewController, 'ViewControllers must inherit Moobile.ViewController');
 		this.viewControllers.push(viewController);
 		viewController.viewControllerStack = this.viewControllerStack;
 		viewController.viewControllerPanel = this.viewControllerPanel;
 		viewController.parentViewController = this;
 		this.didBindViewController(viewController);
 		viewController.startup();
-		Object.member(this, viewController, viewController.view.getProperty('data-view-controller-name'));
+		Object.defineMember(this, viewController, viewController.view.getProperty('data-view-controller-name'));
 		return this;
 	},
 

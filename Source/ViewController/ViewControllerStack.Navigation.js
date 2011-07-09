@@ -23,13 +23,15 @@ provides:
 Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
-
-	loadView: function(view) {
-		this.view = view || new Moobile.ViewStack.Navigation();
-		return this;
-	},
-
+	
 	didAddViewController: function(viewController) {
+
+		if (viewController.view.navigationBar)
+			return this;
+
+		var navigationBar = new Moobile.UI.Bar.Navigation();
+		viewController.view.addChildControl(navigationBar, 'top');
+		viewController.view.navigationBar = navigationBar;
 
 		viewController.navigationBar = viewController.view.navigationBar;
 

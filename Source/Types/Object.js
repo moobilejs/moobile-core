@@ -3,7 +3,7 @@
 
 name: Object
 
-description: Provides extra methods to the object class.
+description: Provides extra methods to Object.
 
 license: MIT-style license.
 
@@ -20,7 +20,7 @@ provides:
 
 Object.extend({
 
-	member: function(source, reference, name) {
+	defineMember: function(source, reference, name) {
 		if (name) {
 			name = name.camelize();
 			if (source[name] == null || source[name] == undefined) {
@@ -28,14 +28,6 @@ Object.extend({
 			}
 		}
 		return source;
-	},
-
-	assertTypeOf: function(object, type, error) {
-		if (!typeOf(object, type)) throw new Error(error);
-	},
-
-	assertInstanceOf: function(object, instance, error) {
-		if (!instanceOf(object, instance)) throw new Error(error);
 	}
 
 })

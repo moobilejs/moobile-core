@@ -50,7 +50,10 @@ Moobile.UI.Element = new Class({
 		this.setElement(element);
 		this.setElementOptions();
 		this.setOptions(options);
-		if (this.occlude('element', this.element)) return this.occluded;
+		
+		if (this.occlude('element', this.element)) 
+			return this.occluded;
+		
 		this.name = this.element.get('data-name');
 		this.build();
 		return this;
@@ -84,6 +87,10 @@ Moobile.UI.Element = new Class({
 
 	getElement: function(selector) {
 		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
+	},
+	
+	getElementContents: function() {
+		return this.element.getContents();
 	},
 
 	getElements: function(selector) {
@@ -141,19 +148,23 @@ Moobile.UI.Element = new Class({
 		return this;
 	},
 
-	inject: function(element, where) {
-		this.element.inject(element, where);
+	adopt: function() {
+		this.element.adopt.apply(this.element, arguments);
 		return this;
 	},
 
-	adopt: function() {
-		this.element.adopt.apply(this.element, arguments);
+	inject: function(element, where) {
+		this.element.inject(element, where);
 		return this;
 	},
 
 	grab: function(element, where) {
 		this.element.grab(element, where);
 		return this;
+	},
+
+	hook: function(element, where, context) {
+		return context ? context.inject(element, where) : this.grab(element, where);
 	},
 
 	empty: function() {

@@ -34,44 +34,26 @@ Moobile.View = new Class({
 
 	childElements: [],
 
-	navigationBar: null,
-
-	wrapperElement: null,
-
-	contentElement: null,
-
 	started: false,
 
 	options: {
-		className: 'view',
-		withContentElement: true,
-		withWrapperElement: false
+		className: 'view'
 	},
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		if (this.occlude('view', this.element)) return this.occluded;
+		
+		if (this.occlude('view', this.element)) 
+			return this.occluded;
+		
 		return this;
 	},
-
+	
 	build: function() {
 		this.parent();
-		if (this.options.withContentElement) this.buildContentElement();
-		if (this.options.withWrapperElement) this.buildWrapperElement();
-		return this;
-	},
-
-	buildWrapperElement: function() {
-		this.wrapperElement = new Element('div.' + this.options.className + '-wrapper');
-		this.wrapperElement.adopt(this.element.getContents());
-		this.element.adopt(this.wrapperElement);
-		return this;
-	},
-
-	buildContentElement: function() {
-		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.getContents());
-		this.element.adopt(this.contentElement);
+		this.content = new Element('div.' + this.options.className + '-content');
+		this.content.adopt(this.element.childElements);
+		this.element.adopt(this.content);
 		return this;
 	},
 
@@ -100,9 +82,6 @@ Moobile.View = new Class({
 		this.release();
 		this.parentView = null;
 		this.window = null;
-		this.contentElement = null;
-		this.wrapperElement = null;
-		this.navigationBar = null;
 		this.parent();
 		return this;
 	},
@@ -125,7 +104,7 @@ Moobile.View = new Class({
 
 	addChildView: function(view, where, context) {
 		this.willAddChildView(view);
-		this.grab(view, where, context);
+		this.hook(view, where, context);
 		this.bindChildView(view);
 		this.didAddChildView(view);
 		return this;
@@ -160,7 +139,6 @@ Moobile.View = new Class({
 	},
 
 	bindChildView: function(view) {
-		Object.assertInstanceOf(view, Moobile.View, 'Views must inherit Moobile.View');
 		this.childViews.push(view);
 		view.parentViewWillChange(this);
 		view.setWindow(this.window);
@@ -169,7 +147,7 @@ Moobile.View = new Class({
 		this.didBindChildView(view);
 		view.startup();
 		view.attachEvents();
-		Object.member(this, view, view.name);
+		Object.defineMember(this, view, view.name);
 		return this;
 	},
 
@@ -205,7 +183,7 @@ Moobile.View = new Class({
 
 	addChildControl: function(control, where, context) {
 		this.willAddChildControl(control);
-		this.grab(control, where, context);
+		this.hook(control, where, context);
 		this.bindChildControl(control);
 		this.didAddChildControl(control);
 		return this;
@@ -232,10 +210,9 @@ Moobile.View = new Class({
 	},
 
 	bindChildControl: function(control) {
-		Object.assertInstanceOf(control, Moobile.UI.Control, 'Controls must inherit Moobile.UI.Control.');
 		this.childControls.push(control);
 		this.didBindChildControl(control);
-		Object.member(this, control, control.name);
+		Object.defineMember(this, control, control.name);
 		return this;
 	},
 
@@ -271,7 +248,7 @@ Moobile.View = new Class({
 
 	addChildElement: function(element, where, context) {
 		this.willAddChildElement(element);
-		this.grab(element, where, context);
+		this.hook(element, where, context);
 		this.bindChildElement(element);
 		this.didAddChildElement(element);
 		return this;
@@ -290,7 +267,7 @@ Moobile.View = new Class({
 	bindChildElement: function(element) {
 		this.childElements.push(element);
 		this.didBindChildElement(element);
-		Object.member(this, element, element.get('data-name'));
+		Object.defineMember(this, element, element.get('data-name'));
 		return this;
 	},
 
@@ -354,31 +331,30 @@ Moobile.View = new Class({
 		return this.element.get('data-title') || 'Untitled';
 	},
 
-	getWrapperElement: function() {
-		return this.wrapperElement;
-	},
-
-	getContentElement: function() {
-		return this.contentElement;
-	},
-
 	getSize: function() {
 		return this.element.getSize();
 	},
 
 	adopt: function() {
-		var content = this.contentElement || this.element;
-		content.adopt.apply(content, arguments);
+		this.content.adopt.apply(this.content, arguments);
 		return this;
 	},
 
-	grab: function(element, where, context) {
-		if (context) {
-			context = document.id(context);
-			element.inject(context, where);
-			return this;
-		}
-		(where == 'top' || where == 'bottom' ? this.element : this.contentElement || this.element).grab(element, where);
+	inject: function(element, where) {
+		this.content.inject(element, where);
+	},
+
+	grab: function(element, where) {
+		this.content.grab(element, where);
+		return this;
+	},
+	
+	hook: function(element, where, context) {
+		return context ? element.inject(context, where) : this.grab(element, where);
+	},
+
+	empty: function() {
+		this.content.empty();
 		return this;
 	},
 

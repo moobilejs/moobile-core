@@ -28,27 +28,51 @@ Moobile.View.Scroll = new Class({
 
 	Extends: Moobile.View,
 
-	contentSize: null,
+	outerElement: null,
+	
+	innerElement: null,
+	
+	innerElementSize: null,
 
 	scroller: null,
-
+	
 	scrollerUpdateInterval: null,
 
 	scrolled: null,
 
-	options: {
-		withWrapperElement: true,
-		withContentElement: true
+	build: function() {
+		this.parent();
+		this.addClass(this.options.className + '-scroll');
+		this.buildInnerElement();
+		this.buildOuterElement();
+		return this;
+	},
+
+	buildInnerElement: function() {
+		this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
+		this.innerElement.adopt(this.content.childElements);
+		this.adopt(this.innerElement);
+		return this;
+	},
+
+	buildOuterElement: function() {
+		this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
+		this.outerElement.adopt(this.content.childElements);
+		this.adopt(this.outerElement);
+		return this;
 	},
 
 	init: function() {
-		this.attachScroller();
 		this.parent();
+		this.attachScroller();
 		return this;
 	},
 
 	release: function() {
+		this.disableScroller();
 		this.detachScroller();
+		this.outerElement = null;
+		this.innerElement = null;
 		this.parent();
 		return this;
 	},
@@ -64,13 +88,12 @@ Moobile.View.Scroll = new Class({
 	},
 
 	createScroller: function() {
-		return new iScroll(this.wrapperElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
+		return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
 	},
 
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
-			this.wrapperElement.setStyle('overflow', 'visible');
 			this.updateScroller();
 			this.updateScrollerAutomatically(true);
 			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
@@ -81,7 +104,7 @@ Moobile.View.Scroll = new Class({
 	disableScroller: function() {
 		if (this.scroller) {
 			this.updateScrollerAutomatically(false);
-			this.scrolled = this.contentElement.getStyle('transform');
+			this.scrolled = this.innerElement.getStyle('transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();
@@ -92,12 +115,8 @@ Moobile.View.Scroll = new Class({
 
 	updateScroller: function() {
 		if (this.scroller) {
-			if (this.contentSize != this.contentElement.getScrollSize().y) {
-				this.contentSize = this.contentElement.getScrollSize().y;
-				var extent = this.getContentExtent();
-				this.wrapperElement.setStyle('height', extent.y);
-				this.wrapperElement.setStyle('min-height', extent.y);
-				this.contentElement.setStyle('min-height', extent.y);
+			if (this.innerElementSize != this.innerElement.getScrollSize().y) {
+				this.innerElementSize  = this.innerElement.getScrollSize().y;
 				this.scroller.refresh();
 			}
 		}
@@ -110,17 +129,15 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	getContentExtent: function() {
-		var prev = this.wrapperElement.getPrevious();
-		var next = this.wrapperElement.getNext();
-		var size = this.getSize();
-		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
-		if (next) size.y = size.y - next.getPosition().y;
-		return size;
+	willShow: function() {
+		this.enableScroller();
+		this.parent();
+		return this;
 	},
 
 	didShow: function() {
-		this.enableScroller();
+		this.updateScroller();
+		this.parent();
 		return this;
 	},
 

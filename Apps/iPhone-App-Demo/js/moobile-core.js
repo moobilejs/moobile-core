@@ -9144,7 +9144,7 @@ Element.defineCustomEvent(name, {
 
 name: Object
 
-description: Provides extra methods to the object class.
+description: Provides extra methods to Object.
 
 license: MIT-style license.
 
@@ -9161,7 +9161,7 @@ provides:
 
 Object.extend({
 
-	member: function(source, reference, name) {
+	defineMember: function(source, reference, name) {
 		if (name) {
 			name = name.camelize();
 			if (source[name] == null || source[name] == undefined) {
@@ -9169,14 +9169,6 @@ Object.extend({
 			}
 		}
 		return source;
-	},
-
-	assertTypeOf: function(object, type, error) {
-		if (!typeOf(object, type)) throw new Error(error);
-	},
-
-	assertInstanceOf: function(object, instance, error) {
-		if (!instanceOf(object, instance)) throw new Error(error);
 	}
 
 })
@@ -9502,6 +9494,40 @@ window.Moobile.UI = {};
 /*
 ---
 
+name: Element
+
+description: Provides extra methods to Element.
+
+license: MIT-style license.
+
+author:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- Element
+
+...
+*/
+
+(function() {
+	
+	var getChildElements = function() {
+		return Array.from(this.childNodes);
+	};
+	
+	Object.defineProperty(Element.prototype, 'childElements', {
+		get: function() {
+			return Array.from(this.childNodes);
+		}	
+	});
+	
+})();
+
+/*
+---
+
 name: Request
 
 description: Provides a base class for ajax request.
@@ -9624,6 +9650,9 @@ Moobile.Request.ViewController = new Class({
 			var viewName = element.get('data-view') || 'Moobile.View';
 			if (viewName) {
 				view = Class.from(viewName, element);
+			} else {
+				view = element;
+
 			}
 
 			var viewControllerName = element.get('data-view-controller') || 'Moobile.ViewController';
@@ -9801,7 +9830,10 @@ Moobile.UI.Element = new Class({
 		this.setElement(element);
 		this.setElementOptions();
 		this.setOptions(options);
-		if (this.occlude('element', this.element)) return this.occluded;
+		
+		if (this.occlude('element', this.element)) 
+			return this.occluded;
+		
 		this.name = this.element.get('data-name');
 		this.build();
 		return this;
@@ -9835,6 +9867,10 @@ Moobile.UI.Element = new Class({
 
 	getElement: function(selector) {
 		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
+	},
+	
+	getElementContents: function() {
+		return this.element.getContents();
 	},
 
 	getElements: function(selector) {
@@ -9892,19 +9928,23 @@ Moobile.UI.Element = new Class({
 		return this;
 	},
 
-	inject: function(element, where) {
-		this.element.inject(element, where);
+	adopt: function() {
+		this.element.adopt.apply(this.element, arguments);
 		return this;
 	},
 
-	adopt: function() {
-		this.element.adopt.apply(this.element, arguments);
+	inject: function(element, where) {
+		this.element.inject(element, where);
 		return this;
 	},
 
 	grab: function(element, where) {
 		this.element.grab(element, where);
 		return this;
+	},
+
+	hook: function(element, where, context) {
+		return context ? context.inject(element, where) : this.grab(element, where);
 	},
 
 	empty: function() {
@@ -11721,44 +11761,26 @@ Moobile.View = new Class({
 
 	childElements: [],
 
-	navigationBar: null,
-
-	wrapperElement: null,
-
-	contentElement: null,
-
 	started: false,
 
 	options: {
-		className: 'view',
-		withContentElement: true,
-		withWrapperElement: false
+		className: 'view'
 	},
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		if (this.occlude('view', this.element)) return this.occluded;
+		
+		if (this.occlude('view', this.element)) 
+			return this.occluded;
+		
 		return this;
 	},
-
+	
 	build: function() {
 		this.parent();
-		if (this.options.withContentElement) this.buildContentElement();
-		if (this.options.withWrapperElement) this.buildWrapperElement();
-		return this;
-	},
-
-	buildWrapperElement: function() {
-		this.wrapperElement = new Element('div.' + this.options.className + '-wrapper');
-		this.wrapperElement.adopt(this.element.getContents());
-		this.element.adopt(this.wrapperElement);
-		return this;
-	},
-
-	buildContentElement: function() {
-		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.getContents());
-		this.element.adopt(this.contentElement);
+		this.content = new Element('div.' + this.options.className + '-content');
+		this.content.adopt(this.element.childElements);
+		this.element.adopt(this.content);
 		return this;
 	},
 
@@ -11787,9 +11809,6 @@ Moobile.View = new Class({
 		this.release();
 		this.parentView = null;
 		this.window = null;
-		this.contentElement = null;
-		this.wrapperElement = null;
-		this.navigationBar = null;
 		this.parent();
 		return this;
 	},
@@ -11812,7 +11831,7 @@ Moobile.View = new Class({
 
 	addChildView: function(view, where, context) {
 		this.willAddChildView(view);
-		this.grab(view, where, context);
+		this.hook(view, where, context);
 		this.bindChildView(view);
 		this.didAddChildView(view);
 		return this;
@@ -11847,16 +11866,15 @@ Moobile.View = new Class({
 	},
 
 	bindChildView: function(view) {
-		Object.assertInstanceOf(view, Moobile.View, 'Views must inherit Moobile.View');
 		this.childViews.push(view);
 		view.parentViewWillChange(this);
 		view.setWindow(this.window);
 		view.setParentView(this);
 		view.parentViewDidChange(this);
+		this.didBindChildView(view);
 		view.startup();
 		view.attachEvents();
-		this.didBindChildView(view);
-		Object.member(this, view, view.name);
+		Object.defineMember(this, view, view.name);
 		return this;
 	},
 
@@ -11892,7 +11910,7 @@ Moobile.View = new Class({
 
 	addChildControl: function(control, where, context) {
 		this.willAddChildControl(control);
-		this.grab(control, where, context);
+		this.hook(control, where, context);
 		this.bindChildControl(control);
 		this.didAddChildControl(control);
 		return this;
@@ -11919,10 +11937,9 @@ Moobile.View = new Class({
 	},
 
 	bindChildControl: function(control) {
-		Object.assertInstanceOf(control, Moobile.UI.Control, 'Controls must inherit Moobile.UI.Control.');
 		this.childControls.push(control);
 		this.didBindChildControl(control);
-		Object.member(this, control, control.name);
+		Object.defineMember(this, control, control.name);
 		return this;
 	},
 
@@ -11958,7 +11975,7 @@ Moobile.View = new Class({
 
 	addChildElement: function(element, where, context) {
 		this.willAddChildElement(element);
-		this.grab(element, where, context);
+		this.hook(element, where, context);
 		this.bindChildElement(element);
 		this.didAddChildElement(element);
 		return this;
@@ -11977,7 +11994,7 @@ Moobile.View = new Class({
 	bindChildElement: function(element) {
 		this.childElements.push(element);
 		this.didBindChildElement(element);
-		Object.member(this, element, element.get('data-name'));
+		Object.defineMember(this, element, element.get('data-name'));
 		return this;
 	},
 
@@ -12041,31 +12058,30 @@ Moobile.View = new Class({
 		return this.element.get('data-title') || 'Untitled';
 	},
 
-	getWrapperElement: function() {
-		return this.wrapperElement;
-	},
-
-	getContentElement: function() {
-		return this.contentElement;
-	},
-
 	getSize: function() {
 		return this.element.getSize();
 	},
 
 	adopt: function() {
-		var content = this.contentElement || this.element;
-		content.adopt.apply(content, arguments);
+		this.content.adopt.apply(this.content, arguments);
 		return this;
 	},
 
-	grab: function(element, where, context) {
-		if (context) {
-			context = document.id(context);
-			element.inject(context, where);
-			return this;
-		}
-		(where == 'top' || where == 'bottom' ? this.element : this.contentElement || this.element).grab(element, where);
+	inject: function(element, where) {
+		this.content.inject(element, where);
+	},
+
+	grab: function(element, where) {
+		this.content.grab(element, where);
+		return this;
+	},
+	
+	hook: function(element, where, context) {
+		return context ? element.inject(context, where) : this.grab(element, where);
+	},
+
+	empty: function() {
+		this.content.empty();
 		return this;
 	},
 
@@ -12199,27 +12215,51 @@ Moobile.View.Scroll = new Class({
 
 	Extends: Moobile.View,
 
-	contentSize: null,
+	outerElement: null,
+	
+	innerElement: null,
+	
+	innerElementSize: null,
 
 	scroller: null,
-
+	
 	scrollerUpdateInterval: null,
 
 	scrolled: null,
 
-	options: {
-		withWrapperElement: true,
-		withContentElement: true
+	build: function() {
+		this.parent();
+		this.addClass(this.options.className + '-scroll');
+		this.buildInnerElement();
+		this.buildOuterElement();
+		return this;
+	},
+
+	buildInnerElement: function() {
+		this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
+		this.innerElement.adopt(this.content.childElements);
+		this.adopt(this.innerElement);
+		return this;
+	},
+
+	buildOuterElement: function() {
+		this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
+		this.outerElement.adopt(this.content.childElements);
+		this.adopt(this.outerElement);
+		return this;
 	},
 
 	init: function() {
-		this.attachScroller();
 		this.parent();
+		this.attachScroller();
 		return this;
 	},
 
 	release: function() {
+		this.disableScroller();
 		this.detachScroller();
+		this.outerElement = null;
+		this.innerElement = null;
 		this.parent();
 		return this;
 	},
@@ -12235,13 +12275,12 @@ Moobile.View.Scroll = new Class({
 	},
 
 	createScroller: function() {
-		return new iScroll(this.wrapperElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
+		return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
 	},
 
 	enableScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = this.createScroller();
-			this.wrapperElement.setStyle('overflow', 'visible');
 			this.updateScroller();
 			this.updateScrollerAutomatically(true);
 			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
@@ -12252,7 +12291,7 @@ Moobile.View.Scroll = new Class({
 	disableScroller: function() {
 		if (this.scroller) {
 			this.updateScrollerAutomatically(false);
-			this.scrolled = this.contentElement.getStyle('transform');
+			this.scrolled = this.innerElement.getStyle('transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();
@@ -12263,12 +12302,8 @@ Moobile.View.Scroll = new Class({
 
 	updateScroller: function() {
 		if (this.scroller) {
-			if (this.contentSize != this.contentElement.getScrollSize().y) {
-				this.contentSize = this.contentElement.getScrollSize().y;
-				var extent = this.getContentExtent();
-				this.wrapperElement.setStyle('height', extent.y);
-				this.wrapperElement.setStyle('min-height', extent.y);
-				this.contentElement.setStyle('min-height', extent.y);
+			if (this.innerElementSize != this.innerElement.getScrollSize().y) {
+				this.innerElementSize  = this.innerElement.getScrollSize().y;
 				this.scroller.refresh();
 			}
 		}
@@ -12281,17 +12316,15 @@ Moobile.View.Scroll = new Class({
 		return this;
 	},
 
-	getContentExtent: function() {
-		var prev = this.wrapperElement.getPrevious();
-		var next = this.wrapperElement.getNext();
-		var size = this.getSize();
-		if (prev) size.y = size.y - prev.getPosition().y - prev.getSize().y;
-		if (next) size.y = size.y - next.getPosition().y;
-		return size;
+	willShow: function() {
+		this.enableScroller();
+		this.parent();
+		return this;
 	},
 
 	didShow: function() {
-		this.enableScroller();
+		this.updateScroller();
+		this.parent();
 		return this;
 	},
 
@@ -12309,98 +12342,9 @@ Moobile.View.Scroll = new Class({
 /*
 ---
 
-name: ViewStack
-
-description: Provide the view that will contains the view controller stack
-             child views. This view must have a wrapper that will be double
-             size of the original view.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- View
-
-provides:
-	- ViewStack
-
-...
-*/
-
-Moobile.ViewStack = new Class({
-
-	/**
-	 * This view does not have much code right now as it serves as an extension
-	 * point for future features I may not have thought of yet.
-	 */
-
-	Extends: Moobile.View,
-
-	options: {
-		className: 'view-stack',
-		withWrapperElement: false,
-		withContentElement: true
-	}
-
-});
-
-/*
----
-
-name: NavigationView
-
-description: Provide a view for the navigation view controller.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- ViewStack
-
-provides:
-	- NavigationView
-
-...
-*/
-
-Moobile.ViewStack.Navigation = new Class({
-
-	/**
-	 * This view does not have much code right now as it serves as an extension
-	 * point for future features I may not have thought of yet.
-	 */
-
-	Extends: Moobile.ViewStack,
-
-	options: {
-		className: 'navigation-view-stack'
-	},
-
-	willAddChildView: function(childView) {
-
-		if (childView.navigationBar)
-			return this;
-
-		var navigationBar = new Moobile.UI.Bar.Navigation();
-		childView.addChildControl(navigationBar, 'top');
-		childView.navigationBar = navigationBar;
-		
-		return this;
-	}
-
-});
-
-/*
----
-
 name: ViewPanel
 
-description: Provide the view that will contains the different panels.
+description: The view that must be used in conjunction with a ViewControllerPanel.
 
 license: MIT-style license.
 
@@ -12409,7 +12353,6 @@ authors:
 
 requires:
 	- Core
-	- View
 
 provides:
 	- ViewPanel
@@ -12419,17 +12362,12 @@ provides:
 
 Moobile.ViewPanel = new Class({
 
-	/**
-	 * This view does not have much code right now as it serves as an extension
-	 * point for future features I may not have thought of yet.
-	 */
-
 	Extends: Moobile.View,
-
-	options: {
-		className: 'view-panel',
-		withWrapperElement: false,
-		withContentElement: false
+	
+	build: function() {
+		this.parent();
+		this.addClass(this.options.className + '-panel');
+		return this;
 	}
 
 });
@@ -12487,11 +12425,11 @@ Moobile.ViewTransition = new Class({
 		return this.transitionElement;
 	},
 
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
 		return this;
 	},
 
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+	leave: function(viewToShow, viewToHide, parentView) {
 		return this;
 	},
 
@@ -12548,8 +12486,10 @@ Moobile.ViewTransition.Slide = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
-
+	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
+	
+		var wrapper = parentView.content;
+		
 		this.setTransitionElement(wrapper);
 
 		wrapper.addClass('transition-slide');
@@ -12568,16 +12508,20 @@ Moobile.ViewTransition.Slide = new Class({
 			wrapper.removeClass('transition-slide-enter');
 			viewToShow.removeClass('transition-slide-view-to-show');
 			viewToShow.removeClass('transition-slide-view-to-show-first');
+			
 			if (viewToHide) {
 				viewToHide.removeClass('transition-slide-view-to-hide');
 			}
+			
 		});
 
 		return this;
 	},
 
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
-
+	leave: function(viewToShow, viewToHide, parentView) {
+		
+		var wrapper = parentView.content;
+		
 		this.setTransitionElement(wrapper);
 
 		wrapper.addClass('transition-slide');
@@ -12623,14 +12567,16 @@ Moobile.ViewTransition.Cubic = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
 
 		if (firstViewIn) {
 
 			alert('Not yet supported...')
 
 		} else {
-
+			
+			var wrapper = parentView.content;
+			
 			this.setTransitionElement(wrapper);
 
 			parentView.addClass('transition-cubic-viewport');
@@ -12639,20 +12585,22 @@ Moobile.ViewTransition.Cubic = new Class({
 			viewToShow.addClass('transition-cubic-view-to-show');
 			viewToHide.addClass('transition-cubic-view-to-hide');
 
-			this.start(function() {
-				parentView.removeClass('transition-cubic-viewport');
+			this.start(function() {
+				parentView.removeClass('transition-cubic-viewport');				
 				wrapper.removeClass('transition-cubic');
 				wrapper.removeClass('transition-cubic-enter');
 				viewToShow.removeClass('transition-cubic-view-to-show');
-				viewToHide.removeClass('transition-cubic-view-to-hide');
-			});
+				viewToHide.removeClass('transition-cubic-view-to-hide');				
+			}.bind(this));
 
 		}
 
 		return this;
 	},
 
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+	leave: function(viewToShow, viewToHide, parentView) {
+
+		var wrapper = parentView.content;
 
 		this.setTransitionElement(wrapper);
 
@@ -12667,7 +12615,7 @@ Moobile.ViewTransition.Cubic = new Class({
 			wrapper.removeClass('transition-cubic');
 			wrapper.removeClass('transition-cubic-leave');
 			viewToHide.removeClass('transition-cubic-view-to-hide');
-			viewToShow.removeClass('transition-cubic-view-to-show');
+			viewToShow.removeClass('transition-cubic-view-to-show');			
 		});
 
 		return this;
@@ -12701,7 +12649,7 @@ Moobile.ViewTransition.Fade = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	enter: function(viewToShow, viewToHide, parentView, wrapper, firstViewIn) {
+	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
 
 		if (firstViewIn) {
 
@@ -12719,14 +12667,14 @@ Moobile.ViewTransition.Fade = new Class({
 
 			this.setTransitionElement(viewToHide);
 
-			wrapper.addClass('transition-fade');
-			wrapper.addClass('transition-fade-enter');
+			parentView.addClass('transition-fade');
+			parentView.addClass('transition-fade-enter');
 			viewToHide.addClass('transition-fade-view-to-hide');
 			viewToShow.addClass('transition-fade-view-to-show');
 
 			this.start(function() {
-				wrapper.removeClass('transition-fade');
-				wrapper.removeClass('transition-fade-enter');
+				parentView.removeClass('transition-fade');
+				parentView.removeClass('transition-fade-enter');
 				viewToHide.removeClass('transition-fade-view-to-hide');
 				viewToShow.removeClass('transition-fade-view-to-show');
 			});
@@ -12735,18 +12683,18 @@ Moobile.ViewTransition.Fade = new Class({
 		return this;
 	},
 
-	leave: function(viewToShow, viewToHide, parentView, wrapper) {
+	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.setTransitionElement(viewToHide);
 
-		wrapper.addClass('transition-fade');
-		wrapper.addClass('transition-fade-leave');
+		parentView.addClass('transition-fade');
+		parentView.addClass('transition-fade-leave');
 		viewToHide.addClass('transition-fade-view-to-hide');
 		viewToShow.addClass('transition-fade-view-to-show');
 
 		this.start(function() {
-			wrapper.removeClass('transition-fade');
-			wrapper.removeClass('transition-fade-leave');
+			parentView.removeClass('transition-fade');
+			parentView.removeClass('transition-fade-leave');
 			viewToHide.removeClass('transition-fade-view-to-hide');
 			viewToShow.removeClass('transition-fade-view-to-show');
 		});
@@ -12798,13 +12746,23 @@ Moobile.ViewController = new Class({
 	started: false,
 
 	initialize: function(view) {
-		this.loadView(view);
+		this.attachView(view);
 		return this;
 	},
 
-	loadView: function(view) {
-		this.view = view || new Moobile.View();
-		Object.assertInstanceOf(this.view, Moobile.View, 'Moobile.ViewController view must be an intance of Moobile.View');
+	loadView: function(element) {
+		this.view = new Moobile.View(element);
+		return this;
+	},
+	
+	attachView: function(view) {
+		if (view instanceof Element) return this.loadView(view);
+		this.view = view;
+		return this;
+	},
+
+	detachView: function() {
+		this.view = null;
 		return this;
 	},
 
@@ -12833,9 +12791,10 @@ Moobile.ViewController = new Class({
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
+		this.navigationBar = null;
 		this.window = null;
-		this.view = null;
 		this.release();
+		this.detachView();
 		return this;
 	},
 
@@ -12951,14 +12910,13 @@ Moobile.ViewControllerCollection = new Class({
 	},
 
 	bindViewController: function(viewController) {
-		Object.assertInstanceOf(viewController, Moobile.ViewController, 'ViewControllers must inherit Moobile.ViewController');
 		this.viewControllers.push(viewController);
 		viewController.viewControllerStack = this.viewControllerStack;
 		viewController.viewControllerPanel = this.viewControllerPanel;
 		viewController.parentViewController = this;
 		this.didBindViewController(viewController);
 		viewController.startup();
-		Object.member(this, viewController, viewController.view.getProperty('data-view-controller-name'));
+		Object.defineMember(this, viewController, viewController.view.getProperty('data-view-controller-name'));
 		return this;
 	},
 
@@ -13034,12 +12992,6 @@ Moobile.ViewControllerStack = new Class({
 
 	viewControllerRequest: null,
 
-	loadView: function(view) {
-		this.view = view || new Moobile.ViewStack();
-		Object.assertInstanceOf(this.view, Moobile.ViewStack, 'Moobile.ViewControllerStack view must be an intance of Moobile.ViewStack');
-		return this;
-	},
-
 	loadViewControllerFrom: function(url, callback) {
 
 		if (this.viewControllerRequest == null) {
@@ -13095,7 +13047,6 @@ Moobile.ViewControllerStack = new Class({
 			viewToShow,
 			viewToHide,
 			this.view,
-			this.view.getContentElement(),
 			this.viewControllers.length == 1
 		);
 
@@ -13168,8 +13119,7 @@ Moobile.ViewControllerStack = new Class({
 		viewTransition.leave(
 			viewControllerBefore.view,
 			viewControllerPopped.view,
-			this.view,
-			this.view.getContentElement()
+			this.view
 		);
 
 		return this;
@@ -13242,13 +13192,15 @@ provides:
 Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
-
-	loadView: function(view) {
-		this.view = view || new Moobile.ViewStack.Navigation();
-		return this;
-	},
-
+	
 	didAddViewController: function(viewController) {
+
+		if (viewController.view.navigationBar)
+			return this;
+
+		var navigationBar = new Moobile.UI.Bar.Navigation();
+		viewController.view.addChildControl(navigationBar, 'top');
+		viewController.view.navigationBar = navigationBar;
 
 		viewController.navigationBar = viewController.view.navigationBar;
 
@@ -13304,76 +13256,11 @@ Moobile.ViewControllerPanel = new Class({
 
 	Extends: Moobile.ViewControllerCollection,
 
-	loadView: function(view) {
-		this.view = view || new Moobile.ViewPanel();
-		Object.assertInstanceOf(this.view, Moobile.ViewPanel, 'Moobile.ViewControllerPanel view must be an intance of Moobile.ViewPanel');
-		return this;
-	},
-
 	didBindViewController: function(viewController) {
 		viewController.viewControllerPanel = this;
 		this.parent();
 		return this;
 	}
-});
-
-/*
----
-
-name: ViewControllerPanel.Split
-
-description: Provide a way to have side by side view controllers.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core
-	- ViewControllerPanel
-
-provides:
-	- ViewControllerPanel.Split
-
-...
-*/
-
-Moobile.ViewControllerPanel.Split = new Class({
-
-	Extends: Moobile.ViewControllerPanel,
-
-	mainViewController: null,
-
-	sideViewController: null,
-
-	options: {
-		mainViewControllerClassName: 'view-panel-main-pane',
-		sideViewControllerClassName: 'view-panel-side-pane'
-	},
-
-	initialize: function(sideViewController, mainViewController, view) {
-		this.parent(view);
-		this.sideViewController = sideViewController;
-		this.mainViewController = mainViewController;
-		return this;
-	},
-
-	startup: function() {
-		this.parent();
-		this.setViewController(this.options.sideViewControllerClassName, this.sideViewController);
-		this.setViewController(this.options.mainViewControllerClassName, this.mainViewController);
-		return this;
-	},
-
-	getMainViewController: function() {
-		return this.mainViewController;
-	},
-
-	getSideViewController: function() {
-		return this.sideViewController;
-	}
-
 });
 
 /*
@@ -13430,11 +13317,15 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	bindChildView: function(view) {
-		this.parent(view);
+	didBindChildView: function(view) {
 		view.setWindow(this);
 		view.setParentView(null);
+		this.parent(view);
 		return this;
+	},
+
+	filterChildView: function(element) {
+		return element.getParent('[data-role=view]') == null;
 	},
 
 	setViewController: function(viewController) {

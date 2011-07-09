@@ -87,6 +87,9 @@ Moobile.Request.ViewController = new Class({
 			var viewName = element.get('data-view') || 'Moobile.View';
 			if (viewName) {
 				view = Class.from(viewName, element);
+			} else {
+				view = element;
+
 			}
 
 			var viewControllerName = element.get('data-view-controller') || 'Moobile.ViewController';

@@ -14,15 +14,15 @@
 		// <![CDATA["
 
 			window.addEvent('ready', function() {
-
+				
 				/**
 				 * Load the view controller stack. For a navigation based app,
 				 * create an instance of Moobile.ViewControllerStack.Navigation
 				 * instead.
 				 */
 //				var viewControllerStack = new Moobile.ViewControllerStack();
-				var viewControllerStack = new Moobile.ViewControllerStack.Navigation();
-
+				var viewControllerStack = new Moobile.ViewControllerStack.Navigation(new Moobile.View());						
+				
 				/**
 				 * Create a new window and assign the view controller stack.
 				 */
