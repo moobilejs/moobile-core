@@ -13,7 +13,10 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
+	- Core/Element
+	- More/Events.Pseudos
+	- Class
+	- Element
 	- Request
 
 provides:
@@ -87,10 +90,10 @@ Moobile.Request.ViewController = new Class({
 			
 			var view = element.get('data-view');
 			if (view) {
-				view = Class.from(view, element);
-				viewController = Class.from(viewController, view);
+				view = Class.instanciate(view, element);
+				viewController = Class.instanciate(viewController, view);
 			} else {
-				viewController = Class.from(viewController, element);
+				viewController = Class.instanciate(viewController, element);
 			}
 
 			this.setCache(this.options.url, viewController);

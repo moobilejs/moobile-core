@@ -11,6 +11,7 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	Core/Element
 
 provides:
 	- Element
@@ -31,3 +32,13 @@ provides:
 	});
 	
 })();
+
+Element.implement
+({
+	ingest: function(string) {
+		var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+		if (match) string = match[1];
+		this.set('html', string);
+		return this
+	}
+});

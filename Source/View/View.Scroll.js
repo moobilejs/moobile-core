@@ -104,7 +104,7 @@ Moobile.View.Scroll = new Class({
 	disableScroller: function() {
 		if (this.scroller) {
 			this.updateScrollerAutomatically(false);
-			this.scrolled = this.innerElement.getStyle('transform');
+			this.scrolled = this.innerElement.getStyle('-webkit-transform');
 			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 			this.scrolled = this.scrolled[2];
 			this.scroller.destroy();

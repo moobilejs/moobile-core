@@ -24,8 +24,10 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
 	
-	didAddViewController: function(viewController) {
-
+	didBindViewController: function(viewController) {
+		
+		this.parent(viewController);
+		
 		if (viewController.view.navigationBar)
 			return this;
 
@@ -40,7 +42,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 			var backButton = viewController.navigationBar.getLeftButton();
 			if (backButton == null) {
 
-				var text = this.viewControllers.getLast(1).getTitle() || 'Back';
+				var text = this.viewControllers.lastItemAt(1).getTitle() || 'Back';
 
 				backButton = new Moobile.UI.BarButton();
 				backButton.setStyle(Moobile.UI.BarButtonStyle.Back);

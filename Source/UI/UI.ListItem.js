@@ -43,7 +43,7 @@ Moobile.UI.ListItem = new Class({
 
 	buildContentElement: function() {
 		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.getContents());
+		this.contentElement.adopt(this.element.childElements);
 		this.element.adopt(this.contentElement);
 		return this;
 	},

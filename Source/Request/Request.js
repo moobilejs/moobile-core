@@ -11,13 +11,18 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
+	- Core/Class
+	- Core/Class.Extras
+	- Core/Request
+	- Class-Extras/Class.Binds
 
 provides:
 	- Request
 
 ...
 */
+
+if (!window.Moobile) window.Moobile = {};
 
 Moobile.Request = new Class({
 

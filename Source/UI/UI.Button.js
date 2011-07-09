@@ -51,14 +51,14 @@ Moobile.UI.Button = new Class({
 
 	buildContentElement: function() {
 		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.getContents());
+		this.contentElement.adopt(this.element.childElements);
 		this.element.adopt(this.contentElement);
 		return this;
 	},
 
 	buildCaptionElement: function() {
 		this.captionElement = new Element('div.' + this.options.className + '-caption');
-		this.captionElement.adopt(this.contentElement.getContents());
+		this.captionElement.adopt(this.contentElement.childElements);
 		this.contentElement.adopt(this.captionElement);
 	},
 

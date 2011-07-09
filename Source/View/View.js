@@ -12,7 +12,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
+	- UI.Element
 
 provides:
 	- View
@@ -121,7 +121,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildView: function(view) {
-		var removed = this.childViews.remove(view);
+		var removed = this.childViews.erase(view);
 		if (removed) {
 			this.willRemoveChildView(view);
 			view.setParentView(null);
@@ -161,7 +161,7 @@ Moobile.View = new Class({
 	attachChildView: function(element) {
 		var view = element.get('data-view');
 		if (view == null) throw new Error('You have to define the view class using the data-view attribute.');
-		this.bindChildView(Class.from(view, element));
+		this.bindChildView(Class.instanciate(view, element));
 		return this;
 	},
 
@@ -200,7 +200,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildControl: function(control) {
-		var removed = this.childControls.remove(control);
+		var removed = this.childControls.erase(control);
 		if (removed) {
 			this.willRemoveChildControl(control);
 			control.dispose();
@@ -226,7 +226,7 @@ Moobile.View = new Class({
 	attachChildControl: function(element) {
 		var control = element.get('data-control');
 		if (control == null) throw new Error('You have to define the control class using the data-control attribute.');
-		this.bindChildControl(Class.from(control, element));
+		this.bindChildControl(Class.instanciate(control, element));
 		return this;
 	},
 
@@ -272,7 +272,7 @@ Moobile.View = new Class({
 	},
 
 	removeChildElement: function(element) {
-		var removed = this.childElements.remove(element);
+		var removed = this.childElements.erase(element);
 		if (removed) {
 			this.willRemoveChildElement(element);
 			element.dispose();

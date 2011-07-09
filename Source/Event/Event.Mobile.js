@@ -3,7 +3,7 @@
 
 name: Event.Mobile
 
-description:
+description: Translate desktop events to mobile event correctly.
 
 license: MIT-style license.
 
@@ -11,10 +11,10 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core/Event
+	- Core/Element.Event
 	- Custom-Event/Element.defineCustomEvent
 	- Mobile/Browser.Mobile
-	- Mobile/Click
-	- Mobile/Touch
 
 provides:
 	- Event.Mobile

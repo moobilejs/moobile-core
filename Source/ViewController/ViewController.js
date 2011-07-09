@@ -11,7 +11,11 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
+	- Core/Class
+	- Core/Class.Extras
+	- Core/Element
+	- Core/Element.Event
+	- Class-Extras/Class.Binds
 
 provides:
 	- ViewController
@@ -21,7 +25,11 @@ provides:
 
 Moobile.ViewController = new Class({
 
-	Implements: [Events, Options, Class.Binds],
+	Implements: [
+		Events, 
+		Options, 
+		Class.Binds
+	],
 
 	window: null,
 

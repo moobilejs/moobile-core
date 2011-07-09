@@ -14,6 +14,8 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core/Event
+	- Core/Element.Event
 	- Custom-Event/Element.defineCustomEvent
 	- Mobile/Browser.Mobile
 	- Mobile/Click

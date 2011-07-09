@@ -11,13 +11,21 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
+	- Core/Class
+	- Core/Class.Extras
+	- Core/Element
+	- Core/Element.Event
+	- Core/Element.Style
+	- Class-Extras/Class.Binds
+	- Event.TransitionEnd
 
 provides:
 	- ViewTransition
 
 ...
 */
+
+if (!window.Moobile) window.Moobile = {};
 
 Moobile.ViewTransition = new Class({
 

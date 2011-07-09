@@ -12,7 +12,6 @@ authors:
 
 requires:
 	- UI.Control
-	- UI.ListItem
 
 provides:
 	- UI.List
@@ -121,7 +120,7 @@ Moobile.UI.List = new Class({
 
 	removeSelectedItem: function(item) {
 		item.setSelected(false);
-		this.selectedItems.remove(item);
+		this.selectedItems.erase(item);
 		this.fireEvent('deselect', item);
 		return this;
 	},

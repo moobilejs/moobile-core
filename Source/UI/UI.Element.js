@@ -15,11 +15,14 @@ requires:
 	- Core/Element.Style
 	- Core/Element.Event
 	- Core/Element.Dimensions
-	- Core/Fx.Tween
-	- Core/Fx.Morph
-	- More/Class.Binds
 	- More/Element.Shortcuts
+	- More/Class.Occlude
 	- Class-Extras/Class.Binds
+	- Object
+	- Array
+	- Class
+	- Class.Mutator
+	- Element
 
 provides:
 	- UI.Element
@@ -27,7 +30,7 @@ provides:
 ...
 */
 
-if (!window.UI) window.UI = {};
+if (!window.Moobile.UI) window.Moobile.UI = {};
 
 Moobile.UI.Element = new Class({
 
@@ -90,7 +93,7 @@ Moobile.UI.Element = new Class({
 	},
 	
 	getElementContents: function() {
-		return this.element.getContents();
+		return this.element.childElements;
 	},
 
 	getElements: function(selector) {

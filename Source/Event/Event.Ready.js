@@ -13,6 +13,9 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core/Event
+	- Core/Element.Event
+	- Core/DOMReady
 	- Custom-Event/Element.defineCustomEvent
 	- Browser.Platform
 

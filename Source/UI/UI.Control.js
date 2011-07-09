@@ -8,8 +8,6 @@ description: Provides the base class for any types of controls.
 license: MIT-style license.
 
 requires:
-	- Core/Class
-	- Core/Class.Extras
 	- UI.Element
 
 provides:
@@ -37,7 +35,10 @@ Moobile.UI.Control = new Class({
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		if (this.occlude('control', this.element)) return this.occluded;
+		
+		if (this.occlude('control', this.element)) 
+			return this.occluded;
+		
 		this.init();
 		this.attachEvents();
 		return this;

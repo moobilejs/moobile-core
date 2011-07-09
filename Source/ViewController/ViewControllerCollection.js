@@ -61,7 +61,7 @@ Moobile.ViewControllerCollection = new Class({
 	},
 
 	removeViewController: function(viewController) {
-		var removed = this.viewControllers.remove(viewController);
+		var removed = this.viewControllers.erase(viewController);
 		if (removed) {
 			this.willRemoveViewController(viewController);
 			viewController.view.removeFromParentView();
@@ -89,7 +89,7 @@ Moobile.ViewControllerCollection = new Class({
 	attachViewController: function(view) {
 		var viewController = view.getProperty('data-view-controller');
 		if (viewController) {
-			viewController = Class.from(viewController, view);
+			viewController = Class.instanciate(viewController, view);
 			this.bindViewController(viewController);
 		}
 		return this;

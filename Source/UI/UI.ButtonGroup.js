@@ -58,7 +58,7 @@ Moobile.UI.ButtonGroup = new Class({
 	},
 
 	attachButton: function(element) {
-		var button = Class.from(element.getProperty('data-control') || 'Moobile.UI.Button', element);
+		var button = Class.instanciate(element.getProperty('data-control') || 'Moobile.UI.Button', element);
 		this.buttons.push(button);
 		return this;
 	},

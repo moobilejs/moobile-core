@@ -11,9 +11,8 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core
 	- Request.ViewController
-	- ViewController
+	- ViewControllerCollection
 
 provides:
 	- ViewControllerStack
@@ -59,12 +58,12 @@ Moobile.ViewControllerStack = new Class({
 
 		var viewControllerPushed = viewController; // ease of understanding
 
-		var viewControllerIndex = this.viewControllers.indexOf(viewControllerPushed);
-		if (viewControllerIndex == -1) {
+		var viewControllerExists = this.viewControllers.contains(viewControllerPushed);
+		if (viewControllerExists == false) {
 			viewControllerPushed.viewControllerStack = this;
 			viewControllerPushed.viewControllerPanel = this.viewControllerPanel;
 		} else {
-			this.viewControllers.remove(viewControllerPushed);
+			this.viewControllers.erase(viewControllerPushed);
 		}
 
 		this.willPushViewController(viewControllerPushed);
@@ -73,7 +72,7 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerPushed.view.show();
 		viewControllerPushed.viewWillEnter();
 
-		var viewControllerBefore = this.viewControllers.getLast(1);
+		var viewControllerBefore = this.viewControllers.lastItemAt(1);
 		if (viewControllerBefore) {
 			viewControllerBefore.viewWillLeave();
 		}
@@ -97,8 +96,8 @@ Moobile.ViewControllerStack = new Class({
 
 	onPushTransitionCompleted: function() {
 
-		var viewControllerPushed = this.viewControllers.getLast(0);
-		var viewControllerBefore = this.viewControllers.getLast(1);
+		var viewControllerPushed = this.viewControllers.lastItemAt(0);
+		var viewControllerBefore = this.viewControllers.lastItemAt(1);
 		if (viewControllerBefore) {
 			viewControllerBefore.viewDidLeave();
 			viewControllerBefore.view.hide();
@@ -145,8 +144,8 @@ Moobile.ViewControllerStack = new Class({
 
 		this.window.disableUserInput();
 
-		var viewControllerPopped = this.viewControllers.getLast(0);
-		var viewControllerBefore = this.viewControllers.getLast(1);
+		var viewControllerPopped = this.viewControllers.lastItemAt(0);
+		var viewControllerBefore = this.viewControllers.lastItemAt(1);
 
 		this.willPopViewController(viewControllerPopped);
 
@@ -167,8 +166,8 @@ Moobile.ViewControllerStack = new Class({
 
 	onPopTransitionCompleted: function() {
 
-		var viewControllerPopped = this.viewControllers.getLast(0);
-		var viewControllerBefore = this.viewControllers.getLast(1);
+		var viewControllerPopped = this.viewControllers.lastItemAt(0);
+		var viewControllerBefore = this.viewControllers.lastItemAt(1);
 		viewControllerBefore.viewDidEnter();
 		viewControllerPopped.viewDidLeave();
 
