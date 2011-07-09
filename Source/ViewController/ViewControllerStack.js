@@ -27,6 +27,11 @@ Moobile.ViewControllerStack = new Class({
 
 	viewControllerRequest: null,
 
+	loadView: function(element) {
+		this.view = new Moobile.ViewStack(element);
+		return this;
+	},
+
 	loadViewControllerFrom: function(url, callback) {
 
 		if (this.viewControllerRequest == null) {

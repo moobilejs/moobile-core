@@ -9645,21 +9645,19 @@ Moobile.Request.ViewController = new Class({
 	loaded: function(response) {
 		var element = new Element('div').ingest(response).getElement('[data-role=view]');
 		if (element) {
-
-			var view = null;
-			var viewName = element.get('data-view') || 'Moobile.View';
-			if (viewName) {
-				view = Class.from(viewName, element);
+			
+			var viewController = element.get('data-view-controller') || 'Moobile.ViewController';
+			
+			var view = element.get('data-view');
+			if (view) {
+				view = Class.from(view, element);
+				viewController = Class.from(viewController, view);
 			} else {
-				view = element;
-
+				viewController = Class.from(viewController, element);
 			}
 
-			var viewControllerName = element.get('data-view-controller') || 'Moobile.ViewController';
-			var viewController = Class.from(viewControllerName, view);
-
 			this.setCache(this.options.url, viewController);
-
+			
 			this.fireEvent('load', viewController);
 
 			return this;
@@ -12375,6 +12373,39 @@ Moobile.ViewPanel = new Class({
 /*
 ---
 
+name: ViewStack
+
+description: The view that must be used in conjunction with a ViewControllerStack.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Core
+
+provides:
+	- ViewStack
+
+...
+*/
+
+Moobile.ViewStack = new Class({
+
+	Extends: Moobile.View,
+	
+	build: function() {
+		this.parent();
+		this.addClass(this.options.className + '-stack');
+		return this;
+	}
+
+});
+
+/*
+---
+
 name: ViewTransition
 
 description: Provides the base class for view controller transition effects.
@@ -12991,6 +13022,11 @@ Moobile.ViewControllerStack = new Class({
 	Extends: Moobile.ViewControllerCollection,
 
 	viewControllerRequest: null,
+
+	loadView: function(element) {
+		this.view = new Moobile.ViewStack(element);
+		return this;
+	},
 
 	loadViewControllerFrom: function(url, callback) {
 

@@ -41,6 +41,7 @@ sources:
   - "Source/View/View.js"
   - "Source/View/View.Scroll.js"
   - "Source/View/ViewPanel.js"
+  - "Source/View/ViewStack.js"
   - "Source/ViewTransition/ViewTransition.js"
   - "Source/ViewTransition/ViewTransition.Slide.js"
   - "Source/ViewTransition/ViewTransition.Cubic.js"

@@ -27,8 +27,8 @@ Moobile.ViewControllerCollection = new Class({
 	viewControllers: [],
 
 	init: function() {
-		this.attachViewControllers();
 		this.parent();
+		this.attachViewControllers();
 		return this;
 	},
 
