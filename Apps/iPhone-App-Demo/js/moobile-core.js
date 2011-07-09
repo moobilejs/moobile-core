@@ -9556,14 +9556,11 @@ Moobile.ViewTransition.Slide = new Class({
 	Extends: Moobile.ViewTransition,
 
 	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
-	
-		var wrapper = parentView.content;
 		
-		this.setTransitionElement(wrapper);
+		this.setTransitionElement(parentView.content);
 
-		wrapper.addClass('transition-slide');
-		wrapper.addClass('transition-slide-enter');
-
+		parentView.content.addClass('transition-slide');
+		parentView.content.addClass('transition-slide-enter');
 		viewToShow.addClass('transition-slide-view-to-show');
 
 		if (firstViewIn) {
@@ -9573,15 +9570,13 @@ Moobile.ViewTransition.Slide = new Class({
 		}
 
 		this.start(function() {
-			wrapper.removeClass('transition-slide');
-			wrapper.removeClass('transition-slide-enter');
+			parentView.content.removeClass('transition-slide');
+			parentView.content.removeClass('transition-slide-enter');
 			viewToShow.removeClass('transition-slide-view-to-show');
 			viewToShow.removeClass('transition-slide-view-to-show-first');
-			
-			if (viewToHide) {
+			if (firstViewIn == false) {
 				viewToHide.removeClass('transition-slide-view-to-hide');
 			}
-			
 		});
 
 		return this;
@@ -9636,52 +9631,46 @@ Moobile.ViewTransition.Cubic = new Class({
 	Extends: Moobile.ViewTransition,
 
 	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
-
-		if (firstViewIn) {
-
-			alert('Not yet supported...')
-
-		} else {
 			
-			var wrapper = parentView.content;
-			
-			this.setTransitionElement(wrapper);
+		this.setTransitionElement(parentView.content);
 
-			parentView.addClass('transition-cubic-viewport');
-			wrapper.addClass('transition-cubic');
-			wrapper.addClass('transition-cubic-enter');
-			viewToShow.addClass('transition-cubic-view-to-show');
+		parentView.addClass('transition-cubic-viewport');
+		parentView.content.addClass('transition-cubic');
+		parentView.content.addClass('transition-cubic-enter');
+
+		viewToShow.addClass('transition-cubic-view-to-show');
+
+		if (firstViewIn == false) {
 			viewToHide.addClass('transition-cubic-view-to-hide');
-
-			this.start(function() {
-				parentView.removeClass('transition-cubic-viewport');				
-				wrapper.removeClass('transition-cubic');
-				wrapper.removeClass('transition-cubic-enter');
-				viewToShow.removeClass('transition-cubic-view-to-show');
+		} 
+			
+		this.start(function() {
+			parentView.removeClass('transition-cubic-viewport');				
+			parentView.content.removeClass('transition-cubic');
+			parentView.content.removeClass('transition-cubic-enter');
+			viewToShow.removeClass('transition-cubic-view-to-show');
+			if (firstViewIn == false) {
 				viewToHide.removeClass('transition-cubic-view-to-hide');				
-			}.bind(this));
-
-		}
+			}
+		});
 
 		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
 
-		var wrapper = parentView.content;
-
-		this.setTransitionElement(wrapper);
+		this.setTransitionElement(parentView.content);
 
 		parentView.addClass('transition-cubic-viewport');
-		wrapper.addClass('transition-cubic');
-		wrapper.addClass('transition-cubic-leave');
+		parentView.content.addClass('transition-cubic');
+		parentView.content.addClass('transition-cubic-leave');
 		viewToHide.addClass('transition-cubic-view-to-hide');
 		viewToShow.addClass('transition-cubic-view-to-show');
 
 		this.start(function() {
 			parentView.removeClass('transition-cubic-viewport');
-			wrapper.removeClass('transition-cubic');
-			wrapper.removeClass('transition-cubic-leave');
+			parentView.content.removeClass('transition-cubic');
+			parentView.content.removeClass('transition-cubic-leave');
 			viewToHide.removeClass('transition-cubic-view-to-hide');
 			viewToShow.removeClass('transition-cubic-view-to-show');			
 		});

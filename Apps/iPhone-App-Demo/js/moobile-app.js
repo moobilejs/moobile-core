@@ -82,10 +82,7 @@ Demo.ViewController.UI = new Class({
 		this.barStyleList = this.view.barStyleList;
 		this.barButtonStyleList = this.view.barButtonStyleList;
 		this.barButton = new Moobile.UI.BarButton();
-		this.barButton.setText('Button');
-		
-		console.log(this);
-		
+		this.barButton.setText('Button');	
 		this.navigationBar.setRightButton(this.barButton);
 		this.parent();
 		return this;

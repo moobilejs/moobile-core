@@ -24,14 +24,11 @@ Moobile.ViewTransition.Slide = new Class({
 	Extends: Moobile.ViewTransition,
 
 	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
-	
-		var wrapper = parentView.content;
 		
-		this.setTransitionElement(wrapper);
+		this.setTransitionElement(parentView.content);
 
-		wrapper.addClass('transition-slide');
-		wrapper.addClass('transition-slide-enter');
-
+		parentView.content.addClass('transition-slide');
+		parentView.content.addClass('transition-slide-enter');
 		viewToShow.addClass('transition-slide-view-to-show');
 
 		if (firstViewIn) {
@@ -41,15 +38,13 @@ Moobile.ViewTransition.Slide = new Class({
 		}
 
 		this.start(function() {
-			wrapper.removeClass('transition-slide');
-			wrapper.removeClass('transition-slide-enter');
+			parentView.content.removeClass('transition-slide');
+			parentView.content.removeClass('transition-slide-enter');
 			viewToShow.removeClass('transition-slide-view-to-show');
 			viewToShow.removeClass('transition-slide-view-to-show-first');
-			
-			if (viewToHide) {
+			if (firstViewIn == false) {
 				viewToHide.removeClass('transition-slide-view-to-hide');
 			}
-			
 		});
 
 		return this;
