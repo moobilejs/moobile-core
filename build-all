@@ -1,2 +1,0 @@
-#!/bin/bash
-./build Moobile/* > ${1}moobile-core.js

@@ -8,123 +8,39 @@ require dirname(__FILE__) . '/Packager/packager.php';
 $executable = array_shift($argv);
 $package = dirname(__FILE__);
 
-$selected = array(
-	'components' => array(),
-	'files' => array(),
-	'add-packages' => array(),
-	'remove-packages' => array(),
-	'blocks' => array(),
-	'use-only' => null
-);
-
-$build = 'components';
-
-$wihtout_core_more = false;
-
-foreach ($argv as $arg){
-
-	if ($arg == '+packages'){
-		$build = 'add-packages';
-		continue;
-	}
-
-	if ($arg == '-blocks'){
-		$build = 'blocks';
-		continue;
-	}
-
-	if ($arg == '+use-only'){
-		$build = 'use-only';
-		if ($selected['use-only'] == null) $selected['use-only'] = array();
-		continue;
-	}
-
-	if ($arg == '-packages'){
-		$build = 'remove-packages';
-		continue;
-	}
-
-	if ($arg == '+components'){
-		$build = 'components';
-		continue;
-	}
-
-	if ($arg == '+files'){
-		$build = 'files';
-		continue;
-	}
-
-	if ($arg == '-without-core-more') {
-		$wihtout_core_more = true;
-		continue;
-	}
-
-	$selected[$build][] = $arg;
-}
-
-$re = "/^([^\/]+)\/\*$/";
-$wildcards = array();
-
-$files = $selected['files'];
-$components = $selected['components'];
-$blocks = $selected['blocks'];
-
-foreach ($components as $component){
-	preg_match($re, $component, $matches);
-	if (!empty($matches)){
-		array_erase($components, $component);
-		array_include($wildcards, $matches[1]);
-	}
-}
-
-foreach ($files as $file){
-	preg_match($re, $file, $matches);
-	if (!empty($matches)){
-		array_erase($files, $file);
-		array_include($wildcards, $matches[1]);
-	}
-}
-
-$pkgs = array(
+$packages = array(
 	$package,
-	dirname(__FILE__) . "/Vendor/mootools-core",
-	dirname(__FILE__) . "/Vendor/mootools-more",
 	dirname(__FILE__) . "/Vendor/mootools-custom-event",
 	dirname(__FILE__) . "/Vendor/mootools-mobile",
 	dirname(__FILE__) . "/Vendor/mootools-class-extras",
 );
 
-if ($wihtout_core_more) {
-	unset($pkgs[1]);
-	unset($pkgs[2]);
+$pkg = new Packager($packages);
+
+fwrite($stderr, "Packager is building Moobile Core \n\n");
+fwrite($stderr, "Included Components:\n");
+
+$no_compat = false;
+
+foreach ($argv as $arg){
+	if ($arg == '-1.2compat'){
+		array_erase($argv, $arg);
+		$no_compat = true;
+		break;
+	}
 }
 
-$pkg = new Packager($pkgs);
-$pkg->validate($files, $components, $wildcards);
-
-foreach ($components as $component){
-	$file = $pkg->component_to_file($component);
-	if ($file) array_include($files, $file);
-}
-
-foreach ($wildcards as $package){
-	$all = $pkg->get_all_files($package);
-	foreach ($all as $file) array_include($files, $file);
-}
+$files = (empty($argv)) ? $pkg->get_all_files() : $pkg->components_to_files($argv);
 
 $files = $pkg->complete_files($files);
 
-Packager::warn("Build using: " . implode(', ', $pkg->get_packages()) . "\n");
-
-Packager::warn("Included Files/Components:\n");
-
 foreach ($files as $file){
-	$file_name = $pkg->get_file_name($file);
-	$file_package = $pkg->get_file_package($file);
-	Packager::warn("- $file_package/$file_name: [" . implode(", ", $pkg->get_file_provides($file)) . "]\n");
+	fwrite($stderr, "- $file: [" . implode(", ", $pkg->get_file_provides($file)) . "]\n");
 }
 
-echo $pkg->build($files, array(), array(), $blocks);
+$output = $pkg->build($files, array(), array(), ($no_compat) ? array("1.2compat") : array());
+
+echo $output;
 
 fclose($stderr);
 

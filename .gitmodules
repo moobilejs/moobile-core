@@ -2,14 +2,6 @@
 	path = Packager
 	url = git://github.com/kamicane/packager.git
 
-[submodule "mootools-core"]
-	path = Vendor/mootools-core
-	url = git://github.com/mootools/mootools-core.git
-
-[submodule "mootools-more"]
-	path = Vendor/mootools-more
-	url = git://github.com/mootools/mootools-more.git
-
 [submodule "mootools-mobile"]
 	path = Vendor/mootools-mobile
 	url = git://github.com/cpojer/mootools-mobile.git

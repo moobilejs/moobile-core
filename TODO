@@ -1,9 +1,0 @@
-Controls:
- - Moobile.UI.Button
- - UI.List
- - UI.ListItem
-
-Controllers:
- - DocumentView
- - DocumentViewController
-   (Call pushViewControllerFrom for (almost) every links (a))
