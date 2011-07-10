@@ -13,6 +13,7 @@ authors:
 requires:
 	- Core/Class
 	- Core/Class.Extras
+	- Core/Event
 	- Core/Element
 	- Core/Element.Event
 	- Class-Extras/Class.Binds
@@ -22,6 +23,8 @@ provides:
 
 ...
 */
+
+if (!window.Moobile) window.Moobile = {};
 
 Moobile.ViewController = new Class({
 

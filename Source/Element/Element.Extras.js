@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Element
+name: Element.Extras
 
 description: Provides extra methods to Element.
 
@@ -11,10 +11,11 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	Core/Array
 	Core/Element
 
 provides:
-	- Element
+	- Element.Extras
 
 ...
 */
@@ -27,18 +28,22 @@ provides:
 	
 	Object.defineProperty(Element.prototype, 'childElements', {
 		get: function() {
-			return Array.from(this.childNodes);
+			return getChildElements.call(this);
 		}	
 	});
 	
+	Element.implement({
+		
+		getChildElements: function() {
+			return getChildElements.call(this);
+		},
+		
+		ingest: function(string) {
+			var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+			if (match) string = match[1];
+			this.set('html', string);
+			return this
+		}
+	});	
+	
 })();
-
-Element.implement
-({
-	ingest: function(string) {
-		var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-		if (match) string = match[1];
-		this.set('html', string);
-		return this
-	}
-});

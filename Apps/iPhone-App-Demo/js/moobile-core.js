@@ -1805,6 +1805,168 @@ Browser.Platform.phonegap =
 /*
 ---
 
+name: Class
+
+description: Contains the Class Function for easily creating, extending, and implementing reusable Classes.
+
+license: MIT-style license.
+
+requires: [Array, String, Function, Number]
+
+provides: Class
+
+...
+*/
+
+(function(){
+
+var Class = this.Class = new Type('Class', function(params){
+	if (instanceOf(params, Function)) params = {initialize: params};
+
+	var newClass = function(){
+		reset(this);
+		if (newClass.$prototyping) return this;
+		this.$caller = null;
+		var value = (this.initialize) ? this.initialize.apply(this, arguments) : this;
+		this.$caller = this.caller = null;
+		return value;
+	}.extend(this).implement(params);
+
+	newClass.$constructor = Class;
+	newClass.prototype.$constructor = newClass;
+	newClass.prototype.parent = parent;
+
+	return newClass;
+});
+
+var parent = function(){
+	if (!this.$caller) throw new Error('The method "parent" cannot be called.');
+	var name = this.$caller.$name,
+		parent = this.$caller.$owner.parent,
+		previous = (parent) ? parent.prototype[name] : null;
+	if (!previous) throw new Error('The method "' + name + '" has no parent.');
+	return previous.apply(this, arguments);
+};
+
+var reset = function(object){
+	for (var key in object){
+		var value = object[key];
+		switch (typeOf(value)){
+			case 'object':
+				var F = function(){};
+				F.prototype = value;
+				object[key] = reset(new F);
+			break;
+			case 'array': object[key] = value.clone(); break;
+		}
+	}
+	return object;
+};
+
+var wrap = function(self, key, method){
+	if (method.$origin) method = method.$origin;
+	var wrapper = function(){
+		if (method.$protected && this.$caller == null) throw new Error('The method "' + key + '" cannot be called.');
+		var caller = this.caller, current = this.$caller;
+		this.caller = current; this.$caller = wrapper;
+		var result = method.apply(this, arguments);
+		this.$caller = current; this.caller = caller;
+		return result;
+	}.extend({$owner: self, $origin: method, $name: key});
+	return wrapper;
+};
+
+var implement = function(key, value, retain){
+	if (Class.Mutators.hasOwnProperty(key)){
+		value = Class.Mutators[key].call(this, value);
+		if (value == null) return this;
+	}
+
+	if (typeOf(value) == 'function'){
+		if (value.$hidden) return this;
+		this.prototype[key] = (retain) ? value : wrap(this, key, value);
+	} else {
+		Object.merge(this.prototype, key, value);
+	}
+
+	return this;
+};
+
+var getInstance = function(klass){
+	klass.$prototyping = true;
+	var proto = new klass;
+	delete klass.$prototyping;
+	return proto;
+};
+
+Class.implement('implement', implement.overloadSetter());
+
+Class.Mutators = {
+
+	Extends: function(parent){
+		this.parent = parent;
+		this.prototype = getInstance(parent);
+	},
+
+	Implements: function(items){
+		Array.from(items).each(function(item){
+			var instance = new item;
+			for (var key in instance) implement.call(this, key, instance[key], true);
+		}, this);
+	}
+};
+
+}).call(this);
+
+
+/*
+---
+
+name: Class.Instanciate
+
+description: Provides a method to instanciate classes based on the class name
+             stored as a string.
+
+license: MIT-style license.
+
+requires:
+	- Core/Class
+
+provides:
+	- Class.Instanciate
+
+...
+*/
+
+Class.extend({
+	
+	parse: function(name) {
+		name = name.trim();
+		name = name.split('.');
+		var func = window;
+		for (var i = 0; i < name.length; i++) func = func[name[i]];
+		return typeof func == 'function' ? func : null;
+	},
+	
+	instanciate: function(klass) {
+		if (typeof klass == 'string') klass = Class.parse(klass);
+		klass.$prototyping = true;
+		var instance = new klass;
+		delete klass.$prototyping;
+		var params = Array.prototype.slice.call(arguments, 1);
+		if (instance.initialize) {
+			instance.initialize.apply(instance, params);
+		}		
+		return instance;		
+	}
+
+});
+
+
+
+/*
+---
+
 name: Object
 
 description: Object generic methods
@@ -2015,7 +2177,7 @@ Hash.alias({indexOf: 'keyOf', contains: 'hasValue'});
 /*
 ---
 
-name: String
+name: String.Extras
 
 description: Provides extra methods to String.
 
@@ -2025,7 +2187,7 @@ requires:
 	- Core/String
 
 provides:
-	- String
+	- String.Extras
 
 ...
 */
@@ -2045,7 +2207,7 @@ String.implement({
 /*
 ---
 
-name: Object
+name: Object.Extras
 
 description: Provides extra methods to Object.
 
@@ -2056,10 +2218,10 @@ author:
 
 requires:
 	- Core/Object
-	- String
+	- String.Extras
 
 provides:
-	- Object
+	- Object.Extras
 
 ...
 */
@@ -2091,7 +2253,7 @@ requires:
 	- Core/Array
 
 provides:
-	- Array
+	- Array.Extras
 
 ...
 */
@@ -4168,7 +4330,7 @@ Element.Properties.html = (function(){
 /*
 ---
 
-name: Element
+name: Element.Extras
 
 description: Provides extra methods to Element.
 
@@ -4178,10 +4340,11 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	Core/Array
 	Core/Element
 
 provides:
-	- Element
+	- Element.Extras
 
 ...
 */
@@ -4194,205 +4357,25 @@ provides:
 	
 	Object.defineProperty(Element.prototype, 'childElements', {
 		get: function() {
-			return Array.from(this.childNodes);
+			return getChildElements.call(this);
 		}	
 	});
 	
-})();
-
-Element.implement
-({
-	ingest: function(string) {
-		var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-		if (match) string = match[1];
-		this.set('html', string);
-		return this
-	}
-});
-
-/*
----
-
-name: Class
-
-description: Contains the Class Function for easily creating, extending, and implementing reusable Classes.
-
-license: MIT-style license.
-
-requires: [Array, String, Function, Number]
-
-provides: Class
-
-...
-*/
-
-(function(){
-
-var Class = this.Class = new Type('Class', function(params){
-	if (instanceOf(params, Function)) params = {initialize: params};
-
-	var newClass = function(){
-		reset(this);
-		if (newClass.$prototyping) return this;
-		this.$caller = null;
-		var value = (this.initialize) ? this.initialize.apply(this, arguments) : this;
-		this.$caller = this.caller = null;
-		return value;
-	}.extend(this).implement(params);
-
-	newClass.$constructor = Class;
-	newClass.prototype.$constructor = newClass;
-	newClass.prototype.parent = parent;
-
-	return newClass;
-});
-
-var parent = function(){
-	if (!this.$caller) throw new Error('The method "parent" cannot be called.');
-	var name = this.$caller.$name,
-		parent = this.$caller.$owner.parent,
-		previous = (parent) ? parent.prototype[name] : null;
-	if (!previous) throw new Error('The method "' + name + '" has no parent.');
-	return previous.apply(this, arguments);
-};
-
-var reset = function(object){
-	for (var key in object){
-		var value = object[key];
-		switch (typeOf(value)){
-			case 'object':
-				var F = function(){};
-				F.prototype = value;
-				object[key] = reset(new F);
-			break;
-			case 'array': object[key] = value.clone(); break;
+	Element.implement({
+		
+		getChildElements: function() {
+			return getChildElements.call(this);
+		},
+		
+		ingest: function(string) {
+			var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+			if (match) string = match[1];
+			this.set('html', string);
+			return this
 		}
-	}
-	return object;
-};
-
-var wrap = function(self, key, method){
-	if (method.$origin) method = method.$origin;
-	var wrapper = function(){
-		if (method.$protected && this.$caller == null) throw new Error('The method "' + key + '" cannot be called.');
-		var caller = this.caller, current = this.$caller;
-		this.caller = current; this.$caller = wrapper;
-		var result = method.apply(this, arguments);
-		this.$caller = current; this.caller = caller;
-		return result;
-	}.extend({$owner: self, $origin: method, $name: key});
-	return wrapper;
-};
-
-var implement = function(key, value, retain){
-	if (Class.Mutators.hasOwnProperty(key)){
-		value = Class.Mutators[key].call(this, value);
-		if (value == null) return this;
-	}
-
-	if (typeOf(value) == 'function'){
-		if (value.$hidden) return this;
-		this.prototype[key] = (retain) ? value : wrap(this, key, value);
-	} else {
-		Object.merge(this.prototype, key, value);
-	}
-
-	return this;
-};
-
-var getInstance = function(klass){
-	klass.$prototyping = true;
-	var proto = new klass;
-	delete klass.$prototyping;
-	return proto;
-};
-
-Class.implement('implement', implement.overloadSetter());
-
-Class.Mutators = {
-
-	Extends: function(parent){
-		this.parent = parent;
-		this.prototype = getInstance(parent);
-	},
-
-	Implements: function(items){
-		Array.from(items).each(function(item){
-			var instance = new item;
-			for (var key in instance) implement.call(this, key, instance[key], true);
-		}, this);
-	}
-};
-
-}).call(this);
-
-
-/*
----
-
-name: Class
-
-description: Provides extra methods to Class.
-
-license: MIT-style license.
-
-requires:
-	- Core/Class
-
-provides:
-	- Class
-
-...
-*/
-
-Class.extend({
+	});	
 	
-	parse: function(name) {
-		name = name.trim();
-		name = name.split('.');
-		var func = window;
-		for (var i = 0; i < name.length; i++) func = func[name[i]];
-		return typeof func == 'function' ? func : null;
-	},
-	
-	instanciate: function(klass) {
-		if (typeof klass == 'string') klass = Class.parse(klass);
-		klass.$prototyping = true;
-		var instance = new klass;
-		delete klass.$prototyping;
-		var params = Array.prototype.slice.call(arguments, 1);
-		if (instance.initialize) {
-			instance.initialize.apply(instance, params);
-		}		
-		return instance;		
-	}
-
-});
-
-
-
-/*
----
-
-name: Class.Mutator
-
-description: Class mutators
-
-license: MIT-style license.
-
-requires:
-	- Core/Class
-
-provides:
-	- Class.Mutator
-
-...
-*/
-
-Class.Mutators.Static = function(items) {
-    this.extend(items);
-};
-
+})();
 
 /*
 ---
@@ -5794,7 +5777,9 @@ Moobile.Request = new Class({
 
 	Extends: Request,
 
-	Implements: [Class.Binds],
+	Implements: [
+		Class.Binds
+	],
 
 	options: {
 		isSuccess: function() {
@@ -6037,10 +6022,12 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core/Event
 	- Core/Element
+	- Core/Element.Event
 	- More/Events.Pseudos
-	- Class
-	- Element
+	- Class.Instanciate
+	- Element.Extras
 	- Request
 
 provides:
@@ -6048,8 +6035,6 @@ provides:
 
 ...
 */
-
-if (!window.Moobile.Request) Moobile.Request = {};
 
 Moobile.Request.ViewController = new Class({
 
@@ -6068,12 +6053,12 @@ Moobile.Request.ViewController = new Class({
 	},
 
 	attachEvents: function() {
-		this.addEvent('success', this.bound('loaded'));
+		this.addEvent('success', this.bound('onViewControllerLoad'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.removeEvent('success', this.bound('loaded'));
+		this.removeEvent('success', this.bound('onViewControllerLoad'));
 		return this;
 	},
 
@@ -6106,7 +6091,7 @@ Moobile.Request.ViewController = new Class({
 		return this;
 	},
 
-	loaded: function(response) {
+	onViewControllerLoad: function(response) {
 		var element = new Element('div').ingest(response).getElement('[data-role=view]');
 		if (element) {
 			
@@ -6127,7 +6112,7 @@ Moobile.Request.ViewController = new Class({
 			return this;
 		}
 
-		throw new Error('Cannot find a view element from the response');
+		throw new Error('Cannot find a data-role=view element from the response');
 
 		return this;
 	}
@@ -6734,6 +6719,7 @@ license: MIT-style license.
 requires:
 	- Core/Class
 	- Core/Class.Extras
+	- Core/Event
 	- Core/DOMReady
 	- Core/Element
 	- Core/Element.Style
@@ -6742,11 +6728,11 @@ requires:
 	- More/Element.Shortcuts
 	- More/Class.Occlude
 	- Class-Extras/Class.Binds
-	- Object
-	- Array
-	- Class
-	- Class.Mutator
-	- Element
+	- Object.Extras
+	- String.Extras
+	- Array.Extras
+	- Class.Instanciate
+	- Element.Extras
 
 provides:
 	- UI.Element
@@ -6754,6 +6740,7 @@ provides:
 ...
 */
 
+if (!window.Moobile) window.Moobile = {};
 if (!window.Moobile.UI) window.Moobile.UI = {};
 
 Moobile.UI.Element = new Class({
@@ -6813,11 +6800,7 @@ Moobile.UI.Element = new Class({
 	},
 
 	getElement: function(selector) {
-		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
-	},
-	
-	getElementContents: function() {
-		return this.element.childElements;
+		return this.getElement(selector);
 	},
 
 	getElements: function(selector) {
@@ -7091,6 +7074,9 @@ provides:
 ...
 */
 
+if (!window.Moobile) window.Moobile = {};
+if (!window.Moobile.UI) window.Moobile.UI = {};
+
 Moobile.UI.ButtonStyle = {
 
 	Default: {
@@ -7339,6 +7325,9 @@ provides:
 ...
 */
 
+if (!window.Moobile) window.Moobile = {};
+if (!window.Moobile.UI) window.Moobile.UI = {};
+
 Moobile.UI.BarStyle = {
 
 	DefaultOpaque: {
@@ -7565,6 +7554,9 @@ provides:
 
 ...
 */
+
+if (!window.Moobile) window.Moobile = {};
+if (!window.Moobile.UI) window.Moobile.UI = {};
 
 Moobile.UI.BarButtonStyle = {
 
@@ -8760,7 +8752,7 @@ Moobile.UI.ListItem = new Class({
 name: View
 
 description: Provides an element on the screen and the interfaces for managing
-             the contentElement in that area.
+             the content in that area.
 
 license: MIT-style license.
 
@@ -9236,144 +9228,147 @@ provides:
 ...
 */
 
-Moobile.View.Scroll = new Class({
-
-	Static: {
-		scrollers: 0
-	},
-
-	Extends: Moobile.View,
-
-	outerElement: null,
+(function() {
 	
-	innerElement: null,
+	var count = 0;
 	
-	innerElementSize: null,
+	Moobile.View.Scroll = new Class({
 
-	scroller: null,
-	
-	scrollerUpdateInterval: null,
+		Extends: Moobile.View,
 
-	scrolled: null,
+		outerElement: null,
 
-	build: function() {
-		this.parent();
-		this.addClass(this.options.className + '-scroll');
-		this.buildInnerElement();
-		this.buildOuterElement();
-		return this;
-	},
+		innerElement: null,
 
-	buildInnerElement: function() {
-		this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
-		this.innerElement.adopt(this.content.childElements);
-		this.adopt(this.innerElement);
-		return this;
-	},
+		innerElementSize: null,
 
-	buildOuterElement: function() {
-		this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
-		this.outerElement.adopt(this.content.childElements);
-		this.adopt(this.outerElement);
-		return this;
-	},
+		scroller: null,
 
-	init: function() {
-		this.parent();
-		this.attachScroller();
-		return this;
-	},
+		scrollerUpdateInterval: null,
 
-	release: function() {
-		this.disableScroller();
-		this.detachScroller();
-		this.outerElement = null;
-		this.innerElement = null;
-		this.parent();
-		return this;
-	},
+		scrolled: null,
 
-	attachScroller: function() {
-		if (++Moobile.View.Scroll.scrollers == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
-		return this;
-	},
+		build: function() {
+			this.parent();
+			this.addClass(this.options.className + '-scroll');
+			this.buildInnerElement();
+			this.buildOuterElement();
+			return this;
+		},
 
-	detachScroller: function() {
-		if (--Moobile.View.Scroll.scrollers == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
-		return this;
-	},
+		buildInnerElement: function() {
+			this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
+			this.innerElement.adopt(this.content.childElements);
+			this.adopt(this.innerElement);
+			return this;
+		},
 
-	createScroller: function() {
-		return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
-	},
+		buildOuterElement: function() {
+			this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
+			this.outerElement.adopt(this.content.childElements);
+			this.adopt(this.outerElement);
+			return this;
+		},
 
-	enableScroller: function() {
-		if (this.scroller == null) {
-			this.scroller = this.createScroller();
-			this.updateScroller();
-			this.updateScrollerAutomatically(true);
-			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
-		}
-		return this;
-	},
+		init: function() {
+			this.parent();
+			this.attachScroller();
+			return this;
+		},
 
-	disableScroller: function() {
-		if (this.scroller) {
-			this.updateScrollerAutomatically(false);
-			this.scrolled = this.innerElement.getStyle('-webkit-transform');
-			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
-			this.scrolled = this.scrolled[2];
-			this.scroller.destroy();
-			this.scroller = null;
-		}
-		return this;
-	},
+		release: function() {
+			this.disableScroller();
+			this.detachScroller();
+			this.outerElement = null;
+			this.innerElement = null;
+			this.parent();
+			return this;
+		},
 
-	updateScroller: function() {
-		if (this.scroller) {
-			if (this.innerElementSize != this.innerElement.getScrollSize().y) {
-				this.innerElementSize  = this.innerElement.getScrollSize().y;
-				this.scroller.refresh();
+		attachScroller: function() {
+			if (++count == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
+			return this;
+		},
+
+		detachScroller: function() {
+			if (--count == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+			return this;
+		},
+
+		createScroller: function() {
+			return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: true, vScroll: true });
+		},
+
+		enableScroller: function() {
+			if (this.scroller == null) {
+				this.scroller = this.createScroller();
+				this.updateScroller();
+				this.updateScrollerAutomatically(true);
+				if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
 			}
+			return this;
+		},
+
+		disableScroller: function() {
+			if (this.scroller) {
+				this.updateScrollerAutomatically(false);
+				this.scrolled = this.innerElement.getStyle('-webkit-transform');
+				this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
+				this.scrolled = this.scrolled[2];
+				this.scroller.destroy();
+				this.scroller = null;
+			}
+			return this;
+		},
+
+		updateScroller: function() {
+			if (this.scroller) {
+				if (this.innerElementSize != this.innerElement.getScrollSize().y) {
+					this.innerElementSize  = this.innerElement.getScrollSize().y;
+					this.scroller.refresh();
+				}
+			}
+			return this;
+		},
+
+		updateScrollerAutomatically: function(automatically) {
+			clearInterval(this.scrollerUpdateInterval);
+			if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+			return this;
+		},
+
+		willShow: function() {
+			this.enableScroller();
+			this.parent();
+			return this;
+		},
+
+		didShow: function() {
+			this.updateScroller();
+			this.parent();
+			return this;
+		},
+
+		didHide: function() {
+			this.disableScroller();
+			return this;
+		},
+
+		onDocumentTouchMove: function(e) {
+			e.preventDefault();
 		}
-		return this;
-	},
 
-	updateScrollerAutomatically: function(automatically) {
-		clearInterval(this.scrollerUpdateInterval);
-		if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
-		return this;
-	},
-
-	willShow: function() {
-		this.enableScroller();
-		this.parent();
-		return this;
-	},
-
-	didShow: function() {
-		this.updateScroller();
-		this.parent();
-		return this;
-	},
-
-	didHide: function() {
-		this.disableScroller();
-		return this;
-	},
-
-	onDocumentTouchMove: function(e) {
-		e.preventDefault();
-	}
-
-});
+	});	
+	
+})();
 
 /*
 ---
 
 name: ViewPanel
 
-description: The view that must be used in conjunction with a ViewControllerPanel.
+description: The view that must be used in conjunction with a 
+             ViewControllerPanel.
 
 license: MIT-style license.
 
@@ -9406,7 +9401,8 @@ Moobile.ViewPanel = new Class({
 
 name: ViewStack
 
-description: The view that must be used in conjunction with a ViewControllerStack.
+description: The view that must be used in conjunction with a 
+             ViewControllerStack.
 
 license: MIT-style license.
 
@@ -9775,6 +9771,7 @@ authors:
 requires:
 	- Core/Class
 	- Core/Class.Extras
+	- Core/Event
 	- Core/Element
 	- Core/Element.Event
 	- Class-Extras/Class.Binds
@@ -9784,6 +9781,8 @@ provides:
 
 ...
 */
+
+if (!window.Moobile) window.Moobile = {};
 
 Moobile.ViewController = new Class({
 
@@ -10357,39 +10356,30 @@ provides:
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
-
+	
 	viewController: null,
-
-	viewControllerCollection: null,
+	
+	rootViewController: null,
 
 	userInputEnabled: true,
 
 	userInputMask: null,
 
 	options: {
-		className: 'window',
-		withWrapperElement: false,
-		withContentElement: false
+		className: 'window'
 	},
 
 	init: function() {
-		this.viewControllerCollection = new Moobile.ViewControllerCollection(this);
-		this.viewControllerCollection.startup();
+		this.viewController = new Moobile.ViewControllerCollection(this);
+		this.viewController.startup();
 		this.parent();
 		return this;
 	},
 
 	release: function() {
-		this.viewControllerCollection.destroy();
-		this.viewControllerCollection = null;
+		this.viewController.destroy();
+		this.viewController = null;
 		this.parent();
-		return this;
-	},
-
-	didBindChildView: function(view) {
-		view.setWindow(this);
-		view.setParentView(null);
-		this.parent(view);
 		return this;
 	},
 
@@ -10397,25 +10387,25 @@ Moobile.Window = new Class({
 		return element.getParent('[data-role=view]') == null;
 	},
 
-	setViewController: function(viewController) {
+	setRootViewController: function(rootViewController) {
 
-		if (this.viewController) {
-			this.viewControllerCollection.removeViewController(this.viewController);
-			this.viewController.view.destroy();
-			this.viewController.view = null;
-			this.viewController.destroy();
-			this.viewController = null;
+		if (this.rootViewController) {
+			this.viewController.removeViewController(this.rootViewController);
+			this.rootViewController.view.destroy();
+			this.rootViewController.view = null;
+			this.rootViewController.destroy();
+			this.rootViewController = null;
 		}
 
-		this.viewControllerCollection.addViewController(viewController);
+		this.viewController.addViewController(rootViewController);
 
-		this.viewController = viewController;
+		this.rootViewController = rootViewController;
 
 		return this;
 	},
 
-	getViewController: function() {
-		return this.viewController || this.viewControllerCollection.getViewControllers()[0];
+	getRootViewController: function() {
+		return this.rootViewController || this.viewController.getViewControllers()[0];
 	},
 
 	getOrientation: function() {
@@ -10455,6 +10445,13 @@ Moobile.Window = new Class({
 		this.userInputMask.destroy();
 		this.userInputMask = null;
 		return this;
-	}
+	},
+	
+	didBindChildView: function(view) {
+		view.setWindow(this);
+		view.setParentView(null);
+		this.parent(view);
+		return this;
+	},	
 
 });

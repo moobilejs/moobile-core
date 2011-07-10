@@ -20,134 +20,136 @@ provides:
 ...
 */
 
-Moobile.View.Scroll = new Class({
-
-	Static: {
-		scrollers: 0
-	},
-
-	Extends: Moobile.View,
-
-	outerElement: null,
+(function() {
 	
-	innerElement: null,
+	var count = 0;
 	
-	innerElementSize: null,
+	Moobile.View.Scroll = new Class({
 
-	scroller: null,
-	
-	scrollerUpdateInterval: null,
+		Extends: Moobile.View,
 
-	scrolled: null,
+		outerElement: null,
 
-	build: function() {
-		this.parent();
-		this.addClass(this.options.className + '-scroll');
-		this.buildInnerElement();
-		this.buildOuterElement();
-		return this;
-	},
+		innerElement: null,
 
-	buildInnerElement: function() {
-		this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
-		this.innerElement.adopt(this.content.childElements);
-		this.adopt(this.innerElement);
-		return this;
-	},
+		innerElementSize: null,
 
-	buildOuterElement: function() {
-		this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
-		this.outerElement.adopt(this.content.childElements);
-		this.adopt(this.outerElement);
-		return this;
-	},
+		scroller: null,
 
-	init: function() {
-		this.parent();
-		this.attachScroller();
-		return this;
-	},
+		scrollerUpdateInterval: null,
 
-	release: function() {
-		this.disableScroller();
-		this.detachScroller();
-		this.outerElement = null;
-		this.innerElement = null;
-		this.parent();
-		return this;
-	},
+		scrolled: null,
 
-	attachScroller: function() {
-		if (++Moobile.View.Scroll.scrollers == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
-		return this;
-	},
+		build: function() {
+			this.parent();
+			this.addClass(this.options.className + '-scroll');
+			this.buildInnerElement();
+			this.buildOuterElement();
+			return this;
+		},
 
-	detachScroller: function() {
-		if (--Moobile.View.Scroll.scrollers == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
-		return this;
-	},
+		buildInnerElement: function() {
+			this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
+			this.innerElement.adopt(this.content.childElements);
+			this.adopt(this.innerElement);
+			return this;
+		},
 
-	createScroller: function() {
-		return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: false, vScroll: true });
-	},
+		buildOuterElement: function() {
+			this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
+			this.outerElement.adopt(this.content.childElements);
+			this.adopt(this.outerElement);
+			return this;
+		},
 
-	enableScroller: function() {
-		if (this.scroller == null) {
-			this.scroller = this.createScroller();
-			this.updateScroller();
-			this.updateScrollerAutomatically(true);
-			if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
-		}
-		return this;
-	},
+		init: function() {
+			this.parent();
+			this.attachScroller();
+			return this;
+		},
 
-	disableScroller: function() {
-		if (this.scroller) {
-			this.updateScrollerAutomatically(false);
-			this.scrolled = this.innerElement.getStyle('-webkit-transform');
-			this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
-			this.scrolled = this.scrolled[2];
-			this.scroller.destroy();
-			this.scroller = null;
-		}
-		return this;
-	},
+		release: function() {
+			this.disableScroller();
+			this.detachScroller();
+			this.outerElement = null;
+			this.innerElement = null;
+			this.parent();
+			return this;
+		},
 
-	updateScroller: function() {
-		if (this.scroller) {
-			if (this.innerElementSize != this.innerElement.getScrollSize().y) {
-				this.innerElementSize  = this.innerElement.getScrollSize().y;
-				this.scroller.refresh();
+		attachScroller: function() {
+			if (++count == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
+			return this;
+		},
+
+		detachScroller: function() {
+			if (--count == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
+			return this;
+		},
+
+		createScroller: function() {
+			return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: true, vScroll: true });
+		},
+
+		enableScroller: function() {
+			if (this.scroller == null) {
+				this.scroller = this.createScroller();
+				this.updateScroller();
+				this.updateScrollerAutomatically(true);
+				if (this.scrolled) this.scroller.scrollTo(0, -this.scrolled);
 			}
+			return this;
+		},
+
+		disableScroller: function() {
+			if (this.scroller) {
+				this.updateScrollerAutomatically(false);
+				this.scrolled = this.innerElement.getStyle('-webkit-transform');
+				this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
+				this.scrolled = this.scrolled[2];
+				this.scroller.destroy();
+				this.scroller = null;
+			}
+			return this;
+		},
+
+		updateScroller: function() {
+			if (this.scroller) {
+				if (this.innerElementSize != this.innerElement.getScrollSize().y) {
+					this.innerElementSize  = this.innerElement.getScrollSize().y;
+					this.scroller.refresh();
+				}
+			}
+			return this;
+		},
+
+		updateScrollerAutomatically: function(automatically) {
+			clearInterval(this.scrollerUpdateInterval);
+			if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+			return this;
+		},
+
+		willShow: function() {
+			this.enableScroller();
+			this.parent();
+			return this;
+		},
+
+		didShow: function() {
+			this.updateScroller();
+			this.parent();
+			return this;
+		},
+
+		didHide: function() {
+			this.disableScroller();
+			return this;
+		},
+
+		onDocumentTouchMove: function(e) {
+			e.preventDefault();
 		}
-		return this;
-	},
 
-	updateScrollerAutomatically: function(automatically) {
-		clearInterval(this.scrollerUpdateInterval);
-		if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
-		return this;
-	},
-
-	willShow: function() {
-		this.enableScroller();
-		this.parent();
-		return this;
-	},
-
-	didShow: function() {
-		this.updateScroller();
-		this.parent();
-		return this;
-	},
-
-	didHide: function() {
-		this.disableScroller();
-		return this;
-	},
-
-	onDocumentTouchMove: function(e) {
-		e.preventDefault();
-	}
-
-});
+	});	
+	
+})();

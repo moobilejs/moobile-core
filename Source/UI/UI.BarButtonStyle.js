@@ -18,6 +18,9 @@ provides:
 ...
 */
 
+if (!window.Moobile) window.Moobile = {};
+if (!window.Moobile.UI) window.Moobile.UI = {};
+
 Moobile.UI.BarButtonStyle = {
 
 	Default: {

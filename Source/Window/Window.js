@@ -22,39 +22,30 @@ provides:
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
-
+	
 	viewController: null,
-
-	viewControllerCollection: null,
+	
+	rootViewController: null,
 
 	userInputEnabled: true,
 
 	userInputMask: null,
 
 	options: {
-		className: 'window',
-		withWrapperElement: false,
-		withContentElement: false
+		className: 'window'
 	},
 
 	init: function() {
-		this.viewControllerCollection = new Moobile.ViewControllerCollection(this);
-		this.viewControllerCollection.startup();
+		this.viewController = new Moobile.ViewControllerCollection(this);
+		this.viewController.startup();
 		this.parent();
 		return this;
 	},
 
 	release: function() {
-		this.viewControllerCollection.destroy();
-		this.viewControllerCollection = null;
+		this.viewController.destroy();
+		this.viewController = null;
 		this.parent();
-		return this;
-	},
-
-	didBindChildView: function(view) {
-		view.setWindow(this);
-		view.setParentView(null);
-		this.parent(view);
 		return this;
 	},
 
@@ -62,25 +53,25 @@ Moobile.Window = new Class({
 		return element.getParent('[data-role=view]') == null;
 	},
 
-	setViewController: function(viewController) {
+	setRootViewController: function(rootViewController) {
 
-		if (this.viewController) {
-			this.viewControllerCollection.removeViewController(this.viewController);
-			this.viewController.view.destroy();
-			this.viewController.view = null;
-			this.viewController.destroy();
-			this.viewController = null;
+		if (this.rootViewController) {
+			this.viewController.removeViewController(this.rootViewController);
+			this.rootViewController.view.destroy();
+			this.rootViewController.view = null;
+			this.rootViewController.destroy();
+			this.rootViewController = null;
 		}
 
-		this.viewControllerCollection.addViewController(viewController);
+		this.viewController.addViewController(rootViewController);
 
-		this.viewController = viewController;
+		this.rootViewController = rootViewController;
 
 		return this;
 	},
 
-	getViewController: function() {
-		return this.viewController || this.viewControllerCollection.getViewControllers()[0];
+	getRootViewController: function() {
+		return this.rootViewController || this.viewController.getViewControllers()[0];
 	},
 
 	getOrientation: function() {
@@ -120,6 +111,13 @@ Moobile.Window = new Class({
 		this.userInputMask.destroy();
 		this.userInputMask = null;
 		return this;
-	}
+	},
+	
+	didBindChildView: function(view) {
+		view.setWindow(this);
+		view.setParentView(null);
+		this.parent(view);
+		return this;
+	},	
 
 });

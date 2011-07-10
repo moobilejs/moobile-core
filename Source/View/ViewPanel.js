@@ -3,7 +3,8 @@
 
 name: ViewPanel
 
-description: The view that must be used in conjunction with a ViewControllerPanel.
+description: The view that must be used in conjunction with a 
+             ViewControllerPanel.
 
 license: MIT-style license.
 

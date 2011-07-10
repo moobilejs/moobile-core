@@ -3,7 +3,8 @@
 
 name: ViewStack
 
-description: The view that must be used in conjunction with a ViewControllerStack.
+description: The view that must be used in conjunction with a 
+             ViewControllerStack.
 
 license: MIT-style license.
 

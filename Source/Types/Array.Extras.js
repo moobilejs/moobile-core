@@ -11,7 +11,7 @@ requires:
 	- Core/Array
 
 provides:
-	- Array
+	- Array.Extras
 
 ...
 */

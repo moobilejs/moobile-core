@@ -13,10 +13,12 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core/Event
 	- Core/Element
+	- Core/Element.Event
 	- More/Events.Pseudos
-	- Class
-	- Element
+	- Class.Instanciate
+	- Element.Extras
 	- Request
 
 provides:
@@ -24,8 +26,6 @@ provides:
 
 ...
 */
-
-if (!window.Moobile.Request) Moobile.Request = {};
 
 Moobile.Request.ViewController = new Class({
 
@@ -44,12 +44,12 @@ Moobile.Request.ViewController = new Class({
 	},
 
 	attachEvents: function() {
-		this.addEvent('success', this.bound('loaded'));
+		this.addEvent('success', this.bound('onViewControllerLoad'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.removeEvent('success', this.bound('loaded'));
+		this.removeEvent('success', this.bound('onViewControllerLoad'));
 		return this;
 	},
 
@@ -82,7 +82,7 @@ Moobile.Request.ViewController = new Class({
 		return this;
 	},
 
-	loaded: function(response) {
+	onViewControllerLoad: function(response) {
 		var element = new Element('div').ingest(response).getElement('[data-role=view]');
 		if (element) {
 			
@@ -103,7 +103,7 @@ Moobile.Request.ViewController = new Class({
 			return this;
 		}
 
-		throw new Error('Cannot find a view element from the response');
+		throw new Error('Cannot find a data-role=view element from the response');
 
 		return this;
 	}

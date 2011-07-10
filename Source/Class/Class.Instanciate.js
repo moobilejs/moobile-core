@@ -1,9 +1,10 @@
 /*
 ---
 
-name: Class
+name: Class.Instanciate
 
-description: Provides extra methods to Class.
+description: Provides a method to instanciate classes based on the class name
+             stored as a string.
 
 license: MIT-style license.
 
@@ -11,7 +12,7 @@ requires:
 	- Core/Class
 
 provides:
-	- Class
+	- Class.Instanciate
 
 ...
 */

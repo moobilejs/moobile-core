@@ -1,7 +1,7 @@
 /*
 ---
 
-name: String
+name: String.Extras
 
 description: Provides extra methods to String.
 
@@ -11,7 +11,7 @@ requires:
 	- Core/String
 
 provides:
-	- String
+	- String.Extras
 
 ...
 */

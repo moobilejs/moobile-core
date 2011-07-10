@@ -10,6 +10,7 @@ license: MIT-style license.
 requires:
 	- Core/Class
 	- Core/Class.Extras
+	- Core/Event
 	- Core/DOMReady
 	- Core/Element
 	- Core/Element.Style
@@ -18,11 +19,11 @@ requires:
 	- More/Element.Shortcuts
 	- More/Class.Occlude
 	- Class-Extras/Class.Binds
-	- Object
-	- Array
-	- Class
-	- Class.Mutator
-	- Element
+	- Object.Extras
+	- String.Extras
+	- Array.Extras
+	- Class.Instanciate
+	- Element.Extras
 
 provides:
 	- UI.Element
@@ -30,6 +31,7 @@ provides:
 ...
 */
 
+if (!window.Moobile) window.Moobile = {};
 if (!window.Moobile.UI) window.Moobile.UI = {};
 
 Moobile.UI.Element = new Class({
@@ -89,11 +91,7 @@ Moobile.UI.Element = new Class({
 	},
 
 	getElement: function(selector) {
-		return arguments.length ? this.element.getElement(arguments[0]) : this.element;
-	},
-	
-	getElementContents: function() {
-		return this.element.childElements;
+		return this.getElement(selector);
 	},
 
 	getElements: function(selector) {

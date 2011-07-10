@@ -4,7 +4,7 @@
 name: View
 
 description: Provides an element on the screen and the interfaces for managing
-             the contentElement in that area.
+             the content in that area.
 
 license: MIT-style license.
 

@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Object
+name: Object.Extras
 
 description: Provides extra methods to Object.
 
@@ -12,10 +12,10 @@ author:
 
 requires:
 	- Core/Object
-	- String
+	- String.Extras
 
 provides:
-	- Object
+	- Object.Extras
 
 ...
 */

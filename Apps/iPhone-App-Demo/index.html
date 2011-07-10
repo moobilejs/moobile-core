@@ -28,12 +28,12 @@
 				 */
 				var mainWindow = new Moobile.Window('main-window');
 				mainWindow.startup();
-				mainWindow.setViewController(viewControllerStack);
+				mainWindow.setRootViewController(viewControllerStack);
 
 				/**
 				 * Load the default view.
 				 */
-				viewControllerStack.pushViewControllerFrom('views/default.html', new Moobile.ViewTransition.Fade);
+				viewControllerStack.pushViewControllerFrom('views/default.html', new Moobile.ViewTransition.Cubic);
 
 			});
 
