@@ -1,3 +1,4 @@
+
 /*
 ---
 
@@ -25,30 +26,31 @@ Moobile.ViewTransition.Fade = new Class({
 
 	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
 
+		this.setTransitionElement(parentView.content);
+
+		this.addAcceptedTarget(viewToShow);
+
+		parentView.content.addClass('transition-fade');
+		parentView.content.addClass('transition-fade-enter');
+
 		if (firstViewIn) {
 
-			this.setTransitionElement(viewToShow);
-
-			viewToShow.addClass('transition-fade');
-			viewToShow.addClass('transition-fade-enter-first');
+			viewToShow.addClass('transition-fade-view-to-show-first');
 
 			this.start(function() {
-				viewToShow.removeClass('transition-fade');
-				viewToShow.removeClass('transition-fade-enter-first');
+				parentView.content.removeClass('transition-fade');
+				parentView.content.removeClass('transition-fade-enter');
+				viewToShow.removeClass('transition-fade-view-to-show-first');
 			});
 
 		} else {
 
-			this.setTransitionElement(viewToHide);
-
-			parentView.addClass('transition-fade');
-			parentView.addClass('transition-fade-enter');
 			viewToHide.addClass('transition-fade-view-to-hide');
 			viewToShow.addClass('transition-fade-view-to-show');
 
 			this.start(function() {
-				parentView.removeClass('transition-fade');
-				parentView.removeClass('transition-fade-enter');
+				parentView.content.removeClass('transition-fade');
+				parentView.content.removeClass('transition-fade-enter');
 				viewToHide.removeClass('transition-fade-view-to-hide');
 				viewToShow.removeClass('transition-fade-view-to-show');
 			});
@@ -59,16 +61,18 @@ Moobile.ViewTransition.Fade = new Class({
 
 	leave: function(viewToShow, viewToHide, parentView) {
 
-		this.setTransitionElement(viewToHide);
+		this.setTransitionElement(parentView.content);
 
-		parentView.addClass('transition-fade');
-		parentView.addClass('transition-fade-leave');
+		this.addAcceptedTarget(viewToHide);
+
+		parentView.content.addClass('transition-fade');
+		parentView.content.addClass('transition-fade-leave');
 		viewToHide.addClass('transition-fade-view-to-hide');
 		viewToShow.addClass('transition-fade-view-to-show');
 
 		this.start(function() {
-			parentView.removeClass('transition-fade');
-			parentView.removeClass('transition-fade-leave');
+			parentView.content.removeClass('transition-fade');
+			parentView.content.removeClass('transition-fade-leave');
 			viewToHide.removeClass('transition-fade-view-to-hide');
 			viewToShow.removeClass('transition-fade-view-to-show');
 		});
