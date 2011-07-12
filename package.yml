@@ -40,6 +40,7 @@ sources:
   - "Source/UI/UI.BarButtonStyle.js"
   - "Source/UI/UI.Slider.js"
   - "Source/UI/UI.List.js"
+  - "Source/UI/UI.ListStyle.js"
   - "Source/UI/UI.ListItem.js"
   - "Source/View/View.js"
   - "Source/View/View.Scroll.js"

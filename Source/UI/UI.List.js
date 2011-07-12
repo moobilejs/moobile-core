@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- UI.Control
+	- UI.ListStyle
 
 provides:
 	- UI.List
@@ -29,6 +30,7 @@ Moobile.UI.List = new Class({
 
 	options: {
 		className: 'ui-list',
+		styleName: Moobile.UI.ListStyle.Default,
 		multiple: false,
 		selectable: true
 	},
