@@ -341,7 +341,7 @@ Moobile.View = new Class({
 	},
 
 	inject: function(element, where) {
-		this.content.inject(element, where);
+		this.element.inject(element, where);
 	},
 
 	grab: function(element, where) {

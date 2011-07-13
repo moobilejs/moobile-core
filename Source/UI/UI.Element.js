@@ -134,7 +134,20 @@ Moobile.UI.Element = new Class({
 		this.element.toggleClass(name);
 		return this;
 	},
-
+	
+	setStyle: function(style, value) {
+		this.element.setStyle(style, value);
+		return this;
+	},
+	
+	getStyle: function(style) {
+		return this.element.getStyle(style);
+	},
+	
+	removeStyle: function(style) {
+		this.element.setStyle(style, null);
+	},
+	
 	getProperty: function(name) {
 		return this.element.get(name);
 	},

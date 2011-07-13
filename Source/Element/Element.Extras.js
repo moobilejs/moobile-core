@@ -38,6 +38,11 @@ provides:
 			return getChildElements.call(this);
 		},
 		
+		removeStyle: function(style) {
+			this.setStyle(style, null);
+			return this;
+		},
+		
 		ingest: function(string) {
 			var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
 			if (match) string = match[1];

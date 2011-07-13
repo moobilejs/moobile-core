@@ -73,23 +73,31 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
-	setStyle: function(style) {
-		this.removeStyle();
-		this.style = style;
-		this.style.attach.call(this);
-		this.addClass(this.style.className);
+	setStyle: function(style, value) {
+		if (typeof style == 'object') {
+			this.removeStyle();
+			this.style = style;
+			this.style.attach.call(this);
+			this.addClass(this.style.className);	
+		} else {
+			this.parent(style, value);
+		}
 		return this;
 	},
 
-	getStyle: function() {
-		return this.style;
+	getStyle: function(style) {
+		return style ? this.parent(style) : this.style;
 	},
 
-	removeStyle: function() {
-		if (this.style) {
-			this.style.detach.call(this);
-			this.removeClass(this.style.className);
-			this.style = null;
+	removeStyle: function(style) {
+		if (style == undefined) {
+			if (this.style) {
+				this.style.detach.call(this);
+				this.removeClass(this.style.className);
+				this.style = null;
+			}			
+		} else {
+			this.parent(style);
 		}
 		return this;
 	},
