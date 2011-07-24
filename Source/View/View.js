@@ -42,13 +42,13 @@ Moobile.View = new Class({
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		
-		if (this.occlude('view', this.element)) 
+
+		if (this.occlude('view', this.element))
 			return this.occluded;
-		
+
 		return this;
 	},
-	
+
 	build: function() {
 		this.parent();
 		this.content = new Element('div.' + this.options.className + '-content');
@@ -342,13 +342,14 @@ Moobile.View = new Class({
 
 	inject: function(element, where) {
 		this.element.inject(element, where);
+		return this;
 	},
 
 	grab: function(element, where) {
 		this.content.grab(element, where);
 		return this;
 	},
-	
+
 	hook: function(element, where, context) {
 		return context ? element.inject(context, where) : this.grab(element, where);
 	},
