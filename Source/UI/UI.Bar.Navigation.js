@@ -100,6 +100,18 @@ Moobile.UI.Bar.Navigation = new Class({
 			this.rightButton = null;
 		}
 		return this;
+	},
+
+	viewWillChange: function(view) {
+		if (this.view) this.view.removeClass('with-' + this.options.className);
+		this.parent();
+		return this;
+	},
+
+	viewDidChange: function(view) {
+		if (this.view) this.view.addClass('with-' + this.options.className);
+		this.parent();
+		return this;
 	}
 
 });

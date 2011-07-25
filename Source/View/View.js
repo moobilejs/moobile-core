@@ -211,6 +211,9 @@ Moobile.View = new Class({
 
 	bindChildControl: function(control) {
 		this.childControls.push(control);
+		control.viewWillChange(this);
+		control.setView(this);
+		control.viewDidChange(this);
 		this.didBindChildControl(control);
 		Object.defineMember(this, control, control.name);
 		return this;

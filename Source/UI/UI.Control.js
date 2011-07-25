@@ -20,6 +20,8 @@ Moobile.UI.Control = new Class({
 
 	Extends: Moobile.UI.Element,
 
+	view: null,
+
 	disabled: false,
 
 	selected: false,
@@ -35,10 +37,10 @@ Moobile.UI.Control = new Class({
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-		
-		if (this.occlude('control', this.element)) 
+
+		if (this.occlude('control', this.element))
 			return this.occluded;
-		
+
 		this.init();
 		this.attachEvents();
 		return this;
@@ -78,7 +80,7 @@ Moobile.UI.Control = new Class({
 			this.removeStyle();
 			this.style = style;
 			this.style.attach.call(this);
-			this.addClass(this.style.className);	
+			this.addClass(this.style.className);
 		} else {
 			this.parent(style, value);
 		}
@@ -95,7 +97,7 @@ Moobile.UI.Control = new Class({
 				this.style.detach.call(this);
 				this.removeClass(this.style.className);
 				this.style = null;
-			}			
+			}
 		} else {
 			this.parent(style);
 		}
@@ -118,6 +120,10 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
+	isDisabled: function() {
+		return this.disabled;
+	},
+
 	setSelected: function(selected) {
 		if (this.selected != selected) {
 			this.selected = selected;
@@ -130,6 +136,10 @@ Moobile.UI.Control = new Class({
 			}
 		}
 		return this;
+	},
+
+	isSelected: function() {
+		return this.selected;
 	},
 
 	setHighlighted: function(highlighted) {
@@ -146,20 +156,29 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
-	isDisabled: function() {
-		return this.disabled;
-	},
-
-	isSelected: function() {
-		return this.selected;
-	},
-
 	isHighlighted: function() {
 		return this.highlighted;
 	},
 
 	isNative: function() {
 		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
+	},
+
+	setView: function(view) {
+		this.view = view;
+		return this;
+	},
+
+	getView: function() {
+		return this.view;
+	},
+
+	viewWillChange: function(parentView) {
+		return this;
+	},
+
+	viewDidChange: function(parentView) {
+		return this;
 	}
 
 });
