@@ -21,34 +21,39 @@ provides:
 */
 
 (function() {
-	
+
 	var getChildElements = function() {
 		return Array.from(this.childNodes);
 	};
-	
+
 	Object.defineProperty(Element.prototype, 'childElements', {
 		get: function() {
 			return getChildElements.call(this);
-		}	
+		}
 	});
-	
+
 	Element.implement({
-		
+
 		getChildElements: function() {
 			return getChildElements.call(this);
 		},
-		
+
 		removeStyle: function(style) {
 			this.setStyle(style, null);
 			return this;
 		},
-		
+
+		removeStyles: function(styles) {
+			for (var style in styles) this.removeStyle(style, styles[style]);
+			return this;
+		},
+
 		ingest: function(string) {
 			var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
 			if (match) string = match[1];
 			this.set('html', string);
 			return this
 		}
-	});	
-	
+	});
+
 })();

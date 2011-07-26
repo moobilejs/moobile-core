@@ -203,7 +203,10 @@ Moobile.View = new Class({
 		var removed = this.childControls.erase(control);
 		if (removed) {
 			this.willRemoveChildControl(control);
+			control.viewWillChange(null);
+			control.setView(null);
 			control.dispose();
+			control.viewDidChange(null);
 			this.didRemoveChildControl(control);
 		}
 		return this;
@@ -234,7 +237,7 @@ Moobile.View = new Class({
 	},
 
 	filterChildControl: function(element) {
-		return element.getParent('[data-role=view]') == this.element;
+		return element.getParent('[data-role=control]') == null && element.getParent('[data-role=view]') == this.element;
 	},
 
 	destroyChildControls: function() {

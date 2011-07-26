@@ -22,6 +22,10 @@ Moobile.UI.Control = new Class({
 
 	view: null,
 
+	parentControl: null,
+
+	childControls: [],
+
 	disabled: false,
 
 	selected: false,
@@ -41,6 +45,7 @@ Moobile.UI.Control = new Class({
 		if (this.occlude('control', this.element))
 			return this.occluded;
 
+		this.attachChildControls();
 		this.init();
 		this.attachEvents();
 		return this;
@@ -72,6 +77,83 @@ Moobile.UI.Control = new Class({
 	},
 
 	detachEvents: function() {
+		return this;
+	},
+
+	addChildControl: function(control, where, context) {
+		this.willAddChildControl(control);
+		this.hook(control, where, context);
+		this.bindChildControl(control);
+		this.didAddChildControl(control);
+		return this;
+	},
+
+	getChildControl: function(name) {
+		return this.childControls.find(function(childControl) {
+			return childControl.name == name;
+		});
+	},
+
+	getChildControls: function() {
+		return this.childControls;
+	},
+
+	removeChildControl: function(control) {
+		var removed = this.childControls.erase(control);
+		if (removed) {
+			this.willRemoveChildControl(control);
+			control.willChangeView(null);
+			control.setView(null);
+			control.didChangeView(null);
+			control.dispose();
+			this.didRemoveChildControl(control);
+		}
+		return this;
+	},
+
+	removeFromParentView: function() {
+		if (this.parentControl) this.parentControl.removeChildControl(this);
+		return this;
+	},
+
+	bindChildControl: function(control) {
+		this.childControls.push(control);
+		control.viewWillChange(this);
+		control.setParentControl(this);
+		control.setView(this.view);
+		control.viewDidChange(this);
+		this.didBindChildControl(control);
+		Object.defineMember(this, control, control.name);
+		return this;
+	},
+
+	attachChildControls: function() {
+		var attach = this.bound('attachChildControl');
+		var filter = this.bound('filterChildControl');
+		this.getElements('[data-role=control]').filter(filter).each(attach);
+		return this;
+	},
+
+	attachChildControl: function(element) {
+		var control = element.get('data-control');
+		if (control == null) throw new Error('You have to define the control class using the data-control attribute.');
+		this.bindChildControl(Class.instanciate(control, element));
+		return this;
+	},
+
+	filterChildControl: function(element) {
+		return element.getParent('[data-role=control]') == this.element;
+	},
+
+	destroyChildControls: function() {
+		this.childControls.each(this.bound('destroyChildControl'));
+		this.childControls = [];
+		return this;
+	},
+
+	destroyChildControl: function(control) {
+		control.destroy();
+		control = null;
 		return this;
 	},
 
@@ -164,6 +246,15 @@ Moobile.UI.Control = new Class({
 		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
 	},
 
+	setParentControl: function(parentControl) {
+		this.parentControl = parentControl;
+		return this;
+	},
+
+	getParentControl: function() {
+		return this.parentControl;
+	},
+
 	setView: function(view) {
 		this.view = view;
 		return this;
@@ -178,6 +269,26 @@ Moobile.UI.Control = new Class({
 	},
 
 	viewDidChange: function(parentView) {
+		return this;
+	},
+
+	willAddChildControl: function(childControl) {
+		return this;
+	},
+
+	didAddChildControl: function(childControl) {
+		return this;
+	},
+
+	didBindChildControl: function(childControl) {
+		return this;
+	},
+
+	willRemoveChildControl: function(childControl) {
+		return this;
+	},
+
+	didRemoveChildControl: function(childControl) {
 		return this;
 	}
 
