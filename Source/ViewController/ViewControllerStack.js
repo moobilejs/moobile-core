@@ -103,9 +103,9 @@ Moobile.ViewControllerStack = new Class({
 			viewControllerBefore.view.hide();
 		}
 
-		viewControllerPushed.viewDidEnter();
-
 		this.didPushViewController(viewControllerPushed);
+
+		viewControllerPushed.viewDidEnter();
 
 		this.window.enableUserInput();
 
@@ -125,9 +125,12 @@ Moobile.ViewControllerStack = new Class({
 				viewControllerToRemove.viewWillLeave();
 				viewControllerToRemove.viewDidLeave();
 				this.removeViewController(viewControllerToRemove);
-				viewControllerToRemove.view.destroy();
-				viewControllerToRemove.view = null;
+
+				var viewToRemove = viewControllerToRemove.view;
 				viewControllerToRemove.destroy();
+				viewControllerToRemove = null;
+				viewToRemove.destroy();
+				viewToRemove = null;
 
 			}
 		}
@@ -172,11 +175,14 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerPopped.viewDidLeave();
 
 		this.removeViewController(viewControllerPopped);
-		viewControllerPopped.view.destroy();
-		viewControllerPopped.view = null;
-		viewControllerPopped.destroy();
 
 		this.didPopViewController(viewControllerPopped);
+
+		var viewPopped = viewControllerPopped.view;
+		viewControllerPopped.destroy();
+		viewControllerPopped = null;
+		viewPopped.destroy();
+		viewPopped = null;
 
 		this.window.enableUserInput();
 
