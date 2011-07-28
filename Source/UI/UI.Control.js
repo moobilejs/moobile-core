@@ -41,10 +41,6 @@ Moobile.UI.Control = new Class({
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-
-		if (this.occlude('control', this.element))
-			return this.occluded;
-
 		this.attachChildControls();
 		this.init();
 		this.attachEvents();
@@ -102,9 +98,9 @@ Moobile.UI.Control = new Class({
 		var removed = this.childControls.erase(control);
 		if (removed) {
 			this.willRemoveChildControl(control);
-			control.willChangeView(null);
-			control.setView(null);
-			control.didChangeView(null);
+			control.viewWillChange(null);
+			control.view = null;
+			control.viewDidChange(null);
 			control.dispose();
 			this.didRemoveChildControl(control);
 		}
@@ -118,10 +114,9 @@ Moobile.UI.Control = new Class({
 
 	bindChildControl: function(control) {
 		this.childControls.push(control);
-		control.viewWillChange(this);
-		control.setParentControl(this);
-		control.setView(this.view);
-		control.viewDidChange(this);
+		control.viewWillChange(this.view);
+		control.view = this.view;
+		control.viewDidChange(this.view);
 		this.didBindChildControl(control);
 		Object.defineMember(this, control, control.name);
 		return this;
@@ -244,24 +239,6 @@ Moobile.UI.Control = new Class({
 
 	isNative: function() {
 		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
-	},
-
-	setParentControl: function(parentControl) {
-		this.parentControl = parentControl;
-		return this;
-	},
-
-	getParentControl: function() {
-		return this.parentControl;
-	},
-
-	setView: function(view) {
-		this.view = view;
-		return this;
-	},
-
-	getView: function() {
-		return this.view;
 	},
 
 	viewWillChange: function(parentView) {

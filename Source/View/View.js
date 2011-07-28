@@ -42,10 +42,6 @@ Moobile.View = new Class({
 
 	initialize: function(element, options) {
 		this.parent(element, options);
-
-		if (this.occlude('view', this.element))
-			return this.occluded;
-
 		return this;
 	},
 
@@ -124,8 +120,10 @@ Moobile.View = new Class({
 		var removed = this.childViews.erase(view);
 		if (removed) {
 			this.willRemoveChildView(view);
-			view.setParentView(null);
-			view.setWindow(null);
+			view.parentViewWillChange(null);
+			view.parentView = null;
+			view.window = null
+			view.parentViewDidChange(null);
 			view.dispose();
 			this.didRemoveChildView(view);
 		}
@@ -141,8 +139,8 @@ Moobile.View = new Class({
 	bindChildView: function(view) {
 		this.childViews.push(view);
 		view.parentViewWillChange(this);
-		view.setWindow(this.window);
-		view.setParentView(this);
+		view.parentView = this;
+		view.window = this.window;
 		view.parentViewDidChange(this);
 		this.didBindChildView(view);
 		view.startup();
@@ -204,9 +202,9 @@ Moobile.View = new Class({
 		if (removed) {
 			this.willRemoveChildControl(control);
 			control.viewWillChange(null);
-			control.setView(null);
-			control.dispose();
+			control.view = null;
 			control.viewDidChange(null);
+			control.dispose();
 			this.didRemoveChildControl(control);
 		}
 		return this;
@@ -215,7 +213,7 @@ Moobile.View = new Class({
 	bindChildControl: function(control) {
 		this.childControls.push(control);
 		control.viewWillChange(this);
-		control.setView(this);
+		control.view = this;
 		control.viewDidChange(this);
 		this.didBindChildControl(control);
 		Object.defineMember(this, control, control.name);
@@ -313,24 +311,6 @@ Moobile.View = new Class({
 		element.destroy();
 		element = null;
 		return this;
-	},
-
-	setWindow: function(window) {
-		this.window = window;
-		return this;
-	},
-
-	getWindow: function() {
-		return this.window;
-	},
-
-	setParentView: function(parentView) {
-		this.parentView = parentView;
-		return this;
-	},
-
-	getParentView: function() {
-		return this.parentView;
 	},
 
 	getTitle: function() {

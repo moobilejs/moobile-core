@@ -22,9 +22,9 @@ provides:
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
-	
+
 	viewController: null,
-	
+
 	rootViewController: null,
 
 	userInputEnabled: true,
@@ -112,12 +112,12 @@ Moobile.Window = new Class({
 		this.userInputMask = null;
 		return this;
 	},
-	
+
 	didBindChildView: function(view) {
-		view.setWindow(this);
-		view.setParentView(null);
+		view.window = this;
+		view.parentView = null;
 		this.parent(view);
 		return this;
-	},	
+	}
 
 });

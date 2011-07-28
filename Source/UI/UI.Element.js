@@ -55,10 +55,6 @@ Moobile.UI.Element = new Class({
 		this.setElement(element);
 		this.setElementOptions();
 		this.setOptions(options);
-		
-		if (this.occlude('element', this.element)) 
-			return this.occluded;
-		
 		this.name = this.element.get('data-name');
 		this.build();
 		return this;
@@ -134,20 +130,20 @@ Moobile.UI.Element = new Class({
 		this.element.toggleClass(name);
 		return this;
 	},
-	
+
 	setStyle: function(style, value) {
 		this.element.setStyle(style, value);
 		return this;
 	},
-	
+
 	getStyle: function(style) {
 		return this.element.getStyle(style);
 	},
-	
+
 	removeStyle: function(style) {
 		this.element.setStyle(style, null);
 	},
-	
+
 	getProperty: function(name) {
 		return this.element.get(name);
 	},

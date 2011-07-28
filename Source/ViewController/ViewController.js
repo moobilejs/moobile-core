@@ -29,8 +29,8 @@ if (!window.Moobile) window.Moobile = {};
 Moobile.ViewController = new Class({
 
 	Implements: [
-		Events, 
-		Options, 
+		Events,
+		Options,
 		Class.Binds
 	],
 
@@ -59,7 +59,7 @@ Moobile.ViewController = new Class({
 		this.view = new Moobile.View(element);
 		return this;
 	},
-	
+
 	attachView: function(view) {
 		if (view instanceof Element) return this.loadView(view);
 		this.view = view;
@@ -82,7 +82,7 @@ Moobile.ViewController = new Class({
 	startup: function() {
 		if (this.started == false) {
 			this.started = true;
-			this.window = this.view.getWindow();
+			this.window = this.view.window;
 			this.init();
 			this.attachEvents();
 		}
