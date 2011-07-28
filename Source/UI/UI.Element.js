@@ -87,7 +87,7 @@ Moobile.UI.Element = new Class({
 	},
 
 	getElement: function(selector) {
-		return this.getElement(selector);
+		return this.element.getElement(selector);
 	},
 
 	getElements: function(selector) {
