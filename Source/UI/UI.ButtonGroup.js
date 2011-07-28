@@ -23,14 +23,11 @@ Moobile.UI.ButtonGroup = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	buttons: [],
-
 	selectedButton: null,
 
 	options: {
 		className: 'ui-button-group',
-		orientation: 'horizontal',
-		defaultButtonIndex: -1
+		orientation: 'horizontal'
 	},
 
 	build: function() {
@@ -39,40 +36,20 @@ Moobile.UI.ButtonGroup = new Class({
 		return this;
 	},
 
-	init: function() {
-		this.attachButtons();
-		if (this.options.defaultButtonIndex > -1) this.setSelectedButtonIndex(this.options.defaultButtonIndex);
-		this.parent();
-		return this;
+	addButton: function(button) {
+		return this.addChildControl(button);
 	},
 
-	release: function() {
-		this.buttons = null;
-		this.parent();
-		return this;
+	getButton: function(name) {
+		return this.getChildControl(name);
 	},
 
-	attachButtons: function() {
-		this.element.getElements('[data-role=control]').each(this.attachButton.bind(this));
-		return this;
+	getButtons: function() {
+		return this.getChildControls();
 	},
 
-	attachButton: function(element) {
-		var button = Class.instanciate(element.getProperty('data-control') || 'Moobile.UI.Button', element);
-		this.buttons.push(button);
-		return this;
-	},
-
-	attachEvents: function() {
-		this.buttons.each(function(button) { button.addEvent('click', this.bound('onButtonClick')); }, this);
-		this.parent();
-		return this;
-	},
-
-	detachEvents: function() {
-		this.buttons.each(function(button) { button.removeEvent('click', this.bound('onButtonClick')); }, this);
-		this.parent();
-		return this;
+	removeButton: function(button) {
+		return this.removeChildControl(button);
 	},
 
 	setSelectedButton: function(button) {
@@ -89,8 +66,18 @@ Moobile.UI.ButtonGroup = new Class({
 	},
 
 	setSelectedButtonIndex: function(index) {
-		var button = this.buttons[index];
+		var button = this.childControls[index];
 		if (button) this.setSelectedButton(button);
+		return this;
+	},
+
+	getSelectedButton: function() {
+		return this.selectedButton;
+	},
+
+	didBindChildControl: function(button) {
+		button.addEvent('click', this.bound('onButtonClick'));
+		this.parent();
 		return this;
 	},
 
