@@ -24,49 +24,29 @@ Moobile.UI.Bar = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	contentElement: null,
-
-	captionElement: null,
-
 	options: {
 		className: 'ui-bar',
 		styleName: Moobile.UI.BarStyle.DefaultOpaque
 	},
 
-	build: function() {
-		this.parent();
-		this.buildContentElement();
-		this.buildCaptionElement();
-		return this;
+	addBarButton: function(button, where, context) {
+		return this.addChildControl(button, where, context);
 	},
 
-	buildContentElement: function() {
-		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.childElements);
-		this.element.adopt(this.contentElement);
-		return this;
+	getBarButton: function(name) {
+		return this.getChildControl(name);
 	},
 
-	buildCaptionElement: function() {
-		this.captionElement = new Element('div.' + this.options.className + '-caption');
-		this.captionElement.adopt(this.contentElement.childElements);
-		this.contentElement.adopt(this.captionElement);
-		return this;
+	getBarButtons: function() {
+		return this.getChildControls();
 	},
 
-	release: function() {
-		this.contentElement = null;
-		this.captionElement = null;
-		this.parent();
-		return this;
+	removeBarButton: function(button) {
+		return this.removeChildControl(button);
 	},
 
-	setText: function(text) {
-		this.captionElement.set('html', text);
-		return this;
-	},
-
-	getText: function() {
-		return this.captionElement.get('html');
+	removeBarButtons: function() {
+		return this.removeChildControls();
 	}
+
 });

@@ -52,6 +52,10 @@ Moobile.UI.ButtonGroup = new Class({
 		return this.removeChildControl(button);
 	},
 
+	removeButtons: function() {
+		return this.removeChildControls();
+	},
+
 	setSelectedButton: function(button) {
 		if (this.selectedButton != button) {
 			if (this.selectedButton) {

@@ -24,80 +24,34 @@ Moobile.UI.Bar.Navigation = new Class({
 
 	Extends: Moobile.UI.Bar,
 
-	leftElement: null,
-
-	rightElement: null,
-
-	leftButton: null,
-
-	rightButton: null,
+	navigationItem : null,
 
 	options: {
 		className: 'ui-navigation-bar'
 	},
 
-	build: function() {
-		this.parent();
-		this.buildLeftElement();
-		this.buildRightElement();
-		return this;
-	},
-
-	buildLeftElement: function() {
-		this.leftElement = new Element('div.' + this.options.className + '-left');
-		this.leftElement.inject(this.captionElement, 'before');
-		return this;
-	},
-
-	buildRightElement: function() {
-		this.rightElement = new Element('div.' + this.options.className + '-right');
-		this.rightElement.inject(this.captionElement, 'after');
-		return this;
-	},
-
 	release: function() {
-		this.leftButton = null;
-		this.leftElement = null;
-		this.rightButton = null;
-		this.rightElement = null;
+		this.navigationItem = null;
 		this.parent();
 		return this;
 	},
 
-	setLeftButton: function(button) {
-		this.removeLeftButton();
-		this.leftButton = button;
-		this.leftButton.inject(this.leftElement);
+	setNavigationItem: function(navigationItem) {
+		this.removeNavigationItem();
+		this.navigationItem = navigationItem;
+		this.addChildControl(this.navigationItem);
 		return this;
 	},
 
-	getLeftButton: function(button) {
-		return this.leftButton;
+	getNavigationItem: function() {
+		return this.navigationItem = null;
 	},
 
-	removeLeftButton: function() {
-		if (this.leftButton) {
-			this.leftButton.destroy();
-			this.leftButton = null;
-		}
-		return this;
-	},
-
-	setRightButton: function(button) {
-		this.removeRightButton();
-		this.rightButton = button;
-		this.rightButton.inject(this.rightElement);
-		return this;
-	},
-
-	getRightButton: function() {
-		return this.rightButton;
-	},
-
-	removeRightButton: function() {
-		if (this.rightButton) {
-			this.rightButton.destroy();
-			this.rightButton = null;
+	removeNavigationItem: function() {
+		if (this.navigationItem) {
+			this.removeChildControl(this.navigationItem);
+			this.navigationItem.destroy();
+			this.navigationItem = null;
 		}
 		return this;
 	},

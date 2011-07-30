@@ -22,7 +22,7 @@ Moobile.UI.Control = new Class({
 
 	view: null,
 
-	parentControl: null,
+	content: null,
 
 	childControls: [],
 
@@ -57,6 +57,11 @@ Moobile.UI.Control = new Class({
 	build: function() {
 		this.parent();
 		if (this.options.styleName) this.setStyle(this.options.styleName);
+		if (this.isNative() == false) {
+			this.content = new Element('div.' + this.options.className + '-content');
+			this.content.adopt(this.element.childElements);
+			this.element.adopt(this.content);
+		}
 		return this;
 	},
 
@@ -239,6 +244,29 @@ Moobile.UI.Control = new Class({
 
 	isNative: function() {
 		return ['input', 'textarea', 'select', 'button'].contains(this.element.get('tag'));
+	},
+
+	adopt: function() {
+		this.content.adopt.apply(this.content, arguments);
+		return this;
+	},
+
+	grab: function(element, where) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
+		this.content.grab(element, where);
+		return this;
+	},
+
+	hook: function(element, where, context) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
+		return context ? element.inject(context, where) : this.grab(element, where);
+	},
+
+	empty: function() {
+		this.content.empty();
+		return this;
 	},
 
 	viewWillChange: function(parentView) {

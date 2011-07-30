@@ -27,6 +27,6 @@ Moobile.UI.BarButton = new Class({
 	options: {
 		className: 'ui-bar-button',
 		styleName: Moobile.UI.BarButtonStyle.Default
-	}	
+	}
 
 });

@@ -328,17 +328,16 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	inject: function(element, where) {
-		this.element.inject(element, where);
-		return this;
-	},
-
 	grab: function(element, where) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
 		this.content.grab(element, where);
 		return this;
 	},
 
 	hook: function(element, where, context) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
 		return context ? element.inject(context, where) : this.grab(element, where);
 	},
 

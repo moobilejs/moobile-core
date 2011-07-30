@@ -24,42 +24,9 @@ Moobile.UI.Button = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	contentElement: null,
-
-	captionElement: null,
-
 	options: {
 		className: 'ui-button',
 		styleName: Moobile.UI.ButtonStyle.Default
-	},
-
-	build: function() {
-		this.parent();
-		if (this.isNative() == false) {
-			this.buildContentElement();
-			this.buildCaptionElement();
-		}
-		return this;
-	},
-
-	release: function() {
-		this.contentElement = null;
-		this.captionElement = null;
-		this.parent();
-		return this;
-	},
-
-	buildContentElement: function() {
-		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.childElements);
-		this.element.adopt(this.contentElement);
-		return this;
-	},
-
-	buildCaptionElement: function() {
-		this.captionElement = new Element('div.' + this.options.className + '-caption');
-		this.captionElement.adopt(this.contentElement.childElements);
-		this.contentElement.adopt(this.captionElement);
 	},
 
 	attachEvents: function() {
@@ -85,7 +52,7 @@ Moobile.UI.Button = new Class({
 			return this;
 		}
 
-		this.captionElement.set('html', text);
+		this.content.set('html', text);
 
 		return this;
 	},

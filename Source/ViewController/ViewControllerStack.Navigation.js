@@ -23,37 +23,35 @@ provides:
 Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
-	
+
 	didBindViewController: function(viewController) {
-		
+
 		this.parent(viewController);
-		
-		if (viewController.view.navigationBar)
+
+		if (viewController.navigationBar)
 			return this;
 
 		var navigationBar = new Moobile.UI.Bar.Navigation();
-		viewController.view.addChildControl(navigationBar, 'top');
-		viewController.view.navigationBar = navigationBar;
-
-		viewController.navigationBar = viewController.view.navigationBar;
+		var navigationItem = new Moobile.UI.Bar.NavigationItem();
+		navigationBar.setNavigationItem(navigationItem);
 
 		if (this.viewControllers.length > 1) {
 
-			var backButton = viewController.navigationBar.getLeftButton();
-			if (backButton == null) {
+			var text = this.viewControllers.lastItemAt(1).getTitle() || 'Back';
 
-				var text = this.viewControllers.lastItemAt(1).getTitle() || 'Back';
+			var backBarButton = new Moobile.UI.BarButton();
+			backBarButton.setStyle(Moobile.UI.BarButtonStyle.Back);
+			backBarButton.setText(text);
+			backBarButton.addEvent('click', this.bound('onBackButtonClick'));
 
-				backButton = new Moobile.UI.BarButton();
-				backButton.setStyle(Moobile.UI.BarButtonStyle.Back);
-				backButton.setText(text);
-				backButton.addEvent('click', this.bound('onBackButtonClick'));
-
-				viewController.navigationBar.setLeftButton(backButton);
-			}
+			navigationItem.setLeftBarButton(backBarButton);
 		}
 
-		viewController.navigationBar.setText(viewController.getTitle());
+		navigationItem.setTitle(viewController.getTitle());
+
+		viewController.view.addChildControl(navigationBar, 'header');
+
+		viewController.navigationBar = navigationBar;
 
 		return this;
 	},

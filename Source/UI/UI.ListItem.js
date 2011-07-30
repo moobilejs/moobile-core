@@ -23,23 +23,8 @@ Moobile.UI.ListItem = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	contentElement: null,
-
 	options: {
 		className: 'ui-list-item'
-	},
-
-	build: function() {
-		this.parent();
-		this.buildContentElement();
-		return this;
-	},
-
-	buildContentElement: function() {
-		this.contentElement = new Element('div.' + this.options.className + '-content');
-		this.contentElement.adopt(this.element.childElements);
-		this.element.adopt(this.contentElement);
-		return this;
 	},
 
 	release: function() {

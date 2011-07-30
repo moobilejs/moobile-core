@@ -500,15 +500,37 @@ p small {
 	-webkit-box-orient: horizontal;			/* Important */
 	display: -webkit-box;					/* Important */
 	height: 44px;							/* Important */
+	position: relative;						/* Important */
 	width: 100%;							/* Important */
 }
 
-.ui-navigation-bar-caption {
+/* UI Navigation Bar + View */
+
+.view.with-ui-navigation-bar > .view-content {
+	padding-top: 44px;
+}
+
+/* UI Navigation Bar Item
+-----------------------------------------------------------------------------*/
+
+.ui-navigation-bar-item {
+	height: 44px;
+	width: 100%;							/* Important */
+}
+
+.ui-navigation-bar-item-content {
+	-webkit-box-orient: horizontal;			/* Important */
+	display: -webkit-box;					/* Important */
+	height: 44px;
+	width: 100%;							/* Important */
+}
+
+.ui-navigation-bar-item-title {
 	-webkit-box-flex: 2;					/* Important */
 	color: #ffffff;
 	font-size: 20px;
 	font-weight: bold;
-	height: 44px;							/* Important */
+	height: 44px;
 	line-height: 44px;
 	overflow: hidden;						/* Important */
 	padding-left: 6px;
@@ -519,26 +541,20 @@ p small {
 	white-space: nowrap;					/* Important */
 }
 
-.ui-navigation-bar-left,
-.ui-navigation-bar-right {
+.ui-navigation-bar-item-left,
+.ui-navigation-bar-item-right {
 	-webkit-box-flex: 1;					/* Important */
 	height: 44px;
 	min-width: 35px;
 	padding-top: 7px;
 }
 
-.ui-navigation-bar-left {
+.ui-navigation-bar-item-left {
 	padding-left: 6px;
 }
 
-.ui-navigation-bar-right {
+.ui-navigation-bar-item-right {
 	padding-right: 6px;
-}
-
-/* UI Navigation Bar + View */
-
-.view.with-ui-navigation-bar > .view-content {
-	padding-top: 44px;
 }
 
 /* UI Navigation Bar Styles */
