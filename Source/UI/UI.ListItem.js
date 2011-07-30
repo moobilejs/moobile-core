@@ -35,16 +35,16 @@ Moobile.UI.ListItem = new Class({
 		return this;
 	},
 
-	release: function() {
-		this.contentElement = null;
-		this.parent();
-		return this;
-	},
-
 	buildContentElement: function() {
 		this.contentElement = new Element('div.' + this.options.className + '-content');
 		this.contentElement.adopt(this.element.childElements);
 		this.element.adopt(this.contentElement);
+		return this;
+	},
+
+	release: function() {
+		this.contentElement = null;
+		this.parent();
 		return this;
 	},
 

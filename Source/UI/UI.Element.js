@@ -164,16 +164,22 @@ Moobile.UI.Element = new Class({
 	},
 
 	inject: function(element, where) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
 		this.element.inject(element, where);
 		return this;
 	},
 
 	grab: function(element, where) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
 		this.element.grab(element, where);
 		return this;
 	},
 
 	hook: function(element, where, context) {
+		if (where == 'header') where = 'top';
+		if (where == 'footer') where = 'bottom';
 		return context ? context.inject(element, where) : this.grab(element, where);
 	},
 

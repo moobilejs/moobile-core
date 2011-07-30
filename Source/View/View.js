@@ -28,6 +28,8 @@ Moobile.View = new Class({
 
 	window: null,
 
+	content: null,
+
 	childViews: [],
 
 	childControls: [],

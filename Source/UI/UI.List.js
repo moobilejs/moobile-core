@@ -24,8 +24,6 @@ Moobile.UI.List = new Class({
 
 	Extends: Moobile.UI.Control,
 
-	items: [],
-
 	selectedItems: [],
 
 	options: {
@@ -35,59 +33,24 @@ Moobile.UI.List = new Class({
 		selectable: true
 	},
 
-	init: function() {
-		this.attachItems();
-		this.parent();
-		return this;
-	},
-
-	release: function() {
-		this.destroyItems();
-		this.parent();
-		return this;
-	},
-
 	addItem: function(item, where, context) {
-		this.attachItem(item);
-		this.grab(item, where, context);
-		return this;
+		return this.addChildControl(item, where, context);
+	},
+
+	getItem: function(name) {
+		return this.getChildControl(name);
+	},
+
+	getItems: function() {
+		return this.getChildControls();
 	},
 
 	removeItem: function(item) {
-		this.detachItem(item);
-		item.dispose();
-		return this;
+		return this.removeChildControl(item);
 	},
 
 	removeItems: function() {
-		this.items.each(this.bound('removeItem'));
-		this.items = [];
-		return this;
-	},
-
-	attachItems: function() {
-		this.element.getElements('[data-role=list-item]').each(this.bound('attachItem'));
-		return this;
-	},
-
-	attachItem: function(element) {
-		var item = element instanceof Element ? new Moobile.UI.ListItem(element) : element;
-		item.addEvent('click', this.bound('onClick'));
-		item.addEvent('mouseup', this.bound('onMouseUp'));
-		item.addEvent('mousedown', this.bound('onMouseDown'));
-		this.items.push(item);
-		return this;
-	},
-
-	destroyItems: function() {
-		this.items.each(this.bound('destroyItem'));
-		this.items = [];
-		return this;
-	},
-
-	destroyItem: function(item) {
-		item.destroy();
-		return this;
+		return this.removeChildControls();
 	},
 
 	setSelectedItem: function(item) {
@@ -109,7 +72,7 @@ Moobile.UI.List = new Class({
 	},
 
 	setSelectedItemIndex: function(index) {
-		var item = this.items[index];
+		var item = this.childControls[index];
 		if (item) this.setSelectedItem(item);
 		return this;
 	},
@@ -133,6 +96,14 @@ Moobile.UI.List = new Class({
 
 	getSelectedItems: function() {
 		return this.selectedItems;
+	},
+
+	didBindChildControl: function(item) {
+		item.addEvent('click', this.bound('onClick'));
+		item.addEvent('mouseup', this.bound('onMouseUp'));
+		item.addEvent('mousedown', this.bound('onMouseDown'));
+		this.parent();
+		return this;
 	},
 
 	onClick: function(e) {

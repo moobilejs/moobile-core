@@ -36,8 +36,8 @@ Moobile.UI.ButtonGroup = new Class({
 		return this;
 	},
 
-	addButton: function(button) {
-		return this.addChildControl(button);
+	addButton: function(button, where, context) {
+		return this.addChildControl(button, where, context);
 	},
 
 	getButton: function(name) {
