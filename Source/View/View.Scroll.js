@@ -64,7 +64,7 @@ provides:
 		release: function() {
 			this.disableScroller();
 			this.detachScroller();
-			this.outerElement = null;
+			this.scrollableWrapper = null;
 			this.scrollableContent = null;
 			this.parent();
 			return this;
