@@ -158,6 +158,14 @@ Moobile.UI.Element = new Class({
 		return this;
 	},
 
+	isChild: function() {
+		return this.element.isChild();
+	},
+
+	isOrphan: function() {
+		return this.element.isOrphan();
+	},
+
 	adopt: function() {
 		this.element.adopt.apply(this.element, arguments);
 		return this;
@@ -178,6 +186,10 @@ Moobile.UI.Element = new Class({
 	},
 
 	hook: function(element, where, context) {
+
+		if (element.isChild())
+			return this;
+
 		if (where == 'header') where = 'top';
 		if (where == 'footer') where = 'bottom';
 		return context ? element.inject(context, where) : this.grab(element, where);

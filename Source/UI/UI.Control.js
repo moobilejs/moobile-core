@@ -82,10 +82,18 @@ Moobile.UI.Control = new Class({
 	},
 
 	addChildControl: function(control, where, context) {
+
+		this.childControls.push(control);
+
 		this.willAddChildControl(control);
 		this.hook(control, where, context);
-		this.bindChildControl(control);
+		control.viewWillChange(this.view);
+		control.view = this.view;
+		control.viewDidChange(this.view);
 		this.didAddChildControl(control);
+
+		Object.defineMember(this, control, control.name);
+
 		return this;
 	},
 
@@ -117,16 +125,6 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
-	bindChildControl: function(control) {
-		this.childControls.push(control);
-		control.viewWillChange(this.view);
-		control.view = this.view;
-		control.viewDidChange(this.view);
-		this.didBindChildControl(control);
-		Object.defineMember(this, control, control.name);
-		return this;
-	},
-
 	attachChildControls: function() {
 		var attach = this.bound('attachChildControl');
 		var filter = this.bound('filterChildControl');
@@ -137,7 +135,7 @@ Moobile.UI.Control = new Class({
 	attachChildControl: function(element) {
 		var control = element.get('data-control');
 		if (control == null) throw new Error('You have to define the control class using the data-control attribute.');
-		this.bindChildControl(Class.instanciate(control, element));
+		this.addChildControl(Class.instanciate(control, element));
 		return this;
 	},
 
@@ -259,6 +257,10 @@ Moobile.UI.Control = new Class({
 	},
 
 	hook: function(element, where, context) {
+
+		if (element.isChild())
+			return this;
+
 		if (where == 'header') where = 'top';
 		if (where == 'footer') where = 'bottom';
 		return context ? element.inject(context, where) : this.grab(element, where);
@@ -282,10 +284,6 @@ Moobile.UI.Control = new Class({
 	},
 
 	didAddChildControl: function(childControl) {
-		return this;
-	},
-
-	didBindChildControl: function(childControl) {
 		return this;
 	},
 

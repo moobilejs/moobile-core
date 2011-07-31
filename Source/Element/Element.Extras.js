@@ -48,6 +48,14 @@ provides:
 			return this;
 		},
 
+		isChild: function() {
+			return document.documentElement.contains(this);
+		},
+
+		isOrphan: function() {
+			return this.isChild == false();
+		},
+
 		ingest: function(string) {
 			var match = string.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
 			if (match) string = match[1];

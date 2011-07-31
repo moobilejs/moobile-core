@@ -31,30 +31,16 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	loadViewControllerFrom: function(url, callback) {
-
-		if (this.viewControllerRequest == null) {
-			this.viewControllerRequest = new Moobile.Request.ViewController();
-		}
-
-		this.viewControllerRequest.cancel();
-		this.viewControllerRequest.load(url, callback);
-
-		return this;
-	},
-
-	pushViewControllerFrom: function(url, viewTransition) {
-		this.loadViewControllerFrom(url,
-			function(viewController) {
-				this.pushViewController(viewController, viewTransition);
-			}.bind(this)
-		);
-		return this;
-	},
-
 	pushViewController: function(viewController, viewTransition) {
 
-		this.window.disableUserInput();
+		this.window.disableInput();
+
+		if (viewController.isViewLoaded() == false) {
+			viewController.addEvent('loaded', function() {
+				this.pushViewController(viewController, viewTransition);
+			}.bind(this));
+			return this;
+		}
 
 		var viewControllerPushed = viewController; // ease of understanding
 
@@ -107,7 +93,7 @@ Moobile.ViewControllerStack = new Class({
 
 		viewControllerPushed.viewDidEnter();
 
-		this.window.enableUserInput();
+		this.window.enableInput();
 
 		return this;
 	},
@@ -126,12 +112,8 @@ Moobile.ViewControllerStack = new Class({
 				viewControllerToRemove.viewDidLeave();
 				this.removeViewController(viewControllerToRemove);
 
-				var viewToRemove = viewControllerToRemove.view;
 				viewControllerToRemove.destroy();
 				viewControllerToRemove = null;
-				viewToRemove.destroy();
-				viewToRemove = null;
-
 			}
 		}
 
@@ -145,7 +127,7 @@ Moobile.ViewControllerStack = new Class({
 		if (this.viewControllers.length <= 1)
 			return this;
 
-		this.window.disableUserInput();
+		this.window.disableInput();
 
 		var viewControllerPopped = this.viewControllers.lastItemAt(0);
 		var viewControllerBefore = this.viewControllers.lastItemAt(1);
@@ -178,18 +160,15 @@ Moobile.ViewControllerStack = new Class({
 
 		this.didPopViewController(viewControllerPopped);
 
-		var viewPopped = viewControllerPopped.view;
 		viewControllerPopped.destroy();
 		viewControllerPopped = null;
-		viewPopped.destroy();
-		viewPopped = null;
 
-		this.window.enableUserInput();
+		this.window.enableInput();
 
 		return this;
 	},
 
-	didBindViewController: function(viewController) {
+	didAddViewController: function(viewController) {
 		viewController.viewControllerStack = this;
 		this.parent();
 		return this;

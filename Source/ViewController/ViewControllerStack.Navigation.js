@@ -24,7 +24,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
 
-	didBindViewController: function(viewController) {
+	didAddViewController: function(viewController) {
 
 		this.parent(viewController);
 

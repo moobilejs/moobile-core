@@ -17,6 +17,7 @@ requires:
 	- Core/Element
 	- Core/Element.Event
 	- Class-Extras/Class.Binds
+	- Event.Loaded
 
 provides:
 	- ViewController
@@ -34,6 +35,8 @@ Moobile.ViewController = new Class({
 		Class.Binds
 	],
 
+	name: null,
+
 	window: null,
 
 	view: null,
@@ -44,30 +47,53 @@ Moobile.ViewController = new Class({
 
 	viewControllerPanel: null,
 
+	viewRequest: null,
+
+	viewLoaded: false,
+
 	parentViewController: null,
 
 	navigationBar: null,
 
 	started: false,
 
-	initialize: function(view) {
-		this.attachView(view);
+	initialize: function(viewSource) {
+
+		var viewElement = document.id(viewSource);
+		if (viewElement) {
+			this.loadViewFromElement(viewElement);
+			return this;
+		}
+
+		this.loadViewFromUrl(viewSource);
+
 		return this;
 	},
 
-	loadView: function(element) {
-		this.view = new Moobile.View(element);
+	loadViewFromElement: function(viewElement) {
+		this.loadView(viewElement);
+		this.viewLoaded = true;
+		this.fireEvent('loaded');
 		return this;
 	},
 
-	attachView: function(view) {
-		if (view instanceof Element) return this.loadView(view);
-		this.view = view;
+	loadViewFromUrl: function(viewUrl) {
+
+		if (this.viewRequest == null) {
+			this.viewRequest = new Moobile.Request.View()
+		}
+
+		this.viewRequest.cancel();
+		this.viewRequest.load(viewUrl, this.bound('loadViewFromElement'));
+
 		return this;
 	},
 
-	detachView: function() {
-		this.view = null;
+	loadView: function(viewElement) {
+		this.view = Class.instanciate(
+			viewElement.get('data-view') || 'Moobile.View',
+			viewElement
+		);
 		return this;
 	},
 
@@ -92,19 +118,24 @@ Moobile.ViewController = new Class({
 	destroy: function() {
 		this.started = false;
 		this.detachEvents();
+		this.release();
+		this.window = null;
+		this.view.destroy();
+		this.view = null;
 		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
 		this.navigationBar = null;
-		this.window = null;
-		this.release();
-		this.detachView();
 		return this;
 	},
 
 	isStarted: function() {
 		return this.started;
+	},
+
+	isViewLoaded: function() {
+		return this.viewLoaded;
 	},
 
 	init: function() {

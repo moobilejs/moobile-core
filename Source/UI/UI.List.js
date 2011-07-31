@@ -98,7 +98,7 @@ Moobile.UI.List = new Class({
 		return this.selectedItems;
 	},
 
-	didBindChildControl: function(item) {
+	didAddChildControl: function(item) {
 		item.addEvent('click', this.bound('onClick'));
 		item.addEvent('mouseup', this.bound('onMouseUp'));
 		item.addEvent('mousedown', this.bound('onMouseDown'));

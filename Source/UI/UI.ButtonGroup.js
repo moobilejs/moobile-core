@@ -79,7 +79,7 @@ Moobile.UI.ButtonGroup = new Class({
 		return this.selectedButton;
 	},
 
-	didBindChildControl: function(button) {
+	didAddChildControl: function(button) {
 		button.addEvent('click', this.bound('onButtonClick'));
 		this.parent();
 		return this;

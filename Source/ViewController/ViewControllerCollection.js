@@ -39,10 +39,27 @@ Moobile.ViewControllerCollection = new Class({
 	},
 
 	addViewController: function(viewController, where, context) {
+
+		if (viewController.isViewLoaded() == false) {
+			viewController.addEvent('loaded', function() {
+				this.addViewController(viewController, where, context);
+			}.bind(this));
+			return this;
+		}
+
+		this.viewControllers.push(viewController);
+
 		this.willAddViewController(viewController);
 		this.view.addChildView(viewController.view, where, context);
-		this.bindViewController(viewController);
+		viewController.viewControllerStack = this.viewControllerStack;
+		viewController.viewControllerPanel = this.viewControllerPanel;
+		viewController.parentViewController = this;
 		this.didAddViewController(viewController);
+
+		viewController.startup();
+
+		Object.defineMember(this, viewController, viewController.name);
+
 		return this;
 	},
 
@@ -71,28 +88,32 @@ Moobile.ViewControllerCollection = new Class({
 	},
 
 	attachViewControllers: function() {
-		this.view.getChildViews().each(this.bound('attachViewController'));
+		var filter = this.bound('filterViewController');
+		var attach = this.bound('attachViewController');
+		this.view.getElements('[data-role=view-controller]').filter(filter).each(attach);
 		return this;
 	},
 
-	bindViewController: function(viewController) {
-		this.viewControllers.push(viewController);
-		viewController.viewControllerStack = this.viewControllerStack;
-		viewController.viewControllerPanel = this.viewControllerPanel;
-		viewController.parentViewController = this;
-		this.didBindViewController(viewController);
-		viewController.startup();
-		Object.defineMember(this, viewController, viewController.view.getProperty('data-view-controller-name'));
-		return this;
-	},
+	attachViewController: function(element) {
+		var viewControllerClass = element.get('data-view-controller');
+		if (viewControllerClass) {
 
-	attachViewController: function(view) {
-		var viewController = view.getProperty('data-view-controller');
-		if (viewController) {
-			viewController = Class.instanciate(viewController, view);
-			this.bindViewController(viewController);
+			var viewElement = element.getElement('[data-role=view]');
+			if (viewElement == null) {
+				throw new Error('You must define a view element under view-controller element');
+			}
+
+			var viewController = Class.instanciate(viewControllerClass, viewElement);
+			viewController.name = element.get('data-name');
+			this.addViewController(viewController);
+
+			element.grab(viewElement, 'before').destroy();
 		}
 		return this;
+	},
+
+	filterViewController: function(element) {
+		return element.getParent('[data-role=view-controller]') == this.view.element;
 	},
 
 	destroyViewControllers: function() {
@@ -112,10 +133,6 @@ Moobile.ViewControllerCollection = new Class({
 	},
 
 	didAddViewController: function(viewController) {
-		return this;
-	},
-
-	didBindViewController: function(viewController) {
 		return this;
 	},
 

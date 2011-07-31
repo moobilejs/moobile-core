@@ -23,7 +23,7 @@ Moobile.ViewControllerPanel = new Class({
 
 	Extends: Moobile.ViewControllerCollection,
 
-	didBindViewController: function(viewController) {
+	didAddViewController: function(viewController) {
 		viewController.viewControllerPanel = this;
 		this.parent();
 		return this;

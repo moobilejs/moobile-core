@@ -23,11 +23,7 @@ Moobile.Window = new Class({
 
 	Extends: Moobile.View,
 
-	viewController: null,
-
-	rootViewController: null,
-
-	userInputEnabled: true,
+	inputEnabled: true,
 
 	userInputMask: null,
 
@@ -35,43 +31,8 @@ Moobile.Window = new Class({
 		className: 'window'
 	},
 
-	init: function() {
-		this.viewController = new Moobile.ViewControllerCollection(this);
-		this.viewController.startup();
-		this.parent();
-		return this;
-	},
-
-	release: function() {
-		this.viewController.destroy();
-		this.viewController = null;
-		this.parent();
-		return this;
-	},
-
 	filterChildView: function(element) {
 		return element.getParent('[data-role=view]') == null;
-	},
-
-	setRootViewController: function(rootViewController) {
-
-		if (this.rootViewController) {
-			this.viewController.removeViewController(this.rootViewController);
-			this.rootViewController.view.destroy();
-			this.rootViewController.view = null;
-			this.rootViewController.destroy();
-			this.rootViewController = null;
-		}
-
-		this.viewController.addViewController(rootViewController);
-
-		this.rootViewController = rootViewController;
-
-		return this;
-	},
-
-	getRootViewController: function() {
-		return this.rootViewController || this.viewController.getViewControllers()[0];
 	},
 
 	getOrientation: function() {
@@ -82,38 +43,38 @@ Moobile.Window = new Class({
 		}
 	},
 
-	enableUserInput: function() {
-		if (this.userInputEnabled == false) {
-			this.userInputEnabled = true;
-			this.destroyUserInputMask();
+	enableInput: function() {
+		if (this.inputEnabled == false) {
+			this.inputEnabled = true;
+			this.hideMask();
 		}
 		return this;
 	},
 
-	disableUserInput: function() {
-		if (this.userInputEnabled == true) {
-			this.userInputEnabled = false;
-			this.injectUserInputMask();
+	disableInput: function() {
+		if (this.inputEnabled == true) {
+			this.inputEnabled = false;
+			this.showMask();
 		}
 	},
 
-	isUserInputEnabled: function() {
-		return this.userInputEnabled;
+	isinputEnabled: function() {
+		return this.inputEnabled;
 	},
 
-	injectUserInputMask: function() {
+	showMask: function() {
 		this.userInputMask = new Element('div.' + this.options.className + '-mask');
 		this.userInputMask.inject(this.element);
 		return this;
 	},
 
-	destroyUserInputMask: function() {
+	hideMask: function() {
 		this.userInputMask.destroy();
 		this.userInputMask = null;
 		return this;
 	},
 
-	didBindChildView: function(view) {
+	didAddChildView: function(view) {
 		view.window = this;
 		view.parentView = null;
 		this.parent(view);
