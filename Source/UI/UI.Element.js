@@ -60,7 +60,7 @@ Moobile.UI.Element = new Class({
 		return this;
 	},
 
-	create: function() {
+	createElement: function() {
 		return new Element('div');
 	},
 
@@ -82,7 +82,7 @@ Moobile.UI.Element = new Class({
 	setElement: function(element) {
 		if (this.element == null) this.element = document.id(element);
 		if (this.element == null) this.element = document.getElement(element);
-		if (this.element == null) this.element = this.create();
+		if (this.element == null) this.element = this.createElement();
 		return this;
 	},
 

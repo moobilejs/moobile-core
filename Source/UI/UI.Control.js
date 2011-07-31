@@ -26,6 +26,8 @@ Moobile.UI.Control = new Class({
 
 	childControls: [],
 
+	childElements: [],
+
 	disabled: false,
 
 	selected: false,
@@ -42,6 +44,7 @@ Moobile.UI.Control = new Class({
 	initialize: function(element, options) {
 		this.parent(element, options);
 		this.attachChildControls();
+		this.attachChildElements();
 		this.init();
 		this.attachEvents();
 		return this;
@@ -120,11 +123,6 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
-	removeFromParentView: function() {
-		if (this.parentControl) this.parentControl.removeChildControl(this);
-		return this;
-	},
-
 	attachChildControls: function() {
 		var attach = this.bound('attachChildControl');
 		var filter = this.bound('filterChildControl');
@@ -152,6 +150,67 @@ Moobile.UI.Control = new Class({
 	destroyChildControl: function(control) {
 		control.destroy();
 		control = null;
+		return this;
+	},
+
+	addChildElement: function(element, where, context) {
+
+		this.childElements.push(element);
+
+		this.willAddChildElement(element);
+		this.hook(element, where, context);
+		this.didAddChildElement(element);
+
+		Object.defineMember(this, element, element.get('data-name'));
+
+		return this;
+	},
+
+	getChildElement: function(name) {
+		return this.childElements.find(function(element) {
+			return (element.name || element.get('data-name')) == name;
+		});
+	},
+
+	getChildElements: function() {
+		return this.childElements;
+	},
+
+	removeChildElement: function(element) {
+		var removed = this.childElements.erase(element);
+		if (removed) {
+			this.willRemoveChildElement(element);
+			element.dispose();
+			this.didRemoveChildElement(element);
+		}
+		return this;
+	},
+
+	attachChildElements: function() {
+		var attach = this.bound('attachChildElement');
+		var filter = this.bound('filterChildElement');
+		this.getElements('[data-role=element]').filter(filter).each(attach);
+		return this;
+	},
+
+	attachChildElement: function(element) {
+		this.addChildElement(element);
+		return this;
+	},
+
+	filterChildElement: function(element) {
+		return element.getParent('[data-role=view]') == this.element;
+	},
+
+	destroyChildElements: function() {
+		this.childElements.each(this.bound('destroyChildElement'));
+		this.childElements = [];
+		return this;
+	},
+
+	destroyChildElement: function(element) {
+		element.destroy();
+		element = null;
 		return this;
 	},
 
@@ -282,6 +341,22 @@ Moobile.UI.Control = new Class({
 	},
 
 	didRemoveChildControl: function(childControl) {
+		return this;
+	},
+
+	willAddChildElement: function(childElement) {
+		return this;
+	},
+
+	didAddChildElement: function(childElement) {
+		return this;
+	},
+
+	willRemoveChildElement: function(childElement) {
+		return this;
+	},
+
+	didRemoveChildElement: function(childElement) {
 		return this;
 	}
 

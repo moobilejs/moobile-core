@@ -27,12 +27,6 @@ Moobile.UI.ListItem = new Class({
 		className: 'ui-list-item'
 	},
 
-	release: function() {
-		this.contentElement = null;
-		this.parent();
-		return this;
-	},
-
 	attachEvents: function() {
 		this.element.addEvent('swipe', this.bound('onSwipe'));
 		this.element.addEvent('click', this.bound('onClick'));
@@ -49,6 +43,15 @@ Moobile.UI.ListItem = new Class({
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 		this.parent();
 		return this;
+	},
+
+	setText: function(text) {
+		this.content.set('html', text);
+		return this;
+	},
+
+	getText: function() {
+		return this.content.get('html');
 	},
 
 	onSwipe: function(e) {

@@ -307,8 +307,8 @@ Moobile.View = new Class({
 	},
 
 	destroyChildElements: function() {
-		this.childControls.each(this.bound('destroyChildElement'));
-		this.childControls = [];
+		this.childElements.each(this.bound('destroyChildElement'));
+		this.childElements = [];
 		return this;
 	},
 
