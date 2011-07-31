@@ -256,16 +256,6 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
-	hook: function(element, where, context) {
-
-		if (element.isChild())
-			return this;
-
-		if (where == 'header') where = 'top';
-		if (where == 'footer') where = 'bottom';
-		return context ? element.inject(context, where) : this.grab(element, where);
-	},
-
 	empty: function() {
 		this.content.empty();
 		return this;

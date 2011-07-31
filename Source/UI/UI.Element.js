@@ -190,8 +190,11 @@ Moobile.UI.Element = new Class({
 		if (element.isChild())
 			return this;
 
-		if (where == 'header') where = 'top';
-		if (where == 'footer') where = 'bottom';
+		if (context) {
+			if (where == 'header') where = 'top';
+			if (where == 'footer') where = 'bottom';
+		}
+
 		return context ? element.inject(context, where) : this.grab(element, where);
 	},
 

@@ -21,18 +21,18 @@ provides:
 */
 
 (function() {
-	
+
 	var count = 0;
-	
+
 	Moobile.View.Scroll = new Class({
 
 		Extends: Moobile.View,
 
-		outerElement: null,
+		scrollableWrapper: null,
 
-		innerElement: null,
+		scrollableContent: null,
 
-		innerElementSize: null,
+		scrollableContentSize: null,
 
 		scroller: null,
 
@@ -42,23 +42,16 @@ provides:
 
 		build: function() {
 			this.parent();
+
 			this.addClass(this.options.className + '-scroll');
-			this.buildInnerElement();
-			this.buildOuterElement();
-			return this;
-		},
 
-		buildInnerElement: function() {
-			this.innerElement = new Element('div.' + this.options.className + '-scroll-inner');
-			this.innerElement.adopt(this.content.childElements);
-			this.adopt(this.innerElement);
-			return this;
-		},
+			this.scrollableWrapper = new Element('div.' + this.options.className + '-scrollable-wrapper');
+			this.scrollableContent = new Element('div.' + this.options.className + '-scrollable-content');
+			this.scrollableContent.adopt(this.content.childElements);
+			this.scrollableWrapper.adopt(this.scrollableContent);
 
-		buildOuterElement: function() {
-			this.outerElement = new Element('div.' + this.options.className + '-scroll-outer');
-			this.outerElement.adopt(this.content.childElements);
-			this.adopt(this.outerElement);
+			this.content.grab(this.scrollableWrapper);
+
 			return this;
 		},
 
@@ -72,7 +65,7 @@ provides:
 			this.disableScroller();
 			this.detachScroller();
 			this.outerElement = null;
-			this.innerElement = null;
+			this.scrollableContent = null;
 			this.parent();
 			return this;
 		},
@@ -88,7 +81,7 @@ provides:
 		},
 
 		createScroller: function() {
-			return new iScroll(this.outerElement, { desktopCompatibility: true, hScroll: true, vScroll: true });
+			return new iScroll(this.scrollableWrapper, { desktopCompatibility: true, hScroll: true, vScroll: true });
 		},
 
 		enableScroller: function() {
@@ -104,7 +97,7 @@ provides:
 		disableScroller: function() {
 			if (this.scroller) {
 				this.updateScrollerAutomatically(false);
-				this.scrolled = this.innerElement.getStyle('-webkit-transform');
+				this.scrolled = this.scrollableContent.getStyle('-webkit-transform');
 				this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
 				this.scrolled = this.scrolled[2];
 				this.scroller.destroy();
@@ -115,8 +108,8 @@ provides:
 
 		updateScroller: function() {
 			if (this.scroller) {
-				if (this.innerElementSize != this.innerElement.getScrollSize().y) {
-					this.innerElementSize  = this.innerElement.getScrollSize().y;
+				if (this.scrollableContentSize != this.scrollableContent.getScrollSize().y) {
+					this.scrollableContentSize  = this.scrollableContent.getScrollSize().y;
 					this.scroller.refresh();
 				}
 			}
@@ -126,6 +119,28 @@ provides:
 		updateScrollerAutomatically: function(automatically) {
 			clearInterval(this.scrollerUpdateInterval);
 			if (automatically) this.scrollerUpdateInterval = this.updateScroller.periodical(250, this);
+			return this;
+		},
+
+		adopt: function() {
+			this.scrollableContent.adopt.apply(this.content, arguments);
+			return this;
+		},
+
+		grab: function(element, where) {
+
+			if (where == 'header') {
+				this.content.grab(element, 'top')
+				return this;
+			}
+
+			if (where == 'footer') {
+				this.content.grab(element, 'bottom')
+				return this;
+			}
+
+			this.scrollableContent.grab(element, where);
+
 			return this;
 		},
 
@@ -150,6 +165,6 @@ provides:
 			e.preventDefault();
 		}
 
-	});	
-	
+	});
+
 })();

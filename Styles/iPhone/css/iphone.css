@@ -245,7 +245,7 @@ p small {
 	-webkit-box-flex: 0;					/* Important */
 }
 
-.view.view-scroll .view-content .view-scroll-outer {
+.view.view-scroll .view-content .view-scrollable-wrapper {
 	-webkit-box-flex: 1;					/* Important */
 	-webkit-backface-visibility: hidden;	/* Important */
 	height: 100%;							/* Important */
@@ -254,7 +254,7 @@ p small {
 	width: 100%;							/* Important */
 }
 
-.view.view-scroll .view-content .view-scroll-inner {
+.view.view-scroll .view-content .view-scrollable-content {
 	min-height: 100%;						/* Important */
 }
 
