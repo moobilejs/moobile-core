@@ -87,7 +87,7 @@ Moobile.UI.Bar.NavigationItem = new Class({
 	},
 
 	getLeftBarButton: function(button) {
-		return this.leftButton;
+		return this.leftBarButton;
 	},
 
 	removeLeftBarButton: function() {
