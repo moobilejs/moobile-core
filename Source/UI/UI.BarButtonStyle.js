@@ -35,12 +35,6 @@ Moobile.UI.BarButtonStyle = {
 		detach: function() {}
 	},
 
-	Black: {
-		className: 'style-black',
-		attach: function() {},
-		detach: function() {}
-	},
-
 	Warning: {
 		className: 'style-warning',
 		attach: function() {},

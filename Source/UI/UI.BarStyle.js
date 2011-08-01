@@ -24,13 +24,13 @@ if (!window.Moobile.UI) window.Moobile.UI = {};
 Moobile.UI.BarStyle = {
 
 	DefaultOpaque: {
-		className: 'style-blue-opaque',
+		className: 'style-default-opaque',
 		attach: function() {},
 		detach: function() {}
 	},
 
 	DefaultTranslucent: {
-		className: 'style-blue-translucent',
+		className: 'style-default-translucent',
 		attach: function() {},
 		detach: function() {}
 	},

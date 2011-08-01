@@ -53,7 +53,7 @@ provides:
 		},
 
 		isOrphan: function() {
-			return this.isChild == false();
+			return this.isChild == false;
 		},
 
 		ingest: function(string) {

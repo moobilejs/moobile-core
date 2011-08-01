@@ -258,28 +258,95 @@ p small {
 	min-height: 100%;						/* Important */
 }
 
-/* UI Button
+/* UI Navigation Bar
 -----------------------------------------------------------------------------*/
 
-.ui-button {
-	-webkit-border-radius: 10px;
-	-webkit-box-sizing: border-box;
-	border: 1px solid #bbbbbb;
-	background: #ffffff;
-	color: #000000;
-	font-size: 17px;
-	font-weight: bold;
-	padding-top: 13px;
-	padding-bottom: 13px;
-	text-align: center;
-	width: 100%;
+.ui-navigation-bar {
+	height: 44px;							/* Important */
+	left: 0px;								/* Important */
+	position: absolute;						/* Important */
+	top: 0px;								/* Important */
+	width: 100%;							/* Important */
+	z-index: 50;							/* Important */
 }
 
-.ui-button.ui-button-down {
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
-	background-image: -moz-linear-gradient(center bottom, #058DF5 0%, #0160E6 100%);
+.ui-navigation-bar-content {
+	-webkit-box-orient: horizontal;			/* Important */
+	display: -webkit-box;					/* Important */
+	height: 44px;							/* Important */
+	position: relative;						/* Important */
+	width: 100%;							/* Important */
+}
+
+/* UI Navigation Bar + View */
+
+.view.with-ui-navigation-bar > .view-content {
+	padding-top: 44px;
+}
+
+/* UI Navigation Bar Styles */
+
+.ui-navigation-bar.style-default-opaque {
+	background: url(../images/ui-bar.png) no-repeat 0px 0px;
+}
+
+.ui-navigation-bar.style-default-translucent {
+	background: url(../images/ui-bar.png) no-repeat 0px -44px;
+}
+
+.ui-navigation-bar.style-black-opaque {
+	background: url(../images/ui-bar.png) no-repeat 0px -88px;
+}
+
+.ui-navigation-bar.style-black-translucent {
+	background: url(../images/ui-bar.png) no-repeat 0px -132px;
+}
+
+/* UI Navigation Bar Item
+-----------------------------------------------------------------------------*/
+
+.ui-navigation-bar-item {
+	height: 44px;
+	width: 100%;							/* Important */
+}
+
+.ui-navigation-bar-item-content {
+	-webkit-box-orient: horizontal;			/* Important */
+	display: -webkit-box;					/* Important */
+	height: 44px;
+	width: 100%;							/* Important */
+}
+
+.ui-navigation-bar-item-title {
+	-webkit-box-flex: 2;					/* Important */
 	color: #ffffff;
-	text-shadow: none;
+	font-size: 20px;
+	font-weight: bold;
+	height: 44px;
+	line-height: 43px;
+	overflow: hidden;						/* Important */
+	padding-left: 6px;
+	padding-right: 6px;
+	text-overflow: ellipsis;				/* Important */
+	text-align: center;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+	white-space: nowrap;					/* Important */
+}
+
+.ui-navigation-bar-item-left,
+.ui-navigation-bar-item-right {
+	-webkit-box-flex: 1;					/* Important */
+	height: 44px;
+	min-width: 35px;
+	padding-top: 7px;
+}
+
+.ui-navigation-bar-item-left {
+	padding-left: 6px;
+}
+
+.ui-navigation-bar-item-right {
+	padding-right: 6px;
 }
 
 /* UI Bar Button
@@ -311,19 +378,45 @@ p small {
 
 /* UI Bar Button Styles */
 
-.ui-bar-button.style-default {
-	-webkit-border-image: url(../images/ui-bar-button.png) 0 5 330 stretch stretch;
+.ui-navigation-bar.style-default-opaque      .ui-bar-button.style-default,
+.ui-navigation-bar.style-default-translucent .ui-bar-button.style-default {
+	-webkit-border-image: url(../images/ui-bar-button.png) 0 5 570 stretch stretch;
 	background: url(../images/ui-bar-button.png) -5px -0px repeat-x;
 	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
-.ui-bar-button.ui-bar-button-down.style-default {
-	-webkit-border-image: url(../images/ui-bar-button.png) 30 5 300 stretch stretch;
+.ui-navigation-bar.style-default-opaque      .ui-bar-button.ui-bar-button-down.style-default,
+.ui-navigation-bar.style-default-translucent .ui-bar-button.ui-bar-button-down.style-default {
+	-webkit-border-image: url(../images/ui-bar-button.png) 30 5 540 stretch stretch;
 	background-position: -5px -30px;
 }
 
-.ui-bar-button.style-default .ui-bar-button-content {
+.ui-navigation-bar.style-default-opaque      .ui-bar-button.style-default .ui-bar-button-content,
+.ui-navigation-bar.style-default-translucent .ui-bar-button.style-default .ui-bar-button-content {
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Default With Black Navigation Bar */
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.style-default,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.style-default {
+	-webkit-border-image: url(../images/ui-bar-button.png) 120 5 450 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -120px repeat-x;
+	background-clip: padding-box;
+	border-width: 0px 5px;
+}
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.ui-bar-button-down.style-default,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.ui-bar-button-down.style-default {
+	-webkit-border-image: url(../images/ui-bar-button.png) 150 5 420 stretch stretch;
+	background-position: -5px -150px;
+	border-width: 0px 5px;
+}
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.style-default .ui-bar-button-content,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.style-default .ui-bar-button-content {
 	border-left-color: rgba(66, 75, 86, 0.75);
 	border-right-color: rgba(66, 75, 86, 0.25);
 }
@@ -331,14 +424,14 @@ p small {
 /* Active */
 
 .ui-bar-button.style-active {
-	-webkit-border-image: url(../images/ui-bar-button.png) 60 5 270 stretch stretch;
+	-webkit-border-image: url(../images/ui-bar-button.png) 60 5 510 stretch stretch;
 	background: url(../images/ui-bar-button.png) -5px -60px repeat-x;
 	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-active {
-	-webkit-border-image: url(../images/ui-bar-button.png) 90 5 240 stretch stretch;
+	-webkit-border-image: url(../images/ui-bar-button.png) 90 5 480 stretch stretch;
 	background-position: -5px -90px;
 }
 
@@ -348,38 +441,17 @@ p small {
 	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
-/* Black */
-
-.ui-bar-button.style-black {
-	-webkit-border-image: url(../images/ui-bar-button.png) 120 5 210 stretch stretch;
-	background: url(../images/ui-bar-button.png) -5px -120px repeat-x;
-	background-clip: padding-box;
-	border-width: 0px 5px;
-}
-
-.ui-bar-button.ui-bar-button-down.style-black {
-	-webkit-border-image: url(../images/ui-bar-button.png) 150 5 180 stretch stretch;
-	background-position: -5px -150px;
-	border-width: 0px 5px;
-}
-
-.ui-bar-button.style-black .ui-bar-button-content {
-	/* TODO */
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
-}
-
 /* Warning */
 
 .ui-bar-button.style-warning {
-	-webkit-border-image: url(../images/ui-bar-button.png) 180 5 150 stretch stretch;
+	-webkit-border-image: url(../images/ui-bar-button.png) 180 5 390 stretch stretch;
 	background: url(../images/ui-bar-button.png) -5px -180px repeat-x;
 	background-clip: padding-box;
 	border-width: 0px 5px;
 }
 
 .ui-bar-button.ui-bar-button-down.style-warning {
-	-webkit-border-image: url(../images/ui-bar-button.png) 210 5 120 stretch stretch;
+	-webkit-border-image: url(../images/ui-bar-button.png) 210 5 360 stretch stretch;
 	background-position: -5px -210px;
 	border-width: 0px 5px;
 }
@@ -390,10 +462,11 @@ p small {
 	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
-/* Back */
+/* Back With Default Navigation Bar*/
 
-.ui-bar-button.style-back {
-	-webkit-border-image: url(../images/ui-bar-button.png) 240 5 90 15 stretch stretch;
+.ui-navigation-bar.style-default-opaque      .ui-bar-button.style-back,
+.ui-navigation-bar.style-default-translucent .ui-bar-button.style-back {
+	-webkit-border-image: url(../images/ui-bar-button.png) 240 5 330 15 stretch stretch;
 	background: url(../images/ui-bar-button.png) -5px -240px repeat-x;
 	background-clip: padding-box;
 	border-width: 0px 5px 0px 15px;
@@ -401,13 +474,41 @@ p small {
 	padding-right: 4px;
 }
 
-.ui-bar-button.ui-bar-button-down.style-back {
-	-webkit-border-image: url(../images/ui-bar-button.png) 270 5 60 15 stretch stretch;
+.ui-navigation-bar.style-default-opaque      .ui-bar-button.ui-bar-button-down.style-back,
+.ui-navigation-bar.style-default-translucent .ui-bar-button.ui-bar-button-down.style-back {
+	-webkit-border-image: url(../images/ui-bar-button.png) 270 5 300 15 stretch stretch;
 	border-width: 0px 5px 0px 15px;
 	background-position: -5px -270px;
 }
 
-.ui-bar-button.style-back .ui-bar-button-content {
+.ui-navigation-bar.style-default-opaque      .ui-bar-button.style-back .ui-bar-button-content,
+.ui-navigation-bar.style-default-translucent .ui-bar-button.style-back .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Back With Black Navigation Bar */
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.style-back,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.style-back {
+	-webkit-border-image: url(../images/ui-bar-button.png) 360 5 210 15 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -240px repeat-x;
+	background-clip: padding-box;
+	border-width: 0px 5px 0px 15px;
+	padding-left: 0px;
+	padding-right: 4px;
+}
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.ui-bar-button-down.style-back,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.ui-bar-button-down.style-back {
+	-webkit-border-image: url(../images/ui-bar-button.png) 390 5 180 15 stretch stretch;
+	border-width: 0px 5px 0px 15px;
+	background-position: -5px -270px;
+}
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.style-back .ui-bar-button-content,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.style-back .ui-bar-button-content {
 	/* TODO */
 	border-left-color: rgba(66, 75, 86, 0.75);
 	border-right-color: rgba(66, 75, 86, 0.25);
@@ -416,7 +517,7 @@ p small {
 /* Forward */
 
 .ui-bar-button.style-forward {
-	-webkit-border-image: url(../images/ui-bar-button.png) 300 15 30 5 stretch stretch;
+	-webkit-border-image: url(../images/ui-bar-button.png) 300 15 270 5 stretch stretch;
 	background: url(../images/ui-bar-button.png) -5px -300px repeat-x;
 	background-clip: padding-box;
 	border-width: 0px 15px 0px 5px;
@@ -425,7 +526,7 @@ p small {
 }
 
 .ui-bar-button.ui-bar-button-down.style-forward {
-	-webkit-border-image: url(../images/ui-bar-button.png) 330 15 0 5 stretch stretch;
+	-webkit-border-image: url(../images/ui-bar-button.png) 330 15 230 5 stretch stretch;
 	background-position: -5px -330px;
 	border-width: 0px 15px 0px 5px;
 }
@@ -434,6 +535,56 @@ p small {
 	/* TODO */
 	border-left-color: rgba(66, 75, 86, 0.75);
 	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Forward With Black Navigation Bar */
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.style-forward,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.style-forward {
+	-webkit-border-image: url(../images/ui-bar-button.png) 420 15 150 5 stretch stretch;
+	background: url(../images/ui-bar-button.png) -5px -300px repeat-x;
+	background-clip: padding-box;
+	border-width: 0px 15px 0px 5px;
+	padding-left: 4px;
+	padding-right: 0px;
+}
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.ui-bar-button-down.style-forward,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.ui-bar-button-down.style-forward {
+	-webkit-border-image: url(../images/ui-bar-button.png) 450 15 120 5 stretch stretch;
+	background-position: -5px -330px;
+	border-width: 0px 15px 0px 5px;
+}
+
+.ui-navigation-bar.style-black-opaque      .ui-bar-button.style-forward .ui-bar-button-content,
+.ui-navigation-bar.style-black-translucent .ui-bar-button.style-forward .ui-bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* UI Button
+-----------------------------------------------------------------------------*/
+
+.ui-button {
+	-webkit-border-radius: 10px;
+	-webkit-box-sizing: border-box;
+	border: 1px solid #bbbbbb;
+	background: #ffffff;
+	color: #000000;
+	font-size: 17px;
+	font-weight: bold;
+	padding-top: 13px;
+	padding-bottom: 13px;
+	text-align: center;
+	width: 100%;
+}
+
+.ui-button.ui-button-down {
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
+	background-image: -moz-linear-gradient(center bottom, #058DF5 0%, #0160E6 100%);
+	color: #ffffff;
+	text-shadow: none;
 }
 
 /* UI Button Group
@@ -482,97 +633,6 @@ p small {
 .ui-button-group .ui-bar-button:last-child .ui-bar-button-content {
 	border-right-width: 0px !important;
 	padding-right: 1px;
-}
-
-/* UI Navigation Bar
------------------------------------------------------------------------------*/
-
-.ui-navigation-bar {
-	height: 44px;							/* Important */
-	left: 0px;								/* Important */
-	position: absolute;						/* Important */
-	top: 0px;								/* Important */
-	width: 100%;							/* Important */
-	z-index: 50;							/* Important */
-}
-
-.ui-navigation-bar-content {
-	-webkit-box-orient: horizontal;			/* Important */
-	display: -webkit-box;					/* Important */
-	height: 44px;							/* Important */
-	position: relative;						/* Important */
-	width: 100%;							/* Important */
-}
-
-/* UI Navigation Bar + View */
-
-.view.with-ui-navigation-bar > .view-content {
-	padding-top: 44px;
-}
-
-/* UI Navigation Bar Item
------------------------------------------------------------------------------*/
-
-.ui-navigation-bar-item {
-	height: 44px;
-	width: 100%;							/* Important */
-}
-
-.ui-navigation-bar-item-content {
-	-webkit-box-orient: horizontal;			/* Important */
-	display: -webkit-box;					/* Important */
-	height: 44px;
-	width: 100%;							/* Important */
-}
-
-.ui-navigation-bar-item-title {
-	-webkit-box-flex: 2;					/* Important */
-	color: #ffffff;
-	font-size: 20px;
-	font-weight: bold;
-	height: 44px;
-	line-height: 44px;
-	overflow: hidden;						/* Important */
-	padding-left: 6px;
-	padding-right: 6px;
-	text-overflow: ellipsis;				/* Important */
-	text-align: center;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-	white-space: nowrap;					/* Important */
-}
-
-.ui-navigation-bar-item-left,
-.ui-navigation-bar-item-right {
-	-webkit-box-flex: 1;					/* Important */
-	height: 44px;
-	min-width: 35px;
-	padding-top: 7px;
-}
-
-.ui-navigation-bar-item-left {
-	padding-left: 6px;
-}
-
-.ui-navigation-bar-item-right {
-	padding-right: 6px;
-}
-
-/* UI Navigation Bar Styles */
-
-.ui-navigation-bar.style-blue-opaque {
-	background: url(../images/ui-bar.png) no-repeat 0px 0px;
-}
-
-.ui-navigation-bar.style-blue-translucent {
-	background: url(../images/ui-bar.png) no-repeat 0px -44px;
-}
-
-.ui-navigation-bar.style-black-opaque {
-	background: url(../images/ui-bar.png) no-repeat 0px -88px;
-}
-
-.ui-navigation-bar.style-black-translucent {
-	background: url(../images/ui-bar.png) no-repeat 0px -132px;
 }
 
 /* UI List
