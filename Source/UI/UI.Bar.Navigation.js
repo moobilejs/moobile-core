@@ -66,6 +66,18 @@ Moobile.UI.Bar.Navigation = new Class({
 		if (this.view) this.view.addClass('with-' + this.options.className);
 		this.parent();
 		return this;
+	},
+
+	willShow: function() {
+		if (this.view) this.view.addClass('with-' + this.options.className);
+		this.parent();
+		return this;
+	},
+
+	willHide: function() {
+		if (this.view) this.view.removeClass('with-' + this.options.className);
+		this.parent();
+		return this;
 	}
 
 });

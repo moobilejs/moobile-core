@@ -320,6 +320,20 @@ Moobile.UI.Control = new Class({
 		return this;
 	},
 
+	show: function() {
+		this.willShow();
+		this.parent();
+		this.didShow();
+		return this;
+	},
+
+	hide: function() {
+		this.willHide();
+		this.parent();
+		this.didHide();
+		return this;
+	},
+
 	viewWillChange: function(parentView) {
 		return this;
 	},
@@ -357,6 +371,22 @@ Moobile.UI.Control = new Class({
 	},
 
 	didRemoveChildElement: function(childElement) {
+		return this;
+	},
+
+	willShow: function() {
+		return this;
+	},
+
+	didShow: function() {
+		return this;
+	},
+
+	willHide: function() {
+		return this;
+	},
+
+	didHide: function() {
 		return this;
 	}
 

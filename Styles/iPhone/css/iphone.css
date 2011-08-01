@@ -221,6 +221,7 @@ p small {
 }
 
 .view-content {
+	-webkit-box-sizing: border-box;			/* Important */
 	height: 100%;							/* Important */
 	position: relative;						/* Important */
 	width: 100%;							/* Important */
