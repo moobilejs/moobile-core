@@ -144,7 +144,6 @@ Moobile.View = new Class({
 			this.willRemoveChildView(view);
 			view.parentViewWillChange(null);
 			view.parentView = null;
-			view.window = null
 			view.parentViewDidChange(null);
 			view.dispose();
 			this.didRemoveChildView(view);
