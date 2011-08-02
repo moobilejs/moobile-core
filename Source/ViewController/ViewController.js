@@ -35,6 +35,8 @@ Moobile.ViewController = new Class({
 		Class.Binds
 	],
 
+	$started: false,
+
 	name: null,
 
 	window: null,
@@ -54,8 +56,6 @@ Moobile.ViewController = new Class({
 	parentViewController: null,
 
 	navigationBar: null,
-
-	started: false,
 
 	initialize: function(viewSource) {
 
@@ -106,8 +106,8 @@ Moobile.ViewController = new Class({
 	},
 
 	startup: function() {
-		if (this.started == false) {
-			this.started = true;
+		if (this.$started == false) {
+			this.$started = true;
 			this.window = this.view.window;
 			this.init();
 			this.attachEvents();
@@ -116,22 +116,28 @@ Moobile.ViewController = new Class({
 	},
 
 	destroy: function() {
-		this.started = false;
+
 		this.detachEvents();
 		this.release();
-		this.window = null;
+
 		this.view.destroy();
 		this.view = null;
+
 		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
+
 		this.navigationBar = null;
+		this.window = null;
+
+		this.$started = false;
+
 		return this;
 	},
 
-	isStarted: function() {
-		return this.started;
+	isstarted: function() {
+		return this.$started;
 	},
 
 	isViewLoaded: function() {

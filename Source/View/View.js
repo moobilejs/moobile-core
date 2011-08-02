@@ -73,14 +73,14 @@ Moobile.View = new Class({
 
 	destroy: function() {
 
-		this.removeFromParentView();
-
 		this.detachEvents();
 		this.destroyChildViews();
 		this.destroyChildControls();
 		this.destroyChildElements();
 
 		this.release();
+
+		this.removeFromParentView();
 
 		this.parentView = null;
 		this.window = null;

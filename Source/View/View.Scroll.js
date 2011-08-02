@@ -41,6 +41,7 @@ provides:
 		scrolled: null,
 
 		build: function() {
+
 			this.parent();
 
 			this.addClass(this.options.className + '-scroll');
@@ -99,7 +100,7 @@ provides:
 				this.updateScrollerAutomatically(false);
 				this.scrolled = this.scrollableContent.getStyle('-webkit-transform');
 				this.scrolled = this.scrolled.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
-				this.scrolled = this.scrolled[2];
+				if (this.scrolled) this.scrolled = this.scrolled[2];
 				this.scroller.destroy();
 				this.scroller = null;
 			}

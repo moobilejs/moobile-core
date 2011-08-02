@@ -34,6 +34,7 @@ Moobile.WindowController = new Class({
 	startup: function() {
 		this.parent();
 		this.window = this.view;
+		this.window.startup();
 		return this;
 	},
 

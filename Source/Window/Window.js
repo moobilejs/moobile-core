@@ -19,6 +19,8 @@ provides:
 ...
 */
 
+if (!window.$moobile) window.$moobile = {};
+
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
@@ -29,6 +31,24 @@ Moobile.Window = new Class({
 
 	options: {
 		className: 'window'
+	},
+
+	init: function() {
+		this.parent();
+		window.$moobile.window = this;
+		return this;
+	},
+
+	attachEvents: function() {
+		window.addEvent('orientationchange', this.bound('onOrientationChange'));
+		this.parent();
+		return this;
+	},
+
+	detachEvents: function() {
+		window.removeEvent('orientationchange', this.bound('onOrientationChange'));
+		this.parent();
+		return this;
 	},
 
 	filterChildView: function(element) {
@@ -79,6 +99,10 @@ Moobile.Window = new Class({
 		view.parentView = null;
 		this.parent(view);
 		return this;
+	},
+
+	onOrientationChange: function() {
+		this.fireEvent('orientationchange', this.getOrientation());
 	}
 
 });
