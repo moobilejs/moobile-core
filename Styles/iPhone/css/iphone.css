@@ -98,8 +98,17 @@ iframe {
 	border: none;
 }
 
+.clear {
+	clear: both;
+}
+
 /* Body
 -----------------------------------------------------------------------------*/
+
+html {
+	height: 100%;							/* Important */
+	width: 100%;							/* Important */
+}
 
 body {
 	-webkit-user-select: none;
@@ -107,6 +116,8 @@ body {
 	font-size: 15px;
 	font-weight: normal;
 	font-family: "Helvetica Neue", sans-serif;
+	height: 100%;							/* Important */
+	width: 100%;							/* Important */
 }
 
 input, select, textarea {
@@ -151,9 +162,9 @@ p small {
 
 .window {
 	background-color: #424242;
-	height: 460px;							/* Important */
+	height: 100%;							/* Important */
 	overflow: hidden;						/* Important */
-	width: 320px;							/* Important */
+	width: 100%;							/* Important */
 }
 
 .window-content {
@@ -288,19 +299,19 @@ p small {
 /* UI Navigation Bar Styles */
 
 .ui-navigation-bar.style-default-opaque {
-	background: url(../images/ui-bar.png) no-repeat 0px 0px;
+	background: url(../images/ui-bar.png) repeat-x 0px 0px;
 }
 
 .ui-navigation-bar.style-default-translucent {
-	background: url(../images/ui-bar.png) no-repeat 0px -44px;
+	background: url(../images/ui-bar.png) repeat-x 0px -44px;
 }
 
 .ui-navigation-bar.style-black-opaque {
-	background: url(../images/ui-bar.png) no-repeat 0px -88px;
+	background: url(../images/ui-bar.png) repeat-x 0px -88px;
 }
 
 .ui-navigation-bar.style-black-translucent {
-	background: url(../images/ui-bar.png) no-repeat 0px -132px;
+	background: url(../images/ui-bar.png) repeat-x 0px -132px;
 }
 
 /* UI Navigation Bar Item
