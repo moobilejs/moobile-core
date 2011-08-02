@@ -123,13 +123,14 @@ Moobile.ViewController = new Class({
 		this.view.destroy();
 		this.view = null;
 
+		this.window = null;
+
 		this.viewTransition = null;
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
 
 		this.navigationBar = null;
-		this.window = null;
 
 		this.$started = false;
 
