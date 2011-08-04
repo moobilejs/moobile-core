@@ -942,6 +942,7 @@ p small {
 
 .transition-cubic-viewport {
 	-webkit-perspective: 800;
+	-webkit-perspective-origin: 50% 50%;
 }
 
 /* Enter */
