@@ -25,21 +25,16 @@ Moobile.WindowController = new Class({
 
 	rootViewController: null,
 
-	initialize: function(viewElement) {
-		this.loadView(viewElement);
+	initialize: function(viewElement, options) {
+		this.parent(viewElement, options);
+		this.window = this.view;
+		this.window.startup();
 		this.startup();
 		return this;
 	},
 
-	startup: function() {
-		this.parent();
-		this.window = this.view;
-		this.window.startup();
-		return this;
-	},
-
 	loadView: function(viewElement) {
-		this.view = new Moobile.Window(viewElement);
+		this.view = new Moobile.Window(viewElement, this.options);
 		return this;
 	},
 
@@ -51,8 +46,6 @@ Moobile.WindowController = new Class({
 
 		if (this.rootViewController) {
 			this.viewController.removeViewController(this.rootViewController);
-			this.rootViewController.view.destroy();
-			this.rootViewController.view = null;
 			this.rootViewController.destroy();
 			this.rootViewController = null;
 		}

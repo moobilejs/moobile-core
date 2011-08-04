@@ -35,25 +35,47 @@ Moobile.Window = new Class({
 
 	options: {
 		className: 'window',
-		showLoadingIndicator: true,
-		showLoadingIndicatorDelay: 750
+		showLoadingIndicator: false,
+		showLoadingIndicatorDelay: 0
 	},
 
-	init: function() {
-		this.parent();
-		this.position.delay(100);
+	startup: function() {
+
 		window.$moobile.window = this;
+
+		if (this.$started == false) {
+			this.$started = true;
+			this.init();
+			this.attachEvents();
+		}
+
+		return this;
+	},
+
+	destroy: function() {
+
+		window.$moobile = null;
+
+		if (this.$started == true) {
+			this.$started = false;
+			this.detachEvents();
+			this.release();
+			this.content = null;
+		}
+
 		return this;
 	},
 
 	attachEvents: function() {
-		window.addEvent('orientationchange', this.bound('onOrientationChange'));
+		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
+		window.addEvent('load', this.bound('onWindowLoad'));
 		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		window.removeEvent('orientationchange', this.bound('onOrientationChange'));
+		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
+		window.removeEvent('load', this.bound('onWindowLoad'));
 		this.parent();
 		return this;
 	},
@@ -113,7 +135,6 @@ Moobile.Window = new Class({
 	showLoadingIndicator: function() {
 		if (this.inputMask) {
 			this.inputMask.addClass('loading');
-
 			this.loadingIndicator = new Element('div.' + this.options.className + '-loading-indicator');
 			this.loadingIndicator.fade('hide');
 			this.loadingIndicator.inject(this.inputMask);
@@ -142,9 +163,14 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	onOrientationChange: function() {
+	onWindowOrientationChange: function() {
 		this.position();
 		this.fireEvent('orientationchange', this.getOrientation());
+	},
+
+	onWindowLoad: function(e) {
+		this.position.delay(100);
+		return this;
 	}
 
 });
