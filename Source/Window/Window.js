@@ -169,7 +169,7 @@ Moobile.Window = new Class({
 	},
 
 	onWindowLoad: function(e) {
-		this.position.delay(100);
+		this.position.delay(250);
 		return this;
 	}
 
