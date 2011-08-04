@@ -42,11 +42,6 @@ Moobile.View = new Class({
 		className: 'view'
 	},
 
-	initialize: function(element, options) {
-		this.parent(element, options);
-		return this;
-	},
-
 	build: function() {
 		this.parent();
 		this.content = new Element('div.' + this.options.className + '-content');
@@ -73,21 +68,24 @@ Moobile.View = new Class({
 
 	destroy: function() {
 
-		this.detachEvents();
-		this.destroyChildViews();
-		this.destroyChildControls();
-		this.destroyChildElements();
+		if (this.$started) {
+			this.$started = false;
 
-		this.release();
+			this.detachEvents();
+			this.destroyChildViews();
+			this.destroyChildControls();
+			this.destroyChildElements();
 
-		this.removeFromParentView();
+			this.release();
 
-		this.parentView = null;
-		this.window = null;
-		this.content = null;
-		this.$started = false;
+			this.removeFromParentView();
 
-		this.parent();
+			this.parentView = null;
+			this.window = null;
+			this.content = null;
+
+			this.parent();
+		}
 
 		return this;
 	},
