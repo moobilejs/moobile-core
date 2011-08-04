@@ -57,7 +57,9 @@ Moobile.ViewController = new Class({
 
 	navigationBar: null,
 
-	initialize: function(viewSource) {
+	initialize: function(viewSource, options) {
+
+		this.setOptions(options);
 
 		var viewElement = document.id(viewSource);
 		if (viewElement) {
@@ -117,22 +119,24 @@ Moobile.ViewController = new Class({
 
 	destroy: function() {
 
-		this.detachEvents();
-		this.release();
+		if (this.$started) {
+			this.$started = false;
 
-		this.view.destroy();
-		this.view = null;
+			this.detachEvents();
+			this.release();
 
-		this.window = null;
+			this.view.destroy();
+			this.view = null;
 
-		this.viewTransition = null;
-		this.viewControllerStack = null;
-		this.viewControllerPanel = null;
-		this.parentViewController = null;
+			this.window = null;
 
-		this.navigationBar = null;
+			this.viewTransition = null;
+			this.viewControllerStack = null;
+			this.viewControllerPanel = null;
+			this.parentViewController = null;
 
-		this.$started = false;
+			this.navigationBar = null;
+		}
 
 		return this;
 	},
