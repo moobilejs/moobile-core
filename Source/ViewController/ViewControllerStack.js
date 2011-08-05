@@ -33,7 +33,8 @@ Moobile.ViewControllerStack = new Class({
 
 	pushViewController: function(viewController, viewTransition) {
 
-		this.window.disableInput();
+		if (this.viewControllers.length > 0)
+			this.window.disableInput();
 
 		if (viewController.isViewLoaded() == false) {
 			viewController.addEvent('loaded', function() {
@@ -91,9 +92,9 @@ Moobile.ViewControllerStack = new Class({
 
 		this.didPushViewController(viewControllerPushed);
 
-		viewControllerPushed.viewDidEnter();
-
 		this.window.enableInput();
+
+		viewControllerPushed.viewDidEnter();
 
 		return this;
 	},
