@@ -374,11 +374,21 @@ p small {
 }
 
 .ui-navigation-bar-item-left {
-	padding-left: 6px;
+	text-align: left;
 }
 
 .ui-navigation-bar-item-right {
-	padding-right: 6px;
+	text-align: right;
+}
+
+.ui-navigation-bar-item-left > * {
+	display: inline-block;
+	margin-left: 6px;
+}
+
+.ui-navigation-bar-item-right > * {
+	display: inline-block;
+	margin-right: 6px;
 }
 
 /* UI Bar Button
@@ -390,6 +400,8 @@ p small {
 	height: 30px;
 	line-height: 30px;
 	overflow: hidden;
+	padding-left: 4px;
+	padding-right: 4px;
 }
 
 .ui-bar-button-content {
