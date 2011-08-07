@@ -47,6 +47,30 @@ Moobile.UI.Bar = new Class({
 
 	removeBarButtons: function() {
 		return this.removeChildControls();
+	},
+
+	viewWillChange: function(view) {
+		if (this.view) this.view.removeClass('with-' + this.options.className);
+		this.parent();
+		return this;
+	},
+
+	viewDidChange: function(view) {
+		if (this.view) this.view.addClass('with-' + this.options.className);
+		this.parent();
+		return this;
+	},
+
+	willShow: function() {
+		if (this.view) this.view.addClass('with-' + this.options.className);
+		this.parent();
+		return this;
+	},
+
+	willHide: function() {
+		if (this.view) this.view.removeClass('with-' + this.options.className);
+		this.parent();
+		return this;
 	}
 
 });

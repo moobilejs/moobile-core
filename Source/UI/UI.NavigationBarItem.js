@@ -1,7 +1,7 @@
 /*
 ---
 
-name: UI.Bar.NavigationItem
+name: UI.NavigationBarItem
 
 description: Provides a container with a title and two buttons for the
              navigation bar.
@@ -15,14 +15,14 @@ requires:
 	- UI.Control
 
 provides:
-	- UI.Bar.NavigationItem
+	- UI.NavigationBarItem
 
 ...
 */
 
 if (!window.Moobile.UI.Bar) window.Moobile.UI.Bar = {};
 
-Moobile.UI.Bar.NavigationItem = new Class({
+Moobile.UI.NavigationBarItem = new Class({
 
 	Extends: Moobile.UI.Control,
 

@@ -1,10 +1,9 @@
 /*
 ---
 
-name: UI.Bar.Navigation
+name: UI.NavigationBar
 
-description: Provide the navigation bar control that contains a title and two
-             areas for buttons.
+description: Provide the navigation bar control.
 
 license: MIT-style license.
 
@@ -15,12 +14,12 @@ requires:
 	- UI.Bar
 
 provides:
-	- UI.Bar.Navigation
+	- UI.NavigationBar
 
 ...
 */
 
-Moobile.UI.Bar.Navigation = new Class({
+Moobile.UI.NavigationBar = new Class({
 
 	Extends: Moobile.UI.Bar,
 
@@ -53,30 +52,6 @@ Moobile.UI.Bar.Navigation = new Class({
 			this.navigationItem.destroy();
 			this.navigationItem = null;
 		}
-		return this;
-	},
-
-	viewWillChange: function(view) {
-		if (this.view) this.view.removeClass('with-' + this.options.className);
-		this.parent();
-		return this;
-	},
-
-	viewDidChange: function(view) {
-		if (this.view) this.view.addClass('with-' + this.options.className);
-		this.parent();
-		return this;
-	},
-
-	willShow: function() {
-		if (this.view) this.view.addClass('with-' + this.options.className);
-		this.parent();
-		return this;
-	},
-
-	willHide: function() {
-		if (this.view) this.view.removeClass('with-' + this.options.className);
-		this.parent();
 		return this;
 	}
 

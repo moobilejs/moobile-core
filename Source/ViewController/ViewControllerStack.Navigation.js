@@ -31,8 +31,8 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		if (viewController.navigationBar)
 			return this;
 
-		var navigationBar = new Moobile.UI.Bar.Navigation();
-		var navigationItem = new Moobile.UI.Bar.NavigationItem();
+		var navigationBar = new Moobile.UI.NavigationBar();
+		var navigationItem = new Moobile.UI.NavigationBarItem();
 		navigationBar.setNavigationItem(navigationItem);
 
 		if (this.viewControllers.length > 1) {
