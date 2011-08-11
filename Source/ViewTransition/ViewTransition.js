@@ -36,49 +36,57 @@ Moobile.ViewTransition = new Class({
 		Class.Binds
 	],
 
-	transitionElement: null,
+	subjects: [],
 
-	acceptedTargets: [],
+	options: {
 
-	running: false,
+	},
 
-	attachEvents: function() {
-		this.transitionElement.addEvent('transitionend', this.bound('onTransitionEnd'));
+	initialize: function(options) {
+		this.setOptions(options);
 		return this;
 	},
 
-	detachEvents: function() {
-		this.transitionElement.removeEvent('transitionend', this.bound('onTransitionEnd'));
+	animate: function(subject, className) {
+		this.addSubject(subject, className);
 		return this;
 	},
 
-	setTransitionElement: function(transitionElement) {
-		this.transitionElement = document.id(transitionElement);
+	addSubject: function(subject, className) {
+		var element = document.id(subject);
+		element.store('view-transition:transition-class', className);
+		element.addClass(className);
+		element.addEvent('transitionend', this.bound('onComplete'));
+		element.addEvent('animationend', this.bound('onComplete'));
+		this.subjects.push(element);
 		return this;
 	},
 
-	addAcceptedTarget: function(target) {
-		target = document.id(target);
-		this.acceptedTargets.include(target);
+	removeSubject: function(subject) {
+		var element = document.id(subject);
+		var className = element.retrieve('view-transition:transition-class');
+		element.removeClass(className);
+		element.removeEvent('transitionend', this.bound('onComplete'));
+		element.removeEvent('animationend', this.bound('onComplete'));
+		this.subjects.erase(element);
 		return this;
 	},
 
-	removeAcceptedTarget: function(target) {
-		target = document.id(target);
-		this.acceptedTargets.erase(target);
+	clearSubjects: function() {
+		this.subjects.each(this.bound('clearSubject'));
+		this.subjects = [];
 		return this;
 	},
 
-	clearAcceptedTargets: function() {
-		this.acceptedTargets = [];
+	clearSubject: function(subject) {
+		var className = subject.retrieve('view-transition:transition-class');
+		subject.removeClass(className);
+		subject.removeEvent('transitionend', this.bound('onComplete'));
+		subject.removeEvent('animationend', this.bound('onComplete'));
 		return this;
 	},
 
-	getTransitionElement: function() {
-		return this.transitionElement;
-	},
-
-	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
+	enter: function(viewToShow, viewToHide, parentView, first) {
 		return this;
 	},
 
@@ -86,30 +94,9 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	start: function(callback) {
-		if (this.running == false) {
-			this.running = true;
-			this.addEvent('ended:once', callback);
-			this.play.delay(5, this);
-		}
-		return this;
-	},
-
-	play: function() {
-		this.running = true;
-		this.attachEvents();
-		this.transitionElement.addClass('commit-transition');
-		return this;
-	},
-
-	onTransitionEnd: function(e) {
-
-		if (this.running && (e.target === this.transitionElement || this.acceptedTargets.contains(e.target))) {
-			this.running = false;
-			this.transitionElement.removeClass('commit-transition');
-			this.detachEvents();
-			this.clearAcceptedTargets();
-			this.fireEvent('ended');
+	onComplete: function(e) {
+		if (this.subjects.contains(e.target)) {
+			this.clearSubjects();
 			this.fireEvent('complete');
 		}
 		return this;

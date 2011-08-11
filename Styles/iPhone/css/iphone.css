@@ -705,7 +705,6 @@ p small {
 .ui-list-item.ui-list-item-selected,
 .ui-list-item.ui-list-item-highlighted {
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
-	background-image: -moz-linear-gradient(center bottom, #058DF5 0%, #0160E6 100%);
 	color: #ffffff;
 	text-shadow: none;
 }
@@ -782,147 +781,213 @@ p small {
 /* Transition - Fade
 -----------------------------------------------------------------------------*/
 
+@-webkit-keyframes transition-fade-in-keyframes {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes transition-fade-out-keyframes {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* Enter First */
+
+.transition-fade-enter-first {
+	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-animation: transition-fade-in-keyframes 500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
 /* Enter */
 
-.transition-fade-enter .transition-fade-view-to-show-first {
-	opacity: 0;
-	z-index: 90;
-}
-
-.transition-fade-enter .transition-fade-view-to-show {
+.transition-fade-enter .transition-view-to-show {
+	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-transform: translateY(-100%);
-	opacity: 0;
-	z-index: 90;
+	-webkit-animation: transition-fade-in-keyframes 350ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	z-index: 100;												/* Important */
 }
 
-.transition-fade-enter .transition-fade-view-to-hide {
-	opacity: 1;
-	z-index: 100;
-}
-
-.transition-fade-enter.commit-transition .transition-fade-view-to-show-first {
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	opacity: 1;
-}
-
-.transition-fade-enter.commit-transition .transition-fade-view-to-show {
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	opacity: 1;
-}
-
-.transition-fade-enter.commit-transition .transition-fade-view-to-hide {
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	opacity: 0;
+.transition-fade-enter .transition-view-to-hide {
+	-webkit-backface-visibility: hidden;						/* Important */
+	z-index: 75;												/* Important */
 }
 
 /* Leave */
 
-.transition-fade-leave .transition-fade-view-to-show {
-	opacity: 0;
-	z-index: 90;
+.transition-fade-leave .transition-view-to-show {
+	-webkit-backface-visibility: hidden;						/* Important */
+	z-index: 75;												/* Important */
 }
 
-.transition-fade-leave .transition-fade-view-to-hide {
+.transition-fade-leave .transition-view-to-hide {
+	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-transform: translateY(-100%);
-	opacity: 1;
-	z-index: 100;
-}
-
-.transition-fade-leave.commit-transition .transition-fade-view-to-show {
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	opacity: 1;
-}
-
-.transition-fade-leave.commit-transition .transition-fade-view-to-hide {
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	opacity: 0;
+	-webkit-animation: transition-fade-out-keyframes 350ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	z-index: 100;												/* Important */
 }
 
 /* Transition - Slide
 -----------------------------------------------------------------------------*/
 
-.transition-slide {
+@-webkit-keyframes transition-slide-enter-first-keyframes {
+	from {
+		-webkit-transform: translateX(100%);
+	}
+	to {
+		-webkit-transform: translateX(0%);
+	}
+}
+
+@-webkit-keyframes transition-slide-leave-keyframes {
+	from {
+		-webkit-transform: translateX(-100%);
+	}
+	to {
+		-webkit-transform: translateX(0%);
+	}
+}
+
+.transition-slide-enter-first,
+.transition-slide-enter,
+.transition-slide-leave {
 	-webkit-backface-visibility: hidden;	/* Important */
-	height: 100%;
-	width: 100%;
 }
 
-.transition-slide .transition-slide-view-to-show,
-.transition-slide .transition-slide-view-to-hide {
-	overflow: visible;
+/* Enter First */
+
+.transition-slide-enter-first {
+	-webkit-animation: transition-slide-enter-first-keyframes 500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
-.transition-slide-enter { -webkit-transform: translateX(0%); }
-.transition-slide-leave { -webkit-transform: translateX(-100%); }
+/* Enter */
 
-.transition-slide-enter .transition-slide-view-to-show {
+@-webkit-keyframes transition-slide-enter-keyframes {
+	from {
+		-webkit-transform: translateX(0%);
+	}
+	to {
+		-webkit-transform: translateX(-100%);
+	}
+}
+
+.transition-slide-enter {
+	-webkit-animation: transition-slide-enter-keyframes 8500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+.transition-slide-enter .transition-view-to-show {
 	-webkit-transform: translateX(100%) translateY(-100%);
-	z-index: 60;
+	overflow: visible;											/* Important */
 }
 
-.transition-slide-enter .transition-slide-view-to-show-first {
-	-webkit-transform: translateX(100%) translateY(0%);
+.transition-slide-enter .transition-view-to-hide {
+	-webkit-transform: translateX(0%) translateY(0%);
+	overflow: visible;											/* Important */
 }
 
-.transition-slide-enter.commit-transition {
-	-webkit-transition-property: -webkit-transform;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	-webkit-transform: translateX(-100%);
+/* Enter Navigation Bar */
+
+@-webkit-keyframes transition-slide-enter-view-to-show-navigation-bar-keyframes {
+	from {
+		-webkit-transform: translateX(-75%);
+		/*opacity: 0;*/
+	}
+	to {
+		-webkit-transform: translateX(0%);
+		/*opacity: 1;*/
+	}
 }
 
-.transition-slide-leave .transition-slide-view-to-hide {
+@-webkit-keyframes transition-slide-enter-view-to-hide-navigation-bar-keyframes {
+	from {
+		-webkit-transform: translateX(0%);
+		/*opacity: 1;*/
+	}
+	to {
+		-webkit-transform: translateX(75%);
+		/*opacity: 0;*/
+	}
+}
+
+.transition-slide-enter .transition-view-to-show .ui-navigation-bar-content {
+	-webkit-animation: transition-slide-enter-view-to-show-navigation-bar-keyframes 8500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+.transition-slide-enter .transition-view-to-hide .ui-navigation-bar-content {
+	-webkit-animation: transition-slide-enter-view-to-hide-navigation-bar-keyframes 8500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Leave */
+
+.transition-slide-leave .transition-view-to-show {
+	-webkit-transform: translateX(0%) translateY(0%);
+	overflow: visible;											/* Important */
+	z-index: 75;												/* Important */
+}
+
+.transition-slide-leave .transition-view-to-hide {
 	-webkit-transform: translateX(100%) translateY(-100%);
-	z-index: 60;
+	overflow: visible;											/* Important */
 }
 
-.transition-slide-leave.commit-transition {
-	-webkit-transition-property: -webkit-transform;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	-webkit-transform: translateX(0%);
+.transition-slide-leave {
+	-webkit-animation: transition-slide-leave-keyframes 500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Leave Navigation Bar */
+
+@-webkit-keyframes transition-slide-leave-view-to-show-navigation-bar-keyframes {
+	from {
+		-webkit-transform: translateX(75%);
+		opacity: 0;
+	}
+	to {
+		-webkit-transform: translateX(0%);
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes transition-slide-leave-view-to-hide-navigation-bar-keyframes {
+	from {
+		-webkit-transform: translateX(0%);
+		opacity: 1;
+	}
+	to {
+		-webkit-transform: translateX(-75%);
+		opacity: 0;
+	}
+}
+
+.transition-slide-leave .transition-view-to-show .ui-navigation-bar-content {
+	-webkit-animation: transition-slide-leave-view-to-show-navigation-bar-keyframes 500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+.transition-slide-leave .transition-view-to-hide .ui-navigation-bar-content {
+	-webkit-animation: transition-slide-leave-view-to-hide-navigation-bar-keyframes 500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Navigation Bar Enter */
-
-.transition-slide-enter .transition-slide-view-to-show .ui-navigation-bar-content {
-	-webkit-transform: translateX(-75%);
-	opacity: 0;
-}
-
-.transition-slide-enter .transition-slide-view-to-hide .ui-navigation-bar-content {
-	-webkit-transform: translateX(0%);
-	opacity: 1;
-}
-
-.transition-slide-enter.commit-transition .transition-slide-view-to-show .ui-navigation-bar-content {
-	-webkit-transition-property: -webkit-transform, opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	-webkit-transform: translateX(0%);
-	opacity: 1;
-}
-
-.transition-slide-enter.commit-transition .transition-slide-view-to-hide .ui-navigation-bar-content {
-	-webkit-transition-property: -webkit-transform, opacity;
-	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
-	-webkit-transform: translateX(75%);
-	opacity: 0;
-}
-
+/*
+*/
 /* Navigation Bar Leave */
-
+/*
 .transition-slide-leave .transition-slide-view-to-show .ui-navigation-bar-content {
 	-webkit-transform: translateX(75%);
 	opacity: 0;
@@ -936,7 +1001,7 @@ p small {
 .transition-slide-leave.commit-transition .transition-slide-view-to-show .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-transform: translateX(0%);
 	opacity: 1;
 }
@@ -944,11 +1009,11 @@ p small {
 .transition-slide-leave.commit-transition .transition-slide-view-to-hide .ui-navigation-bar-content {
 	-webkit-transition-property: -webkit-transform, opacity;
 	-webkit-transition-duration: 500ms;
-	-webkit-transition-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-transition-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-transform: translateX(-75%);
 	opacity: 0;
 }
-
+*/
 /* Transition Cubic
 -----------------------------------------------------------------------------*/
 

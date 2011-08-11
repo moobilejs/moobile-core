@@ -23,50 +23,25 @@ Moobile.ViewTransition.Slide = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	enter: function(viewToShow, viewToHide, parentView, firstViewIn) {
-		
-		this.setTransitionElement(parentView.content);
+	enter: function(viewToShow, viewToHide, parentView, first) {
 
-		parentView.content.addClass('transition-slide');
-		parentView.content.addClass('transition-slide-enter');
-		viewToShow.addClass('transition-slide-view-to-show');
-
-		if (firstViewIn) {
-			viewToShow.addClass('transition-slide-view-to-show-first');
-		} else {
-			viewToHide.addClass('transition-slide-view-to-hide');
+		if (first) {
+			this.animate(viewToShow, 'transition-slide-enter-first');
+			return this;
 		}
 
-		this.start(function() {
-			parentView.content.removeClass('transition-slide');
-			parentView.content.removeClass('transition-slide-enter');
-			viewToShow.removeClass('transition-slide-view-to-show');
-			viewToShow.removeClass('transition-slide-view-to-show-first');
-			if (firstViewIn == false) {
-				viewToHide.removeClass('transition-slide-view-to-hide');
-			}
-		});
+		this.addSubject(viewToShow, 'transition-view-to-show');
+		this.addSubject(viewToHide, 'transition-view-to-hide');
+		this.animate(parentView.content, 'transition-slide-enter');
 
 		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
-		
-		var wrapper = parentView.content;
-		
-		this.setTransitionElement(wrapper);
 
-		wrapper.addClass('transition-slide');
-		wrapper.addClass('transition-slide-leave');
-		viewToShow.addClass('transition-slide-view-to-show');
-		viewToHide.addClass('transition-slide-view-to-hide');
-
-		this.start(function() {
-			wrapper.removeClass('transition-slide');
-			wrapper.removeClass('transition-slide-leave');
-			viewToShow.removeClass('transition-slide-view-to-show');
-			viewToHide.removeClass('transition-slide-view-to-hide');
-		});
+		this.addSubject(viewToShow, 'transition-view-to-show');
+		this.addSubject(viewToHide, 'transition-view-to-hide');
+		this.animate(parentView.content, 'transition-slide-leave');
 
 		return this;
 	}

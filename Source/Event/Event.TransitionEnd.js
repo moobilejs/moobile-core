@@ -41,5 +41,8 @@ provides:
 	Element.NativeEvents[prefix + 'TransitionEnd'] = 2;
 	Element.Events.transitionend = { base: (prefix + 'TransitionEnd') };
 
+	Element.NativeEvents[prefix + 'AnimationEnd'] = 2;
+	Element.Events.animationend = { base: (prefix + 'AnimationEnd') };
+
 })();
 
