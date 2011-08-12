@@ -32,6 +32,7 @@ Moobile.ViewTransition.Slide = new Class({
 
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
+
 		this.animate(parentView.content, 'transition-slide-enter');
 
 		return this;
@@ -41,6 +42,7 @@ Moobile.ViewTransition.Slide = new Class({
 
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
+
 		this.animate(parentView.content, 'transition-slide-leave');
 
 		return this;

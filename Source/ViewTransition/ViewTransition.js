@@ -38,9 +38,7 @@ Moobile.ViewTransition = new Class({
 
 	subjects: [],
 
-	options: {
-
-	},
+	options: {},
 
 	initialize: function(options) {
 		this.setOptions(options);

@@ -33,15 +33,19 @@ Moobile.ViewTransition.Fade = new Class({
 
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 		this.addSubject(viewToShow, 'transition-view-to-show');
+
 		this.animate(parentView.content, 'transition-fade-enter');
 
 		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
+
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 		this.addSubject(viewToShow, 'transition-view-to-show');
+
 		this.animate(parentView.content, 'transition-fade-leave');
+
 		return this;
 	}
 
