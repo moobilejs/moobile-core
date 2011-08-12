@@ -992,6 +992,29 @@ p small {
     -webkit-perspective-origin: 50% 50%;
 }
 
+/* Enter First */
+
+@-webkit-keyframes transition-cubic-enter-first-keyframes {
+	from {
+		-webkit-transform: translateX(0%) rotateY(0deg);
+	}
+	to {
+		-webkit-transform: translateX(-100%) rotateY(-90deg);
+	}
+}
+
+.transition-cubic-enter-first {
+	-webkit-animation: transition-cubic-enter-first-keyframes 500ms 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-transform-style: preserve-3d;
+    -webkit-transform-origin: 100% 100%;
+}
+
+.transition-cubic-enter-first .transition-view-to-show {
+	-webkit-transform-origin: top left;
+    -webkit-transform: translateX(100%) rotateY(90deg);
+}
+
 /* Enter */
 
 @-webkit-keyframes transition-cubic-enter-keyframes {
