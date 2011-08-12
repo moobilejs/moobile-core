@@ -52,6 +52,7 @@ sources:
   - "Source/ViewTransition/ViewTransition.Slide.js"
   - "Source/ViewTransition/ViewTransition.Cubic.js"
   - "Source/ViewTransition/ViewTransition.Fade.js"
+  - "Source/ViewTransition/ViewTransition.Flip.js"
   - "Source/ViewController/ViewController.js"
   - "Source/ViewController/ViewControllerCollection.js"
   - "Source/ViewController/ViewControllerStack.js"

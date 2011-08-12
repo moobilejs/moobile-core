@@ -3,7 +3,7 @@
 
 name: ViewTransition.Cubic
 
-description: Provide a cubic view controller transition effect.
+description: Provide a cubic view transition effect.
 
 license: MIT-style license.
 

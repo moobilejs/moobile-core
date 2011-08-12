@@ -3,7 +3,7 @@
 
 name: ViewTransition.Slide
 
-description: Provide a slide view controller transition effect.
+description: Provide a slide view transition effect.
 
 license: MIT-style license.
 
