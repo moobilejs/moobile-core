@@ -1070,7 +1070,7 @@ p small {
 /* Enter First */
 
 
-@-webkit-keyframes transition-flip-enter-keyframes {
+@-webkit-keyframes transition-flip-enter-first-keyframes {
 	0% {
 		-webkit-transform: rotateY(0deg);
 	}
@@ -1080,7 +1080,7 @@ p small {
 }
 
 .transition-flip-enter-first {
-	-webkit-animation: transition-flip-enter-keyframes 500ms 1;
+	-webkit-animation: transition-flip-enter-first-keyframes 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 50% 50%;
