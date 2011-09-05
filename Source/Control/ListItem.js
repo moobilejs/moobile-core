@@ -46,13 +46,14 @@ Moobile.ListItem = new Class({
 		if (label == null) {
 			label = new Element('div[data-role=label]');
 			label.ingest(this.content);
-			label.inject(this.content, 'bottom');
 		}
 
 		if (image == null) {
 			image = new Element('div[data-role=image]');
-			image.inject(this.content, 'top');
 		}
+
+		image.inject(this.element, 'top');
+		label.inject(this.content, 'top');
 
 		this.label = this.getRoleInstance(label);
 		this.image = this.getRoleInstance(image);

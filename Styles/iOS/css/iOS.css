@@ -787,11 +787,11 @@ p small {
 	position: relative;											/* Important */
 }
 
-.list .list-item .list-item-icon {
+.list .list-item > .image {
 	-webkit-box-flex: 0;
 }
 
-.list .list-item .list-item-icon > * {
+.list .list-item > .image > * {
 	-webkit-box-sizing: border-box;
 	-webkit-background-clip: padding-box;
 	-webkit-border-radius: 4px;
