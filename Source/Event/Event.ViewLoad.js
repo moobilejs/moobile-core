@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Event.Loaded
+name: Event.ViewLoad
 
 description: Provide an element that will be automatically fired when added
              after being fired for the first time.
@@ -17,28 +17,28 @@ requires:
 	- Custom-Event/Element.defineCustomEvent
 
 provides:
-	- Event.Loaded
+	- Event.ViewLoad
 
 ...
 */
 
 (function() {
 
-	var executed = false;
+var executed = false;
 
-	Element.defineCustomEvent('loaded', {
+Element.defineCustomEvent('viewload', {
 
-		condition: function(e) {
-			executed = true;
-			return true;
-		},
+	condition: function(e) {
+		executed = true;
+		return true;
+	},
 
-		onSetup: function() {
-			if (executed) {
-				this.fireEvent('loaded');
-			}
+	onSetup: function() {
+		if (executed) {
+			this.fireEvent('viewload');
 		}
+	}
 
-	});
+});
 
 })();

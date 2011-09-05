@@ -59,10 +59,10 @@ provides:
 	};
 
 	var moved = function(e) {
-		var xmax = x + 3;
-		var xmin = x - 3;
-		var ymax = y + 3;
-		var ymin = y - 3;
+		var xmax = x + 5;
+		var xmin = x - 5;
+		var ymax = y + 5;
+		var ymin = y - 5;
 		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
