@@ -51,7 +51,7 @@ sources:
   - "Source/UI/UI.ListStyle.js"
   - "Source/UI/UI.ListItem.js"
   - "Source/View/View.js"
-  - "Source/View/View.Scroll.js"
+  - "Source/View/ScrollView.js"
   - "Source/View/ViewPanel.js"
   - "Source/View/ViewStack.js"
   - "Source/ViewTransition/ViewTransition.js"
