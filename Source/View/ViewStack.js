@@ -3,7 +3,7 @@
 
 name: ViewStack
 
-description: The view that must be used in conjunction with a 
+description: The view that must be used in conjunction with a
              ViewControllerStack.
 
 license: MIT-style license.
@@ -23,10 +23,16 @@ provides:
 Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
-	
-	build: function() {
-		this.parent();
-		this.addClass(this.options.className + '-stack');
+
+	build: function(element) {
+
+		this.parent(element);
+
+		var className = this.options.className;
+		if (className) {
+			this.element.addClass(className + '-stack');
+		}
+
 		return this;
 	}
 

@@ -3,7 +3,7 @@
 
 name: ViewPanel
 
-description: The view that must be used in conjunction with a 
+description: The view that must be used in conjunction with a
              ViewControllerPanel.
 
 license: MIT-style license.
@@ -23,11 +23,52 @@ provides:
 Moobile.ViewPanel = new Class({
 
 	Extends: Moobile.View,
-	
-	build: function() {
-		this.parent();
-		this.addClass(this.options.className + '-panel');
+
+	sidePanel: null,
+
+	mainPanel: null,
+
+	build: function(element) {
+
+		this.parent(element);
+
+		var sidePanel = this.getElement('[data-role=side-panel]');
+		if (sidePanel == null) {
+			sidePanel = new Element('div[data-role=side-panel]');
+			sidePanel.inject(this.content);
+		}
+
+		var mainPanel = this.getElement('[data-role=main-panel]');
+		if (mainPanel == null) {
+			mainPanel = new Element('div[data-role=main-panel]');
+			mainPanel.inject(this.content);
+		}
+
+		this.sidePanel = sidePanel;
+		this.mainPanel = mainPanel;
+
+		var className = this.options.className;
+		if (className) {
+			this.element.addClass(className + '-panel');
+			this.sidePanel.addClass(className + '-panel-side-panel');
+			this.mainPanel.addClass(className + '-panel-main-panel');
+		}
+
 		return this;
-	}
+	},
+
+	getSidePanel: function() {
+		return this.sidePanel;
+	},
+
+	getMainPanel: function() {
+		return this.mainPanel;
+	},
+
+	filterOwnElement: function(element) {
+		var parent = element.getParent('[data-role]:not([data-role=element])');
+		if (parent == null) return true;
+		return parent == this.element || parent == this.content || parent == this.sidePanel || parent == this.mainPanel;
+	},
 
 });
