@@ -42,6 +42,9 @@ Moobile.NavigationItem = new Class({
 
 		this.parent(element);
 
+		var lBarButton = this.getElement('[data-role=left-bar-button]');
+		var rBarButton = this.getElement('[data-role=right-bar-button]');
+
 		var label = this.getElement('[data-role=label]');
 		if (label == null) {
 			label = new Element('div[data-role=label]');
@@ -50,6 +53,18 @@ Moobile.NavigationItem = new Class({
 		}
 
 		this.label = this.getRoleInstance(label);
+
+		if (lBarButton) {
+			lBarButton.inject(this.content);
+			lBarButton = this.getRoleInstance(lBarButton);
+			this.setLeftBarButton(lBarButton);
+		}
+
+		if (rBarButton) {
+			rBarButton.inject(this.content);
+			rBarButton = this.getRoleInstance(rBarButton);
+			this.setRightBarButton(rBarButton);
+		}
 
 		return this;
 	},

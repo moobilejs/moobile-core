@@ -21,72 +21,86 @@ provides:
 
 Moobile.View.Roles = {
 
-	'view': {
+	view: {
 		stop: true,
-
 		apply: function() {
 			var n = this.get('name');
 			var o = this.get('options');
 			var c = this.get('data-view') || Moobile.View;
 			return Class.instanciate(c, this, o, n);
 		},
-
 		onAttach: function() {},
 		onDetach: function() {}
 	},
 
-	'control': {
+	control: {
 		stop: true,
-
 		apply: function() {
 			var n = this.get('name');
 			var o = this.get('options');
 			var c = this.get('data-control') || Moobile.Control;
 			return Class.instanciate(c, this, o, n);
 		},
-
 		onAttach: function() {},
 		onDetach: function() {}
 	},
 
-	'label': {
+	label: {
 		stop: true,
-
 		apply: function() {
 			var n = this.get('name');
 			var o = this.get('options');
 			var c = this.get('data-label') || Moobile.Label;
 			return Class.instanciate(c, this, o, n);
 		},
-
 		onAttach: function() {},
 		onDetach: function() {}
 	},
 
-	'image': {
+	image: {
 		stop: true,
-
 		apply: function() {
 			var n = this.get('name');
 			var o = this.get('options');
 			var c = this.get('data-image') || Moobile.Image;
 			return Class.instanciate(c, this, o, n);
 		},
-
 		onAttach: function() {},
 		onDetach: function() {}
 	},
 
 	'navigation-item': {
 		stop: true,
-
 		apply: function() {
 			var n = this.get('name');
 			var o = this.get('options');
 			var c = this.get('data-navigation-item') || Moobile.NavigationItem;
 			return Class.instanciate(c, this, o, n);
 		},
+		onAttach: function() {},
+		onDetach: function() {}
+	},
 
+	'left-bar-button': {
+		stop: true,
+		apply: function() {
+			var n = this.get('name');
+			var o = this.get('options');
+			var c = this.get('data-left-bar-button') || Moobile.BarButton;
+			return Class.instanciate(c, this, o, n);
+		},
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	'right-bar-button': {
+		stop: true,
+		apply: function() {
+			var n = this.get('name');
+			var o = this.get('options');
+			var c = this.get('data-right-bar-button') || Moobile.BarButton;
+			return Class.instanciate(c, this, o, n);
+		},
 		onAttach: function() {},
 		onDetach: function() {}
 	},
