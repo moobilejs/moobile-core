@@ -14,7 +14,7 @@ authors: "Jean-Philippe Dery (jeanphilippe.dery@gmail.com)"
 
 sources:
 
-  - "Vendor/iscroll/src/iscroll-lite.js"
+  - "Vendor/iscroll/src/iscroll.js"
 
   - "Source/Browser/Browser.Platform.js"
   - "Source/Class/Class.Instanciate.js"
