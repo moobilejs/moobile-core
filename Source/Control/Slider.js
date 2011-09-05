@@ -79,7 +79,7 @@ Moobile.Slider = new Class({
 	init: function() {
 		this.parent();
 		this.attachSlider();
-		this.value = 0;
+		this.setValue(0);
 		return this;
 	},
 
