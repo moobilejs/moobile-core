@@ -21,11 +21,61 @@ provides:
 
 Moobile.ViewControllerPanel = new Class({
 
-	Extends: Moobile.ViewControllerCollection,
+	Extends: Moobile.ViewController,
 
-	didAddViewController: function(viewController) {
-		viewController.viewControllerPanel = this;
+	mainViewController: null,
+
+	sideViewController: null,
+
+	setMainViewController: function(mainViewController) {
+
+		if (this.mainViewController) {
+			this.mainViewController.removeFromParentViewController();
+			this.mainViewController.destroy();
+			this.mainViewController = null;
+		}
+
+		this.mainViewController = mainViewController;
+
+		this.addChildViewController(this.mainViewController);
+
+		return this;
+	},
+
+	getMainViewController: function() {
+		return this.mainViewController;
+	},
+
+	setSideViewController: function(sideViewController) {
+
+		if (this.sideViewController) {
+			this.sideViewController.destroy();
+			this.sideViewController = null;
+		}
+
+		this.sideViewController = sideViewController;
+
+		this.addChildViewController(this.sideViewController, 'top', this.view.getSidePanel());
+
+		return this;
+	},
+
+	getSideViewController: function() {
+		return this.sideViewController;
+	},
+
+	loadView: function(viewElement) {
+		this.view = Class.instanciate(
+			viewElement.get('data-view') || 'Moobile.ViewPanel',
+			viewElement
+		);
+		return this;
+	},
+
+	didAddChildViewController: function(viewController) {
+		viewController.setViewControllerPanel(this);
 		this.parent();
 		return this;
 	}
+
 });

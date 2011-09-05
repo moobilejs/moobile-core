@@ -11,8 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Request.ViewController
-	- ViewControllerCollection
+	- ViewController
 
 provides:
 	- ViewControllerStack
@@ -22,22 +21,29 @@ provides:
 
 Moobile.ViewControllerStack = new Class({
 
-	Extends: Moobile.ViewControllerCollection,
+	Extends: Moobile.ViewController,
 
-	viewControllerRequest: null,
+	topViewController: null,
 
-	loadView: function(element) {
-		this.view = new Moobile.ViewStack(element);
+	getTopViewController: function() {
+		return this.topViewController;
+	},
+
+	loadView: function(viewElement) {
+		this.view = Class.instanciate(
+			viewElement.get('data-view') || 'Moobile.ViewStack',
+			viewElement
+		);
 		return this;
 	},
 
 	pushViewController: function(viewController, viewTransition) {
 
-		if (this.viewControllers.length > 0)
+		if (this.childViewControllers.length > 0)
 			this.window.disableInput();
 
 		if (viewController.isViewLoaded() == false) {
-			viewController.addEvent('loaded', function() {
+			viewController.addEvent('viewload:once', function() {
 				this.pushViewController(viewController, viewTransition);
 			}.bind(this));
 			return this;
@@ -45,49 +51,58 @@ Moobile.ViewControllerStack = new Class({
 
 		var viewControllerPushed = viewController; // ease of understanding
 
-		var viewControllerExists = this.viewControllers.contains(viewControllerPushed);
-		if (viewControllerExists == false) {
-			viewControllerPushed.viewControllerStack = this;
-			viewControllerPushed.viewControllerPanel = this.viewControllerPanel;
-		} else {
-			this.viewControllers.erase(viewControllerPushed);
+		var viewControllerExists = this.childViewControllers.contains(viewControllerPushed);
+		if (viewControllerExists) {
+			this.removeChildViewController(viewControllerPushed);
 		}
 
 		this.willPushViewController(viewControllerPushed);
 
-		this.addViewController(viewControllerPushed);
-		viewControllerPushed.view.show();
-		viewControllerPushed.viewWillEnter();
+		this.addChildViewController(viewControllerPushed);
 
-		var viewControllerBefore = this.viewControllers.lastItemAt(1);
-		if (viewControllerBefore) {
-			viewControllerBefore.viewWillLeave();
-		}
+		this.topViewController = viewControllerPushed;
+
+		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
 
 		var viewToShow = viewControllerPushed.view;
-		var viewToHide = viewControllerBefore ? viewControllerBefore.view : null;
+		var viewToHide = viewControllerBefore
+					   ? viewControllerBefore.view
+					   : null;
 
-		viewTransition = viewTransition || new Moobile.ViewTransition.Slide();
-		viewTransition.addEvent('complete:once', this.bound('onPushTransitionCompleted'));
+		viewTransition = viewTransition || new Moobile.ViewTransition.None();
+		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
 			this.view,
-			this.viewControllers.length == 1
+			this.childViewControllers.length == 1
 		);
 
-		viewControllerPushed.viewTransition = viewTransition;
+		viewControllerPushed.setViewTransition(viewTransition);
 
 		return this;
 	},
 
-	onPushTransitionCompleted: function() {
+	onPushTransitionStart: function() {
 
-		var viewControllerPushed = this.viewControllers.lastItemAt(0);
-		var viewControllerBefore = this.viewControllers.lastItemAt(1);
+		var viewControllerPushed = this.childViewControllers.lastItemAt(0);
+		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
+		if (viewControllerBefore) {
+			viewControllerBefore.viewWillLeave();
+		}
+
+		viewControllerPushed.viewWillEnter();
+
+		return this;
+	},
+
+	onPushTransitionComplete: function() {
+
+		var viewControllerPushed = this.childViewControllers.lastItemAt(0);
+		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
 		if (viewControllerBefore) {
 			viewControllerBefore.viewDidLeave();
-			viewControllerBefore.view.hide();
 		}
 
 		this.didPushViewController(viewControllerPushed);
@@ -101,17 +116,17 @@ Moobile.ViewControllerStack = new Class({
 
 	popViewControllerUntil: function(viewController) {
 
-		if (this.viewControllers.length <= 1)
+		if (this.childViewControllers.length <= 1)
 			return this;
 
-		var viewControllerIndex = this.viewControllers.indexOf(viewController);
+		var viewControllerIndex = this.childViewControllers.indexOf(viewController);
 		if (viewControllerIndex > -1) {
-			for (var i = this.viewControllers.length - 2; i > viewControllerIndex; i--) {
+			for (var i = this.childViewControllers.length - 2; i > viewControllerIndex; i--) {
 
-				var viewControllerToRemove = this.viewControllers[i];
+				var viewControllerToRemove = this.childViewControllers[i];
 				viewControllerToRemove.viewWillLeave();
 				viewControllerToRemove.viewDidLeave();
-				this.removeViewController(viewControllerToRemove);
+				this.removeChildViewController(viewControllerToRemove);
 
 				viewControllerToRemove.destroy();
 				viewControllerToRemove = null;
@@ -125,22 +140,21 @@ Moobile.ViewControllerStack = new Class({
 
 	popViewController: function() {
 
-		if (this.viewControllers.length <= 1)
+		if (this.childViewControllers.length <= 1)
 			return this;
 
 		this.window.disableInput();
 
-		var viewControllerPopped = this.viewControllers.lastItemAt(0);
-		var viewControllerBefore = this.viewControllers.lastItemAt(1);
+		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
+		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
 
 		this.willPopViewController(viewControllerPopped);
 
-		viewControllerPopped.viewWillLeave();
-		viewControllerBefore.viewWillEnter();
-		viewControllerBefore.view.show();
+		this.topViewController = viewControllerBefore;
 
 		var viewTransition = viewControllerPopped.viewTransition;
-		viewTransition.addEvent('complete:once', this.bound('onPopTransitionCompleted'));
+		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('onPopTransitionComplete'));
 		viewTransition.leave(
 			viewControllerBefore.view,
 			viewControllerPopped.view,
@@ -150,14 +164,25 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	onPopTransitionCompleted: function() {
+	onPopTransitionStart: function() {
 
-		var viewControllerPopped = this.viewControllers.lastItemAt(0);
-		var viewControllerBefore = this.viewControllers.lastItemAt(1);
+		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
+		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
+
+		viewControllerBefore.viewWillEnter();
+		viewControllerPopped.viewWillLeave();
+
+		return this;
+	},
+
+	onPopTransitionComplete: function() {
+
+		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
+		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
 		viewControllerBefore.viewDidEnter();
 		viewControllerPopped.viewDidLeave();
 
-		this.removeViewController(viewControllerPopped);
+		this.removeChildViewController(viewControllerPopped);
 
 		this.didPopViewController(viewControllerPopped);
 
@@ -169,8 +194,8 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	didAddViewController: function(viewController) {
-		viewController.viewControllerStack = this;
+	didAddChildViewController: function(viewController) {
+		viewController.setViewControllerStack(this);
 		this.parent();
 		return this;
 	},
@@ -190,4 +215,5 @@ Moobile.ViewControllerStack = new Class({
 	didPopViewController: function(viewController) {
 		return this;
 	}
+
 });

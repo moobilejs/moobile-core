@@ -24,34 +24,64 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
 
-	didAddViewController: function(viewController) {
+	options: {
+		back: true
+	},
+
+	willAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
 
-		if (viewController.navigationBar)
-			return this;
+		var view = viewController.getView();
 
-		var navigationBar = new Moobile.UI.NavigationBar();
-		var navigationItem = new Moobile.UI.NavigationBarItem();
-		navigationBar.setNavigationItem(navigationItem);
-
-		if (this.viewControllers.length > 1) {
-
-			var text = this.viewControllers.lastItemAt(1).getTitle() || 'Back';
-
-			var backBarButton = new Moobile.UI.BarButton();
-			backBarButton.setStyle(Moobile.UI.BarButtonStyle.Back);
-			backBarButton.setText(text);
-			backBarButton.addEvent('click', this.bound('onBackButtonClick'));
-
-			navigationItem.setLeftBarButton(backBarButton);
+		var navigationItem = null;
+		var navigationBar = view.getChildView('navigation-bar');
+		if (navigationBar == null) {
+			navigationBar = new Moobile.NavigationBar(null, null, 'navigation-bar');
+			navigationItem = new Moobile.NavigationItem();
+			navigationBar.setNavigationItem(navigationItem);
+			view.addChildView(navigationBar, 'header');
+		} else {
+			navigationItem = navigationBar.getNavigationItem();
 		}
 
-		navigationItem.setTitle(viewController.getTitle());
+		if (viewController.isModal() || !this.childViewControllers.length)
+			return this;
 
-		viewController.view.addChildControl(navigationBar, 'header');
+		if (this.options.back) {
 
-		viewController.navigationBar = navigationBar;
+			var title = this.topViewController.getTitle();
+			if (title) {
+
+				var backButton = new Moobile.BarButton();
+				backButton.setStyle(Moobile.BarButtonStyle.Back);
+				backButton.setLabel(title);
+				backButton.addEvent('click', this.bound('onBackButtonClick'));
+
+				navigationItem.setLeftBarButton(backButton);
+			}
+
+		}
+
+		return this;
+	},
+
+	didAddChildViewController: function(viewController) {
+
+		this.parent(viewController);
+
+		var navigationBar = viewController.getView().getChildView('navigation-bar');
+		if (navigationBar == null)
+			return this;
+
+		var title = viewController.getTitle();
+		if (title) {
+
+			var navigationItem = navigationBar.getNavigationItem();
+			if (navigationItem) {
+				navigationItem.setLabel(title)
+			}
+		}
 
 		return this;
 	},
