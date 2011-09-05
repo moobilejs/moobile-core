@@ -822,67 +822,67 @@ p small {
 /* Style Checked */
 
 .list .list-item.style-checked > .list-item-content {
-	padding-right: 25px;
+	padding-right: 30px;
 }
 
 .list .list-item.style-checked > .list-item-content:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -50px center;
+	background: url(../images/list-item-style-icon.png) no-repeat -60px center;
 	content: '';
 	height: 100%;
-	right: 10px;
+	right: 0px;
 	position: absolute;
 	top: 0px;
-	width: 25px;
+	width: 30px;
 }
 
 .list .list-item.list-item-down.style-checked > .list-item-content:after,
 .list .list-item.list-item-selected.style-checked > .list-item-content:after,
 .list .list-item.list-item-highlighted.style-checked > .list-item-content:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -75px center;
+	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
 }
 
 /* Style Disclosed */
 
 .list .list-item.style-disclosed > .list-item-content {
-	padding-right: 25px;
+	padding-right: 30px;
 }
 
 .list .list-item.style-disclosed > .list-item-content:after {
 	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
 	content: '';
 	height: 100%;
-	right: 10px;
+	right: 0px;
 	position: absolute;
 	top: 0px;
-	width: 25px;
+	width: 30px;
 }
 
 .list .list-item.list-item-down.style-disclosed > .list-item-content:after,
 .list .list-item.list-item-selected.style-disclosed > .list-item-content:after,
 .list .list-item.list-item-highlighted.style-disclosed > .list-item-content:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -25px center;
+	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
 }
 
 /* Style Detailed */
 
 .list .list-item.style-detailed > .list-item-content {
-	padding-right: 25px;
+	padding-right: 30px;
 }
 
 .list .list-item.style-detailed > .list-item-content:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -100px center;
+	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 	content: '';
 	height: 100%;
-	right: 10px;
+	right: 5px;
 	position: absolute;
 	top: 0px;
-	width: 25px;
+	width: 30px;
 }
 
 .list .list-item.list-item-down.style-detailed > .list-item-content:after,
 .list .list-item.list-item-selected.style-detailed > .list-item-content:after,
 .list .list-item.list-item-highlighted.style-detailed > .list-item-content:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -100px center;
+	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
 /* Style Active */
