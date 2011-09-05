@@ -18,10 +18,18 @@ provides:
 
 String.implement({
 
-	camelize: function() {
-		return this.toString()
-	    	.replace(/([A-Z]+)/g,   function(m,l) { return l.substr(0, 1).toUpperCase() + l.toLowerCase().substr(1, l.length); })
-		    .replace(/[\-_\s](.)/g, function(m,l) { return l.toUpperCase(); });
+	toJSONString: function() {
+		return '{' + this.toString() + '}';
+	},
+
+	toJSONObject: function() {
+		return JSON.decode(this.toJSONString());
+	},
+
+	toCamelCase: function() {
+		return this.camelCase().replace('-', '').replace(/\s\D/g, function(match){
+            return match.charAt(1).toUpperCase();
+        });
 	}
 
 });

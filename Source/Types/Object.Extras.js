@@ -22,11 +22,24 @@ provides:
 
 Object.extend({
 
-	defineMember: function(source, reference, name) {
+	defineMember: function(source, reference, name, readonly) {
 		if (name) {
-			name = name.camelize();
-			if (source[name] == null || source[name] == undefined) {
-				source[name] = reference;
+			var member = name.toCamelCase();
+			if (source[member] == null || source[member] == undefined) {
+				source[member] = reference;
+				var getter = 'get' + member.capitalize();
+				var setter = 'set' + member.capitalize();
+				if (source[getter] == undefined) {
+					source[getter] = function() {
+						return this[member];
+					}.bind(source);
+				}
+				if (source[setter] && !readonly) {
+					source[setter] = function(value) {
+						this[member] = value;
+						return this;
+					}.bind(source);
+				}
 			}
 		}
 		return source;
