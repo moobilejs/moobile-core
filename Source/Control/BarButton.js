@@ -1,7 +1,7 @@
 /*
 ---
 
-name: UI.BarButton
+name: BarButton
 
 description: Provides a button used inside a bar such as the navigation bar.
 
@@ -11,22 +11,22 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- UI.Button
-	- UI.BarButtonStyle
+	- Button
+	- BarButtonStyle
 
 provides:
-	- UI.BarButton
+	- BarButton
 
 ...
 */
 
-Moobile.UI.BarButton = new Class({
+Moobile.BarButton = new Class({
 
-	Extends: Moobile.UI.Button,
+	Extends: Moobile.Button,
 
 	options: {
-		className: 'ui-bar-button',
-		styleName: Moobile.UI.BarButtonStyle.Default
+		className: 'bar-button',
+		styleName: Moobile.BarButtonStyle.Default
 	}
 
 });

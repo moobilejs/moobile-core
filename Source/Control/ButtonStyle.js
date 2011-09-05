@@ -1,7 +1,7 @@
 /*
 ---
 
-name: UI.ButtonStyle
+name: ButtonStyle
 
 description: Provide constants for button styles.
 
@@ -13,20 +13,25 @@ authors:
 requires:
 
 provides:
-	- UI.ButtonStyle
+	- ButtonStyle
 
 ...
 */
 
 if (!window.Moobile) window.Moobile = {};
-if (!window.Moobile.UI) window.Moobile.UI = {};
 
-Moobile.UI.ButtonStyle = {
+Moobile.ButtonStyle = {
 
 	Default: {
-		className: 'style-default',
-		attach: function() {},
-		detach: function() {}
+
+		onAttach: function() {
+			return this.addClass('style-default');
+		},
+
+		onDetach: function() {
+			return this.removeClass('style-default');
+		}
+
 	}
-	
+
 };

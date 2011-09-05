@@ -1,7 +1,7 @@
 /*
 ---
 
-name: UI.Slider
+name: Slider
 
 description:
 
@@ -13,10 +13,10 @@ authors:
 requires:
 	- More/Class.Refactor
 	- More/Slider
-	- UI.Control
+	- Control
 
 provides:
-	- UI.Slider
+	- Slider
 
 ...
 */
@@ -30,55 +30,62 @@ Class.refactor(Slider, {
 
 });
 
-Moobile.UI.Slider = new Class({
+Moobile.Slider = new Class({
 
-	Extends: Moobile.UI.Control,
+	Extends: Moobile.Control,
+
+	value: 0,
 
 	slider: null,
 
-	trackElement: null,
+	track: null,
 
-	handleElement: null,
+	thumb: null,
 
 	options: {
-		className: 'ui-slider',
+		className: 'slider',
 		snap: false,
 		mode: 'horizontal',
 		min: 0,
 		max: 100,
 		background: true,
-		backgroundSize: 2048
+		backgroundSize: 2048,
+		value: 0
 	},
 
-	build: function() {
-		this.parent();
-		this.buildTrackElement();
-		this.buildHandleElement();
+	build: function(element) {
+
+		this.parent(element);
+
+		this.thumb = new Element('div.' + this.options.className + '-thumb');
+		this.track = new Element('div.' + this.options.className + '-track');
+		this.track.grab(this.thumb);
+
+		this.content.empty();
+		this.content.grab(this.track);
+
 		return this;
 	},
 
-	buildTrackElement: function() {
-		this.trackElement = new Element('div.' + this.options.className + '-track');
-		this.trackElement.inject(this.element);
+	setValue: function(value) {
+		this.slider.set(this.value = value);
 		return this;
 	},
 
-	buildHandleElement: function() {
-		this.handleElement = new Element('div.' + this.options.className + '-handle');
-		this.handleElement.inject(this.trackElement);
-		return this;
+	getValue: function() {
+		return this.value;
 	},
 
 	init: function() {
-		this.attachSlider();
-		this.set(this.options.min);
 		this.parent();
+		this.attachSlider();
+		this.value = 0;
 		return this;
 	},
 
 	release: function() {
 		this.detachSlider();
-		this.handleElement = null;
+		this.thumb = null;
 		this.parent();
 		return this;
 	},
@@ -92,8 +99,7 @@ Moobile.UI.Slider = new Class({
 			mode: this.options.mode
 		};
 
-		this.slider = new Slider(this.trackElement, this.handleElement, options);
-
+		this.slider = new Slider(this.track, this.thumb, options);
 		this.slider.addEvent('move', this.bound('onMove'));
 		this.slider.addEvent('tick', this.bound('onTick'));
 		this.slider.addEvent('change', this.bound('onChange'));
@@ -106,30 +112,26 @@ Moobile.UI.Slider = new Class({
 		return this;
 	},
 
-	set: function(step) {
-		this.slider.set(step);
-		return this;
-	},
-
-	adjustBackground: function(position) {
-		this.trackElement.setStyle('background-position',
-			(-this.options.backgroundSize / 2) + (position + this.handleElement.getSize().x / 2)
+	updateTrack: function(position) {
+		this.track.setStyle('background-position',
+			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
 		);
 		return this;
 	},
 
 	onMove: function(position) {
-		this.adjustBackground(position);
+		this.updateTrack(position);
 		this.fireEvent('move', position);
 	},
 
 	onTick: function(position) {
-		this.adjustBackground(position);
+		this.updateTrack(position);
 		this.fireEvent('tick', position);
 	},
 
 	onChange: function(step) {
-		this.adjustBackground(this.slider.toPosition(step));
+		this.value = step;
+		this.updateTrack(this.slider.toPosition(step));
 		this.fireEvent('change', step);
 	}
 
