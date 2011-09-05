@@ -43,11 +43,13 @@ Moobile.Window = new Class({
 
 		window.$moobile.window = this;
 
-		if (this.$started == false) {
-			this.$started = true;
-			this.init();
-			this.attachEvents();
-		}
+		if (this.ready == true)
+			return this;
+
+		this.ready = true;
+
+		this.init();
+		this.attachEvents();
 
 		return this;
 	},
@@ -56,12 +58,13 @@ Moobile.Window = new Class({
 
 		window.$moobile = null;
 
-		if (this.$started == true) {
-			this.$started = false;
-			this.detachEvents();
-			this.release();
-			this.content = null;
-		}
+		if (this.ready == false)
+			return this;
+
+		this.ready = false;
+
+		this.detachEvents();
+		this.release();
 
 		return this;
 	},
@@ -80,8 +83,8 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	filterChildView: function(element) {
-		return element.getParent('[data-role=view]') == null;
+	filterElement: function(element) {
+		return element.getParent('[data-role]') == null;
 	},
 
 	position: function() {
@@ -147,7 +150,6 @@ Moobile.Window = new Class({
 	hideLoadingIndicator: function() {
 		if (this.inputMask) {
 			this.inputMask.removeClass('loading');
-
 			if (this.loadingIndicator) {
 				this.loadingIndicator.destroy();
 				this.loadingIndicator = null;
@@ -157,8 +159,8 @@ Moobile.Window = new Class({
 	},
 
 	didAddChildView: function(view) {
-		view.window = this;
-		view.parentView = null;
+		view.setWindow(this);
+		view.setParentView(null);
 		this.parent(view);
 		return this;
 	},
@@ -171,6 +173,8 @@ Moobile.Window = new Class({
 	onWindowLoad: function(e) {
 		this.position.delay(250);
 		return this;
-	}
+	},
+
+
 
 });

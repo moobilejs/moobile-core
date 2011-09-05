@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- ViewControllerCollection
+	- ViewController
 
 provides:
 	- WindowController
@@ -21,7 +21,7 @@ provides:
 
 Moobile.WindowController = new Class({
 
-	Extends: Moobile.ViewControllerCollection,
+	Extends: Moobile.ViewController,
 
 	rootViewController: null,
 
@@ -33,37 +33,37 @@ Moobile.WindowController = new Class({
 		return this;
 	},
 
-	loadView: function(viewElement) {
-		this.view = new Moobile.Window(viewElement, this.options);
-		return this;
-	},
-
-	filterViewController: function(element) {
-		return element.getParent('[data-role=view-controller]') == null;
-	},
-
 	setRootViewController: function(rootViewController) {
 
 		if (this.rootViewController) {
-			this.viewController.removeViewController(this.rootViewController);
+			this.rootViewController.removeFromParentViewController();
 			this.rootViewController.destroy();
 			this.rootViewController = null;
 		}
 
-		this.viewController.addViewController(rootViewController);
-
-		this.rootViewController = rootViewController;
+		if (rootViewController) {
+			this.rootViewController = rootViewController;
+			this.addChildViewController(rootViewController);
+		}
 
 		return this;
 	},
 
-	getRootViewController: function() {
-		return this.rootViewController;
+	filterChildViewController: function(element) {
+		return element.getParent('[data-role=view-controller]') == null;
 	},
 
-	didAddViewController: function(viewController) {
-		this.rootViewController = viewController;
+	loadView: function(viewElement) {
+		this.view = Class.instanciate(
+			viewElement.get('data-view') || 'Moobile.Window',
+			viewElement
+		);
+		return this;
+	},
+
+	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
+		this.rootViewController = viewController;
 		return this;
 	}
 
