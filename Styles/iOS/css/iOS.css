@@ -575,8 +575,8 @@ p small {
 
 .bar.style-default-opaque      .bar-button.style-default > .bar-button-content,
 .bar.style-default-translucent .bar-button.style-default > .bar-button-content {
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
+	border-left-color: rgba(53, 78, 110, 0.45);
+	border-right-color: rgba(53, 78, 110, 0.00);
 }
 
 /* Default With Black Navigation Bar */
@@ -602,8 +602,8 @@ p small {
 
 .bar.style-black-opaque      .bar-button.style-default > .bar-button-content,
 .bar.style-black-translucent .bar-button.style-default > .bar-button-content {
-	border-left-color: rgba(0, 0, 0, 0.75);
-	border-right-color: rgba(0, 0, 0, 0.25);
+	border-left-color: rgba(0, 0, 0, 0.30);
+	border-right-color: rgba(0, 0, 0, 0.0);
 }
 
 /* Active */
@@ -622,10 +622,9 @@ p small {
 	background-position: -5px -90px;
 }
 
-.bar-button.style-active .bar-button > .bar-button-content {
-	/* TODO */
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
+.bar-button.style-active > .bar-button-content {
+	border-left-color: rgba(56, 71, 92, 0.30);
+	border-right-color: rgba(56, 71, 92, 0.00);
 }
 
 /* Warning */
@@ -645,13 +644,12 @@ p small {
 	border-width: 0px 5px;
 }
 
-.bar-button.style-warning .bar-button > .bar-button-content {
-	/* TODO */
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
+.bar-button.style-warning > .bar-button-content {
+	border-left-color: rgba(69, 28, 27, 0.30);
+	border-right-color: rgba(69, 28, 27, 0.00);
 }
 
-/* Back With Default Navigation Bar*/
+/* Back With Default Navigation Bar */
 
 .navigation-bar.style-default-opaque      .bar-button.style-back,
 .navigation-bar.style-default-translucent .bar-button.style-back {
@@ -676,9 +674,8 @@ p small {
 
 .navigation-bar.style-default-opaque      .bar-button.style-back > .bar-button-content,
 .navigation-bar.style-default-translucent .bar-button.style-back > .bar-button-content {
-	/* TODO */
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
+	border-left-color: rgba(53, 78, 110, 0.45);
+	border-right-color: rgba(53, 78, 110, 0.00);
 }
 
 /* Back With Black Navigation Bar */
@@ -706,12 +703,11 @@ p small {
 
 .navigation-bar.style-black-opaque      .bar-button.style-back > .bar-button-content,
 .navigation-bar.style-black-translucent .bar-button.style-back > .bar-button-content {
-	/* TODO */
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
+	border-left-color: rgba(0, 0, 0, 0.30);
+	border-right-color: rgba(0, 0, 0, 0.0);
 }
 
-/* Forward */
+/* Forward With Default Navigation Bar */
 
 .bar-button.style-forward {
 	-webkit-border-image: url(../images/bar-button.png) 300 15 270 5 stretch stretch;
@@ -725,13 +721,12 @@ p small {
 .bar-button.bar-button-down.style-forward,
 .bar-button.bar-button-selected.style-forward,
 .bar-button.bar-button-highlighted.style-forward {
-	-webkit-border-image: url(../images/bar-button.png) 330 15 230 5 stretch stretch;
+	-webkit-border-image: url(../images/bar-button.png) 330 15 240 5 stretch stretch;
 	background-position: -5px -330px;
 	border-width: 0px 15px 0px 5px;
 }
 
 .bar-button.style-forward > .bar-button-content {
-	/* TODO */
 	border-left-color: rgba(66, 75, 86, 0.75);
 	border-right-color: rgba(66, 75, 86, 0.25);
 }
@@ -761,12 +756,11 @@ p small {
 
 .navigation-bar.style-black-opaque      .bar-button.style-forward > .bar-button-content,
 .navigation-bar.style-black-translucent .bar-button.style-forward > .bar-button-content {
-	/* TODO */
-	border-left-color: rgba(66, 75, 86, 0.75);
-	border-right-color: rgba(66, 75, 86, 0.25);
+	border-left-color: rgba(0, 0, 0, 0.30);
+	border-right-color: rgba(0, 0, 0, 0.0);
 }
 
-/* With ButtonGroup Horizontal */
+/* With ButtonGroup (Always Horizontal) */
 
 .button-group > .button-group-content > .bar-button {
 	-webkit-background-size: auto;
@@ -779,8 +773,8 @@ p small {
 .button-group > .button-group-content > .bar-button > .bar-button-content {
 	border-left-width: 1px;
 	border-right-width: 1px;
-	padding-left: 4px;
-	padding-right: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .button-group > .button-group-content > .bar-button:first-child {
@@ -790,7 +784,7 @@ p small {
 
 .button-group > .button-group-content > .bar-button:first-child > .bar-button-content {
 	border-left-width: 0px !important;
-	padding-left: 1px;
+	padding-left: 4px;
 }
 
 .button-group > .button-group-content > .bar-button:last-child {
@@ -800,7 +794,7 @@ p small {
 
 .button-group > .button-group-content > .bar-button:last-child > .bar-button-content {
 	border-right-width: 0px !important;
-	padding-right: 1px;
+	padding-right: 4px;
 }
 
 /* List
