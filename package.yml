@@ -37,6 +37,7 @@ sources:
   - "Source/Control/Button.js"
   - "Source/Control/ButtonStyle.js"
   - "Source/Control/ButtonGroup.js"
+  - "Source/Control/ButtonGroupStyle.js"
   - "Source/Control/Bar.js"
   - "Source/Control/BarStyle.js"
   - "Source/Control/NavigationBar.js"
