@@ -25,6 +25,8 @@ Moobile.ViewTransition.Cubic = new Class({
 
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
+		this.parent(viewToShow, viewToHide, parentView, first);
+
 		this.addSubject(parentView, 'transition-cubic-perspective');
 		this.addSubject(viewToShow, 'transition-view-to-show');
 
@@ -41,6 +43,8 @@ Moobile.ViewTransition.Cubic = new Class({
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
+
+		this.parent(viewToShow, viewToHide, parentView);
 
 		this.addSubject(parentView, 'transition-cubic-perspective');
 

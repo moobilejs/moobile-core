@@ -1,10 +1,9 @@
-
 /*
 ---
 
-name: ViewTransition.Flip
+name: ViewTransition.Cover
 
-description: Provide a flip view transition effect.
+description: Provide a view transition that covers the previous view.
 
 license: MIT-style license.
 
@@ -15,12 +14,12 @@ requires:
 	- ViewTransition
 
 provides:
-	- ViewTransition.Flip
+	- ViewTransition.Cover
 
 ...
 */
 
-Moobile.ViewTransition.Flip = new Class({
+Moobile.ViewTransition.Cover = new Class({
 
 	Extends: Moobile.ViewTransition,
 
@@ -28,17 +27,15 @@ Moobile.ViewTransition.Flip = new Class({
 
 		this.parent(viewToShow, viewToHide, parentView, first);
 
-		this.addSubject(parentView, 'transition-flip-perspective');
-		this.addSubject(viewToShow, 'transition-view-to-show');
-
 		if (first) {
-			this.animate(parentView.content, 'transition-flip-enter-first');
+			this.animate(viewToShow, 'transition-cover-enter-first');
 			return this;
 		}
 
+		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
-		this.animate(parentView.content, 'transition-flip-enter');
+		this.animate(parentView.content, 'transition-cover-enter');
 
 		return this;
 	},
@@ -47,12 +44,10 @@ Moobile.ViewTransition.Flip = new Class({
 
 		this.parent(viewToShow, viewToHide, parentView);
 
-		this.addSubject(parentView, 'transition-flip-perspective');
-
-		this.addSubject(viewToHide, 'transition-view-to-hide');
 		this.addSubject(viewToShow, 'transition-view-to-show');
+		this.addSubject(viewToHide, 'transition-view-to-hide');
 
-		this.animate(parentView.content, 'transition-flip-leave');
+		this.animate(parentView.content, 'transition-cover-leave');
 
 		return this;
 	}

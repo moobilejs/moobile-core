@@ -26,6 +26,8 @@ Moobile.ViewTransition.Fade = new Class({
 
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
+		this.parent(viewToShow, viewToHide, parentView, first);
+
 		if (first) {
 			this.animate(parentView.content, 'transition-fade-enter-first');
 			return this;
@@ -40,6 +42,8 @@ Moobile.ViewTransition.Fade = new Class({
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
+
+		this.parent(viewToShow, viewToHide, parentView);
 
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 		this.addSubject(viewToShow, 'transition-view-to-show');

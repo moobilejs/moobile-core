@@ -17,7 +17,7 @@ requires:
 	- Core/Element.Event
 	- Core/Element.Style
 	- Class-Extras/Class.Binds
-	- Event.TransitionEnd
+	- Event.CSS3
 
 provides:
 	- ViewTransition
@@ -47,26 +47,37 @@ Moobile.ViewTransition = new Class({
 
 	animate: function(subject, className) {
 		this.addSubject(subject, className);
+		this.fireEvent('start');
 		return this;
 	},
 
 	addSubject: function(subject, className) {
+
 		var element = document.id(subject);
+		if (element == null)
+			return this;
+
 		element.store('view-transition:transition-class', className);
 		element.addClass(className);
 		element.addEvent('transitionend', this.bound('onComplete'));
 		element.addEvent('animationend', this.bound('onComplete'));
 		this.subjects.push(element);
+
 		return this;
 	},
 
 	removeSubject: function(subject) {
+
 		var element = document.id(subject);
+		if (element == null)
+			return this;
+
 		var className = element.retrieve('view-transition:transition-class');
 		element.removeClass(className);
 		element.removeEvent('transitionend', this.bound('onComplete'));
 		element.removeEvent('animationend', this.bound('onComplete'));
 		this.subjects.erase(element);
+
 		return this;
 	},
 
@@ -85,16 +96,31 @@ Moobile.ViewTransition = new Class({
 	},
 
 	enter: function(viewToShow, viewToHide, parentView, first) {
+		if (viewToShow) viewToShow.show();
+		this.addEvent('stop:once', this.onEnter.pass([viewToShow, viewToHide, parentView, first], this));
 		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
+		if (viewToShow) viewToShow.show();
+		this.addEvent('stop:once', this.onLeave.pass([viewToShow, viewToHide, parentView], this));
+		return this;
+	},
+
+	onEnter: function(viewToShow, viewToHide, parentView, first) {
+		if (viewToHide) viewToHide.hide();
+		return this;
+	},
+
+	onLeave: function(viewToShow, viewToHide, parentView) {
+		if (viewToHide) viewToHide.hide();
 		return this;
 	},
 
 	onComplete: function(e) {
 		if (this.subjects.contains(e.target)) {
 			this.clearSubjects();
+			this.fireEvent('stop');
 			this.fireEvent('complete');
 		}
 		return this;
