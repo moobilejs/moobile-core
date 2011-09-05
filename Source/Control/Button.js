@@ -28,7 +28,10 @@ Moobile.Button = new Class({
 
 	options: {
 		className: 'button',
-		styleName: Moobile.ButtonStyle.Default
+		styleName: Moobile.ButtonStyle.Default,
+		disabled: false,
+		selected: false,
+		highlighted: false
 	},
 
 	build: function(element) {
@@ -43,6 +46,10 @@ Moobile.Button = new Class({
 		}
 
 		this.label = this.getRoleInstance(label);
+
+		if (this.options.disabled) this.setDisabled(true);
+		if (this.options.selected) this.setSelected(true);
+		if (this.options.highlighted) this.options.setHighlighted(true);
 
 		return this;
 	},

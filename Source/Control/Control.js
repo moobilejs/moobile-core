@@ -24,7 +24,7 @@ Moobile.Control = new Class({
 
 	style: null,
 
-	disabled: true,
+	disabled: false,
 
 	selected: false,
 

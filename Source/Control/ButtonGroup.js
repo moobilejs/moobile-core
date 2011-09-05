@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- ButtonGroupStyle
 
 provides:
 	- ButtonGroup
@@ -28,7 +29,8 @@ Moobile.ButtonGroup = new Class({
 	selectedButtonIndex: -1,
 
 	options: {
-		className: 'button-group'
+		className: 'button-group',
+		styleName: Moobile.ButtonGroupStyle.Horizontal
 	},
 
 	setSelectedButton: function(selectedButton) {
@@ -83,14 +85,14 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	didAddChildView: function(childView) {
-		childView.addEvent('click', this.bound('onButtonClick'));
 		this.parent(childView);
+		childView.addEvent('click', this.bound('onButtonClick'));
 		return this;
 	},
 
 	didRemoveChildView: function(childView) {
-		childView.removeEvent('click', this.bound('onButtonClick'));
 		this.parent(childView);
+		childView.removeEvent('click', this.bound('onButtonClick'));
 		return this;
 	},
 
