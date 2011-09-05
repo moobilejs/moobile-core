@@ -1,0 +1,228 @@
+/* View
+-----------------------------------------------------------------------------*/
+
+.view {
+	background: #e2e5ea;
+}
+
+/* UI Navigation Bar
+-----------------------------------------------------------------------------*/
+
+/* UI Navigation Bar Styles */
+
+.navigation-bar.style-default-opaque {
+	background-image: url(../images/bar-ipad.png);
+	color: #717880;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
+}
+
+.navigation-bar.style-default-translucent {
+	background-image: url(../images/bar-ipad.png);
+	color: #717880;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
+}
+
+.navigation-bar.style-black-opaque {
+	background-image: url(../images/bar-ipad.png);
+}
+
+.navigation-bar.style-black-translucent {
+	background-image: url(../images/bar-ipad.png);
+}
+
+/* UI Bar Button
+-----------------------------------------------------------------------------*/
+
+/* UI Bar Button Styles */
+
+.navigation-bar.style-default-opaque      .bar-button.style-default,
+.navigation-bar.style-default-translucent .bar-button.style-default {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 0 5 570 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -0px repeat-x;
+	background-clip: padding-box;
+}
+
+.navigation-bar.style-default-opaque      .bar-button.bar-button-down.style-default,
+.navigation-bar.style-default-translucent .bar-button.bar-button-down.style-default {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 30 5 540 stretch stretch;
+}
+
+.navigation-bar.style-default-opaque      .bar-button.style-default .bar-button-content,
+.navigation-bar.style-default-translucent .bar-button.style-default .bar-button-content {
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Default With Black Navigation Bar */
+
+.navigation-bar.style-black-opaque      .bar-button.style-default,
+.navigation-bar.style-black-translucent .bar-button.style-default {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 120 5 450 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -120px repeat-x;
+	background-clip: padding-box;
+}
+
+.navigation-bar.style-black-opaque      .bar-button.bar-button-down.style-default,
+.navigation-bar.style-black-translucent .bar-button.bar-button-down.style-default {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 150 5 420 stretch stretch;
+}
+
+.navigation-bar.style-black-opaque      .bar-button.style-default .bar-button-content,
+.navigation-bar.style-black-translucent .bar-button.style-default .bar-button-content {
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Active */
+
+.bar-button.style-active {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 60 5 510 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -60px repeat-x;
+	background-clip: padding-box;
+}
+
+.bar-button.bar-button-down.style-active {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 90 5 480 stretch stretch;
+}
+
+.bar-button.style-active .bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Warning */
+
+.bar-button.style-warning {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 180 5 390 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -180px repeat-x;
+	background-clip: padding-box;
+}
+
+.bar-button.bar-button-down.style-warning {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 210 5 360 stretch stretch;
+}
+
+.bar-button.style-warning .bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Back With Default Navigation Bar*/
+
+.navigation-bar.style-default-opaque      .bar-button.style-back,
+.navigation-bar.style-default-translucent .bar-button.style-back {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 240 5 330 15 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -240px repeat-x;
+	background-clip: padding-box;
+}
+
+.navigation-bar.style-default-opaque      .bar-button.bar-button-down.style-back,
+.navigation-bar.style-default-translucent .bar-button.bar-button-down.style-back {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 270 5 300 15 stretch stretch;
+}
+
+.navigation-bar.style-default-opaque      .bar-button.style-back .bar-button-content,
+.navigation-bar.style-default-translucent .bar-button.style-back .bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Back With Black Navigation Bar */
+
+.navigation-bar.style-black-opaque      .bar-button.style-back,
+.navigation-bar.style-black-translucent .bar-button.style-back {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 360 5 210 15 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -240px repeat-x;
+	background-clip: padding-box;
+}
+
+.navigation-bar.style-black-opaque      .bar-button.bar-button-down.style-back,
+.navigation-bar.style-black-translucent .bar-button.bar-button-down.style-back {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 390 5 180 15 stretch stretch;
+}
+
+.navigation-bar.style-black-opaque      .bar-button.style-back .bar-button-content,
+.navigation-bar.style-black-translucent .bar-button.style-back .bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Forward */
+
+.bar-button.style-forward {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 300 15 270 5 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -300px repeat-x;
+	background-clip: padding-box;
+}
+
+.bar-button.bar-button-down.style-forward {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 330 15 230 5 stretch stretch;
+}
+
+.bar-button.style-forward .bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* Forward With Black Navigation Bar */
+
+.navigation-bar.style-black-opaque      .bar-button.style-forward,
+.navigation-bar.style-black-translucent .bar-button.style-forward {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 420 15 150 5 stretch stretch;
+	background: url(../images/bar-button-ipad.png) -5px -300px repeat-x;
+	background-clip: padding-box;
+}
+
+.navigation-bar.style-black-opaque      .bar-button.bar-button-down.style-forward,
+.navigation-bar.style-black-translucent .bar-button.bar-button-down.style-forward {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 450 15 120 5 stretch stretch;
+}
+
+.navigation-bar.style-black-opaque      .bar-button.style-forward .bar-button-content,
+.navigation-bar.style-black-translucent .bar-button.style-forward .bar-button-content {
+	/* TODO */
+	border-left-color: rgba(66, 75, 86, 0.75);
+	border-right-color: rgba(66, 75, 86, 0.25);
+}
+
+/* UI List
+-----------------------------------------------------------------------------*/
+
+/* Default Style */
+
+.list.style-default .list-item {
+	background: transparent;
+	border-left: none;
+	border-right: none;
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.list.style-default .list-item:first-child {
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.list.style-default .list-item:first-child {}
+.list.style-default .list-item:last-child {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.list.style-default .list-item.list-item-down,
+.list.style-default .list-item.list-item-selected,
+.list.style-default .list-item.list-item-highlighted {
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #015fe6), color-stop(1, #058cf5));
+	color: #ffffff;
+	text-shadow: none;
+}
+
+/* Grouped Style */
+
+.list.style-grouped {
+	-webkit-box-shadow: 0px 1px 1px 0px #ffffff;
+}
+
