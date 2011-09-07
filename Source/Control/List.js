@@ -135,14 +135,14 @@ Moobile.List = new Class({
 
 	onItemMouseUp: function(e) {
 		var item = e.target;
-		if (this.selectable) item.setHighlighted(false);
+		if (this.highlightable) item.setHighlighted(false);
 		this.fireEvent('mouseup', e);
 		return this;
 	},
 
 	onItemMouseDown: function(e) {
 		var item = e.target;
-		if (this.selectable) item.setHighlighted(true);
+		if (this.highlightable) item.setHighlighted(true);
 		this.fireEvent('mousedown', e);
 		return this;
 	}
