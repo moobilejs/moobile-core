@@ -36,7 +36,12 @@ Moobile.Control = new Class({
 
 	options: {
 		className: null,
-		styleName: null
+		styleName: null,
+		disabled: false,
+		selected: false,
+		selectable: true,
+		highlighted: false,
+		highlightable: true,
 	},
 
 	build: function(element) {
@@ -44,6 +49,13 @@ Moobile.Control = new Class({
 		this.parent(element);
 
 		this.element.set('role', 'control');
+
+		if (this.options.disabled) this.setDisabled(true);
+		if (this.options.selected) this.setSelected(true);
+		if (this.options.highlighted) this.options.setHighlighted(true);
+
+		if (!this.options.selectable) this.setSelectable(false);
+		if (!this.options.highlightable) this.setHighlightable(false);
 
 		var styleName = this.options.styleName;
 		if (styleName) {
