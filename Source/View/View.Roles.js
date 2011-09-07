@@ -21,6 +21,20 @@ provides:
 
 Moobile.View.Roles = {
 
+	content: {
+		stop: false,
+		apply: function() {},
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
+	text: {
+		stop: false,
+		apply: function() {},
+		onAttach: function() {},
+		onDetach: function() {}
+	},
+
 	view: {
 		stop: true,
 		apply: function() {
@@ -101,13 +115,6 @@ Moobile.View.Roles = {
 			var c = this.get('data-right-bar-button') || Moobile.BarButton;
 			return Class.instanciate(c, this, o, n);
 		},
-		onAttach: function() {},
-		onDetach: function() {}
-	},
-
-	'content': {
-		stop: false,
-		apply: function() {},
 		onAttach: function() {},
 		onDetach: function() {}
 	}
