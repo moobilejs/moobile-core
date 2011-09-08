@@ -59,6 +59,7 @@ sources:
   - "Source/View/ViewPanel.js"
   - "Source/View/ViewStack.js"
   - "Source/Scroller/Scroller.js"
+  - "Source/Scroller/Scroller.Carousel.js"
   - "Source/ViewTransition/ViewTransition.js"
   - "Source/ViewTransition/ViewTransition.Slide.js"
   - "Source/ViewTransition/ViewTransition.Cover.js"

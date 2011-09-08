@@ -1058,6 +1058,39 @@ p small {
 	width: 24px;
 }
 
+/* Carousel
+-----------------------------------------------------------------------------*/
+
+.carousel {
+	position: relative;											/* Important */
+	width: 100%;												/* Important */
+}
+
+.carousel > div {
+	height: 100%;
+	width: 100%;
+}
+
+.carousel .carousel-content {
+	display: -webkit-box;										/* Important */
+}
+
+.carousel.carousel-horizontal .carousel-content {
+	-webkit-box-orient: horizontal;								/* Important */
+	height: 100%;
+	width: 100%;
+}
+
+.carousel.carousel-vertical .carousel-content {
+	-webkit-box-orient: vertical;								/* Important */
+}
+
+.carousel .carousel-element {
+	-webkit-box-flex: 1;										/* Important */
+	list-style: none;
+	list-style-position: outside;
+}
+
 /* Transition - Fade
 -----------------------------------------------------------------------------*/
 

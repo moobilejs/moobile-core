@@ -74,11 +74,9 @@ Moobile.Scroller = new Class({
 		content = content || null;
 
 		if (content == null) {
-			content = wrapper.getElement('[data-role=content]');
-			if (content == null) {
-				content.elements = wrapper.elements;
-				content.inject(wrapper);
-			}
+			content = new Element('div')
+			content.ingest(wrapper);
+			content.inject(wrapper);
 		}
 
 		this.content = content;
