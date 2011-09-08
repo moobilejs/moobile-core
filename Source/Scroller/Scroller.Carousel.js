@@ -30,7 +30,7 @@ Moobile.Scroller.Carousel = new Class({
 		vScrollbar: false,
 		orientation: 'horizontal',
 		snap: true,
-		snapThreshold: 50
+		snapThreshold: 1
 	},
 
 	initialize: function(wrapper, content, options) {
@@ -65,13 +65,13 @@ Moobile.Scroller.Carousel = new Class({
 					case 'vertical':
 						key = 'height';
 						val = size.y * elements.length;
-						this.scroller.options.snapThreshold = size.y / 2;
+						this.scroller.options.snapThreshold = size.y * 40 / 100;
 						break;
 
 					case 'horizontal':
 						key = 'width';
 						val = size.x * elements.length
-						this.scroller.options.snapThreshold = size.x / 2;
+						this.scroller.options.snapThreshold = size.x * 40 / 100;
 						break;
 				}
 
