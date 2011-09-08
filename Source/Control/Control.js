@@ -41,7 +41,7 @@ Moobile.Control = new Class({
 		selected: false,
 		selectable: true,
 		highlighted: false,
-		highlightable: true,
+		highlightable: true
 	},
 
 	build: function(element) {
@@ -113,6 +113,11 @@ Moobile.Control = new Class({
 		return this._getState('selected');
 	},
 
+	setSelectable: function(selectable) {
+		this.selectable = selectable;
+		return this;
+	},
+
 	isSelectable: function() {
 		return this.selectable;
 	},
@@ -125,8 +130,12 @@ Moobile.Control = new Class({
 		return this._getState('highlighted');
 	},
 
+	setHighlightable: function(highlightable) {
+		this.highlightable = highlightable;
+	},
+
 	isHighlightable: function() {
-		return this.getHighlightable();
+		return this.highlightable;
 	},
 
 	_setState: function(state, value) {
