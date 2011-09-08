@@ -1362,7 +1362,7 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .transition-cubic-perspective {
-	-webkit-perspective: 1000px;
+	-webkit-perspective: 1000;
     -webkit-perspective-origin: 50% 50%;
 }
 
@@ -1455,7 +1455,7 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .transition-flip-perspective {
-	-webkit-perspective: 1000px;
+	-webkit-perspective: 1000;
     -webkit-perspective-origin: 50% 50%;
 }
 
