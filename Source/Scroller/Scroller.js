@@ -23,21 +23,21 @@ provides:
 
 (function() {
 
-	iScroll.prototype._currentSize = {x: 0, y: 0};
+iScroll.prototype._currentSize = {x: 0, y: 0};
 
-	var _checkDOMChanges = iScroll.prototype._checkDOMChanges;
+var _checkDOMChanges = iScroll.prototype._checkDOMChanges;
 
-	iScroll.prototype._checkDOMChanges = function() {
+iScroll.prototype._checkDOMChanges = function() {
 
-		_checkDOMChanges.call(this);
+	_checkDOMChanges.call(this);
 
-		var size = this.wrapper.getSize();
-		if (this._currentSize.x != size.x || this._currentSize.y != size.y) {
-			this._currentSize = size;
-			this.refresh();
-		}
+	var size = this.wrapper.getSize();
+	if (this._currentSize.x != size.x || this._currentSize.y != size.y) {
+		this._currentSize = size;
+		this.refresh();
+	}
 
-	};
+};
 
 })();
 
