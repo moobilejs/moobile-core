@@ -51,7 +51,7 @@ Moobile.List = new Class({
 
 	setSelectedItem: function(selectedItem) {
 
-		if (selectedItem.isSelectable() == false)
+		if (selectedItem && selectedItem.isSelectable() == false)
 			return this;
 
 		if (this.selectedItem == selectedItem)
@@ -75,12 +75,7 @@ Moobile.List = new Class({
 	},
 
 	setSelectedItemIndex: function(index) {
-
-		var selectedItem = this.childViews[index];
-		if (selectedItem) {
-			this.setSelectedItem(selectedItem);
-		}
-
+		this.setSelectedItem(this.childViews[index] || null);
 		return this;
 	},
 
