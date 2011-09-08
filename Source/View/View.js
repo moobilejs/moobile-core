@@ -78,7 +78,7 @@ Moobile.View = new Class({
 
 		this.setOptions(options);
 
-		this.name = name || String.uniqueID();
+		this.name = name || null;
 
 		this.build(element);
 

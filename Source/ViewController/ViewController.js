@@ -69,7 +69,7 @@ Moobile.ViewController = new Class({
 
 		this.setOptions(options);
 
-		this.name = name || String.uniqueID();
+		this.name = name || null;
 
 		var element = document.id(source);
 		if (element) {
