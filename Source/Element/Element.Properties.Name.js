@@ -35,12 +35,7 @@ Element.Properties.name = {
 
 		var role = this.get('data-role');
 		if (role) {
-			var name = this.get('data-name');
-			if (name == null) {
-				name = role + '-' + String.uniqueID();
-				this.set('name', name);
-			}
-			return name;
+			return this.get('data-name');
 		}
 
 		return this.getProperty(name);
