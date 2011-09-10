@@ -1199,20 +1199,20 @@ p small {
 /* Transition - Fade
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes transition-fade-in-keyframes {
-	0% {
+@-webkit-keyframes anim-fade-in {
+	from {
 		opacity: 0;
 	}
-	100% {
+	to {
 		opacity: 1;
 	}
 }
 
-@-webkit-keyframes transition-fade-out-keyframes {
-	0% {
+@-webkit-keyframes anim-fade-out {
+	from {
 		opacity: 1;
 	}
-	100% {
+	to {
 		opacity: 0;
 	}
 }
@@ -1220,7 +1220,7 @@ p small {
 /* Enter First */
 
 .transition-fade-enter-first {
-	-webkit-animation: transition-fade-in-keyframes 500ms 1;
+	-webkit-animation: anim-fade-in 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
@@ -1232,7 +1232,7 @@ p small {
 
 .transition-fade-enter .transition-view-to-show {
 	-webkit-transform: translateY(-100%);
-	-webkit-animation: transition-fade-in-keyframes 350ms 1;
+	-webkit-animation: anim-fade-in 350ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 100;												/* Important */
 }
@@ -1253,7 +1253,7 @@ p small {
 
 .transition-fade-leave .transition-view-to-hide {
 	-webkit-transform: translateY(-100%);
-	-webkit-animation: transition-fade-out-keyframes 350ms 1;
+	-webkit-animation: anim-fade-out 350ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 100;												/* Important */
 }
@@ -1263,7 +1263,7 @@ p small {
 
 /* Enter First */
 
-@-webkit-keyframes transition-slide-enter-first-keyframes {
+@-webkit-keyframes anim-slide-enter-first {
 	from {
 		-webkit-transform: translateX(100%);
 	}
@@ -1273,13 +1273,13 @@ p small {
 }
 
 .transition-slide-enter-first {
-	-webkit-animation: transition-slide-enter-first-keyframes 500ms 1;
+	-webkit-animation: anim-slide-enter-first 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Enter */
 
-@-webkit-keyframes transition-slide-enter-keyframes {
+@-webkit-keyframes anim-slide-enter {
 	from {
 		-webkit-transform: translateX(0%);
 	}
@@ -1289,7 +1289,7 @@ p small {
 }
 
 .transition-slide-enter {
-	-webkit-animation: transition-slide-enter-keyframes 500ms 1;
+	-webkit-animation: anim-slide-enter 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-box-orient: horizontal !important;					/* Important */
 	overflow: visible;											/* Important */
@@ -1307,7 +1307,7 @@ p small {
 
 /* Enter Navigation Bar View */
 
-@-webkit-keyframes transition-slide-enter-view-to-show-navigation-bar-keyframes {
+@-webkit-keyframes anim-slide-enter-view-to-show-navigation-bar {
 	from {
 		-webkit-transform: translateX(-75%);
 		opacity: 0;
@@ -1318,7 +1318,7 @@ p small {
 	}
 }
 
-@-webkit-keyframes transition-slide-enter-view-to-hide-navigation-bar-keyframes {
+@-webkit-keyframes anim-slide-enter-view-to-hide-navigation-bar {
 	from {
 		-webkit-transform: translateX(0%);
 		opacity: 1;
@@ -1330,18 +1330,18 @@ p small {
 }
 
 .transition-slide-enter .transition-view-to-show .bar > .bar-content {
-	-webkit-animation: transition-slide-enter-view-to-show-navigation-bar-keyframes 500ms 1;
+	-webkit-animation: anim-slide-enter-view-to-show-navigation-bar 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 .transition-slide-enter .transition-view-to-hide .bar > .bar-content {
-	-webkit-animation: transition-slide-enter-view-to-hide-navigation-bar-keyframes 500ms 1;
+	-webkit-animation: anim-slide-enter-view-to-hide-navigation-bar 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Leave */
 
-@-webkit-keyframes transition-slide-leave-keyframes {
+@-webkit-keyframes anim-slide-leave {
 	from {
 		-webkit-transform: translateX(-100%);
 	}
@@ -1351,7 +1351,7 @@ p small {
 }
 
 .transition-slide-leave {
-	-webkit-animation: transition-slide-leave-keyframes 500ms 1;
+	-webkit-animation: anim-slide-leave 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-box-orient: horizontal !important;					/* Important */
 	overflow: visible;											/* Important */
@@ -1369,7 +1369,7 @@ p small {
 
 /* Leave Navigation Bar View */
 
-@-webkit-keyframes transition-slide-leave-view-to-show-navigation-bar-keyframes {
+@-webkit-keyframes anim-slide-leave-view-to-show-navigation-bar {
 	from {
 		-webkit-transform: translateX(75%);
 		opacity: 0;
@@ -1380,7 +1380,7 @@ p small {
 	}
 }
 
-@-webkit-keyframes transition-slide-leave-view-to-hide-navigation-bar-keyframes {
+@-webkit-keyframes anim-slide-leave-view-to-hide-navigation-bar {
 	from {
 		-webkit-transform: translateX(0%);
 		opacity: 1;
@@ -1392,12 +1392,12 @@ p small {
 }
 
 .transition-slide-leave .transition-view-to-show .bar > .bar-content {
-	-webkit-animation: transition-slide-leave-view-to-show-navigation-bar-keyframes 500ms 1;
+	-webkit-animation: anim-slide-leave-view-to-show-navigation-bar 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 .transition-slide-leave .transition-view-to-hide .bar > .bar-content {
-	-webkit-animation: transition-slide-leave-view-to-hide-navigation-bar-keyframes 500ms 1;
+	-webkit-animation: anim-slide-leave-view-to-hide-navigation-bar 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
@@ -1406,7 +1406,7 @@ p small {
 
 /* Enter First */
 
-@-webkit-keyframes transition-cover-enter-first-keyframes {
+@-webkit-keyframes anim-cover-enter-first {
 	from {
 		-webkit-transform: translateY(100%);
 	}
@@ -1416,14 +1416,14 @@ p small {
 }
 
 .transition-cover-enter-first .transition-view-to-show {
-	-webkit-animation: transition-cover-enter-first-keyframes 500ms 1;
+	-webkit-animation: anim-cover-enter-first 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 75;
 }
 
 /* Enter */
 
-@-webkit-keyframes transition-cover-enter-keyframes {
+@-webkit-keyframes anim-cover-enter {
 	from {
 		-webkit-transform: translateY(0%);
 	}
@@ -1437,14 +1437,14 @@ p small {
 }
 
 .transition-cover-enter .transition-view-to-show {
-	-webkit-animation: transition-cover-enter-keyframes 500ms 1;
+	-webkit-animation: anim-cover-enter 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 75;
 }
 
 /* Leave */
 
-@-webkit-keyframes transition-cover-leave-keyframes {
+@-webkit-keyframes anim-cover-leave {
 	from {
 		-webkit-transform: translateY(-100%);
 	}
@@ -1458,7 +1458,7 @@ p small {
 }
 
 .transition-cover-leave .transition-view-to-hide {
-	-webkit-animation: transition-cover-leave-keyframes 500ms 1;
+	-webkit-animation: anim-cover-leave 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 75;
 }
@@ -1473,7 +1473,7 @@ p small {
 
 /* Enter First */
 
-@-webkit-keyframes transition-cubic-enter-first-keyframes {
+@-webkit-keyframes anim-cubic-enter-first {
 	from {
 		-webkit-transform: translateX(0%) rotateY(0deg);
 	}
@@ -1483,7 +1483,7 @@ p small {
 }
 
 .transition-cubic-enter-first {
-	-webkit-animation: transition-cubic-enter-first-keyframes 500ms 1;
+	-webkit-animation: anim-cubic-enter-first 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 100% 50%;
@@ -1496,7 +1496,7 @@ p small {
 
 /* Enter */
 
-@-webkit-keyframes transition-cubic-enter-keyframes {
+@-webkit-keyframes anim-cubic-enter {
 	from {
 		-webkit-transform: translateX(0%) rotateY(0deg);
 	}
@@ -1506,7 +1506,7 @@ p small {
 }
 
 .transition-cubic-enter {
-	-webkit-animation: transition-cubic-enter-keyframes 500ms 1;
+	-webkit-animation: anim-cubic-enter 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;						/* Important */
     -webkit-transform-origin: 100% 50%;							/* Important */
@@ -1527,7 +1527,7 @@ p small {
 
 /* Leave */
 
-@-webkit-keyframes transition-cubic-leave-keyframes {
+@-webkit-keyframes anim-cubic-leave {
 	from {
 		-webkit-transform: translateX(-100%) rotateY(-90deg);
 	}
@@ -1537,7 +1537,7 @@ p small {
 }
 
 .transition-cubic-leave {
-	-webkit-animation: transition-cubic-leave-keyframes 500ms 1;
+	-webkit-animation: anim-cubic-leave 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 100% 50%;
@@ -1566,17 +1566,17 @@ p small {
 
 /* Enter First */
 
-@-webkit-keyframes transition-flip-enter-first-keyframes {
-	0% {
+@-webkit-keyframes anim-flip-enter-first {
+	from {
 		-webkit-transform: rotateY(0deg);
 	}
-	100% {
+	to {
 		-webkit-transform: rotateY(-90deg);
 	}
 }
 
 .transition-flip-enter-first {
-	-webkit-animation: transition-flip-enter-first-keyframes 500ms 1;
+	-webkit-animation: anim-flip-enter-first 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 50% 50%;
@@ -1589,58 +1589,94 @@ p small {
 
 /* Enter */
 
-@-webkit-keyframes transition-flip-enter-keyframes {
-	0% {
+@-webkit-keyframes anim-flip-enter {
+	from {
 		-webkit-transform: rotateY(0deg);
 	}
-	100% {
+	to {
 		-webkit-transform: rotateY(-180deg);
 	}
 }
 
+@-webkit-keyframes anim-view-to-show-flip-enter {
+	from {
+		-webkit-transform: translateY(-100%) rotateY(180deg) scale(0.6)
+	}
+	to {
+		-webkit-transform: translateY(-100%) rotateY(180deg) scale(1);
+	}
+}
+
+@-webkit-keyframes anim-view-to-hide-flip-enter {
+	from {
+		-webkit-transform: translateY(0%) rotateY(0deg) scale(1);
+	}
+	to {
+		-webkit-transform: translateY(0%) rotateY(0deg) scale(0.6);
+	}
+}
+
 .transition-flip-enter {
-	-webkit-animation: transition-flip-enter-keyframes 1000ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: anim-flip-enter 750ms 1;
+	-webkit-animation-timing-function: ease-in-out;
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 50% 50%;
 	display: block !important;
 }
 
 .transition-flip-enter .transition-view-to-show {
-	-webkit-transform-origin: center center;
-    -webkit-transform: translateY(-100%) rotateY(180deg);
+	-webkit-animation: anim-view-to-show-flip-enter 750ms 1;
+	-webkit-animation-timing-function: ease-in-out;
 }
 
 .transition-flip-enter .transition-view-to-hide {
-	-webkit-transform-origin: center center;
-    -webkit-transform: translateY(0%) rotateY(0deg);
+	-webkit-animation: anim-view-to-hide-flip-enter 750ms 1;
+	-webkit-animation-timing-function: ease-in-out;
 }
 
 /* Leave */
 
-@-webkit-keyframes transition-flip-leave-keyframes {
-	0% {
+@-webkit-keyframes anim-flip-leave {
+	from {
 		-webkit-transform: rotateY(0deg);
 	}
-	100% {
+	to {
 		-webkit-transform: rotateY(180deg);
 	}
 }
 
+@-webkit-keyframes anim-view-to-show-flip-leave {
+	from {
+		-webkit-transform: translateY(0%) rotateY(180deg) scale(0.6)
+	}
+	to {
+		-webkit-transform: translateY(0%) rotateY(180deg) scale(1);
+	}
+}
+
+@-webkit-keyframes anim-view-to-hide-flip-leave {
+	from {
+		-webkit-transform: translateY(-100%) rotateY(0deg) scale(1);
+	}
+	to {
+		-webkit-transform: translateY(-100%) rotateY(0deg) scale(0.6);
+	}
+}
+
 .transition-flip-leave {
-	-webkit-animation: transition-flip-leave-keyframes 1000ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: anim-flip-leave 750ms 1;
+	-webkit-animation-timing-function: ease-in-out;
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 50% 50%;
 	display: block !important;
 }
 
 .transition-flip-leave .transition-view-to-show {
-	-webkit-transform-origin: center center;
-    -webkit-transform: translateY(0%) rotateY(180deg);
+	-webkit-animation: anim-view-to-show-flip-leave 750ms 1;
+	-webkit-animation-timing-function: ease-in-out;
 }
 
 .transition-flip-leave .transition-view-to-hide {
-	-webkit-transform-origin: center center;
-    -webkit-transform: translateY(-100%) rotateY(0deg);
+	-webkit-animation: anim-view-to-hide-flip-leave 750ms 1;
+	-webkit-animation-timing-function: ease-in-out;
 }
