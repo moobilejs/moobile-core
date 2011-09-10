@@ -264,7 +264,7 @@ p small {
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;								/* Important */
 	-webkit-box-flex: 1;										/* Important */
-	background-image: url(../images/background-striped.png);
+	background: #ffffff url(../images/background-striped.png);
 	display: -webkit-box;										/* Important */
 	height: 100%;												/* Important */
 	overflow: hidden;											/* Important */
@@ -295,7 +295,7 @@ p small {
 /* ScrollView
 -----------------------------------------------------------------------------*/
 
-.view.scroll-view > .scroll-view-content-wrapper {
+.view.scroll-view > .scroll-view-wrapper {
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;								/* Important */
@@ -306,11 +306,11 @@ p small {
 	width: 100%;												/* Important */
 }
 
-.view.scroll-view > .scroll-view-content-wrapper > * {
+.view.scroll-view > .scroll-view-wrapper > * {
 	-webkit-box-flex: 0;
 }
 
-.view.scroll-view > .scroll-view-content-wrapper > .view-content {
+.view.scroll-view > .scroll-view-wrapper > .view-content {
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;
@@ -358,16 +358,16 @@ p small {
 	width: auto;												/* Important */
 }
 
-/* Navigation Bar
+/* Bar View
 -----------------------------------------------------------------------------*/
 
-.navigation-bar {
+.bar {
 	height: 44px;												/* Important */
 	position: relative;											/* Important */
 	z-index: 50;												/* Important */
 }
 
-.navigation-bar > .bar-content {
+.bar > .bar-content {
 	-webkit-box-orient: horizontal;								/* Important */
 	display: -webkit-box;										/* Important */
 	height: 44px;												/* Important */
@@ -375,50 +375,68 @@ p small {
 	width: 100%;												/* Important */
 }
 
-/* Navigation Bar Styles */
+/*  Bar View Styles */
 
-.navigation-bar.style-default-opaque {
+.bar.style-default-opaque {
 	background: url(../images/bar.png) repeat-x 0px 0px;
 	color: #ffffff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.navigation-bar.style-default-translucent {
+.bar.style-default-translucent {
 	background: url(../images/bar.png) repeat-x 0px -44px;
 	color: #ffffff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.navigation-bar.style-black-opaque {
+.bar.style-black-opaque {
 	background: url(../images/bar.png) repeat-x 0px -88px;
 	color: #ffffff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.navigation-bar.style-black-translucent {
+.bar.style-black-translucent {
 	background: url(../images/bar.png) repeat-x 0px -132px;
 	color: #ffffff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-/* Navigation Item
+/* Bar View (Navigation Bar)
 -----------------------------------------------------------------------------*/
 
-.navigation-item {
+.bar.navigation-bar {
 	height: 44px;
 }
 
-.navigation-item > .navigation-item-content {
+.bar.navigation-bar > .bar-content {
 	height: 44px;
 }
 
-.navigation-item > .navigation-item-content > .label {
+.bar.navigation-bar > .bar-content > * {
+	-webkit-box-flex: 0;
+}
+
+.bar.navigation-bar > .bar-content > :first-child {
+	margin-left: 7px;
+}
+
+.bar.navigation-bar > .bar-content > :last-child {
+	margin-right: 7px;
+}
+
+.bar.navigation-bar > .bar-content > [data-role=bar-title] {
+	-webkit-box-flex: 1;
+}
+
+.bar.navigation-bar > .bar-content > [data-role=bar-title] > * {
 	font-size: 20px;
 	font-weight: bold;
 	height: 44px;
 	line-height: 43px;
+	left: 0px;													/* Important */
 	overflow: hidden;											/* Important */
 	position: absolute;											/* Important */
+	right: 0px;													/* Important */
 	text-overflow: ellipsis;									/* Important */
 	text-align: center;
 	white-space: nowrap;										/* Important */
@@ -426,19 +444,12 @@ p small {
 	z-index: 25;												/* Important */
 }
 
-.navigation-item-left-button {
-	left: 7px;
-	position: absolute;
-	z-index: 30;
+.bar.navigation-bar > .bar-content > [data-role=bar-button] {
+	position: relative;
+	z-index: 35;
 }
 
-.navigation-item-right-button {
-	right: 7px;
-	position: absolute;
-	z-index: 30;
-}
-
-/* Button Group
+/* Button View Group
 -----------------------------------------------------------------------------*/
 
 .button-group.style-vertical > .button-group-content {
@@ -486,7 +497,7 @@ p small {
 	color: rgba(0, 0, 0, 0.25);
 }
 
-/* With ButtonGroup Horizontal */
+/* With Button ViewGroup Horizontal */
 
 .button-group.style-horizontal > .button-group-content > .button {
 	-webkit-border-radius: 0px;
@@ -504,7 +515,7 @@ p small {
 	-webkit-border-bottom-right-radius: 10px;
 }
 
-/* With ButtonGroup Vertical */
+/* With Button ViewGroup Vertical */
 
 .button-group.style-vertical > .button-group-content > .button {
 	-webkit-border-radius: 0px;
@@ -522,7 +533,7 @@ p small {
 	-webkit-border-bottom-right-radius: 10px;
 }
 
-/* Bar Button
+/* Bar Button View
 -----------------------------------------------------------------------------*/
 
 .bar-button {
@@ -553,7 +564,7 @@ p small {
 	white-space: nowrap;
 }
 
-/* Default With Default Navigation Bar */
+/* Default With Default Navigation Bar View */
 
 .bar.style-default-opaque      .bar-button.style-default,
 .bar.style-default-translucent .bar-button.style-default {
@@ -579,7 +590,7 @@ p small {
 	border-right-color: rgba(53, 78, 110, 0.00);
 }
 
-/* Default With Black Navigation Bar */
+/* Default With Black Navigation Bar View */
 
 .bar.style-black-opaque      .bar-button.style-default,
 .bar.style-black-translucent .bar-button.style-default {
@@ -649,10 +660,10 @@ p small {
 	border-right-color: rgba(69, 28, 27, 0.00);
 }
 
-/* Back With Default Navigation Bar */
+/* Back With Default Navigation Bar View */
 
-.navigation-bar.style-default-opaque      .bar-button.style-back,
-.navigation-bar.style-default-translucent .bar-button.style-back {
+.bar.style-default-opaque      .bar-button.style-back,
+.bar.style-default-translucent .bar-button.style-back {
 	-webkit-border-image: url(../images/bar-button.png) 240 5 330 15 stretch stretch;
 	background: url(../images/bar-button.png) -5px -240px repeat-x;
 	background-clip: padding-box;
@@ -661,27 +672,27 @@ p small {
 	padding-right: 4px;
 }
 
-.navigation-bar.style-default-opaque      .bar-button.bar-button-down.style-back,
-.navigation-bar.style-default-opaque      .bar-button.bar-button-selected.style-back,
-.navigation-bar.style-default-opaque      .bar-button.bar-button-highlighted.style-back,
-.navigation-bar.style-default-translucent .bar-button.bar-button-down.style-back,
-.navigation-bar.style-default-translucent .bar-button.bar-button-selected.style-back,
-.navigation-bar.style-default-translucent .bar-button.bar-button-highlighted.style-back {
+.bar.style-default-opaque      .bar-button.bar-button-down.style-back,
+.bar.style-default-opaque      .bar-button.bar-button-selected.style-back,
+.bar.style-default-opaque      .bar-button.bar-button-highlighted.style-back,
+.bar.style-default-translucent .bar-button.bar-button-down.style-back,
+.bar.style-default-translucent .bar-button.bar-button-selected.style-back,
+.bar.style-default-translucent .bar-button.bar-button-highlighted.style-back {
 	-webkit-border-image: url(../images/bar-button.png) 270 5 300 15 stretch stretch;
 	border-width: 0px 5px 0px 15px;
 	background-position: -5px -270px;
 }
 
-.navigation-bar.style-default-opaque      .bar-button.style-back > .bar-button-content,
-.navigation-bar.style-default-translucent .bar-button.style-back > .bar-button-content {
+.bar.style-default-opaque      .bar-button.style-back > .bar-button-content,
+.bar.style-default-translucent .bar-button.style-back > .bar-button-content {
 	border-left-color: rgba(53, 78, 110, 0.45);
 	border-right-color: rgba(53, 78, 110, 0.00);
 }
 
-/* Back With Black Navigation Bar */
+/* Back With Black Navigation Bar View */
 
-.navigation-bar.style-black-opaque      .bar-button.style-back,
-.navigation-bar.style-black-translucent .bar-button.style-back {
+.bar.style-black-opaque      .bar-button.style-back,
+.bar.style-black-translucent .bar-button.style-back {
 	-webkit-border-image: url(../images/bar-button.png) 360 5 210 15 stretch stretch;
 	background: url(../images/bar-button.png) -5px -240px repeat-x;
 	background-clip: padding-box;
@@ -690,24 +701,24 @@ p small {
 	padding-right: 4px;
 }
 
-.navigation-bar.style-black-opaque      .bar-button.bar-button-down.style-back,
-.navigation-bar.style-black-opaque      .bar-button.bar-button-selected.style-back,
-.navigation-bar.style-black-opaque      .bar-button.bar-button-highlighted.style-back,
-.navigation-bar.style-black-translucent .bar-button.bar-button-down.style-back,
-.navigation-bar.style-black-translucent .bar-button.bar-button-selected.style-back,
-.navigation-bar.style-black-translucent .bar-button.bar-button-highlighted.style-back {
+.bar.style-black-opaque      .bar-button.bar-button-down.style-back,
+.bar.style-black-opaque      .bar-button.bar-button-selected.style-back,
+.bar.style-black-opaque      .bar-button.bar-button-highlighted.style-back,
+.bar.style-black-translucent .bar-button.bar-button-down.style-back,
+.bar.style-black-translucent .bar-button.bar-button-selected.style-back,
+.bar.style-black-translucent .bar-button.bar-button-highlighted.style-back {
 	-webkit-border-image: url(../images/bar-button.png) 390 5 180 15 stretch stretch;
 	border-width: 0px 5px 0px 15px;
 	background-position: -5px -270px;
 }
 
-.navigation-bar.style-black-opaque      .bar-button.style-back > .bar-button-content,
-.navigation-bar.style-black-translucent .bar-button.style-back > .bar-button-content {
+.bar.style-black-opaque      .bar-button.style-back > .bar-button-content,
+.bar.style-black-translucent .bar-button.style-back > .bar-button-content {
 	border-left-color: rgba(0, 0, 0, 0.30);
 	border-right-color: rgba(0, 0, 0, 0.0);
 }
 
-/* Forward With Default Navigation Bar */
+/* Forward With Default Navigation Bar View */
 
 .bar-button.style-forward {
 	-webkit-border-image: url(../images/bar-button.png) 300 15 270 5 stretch stretch;
@@ -731,10 +742,10 @@ p small {
 	border-right-color: rgba(66, 75, 86, 0.25);
 }
 
-/* Forward With Black Navigation Bar */
+/* Forward With Black Navigation Bar View */
 
-.navigation-bar.style-black-opaque      .bar-button.style-forward,
-.navigation-bar.style-black-translucent .bar-button.style-forward {
+.bar.style-black-opaque      .bar-button.style-forward,
+.bar.style-black-translucent .bar-button.style-forward {
 	-webkit-border-image: url(../images/bar-button.png) 420 15 150 5 stretch stretch;
 	background: url(../images/bar-button.png) -5px -300px repeat-x;
 	background-clip: padding-box;
@@ -743,24 +754,24 @@ p small {
 	padding-right: 0px;
 }
 
-.navigation-bar.style-black-opaque      .bar-button.bar-button-down.style-forward,
-.navigation-bar.style-black-opaque      .bar-button.bar-button-selected.style-forward,
-.navigation-bar.style-black-opaque      .bar-button.bar-button-highlighted.style-forward,
-.navigation-bar.style-black-translucent .bar-button.bar-button-down.style-forward,
-.navigation-bar.style-black-translucent .bar-button.bar-button-selected.style-forward,
-.navigation-bar.style-black-translucent .bar-button.bar-button-highlighted.style-forward {
+.bar.style-black-opaque      .bar-button.bar-button-down.style-forward,
+.bar.style-black-opaque      .bar-button.bar-button-selected.style-forward,
+.bar.style-black-opaque      .bar-button.bar-button-highlighted.style-forward,
+.bar.style-black-translucent .bar-button.bar-button-down.style-forward,
+.bar.style-black-translucent .bar-button.bar-button-selected.style-forward,
+.bar.style-black-translucent .bar-button.bar-button-highlighted.style-forward {
 	-webkit-border-image: url(../images/bar-button.png) 450 15 120 5 stretch stretch;
 	background-position: -5px -330px;
 	border-width: 0px 15px 0px 5px;
 }
 
-.navigation-bar.style-black-opaque      .bar-button.style-forward > .bar-button-content,
-.navigation-bar.style-black-translucent .bar-button.style-forward > .bar-button-content {
+.bar.style-black-opaque      .bar-button.style-forward > .bar-button-content,
+.bar.style-black-translucent .bar-button.style-forward > .bar-button-content {
 	border-left-color: rgba(0, 0, 0, 0.30);
 	border-right-color: rgba(0, 0, 0, 0.0);
 }
 
-/* With ButtonGroup (Always Horizontal) */
+/* With Button Group View (Always Horizontal) */
 
 .button-group > .button-group-content > .bar-button {
 	-webkit-background-size: auto;
@@ -797,7 +808,7 @@ p small {
 	padding-right: 4px;
 }
 
-/* List
+/* List View
 -----------------------------------------------------------------------------*/
 
 /* Default Style */
@@ -844,10 +855,7 @@ p small {
 	-webkit-box-align: center;									/* Important */
 	border: 1px solid #bbbbbb;
 	border-bottom: none;
-	color: #000000;
 	display: -webkit-box;
-	font-size: 17px;
-	font-weight: bold;
 	list-style: none;
 	list-style-position: outside;
 	overflow: hidden;											/* Important */
@@ -857,11 +865,11 @@ p small {
 	position: relative;											/* Important */
 }
 
-.list .list-item > .image {
+.list .list-item > [data-role=image] {
 	-webkit-box-flex: 0;
 }
 
-.list .list-item > .image > * {
+.list .list-item > [data-role=image] img {
 	-webkit-box-sizing: border-box;
 	-webkit-background-clip: padding-box;
 	-webkit-border-radius: 4px;
@@ -870,7 +878,7 @@ p small {
 	width: 29px;
 }
 
-.list .list-item .list-item-content {
+.list .list-item > .list-item-content {
 	-webkit-box-flex: 1;
 	-webkit-box-sizing: border-box;								/* Important */
 	overflow: hidden;											/* Important */
@@ -881,12 +889,22 @@ p small {
 	white-space: nowrap;										/* Important */
 }
 
+.list .list-item > .list-item-content > [data-role=label] {
+	color: #000000;
+	font-size: 17px;
+	font-weight: bold;
+}
+
 .list .list-item.list-item-down,
 .list .list-item.list-item-selected,
 .list .list-item.list-item-highlighted {
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
+}
+
+.list .list-item.list-item-down > .list-item-content > [data-role=label],
+.list .list-item.list-item-selected > .list-item-content > [data-role=label],
+.list .list-item.list-item-highlighted > .list-item-content > [data-role=label] {
 	color: #ffffff;
-	text-shadow: none;
 }
 
 /* Style Checked */
@@ -981,6 +999,98 @@ p small {
 	background: url(../images/activity-indicator.png) -21px center no-repeat;
 }
 
+/* Alert Box
+-----------------------------------------------------------------------------*/
+
+.alert {
+	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-box-sizing: border-box;
+	-webkit-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.75);
+	-webkit-border-radius: 12px;
+	background: rgba(11, 27, 68, 0.8) url(../images/alert-bg.png) no-repeat center top;
+	border: 2px solid #dfe1e6;
+	color: #ffffff;
+	padding: 6px;
+	width: 276px;
+}
+
+.alert-title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	text-align: center;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
+}
+
+.alert-message {
+	margin-bottom: 12px;
+	text-align: center;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
+}
+
+.alert-buttons .button {
+	-webkit-box-flex: 1;
+	-webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+	-webkit-border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+	background: url(../images/alert-button-bg.png) repeat-x;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: bold;
+	height: 40px;
+	line-height: 38px;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
+	text-align: center;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.alert-buttons .button.button-down,
+.alert-buttons .button.button-selected {
+	background: url(../images/alert-button-bg.png) 0px -40px repeat-x;
+}
+
+.alert-buttons .button.button-highlighted {
+	background: url(../images/alert-button-bg.png) 0px -80px repeat-x;
+}
+
+.alert.style-horizontal .alert-buttons {
+	-webkit-box-orient: horizontal;
+	display: -webkit-box;
+}
+
+.alert.style-horizontal .alert-buttons .button {
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.alert.style-horizontal .alert-buttons .button:first-child {
+	margin-left: 0px;
+}
+
+.alert.style-horizontal .alert-buttons .button:last-child {
+	margin-right: 0px;
+}
+
+.alert.style-vertical .alert-buttons {
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+}
+
+.alert.style-vertical .alert-buttons .button {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.alert.style-vertical .alert-buttons .button:first-child {
+	margin-top: 0px;
+}
+
+.alert.style-vertical .alert-buttons .button:last-child {
+	margin-bottom: 0px;
+}
+
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 
@@ -995,11 +1105,6 @@ p small {
 
 .activity-indicator {
 	z-index: 100;
-}
-
-.activity-indicator,
-.activity-indicator-content {
-	height: 20px;
 	width: 21px;
 }
 
@@ -1200,7 +1305,7 @@ p small {
 	overflow: visible;											/* Important */
 }
 
-/* Enter Navigation Bar */
+/* Enter Navigation Bar View */
 
 @-webkit-keyframes transition-slide-enter-view-to-show-navigation-bar-keyframes {
 	from {
@@ -1262,7 +1367,7 @@ p small {
 	overflow: visible;											/* Important */
 }
 
-/* Leave Navigation Bar */
+/* Leave Navigation Bar View */
 
 @-webkit-keyframes transition-slide-leave-view-to-show-navigation-bar-keyframes {
 	from {

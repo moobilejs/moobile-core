@@ -37,7 +37,7 @@ Moobile.ViewControllerPanel = new Class({
 
 		this.mainViewController = mainViewController;
 
-		this.addChildViewController(this.mainViewController);
+		this.addChildViewController(this.mainViewController, 'top', this.view.getMainPanel());
 
 		return this;
 	},

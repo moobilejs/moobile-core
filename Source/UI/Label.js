@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Control
+	- View
 
 provides:
 	- Label
@@ -31,25 +31,18 @@ Moobile.Label = new Class({
 
 	build: function(element) {
 
-		this.element = document.id(element) || new Element('div');
+		this.parent(element);
 
 		this.element.set('role', 'label');
 
 		var text = this.getElement('[data-role=text]');
 		if (text == null) {
 			text = new Element('span[data-role=text]');
-			text.ingest(this.element);
-			text.inject(this.element);
+			text.ingest(this.content);
+			text.inject(this.content);
 		}
 
 		this.text = text;
-
-		var className = this.options.className;
-		if (className) {
-			this.element.addClass(className);
-		}
-
-		this.content = this.element;
 
 		return this;
 	},
@@ -69,10 +62,6 @@ Moobile.Label = new Class({
 
 	getText: function() {
 		return this.text.get('html');
-	},
-
-	getContent: function() {
-		throw new Error('The content property is not available in this type of view.')
 	}
 
 });

@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Control
+	- View
 
 provides:
 	- Image
@@ -31,7 +31,7 @@ Moobile.Image = new Class({
 
 	build: function(element) {
 
-		this.element = document.id(element) || new Element('div');
+		this.parent(element);
 
 		this.element.set('role', 'image');
 
@@ -39,17 +39,10 @@ Moobile.Image = new Class({
 		if (image == null) {
 			image = new Element('img')
 			image.hide();
-			image.inject(this.element);
+			image.inject(this.content);
 		}
 
 		this.image = image;
-
-		var className = this.options.className;
-		if (className) {
-			this.element.addClass(className);
-		}
-
-		this.content = this.element;
 
 		return this;
 	},
@@ -69,10 +62,6 @@ Moobile.Image = new Class({
 
 	getImage: function() {
 		return this.image.get('src');
-	},
-
-	getContent: function() {
-		throw new Error('The content property is not available in this type of view.')
 	}
 
 });

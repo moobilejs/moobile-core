@@ -67,7 +67,7 @@ Moobile.ListItemStyle = {
 		},
 
 		onDetach: function() {
-			var element = this.getElement('div..list-item-active-indicator');
+			var element = this.getElement('div.list-item-active-indicator');
 			if (element) {
 				element.destroy();
 			}

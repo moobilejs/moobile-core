@@ -23,20 +23,43 @@ Moobile.NavigationBar = new Class({
 
 	Extends: Moobile.Bar,
 
-	navigationItem: null,
+	title: null,
+
+	leftBarButton: null,
+
+	leftBarButtonVisible: true,
+
+	rightBartButton: null,
+
+	rightBarButtonVisible: true,
 
 	build: function(element) {
 
 		this.parent(element);
 
-		var navigationItem = this.getElement('[data-role=navigation-item]');
-		if (navigationItem == null) {
-			navigationItem = new Element('div[data-role=navigation-item]');
-			navigationItem.ingest(this.content);
-			navigationItem.inject(this.content);
+		var lBarButton = this.getElement('[data-role=bar-button][data-align=left]');
+		var rBarButton = this.getElement('[data-role=bar-button][data-align=right]');
+
+		var title = this.getElement('[data-role=bar-title]');
+		if (title == null) {
+			title = new Element('div[data-role=bar-title]');
+			title.ingest(this.content);
+			title.inject(this.content);
 		}
 
-		this.navigationItem = this.getRoleInstance(navigationItem);
+		this.title = this.getRoleInstance(title);
+
+		if (lBarButton) {
+			lBarButton.inject(this.content, 'top');
+			lBarButton = this.getRoleInstance(lBarButton);
+			this.setLeftBarButton(lBarButton);
+		}
+
+		if (rBarButton) {
+			rBarButton.inject(this.content);
+			rBarButton = this.getRoleInstance(rBarButton);
+			this.setRightBarButton(rBarButton);
+		}
 
 		if (this.options.className) {
 			this.element.addClass('navigation-' + this.options.className);
@@ -45,31 +68,143 @@ Moobile.NavigationBar = new Class({
 		return this;
 	},
 
-	setNavigationItem: function(navigationItem) {
+	setTitle: function(title) {
 
-		if (this.navigationItem == navigationItem)
+		if (this.title == title)
 			return this;
 
-		if (navigationItem) {
+		this.title.setText(null);
+		this.title.hide();
 
-			if (navigationItem instanceof Element) {
-				navigationItem = new Moobile.NavigationItem(navigationItem);
+		if (title) {
+
+			var type = typeOf(title);
+			if (type == 'string') {
+				this.title.setText(title);
+				this.title.show();
+				return this;
 			}
 
-			this.replaceChildView(this.navigationItem, navigationItem);
-			this.navigationItem.destroy();
-			this.navigationItem = navigationItem;
+			if (type == 'element') {
+				title = new Moobile.BarTitle(title);
+			}
+
+			this.replaceChildView(this.title, title);
+			this.title.destroy();
+			this.title = title;
 		}
 
 		return this;
 	},
 
-	getNavigationItem: function() {
-		return this.navigationItem;
+	getTitle: function() {
+		return this.title;
+	},
+
+	setLeftBarButton: function(leftBarButton) {
+
+		if (this.leftBarButton == leftBarButton)
+			return this;
+
+		if (this.leftBarButton) {
+			this.leftBarButton.removeFromParentView();
+			this.leftBarButton.destroy();
+			this.leftBarButton = null;
+		}
+
+		if (leftBarButton) {
+
+			var type = typeOf(leftBarButton);
+			if (type == 'string') {
+				this.leftBarButton = new Moobile.BarButton();
+				this.leftBarButton.setLabel(leftBarButton);
+			} else if (type == 'element') {
+				this.leftBarButton = new Moobile.BarButton(leftBarButton);
+			}
+
+			this.leftBarButton = leftBarButton;
+			this.leftBarButton.set('data-align', 'left');
+
+			this.addChildView(this.leftBarButton, 'before', this.title);
+
+			if (this.leftBarButtonVisible == false) {
+				this.leftBarButton.hide();
+			}
+		}
+
+		return this;
+	},
+
+	getLeftBarButton: function() {
+		return this.leftBarButton;
+	},
+
+	setLeftBarButtonVisible: function(visible) {
+		this.leftBarButtonVisible = visible;
+		if (this.leftBarButton) {
+			this.leftBarButton[visible ? 'show' : 'hide'].call(this.leftBarButton);
+		}
+		return this;
+	},
+
+	isLeftBarButtonVisible: function() {
+		return this.leftBarButtonVisible;
+	},
+
+	setRightBarButton: function(rightBarButton) {
+
+		if (this.rightBarButton == rightBarButton)
+			return this;
+
+		if (this.rightBarButton) {
+			this.rightBarButton.removeFromParentView();
+			this.rightBarButton.destroy();
+			this.rightBarButton = null;
+		}
+
+		if (rightBarButton) {
+
+			var type = typeOf(rightBarButton);
+			if (type == 'string') {
+				this.rightBarButton = new Moobile.BarButton();
+				this.rightBarButton.setLabel(rightBarButton);
+			} else if (type == 'element') {
+				this.rightBarButton = new Moobile.BarButton(rightBarButton);
+			}
+
+			this.rightBarButton = rightBarButton;
+			this.rightBarButton.set('data-align', 'right');
+
+			this.addChildView(this.rightBarButton, 'before', this.title);
+
+			if (this.rightBarButtonVisible == false) {
+				this.rightBarButton.hide();
+			}
+		}
+
+		return this;
+	},
+
+	getRightBarButton: function() {
+		return this.rightBarButton;
+	},
+
+	setRightBarButtonVisible: function(visible) {
+		this.rightBarButtonVisible = visible;
+		if (this.rightBarButton) {
+			this.rightBarButton[visible ? 'show' : 'hide'].call(this.rightBarButton);
+		}
+		return this;
+	},
+
+	isRightBarButtonVisible: function() {
+		return this.rightBarButtonVisible;
 	},
 
 	release: function() {
-		this.navigationItem = null;
+		this.title = null;
+		this.leftBarButton = null;
+		this.rightBarButton = null;
 		this.parent();
 		return this;
 	}

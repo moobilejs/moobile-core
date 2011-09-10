@@ -25,7 +25,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	Extends: Moobile.ViewControllerStack,
 
 	options: {
-		back: true
+		showBackButton: true
 	},
 
 	willAddChildViewController: function(viewController) {
@@ -34,21 +34,16 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 		var view = viewController.getView();
 
-		var navigationItem = null;
 		var navigationBar = view.getChildView('navigation-bar');
 		if (navigationBar == null) {
 			navigationBar = new Moobile.NavigationBar(null, null, 'navigation-bar');
-			navigationItem = new Moobile.NavigationItem();
-			navigationBar.setNavigationItem(navigationItem);
 			view.addChildView(navigationBar, 'header');
-		} else {
-			navigationItem = navigationBar.getNavigationItem();
 		}
 
-		if (viewController.isModal() || !this.childViewControllers.length)
+		if (viewController.isModal() || this.childViewControllers.length == 0)
 			return this;
 
-		if (this.options.back) {
+		if (this.options.showBackButton) {
 
 			var title = this.topViewController.getTitle();
 			if (title) {
@@ -58,9 +53,8 @@ Moobile.ViewControllerStack.Navigation = new Class({
 				backButton.setLabel(title);
 				backButton.addEvent('click', this.bound('onBackButtonClick'));
 
-				navigationItem.setLeftBarButton(backButton);
+				navigationBar.setLeftBarButton(backButton);
 			}
-
 		}
 
 		return this;
@@ -76,11 +70,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 		var title = viewController.getTitle();
 		if (title) {
-
-			var navigationItem = navigationBar.getNavigationItem();
-			if (navigationItem) {
-				navigationItem.setLabel(title)
-			}
+			navigationBar.setTitle(title)
 		}
 
 		return this;

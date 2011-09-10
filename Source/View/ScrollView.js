@@ -57,9 +57,9 @@ Moobile.ScrollView = new Class({
 
 		this.parent(element);
 
-		var wrapper = this.getElement('[data-role=content-wrapper]');
+		var wrapper = this.getElement('[data-role=wrapper]');
 		if (wrapper == null) {
-			wrapper = new Element('div[data-role=content-wrapper]');
+			wrapper = new Element('div[data-role=wrapper]');
 			wrapper.wraps(this.content);
 		}
 
@@ -67,7 +67,7 @@ Moobile.ScrollView = new Class({
 
 		if (this.options.className) {
 			this.element.addClass('scroll-' + this.options.className);
-			this.wrapper.addClass('scroll-' + this.options.className + '-content-wrapper');
+			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
 		}
 
 		return this;
