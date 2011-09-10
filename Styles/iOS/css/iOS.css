@@ -1171,7 +1171,7 @@ p small {
 	width: 100%;												/* Important */
 }
 
-.carousel > div {
+.carousel > * {
 	height: 100%;
 	width: 100%;
 }

@@ -51,6 +51,7 @@ Moobile.Scroller.Carousel = new Class({
 		var size = this.wrapper.getSize();
 
 		var elements = this.wrapper.getElements(this.options.element);
+		elements.addClass('carousel-element');
 
 		var element = this.wrapper.getElement(this.options.element);
 		if (element) {
