@@ -23,67 +23,59 @@ Moobile.Scroller.Carousel = new Class({
 
 	Extends: Moobile.Scroller,
 
+	elements: [],
+
 	options: {
-		element: 'li',
+		layout: 'horizontal',
 		momentum: false,
 		hScrollbar: false,
 		vScrollbar: false,
-		orientation: 'horizontal',
 		snap: true,
-		snapThreshold: 1
+		snapThreshold: 40
 	},
 
 	initialize: function(wrapper, content, options) {
 
-		if (options) {
-			options.snap = options.element || this.options.element;
-		} else {
-			options = {
-				snap: this.options.element
-			};
-		}
-
 		this.parent(wrapper, content, options);
 
 		this.wrapper.addClass('carousel');
-		this.wrapper.addClass('carousel-' + this.options.orientation);
+		this.wrapper.addClass('carousel-' + this.options.layout);
 
-		var size = this.wrapper.getSize();
+		this.elements = this.content.getElements('>');
+		this.elements.addClass('slide');
 
-		var elements = this.wrapper.getElements(this.options.element);
-		elements.addClass('carousel-element');
+		this.update();
 
-		var element = this.wrapper.getElement(this.options.element);
-		if (element) {
-			var parent = element.getParent();
-			if (parent) {
-				parent.addClass('carousel-content');
+		return this;
+	},
 
-				var key = '';
-				var val = 0;
+	update: function() {
 
-				switch (this.options.orientation) {
-					case 'vertical':
-						key = 'height';
-						val = size.y * elements.length;
-						this.scroller.options.snapThreshold = size.y * 40 / 100;
-						break;
+		var size = null;
+		var style = null;
 
-					case 'horizontal':
-						key = 'width';
-						val = size.x * elements.length
-						this.scroller.options.snapThreshold = size.x * 40 / 100;
-						break;
-				}
-
-				parent.setStyle(key, val);
-
-				if (this.content !== parent) {
-					this.content.setStyle(key, val);
-				}
-			}
+		switch (this.options.layout) {
+			case 'horizontal':
+				size = this.wrapper.getSize().x;
+				style = 'width';
+				break;
+			case 'vertical':
+				size = this.wrapper.getSize().y;
+				style = 'height';
+				break;
 		}
 
+		this.elements.setStyle(style, 100 / this.elements.length + '%');
+		this.content.setStyle(style, 100 * this.elements.length + '%');
+
+		this.scroller.options.snapThreshold = size * this.options.snapThreshold / 100;
+
+		return this;
+	},
+
+	onRefresh: function() {
+		this.parent();
+		this.update();
 		return this;
 	}
 
