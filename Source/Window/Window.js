@@ -21,6 +21,10 @@ provides:
 
 if (!window.$moobile) window.$moobile = {};
 
+(function() {
+
+var instance = null;
+
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
@@ -39,6 +43,20 @@ Moobile.Window = new Class({
 		showLoadingIndicatorDelay: 0
 	},
 
+	initialize: function(element, options, name) {
+
+		this.parent(element, options, name);
+
+		if (instance == null) {
+			instance = this;
+			return this;
+		}
+
+		throw new Error('Only one window instance is allowed.');
+
+		return this;
+	},
+
 	startup: function() {
 
 		window.$moobile.window = this;
@@ -47,7 +65,6 @@ Moobile.Window = new Class({
 			return this;
 
 		this.ready = true;
-
 		this.init();
 		this.attachEvents();
 
@@ -62,23 +79,24 @@ Moobile.Window = new Class({
 			return this;
 
 		this.ready = false;
-
 		this.detachEvents();
 		this.release();
+
+		instance = null;
 
 		return this;
 	},
 
 	attachEvents: function() {
-		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		window.addEvent('load', this.bound('onWindowLoad'));
+		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		window.removeEvent('load', this.bound('onWindowLoad'));
+		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		this.parent();
 		return this;
 	},
@@ -173,8 +191,16 @@ Moobile.Window = new Class({
 	onWindowLoad: function(e) {
 		this.position.delay(250);
 		return this;
-	},
-
-
+	}
 
 });
+
+Moobile.Window.extend({
+
+	getInstance: function() {
+		return instance;
+	}
+
+});
+
+})();

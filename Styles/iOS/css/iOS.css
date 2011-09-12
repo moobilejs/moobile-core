@@ -1055,6 +1055,17 @@ p small {
 	}
 }
 
+@-webkit-keyframes anim-dismiss-alert {
+	from {
+		opacity: 1;
+		-webkit-transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		-webkit-transform: scale(0);
+	}
+}
+
 .alert {
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;
@@ -1077,7 +1088,11 @@ p small {
 }
 
 .alert.dismiss {
-
+ 	-webkit-animation-name: anim-dismiss-alert;
+	-webkit-animation-duration: 250ms;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-animation-fill-mode: both;
 }
 
 .alert-header {
@@ -1121,39 +1136,39 @@ p small {
 	background: url(../images/alert-button-bg.png) 0px -40px repeat-x;
 }
 
-.alert.style-horizontal .alert-footer {
+.alert.alert-horizontal .alert-footer {
 	-webkit-box-orient: horizontal;
 	display: -webkit-box;
 }
 
-.alert.style-horizontal .alert-footer .button {
+.alert.alert-horizontal .alert-footer .button {
 	margin-left: 4px;
 	margin-right: 4px;
 }
 
-.alert.style-horizontal .alert-footer .button:first-child {
+.alert.alert-horizontal .alert-footer .button:first-child {
 	margin-left: 0px;
 }
 
-.alert.style-horizontal .alert-footer .button:last-child {
+.alert.alert-horizontal .alert-footer .button:last-child {
 	margin-right: 0px;
 }
 
-.alert.style-vertical .alert-footer {
+.alert.alert-vertical .alert-footer {
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
 }
 
-.alert.style-vertical .alert-footer .button {
+.alert.alert-vertical .alert-footer .button {
 	margin-top: 2px;
 	margin-bottom: 2px;
 }
 
-.alert.style-vertical .alert-footer .button:first-child {
+.alert.alert-vertical .alert-footer .button:first-child {
 	margin-top: 0px;
 }
 
-.alert.style-vertical .alert-footer .button:last-child {
+.alert.alert-vertical .alert-footer .button:last-child {
 	margin-bottom: 0px;
 }
 
