@@ -124,7 +124,7 @@ Moobile.Alert = new Class({
 
 	onButtonClick: function(e) {
 
-		this.fireEvent('buttonclick', e);
+		this.fireEvent('buttonclick', e.target);
 
 		if (this.buttons.length == 1) {
 			this.dismiss();
