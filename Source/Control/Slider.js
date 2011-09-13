@@ -43,7 +43,7 @@ Moobile.Slider = new Class({
 	thumb: null,
 
 	options: {
-		className: 'slider-view',
+		className: 'slider',
 		snap: false,
 		mode: 'horizontal',
 		min: 0,
