@@ -494,7 +494,7 @@ p small {
 }
 
 .button > .button-content {
-	overflow: hidden;
+	position: relative;											/* Important */
 }
 
 .button > .button-content [data-role=label] [data-role=text] {
@@ -921,10 +921,9 @@ p small {
 .list .list-item > .list-item-content {
 	-webkit-box-flex: 1;
 	-webkit-box-sizing: border-box;								/* Important */
-	padding : 7px;
+	padding : 6px;
 	padding-left: 10px;
 	padding-right: 10px;
-	overflow: hidden;
 }
 
 .list .list-item > .list-item-content > [data-role=label] {
@@ -935,6 +934,8 @@ p small {
 
 .list .list-item > .list-item-content > [data-role=label] [data-role=text] {
 	display: block;												/* Important */
+	height: 19px;
+	line-height: 19px;
 	overflow: hidden;											/* Important */
 	text-overflow: ellipsis;									/* Important */
 	white-space: nowrap;										/* Important */
