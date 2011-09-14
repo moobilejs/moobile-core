@@ -125,17 +125,17 @@ Moobile.Scroller = new Class({
 	},
 
 	scrollTo: function(x, y, time, relative) {
-		this.scroller.scrollTo(x, y, time, relative);
+		(function() { this.scroller.scrollTo(x, y, time, relative); }).delay(5, this);
 		return this;
 	},
 
 	scrollToElement: function(element, time) {
-		this.scroller.scrollToElement(element, time);
+		(function() { this.scroller.scrollToElement(element, time); }).delay(5, this);
 		return this;
 	},
 
 	scrollToPage: function (pageX, pageY, time) {
-		this.scroller.scrollToPage(pageX, pageY, time);
+		(function() { this.scroller.scrollToPage(pageX, pageY, time); }).delay(5, this);
 		return this;
 	},
 
