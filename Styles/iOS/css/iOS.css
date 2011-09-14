@@ -370,6 +370,7 @@ p small {
 	-webkit-backface-visibility: hidden;						/* Important */
 	height: 44px;												/* Important */
 	position: relative;											/* Important */
+	width: 100%;												/* Important */
 	z-index: 50;												/* Important */
 }
 
@@ -487,6 +488,7 @@ p small {
 	color: #000000;
 	font-size: 17px;
 	font-weight: bold;
+	padding: 10px;
 	padding-top: 13px;
 	padding-bottom: 13px;
 	text-align: center;
