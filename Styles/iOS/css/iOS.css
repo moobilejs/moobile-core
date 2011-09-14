@@ -489,8 +489,8 @@ p small {
 	font-size: 17px;
 	font-weight: bold;
 	padding: 10px;
-	padding-top: 13px;
-	padding-bottom: 13px;
+	padding-top: 11px;
+	padding-bottom: 11px;
 	text-align: center;
 	width: 100%;
 }
@@ -501,6 +501,8 @@ p small {
 
 .button > .button-content [data-role=label] [data-role=text] {
 	display: block;												/* Important */
+	height: 19px;
+	line-height: 19px;
 	overflow: hidden;											/* Important */
 	text-overflow: ellipsis;									/* Important */
 	white-space: nowrap;										/* Important */
