@@ -391,6 +391,10 @@ Moobile.ViewController = new Class({
 		});
 	},
 
+	getChildViewControllers: function() {
+		return this.childViewControllers;
+	},
+
 	removeChildViewController: function(viewController) {
 
 		var exists = this.childViewControllers.contains(viewController);
