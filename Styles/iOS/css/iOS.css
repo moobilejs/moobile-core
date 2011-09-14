@@ -1088,7 +1088,6 @@ p small {
 
 @-webkit-keyframes anim-present-alert {
 	0% {
-		opacity: 0;
 		-webkit-transform: scale(0.5);
 	}
 	35% {
@@ -1098,7 +1097,6 @@ p small {
 		-webkit-transform: scale(0.9);
 	}
 	100% {
-		opacity: 1;
 		-webkit-transform: scale(1);
 	}
 }
@@ -1123,7 +1121,6 @@ p small {
 	background: rgba(11, 27, 68, 0.8) url(../images/alert-bg.png) no-repeat center top;
 	border: 2px solid #dfe1e6;
 	color: #ffffff;
-	opacity: 0;
 	padding: 6px;
 	width: 275px;
 }
