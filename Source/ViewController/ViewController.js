@@ -144,7 +144,7 @@ Moobile.ViewController = new Class({
 	},
 
 	setParentViewController: function(parentViewController) {
-		this.parentViewController = this.parentViewController;
+		this.parentViewController = parentViewController;
 		return this;
 	},
 
@@ -245,10 +245,10 @@ Moobile.ViewController = new Class({
 		this.modalViewController = viewController;
 		this.modalViewController.modal = true;
 
-		this.addChildViewController(this.modalViewController, 'after', this.view);
+		this.addChildViewController(this.modalViewController, 'bottom', this.window.getContent());
 
 		var viewToShow = this.modalViewController.getView();
-		var viewToHide = this.view;
+		var viewToHide = this.window.getRootView();
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
 		viewTransition.addEvent('start:once', this.bound('onPresentTransitionStart'));
@@ -256,7 +256,7 @@ Moobile.ViewController = new Class({
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
-			this.view.getParentView() || this.view.getWindow()
+			this.window
 		);
 
 		this.modalViewController.setViewTransition(viewTransition);
@@ -282,7 +282,7 @@ Moobile.ViewController = new Class({
 
 		this.window.disableInput();
 
-		var viewToShow = this.view;
+		var viewToShow = this.window.getRootView();
 		var viewToHide = this.modalViewController.getView();
 
 		var viewTransition = this.modalViewController.viewTransition;
@@ -291,7 +291,7 @@ Moobile.ViewController = new Class({
 		viewTransition.leave(
 			viewToShow,
 			viewToHide,
-			this.view.getParentView() || this.view.getWindow()
+			this.window
 		);
 
 		return this;
