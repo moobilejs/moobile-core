@@ -110,6 +110,10 @@ Moobile.Window = new Class({
 		return this;
 	},
 
+	getRootView: function() {
+		return this.childViews[0];
+	},
+
 	getOrientation: function() {
 		var o = Math.abs(window.orientation);
 		switch (o) {
