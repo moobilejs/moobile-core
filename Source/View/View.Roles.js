@@ -34,7 +34,7 @@ Moobile.View.Roles = {
 
 	wrapper: {
 		stop: false,
-		onDetach: function() {
+		onAttach: function() {
 			this.addClass('wrapper');
 		}
 	},
