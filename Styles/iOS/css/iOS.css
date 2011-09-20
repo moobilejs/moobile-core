@@ -493,8 +493,7 @@ p small {
 
 .button > .button-content [data-role=label] [data-role=text] {
 	display: block;												/* Important */
-	height: 19px;
-	line-height: 19px;
+	line-height: 1.25;											/* Important */
 	overflow: hidden;											/* Important */
 	text-overflow: ellipsis;									/* Important */
 	white-space: nowrap;										/* Important */
@@ -555,7 +554,6 @@ p small {
 .bar-button {
 	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-background-size: 0px 0px;
 	cursor: pointer;
 	color: #ffffff;
 	font-size: 12px;
@@ -589,6 +587,7 @@ p small {
 
 .bar.style-default-opaque      .bar-button.style-default,
 .bar.style-default-translucent .bar-button.style-default {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 0 5 570 stretch stretch;
 	background: url(../images/bar-button.png) -5px -0px repeat-x;
 	background-clip: padding-box;
@@ -615,6 +614,7 @@ p small {
 
 .bar.style-black-opaque      .bar-button.style-default,
 .bar.style-black-translucent .bar-button.style-default {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 120 5 450 stretch stretch;
 	background: url(../images/bar-button.png) -5px -120px repeat-x;
 	background-clip: padding-box;
@@ -641,6 +641,7 @@ p small {
 /* Active */
 
 .bar-button.style-active {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 60 5 510 stretch stretch;
 	background: url(../images/bar-button.png) -5px -60px repeat-x;
 	background-clip: padding-box;
@@ -662,6 +663,7 @@ p small {
 /* Warning */
 
 .bar-button.style-warning {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 180 5 390 stretch stretch;
 	background: url(../images/bar-button.png) -5px -180px repeat-x;
 	background-clip: padding-box;
@@ -685,6 +687,7 @@ p small {
 
 .bar.style-default-opaque      .bar-button.style-back,
 .bar.style-default-translucent .bar-button.style-back {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 240 5 330 15 stretch stretch;
 	background: url(../images/bar-button.png) -5px -240px repeat-x;
 	background-clip: padding-box;
@@ -714,6 +717,7 @@ p small {
 
 .bar.style-black-opaque      .bar-button.style-back,
 .bar.style-black-translucent .bar-button.style-back {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 360 5 210 15 stretch stretch;
 	background: url(../images/bar-button.png) -5px -240px repeat-x;
 	background-clip: padding-box;
@@ -742,6 +746,7 @@ p small {
 /* Forward With Default Navigation Bar View */
 
 .bar-button.style-forward {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 300 15 270 5 stretch stretch;
 	background: url(../images/bar-button.png) -5px -300px repeat-x;
 	background-clip: padding-box;
@@ -767,6 +772,7 @@ p small {
 
 .bar.style-black-opaque      .bar-button.style-forward,
 .bar.style-black-translucent .bar-button.style-forward {
+	-webkit-background-size: 0px 0px;
 	-webkit-border-image: url(../images/bar-button.png) 420 15 150 5 stretch stretch;
 	background: url(../images/bar-button.png) -5px -300px repeat-x;
 	background-clip: padding-box;
@@ -795,7 +801,7 @@ p small {
 /* With Button Group View (Always Horizontal) */
 
 .button-group > .button-group-content > .bar-button {
-	-webkit-background-size: auto;
+	-webkit-background-size: auto !important;
 	border-left-width: 0px !important;
 	border-right-width: 0px !important;
 	padding-left: 0px;
@@ -891,9 +897,9 @@ p small {
 	list-style: none;
 	list-style-position: outside;
 	overflow: hidden;											/* Important */
-	padding: 7px;
-	padding-left: 8px;
-	padding-right: 8px;
+	padding: 8px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	position: relative;											/* Important */
 }
 
@@ -913,15 +919,14 @@ p small {
 .list .list-item > .list-item-content {
 	-webkit-box-flex: 1;
 	-webkit-box-sizing: border-box;								/* Important */
-	padding: 6px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 11px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 }
 
 .list .list-item > .list-item-content > [data-role=label] [data-role=text] {
 	display: block;												/* Important */
-	height: 19px;
-	line-height: 19px;
+	line-height: 1.25;											/* Important */
 	overflow: hidden;											/* Important */
 	text-overflow: ellipsis;									/* Important */
 	white-space: nowrap;										/* Important */
@@ -931,11 +936,6 @@ p small {
 .list .list-item.list-item-selected,
 .list .list-item.list-item-highlighted {
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
-}
-
-.list .list-item.list-item-down,
-.list .list-item.list-item-selected,
-.list .list-item.list-item-highlighted {
 	color: #ffffff;
 	text-shadow: none;
 }
