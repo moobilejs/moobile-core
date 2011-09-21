@@ -241,10 +241,12 @@ Moobile.ViewController = new Class({
 			}.bind(this));
 			return this;
 		}
-
+		
 		this.modalViewController = viewController;
 		this.modalViewController.modal = true;
-
+		
+		this.willPresentModalViewController();
+		
 		this.addChildViewController(this.modalViewController, 'bottom', this.window.getContent());
 
 		var viewToShow = this.modalViewController.getView();
@@ -271,6 +273,7 @@ Moobile.ViewController = new Class({
 
 	onPresentTransitionCompleted: function() {
 		this.modalViewController.viewDidEnter();
+		this.didPresentModalViewController()
 		this.window.enableInput();
 		return this;
 	},
@@ -281,6 +284,8 @@ Moobile.ViewController = new Class({
 			return this;
 
 		this.window.disableInput();
+
+		this.willDismissModalViewController()
 
 		var viewToShow = this.window.getRootView();
 		var viewToHide = this.modalViewController.getView();
@@ -306,7 +311,8 @@ Moobile.ViewController = new Class({
 		this.removeChildViewController(this.modalViewController);
 		this.modalViewController.destroy();
 		this.modalViewController = null;
-		this.window.enableInput();
+		this.didDismissModalViewController();
+		this.window.enableInput();	
 		return this;
 	},
 
@@ -433,6 +439,22 @@ Moobile.ViewController = new Class({
 	},
 
 	didRemoveChildViewController: function(viewController) {
+		return this;
+	},
+
+	willPresentModalViewController: function() {
+		return this;
+	},
+	
+	didPresentModalViewController: function() {
+		return this;
+	},
+	
+	willDismissModalViewController: function() {
+		return this;
+	},
+	
+	didDismissModalViewController: function() {
 		return this;
 	},
 
