@@ -194,9 +194,9 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	didAddChildViewController: function(viewController) {
-		viewController.setViewControllerStack(this);
+	willAddChildViewController: function(viewController) {
 		this.parent();
+		viewController.setViewControllerStack(this);
 		return this;
 	},
 

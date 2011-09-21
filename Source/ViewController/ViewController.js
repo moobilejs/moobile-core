@@ -190,7 +190,7 @@ Moobile.ViewController = new Class({
 
 		this.window = this.view.getWindow();
 
-		this.attachchildViewControllers();
+		this.attachChildViewControllers();
 		this.init();
 		this.attachEvents();
 
@@ -310,14 +310,14 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	attachchildViewControllers: function() {
-		var filter = this.bound('filterViewController');
-		var attach = this.bound('attachViewController');
+	attachChildViewControllers: function() {
+		var filter = this.bound('filterChildViewController');
+		var attach = this.bound('attachChildViewController');
 		this.view.getElements('[data-role=view-controller]').filter(filter).each(attach);
 		return this;
 	},
 
-	attachViewController: function(element) {
+	attachChildViewController: function(element) {
 
 		var viewControllerClass = element.get('data-view-controller');
 		if (viewControllerClass) {
@@ -340,17 +340,17 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	filterViewController: function(element) {
+	filterChildViewController: function(element) {
 		return element.getParent('[data-role=view-controller]') == this.view.element; // not quite sure
 	},
 
 	destroyChildViewControllers: function() {
-		this.childViewControllers.each(this.bound('destroyViewController'));
+		this.childViewControllers.each(this.bound('destroyChildViewController'));
 		this.childViewControllers.empty();
 		return this;
 	},
 
-	destroyViewController: function(viewController) {
+	destroyChildViewController: function(viewController) {
 		viewController.destroy();
 		viewController = null;
 		return this;
@@ -367,15 +367,14 @@ Moobile.ViewController = new Class({
 
 		var view = viewController.getView();
 
-		this.willAddChildViewController(viewController);
-		this.childViewControllers.push(viewController);
-		this.view.addChildView(view, where, context);
-
 		if (viewController.isModal() == false) {
 			viewController.setViewControllerStack(this.viewControllerStack);
 			viewController.setViewControllerPanel(this.viewControllerPanel);
 		}
 
+		this.willAddChildViewController(viewController);
+		this.childViewControllers.push(viewController);
+		this.view.addChildView(view, where, context);
 		viewController.setParentViewController(this);
 		viewController.startup();
 		this.didAddChildViewController(viewController);
