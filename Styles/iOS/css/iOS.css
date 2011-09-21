@@ -260,7 +260,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .view {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;								/* Important */
@@ -283,7 +282,6 @@ p small {
 }
 
 .view > .view-content {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;								/* Important */
@@ -298,7 +296,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .view.scroll-view > .scroll-view-wrapper {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;								/* Important */
@@ -314,7 +311,6 @@ p small {
 }
 
 .view.scroll-view > .scroll-view-wrapper > .view-content {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-orient: vertical;
@@ -362,7 +358,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .bar {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	color: #ffffff;
 	font-size: 20px;
@@ -469,7 +464,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .button {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-border-radius: 10px;
 	-webkit-box-sizing: border-box;
@@ -552,7 +546,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .bar-button {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	cursor: pointer;
 	color: #ffffff;
@@ -839,7 +832,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .list {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 }
 
@@ -882,7 +874,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .list .list-item {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-orient: horizontal;								/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
@@ -1098,7 +1089,6 @@ p small {
 }
 
 .alert {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;
 	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
@@ -1214,7 +1204,6 @@ p small {
 }
 
 .activity-indicator {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	z-index: 100;
 	width: 21px;
@@ -1265,7 +1254,6 @@ p small {
 }
 
 .slider-track {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-border-radius: 5px;
 	background: url(../images/slider-track.png) 0px 0px;
@@ -1273,7 +1261,6 @@ p small {
 }
 
 .slider-thumb {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-border-radius: 5px;
 	background: url(../images/slider-handle.png) no-repeat center center;
@@ -1287,7 +1274,6 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .carousel {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	overflow: hidden;											/* Important */
