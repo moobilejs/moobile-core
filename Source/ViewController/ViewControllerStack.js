@@ -39,6 +39,9 @@ Moobile.ViewControllerStack = new Class({
 
 	pushViewController: function(viewController, viewTransition) {
 
+		if (this.topViewController == viewController)
+			return;
+
 		if (this.childViewControllers.length > 0)
 			this.window.disableInput();
 
