@@ -175,9 +175,8 @@ p small {
 .window > .window-content {
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-orient: vertical;								/* Important */
 	-webkit-box-flex: 1;										/* Important */
-	display: -webkit-box;										/* Important */
+	display: block;												/* Important */
 	height: 100%;												/* Important */
 	position: relative;											/* Important */
 	width: 100%;												/* Important */
@@ -326,6 +325,10 @@ p small {
 
 .view.view-stack {
 	background: transparent;
+}
+
+.view.view-stack > .view-content {
+	display: block;												/* Important */
 }
 
 /* View Panel
@@ -1392,16 +1395,18 @@ p small {
 .transition-slide-enter {
 	-webkit-animation: anim-slide-enter 500ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	-webkit-box-orient: horizontal !important;					/* Important */
+	display: block; 											/* Important */
 	overflow: visible;											/* Important */
 }
 
 .transition-slide-enter .transition-view-to-show {
+	-webkit-transform: translateY(-100%) translateX(100%);		/* Important */
 	-webkit-box-flex: 0;										/* Important */
 	overflow: visible;											/* Important */
 }
 
 .transition-slide-enter .transition-view-to-hide {
+	-webkit-transform: translateY(0%) translateX(0%);			/* Important */
 	-webkit-box-flex: 0;										/* Important */
 	overflow: visible;											/* Important */
 }
@@ -1459,11 +1464,13 @@ p small {
 }
 
 .transition-slide-leave .transition-view-to-show {
+	-webkit-transform: translateY(0%) translateX(0%);			/* Important */
 	-webkit-box-flex: 0;										/* Important */
 	overflow: visible;											/* Important */
 }
 
 .transition-slide-leave .transition-view-to-hide {
+	-webkit-transform: translateY(-100%) translateX(100%);		/* Important */
 	-webkit-box-flex: 0;										/* Important */
 	overflow: visible;											/* Important */
 }
@@ -1543,6 +1550,10 @@ p small {
 	z-index: 75;
 }
 
+.transition-cover-enter-background-view {
+	-webkit-transform: translateY(-100%);	
+}
+
 /* Leave */
 
 @-webkit-keyframes anim-cover-leave {
@@ -1611,12 +1622,12 @@ p small {
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;						/* Important */
     -webkit-transform-origin: 100% 50%;							/* Important */
-	-webkit-box-orient: horizontal !important;					/* Important */
+	display: block !important;									/* Important */
 }
 
 .transition-cubic-enter .transition-view-to-show {
 	-webkit-transform-origin: center left;
-    -webkit-transform: rotateY(90deg);
+    -webkit-transform: translateY(-100%) translateX(100%) rotateY(90deg);
 	-webkit-box-flex: 0;										/* Important */
 }
 
@@ -1642,7 +1653,7 @@ p small {
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 100% 50%;
-	-webkit-box-orient: horizontal !important;					/* Important */
+	display: block !important;									/* Important */
 }
 
 .transition-cubic-leave .transition-view-to-show {
@@ -1653,7 +1664,7 @@ p small {
 
 .transition-cubic-leave .transition-view-to-hide {
 	-webkit-transform-origin: center left;
-    -webkit-transform: rotateY(90deg);
+    -webkit-transform: translateY(-100%) translateX(100%) rotateY(90deg);
 	-webkit-box-flex: 0;										/* Important */
 }
 
