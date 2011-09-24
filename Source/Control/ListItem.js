@@ -28,6 +28,8 @@ Moobile.ListItem = new Class({
 
 	image: null,
 
+	accessory: null,
+
 	options: {
 		className: 'list-item'
 	},
@@ -42,9 +44,14 @@ Moobile.ListItem = new Class({
 
 		this.set('role', 'list-item');
 
-		var label = this.getElement('[data-role=label]');
-		var image = this.getElement('[data-role=image]');
+		var label = this.getElement('[data-role=label]:not([data-task])');
+		var image = this.getElement('[data-role=image]:not([data-task])');
 
+		var accessory = this.getElement('[data-role=label][data-task=accessory]');
+		if (accessory == null) {
+			accessory = new Element('div[data-role=label][data-task=accessory]');
+		}
+		
 		if (label == null) {
 			label = new Element('div[data-role=label]');
 			label.ingest(this.content);
@@ -56,10 +63,12 @@ Moobile.ListItem = new Class({
 
 		image.inject(this.element, 'top');
 		label.inject(this.content, 'top');
+		accessory.inject(this.element);
 
 		this.label = this.getRoleInstance(label);
-		this.image = this.getRoleInstance(image);
-
+		this.image = this.getRoleInstance(image);		
+		this.accessory = this.getRoleInstance(accessory);
+	
 		return this;
 	},
 

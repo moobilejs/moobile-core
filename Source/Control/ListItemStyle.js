@@ -58,20 +58,27 @@ Moobile.ListItemStyle = {
 
 	},
 
-	Active: {
+	Activity: {
 
 		onAttach: function() {
-			var indicator = new Element('div.list-item-active-indicator');
-			indicator.inject(this.content, 'after');
-			return this.addClass('style-active');
+			
+			var activity = this.getElement('div.list-item-activity');
+			if (activity == null) {
+				activity = new Element('div.list-item-activity');
+				activity.inject(this.element);
+			}
+
+			return this.addClass('style-activity');
 		},
 
 		onDetach: function() {
-			var element = this.getElement('div.list-item-active-indicator');
-			if (element) {
-				element.destroy();
+			
+			var activity = this.getElement('div.list-item-activity');
+			if (activity) {
+				activity.destroy();
 			}
-			return this.removeClass('style-active');
+			
+			return this.removeClass('style-activity');
 		}
 
 	}
