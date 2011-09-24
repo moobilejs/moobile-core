@@ -44,6 +44,18 @@ Moobile.Control = new Class({
 		highlightable: true
 	},
 
+	initialize: function(element, options, name) {
+
+		this.parent(element, options, name);
+
+		var styleName = this.options.styleName;
+		if (styleName) {
+			this.setStyle(styleName);
+		}
+		
+		return this;
+	},
+
 	build: function(element) {
 
 		this.parent(element);
@@ -56,11 +68,6 @@ Moobile.Control = new Class({
 
 		if (!this.options.selectable) this.setSelectable(false);
 		if (!this.options.highlightable) this.setHighlightable(false);
-
-		var styleName = this.options.styleName;
-		if (styleName) {
-			this.setStyle(styleName);
-		}
 
 		return this;
 	},
