@@ -37,8 +37,8 @@ Moobile.NavigationBar = new Class({
 
 		this.parent(element);
 
-		var lBarButton = this.getElement('[data-role=bar-button][data-align=left]');
-		var rBarButton = this.getElement('[data-role=bar-button][data-align=right]');
+		var lBarButton = this.getElement('[data-role=bar-button][data-task=left]');
+		var rBarButton = this.getElement('[data-role=bar-button][data-task=right]');
 
 		var title = this.getElement('[data-role=bar-title]');
 		if (title == null) {
