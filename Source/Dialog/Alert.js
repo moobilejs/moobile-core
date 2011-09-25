@@ -87,7 +87,9 @@ Moobile.Alert = new Class({
 			this.addButton(dismissButton);
 		}
 
-		this.mask = new Moobile.Mask();
+		this.mask = new Moobile.Mask(null, {
+			fillStyle: 'gradient'
+		});
 
 		Moobile.Window.getInstance().addChildView(this.mask);
 
