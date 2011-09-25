@@ -24,7 +24,19 @@ Moobile.Mask = new Class({
 	Extends: Moobile.View,
 
 	options: {
-		className: 'mask'
+		className: 'mask',
+		fillStyle: 'solid'
+	},
+
+	build: function(element) {
+		
+		this.parent(element);
+		
+		if (this.options.className) {
+			this.element.addClass(this.options.className + '-' + this.options.fillStyle);			
+		}
+		
+		return this;
 	},
 
 	attachEvents: function() {
