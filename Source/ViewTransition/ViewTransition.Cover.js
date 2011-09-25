@@ -78,7 +78,7 @@ Moobile.ViewTransition.Cover = new Class({
 		return this;
 	},
 
-	onEnter: function(viewToShow, viewToHide, parentView, first) {
+	didEnter: function(viewToShow, viewToHide, parentView, first) {
 		
 		this.parent(viewToShow, viewToHide, parentView, first);
 		
@@ -111,7 +111,7 @@ Moobile.ViewTransition.Cover = new Class({
 		return this;
 	},
 	
-	onLeave: function(viewToShow, viewToHide, parentView) {
+	didLeave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);
 		

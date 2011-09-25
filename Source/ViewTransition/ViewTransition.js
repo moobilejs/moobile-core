@@ -97,22 +97,22 @@ Moobile.ViewTransition = new Class({
 
 	enter: function(viewToShow, viewToHide, parentView, first) {
 		if (viewToShow) viewToShow.show();
-		this.addEvent('stop:once', this.onEnter.pass([viewToShow, viewToHide, parentView, first], this));
+		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
 		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
 		if (viewToShow) viewToShow.show();
-		this.addEvent('stop:once', this.onLeave.pass([viewToShow, viewToHide, parentView], this));
+		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
 		return this;
 	},
 
-	onEnter: function(viewToShow, viewToHide, parentView, first) {
+	didEnter: function(viewToShow, viewToHide, parentView, first) {
 		if (viewToHide) viewToHide.hide();
 		return this;
 	},
 
-	onLeave: function(viewToShow, viewToHide, parentView) {
+	didLeave: function(viewToShow, viewToHide, parentView) {
 		if (viewToHide) viewToHide.hide();
 		return this;
 	},
