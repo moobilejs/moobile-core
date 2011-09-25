@@ -97,7 +97,7 @@ Moobile.ViewController = new Class({
 	},
 
 	getTitle: function() {
-		return this.title || 'Untitled';
+		return this.title == null ? 'Untitled' : this.title;
 	},
 
 	isReady: function() {
