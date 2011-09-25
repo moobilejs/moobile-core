@@ -25,7 +25,8 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	Extends: Moobile.ViewControllerStack,
 
 	options: {
-		showBackButton: true
+		backButton: true,
+		backButtonLabel: 'Back'
 	},
 
 	willAddChildViewController: function(viewController) {
@@ -43,14 +44,14 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		if (viewController.isModal() || this.childViewControllers.length == 0)
 			return this;
 
-		if (this.options.showBackButton) {
+		if (this.options.backButton) {
 
-			var title = this.topViewController.getTitle();
-			if (title) {
+			var backButtonLabel = this.topViewController.getTitle() || this.options.backButtonLabel;
+			if (backButtonLabel) {
 
 				var backButton = new Moobile.BarButton();
 				backButton.setStyle(Moobile.BarButtonStyle.Back);
-				backButton.setLabel(title);
+				backButton.setLabel(backButtonLabel);
 				backButton.addEvent('click', this.bound('onBackButtonClick'));
 
 				navigationBar.setLeftBarButton(backButton);
