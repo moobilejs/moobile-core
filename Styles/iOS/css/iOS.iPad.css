@@ -109,23 +109,23 @@
 	background: transparent;
 	border-left: none;
 	border-right: none;
-	border-top: 1px solid rgba(255, 255, 255, 0.25);
-	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 .list.style-default .list-item:first-child {
-	border-top: 1px solid rgba(255, 255, 255, 0.25);
+	border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
 }
 
 .list.style-default .list-item:first-child {}
 .list.style-default .list-item:last-child {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 .list.style-default .list-item.list-item-down,
 .list.style-default .list-item.list-item-selected,
 .list.style-default .list-item.list-item-highlighted {
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #015fe6), color-stop(1, #058cf5));
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #015fe6), color-stop(1, #058cf5)) !important;
 	color: #ffffff;
 	text-shadow: none;
 }

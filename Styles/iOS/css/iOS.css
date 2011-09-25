@@ -129,28 +129,22 @@ input, select, textarea {
 /* Header Text
 -----------------------------------------------------------------------------*/
 
-h2 {
+h1 {
 	color: #4c596e;
 	font-size: 17px;
 	font-weight: bold;
 	margin-bottom: 12px;
-	padding-left: 8px;
-	padding-right: 8px;
 }
 
-h3 {
+h2 {
 	color: #4c596e;
 	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 12px;
-	padding-left: 8px;
-	padding-right: 8px;
 }
 
 p {
 	margin-bottom: 12px;
-	padding-left: 8px;
-	padding-right: 8px;
 }
 
 p small {
@@ -273,6 +267,7 @@ p small {
 	position: relative;											/* Important */
 	text-shadow: 0px 1px 0px #ffffff;
 	width: 100%;												/* Important */
+	z-index: 50;												/* Important */
 }
 
 .view > * {
@@ -1042,8 +1037,7 @@ p small {
 .mask {
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-transform: translate3d(0, 0, 0);					/* Important */
-    -webkit-transition: opacity 350ms cubic-bezier(0.5,0.1,0.5,1);
-	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
+    -webkit-transition: opacity 350ms cubic-bezier(0.5, 0.1, 0.5, 1);
 	bottom: 0px;
 	height: 100%;
 	left: 0px;
@@ -1053,6 +1047,14 @@ p small {
 	top: 0px;
 	width: 100%;
 	z-index: 100;
+}
+
+.mask.mask-solid {
+	background: rgba(0, 0, 0, 0.30);
+}
+
+.mask.mask-gradient {
+	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));	
 }
 
 .mask {
@@ -1077,7 +1079,7 @@ p small {
 
 @-webkit-keyframes anim-present-alert {
 	0% {
-		-webkit-transform: scale(0.5);
+		-webkit-transform: scale(0.6);
 	}
 	35% {
 		-webkit-transform: scale(1.1);
@@ -1097,7 +1099,7 @@ p small {
 	}
 	to {
 		opacity: 0;
-		-webkit-transform: scale(0);
+		-webkit-transform: scale(0.6);
 	}
 }
 
@@ -1117,7 +1119,7 @@ p small {
  	-webkit-animation-name: anim-present-alert;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-iteration-count: 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 }
 
@@ -1125,7 +1127,7 @@ p small {
  	-webkit-animation-name: anim-dismiss-alert;
 	-webkit-animation-duration: 250ms;
 	-webkit-animation-iteration-count: 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5,0.1,0.5,1);
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 }
 
@@ -1155,8 +1157,8 @@ p small {
 	font-weight: bold;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
 	text-align: center;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 9px;
+	padding-bottom: 9px;
 }
 
 .alert-footer .button.button-highlighted {
@@ -1543,10 +1545,10 @@ p small {
 
 @-webkit-keyframes anim-cover-enter {
 	from {
-		-webkit-transform: translateY(0%);
+		-webkit-transform: translateY(100%);
 	}
 	to {
-		-webkit-transform: translateY(-100%);
+		-webkit-transform: translateY(0%);
 	}
 }
 
@@ -1560,23 +1562,71 @@ p small {
 	z-index: 75;
 }
 
-.transition-cover-enter-background-view {
-	-webkit-transform: translateY(-100%);	
+.transition-cover-enter .transition-view-to-hide {
+	position: absolute;
+}
+
+.transition-cover-view-wrapper {
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	-webkit-box-flex: 1;
+	display: -webkit-box;
+	height: 100%;
+	width: 100%;
+	z-index: 70;
+}
+
+.transition-cover-background-view {
+	position: absolute;
+	z-index: 50;
+}
+
+.transition-cover-foreground-view {
+	position: relative;
+	z-index: 75;
+}
+
+.transition-cover-mask {
+	z-index: 65;
+}
+
+/* Enter - Center */
+
+.transition-cover-center .transition-cover-foreground-view {
+	-webkit-box-shadow: 0px 0px 10px #000000;
+	margin-left: auto;
+	margin-right: auto;
+	width: 768px;	
+	z-index: 70;
+}
+
+/* Enter - Box */
+
+.transition-cover-box .transition-cover-foreground-view > .view {
+	-webkit-box-shadow: 0px 0px 10px #000000;
+	-webkit-box-flex: 0;
+	height: 620px;
+	width: 540px;	
 }
 
 /* Leave */
 
 @-webkit-keyframes anim-cover-leave {
 	from {
-		-webkit-transform: translateY(-100%);
+		-webkit-transform: translateY(0%);
 	}
 	to {
-		-webkit-transform: translateY(0%);
+		-webkit-transform: translateY(100%);
 	}
 }
 
 .transition-cover-leave {
 	display: block !important;
+}
+
+.transition-cover-leave .transition-view-to-show {
+	position: absolute;
+	z-index: 50;
 }
 
 .transition-cover-leave .transition-view-to-hide {
