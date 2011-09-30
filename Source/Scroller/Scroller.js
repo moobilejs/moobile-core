@@ -60,6 +60,8 @@ Moobile.Scroller = new Class({
 	size: null,
 
 	options: {
+		useTransform: true,
+		useTransition: true,		
 		hideScrollbar: true,
 		fadeScrollbar: true,
 		checkDOMChanges: true,
