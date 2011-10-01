@@ -3,7 +3,7 @@
 
 name: BarTitle
 
-description:
+description: Provides a view that contains the title of a Bar control.
 
 license: MIT-style license.
 

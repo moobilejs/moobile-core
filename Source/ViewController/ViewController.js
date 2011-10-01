@@ -69,7 +69,7 @@ Moobile.ViewController = new Class({
 
 		this.setOptions(options);
 
-		this.name = name || null;
+		this.name = name || null;
 
 		var element = document.id(source);
 		if (element) {
@@ -150,7 +150,7 @@ Moobile.ViewController = new Class({
 
 	loadView: function(viewElement) {
 		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.View',
+			viewElement.get('data-view') || 'Moobile.View',
 			viewElement
 		);
 		return this;

@@ -3,7 +3,7 @@
 
 name: Array.Extras
 
-description: Provides extra methods to the array object.
+description: Provides extra methods to the Array object.
 
 license: MIT-style license.
 

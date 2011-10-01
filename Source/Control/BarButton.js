@@ -3,7 +3,7 @@
 
 name: BarButton
 
-description: Provides a button used inside a bar such as the navigation bar.
+description: Provides a button used inside a Bar control.
 
 license: MIT-style license.
 

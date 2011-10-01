@@ -3,8 +3,8 @@
 
 name: Element.Ingest
 
-description: Provides an ingest method that creates child dom element based on
-             a string.
+description: Provides a method that grab all the child element from an element
+             or a string.
 
 license: MIT-style license.
 

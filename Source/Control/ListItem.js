@@ -3,7 +3,7 @@
 
 name: ListItem
 
-description: Provide an item of a list.
+description: Provide a ListItem control used inside a List control.
 
 license: MIT-style license.
 
@@ -34,12 +34,10 @@ Moobile.ListItem = new Class({
 		className: 'list-item'
 	},
 
-	found: function(element) {
-		return document.id(element) || new Element('li');
-	},
-
 	build: function(element) {
-
+		
+		element = document.id(element) || new Element('li');
+		
 		this.parent(element);
 
 		this.set('role', 'list-item');

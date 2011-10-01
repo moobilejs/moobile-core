@@ -3,7 +3,7 @@
 
 name: Alert
 
-description: Provide an alert message box.
+description: Provides an Alert dialog.
 
 license: MIT-style license.
 

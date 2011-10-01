@@ -3,7 +3,7 @@
 
 name: Control
 
-description: Provides the base class for any types of controls.
+description: Provides the base class for controls.
 
 license: MIT-style license.
 

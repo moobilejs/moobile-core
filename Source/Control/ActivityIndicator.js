@@ -49,7 +49,7 @@ Moobile.ActivityIndicator = new Class({
 	},
 
 	center: function() {
-		var wrapper = this.parentView || this.window;
+		var wrapper = this.parentView || this.window;
 		if (wrapper) {
 			var wrapperSize = wrapper.content.getSize();
 			var elementSize = this.element.getSize();

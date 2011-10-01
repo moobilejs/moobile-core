@@ -3,7 +3,7 @@
 
 name: Element.Properties.Role
 
-description: Provides a role element properties.
+description: Provides a role property.
 
 license: MIT-style license.
 
@@ -30,7 +30,7 @@ Element.Properties.role={
 		role = role.trim();
 		role = role.toLowerCase();
 
-		var object = Moobile.View.Roles[role] || null;
+		var object = Moobile.View.Roles[role] || null;
 		if (object) {
 			object.name = role;
 		}

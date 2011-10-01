@@ -3,7 +3,7 @@
 
 name: ButtonGroupStyle
 
-description: Provide constants for button group styles.
+description: Provide styles for ButtonGroup instances.
 
 license: MIT-style license.
 

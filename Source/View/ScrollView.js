@@ -3,8 +3,8 @@
 
 name: ScrollView
 
-description: Provide a view that scrolls when the content is larger that the
-             window.
+description: Provides a view that scroll up or down when the content is larger 
+             that the view area.
 
 license: MIT-style license.
 

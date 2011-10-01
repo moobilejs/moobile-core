@@ -3,7 +3,7 @@
 
 name: Request
 
-description: Provides a base class for ajax request.
+description: Provides a base class for requests that could be executed locally.
 
 license: MIT-style license.
 

@@ -3,7 +3,7 @@
 
 name: View.Roles
 
-description: Provides the behavior of differents roles.
+description: Provides the behavior for roles used inside views.
 
 license: MIT-style license.
 

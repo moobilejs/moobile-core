@@ -3,7 +3,7 @@
 
 name: Scroller.Carousel
 
-description: Creates snap to element carousel.
+description: Creates a Scroller that snaps to elements.
 
 license: MIT-style license.
 

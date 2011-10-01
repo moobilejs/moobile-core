@@ -3,8 +3,8 @@
 
 name: View
 
-description: Provides an element on the screen and the interfaces for managing
-             the content in that area.
+description: Provides the base class for every objects that are displayed 
+             through an element.
 
 license: MIT-style license.
 
@@ -342,7 +342,7 @@ Moobile.View = new Class({
 	},
 
 	getElement: function(selector) {
-		return selector ? this.element.getElements(selector)[0] || null : this.element;
+		return selector ? this.element.getElements(selector)[0] || null : this.element;
 	},
 
 	getElements: function(selector) {

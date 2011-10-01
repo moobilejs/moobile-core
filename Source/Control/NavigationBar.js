@@ -3,7 +3,7 @@
 
 name: NavigationBar
 
-description: Provide the navigation bar control.
+description: Provides a NavigationBar control. 
 
 license: MIT-style license.
 

@@ -3,7 +3,7 @@
 
 name: Scroller
 
-description: Provides an iScroll wrapper
+description: Provides a wrapper for the iScroll class. 
 
 license: MIT-style license.
 
@@ -61,7 +61,7 @@ Moobile.Scroller = new Class({
 
 	options: {
 		useTransform: true,
-		useTransition: true,		
+		useTransition: true,
 		hideScrollbar: true,
 		fadeScrollbar: true,
 		checkDOMChanges: true,

@@ -3,7 +3,7 @@
 
 name: Mask
 
-description: Creates a mask over the entire app.
+description: Provides a view that creates a mask over a view.
 
 license: MIT-style license.
 

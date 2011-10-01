@@ -1,9 +1,9 @@
 /*
 ---
 
-name: Element.Properties.Name
+name: Element.Properties.name
 
-description: Provides a name element properties.
+description: Provides a name property that work with the role property.
 
 license: MIT-style license.
 
@@ -14,7 +14,7 @@ requires:
 	Core/Element
 
 provides:
-	- Element.Properties.Name
+	- Element.Properties.name
 
 ...
 */

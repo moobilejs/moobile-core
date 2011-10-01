@@ -3,7 +3,8 @@
 
 name: Request.View
 
-description: Provides a method to load a view element from a remote location.
+description: Provides a Request that loads a view from a remote location. This 
+             class will look for an element with the view data-role.
 
 license: MIT-style license.
 

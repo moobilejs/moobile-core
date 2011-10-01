@@ -3,7 +3,7 @@
 
 name: Element.Styles
 
-description: Provides new methods to Element.Styles.
+description: Provides extra methods to Element.Styles.
 
 license: MIT-style license.
 

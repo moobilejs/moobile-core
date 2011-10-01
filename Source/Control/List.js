@@ -3,7 +3,7 @@
 
 name: List
 
-description: Provide a list of items.
+description: Provide a List control.
 
 license: MIT-style license.
 
@@ -75,7 +75,7 @@ Moobile.List = new Class({
 	},
 
 	setSelectedItemIndex: function(index) {
-		this.setSelectedItem(this.childViews[index] || null);
+		this.setSelectedItem(this.childViews[index] || null);
 		return this;
 	},
 

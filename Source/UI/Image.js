@@ -3,7 +3,7 @@
 
 name: Image
 
-description: Provide an image view.
+description: Provides a view that contains an image.
 
 license: MIT-style license.
 

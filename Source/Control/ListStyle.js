@@ -3,7 +3,7 @@
 
 name: ListStyle
 
-description: Provide constants for list styles.
+description: Provide styles for List instances.
 
 license: MIT-style license.
 

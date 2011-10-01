@@ -3,7 +3,7 @@
 
 name: ButtonGroup
 
-description:
+description: Provides a wrapper for many Button controls.
 
 license: MIT-style license.
 

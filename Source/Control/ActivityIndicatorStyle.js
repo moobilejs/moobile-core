@@ -3,7 +3,7 @@
 
 name: ActivityIndicatorStyle
 
-description: Provide constants for activity indicator styles.
+description: Provide styles for ActivityIndicator instances.
 
 license: MIT-style license.
 

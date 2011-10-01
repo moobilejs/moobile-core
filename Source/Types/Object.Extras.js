@@ -3,7 +3,7 @@
 
 name: Object.Extras
 
-description: Provides extra methods to Object.
+description: Provides extra methods to the Object object.
 
 license: MIT-style license.
 
@@ -25,7 +25,7 @@ Object.extend({
 	defineMember: function(source, reference, name, readonly) {
 		if (name) {
 			var member = name.toCamelCase();
-			if (source[member] == null || source[member] == undefined) {
+			if (source[member] == null || source[member] == undefined) {
 				source[member] = reference;
 				var getter = 'get' + member.capitalize();
 				var setter = 'set' + member.capitalize();

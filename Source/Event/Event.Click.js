@@ -5,8 +5,8 @@ name: Event.Click
 
 description: Provides a click event that is not triggered when the user clicks
              and moves the mouse. This overrides the default click event. It's
-			 important to include Mobile/Click before this class otherwise the
-			 click event will be deleted.
+             important to include Mobile/Click before this class otherwise the
+             click event will be deleted.
 
 license: MIT-style license.
 
@@ -63,7 +63,7 @@ provides:
 		var xmin = x - 5;
 		var ymax = y + 5;
 		var ymin = y - 5;
-		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
+		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
 	};
 
 	Element.defineCustomEvent('click', {

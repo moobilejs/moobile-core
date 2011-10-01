@@ -3,8 +3,9 @@
 
 name: Event.ViewLoad
 
-description: Provide an element that will be automatically fired when added
-             after being fired for the first time.
+description: Provides an event that indicates the view is loaded from a remote
+             location. This event is instanly triggered when added once it's
+             been triggered one.
 
 license: MIT-style license.
 

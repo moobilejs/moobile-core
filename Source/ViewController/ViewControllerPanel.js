@@ -3,7 +3,8 @@
 
 name: ViewControllerPanel
 
-description: Provide a way to have side by side view controllers.
+description: Provide a ViewController that handles two side by side view inside
+             it's own view.
 
 license: MIT-style license.
 

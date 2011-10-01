@@ -3,7 +3,7 @@
 
 name: Label
 
-description: Provide a label
+description: Provides a view that contains some text.
 
 license: MIT-style license.
 

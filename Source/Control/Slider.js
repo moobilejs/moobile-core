@@ -3,7 +3,7 @@
 
 name: Slider
 
-description:
+description: Provides a Slider control.
 
 license: MIT-style license.
 

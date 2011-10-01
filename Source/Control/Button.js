@@ -3,7 +3,7 @@
 
 name: Button
 
-description: Provides a button.
+description: Provides a Button control.
 
 license: MIT-style license.
 

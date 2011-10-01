@@ -3,8 +3,7 @@
 
 name: Class.Instanciate
 
-description: Provides a method to instanciate classes based on the class name
-             stored as a string.
+description: Provides extra static methods to instanciate a class from a string.
 
 license: MIT-style license.
 

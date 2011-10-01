@@ -3,7 +3,7 @@
 
 name: WindowController
 
-description: Provides the starting poing view controller inside the window.
+description: Provides the ViewController that handles a window.
 
 license: MIT-style license.
 
@@ -55,7 +55,7 @@ Moobile.WindowController = new Class({
 
 	loadView: function(viewElement) {
 		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.Window',
+			viewElement.get('data-view') || 'Moobile.Window',
 			viewElement
 		);
 		return this;

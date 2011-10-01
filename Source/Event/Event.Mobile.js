@@ -3,7 +3,7 @@
 
 name: Event.Mobile
 
-description: Translate desktop events to mobile event correctly.
+description: Correctly translate mouse events to touch events.
 
 license: MIT-style license.
 

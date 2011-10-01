@@ -3,7 +3,7 @@
 
 name: ViewTransition
 
-description: Provides the base class for view transition effects.
+description: Provides the base class for view transitions.
 
 license: MIT-style license.
 

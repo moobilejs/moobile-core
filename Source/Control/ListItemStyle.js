@@ -3,7 +3,7 @@
 
 name: ListItemStyle
 
-description: Provide constants for list item styles.
+description: Provide styles for ListItem instances.
 
 license: MIT-style license.
 

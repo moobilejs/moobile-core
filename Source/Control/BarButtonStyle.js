@@ -3,7 +3,7 @@
 
 name: BarButtonStyle
 
-description: Provide constants for bar button styles.
+description: Provide styles for BarButton instances.
 
 license: MIT-style license.
 

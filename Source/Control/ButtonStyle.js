@@ -3,7 +3,7 @@
 
 name: ButtonStyle
 
-description: Provide constants for button styles.
+description: Provide styles for Button instances.
 
 license: MIT-style license.
 

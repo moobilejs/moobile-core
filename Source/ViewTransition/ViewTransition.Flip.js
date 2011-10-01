@@ -4,7 +4,7 @@
 
 name: ViewTransition.Flip
 
-description: Provide a flip view transition effect.
+description: Provide a flip view transition.
 
 license: MIT-style license.
 

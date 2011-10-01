@@ -3,7 +3,7 @@
 
 name: String.Extras
 
-description: Provides extra methods to String.
+description: Provides extra methods to the String object.
 
 license: MIT-style license.
 
@@ -17,14 +17,6 @@ provides:
 */
 
 String.implement({
-
-	toJSONString: function() {
-		return '{' + this.toString() + '}';
-	},
-
-	toJSONObject: function() {
-		return JSON.decode(this.toJSONString());
-	},
 
 	toCamelCase: function() {
 		return this.camelCase().replace('-', '').replace(/\s\D/g, function(match){

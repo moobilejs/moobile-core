@@ -26,7 +26,7 @@ provides:
 	/* vendor prefix */
 
 	var prefix = '';
-	if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
+	if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
 		prefix = 'webkit';
 	} else if (Browser.firefox) {
 		prefix = 'Moz';

@@ -3,7 +3,7 @@
 
 name: ViewTransition.Cover
 
-description: Provide a view transition that covers the previous view.
+description: Provide a vertical slide view transition.
 
 license: MIT-style license.
 
@@ -100,7 +100,7 @@ Moobile.ViewTransition.Cover = new Class({
 			var viewToHideWrapper = viewToHideElement.getParent('.transition-cover-view-wrapper');
 			if (viewToHideWrapper) {
 				viewToHide = viewToHideWrapper;
-			}				
+			}
 		}
 		
 		this.addSubject(viewToShow, 'transition-view-to-show');

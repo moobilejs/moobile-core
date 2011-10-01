@@ -4,7 +4,7 @@
 
 name: ViewTransition.None
 
-description: Provide a none animated transition
+description: Provide a non-animated view transition
 
 license: MIT-style license.
 

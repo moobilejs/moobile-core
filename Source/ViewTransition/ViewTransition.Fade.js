@@ -4,7 +4,7 @@
 
 name: ViewTransition.Fade
 
-description: Provide a fade-in fade-out view transition effect.
+description: Provide a fade view transition.
 
 license: MIT-style license.
 

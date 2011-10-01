@@ -3,7 +3,7 @@
 
 name: Window
 
-description: Provides the area where the views will be stored and displayed.
+description: Provides the root container for all views.
 
 license: MIT-style license.
 
@@ -125,7 +125,7 @@ Moobile.Window = new Class({
 	enableInput: function() {
 		if (this.inputEnabled == false) {
 			this.inputEnabled = true;
-			if (this.options.showLoadingIndicator) {
+			if (this.options.showLoadingIndicator) {
 				this.hideLoadingIndicator();
 				clearTimeout(this.loadingIndicatorTimeout);
 			}
@@ -138,7 +138,7 @@ Moobile.Window = new Class({
 		if (this.inputEnabled == true) {
 			this.inputEnabled = false;
 			this.showMask();
-			if (this.options.showLoadingIndicator) {
+			if (this.options.showLoadingIndicator) {
 				this.loadingIndicatorTimeout = this.showLoadingIndicator.delay(this.options.showLoadingIndicatorDelay, this);
 			}
 		}

@@ -3,7 +3,8 @@
 
 name: ViewControllerStack
 
-description: Provides a way to navigate from view to view and comming back.
+description: Provides a ViewController that handles multiple views inside its
+             own view.
 
 license: MIT-style license.
 
@@ -31,7 +32,7 @@ Moobile.ViewControllerStack = new Class({
 
 	loadView: function(viewElement) {
 		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.ViewStack',
+			viewElement.get('data-view') || 'Moobile.ViewStack',
 			viewElement
 		);
 		return this;
@@ -123,7 +124,7 @@ Moobile.ViewControllerStack = new Class({
 			return this;
 
 		var viewControllerIndex = this.childViewControllers.indexOf(viewController);
-		if (viewControllerIndex > -1) {
+		if (viewControllerIndex > -1) {
 			for (var i = this.childViewControllers.length - 2; i > viewControllerIndex; i--) {
 
 				var viewControllerToRemove = this.childViewControllers[i];
@@ -167,7 +168,7 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
-	onPopTransitionStart: function() {
+	onPopTransitionStart: function() {
 
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
 		var viewControllerPopped = this.childViewControllers.lastItemAt(0);

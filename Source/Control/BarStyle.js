@@ -3,7 +3,7 @@
 
 name: BarStyle
 
-description: Provide constants for bar styles.
+description: Provide styles for Bar instances.
 
 license: MIT-style license.
 

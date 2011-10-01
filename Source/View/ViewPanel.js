@@ -3,8 +3,7 @@
 
 name: ViewPanel
 
-description: The view that must be used in conjunction with a
-             ViewControllerPanel.
+description: Provides the view used in a ViewControllerPanel.
 
 license: MIT-style license.
 
@@ -66,9 +65,9 @@ Moobile.ViewPanel = new Class({
 	},
 
 	filterOwnElement: function(element) {
-		var parent = element.getParent('[data-role]:not([data-role=element])');
+		var parent = element.getParent('[data-role]');
 		if (parent == null) return true;
-		return parent == this.element || parent == this.content || parent == this.sidePanel || parent == this.mainPanel;
+		return parent == this.element || parent == this.content || parent == this.sidePanel || parent == this.mainPanel;
 	},
 
 });

@@ -3,7 +3,8 @@
 
 name: Element.Properties.Options
 
-description: Provides an options element properties.
+description: Provides an option property used to retrieve stored options in a 
+             JSON format.
 
 license: MIT-style license.
 

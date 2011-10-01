@@ -3,7 +3,7 @@
 
 name: Bar
 
-description: Provide the base class for a bar.
+description: Provide the base class for a Bar control.
 
 license: MIT-style license.
 

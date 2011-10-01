@@ -5,7 +5,7 @@ name: Event.Ready
 
 description: Provides an event that indicates the app is loaded. This event is
              based on the domready event or other third party events such as
-			 deviceready on phonegap.
+             deviceready on phonegap.
 
 license: MIT-style license.
 
@@ -37,11 +37,11 @@ provides:
 
 	Element.defineCustomEvent('ready', {
 
-		onSetup: function(){
+		onSetup: function() {
 			this.addEvent(domready, onReady);
 		},
 
-		onTeardown: function(){
+		onTeardown: function() {
 			this.removeEvent(domready, onReady);
 		}
 

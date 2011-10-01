@@ -3,8 +3,8 @@
 
 name: ViewControllerStack.Navigation
 
-description: Provide navigation function to the view controller stack such as
-             a navigation bar and navigation bar buttons.
+description: Provides a ViewControllerStack that automatically add a 
+             NavigationBar control to each view controller's wiew added.
 
 license: MIT-style license.
 
@@ -41,12 +41,12 @@ Moobile.ViewControllerStack.Navigation = new Class({
 			view.addChildView(navigationBar, 'header');
 		}
 
-		if (viewController.isModal() || this.childViewControllers.length == 0)
+		if (viewController.isModal() || this.childViewControllers.length == 0)
 			return this;
 
 		if (this.options.backButton) {
 
-			var backButtonLabel = this.topViewController.getTitle() || this.options.backButtonLabel;
+			var backButtonLabel = this.topViewController.getTitle() || this.options.backButtonLabel;
 			if (backButtonLabel) {
 
 				var backButton = new Moobile.BarButton();
