@@ -1654,7 +1654,7 @@ p small {
 }
 
 .transition-cubic-enter-first {
-	-webkit-animation: anim-cubic-enter-first 400ms 1;
+	-webkit-animation: anim-cubic-enter-first 750ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 100% 50%;
@@ -1677,7 +1677,7 @@ p small {
 }
 
 .transition-cubic-enter {
-	-webkit-animation: anim-cubic-enter 400ms 1;
+	-webkit-animation: anim-cubic-enter 750ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;						/* Important */
     -webkit-transform-origin: 100% 50%;							/* Important */
@@ -1708,7 +1708,7 @@ p small {
 }
 
 .transition-cubic-leave {
-	-webkit-animation: anim-cubic-leave 400ms 1;
+	-webkit-animation: anim-cubic-leave 750ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
     -webkit-transform-origin: 100% 50%;
@@ -1771,19 +1771,19 @@ p small {
 
 @-webkit-keyframes anim-view-to-show-flip-enter {
 	from {
-		-webkit-transform: translateY(-100%) rotateY(180deg) scale(0.6)
+		-webkit-transform: translateY(-100%) rotateY(180deg);
 	}
 	to {
-		-webkit-transform: translateY(-100%) rotateY(180deg) scale(1);
+		-webkit-transform: translateY(-100%) rotateY(180deg);
 	}
 }
 
 @-webkit-keyframes anim-view-to-hide-flip-enter {
 	from {
-		-webkit-transform: translateY(0%) rotateY(0deg) scale(1);
+		-webkit-transform: translateY(0%) rotateY(0deg);
 	}
 	to {
-		-webkit-transform: translateY(0%) rotateY(0deg) scale(0.6);
+		-webkit-transform: translateY(0%) rotateY(0deg);
 	}
 }
 
@@ -1818,19 +1818,19 @@ p small {
 
 @-webkit-keyframes anim-view-to-show-flip-leave {
 	from {
-		-webkit-transform: translateY(0%) rotateY(180deg) scale(0.6)
+		-webkit-transform: translateY(0%) rotateY(180deg);
 	}
 	to {
-		-webkit-transform: translateY(0%) rotateY(180deg) scale(1);
+		-webkit-transform: translateY(0%) rotateY(180deg);
 	}
 }
 
 @-webkit-keyframes anim-view-to-hide-flip-leave {
 	from {
-		-webkit-transform: translateY(-100%) rotateY(0deg) scale(1);
+		-webkit-transform: translateY(-100%) rotateY(0deg);
 	}
 	to {
-		-webkit-transform: translateY(-100%) rotateY(0deg) scale(0.6);
+		-webkit-transform: translateY(-100%) rotateY(0deg);
 	}
 }
 
