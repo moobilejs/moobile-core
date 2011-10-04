@@ -92,22 +92,75 @@ Moobile.Scroller = new Class({
 	},
 
 	attachEvents: function() {
-		this.options.onScrollStart = this.bound('onScrollStart');
-		this.options.onScrollMove = this.bound('onScrollMove');
-		this.options.onScrollEnd = this.bound('onScrollEnd');
-		this.options.onRefresh = this.bound('onRefresh');
+		this.scroller.options.onScrollStart = this.bound('onScrollStart');
+		this.scroller.options.onScrollMove = this.bound('onScrollMove');
+		this.scroller.options.onScrollEnd = this.bound('onScrollEnd');
+		this.scroller.options.onRefresh = this.bound('onRefresh');
 		return this;
 	},
 
 	detachEvents: function() {
-		this.options.onScrollStart = null;
-		this.options.onScrollMove = null;
-		this.options.onScrollEnd = null;
-		this.options.onRefresh = null;
+		this.scroller.options.onScrollStart = null;
+		this.scroller.options.onScrollMove = null;
+		this.scroller.options.onScrollEnd = null;
+		this.scroller.options.onRefresh = null;
 		return this;
 	},
 
+	getCurrentPage: function() {
+		return {
+			x: this.scroller.currPageX,
+			y: this.scroller.currPageY
+		};
+	},
+	
+	getAbsoluteDistance: function() {
+		return {
+			x: this.scroller.absDistX,
+			y: this.scroller.absDistY
+		};
+	},
+	
+	getDistance: function() {
+		return {
+			x: this.scroller.distX,
+			y: this.scroller.distY			
+		};
+	},
+	
+	getDirection: function() {
+		return {
+			x: this.scroller.dirX,
+			y: this.scroller.dirY
+		};	
+	},
+	
+	getAbsoluteStart: function() {
+		return {
+			x: this.scroller.absStartX,
+			y: this.scroller.absStartY
+		};
+	},
+	
+	getStart: function() {
+		return {
+			x: this.scroller.startX,
+			y: this.scroller.startY
+		};
+	},
+	
+	getPages: function() {
+		return {
+			x: this.scroller.pagesX,
+			y: this.scroller.pagesY
+		};
+	},
+
 	getOffset: function() {
+
+		// TODO: I just realized this information might be found in iscroll 
+		// directly, I'll have to fix this instead of using "fancy"
+		// regular expressions
 
 		var x = 0;
 		var y = 0;
@@ -120,6 +173,14 @@ Moobile.Scroller = new Class({
 		}
 
 		return {x: x, y: y};
+	},
+
+	isZoomed: function() {
+		return this.scroller.zoomed;
+	},
+
+	isMoved: function() {
+		return this.scroller.moved;
 	},
 
 	isReady: function() {
