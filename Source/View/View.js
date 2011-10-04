@@ -396,11 +396,30 @@ Moobile.View = new Class({
 	},
 
 	get: function(name) {
-		return this.element.get(name);
+		
+		switch (name) {
+			case 'html':
+			case 'text':
+				return this.content.get(name);
+			default:
+				return this.element.get(name);
+		}
+		
+		return t;
 	},
 
 	set: function(name, value) {
-		this.element.set(name, value);
+		
+		switch (name) {
+			case 'html':
+			case 'text':
+				this.content.set(name, value);
+				break;
+			default:
+				this.element.set(name, value);
+				break;
+		}
+						
 		return this;
 	},
 
