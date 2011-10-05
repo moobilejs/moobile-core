@@ -342,7 +342,7 @@ Moobile.View = new Class({
 	},
 
 	getElement: function(selector) {
-		return selector ? this.element.getElements(selector)[0] || null : this.element;
+		return selector ? this.getElements(selector)[0] || null : this.element;
 	},
 
 	getElements: function(selector) {
