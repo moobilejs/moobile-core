@@ -30,18 +30,24 @@ Moobile.ButtonGroup = new Class({
 
 	options: {
 		className: 'button-group',
-		styleName: Moobile.ButtonGroupStyle.Horizontal
+		styleName: Moobile.ButtonGroupStyle.Horizontal,
+		deselectable: false
 	},
 
 	setSelectedButton: function(selectedButton) {
+		
+		if (this.selectedButton === selectedButton) {
+			if (selectedButton && this.options.deselectable) {
+				selectedButton = null;
+			} else {
+				return this;
+			}
+		}
 
-		if (this.selectedButton == selectedButton)
-			return this;
-
-		if (this.selectedButton) {
+		if (this.selectedButton) {		
+			this.fireEvent('deselect', this.selectedButton);
 			this.selectedButton.setSelected(false);
 			this.selectedButton = null;
-			this.fireEvent('deselect', this.selectedButton);
 		}
 
 		if (selectedButton) {
