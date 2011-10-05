@@ -31,7 +31,7 @@ Moobile.BarButton = new Class({
 
 	build: function(element) {
 		this.parent(element);
-		this.set('role', 'bar-button');
+		this.element.set('role', 'bar-button');
 		return this;
 	}
 

@@ -123,7 +123,7 @@ Moobile.NavigationBar = new Class({
 			}
 
 			this.leftBarButton = leftBarButton;
-			this.leftBarButton.set('data-align', 'left');
+			this.leftBarButton.set('data-task', 'left');
 
 			this.addChildView(this.leftBarButton, 'before', this.title);
 
@@ -173,7 +173,7 @@ Moobile.NavigationBar = new Class({
 			}
 
 			this.rightBarButton = rightBarButton;
-			this.rightBarButton.set('data-align', 'right');
+			this.rightBarButton.set('data-task', 'right');
 
 			this.addChildView(this.rightBarButton, 'before', this.title);
 

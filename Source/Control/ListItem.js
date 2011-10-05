@@ -40,7 +40,7 @@ Moobile.ListItem = new Class({
 		
 		this.parent(element);
 
-		this.set('role', 'list-item');
+		this.element.set('role', 'list-item');
 
 		var label = this.getElement('[data-role=label]:not([data-task])');
 		var image = this.getElement('[data-role=image]:not([data-task])');
