@@ -370,7 +370,7 @@ p small {
 .bar > .bar-content {
 	-webkit-box-orient: horizontal;								/* Important */
 	display: -webkit-box;										/* Important */
-	height: 44px;												/* Important */
+	height: inherit;											/* Important */
 	position: relative;											/* Important */
 	width: 100%;												/* Important */
 }
@@ -409,7 +409,7 @@ p small {
 }
 
 .bar.navigation-bar > .bar-content {
-	height: 44px;
+	height: inherit;
 }
 
 .bar.navigation-bar > .bar-content > :first-child { margin-left:  7px; }
