@@ -76,14 +76,14 @@ Moobile.Slider = new Class({
 		return this.value;
 	},
 
-	init: function() {
+	setup: function() {
 		this.parent();
 		this.attachSlider();
 		this.setValue(0);
 		return this;
 	},
 
-	release: function() {
+	teardown: function() {
 		this.detachSlider();
 		this.thumb = null;
 		this.parent();

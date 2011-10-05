@@ -73,13 +73,13 @@ Moobile.ScrollView = new Class({
 		return this;
 	},
 
-	init: function() {
+	setup: function() {
 		this.parent();
 		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
 		return this;
 	},
 
-	release: function() {
+	teardown: function() {
 		this.scroller.destroy();
 		this.scroller = null;
 		this.wrapper = null;

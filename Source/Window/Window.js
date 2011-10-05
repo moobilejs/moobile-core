@@ -65,7 +65,7 @@ Moobile.Window = new Class({
 			return this;
 
 		this.ready = true;
-		this.init();
+		this.setup();
 		this.attachEvents();
 
 		return this;
@@ -80,7 +80,7 @@ Moobile.Window = new Class({
 
 		this.ready = false;
 		this.detachEvents();
-		this.release();
+		this.teardown();
 
 		instance = null;
 
