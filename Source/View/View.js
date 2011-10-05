@@ -117,7 +117,7 @@ Moobile.View = new Class({
 		this.ready = true;
 
 		this.attachRoleElements();
-		this.init();
+		this.setup();
 		this.attachEvents();
 
 		return this;
@@ -131,7 +131,7 @@ Moobile.View = new Class({
 		this.detachRoleElements();
 		this.detachEvents();
 		this.destroyChildViews();
-		this.release();
+		this.teardown();
 
 		this.removeFromParentView();
 
@@ -145,11 +145,11 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	init: function() {
+	setup: function() {
 		return this;
 	},
 
-	release: function() {
+	teardown: function() {
 		return this;
 	},
 

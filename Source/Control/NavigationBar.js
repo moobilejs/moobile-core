@@ -201,7 +201,7 @@ Moobile.NavigationBar = new Class({
 		return this.rightBarButtonVisible;
 	},
 
-	release: function() {
+	teardown: function() {
 		this.title = null;
 		this.leftBarButton = null;
 		this.rightBarButton = null;

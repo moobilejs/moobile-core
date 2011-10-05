@@ -191,7 +191,7 @@ Moobile.ViewController = new Class({
 		this.window = this.view.getWindow();
 
 		this.attachChildViewControllers();
-		this.init();
+		this.setup();
 		this.attachEvents();
 
 		return this;
@@ -205,7 +205,7 @@ Moobile.ViewController = new Class({
 		this.ready = false;
 
 		this.detachEvents();
-		this.release();
+		this.teardown();
 		this.destroyChildViewControllers();
 
 		this.view.destroy();
@@ -220,11 +220,11 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	init: function() {
+	setup: function() {
 		return this;
 	},
 
-	release: function() {
+	teardown: function() {
 		return this;
 	},
 
