@@ -27,12 +27,6 @@ Moobile.BarButton = new Class({
 	options: {
 		className: 'bar-button',
 		styleName: Moobile.BarButtonStyle.Default
-	},
-
-	build: function(element) {
-		this.parent(element);
-		this.element.set('role', 'bar-button');
-		return this;
 	}
 
 });

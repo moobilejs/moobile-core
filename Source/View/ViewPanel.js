@@ -33,13 +33,13 @@ Moobile.ViewPanel = new Class({
 
 		var sidePanel = this.getElement('[data-role=side-panel]');
 		if (sidePanel == null) {
-			sidePanel = new Element('div[data-role=side-panel]');
+			sidePanel = new Element('div');
 			sidePanel.inject(this.content);
 		}
 
 		var mainPanel = this.getElement('[data-role=main-panel]');
 		if (mainPanel == null) {
-			mainPanel = new Element('div[data-role=main-panel]');
+			mainPanel = new Element('div');
 			mainPanel.inject(this.content);
 		}
 

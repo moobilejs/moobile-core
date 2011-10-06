@@ -35,28 +35,24 @@ Moobile.ListItem = new Class({
 	},
 
 	build: function(element) {
-		
-		element = document.id(element) || new Element('li');
-		
+						
 		this.parent(element);
-
-		this.element.set('role', 'list-item');
 
 		var label = this.getElement('[data-role=label]:not([data-task])');
 		var image = this.getElement('[data-role=image]:not([data-task])');
 
 		var accessory = this.getElement('[data-role=label][data-task=accessory]');
 		if (accessory == null) {
-			accessory = new Element('div[data-role=label][data-task=accessory]');
+			accessory = new Element('div');
 		}
 		
 		if (label == null) {
-			label = new Element('div[data-role=label]');
+			label = new Element('div');
 			label.ingest(this.content);
 		}
 
 		if (image == null) {
-			image = new Element('div[data-role=image]');
+			image = new Element('div');
 		}
 
 		image.inject(this.element, 'top');

@@ -33,8 +33,6 @@ Moobile.Image = new Class({
 
 		this.parent(element);
 
-		this.element.set('role', 'image');
-
 		var image = this.getElement('img');
 		if (image == null) {
 			image = new Element('img')

@@ -29,12 +29,6 @@ Moobile.BarTitle = new Class({
 		className: 'bar-title'
 	},
 
-	build: function(element) {
-		this.parent(element);
-		this.set('role', 'bar-title');
-		return this;
-	},
-
 	setText: function(text) {
 
 		this.destroyChildViews();

@@ -42,7 +42,7 @@ Moobile.NavigationBar = new Class({
 
 		var title = this.getElement('[data-role=bar-title]');
 		if (title == null) {
-			title = new Element('div[data-role=bar-title]');
+			title = new Element('div');
 			title.ingest(this.content);
 			title.inject(this.content);
 		}

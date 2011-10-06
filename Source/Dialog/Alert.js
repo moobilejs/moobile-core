@@ -42,8 +42,6 @@ Moobile.Alert = new Class({
 
 		this.parent(element);
 
-		this.set('role', 'dialog');
-
 		this.header = new Element('div');
 		this.header.inject(this.element, 'top');
 

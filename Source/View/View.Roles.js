@@ -26,86 +26,80 @@ Moobile.View.Roles = {
 	},
 
 	content: {
-		stop: false,
-		onAttach: function() {
-			this.addClass('content');
-		}
+		stop: false
 	},
 
 	wrapper: {
-		stop: false,
-		onAttach: function() {
-			this.addClass('wrapper');
-		}
+		stop: false
 	},
 
 	label: {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-label') || Moobile.Label;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-label') || Moobile.Label;
+			return Class.instanciate(c, element, o, n);
 		}
 	},
 
 	image: {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-image') || Moobile.Image;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-image') || Moobile.Image;
+			return Class.instanciate(c, element, o, n);
 		}
 	},
 
 	view: {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-view') || Moobile.View;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-view') || Moobile.View;
+			return Class.instanciate(c, element, o, n);
 		}
 	},
 
 	control: {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-control') || Moobile.Control;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-control') || Moobile.Control;
+			return Class.instanciate(c, element, o, n);
 		}
 	},
 
 	'list-item': {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-list-item') || Moobile.ListItem;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-list-item') || Moobile.ListItem;
+			return Class.instanciate(c, element, o, n);
 		}
 	},
 
 	'bar-title': {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-bar-title') || Moobile.BarTitle;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-bar-title') || Moobile.BarTitle;
+			return Class.instanciate(c, element, o, n);
 		}
 	},
 
 	'bar-button': {
 		stop: true,
-		apply: function() {
-			var n = this.get('name');
-			var o = this.get('options');
-			var c = this.get('data-bar-button') || Moobile.BarButton;
-			return Class.instanciate(c, this, o, n);
+		apply: function(element) {
+			var n = element.get('name');
+			var o = element.get('options');
+			var c = element.get('data-bar-button') || Moobile.BarButton;
+			return Class.instanciate(c, element, o, n);
 		}
 	}
 

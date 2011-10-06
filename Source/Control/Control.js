@@ -60,8 +60,6 @@ Moobile.Control = new Class({
 
 		this.parent(element);
 
-		this.element.set('role', 'control');
-
 		if (this.options.disabled) this.setDisabled(true);
 		if (this.options.selected) this.setSelected(true);
 		if (this.options.highlighted) this.options.setHighlighted(true);

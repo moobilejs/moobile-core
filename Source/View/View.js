@@ -89,11 +89,9 @@ Moobile.View = new Class({
 
 		this.element = document.id(element) || new Element('div');
 
-		this.element.set('role', 'view');
-
 		var content = this.getElement('[data-role=content]');
 		if (content == null) {
-			content = new Element('div[data-role=content]');
+			content = new Element('div');
 			content.ingest(this.element);
 			content.inject(this.element);
 		}
@@ -116,7 +114,7 @@ Moobile.View = new Class({
 
 		this.ready = true;
 
-		this.attachRoleElements();
+		this.attachRoles();
 		this.setup();
 		this.attachEvents();
 
@@ -128,7 +126,6 @@ Moobile.View = new Class({
 		if (this.ready == false)
 			return this;
 
-		this.detachRoleElements();
 		this.detachEvents();
 		this.destroyChildViews();
 		this.teardown();
@@ -169,57 +166,31 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	attachRoleElements: function() {
-		this.getElements('[data-role]').each(this.bound('attachRoleElement'));
+	attachRoles: function() {
+		this.element.children.each(this.bound('attachRole'));
 		return this;
 	},
 
-	attachRoleElement: function(element) {
+	attachRole: function(element) {
+						
 		var role = element.get('role');
 		if (role) {
-
-			var instance = this.getRoleInstance(element);
-			if (instance instanceof Moobile.View) {
-				this.addChildView(instance);
-			}
-
-			if (role.onAttach) {
-				role.onAttach.call(element);
-			}
-		}
-		return this;
-	},
-
-	detachRoleElements: function() {
-		this.getElements('[data-role]').each(this.bound('detachRoleElement'));
-		return this;
-	},
-
-	detachRoleElement: function(element) {
-		var role = element.get('role');
-		if (role) {
-			if (role.onDetach) {
-				role.onDetach.call(element);
-			}
-		}
-		return this;
-	},
-
-	getRoleInstance: function(element) {
-
-		var role = element.get('role');
-		if (role) {
-			var instance = element.retrieve('moobile:role-instance');
-			if (instance == null) {
-				if (role.apply) {
-					instance = role.apply.call(element);
-					element.store('moobile:role-instance', instance);
+			
+			if (role.apply) {
+				var instance = role.apply.call(this, element);
+				if (instance instanceof Moobile.View) {
+					this.addChildView(instance);
 				}
 			}
-			return instance;
+			
+			if (role.stop) {
+				return this;
+			}
 		}
-
-		return null;
+		
+		element.children.each(this.bound('attachRoleElement'));
+		
+		return this;
 	},
 
 	addChildView: function(view, where, context) {
@@ -342,41 +313,12 @@ Moobile.View = new Class({
 	},
 
 	getElement: function(selector) {
-		return selector ? this.getElements(selector)[0] || null : this.element;
+		return selector ? this.element.getElement(selector) : this.element;
 	},
 
 	getElements: function(selector) {
-		return this.element.getElements(selector).filter(this.bound('filterElement'));
-	},
-
-	filterElement: function(element) {
-
-		var roles = [];
-
-		var keys = Moobile.View.Roles;
-		for (var key in keys) {
-			if (keys[key].stop) roles.push(key);
-		}
-
-		var parent = element.getParent('[data-role]');
-		while (true) {
-
-			if (parent == null) {
-				return true
-			}
-
-			var role = parent.get('role');
-			if (role && role.stop) {
-				if (roles.contains(role.name)) {
-					return parent === this.element;
-				}
-			}
-
-			parent = parent.getParent('[data-role]');
-		}
-
-		return false;
-	},
+		return selector ? this.element.getElements(selector) : this.element.children;
+	}
 
 	getContent: function() {
 		return this.content;
