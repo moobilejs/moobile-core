@@ -56,7 +56,7 @@ sources:
   - "Source/UI/Mask.js"
   - "Source/Dialog/Alert.js"
   - "Source/View/View.js"
-  - "Source/View/View.Roles.js"
+  - "Source/View/ViewRoles.js"
   - "Source/View/ScrollView.js"
   - "Source/View/ViewPanel.js"
   - "Source/View/ViewStack.js"
