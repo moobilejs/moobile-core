@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- View
+	- ViewPanelRoles
 
 provides:
 	- ViewPanel
@@ -23,6 +24,8 @@ Moobile.ViewPanel = new Class({
 
 	Extends: Moobile.View,
 
+	Roles: Moobile.ViewPanelRoles,
+
 	sidePanel: null,
 
 	mainPanel: null,
@@ -31,20 +34,20 @@ Moobile.ViewPanel = new Class({
 
 		this.parent();
 
-		var sidePanel = this.getElement('[data-role=side-panel]');
+		var sidePanel = this.getRolePerformer('side-panel');
 		if (sidePanel == null) {
 			sidePanel = new Element('div');
 			sidePanel.inject(this.content);
 		}
 
-		var mainPanel = this.getElement('[data-role=main-panel]');
+		var mainPanel = this.getRolePerformer('main-panel');
 		if (mainPanel == null) {
 			mainPanel = new Element('div');
 			mainPanel.inject(this.content);
 		}
 
-		this.sidePanel = sidePanel;
-		this.mainPanel = mainPanel;
+		this.sidePanel = this.applyRole(sidePanel, 'side-panel');
+		this.mainPanel = this.applyRole(mainPanel, 'main-panel');
 
 		var className = this.options.className;
 		if (className) {
@@ -62,12 +65,6 @@ Moobile.ViewPanel = new Class({
 
 	getMainPanel: function() {
 		return this.mainPanel;
-	},
-
-	filterOwnElement: function(element) {
-		var parent = element.getParent('[data-role]');
-		if (parent == null) return true;
-		return parent == this.element || parent == this.content || parent == this.sidePanel || parent == this.mainPanel;
-	},
+	}
 
 });

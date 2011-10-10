@@ -69,6 +69,7 @@ sources:
   - "Source/View/ScrollView.js"
   - "Source/View/ScrollViewRoles.js"  
   - "Source/View/ViewPanel.js"
+  - "Source/View/ViewPanelRoles.js"  
   - "Source/View/ViewStack.js"
   - "Source/Scroller/Scroller.js"
   - "Source/Scroller/Scroller.Carousel.js"
