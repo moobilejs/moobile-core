@@ -28,9 +28,9 @@ Moobile.Mask = new Class({
 		fillStyle: 'solid'
 	},
 
-	build: function(element) {
+	build: function() {
 		
-		this.parent(element);
+		this.parent();
 		
 		if (this.options.className) {
 			this.element.addClass(this.options.className + '-' + this.options.fillStyle);			

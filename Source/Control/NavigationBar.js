@@ -36,9 +36,9 @@ Moobile.NavigationBar = new Class({
 
 	rightBarButtonVisible: true,
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var lBarButton = this.getRolePerformer('bar-button-left');
 		var rBarButton = this.getRolePerformer('bar-button-right');

@@ -34,9 +34,9 @@ Moobile.Button = new Class({
 		styleName: Moobile.ButtonStyle.Default
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var label = this.getRolePerformer('label');
 		if (label == null) {

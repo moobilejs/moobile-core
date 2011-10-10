@@ -23,9 +23,9 @@ Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var className = this.options.className;
 		if (className) {

@@ -36,9 +36,9 @@ Moobile.List = new Class({
 		styleName: Moobile.ListStyle.Default
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var content = this.content.getElement('> ul');
 		if (content == null) {

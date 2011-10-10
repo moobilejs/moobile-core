@@ -29,9 +29,9 @@ Moobile.Label = new Class({
 		className: 'label'
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var text = this.getElement('[data-role=text]');
 		if (text == null) {

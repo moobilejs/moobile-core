@@ -37,9 +37,9 @@ Moobile.ListItem = new Class({
 		className: 'list-item'
 	},
 
-	build: function(element) {
+	build: function() {
 						
-		this.parent(element);
+		this.parent();
 
 		var label = this.getRolePerformer('label');
 		var image = this.getRolePerformer('image');

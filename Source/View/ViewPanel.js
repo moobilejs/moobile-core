@@ -27,9 +27,9 @@ Moobile.ViewPanel = new Class({
 
 	mainPanel: null,
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var sidePanel = this.getElement('[data-role=side-panel]');
 		if (sidePanel == null) {

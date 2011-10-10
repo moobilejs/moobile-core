@@ -56,9 +56,9 @@ Moobile.ScrollView = new Class({
 		return this.scroller.getOffset();
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var wrapper = this.getRolePerformer('wrapper');
 		if (wrapper == null) {

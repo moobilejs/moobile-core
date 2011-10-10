@@ -38,9 +38,9 @@ Moobile.Alert = new Class({
 
 	buttons: [],
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		this.header = new Element('div');
 		this.header.inject(this.element, 'top');

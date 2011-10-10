@@ -57,9 +57,9 @@ Moobile.Control = new Class({
 		return this;
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		if (this.options.disabled) this.setDisabled(true);
 		if (this.options.selected) this.setSelected(true);

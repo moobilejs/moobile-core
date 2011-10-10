@@ -85,12 +85,11 @@ Moobile.View = new Class({
 		this.setOptions(options);
 		
 		this.name = name || null;
-		
 		this.element = document.id(element) || new Element('div');
 		
 		this.performRoles();
 		
-		this.build(element);
+		this.build();
 		
 		return this;
 	},
@@ -129,7 +128,7 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	build: function(element) {
+	build: function() {
 
 		var content = this.getRolePerformer('content');
 		if (content == null) {

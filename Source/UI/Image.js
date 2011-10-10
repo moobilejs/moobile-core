@@ -29,9 +29,9 @@ Moobile.Image = new Class({
 		className: 'image'
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		var image = this.getElement('img');
 		if (image == null) {

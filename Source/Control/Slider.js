@@ -53,9 +53,9 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
-	build: function(element) {
+	build: function() {
 
-		this.parent(element);
+		this.parent();
 
 		this.thumb = new Element('div.' + this.options.className + '-thumb');
 		this.track = new Element('div.' + this.options.className + '-track');

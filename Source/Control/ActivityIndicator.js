@@ -32,8 +32,8 @@ Moobile.ActivityIndicator = new Class({
 		styleName: Moobile.ActivityIndicatorStyle.Default
 	},
 
-	build: function(element) {
-		this.parent(element);
+	build: function() {
+		this.parent();
 		this.start();
 		return this;
 	},
