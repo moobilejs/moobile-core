@@ -23,7 +23,7 @@ if (!window.$moobile) window.$moobile = {};
 
 (function() {
 
-var instance = null;
+var windowInstance = null;
 
 Moobile.Window = new Class({
 
@@ -47,44 +47,26 @@ Moobile.Window = new Class({
 
 		this.parent(element, options, name);
 
-		if (instance == null) {
-			instance = this;
-			return this;
+		if (windowInstance == null) {
+			windowInstance = this;
+		} else {
+			throw new Error('Only one window windowInstance is allowed.');	
 		}
-
-		throw new Error('Only one window instance is allowed.');
-
+		
 		return this;
 	},
 
 	startup: function() {
-
 		window.$moobile.window = this;
-
-		if (this.ready == true)
-			return this;
-
-		this.ready = true;
-		this.setup();
-		this.attachEvents();
-
+		this.parent();
 		return this;
 	},
 
 	destroy: function() {
-
 		window.$moobile = null;
-
-		if (this.ready == false)
-			return this;
-
-		this.ready = false;
-		this.detachEvents();
-		this.teardown();
-
-		instance = null;
-
-		return this;
+		windowInstance = null;
+		this.parent();
+		return;
 	},
 
 	attachEvents: function() {
@@ -98,15 +80,6 @@ Moobile.Window = new Class({
 		window.removeEvent('load', this.bound('onWindowLoad'));
 		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		this.parent();
-		return this;
-	},
-
-	filterElement: function(element) {
-		return element.getParent('[data-role]') == null;
-	},
-
-	position: function() {
-		window.scrollTo(0, 1);
 		return this;
 	},
 
@@ -180,6 +153,11 @@ Moobile.Window = new Class({
 		return this;
 	},
 
+	position: function() {
+		window.scrollTo(0, 1);
+		return this;
+	},
+
 	didAddChildView: function(view) {
 		view.setWindow(this);
 		view.setParentView(null);
@@ -202,7 +180,7 @@ Moobile.Window = new Class({
 Moobile.Window.extend({
 
 	getInstance: function() {
-		return instance;
+		return windowInstance;
 	}
 
 });

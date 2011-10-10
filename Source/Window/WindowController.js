@@ -24,15 +24,7 @@ Moobile.WindowController = new Class({
 	Extends: Moobile.ViewController,
 
 	rootViewController: null,
-
-	initialize: function(viewElement, options) {
-		this.parent(viewElement, options);
-		this.window = this.view;
-		this.window.startup();
-		this.startup();
-		return this;
-	},
-
+	
 	setRootViewController: function(rootViewController) {
 
 		if (this.rootViewController) {
@@ -49,15 +41,11 @@ Moobile.WindowController = new Class({
 		return this;
 	},
 
-	filterChildViewController: function(element) {
-		return element.getParent('[data-role=view-controller]') == null;
-	},
-
 	loadView: function(viewElement) {
-		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.Window',
-			viewElement
-		);
+		this.view = new Moobile.Window(viewElement);
+		this.view.startup();
+		this.window = this.view;
+		this.startup();
 		return this;
 	},
 
