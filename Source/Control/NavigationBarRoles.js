@@ -31,24 +31,14 @@ Moobile.NavigationBarRoles = {
 		}
 	},
 	
-	'bar-button-left': {
+	'bar-button-left, bar-button-right': {
 		stop: true,
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-left-bar-button') || Moobile.BarButton;
+			var c = element.get('data-class') || Moobile.BarButton;
 			return Class.instanciate(c, element, o, n);
 		}
-	},
-	
-	'bar-button-right': {
-		stop: true,
-		apply: function(element) {
-			var n = element.get('data-name');
-			var o = element.get('data-options');
-			var c = element.get('data-left-bar-button') || Moobile.BarButton;
-			return Class.instanciate(c, element, o, n);
-		}
-	}	
+	}
 	
 };

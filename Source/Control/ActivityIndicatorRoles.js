@@ -27,7 +27,7 @@ Moobile.ActivityIndicatorRoles = {
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-label') || Moobile.Label;
+			var c = element.get('data-class') || Moobile.Label;
 			return Class.instanciate(c, element, o, n);
 		}
 	},
@@ -37,7 +37,7 @@ Moobile.ActivityIndicatorRoles = {
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-image') || Moobile.Image;
+			var c = element.get('data-class') || Moobile.Image;
 			return Class.instanciate(c, element, o, n);
 		}
 	}

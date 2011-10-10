@@ -26,7 +26,7 @@ Moobile.BarRoles = {
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-bar-button') || Moobile.BarButton;
+			var c = element.get('data-class') || Moobile.BarButton;
 			return Class.instanciate(c, element, o, n);
 		}
 	}

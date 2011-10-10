@@ -150,7 +150,7 @@ Moobile.ViewController = new Class({
 
 	loadView: function(viewElement) {
 		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.View',
+			viewElement.get('data-class') || 'Moobile.View',
 			viewElement
 		);
 		return this;

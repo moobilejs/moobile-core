@@ -30,7 +30,7 @@ Moobile.ViewControllerPanel = new Class({
 
 	loadView: function(viewElement) {
 		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.ViewPanel',
+			viewElement.get('data-class') || 'Moobile.ViewPanel',
 			viewElement
 		);
 		return this;

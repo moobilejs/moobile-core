@@ -32,7 +32,7 @@ Moobile.ViewRoles = {
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-view') || Moobile.View;
+			var c = element.get('data-class') || Moobile.View;
 			return Class.instanciate(c, element, o, n);
 		}
 	},
@@ -42,7 +42,7 @@ Moobile.ViewRoles = {
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-control') || Moobile.Control;
+			var c = element.get('data-class') || Moobile.Control;
 			return Class.instanciate(c, element, o, n);
 		}
 	}
