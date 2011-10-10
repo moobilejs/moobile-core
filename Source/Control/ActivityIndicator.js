@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- ActivityIndicatorRoles
 	- ActivityIndicatorStyle
 
 provides:
@@ -24,17 +25,16 @@ Moobile.ActivityIndicator = new Class({
 
 	Extends: Moobile.Control,
 
+	Roles: Moobile.ActivityIndicatorRoles,
+
 	options: {
 		className: 'activity-indicator',
 		styleName: Moobile.ActivityIndicatorStyle.Default
 	},
 
 	build: function(element) {
-
 		this.parent(element);
-
 		this.start();
-
 		return this;
 	},
 

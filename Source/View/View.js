@@ -39,6 +39,8 @@ requires:
 	- String.Extras
 	- Array.Extras
 	- Class.Instanciate
+	- Class.Mutators.Roles
+	- ViewRoles
 
 provides:
 	- View
@@ -56,6 +58,8 @@ Moobile.View = new Class({
 		Class.Binds
 	],
 
+	Roles: Moobile.ViewRoles,
+
 	window: null,
 
 	name: null,
@@ -70,40 +74,24 @@ Moobile.View = new Class({
 
 	parentView: null,
 
+	_performers: [],
+
 	options: {
 		className: 'view'
 	},
 
 	initialize: function(element, options, name) {
-
+		
 		this.setOptions(options);
-
+		
 		this.name = name || null;
-
-		this.build(element);
-
-		return this;
-	},
-
-	build: function(element) {
-
+		
 		this.element = document.id(element) || new Element('div');
-
-		var content = this.getElement('[data-role=content]');
-		if (content == null) {
-			content = new Element('div');
-			content.ingest(this.element);
-			content.inject(this.element);
-		}
-
-		this.content = content;
-
-		var className = this.options.className;
-		if (className) {
-			this.element.addClass(className);
-			this.content.addClass(className + '-content');
-		}
-
+		
+		this.performRoles();
+		
+		this.build(element);
+		
 		return this;
 	},
 
@@ -114,7 +102,6 @@ Moobile.View = new Class({
 
 		this.ready = true;
 
-		this.attachRoles();
 		this.setup();
 		this.attachEvents();
 
@@ -128,7 +115,7 @@ Moobile.View = new Class({
 
 		this.detachEvents();
 		this.destroyChildViews();
-		this.teardown();
+		this.teardown(); 
 
 		this.removeFromParentView();
 
@@ -138,6 +125,26 @@ Moobile.View = new Class({
 		this.window = null;
 
 		this.ready = false;
+
+		return this;
+	},
+
+	build: function(element) {
+
+		var content = this.getRolePerformer('content');
+		if (content == null) {
+			content = new Element('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+		}
+
+		this.content = this.applyRole(content, 'content');
+
+		var className = this.options.className;
+		if (className) {
+			this.element.addClass(className);
+			this.content.addClass(className + '-content');
+		}
 
 		return this;
 	},
@@ -166,31 +173,75 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	attachRoles: function() {
-		this.element.children.each(this.bound('attachRole'));
+	performRoles: function() {
+		this.element.getChildren().each(this.bound('performRole'));
 		return this;
 	},
 
-	attachRole: function(element) {
-						
-		var role = element.get('role');
+	performRole: function(element) {
+					
+		var roleName = element.get('data-role');
+		if (roleName) {
+			
+			this._performers.push(element);
+			
+			var role = this.getRole(roleName);
+			if (role) {
+				
+				this.applyRole(element, role);
+				
+				if (role.stop) {
+					return this;
+				}				
+			}						
+		}
+	
+		element.getChildren().each(this.bound('performRole'));
+		
+		return this;
+	},
+	
+	applyRole: function(element, role) {
+
+		var result = element.retrieve('moobile:element-role');
+		if (result) {
+			return result;
+		}
+
+		if (typeof role == 'string') {
+			role = this.getRole(role);
+		}
+
 		if (role) {
 			
 			if (role.apply) {
+				
 				var instance = role.apply.call(this, element);
 				if (instance instanceof Moobile.View) {
 					this.addChildView(instance);
 				}
+				
+				element.store('moobile:element-role', instance);
+				
+				return instance;
 			}
-			
-			if (role.stop) {
-				return this;
-			}
+
+			return element;
 		}
 		
-		element.children.each(this.bound('attachRoleElement'));
-		
-		return this;
+		return null;
+	},
+	
+	getRolePerformer: function(role) {
+		return this.getRolePerformers(role)[0] || null;
+	},
+	
+	getRolePerformers: function(role) {
+		return role ? this._performers.filter(function(element) { return element.get('data-role') == role; }) : this._performers;
+	},
+
+	getRole: function(name) {
+		return this.$roles[name] || null;
 	},
 
 	addChildView: function(view, where, context) {
@@ -200,12 +251,6 @@ Moobile.View = new Class({
 			return this;
 
 		var element = view.getElement();
-
-		this.willAddChildView(view);
-		view.parentViewWillChange(this);
-		view.setParentView(this);
-		view.setWindow(this.window);
-		this.childViews.push(view);
 
 		var contains = this.element.contains(element);
 		if (contains == false) {
@@ -219,6 +264,12 @@ Moobile.View = new Class({
 				}
 			}
 		}
+		
+		this.willAddChildView(view);
+		view.parentViewWillChange(this);
+		view.setParentView(this);
+		view.setWindow(this.window);
+		this.childViews.push(view);
 
 		view.parentViewDidChange(this);
 		view.startup();
@@ -318,7 +369,7 @@ Moobile.View = new Class({
 
 	getElements: function(selector) {
 		return selector ? this.element.getElements(selector) : this.element.children;
-	}
+	},
 
 	getContent: function() {
 		return this.content;
@@ -338,20 +389,17 @@ Moobile.View = new Class({
 	},
 
 	get: function(name) {
-		
 		switch (name) {
 			case 'html':
 			case 'text':
 				return this.content.get(name);
 			default:
 				return this.element.get(name);
-		}
-		
+		}		
 		return t;
 	},
 
 	set: function(name, value) {
-		
 		switch (name) {
 			case 'html':
 			case 'text':
@@ -360,8 +408,7 @@ Moobile.View = new Class({
 			default:
 				this.element.set(name, value);
 				break;
-		}
-						
+		}						
 		return this;
 	},
 

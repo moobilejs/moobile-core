@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Button
+	- BarButtonRoles	
 	- BarButtonStyle
 
 provides:
@@ -23,6 +24,8 @@ provides:
 Moobile.BarButton = new Class({
 
 	Extends: Moobile.Button,
+	
+	Roles: Moobile.BarButtonRoles,
 
 	options: {
 		className: 'bar-button',

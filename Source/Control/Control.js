@@ -9,6 +9,7 @@ license: MIT-style license.
 
 requires:
 	- View
+	- ControlRoles
 
 provides:
 	- Control
@@ -16,11 +17,11 @@ provides:
 ...
 */
 
-if (!window.Moobile) window.Moobile = {};
-
 Moobile.Control = new Class({
 
 	Extends: Moobile.View,
+
+	Roles: Moobile.ControlRoles,
 
 	style: null,
 
@@ -62,7 +63,7 @@ Moobile.Control = new Class({
 
 		if (this.options.disabled) this.setDisabled(true);
 		if (this.options.selected) this.setSelected(true);
-		if (this.options.highlighted) this.options.setHighlighted(true);
+		if (this.options.highlighted) this.setHighlighted(true);
 
 		if (!this.options.selectable) this.setSelectable(false);
 		if (!this.options.highlightable) this.setHighlightable(false);

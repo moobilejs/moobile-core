@@ -11,14 +11,13 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Control
 
 provides:
 	- ButtonGroupStyle
 
 ...
 */
-
-if (!window.Moobile) window.Moobile = {};
 
 Moobile.ButtonGroupStyle = {
 

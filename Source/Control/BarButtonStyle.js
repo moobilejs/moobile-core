@@ -11,14 +11,13 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Control
 
 provides:
 	- BarButtonStyle
 
 ...
 */
-
-if (!window.Moobile) window.Moobile = {};
 
 Moobile.BarButtonStyle = {
 

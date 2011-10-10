@@ -415,7 +415,7 @@ p small {
 .bar.navigation-bar > .bar-content > :first-child { margin-left:  7px; }
 .bar.navigation-bar > .bar-content > :last-child  { margin-right: 7px; }
 
-.bar.navigation-bar > .bar-content > [data-role=bar-title] {
+.bar.navigation-bar > .bar-content > .bar-title {
 	-webkit-box-flex: 1;										/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
 	height: 44px;
@@ -423,7 +423,7 @@ p small {
 	text-align: center;
 }
 
-.bar.navigation-bar > .bar-content > [data-role=bar-title] > .content {
+.bar.navigation-bar > .bar-content > .bar-title > .content {
 	left: 0px;													/* Important */
 	overflow: hidden;											/* Important */
 	position: absolute;											/* Important */
@@ -434,7 +434,7 @@ p small {
 	z-index: 25;												/* Important */
 }
 
-.bar.navigation-bar > .bar-content > [data-role=bar-button] {
+.bar.navigation-bar > .bar-content > .bar-button {
 	position: relative;
 	z-index: 35;
 }
@@ -483,7 +483,7 @@ p small {
 	width: 100%;
 }
 
-.button > .button-content [data-role=label] [data-role=text] {
+.button > .button-content .label .text {
 	display: block;												/* Important */
 	line-height: 1.25;											/* Important */
 	overflow: hidden;											/* Important */
@@ -567,7 +567,7 @@ p small {
 	margin-top: 1px;
 }
 
-.bar-button > .bar-button-content [data-role=label] [data-role=text] {
+.bar-button > .bar-button-content .label .text {
 	display: block;												/* Important */
 	overflow: hidden;											/* Important */
 	text-overflow: ellipsis;									/* Important */
@@ -892,11 +892,11 @@ p small {
 	position: relative;											/* Important */
 }
 
-.list-item > [data-role=image] {
+.list-item > .image {
 	-webkit-box-flex: 0;
 }
 
-.list-item > [data-role=image] img {
+.list-item > .image img {
 	-webkit-box-sizing: border-box;
 	-webkit-background-clip: padding-box;
 	-webkit-border-radius: 4px;
@@ -913,7 +913,7 @@ p small {
 	padding-bottom: 6px;
 }
 
-.list-item > .list-item-content > [data-role=label] [data-role=text] {
+.list-item > .list-item-content .label .text {
 	display: block;												/* Important */
 	line-height: 1.25;											/* Important */
 	overflow: hidden;											/* Important */
@@ -929,21 +929,21 @@ p small {
 	text-shadow: none;
 }
 
-.list-item > [data-role=label][data-task=accessory] {
+.list-item .label.accessory {
 	color: #395587;
 	font-size: 17px;
 	font-weight: normal;
 }
 
-.list-item.list-item-down        > [data-role=label][data-task=accessory],
-.list-item.list-item-selected    > [data-role=label][data-task=accessory],
-.list-item.list-item-highlighted > [data-role=label][data-task=accessory] {
+.list-item.list-item-down        .label.accessory,
+.list-item.list-item-selected    .label.accessory,
+.list-item.list-item-highlighted .label.accessory {
 	color: #ffffff;
 }
 
 /* Styles */
 
-.list-item > [data-role=label][data-task=accessory]:after {
+.list-item .label.accessory:after {
 	content: '';
 	height: 100%;
 	position: absolute;
@@ -954,49 +954,49 @@ p small {
 
 /* Style Checked */
 
-.list-item.style-checked > [data-role=label][data-task=accessory] {
+.list-item.style-checked .label.accessory {
 	padding-right: 35px;
 }
 
-.list-item.style-checked > [data-role=label][data-task=accessory]:after {
+.list-item.style-checked .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -60px center;		
 }
 
-.list-item.list-item-down.style-checked        > [data-role=label][data-task=accessory]:after,
-.list-item.list-item-selected.style-checked    > [data-role=label][data-task=accessory]:after,
-.list-item.list-item-highlighted.style-checked > [data-role=label][data-task=accessory]:after {
+.list-item.list-item-down.style-checked        > .label.accessory:after,
+.list-item.list-item-selected.style-checked    > .label.accessory:after,
+.list-item.list-item-highlighted.style-checked > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
 }
 
 /* Style Disclosed */
 
-.list-item.style-disclosed > [data-role=label][data-task=accessory] {
+.list-item.style-disclosed > .label.accessory {
 	padding-right: 35px;
 }
 
-.list-item.style-disclosed > [data-role=label][data-task=accessory]:after {
+.list-item.style-disclosed > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
 }
 
-.list-item.list-item-down.style-disclosed        > [data-role=label][data-task=accessory]:after,
-.list-item.list-item-selected.style-disclosed    > [data-role=label][data-task=accessory]:after,
-.list-item.list-item-highlighted.style-disclosed > [data-role=label][data-task=accessory]:after {
+.list-item.list-item-down.style-disclosed        > .label.accessory:after,
+.list-item.list-item-selected.style-disclosed    > .label.accessory:after,
+.list-item.list-item-highlighted.style-disclosed > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
 }
 
 /* Style Detailed */
 
-.list-item.style-detailed > [data-role=label][data-task=accessory] {
+.list-item.style-detailed > .label.accessory {
 	padding-right: 35px;
 }
 
-.list-item.style-detailed > [data-role=label][data-task=accessory]:after {
+.list-item.style-detailed > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
-.list-item.list-item-down.style-detailed        > [data-role=label][data-task=accessory]:after,
-.list-item.list-item-selected.style-detailed    > [data-role=label][data-task=accessory]:after,
-.list-item.list-item-highlighted.style-detailed > [data-role=label][data-task=accessory]:after {
+.list-item.list-item-down.style-detailed        > .label.accessory:after,
+.list-item.list-item-selected.style-detailed    > .label.accessory:after,
+.list-item.list-item-highlighted.style-detailed > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
@@ -1011,7 +1011,7 @@ p small {
 	}
 }
 
-.list-item.style-activity > [data-role=label][data-task=accessory] {
+.list-item.style-activity > .label.accessory {
 	padding-right: 10px;
 }
 

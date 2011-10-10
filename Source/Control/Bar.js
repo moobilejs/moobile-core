@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- BarRoles	
 	- BarStyle
 
 provides:
@@ -23,6 +24,8 @@ provides:
 Moobile.Bar = new Class({
 
 	Extends: Moobile.Control,
+	
+	Roles: Moobile.BarRoles,
 
 	options: {
 		className: 'bar',

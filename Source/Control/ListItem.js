@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- ListItemRoles
 	- ListItemStyle
 
 provides:
@@ -23,6 +24,8 @@ provides:
 Moobile.ListItem = new Class({
 
 	Extends: Moobile.Control,
+
+	Roles: Moobile.ListItemRoles,
 
 	label: null,
 
@@ -38,10 +41,10 @@ Moobile.ListItem = new Class({
 						
 		this.parent(element);
 
-		var label = this.getElement('[data-role=label]:not([data-task])');
-		var image = this.getElement('[data-role=image]:not([data-task])');
+		var label = this.getRolePerformer('label');
+		var image = this.getRolePerformer('image');
 
-		var accessory = this.getElement('[data-role=label][data-task=accessory]');
+		var accessory = this.getRolePerformer('accessory');
 		if (accessory == null) {
 			accessory = new Element('div');
 		}
@@ -59,9 +62,9 @@ Moobile.ListItem = new Class({
 		label.inject(this.content, 'top');
 		accessory.inject(this.element);
 
-		this.label = this.getRoleInstance(label);
-		this.image = this.getRoleInstance(image);		
-		this.accessory = this.getRoleInstance(accessory);
+		this.label = this.applyRole(label, 'label');
+		this.image = this.applyRole(image, 'image');		
+		this.accessory = this.applyRole(accessory, 'accessory');
 	
 		return this;
 	},

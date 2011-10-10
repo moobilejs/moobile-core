@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Bar
+	- NavigationBarRoles
 
 provides:
 	- NavigationBar
@@ -23,13 +24,15 @@ Moobile.NavigationBar = new Class({
 
 	Extends: Moobile.Bar,
 
+	Roles: Moobile.NavigationBarRoles,
+
 	title: null,
 
 	leftBarButton: null,
 
 	leftBarButtonVisible: true,
 
-	rightBartButton: null,
+	rightBarButton: null,
 
 	rightBarButtonVisible: true,
 
@@ -37,27 +40,27 @@ Moobile.NavigationBar = new Class({
 
 		this.parent(element);
 
-		var lBarButton = this.getElement('[data-role=bar-button][data-task=left]');
-		var rBarButton = this.getElement('[data-role=bar-button][data-task=right]');
+		var lBarButton = this.getRolePerformer('bar-button-left');
+		var rBarButton = this.getRolePerformer('bar-button-right');
 
-		var title = this.getElement('[data-role=bar-title]');
+		var title = this.getRolePerformer('bar-title');
 		if (title == null) {
 			title = new Element('div');
 			title.ingest(this.content);
 			title.inject(this.content);
 		}
 
-		this.title = this.getRoleInstance(title);
+		this.title = this.applyRole(title, 'bar-title');
 
 		if (lBarButton) {
 			lBarButton.inject(this.content, 'top');
-			lBarButton = this.getRoleInstance(lBarButton);
+			lBarButton = this.applyRole(lBarButton, 'bar-button-left');
 			this.setLeftBarButton(lBarButton);
 		}
 
 		if (rBarButton) {
 			rBarButton.inject(this.content);
-			rBarButton = this.getRoleInstance(rBarButton);
+			rBarButton = this.applyRole(rBarButton, 'bar-button-right');
 			this.setRightBarButton(rBarButton);
 		}
 
@@ -116,10 +119,10 @@ Moobile.NavigationBar = new Class({
 
 			var type = typeOf(leftBarButton);
 			if (type == 'string') {
-				this.leftBarButton = new Moobile.BarButton();
+				this.leftBarButton = new Moobile.Button();
 				this.leftBarButton.setLabel(leftBarButton);
 			} else if (type == 'element') {
-				this.leftBarButton = new Moobile.BarButton(leftBarButton);
+				this.leftBarButton = new Moobile.Button(leftBarButton);
 			}
 
 			this.leftBarButton = leftBarButton;
@@ -147,38 +150,38 @@ Moobile.NavigationBar = new Class({
 		return this;
 	},
 
-	isLeftBarButtonVisible: function() {
+	isLeftButtonVisible: function() {
 		return this.leftBarButtonVisible;
 	},
 
-	setRightBarButton: function(rightBarButton) {
+	setRightBarButton: function(rightButton) {
 
-		if (this.rightBarButton == rightBarButton)
+		if (this.rightButton == rightButton)
 			return this;
 
-		if (this.rightBarButton) {
-			this.rightBarButton.removeFromParentView();
-			this.rightBarButton.destroy();
-			this.rightBarButton = null;
+		if (this.rightButton) {
+			this.rightButton.removeFromParentView();
+			this.rightButton.destroy();
+			this.rightButton = null;
 		}
 
-		if (rightBarButton) {
+		if (rightButton) {
 
-			var type = typeOf(rightBarButton);
+			var type = typeOf(rightButton);
 			if (type == 'string') {
-				this.rightBarButton = new Moobile.BarButton();
-				this.rightBarButton.setLabel(rightBarButton);
+				this.rightButton = new Moobile.Button();
+				this.rightButton.setLabel(rightButton);
 			} else if (type == 'element') {
-				this.rightBarButton = new Moobile.BarButton(rightBarButton);
+				this.rightButton = new Moobile.Button(rightButton);
 			}
 
-			this.rightBarButton = rightBarButton;
-			this.rightBarButton.set('data-task', 'right');
+			this.rightButton = rightButton;
+			this.rightButton.set('data-task', 'right');
 
-			this.addChildView(this.rightBarButton, 'before', this.title);
+			this.addChildView(this.rightButton, 'before', this.title);
 
 			if (this.rightBarButtonVisible == false) {
-				this.rightBarButton.hide();
+				this.rightButton.hide();
 			}
 		}
 
@@ -186,25 +189,25 @@ Moobile.NavigationBar = new Class({
 	},
 
 	getRightBarButton: function() {
-		return this.rightBarButton;
+		return this.rightButton;
 	},
 
 	setRightBarButtonVisible: function(visible) {
 		this.rightBarButtonVisible = visible;
-		if (this.rightBarButton) {
-			this.rightBarButton[visible ? 'show' : 'hide'].call(this.rightBarButton);
+		if (this.rightButton) {
+			this.rightButton[visible ? 'show' : 'hide'].call(this.rightButton);
 		}
 		return this;
 	},
 
-	isRightBarButtonVisible: function() {
+	isRightButtonVisible: function() {
 		return this.rightBarButtonVisible;
 	},
 
 	teardown: function() {
 		this.title = null;
 		this.leftBarButton = null;
-		this.rightBarButton = null;
+		this.rightButton = null;
 		this.parent();
 		return this;
 	}

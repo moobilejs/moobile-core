@@ -35,7 +35,7 @@ Moobile.Label = new Class({
 
 		var text = this.getElement('[data-role=text]');
 		if (text == null) {
-			text = new Element('span');
+			text = new Element('span.text');
 			text.ingest(this.content);
 			text.inject(this.content);
 		}

@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- ListRoles
 	- ListStyle
 
 provides:
@@ -23,6 +24,8 @@ provides:
 Moobile.List = new Class({
 
 	Extends: Moobile.Control,
+
+	Roles: Moobile.ListRoles,
 
 	selectedItem: null,
 
@@ -37,7 +40,7 @@ Moobile.List = new Class({
 
 		this.parent(element);
 
-		var content = this.getElement('ul');
+		var content = this.content.getElement('> ul');
 		if (content == null) {
 			content = new Element('ul');
 			content.ingest(this.content);

@@ -190,7 +190,6 @@ Moobile.ViewController = new Class({
 
 		this.window = this.view.getWindow();
 
-		this.attachChildViewControllers();
 		this.setup();
 		this.attachEvents();
 
@@ -316,40 +315,6 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	attachChildViewControllers: function() {
-		var filter = this.bound('filterChildViewController');
-		var attach = this.bound('attachChildViewController');
-		this.view.getElements('[data-role=view-controller]').filter(filter).each(attach);
-		return this;
-	},
-
-	attachChildViewController: function(element) {
-
-		var viewControllerClass = element.get('data-view-controller');
-		if (viewControllerClass) {
-
-			var viewElement = element.getElement('[data-role=view]');
-			if (viewElement == null) {
-				throw new Error('You must define a view element under view-controller element');
-			}
-
-			var options = element.get('data-options');
-			if (options) options = options.toJSONObject();
-
-			var viewController = Class.instanciate(viewControllerClass, viewElement, options, element.get('data-name'));
-
-			this.addChildViewController(viewController);
-
-			element.grab(viewElement, 'before').destroy();
-		}
-
-		return this;
-	},
-
-	filterChildViewController: function(element) {
-		return element.getParent('[data-role=view-controller]') == this.view.element; // not quite sure
-	},
-
 	destroyChildViewControllers: function() {
 		this.childViewControllers.each(this.bound('destroyChildViewController'));
 		this.childViewControllers.empty();
@@ -371,7 +336,7 @@ Moobile.ViewController = new Class({
 			return this;
 		}
 
-		var view = viewController.getView();
+		this.view.addChildView(viewController.getView(), where, context);
 
 		if (viewController.isModal() == false) {
 			viewController.setViewControllerStack(this.viewControllerStack);
@@ -380,7 +345,6 @@ Moobile.ViewController = new Class({
 
 		this.willAddChildViewController(viewController);
 		this.childViewControllers.push(viewController);
-		this.view.addChildView(view, where, context);
 		viewController.setParentViewController(this);
 		viewController.startup();
 		this.didAddChildViewController(viewController);
@@ -406,15 +370,14 @@ Moobile.ViewController = new Class({
 		if (exists == false)
 			return this;
 
-		var view = viewController.getView();
-
 		this.willRemoveChildViewController(viewController);
 		this.childViewControllers.erase(viewController);
 		viewController.setViewControllerStack(null);
 		viewController.setViewControllerPanel(null);
 		viewController.setParentViewController(null);
-		view.removeFromParentView();
 		this.didRemoveChildViewController(viewController);
+
+		viewController.getView().removeFromParentView();
 
 		return this;
 	},

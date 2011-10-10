@@ -20,10 +20,10 @@ provides:
 ...
 */
 
-Element.Properties.options = {
+Element.Properties['data-options'] = {
 
 	get: function() {
-		var options = this.get('data-options');
+		var options = this.getProperty('data-options');
 		if (options) {
 			if (!options.match(/^\{/)) options = '{' + options;
 			if (!options.match(/\}$/)) options = options + '}';

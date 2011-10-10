@@ -13,6 +13,7 @@ authors:
 
 requires:
 	- View
+	- ScrollViewRoles
 
 provides:
 	- ScrollView
@@ -27,6 +28,8 @@ var instances = 0;
 Moobile.ScrollView = new Class({
 
 	Extends: Moobile.View,
+	
+	Roles: Moobile.ScrollViewRoles,
 
 	wrapper: null,
 
@@ -57,13 +60,13 @@ Moobile.ScrollView = new Class({
 
 		this.parent(element);
 
-		var wrapper = this.getElement('[data-role=wrapper]');
+		var wrapper = this.getRolePerformer('wrapper');
 		if (wrapper == null) {
-			wrapper = new Element('div[data-role=wrapper]');
+			wrapper = new Element('div');
 			wrapper.wraps(this.content);
 		}
 
-		this.wrapper = wrapper;
+		this.wrapper = this.applyRole(wrapper, 'wrapper');
 
 		if (this.options.className) {
 			this.element.addClass('scroll-' + this.options.className);

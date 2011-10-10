@@ -1,9 +1,10 @@
 /*
 ---
 
-name: ViewRoles
+name: ActivityIndicatorRoles
 
-description: Provides the behavior for roles used inside views.
+description: Provides the behavior for roles used in activity indicator 
+             controls.
 
 license: MIT-style license.
 
@@ -11,39 +12,34 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Control
 
 provides:
-	- ViewRoles
+	- ActivityIndicatorRoles
 
 ...
 */
 
-Moobile.ViewRoles = {
-
-	content: {
-		stop: false,
-		apply: function(element) {
-			return element.addClass('content');
-		}
-	},
-
-	view: {
+Moobile.ActivityIndicatorRoles = {
+	
+	label: {
 		stop: true,
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-view') || Moobile.View;
+			var c = element.get('data-label') || Moobile.Label;
 			return Class.instanciate(c, element, o, n);
 		}
 	},
 
-	control: {
+	image: {
 		stop: true,
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			var c = element.get('data-control') || Moobile.Control;
+			var c = element.get('data-image') || Moobile.Image;
 			return Class.instanciate(c, element, o, n);
 		}
 	}
+		
 };

@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- ButtonGroupRoles
 	- ButtonGroupStyle
 
 provides:
@@ -23,6 +24,8 @@ provides:
 Moobile.ButtonGroup = new Class({
 
 	Extends: Moobile.Control,
+	
+	Roles: Moobile.ButtonGroupRoles,
 
 	selectedButton: null,
 

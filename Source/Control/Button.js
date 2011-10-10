@@ -12,6 +12,7 @@ authors:
 
 requires:
 	- Control
+	- ButtonRoles
 	- ButtonStyle
 
 provides:
@@ -23,6 +24,8 @@ provides:
 Moobile.Button = new Class({
 
 	Extends: Moobile.Control,
+	
+	Roles: Moobile.ButtonRoles,
 
 	label: null,
 
@@ -35,14 +38,14 @@ Moobile.Button = new Class({
 
 		this.parent(element);
 
-		var label = this.getElement('[data-role=label]');
+		var label = this.getRolePerformer('label');
 		if (label == null) {
 			label = new Element('div');
 			label.ingest(this.content);
 			label.inject(this.content);
 		}
 
-		this.label = this.getRoleInstance(label);
+		this.label = this.applyRole(label, 'label');
 
 		return this;
 	},
