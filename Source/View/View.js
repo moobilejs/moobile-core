@@ -368,6 +368,7 @@ Moobile.View = new Class({
 		
 		if (this.element == null) {
 			this.element = document.id(element) || new Element(this.options.element);
+			return this;
 		}
 		
 		throw new Error('The element cannot be redefined');
