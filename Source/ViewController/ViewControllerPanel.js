@@ -28,6 +28,14 @@ Moobile.ViewControllerPanel = new Class({
 
 	sideViewController: null,
 
+	loadView: function(viewElement) {
+		this.view = Class.instanciate(
+			viewElement.get('data-view') || 'Moobile.ViewPanel',
+			viewElement
+		);
+		return this;
+	},
+
 	setMainViewController: function(mainViewController) {
 
 		if (this.mainViewController) {
@@ -63,14 +71,6 @@ Moobile.ViewControllerPanel = new Class({
 
 	getSideViewController: function() {
 		return this.sideViewController;
-	},
-
-	loadView: function(viewElement) {
-		this.view = Class.instanciate(
-			viewElement.get('data-view') || 'Moobile.ViewPanel',
-			viewElement
-		);
-		return this;
 	},
 
 	didAddChildViewController: function(viewController) {

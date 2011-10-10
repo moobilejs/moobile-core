@@ -26,10 +26,6 @@ Moobile.ViewControllerStack = new Class({
 
 	topViewController: null,
 
-	getTopViewController: function() {
-		return this.topViewController;
-	},
-
 	loadView: function(viewElement) {
 		this.view = Class.instanciate(
 			viewElement.get('data-view') || 'Moobile.ViewStack',
@@ -38,6 +34,10 @@ Moobile.ViewControllerStack = new Class({
 		return this;
 	},
 
+	getTopViewController: function() {
+		return this.topViewController;
+	},
+	
 	pushViewController: function(viewController, viewTransition) {
 
 		if (this.topViewController == viewController)
