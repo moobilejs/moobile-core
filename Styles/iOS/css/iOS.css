@@ -406,20 +406,22 @@ p small {
 
 .bar.navigation-bar {
 	height: 44px;
+	line-height: 43px;
 }
 
 .bar.navigation-bar > .bar-content {
 	height: inherit;
+	line-height: inherit;	
 }
 
 .bar.navigation-bar > .bar-content > :first-child { margin-left:  7px; }
 .bar.navigation-bar > .bar-content > :last-child  { margin-right: 7px; }
 
-.bar.navigation-bar > .bar-content > .bar-title {
+.bar.navigation-bar > .bar-content .bar-title {
 	-webkit-box-flex: 1;										/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
-	height: 44px;
-	line-height: 43px;
+	height: inherit;
+	line-height: inherit;
 	text-align: center;
 }
 
@@ -545,26 +547,27 @@ p small {
 
 .bar-button {
 	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-box-sizing: border-box;								/* Important */
 	cursor: pointer;
 	color: #ffffff;
 	font-size: 12px;
 	font-weight: bold;
 	height: 30px;
-	line-height: 30px;
+	line-height: 27px;
 	margin-top: 7px;
 	margin-bottom: 7px;
 	overflow: hidden;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 	padding-left: 4px;
 	padding-right: 4px;
+	padding-top: 1px;
 }
 
 .bar-button > .bar-button-content {
 	border-right-style: solid;
 	border-left-style: solid;
-	height: 27px;
-	line-height: 28px;
-	margin-top: 1px;
+	height: inherit;
+	line-height: inherit;
 }
 
 .bar-button > .bar-button-content .label .text {
@@ -1292,6 +1295,13 @@ p small {
 	-webkit-box-sizing: border-box;								/* Important */
 	overflow: hidden;											/* Important */
 	position: relative;											/* Important */
+	height: 100%;												/* Important */
+	width: 100%;												/* Important */
+}
+
+.carousel > * {
+	height: 100%;												/* Important */
+	width: 100%;												/* Important */
 }
 
 .carousel .slide {
@@ -1301,6 +1311,8 @@ p small {
 	list-style: none;
 	list-style-position: outside;
 	position: relative;											/* Important */
+	height: 100%;												/* Important */
+	width: 100%;												/* Important */
 }
 
 .carousel.carousel-horizontal .slide {
