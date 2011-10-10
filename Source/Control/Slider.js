@@ -79,7 +79,7 @@ Moobile.Slider = new Class({
 	setup: function() {
 		this.parent();
 		this.attachSlider();
-		this.setValue(0);
+		this.setValue(this.options.value);
 		return this;
 	},
 

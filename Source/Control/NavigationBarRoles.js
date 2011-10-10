@@ -36,7 +36,6 @@ Moobile.NavigationBarRoles = {
 		apply: function(element) {
 			var n = element.get('data-name');
 			var o = element.get('data-options');
-			console.log(o);
 			var c = element.get('data-left-bar-button') || Moobile.BarButton;
 			return Class.instanciate(c, element, o, n);
 		}
