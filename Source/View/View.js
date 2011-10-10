@@ -60,11 +60,13 @@ Moobile.View = new Class({
 
 	Roles: Moobile.ViewRoles,
 
+	rolePerformers: [],
+
 	window: null,
 
 	name: null,
 
-	ready: null,
+	ready: false,
 
 	element: null,
 
@@ -74,24 +76,17 @@ Moobile.View = new Class({
 
 	parentView: null,
 
-	_performers: [],
-
 	options: {
-		className: 'view'
+		className: 'view',
+		element: 'div'
 	},
 
 	initialize: function(element, options, name) {
-		
-		this.setOptions(options);
-		
 		this.name = name || null;
-		
-		this.element = document.id(element) || new Element('div');
-		
-		this.performRoles();
-		
-		this.build(element);
-		
+		this.setOptions(options);
+		this.setElement(element);
+		this.attachRoles();
+		this.build();
 		return this;
 	},
 
@@ -104,6 +99,8 @@ Moobile.View = new Class({
 
 		this.setup();
 		this.attachEvents();
+		
+		this.fireEvent('viewready');
 
 		return this;
 	},
@@ -129,7 +126,7 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	build: function(element) {
+	build: function() {
 
 		var content = this.getRolePerformer('content');
 		if (content == null) {
@@ -157,6 +154,74 @@ Moobile.View = new Class({
 		return this;
 	},
 
+	attachRoles: function() {
+		this.element.getChildren().each(this.bound('attachRole'));
+		return this;
+	},
+
+	attachRole: function(element) {
+					
+		var name = element.get('data-role');
+		if (name) {
+			
+			this.rolePerformers.push(element);
+			
+			var role = this.getRole(name);
+			if (role) {
+				
+				this.applyRole(element, role);
+				
+				if (role.stop) {
+					return this;
+				}				
+			}						
+		}
+	
+		element.getChildren().each(this.bound('attachRole'));
+		
+		return this;
+	},
+	
+	applyRole: function(element, role) {
+
+		var result = element.retrieve('moobile:element-role');
+		if (result) {
+			return result;
+		}
+
+		if (typeof role == 'string') {
+			role = this.getRole(role);
+		}
+
+		if (role && role.apply) {
+				
+			var instance = role.apply.call(this, element);
+			if (instance instanceof Moobile.View) {
+				this.addChildView(instance);
+			}
+		
+			element.store('moobile:element-role', instance);
+		
+			return instance;
+		}
+		
+		return null;
+	},
+	
+	getRolePerformer: function(role) {
+		return this.getRolePerformers(role)[0] || null;
+	},
+	
+	getRolePerformers: function(role) {
+		return role 
+			? this.rolePerformers.filter(function(element) { return element.get('data-role') == role; }) 
+			: this.rolePerformers;
+	},
+
+	getRole: function(name) {
+		return this.$roles[name] || null;
+	},
+
 	attachEvents: function() {
 		this.element.addEvent('swipe', this.bound('onViewSwipe'));
 		this.element.addEvent('click', this.bound('onViewClick'));
@@ -173,78 +238,14 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	performRoles: function() {
-		this.element.getChildren().each(this.bound('performRole'));
-		return this;
-	},
-
-	performRole: function(element) {
-					
-		var roleName = element.get('data-role');
-		if (roleName) {
-			
-			this._performers.push(element);
-			
-			var role = this.getRole(roleName);
-			if (role) {
-				
-				this.applyRole(element, role);
-				
-				if (role.stop) {
-					return this;
-				}				
-			}						
-		}
-	
-		element.getChildren().each(this.bound('performRole'));
-		
-		return this;
-	},
-	
-	applyRole: function(element, role) {
-
-		var result = element.retrieve('moobile:element-role');
-		if (result) {
-			return result;
-		}
-
-		if (typeof role == 'string') {
-			role = this.getRole(role);
-		}
-
-		if (role) {
-			
-			if (role.apply) {
-				
-				var instance = role.apply.call(this, element);
-				if (instance instanceof Moobile.View) {
-					this.addChildView(instance);
-				}
-				
-				element.store('moobile:element-role', instance);
-				
-				return instance;
-			}
-
-			return element;
-		}
-		
-		return null;
-	},
-	
-	getRolePerformer: function(role) {
-		return this.getRolePerformers(role)[0] || null;
-	},
-	
-	getRolePerformers: function(role) {
-		return role ? this._performers.filter(function(element) { return element.get('data-role') == role; }) : this._performers;
-	},
-
-	getRole: function(name) {
-		return this.$roles[name] || null;
-	},
-
 	addChildView: function(view, where, context) {
+
+		if (this.ready == false) {
+			this.addEvent('viewready:once', function() {
+				this.addChildView(view, where, context);
+			}.bind(this));
+			return this;
+		}
 
 		var exists = this.childViews.contains(view);
 		if (exists == true)
@@ -363,12 +364,23 @@ Moobile.View = new Class({
 		return this.ready;
 	},
 
+	setElement: function(element) {
+		
+		if (this.element == null) {
+			this.element = document.id(element) || new Element(this.options.element);
+		}
+		
+		throw new Error('The element cannot be redefined');
+		
+		return this;
+	},
+
 	getElement: function(selector) {
 		return selector ? this.element.getElement(selector) : this.element;
 	},
 
 	getElements: function(selector) {
-		return selector ? this.element.getElements(selector) : this.element.children;
+		return selector ? this.element.getElements(selector) : this.element.getChildren();
 	},
 
 	getContent: function() {
@@ -389,6 +401,7 @@ Moobile.View = new Class({
 	},
 
 	get: function(name) {
+		
 		switch (name) {
 			case 'html':
 			case 'text':
@@ -396,10 +409,12 @@ Moobile.View = new Class({
 			default:
 				return this.element.get(name);
 		}		
+		
 		return t;
 	},
 
 	set: function(name, value) {
+		
 		switch (name) {
 			case 'html':
 			case 'text':
@@ -409,6 +424,7 @@ Moobile.View = new Class({
 				this.element.set(name, value);
 				break;
 		}						
+		
 		return this;
 	},
 
