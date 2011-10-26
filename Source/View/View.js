@@ -444,34 +444,6 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	setStyle: function(style, value) {
-		this.element.setStyle(style, value);
-		return this;
-	},
-
-	setStyles: function(styles) {
-		this.element.setStyles(styles);
-		return this;
-	},
-
-	getStyle: function(style) {
-		return this.element.getStyle(style);
-	},
-
-	getStyles: function(styles) {
-		return this.element.getStyles(styles);
-	},
-
-	removeStyle: function(style) {
-		this.element.removeStyle(style);
-		return this;
-	},
-
-	removeStyles: function(styles) {
-		this.element.removeStyles(styles);
-		return this;
-	},
-
 	getSize: function() {
 		return this.element.getSize();
 	},
