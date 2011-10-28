@@ -34,8 +34,6 @@ Moobile.Entity = new Class({
 
 	name: null,
 
-	started: false,
-
 	element: null,
 	
 	children: [],
@@ -50,66 +48,20 @@ Moobile.Entity = new Class({
 	},
 
 	initialize: function(element, options, name) {
-		
+
 		this.name = name;
 		
 		this.setOptions(options);
-
-		this.element = document.id(element);
-		if (this.element == null) {
-			this.element = new Element(this.options.tagName);
-			if (typeof element == 'string') {
-				this.element.set('html', element);
-				var element = this.element.getChildren();
-				if (children.length == 1) {
-					this.element = children[0];
-				}
-			}
-		}
-		
-		this.build();
-		
+		this.setElement(element);
+	
 		var className = this.options.className;
 		if (className) {
 			this.element.addClass(className);
 		}		
-		
-		return this;
-	},
 
-	startup: function() {
-
-		if (this.started)
-			return this;
-						
 		this.setup();
 		this.attachEvents();
-		this.started = true;			
-
-		return this;
-	},
-
-	destroy: function() {
-
-		if (!this.started)
-			return this;
-
-		this.detachEvents();
-		this.destroyChildren();
-		this.teardown(); 
-
-		this.removeFromParent();
-
-		this.element.destroy();
-		this.element = null;
-		this.window = null;
-
-		this.started = false;
-
-		return this;
-	},
-
-	build: function() {
+		
 		return this;
 	},
 
@@ -118,6 +70,24 @@ Moobile.Entity = new Class({
 	},
 
 	teardown: function() {
+		return this;
+	},
+
+	destroy: function() {
+
+		this.detachEvents();
+		
+		this.children.each(function(child){child.destroy()});
+		this.children = null;
+		
+		this.teardown(); 
+
+		this.removeFromParent();
+
+		this.element.destroy();
+		this.element = null;
+		this.window = null;
+
 		return this;
 	},
 
@@ -141,10 +111,7 @@ Moobile.Entity = new Class({
 			return this;
 		
 		this.willAddChild(child);
-		child.ownerWillChange(this);
-		child.setOwner(this);
-		child.setWindow(this.window);
-
+		
 		var element = child.getElement();
 	
 		if (!this.element.contains(element)) {
@@ -158,10 +125,14 @@ Moobile.Entity = new Class({
 			
 			element.inject(context, where);
 		}
-			
+		
 		this.children.push(child);
+		
+		child.ownerWillChange(this);
+		child.setOwner(this);
+		child.setWindow(this.window);			
 		child.ownerDidChange(this);
-		child.startup();
+		
 		this.didAddChild(child);
 
 		return this;
@@ -192,8 +163,7 @@ Moobile.Entity = new Class({
 		child.setWindow(null);
 		child.ownerDidChange(null);
 		
-		child.getElement()
-		     .dispose();
+		child.getElement().dispose();
 		
 		this.children.erase(child);
 		this.didRemoveChild(child);
@@ -206,19 +176,7 @@ Moobile.Entity = new Class({
 		if (parent) parent.removeChild(this);
 		return this;
 	},
-
-	destroyChildren: function() {
-		this.children.each(this.bound('destroyChild'));
-		this.children.empty();
-		return this;
-	},
-
-	destroyChild: function(child) {
-		child.destroy();
-		child = null;
-		return this;
-	},
-
+	
 	show: function() {
 		this.willShow();
 		this.element.show();
@@ -244,6 +202,24 @@ Moobile.Entity = new Class({
 
 	getName: function() {
 		return this.name;
+	},
+
+	setElement: function(element) {
+	
+		if (this.element)
+			return;
+	
+		var root = document.id(element);
+		if (root == null) {
+			root = new Element(this.options.tagName);
+			if (typeof element == 'string' && element.trim().match(/^<\s*([^ >]+)[^>]*>.*?<\/\s*\1\s*>$/mig)) {
+				root = root.set('html', element).getElement(':first-child');
+			} 
+		}
+	
+		this.element = root;
+	
+		return this;
 	},
 
 	getElement: function(selector) {
