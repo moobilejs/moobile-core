@@ -41,6 +41,8 @@ Moobile.Entity = new Class({
 	owner: null,
 
 	window: null,
+	
+	ready: false,
 
 	options: {
 		className: null,
@@ -87,6 +89,7 @@ Moobile.Entity = new Class({
 		this.element.destroy();
 		this.element = null;
 		this.window = null;
+		this.ready = false;
 
 		return this;
 	},
@@ -135,6 +138,17 @@ Moobile.Entity = new Class({
 		
 		this.didAddChild(child);
 
+		var ready = function() {
+			child.setReady(true);
+			child.didBecomeReady();
+		};
+
+		if (this.ready == false) {
+			this.addEvent('ready:once', ready);
+		} else {
+			ready();
+		}
+
 		return this;
 	},
 
@@ -157,15 +171,20 @@ Moobile.Entity = new Class({
 		if (!this.children.contains(child))
 			return this;
 
+		var element = child.getElement();
+
 		this.willRemoveChild(child);
+		
 		child.ownerWillChange(null);
 		child.setOwner(null);
 		child.setWindow(null);
 		child.ownerDidChange(null);
+		child.setReady(false);
 		
-		child.getElement().dispose();
+		element.dispose();
 		
 		this.children.erase(child);
+		
 		this.didRemoveChild(child);
 
 		return this;
@@ -249,11 +268,23 @@ Moobile.Entity = new Class({
 		return this.element.getSize();
 	},
 
-	ownerWillChange: function(owner) {
+	setReady: function(ready) {
+		
+		if (this.ready != ready) {
+			this.ready = ready;
+			if (this.ready) {
+				this.fireEvent('ready');
+			}
+		}
+
 		return this;
 	},
 
-	ownerDidChange: function(owner) {
+	isReady: function() {
+		return this.ready;
+	},
+
+	didBecomeReady: function() {
 		return this;
 	},
 
@@ -288,6 +319,14 @@ Moobile.Entity = new Class({
 	didHide: function() {
 		return this;
 	},
+	
+	ownerWillChange: function(owner) {
+		return this;
+	},
+
+	ownerDidChange: function(owner) {
+		return this;
+	},	
 
 	onClick: function(e) {
 		e.target = this;
