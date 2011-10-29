@@ -62,7 +62,7 @@ Moobile.ViewControllerStack = new Class({
 
 		this.willPushViewController(viewControllerPushed);
 
-		this.addChildViewController(viewControllerPushed);
+		this.addChildController(viewControllerPushed);
 
 		this.topViewController = viewControllerPushed;
 

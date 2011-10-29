@@ -110,7 +110,7 @@ Moobile.NavigationBar = new Class({
 			return this;
 
 		if (this.leftBarButton) {
-			this.leftBarButton.removeFromParentView();
+			this.leftBarButton.removeFromParent();
 			this.leftBarButton.destroy();
 			this.leftBarButton = null;
 		}
@@ -128,7 +128,7 @@ Moobile.NavigationBar = new Class({
 			this.leftBarButton = leftBarButton;
 			this.leftBarButton.set('data-task', 'left');
 
-			this.addChildView(this.leftBarButton, 'before', this.title);
+			this.addChild(this.leftBarButton, 'before', this.title);
 
 			if (this.leftBarButtonVisible == false) {
 				this.leftBarButton.hide();
@@ -160,7 +160,7 @@ Moobile.NavigationBar = new Class({
 			return this;
 
 		if (this.rightButton) {
-			this.rightButton.removeFromParentView();
+			this.rightButton.removeFromParent();
 			this.rightButton.destroy();
 			this.rightButton = null;
 		}
@@ -178,7 +178,7 @@ Moobile.NavigationBar = new Class({
 			this.rightButton = rightButton;
 			this.rightButton.set('data-task', 'right');
 
-			this.addChildView(this.rightButton, 'before', this.title);
+			this.addChild(this.rightButton, 'before', this.title);
 
 			if (this.rightBarButtonVisible == false) {
 				this.rightButton.hide();

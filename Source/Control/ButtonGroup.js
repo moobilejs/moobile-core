@@ -78,7 +78,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	addButton: function(button, where, context) {
-		return this.addChildView(button, where, context);
+		return this.addChild(button, where, context);
 	},
 
 	getButton: function(name) {

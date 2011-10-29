@@ -35,7 +35,7 @@ Moobile.WindowController = new Class({
 
 		if (rootViewController) {
 			this.rootViewController = rootViewController;
-			this.addChildViewController(rootViewController);
+			this.addChildController(rootViewController);
 		}
 
 		return this;
@@ -43,7 +43,6 @@ Moobile.WindowController = new Class({
 
 	loadView: function(viewElement) {
 		this.view = new Moobile.Window(viewElement);
-		this.view.startup();
 		this.window = this.view;
 		this.startup();
 		return this;

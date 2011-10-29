@@ -246,7 +246,7 @@ Moobile.ViewController = new Class({
 		
 		this.willPresentModalViewController();
 		
-		this.addChildViewController(this.modalViewController, 'bottom', this.window.getContent());
+		this.addChildController(this.modalViewController, 'bottom', this.window.getContent());
 
 		var viewToShow = this.modalViewController.getView();
 		var viewToHide = this.window.getRootView();
@@ -327,16 +327,16 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	addChildViewController: function(viewController, where, context) {
+	addChildController: function(viewController, where, context) {
 
 		if (viewController.isViewLoaded() == false) {
 			viewController.addEvent('viewload:once', function() {
-				this.addChildViewController(viewController, where, context);
+				this.addChildController(viewController, where, context);
 			}.bind(this));
 			return this;
 		}
 
-		this.view.addChildView(viewController.getView(), where, context);
+		this.view.addChild(viewController.getView(), where, context);
 
 		if (viewController.isModal() == false) {
 			viewController.setViewControllerStack(this.viewControllerStack);
@@ -377,7 +377,7 @@ Moobile.ViewController = new Class({
 		viewController.setParentViewController(null);
 		this.didRemoveChildViewController(viewController);
 
-		viewController.getView().removeFromParentView();
+		viewController.getView().removeFromParent();
 
 		return this;
 	},

@@ -38,7 +38,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		var navigationBar = view.getChildView('navigation-bar');
 		if (navigationBar == null) {
 			navigationBar = new Moobile.NavigationBar(null, null, 'navigation-bar');
-			view.addChildView(navigationBar, 'header');
+			view.addChild(navigationBar, 'header');
 		}
 
 		if (viewController.isModal() || this.childViewControllers.length == 0)

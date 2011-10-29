@@ -83,7 +83,7 @@ Moobile.List = new Class({
 	},
 
 	addItem: function(item, where, context) {
-		return this.addChildView(item, where, context);
+		return this.addChild(item, where, context);
 	},
 
 	getItem: function(name) {

@@ -71,7 +71,7 @@ Moobile.Alert = new Class({
 
 	addButton: function(button) {
 		button.addEvent('click', this.bound('onButtonClick'));
-		this.addChildView(button, 'bottom', this.footer);
+		this.addChild(button, 'bottom', this.footer);
 		this.buttons.push(button);
 		return this;
 	},
@@ -89,9 +89,9 @@ Moobile.Alert = new Class({
 			fillStyle: 'gradient'
 		});
 
-		Moobile.Window.getInstance().addChildView(this.mask);
+		Moobile.Window.getInstance().addChild(this.mask);
 
-		this.mask.addChildView(this);
+		this.mask.addChild(this);
 		this.mask.show();
 
 		this.element.addEvent('animationend:once', this.bound('onPresentAnimationComplete'));
@@ -117,7 +117,7 @@ Moobile.Alert = new Class({
 	},
 
 	onDismissAnimationComplete: function() {
-		this.removeFromParentView();
+		this.removeFromParent();
 		this.fireEvent('dismiss');
 		return this;
 	},
@@ -134,7 +134,7 @@ Moobile.Alert = new Class({
 	},
 
 	onMaskHide: function() {
-		this.removeFromParentView();
+		this.removeFromParent();
 		this.mask.destroy();
 		this.mask = null;
 	}

@@ -111,7 +111,7 @@ Moobile.Entity = new Class({
 	addChild: function(child, where, relative) {
 
 		if (this.children.contains(child))
-			return this;
+			return false;
 		
 		this.willAddChild(child);
 		
@@ -149,7 +149,7 @@ Moobile.Entity = new Class({
 			ready();
 		}
 
-		return this;
+		return true;
 	},
 
 	getChild: function(name) {
@@ -169,7 +169,7 @@ Moobile.Entity = new Class({
 	removeChild: function(child) {
 
 		if (!this.children.contains(child))
-			return this;
+			return false;
 
 		var element = child.getElement();
 
@@ -187,13 +187,13 @@ Moobile.Entity = new Class({
 		
 		this.didRemoveChild(child);
 
-		return this;
+		return true;
 	},
 
 	removeFromParent: function() {
 		var parent = this.owner || this.window;
-		if (parent) parent.removeChild(this);
-		return this;
+		if (parent) return parent.removeChild(this);
+		return false;
 	},
 	
 	show: function() {
@@ -237,7 +237,7 @@ Moobile.Entity = new Class({
 		}
 	
 		this.element = root;
-	
+		
 		return this;
 	},
 

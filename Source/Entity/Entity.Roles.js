@@ -57,35 +57,31 @@ Moobile.Entity.Roles = new Class({
 		return this;
 	},
 		
-	setRole: function(element, role) {
-		
+	setRole: function(role, element) {
+
 		if (element.retrieve('entity.roles.role'))
 			return this;
 		
-		var definition = roles[role] || this.$roles[role];
-		if (definition) {
-			
-			var reference = true;
-			
-			if (definition.load) {
-				
-				var options = element.get('data-options');
-				if (options) {
+		var res = true;
+		var def = roles[role] || this.$roles[role];
+		if (def) {
 					
-					if (!options.match(/^\{/)) options = '{' + options;
-					if (!options.match(/\}$/)) options = options + '}';
+			var options = element.get('data-options');
+			if (options) {
+				
+				if (!options.match(/^\{/)) options = '{' + options;
+				if (!options.match(/\}$/)) options = options + '}';
 
-					try {
-						options = JSON.decode(options);	
-					} catch (e) {
-						throw new Error('Error parsing JSON string: ' + options);
-					}					
-				}
-
-				reference = definition.load.call(this, element, options, name || element.get('data-name'));
+				try {
+					options = JSON.decode(options);	
+				} catch (e) {
+					throw new Error('Error parsing JSON string: ' + options);
+				}					
 			}
+
+			res = def.call(this, element, options, name || element.get('data-name'));
 			
-			element.store('entity.roles.role', reference);					
+			element.store('entity.roles.role', res);					
 		}
 		
 		return this;

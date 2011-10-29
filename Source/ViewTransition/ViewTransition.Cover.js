@@ -57,7 +57,7 @@ Moobile.ViewTransition.Cover = new Class({
 			this.mask.addEvent('show', this.bound('onMaskShow'));
 			this.mask.addEvent('hide', this.bound('onMaskHide'));
 			
-			parentView.addChildView(this.mask)
+			parentView.addChild(this.mask)
 			
 			this.mask.show();			
 		}
