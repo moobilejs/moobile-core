@@ -25,29 +25,13 @@ Moobile.List = new Class({
 
 	Extends: Moobile.Control,
 
-
 	selectedItem: null,
 
 	selectedItemIndex: -1,
 
 	options: {
-		className: 'list'
-	},
-
-	build: function() {
-
-		this.parent();
-
-		var content = this.content.getElement('> ul');
-		if (content == null) {
-			content = new Element('ul');
-			content.ingest(this.content);
-			content.inject(this.content);
-		}
-
-		this.content = content;
-
-		return this;
+		className: 'list',
+		tagName: 'ul'
 	},
 
 	setSelectedItem: function(selectedItem) {
@@ -96,51 +80,82 @@ Moobile.List = new Class({
 		return this.removeChildren();
 	},
 
-	didAddChild: function(item) {
+	didAddChild: function(child) {
 
-		this.parent(item);
+		this.parent(child);
 
-		if (item instanceof Moobile.ListItem) {
-			item.addEvent('click', this.bound('onItemClick'));
-			item.addEvent('mouseup', this.bound('onItemMouseUp'));
-			item.addEvent('mousedown', this.bound('onItemMouseDown'));
+		if (child instanceof Moobile.ListItem) {
+			child.addEvent('click', this.bound('onItemClick'));
+			child.addEvent('mouseup', this.bound('onItemMouseUp'));
+			child.addEvent('mousedown', this.bound('onItemMouseDown'));
 		}
-
-		return this;
 	},
 
-	didRemoveChild: function(item) {
+	didRemoveChild: function(child) {
 
-		this.parent(item);
+		this.parent(child);
 
-		if (item instanceof Moobile.ListItem) {
-			item.removeEvent('click', this.bound('onItemClick'));
-			item.removeEvent('mouseup', this.bound('onItemMouseUp'));
-			item.removeEvent('mousedown', this.bound('onItemMouseDown'));
+		if (child instanceof Moobile.ListItem) {
+			child.removeEvent('click', this.bound('onItemClick'));
+			child.removeEvent('mouseup', this.bound('onItemMouseUp'));
+			child.removeEvent('mousedown', this.bound('onItemMouseDown'));
 		}
-
-		return this;
 	},
 
 	onItemClick: function(e) {
 		var item = e.target;
 		if (this.selectable) this.setSelectedItem(item);
 		this.fireEvent('click', e);
-		return this;
 	},
 
 	onItemMouseUp: function(e) {
 		var item = e.target;
 		if (this.selectable && this.highlightable) item.setHighlighted(false);
 		this.fireEvent('mouseup', e);
-		return this;
 	},
 
 	onItemMouseDown: function(e) {
 		var item = e.target;
 		if (this.selectable && this.highlightable) item.setHighlighted(true);
 		this.fireEvent('mousedown', e);
-		return this;
 	}
 
+});
+
+/**
+ * @role list-item
+ */
+Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, options, name);
+	if (instance instanceof Moobile.ListItem) {
+		this.addChild(instance);
+	}
+	
+	return instance;
+});
+
+/**
+ * @role list
+ */
+Moobile.Entity.defineRole('list', null, function(element, options, name) {
+
+	var instance = Class.instantiate(element.get('data-list') || Moobile.List, element, options, name);
+	if (instance instanceof Moobile.List) {
+		this.addChild(instance);
+	}
+	
+	return instance;
+});
+
+/**
+ * @style grouped
+ */
+Moobile.Entity.defineStyle('grouped', Moobile.List, {
+	attach: function(element) { 
+		element.addClass('style-grouped');
+	},			
+	detach: function(element) { 
+		element.removeClass('style-grouped');
+	}
 });
