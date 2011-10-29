@@ -24,8 +24,6 @@ Moobile.NavigationBar = new Class({
 
 	Extends: Moobile.Bar,
 
-	Roles: Moobile.NavigationBarRoles,
-
 	title: null,
 
 	leftBarButton: null,

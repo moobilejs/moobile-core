@@ -25,15 +25,13 @@ Moobile.List = new Class({
 
 	Extends: Moobile.Control,
 
-	Roles: Moobile.ListRoles,
 
 	selectedItem: null,
 
 	selectedItemIndex: -1,
 
 	options: {
-		className: 'list',
-		styleName: Moobile.ListStyle.Default
+		className: 'list'
 	},
 
 	build: function() {

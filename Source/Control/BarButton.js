@@ -24,12 +24,9 @@ provides:
 Moobile.BarButton = new Class({
 
 	Extends: Moobile.Button,
-	
-	Roles: Moobile.BarButtonRoles,
 
 	options: {
-		className: 'bar-button',
-		styleName: Moobile.BarButtonStyle.Default
+		className: 'bar-button'
 	}
 
 });

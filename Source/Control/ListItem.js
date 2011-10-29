@@ -25,8 +25,6 @@ Moobile.ListItem = new Class({
 
 	Extends: Moobile.Control,
 
-	Roles: Moobile.ListItemRoles,
-
 	label: null,
 
 	image: null,

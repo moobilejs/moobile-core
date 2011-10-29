@@ -24,8 +24,6 @@ provides:
 Moobile.ButtonGroup = new Class({
 
 	Extends: Moobile.Control,
-	
-	Roles: Moobile.ButtonGroupRoles,
 
 	selectedButton: null,
 
@@ -33,7 +31,6 @@ Moobile.ButtonGroup = new Class({
 
 	options: {
 		className: 'button-group',
-		styleName: Moobile.ButtonGroupStyle.Horizontal,
 		deselectable: false
 	},
 

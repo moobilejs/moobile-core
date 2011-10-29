@@ -19,11 +19,12 @@ provides:
 
 Moobile.Control = new Class({
 
-	Extends: Moobile.View,
+	Extends: Moobile.Entity,
 
-	Roles: Moobile.ControlRoles,
-
-	style: null,
+	Implements: [
+		Moobile.Entity.Roles,
+		Moobile.Entity.Styles
+	],
 
 	disabled: false,
 
@@ -37,12 +38,7 @@ Moobile.Control = new Class({
 
 	options: {
 		className: null,
-		styleName: null,
-		disabled: false,
-		selected: false,
-		selectable: true,
-		highlighted: false,
-		highlightable: true
+		styleName: null	
 	},
 
 	initialize: function(element, options, name) {
@@ -57,50 +53,11 @@ Moobile.Control = new Class({
 		return this;
 	},
 
-	build: function() {
-
+	setup: function() {
 		this.parent();
-
-		if (this.options.disabled) this.setDisabled(true);
-		if (this.options.selected) this.setSelected(true);
-		if (this.options.highlighted) this.setHighlighted(true);
-
-		if (!this.options.selectable) this.setSelectable(false);
-		if (!this.options.highlightable) this.setHighlightable(false);
-
+		this.loadRoles();
+		this.loadStyle();
 		return this;
-	},
-
-	setStyle: function(style, value) {
-
-		if (typeof style == 'object') {
-
-			if (this.style == style)
-				return this;
-
-			if (this.style) {
-				if (this.style.onDetach) {
-					this.style.onDetach.call(this);
-				}
-			}
-
-			this.style = null;
-
-			if (style) {
-				this.style = style;
-				if (this.style.onAttach) {
-					this.style.onAttach.call(this);
-				}
-			}
-
-			return this;
-		}
-
-		return this.parent(style, value);
-	},
-
-	getStyle: function(style) {
-		return style ? this.parent(style) : this.style;
 	},
 
 	setDisabled: function(disabled) {

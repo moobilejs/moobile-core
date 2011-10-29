@@ -25,11 +25,8 @@ Moobile.ActivityIndicator = new Class({
 
 	Extends: Moobile.Control,
 
-	Roles: Moobile.ActivityIndicatorRoles,
-
 	options: {
-		className: 'activity-indicator',
-		styleName: Moobile.ActivityIndicatorStyle.Default
+		className: 'activity-indicator'
 	},
 
 	build: function() {

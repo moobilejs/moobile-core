@@ -24,12 +24,9 @@ provides:
 Moobile.Bar = new Class({
 
 	Extends: Moobile.Control,
-	
-	Roles: Moobile.BarRoles,
 
 	options: {
-		className: 'bar',
-		styleName: Moobile.BarStyle.DefaultOpaque
+		className: 'bar'
 	}
 
 });
