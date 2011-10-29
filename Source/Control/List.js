@@ -70,13 +70,13 @@ Moobile.List = new Class({
 			this.fireEvent('select', this.selectedItem);
 		}
 
-		this.selectedItemIndex = selectedItem ? this.childViews.indexOf(selectedItem) : -1;
+		this.selectedItemIndex = selectedItem ? this.children.indexOf(selectedItem) : -1;
 
 		return this;
 	},
 
 	setSelectedItemIndex: function(index) {
-		this.setSelectedItem(this.childViews[index] || null);
+		this.setSelectedItem(this.children[index] || null);
 		return this;
 	},
 
@@ -85,18 +85,18 @@ Moobile.List = new Class({
 	},
 
 	getItem: function(name) {
-		return this.getChildView(name);
+		return this.getChild(name);
 	},
 
 	removeItem: function(item) {
-		return this.removeChildView(item);
+		return this.removeChild(item);
 	},
 
 	clearItems: function() {
-		return this.removeChildViews();
+		return this.removeChildren();
 	},
 
-	didAddChildView: function(item) {
+	didAddChild: function(item) {
 
 		this.parent(item);
 
@@ -109,7 +109,7 @@ Moobile.List = new Class({
 		return this;
 	},
 
-	didRemoveChildView: function(item) {
+	didRemoveChild: function(item) {
 
 		this.parent(item);
 

@@ -35,7 +35,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 		var view = viewController.getView();
 
-		var navigationBar = view.getChildView('navigation-bar');
+		var navigationBar = view.getChild('navigation-bar');
 		if (navigationBar == null) {
 			navigationBar = new Moobile.NavigationBar(null, null, 'navigation-bar');
 			view.addChild(navigationBar, 'header');
@@ -65,7 +65,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 		this.parent(viewController);
 
-		var navigationBar = viewController.getView().getChildView('navigation-bar');
+		var navigationBar = viewController.getView().getChild('navigation-bar');
 		if (navigationBar == null)
 			return this;
 

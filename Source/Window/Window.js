@@ -84,7 +84,7 @@ Moobile.Window = new Class({
 	},
 
 	getRootView: function() {
-		return this.childViews[0];
+		return this.children[0];
 	},
 
 	getOrientation: function() {
@@ -158,7 +158,7 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	didAddChildView: function(view) {
+	didAddChild: function(view) {
 		view.setWindow(this);
 		view.setParentView(null);
 		this.parent(view);

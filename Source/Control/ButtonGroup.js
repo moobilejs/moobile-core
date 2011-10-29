@@ -56,7 +56,7 @@ Moobile.ButtonGroup = new Class({
 			this.fireEvent('select', this.selectedButton);
 		}
 
-		this.selectedButtonIndex = selectedButton ? this.childViews.indexOf(selectedButton) : -1;
+		this.selectedButtonIndex = selectedButton ? this.children.indexOf(selectedButton) : -1;
 
 		return this;
 	},
@@ -66,7 +66,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	setSelectedButtonIndex: function(index) {
-		this.setSelectedButton(this.childViews[index]);
+		this.setSelectedButton(this.children[index]);
 		return this;
 	},
 
@@ -79,26 +79,26 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	getButton: function(name) {
-		return this.getChildView(name);
+		return this.getChild(name);
 	},
 
 	removeButton: function(button) {
-		return this.removeChildView(button);
+		return this.removeChild(button);
 	},
 
 	clearButtons: function() {
 		return this.removeChildViews();
 	},
 
-	didAddChildView: function(childView) {
-		this.parent(childView);
-		childView.addEvent('click', this.bound('onButtonClick'));
+	didAddChild: function(entity) {
+		this.parent(entity);
+		entity.addEvent('click', this.bound('onButtonClick'));
 		return this;
 	},
 
-	didRemoveChildView: function(childView) {
-		this.parent(childView);
-		childView.removeEvent('click', this.bound('onButtonClick'));
+	didRemoveChild: function(entity) {
+		this.parent(entity);
+		entity.removeEvent('click', this.bound('onButtonClick'));
 		return this;
 	},
 
