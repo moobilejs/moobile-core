@@ -109,7 +109,6 @@ Moobile.View = new Class({
 	onSwipe: function(e) {
 		e.target = this;
 		this.fireEvent('swipe', e);
-		return this;
 	}
 
 });

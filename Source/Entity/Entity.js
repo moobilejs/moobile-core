@@ -285,65 +285,62 @@ Moobile.Entity = new Class({
 	},
 
 	didBecomeReady: function() {
-		return this;
+		
 	},
 
 	willAddChild: function(child) {
-		return this;
+		
 	},
 
 	didAddChild: function(child) {
-		return this;
+		
 	},
 
 	willRemoveChild: function(child) {
-		return this;
+		
 	},
 
 	didRemoveChild: function(child) {
-		return this;
+		
 	},
 
 	willShow: function() {
-		return this;
+		
 	},
 
 	didShow: function() {
-		return this;
+		
 	},
 
 	willHide: function() {
-		return this;
+		
 	},
 
 	didHide: function() {
-		return this;
+		
 	},
 	
 	ownerWillChange: function(owner) {
-		return this;
+		
 	},
 
 	ownerDidChange: function(owner) {
-		return this;
+		
 	},	
 
 	onClick: function(e) {
 		e.target = this;
 		this.fireEvent('click', e);
-		return this;
 	},
 
 	onMouseUp: function(e) {
 		e.target = this;
 		this.fireEvent('mouseup', e);
-		return this;
 	},
 
 	onMouseDown: function(e) {
 		e.target = this;
 		this.fireEvent('mousedown', e);
-		return this;
 	},
 
 	toElement: function() {

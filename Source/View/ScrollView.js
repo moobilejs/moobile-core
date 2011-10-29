@@ -21,10 +21,6 @@ provides:
 ...
 */
 
-(function() {
-
-var instances = 0;
-
 Moobile.ScrollView = new Class({
 
 	Extends: Moobile.View,
@@ -81,17 +77,15 @@ Moobile.ScrollView = new Class({
 	},
 
 	attachEvents: function() {
-		if (++instances == 1) document.addEventListener('touchmove', this.onDocumentTouchMove);
+		this.parent();
 		this.scroller.addEvent('scrollstart', this.bound('onViewScrollStart'));
 		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
 		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));
 		this.scroller.addEvent('refresh', this.bound('onViewScrollRefresh'));
-		this.parent();
 		return this;
 	},
 
 	detachEvents: function() {
-		if (--instances == 0) document.removeEventListener('touchmove', this.onDocumentTouchMove);
 		this.scroller.removeEvent('scrollstart', this.bound('onViewScrollStart'));
 		this.scroller.removeEvent('scrollmove', this.bound('onViewScrollMove'));
 		this.scroller.removeEvent('scrollend', this.bound('onViewScrollEnd'));
@@ -123,36 +117,28 @@ Moobile.ScrollView = new Class({
 		this.scroller.enable();
 		this.scroller.scrollTo(this.defaultContentOffset.x, this.defaultContentOffset.y);
 		this.parent();
-		return this;
 	},
 
 	willHide: function() {
 		this.defaultContentOffset = this.scroller.getOffset();
 		this.scroller.disable();
 		this.parent();
-		return this;
 	},
 
 	onViewScrollRefresh: function() {
 		this.fireEvent('scrollrefresh');
-		return this;
 	},
 
 	onViewScrollStart: function() {
 		this.fireEvent('scrollstart');
-		return this;
 	},
 
 	onViewScrollMove: function() {
 		this.fireEvent('scrollmove');
-		return this;
 	},
 
 	onViewScrollEnd: function() {
 		this.fireEvent('scrollend');
-		return this;
 	}
 
 });
-
-})();
