@@ -82,7 +82,10 @@ Moobile.Request.View = new Class({
 
 	onViewLoad: function(response) {
 
-		var viewElement = new Element('div').ingest(response).getElement('[data-role=view]');
+		var match = response.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+		if (match) response = match[1];
+		
+		var viewElement = new Element('div').set('html', response).getElement('[data-role=view]');
 		if (viewElement) {
 			this.setCache(this.options.url, viewElement);
 			this.fireEvent('load', viewElement);

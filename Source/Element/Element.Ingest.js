@@ -25,22 +25,7 @@ provides:
 Element.implement({
 
 	ingest: function(element) {
-
-		this.empty();
-
-		var type = typeOf(element);
-		if (type == 'element') {
-			this.adopt(Array.from(element.childNodes));
-			return this;
-		}
-
-		if (type == 'string') {
-			var match = element.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-			if (match) element = match[1];
-			this.set('html', element);
-		}
-
-		return this;
+		return this.adopt(Array.from(document.id(element).childNodes));
 	}
 
 });
