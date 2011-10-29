@@ -12,8 +12,6 @@ authors:
 
 requires:
 	- Control
-	- ButtonRoles
-	- ButtonStyle
 
 provides:
 	- Button
@@ -25,55 +23,49 @@ Moobile.Button = new Class({
 
 	Extends: Moobile.Control,
 	
-	Roles: Moobile.ButtonRoles,
-
 	label: null,
 
 	options: {
 		className: 'button',
-		styleName: Moobile.ButtonStyle.Default
 	},
 
-	build: function() {
+	setup: function() {
 
 		this.parent();
-
-		var label = this.getRolePerformer('label');
-		if (label == null) {
-			label = new Element('div');
-			label.ingest(this.content);
-			label.inject(this.content);
+		
+		if (this.label == null) {
+			this.label = new Element('div');
+			this.label.ingest(this.element);
+			this.label.inject(this.element);
+			this.setRole('label', this.label);
 		}
 
-		this.label = this.applyRole(label, 'label');
-
+		return this;
+	},
+	
+	teardown: function() {
+		this.parent();
+		this.label = null;
 		return this;
 	},
 
 	setLabel: function(label) {
 
-		if (this.label == label)
+		if (this.label ===  label)
 			return this;
 
-		this.label.setText(null);
+		this.label.set('html', null);
 		this.label.hide();
 
 		if (label) {
-
-			var type = typeOf(label);
-			if (type == 'string') {
-				this.label.setText(label);
+			if (typeof type == 'string') {
+				this.label.set('html', label);
 				this.label.show();
-				return this;
+			} else {
+				this.replaceChildView(this.label, label);
+				this.label.destroy();
+				this.label = label;				
 			}
-
-			if (type == 'element') {
-				label = new Moobile.Label(label);
-			}
-
-			this.replaceChildView(this.label, label);
-			this.label.destroy();
-			this.label = label;
 		}
 
 		return this;
@@ -83,28 +75,42 @@ Moobile.Button = new Class({
 		return this.label;
 	},
 
-	attachEvents: function() {
-		this.addEvent('mouseup', this.bound('onMouseUp'))
-		this.addEvent('mousedown', this.bound('onMouseDown'));
-		this.parent();
-		return this;
-	},
-
-	detachEvents: function() {
-		this.removeEvent('mouseup', this.bound('onMouseUp'));
-		this.removeEvent('mousedown', this.bound('onMouseDown'));
-		this.parent();
-		return this;
-	},
-
 	onMouseDown: function(e) {
-		this.addClass(this.options.className + '-down');
-		return this;
+		this.parent(e);
+		this.element.addClass(this.options.className + '-down');
 	},
 
 	onMouseUp: function(e) {
-		this.removeClass(this.options.className + '-down');
-		return this;
+		this.parent(e);
+		this.element.removeClass(this.options.className + '-down');
 	}
 
+});
+
+/**
+ * @role button
+ */
+Moobile.Entity.defineRole('button', null, function(element, options, name) {
+	
+	var instance = Class.instanciate(options.button || Moobile.Button, element, options, name);
+	if (instance instanceof Moobile.Button) {
+		this.addChild(instance);
+	}	
+	
+	return instance;
+});
+
+/**
+ * @role label
+ */
+Moobile.Entity.defineRole('label', Moobile.Button, function(element, options, name) {
+	
+	var instance = Class.instanciate(options.label || Moobile.Entity, element, options, name);
+	if (instance instanceof Moobile.Entity) {
+		this.addChild(instance);
+	}
+	
+	this.label = instance;
+	
+	return instance;
 });
