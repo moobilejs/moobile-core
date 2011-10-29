@@ -37,15 +37,16 @@ Moobile.View = new Class({
 	setup: function() {
 		
 		this.parent();
+
+		var content = this.getRoleElement('content');
+		if (content == null) {
+			content = new Element('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			this.setRole('content', content);			
+		}
 		
 		this.loadRoles();
-		
-		if (this.content == null) {
-			this.content = new Element('div');
-			this.content.ingest(this.element);
-			this.content.inject(this.element);
-			this.setRole('content', this.content);
-		}
 
 		return this;
 	},
@@ -78,6 +79,10 @@ Moobile.View = new Class({
 			
 			case 'footer': 
 				this.addChild(child, 'bottom'); 
+				return this;
+				
+			case 'content':
+				this.addChild(child);
 				return this;
 		}
 
@@ -113,7 +118,7 @@ Moobile.View = new Class({
 
 });
 
-Moobile.View.viewElementFromPath = function(path, callback) {
+Moobile.View.elementFromPath = function(path, callback) {
 	new Moobile.Request.View().load(path, callback);
 };
 
@@ -124,7 +129,7 @@ Moobile.Entity.defineRole('content', Moobile.View, function(element, options, na
 	
 	this.content = new Moobile.Entity(element, options);
 	
-	this.addChild(this.content);
+	this.addChild(this.content, 'content');
 	
 	var className = this.options.className;
 	if (className) {
