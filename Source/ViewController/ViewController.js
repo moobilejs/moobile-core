@@ -17,7 +17,7 @@ requires:
 	- Core/Element
 	- Core/Element.Event
 	- Class-Extras/Class.Binds
-	- Class.Instanciate
+	- Class.Instantiate
 	- Class.Mutator.Property
 	- Event.Loaded
 
@@ -149,7 +149,7 @@ Moobile.ViewController = new Class({
 	},
 
 	loadView: function(viewElement) {
-		this.view = Class.instanciate(
+		this.view = Class.instantiate(
 			viewElement.get('data-class') || 'Moobile.View',
 			viewElement
 		);

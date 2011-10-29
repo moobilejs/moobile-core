@@ -1,9 +1,9 @@
 /*
 ---
 
-name: Class.Instanciate
+name: Class.Instantiate
 
-description: Provides extra static methods to instanciate a class from a string.
+description: Provides extra static methods to instantiate a class from a string.
 
 license: MIT-style license.
 
@@ -11,7 +11,7 @@ requires:
 	- Core/Class
 
 provides:
-	- Class.Instanciate
+	- Class.Instantiate
 
 ...
 */
@@ -26,7 +26,7 @@ Class.extend({
 		return typeof func == 'function' ? func : null;
 	},
 
-	instanciate: function(klass) {
+	instantiate: function(klass) {
 		if (typeof klass == 'string') klass = Class.parse(klass);
 		if (klass == null) return null;
 		klass.$prototyping = true;

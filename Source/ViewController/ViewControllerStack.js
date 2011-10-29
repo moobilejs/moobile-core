@@ -27,7 +27,7 @@ Moobile.ViewControllerStack = new Class({
 	topViewController: null,
 
 	loadView: function(viewElement) {
-		this.view = Class.instanciate(
+		this.view = Class.instantiate(
 			viewElement.get('data-class') || 'Moobile.ViewStack',
 			viewElement
 		);

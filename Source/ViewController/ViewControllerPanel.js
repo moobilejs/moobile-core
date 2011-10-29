@@ -29,7 +29,7 @@ Moobile.ViewControllerPanel = new Class({
 	sideViewController: null,
 
 	loadView: function(viewElement) {
-		this.view = Class.instanciate(
+		this.view = Class.instantiate(
 			viewElement.get('data-class') || 'Moobile.ViewPanel',
 			viewElement
 		);

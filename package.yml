@@ -16,8 +16,7 @@ sources:
 
   - "Vendor/iscroll/src/iscroll.js"
   - "Source/Browser/Browser.Platform.js"
-  - "Source/Class/Class.Instanciate.js"
-  - "Source/Class/Class.Mutators.Roles.js"
+  - "Source/Class/Class.Instantiate.js"
   - "Source/Types/Object.Extras.js"
   - "Source/Types/String.Extras.js"
   - "Source/Types/Array.Extras.js"

@@ -92,7 +92,7 @@ Moobile.Button = new Class({
  */
 Moobile.Entity.defineRole('button', null, function(element, options, name) {
 	
-	var instance = Class.instanciate(element.get('data-button') || Moobile.Button, element, options, name);
+	var instance = Class.instantiate(element.get('data-button') || Moobile.Button, element, options, name);
 	if (instance instanceof Moobile.Button) {
 		this.addChild(instance);
 	}	
@@ -105,7 +105,7 @@ Moobile.Entity.defineRole('button', null, function(element, options, name) {
  */
 Moobile.Entity.defineRole('label', Moobile.Button, function(element, options, name) {
 	
-	var instance = Class.instanciate(element.get('data-label') || Moobile.Entity, element, options, name);
+	var instance = Class.instantiate(element.get('data-label') || Moobile.Entity, element, options, name);
 	if (instance instanceof Moobile.Entity) {
 		this.addChild(instance);
 	}
