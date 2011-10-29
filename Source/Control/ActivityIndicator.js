@@ -29,12 +29,6 @@ Moobile.ActivityIndicator = new Class({
 		className: 'activity-indicator'
 	},
 
-	build: function() {
-		this.parent();
-		this.start();
-		return this;
-	},
-
 	start: function() {
 		this.addClass('activity');
 		return this;
@@ -43,20 +37,19 @@ Moobile.ActivityIndicator = new Class({
 	pause: function() {
 		this.removeClass('activity');
 		return this;
-	},
-
-	center: function() {
-		var wrapper = this.parentView || this.window;
-		if (wrapper) {
-			var wrapperSize = wrapper.content.getSize();
-			var elementSize = this.element.getSize();
-			var t = wrapperSize.y / 2 - elementSize.x / 2;
-			var l = wrapperSize.x / 2 - elementSize.x / 2;
-			this.setStyle('top', t);
-			this.setStyle('left', l);
-			this.setStyle('position', 'absolute');
-		}
-		return this;
 	}
 
+});
+
+/**
+ * @role activity-indicator
+ */
+Moobile.Entity.defineRole('activity-indicator', null, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-activity-indicator') || Moobile.ActivityIndicator, element, options, name);
+	if (instance instanceof Moobile.ActivityIndicator) {
+		this.addChild(instance);
+	}
+	
+	return instance;	
 });
