@@ -113,6 +113,10 @@ Moobile.View = new Class({
 
 });
 
+Moobile.View.viewElementFromPath = function(path, callback) {
+	new Moobile.Request.View().load(path, callback);
+};
+
 /**
  * @role content
  */
