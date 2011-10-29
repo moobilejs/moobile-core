@@ -30,3 +30,39 @@ Moobile.Bar = new Class({
 	}
 
 });
+
+/**
+ * @style translucent
+ */
+Moobile.Entity.defineStyle('translucent', Moobile.Bar, {
+	attach: function(element) {
+		element.addClass('style-translucent');
+	},			
+	detach: function(element) {
+		element.removeClass('style-translucent');
+	}			
+});
+
+/**
+ * @style black-opaque
+ */
+Moobile.Entity.defineStyle('black', Moobile.Bar, {
+	attach: function(element) {
+		element.addClass('style-black');
+	},			
+	detach: function(element) {
+		element.removeClass('style-black');
+	}			
+});
+
+/**
+ * @style black-translucent
+ */
+Moobile.Entity.defineStyle('black-translucent', Moobile.Bar, {
+	attach: function(element) {
+		element.addClass('style-black').addClass('style-black-translucent');
+	},			
+	detach: function(element) {
+		element.removeClass('style-black').removeClass('style-black-translucent');
+	}
+});
