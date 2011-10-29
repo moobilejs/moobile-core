@@ -23,7 +23,7 @@ Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
 
-	build: function() {
+	setup: function() {
 
 		this.parent();
 

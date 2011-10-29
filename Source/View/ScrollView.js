@@ -56,37 +56,27 @@ Moobile.ScrollView = new Class({
 		return this.scroller.getOffset();
 	},
 
-	build: function() {
+	setup: function() {
 
-		this.parent();
-
-		var wrapper = this.getRolePerformer('wrapper');
-		if (wrapper == null) {
-			wrapper = new Element('div');
-			wrapper.wraps(this.content);
-		}
-
-		this.wrapper = this.applyRole(wrapper, 'wrapper');
+		this.wrapper = new Element('div');
+		this.wrapper.wraps(this.content);
 
 		if (this.options.className) {
 			this.element.addClass('scroll-' + this.options.className);
+			this.content.addClass('scroll-' + this.options.className + '-content');
 			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
 		}
-
-		return this;
-	},
-
-	setup: function() {
-		this.parent();
+		
 		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
+		
 		return this;
 	},
 
 	teardown: function() {
+		this.parent();
 		this.scroller.destroy();
 		this.scroller = null;
 		this.wrapper = null;
-		this.parent();
 		return this;
 	},
 
@@ -123,6 +113,10 @@ Moobile.ScrollView = new Class({
 	scrollToPage: function (pageX, pageY, time) {
 		this.scroller.scrollToPage(pageX, pageY, time);
 		return this;
+	},
+
+	didBecomeReady: function() {
+		this.scroller.refresh();
 	},
 
 	didShow: function() {
