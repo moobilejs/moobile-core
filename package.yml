@@ -23,7 +23,6 @@ sources:
   - "Source/Types/Array.Extras.js"
   - "Source/Element/Element.Styles.js"
   - "Source/Element/Element.Ingest.js"
-  - "Source/Element/Element.Properties.DataOptions.js"
   - "Source/Event/Event.Mobile.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.Click.js"
