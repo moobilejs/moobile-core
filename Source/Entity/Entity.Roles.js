@@ -77,6 +77,8 @@ Moobile.Entity.Roles = new Class({
 				} catch (e) {
 					throw new Error('Error parsing JSON string: ' + options);
 				}					
+			} else {
+				options = {};
 			}
 
 			res = def.call(this, element, options, name || element.get('data-name'));
@@ -106,7 +108,7 @@ var filter = function(element) {
 var attach = function(element) {
 	var role = element.get('data-role');
 	if (role) {
-		this.setRole(element, role);
+		this.setRole(role, element);
 	}
 };
 	
