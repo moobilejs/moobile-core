@@ -50,7 +50,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 			if (backButtonLabel) {
 
 				var backButton = new Moobile.BarButton();
-				backButton.setStyle(Moobile.BarButtonStyle.Back);
+				backButton.setStyle('back');
 				backButton.setLabel(backButtonLabel);
 				backButton.addEvent('click', this.bound('onBackButtonClick'));
 
