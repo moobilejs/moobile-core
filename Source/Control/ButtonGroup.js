@@ -31,6 +31,7 @@ Moobile.ButtonGroup = new Class({
 
 	options: {
 		className: 'button-group',
+		styleName: 'horizontal',
 		deselectable: false
 	},
 
@@ -120,4 +121,28 @@ Moobile.Entity.defineRole('button-group', null, function(element, options, name)
 	}
 	
 	return instance;	
+});
+
+/**
+ * @style horizontal
+ */
+Moobile.Entity.defineStyle('horizontal', Moobile.ButtonGroup, {
+	attach: function(element) {
+		element.addClass('style-horizontal');
+	},			
+	detach: function(element) {
+		element.removeClass('style-horizontal');
+	}			
+});
+
+/**
+ * @style vertical
+ */
+Moobile.Entity.defineStyle('vertical', Moobile.ButtonGroup, {
+	attach: function(element) {
+		element.addClass('style-vertical');
+	},			
+	detach: function(element) {
+		element.removeClass('style-vertical');
+	}			
 });

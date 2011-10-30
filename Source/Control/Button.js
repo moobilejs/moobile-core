@@ -43,7 +43,7 @@ Moobile.Button = new Class({
 		this.label.setText(null);
 
 		if (label) {
-			if (typeof type == 'string') {
+			if (typeof label == 'string') {
 				this.label.setText(label);
 			} else {
 				this.replaceChild(this.label, label);

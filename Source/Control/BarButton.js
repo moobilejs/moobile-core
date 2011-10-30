@@ -30,6 +30,19 @@ Moobile.BarButton = new Class({
 });
 
 /**
+ * @role bar-button
+ */
+Moobile.Entity.defineRole('bar-button', null, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-bar-button') || Moobile.BarButton, element, options, name);
+	if (instance instanceof Moobile.BarButton) {
+		this.addChild(instance);
+	}	
+	
+	return instance;
+});
+
+/**
  * @style active
  */
 Moobile.Entity.defineStyle('active', Moobile.BarButton, {
