@@ -67,9 +67,11 @@ Moobile.ViewController = new Class({
 
 	initialize: function(source, options, name) {
 
-		this.setOptions(options);
+		this.name = name;
 
-		this.name = name || null;
+		this.window = Moobile.Window.getInstance();
+
+		this.setOptions(options);
 
 		var element = document.id(source);
 		if (element) {
@@ -187,8 +189,6 @@ Moobile.ViewController = new Class({
 			return this;
 
 		this.ready = true;
-
-		this.window = this.view.getWindow();
 
 		this.setup();
 		this.attachEvents();
@@ -348,8 +348,6 @@ Moobile.ViewController = new Class({
 		viewController.setParentViewController(this);
 		viewController.startup();
 		this.didAddChildViewController(viewController);
-
-		Object.defineMember(this, viewController, viewController.getName());
 
 		return this;
 	},

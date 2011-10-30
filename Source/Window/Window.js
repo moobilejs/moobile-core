@@ -158,13 +158,6 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	didAddChild: function(view) {
-		view.setOwner(null);
-		view.setWindow(this);
-		this.parent(view);
-		return this;
-	},
-
 	onWindowOrientationChange: function() {
 		this.position();
 		this.fireEvent('orientationchange', this.getOrientation());

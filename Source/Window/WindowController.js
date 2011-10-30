@@ -43,7 +43,6 @@ Moobile.WindowController = new Class({
 
 	loadView: function(viewElement) {
 		this.view = new Moobile.Window(viewElement);
-		this.window = this.view;
 		this.startup();
 		return this;
 	},

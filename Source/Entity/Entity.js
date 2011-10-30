@@ -62,7 +62,9 @@ Moobile.Entity = new Class({
 	initialize: function(element, options, name) {
 
 		this.name = name;
-
+		
+		this.window = Moobile.Window.getInstance();
+		
 		this.setOptions(options);
 		this.setElement(element);
 
@@ -70,7 +72,7 @@ Moobile.Entity = new Class({
 		if (className) {
 			this.element.addClass(className);
 		}		
-
+		
 		this.loadStyle();		
 		this.loadRoles();
 
@@ -148,7 +150,6 @@ Moobile.Entity = new Class({
 
 		child.ownerWillChange(this);
 		child.setOwner(this);
-		child.setWindow(this.window);			
 		child.ownerDidChange(this);
 
 		this.didAddChild(child);
@@ -189,7 +190,6 @@ Moobile.Entity = new Class({
 
 	removeChild: function(child) {
 
-
 		var element = document.id(child);
 		if (element == null)
 			return false;
@@ -201,7 +201,6 @@ Moobile.Entity = new Class({
 
 		child.ownerWillChange(null);
 		child.setOwner(null);
-		child.setWindow(null);
 		child.ownerDidChange(null);
 		child.setReady(false);
 
@@ -232,15 +231,6 @@ Moobile.Entity = new Class({
 		this.element.hide();
 		this.didHide();
 		return this;
-	},
-
-	setWindow: function(window) {
-		this.window = window;
-		return this;
-	},
-
-	getWindow: function(window) {
-		return this.window;
 	},
 
 	getName: function() {
