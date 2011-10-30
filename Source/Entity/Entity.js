@@ -91,19 +91,20 @@ Moobile.Entity = new Class({
 	},
 
 	destroy: function() {
-
+		
+		this.removeFromParent();
+		
 		this.detachEvents();
 
 		this.children.each(function(child){child.destroy()});
 		this.children = null;
 
 		this.teardown(); 
-
-		this.removeFromParent();
-
+		
 		this.element.destroy();
 		this.element = null;
 		this.window = null;
+		this.owner = null;
 		this.ready = false;
 
 		return this;
