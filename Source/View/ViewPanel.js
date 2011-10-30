@@ -31,18 +31,11 @@ Moobile.ViewPanel = new Class({
 
 		this.parent();
 
-		if (this.sidePanel == null) {
-			this.sidePanel = new Element('div');
-			this.sidePanel.inject(this.content);
-			this.setRole('side-panel', this.sidePanel);
+		var className = this.options.className;
+		if (className) {
+			this.element.addClass(className + '-panel');
 		}
-		
-		if (this.mainPanel == null) {
-			this.mainPanel = new Element('div');
-			this.mainPanel.inject(this.content);
-			this.setRole('main-panel', this.mainPanel);
-		}
-	
+
 		return this;
 	},
 
@@ -54,45 +47,27 @@ Moobile.ViewPanel = new Class({
 	},
 
 	getSidePanel: function() {
-		return this.sidePanel;
+		return this.content.getSidePanel();
 	},
 
 	getMainPanel: function() {
-		return this.mainPanel;
+		return this.content.getMainPanel();
 	}
 
 });
 
 /**
- * @role side-panel
+ * @role content
  */
-Moobile.Entity.defineRole('side-panel', Moobile.ViewPanel, function(element, options) {
-	
-	this.sidePanel = new Moobile.Entity(element, options);
+Moobile.Entity.defineRole('content', Moobile.ViewPanel, function(element, options, name) {
 
-	this.addChild(this.sidePanel);
-	
-	var className = this.options.className;
-	if (className) {
-		this.sidePanel.getElement().addClass(className + '-side-panel');
+	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewPanelContent, element, options, name);
+	if (instance instanceof Moobile.ViewPanelContent) {
+		this.addChild(instance, 'content');
 	}
+
+	this.content = instance;
 	
-	return this.sidePanel;
+	return instance;
 });
 
-/**
- * @role main-panel
- */
-Moobile.Entity.defineRole('main-panel', Moobile.ViewPanel, function(element, options) {
-	
-	this.mainPanel = new Moobile.Entity(element, options);
-	
-	this.addChild(this.mainPanel);
-	
-	var className = this.options.className;
-	if (className) {
-		this.mainPanel.getElement().addClass(className + '-main-panel');
-	}
-	
-	return this.mainPanel;
-});
