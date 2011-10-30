@@ -24,8 +24,6 @@ provides:
 Moobile.ScrollView = new Class({
 
 	Extends: Moobile.View,
-	
-	Roles: Moobile.ScrollViewRoles,
 
 	wrapper: null,
 
