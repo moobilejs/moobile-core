@@ -12,8 +12,6 @@ authors:
 
 requires:
 	- Button
-	- BarButtonRoles	
-	- BarButtonStyle
 
 provides:
 	- BarButton
@@ -29,4 +27,52 @@ Moobile.BarButton = new Class({
 		className: 'bar-button'
 	}
 
+});
+
+/**
+ * @style active
+ */
+Moobile.Entity.defineStyle('active', Moobile.BarButton, {
+	attach: function(element) {
+		element.addClass('style-active');
+	},
+	detach: function(element) {
+		element.removeClass('style-active');
+	}			
+});
+
+/**
+ * @style warning
+ */
+Moobile.Entity.defineStyle('warning', Moobile.BarButton, {
+	attach: function(element) {
+		element.addClass('style-warning');
+	},
+	detach: function(element) {
+		element.removeClass('style-warning');
+	}			
+});
+
+/**
+ * @style back
+ */
+Moobile.Entity.defineStyle('back', Moobile.BarButton, {
+	attach: function(element) {
+		element.addClass('style-back');
+	},
+	detach: function(element) {
+		element.removeClass('style-back');
+	}			
+});
+
+/**
+ * @style forward
+ */
+Moobile.Entity.defineStyle('forward', Moobile.BarButton, {
+	attach: function(element) {
+		element.addClass('style-forward');
+	},
+	detach: function(element) {
+		element.removeClass('style-forward');
+	}			
 });
