@@ -35,12 +35,12 @@ Moobile.NavigationBar = new Class({
 		return this;
 	},
 	
-	addLeftButton: function(button) {
-		return this.addButton(button, 'top');
+	addLeftBarButton: function(button) {
+		return this.addBarButton(button, 'top');
 	},
 	
-	addRightButton: function(button) {
-		return this.addRightButton(button, 'bottom');
+	addRightBarButton: function(button) {
+		return this.addBarButton(button, 'bottom');
 	},
 
 	setTitle: function(title) {

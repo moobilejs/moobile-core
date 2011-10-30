@@ -31,19 +31,19 @@ Moobile.Bar = new Class({
 	
 	item: null,
 	
-	addButton: function(item, where, context) {
+	addBarButton: function(item, where, context) {
 		return this.item.addChild(item, where, context);
 	},
 
-	getButton: function(name) {
+	getBarButton: function(name) {
 		return this.item.getChild(name);
 	},
 
-	removeButton: function(item) {
+	removeBarButton: function(item) {
 		return this.item.removeChild(item);
 	},
 
-	clearButtons: function() {
+	clearBarButtons: function() {
 		return this.item.removeChildren();
 	},
 
