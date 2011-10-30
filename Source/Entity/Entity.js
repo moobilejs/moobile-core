@@ -189,10 +189,13 @@ Moobile.Entity = new Class({
 
 	removeChild: function(child) {
 
-		if (!this.children.contains(child))
+
+		var element = document.id(child);
+		if (element == null)
 			return false;
 
-		var element = child.getElement();
+		if (!this.children.contains(child))
+			return false;
 
 		this.willRemoveChild(child);
 
