@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Entity.Styles
+name: EntityStyles
 
 description: 
 
@@ -11,27 +11,18 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- Core/Class
+	- Core/Class.Extras
 
 provides:
-	- Entity.Styles
+	- EntityStyles
 
 ...
 */
 
-(function() {
-	
-var styles = {};
+if (!window.Moobile) window.Moobile = {};
 
-Moobile.Entity.defineStyle = function(name, target, def) {
-	if (target) {
-		target.prototype.$styles[name] = def
-	} else {
-		styles[name] = def;
-	}
-};	
-
-Moobile.Entity.Styles = new Class({
+Moobile.EntityStyles = new Class({
 
 	Implements: Class.Binds,
 
@@ -44,11 +35,15 @@ Moobile.Entity.Styles = new Class({
 	},
 
 	loadStyle: function() {
-
+		
+		this.styleWillLoad();
+		
 		var styleName = this.options.styleName
 		if (styleName) {
 			this.setStyle(styleName);
 		}
+
+		this.styleDidLoad();
 
 		return this;
 	},
@@ -75,8 +70,14 @@ Moobile.Entity.Styles = new Class({
 	
 	getStyle: function() {
 		return this.style;
+	},
+	
+	styleWillLoad: function() {
+		
+	},
+	
+	styleDidLoad: function() {
+		
 	}
 
-});	
-	
-})();
+});

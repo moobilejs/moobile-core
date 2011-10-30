@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Entity.Roles
+name: EntityRoles
 
 description: 
 
@@ -13,47 +13,48 @@ authors:
 requires:
 	- Core/Class
 	- Core/Class.Extras
-	- Entity
 
 provides:
-	- Entity.Roles
+	- EntityRoles
 
 ...
 */
 
+if (!window.Moobile) window.Moobile = {};
+
 (function() {
 	
 var roles = {};
+
+var filter = function(element) {
 	
-Moobile.Entity.defineRole = function(name, target, fn) {
-	if (target) {
-		target.prototype.$roles[name] = fn;
-	} else  {
-		roles[name] = fn;
+	var parent = element.getParent('[data-role]');
+	if (parent) {
+		return parent === this.element;
 	}
-};	
+	
+	return true;
+};
 
-
-Moobile.Entity.Roles = new Class({
+Moobile.EntityRoles = new Class({
 
 	Implements: Class.Binds,
 
 	$roles: {},
 
-	getRoleElement: function(role) {
-		role = role.clean();
-		return this.element.getElements('[data-role="' + role + '"]').filter(filter.bind(this)).pop();
-	},
-	
-	getRoleElements: function(role) {
-		role = role.clean();
-		return this.element.getElements('[data-role="' + role + '"]').filter(filter.bind(this));
-	},
-
 	loadRoles: function() {
-		var f = filter.bind(this);
-		var a = attach.bind(this);
-		this.element.getElements('[data-role]').filter(f).each(a);
+		
+		this.rolesWillLoad();
+
+		var load = function(element) {
+			var role = element.get('data-role');
+			if (role) this.setRole(role, element);
+		}.bind(this);
+		
+		this.element.getElements('[data-role]').filter(filter.bind(this)).each(load);
+		
+		this.rolesDidLoad();
+		
 		return this;
 	},
 		
@@ -76,7 +77,8 @@ Moobile.Entity.Roles = new Class({
 					options = JSON.decode(options);	
 				} catch (e) {
 					throw new Error('Error parsing JSON string: ' + options);
-				}					
+				}
+									
 			} else {
 				options = {};
 			}
@@ -91,25 +93,26 @@ Moobile.Entity.Roles = new Class({
 	
 	getRole: function(element) {
 		return element.retrieve('entity.roles.role');
+	},
+	
+	getRoleElement: function(role) {
+		role = role.clean();
+		return this.element.getElements('[data-role="' + role + '"]').filter(filter.bind(this))[0] || null;
+	},
+	
+	getRoleElements: function(role) {
+		role = role.clean();
+		return this.element.getElements('[data-role="' + role + '"]').filter(filter.bind(this));
+	},	
+	
+	rolesWillLoad: function() {
+
+	},
+	
+	rolesDidLoad: function() {
+
 	}
 	
 });
-	
-var filter = function(element) {
-	
-	var parent = element.getParent('[data-role]');
-	if (parent) {
-		return parent.contains(this.element) || parent === this.element;
-	}
-	
-	return true;
-};
-
-var attach = function(element) {
-	var role = element.get('data-role');
-	if (role) {
-		this.setRole(role, element);
-	}
-};
 	
 })();

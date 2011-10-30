@@ -15,6 +15,8 @@ requires:
 	- Core/Class
 	- Core/Class.Extras
 	- Class-Extras/Class.Binds
+	- EntityRoles
+	- EntityStyles
 
 provides:
 	- Entity
@@ -24,46 +26,57 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
+(function() {
+
+var roles = {};
+var styles = {};
+
 Moobile.Entity = new Class({
 
 	Implements: [
 		Events,
 		Options,
-		Class.Binds
+		Class.Binds,
+		Moobile.EntityRoles,
+		Moobile.EntityStyles
 	],
 
 	name: null,
 
 	element: null,
-	
+
 	children: [],
 
 	owner: null,
 
 	window: null,
-	
+
 	ready: false,
 
 	options: {
 		className: null,
+		styleName: null,
 		tagName: 'div',
 	},
 
 	initialize: function(element, options, name) {
 
 		this.name = name;
-		
+
 		this.setOptions(options);
 		this.setElement(element);
-	
+
 		var className = this.options.className;
 		if (className) {
 			this.element.addClass(className);
 		}		
 
+		this.loadStyle();		
+		this.loadRoles();
+
 		this.setup();
 		this.attachEvents();
-		
+
 		return this;
 	},
 
@@ -78,10 +91,10 @@ Moobile.Entity = new Class({
 	destroy: function() {
 
 		this.detachEvents();
-		
+
 		this.children.each(function(child){child.destroy()});
 		this.children = null;
-		
+
 		this.teardown(); 
 
 		this.removeFromParent();
@@ -112,30 +125,30 @@ Moobile.Entity = new Class({
 
 		if (this.children.contains(child))
 			return false;
-		
+
 		this.willAddChild(child);
-		
+
 		var element = child.getElement();
-	
+
 		if (!this.element.contains(element)) {
-			
+
 			var context = document.id(relative);
 			if (context == null) {
 				context = this.element;
 			} else if (!this.element.contains(context)) {
 				throw new Error('You are trying to add a child relative to an element that does not belong to this entity');
 			}
-			
+
 			element.inject(context, where);
 		}
-		
+
 		this.children.push(child);
-		
+
 		child.ownerWillChange(this);
 		child.setOwner(this);
 		child.setWindow(this.window);			
 		child.ownerDidChange(this);
-		
+
 		this.didAddChild(child);
 
 		var ready = function() {
@@ -174,17 +187,17 @@ Moobile.Entity = new Class({
 		var element = child.getElement();
 
 		this.willRemoveChild(child);
-		
+
 		child.ownerWillChange(null);
 		child.setOwner(null);
 		child.setWindow(null);
 		child.ownerDidChange(null);
 		child.setReady(false);
-		
+
 		element.dispose();
-		
+
 		this.children.erase(child);
-		
+
 		this.didRemoveChild(child);
 
 		return true;
@@ -195,7 +208,7 @@ Moobile.Entity = new Class({
 		if (parent) return parent.removeChild(this);
 		return false;
 	},
-	
+
 	show: function() {
 		this.willShow();
 		this.element.show();
@@ -224,10 +237,10 @@ Moobile.Entity = new Class({
 	},
 
 	setElement: function(element) {
-	
+
 		if (this.element)
 			return;
-	
+
 		var root = document.id(element);
 		if (root == null) {
 			root = new Element(this.options.tagName);
@@ -235,9 +248,9 @@ Moobile.Entity = new Class({
 				root = root.set('html', element).getElement(':first-child');
 			} 
 		}
-	
+
 		this.element = root;
-		
+
 		return this;
 	},
 
@@ -269,7 +282,7 @@ Moobile.Entity = new Class({
 	},
 
 	setReady: function(ready) {
-		
+
 		if (this.ready != ready) {
 			this.ready = ready;
 			if (this.ready) {
@@ -285,47 +298,47 @@ Moobile.Entity = new Class({
 	},
 
 	didBecomeReady: function() {
-		
+
 	},
 
 	willAddChild: function(child) {
-		
+
 	},
 
 	didAddChild: function(child) {
-		
+
 	},
 
 	willRemoveChild: function(child) {
-		
+
 	},
 
 	didRemoveChild: function(child) {
-		
+
 	},
 
 	willShow: function() {
-		
+
 	},
 
 	didShow: function() {
-		
+
 	},
 
 	willHide: function() {
-		
+
 	},
 
 	didHide: function() {
-		
+
 	},
-	
+
 	ownerWillChange: function(owner) {
-		
+
 	},
 
 	ownerDidChange: function(owner) {
-		
+
 	},	
 
 	onClick: function(e) {
@@ -348,3 +361,21 @@ Moobile.Entity = new Class({
 	}
 
 });
+
+Moobile.Entity.defineRole = function(name, target, fn) {
+	if (target) {
+		target.prototype.$roles[name] = fn;
+	} else  {
+		roles[name] = fn;
+	}
+};
+
+Moobile.Entity.defineStyle = function(name, target, def) {
+	if (target) {
+		target.prototype.$styles[name] = def
+	} else {
+		styles[name] = def;
+	}
+};
+
+})();
