@@ -31,13 +31,13 @@ Moobile.ViewTransition.Cubic = new Class({
 		this.addSubject(viewToShow, 'transition-view-to-show');
 
 		if (first) {
-			this.animate(parentView.content, 'transition-cubic-enter-first');
+			this.animate(parentView.getContent(), 'transition-cubic-enter-first');
 			return this;
 		}
 
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
-		this.animate(parentView.content, 'transition-cubic-enter');
+		this.animate(parentView.getContent(), 'transition-cubic-enter');
 
 		return this;
 	},
@@ -51,7 +51,7 @@ Moobile.ViewTransition.Cubic = new Class({
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
-		this.animate(parentView.content, 'transition-cubic-leave');
+		this.animate(parentView.getContent(), 'transition-cubic-leave');
 
 		return this;
 	}

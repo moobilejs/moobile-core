@@ -29,14 +29,14 @@ Moobile.ViewTransition.Fade = new Class({
 		this.parent(viewToShow, viewToHide, parentView, first);
 
 		if (first) {
-			this.animate(parentView.content, 'transition-fade-enter-first');
+			this.animate(parentView.getContent(), 'transition-fade-enter-first');
 			return this;
 		}
 
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
-		this.animate(parentView.content, 'transition-fade-enter');
+		this.animate(parentView.getContent(), 'transition-fade-enter');
 
 		return this;
 	},
@@ -48,7 +48,7 @@ Moobile.ViewTransition.Fade = new Class({
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 		this.addSubject(viewToShow, 'transition-view-to-show');
 
-		this.animate(parentView.content, 'transition-fade-leave');
+		this.animate(parentView.getContent(), 'transition-fade-leave');
 
 		return this;
 	}

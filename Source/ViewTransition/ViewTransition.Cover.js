@@ -32,18 +32,18 @@ Moobile.ViewTransition.Cover = new Class({
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
-
+		
 		switch (this.options.presentation) {
 			
 			case 'box':					
 				this.mask = new Moobile.Mask();
 				viewToShow = new Element('div.transition-cover-view-wrapper').wraps(viewToShow);
-				parentView.addClass('transition-cover-box');				
+				document.id(parentView).addClass('transition-cover-box');				
 				break;
 			
 			case 'center':
 				this.mask = new Moobile.Mask();
-				parentView.addClass('transition-cover-center');		
+				document.id(parentView).addClass('transition-cover-center');		
 				break;
 			
 			case 'fullscreen':
@@ -57,7 +57,7 @@ Moobile.ViewTransition.Cover = new Class({
 			this.mask.addEvent('show', this.bound('onMaskShow'));
 			this.mask.addEvent('hide', this.bound('onMaskHide'));
 			
-			parentView.addChild(this.mask)
+			document.id(parentView).addChild(this.mask)
 			
 			this.mask.show();			
 		}
@@ -67,8 +67,8 @@ Moobile.ViewTransition.Cover = new Class({
 			return this;
 		}
 
-		viewToHide.addClass('transition-cover-background-view');
-		viewToShow.addClass('transition-cover-foreground-view');
+		document.id(viewToHide).addClass('transition-cover-background-view');
+		document.id(viewToShow).addClass('transition-cover-foreground-view');
 
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
@@ -127,20 +127,20 @@ Moobile.ViewTransition.Cover = new Class({
 					viewToHideWrapper = null;
 				}
 					
-				parentView.removeClass('transition-cover-box');
+				document.id(parentView).removeClass('transition-cover-box');
 				
 				break;
 			
 			case 'center':
-				parentView.removeClass('transition-cover-center');		
+				document.id(parentView).removeClass('transition-cover-center');		
 				break;
 			
 			case 'fullscreen':
 				break;
 		}	
 		
-		viewToHide.removeClass('transition-cover-foreground-view');
-		viewToShow.removeClass('transition-cover-background-view');		
+		document.id(viewToHide).removeClass('transition-cover-foreground-view');
+		document.id(viewToShow).removeClass('transition-cover-background-view');		
 		
 		return this;		
 	},

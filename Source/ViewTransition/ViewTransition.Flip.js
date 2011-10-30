@@ -32,7 +32,7 @@ Moobile.ViewTransition.Flip = new Class({
 		this.addSubject(viewToShow, 'transition-view-to-show');
 
 		if (first) {
-			this.animate(parentView.content, 'transition-flip-enter-first');
+			this.animate(parentView.getContent(), 'transition-flip-enter-first');
 			return this;
 		}
 
@@ -52,7 +52,7 @@ Moobile.ViewTransition.Flip = new Class({
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 		this.addSubject(viewToShow, 'transition-view-to-show');
 
-		this.animate(parentView.content, 'transition-flip-leave');
+		this.animate(parentView.getContent(), 'transition-flip-leave');
 
 		return this;
 	}
