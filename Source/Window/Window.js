@@ -27,7 +27,7 @@ var windowInstance = null;
 
 Moobile.Window = new Class({
 
-	Extends: Moobile.View,
+	Extends: Moobile.Entity,
 
 	inputEnabled: true,
 
@@ -120,7 +120,7 @@ Moobile.Window = new Class({
 
 	showMask: function() {
 		this.inputMask = new Element('div.' + this.options.className + '-mask');
-		this.inputMask.inject(this.content);
+		this.inputMask.inject(this.element);
 		return this;
 	},
 
