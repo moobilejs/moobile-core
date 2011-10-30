@@ -26,8 +26,7 @@ Moobile.Label = new Class({
 	text: null,
 
 	options: {
-		className: 'label',
-		tagName: 'span'
+		className: 'label'
 	},
 
 	setText: function(text) {
