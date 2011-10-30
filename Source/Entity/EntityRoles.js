@@ -23,16 +23,14 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 (function() {
-	
-var roles = {};
 
 var filter = function(element) {
-	
+
 	var parent = element.getParent('[data-role]');
 	if (parent) {
 		return parent === this.element;
 	}
-	
+
 	return true;
 };
 
@@ -46,12 +44,16 @@ Moobile.EntityRoles = new Class({
 		
 		this.rolesWillLoad();
 
-		var load = function(element) {
+		var attach = function(element) {
 			var role = element.get('data-role');
-			if (role) this.setRole(role, element);
-		}.bind(this);
+			if (role) {
+				this.setRole(role, element);
+			}
+		};
 		
-		this.element.getElements('[data-role]').filter(filter.bind(this)).each(load);
+		var f = filter.bind(this);
+		var a = attach.bind(this);
+		this.element.getElements('[data-role]').filter(f).each(a);
 		
 		this.rolesDidLoad();
 		
@@ -62,11 +64,11 @@ Moobile.EntityRoles = new Class({
 
 		if (element.retrieve('entity.roles.role'))
 			return this;
-		
+
 		var res = true;
-		var def = roles[role] || this.$roles[role];
+		var def = this.$roles[role];
 		if (def) {
-					
+
 			var options = element.get('data-options');
 			if (options) {
 				

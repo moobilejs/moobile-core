@@ -363,19 +363,11 @@ Moobile.Entity = new Class({
 });
 
 Moobile.Entity.defineRole = function(name, target, fn) {
-	if (target) {
-		target.prototype.$roles[name] = fn;
-	} else  {
-		roles[name] = fn;
-	}
+	(target || Moobile.Entity).prototype.$roles[name] = fn;
 };
 
 Moobile.Entity.defineStyle = function(name, target, def) {
-	if (target) {
-		target.prototype.$styles[name] = def
-	} else {
-		styles[name] = def;
-	}
+	(target || Moobile.Entity).prototype.$styles[name] = def;
 };
 
 })();
