@@ -123,12 +123,12 @@ Moobile.List = new Class({
 });
 
 /**
- * @role list-item
+ * @role list
  */
-Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, name) {
-	
-	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, options, name);
-	if (instance instanceof Moobile.ListItem) {
+Moobile.Entity.defineRole('list', null, function(element, options, name) {
+
+	var instance = Class.instantiate(element.get('data-list') || Moobile.List, element, options, name);
+	if (instance instanceof Moobile.List) {
 		this.addChild(instance);
 	}
 	
@@ -136,12 +136,12 @@ Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, 
 });
 
 /**
- * @role list
+ * @role list-item
  */
-Moobile.Entity.defineRole('list', null, function(element, options, name) {
-
-	var instance = Class.instantiate(element.get('data-list') || Moobile.List, element, options, name);
-	if (instance instanceof Moobile.List) {
+Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, options, name);
+	if (instance instanceof Moobile.ListItem) {
 		this.addChild(instance);
 	}
 	
