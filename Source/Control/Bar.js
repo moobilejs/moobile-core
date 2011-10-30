@@ -27,8 +27,57 @@ Moobile.Bar = new Class({
 
 	options: {
 		className: 'bar'
+	},
+	
+	item: null,
+	
+	addButton: function(item, where, context) {
+		return this.item.addChild(item, where, context);
+	},
+
+	getButton: function(name) {
+		return this.item.getChild(name);
+	},
+
+	removeButton: function(item) {
+		return this.item.removeChild(item);
+	},
+
+	clearButtons: function() {
+		return this.item.removeChildren();
+	},
+
+	getItem: function() {
+		return this.item;
+	},
+	
+	rolesWillLoad: function() {
+		
+		this.parent();
+		
+		var item = this.getRoleElement('item');
+		if (item == null) {
+			item = new Element('div[data-role=item]');
+			item.ingest(this.element);
+			item.inject(this.element);
+		}
 	}
 
+});
+
+/**
+ * @role item
+ */
+Moobile.Entity.defineRole('item', Moobile.Bar, function(element, options, name) {
+
+	var instance = Class.instantiate(element.get('data-item') || Moobile.BarItem, element, options, name);
+	if (instance instanceof Moobile.BarItem) {
+		this.addChild(instance);
+	}	
+	
+	this.item = instance;
+	
+	return instance;
 });
 
 /**
