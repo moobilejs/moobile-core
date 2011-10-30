@@ -21,11 +21,6 @@ Moobile.Control = new Class({
 
 	Extends: Moobile.Entity,
 
-	Implements: [
-		Moobile.Entity.Roles,
-		Moobile.Entity.Styles
-	],
-
 	disabled: false,
 
 	selected: false,
@@ -39,13 +34,6 @@ Moobile.Control = new Class({
 	options: {
 		className: null,
 		styleName: null	
-	},
-
-	setup: function() {
-		this.parent();
-		this.loadRoles();
-		this.loadStyle();
-		return this;
 	},
 
 	setDisabled: function(disabled) {
