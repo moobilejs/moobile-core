@@ -56,7 +56,7 @@ Moobile.EntityStyles = new Class({
 			}
 		}
 
-		var style = styles[name] || this.$styles[name];
+		var style = this.$styles[name];
 		if (style) {
 			if (style.attach) {
 				style.attach.call(this, this.element);
