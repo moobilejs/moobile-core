@@ -85,8 +85,8 @@ Moobile.Control = new Class({
 		this[state] = value;
 
 		var klass = this.options.className + '-' + state;
-		if (value)	this.addClass(klass);
-		else		this.removeClass(klass);
+		if (value)	this.element.addClass(klass);
+		else		this.element.removeClass(klass);
 
 		this.fireEvent('statechange', [state, value]);
 
