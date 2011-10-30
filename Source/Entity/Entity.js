@@ -123,16 +123,20 @@ Moobile.Entity = new Class({
 
 	addChild: function(child, where, relative) {
 
+		var element = document.id(child);
+		if (element == null)
+			return false;
+		
 		if (this.children.contains(child))
 			return false;
 
 		this.willAddChild(child);
 
-		var element = child.getElement();
-
 		if (!this.element.contains(element)) {
 
+console.log(relative);
 			var context = document.id(relative);
+console.log(context);
 			if (context == null) {
 				context = this.element;
 			} else if (!this.element.contains(context)) {
