@@ -60,9 +60,13 @@ Moobile.Entity.defineStyle('black', Moobile.Bar, {
  */
 Moobile.Entity.defineStyle('black-translucent', Moobile.Bar, {
 	attach: function(element) {
-		element.addClass('style-black').addClass('style-black-translucent');
+		element
+			.addClass('style-black')
+			.addClass('style-black-translucent');
 	},			
 	detach: function(element) {
-		element.removeClass('style-black').removeClass('style-black-translucent');
+		element
+			.removeClass('style-black')
+			.removeClass('style-black-translucent');
 	}
 });
