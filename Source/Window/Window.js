@@ -159,8 +159,8 @@ Moobile.Window = new Class({
 	},
 
 	didAddChild: function(view) {
+		view.setOwner(null);
 		view.setWindow(this);
-		view.setParentView(null);
 		this.parent(view);
 		return this;
 	},
