@@ -26,5 +26,5 @@ Moobile.BarItem = new Class({
 	options: {
 		className: 'bar-item'
 	}
-
+	
 });

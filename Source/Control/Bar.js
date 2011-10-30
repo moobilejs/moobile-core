@@ -47,6 +47,13 @@ Moobile.Bar = new Class({
 		return this.item.removeChildren();
 	},
 
+	setItem: function(item) {
+		this.replaceChild(this.item, item);
+		this.item.destroy();
+		this.item = item;
+		return this;		
+	},
+
 	getItem: function() {
 		return this.item;
 	},

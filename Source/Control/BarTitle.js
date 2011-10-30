@@ -30,9 +30,7 @@ Moobile.BarTitle = new Class({
 	},
 
 	setText: function(text) {
-
-		this.destroyChildViews();
-
+	
 		if (this.text) {
 			this.text = '';
 		}
@@ -41,7 +39,7 @@ Moobile.BarTitle = new Class({
 			this.text = text;
 		}
 
-		this.content.set('html', this.text);
+		this.element.set('html', this.text);
 
 		return this;
 	},

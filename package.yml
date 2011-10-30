@@ -41,6 +41,7 @@ sources:
   - "Source/Control/BarTitle.js"
   - "Source/Control/BarButton.js"
   - "Source/Control/NavigationBar.js"
+  - "Source/Control/NavigationBarItem.js"
   - "Source/Control/Slider.js"
   - "Source/Control/List.js"
   - "Source/Control/ListItem.js"
