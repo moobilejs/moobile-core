@@ -52,12 +52,13 @@ Moobile.ScrollView = new Class({
 
 	setup: function() {
 
+		this.parent();
+
 		this.wrapper = new Element('div');
 		this.wrapper.wraps(this.content);
 
 		if (this.options.className) {
 			this.element.addClass('scroll-' + this.options.className);
-			this.content.addClass('scroll-' + this.options.className + '-content');
 			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
 		}
 		

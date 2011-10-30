@@ -53,21 +53,16 @@ Moobile.View = new Class({
 		switch (where) {
 			
 			case 'header': 
-				this.parent(child, 'top'); 
-				return this;
+				return this.parent(child, 'top'); 
 			
 			case 'footer': 
-				this.parent(child, 'bottom'); 
-				return this;
+				return this.parent(child, 'bottom'); 
 				
 			case 'content':
-				this.parent(child, 'bottom');
-				return this;
+				return this.parent(child, 'bottom');
 		}
 
-		this.content.addChild(child, where, relative);
-		
-		return this;
+		return this.content.addChild(child, where, relative);
 	},
 
 	getChild: function(name) {

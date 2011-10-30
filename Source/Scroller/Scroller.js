@@ -73,7 +73,7 @@ Moobile.Scroller = new Class({
 		this.setOptions(options);
 
 		wrapper = document.id(wrapper);
-		content = content || null;
+		content = document.id(content);
 
 		if (content == null) {
 			content = new Element('div')
