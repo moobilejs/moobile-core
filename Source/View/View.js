@@ -23,34 +23,13 @@ provides:
 Moobile.View = new Class({
 
 	Extends: Moobile.Entity,
-
-	Implements: [
-		Moobile.Entity.Roles
-	],
-
+	
 	content: null,
 
 	options: {
 		className: 'view'
 	},
 
-	setup: function() {
-		
-		this.parent();
-
-		var content = this.getRoleElement('content');
-		if (content == null) {
-			content = new Element('div');
-			content.ingest(this.element);
-			content.inject(this.element);
-			this.setRole('content', content);			
-		}
-		
-		this.loadRoles();
-
-		return this;
-	},
-	
 	teardown: function() {
 		this.parent();
 		this.content = null;
@@ -74,15 +53,15 @@ Moobile.View = new Class({
 		switch (where) {
 			
 			case 'header': 
-				this.addChild(child, 'top'); 
+				this.parent(child, 'top'); 
 				return this;
 			
 			case 'footer': 
-				this.addChild(child, 'bottom'); 
+				this.parent(child, 'bottom'); 
 				return this;
 				
 			case 'content':
-				this.addChild(child);
+				this.parent(child, 'bottom');
 				return this;
 		}
 
@@ -111,6 +90,18 @@ Moobile.View = new Class({
 		return this.content;
 	},
 
+	rolesWillLoad: function() {
+		
+		this.parent();
+	
+		var content = this.getRoleElement('content');
+		if (content == null) {
+			content = new Element('div[data-role=content]');
+			content.ingest(this.element);
+			content.inject(this.element);	
+		}
+	},
+	
 	onSwipe: function(e) {
 		e.target = this;
 		this.fireEvent('swipe', e);
@@ -126,15 +117,13 @@ Moobile.View.elementFromPath = function(path, callback) {
  * @role content
  */
 Moobile.Entity.defineRole('content', Moobile.View, function(element, options, name) {
-	
-	this.content = new Moobile.Entity(element, options);
-	
-	this.addChild(this.content, 'content');
-	
-	var className = this.options.className;
-	if (className) {
-		this.content.getElement().addClass(className + '-content');
+
+	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, options, name);
+	if (instance instanceof Moobile.ViewContent) {
+		this.addChild(instance, 'content');
 	}
+
+	this.content = instance;
 	
-	return this.content;
+	return instance;
 });
