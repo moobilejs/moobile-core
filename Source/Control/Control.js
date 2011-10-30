@@ -41,18 +41,6 @@ Moobile.Control = new Class({
 		styleName: null	
 	},
 
-	initialize: function(element, options, name) {
-
-		this.parent(element, options, name);
-
-		var styleName = this.options.styleName;
-		if (styleName) {
-			this.setStyle(styleName);
-		}
-		
-		return this;
-	},
-
 	setup: function() {
 		this.parent();
 		this.loadRoles();
