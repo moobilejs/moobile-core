@@ -134,9 +134,7 @@ Moobile.Entity = new Class({
 
 		if (!this.element.contains(element)) {
 
-console.log(relative);
 			var context = document.id(relative);
-console.log(context);
 			if (context == null) {
 				context = this.element;
 			} else if (!this.element.contains(context)) {
@@ -180,7 +178,13 @@ console.log(context);
 	},
 
 	replaceChild: function(replace, child) {
-		return this.addChild(child, 'before', replace).removeChild(replace);
+		
+		var success = this.addChild(child, 'before', replace);
+		if (success) {
+			return this.removeChild(replace);
+		}
+
+		return false;
 	},
 
 	removeChild: function(child) {
