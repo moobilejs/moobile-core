@@ -82,13 +82,37 @@ Moobile.ListItem = new Class({
 		return this.image;
 	},
 	
+	setInfos: function(infos) {
+
+		if (this.infos === infos)
+			return this;
+
+		this.infos.setText(null);
+
+		if (infos) {
+			if (typeof infos == 'string') {
+				this.infos.setText(infos);
+			} else {
+				this.replaceChildView(this.infos, infos);
+				this.infos.destroy();
+				this.infos = infos;				
+			}
+		}
+
+		return this;
+	},
+
+	getInfos: function() {
+		return this.infos;
+	},
+	
 	rolesWillLoad: function() {
 		
 		this.parent();
 
 		var image = this.getRoleElement('image');
 		var label = this.getRoleElement('label');
-		var accessory = this.getRoleElement('accessory');
+		var infos = this.getRoleElement('infos');
 		
 		if (label == null) {
 			label = new Element('div[data-role=label]');
@@ -101,9 +125,9 @@ Moobile.ListItem = new Class({
 			image.inject(this.element, 'top');
 		}
 		
-		if (accessory == null) {
-			accessory = new Element('div[data-role=accessory]');
-			accessory.inject(this.element);
+		if (infos == null) {
+			infos = new Element('div[data-role=infos]');
+			infos.inject(this.element);
 		}
 	}
 
@@ -119,6 +143,56 @@ Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, 
 		this.addChild(instance);
 	}
 	
+	return instance;
+});
+
+/**
+ * @actor label
+ */
+Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, options, name);
+	if (instance instanceof Moobile.Label) {
+		this.addChild(instance);
+	}				
+	
+	this.label = instance;
+			
+	return instance;
+});
+
+/**
+ * @actor image
+ */
+Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-image') || Moobile.Image, element, options, name);
+	if (instance instanceof Moobile.Image) {
+		this.addChild(instance);
+	}
+
+	this.image = instance;
+	
+	if (!this.image.getSource()) {
+		this.image.hide();
+	}
+	
+	return instance;	
+});
+
+/**
+ * @actor detail
+ */
+Moobile.Entity.defineRole('infos', Moobile.ListItem, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-infos') || Moobile.Label, element, options, name);
+	if (instance instanceof Moobile.Label) {
+		this.addChild(instance);
+	}
+
+	this.detail = instance;
+	this.detail.getElement().addClass('infos');	
+
 	return instance;
 });
 

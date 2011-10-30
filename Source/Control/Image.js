@@ -29,7 +29,7 @@ Moobile.Image = new Class({
 		className: 'image',
 		tagName: 'img'
 	},
-
+	
 	setSource: function(source) {
 
 		this.element.set('src', null);
@@ -43,7 +43,7 @@ Moobile.Image = new Class({
 		return this;
 	},
 
-	setSource: function() {
+	getSource: function() {
 		return this.element.get('src');
 	}
 
