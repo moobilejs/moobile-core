@@ -26,12 +26,12 @@ if (!window.Moobile) window.Moobile = {};
 
 var filter = function(element) {
 
-	var parent = element.getParent('[data-role]');
+	var parent = element.getParent();
 	if (parent) {
-		return parent === this.element;
+		return this.element === parent || filter.call(this, parent);
 	}
-
-	return true;
+	
+	return false;
 };
 
 Moobile.EntityRoles = new Class({

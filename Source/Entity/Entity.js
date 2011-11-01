@@ -155,20 +155,24 @@ Moobile.Entity = new Class({
 
 		this.didAddChild(child);
 
-		var ready = function() {
-			child.setReady(true);
-			child.didBecomeReady();
-		};
-
 		if (this.ready == false) {
-			this.addEvent('ready:once', ready);
-		} else {
-			ready();
+			this.addEvent('ready:once', function() {
+				child.setReady(true);
+				child.didBecomeReady();				
+			});
+			return true;
 		}
+		
+		child.setReady(true);
+		child.didBecomeReady();		
 
 		return true;
 	},
 
+	hasChild: function(child) {
+		return this.children.contains(child);
+	},
+	
 	getChild: function(name) {
 		return this.children.find(function(children) {
 			return children.getName() == name;
