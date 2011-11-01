@@ -64,10 +64,12 @@ Moobile.Bar = new Class({
 		
 		var item = this.getRoleElement('item');
 		if (item == null) {
-			item = new Element('div[data-role=item]');
+			item = new Element('div');
 			item.ingest(this.element);
 			item.inject(this.element);
 		}
+		
+		this.setRole('item', item);
 	}
 
 });

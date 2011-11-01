@@ -246,7 +246,7 @@ Moobile.ViewController = new Class({
 		
 		this.willPresentModalViewController();
 		
-		this.addChildController(this.modalViewController, 'bottom', this.window.getContent());
+		this.addChildController(this.modalViewController, 'bottom', this.window);
 
 		var viewToShow = this.modalViewController.getView();
 		var viewToHide = this.window.getRootView();

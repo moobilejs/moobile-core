@@ -70,15 +70,18 @@ Moobile.NavigationBarItem = new Class({
 	},
 		
 	rolesWillLoad: function() {
-	
+
 		this.parent();
-		
+
 		var title = this.getRoleElement('title');
+
 		if (title == null) {
-			title = new Element('div[data-role=title]');
+			title = new Element('div');
 			title.ingest(this.element);
 			title.inject(this.element);
 		}
+		
+		this.setRole('title', title);
 	}
 	
 });

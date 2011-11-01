@@ -49,7 +49,7 @@ Moobile.NavigationBar = new Class({
 
 	getTitle: function() {
 		return this.item.title;
-	},
+	}
 
 });
 

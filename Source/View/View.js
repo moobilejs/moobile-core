@@ -49,6 +49,10 @@ Moobile.View = new Class({
 	},
 
 	addChild: function(child, where, relative) {
+
+		if (child instanceof Moobile.ViewContent) {
+			return this.parent(child);
+		}
 		
 		switch (where) {
 			
@@ -57,9 +61,6 @@ Moobile.View = new Class({
 			
 			case 'footer': 
 				return this.parent(child, 'bottom'); 
-				
-			case 'content':
-				return this.parent(child, 'bottom');
 		}
 
 		return this.content.addChild(child, where, relative);
@@ -91,10 +92,12 @@ Moobile.View = new Class({
 	
 		var content = this.getRoleElement('content');
 		if (content == null) {
-			content = new Element('div[data-role=content]');
+			content = new Element('div');
 			content.ingest(this.element);
-			content.inject(this.element);	
+			content.inject(this.element);
 		}
+		
+		this.setRole('content', content);
 	},
 	
 	onSwipe: function(e) {
@@ -115,7 +118,7 @@ Moobile.Entity.defineRole('content', Moobile.View, function(element, options, na
 
 	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, options, name);
 	if (instance instanceof Moobile.ViewContent) {
-		this.addChild(instance, 'content');
+		this.addChild(instance);
 	}
 
 	this.content = instance;

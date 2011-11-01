@@ -65,10 +65,12 @@ Moobile.Button = new Class({
 		
 		var label = this.getRoleElement('label');
 		if (label == null) {
-			label = new Element('div[data-role=label]');
+			label = new Element('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 		}
+		
+		this.setRole('label', label);
 	},
 
 	onMouseDown: function(e) {
