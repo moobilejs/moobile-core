@@ -92,20 +92,38 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	didAddChild: function(entity) {
+
 		this.parent(entity);
-		entity.addEvent('click', this.bound('onButtonClick'));
-		return this;
+		
+		if (entity instanceof Moobile.Button) {
+			entity.addEvent('click', this.bound('onButtonClick'));
+			entity.addEvent('mouseup', this.bound('onButtonMouseUp'));
+			entity.addEvent('mousedown', this.bound('onButtonMouseDown'));
+		}
 	},
 
 	didRemoveChild: function(entity) {
+		
 		this.parent(entity);
-		entity.removeEvent('click', this.bound('onButtonClick'));
-		return this;
+		
+		if (entity instanceof Moobile.Button) {
+			entity.removeEvent('click', this.bound('onButtonClick'));
+			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
+			entity.removeEvent('mousedown', this.bound('onButtonMouseDown'));
+		}	
 	},
 
 	onButtonClick: function(e) {
 		this.setSelectedButton(e.target);
-		return this;
+		this.fireEvent('buttonClick', e.target);
+	},
+	
+	onButtonMouseUp: function(e) {
+		this.fireEvent('buttonMouseUp', e.target);
+	},
+	
+	onButtonMouseDown: function(e) {
+		this.fireEvent('buttonMouseDown', e.target);
 	}
 
 });
