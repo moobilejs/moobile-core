@@ -66,7 +66,16 @@ Moobile.Entity = new Class({
 		this.window = Moobile.Window.getInstance();
 		
 		this.setOptions(options);
-		this.setElement(element);
+		
+		var entityElement = document.id(element);
+		if (entityElement == null) {
+			entityElement = new Element(this.options.tagName);
+			if (typeof element == 'string' && element.trim().match(/^<\s*([^ >]+)[^>]*>.*?<\/\s*\1\s*>$/mig)) {
+				entityElement = entityElement.set('html', element).getElement(':first-child');
+			} 
+		}
+		
+		this.element = entityElement;
 
 		var className = this.options.className;
 		if (className) {
@@ -182,6 +191,16 @@ Moobile.Entity = new Class({
 	getChildAt: function(index) {
 		return this.children[index] || null;
 	},
+	
+	getChildren: function() {
+		return this.children;
+	},
+	
+	getChildrenOfType: function(type) {
+		return this.children.filter(function(children) {
+			return children instanceof type;
+		});
+	},
 
 	replaceChild: function(replace, child) {
 		
@@ -223,6 +242,15 @@ Moobile.Entity = new Class({
 		if (parent) return parent.removeChild(this);
 		return false;
 	},
+	
+	setOwner: function(owner) {
+		this.owner = owner;
+		return this;
+	},
+
+	getOwner: function() {
+		return this.owner;
+	},	
 
 	show: function() {
 		this.willShow();
@@ -242,24 +270,6 @@ Moobile.Entity = new Class({
 		return this.name;
 	},
 
-	setElement: function(element) {
-
-		if (this.element)
-			return;
-
-		var root = document.id(element);
-		if (root == null) {
-			root = new Element(this.options.tagName);
-			if (typeof element == 'string' && element.trim().match(/^<\s*([^ >]+)[^>]*>.*?<\/\s*\1\s*>$/mig)) {
-				root = root.set('html', element).getElement(':first-child');
-			} 
-		}
-
-		this.element = root;
-
-		return this;
-	},
-
 	getElement: function(selector) {
 		return selector 
 			? this.element.getElement(selector) 
@@ -268,19 +278,6 @@ Moobile.Entity = new Class({
 
 	getElements: function(selector) {
 		return this.element.getElements(selector);
-	},
-
-	setOwner: function(owner) {
-		this.owner = owner;
-		return this;
-	},
-
-	getOwner: function() {
-		return this.owner;
-	},
-
-	getChildren: function() {
-		return this.children;
 	},
 
 	getSize: function() {
