@@ -19,57 +19,50 @@ provides:
 ...
 */
 
-Moobile.Mask = new Class({
+Moobile.Overlay = new Class({
 
-	Extends: Moobile.View,
+	Extends: Moobile.Entity,
 
 	options: {
-		className: 'mask',
-		fillStyle: 'solid'
-	},
-
-	build: function() {
-		
-		this.parent();
-		
-		if (this.options.className) {
-			this.element.addClass(this.options.className + '-' + this.options.fillStyle);			
-		}
-		
-		return this;
+		className: 'overlay'
 	},
 
 	attachEvents: function() {
-		this.element.addEvent('transitionend', this.bound('onTransitionEnd'));
 		this.parent();
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 		return this;
 	},
 
 	detachEvents: function() {
-		this.element.removeEvent('transitionend', this.bound('onTransitionEnd'));
 		this.parent();
+		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
 		return this;
 	},
 
-	show: function() {
-		this.element.addClass.delay(5, this.element, 'visible');
+	showAnimated: function() {
+		this.willShow();
+		this.element.show();
+		this.element.addClass('present');
 		return this;
 	},
 
-	hide: function() {
-		this.element.removeClass.delay(5, this.element, 'visible');
+	hideAnimated: function() {
+		this.willHide();
+		this.element.addClass('dismiss');
 		return this;
 	},
 
-	onTransitionEnd: function(e) {
-		var opacity = this.element.getStyle('opacity');
-		if (opacity == 0) {
-			this.didHide();
-			this.fireEvent('hide');
-		} else {
-			this.didShow();
-			this.fireEvent('show');
+	onAnimationEnd: function(e) {
+		
+		if (this.element.hasClass('present')) this.didShow();
+		if (this.element.hasClass('dismiss')) {
+			this.element.hide();
+			this.didHide();		
 		}
+		
+		this.element.removeClass('present');
+		this.element.removeClass('dismiss');
+		
 		return this;
 	}
 

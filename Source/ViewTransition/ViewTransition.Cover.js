@@ -36,13 +36,13 @@ Moobile.ViewTransition.Cover = new Class({
 		switch (this.options.presentation) {
 			
 			case 'box':					
-				this.mask = new Moobile.Mask();
+				this.mask = new Moobile.Overlay();
 				viewToShow = new Element('div.transition-cover-view-wrapper').wraps(viewToShow);
 				document.id(parentView).addClass('transition-cover-box');				
 				break;
 			
 			case 'center':
-				this.mask = new Moobile.Mask();
+				this.mask = new Moobile.Overlay();
 				document.id(parentView).addClass('transition-cover-center');		
 				break;
 			
