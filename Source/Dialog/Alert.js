@@ -22,121 +22,173 @@ provides:
 
 Moobile.Alert = new Class({
 
-	Extends: Moobile.View,
+	Extends: Moobile.Overlay,
 
+	title: null,
+	
+	message: null,
+
+	dialog: null,	
+	
+	header: null,
+	
+	footer: null,
+	
+	content: null,
+	
+	buttons: [],
+	
 	options: {
-		className: 'alert',
-		buttonLabel: 'OK',
-		buttonLayout: 'vertical'
+		className: 'alert'
 	},
 
-	mask: null,
-
-	header: null,
-
-	footer: null,
-
-	buttons: [],
-
-	build: function() {
+	setup: function() {
 
 		this.parent();
 
-		this.header = new Element('div');
-		this.header.inject(this.element, 'top');
+		this.header  = new Element('div.dialog-header');
+		this.footer  = new Element('div.dialog-footer');
+		this.content = new Element('div.dialog-content');
+		
+		this.dialog = new Element('div.dialog');
+		this.dialog.grab(this.header);
+		this.dialog.grab(this.content);
+		this.dialog.grab(this.footer);
 
-		this.footer = new Element('div');
-		this.footer.inject(this.element, 'bottom');
-
-		if (this.options.className) {
-			this.header.addClass(this.options.className + '-header');
-			this.footer.addClass(this.options.className + '-footer');
-			this.element.addClass(this.options.className + '-' + this.options.buttonLayout);
-		}
+		this.element.grab(this.dialog);
 
 		return this;
 	},
-
-	setTitle: function(title) {
-		this.header.empty();
-		this.header.set('html', title);
+	
+	teardown: function() {
+		this.parent();
+		this.dialog = null;
+		this.header = null;
+		this.footer = null;
+		this.content = null;
+		this.message = null;
+		this.title = null;
+		this.buttons = null;	
 		return this;
+	},
+	
+	setTitle: function(title) {
+
+		if (this.title instanceof Moobile.Entity) {
+			this.title.removeFromParent();
+			this.title.destroy();
+			this.title = null;
+		}
+				
+		this.header.empty();
+				
+		if (title instanceof Moobile.Entity) {
+			this.addChild(title, 'bottom', this.header);
+		} else {
+			this.header.set('html', title);
+		}
+
+		this.title = title;
+
+		return this;
+	},
+	
+	getTitle: function() {
+		return this.title;
 	},
 
 	setMessage: function(message) {
+		
+		if (this.message instanceof Moobile.Entity) {
+			this.message.removeFromParent();
+			this.message.destroy();
+			this.message = null;
+		}
+				
 		this.content.empty();
-		this.content.set('html', message);
+				
+		if (message instanceof Moobile.Entity) {
+			this.addChild(message, 'bottom', this.content);
+		} else {
+			this.content.set('html', message);
+		}
+
+		this.message = message;
+
 		return this;
+	},
+	
+	getMessage: function() {
+		return this.message;
 	},
 
 	addButton: function(button) {
-		button.addEvent('click', this.bound('onButtonClick'));
 		this.addChild(button, 'bottom', this.footer);
-		this.buttons.push(button);
 		return this;
 	},
-
-	present: function() {
-
+	
+	didAddChild: function(entity) {
+		
+		this.parent(entity);
+		
+		if (entity instanceof Moobile.Button) {
+			entity.addEvent('click', this.bound('onButtonClick'));			
+			entity.addEvent('mouseup', this.bound('onButtonMouseUp'));
+			entity.addEvent('mousedown', this.bound('onButtonMouseUp'));
+			this.buttons.include(entity);
+		}	
+	},
+	
+	didRemoveChild: function(entity) {
+		
+		this.parent(entity);
+		
+		if (entity instanceof Moobile.Button) {
+			entity.removeEvent('click', this.bound('onButtonClick'));
+			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
+			entity.removeEvent('mousedown', this.bound('onButtonMouseUp'));			
+			this.button.erase(entity);
+		}		
+	},
+	
+	willShow: function() {
+		
+		this.parent();
+		
 		if (this.buttons.length == 0) {
-			var dismissButton = new Moobile.Button();
-			dismissButton.setLabel(this.options.buttonLabel);
-			dismissButton.setHighlighted(true);
-			this.addButton(dismissButton);
+			
+			var button = new Moobile.Button();
+			button.setLabel('OK');
+			button.setHighlighted(true);
+			
+			this.addButton(button);			
 		}
-
-		this.mask = new Moobile.Mask(null, {
-			fillStyle: 'gradient'
-		});
-
-		Moobile.Window.getInstance().addChild(this.mask);
-
-		this.mask.addChild(this);
-		this.mask.show();
-
-		this.element.addEvent('animationend:once', this.bound('onPresentAnimationComplete'));
-		this.element.addClass('present');
-
-		return this;
-	},
-
-	dismiss: function() {
-
-		this.mask.hide();
-		this.mask.addEvent('hide', this.bound('onMaskHide'));
-
-		this.element.addEvent('animationend:once', this.bound('onDismissAnimationComplete'));
-		this.element.addClass('dismiss');
-
-		return this;
-	},
-
-	onPresentAnimationComplete: function() {
-		this.fireEvent('present');
-		return this;
-	},
-
-	onDismissAnimationComplete: function() {
-		this.removeFromParent();
-		this.fireEvent('dismiss');
-		return this;
 	},
 
 	onButtonClick: function(e) {
 
-		this.fireEvent('buttonclick', e.target);
-
+		this.fireEvent('buttonClick', e.target);
+		
 		if (this.buttons.length == 1) {
-			this.dismiss();
+			this.hideAnimated();
 		}
-
-		return this;
 	},
-
-	onMaskHide: function() {
-		this.removeFromParent();
-		this.mask.destroy();
-		this.mask = null;
+	
+	onButtonMouseUp: function() {
+		this.fireEvent('buttonMouseUp');
+	},
+	
+	onButtonMouseDown: function() {
+		this.fireEvent('buttonMouseDown');
 	}
 
+});
+
+Moobile.Entity.defineStyle('horizontal', Moobile.Alert, {
+	attach: function() {
+		this.element.addClass('style-horizontal');
+	},
+	detach: function() {
+		this.element.addClass('style-horizontal');
+	}
 });
