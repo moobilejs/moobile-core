@@ -157,12 +157,23 @@ p small {
 .window {
 	-webkit-backface-visibility: hidden;						/* Important */
 	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-box-orient: vertical;								/* Important */
 	background: black;
-	display: block;												/* Important */
+	display: -webkit-box;										/* Important */
 	height: 100%;												/* Important */
 	overflow: hidden;											/* Important */
 	position: relative;											/* Important */
-	width: 100%;												/* Important */	
+	width: 100%;												/* Important */
+}
+
+.window > .window-content {
+	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-box-flex: 1;										/* Important */
+	display: block;												/* Important */
+	height: 100%;												/* Important */
+	position: relative;											/* Important */
+	width: 100%;												/* Important */
 }
 
 .window-mask {
@@ -1578,7 +1589,7 @@ p small {
 	z-index: 75;
 }
 
-.transition-cover-mask {
+.transition-cover-overlay {
 	z-index: 65;
 }
 
