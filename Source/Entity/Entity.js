@@ -139,17 +139,17 @@ Moobile.Entity = new Class({
 		if (element == null)
 			return false;
 		
-		if (this.children.contains(child))
+		if (this.hasChild(child))
 			return false;
 
 		this.willAddChild(child);
 
-		if (!this.element.contains(element)) {
+		if (!this.hasElement(element)) {
 
 			var context = document.id(relative);
 			if (context == null) {
 				context = this.element;
-			} else if (!this.element.contains(context)) {
+			} else if (!this.hasElement(context)) {
 				throw new Error('You are trying to add a child relative to an element that does not belong to this entity');
 			}
 
@@ -174,7 +174,7 @@ Moobile.Entity = new Class({
 		
 		child.setReady(true);
 		child.didBecomeReady();		
-
+		
 		return true;
 	},
 
@@ -187,19 +187,9 @@ Moobile.Entity = new Class({
 			return children.getName() == name;
 		});
 	},
-
-	getChildAt: function(index) {
-		return this.children[index] || null;
-	},
 	
 	getChildren: function() {
 		return this.children;
-	},
-	
-	getChildrenOfType: function(type) {
-		return this.children.filter(function(children) {
-			return children instanceof type;
-		});
 	},
 
 	replaceChild: function(replace, child) {
@@ -218,7 +208,7 @@ Moobile.Entity = new Class({
 		if (element == null)
 			return false;
 
-		if (!this.children.contains(child))
+		if (!this.hasElement(child))
 			return false;
 
 		this.willRemoveChild(child);
@@ -252,6 +242,10 @@ Moobile.Entity = new Class({
 		return this.owner;
 	},	
 
+	hasOwner: function() {
+		return !!this.owner;
+	},
+
 	show: function() {
 		this.willShow();
 		this.element.show();
@@ -278,6 +272,10 @@ Moobile.Entity = new Class({
 
 	getElements: function(selector) {
 		return this.element.getElements(selector);
+	},
+
+	hasElement: function(element) {
+		return this.element === document.id(element) || this.element.contains(document.id(element));
 	},
 
 	getSize: function() {

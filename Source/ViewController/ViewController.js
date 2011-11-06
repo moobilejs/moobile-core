@@ -39,6 +39,8 @@ Moobile.ViewController = new Class({
 
 	window: null,
 
+	windowController: null,
+
 	name: null,
 
 	title: null,
@@ -149,6 +151,18 @@ Moobile.ViewController = new Class({
 		this.parentViewController = parentViewController;
 		return this;
 	},
+	
+	getParentViewController: function() {
+		return this.parentViewController;
+	},
+	
+	setWindowController: function(windowController) {
+		this.windowController = windowController;
+	},
+	
+	getWindowController: function() {
+		return this.windowController;
+	},
 
 	loadView: function(viewElement) {
 		this.view = Class.instantiate(
@@ -228,7 +242,7 @@ Moobile.ViewController = new Class({
 	},
 
 	presentModalViewController: function(viewController, viewTransition) {
-
+		
 		if (this.modalViewController)
 			return this;
 
@@ -245,11 +259,12 @@ Moobile.ViewController = new Class({
 		this.modalViewController.modal = true;
 		
 		this.willPresentModalViewController();
-		
-		this.addChildController(this.modalViewController, 'bottom', this.window);
 
 		var viewToShow = this.modalViewController.getView();
-		var viewToHide = this.window.getRootView();
+		var viewToHide = this.view;
+		var parentView = this.view.getOwnerView();
+		
+		this.addChildController(this.modalViewController, 'after', viewToHide);
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
 		viewTransition.addEvent('start:once', this.bound('onPresentTransitionStart'));
@@ -257,7 +272,7 @@ Moobile.ViewController = new Class({
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
-			this.window
+			parentView
 		);
 
 		this.modalViewController.setViewTransition(viewTransition);
@@ -286,7 +301,7 @@ Moobile.ViewController = new Class({
 
 		this.willDismissModalViewController()
 
-		var viewToShow = this.window.getRootView();
+		var viewToShow = this.view;
 		var viewToHide = this.modalViewController.getView();
 
 		var viewTransition = this.modalViewController.viewTransition;
@@ -307,7 +322,7 @@ Moobile.ViewController = new Class({
 
 	onDismissTransitionCompleted: function() {
 		this.modalViewController.viewDidLeave();
-		this.removeChildViewController(this.modalViewController);
+		this.modalViewController.removeFromParentViewController();
 		this.modalViewController.destroy();
 		this.modalViewController = null;
 		this.didDismissModalViewController();
@@ -372,6 +387,7 @@ Moobile.ViewController = new Class({
 		this.childViewControllers.erase(viewController);
 		viewController.setViewControllerStack(null);
 		viewController.setViewControllerPanel(null);
+		viewController.setWindowController(null);
 		viewController.setParentViewController(null);
 		this.didRemoveChildViewController(viewController);
 

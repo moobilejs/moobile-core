@@ -63,11 +63,10 @@ Moobile.Entity.defineRole('content', Moobile.ViewPanel, function(element, option
 
 	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewPanelContent, element, options, name);
 	if (instance instanceof Moobile.ViewPanelContent) {
-		this.addChild(instance, 'content');
+		this.addChild(instance);
+		this.content = instance;
 	}
 
-	this.content = instance;
-	
 	return instance;
 });
 

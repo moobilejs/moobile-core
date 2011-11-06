@@ -27,7 +27,7 @@ Moobile.ViewTransition.Cover = new Class({
 		presentation: 'fullscreen' // center, box
 	},
 
-	mask: null,
+	overlay: null,
 
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
@@ -36,30 +36,31 @@ Moobile.ViewTransition.Cover = new Class({
 		switch (this.options.presentation) {
 			
 			case 'box':					
-				this.mask = new Moobile.Overlay();
+				this.overlay = new Moobile.Overlay();
 				viewToShow = new Element('div.transition-cover-view-wrapper').wraps(viewToShow);
 				document.id(parentView).addClass('transition-cover-box');				
 				break;
 			
 			case 'center':
-				this.mask = new Moobile.Overlay();
+				this.overlay = new Moobile.Overlay();
 				document.id(parentView).addClass('transition-cover-center');		
 				break;
 			
 			case 'fullscreen':
-				this.mask = null;
+				this.overlay = null;
 				break;
 		}
 		
-		if (this.mask) {
+		if (this.overlay) {
 
-			this.mask.addClass('transition-cover-mask');
-			this.mask.addEvent('show', this.bound('onMaskShow'));
-			this.mask.addEvent('hide', this.bound('onMaskHide'));
+			document.id(this.overlay).addClass('transition-cover-overlay');
 			
-			document.id(parentView).addChild(this.mask)
+			this.overlay.addEvent('show', this.bound('onMaskShow'));
+			this.overlay.addEvent('hide', this.bound('onMaskHide'));
 			
-			this.mask.show();			
+			parentView.addChild(this.overlay)
+			
+			this.overlay.showAnimated();			
 		}
 
 		if (first) {			
@@ -91,8 +92,8 @@ Moobile.ViewTransition.Cover = new Class({
 
 		this.parent(viewToShow, viewToHide, parentView);
 		
-		if (this.mask) {
-			this.mask.hide();
+		if (this.overlay) {
+			this.overlay.hideAnimated();
 		}
 		
 		if (this.options.presentation == 'box') {
@@ -150,8 +151,8 @@ Moobile.ViewTransition.Cover = new Class({
 	},
 	
 	onMaskHide: function() {
-		this.mask.destroy();
-		this.mask = null;
+		this.overlay.destroy();
+		this.overlay = null;
 	}
 
 });

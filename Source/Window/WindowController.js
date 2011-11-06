@@ -40,11 +40,20 @@ Moobile.WindowController = new Class({
 
 		return this;
 	},
+	
+	getRootViewController: function() {
+		return this.rootViewController;
+	},
 
 	loadView: function(viewElement) {
 		this.view = new Moobile.Window(viewElement);
 		this.startup();
 		return this;
+	},
+	
+	willAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setWindowController(this);
 	},
 
 	didAddChildViewController: function(viewController) {

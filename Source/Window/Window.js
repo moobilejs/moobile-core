@@ -27,7 +27,7 @@ var windowInstance = null;
 
 Moobile.Window = new Class({
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.View,
 
 	inputEnabled: true,
 
@@ -36,6 +36,8 @@ Moobile.Window = new Class({
 	loadingIndicator: null,
 
 	loadingIndicatorTimeout: null,
+
+	ready: true,
 
 	options: {
 		className: 'window',
@@ -54,6 +56,10 @@ Moobile.Window = new Class({
 		}
 		
 		return this;
+	},
+
+	setup: function() {
+		document.id(this.content).removeClass('view-content').addClass('window-content');
 	},
 
 	startup: function() {

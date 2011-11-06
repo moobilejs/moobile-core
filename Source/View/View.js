@@ -48,38 +48,71 @@ Moobile.View = new Class({
 		return this;
 	},
 
-	addChild: function(child, where, relative) {
+	addChild: function(child, where, context) {
 
 		if (child instanceof Moobile.ViewContent) {
-			return this.parent(child);
+			return this.parent(child, where, context); 
 		}
-		
+	
 		switch (where) {
-			
-			case 'header': 
-				return this.parent(child, 'top'); 
-			
-			case 'footer': 
-				return this.parent(child, 'bottom'); 
+			case 'header': return this.parent(child, 'top'); 
+			case 'footer': return this.parent(child, 'bottom'); 
 		}
 
-		return this.content.addChild(child, where, relative);
+		if (this.content && this.content.hasOwner()) {
+		
+			if (this.hasChild(child)) {
+				return false;
+			}
+				
+			if (this.hasElement(child) && !this.content.hasElement(child) || 
+				this.hasElement(context) && !this.content.hasElement(context)) {
+				return this.parent(child, where, context);
+			}		
+			
+			return this.content.addChild(child, where, context);
+		}
+				
+		return this.parent(child, where, context); 
 	},
 
-	getChild: function(name) {
-		return this.content.getChild(name) || this.parent(name);
+	getChild: function(name) {	
+		return this.content && this.content.hasOwner()
+			 ? this.content.getChild(name) || this.parent(name)
+			 : this.parent(name);
 	},
-
-	getChildAt: function(index) {
-		return this.content.getChildAt(index) || this.parent(index);
+	
+	hasChild: function(child) {
+		return this.content && this.content.hasOwner()
+		     ? this.content.hasChild(child) || this.parent(child)
+		     : this.parent(child);
 	},
 
 	replaceChild: function(replace, child) {
-		return this.content.replaceChild(replace, child) || this.parent(replace, child);
+		return this.content && this.content.hasOwner()
+		     ? this.content.replaceChild(replace, child) || this.parent(replace, child)
+		     : this.parent(replace, child);
 	},
 
 	removeChild: function(child) {
-		return this.content.removeChild(child) || this.parent(child);
+		return this.content && this.content.hasOwner()
+		     ? this.content.removeChild(child) || this.parent(child)
+		     : this.parent(child);
+	},
+
+	getOwnerView: function() {
+		
+		var owner = this.owner;
+		while (owner) {
+			
+			if (owner instanceof Moobile.View) {
+				return owner;
+			}
+			
+			owner = owner.getOwner();			
+		}				
+
+		return null;
 	},
 
 	getContent: function() {
@@ -115,13 +148,12 @@ Moobile.View.elementFromPath = function(path, callback) {
  * @role content
  */
 Moobile.Entity.defineRole('content', Moobile.View, function(element, options, name) {
-
+	
 	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, options, name);
 	if (instance instanceof Moobile.ViewContent) {
 		this.addChild(instance);
+		this.content = instance;		
 	}
-
-	this.content = instance;
-	
+		
 	return instance;
 });
