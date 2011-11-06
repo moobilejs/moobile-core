@@ -137,37 +137,22 @@ Moobile.ListItem = new Class({
 
 });
 
-/**
- * @role list-item
- */
-Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, name) {
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
 
-	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, options, name);
-	if (instance instanceof Moobile.ListItem) {
-		this.addChild(instance);
-	}
-	
-	return instance;
-});
-
-/**
- * @actor label
- */
 Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, options, name);
 	if (instance instanceof Moobile.Label) {
 		this.addChild(instance);
+		this.label = instance;
 	}				
-	
-	this.label = instance;
-			
+				
 	return instance;
 });
 
-/**
- * @actor image
- */
+
 Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-image') || Moobile.Image, element, options, name);
@@ -184,9 +169,6 @@ Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, options, 
 	return instance;	
 });
 
-/**
- * @actor detail
- */
 Moobile.Entity.defineRole('infos', Moobile.ListItem, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-infos') || Moobile.Label, element, options, name);
@@ -200,45 +182,25 @@ Moobile.Entity.defineRole('infos', Moobile.ListItem, function(element, options, 
 	return instance;
 });
 
-/**
- * @style checked
- */
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineStyle('checked', Moobile.ListItem, {
-	attach: function(element) {
-		element.addClass('style-checked');
-	},
-	detach: function(element) {
-		element.removeClass('style-checked');
-	}
+	attach: function(element) { element.addClass('style-checked'); },
+	detach: function(element) { element.removeClass('style-checked'); }
 });
 
-/**
- * @style disclosed
- */
 Moobile.Entity.defineStyle('disclosed', Moobile.ListItem, {
-	attach: function(element) {
-		element.addClass('style-disclosed');
-	},
-	detach: function(element) {
-		element.removeClass('style-disclosed');
-	}
+	attach: function(element) { element.addClass('style-disclosed'); },
+	detach: function(element) { element.removeClass('style-disclosed'); }
 });
 
-/**
- * @style detailed
- */
 Moobile.Entity.defineStyle('detailed', Moobile.ListItem, {
-	attach: function(element) {
-		element.addClass('style-detailed');
-	},
-	detach: function(element) {
-		element.removeClass('style-detailed');
-	}
+	attach: function(element) { element.addClass('style-detailed'); },
+	detach: function(element) { element.removeClass('style-detailed'); }
 });
 
-/**
- * @style active
- */
 Moobile.Entity.defineStyle('active', Moobile.ListItem, {
 	attach: function(element) {
 		var activity = element.getElement('div.list-item-activity');

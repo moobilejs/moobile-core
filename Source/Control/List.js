@@ -122,9 +122,10 @@ Moobile.List = new Class({
 
 });
 
-/**
- * @role list
- */
+//------------------------------------------------------------------------------
+// Global Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('list', null, function(element, options, name) {
 
 	var instance = Class.instantiate(element.get('data-list') || Moobile.List, element, options, name);
@@ -135,9 +136,10 @@ Moobile.Entity.defineRole('list', null, function(element, options, name) {
 	return instance;
 });
 
-/**
- * @role list-item
- */
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, options, name);
@@ -148,14 +150,11 @@ Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, 
 	return instance;
 });
 
-/**
- * @style grouped
- */
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineStyle('grouped', Moobile.List, {
-	attach: function(element) { 
-		element.addClass('style-grouped');
-	},			
-	detach: function(element) { 
-		element.removeClass('style-grouped');
-	}
+	attach: function(element) { element.addClass('style-grouped'); },			
+	detach: function(element) { element.removeClass('style-grouped'); }
 });

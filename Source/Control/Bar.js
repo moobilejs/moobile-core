@@ -74,9 +74,10 @@ Moobile.Bar = new Class({
 
 });
 
-/**
- * @role bar
- */
+//------------------------------------------------------------------------------
+// Global Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('bar', null, function(element, options, name) {
 
 	var instance = Class.instantiate(element.get('data-bar') || Moobile.Bar, element, options, name);
@@ -87,9 +88,10 @@ Moobile.Entity.defineRole('bar', null, function(element, options, name) {
 	return instance;
 });
 
-/**
- * @role item
- */
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('item', Moobile.Bar, function(element, options, name) {
 
 	var instance = Class.instantiate(element.get('data-item') || Moobile.BarItem, element, options, name);
@@ -101,33 +103,20 @@ Moobile.Entity.defineRole('item', Moobile.Bar, function(element, options, name) 
 	return instance;
 });
 
-/**
- * @style translucent
- */
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineStyle('translucent', Moobile.Bar, {
-	attach: function(element) {
-		element.addClass('style-translucent');
-	},			
-	detach: function(element) {
-		element.removeClass('style-translucent');
-	}			
+	attach: function(element) { element.addClass('style-translucent'); },			
+	detach: function(element) { element.removeClass('style-translucent'); }			
 });
 
-/**
- * @style black-opaque
- */
 Moobile.Entity.defineStyle('black', Moobile.Bar, {
-	attach: function(element) {
-		element.addClass('style-black');
-	},			
-	detach: function(element) {
-		element.removeClass('style-black');
-	}			
+	attach: function(element) { element.addClass('style-black'); },			
+	detach: function(element) { element.removeClass('style-black'); }			
 });
 
-/**
- * @style black-translucent
- */
 Moobile.Entity.defineStyle('black-translucent', Moobile.Bar, {
 	attach: function(element) {
 		element

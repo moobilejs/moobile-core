@@ -25,4 +25,3 @@ String.implement({
 	}
 
 });
-

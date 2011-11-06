@@ -22,3 +22,4 @@ provides:
 Browser.Platform.phonegap =
 	window.device &&
 	window.device.phonegap;
+	

@@ -45,4 +45,3 @@ provides:
 	Element.Events.animationend = { base: (prefix + 'AnimationEnd') };
 
 })();
-

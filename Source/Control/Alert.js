@@ -187,11 +187,11 @@ Moobile.Alert = new Class({
 
 });
 
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineStyle('horizontal', Moobile.Alert, {
-	attach: function() {
-		this.element.addClass('style-horizontal');
-	},
-	detach: function() {
-		this.element.addClass('style-horizontal');
-	}
+	attach: function() { this.element.addClass('style-horizontal'); },
+	detach: function() { this.element.removeClass('style-horizontal'); }
 });

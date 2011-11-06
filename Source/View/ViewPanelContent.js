@@ -54,9 +54,10 @@ Moobile.ViewPanelContent = new Class({
 	
 });
 
-/**
- * @role side-panel
- */
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(element, options) {
 	
 	this.sidePanel = new Moobile.Entity(element, options);
@@ -71,9 +72,6 @@ Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(eleme
 	return this.sidePanel;
 });
 
-/**
- * @role main-panel
- */
 Moobile.Entity.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
 	
 	this.mainPanel = new Moobile.Entity(element, options);

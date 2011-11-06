@@ -53,9 +53,10 @@ Moobile.ViewPanel = new Class({
 
 });
 
-/**
- * @role content
- */
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('content', Moobile.ViewPanel, function(element, options, name) {
 
 	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewPanelContent, element, options, name);

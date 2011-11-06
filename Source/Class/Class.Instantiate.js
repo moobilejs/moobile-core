@@ -40,4 +40,3 @@ Class.extend({
 	}
 
 });
-

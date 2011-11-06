@@ -141,9 +141,10 @@ Moobile.View.elementFromPath = function(path, callback) {
 	new Moobile.Request.View().load(path, callback);
 };
 
-/**
- * @role content
- */
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('content', Moobile.View, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, options, name);

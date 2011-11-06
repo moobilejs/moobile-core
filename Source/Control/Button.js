@@ -84,9 +84,10 @@ Moobile.Button = new Class({
 
 });
 
-/**
- * @role button
- */
+//------------------------------------------------------------------------------
+// Global Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('button', null, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-button') || Moobile.Button, element, options, name);
@@ -97,17 +98,17 @@ Moobile.Entity.defineRole('button', null, function(element, options, name) {
 	return instance;
 });
 
-/**
- * @role label
- */
+//------------------------------------------------------------------------------
+// Child Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('label', Moobile.Button, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, options, name);
 	if (instance instanceof Moobile.Entity) {
 		this.addChild(instance);
+		this.label = instance;
 	}
-	
-	this.label = instance;
 	
 	return instance;
 });

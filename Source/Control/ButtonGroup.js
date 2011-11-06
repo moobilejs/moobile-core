@@ -128,9 +128,10 @@ Moobile.ButtonGroup = new Class({
 
 });
 
-/**
- * @role button-group
- */
+//------------------------------------------------------------------------------
+// Global Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('button-group', null, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-button-group') || Moobile.ButtonGroup, element, options, name);
@@ -141,26 +142,16 @@ Moobile.Entity.defineRole('button-group', null, function(element, options, name)
 	return instance;	
 });
 
-/**
- * @style horizontal
- */
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineStyle('horizontal', Moobile.ButtonGroup, {
-	attach: function(element) {
-		element.addClass('style-horizontal');
-	},			
-	detach: function(element) {
-		element.removeClass('style-horizontal');
-	}			
+	attach: function(element) { element.addClass('style-horizontal'); },			
+	detach: function(element) { element.removeClass('style-horizontal'); }			
 });
 
-/**
- * @style vertical
- */
 Moobile.Entity.defineStyle('vertical', Moobile.ButtonGroup, {
-	attach: function(element) {
-		element.addClass('style-vertical');
-	},			
-	detach: function(element) {
-		element.removeClass('style-vertical');
-	}			
+	attach: function(element) { element.addClass('style-vertical'); },			
+	detach: function(element) { element.removeClass('style-vertical'); }			
 });

@@ -29,9 +29,10 @@ Moobile.BarButton = new Class({
 
 });
 
-/**
- * @role bar-button
- */
+//------------------------------------------------------------------------------
+// Global Roles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineRole('bar-button', null, function(element, options, name) {
 	
 	var instance = Class.instantiate(element.get('data-bar-button') || Moobile.BarButton, element, options, name);
@@ -42,50 +43,26 @@ Moobile.Entity.defineRole('bar-button', null, function(element, options, name) {
 	return instance;
 });
 
-/**
- * @style active
- */
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
 Moobile.Entity.defineStyle('active', Moobile.BarButton, {
-	attach: function(element) {
-		element.addClass('style-active');
-	},
-	detach: function(element) {
-		element.removeClass('style-active');
-	}			
+	attach: function(element) { element.addClass('style-active'); },
+	detach: function(element) { element.removeClass('style-active'); }			
 });
 
-/**
- * @style warning
- */
 Moobile.Entity.defineStyle('warning', Moobile.BarButton, {
-	attach: function(element) {
-		element.addClass('style-warning');
-	},
-	detach: function(element) {
-		element.removeClass('style-warning');
-	}			
+	attach: function(element) { element.addClass('style-warning'); },
+	detach: function(element) { element.removeClass('style-warning'); }			
 });
 
-/**
- * @style back
- */
 Moobile.Entity.defineStyle('back', Moobile.BarButton, {
-	attach: function(element) {
-		element.addClass('style-back');
-	},
-	detach: function(element) {
-		element.removeClass('style-back');
-	}			
+	attach: function(element) { element.addClass('style-back'); },
+	detach: function(element) { element.removeClass('style-back'); }			
 });
 
-/**
- * @style forward
- */
 Moobile.Entity.defineStyle('forward', Moobile.BarButton, {
-	attach: function(element) {
-		element.addClass('style-forward');
-	},
-	detach: function(element) {
-		element.removeClass('style-forward');
-	}			
+	attach: function(element) { element.addClass('style-forward'); },
+	detach: function(element) { element.removeClass('style-forward'); }			
 });
