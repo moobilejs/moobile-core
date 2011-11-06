@@ -53,7 +53,7 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
-	build: function() {
+	setup: function() {
 
 		this.parent();
 
@@ -61,29 +61,15 @@ Moobile.Slider = new Class({
 		this.track = new Element('div.' + this.options.className + '-track');
 		this.track.grab(this.thumb);
 
-		this.content.empty();
-		this.content.grab(this.track);
-	},
-
-	setValue: function(value) {
-		this.slider.set(this.value = value);
-		return this;
-	},
-
-	getValue: function() {
-		return this.value;
-	},
-
-	setup: function() {
-		this.parent();
-		this.attachSlider();
-		this.setValue(this.options.value);
+		this.element.empty();
+		this.element.grab(this.track);
 	},
 
 	teardown: function() {
-		this.detachSlider();
-		this.thumb = null;
 		this.parent();
+		this.thumb = null;
+		this.track = null;
+		this.detachSlider();		
 	},
 
 	attachSlider: function() {
@@ -105,10 +91,25 @@ Moobile.Slider = new Class({
 		this.slider = null;
 	},
 
+	setValue: function(value) {
+		this.slider.set(this.value = value);
+		return this;
+	},
+
+	getValue: function() {
+		return this.value;
+	},
+
 	updateTrack: function(position) {
 		this.track.setStyle('background-position',
 			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
 		);
+	},
+
+	didBecomeReady: function() {
+		this.parent();
+		this.attachSlider();
+		this.setValue(this.options.value);
 	},
 
 	onMove: function(position) {
@@ -127,4 +128,18 @@ Moobile.Slider = new Class({
 		this.fireEvent('change', step);
 	}
 
+});
+
+//------------------------------------------------------------------------------
+// Global Roles
+//------------------------------------------------------------------------------
+
+Moobile.Entity.defineRole('slider', null, function(element, options, name) {
+	
+	var instance = Class.instantiate(element.get('data-slider') || Moobile.Slider, element, options, name);
+	if (instance instanceof Moobile.Slider) {
+		this.addChild(instance);
+	}	
+	
+	return instance;
 });
