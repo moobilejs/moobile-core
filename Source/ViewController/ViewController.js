@@ -39,8 +39,6 @@ Moobile.ViewController = new Class({
 
 	window: null,
 
-	windowController: null,
-
 	name: null,
 
 	title: null,
@@ -184,7 +182,7 @@ Moobile.ViewController = new Class({
 		var viewToHide = this.view;
 		var parentView = this.view.getOwnerView();
 		
-		this.addChildController(this.modalViewController, 'after', viewToHide);
+		this.addChildViewController(this.modalViewController, 'after', viewToHide);
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
 		viewTransition.addEvent('start:once', this.bound('onPresentTransitionStart'));
@@ -259,11 +257,11 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	addChildController: function(viewController, where, context) {
+	addChildViewController: function(viewController, where, context) {
 
 		if (viewController.isViewLoaded() == false) {
 			viewController.addEvent('viewload:once', function() {
-				this.addChildController(viewController, where, context);
+				this.addChildViewController(viewController, where, context);
 			}.bind(this));
 			return this;
 		}
@@ -276,9 +274,12 @@ Moobile.ViewController = new Class({
 		}
 
 		this.willAddChildViewController(viewController);
+		
 		this.childViewControllers.push(viewController);
+		
 		viewController.setParentViewController(this);
 		viewController.startup();
+		
 		this.didAddChildViewController(viewController);
 
 		return this;
@@ -301,11 +302,13 @@ Moobile.ViewController = new Class({
 			return this;
 
 		this.willRemoveChildViewController(viewController);
+		
 		this.childViewControllers.erase(viewController);
+		
 		viewController.setViewControllerStack(null);
 		viewController.setViewControllerPanel(null);
-		viewController.setWindowController(null);
 		viewController.setParentViewController(null);
+		
 		this.didRemoveChildViewController(viewController);
 
 		viewController.getView().removeFromParent();
@@ -384,14 +387,6 @@ Moobile.ViewController = new Class({
 	getParentViewController: function() {
 		return this.parentViewController;
 	},
-	
-	setWindowController: function(windowController) {
-		this.windowController = windowController;
-	},
-	
-	getWindowController: function() {
-		return this.windowController;
-	},	
 
 	willAddChildViewController: function(viewController) {
 

@@ -35,7 +35,7 @@ Moobile.WindowController = new Class({
 
 		if (rootViewController) {
 			this.rootViewController = rootViewController;
-			this.addChildController(rootViewController);
+			this.addChildViewController(rootViewController);
 		}
 
 		return this;
@@ -49,11 +49,6 @@ Moobile.WindowController = new Class({
 		this.view = new Moobile.Window(viewElement);
 		this.startup();
 		return this;
-	},
-	
-	willAddChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setWindowController(this);
 	},
 
 	didAddChildViewController: function(viewController) {
