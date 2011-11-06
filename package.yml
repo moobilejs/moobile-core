@@ -46,7 +46,7 @@ sources:
   - "Source/Control/Image.js"
   - "Source/Control/Label.js"
   - "Source/Control/Overlay.js"
-  - "Source/Dialog/Alert.js"
+  - "Source/Control/Alert.js"
   - "Source/View/View.js"
   - "Source/View/ViewContent.js"
   - "Source/View/ScrollView.js"
