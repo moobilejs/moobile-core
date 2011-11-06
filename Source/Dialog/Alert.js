@@ -74,6 +74,9 @@ Moobile.Alert = new Class({
 	
 	setTitle: function(title) {
 
+		if (this.title === title) 
+			return this;
+
 		if (this.title instanceof Moobile.Entity) {
 			this.title.removeFromParent();
 			this.title.destroy();
@@ -98,6 +101,9 @@ Moobile.Alert = new Class({
 	},
 
 	setMessage: function(message) {
+		
+		if (this.message === message)
+			return this;
 		
 		if (this.message instanceof Moobile.Entity) {
 			this.message.removeFromParent();
