@@ -92,11 +92,11 @@ Moobile.Entity = new Class({
 	},
 
 	setup: function() {
-		return this;
+
 	},
 
 	teardown: function() {
-		return this;
+
 	},
 
 	destroy: function() {
@@ -115,7 +115,7 @@ Moobile.Entity = new Class({
 		this.window = null;
 		this.owner = null;
 		this.ready = false;
-
+		
 		return this;
 	},
 
@@ -123,14 +123,12 @@ Moobile.Entity = new Class({
 		this.element.addEvent('click', this.bound('onClick'));
 		this.element.addEvent('mouseup', this.bound('onMouseUp'))
 		this.element.addEvent('mousedown', this.bound('onMouseDown'));
-		return this;
 	},
 
 	detachEvents: function() {
 		this.element.removeEvent('click', this.bound('onClick'));
 		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
-		return this;
 	},
 
 	addChild: function(child, where, relative) {

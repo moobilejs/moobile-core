@@ -65,7 +65,7 @@ Moobile.ViewTransition.Cover = new Class({
 
 		if (first) {			
 			this.animate(viewToShow, 'transition-cover-enter-first');
-			return this;
+			return;
 		}
 
 		document.id(viewToHide).addClass('transition-cover-background-view');
@@ -75,17 +75,11 @@ Moobile.ViewTransition.Cover = new Class({
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
 		this.animate(parentView.getContent(), 'transition-cover-enter');
-
-		return this;
 	},
 
 	didEnter: function(viewToShow, viewToHide, parentView, first) {
-		
 		this.parent(viewToShow, viewToHide, parentView, first);
-		
 		viewToHide.show();
-		
-		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
@@ -108,8 +102,6 @@ Moobile.ViewTransition.Cover = new Class({
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
 		this.animate(parentView.getContent(), 'transition-cover-leave');
-
-		return this;
 	},
 	
 	didLeave: function(viewToShow, viewToHide, parentView) {
@@ -142,8 +134,7 @@ Moobile.ViewTransition.Cover = new Class({
 		
 		document.id(viewToHide).removeClass('transition-cover-foreground-view');
 		document.id(viewToShow).removeClass('transition-cover-background-view');		
-		
-		return this;		
+	
 	},
 	
 	onMaskShow: function() {

@@ -56,8 +56,6 @@ Moobile.Alert = new Class({
 		this.dialog.grab(this.footer);
 
 		this.element.grab(this.dialog);
-
-		return this;
 	},
 	
 	teardown: function() {
@@ -66,10 +64,9 @@ Moobile.Alert = new Class({
 		this.header = null;
 		this.footer = null;
 		this.content = null;
+		this.buttons = null;	
 		this.message = null;
 		this.title = null;
-		this.buttons = null;	
-		return this;
 	},
 	
 	setTitle: function(title) {

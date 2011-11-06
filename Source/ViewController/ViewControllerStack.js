@@ -31,7 +31,6 @@ Moobile.ViewControllerStack = new Class({
 			viewElement.get('data-class') || 'Moobile.ViewStack',
 			viewElement
 		);
-		return this;
 	},
 
 	getTopViewController: function() {
@@ -97,8 +96,6 @@ Moobile.ViewControllerStack = new Class({
 		}
 
 		viewControllerPushed.viewWillEnter();
-
-		return this;
 	},
 
 	onPushTransitionComplete: function() {
@@ -114,8 +111,6 @@ Moobile.ViewControllerStack = new Class({
 		this.window.enableInput();
 
 		viewControllerPushed.viewDidEnter();
-
-		return this;
 	},
 
 	popViewControllerUntil: function(viewController) {
@@ -175,8 +170,6 @@ Moobile.ViewControllerStack = new Class({
 
 		viewControllerBefore.viewWillEnter();
 		viewControllerPopped.viewWillLeave();
-
-		return this;
 	},
 
 	onPopTransitionComplete: function() {
@@ -194,30 +187,27 @@ Moobile.ViewControllerStack = new Class({
 		viewControllerPopped = null;
 
 		this.window.enableInput();
-
-		return this;
 	},
 
 	willAddChildViewController: function(viewController) {
-		this.parent();
+		this.parent(viewController);
 		viewController.setViewControllerStack(this);
-		return this;
 	},
 
 	willPushViewController: function(viewController) {
-		return this;
+
 	},
 
 	didPushViewController: function(viewController) {
-		return this;
+
 	},
 
 	willPopViewController: function(viewController) {
-		return this;
+
 	},
 
 	didPopViewController: function(viewController) {
-		return this;
+
 	}
 
 });

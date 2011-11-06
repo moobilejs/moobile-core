@@ -35,15 +35,12 @@ Moobile.ViewPanel = new Class({
 		if (className) {
 			this.element.addClass(className + '-panel');
 		}
-
-		return this;
 	},
 
 	destroy: function() {
 		this.parent();
 		this.sidePanel = null;
-		this.mainPanel = null;
-		return this;		
+		this.mainPanel = null;	
 	},
 
 	getSidePanel: function() {

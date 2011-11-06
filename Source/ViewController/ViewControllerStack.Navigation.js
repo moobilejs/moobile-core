@@ -57,8 +57,6 @@ Moobile.ViewControllerStack.Navigation = new Class({
 				navigationBar.addLeftBarButton(backButton);
 			}
 		}
-
-		return this;
 	},
 
 	didAddChildViewController: function(viewController) {
@@ -73,8 +71,6 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		if (title) {
 			navigationBar.setTitle(title)
 		}
-
-		return this;
 	},
 
 	onBackButtonClick: function() {

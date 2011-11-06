@@ -31,8 +31,6 @@ Moobile.NavigationBar = new Class({
 		if (this.options.className) {
 			this.element.addClass('navigation-' + this.options.className);
 		}
-
-		return this;
 	},
 	
 	addLeftBarButton: function(button) {
@@ -74,9 +72,8 @@ Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, optio
 	var instance = Class.instantiate(element.get('data-item') || Moobile.NavigationBarItem, element, options, name);
 	if (instance instanceof Moobile.NavigationBarItem) {
 		this.addChild(instance);
+		this.item = instance;
 	}	
-
-	this.item = instance;
 		
 	return instance;
 });

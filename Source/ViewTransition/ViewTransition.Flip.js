@@ -39,8 +39,6 @@ Moobile.ViewTransition.Flip = new Class({
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
 		this.animate(parentView.content, 'transition-flip-enter');
-
-		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
@@ -53,8 +51,6 @@ Moobile.ViewTransition.Flip = new Class({
 		this.addSubject(viewToShow, 'transition-view-to-show');
 
 		this.animate(parentView.getContent(), 'transition-flip-leave');
-
-		return this;
 	}
 
 });

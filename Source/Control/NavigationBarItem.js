@@ -33,14 +33,11 @@ Moobile.NavigationBarItem = new Class({
 		if (className) {
 			this.element.addClass('navigation-' + className);
 		}
-		
-		return this;
 	},
 	
 	teardown: function() {
 		this.parent();
 		this.title = null;
-		return this;
 	},
 	
 	setTitle: function(title) {

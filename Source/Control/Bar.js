@@ -95,9 +95,8 @@ Moobile.Entity.defineRole('item', Moobile.Bar, function(element, options, name) 
 	var instance = Class.instantiate(element.get('data-item') || Moobile.BarItem, element, options, name);
 	if (instance instanceof Moobile.BarItem) {
 		this.addChild(instance);
+		this.item = instance;
 	}	
-	
-	this.item = instance;
 	
 	return instance;
 });

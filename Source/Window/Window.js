@@ -65,7 +65,6 @@ Moobile.Window = new Class({
 	startup: function() {
 		window.$moobile.window = this;
 		this.parent();
-		return this;
 	},
 
 	destroy: function() {
@@ -79,14 +78,12 @@ Moobile.Window = new Class({
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		this.parent();
-		return this;
 	},
 
 	detachEvents: function() {
 		window.removeEvent('load', this.bound('onWindowLoad'));
 		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 		this.parent();
-		return this;
 	},
 
 	getRootView: function() {
@@ -133,29 +130,6 @@ Moobile.Window = new Class({
 	hideMask: function() {
 		this.inputMask.destroy();
 		this.inputMask = null;
-		return this;
-	},
-
-	showLoadingIndicator: function() {
-		if (this.inputMask) {
-			this.inputMask.addClass('loading');
-			this.loadingIndicator = new Element('div.' + this.options.className + '-loading-indicator');
-			this.loadingIndicator.fade('hide');
-			this.loadingIndicator.inject(this.inputMask);
-			this.loadingIndicator.position()
-			this.loadingIndicator.fade('show');
-		}
-		return this;
-	},
-
-	hideLoadingIndicator: function() {
-		if (this.inputMask) {
-			this.inputMask.removeClass('loading');
-			if (this.loadingIndicator) {
-				this.loadingIndicator.destroy();
-				this.loadingIndicator = null;
-			}
-		}
 		return this;
 	},
 

@@ -56,8 +56,6 @@ Moobile.EntityRoles = new Class({
 		this.element.getElements('[data-role]').filter(f).each(a);
 		
 		this.rolesDidLoad();
-		
-		return this;
 	},
 		
 	setRole: function(role, element) {
@@ -98,13 +96,11 @@ Moobile.EntityRoles = new Class({
 	},
 	
 	getRoleElement: function(role) {
-		role = role.clean();
-		return this.element.getElements('[data-role="' + role + '"]').filter(filter.bind(this))[0] || null;
+		return this.element.getElements('[data-role="' + role.clean() + '"]').filter(filter.bind(this))[0] || null;
 	},
 	
 	getRoleElements: function(role) {
-		role = role.clean();
-		return this.element.getElements('[data-role="' + role + '"]').filter(filter.bind(this));
+		return this.element.getElements('[data-role="' + role.clean() + '"]').filter(filter.bind(this));
 	},	
 	
 	rolesWillLoad: function() {

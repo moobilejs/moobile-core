@@ -98,23 +98,19 @@ Moobile.ViewTransition = new Class({
 	enter: function(viewToShow, viewToHide, parentView, first) {
 		if (viewToShow) viewToShow.show();
 		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
-		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
 		if (viewToShow) viewToShow.show();
 		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
-		return this;
 	},
 
 	didEnter: function(viewToShow, viewToHide, parentView, first) {
 		if (viewToHide) viewToHide.hide();
-		return this;
 	},
 
 	didLeave: function(viewToShow, viewToHide, parentView) {
 		if (viewToHide) viewToHide.hide();
-		return this;
 	},
 
 	onComplete: function(e) {
@@ -123,7 +119,6 @@ Moobile.ViewTransition = new Class({
 			this.fireEvent('stop');
 			this.fireEvent('complete');
 		}
-		return this;
 	}
 
 });

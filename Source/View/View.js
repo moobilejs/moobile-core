@@ -33,19 +33,16 @@ Moobile.View = new Class({
 	teardown: function() {
 		this.parent();
 		this.content = null;
-		return this;
 	},
 
 	attachEvents: function() {
 		this.parent();
 		this.element.addEvent('swipe', this.bound('onSwipe'));
-		return this;
 	},
 
 	detachEvents: function() {
 		this.parent();
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
-		return this;
 	},
 
 	addChild: function(child, where, context) {

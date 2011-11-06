@@ -32,7 +32,6 @@ Moobile.Button = new Class({
 	teardown: function() {
 		this.parent();
 		this.label = null;
-		return this;
 	},
 
 	setLabel: function(label) {

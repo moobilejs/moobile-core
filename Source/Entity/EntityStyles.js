@@ -44,8 +44,6 @@ Moobile.EntityStyles = new Class({
 		}
 
 		this.styleDidLoad();
-
-		return this;
 	},
 
 	setStyle: function(name) {

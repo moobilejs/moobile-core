@@ -34,22 +34,6 @@ Moobile.ScrollView = new Class({
 		y: 0
 	},
 
-	getWrapper: function() {
-		return this.wrapper;
-	},
-
-	getScroller: function() {
-		return this.scroller;
-	},
-
-	getContentSize: function() {
-		return this.content.getScrollSize();
-	},
-
-	getContentOffset: function() {
-		return this.scroller.getOffset();
-	},
-
 	setup: function() {
 
 		this.parent();
@@ -63,8 +47,6 @@ Moobile.ScrollView = new Class({
 		}
 		
 		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
-		
-		return this;
 	},
 
 	teardown: function() {
@@ -72,7 +54,6 @@ Moobile.ScrollView = new Class({
 		this.scroller.destroy();
 		this.scroller = null;
 		this.wrapper = null;
-		return this;
 	},
 
 	attachEvents: function() {
@@ -81,7 +62,6 @@ Moobile.ScrollView = new Class({
 		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
 		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));
 		this.scroller.addEvent('refresh', this.bound('onViewScrollRefresh'));
-		return this;
 	},
 
 	detachEvents: function() {
@@ -90,7 +70,6 @@ Moobile.ScrollView = new Class({
 		this.scroller.removeEvent('scrollend', this.bound('onViewScrollEnd'));
 		this.scroller.removeEvent('refresh', this.bound('onViewScrollRefresh'));
 		this.parent();
-		return this;
 	},
 
 	scrollTo: function(x, y, time, relative) {
@@ -107,21 +86,37 @@ Moobile.ScrollView = new Class({
 		this.scroller.scrollToPage(pageX, pageY, time);
 		return this;
 	},
+	
+	getWrapper: function() {
+		return this.wrapper;
+	},
+
+	getScroller: function() {
+		return this.scroller;
+	},
+
+	getContentSize: function() {
+		return this.content.getScrollSize();
+	},
+
+	getContentOffset: function() {
+		return this.scroller.getOffset();
+	},	
 
 	didBecomeReady: function() {
 		this.scroller.refresh();
 	},
 
 	didShow: function() {
+		this.parent();
 		this.scroller.enable();
 		this.scroller.scrollTo(this.defaultContentOffset.x, this.defaultContentOffset.y);
-		this.parent();
 	},
 
 	willHide: function() {
+		this.parent();
 		this.defaultContentOffset = this.scroller.getOffset();
 		this.scroller.disable();
-		this.parent();
 	},
 
 	onViewScrollRefresh: function() {

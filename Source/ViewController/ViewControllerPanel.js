@@ -33,7 +33,6 @@ Moobile.ViewControllerPanel = new Class({
 			viewElement.get('data-class') || 'Moobile.ViewPanel',
 			viewElement
 		);
-		return this;
 	},
 
 	setMainViewController: function(mainViewController) {
@@ -74,9 +73,8 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	didAddChildViewController: function(viewController) {
+		this.parent(viewController);
 		viewController.setViewControllerPanel(this);
-		this.parent();
-		return this;
 	}
 
 });

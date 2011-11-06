@@ -43,12 +43,10 @@ Moobile.Request.View = new Class({
 
 	attachEvents: function() {
 		this.addEvent('success', this.bound('onViewLoad'));
-		return this;
 	},
 
 	detachEvents: function() {
 		this.removeEvent('success', this.bound('onViewLoad'));
-		return this;
 	},
 
 	setCache: function(url, viewController) {
@@ -93,8 +91,6 @@ Moobile.Request.View = new Class({
 		}
 
 		throw new Error('Cannot find a data-role=view element from the response');
-
-		return this;
 	}
 
 });

@@ -28,14 +28,12 @@ Moobile.ViewTransition.None = new Class({
 		this.parent(viewToShow, viewToHide, parentView, first);
 		this.fireEvent('stop');
 		this.fireEvent('complete');
-		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
 		this.parent(viewToShow, viewToHide, parentView);
 		this.fireEvent('stop');
 		this.fireEvent('complete');
-		return this;
 	}
 
 });

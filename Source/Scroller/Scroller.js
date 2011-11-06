@@ -96,7 +96,6 @@ Moobile.Scroller = new Class({
 		this.scroller.options.onScrollMove = this.bound('onScrollMove');
 		this.scroller.options.onScrollEnd = this.bound('onScrollEnd');
 		this.scroller.options.onRefresh = this.bound('onRefresh');
-		return this;
 	},
 
 	detachEvents: function() {
@@ -104,7 +103,6 @@ Moobile.Scroller = new Class({
 		this.scroller.options.onScrollMove = null;
 		this.scroller.options.onScrollEnd = null;
 		this.scroller.options.onRefresh = null;
-		return this;
 	},
 
 	getCurrentPage: function() {
@@ -230,22 +228,18 @@ Moobile.Scroller = new Class({
 
 	onRefresh: function() {
 		this.fireEvent('refresh');
-		return this;
 	},
 
 	onScrollStart: function() {
 		this.fireEvent('scrollstart');
-		return this;
 	},
 
 	onScrollMove: function() {
 		this.fireEvent('scrollmove');
-		return this;
 	},
 
 	onScrollEnd: function() {
 		this.fireEvent('scrollend');
-		return this;
 	}
 
 });

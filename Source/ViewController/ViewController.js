@@ -91,85 +91,11 @@ Moobile.ViewController = new Class({
 		return this;
 	},
 
-	getName: function() {
-		return this.name;
-	},
-
-	setTitle: function(title) {
-		this.title = title;
-		return this;
-	},
-
-	getTitle: function() {
-		return this.title == null ? 'Untitled' : this.title;
-	},
-
-	isReady: function() {
-		return this.ready;
-	},
-
-	isModal: function() {
-		return this.modal;
-	},
-
-	isViewLoaded: function() {
-		return this.viewLoaded;
-	},
-
-	getView: function() {
-		return this.view;
-	},
-
-	setViewTransition: function(viewTransition) {
-		this.viewTransition = viewTransition;
-		return this;
-	},
-
-	getViewTransition: function() {
-		return this.viewTransition;
-	},
-
-	setViewControllerStack: function(viewControllerStack) {
-		this.viewControllerStack = viewControllerStack;
-		return this;
-	},
-
-	getViewControllerStack: function() {
-		return this.viewControllerStack;
-	},
-
-	setViewControllerPanel: function(viewControllerPanel) {
-		this.viewControllerPanel = viewControllerPanel;
-		return this
-	},
-
-	getViewControllerPanel: function(viewControllerPanel) {
-		return this.viewControllerPanel;
-	},
-
-	setParentViewController: function(parentViewController) {
-		this.parentViewController = parentViewController;
-		return this;
-	},
-	
-	getParentViewController: function() {
-		return this.parentViewController;
-	},
-	
-	setWindowController: function(windowController) {
-		this.windowController = windowController;
-	},
-	
-	getWindowController: function() {
-		return this.windowController;
-	},
-
 	loadView: function(viewElement) {
 		this.view = Class.instantiate(
 			viewElement.get('data-view') || 'Moobile.View',
 			viewElement
 		);
-		return this;
 	},
 
 	loadViewWith: function(element) {
@@ -177,7 +103,6 @@ Moobile.ViewController = new Class({
 		this.viewDidLoad();
 		this.viewLoaded = true;
 		this.fireEvent('viewload');
-		return this;
 	},
 
 	loadViewFrom: function(source) {
@@ -186,15 +111,14 @@ Moobile.ViewController = new Class({
 		}
 		this._viewRequest.cancel();
 		this._viewRequest.load(source, this.bound('loadViewWith'));
-		return this;
 	},
 
 	attachEvents: function() {
-  		return this;
+
 	},
 
 	detachEvents: function() {
-		return this;
+
 	},
 
 	startup: function() {
@@ -206,8 +130,6 @@ Moobile.ViewController = new Class({
 
 		this.setup();
 		this.attachEvents();
-
-		return this;
 	},
 
 	destroy: function() {
@@ -229,16 +151,14 @@ Moobile.ViewController = new Class({
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
-
-		return this;
 	},
 
 	setup: function() {
-		return this;
+
 	},
 
 	teardown: function() {
-		return this;
+
 	},
 
 	presentModalViewController: function(viewController, viewTransition) {
@@ -282,14 +202,12 @@ Moobile.ViewController = new Class({
 
 	onPresentTransitionStart: function() {
 		this.modalViewController.viewWillEnter();
-		return this;
 	},
 
 	onPresentTransitionCompleted: function() {
 		this.modalViewController.viewDidEnter();
 		this.didPresentModalViewController()
 		this.window.enableInput();
-		return this;
 	},
 
 	dismissModalViewController: function() {
@@ -327,7 +245,6 @@ Moobile.ViewController = new Class({
 		this.modalViewController = null;
 		this.didDismissModalViewController();
 		this.window.enableInput();	
-		return this;
 	},
 
 	destroyChildViewControllers: function() {
@@ -402,57 +319,130 @@ Moobile.ViewController = new Class({
 		}
 		return this;
 	},
+	
+	getName: function() {
+		return this.name;
+	},
+
+	setTitle: function(title) {
+		this.title = title;
+		return this;
+	},
+
+	getTitle: function() {
+		return this.title == null ? 'Untitled' : this.title;
+	},
+
+	isReady: function() {
+		return this.ready;
+	},
+
+	isModal: function() {
+		return this.modal;
+	},
+
+	isViewLoaded: function() {
+		return this.viewLoaded;
+	},
+
+	getView: function() {
+		return this.view;
+	},
+
+	setViewTransition: function(viewTransition) {
+		this.viewTransition = viewTransition;
+		return this;
+	},
+
+	getViewTransition: function() {
+		return this.viewTransition;
+	},
+
+	setViewControllerStack: function(viewControllerStack) {
+		this.viewControllerStack = viewControllerStack;
+		return this;
+	},
+
+	getViewControllerStack: function() {
+		return this.viewControllerStack;
+	},
+
+	setViewControllerPanel: function(viewControllerPanel) {
+		this.viewControllerPanel = viewControllerPanel;
+		return this
+	},
+
+	getViewControllerPanel: function(viewControllerPanel) {
+		return this.viewControllerPanel;
+	},
+
+	setParentViewController: function(parentViewController) {
+		this.parentViewController = parentViewController;
+		return this;
+	},
+	
+	getParentViewController: function() {
+		return this.parentViewController;
+	},
+	
+	setWindowController: function(windowController) {
+		this.windowController = windowController;
+	},
+	
+	getWindowController: function() {
+		return this.windowController;
+	},	
 
 	willAddChildViewController: function(viewController) {
-		return this;
+
 	},
 
 	didAddChildViewController: function(viewController) {
-		return this;
+
 	},
 
 	willRemoveChildViewController: function(viewController) {
-		return this;
+
 	},
 
 	didRemoveChildViewController: function(viewController) {
-		return this;
+
 	},
 
 	willPresentModalViewController: function() {
-		return this;
+
 	},
 	
 	didPresentModalViewController: function() {
-		return this;
+
 	},
 	
 	willDismissModalViewController: function() {
-		return this;
+
 	},
 	
 	didDismissModalViewController: function() {
-		return this;
+
 	},
 
 	viewDidLoad: function() {
-		return this;
+
 	},
 
 	viewWillEnter: function() {
-		return this;
+
 	},
 
 	viewDidEnter: function() {
-		return this;
+
 	},
 
 	viewWillLeave: function() {
-		return this;
+
 	},
 
 	viewDidLeave: function() {
-		return this;
+
 	}
 
 });

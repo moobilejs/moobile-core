@@ -31,8 +31,6 @@ Moobile.ViewStack = new Class({
 		if (className) {
 			this.element.addClass(className + '-stack');
 		}
-
-		return this;
 	}
 
 });

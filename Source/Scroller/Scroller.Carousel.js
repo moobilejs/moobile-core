@@ -69,14 +69,11 @@ Moobile.Scroller.Carousel = new Class({
 		this.content.setStyle(style, 100 * this.elements.length + '%');
 
 		this.scroller.options.snapThreshold = size * this.options.snapThreshold / 100;
-
-		return this;
 	},
 
 	onRefresh: function() {
 		this.parent();
 		this.update();
-		return this;
 	}
 
 });
