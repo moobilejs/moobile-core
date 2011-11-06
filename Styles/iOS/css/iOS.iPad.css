@@ -10,22 +10,19 @@
 
 /* Navigation Bar Styles */
 
-.bar.style-default-opaque {
+.bar {
 	background-image: url(../images/bar-ipad.png);
 	color: #717880;
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
 }
 
-.bar.style-default-translucent {
+.bar.style-translucent {
 	background-image: url(../images/bar-ipad.png);
 	color: #717880;
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
 }
 
-.bar.style-black-opaque {
-	background-image: url(../images/bar-ipad.png);
-}
-
+.bar.style-black-opaque,
 .bar.style-black-translucent {
 	background-image: url(../images/bar-ipad.png);
 }
@@ -33,98 +30,101 @@
 /* Bar Button
 -----------------------------------------------------------------------------*/
 
-/* Default With Default Navigation Bar */
-
-.bar.style-default-opaque      .bar-button.style-default,
-.bar.style-default-translucent .bar-button.style-default {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 0 5 570 stretch stretch;
-	background: url(../images/bar-button-ipad.png) -5px -0px repeat-x;
-	background-clip: padding-box;
+.bar-button {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 0 5 1970 stretch stretch;
 }
 
-.bar.style-default-opaque      .bar-button.bar-button-down.style-default,
-.bar.style-default-opaque      .bar-button.bar-button-selected.style-default,
-.bar.style-default-opaque      .bar-button.bar-button-highlighted.style-default,
-.bar.style-default-translucent .bar-button.bar-button-down.style-default,
-.bar.style-default-translucent .bar-button.bar-button-selected.style-default,
-.bar.style-default-translucent .bar-button.bar-button-highlighted.style-default {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 30 5 540 stretch stretch;
+.bar-button.bar-button-down,
+.bar-button.bar-button-selected,
+.bar-button.bar-button-highlighted {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 30 5 1940 stretch stretch;
 }
 
-.bar.style-default-opaque      .bar-button.style-default > .bar-button-content,
-.bar.style-default-translucent .bar-button.style-default > .bar-button-content {
-	border-left-color: rgba(69, 69, 69, 0.30);
-	border-right-color: rgba(69, 69, 69, 0.00);
+/* Grouped */
+
+.bar-button-group.style-horizontal .bar-button {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 60 1 1910 1 stretch stretch;
 }
 
-/* Back With Default Navigation Bar */
-
-.bar.style-default-opaque      .bar-button.style-back,
-.bar.style-default-translucent .bar-button.style-back {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 240 5 330 15 stretch stretch;
-	background: url(../images/bar-button-ipad.png) -5px -240px repeat-x;
-	background-clip: padding-box;
+.bar-button-group.style-horizontal .bar-button:first-child {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 90 1 1880 5 stretch stretch;
 }
 
-.bar.style-default-opaque      .bar-button.bar-button-down.style-back,
-.bar.style-default-opaque      .bar-button.bar-button-highlighted.style-back,
-.bar.style-default-opaque      .bar-button.bar-button-selected.style-back,
-.bar.style-default-translucent .bar-button.bar-button-selected.style-back,
-.bar.style-default-translucent .bar-button.bar-button-down.style-back,
-.bar.style-default-translucent .bar-button.bar-button-highlighted.style-back {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 270 5 300 15 stretch stretch;
+.bar-button-group.style-horizontal .bar-button:last-child {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 120 5 1850 1 stretch stretch;
 }
 
-.bar.style-default-opaque      .bar-button.style-back > .bar-button-content,
-.bar.style-default-translucent .bar-button.style-back > .bar-button-content {
-	border-left-color: rgba(69, 69, 69, 0.30);
-	border-right-color: rgba(69, 69, 69, 0.00);
+.bar-button-group.style-horizontal .bar-button.bar-button-down,
+.bar-button-group.style-horizontal .bar-button.bar-button-selected,
+.bar-button-group.style-horizontal .bar-button.bar-button-highlighted {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 150 1 1820 1 stretch stretch;
 }
 
-/* Forward With Default Navigation Bar */
+.bar-button-group.style-horizontal .bar-button.bar-button-down:first-child,
+.bar-button-group.style-horizontal .bar-button.bar-button-selected:first-child,
+.bar-button-group.style-horizontal .bar-button.bar-button-highlighted:first-child {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 180 1 1790 5 stretch stretch;
+}
+
+.bar-button-group.style-horizontal .bar-button.bar-button-down:last-child,
+.bar-button-group.style-horizontal .bar-button.bar-button-selected:last-child,
+.bar-button-group.style-horizontal .bar-button.bar-button-highlighted:last-child {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 210 5 1760 1 stretch stretch;
+}
+
+/* Back */
+
+.bar-button.style-back {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 240 5 1730 13 stretch stretch;
+}
+
+.bar-button.style-back.bar-button-down,
+.bar-button.style-back.bar-button-selected,
+.bar-button.style-back.bar-button-highlighted {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 270 5 1700 13 stretch stretch;	
+}
+
+/* Forward */
 
 .bar-button.style-forward {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 300 15 270 5 stretch stretch;
-	background: url(../images/bar-button-ipad.png) -5px -300px repeat-x;
-	background-clip: padding-box;
+	-webkit-border-image: url(../images/bar-button-ipad.png) 300 13 1670 5 stretch stretch;
 }
 
-.bar-button.bar-button-down.style-forward,
-.bar-button.bar-button-selected.style-forward,
-.bar-button.bar-button-highlighted.style-forward {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 330 15 240 5 stretch stretch;
-}
-
-.bar-button.style-forward > .bar-button-content {
-	border-left-color: rgba(69, 69, 69, 0.30);
-	border-right-color: rgba(69, 69, 69, 0.00);
+.bar-button.style-forward.bar-button-down,
+.bar-button.style-forward.bar-button-selected,
+.bar-button.style-forward.bar-button-highlighted {
+	-webkit-border-image: url(../images/bar-button-ipad.png) 330 13 1640 5 stretch stretch;	
 }
 
 /* List
 -----------------------------------------------------------------------------*/
 
-/* Default Style */
+.list {
+	background: transparent;
+}
 
-.list.style-default .list-item {
+/* List Item
+-----------------------------------------------------------------------------*/
+
+.list-item {
 	background: transparent;
 	border-left: none;
 	border-right: none;
-	border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.list.style-default .list-item:first-child {
-	border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
+.list-item:first-child {
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.list.style-default .list-item:first-child {}
-.list.style-default .list-item:last-child {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+.list-item:last-child {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.list.style-default .list-item.list-item-down,
-.list.style-default .list-item.list-item-selected,
-.list.style-default .list-item.list-item-highlighted {
+.list-item.list-item-down,
+.list-item.list-item-selected,
+.list-item.list-item-highlighted {
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #015fe6), color-stop(1, #058cf5)) !important;
 	color: #ffffff;
 	text-shadow: none;

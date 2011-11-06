@@ -525,13 +525,13 @@ p small {
 
 .bar-button-group.style-horizontal .bar-button.bar-button-down:first-child,
 .bar-button-group.style-horizontal .bar-button.bar-button-selected:first-child,
-.bar-button-group.style-horizontal .bar-button.bar-button-highlighte:first-child {
+.bar-button-group.style-horizontal .bar-button.bar-button-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 180 1 1790 5 stretch stretch;
 }
 
 .bar-button-group.style-horizontal .bar-button.bar-button-down:last-child,
 .bar-button-group.style-horizontal .bar-button.bar-button-selected:last-child,
-.bar-button-group.style-horizontal .bar-button.bar-button-highlighte:last-child {
+.bar-button-group.style-horizontal .bar-button.bar-button-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 210 5 1760 1 stretch stretch;
 }
 
@@ -597,13 +597,13 @@ p small {
 
 .bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-down:first-child,
 .bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-selected:first-child,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighte:first-child {
+.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 540 1 1430 5 stretch stretch;
 }
 
 .bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-down:last-child,
 .bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-selected:last-child,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighte:last-child {
+.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 570 5 1400 1 stretch stretch;
 }
 
@@ -677,13 +677,13 @@ p small {
 
 .bar-button-group.style-horizontal .bar-button.style-active.bar-button-down:first-child,
 .bar-button-group.style-horizontal .bar-button.style-active.bar-button-selected:first-child,
-.bar-button-group.style-horizontal .bar-button.style-active.bar-button-highlighte:first-child {
+.bar-button-group.style-horizontal .bar-button.style-active.bar-button-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 900 1 1070 5 stretch stretch;
 }
 
 .bar-button-group.style-horizontal .bar-button.style-active.bar-button-down:last-child,
 .bar-button-group.style-horizontal .bar-button.style-active.bar-button-selected:last-child,
-.bar-button-group.style-horizontal .bar-button.style-active.bar-button-highlighte:last-child {
+.bar-button-group.style-horizontal .bar-button.style-active.bar-button-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 930 5 1040 1 stretch stretch;
 }
 
@@ -837,6 +837,8 @@ p small {
 
 .list.style-grouped .list-item {
 	background: #ffffff;
+	border: 1px solid #bbbbbb;
+	border-bottom: none;	
 }
 
 .list.style-grouped .list-item:first-child {
