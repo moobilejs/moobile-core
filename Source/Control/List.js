@@ -80,25 +80,25 @@ Moobile.List = new Class({
 		return this.removeChildren();
 	},
 
-	didAddChild: function(child) {
+	didAddChild: function(entity) {
 
-		this.parent(child);
+		this.parent(entity);
 
-		if (child instanceof Moobile.ListItem) {
-			child.addEvent('click', this.bound('onItemClick'));
-			child.addEvent('mouseup', this.bound('onItemMouseUp'));
-			child.addEvent('mousedown', this.bound('onItemMouseDown'));
+		if (entity instanceof Moobile.ListItem) {
+			entity.addEvent('click', this.bound('onItemClick'));
+			entity.addEvent('mouseup', this.bound('onItemMouseUp'));
+			entity.addEvent('mousedown', this.bound('onItemMouseDown'));
 		}
 	},
 
-	didRemoveChild: function(child) {
+	didRemoveChild: function(entity) {
 
-		this.parent(child);
+		this.parent(entity);
 
-		if (child instanceof Moobile.ListItem) {
-			child.removeEvent('click', this.bound('onItemClick'));
-			child.removeEvent('mouseup', this.bound('onItemMouseUp'));
-			child.removeEvent('mousedown', this.bound('onItemMouseDown'));
+		if (entity instanceof Moobile.ListItem) {
+			entity.removeEvent('click', this.bound('onItemClick'));
+			entity.removeEvent('mouseup', this.bound('onItemMouseUp'));
+			entity.removeEvent('mousedown', this.bound('onItemMouseDown'));
 		}
 	},
 

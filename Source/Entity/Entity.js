@@ -105,7 +105,7 @@ Moobile.Entity = new Class({
 		
 		this.detachEvents();
 
-		this.children.each(function(child){child.destroy()});
+		this.children.each(function(entity){entity.destroy()});
 		this.children = null;
 
 		this.teardown(); 
@@ -131,20 +131,20 @@ Moobile.Entity = new Class({
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 	},
 
-	addChild: function(child, where, relative) {
+	addChild: function(entity, where, context) {
 
-		var element = document.id(child);
+		var element = document.id(entity);
 		if (element == null)
 			return false;
 		
-		if (this.hasChild(child))
+		if (this.hasChild(entity))
 			return false;
 
-		this.willAddChild(child);
+		this.willAddChild(entity);
 
 		if (!this.hasElement(element)) {
 
-			var context = document.id(relative);
+			context = document.id(context);
 			if (context == null) {
 				context = this.element;
 			} else if (!this.hasElement(context)) {
@@ -154,30 +154,30 @@ Moobile.Entity = new Class({
 			element.inject(context, where);
 		}
 
-		this.children.push(child);
+		this.children.push(entity);
 
-		child.ownerWillChange(this);
-		child.setOwner(this);
-		child.ownerDidChange(this);
+		entity.ownerWillChange(this);
+		entity.setOwner(this);
+		entity.ownerDidChange(this);
 
-		this.didAddChild(child);
+		this.didAddChild(entity);
 
 		if (this.ready == false) {
 			this.addEvent('ready:once', function() {
-				child.setReady(true);
-				child.didBecomeReady();				
+				entity.setReady(true);
+				entity.didBecomeReady();				
 			});
 			return true;
 		}
 		
-		child.setReady(true);
-		child.didBecomeReady();		
+		entity.setReady(true);
+		entity.didBecomeReady();		
 		
 		return true;
 	},
 
-	hasChild: function(child) {
-		return this.children.contains(child);
+	hasChild: function(entity) {
+		return this.children.contains(entity);
 	},
 	
 	getChild: function(name) {
@@ -190,9 +190,9 @@ Moobile.Entity = new Class({
 		return this.children;
 	},
 
-	replaceChild: function(replace, child) {
+	replaceChild: function(replace, entity) {
 		
-		var success = this.addChild(child, 'before', replace);
+		var success = this.addChild(entity, 'before', replace);
 		if (success) {
 			return this.removeChild(replace);
 		}
@@ -200,27 +200,27 @@ Moobile.Entity = new Class({
 		return false;
 	},
 
-	removeChild: function(child) {
+	removeChild: function(entity) {
 
-		var element = document.id(child);
+		var element = document.id(entity);
 		if (element == null)
 			return false;
 
-		if (!this.hasElement(child))
+		if (!this.hasElement(entity))
 			return false;
 
-		this.willRemoveChild(child);
+		this.willRemoveChild(entity);
 
-		child.ownerWillChange(null);
-		child.setOwner(null);
-		child.ownerDidChange(null);
-		child.setReady(false);
+		entity.ownerWillChange(null);
+		entity.setOwner(null);
+		entity.ownerDidChange(null);
+		entity.setReady(false);
 
 		element.dispose();
 
-		this.children.erase(child);
+		this.children.erase(entity);
 
-		this.didRemoveChild(child);
+		this.didRemoveChild(entity);
 
 		return true;
 	},
@@ -300,19 +300,19 @@ Moobile.Entity = new Class({
 
 	},
 
-	willAddChild: function(child) {
+	willAddChild: function(entity) {
 
 	},
 
-	didAddChild: function(child) {
+	didAddChild: function(entity) {
 
 	},
 
-	willRemoveChild: function(child) {
+	willRemoveChild: function(entity) {
 
 	},
 
-	didRemoveChild: function(child) {
+	didRemoveChild: function(entity) {
 
 	},
 

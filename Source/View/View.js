@@ -45,32 +45,32 @@ Moobile.View = new Class({
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
 	},
 
-	addChild: function(child, where, context) {
+	addChild: function(entity, where, context) {
 
-		if (child instanceof Moobile.ViewContent) {
-			return this.parent(child, where, context); 
+		if (entity instanceof Moobile.ViewContent) {
+			return this.parent(entity, where, context); 
 		}
 	
 		switch (where) {
-			case 'header': return this.parent(child, 'top'); 
-			case 'footer': return this.parent(child, 'bottom'); 
+			case 'header': return this.parent(entity, 'top'); 
+			case 'footer': return this.parent(entity, 'bottom'); 
 		}
 
 		if (this.content && this.content.hasOwner()) {
 		
-			if (this.hasChild(child)) {
+			if (this.hasChild(entity)) {
 				return false;
 			}
 				
-			if (this.hasElement(child) && !this.content.hasElement(child) || 
+			if (this.hasElement(entity) && !this.content.hasElement(entity) || 
 				this.hasElement(context) && !this.content.hasElement(context)) {
-				return this.parent(child, where, context);
+				return this.parent(entity, where, context);
 			}		
 			
-			return this.content.addChild(child, where, context);
+			return this.content.addChild(entity, where, context);
 		}
 				
-		return this.parent(child, where, context); 
+		return this.parent(entity, where, context); 
 	},
 
 	getChild: function(name) {	
@@ -79,22 +79,22 @@ Moobile.View = new Class({
 			 : this.parent(name);
 	},
 	
-	hasChild: function(child) {
+	hasChild: function(entity) {
 		return this.content && this.content.hasOwner()
-		     ? this.content.hasChild(child) || this.parent(child)
-		     : this.parent(child);
+		     ? this.content.hasChild(entity) || this.parent(entity)
+		     : this.parent(entity);
 	},
 
-	replaceChild: function(replace, child) {
+	replaceChild: function(replace, entity) {
 		return this.content && this.content.hasOwner()
-		     ? this.content.replaceChild(replace, child) || this.parent(replace, child)
-		     : this.parent(replace, child);
+		     ? this.content.replaceChild(replace, entity) || this.parent(replace, entity)
+		     : this.parent(replace, entity);
 	},
 
-	removeChild: function(child) {
+	removeChild: function(entity) {
 		return this.content && this.content.hasOwner()
-		     ? this.content.removeChild(child) || this.parent(child)
-		     : this.parent(child);
+		     ? this.content.removeChild(entity) || this.parent(entity)
+		     : this.parent(entity);
 	},
 
 	getOwnerView: function() {
