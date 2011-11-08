@@ -26,28 +26,27 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
-(function() {
-
-var roles = {};
-var styles = {};
-
 Moobile.Entity = new Class({
 
 	Implements: [
 		Events,
 		Options,
-		Class.Binds,
-		Moobile.EntityRoles,
-		Moobile.EntityStyles
+		Class.Binds
 	],
+
+	$roles: {},
+
+	$styles: {},
+
+	style: null,
+
+	owner: null,
 
 	name: null,
 
 	element: null,
 
 	children: [],
-
-	owner: null,
 
 	window: null,
 
@@ -67,15 +66,15 @@ Moobile.Entity = new Class({
 		
 		this.setOptions(options);
 		
-		var entityElement = document.id(element);
-		if (entityElement == null) {
-			entityElement = new Element(this.options.tagName);
+		var root = document.id(element);
+		if (root == null) {
+			root = new Element(this.options.tagName);
 			if (typeof element == 'string' && element.trim().match(/^<\s*([^ >]+)[^>]*>.*?<\/\s*\1\s*>$/mig)) {
-				entityElement = entityElement.set('html', element).getElement(':first-child');
+				root = root.set('html', element).getElement(':first-child');
 			} 
 		}
 		
-		this.element = entityElement;
+		this.element = root;
 
 		var className = this.options.className;
 		if (className) {
@@ -84,11 +83,39 @@ Moobile.Entity = new Class({
 		
 		this.loadStyle();		
 		this.loadRoles();
-
+		
 		this.setup();
 		this.attachEvents();
 
 		return this;
+	},
+
+	loadRoles: function() {
+		
+		this.rolesWillLoad();
+
+		var attach = function(element) {
+			var role = element.get('data-role');
+			if (role) {
+				this.setRole(role, element);
+			}
+		}.bind(this);
+
+		this.element.getElements('[data-role]').filter(this.bound('hasRoleElement')).each(attach);
+		
+		this.rolesDidLoad();
+	},
+	
+	loadStyle: function() {
+		
+		this.styleWillLoad();
+		
+		var styleName = this.options.styleName
+		if (styleName) {
+			this.setStyle(styleName);
+		}
+
+		this.styleDidLoad();
 	},
 
 	setup: function() {
@@ -105,7 +132,7 @@ Moobile.Entity = new Class({
 		
 		this.detachEvents();
 
-		this.children.each(function(entity){entity.destroy()});
+		this.children.each(function(entity){ entity.destroy() });
 		this.children = null;
 
 		this.teardown(); 
@@ -231,6 +258,67 @@ Moobile.Entity = new Class({
 		return false;
 	},
 	
+	setRole: function(role, element) {
+
+		if (element.retrieve('entity.roles.role'))
+			return this;
+
+		var res = true;
+		var def = this.$roles[role];
+		if (def) {
+
+			var options = element.get('data-options');
+			if (options) {
+				
+				if (!options.match(/^\{/)) options = '{' + options;
+				if (!options.match(/\}$/)) options = options + '}';
+
+				try {
+					options = JSON.decode(options);	
+				} catch (e) {
+					throw new Error('Error parsing JSON string: ' + options);
+				}
+									
+			} else {
+				options = {};
+			}
+
+			res = def.call(this, element, options, name || element.get('data-name'));
+			
+			element.store('entity.roles.role', res);					
+		}
+		
+		return this;
+	},
+	
+	getRole: function(element) {
+		return element.retrieve('entity.roles.role');
+	},
+	
+	setStyle: function(name) {
+
+		if (this.style) {
+			if (this.style.detach) {
+				this.style.detach.call(this, this.element);
+			}
+		}
+
+		var style = this.$styles[name];
+		if (style) {
+			if (style.attach) {
+				style.attach.call(this, this.element);
+			}			
+		}
+
+		this.style = style;
+
+		return this;
+	},
+	
+	getStyle: function() {
+		return this.style;
+	},
+	
 	setOwner: function(owner) {
 		this.owner = owner;
 		return this;
@@ -242,20 +330,6 @@ Moobile.Entity = new Class({
 
 	hasOwner: function() {
 		return !!this.owner;
-	},
-
-	show: function() {
-		this.willShow();
-		this.element.show();
-		this.didShow();
-		return this;
-	},
-
-	hide: function() {
-		this.willHide();
-		this.element.hide();
-		this.didHide();
-		return this;
 	},
 
 	getName: function() {
@@ -276,6 +350,24 @@ Moobile.Entity = new Class({
 		return this.element === document.id(element) || this.element.contains(document.id(element));
 	},
 
+	getRoleElement: function(role) {
+		return this.getRoleElements(role)[0] || null;
+	},
+
+	getRoleElements: function(role) {
+		return this.element.getElements('[data-role="' + role.clean() + '"]').filter(this.bound('hasRoleElement'));
+	},	
+
+	hasRoleElement: function(element) {
+
+		var parent = element.getParent();
+		if (parent) {
+			return this.element === parent || this.hasRoleElement.call(this, parent);
+		}
+
+		return false;
+	},
+	
 	getSize: function() {
 		return this.element.getSize();
 	},
@@ -294,6 +386,20 @@ Moobile.Entity = new Class({
 
 	isReady: function() {
 		return this.ready;
+	},
+
+	show: function() {
+		this.willShow();
+		this.element.show();
+		this.didShow();
+		return this;
+	},
+
+	hide: function() {
+		this.willHide();
+		this.element.hide();
+		this.didHide();
+		return this;
 	},
 
 	didBecomeReady: function() {
@@ -340,6 +446,22 @@ Moobile.Entity = new Class({
 
 	},	
 
+	rolesWillLoad: function() {
+
+	},
+	
+	rolesDidLoad: function() {
+
+	},
+	
+	styleWillLoad: function() {
+		
+	},
+	
+	styleDidLoad: function() {
+		
+	},	
+
 	onClick: function(e) {
 		e.target = this;
 		this.fireEvent('click', e);
@@ -368,5 +490,3 @@ Moobile.Entity.defineRole = function(name, target, fn) {
 Moobile.Entity.defineStyle = function(name, target, def) {
 	(target || Moobile.Entity).prototype.$styles[name] = def;
 };
-
-})();

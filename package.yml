@@ -27,8 +27,6 @@ sources:
   - "Source/Request/Request.js"
   - "Source/Request/Request.View.js"
   - "Source/Entity/Entity.js"
-  - "Source/Entity/EntityRoles.js"
-  - "Source/Entity/EntityStyles.js"
   - "Source/Control/Control.js"
   - "Source/Control/Button.js"
   - "Source/Control/ButtonGroup.js"
