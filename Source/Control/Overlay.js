@@ -53,7 +53,7 @@ Moobile.Overlay = new Class({
 	onAnimationEnd: function(e) {
 		
 		if (this.element.hasClass('present')) this.didShow();
-		if (this.element.hasClass('dismiss')) {
+		if (this.element.hasClass('dismiss')) {
 			this.element.hide();
 			this.didHide();		
 		}

@@ -347,11 +347,11 @@ Moobile.Entity = new Class({
 	},
 
 	hasElement: function(element) {
-		return this.element === document.id(element) || this.element.contains(document.id(element));
+		return this.element === document.id(element) || this.element.contains(document.id(element));
 	},
 
 	getRoleElement: function(role) {
-		return this.getRoleElements(role)[0] || null;
+		return this.getRoleElements(role)[0] || null;
 	},
 
 	getRoleElements: function(role) {
@@ -484,9 +484,9 @@ Moobile.Entity = new Class({
 });
 
 Moobile.Entity.defineRole = function(name, target, fn) {
-	(target || Moobile.Entity).prototype.$roles[name] = fn;
+	(target || Moobile.Entity).prototype.$roles[name] = fn;
 };
 
 Moobile.Entity.defineStyle = function(name, target, def) {
-	(target || Moobile.Entity).prototype.$styles[name] = def;
+	(target || Moobile.Entity).prototype.$styles[name] = def;
 };

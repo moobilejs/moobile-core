@@ -62,7 +62,7 @@ Moobile.View = new Class({
 				return false;
 			}
 				
-			if (this.hasElement(entity) && !this.content.hasElement(entity) || 
+			if (this.hasElement(entity) && !this.content.hasElement(entity) || 
 				this.hasElement(context) && !this.content.hasElement(context)) {
 				return this.parent(entity, where, context);
 			}		
@@ -75,25 +75,25 @@ Moobile.View = new Class({
 
 	getChild: function(name) {	
 		return this.content && this.content.hasOwner()
-			 ? this.content.getChild(name) || this.parent(name)
+			 ? this.content.getChild(name) || this.parent(name)
 			 : this.parent(name);
 	},
 	
 	hasChild: function(entity) {
 		return this.content && this.content.hasOwner()
-		     ? this.content.hasChild(entity) || this.parent(entity)
+		     ? this.content.hasChild(entity) || this.parent(entity)
 		     : this.parent(entity);
 	},
 
 	replaceChild: function(replace, entity) {
 		return this.content && this.content.hasOwner()
-		     ? this.content.replaceChild(replace, entity) || this.parent(replace, entity)
+		     ? this.content.replaceChild(replace, entity) || this.parent(replace, entity)
 		     : this.parent(replace, entity);
 	},
 
 	removeChild: function(entity) {
 		return this.content && this.content.hasOwner()
-		     ? this.content.removeChild(entity) || this.parent(entity)
+		     ? this.content.removeChild(entity) || this.parent(entity)
 		     : this.parent(entity);
 	},
 
