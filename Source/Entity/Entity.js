@@ -266,24 +266,24 @@ Moobile.Entity = new Class({
 		var res = true;
 		var def = this.$roles[role];
 		if (def) {
-
-			var options = element.get('data-options');
-			if (options) {
+			
+			var options = {};
+			
+			var prefix = role.toLowerCase().toCamelCase();
+			
+			for (var option in element.dataset) {
 				
-				if (!options.match(/^\{/)) options = '{' + options;
-				if (!options.match(/\}$/)) options = options + '}';
-
-				try {
-					options = JSON.decode(options);	
-				} catch (e) {
-					throw new Error('Error parsing JSON string: ' + options);
+				var value = element.dataset[option];
+				
+				var index = option.indexOf(prefix);
+				if (index == 0) {
+					option = option.substr(prefix.length, option.length - prefix.length);
+					option = option.substr(0, 1).toLowerCase() + option.substr(1);
+					options[option] = value;
 				}
-									
-			} else {
-				options = {};
 			}
-
-			res = def.call(this, element, options, name || element.get('data-name'));
+				
+			res = def.call(this, element, options, element.dataset.name || null);
 			
 			element.store('entity.roles.role', res);					
 		}
