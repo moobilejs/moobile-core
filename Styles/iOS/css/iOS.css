@@ -563,75 +563,75 @@ p small {
 	-webkit-border-image: url(../images/bar-button.png) 330 13 1640 5 stretch stretch;	
 }
 
-/* With Black Bar */
+/* Dark */
 
-.bar.style-black .bar-button {
+.bar-button.style-dark {
 	-webkit-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
 }
 
-.bar.style-black .bar-button.bar-button-down,
-.bar.style-black .bar-button.bar-button-selected,
-.bar.style-black .bar-button.bar-button-highlighted {
+.bar-button.bar-button.style-dark.bar-button-down,
+.bar-button.bar-button.style-dark.bar-button-selected,
+.bar-button.bar-button.style-dark.bar-button-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
 }
 
-/* Grouped With Black Bar */
+/* Dark + Grouped */
 
-.bar.style-black .bar-button-group.style-horizontal .bar-button {
+.bar-button-group.style-horizontal .bar-button.style-dark {
 	-webkit-border-image: url(../images/bar-button.png) 420 1 1550 1 stretch stretch;
 }
 
-.bar.style-black .bar-button-group.style-horizontal .bar-button:first-child {
+.bar-button-group.style-horizontal .bar-button.style-dark:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 450 1 1520 5 stretch stretch;
 }
 
-.bar.style-black .bar-button-group.style-horizontal .bar-button:last-child {
+.bar-button-group.style-horizontal .bar-button.style-dark:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 480 5 1490 1 stretch stretch;
 }
 
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-down,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-selected,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighted {
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-down,
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-selected,
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 510 1 1460 1 stretch stretch;
 }
 
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-down:first-child,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-selected:first-child,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighted:first-child {
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-down:first-child,
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-selected:first-child,
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 540 1 1430 5 stretch stretch;
 }
 
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-down:last-child,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-selected:last-child,
-.bar.style-black .bar-button-group.style-horizontal .bar-button.bar-button-highlighted:last-child {
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-down:last-child,
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-selected:last-child,
+.bar-button-group.style-horizontal .bar-button.style-dark.bar-button-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 570 5 1400 1 stretch stretch;
 }
 
-/* Back With Black Bar */
+/* Dark Back */
 
-.bar.style-black .bar-button.style-back {
+.bar-button.style-dark-back {
 	-webkit-border-image: url(../images/bar-button.png) 600 5 1370 13 stretch stretch;
 	border-left-width: 13px;
 	padding-left: 0px;
 }
 
-.bar.style-black .bar-button.style-back.bar-button-down,
-.bar.style-black .bar-button.style-back.bar-button-selected,
-.bar.style-black .bar-button.style-back.bar-button-highlighted {
+.bar-button.style-dark-back.bar-button-down,
+.bar-button.style-dark-back.bar-button-selected,
+.bar-button.style-dark-back.bar-button-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 630 5 1340 13 stretch stretch;	
 }
 
-/* Forward With Black Bar */
+/* Dark Forward */
 
-.bar.style-black .bar-button.style-forward {
+.bar-button.style-dark-forward {
 	-webkit-border-image: url(../images/bar-button.png) 660 13 1310 5 stretch stretch;
 	border-right-width: 13px;
 	padding-right: 0px;
 }
 
-.bar.style-black .bar-button.style-forward.bar-button-down,
-.bar.style-black .bar-button.style-forward.bar-button-selected,
-.bar.style-black .bar-button.style-forward.bar-button-highlighted {
+.bar-button.style-dark-forward.bar-button-down,
+.bar-button.style-dark-forward.bar-button-selected,
+.bar-button.style-dark-forward.bar-button-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 690 13 1280 5 stretch stretch;	
 }
 
@@ -805,7 +805,7 @@ p small {
 	text-align: center;
 	left: 0px;													/* Important */
 	overflow: hidden;											/* Important */
-	position: absolute;											/* Important */
+	position: relative;											/* Important */
 	right: 0px;													/* Important */
 	text-overflow: ellipsis;									/* Important */
 	white-space: nowrap;										/* Important */
@@ -833,6 +833,7 @@ p small {
 .list.style-grouped {
 	-webkit-border-radius: 8px;
 	-webkit-background-clip: padding-box;
+	margin-bottom: 24px;
 }
 
 .list.style-grouped .list-item {
@@ -861,8 +862,7 @@ p small {
 	-webkit-box-sizing: border-box;								/* Important */
 	-webkit-box-align: center;									/* Important */
 	background: #ffffff;
-	border: 1px solid #bbbbbb;
-	border-bottom: none;
+	border-top: 1px solid #bbbbbb;
 	color: #000000;
 	display: -webkit-box;
 	font-size: 17px;
@@ -940,9 +940,9 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat -60px center;		
 }
 
-.list-item.list-item-down.style-checked > .label.infos:after,
-.list-item.list-item-selected.style-checked > .label.infos:after,
-.list-item.list-item-highlighted.style-checked > .label.infos:after {
+.list-item.style-checked.list-item-down > .label.infos:after,
+.list-item.style-checked.list-item-selected > .label.infos:after,
+.list-item.style-checked.list-item-highlighted > .label.infos:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
 }
 
@@ -956,9 +956,9 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
 }
 
-.list-item.list-item-down.style-disclosed > .label.infos:after,
-.list-item.list-item-selected.style-disclosed > .label.infos:after,
-.list-item.list-item-highlighted.style-disclosed > .label.infos:after {
+.list-item.style-disclosed.list-item-down > .label.infos:after,
+.list-item.style-disclosed.list-item-selected > .label.infos:after,
+.list-item.style-disclosed.list-item-highlighted > .label.infos:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
 }
 
@@ -972,9 +972,9 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
-.list-item.list-item-down.style-detailed > .label.accessory:after,
-.list-item.list-item-selected.style-detailed > .label.accessory:after,
-.list-item.list-item-highlighted.style-detailed > .label.accessory:after {
+.list-item.style-detailed.list-item-down > .label.accessory:after,
+.list-item.style-detailed.list-item-selected > .label.accessory:after,
+.list-item.style-detailed.list-item-highlighted > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
@@ -999,9 +999,9 @@ p small {
 	width: 21px;
 }
 
-.list-item.list-item-down.style-activity        > .list-item-activity,
-.list-item.list-item-selected.style-activity    > .list-item-activity,
-.list-item.list-item-highlighted.style-activity > .list-item-activity {
+.list-item.style-activity.list-item-down > .list-item-activity,
+.list-item.style-activity.list-item-selected > .list-item-activity,
+.list-item.style-activity.list-item-highlighted > .list-item-activity {
 	background: url(../images/activity-indicator.png) -21px center no-repeat;
 }
 

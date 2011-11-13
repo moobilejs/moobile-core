@@ -66,3 +66,19 @@ Moobile.Entity.defineStyle('forward', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }			
 });
+
+Moobile.Entity.defineStyle('dark', Moobile.BarButton, {
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }			
+});
+
+Moobile.Entity.defineStyle('dark-back', Moobile.BarButton, {
+	attach: function(element) { element.addClass('style-dark-back'); },
+	detach: function(element) { element.removeClass('style-dark-back'); }			
+});
+
+Moobile.Entity.defineStyle('dark-forward', Moobile.BarButton, {
+	attach: function(element) { element.addClass('style-dark-forward'); },
+	detach: function(element) { element.removeClass('style-dark-forward'); }			
+});
+

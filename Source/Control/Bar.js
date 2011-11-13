@@ -112,20 +112,20 @@ Moobile.Entity.defineStyle('translucent', Moobile.Bar, {
 	detach: function(element) { element.removeClass('style-translucent'); }			
 });
 
-Moobile.Entity.defineStyle('black', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-black'); },			
-	detach: function(element) { element.removeClass('style-black'); }			
+Moobile.Entity.defineStyle('dark', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-dark'); },			
+	detach: function(element) { element.removeClass('style-dark'); }			
 });
 
-Moobile.Entity.defineStyle('black-translucent', Moobile.Bar, {
+Moobile.Entity.defineStyle('dark-translucent', Moobile.Bar, {
 	attach: function(element) {
 		element
-			.addClass('style-black')
-			.addClass('style-black-translucent');
+			.addClass('style-dark')
+			.addClass('style-dark-translucent');
 	},			
 	detach: function(element) {
 		element
-			.removeClass('style-black')
-			.removeClass('style-black-translucent');
+			.removeClass('style-dark')
+			.removeClass('style-dark-translucent');
 	}
 });
