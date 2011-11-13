@@ -258,6 +258,21 @@ Moobile.Entity = new Class({
 		return false;
 	},
 	
+	addClass: function(name) {
+		this.element.addClass(name);
+		return this;
+	},
+
+	removeClass: function(name) {
+		this.element.removeClass(name);
+		return this;
+	},
+
+	toggleClass: function(name) {
+		this.element.toggleClass(name);
+		return this;
+	},	
+	
 	setRole: function(role, element) {
 
 		if (element.retrieve('entity.roles.role'))
