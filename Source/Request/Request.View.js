@@ -32,7 +32,8 @@ Moobile.Request.View = new Class({
 	cache: {},
 
 	options: {
-		method: 'get'
+		method: 'get',
+		async: false
 	},
 
 	initialize: function(options) {
