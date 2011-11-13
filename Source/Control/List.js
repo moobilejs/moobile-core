@@ -64,6 +64,10 @@ Moobile.List = new Class({
 		return this;
 	},
 
+	clearSelectedItem: function() {
+		return this.setSelectedItem(null);
+	},
+
 	addItem: function(item, where, context) {
 		return this.addChild(item, where, context);
 	},
