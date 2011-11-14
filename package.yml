@@ -25,7 +25,7 @@ sources:
   - "Source/Event/Event.Click.js"
   - "Source/Event/Event.CSS3.js"
   - "Source/Request/Request.js"
-  - "Source/Request/Request.View.js"
+  - "Source/Request/Request.ViewElement.js"
   - "Source/Entity/Entity.js"
   - "Source/Control/Control.js"
   - "Source/Control/Button.js"
