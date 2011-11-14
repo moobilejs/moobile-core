@@ -104,11 +104,17 @@ Moobile.ViewController = new Class({
 	},
 
 	loadViewFrom: function(source) {
+	
 		if (this._viewRequest == null) {
-			this._viewRequest = new Moobile.Request.ViewElement()
+			this._viewRequest = new Moobile.Request.ViewElement();
 		}
+		
 		this._viewRequest.cancel();
-		this._viewRequest.load(source, this.bound('loadViewWith'));
+		
+		var element = this._viewRequest.load(source);
+		if (element) {
+			this.loadViewWith(element);
+		}
 	},
 
 	attachEvents: function() {
