@@ -978,33 +978,6 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
-/* Style Activity */
-
-@-webkit-keyframes anim-list-item-activity {
-	from { -webkit-transform: rotate(0deg); }
-	to   { -webkit-transform: rotate(360deg); }
-}
-
-.list-item.style-activity > .label.infos {
-	padding-right: 10px;
-}
-
-.list-item.style-activity > .list-item-activity {
-	-webkit-animation: anim-list-item-activity 1s infinite;
-	-webkit-animation-timing-function: linear;
-	-webkit-transform-origin: 50% 50%;
-	background: url(../images/activity-indicator.png) 0px center no-repeat;
-	height: 20px;
-	margin-right: 3px;
-	width: 21px;
-}
-
-.list-item.style-activity.list-item-down > .list-item-activity,
-.list-item.style-activity.list-item-selected > .list-item-activity,
-.list-item.style-activity.list-item-highlighted > .list-item-activity {
-	background: url(../images/activity-indicator.png) -21px center no-repeat;
-}
-
 /* Overlay
 -----------------------------------------------------------------------------*/
 

@@ -200,21 +200,3 @@ Moobile.Entity.defineStyle('detailed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-detailed'); },
 	detach: function(element) { element.removeClass('style-detailed'); }
 });
-
-Moobile.Entity.defineStyle('active', Moobile.ListItem, {
-	attach: function(element) {
-		var activity = element.getElement('div.list-item-activity');
-		if (activity == null) {
-			activity = new Element('div.list-item-activity');
-			activity.inject(element);
-		}
-		element.addClass('style-activity');
-	},
-	detach: function(element) {
-		var activity = element.getElement('div.list-item-activity');
-		if (activity) {
-			activity.destroy();
-		}
-		element.removeClass('style-activity');
-	}
-});
