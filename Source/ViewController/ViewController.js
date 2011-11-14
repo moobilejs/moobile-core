@@ -105,7 +105,7 @@ Moobile.ViewController = new Class({
 
 	loadViewFrom: function(source) {
 		if (this._viewRequest == null) {
-			this._viewRequest = new Moobile.Request.View()
+			this._viewRequest = new Moobile.Request.ViewElement()
 		}
 		this._viewRequest.cancel();
 		this._viewRequest.load(source, this.bound('loadViewWith'));

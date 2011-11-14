@@ -141,7 +141,7 @@ Moobile.View.elementFromPath = function(path, callback) {
 	var elements = [];
 	path = Array.from(path);
 	path.each(function(source) {
-		new Moobile.Request.View().load(source, function(element) {
+		new Moobile.Request.ViewElement().load(source, function(element) {
 			elements.push(element);
 			if (elements.length == path.length) {
 				callback.apply(this, elements);

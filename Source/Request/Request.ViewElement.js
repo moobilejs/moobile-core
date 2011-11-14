@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Request.View
+name: Request.ViewElement
 
 description: Provides a Request that loads a view from a remote location. This 
              class will look for an element with the view data-role.
@@ -12,20 +12,15 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core/Event
-	- Core/Element
-	- Core/Element.Event
-	- More/Events.Pseudos
-	- Element.Extras
 	- Request
 
 provides:
-	- Request.ViewController
+	- Request.ViewElement
 
 ...
 */
 
-Moobile.Request.View = new Class({
+Moobile.Request.ViewElement = new Class({
 
 	Extends: Moobile.Request,
 
