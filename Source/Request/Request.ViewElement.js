@@ -40,7 +40,7 @@ Moobile.Request.ViewElement = new Class({
 		var element = null;
 		
 		this.addEvent('success:once', function(response) {
-			element = Elements.from(response)[0];		
+			element = Elements.from(response)[0] || null;		
 		});
 
 		this.options.url = url;
@@ -48,7 +48,7 @@ Moobile.Request.ViewElement = new Class({
 		this.send();
 
 		if (element == null) {
-			throw new Error('Cannot find a data-role=view element within the response.');
+			throw new Error('Cannot find an element within the response.');
 		}
 
 		this.elements[url] = element;
