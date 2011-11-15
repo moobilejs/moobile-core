@@ -65,8 +65,8 @@ Moobile.Entity = new Class({
 		var root = document.id(element);
 		if (root == null) {
 			root = new Element(this.options.tagName);
-			if (typeof element == 'string' && element.trim().match(/^<\s*([^ >]+)[^>]*>.*?<\/\s*\1\s*>$/mig)) {
-				root = root.set('html', element).getElement(':first-child');
+			if (typeof element == 'string') {
+				root = Elements.from(element)[0];
 			} 
 		}
 		
