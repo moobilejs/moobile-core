@@ -28,11 +28,8 @@ Moobile.ViewControllerPanel = new Class({
 
 	sideViewController: null,
 
-	loadView: function(viewElement) {
-		this.view = Class.instantiate(
-			viewElement.get('data-class') || 'Moobile.ViewPanel',
-			viewElement
-		);
+	loadView: function() {
+		this.view = new Moobile.ViewPanel();
 	},
 
 	setMainViewController: function(mainViewController) {

@@ -38,12 +38,12 @@ Moobile.ViewTransition.Cover = new Class({
 			case 'box':					
 				this.overlay = new Moobile.Overlay();
 				viewToShow = new Element('div.transition-cover-view-wrapper').wraps(viewToShow);
-				document.id(parentView).addClass('transition-cover-box');				
+				parentView.addClass('transition-cover-box');				
 				break;
 			
 			case 'center':
 				this.overlay = new Moobile.Overlay();
-				document.id(parentView).addClass('transition-cover-center');		
+				parentView.addClass('transition-cover-center');		
 				break;
 			
 			case 'fullscreen':
@@ -53,7 +53,7 @@ Moobile.ViewTransition.Cover = new Class({
 		
 		if (this.overlay) {
 
-			document.id(this.overlay).addClass('transition-cover-overlay');
+			this.overlay.addClass('transition-cover-overlay');
 			
 			this.overlay.addEvent('show', this.bound('onMaskShow'));
 			this.overlay.addEvent('hide', this.bound('onMaskHide'));
@@ -68,8 +68,8 @@ Moobile.ViewTransition.Cover = new Class({
 			return;
 		}
 
-		document.id(viewToHide).addClass('transition-cover-background-view');
-		document.id(viewToShow).addClass('transition-cover-foreground-view');
+		viewToHide.addClass('transition-cover-background-view');
+		viewToShow.addClass('transition-cover-foreground-view');
 
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
@@ -120,20 +120,20 @@ Moobile.ViewTransition.Cover = new Class({
 					viewToHideWrapper = null;
 				}
 					
-				document.id(parentView).removeClass('transition-cover-box');
+				parentView.removeClass('transition-cover-box');
 				
 				break;
 			
 			case 'center':
-				document.id(parentView).removeClass('transition-cover-center');		
+				parentView.removeClass('transition-cover-center');		
 				break;
 			
 			case 'fullscreen':
 				break;
 		}	
 		
-		document.id(viewToHide).removeClass('transition-cover-foreground-view');
-		document.id(viewToShow).removeClass('transition-cover-background-view');		
+		viewToHide.removeClass('transition-cover-foreground-view');
+		viewToShow.removeClass('transition-cover-background-view');		
 	
 	},
 	

@@ -65,4 +65,5 @@ sources:
   - "Source/ViewController/ViewControllerStack.Navigation.js"
   - "Source/ViewController/ViewControllerPanel.js"
   - "Source/Window/Window.js"
+  - "Source/Window/WindowContent.js"
   - "Source/Window/WindowController.js"

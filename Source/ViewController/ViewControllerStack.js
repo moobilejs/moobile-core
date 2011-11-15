@@ -26,11 +26,8 @@ Moobile.ViewControllerStack = new Class({
 
 	topViewController: null,
 
-	loadView: function(viewElement) {
-		this.view = Class.instantiate(
-			viewElement.get('data-class') || 'Moobile.ViewStack',
-			viewElement
-		);
+	loadView: function() {
+		this.view = new Moobile.ViewStack();
 	},
 
 	getTopViewController: function() {
@@ -41,16 +38,6 @@ Moobile.ViewControllerStack = new Class({
 
 		if (this.topViewController == viewController)
 			return;
-
-		if (this.childViewControllers.length > 0)
-			this.window.disableInput();
-
-		if (viewController.isViewLoaded() == false) {
-			viewController.addEvent('viewload:once', function() {
-				this.pushViewController(viewController, viewTransition);
-			}.bind(this));
-			return this;
-		}
 
 		var viewControllerPushed = viewController; // ease of understanding
 
@@ -108,8 +95,6 @@ Moobile.ViewControllerStack = new Class({
 
 		this.didPushViewController(viewControllerPushed);
 
-		this.window.enableInput();
-
 		viewControllerPushed.viewDidEnter();
 	},
 
@@ -141,8 +126,6 @@ Moobile.ViewControllerStack = new Class({
 
 		if (this.childViewControllers.length <= 1)
 			return this;
-
-		this.window.disableInput();
 
 		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
@@ -185,8 +168,6 @@ Moobile.ViewControllerStack = new Class({
 
 		viewControllerPopped.destroy();
 		viewControllerPopped = null;
-
-		this.window.enableInput();
 	},
 
 	willAddChildViewController: function(viewController) {

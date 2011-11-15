@@ -37,19 +37,17 @@ Moobile.ViewController = new Class({
 		Class.Binds
 	],
 
-	window: null,
-
 	name: null,
 
 	title: null,
-
-	ready: false,
 
 	modal: false,
 
 	view: null,
 
 	viewLoaded: false,
+	
+	viewReady: false,
 
 	viewTransition: null,
 
@@ -63,93 +61,29 @@ Moobile.ViewController = new Class({
 
 	childViewControllers: [],
 
-	_viewRequest: null,
-
-	initialize: function(source, options, name) {
-
+	initialize: function(options, name) {
+		
 		this.name = name;
-
-		this.window = Moobile.Window.getInstance();
-
+		
 		this.setOptions(options);
-
-		var element = document.id(source);
-		if (element) {
-			this.loadViewWith(element);
-			return this;
-		}
-
-		if (source) {
-			this.loadViewFrom(source);
-			return this;
-		}
-
-		this.loadViewWith(new Element('div'));
-
+		
+		this.loadView();
+		this.setViewLoaded();
+	
 		return this;
 	},
 
 	loadView: function(viewElement) {
-		this.view = Class.instantiate(
-			viewElement.get('data-view') || 'Moobile.View',
-			viewElement
-		);
-	},
-
-	loadViewWith: function(element) {
-		this.loadView(element);
-		this.viewDidLoad();
-		this.viewLoaded = true;
-		this.fireEvent('viewload');
-	},
-
-	loadViewFrom: function(source) {
-	
-		if (this._viewRequest == null) {
-			this._viewRequest = new Moobile.Request.ViewElement();
-		}
-		
-		this._viewRequest.cancel();
-		
-		var element = this._viewRequest.load(source);
-		if (element) {
-			this.loadViewWith(element);
-		}
-	},
-
-	attachEvents: function() {
-
-	},
-
-	detachEvents: function() {
-
-	},
-
-	startup: function() {
-
-		if (this.ready == true)
-			return this;
-
-		this.ready = true;
-
-		this.setup();
-		this.attachEvents();
+		this.view = new Moobile.View();
 	},
 
 	destroy: function() {
-
-		if (this.ready == false)
-			return this;
-
-		this.ready = false;
-
-		this.detachEvents();
-		this.teardown();
+		
 		this.destroyChildViewControllers();
 
 		this.view.destroy();
 		this.view = null;
-		this.window = null;
+		this.viewDidUnload();
 
 		this.viewTransition = null;
 		this.viewControllerStack = null;
@@ -157,27 +91,10 @@ Moobile.ViewController = new Class({
 		this.parentViewController = null;
 	},
 
-	setup: function() {
-
-	},
-
-	teardown: function() {
-
-	},
-
 	presentModalViewController: function(viewController, viewTransition) {
 		
 		if (this.modalViewController)
 			return this;
-
-		this.window.disableInput();
-
-		if (viewController.isViewLoaded() == false) {
-			viewController.addEvent('viewload:once', function() {
-				this.presentModalViewController(viewController, viewTransition);
-			}.bind(this));
-			return this;
-		}
 		
 		this.modalViewController = viewController;
 		this.modalViewController.modal = true;
@@ -211,7 +128,6 @@ Moobile.ViewController = new Class({
 	onPresentTransitionCompleted: function() {
 		this.modalViewController.viewDidEnter();
 		this.didPresentModalViewController()
-		this.window.enableInput();
 	},
 
 	dismissModalViewController: function() {
@@ -219,12 +135,11 @@ Moobile.ViewController = new Class({
 		if (this.modalViewController == null)
 			return this;
 
-		this.window.disableInput();
-
 		this.willDismissModalViewController()
 
 		var viewToShow = this.view;
 		var viewToHide = this.modalViewController.getView();
+		var parentView = this.view.getOwnerView();
 
 		var viewTransition = this.modalViewController.viewTransition;
 		viewTransition.addEvent('start:once', this.bound('onDismissTransitionStart'));
@@ -232,7 +147,7 @@ Moobile.ViewController = new Class({
 		viewTransition.leave(
 			viewToShow,
 			viewToHide,
-			this.window
+			parentView
 		);
 
 		return this;
@@ -248,7 +163,6 @@ Moobile.ViewController = new Class({
 		this.modalViewController.destroy();
 		this.modalViewController = null;
 		this.didDismissModalViewController();
-		this.window.enableInput();	
 	},
 
 	destroyChildViewControllers: function() {
@@ -264,28 +178,20 @@ Moobile.ViewController = new Class({
 	},
 
 	addChildViewController: function(viewController, where, context) {
-
-		if (viewController.isViewLoaded() == false) {
-			viewController.addEvent('viewload:once', function() {
-				this.addChildViewController(viewController, where, context);
-			}.bind(this));
-			return this;
-		}
-
+	
+		this.willAddChildViewController(viewController);
+		
 		this.view.addChild(viewController.getView(), where, context);
-
+		
 		if (viewController.isModal() == false) {
 			viewController.setViewControllerStack(this.viewControllerStack);
 			viewController.setViewControllerPanel(this.viewControllerPanel);
 		}
 
-		this.willAddChildViewController(viewController);
+		viewController.setParentViewController(this);
 		
 		this.childViewControllers.push(viewController);
-		
-		viewController.setParentViewController(this);
-		viewController.startup();
-		
+	
 		this.didAddChildViewController(viewController);
 
 		return this;
@@ -342,16 +248,44 @@ Moobile.ViewController = new Class({
 		return this.title == null ? 'Untitled' : this.title;
 	},
 
-	isReady: function() {
-		return this.ready;
-	},
-
 	isModal: function() {
 		return this.modal;
 	},
 
+	setViewLoaded: function()  {
+		
+		if (this.viewLoaded)
+			return this;
+		
+		this.view.addEvent('ready', this.bound('setViewReady'));
+		this.viewLoaded = true;
+		this.viewDidLoad();		
+		
+		this.fireEvent('viewLoad');	
+		
+		return this;		
+	},
+
 	isViewLoaded: function() {
 		return this.viewLoaded;
+	},
+
+	setViewReady: function() {
+		
+		if (this.viewReady)
+			return this;
+		
+		this.view.removeEvent('ready', this.bound('setViewReady'));
+		this.viewReady = true;
+		this.viewDidBecomeReady();
+		
+		this.fireEvent('viewReady');
+		
+		return this;
+	},
+
+	isViewReady: function() {
+		return this.viewReady;
 	},
 
 	getView: function() {
@@ -428,6 +362,14 @@ Moobile.ViewController = new Class({
 
 	viewDidLoad: function() {
 
+	},
+	
+	viewDidUnload: function() {
+		
+	},
+	
+	viewDidBecomeReady: function() {
+		
 	},
 
 	viewWillEnter: function() {
