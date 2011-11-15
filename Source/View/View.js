@@ -45,6 +45,16 @@ Moobile.View = new Class({
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
 	},
 
+	enable: function() {
+		this.element.removeClass('disable').addClass('enable');
+		return this;
+	},
+	
+	disable: function() {
+		this.element.removeClass('enable').addClass('disable');
+		return this;
+	},
+
 	addChild: function(entity, where, context) {
 
 		if (entity instanceof Moobile.ViewContent) {
@@ -139,6 +149,16 @@ Moobile.View = new Class({
 
 Moobile.View.elementAtPath = function(path) {
 	return new Moobile.Request.ViewElement().load(path);
+};
+
+Moobile.View.atPath = function(path) {
+	
+	var element = Moobile.View.elementAtPath(path);
+	if (element) {
+		return Class.instantiate(element.get('data-view') || 'Moobile.View', element, null, element.get('data-name'));
+	}
+	
+	return null;
 };
 
 //------------------------------------------------------------------------------
