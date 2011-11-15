@@ -62,10 +62,6 @@ Moobile.Entity = new Class({
 
 		this.name = name;
 		
-		this.window = Moobile.Window.getInstance();
-		
-		this.setOptions(options);
-		
 		var root = document.id(element);
 		if (root == null) {
 			root = new Element(this.options.tagName);
@@ -76,6 +72,19 @@ Moobile.Entity = new Class({
 		
 		this.element = root;
 
+		options = options || {};
+
+		for (var option in this.options) {
+			var value = this.element.get('data-option-' + option.hyphenate());
+			if (value != null) {
+				if (options[option] == undefined) {
+					options[option] = value;	
+				}
+			}			
+		}
+				
+		this.setOptions(options);				
+
 		var className = this.options.className;
 		if (className) {
 			this.element.addClass(className);
@@ -83,10 +92,10 @@ Moobile.Entity = new Class({
 		
 		this.loadStyle();		
 		this.loadRoles();
-		
+
 		this.setup();
 		this.attachEvents();
-
+		
 		return this;
 	},
 
@@ -187,6 +196,8 @@ Moobile.Entity = new Class({
 		entity.setOwner(this);
 		entity.ownerDidChange(this);
 
+		entity.setWindow(this.window);
+
 		this.didAddChild(entity);
 
 		if (this.ready == false) {
@@ -242,7 +253,9 @@ Moobile.Entity = new Class({
 		entity.setOwner(null);
 		entity.ownerDidChange(null);
 		entity.setReady(false);
-
+		
+		entity.setWindow(null);
+		
 		element.dispose();
 
 		this.children.erase(entity);
@@ -278,29 +291,9 @@ Moobile.Entity = new Class({
 		if (element.retrieve('entity.roles.role'))
 			return this;
 
-		var res = true;
-		var def = this.$roles[role];
-		if (def) {
-			
-			var options = {};
-			
-			var prefix = role.toLowerCase().toCamelCase();
-			
-			for (var option in element.dataset) {
-				
-				var value = element.dataset[option];
-				
-				var index = option.indexOf(prefix);
-				if (index == 0) {
-					option = option.substr(prefix.length, option.length - prefix.length);
-					option = option.substr(0, 1).toLowerCase() + option.substr(1);
-					options[option] = value;
-				}
-			}
-				
-			res = def.call(this, element, options, element.dataset.name || null);
-			
-			element.store('entity.roles.role', res);					
+		var fn = this.$roles[role];
+		if (fn) {
+			element.store('entity.roles.role', fn.call(this, element, null, element.get('data-name')) || true);					
 		}
 		
 		return this;
@@ -345,6 +338,18 @@ Moobile.Entity = new Class({
 
 	hasOwner: function() {
 		return !!this.owner;
+	},
+
+	setWindow: function(window) {
+		this.window = window;
+	},
+	
+	getWindow: function() {
+		return this.window;
+	},
+	
+	hasWindow: function() {
+		return !!this.window;
 	},
 
 	getName: function() {
