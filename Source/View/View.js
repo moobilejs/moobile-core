@@ -84,7 +84,7 @@ Moobile.View = new Class({
 	},
 
 	getChildren: function() {
-		return [].concat(this.content.getChildren(), this.getChildren());
+		return [].concat(this.content.getChildren(), this.parent());
 	},
 
 	getChild: function(name) {	
