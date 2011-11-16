@@ -83,6 +83,10 @@ Moobile.View = new Class({
 		return this.parent(entity, where, context); 
 	},
 
+	getChildren: function() {
+		return [].concat(this.content.getChildren(), this.getChildren());
+	},
+
 	getChild: function(name) {	
 		return this.content && this.content.hasOwner()
 			 ? this.content.getChild(name) || this.parent(name)
