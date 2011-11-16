@@ -202,14 +202,12 @@ Moobile.Entity = new Class({
 
 		if (this.ready == false) {
 			this.addEvent('ready:once', function() {
-				entity.setReady(true);
-				entity.didBecomeReady();				
+				entity.setReady();		
 			});
 			return true;
 		}
 		
-		entity.setReady(true);
-		entity.didBecomeReady();		
+		entity.setReady();
 		
 		return true;
 	},
@@ -394,12 +392,14 @@ Moobile.Entity = new Class({
 
 	setReady: function(ready) {
 
-		if (this.ready != ready) {
-			this.ready = ready;
-			if (this.ready) {
-				this.fireEvent('ready');
-			}
-		}
+		if (this.ready)
+			return this;
+		
+		this.window = this.owner.getWindow();
+			
+		this.ready = true;
+		this.didBecomeReady();
+		this.fireEvent('ready');
 
 		return this;
 	},
