@@ -148,6 +148,9 @@ Moobile.ViewTransition = new Class({
 	},
 
 	onComplete: function(e) {
+		
+		e.stop();
+		
 		if (this.subjects.contains(e.target)) {
 			this.clearSubjects();
 			this.fireEvent('stop');
