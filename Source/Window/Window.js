@@ -31,8 +31,14 @@ Moobile.Window = new Class({
 		className: 'window'
 	},
 
-	setup: function() {	
-		document.body.grab(this.element);
+	initialize: function(options) {
+		var element = new Element('div#window');
+		element.inject(document.body);
+		this.parent(element, options);
+		return this;
+	},
+
+	setup: function() {		
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},

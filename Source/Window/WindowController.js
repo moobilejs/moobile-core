@@ -27,6 +27,7 @@ Moobile.WindowController = new Class({
 	
 	loadView: function() {
 		this.view = new Moobile.Window();
+		this.viewIsLoaded();
 	},	
 	
 	setRootViewController: function(rootViewController) {
