@@ -156,7 +156,7 @@ Moobile.ViewController = new Class({
 
 		this.willAddChildViewController(viewController);
 		
-		if (viewController.isModal() == false) {
+		if (!viewController.isModal()) {
 			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
 			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
 		}
