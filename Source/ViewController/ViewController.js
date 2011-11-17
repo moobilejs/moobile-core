@@ -184,8 +184,7 @@ Moobile.ViewController = new Class({
 
 	removeChildViewController: function(viewController) {
 
-		var exists = this.childViewControllers.contains(viewController);
-		if (exists == false)
+		if (!this.childViewControllers.contains(viewController))
 			return this;
 
 		this.willRemoveChildViewController(viewController);
