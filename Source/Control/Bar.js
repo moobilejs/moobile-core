@@ -70,6 +70,11 @@ Moobile.Bar = new Class({
 		}
 		
 		this.defineElementRole(item, 'item');
+	},
+	
+	destroy: function() {
+		this.item = null;
+		this.parent();
 	}
 
 });

@@ -76,10 +76,10 @@ Moobile.NavigationBarItem = new Class({
 		}
 	},	
 	
-	willUnload: function() {
+	destroy: function() {
 		this.title = null;
 		this.parent();		
-	},	
+	},
 	
 });
 

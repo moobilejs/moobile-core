@@ -53,9 +53,6 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
-
-
-
 	setValue: function(value) {
 		this.slider.set(this.value = value);
 		return this;
@@ -102,12 +99,10 @@ Moobile.Slider = new Class({
 		this.setValue(this.options.value);
 	},
 
-	didUnload: function() {
-
+	destroy: function() {
 		this.thumb = null;
 		this.track = null;
-		this.slider = null;		
-		
+		this.slider = null;
 		this.parent();		
 	},
 

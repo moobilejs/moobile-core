@@ -45,7 +45,7 @@ Moobile.Overlay = new Class({
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 	},
 
-	willUnload: function() {
+	destroy: function() {
 		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
 		this.parent();		
 	},

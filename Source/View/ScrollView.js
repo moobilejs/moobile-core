@@ -89,7 +89,19 @@ Moobile.ScrollView = new Class({
 		this.scroller.refresh();
 	},
 
-	willUnload: function() {
+	didShow: function() {
+		this.parent();
+		this.scroller.enable();
+		this.scroller.scrollTo(this.defaultContentOffset.x, this.defaultContentOffset.y);
+	},
+
+	willHide: function() {
+		this.parent();
+		this.defaultContentOffset = this.scroller.getOffset();
+		this.scroller.disable();
+	},
+
+	destroy: function() {
 		
 		this.scroller.removeEvent('scrollstart', this.bound('onViewScrollStart'));
 		this.scroller.removeEvent('scrollmove', this.bound('onViewScrollMove'));
@@ -101,18 +113,6 @@ Moobile.ScrollView = new Class({
 		this.wrapper = null;
 		
 		this.parent();
-	},
-
-	didShow: function() {
-		this.parent();
-		this.scroller.enable();
-		this.scroller.scrollTo(this.defaultContentOffset.x, this.defaultContentOffset.y);
-	},
-
-	willHide: function() {
-		this.parent();
-		this.defaultContentOffset = this.scroller.getOffset();
-		this.scroller.disable();
 	},
 
 	onViewScrollRefresh: function() {

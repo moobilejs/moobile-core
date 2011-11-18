@@ -45,6 +45,11 @@ Moobile.Image = new Class({
 
 	getSource: function() {
 		return this.element.get('src');
+	},
+	
+	destroy: function() {
+		this.image = null;
+		this.parent();
 	}
 
 });

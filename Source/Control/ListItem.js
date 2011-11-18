@@ -29,7 +29,7 @@ Moobile.ListItem = new Class({
 
 	image: null,
 
-	accessory: null,
+	infos: null,
 
 	options: {
 		className: 'list-item'
@@ -135,12 +135,10 @@ Moobile.ListItem = new Class({
 		this.defineElementRole(infos, 'infos');
 	},
 	
-	willUnload: function() {
-		
+	destroy: function() {
 		this.label = null;
 		this.image = null;
 		this.infos = null;
-		
 		this.parent();
 	}
 

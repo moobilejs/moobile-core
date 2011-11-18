@@ -45,7 +45,7 @@ Moobile.ViewPanel = new Class({
 		}
 	},
 
-	willUnload: function() {
+	destroy: function() {
 		this.sidePanel = null;
 		this.mainPanel = null;	
 		this.parent();		

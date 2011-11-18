@@ -119,19 +119,6 @@ Moobile.Alert = new Class({
 		this.element.grab(this.dialog);
 	},
 	
-	willUnload: function() {
-		
-		this.dialog = null;
-		this.header = null;
-		this.footer = null;
-		this.content = null;
-		this.buttons = null;	
-		this.message = null;
-		this.title = null;
-		
-		this.parent();		
-	},	
-	
 	didAddChild: function(entity) {
 		
 		this.parent(entity);
@@ -169,6 +156,19 @@ Moobile.Alert = new Class({
 			this.addButton(button);			
 		}
 	},
+
+	destroy: function() {
+		
+		this.dialog = null;
+		this.header = null;
+		this.footer = null;
+		this.content = null;
+		this.buttons = null;	
+		this.message = null;
+		this.title = null;
+		
+		this.parent();		
+	},	
 
 	onButtonClick: function(e) {
 

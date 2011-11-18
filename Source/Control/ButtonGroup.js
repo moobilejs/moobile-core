@@ -113,6 +113,12 @@ Moobile.ButtonGroup = new Class({
 		}	
 	},
 
+	destroy: function() {
+		this.selectedButton = null;
+		this.selectedButtonIndex = -1;
+		this.parent();	
+	},
+
 	onButtonClick: function(e) {
 		this.setSelectedButton(e.target);
 		this.fireEvent('buttonClick', e.target);

@@ -23,8 +23,6 @@ Moobile.Label = new Class({
 
 	Extends: Moobile.Entity,
 
-	text: null,
-
 	options: {
 		className: 'label'
 	},

@@ -46,6 +46,11 @@ Moobile.BarTitle = new Class({
 
 	getText: function() {
 		return this.text;
+	},
+	
+	destroy: function() {
+		this.text = null;
+		this.parent();
 	}
 
 });
