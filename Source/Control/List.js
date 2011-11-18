@@ -106,6 +106,12 @@ Moobile.List = new Class({
 		}
 	},
 
+	destroy: function() {
+		this.selectedItem = null;
+		this.selectedItemIndex = -1;
+		this.parent();
+	},
+
 	onItemClick: function(e) {
 		var item = e.target;
 		if (this.selectable) this.setSelectedItem(item);
