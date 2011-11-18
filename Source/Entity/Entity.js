@@ -238,9 +238,9 @@ Moobile.Entity = new Class({
 	},
 
 	removeFromParent: function() {
-		var parent = this.owner || this.window;
-		if (parent) return parent.removeChild(this);
-		return false;
+		return this.owner
+		     ? this.owner.removeChild(this)
+		     : false;
 	},
 	
 	addClass: function(name) {
