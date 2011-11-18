@@ -33,9 +33,9 @@ Moobile.BarButton = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('bar-button', null, function(element, options, name) {
+Moobile.Entity.defineRole('bar-button', null, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-bar-button') || Moobile.BarButton, element, options, name);
+	var instance = Class.instantiate(element.get('data-bar-button') || Moobile.BarButton, element, null, name);
 	if (instance instanceof Moobile.BarButton) {
 		this.addChild(instance);
 	}	

@@ -41,33 +41,6 @@ Moobile.Alert = new Class({
 	options: {
 		className: 'alert'
 	},
-
-	setup: function() {
-
-		this.parent();
-
-		this.header  = new Element('div.dialog-header');
-		this.footer  = new Element('div.dialog-footer');
-		this.content = new Element('div.dialog-content');
-		
-		this.dialog = new Element('div.dialog');
-		this.dialog.grab(this.header);
-		this.dialog.grab(this.content);
-		this.dialog.grab(this.footer);
-
-		this.element.grab(this.dialog);
-	},
-	
-	teardown: function() {
-		this.parent();
-		this.dialog = null;
-		this.header = null;
-		this.footer = null;
-		this.content = null;
-		this.buttons = null;	
-		this.message = null;
-		this.title = null;
-	},
 	
 	setTitle: function(title) {
 
@@ -129,6 +102,35 @@ Moobile.Alert = new Class({
 		this.addChild(button, 'bottom', this.footer);
 		return this;
 	},
+	
+	didLoad: function() {
+
+		this.parent();
+
+		this.header  = new Element('div.dialog-header');
+		this.footer  = new Element('div.dialog-footer');
+		this.content = new Element('div.dialog-content');
+		
+		this.dialog = new Element('div.dialog');
+		this.dialog.grab(this.header);
+		this.dialog.grab(this.content);
+		this.dialog.grab(this.footer);
+
+		this.element.grab(this.dialog);
+	},
+	
+	willUnload: function() {
+		
+		this.dialog = null;
+		this.header = null;
+		this.footer = null;
+		this.content = null;
+		this.buttons = null;	
+		this.message = null;
+		this.title = null;
+		
+		this.parent();		
+	},	
 	
 	didAddChild: function(entity) {
 		

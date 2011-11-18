@@ -55,7 +55,7 @@ Moobile.Entity = new Class({
 	options: {
 		className: null,
 		styleName: null,
-		tagName: 'div',
+		tagName: 'div'
 	},
 
 	initialize: function(element, options, name) {
@@ -85,86 +85,54 @@ Moobile.Entity = new Class({
 				
 		this.setOptions(options);				
 
+		this.element.addEvent('click', this.bound('onClick'));
+		this.element.addEvent('mouseup', this.bound('onMouseUp'))
+		this.element.addEvent('mousedown', this.bound('onMouseDown'));
+
+		this.willLoad();
+
 		var className = this.options.className;
 		if (className) {
 			this.element.addClass(className);
 		}		
 		
-		this.loadStyle();		
-		this.loadRoles();
-
-		this.setup();
-		this.attachEvents();
-		
-		return this;
-	},
-
-	loadRoles: function() {
-		
-		this.rolesWillLoad();
-
-		var attach = function(element) {
-			var role = element.get('data-role');
-			if (role) {
-				this.setRole(role, element);
-			}
-		}.bind(this);
-
-		this.element.getElements('[data-role]').filter(this.bound('hasRoleElement')).each(attach);
-		
-		this.rolesDidLoad();
-	},
-	
-	loadStyle: function() {
-		
-		this.styleWillLoad();
-		
 		var styleName = this.options.styleName
 		if (styleName) {
 			this.setStyle(styleName);
 		}
+		
+		this.element.getElements('[data-role]').each(function(element) {
+			if (this.hasRoleElement(element)) {
+				this.defineElementRole(element, element.get('data-role'));	
+			} 
+		}, this);
 
-		this.styleDidLoad();
+		this.didLoad();
+		
+		return this;
 	},
-
-	setup: function() {
-
-	},
-
-	teardown: function() {
-
-	},
-
+	
 	destroy: function() {
 		
+		this.willUnload();
+
+		this.element.removeEvent('click', this.bound('onClick'));
+		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
+		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
+
 		this.removeFromParent();
-		
-		this.detachEvents();
 
 		this.children.each(function(entity){ entity.destroy() });
 		this.children = null;
-
-		this.teardown(); 
 		
 		this.element.destroy();
 		this.element = null;
 		this.window = null;
 		this.owner = null;
-		this.ready = false;
+		
+		this.didUnload();
 		
 		return this;
-	},
-
-	attachEvents: function() {
-		this.element.addEvent('click', this.bound('onClick'));
-		this.element.addEvent('mouseup', this.bound('onMouseUp'))
-		this.element.addEvent('mousedown', this.bound('onMouseDown'));
-	},
-
-	detachEvents: function() {
-		this.element.removeEvent('click', this.bound('onClick'));
-		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
-		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 	},
 
 	addChild: function(entity, where, context) {
@@ -195,7 +163,6 @@ Moobile.Entity = new Class({
 		entity.ownerWillChange(this);
 		entity.setOwner(this);
 		entity.ownerDidChange(this);
-
 		entity.setWindow(this.window);
 
 		this.didAddChild(entity);
@@ -283,37 +250,16 @@ Moobile.Entity = new Class({
 		this.element.toggleClass(name);
 		return this;
 	},	
-	
-	setRole: function(role, element) {
-
-		if (element.retrieve('entity.roles.role'))
-			return this;
-
-		var fn = this.$roles[role];
-		if (fn) {
-			element.store('entity.roles.role', fn.call(this, element, null, element.get('data-name')) || true);					
-		}
 		
-		return this;
-	},
-	
-	getRole: function(element) {
-		return element.retrieve('entity.roles.role');
-	},
-	
 	setStyle: function(name) {
 
 		if (this.style) {
-			if (this.style.detach) {
-				this.style.detach.call(this, this.element);
-			}
+			this.style.detach.call(this, this.element);
 		}
 
 		var style = this.$styles[name];
 		if (style) {
-			if (style.attach) {
-				style.attach.call(this, this.element);
-			}			
+			style.attach.call(this, this.element);			
 		}
 
 		this.style = style;
@@ -322,9 +268,9 @@ Moobile.Entity = new Class({
 	},
 	
 	getStyle: function() {
-		return this.style;
+		return this.style.name;
 	},
-	
+		
 	setOwner: function(owner) {
 		this.owner = owner;
 		return this;
@@ -373,24 +319,41 @@ Moobile.Entity = new Class({
 	},
 
 	getRoleElements: function(role) {
-		return this.element.getElements('[data-role="' + role.clean() + '"]').filter(this.bound('hasRoleElement'));
+		return this.element.getElements('[data-role=' + role + ']').filter(this.bound('hasRoleElement'));
 	},	
 
 	hasRoleElement: function(element) {
 
 		var parent = element.getParent();
 		if (parent) {
-			return this.element === parent || this.hasRoleElement.call(this, parent);
+			return this.element === parent || this.hasRoleElement(parent);
 		}
 
 		return false;
 	},
 	
+	defineElementRole: function(element, name) {
+
+		if (element.retrieve('entity.has-role'))
+			return this;
+
+		var role = this.$roles[name];
+		if (role) {	
+			role.call(this, element, element.get('data-name'));					
+		} else {
+			throw new Error('Role ' + name + ' does not exists.');
+		}
+		
+		element.store('entity.has-role', true);
+		
+		return this;
+	},	
+	
 	getSize: function() {
 		return this.element.getSize();
 	},
 
-	setReady: function(ready) {
+	setReady: function() {
 
 		if (this.ready)
 			return this;
@@ -420,6 +383,22 @@ Moobile.Entity = new Class({
 		this.element.hide();
 		this.didHide();
 		return this;
+	},
+
+	willLoad: function() {
+		
+	},
+	
+	didLoad: function() {
+		
+	},
+	
+	willUnload: function() {
+		
+	},
+	
+	didUnload: function() {
+		
 	},
 
 	didBecomeReady: function() {
@@ -466,22 +445,6 @@ Moobile.Entity = new Class({
 
 	},	
 
-	rolesWillLoad: function() {
-
-	},
-	
-	rolesDidLoad: function() {
-
-	},
-	
-	styleWillLoad: function() {
-		
-	},
-	
-	styleDidLoad: function() {
-		
-	},	
-
 	onClick: function(e) {
 		e.target = this;
 		this.fireEvent('click', e);
@@ -508,5 +471,9 @@ Moobile.Entity.defineRole = function(name, target, fn) {
 };
 
 Moobile.Entity.defineStyle = function(name, target, def) {
-	(target || Moobile.Entity).prototype.$styles[name] = def;
+	(target || Moobile.Entity).prototype.$styles[name] = Object.append({
+		name: name,
+		attach: function() {},
+		detach: function() {}
+	}, def);
 };

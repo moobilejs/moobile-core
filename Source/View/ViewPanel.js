@@ -27,7 +27,15 @@ Moobile.ViewPanel = new Class({
 
 	mainPanel: null,
 
-	setup: function() {
+	getSidePanel: function() {
+		return this.content.getSidePanel();
+	},
+
+	getMainPanel: function() {
+		return this.content.getMainPanel();
+	},
+	
+	didLoad: function() {
 
 		this.parent();
 
@@ -37,19 +45,11 @@ Moobile.ViewPanel = new Class({
 		}
 	},
 
-	destroy: function() {
-		this.parent();
+	willUnload: function() {
 		this.sidePanel = null;
 		this.mainPanel = null;	
-	},
-
-	getSidePanel: function() {
-		return this.content.getSidePanel();
-	},
-
-	getMainPanel: function() {
-		return this.content.getMainPanel();
-	}
+		this.parent();		
+	}	
 
 });
 
@@ -57,9 +57,9 @@ Moobile.ViewPanel = new Class({
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('content', Moobile.ViewPanel, function(element, options, name) {
+Moobile.Entity.defineRole('content', Moobile.ViewPanel, function(element, name) {
 
-	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewPanelContent, element, options, name);
+	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewPanelContent, element, null, name);
 	if (instance instanceof Moobile.ViewPanelContent) {
 		this.addChild(instance);
 		this.content = instance;

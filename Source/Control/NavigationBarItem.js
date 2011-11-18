@@ -25,21 +25,6 @@ Moobile.NavigationBarItem = new Class({
 	
 	title: null,
 	
-	setup: function() {
-		
-		this.parent();
-		
-		var className = this.options.className;
-		if (className) {
-			this.element.addClass('navigation-' + className);
-		}
-	},
-	
-	teardown: function() {
-		this.parent();
-		this.title = null;
-	},
-	
 	setTitle: function(title) {
 
 		if (this.title === title)
@@ -66,7 +51,7 @@ Moobile.NavigationBarItem = new Class({
 		return this.title;
 	},
 		
-	rolesWillLoad: function() {
+	willLoad: function() {
 
 		this.parent();
 
@@ -78,8 +63,23 @@ Moobile.NavigationBarItem = new Class({
 			title.inject(this.element);
 		}
 		
-		this.setRole('title', title);
-	}
+		this.defineElementRole(title, 'title');
+	},
+	
+	didLoad: function() {
+		
+		this.parent();
+		
+		var className = this.options.className;
+		if (className) {
+			this.element.addClass('navigation-' + className);
+		}
+	},	
+	
+	willUnload: function() {
+		this.title = null;
+		this.parent();		
+	},	
 	
 });
 
@@ -87,9 +87,9 @@ Moobile.NavigationBarItem = new Class({
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element, options, name) {
+Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element, name) {
 
-	var instance = Class.instantiate(element.get('title') || Moobile.BarTitle, element, options, name);
+	var instance = Class.instantiate(element.get('title') || Moobile.BarTitle, element, null, name);
 	if (instance instanceof Moobile.BarTitle) {
 		this.addChild(instance);
 		this.title = instance;

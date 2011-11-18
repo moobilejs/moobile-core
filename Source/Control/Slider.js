@@ -53,43 +53,8 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
-	setup: function() {
 
-		this.parent();
 
-		this.thumb = new Element('div.' + this.options.className + '-thumb');
-		this.track = new Element('div.' + this.options.className + '-track');
-		this.track.grab(this.thumb);
-
-		this.element.empty();
-		this.element.grab(this.track);
-	},
-
-	teardown: function() {
-		this.parent();
-		this.thumb = null;
-		this.track = null;
-		this.detachSlider();		
-	},
-
-	attachSlider: function() {
-
-		var options = {
-			snap: this.options.snap,
-			steps: this.options.max - this.options.min,
-			range: [this.options.min, this.options.max],
-			mode: this.options.mode
-		};
-
-		this.slider = new Slider(this.track, this.thumb, options);
-		this.slider.addEvent('move', this.bound('onMove'));
-		this.slider.addEvent('tick', this.bound('onTick'));
-		this.slider.addEvent('change', this.bound('onChange'));
-	},
-
-	detachSlider: function() {
-		this.slider = null;
-	},
 
 	setValue: function(value) {
 		this.slider.set(this.value = value);
@@ -106,10 +71,44 @@ Moobile.Slider = new Class({
 		);
 	},
 
-	didBecomeReady: function() {
+	didLoad: function() {
+
 		this.parent();
-		this.attachSlider();
+
+		this.thumb = new Element('div.' + this.options.className + '-thumb');
+		this.track = new Element('div.' + this.options.className + '-track');
+		this.track.grab(this.thumb);
+
+		this.element.empty();
+		this.element.grab(this.track);
+	},
+
+	didBecomeReady: function() {
+		
+		this.parent();
+		
+		var options = {
+			snap: this.options.snap,
+			steps: this.options.max - this.options.min,
+			range: [this.options.min, this.options.max],
+			mode: this.options.mode
+		};
+
+		this.slider = new Slider(this.track, this.thumb, options);
+		this.slider.addEvent('move', this.bound('onMove'));
+		this.slider.addEvent('tick', this.bound('onTick'));
+		this.slider.addEvent('change', this.bound('onChange'));		
+		
 		this.setValue(this.options.value);
+	},
+
+	didUnload: function() {
+
+		this.thumb = null;
+		this.track = null;
+		this.slider = null;		
+		
+		this.parent();		
 	},
 
 	onMove: function(position) {
@@ -134,9 +133,9 @@ Moobile.Slider = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('slider', null, function(element, options, name) {
+Moobile.Entity.defineRole('slider', null, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-slider') || Moobile.Slider, element, options, name);
+	var instance = Class.instantiate(element.get('data-slider') || Moobile.Slider, element, null, name);
 	if (instance instanceof Moobile.Slider) {
 		this.addChild(instance);
 	}	

@@ -45,9 +45,9 @@ Moobile.ActivityIndicator = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('activity-indicator', null, function(element, options, name) {
+Moobile.Entity.defineRole('activity-indicator', null, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-activity-indicator') || Moobile.ActivityIndicator, element, options, name);
+	var instance = Class.instantiate(element.get('data-activity-indicator') || Moobile.ActivityIndicator, element, null, name);
 	if (instance instanceof Moobile.ActivityIndicator) {
 		this.addChild(instance);
 	}

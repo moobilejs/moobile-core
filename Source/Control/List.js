@@ -130,9 +130,9 @@ Moobile.List = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('list', null, function(element, options, name) {
+Moobile.Entity.defineRole('list', null, function(element, name) {
 
-	var instance = Class.instantiate(element.get('data-list') || Moobile.List, element, options, name);
+	var instance = Class.instantiate(element.get('data-list') || Moobile.List, element, null, name);
 	if (instance instanceof Moobile.List) {
 		this.addChild(instance);
 	}
@@ -144,9 +144,9 @@ Moobile.Entity.defineRole('list', null, function(element, options, name) {
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('list-item', Moobile.List, function(element, options, name) {
+Moobile.Entity.defineRole('list-item', Moobile.List, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, options, name);
+	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, null, name);
 	if (instance instanceof Moobile.ListItem) {
 		this.addChild(instance);
 	}

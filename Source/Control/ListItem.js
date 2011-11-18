@@ -106,7 +106,7 @@ Moobile.ListItem = new Class({
 		return this.infos;
 	},
 	
-	rolesWillLoad: function() {
+	willLoad: function() {
 		
 		this.parent();
 
@@ -130,9 +130,18 @@ Moobile.ListItem = new Class({
 			infos.inject(this.element);
 		}
 		
-		this.setRole('label', label);
-		this.setRole('image', image);
-		this.setRole('infos', infos);
+		this.defineElementRole(label, 'label');
+		this.defineElementRole(image, 'image');
+		this.defineElementRole(infos, 'infos');
+	},
+	
+	willUnload: function() {
+		
+		this.label = null;
+		this.image = null;
+		this.infos = null;
+		
+		this.parent();
 	}
 
 });
@@ -141,9 +150,9 @@ Moobile.ListItem = new Class({
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, options, name) {
+Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, options, name);
+	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, null, name);
 	if (instance instanceof Moobile.Label) {
 		this.addChild(instance);
 		this.label = instance;
@@ -153,9 +162,9 @@ Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, options, 
 });
 
 
-Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, options, name) {
+Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-image') || Moobile.Image, element, options, name);
+	var instance = Class.instantiate(element.get('data-image') || Moobile.Image, element, null, name);
 	if (instance instanceof Moobile.Image) {
 		this.addChild(instance);
 	}
@@ -169,9 +178,9 @@ Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, options, 
 	return instance;	
 });
 
-Moobile.Entity.defineRole('infos', Moobile.ListItem, function(element, options, name) {
+Moobile.Entity.defineRole('infos', Moobile.ListItem, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-infos') || Moobile.Label, element, options, name);
+	var instance = Class.instantiate(element.get('data-infos') || Moobile.Label, element, null, name);
 	if (instance instanceof Moobile.Label) {
 		this.addChild(instance);
 	}

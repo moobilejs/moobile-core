@@ -34,44 +34,6 @@ Moobile.ScrollView = new Class({
 		y: 0
 	},
 
-	setup: function() {
-
-		this.parent();
-
-		this.wrapper = new Element('div');
-		this.wrapper.wraps(this.content);
-
-		if (this.options.className) {
-			this.element.addClass('scroll-' + this.options.className);
-			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
-		}
-		
-		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
-	},
-
-	teardown: function() {
-		this.parent();
-		this.scroller.destroy();
-		this.scroller = null;
-		this.wrapper = null;
-	},
-
-	attachEvents: function() {
-		this.parent();
-		this.scroller.addEvent('scrollstart', this.bound('onViewScrollStart'));
-		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
-		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));
-		this.scroller.addEvent('refresh', this.bound('onViewScrollRefresh'));
-	},
-
-	detachEvents: function() {
-		this.scroller.removeEvent('scrollstart', this.bound('onViewScrollStart'));
-		this.scroller.removeEvent('scrollmove', this.bound('onViewScrollMove'));
-		this.scroller.removeEvent('scrollend', this.bound('onViewScrollEnd'));
-		this.scroller.removeEvent('refresh', this.bound('onViewScrollRefresh'));
-		this.parent();
-	},
-
 	scrollTo: function(x, y, time, relative) {
 		this.scroller.scrollTo(x, y, time, relative);
 		return this;
@@ -103,8 +65,42 @@ Moobile.ScrollView = new Class({
 		return this.scroller.getOffset();
 	},	
 
+	didLoad: function() {
+
+		this.parent();
+
+		this.wrapper = new Element('div.wrapper');
+		this.wrapper.wraps(this.content);
+
+		if (this.options.className) {
+			this.element.addClass('scroll-' + this.options.className);
+			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
+		}
+		
+		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
+		
+		this.scroller.addEvent('scrollstart', this.bound('onViewScrollStart'));
+		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
+		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));
+		this.scroller.addEvent('refresh', this.bound('onViewScrollRefresh'));
+	},
+
 	didBecomeReady: function() {
 		this.scroller.refresh();
+	},
+
+	willUnload: function() {
+		
+		this.scroller.removeEvent('scrollstart', this.bound('onViewScrollStart'));
+		this.scroller.removeEvent('scrollmove', this.bound('onViewScrollMove'));
+		this.scroller.removeEvent('scrollend', this.bound('onViewScrollEnd'));
+		this.scroller.removeEvent('refresh', this.bound('onViewScrollRefresh'));		
+		
+		this.scroller.destroy();
+		this.scroller = null;
+		this.wrapper = null;
+		
+		this.parent();
 	},
 
 	didShow: function() {

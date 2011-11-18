@@ -58,7 +58,7 @@ Moobile.Bar = new Class({
 		return this.item;
 	},
 	
-	rolesWillLoad: function() {
+	willLoad: function() {
 		
 		this.parent();
 		
@@ -69,7 +69,7 @@ Moobile.Bar = new Class({
 			item.inject(this.element);
 		}
 		
-		this.setRole('item', item);
+		this.defineElementRole(item, 'item');
 	}
 
 });
@@ -78,9 +78,9 @@ Moobile.Bar = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('bar', null, function(element, options, name) {
+Moobile.Entity.defineRole('bar', null, function(element, name) {
 
-	var instance = Class.instantiate(element.get('data-bar') || Moobile.Bar, element, options, name);
+	var instance = Class.instantiate(element.get('data-bar') || Moobile.Bar, element, null, name);
 	if (instance instanceof Moobile.Bar) {
 		this.addChild(instance);
 	}	
@@ -92,9 +92,9 @@ Moobile.Entity.defineRole('bar', null, function(element, options, name) {
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('item', Moobile.Bar, function(element, options, name) {
+Moobile.Entity.defineRole('item', Moobile.Bar, function(element, name) {
 
-	var instance = Class.instantiate(element.get('data-item') || Moobile.BarItem, element, options, name);
+	var instance = Class.instantiate(element.get('data-item') || Moobile.BarItem, element, null, name);
 	if (instance instanceof Moobile.BarItem) {
 		this.addChild(instance);
 		this.item = instance;

@@ -30,21 +30,6 @@ Moobile.View = new Class({
 		className: 'view'
 	},
 
-	teardown: function() {
-		this.parent();
-		this.content = null;
-	},
-
-	attachEvents: function() {
-		this.parent();
-		this.element.addEvent('swipe', this.bound('onSwipe'));
-	},
-
-	detachEvents: function() {
-		this.parent();
-		this.element.removeEvent('swipe', this.bound('onSwipe'));
-	},
-
 	enable: function() {
 		this.element.removeClass('disable').addClass('enable');
 		return this;
@@ -130,7 +115,7 @@ Moobile.View = new Class({
 		return this.content;
 	},
 
-	rolesWillLoad: function() {
+	willLoad: function() {
 		
 		this.parent();
 	
@@ -141,10 +126,32 @@ Moobile.View = new Class({
 			content.inject(this.element);
 		}
 		
-		this.setRole('content', content);
+		this.defineElementRole(content, 'content');
 	},
 	
+	didLoad: function() {
+		this.parent();
+		this.element.addEvent('swipe', this.bound('onSwipe'));
+		this.element.addEvent('pinch', this.bound('onPinch'));
+	},
+
+	willUnload: function() {
+		this.parent();
+		this.element.removeEvent('swipe', this.bound('onSwipe'));
+		this.element.removeEvent('pinch', this.bound('onPinch'));		
+	},
+
+	didUnload: function() {
+		this.parent();
+		this.content = null;
+	},	
+	
 	onSwipe: function(e) {
+		e.target = this;
+		this.fireEvent('swipe', e);
+	},
+	
+	onPinch: function(e) {
 		e.target = this;
 		this.fireEvent('swipe', e);
 	}
@@ -169,12 +176,12 @@ Moobile.View.atPath = function(path) {
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('content', Moobile.View, function(element, options, name) {
+Moobile.Entity.defineRole('content', Moobile.View, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, options, name);
+	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, null, name);
 	if (instance instanceof Moobile.ViewContent) {
 		this.addChild(instance);
-		this.content = instance;		
+		this.content = instance; // must be assigned after addChild is called	
 	}
 		
 	return instance;

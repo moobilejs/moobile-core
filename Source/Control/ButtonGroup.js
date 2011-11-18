@@ -132,9 +132,9 @@ Moobile.ButtonGroup = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('button-group', null, function(element, options, name) {
+Moobile.Entity.defineRole('button-group', null, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-button-group') || Moobile.ButtonGroup, element, options, name);
+	var instance = Class.instantiate(element.get('data-button-group') || Moobile.ButtonGroup, element, null, name);
 	if (instance instanceof Moobile.ButtonGroup) {
 		this.addChild(instance);
 	}

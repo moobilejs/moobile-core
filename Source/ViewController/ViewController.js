@@ -46,9 +46,7 @@ Moobile.ViewController = new Class({
 	modal: false,
 
 	view: null,
-	
-	viewLoaded: false,
-	
+		
 	viewReady: false,
 		
 	viewTransition: null,
@@ -64,17 +62,32 @@ Moobile.ViewController = new Class({
 	childViewControllers: [],
 
 	initialize: function(options, name) {
+		
 		this.name = name;
+		
 		this.setOptions(options);
+		
+		this.viewWillLoad();
 		this.loadView();
+		this.viewDidLoad();
+		
+		if (this.view.isReady()) {
+			this.viewReady = true;
+			this.viewDidBecomeReady();
+		} else {
+			this.view.addEvent('ready', this.bound('onViewReady'));
+		}
+		
 		return this;
 	},
 
-	loadView: function(viewElement) {
+	loadView: function() {
 		this.view = new Moobile.View();
 	},
 
 	destroy: function() {
+		
+		this.viewWillUnload();
 		
 		this.destroyChildViewControllers();
 
@@ -85,8 +98,79 @@ Moobile.ViewController = new Class({
 		this.viewControllerStack = null;
 		this.viewControllerPanel = null;
 		this.parentViewController = null;
+		
+		this.viewDidUnload();
 	},
 
+	destroyChildViewControllers: function() {
+		this.childViewControllers.each(this.bound('destroyChildViewController'));
+		this.childViewControllers.empty();
+		return this;
+	},
+
+	destroyChildViewController: function(viewController) {
+		viewController.destroy();
+		viewController = null;
+		return this;
+	},
+
+	addChildViewController: function(viewController, where, context) {
+
+		this.willAddChildViewController(viewController);
+		
+		if (!viewController.isModal()) {
+			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
+			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
+		}
+		
+		viewController.setParentViewController(this);	
+		
+		this.childViewControllers.push(viewController);
+		this.view.addChild(viewController.getView(), where, context);
+		this.didAddChildViewController(viewController);
+		
+		return this;
+	},
+
+	getChildViewController: function(name) {
+		return this.childViewControllers.find(function(viewController) {
+			return viewController.getName() == name;
+		});
+	},
+
+	getChildViewControllers: function() {
+		return this.childViewControllers;
+	},
+
+	removeChildViewController: function(viewController) {
+
+		if (!this.childViewControllers.contains(viewController))
+			return this;
+
+		this.willRemoveChildViewController(viewController);
+		
+		this.childViewControllers.erase(viewController);
+		
+		viewController.setViewControllerStack(null);
+		viewController.setViewControllerPanel(null);
+		viewController.setParentViewController(null);
+		
+		this.didRemoveChildViewController(viewController);
+
+		viewController.getView().removeFromParent();
+
+		return this;
+	},
+
+	removeFromParentViewController: function() {
+		
+		if (this.parentViewController) {
+			this.parentViewController.removeChildViewController(this);
+		}
+		
+		return this;
+	},
+	
 	presentModalViewController: function(viewController, viewTransition) {
 		
 		if (this.modalViewController)
@@ -138,78 +222,7 @@ Moobile.ViewController = new Class({
 		);
 
 		return this;
-	},
-
-	destroyChildViewControllers: function() {
-		this.childViewControllers.each(this.bound('destroyChildViewController'));
-		this.childViewControllers.empty();
-		return this;
-	},
-
-	destroyChildViewController: function(viewController) {
-		viewController.destroy();
-		viewController = null;
-		return this;
-	},
-
-	addChildViewController: function(viewController, where, context) {
-
-		this.willAddChildViewController(viewController);
-		
-		if (!viewController.isModal()) {
-			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
-			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
-		}
-		
-		viewController.setParentViewController(this);	
-		
-		this.childViewControllers.push(viewController);
-		this.view.addChild(viewController.getView(), where, context);
-		this.didAddChildViewController(viewController);
-
-		viewController.viewIsLoaded();
-
-		return this;
-	},
-
-	getChildViewController: function(name) {
-		return this.childViewControllers.find(function(viewController) {
-			return viewController.getName() == name;
-		});
-	},
-
-	getChildViewControllers: function() {
-		return this.childViewControllers;
-	},
-
-	removeChildViewController: function(viewController) {
-
-		if (!this.childViewControllers.contains(viewController))
-			return this;
-
-		this.willRemoveChildViewController(viewController);
-		
-		this.childViewControllers.erase(viewController);
-		
-		viewController.setViewControllerStack(null);
-		viewController.setViewControllerPanel(null);
-		viewController.setParentViewController(null);
-		
-		this.didRemoveChildViewController(viewController);
-
-		viewController.getView().removeFromParent();
-
-		return this;
-	},
-
-	removeFromParentViewController: function() {
-		
-		if (this.parentViewController) {
-			this.parentViewController.removeChildViewController(this);
-		}
-		
-		return this;
-	},
+	},	
 	
 	getName: function() {
 		return this.name;
@@ -236,24 +249,8 @@ Moobile.ViewController = new Class({
 		return this.modal;
 	},
 
-	isViewLoaded: function() {
-		return this.viewLoaded;
-	},
-
 	isViewReady: function() {
 		return this.viewReady;
-	},
-	
-	viewIsLoaded: function() {
-		
-		this.viewLoaded = true;
-		this.viewDidLoad();
-		
-		if (this.view.isReady()) {
-			this.viewIsReady();
-		} else {
-			this.view.addEvent('ready', this.bound('onViewReady'));
-		}				
 	},
 	
 	viewIsReady: function() {
@@ -333,11 +330,23 @@ Moobile.ViewController = new Class({
 
 	},
 
+	viewWillLoad: function() {
+		
+	},
+
 	viewDidLoad: function() {
 
 	},
 	
 	viewDidBecomeReady: function() {
+		
+	},
+	
+	viewWillUnload: function() {
+		
+	},
+	
+	viewDidUnload: function() {
 		
 	},
 
@@ -358,7 +367,8 @@ Moobile.ViewController = new Class({
 	},
 
 	onViewReady: function() {
-		this.viewIsReady();
+		this.viewReady = true;
+		this.viewDidBecomeReady();
 	},
 
 	onPresentTransitionStart: function() {

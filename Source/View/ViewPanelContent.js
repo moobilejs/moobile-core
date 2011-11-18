@@ -31,7 +31,7 @@ Moobile.ViewPanelContent = new Class({
 		return this.mainPanel;
 	},
 
-	rolesWillLoad: function() {
+	willLoad: function() {
 		
 		this.parent();
 		
@@ -48,8 +48,8 @@ Moobile.ViewPanelContent = new Class({
 			side.inject(this.element, 'top');
 		}
 		
-		this.setRole('main-panel', main);
-		this.setRole('side-panel', side);
+		this.defineElementRole(main, 'main-panel');
+		this.defineElementRole(side, 'side-panel');
 	}
 	
 });
@@ -66,10 +66,8 @@ Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(eleme
 	
 	var className = this.options.className;
 	if (className) {
-		this.sidePanel.getElement().addClass('side-panel');
+		this.sidePanel.addClass('side-panel');
 	}
-	
-	return this.sidePanel;
 });
 
 Moobile.Entity.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
@@ -80,8 +78,6 @@ Moobile.Entity.defineRole('main-panel', Moobile.ViewPanelContent, function(eleme
 	
 	var className = this.options.className;
 	if (className) {
-		this.mainPanel.getElement().addClass('main-panel');
+		this.mainPanel.addClass('main-panel');
 	}
-	
-	return this.mainPanel;
 });

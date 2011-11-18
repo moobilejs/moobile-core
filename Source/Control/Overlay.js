@@ -27,16 +27,6 @@ Moobile.Overlay = new Class({
 		className: 'overlay'
 	},
 
-	attachEvents: function() {
-		this.parent();
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-	},
-
-	detachEvents: function() {
-		this.parent();
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
-	},
-
 	showAnimated: function() {
 		this.willShow();
 		this.element.show();
@@ -48,6 +38,16 @@ Moobile.Overlay = new Class({
 		this.willHide();
 		this.element.addClass('dismiss');
 		return this;
+	},
+
+	didLoad: function() {
+		this.parent();
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+	},
+
+	willUnload: function() {
+		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.parent();		
 	},
 
 	onAnimationEnd: function(e) {

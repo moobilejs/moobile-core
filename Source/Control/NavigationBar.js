@@ -23,15 +23,6 @@ provides:
 Moobile.NavigationBar = new Class({
 
 	Extends: Moobile.Bar,
-
-	setup: function() {
-		
-		this.parent();
-	
-		if (this.options.className) {
-			this.element.addClass('navigation-' + this.options.className);
-		}
-	},
 	
 	addLeftBarButton: function(button) {
 		return this.addBarButton(button, 'top');
@@ -47,7 +38,16 @@ Moobile.NavigationBar = new Class({
 
 	getTitle: function() {
 		return this.item.title;
-	}
+	},
+	
+	didLoad: function() {
+		
+		this.parent();
+	
+		if (this.options.className) {
+			this.element.addClass('navigation-' + this.options.className);
+		}
+	}	
 
 });
 
@@ -55,9 +55,9 @@ Moobile.NavigationBar = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('navigation-bar', null, function(element, options, name) {
+Moobile.Entity.defineRole('navigation-bar', null, function(element, name) {
 
-	var instance = Class.instantiate(element.get('data-navigation-bar') || Moobile.NavigationBar, element, options, name);
+	var instance = Class.instantiate(element.get('data-navigation-bar') || Moobile.NavigationBar, element, null, name);
 	if (instance instanceof Moobile.NavigationBar) {
 		this.addChild(instance);
 	}	
@@ -69,9 +69,9 @@ Moobile.Entity.defineRole('navigation-bar', null, function(element, options, nam
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, options, name) {
+Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, name) {
 
-	var instance = Class.instantiate(element.get('data-item') || Moobile.NavigationBarItem, element, options, name);
+	var instance = Class.instantiate(element.get('data-item') || Moobile.NavigationBarItem, element, null, name);
 	if (instance instanceof Moobile.NavigationBarItem) {
 		this.addChild(instance);
 		this.item = instance;

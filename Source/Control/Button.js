@@ -29,11 +29,6 @@ Moobile.Button = new Class({
 		className: 'button',
 	},
 	
-	teardown: function() {
-		this.parent();
-		this.label = null;
-	},
-
 	setLabel: function(label) {
 
 		if (this.label === label)
@@ -58,7 +53,7 @@ Moobile.Button = new Class({
 		return this.label;
 	},
 
-	rolesWillLoad: function() {
+	willLoad: function() {
 		
 		this.parent();
 		
@@ -69,8 +64,13 @@ Moobile.Button = new Class({
 			label.inject(this.element);
 		}
 		
-		this.setRole('label', label);
+		this.defineElementRole('label', label);
 	},
+	
+	didUnload: function() {
+		this.label = null;
+		this.parent();		
+	},	
 
 	onMouseDown: function(e) {
 		this.parent(e);
@@ -88,9 +88,9 @@ Moobile.Button = new Class({
 // Global Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('button', null, function(element, options, name) {
+Moobile.Entity.defineRole('button', null, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-button') || Moobile.Button, element, options, name);
+	var instance = Class.instantiate(element.get('data-button') || Moobile.Button, element, null, name);
 	if (instance instanceof Moobile.Button) {
 		this.addChild(instance);
 	}	
@@ -102,9 +102,9 @@ Moobile.Entity.defineRole('button', null, function(element, options, name) {
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('label', Moobile.Button, function(element, options, name) {
+Moobile.Entity.defineRole('label', Moobile.Button, function(element, name) {
 	
-	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, options, name);
+	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, null, name);
 	if (instance instanceof Moobile.Entity) {
 		this.addChild(instance);
 		this.label = instance;
