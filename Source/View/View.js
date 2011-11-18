@@ -136,15 +136,13 @@ Moobile.View = new Class({
 	},
 
 	willUnload: function() {
-		this.parent();
+		
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
 		this.element.removeEvent('pinch', this.bound('onPinch'));		
-	},
-
-	didUnload: function() {
-		this.parent();
 		this.content = null;
-	},	
+		
+		this.parent();
+	},
 	
 	onSwipe: function(e) {
 		e.target = this;

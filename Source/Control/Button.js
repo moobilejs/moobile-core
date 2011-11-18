@@ -67,7 +67,7 @@ Moobile.Button = new Class({
 		this.defineElementRole('label', label);
 	},
 	
-	didUnload: function() {
+	willUnload: function() {
 		this.label = null;
 		this.parent();		
 	},	
