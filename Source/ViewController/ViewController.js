@@ -105,6 +105,9 @@ Moobile.ViewController = new Class({
 
 	addChildViewController: function(viewController, where, context) {
 
+		if (this.childViewControllers.contains(viewController))
+			return false;
+
 		this.willAddChildViewController(viewController);
 		
 		if (!viewController.isModal()) {
@@ -118,7 +121,7 @@ Moobile.ViewController = new Class({
 		this.view.addChild(viewController.getView(), where, context);
 		this.didAddChildViewController(viewController);
 		
-		return this;
+		return true;
 	},
 
 	getChildViewController: function(name) {
@@ -134,7 +137,7 @@ Moobile.ViewController = new Class({
 	removeChildViewController: function(viewController) {
 
 		if (!this.childViewControllers.contains(viewController))
-			return this;
+			return false;
 
 		this.willRemoveChildViewController(viewController);
 		
@@ -148,16 +151,13 @@ Moobile.ViewController = new Class({
 
 		viewController.getView().removeFromParent();
 
-		return this;
+		return true;
 	},
 
 	removeFromParentViewController: function() {
-		
-		if (this.parentViewController) {
-			this.parentViewController.removeChildViewController(this);
-		}
-		
-		return this;
+		return this.parentViewController 
+			 ? this.parentViewController.removeChildViewController(this)
+			 : false;
 	},
 	
 	presentModalViewController: function(viewController, viewTransition) {
