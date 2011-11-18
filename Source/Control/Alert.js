@@ -48,7 +48,7 @@ Moobile.Alert = new Class({
 			return this;
 
 		if (this.title instanceof Moobile.Entity) {
-			this.title.removeFromParent();
+			this.title.removeFromOwner();
 			this.title.destroy();
 			this.title = null;
 		}
@@ -76,7 +76,7 @@ Moobile.Alert = new Class({
 			return this;
 		
 		if (this.message instanceof Moobile.Entity) {
-			this.message.removeFromParent();
+			this.message.removeFromOwner();
 			this.message.destroy();
 			this.message = null;
 		}

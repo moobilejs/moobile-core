@@ -110,12 +110,15 @@ Moobile.ViewController = new Class({
 
 		this.willAddChildViewController(viewController);
 		
+		viewController.parentViewControllerWillChange(this);
+		
 		if (!viewController.isModal()) {
 			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
 			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
 		}
-		
+				
 		viewController.setParentViewController(this);	
+		viewController.parentViewControllerDidChange(this);
 		
 		this.childViewControllers.push(viewController);
 		this.view.addChild(viewController.getView(), where, context);
@@ -143,13 +146,15 @@ Moobile.ViewController = new Class({
 		
 		this.childViewControllers.erase(viewController);
 		
+		viewController.parentViewControllerWillChange(null);
 		viewController.setViewControllerStack(null);
 		viewController.setViewControllerPanel(null);
 		viewController.setParentViewController(null);
+		viewController.parentViewControllerDidChange(null);
 		
 		this.didRemoveChildViewController(viewController);
 
-		viewController.getView().removeFromParent();
+		viewController.getView().removeFromOwner();
 
 		return true;
 	},
@@ -296,6 +301,14 @@ Moobile.ViewController = new Class({
 
 	didRemoveChildViewController: function(viewController) {
 
+	},
+	
+	parentViewControllerWillChange: function(viewController) {
+		
+	},
+	
+	parentViewControllerDidChange: function(viewController) {
+		
 	},
 
 	willPresentModalViewController: function() {

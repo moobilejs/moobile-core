@@ -120,7 +120,7 @@ Moobile.Entity = new Class({
 		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 
-		this.removeFromParent();
+		this.removeFromOwner();
 
 		this.destroyChildren();
 		
@@ -237,7 +237,7 @@ Moobile.Entity = new Class({
 		return true;
 	},
 
-	removeFromParent: function() {
+	removeFromOwner: function() {
 		return this.owner
 		     ? this.owner.removeChild(this)
 		     : false;
