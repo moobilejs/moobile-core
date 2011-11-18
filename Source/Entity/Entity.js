@@ -122,8 +122,7 @@ Moobile.Entity = new Class({
 
 		this.removeFromParent();
 
-		this.children.each(function(entity){ entity.destroy() });
-		this.children = null;
+		this.destroyChildren();
 		
 		this.element.destroy();
 		this.element = null;
@@ -131,8 +130,16 @@ Moobile.Entity = new Class({
 		this.owner = null;
 		
 		this.didUnload();
-		
-		return this;
+	},
+	
+	destroyChildren: function() {
+		this.children.each(this.bound('destroyChild'));
+		this.children.empty();
+	},
+
+	destroyChild: function(entity) {
+		entity.destroy();
+		entity = null;
 	},
 
 	addChild: function(entity, where, context) {
