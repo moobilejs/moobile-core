@@ -23,18 +23,29 @@ Moobile.ViewPanel = new Class({
 
 	Extends: Moobile.View,
 
-	sidePanel: null,
-
-	mainPanel: null,
-
+	/**
+	 * Return the view content side panel element.
+	 * @return {Element}
+	 * @since 0.1
+	 */
 	getSidePanel: function() {
 		return this.content.getSidePanel();
 	},
 
+	/**
+	 * Return the view content main panel element.
+	 * @return {Element}
+	 * @since 0.1
+	 */
 	getMainPanel: function() {
 		return this.content.getMainPanel();
 	},
-	
+
+	/**
+	 * Add a CSS class to the element.
+	 * @since 0.1
+	 * @see Entity#didLoad
+	 */
 	didLoad: function() {
 
 		this.parent();
@@ -45,11 +56,16 @@ Moobile.ViewPanel = new Class({
 		}
 	},
 
+	/**
+	 * Destroy the view panel.
+	 * @since 0.1
+	 * @see Entity#destroy
+	 */
 	destroy: function() {
 		this.sidePanel = null;
-		this.mainPanel = null;	
-		this.parent();		
-	}	
+		this.mainPanel = null;
+		this.parent();
+	}
 
 });
 

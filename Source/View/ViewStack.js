@@ -23,6 +23,11 @@ Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
 
+	/**
+	 * Add a CSS class to the element.
+	 * @since 0.1
+	 * @see Entity#didLoad
+	 */
 	didLoad: function() {
 
 		this.parent();
