@@ -176,8 +176,6 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * Build required elements before roles are applied.
-	 * @since 0.1
 	 * @see Entity#willLoad
 	 */
 	willLoad: function() {
@@ -195,7 +193,6 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @since 0.1
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
@@ -205,8 +202,6 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * Destroy the view.
-	 * @since 0.1
 	 * @see Entity#destroy
 	 */
 	destroy: function() {

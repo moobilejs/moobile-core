@@ -122,8 +122,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	},
 
 	/**
-	 * Initialize the scroller
-	 * @since 0.1
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
@@ -147,8 +145,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	},
 
 	/**
-	 * Refresh the scroller.
-	 * @since 0.1
 	 * @see Entity#didBecomeReady
 	 */
 	didBecomeReady: function() {
@@ -156,8 +152,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	},
 
 	/**
-	 * Disable the scroller and save the current position.
-	 * @since 0.1
 	 * @see Entity#didBecomeReady
 	 */
 	willHide: function() {
@@ -167,8 +161,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	},
 
 	/**
-	 * Enable the scroller and scroll to the saved position.
-	 * @since 0.1
 	 * @see Entity#didBecomeReady
 	 */
 	didShow: function() {
@@ -178,8 +170,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	},
 
 	/**
-	 * Destroy the scroll view.
-	 * @since 0.1
 	 * @see Entity#destroy
 	 */
 	destroy: function() {

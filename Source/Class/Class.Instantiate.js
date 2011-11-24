@@ -18,6 +18,11 @@ provides:
 
 Class.extend({
 
+	/**
+	 * [parse description]
+	 * @param  {[type]} name [description]
+	 * @return {[type]}
+	 */
 	parse: function(name) {
 		name = name.trim();
 		name = name.split('.');

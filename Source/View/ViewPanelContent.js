@@ -42,8 +42,6 @@ Moobile.ViewPanelContent = new Class({
 	},
 
 	/**
-	 * Build the panels.
-	 * @since 0.1
 	 * @see Entity#willLoad.
 	 */
 	willLoad: function() {

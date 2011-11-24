@@ -42,8 +42,6 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * Add a CSS class to the element.
-	 * @since 0.1
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
@@ -57,8 +55,6 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * Destroy the view panel.
-	 * @since 0.1
 	 * @see Entity#destroy
 	 */
 	destroy: function() {
