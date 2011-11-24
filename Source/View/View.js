@@ -94,7 +94,7 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * Get a child from the view or the view content.
+	 * Return a child from the view or the view content.
 	 * @since 0.1
 	 * @see Entity#getChild
 	 */

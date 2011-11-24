@@ -35,13 +35,13 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	],
 
 	/**
-	 * Contains the role definitions for this entity.
+	 * Contains the role definitions for the entity.
 	 * @type {Object}
 	 */
 	$roles: {},
 
 	/**
-	 * Contains the style definitions for this entity.
+	 * Contains the style definitions for the entity.
 	 * @type {Object}
 	 */
 	$styles: {},
@@ -150,7 +150,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 		}
 
 		this.element.getElements('[data-role]').each(function(element) {
-			if (this.hasRoleElement(element)) {
+			if (this.filterRoleElement(element)) {
 				this.defineElementRole(element, element.get('data-role'));
 			}
 		}, this);
@@ -161,7 +161,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Destroy the entire hierarchy.
+	 * Destroy the view and its hierarchy.
 	 * @return {Entity}
 	 * @since 0.1
 	 */
@@ -188,7 +188,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Destroy the entity children.
+	 * Destroy the child entities.
 	 * @since 0.1
 	 * @ignore
 	 */
@@ -198,7 +198,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Destroy an entity child.
+	 * Destroy a child entity.
 	 * @param {Entity} entity The entity to destroy.
 	 * @since 0.1
 	 * @ignore
@@ -208,9 +208,10 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Add an entity to the hierarchy at a given location.
-	 * @param {Entity} entity The entity.
-	 * @param {String} where The entity location (top, bottom, before, after).
+	 * Add a child entity at a specific location. If the location is
+	 * unspecified, the child entity will go to the bottom.
+	 * @param {Entity} entity The child entity.
+	 * @param {String} where The child entity location can be top, bottom, before or after.
 	 * @param {Element} context The entity location context element.
 	 * @return {Boolean}
 	 * @since 0.1
@@ -260,7 +261,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Indicate whether the entity has a child.
+	 * Indicate whether an entity is a direct child of the entity.
 	 * @param {Entity} entity The entity.
 	 * @return {Boolean}
 	 * @since 0.1
@@ -270,7 +271,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get a child entity by its name.
+	 * Return a child entity by its name.
 	 * @param {String} name The entity name.
 	 * @return {Entity}
 	 * @since 0.1
@@ -282,7 +283,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get child entities.
+	 * Return all child entities.
 	 * @return {Array}
 	 * @since 0.1
 	 */
@@ -352,7 +353,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Adds the passed in class to the entity's element.
+	 * Adds a CSS class to the entity's element.
 	 * @param {String} name The CSS class.
 	 * @return {Entity}
 	 * @since 0.1
@@ -363,7 +364,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Remove the passed in class from the entity's element.
+	 * Remove a CSS class from the entity's element.
 	 * @param {String} name The CSS class.
 	 * @return {Entity}
 	 * @since 0.1
@@ -374,7 +375,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Adds or removes the passed in class name to the entity's element.
+	 * Adds or removes a CSS class name to the entity's element.
 	 * @param {String} name The CSS class.
 	 * @return {Entity}
 	 * @since 0.1
@@ -407,7 +408,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get the current style of the entity.
+	 * Return the current style of the entity.
 	 * @return {String}
 	 * @since 0.1
 	 */
@@ -427,7 +428,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get the entity's owner.
+	 * Return the entity's owner.
 	 * @return {Entity}
 	 * @since 0.1
 	 */
@@ -436,7 +437,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Indicates whether this entity has an owner.
+	 * Indicates whether the entity has an owner.
 	 * @return {Boolean}
 	 * @since 0.1
 	 */
@@ -456,7 +457,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get the entity's window.
+	 * Return the entity's window.
 	 * @return {Window}
 	 * @since 0.1
 	 */
@@ -465,7 +466,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Indicates whether this entity has a window.
+	 * Indicates whether the entity has a window.
 	 * @return {Boolean}
 	 * @since 0.1
 	 */
@@ -474,7 +475,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get the entity's name.
+	 * Return the entity's name.
 	 * @return {String}
 	 * @since 0.1
 	 */
@@ -483,7 +484,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get the entity's element or an element who match the selector.
+	 * Return the entity's element or an element that match the selector.
 	 * @param {String} selector The selector
 	 * @return {Element}
 	 * @since 0.1
@@ -495,7 +496,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get a collection of elements who match the selector.
+	 * Return a collection of elements that match the selector.
 	 * @param {String} selector The selector
 	 * @return {Elements}
 	 * @since 0.1
@@ -505,7 +506,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Indicates whether an element exists in this entity.
+	 * Indicates whether an element exists in the entity.
 	 * @param {Element} element The element.
 	 * @return {Boolean}
 	 * @since 0.1
@@ -515,7 +516,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get an element within the scope of this entity who performs a given role.
+	 * Return an element performing a given role.
 	 * @param {String} role The role.
 	 * @return {Element}
 	 * @since 0.1
@@ -525,45 +526,44 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Get an element collection within the scole of this entity who performs a
-	 * given role.
+	 * Return a collection of elements performing a given role.
 	 * @param {String} role The role.
 	 * @return {Elements}
 	 * @since 0.1
 	 */
 	getRoleElements: function(role) {
-		return this.element.getElements('[data-role=' + role + ']').filter(this.bound('hasRoleElement'));
+		return this.element.getElements('[data-role=' + role + ']').filter(this.bound('filterRoleElement'));
 	},
 
 	/**
 	 * @todo Find a more suitable name.
 	 * @ignore
 	 */
-	hasRoleElement: function(element) {
+	filterRoleElement: function(element) {
 
 		var parent = element.getParent();
 		if (parent) {
-			return this.element === parent || this.hasRoleElement(parent);
+			return this.element === parent || this.filterRoleElement(parent);
 		}
 
 		return false;
 	},
 
 	/**
-	 * Apply a role to an element.
+	 * Define the role of an element.
 	 * @param {Element} element The element.
 	 * @param {String} name The role.
 	 * @return {Entity}
 	 * @since 0.1
 	 */
-	defineElementRole: function(element, name) {
+	defineElementRole: function(element, role) {
 
 		if (element.retrieve('entity.has-role'))
 			return this;
 
-		var role = this.$roles[name];
+		role = this.$roles[role];
 		if (role == undefined) {
-			throw new Error('Role ' + name + ' does not exists.');
+			throw new Error('Role ' + role + ' does not exists.');
 		}
 
 		role.call(this, element, element.get('data-name'));
@@ -583,7 +583,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Mark the entity as being part of the DOM.
+	 * Set the entity as being part of the DOM.
 	 * @return {Entity}
 	 * @since 0.1
 	 * @ignore
@@ -613,7 +613,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Show this entity by changing the display style to its default value.
+	 * Show the entity.
 	 * @return {Entity}
 	 * @since 0.1
 	 */
@@ -625,7 +625,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Hide this entity by changing the display style to none.
+	 * Hide the entity.
 	 * @return {Entity}
 	 * @since 0.1
 	 */
@@ -892,7 +892,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 });
 
 /**
- * Define how a role will perform for an entity.
+ * Define a role.
  * @param {String} name The role name.
  * @param {Entity} target The role target.
  * @param {Function} behavior The role behavior.
@@ -903,7 +903,7 @@ Moobile.Entity.defineRole = function(name, target, behavior) {
 };
 
 /**
- * Defines a style for an entity.
+ * Define a style.
  * @param {String} name The style name.
  * @param {Entity} target The style target.
  * @param {Object} behavior The style behavior.
