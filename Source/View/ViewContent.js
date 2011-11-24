@@ -24,7 +24,7 @@ Moobile.ViewContent = new Class({
 	Extends: Moobile.Entity,
 
 	/**
-	 * Options.
+	 * The class options.
 	 * @type {Object}
 	 */
 	options: {

@@ -31,7 +31,7 @@ Moobile.View = new Class({
 	content: null,
 
 	/**
-	 * Options.
+	 * The class options.
 	 * @type {Object}
 	 */
 	options: {

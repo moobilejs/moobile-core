@@ -89,7 +89,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	ready: false,
 
 	/**
-	 * Options.
+	 * The class options.
 	 * @type {Object}
 	 */
 	options: {

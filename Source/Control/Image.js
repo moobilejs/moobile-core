@@ -23,13 +23,15 @@ Moobile.Image = new Class({
 
 	Extends: Moobile.Entity,
 
-	image: null,
-
+	/**
+	 * The class options.
+	 * @type {Object}
+	 */
 	options: {
 		className: 'image',
 		tagName: 'img'
 	},
-	
+
 	setSource: function(source) {
 
 		this.element.set('src', null);
@@ -46,7 +48,7 @@ Moobile.Image = new Class({
 	getSource: function() {
 		return this.element.get('src');
 	},
-	
+
 	destroy: function() {
 		this.image = null;
 		this.parent();
