@@ -70,43 +70,8 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	},
 
 	/**
-	 * Add a bar button to the bar item.
-	 * @since 0.1
-	 * @see Entity#addChild
+	 * @see Entity#willLaod
 	 */
-	addBarButton: function(item, where, context) {
-		return this.item.addChild(item, where, context);
-	},
-
-	/**
-	 * Return a bar button from the bar item.
-	 * @since 0.1
-	 * @see Entity#getChild
-	 */
-	getBarButton: function(name) {
-		return this.item.getChild(name);
-	},
-
-	/**
-	 * Remove a bar button from the bar item.
-	 * @since 0.1
-	 * @see Entity#removeChild
-	 */
-	removeBarButton: function(item) {
-		return this.item.removeChild(item);
-	},
-
-	/**
-	 * Remove all bar buttons from the bar item.
-	 * @since 0.1
-	 * @see Entity#removeChildren
-	 */
-	removeAllBarButton: function() {
-		return this.item.removeChildren();
-	},
-
-
-
 	willLoad: function() {
 
 		this.parent();
@@ -121,6 +86,9 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		this.defineElementRole(item, 'item');
 	},
 
+	/**
+	 * @see Entity#destroy
+	 */
 	destroy: function() {
 		this.item = null;
 		this.parent();
