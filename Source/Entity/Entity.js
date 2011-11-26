@@ -3,8 +3,8 @@
 
 name: Entity
 
-description: Provides the base class for every objects that are displayed
-             through an element.
+description: Provides the base class for objects that encapsulates a DOM
+             element. Also support methods to manage a hierarchy of entities.
 
 license: MIT-style license.
 
@@ -26,6 +26,16 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
+/**
+ * Provides the base class for objects that encapsulates a DOM element. Also
+ * support methods to manage a hierarchy of entities.
+ *
+ * @name Entity
+ * @class Entity
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 	Implements: [
@@ -37,12 +47,14 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	/**
 	 * Contains the role definitions for the entity.
 	 * @type {Object}
+	 * @private
 	 */
 	$roles: {},
 
 	/**
 	 * Contains the style definitions for the entity.
 	 * @type {Object}
+	 * @private
 	 */
 	$styles: {},
 
@@ -120,7 +132,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 		this.element = root;
 
-		options = options || {};
+		options = options || {};
 
 		for (var option in this.options) {
 			var value = this.element.get('data-option-' + option.hyphenate());
@@ -893,9 +905,11 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 /**
  * Define a role.
+ * @name Entity.defineRole
  * @param {String} name The role name.
  * @param {Entity} target The role target.
  * @param {Function} behavior The role behavior.
+ * @function
  * @since 0.1
  */
 Moobile.Entity.defineRole = function(name, target, behavior) {
@@ -904,9 +918,12 @@ Moobile.Entity.defineRole = function(name, target, behavior) {
 
 /**
  * Define a style.
+ * @name Entity.defineStyle
  * @param {String} name The style name.
  * @param {Entity} target The style target.
  * @param {Object} behavior The style behavior.
+ * @function
+ * @since 0.1
  */
 Moobile.Entity.defineStyle = function(name, target, behavior) {
 	(target || Moobile.Entity).prototype.$styles[name] = Object.append({

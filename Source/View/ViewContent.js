@@ -3,7 +3,7 @@
 
 name: ViewContent
 
-description: Provides the content of a view.
+description: Manages the content of a view.
 
 license: MIT-style license.
 
@@ -19,7 +19,17 @@ provides:
 ...
 */
 
-Moobile.ViewContent = new Class({
+/**
+ * Manages the content of a view.
+ *
+ * @name ViewContent
+ * @class ViewContent
+ * @extends Entity
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 
 	Extends: Moobile.Entity,
 

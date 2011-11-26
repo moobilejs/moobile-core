@@ -3,7 +3,7 @@
 
 name: ViewPanelContent
 
-description: Provides the content of a view panel.
+description: Manages the content of a view panel.
 
 license: MIT-style license.
 
@@ -19,6 +19,16 @@ provides:
 ...
 */
 
+/**
+ * Manages the content of a view panel.
+ *
+ * @name ViewPanelContent
+ * @class ViewPanelContent
+ * @extends ViewContent
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.ViewPanelContent = new Class({
 
 	Extends: Moobile.ViewContent,

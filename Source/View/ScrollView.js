@@ -3,8 +3,8 @@
 
 name: ScrollView
 
-description: Provides a view that scroll up or down when the content is larger
-             that the view area.
+description: Provides a view that scrolls when its content is larger than the
+             view area.
 
 license: MIT-style license.
 
@@ -21,6 +21,16 @@ provides:
 ...
 */
 
+/**
+ * Provides a view that scrolls when its content is larger than the view area.
+ *
+ * @name ScrollView
+ * @class ScrollView
+ * @extends View
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 
 	Extends: Moobile.View,

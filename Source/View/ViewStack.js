@@ -3,7 +3,8 @@
 
 name: ViewStack
 
-description: Provides a view used in a ViewControllerStack.
+description: Provides a view that handles an infinite number of views arrenged
+             as a stack, one on the top of each others.
 
 license: MIT-style license.
 
@@ -19,7 +20,18 @@ provides:
 ...
 */
 
-Moobile.ViewStack = new Class({
+/**
+ * Provides a view that handles an infinite number of views arrenged as a
+ * stack, one on the top of each others.
+ *
+ * @name ViewStack
+ * @class ViewStack
+ * @extends View
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.ViewStack = new Class( /* @lends ViewStack.prototype */ {
 
 	Extends: Moobile.View,
 

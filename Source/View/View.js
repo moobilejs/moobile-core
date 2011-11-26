@@ -3,8 +3,8 @@
 
 name: View
 
-description: Provides the base class for every objects that are displayed
-             through an element.
+description: Provides an entity that handles an area in which a user can
+             interract.
 
 license: MIT-style license.
 
@@ -20,7 +20,17 @@ provides:
 ...
 */
 
-Moobile.View = new Class({
+/**
+ * Provides an entity that handles an area in which a user can interract.
+ *
+ * @name View
+ * @class View
+ * @extends Entity
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.View = new Class( /** @lends View.prototype */ {
 
 	Extends: Moobile.Entity,
 
@@ -215,7 +225,7 @@ Moobile.View = new Class({
 	 * Swipe event handler.
 	 * @param {Event} e The event.
 	 * @since 0.1
-	 * @ignore
+	 * @private
 	 */
 	onSwipe: function(e) {
 		e.target = this;
@@ -226,7 +236,7 @@ Moobile.View = new Class({
 	 * Pinch event handler.
 	 * @param {Event} e The event.
 	 * @since 0.1
-	 * @ignore
+	 * @private
 	 */
 	onPinch: function(e) {
 		e.target = this;

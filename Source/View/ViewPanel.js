@@ -3,7 +3,7 @@
 
 name: ViewPanel
 
-description: Provides the view used in a ViewControllerPanel.
+description: Provides a view that handles a panel with two panes.
 
 license: MIT-style license.
 
@@ -19,7 +19,17 @@ provides:
 ...
 */
 
-Moobile.ViewPanel = new Class({
+/**
+ * Provides a view that handles a panel with two panes.
+ *
+ * @name ViewPanel
+ * @class ViewPanel
+ * @extends View
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 
 	Extends: Moobile.View,
 
