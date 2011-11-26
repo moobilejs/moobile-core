@@ -3,7 +3,7 @@
 
 name: Scroller
 
-description: Provides a wrapper for the iScroll class. 
+description: Provides a wrapper for the iScroll scroller.
 
 license: MIT-style license.
 
@@ -41,7 +41,18 @@ iScroll.prototype._checkDOMChanges = function() {
 
 })();
 
-Moobile.Scroller = new Class({
+/**
+ * Provides a wrapper for the iScroll scroller. This class needs major refactor
+ * as iScroll is becomming less usefull becase the performance are not very
+ * good on android and iOS 5 provides native scrolling.
+ *
+ * @name Scroller
+ * @class Scroller
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 
 	Implements: [
 		Events,
@@ -49,15 +60,11 @@ Moobile.Scroller = new Class({
 		Class.Binds
 	],
 
-	ready: null,
-
 	content: null,
 
 	wrapper: null,
 
 	scroller: null,
-
-	size: null,
 
 	options: {
 		useTransform: true,
@@ -91,6 +98,9 @@ Moobile.Scroller = new Class({
 		return this;
 	},
 
+	/**
+	 * @private
+	 */
 	attachEvents: function() {
 		this.scroller.options.onScrollStart = this.bound('onScrollStart');
 		this.scroller.options.onScrollMove = this.bound('onScrollMove');
@@ -98,6 +108,9 @@ Moobile.Scroller = new Class({
 		this.scroller.options.onRefresh = this.bound('onRefresh');
 	},
 
+	/**
+	 * @private
+	 */
 	detachEvents: function() {
 		this.scroller.options.onScrollStart = null;
 		this.scroller.options.onScrollMove = null;
@@ -111,42 +124,42 @@ Moobile.Scroller = new Class({
 			y: this.scroller.currPageY
 		};
 	},
-	
+
 	getAbsoluteDistance: function() {
 		return {
 			x: this.scroller.absDistX,
 			y: this.scroller.absDistY
 		};
 	},
-	
+
 	getDistance: function() {
 		return {
 			x: this.scroller.distX,
-			y: this.scroller.distY			
+			y: this.scroller.distY
 		};
 	},
-	
+
 	getDirection: function() {
 		return {
 			x: this.scroller.dirX,
 			y: this.scroller.dirY
-		};	
+		};
 	},
-	
+
 	getAbsoluteStart: function() {
 		return {
 			x: this.scroller.absStartX,
 			y: this.scroller.absStartY
 		};
 	},
-	
+
 	getStart: function() {
 		return {
 			x: this.scroller.startX,
 			y: this.scroller.startY
 		};
 	},
-	
+
 	getPages: function() {
 		return {
 			x: this.scroller.pagesX,
@@ -156,7 +169,7 @@ Moobile.Scroller = new Class({
 
 	getOffset: function() {
 
-		// TODO: I just realized this information might be found in iscroll 
+		// TODO: I just realized this information might be found in iscroll
 		// directly, I'll have to fix this instead of using "fancy"
 		// regular expressions
 

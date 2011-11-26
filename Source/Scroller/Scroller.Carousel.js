@@ -3,7 +3,7 @@
 
 name: Scroller.Carousel
 
-description: Creates a Scroller that snaps to elements.
+description: Provides a scroller that snaps to elements to create a carousel.
 
 license: MIT-style license.
 
@@ -19,7 +19,17 @@ provides:
 ...
 */
 
-Moobile.Scroller.Carousel = new Class({
+/**
+ * Provides a scroller that snaps to elements to create a carousel. As for the
+ * Scroller class, this class will receive a major refactor soon.
+ *
+ * @name Scroller.Carousel
+ * @class Scroller.Carousel
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Scroller.Carousel = new Class( /** @lends Scroller.Carousel.prototype */ {
 
 	Extends: Moobile.Scroller,
 
