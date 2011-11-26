@@ -3,7 +3,7 @@
 
 name: Label
 
-description: Provides a control that display some text.
+description: Provides a control that displays a label.
 
 license: MIT-style license.
 
@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * Provides a control that displays some text.
+ * Provides a control that displays a label.
  *
  * @name Label
  * @class Label
