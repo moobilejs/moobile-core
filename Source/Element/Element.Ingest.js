@@ -3,8 +3,7 @@
 
 name: Element.Ingest
 
-description: Provides a method that grab all the child element from an element
-             or a string.
+description: Provides extra methods to the Element prototype.
 
 license: MIT-style license.
 
@@ -21,7 +20,15 @@ provides:
 */
 
 
-
+/**
+ * Provides extra methods to the Element prototype.
+ *
+ * @name Element
+ * @class Element
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Element.implement( /** @lends Element.prototype */ {
 
 	/**
