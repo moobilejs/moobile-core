@@ -191,8 +191,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Button click event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onButtonClick: function(e) {
 		this.setSelectedButton(e.target);
@@ -202,8 +202,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Button mouse up event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onButtonMouseUp: function(e) {
 		this.fireEvent('buttonMouseUp', e.target);
@@ -212,8 +212,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Button mouse down event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onButtonMouseDown: function(e) {
 		this.fireEvent('buttonMouseDown', e.target);

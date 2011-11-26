@@ -201,8 +201,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 	/**
 	 * Destroy the child entities.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	destroyChildren: function() {
 		this.children.each(this.bound('destroyChild'));
@@ -212,8 +212,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	/**
 	 * Destroy a child entity.
 	 * @param {Entity} entity The entity to destroy.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	destroyChild: function(entity) {
 		entity.destroy();
@@ -549,7 +549,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 	/**
 	 * @todo Find a more suitable name.
-	 * @ignore
+	 * @private
 	 */
 	filterRoleElement: function(element) {
 
@@ -595,10 +595,10 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Set the entity as being part of the DOM.
+	 * Set the entity as being part of the DOM and at this point it is, for
+	 * instance measurable.
 	 * @return {Entity}
 	 * @since 0.1
-	 * @ignore
 	 */
 	setReady: function() {
 
@@ -620,7 +620,6 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	 * Indicates whether the entity is in the DOM.
 	 * @return {Boolean}
 	 * @since 0.1
-	 * @ignore
 	 */
 	isReady: function() {
 		return this.ready;
@@ -869,8 +868,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	/**
 	 * Click event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onClick: function(e) {
 		e.target = this;
@@ -880,8 +879,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	/**
 	 * Mouse Up event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onMouseUp: function(e) {
 		e.target = this;
@@ -891,8 +890,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	/**
 	 * Mouse Down event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onMouseDown: function(e) {
 		e.target = this;

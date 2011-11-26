@@ -97,8 +97,8 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 	/**
 	 * The back button click event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onBackButtonClick: function(e) {
 		this.popViewController();

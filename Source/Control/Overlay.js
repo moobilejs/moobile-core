@@ -83,8 +83,8 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	/**
 	 * The animation end event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onAnimationEnd: function(e) {
 

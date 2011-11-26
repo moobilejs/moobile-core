@@ -226,8 +226,8 @@ Moobile.ViewTransition = new Class({
 	/**
 	 * The animation end event.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onComplete: function(e) {
 

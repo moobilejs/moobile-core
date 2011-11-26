@@ -724,8 +724,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * View ready event handler.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onViewReady: function() {
 		this.viewReady = true;
@@ -734,8 +734,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * Present modal view controller transition start event handler.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onPresentTransitionStart: function() {
 		this.modalViewController.viewWillEnter();
@@ -743,8 +743,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * Present modal view controller transition completed event handler.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onPresentTransitionCompleted: function() {
 		this.modalViewController.viewDidEnter();
@@ -753,8 +753,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * Dismiss modal view controller transition start event handler.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onDismissTransitionStart: function() {
 		this.modalViewController.viewWillLeave();
@@ -762,8 +762,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * Dismiss modal view controller transition completed event handler.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onDismissTransitionCompleted: function() {
 		this.modalViewController.viewDidLeave();

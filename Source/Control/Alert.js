@@ -125,7 +125,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	/**
 	 * Set the message with either a string or an entity object.
 	 * @param {Mixed} message The message as a string or an entity object.
-	 * @returh {Alert}
+	 * @return {Alert}
 	 * @since 0.1
 	 */
 	setMessage: function(message) {
@@ -257,8 +257,8 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	/**
 	 * Button click event hand.er
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onButtonClick: function(e) {
 
@@ -272,8 +272,8 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	/**
 	 * Button mouse up event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onButtonMouseUp: function() {
 		this.fireEvent('buttonMouseUp');
@@ -282,8 +282,8 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	/**
 	 * Button mouse down event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onButtonMouseDown: function() {
 		this.fireEvent('buttonMouseDown');

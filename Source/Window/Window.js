@@ -59,7 +59,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	/**
 	 * Scroll the window at the top, hiding safari's address bar.
 	 * @since 0.1
-	 * @ignore
+	 * @private
 	 */
 	position: function() {
 		window.scrollTo(0, 1);
@@ -95,8 +95,8 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	/**
 	 * Window load event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onWindowLoad: function(e) {
 		this.position.delay(250);
@@ -105,8 +105,8 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	/**
 	 * Orientation change event handler.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onWindowOrientationChange: function(e) {
 		this.position();

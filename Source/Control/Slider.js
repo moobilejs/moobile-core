@@ -165,8 +165,8 @@ Moobile.Slider = new Class({
 	/**
 	 * The move event handler.
 	 * @param {Integer} position The slider position.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onMove: function(position) {
 		this.updateTrack(position);
@@ -176,8 +176,8 @@ Moobile.Slider = new Class({
 	/**
 	 * The tick event handler.
 	 * @param {Integer} position The slider position.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onTick: function(position) {
 		this.updateTrack(position);
@@ -187,8 +187,8 @@ Moobile.Slider = new Class({
 	/**
 	 * The change event handler.
 	 * @param {Integer} step The slider step.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onChange: function(step) {
 		this.value = step;

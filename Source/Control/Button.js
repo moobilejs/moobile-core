@@ -110,8 +110,8 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	/**
 	 * Mouse down event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onMouseDown: function(e) {
 		this.parent(e);
@@ -121,8 +121,8 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	/**
 	 * Mouse up event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onMouseUp: function(e) {
 		this.parent(e);

@@ -189,8 +189,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Item click event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onItemClick: function(e) {
 		var item = e.target;
@@ -201,8 +201,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Item mouse up event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onItemMouseUp: function(e) {
 		var item = e.target;
@@ -213,8 +213,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Item mouse down event handler.
 	 * @param {Event} e The event.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onItemMouseDown: function(e) {
 		var item = e.target;

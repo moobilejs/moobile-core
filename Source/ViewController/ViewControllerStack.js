@@ -232,8 +232,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 	/**
 	 * The push transition start event handler.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onPushTransitionStart: function() {
 
@@ -248,8 +248,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 	/**
 	 * The push transition complete event handler.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onPushTransitionComplete: function() {
 
@@ -266,8 +266,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 	/**
 	 * The pop transition start event handler.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onPopTransitionStart: function() {
 
@@ -280,8 +280,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 	/**
 	 * The push transition complete event handler.
-	 * @since 0.1
 	 * @private
+	 * @since 0.1
 	 */
 	onPopTransitionComplete: function() {
 

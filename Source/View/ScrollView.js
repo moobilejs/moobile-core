@@ -199,8 +199,8 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	/**
 	 * Handler for the scroll refresh event.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onViewScrollRefresh: function() {
 		this.fireEvent('scrollrefresh');
@@ -209,8 +209,8 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	/**
 	 * Handler for the scroll start event.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onViewScrollStart: function() {
 		this.fireEvent('scrollstart');
@@ -219,8 +219,8 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	/**
 	 * Handler for the scroll move event.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onViewScrollMove: function() {
 		this.fireEvent('scrollmove');
@@ -229,8 +229,8 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	/**
 	 * Handler for the scroll end event.
 	 * @param {Event} e The event.
+	 * @private
 	 * @since 0.1
-	 * @ignore
 	 */
 	onViewScrollEnd: function() {
 		this.fireEvent('scrollend');
