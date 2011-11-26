@@ -3,8 +3,8 @@
 
 name: ViewControllerStack.Navigation
 
-description: Provides a ViewControllerStack that automatically add a 
-             NavigationBar control to each view controller's wiew added.
+description: Provides a view controller stack that also handles a navigation
+             bar and its back button.
 
 license: MIT-style license.
 
@@ -20,15 +20,33 @@ provides:
 ...
 */
 
-Moobile.ViewControllerStack.Navigation = new Class({
+/**
+ * Provides a view controller stack that also handles a navigation bar and
+ * its back button.
+ *
+ * @name ViewControllerStack.Navigation
+ * @class ViewControllerStack.Navigation
+ * @extends ViewControllerStack
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerStack.Navigation.prototype */ {
 
 	Extends: Moobile.ViewControllerStack,
 
+	/**
+	 * The class options.
+	 * @type {Object}
+	 */
 	options: {
 		backButton: true,
 		backButtonLabel: 'Back'
 	},
 
+	/**
+	 * @see ViewController#willAddChildViewController
+	 */
 	willAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
@@ -59,6 +77,9 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		}
 	},
 
+	/**
+	 * @see ViewController#didAddChildViewController
+	 */
 	didAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
@@ -73,7 +94,13 @@ Moobile.ViewControllerStack.Navigation = new Class({
 		}
 	},
 
-	onBackButtonClick: function() {
+	/**
+	 * The back button click event handler.
+	 * @param {Event} e The event.
+	 * @since 0.1
+	 * @private
+	 */
+	onBackButtonClick: function(e) {
 		this.popViewController();
 	}
 

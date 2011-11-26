@@ -3,8 +3,7 @@
 
 name: ViewControllerPanel
 
-description: Provide a ViewController that handles two side by side view inside
-             it's own view.
+description: Manages a view panel.
 
 license: MIT-style license.
 
@@ -20,18 +19,38 @@ provides:
 ...
 */
 
-Moobile.ViewControllerPanel = new Class({
+/**
+ * Manages a view panel.
+ *
+ * @name ViewControllerPanel
+ * @class ViewControllerPanel
+ * @extends ViewController
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototype */ {
 
 	Extends: Moobile.ViewController,
 
+	/**
+	 * The main view controller.
+	 * @type {ViewController}
+	 */
 	mainViewController: null,
 
+	/**
+	 * The side view controller.
+	 * @type {ViewController}
+	 */
 	sideViewController: null,
 
-	loadView: function() {
-		this.view = new Moobile.ViewPanel();
-	},
-
+	/**
+	 * Set the main view controller.
+	 * @param {ViewController} mainViewController The main view controller.
+	 * @return {ViewControllerPanel}
+	 * @since 0.1
+	 */
 	setMainViewController: function(mainViewController) {
 
 		if (this.mainViewController) {
@@ -47,10 +66,21 @@ Moobile.ViewControllerPanel = new Class({
 		return this;
 	},
 
+	/**
+	 * Return the main view controller.
+	 * @return {ViewController}
+	 * @since 0.1
+	 */
 	getMainViewController: function() {
 		return this.mainViewController;
 	},
 
+	/**
+	 * Set the side view controller.
+	 * @param {ViewController} mainViewController The side view controller.
+	 * @return {ViewControllerPanel}
+	 * @since 0.1
+	 */
 	setSideViewController: function(sideViewController) {
 
 		if (this.sideViewController) {
@@ -65,10 +95,25 @@ Moobile.ViewControllerPanel = new Class({
 		return this;
 	},
 
+	/**
+	 * Return the side view controller.
+	 * @return {ViewController}
+	 * @since 0.1
+	 */
 	getSideViewController: function() {
 		return this.sideViewController;
 	},
 
+	/**
+	 * @see ViewController#loadView
+	 */
+	loadView: function() {
+		this.view = new Moobile.ViewPanel();
+	},
+
+	/**
+	 * @see ViewControlelr#didAddChildViewController
+	 */
 	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerPanel(this);
