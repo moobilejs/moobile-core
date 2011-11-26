@@ -16,6 +16,16 @@ provides:
 ...
 */
 
+/**
+ * Provides the base class for controls.
+ *
+ * @name Control
+ * @class Control
+ * @extends Entity
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.Control = new Class( /* @lends Control.prototype */ {
 
 	Extends: Moobile.Entity,

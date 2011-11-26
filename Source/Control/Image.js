@@ -3,7 +3,7 @@
 
 name: Image
 
-description: Provides a view that contains an image.
+description: Provides a control that display an image.
 
 license: MIT-style license.
 
@@ -19,9 +19,19 @@ provides:
 ...
 */
 
-Moobile.Image = new Class({
+/**
+ * Provides a control that displays an image.
+ *
+ * @name Image
+ * @class Image
+ * @extends Control
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Image = new Class( /** @lends Image.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.Control,
 
 	/**
 	 * The class options.
@@ -32,6 +42,12 @@ Moobile.Image = new Class({
 		tagName: 'img'
 	},
 
+	/**
+	 * Set the image source.
+	 * @param {String} source The image source.
+	 * @return {Image}
+	 * @since 0.1
+	 */
 	setSource: function(source) {
 
 		this.element.set('src', null);
@@ -45,10 +61,18 @@ Moobile.Image = new Class({
 		return this;
 	},
 
+	/**
+	 * Return the image source.
+	 * @return {String}
+	 * @since 0.1
+	 */
 	getSource: function() {
 		return this.element.get('src');
 	},
 
+	/**
+	 * @see Entity#destroy
+	 */
 	destroy: function() {
 		this.image = null;
 		this.parent();

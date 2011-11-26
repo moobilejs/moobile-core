@@ -3,7 +3,7 @@
 
 name: Alert
 
-description: Provides an Alert dialog.
+description: Provides a control that displays a modal alert message.
 
 license: MIT-style license.
 
@@ -12,7 +12,6 @@ authors:
 
 requires:
 	- Control
-	- AlertStyle
 
 provides:
 	- Alert
@@ -20,7 +19,17 @@ provides:
 ...
 */
 
-Moobile.Alert = new Class({
+/**
+ * Provides a control that displays a modal alert message.
+ *
+ * @name Alert
+ * @class Alert
+ * @extends Overlay
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 	Extends: Moobile.Overlay,
 

@@ -3,7 +3,7 @@
 
 name: Label
 
-description: Provides a view that contains some text.
+description: Provides a control that display some text.
 
 license: MIT-style license.
 
@@ -19,19 +19,44 @@ provides:
 ...
 */
 
-Moobile.Label = new Class({
+/**
+ * Provides a control that displays some text.
+ *
+ * @name Label
+ * @class Label
+ * @extends Control
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Label = new Class( /** @lends Label.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.Control,
 
+	/**
+	 * The class options.
+	 * @type {Object}
+	 */
 	options: {
 		className: 'label'
 	},
 
+	/**
+	 * Set the label text.
+	 * @param {String} text The label text.
+	 * @return {Label}
+	 * @since 0.1
+	 */
 	setText: function(text) {
 		this.element.set('html', text);
 		return this;
 	},
 
+	/**
+	 * Return the label text.
+	 * @return {String}
+	 * @since 0.1
+	 */
 	getText: function() {
 		return this.element.get('html');
 	}

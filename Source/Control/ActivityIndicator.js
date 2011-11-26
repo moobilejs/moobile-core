@@ -3,7 +3,7 @@
 
 name: ActivityIndicator
 
-description: Provide an activity indicator.
+description: Provides a control that indicates activities when animated.
 
 license: MIT-style license.
 
@@ -12,8 +12,6 @@ authors:
 
 requires:
 	- Control
-	- ActivityIndicatorRoles
-	- ActivityIndicatorStyle
 
 provides:
 	- ActivityIndicator
@@ -21,7 +19,17 @@ provides:
 ...
 */
 
-Moobile.ActivityIndicator = new Class({
+/**
+ * Provides a control that indicates activities when animated.
+ *
+ * @name ActivityIndicator
+ * @class ActivityIndicator
+ * @extends Control
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ {
 
 	Extends: Moobile.Control,
 
