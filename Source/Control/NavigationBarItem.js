@@ -79,6 +79,49 @@ Moobile.NavigationBarItem = new Class(/** @lends NavigationBarItem.prototype */ 
 	},
 
 	/**
+	 * Add a button at the left of the title.
+	 * @see Entity#addChild.
+	 */
+	addLeftBarButton: function(button) {
+		return this.addChild(button, 'top');
+	},
+
+	/**
+	 * Add a button at the right of the title.
+	 * @see Bar#addBarButton.
+	 */
+	addRightBarButton: function(button) {
+		return this.addChild(button, 'bottom');
+	},
+
+	/**
+	 * Return a bar button from the bar item.
+	 * @since 0.1
+	 * @see Entity#getChild
+	 */
+	getBarButton: function(name) {
+		return this.getChild(name);
+	},
+
+	/**
+	 * Remove a bar button from the bar item.
+	 * @since 0.1
+	 * @see Entity#removeChild
+	 */
+	removeBarButton: function(item) {
+		return this.removeChild(item);
+	},
+
+	/**
+	 * Remove all bar buttons from the bar item.
+	 * @since 0.1
+	 * @see Entity#removeChildren
+	 */
+	removeAllBarButtons: function() {
+		return this.removeChildren();
+	},
+
+	/**
 	 * @see Entity#willLoad
 	 */
 	willLoad: function() {
