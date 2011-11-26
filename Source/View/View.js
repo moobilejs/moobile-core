@@ -272,16 +272,10 @@ Moobile.View.atPath = function(path) {
 };
 
 //------------------------------------------------------------------------------
-// Child Roles
+// Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.View, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, null, name);
-	if (instance instanceof Moobile.ViewContent) {
-		this.addChild(instance);
-		this.content = instance; // must be assigned after addChild is called
-	}
-
-	return instance;
+Moobile.Entity.defineRole('view', null, function(element, name) {
+	var instance = Moobile.Entity.fromElement(element, 'data-view', Moobile.View);
+	this.addChild(instance);
 });

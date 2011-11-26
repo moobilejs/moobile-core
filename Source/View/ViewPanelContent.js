@@ -78,29 +78,24 @@ Moobile.ViewPanelContent = new Class({
 });
 
 //------------------------------------------------------------------------------
-// Child Roles
+// Roles
 //------------------------------------------------------------------------------
 
+Moobile.Entity.defineRole('view-content', Moobile.ViewPanel, function(element, name) {
+	var instance = new Moobile.ViewPanelContent(element, null, name);
+	this.addChild(instance);
+	this.content = instance;
+});
+
+
 Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(element, options) {
-
 	this.sidePanel = new Moobile.Entity(element, options);
-
+	this.sidePanel.addClass('side-panel');
 	this.addChild(this.sidePanel);
-
-	var className = this.options.className;
-	if (className) {
-		this.sidePanel.addClass('side-panel');
-	}
 });
 
 Moobile.Entity.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
-
 	this.mainPanel = new Moobile.Entity(element, options);
-
+	this.mainPanel.addClass('main-panel');
 	this.addChild(this.mainPanel);
-
-	var className = this.options.className;
-	if (className) {
-		this.mainPanel.addClass('main-panel');
-	}
 });

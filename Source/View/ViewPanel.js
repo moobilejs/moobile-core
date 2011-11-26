@@ -76,17 +76,10 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 });
 
 //------------------------------------------------------------------------------
-// Child Roles
+// Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('content', Moobile.ViewPanel, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewPanelContent, element, null, name);
-	if (instance instanceof Moobile.ViewPanelContent) {
-		this.addChild(instance);
-		this.content = instance;
-	}
-
-	return instance;
+Moobile.Entity.defineRole('view-panel', null, function(element, name) {
+	var instance = Moobile.Entity.fromElement(element, 'data-view-panel', Moobile.ViewPanel);
+	this.addChild(instance);
 });
-

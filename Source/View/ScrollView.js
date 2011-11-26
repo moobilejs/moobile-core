@@ -237,3 +237,16 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	}
 
 });
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * Defines the role 'scroll-view' under all entities.
+ * @since 0.1
+ */
+Moobile.Entity.defineRole('scroll-view', null, function(element, name) {
+	var instance = Moobile.Entity.fromElement(element, 'data-scroll-view', Moobile.ScrollView);
+	this.addChild(instance);
+});

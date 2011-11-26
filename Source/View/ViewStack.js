@@ -49,3 +49,12 @@ Moobile.ViewStack = new Class( /* @lends ViewStack.prototype */ {
 	}
 
 });
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+Moobile.Entity.defineRole('view-stack', null, function(element, name) {
+	var instance = Moobile.Entity.fromElement(element, 'data-view-stack', Moobile.ViewStack);
+	this.addChild(instance);
+});
