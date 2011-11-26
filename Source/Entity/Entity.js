@@ -918,7 +918,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
  */
 Moobile.Entity.fromElement = function(element, property, type) {
 
-	var name = element.get('name');
+	var name = element.get('data-name');
 
 	var klass = element.get(property);
 	if (klass) {
@@ -931,7 +931,7 @@ Moobile.Entity.fromElement = function(element, property, type) {
 		throw new Error('Class ' + klass + ' is not a proper instance.');
 	}
 
-	return new type(elment, null, name);
+	return new type(element, null, name);
 };
 
 /**
