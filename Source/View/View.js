@@ -192,14 +192,14 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 
 		this.parent();
 
-		var content = this.getRoleElement('content');
+		var content = this.getRoleElement('view-content');
 		if (content == null) {
 			content = new Element('div');
 			content.ingest(this.element);
 			content.inject(this.element);
 		}
 
-		this.defineElementRole(content, 'content');
+		this.defineElementRole(content, 'view-content');
 	},
 
 	/**

@@ -44,14 +44,6 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	},
 
 	/**
-	 * @see Entity#initialize
-	 */
-	initialize: function(element, options) {
-		this.parent(element, options, 'window');
-		return this;
-	},
-
-	/**
 	 * Return the current orientation name: portrait or landscape.
 	 * @return {String}
 	 * @since 0.1
@@ -74,33 +66,19 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	},
 
 	/**
-	 * @see Entity#willLoad
-	 */
-	willLoad: function() {
-
-		this.parent()
-
-		if (this.element == null) {
-			this.element = new Element('div');
-			this.element.inject(document.body);
-		}
-	},
-
-	/**
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
-
+		this.parent();
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
-
-		this.setReady();
 	},
 
 	/**
 	 * @see Entity#willUnload
 	 */
 	willUnload: function() {
+		this.parent();
 		window.removeEvent('load', this.bound('onWindowLoad'));
 		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
@@ -109,7 +87,9 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	 * @see Entity#didAddChild
 	 */
 	didAddChild: function(entity) {
+		this.parent(entity);
 		entity.setWindow(this);
+		entity.setOwner(this);
 	},
 
 	/**
@@ -138,7 +118,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('content', Moobile.Window, function(element, name) {
+Moobile.Entity.defineRole('view-content', Moobile.Window, function(element, name) {
 
 	var instance = Class.instantiate(element.get('data-content') || Moobile.WindowContent, element, null, name);
 

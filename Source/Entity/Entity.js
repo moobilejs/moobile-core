@@ -573,12 +573,12 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 		if (element.retrieve('entity.has-role'))
 			return this;
 
-		role = this.$roles[role];
-		if (role == undefined) {
+		var definition = this.$roles[role];
+		if (definition == undefined) {
 			throw new Error('Role ' + role + ' does not exists.');
 		}
 
-		role.call(this, element, element.get('data-name'));
+		definition.call(this, element, element.get('data-name'));
 
 		element.store('entity.has-role', true);
 
@@ -605,7 +605,9 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 		if (this.ready)
 			return this;
 
-		this.window = this.owner.getWindow();
+		if (this.owner) {
+			this.window = this.owner.getWindow();
+		}
 
 		this.ready = true;
 		this.didBecomeReady();

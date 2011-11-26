@@ -94,7 +94,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 */
 	getSelectedItem: function() {
 		return this.selectedItem;
-	}
+	},
 
 	/**
 	 * Set the selected item using its index.

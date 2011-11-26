@@ -40,7 +40,7 @@ Class.parse = function(name) {
  * @return {Object}
  * @since 0.1
  */
-Class.instantiate: function(klass) {
+Class.instantiate = function(klass) {
 	if (typeof klass == 'string') klass = Class.parse(klass);
 	if (klass == null) return null;
 	klass.$prototyping = true;
