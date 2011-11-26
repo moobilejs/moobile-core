@@ -905,6 +905,36 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 });
 
 /**
+ * Instantiate an entity based on a property stored on an element and validates
+ * the instance. If the propery does not contain the class name, an instance of
+ * the the type will be returned.
+ * @name Entity.fromElement
+ * @param {Element} element The element.
+ * @param {String} property The property that contains the class name.
+ * @param {Object} type The class name must be an instance of this value.
+ * @return {Object}
+ * @function
+ * @since 0.1
+ */
+Moobile.Entity.fromElement = function(element, property, type) {
+
+	var name = element.get('name');
+
+	var klass = element.get(property);
+	if (klass) {
+
+		var child = Class.instantiate(klass, element, null, name);
+		if (child instanceof type) {
+			return child;
+		}
+
+		throw new Error('Class ' + klass + ' is not a proper instance.');
+	}
+
+	return new type(elment, null, name);
+};
+
+/**
  * Define a role.
  * @name Entity.defineRole
  * @param {String} name The role name.
