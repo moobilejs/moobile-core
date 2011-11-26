@@ -3,7 +3,7 @@
 
 name: ViewTransition
 
-description: Provides the base class for view transitions.
+description: Provides the base class that applies view transition.
 
 license: MIT-style license.
 
@@ -27,6 +27,16 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
+/**
+ * Provides the base class that applies view transition. This class needs major
+ * refactoring as it only supports animation, no transitions.
+ *
+ * @name ViewTransition
+ * @class ViewTransition
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.ViewTransition = new Class({
 
 	Implements: [
@@ -36,21 +46,37 @@ Moobile.ViewTransition = new Class({
 		Class.Binds
 	],
 
+	/**
+	 * Elements that are likely to be animated.
+	 * @type {Array}
+	 */
 	subjects: [],
 
+	/**
+	 * The class options.
+	 * @type {Object}
+	 */
 	options: {},
 
+	/**
+	 * Initialize the view transition.
+	 * @param {Object} options The class options.
+	 * @return {ViewTransition}
+	 * @since 0.1
+	 */
 	initialize: function(options) {
 		this.setOptions(options);
 		return this;
 	},
 
-	animate: function(subject, className) {
-		this.addSubject(subject, className);
-		this.fireEvent('start');
-		return this;
-	},
-
+	/**
+	 * Add an element identified with a CSS class name that is a part of the
+	 * view transition.
+	 * @param {Element} subject The element.
+	 * @param {String} className The CSS class name.
+	 * @return {ViewTransition}
+	 * @since 0.1
+	 */
 	addSubject: function(subject, className) {
 
 		var element = document.id(subject);
@@ -66,6 +92,12 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
+	/**
+	 * Remove an element from the list of subjects.
+	 * @param {Element} subject The element.
+	 * @return {ViewTransition}
+	 * @since 0.1
+	 */
 	removeSubject: function(subject) {
 
 		var element = document.id(subject);
@@ -81,78 +113,128 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	clearSubjects: function() {
-		this.subjects.each(this.bound('clearSubject'));
-		this.subjects = [];
+	/**
+	 * Remove all the subjects.
+	 * @return {ViewTransition}
+	 * @since 0.1
+	 */
+	removeAllSubjects: function() {
+		this.subjects.each(this.bound('removeSubject'));
+		this.subjects.clean();
 		return this;
 	},
 
-	clearSubject: function(subject) {
-		var className = subject.retrieve('view-transition:transition-class');
-		subject.removeClass(className);
-		subject.removeEvent('transitionend', this.bound('onComplete'));
-		subject.removeEvent('animationend', this.bound('onComplete'));
+	/**
+	 * Add the final subject that will trigger the animation.
+	 * @param {Element} subject The element.
+	 * @param {String} className The CSS class name.
+	 * @return {ViewTransition}
+	 * @since 0.1
+	 */
+	animate: function(subject, className) {
+		this.addSubject(subject, className);
+		this.fireEvent('start');
 		return this;
 	},
 
+	/**
+	 * Override this method to define the animation used when the view enters.
+	 * Always call the parent at the top of the method.
+	 * @param {View} viewToShow The view to show.
+	 * @param {View} viewToHide The view to hide.
+	 * @param {View} parentView The view that contains both views.
+	 * @param {Boolean} first Whether this is the first view to show thus no view to hide.
+	 * @since 0.1
+	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
-		
+
 		if (viewToShow) {
 			viewToShow.show();
 			viewToShow.disable();
 		}
-		
+
 		if (viewToHide) {
 			viewToHide.disable();
 		}
-		
+
 		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
 	},
 
+	/**
+	 * Override this method to define the animation used when the view leaves.
+	 * Always call the parent at the top of the method.
+	 * @param {View} viewToShow The view to show.
+	 * @param {View} viewToHide The view to hide.
+	 * @param {View} parentView The view that contains both views.
+	 * @param {Boolean} first Whether this is the first view to enter the parent.
+	 * @since 0.1
+	 */
 	leave: function(viewToShow, viewToHide, parentView) {
-		
+
 		if (viewToShow){
-			viewToShow.show();	
+			viewToShow.show();
 			viewToShow.disable();
-		} 
-		
+		}
+
 		if (viewToHide) {
 			viewToHide.disable();
 		}
-		
+
 		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
 	},
 
+	/**
+	 * Called by the view transition once the enter animation completed.
+	 * @param {View} viewToShow The view to show.
+	 * @param {View} viewToHide The view to hide.
+	 * @param {View} parentView The view that contains both views.
+	 * @param {Boolean} first Whether this is the first view to enter the parent.
+	 * @since 0.1
+	 */
 	didEnter: function(viewToShow, viewToHide, parentView, first) {
 
 		if (viewToShow) {
 			viewToShow.enable();
 		}
-		 
+
 		if (viewToHide) {
-			viewToHide.hide();	
+			viewToHide.hide();
 			viewToHide.enable();
 		}
 	},
 
+	/**
+	 * Called by the view transition once the leave animation completed.
+	 * @param {View} viewToShow The view to show.
+	 * @param {View} viewToHide The view to hide.
+	 * @param {View} parentView The view that contains both views.
+	 * @param {Boolean} first Whether this is the first view to enter the parent.
+	 * @since 0.1
+	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
-		
+
 		if (viewToShow) {
 			viewToShow.enable();
 		}
-		
+
 		if (viewToHide) {
-			viewToHide.hide();	
+			viewToHide.hide();
 			viewToHide.enable();
-		} 
+		}
 	},
 
+	/**
+	 * The animation end event.
+	 * @param {Event} e The event.
+	 * @since 0.1
+	 * @ignore
+	 */
 	onComplete: function(e) {
-		
+
 		e.stop();
-		
+
 		if (this.subjects.contains(e.target)) {
-			this.clearSubjects();
+			this.removeAllSubjects();
 			this.fireEvent('stop');
 			this.fireEvent('complete');
 		}

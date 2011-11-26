@@ -19,10 +19,23 @@ provides:
 ...
 */
 
+/**
+ * Provides a cubic view transition.
+ *
+ * @name ViewTransition.Cubic
+ * @class ViewTransition.Cubic
+ * @extends ViewTransition
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.ViewTransition.Cubic = new Class({
 
 	Extends: Moobile.ViewTransition,
 
+	/**
+	 * @see ViewTransition#enter
+	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
@@ -40,6 +53,9 @@ Moobile.ViewTransition.Cubic = new Class({
 		this.animate(parentView.getContent(), 'transition-cubic-enter');
 	},
 
+	/**
+	 * @see ViewTransition#leave
+	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);
