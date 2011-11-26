@@ -90,7 +90,7 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 
 		var title = viewController.getTitle();
 		if (title) {
-			navigationBar.setTitle(title)
+			navigationBar.getItem().setTitle(title)
 		}
 	},
 
