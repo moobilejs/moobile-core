@@ -3,7 +3,7 @@
 
 name: Window
 
-description: Provides the root container for all views.
+description: Provides the root of a view hierarchy.
 
 license: MIT-style license.
 
@@ -21,23 +21,41 @@ provides:
 
 if (!window.$moobile) window.$moobile = {};
 
-Moobile.Window = new Class({
+/**
+ * Provides the root of a view hierarchy.
+ *
+ * @name Window
+ * @class Window
+ * @extends View
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Window = new Class( /** @lends Window.prototype */ {
 
 	Extends: Moobile.View,
 
-	ready: true,
-
+	/**
+	 * The class options.
+	 * @type {Object}
+	 */
 	options: {
 		className: 'window'
 	},
 
-	initialize: function(options) {
-		var element = new Element('div#window');
-		element.inject(document.body);
-		this.parent(element, options);
+	/**
+	 * @see Entity#initialize
+	 */
+	initialize: function(element, options) {
+		this.parent(element, options, 'window');
 		return this;
 	},
 
+	/**
+	 * Return the current orientation name: portrait or landscape.
+	 * @return {String}
+	 * @since 0.1
+	 */
 	getOrientation: function() {
 		var o = Math.abs(window.orientation);
 		switch (o) {
@@ -46,31 +64,71 @@ Moobile.Window = new Class({
 		}
 	},
 
+	/**
+	 * Scroll the window at the top, hiding safari's address bar.
+	 * @since 0.1
+	 * @ignore
+	 */
 	position: function() {
 		window.scrollTo(0, 1);
-		return this;
 	},
 
-	didLoad: function() {		
+	/**
+	 * @see Entity#willLoad
+	 */
+	willLoad: function() {
+
+		this.parent()
+
+		if (this.element == null) {
+			this.element = new Element('div');
+			this.element.inject(document.body);
+		}
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
+
+		this.setReady();
 	},
 
+	/**
+	 * @see Entity#willUnload
+	 */
 	willUnload: function() {
 		window.removeEvent('load', this.bound('onWindowLoad'));
-		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));		
+		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
 
+	/**
+	 * @see Entity#didAddChild
+	 */
 	didAddChild: function(entity) {
 		entity.setWindow(this);
 	},
 
+	/**
+	 * Window load event handler.
+	 * @param {Event} e The event.
+	 * @since 0.1
+	 * @ignore
+	 */
 	onWindowLoad: function(e) {
 		this.position.delay(250);
-		return this;
 	},
 
-	onWindowOrientationChange: function() {
+	/**
+	 * Orientation change event handler.
+	 * @param {Event} e The event.
+	 * @since 0.1
+	 * @ignore
+	 */
+	onWindowOrientationChange: function(e) {
 		this.position();
 		this.fireEvent('orientationchange', this.getOrientation());
 	}
@@ -86,7 +144,7 @@ Moobile.Entity.defineRole('content', Moobile.Window, function(element, name) {
 
 	if (instance instanceof Moobile.WindowContent) {
 		this.addChild(instance);
-		this.content = instance; // must be assigned after addChild is called		
+		this.content = instance; // must be assigned after addChild is called
 	}
 
 	return instance;

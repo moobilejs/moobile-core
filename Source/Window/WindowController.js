@@ -3,7 +3,7 @@
 
 name: WindowController
 
-description: Provides the ViewController that handles a window.
+description: Manages a window.
 
 license: MIT-style license.
 
@@ -19,16 +19,33 @@ provides:
 ...
 */
 
-Moobile.WindowController = new Class({
+/**
+ * Manages a window.
+ *
+ * @name WindowController
+ * @class WindowController
+ * @extends ViewController
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 
 	Extends: Moobile.ViewController,
 
+	/**
+	 * The view controller at the root of the hierarchy.
+	 * @type {ViewController}
+	 */
 	rootViewController: null,
-	
-	loadView: function() {
-		this.view = new Moobile.Window();
-	},	
-	
+
+	/**
+	 * Set the view controller at the root of the hierarchy. The current root
+	 * view controller will be destroyed before the new one is assigned.
+	 * @param {ViewController} rootViewController The view controller.
+	 * @return {WindowController}
+	 * @since 0.1
+	 */
 	setRootViewController: function(rootViewController) {
 
 		if (this.rootViewController) {
@@ -44,11 +61,26 @@ Moobile.WindowController = new Class({
 
 		return this;
 	},
-	
+
+	/**
+	 * Return the view controller at the root of the hierarchy.
+	 * @return {ViewController}
+	 * @since 0.1
+	 */
 	getRootViewController: function() {
 		return this.rootViewController;
 	},
 
+	/**
+	 * @see Entity#loadView
+	 */
+	loadView: function() {
+		this.view = new Moobile.Window();
+	},
+
+	/**
+	 * @see Entity#didAddChildViewController
+	 */
 	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		this.rootViewController = viewController;
