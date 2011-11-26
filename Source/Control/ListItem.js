@@ -69,21 +69,17 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	 */
 	setImage: function(image) {
 
-		// TODO: empècher setter null
-
 		if (this.image === image)
 			return this;
 
-		if (image) {
-
-			if (typeof image == 'string') {
-				this.image.setSource(image);
-			} else {
-				this.replaceChild(this.image, image);
-				this.image.destroy();
-				this.image = image;
-			}
+		if (typeof image == 'string') {
+			this.image.setSource(image);
+			return this;
 		}
+
+		this.replaceChild(this.image, image);
+		this.image.destroy();
+		this.image = image;
 
 		return this;
 	},
@@ -105,22 +101,17 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	 */
 	setLabel: function(label) {
 
-		// TODO: empècher setter null
-
 		if (this.label === label)
 			return this;
 
-		this.label.setText(null);
-
-		if (label) {
-			if (typeof label == 'string') {
-				this.label.setText(label);
-			} else {
-				this.replaceChildView(this.label, label);
-				this.label.destroy();
-				this.label = label;
-			}
+		if (typeof label == 'string') {
+			this.label.setText(label);
+			return this;
 		}
+
+		this.replaceChild(this.label, label);
+		this.label.destroy();
+		this.label = label;
 
 		return this;
 	},
@@ -135,29 +126,24 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Set the list item infos.
-	 * @param {Mixed} infos The infos as a Label instance or as a string.
+	 * Set the list item detail.
+	 * @param {Mixed} detail The detail as a Label instance or as a string.
 	 * @return {Object}
 	 * @since 0.1
 	 */
-	setDetail: function(infos) {
+	setDetail: function(detail) {
 
-		// TODO: empècher setter null
-
-		if (this.detail === infos)
+		if (this.detail === detail)
 			return this;
 
-		this.detail.setText(null);
-
-		if (infos) {
-			if (typeof infos == 'string') {
-				this.detail.setText(infos);
-			} else {
-				this.replaceChild(this.detail, infos);
-				this.detail.destroy();
-				this.detail = infos;
-			}
+		if (typeof infos == 'string') {
+			this.detail.setText(infos);
+			return this;
 		}
+
+		this.replaceChild(this.detail, infos);
+		this.detail.destroy();
+		this.detail = infos;
 
 		return this;
 	},

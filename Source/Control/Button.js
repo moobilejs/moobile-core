@@ -55,22 +55,17 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	setLabel: function(label) {
 
-		// TODO: Empècher de setter null
-
 		if (this.label === label)
 			return this;
 
-		this.label.setText(null);
-
-		if (label) {
-			if (typeof label == 'string') {
-				this.label.setText(label);
-			} else {
-				this.replaceChild(this.label, label);
-				this.label.destroy();
-				this.label = label;
-			}
+		if (typeof label == 'string') {
+			this.label.setText(label);
+			return this;
 		}
+
+		this.replaceChild(this.label, label);
+		this.label.destroy();
+		this.label = label;
 
 		return this;
 	},
