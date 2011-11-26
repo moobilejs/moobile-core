@@ -72,7 +72,7 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 				backButton.setLabel(backButtonLabel);
 				backButton.addEvent('click', this.bound('onBackButtonClick'));
 
-				navigationBar.addLeftBarButton(backButton);
+				navigationBar.getItem().addLeftBarButton(backButton);
 			}
 		}
 	},

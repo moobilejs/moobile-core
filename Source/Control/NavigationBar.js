@@ -35,51 +35,11 @@ Moobile.NavigationBar = new Class( /* @lends NavigationBar.prototype */ {
 	Extends: Moobile.Bar,
 
 	/**
-	 * Set the navigation bar item title.
-	 * @param {String} title The navigation bar item title.
-	 * @return {NavigationBar}
-	 * @since 0.1
-	 */
-	setTitle: function(title) {
-		this.item.setTitle(title);
-		return this;
-	},
-
-	/**
-	 * Return the navigation bar item title.
-	 * @return {String}
-	 * @since 0.1
-	 */
-	getTitle: function() {
-		return this.item.title;
-	},
-
-	/**
-	 * Add a button at the left of the title.
-	 * @see Bar#addBarButton.
-	 */
-	addLeftBarButton: function(button) {
-		return this.addBarButton(button, 'top');
-	},
-
-	/**
-	 * Add a button at the right of the title.
-	 * @see Bar#addBarButton.
-	 */
-	addRightBarButton: function(button) {
-		return this.addBarButton(button, 'bottom');
-	},
-
-	/**
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
-
 		this.parent();
-
-		if (this.options.className) {
-			this.element.addClass('navigation-' + this.options.className);
-		}
+		this.element.addClass('navigation-bar');
 	}
 
 });

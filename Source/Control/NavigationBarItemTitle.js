@@ -1,9 +1,9 @@
 /*
 ---
 
-name: BarTitle
+name: NavigationBarItemTitle
 
-description: Provides a title control used inside bar controls.
+description:Provides a title control used inside navigation bar item.
 
 license: MIT-style license.
 
@@ -14,22 +14,22 @@ requires:
 	- Control
 
 provides:
-	- BarTitle
+	- NavigationBarItemTitle
 
 ...
 */
 
 /**
- * Provides a title control used inside bar controls.
+ * Provides a title control used inside navigation bar item.
  *
- * @name BarTitle
- * @class BarTitle
+ * @name NavigationBarItemTitle
+ * @class NavigationBarItemTitle
  * @extends Control
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.BarTitle = new Class( /* @lends BarTitle.prototype */ {
+Moobile.NavigationBarItemTitle = new Class( /* @lends NavigationBarItemTitle.prototype */ {
 
 	Extends: Moobile.Control,
 
@@ -50,7 +50,7 @@ Moobile.BarTitle = new Class( /* @lends BarTitle.prototype */ {
 	/**
 	 * Set the title text.
 	 * @param {String} text The title text.
-	 * @return {BarTitle}
+	 * @return {NavigationBarItemTitle}
 	 * @since 0.1
 	 */
 	setText: function(text) {
