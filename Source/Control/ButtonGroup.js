@@ -222,17 +222,12 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('button-group', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-button-group') || Moobile.ButtonGroup, element, null, name);
-	if (instance instanceof Moobile.ButtonGroup) {
-		this.addChild(instance);
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-button-group', Moobile.ButtonGroup);
+	this.addChild(instance);
 });
 
 //------------------------------------------------------------------------------

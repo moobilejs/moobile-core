@@ -71,6 +71,14 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	},
 
 	/**
+	 * @see Entity#willLoad
+	 */
+	willLoad: function() {
+		this.parent();
+		if (!this.getSource()) this.element.hide();
+	},
+
+	/**
 	 * @see Entity#destroy
 	 */
 	destroy: function() {

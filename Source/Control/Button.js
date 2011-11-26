@@ -55,6 +55,8 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	setLabel: function(label) {
 
+		// TODO: Empècher de setter null
+
 		if (this.label === label)
 			return this;
 
@@ -132,17 +134,12 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('button', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-button') || Moobile.Button, element, null, name);
-	if (instance instanceof Moobile.Button) {
-		this.addChild(instance);
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-button', Moobile.Button);
+	this.addChild(instance);
 });
 
 //------------------------------------------------------------------------------

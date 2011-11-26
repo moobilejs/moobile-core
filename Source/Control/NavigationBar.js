@@ -45,30 +45,11 @@ Moobile.NavigationBar = new Class( /* @lends NavigationBar.prototype */ {
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('navigation-bar', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-navigation-bar') || Moobile.NavigationBar, element, null, name);
-	if (instance instanceof Moobile.NavigationBar) {
-		this.addChild(instance);
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-navigation-bar', Moobile.NavigationBar);
+	this.addChild(instance);
 });
 
-//------------------------------------------------------------------------------
-// Child Roles
-//------------------------------------------------------------------------------
-
-Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-item') || Moobile.NavigationBarItem, element, null, name);
-	if (instance instanceof Moobile.NavigationBarItem) {
-		this.addChild(instance);
-		this.item = instance;
-	}
-
-	return instance;
-});

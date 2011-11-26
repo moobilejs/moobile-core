@@ -97,32 +97,12 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('bar', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-bar') || Moobile.Bar, element, null, name);
-	if (instance instanceof Moobile.Bar) {
-		this.addChild(instance);
-	}
-
-	return instance;
-});
-
-//------------------------------------------------------------------------------
-// Child Roles
-//------------------------------------------------------------------------------
-
-Moobile.Entity.defineRole('item', Moobile.Bar, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-item') || Moobile.BarItem, element, null, name);
-	if (instance instanceof Moobile.BarItem) {
-		this.addChild(instance);
-		this.item = instance;
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-bar', Moobile.Bar);
+	this.addChild(instance);
 });
 
 //------------------------------------------------------------------------------

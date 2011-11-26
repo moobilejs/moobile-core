@@ -199,15 +199,10 @@ Moobile.Slider = new Class({
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('slider', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-slider') || Moobile.Slider, element, null, name);
-	if (instance instanceof Moobile.Slider) {
-		this.addChild(instance);
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-slider', Moobile.Slider);
+	this.addChild(instance);
 });

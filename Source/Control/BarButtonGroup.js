@@ -44,15 +44,10 @@ Moobile.BarButtonGroup = new Class( /** @lends BarButtonGroup.prototype */ {
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('bar-button-group', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-bar-button-group') || Moobile.BarButtonGroup, element, null, name);
-	if (instance instanceof Moobile.BarButtonGroup) {
-		this.addChild(instance);
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-bar-button-group', Moobile.BarButtonGroup);
+	this.addChild(instance);
 });

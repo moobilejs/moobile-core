@@ -64,15 +64,10 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 });
 
 //------------------------------------------------------------------------------
-// Global Roles
+// Roles
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('activity-indicator', null, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-activity-indicator') || Moobile.ActivityIndicator, element, null, name);
-	if (instance instanceof Moobile.ActivityIndicator) {
-		this.addChild(instance);
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-activity-indicator', Moobile.ActivityIndicator);
+	this.addChild(instance);
 });
