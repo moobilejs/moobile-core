@@ -153,11 +153,11 @@ Moobile.ViewTransition = new Class({
 
 		if (viewToShow) {
 			viewToShow.show();
-			viewToShow.disable();
+			viewToShow.disableTouch();
 		}
 
 		if (viewToHide) {
-			viewToHide.disable();
+			viewToHide.disableTouch();
 		}
 
 		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
@@ -176,11 +176,11 @@ Moobile.ViewTransition = new Class({
 
 		if (viewToShow){
 			viewToShow.show();
-			viewToShow.disable();
+			viewToShow.disableTouch();
 		}
 
 		if (viewToHide) {
-			viewToHide.disable();
+			viewToHide.disableTouch();
 		}
 
 		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
@@ -197,12 +197,12 @@ Moobile.ViewTransition = new Class({
 	didEnter: function(viewToShow, viewToHide, parentView, first) {
 
 		if (viewToShow) {
-			viewToShow.enable();
+			viewToShow.enableTouch();
 		}
 
 		if (viewToHide) {
 			viewToHide.hide();
-			viewToHide.enable();
+			viewToHide.enableTouch();
 		}
 	},
 
@@ -217,12 +217,12 @@ Moobile.ViewTransition = new Class({
 	didLeave: function(viewToShow, viewToHide, parentView) {
 
 		if (viewToShow) {
-			viewToShow.enable();
+			viewToShow.enableTouch();
 		}
 
 		if (viewToHide) {
 			viewToHide.hide();
-			viewToHide.enable();
+			viewToHide.enableTouch();
 		}
 	},
 

@@ -53,7 +53,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @return {View}
 	 * @since 0.1
 	 */
-	enable: function() {
+	enableTouch: function() {
 		this.element.removeClass('disable').addClass('enable');
 		return this;
 	},
@@ -63,7 +63,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @return {View}
 	 * @since 0.1
 	 */
-	disable: function() {
+	disableTouch: function() {
 		this.element.removeClass('enable').addClass('disable');
 		return this;
 	},
