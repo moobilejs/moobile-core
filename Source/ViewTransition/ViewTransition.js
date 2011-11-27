@@ -113,14 +113,17 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	/**
-	 * Remove all the subjects.
-	 * @return {ViewTransition}
-	 * @since 0.1
-	 */
-	removeAllSubjects: function() {
-		this.subjects.each(this.bound('removeSubject'));
-		this.subjects.clean();
+	clearSubjects: function() {
+		this.subjects.each(this.bound('clearSubject'));
+		this.subjects = [];
+		return this;
+	},
+
+	clearSubject: function(subject) {
+		var className = subject.retrieve('view-transition:transition-class');
+		subject.removeClass(className);
+		subject.removeEvent('transitionend', this.bound('onComplete'));
+		subject.removeEvent('animationend', this.bound('onComplete'));
 		return this;
 	},
 
@@ -234,7 +237,7 @@ Moobile.ViewTransition = new Class({
 		e.stop();
 
 		if (this.subjects.contains(e.target)) {
-			this.removeAllSubjects();
+			this.clearSubjects();
 			this.fireEvent('stop');
 			this.fireEvent('complete');
 		}
