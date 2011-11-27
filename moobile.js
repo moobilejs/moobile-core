@@ -107,7 +107,7 @@ var m = Math,
 
 		// User defined options
 		for (i in options) that.options[i] = options[i];
-		
+
 		// Set starting position
 		that.x = that.options.x;
 		that.y = that.options.y;
@@ -118,13 +118,13 @@ var m = Math,
 		that.options.vScrollbar = that.options.vScroll && that.options.vScrollbar;
 		that.options.zoom = that.options.useTransform && that.options.zoom;
 		that.options.useTransition = hasTransitionEnd && that.options.useTransition;
-		
+
 		// Set some default styles
 		that.scroller.style[vendor + 'TransitionProperty'] = that.options.useTransform ? '-' + vendor.toLowerCase() + '-transform' : 'top left';
 		that.scroller.style[vendor + 'TransitionDuration'] = '0';
 		that.scroller.style[vendor + 'TransformOrigin'] = '0 0';
 		if (that.options.useTransition) that.scroller.style[vendor + 'TransitionTimingFunction'] = 'cubic-bezier(0.33,0.66,0.66,1)';
-		
+
 		if (that.options.useTransform) that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose;
 		else that.scroller.style.cssText += ';position:absolute;top:' + that.y + 'px;left:' + that.x + 'px';
 
@@ -155,7 +155,7 @@ iScroll.prototype = {
 	pagesX: [], pagesY: [],
 	aniTime: null,
 	wheelZoomCount: 0,
-	
+
 	handleEvent: function (e) {
 		var that = this;
 		switch(e.type) {
@@ -172,14 +172,14 @@ iScroll.prototype = {
 			case 'webkitTransitionEnd': that._transitionEnd(e); break;
 		}
 	},
-	
+
 	_checkDOMChanges: function () {
 		if (this.moved || this.zoomed || this.animating ||
 			(this.scrollerW == this.scroller.offsetWidth * this.scale && this.scrollerH == this.scroller.offsetHeight * this.scale)) return;
 
 		this.refresh();
 	},
-	
+
 	_scrollbar: function (dir) {
 		var that = this,
 			doc = document,
@@ -237,12 +237,12 @@ iScroll.prototype = {
 		// Reset position
 		that._scrollbarPos(dir, true);
 	},
-	
+
 	_resize: function () {
 		var that = this;
 		setTimeout(function () { that.refresh(); }, isAndroid ? 200 : 0);
 	},
-	
+
 	_pos: function (x, y) {
 		x = this.hScroll ? x : 0;
 		y = this.vScroll ? y : 0;
@@ -294,7 +294,7 @@ iScroll.prototype = {
 		that[dir + 'ScrollbarWrapper'].style.opacity = hidden && that.options.hideScrollbar ? '0' : '1';
 		that[dir + 'ScrollbarIndicator'].style[vendor + 'Transform'] = trnOpen + (dir == 'h' ? pos + 'px,0' : '0,' + pos + 'px') + trnClose;
 	},
-	
+
 	_start: function (e) {
 		var that = this,
 			point = hasTouch ? e.touches[0] : e,
@@ -339,7 +339,7 @@ iScroll.prototype = {
 				x = getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g, '') * 1;
 				y = getComputedStyle(that.scroller, null).top.replace(/[^0-9-]/g, '') * 1;
 			}
-			
+
 			if (x != that.x || y != that.y) {
 				if (that.options.useTransition) that._unbind('webkitTransitionEnd');
 				else cancelFrame(that.aniTime);
@@ -364,7 +364,7 @@ iScroll.prototype = {
 		that._bind(END_EV);
 		that._bind(CANCEL_EV);
 	},
-	
+
 	_move: function (e) {
 		var that = this,
 			point = hasTouch ? e.touches[0] : e,
@@ -408,7 +408,7 @@ iScroll.prototype = {
 		if (newX > 0 || newX < that.maxScrollX) {
 			newX = that.options.bounce ? that.x + (deltaX / 2) : newX >= 0 || that.maxScrollX >= 0 ? 0 : that.maxScrollX;
 		}
-		if (newY > that.minScrollY || newY < that.maxScrollY) { 
+		if (newY > that.minScrollY || newY < that.maxScrollY) {
 			newY = that.options.bounce ? that.y + (deltaY / 2) : newY >= that.minScrollY || that.maxScrollY >= 0 ? that.minScrollY : that.maxScrollY;
 		}
 
@@ -442,10 +442,10 @@ iScroll.prototype = {
 			that.startX = that.x;
 			that.startY = that.y;
 		}
-		
+
 		if (that.options.onScrollMove) that.options.onScrollMove.call(that, e);
 	},
-	
+
 	_end: function (e) {
 		if (hasTouch && e.touches.length != 0) return;
 
@@ -477,10 +477,10 @@ iScroll.prototype = {
 
 			that.x = that.originX - that.originX * that.lastScale + that.x;
 			that.y = that.originY - that.originY * that.lastScale + that.y;
-			
+
 			that.scroller.style[vendor + 'TransitionDuration'] = '200ms';
 			that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose + ' scale(' + that.scale + ')';
-			
+
 			that.zoomed = false;
 			that.refresh();
 
@@ -578,7 +578,7 @@ iScroll.prototype = {
 		that._resetPos(200);
 		if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
 	},
-	
+
 	_resetPos: function (time) {
 		var that = this,
 			resetX = that.x >= 0 ? 0 : that.x < that.maxScrollX ? that.maxScrollX : that.x,
@@ -619,27 +619,27 @@ iScroll.prototype = {
 		} else {
 			wheelDeltaX = wheelDeltaY = -e.wheelDelta;
 		}
-		
+
 		if (that.options.wheelAction == 'zoom') {
 			deltaScale = that.scale * Math.pow(2, 1/3 * (wheelDeltaY ? wheelDeltaY / Math.abs(wheelDeltaY) : 0));
 			if (deltaScale < that.options.zoomMin) deltaScale = that.options.zoomMin;
 			if (deltaScale > that.options.zoomMax) deltaScale = that.options.zoomMax;
-			
+
 			if (deltaScale != that.scale) {
 				if (!that.wheelZoomCount && that.options.onZoomStart) that.options.onZoomStart.call(that, e);
 				that.wheelZoomCount++;
-				
+
 				that.zoom(e.pageX, e.pageY, deltaScale, 400);
-				
+
 				setTimeout(function() {
 					that.wheelZoomCount--;
 					if (!that.wheelZoomCount && that.options.onZoomEnd) that.options.onZoomEnd.call(that, e);
 				}, 400);
 			}
-			
+
 			return;
 		}
-		
+
 		deltaX = that.x + wheelDeltaX;
 		deltaY = that.y + wheelDeltaY;
 
@@ -651,7 +651,7 @@ iScroll.prototype = {
 
 		that.scrollTo(deltaX, deltaY, 0);
 	},
-	
+
 	_mouseout: function (e) {
 		var t = e.relatedTarget;
 
@@ -661,7 +661,7 @@ iScroll.prototype = {
 		}
 
 		while (t = t.parentNode) if (t == this.wrapper) return;
-		
+
 		this._end(e);
 	},
 
@@ -671,7 +671,7 @@ iScroll.prototype = {
 		if (e.target != that.scroller) return;
 
 		that._unbind('webkitTransitionEnd');
-		
+
 		that._startAni();
 	},
 
@@ -689,19 +689,19 @@ iScroll.prototype = {
 			animate;
 
 		if (that.animating) return;
-		
+
 		if (!that.steps.length) {
 			that._resetPos(400);
 			return;
 		}
-		
+
 		step = that.steps.shift();
-		
+
 		if (step.x == startX && step.y == startY) step.time = 0;
 
 		that.animating = true;
 		that.moved = true;
-		
+
 		if (that.options.useTransition) {
 			that._transitionTime(step.time);
 			that._pos(step.x, step.y);
@@ -747,7 +747,7 @@ iScroll.prototype = {
 			newDist = (speed * speed) / (2 * deceleration),
 			newTime = 0, outsideDist = 0;
 
-		// Proportinally reduce speed if we are outside of the boundaries 
+		// Proportinally reduce speed if we are outside of the boundaries
 		if (dist > 0 && newDist > maxDistUpper) {
 			outsideDist = size / (6 / (newDist / speed * deceleration));
 			maxDistUpper = maxDistUpper + outsideDist;
@@ -769,12 +769,12 @@ iScroll.prototype = {
 	_offset: function (el) {
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
-			
+
 		while (el = el.offsetParent) {
 			left -= el.offsetLeft;
 			top -= el.offsetTop;
 		}
-		
+
 		if (el != this.wrapper) {
 			left *= this.scale;
 			top *= this.scale;
@@ -854,16 +854,16 @@ iScroll.prototype = {
 		that._unbind(MOVE_EV);
 		that._unbind(END_EV);
 		that._unbind(CANCEL_EV);
-		
+
 		if (that.options.hasTouch) {
 			that._unbind('mouseout', that.wrapper);
 			that._unbind(WHEEL_EV);
 		}
-		
+
 		if (that.options.useTransition) that._unbind('webkitTransitionEnd');
-		
+
 		if (that.options.checkDOMChanges) clearInterval(that.checkDOMTime);
-		
+
 		if (that.options.onDestroy) that.options.onDestroy.call(that);
 	},
 
@@ -949,7 +949,7 @@ iScroll.prototype = {
 		that.stop();
 
 		if (!step.length) step = [{ x: x, y: y, time: time, relative: relative }];
-		
+
 		for (i=0, l=step.length; i<l; i++) {
 			if (step[i].relative) { step[i].x = that.x - step[i].x; step[i].y = that.y - step[i].y; }
 			that.steps.push({ x: step[i].x, y: step[i].y, time: step[i].time || 0 });
@@ -1010,11 +1010,11 @@ iScroll.prototype = {
 		this._unbind(END_EV);
 		this._unbind(CANCEL_EV);
 	},
-	
+
 	enable: function () {
 		this.enabled = true;
 	},
-	
+
 	stop: function () {
 		if (this.options.useTransition) this._unbind('webkitTransitionEnd');
 		else cancelFrame(this.aniTime);
@@ -1022,7 +1022,7 @@ iScroll.prototype = {
 		this.moved = false;
 		this.animating = false;
 	},
-	
+
 	zoom: function (x, y, scale, time) {
 		var that = this,
 			relScale = scale / that.scale;
@@ -1046,7 +1046,7 @@ iScroll.prototype = {
 		that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose + ' scale(' + scale + ')';
 		that.zoomed = false;
 	},
-	
+
 	isReady: function () {
 		return !this.moved && !this.zoomed && !this.animating;
 	}
@@ -1082,7 +1082,7 @@ provides:
 Browser.Platform.phonegap =
 	window.device &&
 	window.device.phonegap;
-	
+
 
 /*
 ---
@@ -1186,13 +1186,13 @@ Array.implement({
 		}
 		return null;
 	},
-	
+
 	lastItemAt: function(offset) {
 		offset = offset ? offset : 0;
 		return this[this.length - 1 - offset] ?
 			   this[this.length - 1 - offset] :
 			   null;
-	}	
+	}
 });
 
 
@@ -1347,7 +1347,7 @@ Browser.Device = {
 
 if (Browser.Platform.ios){
 	var device = navigator.userAgent.toLowerCase().match(/(ip(ad|od|hone))/)[0];
-	
+
 	Browser.Device[device] = true;
 	Browser.Device.name = device;
 }
@@ -1480,7 +1480,7 @@ Browser.Features.Touch = (function(){
 		document.createEvent('TouchEvent').initTouchEvent('touchstart');
 		return true;
 	} catch (exception){}
-	
+
 	return false;
 })();
 
@@ -1824,7 +1824,7 @@ Moobile.Request = new Class({
 
 name: Request.ViewElement
 
-description: Provides a Request that loads a view from a remote location. This 
+description: Provides a Request that loads a view from a remote location. This
              class will look for an element with the view data-role.
 
 license: MIT-style license.
@@ -1852,16 +1852,16 @@ Moobile.Request.ViewElement = new Class({
 	},
 
 	load: function(url) {
-	
+
 		var element = this.elements[url];
 		if (element) {
 			return element;
 		}
-		
+
 		var element = null;
-		
+
 		this.addEvent('success:once', function(response) {
-			element = Elements.from(response)[0] || null;		
+			element = Elements.from(response)[0] || null;
 		});
 
 		this.options.url = url;
@@ -1876,7 +1876,7 @@ Moobile.Request.ViewElement = new Class({
 
 		return element;
 	}
-	
+
 });
 
 
@@ -1885,7 +1885,7 @@ Moobile.Request.ViewElement = new Class({
 
 name: Entity
 
-description: Provides the base class for every objects that are displayed 
+description: Provides the base class for every objects that are displayed
              through an element.
 
 license: MIT-style license.
@@ -1943,29 +1943,29 @@ Moobile.Entity = new Class({
 	initialize: function(element, options, name) {
 
 		this.name = name;
-		
+
 		var root = document.id(element);
 		if (root == null) {
 			root = new Element(this.options.tagName);
 			if (typeof element == 'string') {
 				root = Elements.from(element)[0];
-			} 
+			}
 		}
-		
+
 		this.element = root;
 
-		options = options || {};
+		options = options || {};
 
 		for (var option in this.options) {
 			var value = this.element.get('data-option-' + option.hyphenate());
 			if (value != null) {
 				if (options[option] == undefined) {
-					options[option] = value;	
+					options[option] = value;
 				}
-			}			
+			}
 		}
-				
-		this.setOptions(options);				
+
+		this.setOptions(options);
 
 		this.element.addEvent('click', this.bound('onClick'));
 		this.element.addEvent('mouseup', this.bound('onMouseUp'))
@@ -1976,26 +1976,26 @@ Moobile.Entity = new Class({
 		var className = this.options.className;
 		if (className) {
 			this.element.addClass(className);
-		}		
-		
+		}
+
 		var styleName = this.options.styleName
 		if (styleName) {
 			this.setStyle(styleName);
 		}
-		
+
 		this.element.getElements('[data-role]').each(function(element) {
 			if (this.hasRoleElement(element)) {
-				this.defineElementRole(element, element.get('data-role'));	
-			} 
+				this.defineElementRole(element, element.get('data-role'));
+			}
 		}, this);
 
 		this.didLoad();
-		
+
 		return this;
 	},
-	
+
 	destroy: function() {
-		
+
 		this.willUnload();
 
 		this.element.removeEvent('click', this.bound('onClick'));
@@ -2005,15 +2005,15 @@ Moobile.Entity = new Class({
 		this.removeFromOwner();
 
 		this.destroyChildren();
-		
+
 		this.element.destroy();
 		this.element = null;
 		this.window = null;
 		this.owner = null;
-		
+
 		this.didUnload();
 	},
-	
+
 	destroyChildren: function() {
 		this.children.each(this.bound('destroyChild'));
 		this.children.empty();
@@ -2029,7 +2029,7 @@ Moobile.Entity = new Class({
 		var element = document.id(entity);
 		if (element == null)
 			return false;
-		
+
 		if (this.hasChild(entity))
 			return false;
 
@@ -2058,32 +2058,32 @@ Moobile.Entity = new Class({
 
 		if (this.ready == false) {
 			this.addEvent('ready:once', function() {
-				entity.setReady();		
+				entity.setReady();
 			});
 			return true;
 		}
-		
+
 		entity.setReady();
-		
+
 		return true;
 	},
 
 	hasChild: function(entity) {
 		return this.children.contains(entity);
 	},
-	
+
 	getChild: function(name) {
 		return this.children.find(function(children) {
 			return children.getName() == name;
 		});
 	},
-	
+
 	getChildren: function() {
 		return this.children;
 	},
 
 	replaceChild: function(replace, entity) {
-		
+
 		var success = this.addChild(entity, 'before', replace);
 		if (success) {
 			return this.removeChild(replace);
@@ -2107,9 +2107,9 @@ Moobile.Entity = new Class({
 		entity.setOwner(null);
 		entity.ownerDidChange(null);
 		entity.setReady(false);
-		
+
 		entity.setWindow(null);
-		
+
 		element.dispose();
 
 		this.children.erase(entity);
@@ -2124,7 +2124,7 @@ Moobile.Entity = new Class({
 		     ? this.owner.removeChild(this)
 		     : false;
 	},
-	
+
 	addClass: function(name) {
 		this.element.addClass(name);
 		return this;
@@ -2138,8 +2138,8 @@ Moobile.Entity = new Class({
 	toggleClass: function(name) {
 		this.element.toggleClass(name);
 		return this;
-	},	
-		
+	},
+
 	setStyle: function(name) {
 
 		if (this.style) {
@@ -2148,18 +2148,18 @@ Moobile.Entity = new Class({
 
 		var style = this.$styles[name];
 		if (style) {
-			style.attach.call(this, this.element);			
+			style.attach.call(this, this.element);
 		}
 
 		this.style = style;
 
 		return this;
 	},
-	
+
 	getStyle: function() {
 		return this.style.name;
 	},
-		
+
 	setOwner: function(owner) {
 		this.owner = owner;
 		return this;
@@ -2167,7 +2167,7 @@ Moobile.Entity = new Class({
 
 	getOwner: function() {
 		return this.owner;
-	},	
+	},
 
 	hasOwner: function() {
 		return !!this.owner;
@@ -2176,11 +2176,11 @@ Moobile.Entity = new Class({
 	setWindow: function(window) {
 		this.window = window;
 	},
-	
+
 	getWindow: function() {
 		return this.window;
 	},
-	
+
 	hasWindow: function() {
 		return !!this.window;
 	},
@@ -2190,8 +2190,8 @@ Moobile.Entity = new Class({
 	},
 
 	getElement: function(selector) {
-		return selector 
-			? this.element.getElement(selector) 
+		return selector
+			? this.element.getElement(selector)
 			: this.element;
 	},
 
@@ -2209,7 +2209,7 @@ Moobile.Entity = new Class({
 
 	getRoleElements: function(role) {
 		return this.element.getElements('[data-role=' + role + ']').filter(this.bound('hasRoleElement'));
-	},	
+	},
 
 	hasRoleElement: function(element) {
 
@@ -2220,24 +2220,24 @@ Moobile.Entity = new Class({
 
 		return false;
 	},
-	
+
 	defineElementRole: function(element, name) {
 
 		if (element.retrieve('entity.has-role'))
 			return this;
 
 		var role = this.$roles[name];
-		if (role) {	
-			role.call(this, element, element.get('data-name'));					
+		if (role) {
+			role.call(this, element, element.get('data-name'));
 		} else {
 			throw new Error('Role ' + name + ' does not exists.');
 		}
-		
+
 		element.store('entity.has-role', true);
-		
+
 		return this;
-	},	
-	
+	},
+
 	getSize: function() {
 		return this.element.getSize();
 	},
@@ -2246,9 +2246,9 @@ Moobile.Entity = new Class({
 
 		if (this.ready)
 			return this;
-		
+
 		this.window = this.owner.getWindow();
-			
+
 		this.ready = true;
 		this.didBecomeReady();
 		this.fireEvent('ready');
@@ -2275,19 +2275,19 @@ Moobile.Entity = new Class({
 	},
 
 	willLoad: function() {
-		
+
 	},
-	
+
 	didLoad: function() {
-		
+
 	},
-	
+
 	willUnload: function() {
-		
+
 	},
-	
+
 	didUnload: function() {
-		
+
 	},
 
 	didBecomeReady: function() {
@@ -2332,7 +2332,7 @@ Moobile.Entity = new Class({
 
 	ownerDidChange: function(owner) {
 
-	},	
+	},
 
 	onClick: function(e) {
 		e.target = this;
@@ -2373,7 +2373,7 @@ Moobile.Entity.defineStyle = function(name, target, def) {
 
 name: View
 
-description: Provides the base class for every objects that are displayed 
+description: Provides the base class for every objects that are displayed
              through an element.
 
 license: MIT-style license.
@@ -2383,7 +2383,7 @@ authors:
 
 requires:
 	- Entity
-	
+
 provides:
 	- View
 
@@ -2393,7 +2393,7 @@ provides:
 Moobile.View = new Class({
 
 	Extends: Moobile.Entity,
-	
+
 	content: null,
 
 	options: {
@@ -2404,7 +2404,7 @@ Moobile.View = new Class({
 		this.element.removeClass('disable').addClass('enable');
 		return this;
 	},
-	
+
 	disable: function() {
 		this.element.removeClass('enable').addClass('disable');
 		return this;
@@ -2413,41 +2413,41 @@ Moobile.View = new Class({
 	addChild: function(entity, where, context) {
 
 		if (entity instanceof Moobile.ViewContent) {
-			return this.parent(entity, where, context); 
+			return this.parent(entity, where, context);
 		}
-	
+
 		switch (where) {
-			case 'header': return this.parent(entity, 'top'); 
-			case 'footer': return this.parent(entity, 'bottom'); 
+			case 'header': return this.parent(entity, 'top');
+			case 'footer': return this.parent(entity, 'bottom');
 		}
 
 		if (this.content && this.content.hasOwner()) {
-		
+
 			if (this.hasChild(entity)) {
 				return false;
 			}
-				
-			if (this.hasElement(entity) && !this.content.hasElement(entity) || 
+
+			if (this.hasElement(entity) && !this.content.hasElement(entity) ||
 				this.hasElement(context) && !this.content.hasElement(context)) {
 				return this.parent(entity, where, context);
-			}		
-			
+			}
+
 			return this.content.addChild(entity, where, context);
 		}
-				
-		return this.parent(entity, where, context); 
+
+		return this.parent(entity, where, context);
 	},
 
 	getChildren: function() {
 		return [].concat(this.content.getChildren(), this.parent());
 	},
 
-	getChild: function(name) {	
+	getChild: function(name) {
 		return this.content && this.content.hasOwner()
 			 ? this.content.getChild(name) || this.parent(name)
 			 : this.parent(name);
 	},
-	
+
 	hasChild: function(entity) {
 		return this.content && this.content.hasOwner()
 		     ? this.content.hasChild(entity) || this.parent(entity)
@@ -2467,16 +2467,16 @@ Moobile.View = new Class({
 	},
 
 	getOwnerView: function() {
-		
+
 		var owner = this.owner;
 		while (owner) {
-			
+
 			if (owner instanceof Moobile.View) {
 				return owner;
 			}
-			
-			owner = owner.getOwner();			
-		}				
+
+			owner = owner.getOwner();
+		}
 
 		return null;
 	},
@@ -2486,19 +2486,19 @@ Moobile.View = new Class({
 	},
 
 	willLoad: function() {
-		
+
 		this.parent();
-	
+
 		var content = this.getRoleElement('content');
 		if (content == null) {
 			content = new Element('div');
 			content.ingest(this.element);
 			content.inject(this.element);
 		}
-		
+
 		this.defineElementRole(content, 'content');
 	},
-	
+
 	didLoad: function() {
 		this.parent();
 		this.element.addEvent('swipe', this.bound('onSwipe'));
@@ -2507,16 +2507,16 @@ Moobile.View = new Class({
 
 	destroy: function() {
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
-		this.element.removeEvent('pinch', this.bound('onPinch'));		
+		this.element.removeEvent('pinch', this.bound('onPinch'));
 		this.content = null;
 		this.parent();
 	},
-	
+
 	onSwipe: function(e) {
 		e.target = this;
 		this.fireEvent('swipe', e);
 	},
-	
+
 	onPinch: function(e) {
 		e.target = this;
 		this.fireEvent('swipe', e);
@@ -2529,12 +2529,12 @@ Moobile.View.elementAtPath = function(path) {
 };
 
 Moobile.View.atPath = function(path) {
-	
+
 	var element = Moobile.View.elementAtPath(path);
 	if (element) {
-		return Class.instantiate(element.get('data-view') || 'Moobile.View', element, null, element.get('data-name'));
+		return Class.instantiate(element.get('data-view') || 'Moobile.View', element, null, element.get('data-name'));
 	}
-	
+
 	return null;
 };
 
@@ -2543,13 +2543,13 @@ Moobile.View.atPath = function(path) {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('content', Moobile.View, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-content') || Moobile.ViewContent, element, null, name);
 	if (instance instanceof Moobile.ViewContent) {
 		this.addChild(instance);
-		this.content = instance; // must be assigned after addChild is called	
+		this.content = instance; // must be assigned after addChild is called
 	}
-		
+
 	return instance;
 });
 
@@ -2589,7 +2589,7 @@ Moobile.Control = new Class({
 
 	options: {
 		className: null,
-		styleName: null	
+		styleName: null
 	},
 
 	setDisabled: function(disabled) {
@@ -2680,13 +2680,13 @@ provides:
 Moobile.Button = new Class({
 
 	Extends: Moobile.Control,
-	
+
 	label: null,
 
 	options: {
 		className: 'button',
 	},
-	
+
 	setLabel: function(label) {
 
 		if (this.label === label)
@@ -2700,7 +2700,7 @@ Moobile.Button = new Class({
 			} else {
 				this.replaceChild(this.label, label);
 				this.label.destroy();
-				this.label = label;				
+				this.label = label;
 			}
 		}
 
@@ -2712,23 +2712,23 @@ Moobile.Button = new Class({
 	},
 
 	willLoad: function() {
-		
+
 		this.parent();
-		
+
 		var label = this.getRoleElement('label');
 		if (label == null) {
 			label = new Element('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 		}
-		
+
 		this.defineElementRole('label', label);
 	},
-	
+
 	destroy: function() {
 		this.label = null;
-		this.parent();		
-	},	
+		this.parent();
+	},
 
 	onMouseDown: function(e) {
 		this.parent(e);
@@ -2747,12 +2747,12 @@ Moobile.Button = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('button', null, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-button') || Moobile.Button, element, null, name);
 	if (instance instanceof Moobile.Button) {
 		this.addChild(instance);
-	}	
-	
+	}
+
 	return instance;
 });
 
@@ -2761,13 +2761,13 @@ Moobile.Entity.defineRole('button', null, function(element, name) {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('label', Moobile.Button, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, null, name);
 	if (instance instanceof Moobile.Entity) {
 		this.addChild(instance);
 		this.label = instance;
 	}
-	
+
 	return instance;
 });
 
@@ -2810,7 +2810,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	setSelectedButton: function(selectedButton) {
-		
+
 		if (this.selectedButton === selectedButton) {
 			if (selectedButton && this.options.deselectable) {
 				selectedButton = null;
@@ -2819,7 +2819,7 @@ Moobile.ButtonGroup = new Class({
 			}
 		}
 
-		if (this.selectedButton) {		
+		if (this.selectedButton) {
 			this.fireEvent('deselect', this.selectedButton);
 			this.selectedButton.setSelected(false);
 			this.selectedButton = null;
@@ -2868,7 +2868,7 @@ Moobile.ButtonGroup = new Class({
 	didAddChild: function(entity) {
 
 		this.parent(entity);
-		
+
 		if (entity instanceof Moobile.Button) {
 			entity.addEvent('click', this.bound('onButtonClick'));
 			entity.addEvent('mouseup', this.bound('onButtonMouseUp'));
@@ -2877,31 +2877,31 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	didRemoveChild: function(entity) {
-		
+
 		this.parent(entity);
-		
+
 		if (entity instanceof Moobile.Button) {
 			entity.removeEvent('click', this.bound('onButtonClick'));
 			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
 			entity.removeEvent('mousedown', this.bound('onButtonMouseDown'));
-		}	
+		}
 	},
 
 	destroy: function() {
 		this.selectedButton = null;
 		this.selectedButtonIndex = -1;
-		this.parent();	
+		this.parent();
 	},
 
 	onButtonClick: function(e) {
 		this.setSelectedButton(e.target);
 		this.fireEvent('buttonClick', e.target);
 	},
-	
+
 	onButtonMouseUp: function(e) {
 		this.fireEvent('buttonMouseUp', e.target);
 	},
-	
+
 	onButtonMouseDown: function(e) {
 		this.fireEvent('buttonMouseDown', e.target);
 	}
@@ -2913,13 +2913,13 @@ Moobile.ButtonGroup = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('button-group', null, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-button-group') || Moobile.ButtonGroup, element, null, name);
 	if (instance instanceof Moobile.ButtonGroup) {
 		this.addChild(instance);
 	}
-	
-	return instance;	
+
+	return instance;
 });
 
 //------------------------------------------------------------------------------
@@ -2927,13 +2927,13 @@ Moobile.Entity.defineRole('button-group', null, function(element, name) {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineStyle('horizontal', Moobile.ButtonGroup, {
-	attach: function(element) { element.addClass('style-horizontal'); },			
-	detach: function(element) { element.removeClass('style-horizontal'); }			
+	attach: function(element) { element.addClass('style-horizontal'); },
+	detach: function(element) { element.removeClass('style-horizontal'); }
 });
 
 Moobile.Entity.defineStyle('vertical', Moobile.ButtonGroup, {
-	attach: function(element) { element.addClass('style-vertical'); },			
-	detach: function(element) { element.removeClass('style-vertical'); }			
+	attach: function(element) { element.addClass('style-vertical'); },
+	detach: function(element) { element.removeClass('style-vertical'); }
 });
 
 
@@ -2951,7 +2951,7 @@ authors:
 
 requires:
 	- Control
-	- BarRoles	
+	- BarRoles
 	- BarStyle
 
 provides:
@@ -2967,9 +2967,9 @@ Moobile.Bar = new Class({
 	options: {
 		className: 'bar'
 	},
-	
+
 	item: null,
-	
+
 	addBarButton: function(item, where, context) {
 		return this.item.addChild(item, where, context);
 	},
@@ -2990,27 +2990,27 @@ Moobile.Bar = new Class({
 		this.replaceChild(this.item, item);
 		this.item.destroy();
 		this.item = item;
-		return this;		
+		return this;
 	},
 
 	getItem: function() {
 		return this.item;
 	},
-	
+
 	willLoad: function() {
-		
+
 		this.parent();
-		
+
 		var item = this.getRoleElement('item');
 		if (item == null) {
 			item = new Element('div');
 			item.ingest(this.element);
 			item.inject(this.element);
 		}
-		
+
 		this.defineElementRole(item, 'item');
 	},
-	
+
 	destroy: function() {
 		this.item = null;
 		this.parent();
@@ -3027,8 +3027,8 @@ Moobile.Entity.defineRole('bar', null, function(element, name) {
 	var instance = Class.instantiate(element.get('data-bar') || Moobile.Bar, element, null, name);
 	if (instance instanceof Moobile.Bar) {
 		this.addChild(instance);
-	}	
-	
+	}
+
 	return instance;
 });
 
@@ -3042,8 +3042,8 @@ Moobile.Entity.defineRole('item', Moobile.Bar, function(element, name) {
 	if (instance instanceof Moobile.BarItem) {
 		this.addChild(instance);
 		this.item = instance;
-	}	
-	
+	}
+
 	return instance;
 });
 
@@ -3052,13 +3052,13 @@ Moobile.Entity.defineRole('item', Moobile.Bar, function(element, name) {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineStyle('translucent', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-translucent'); },			
-	detach: function(element) { element.removeClass('style-translucent'); }			
+	attach: function(element) { element.addClass('style-translucent'); },
+	detach: function(element) { element.removeClass('style-translucent'); }
 });
 
 Moobile.Entity.defineStyle('dark', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-dark'); },			
-	detach: function(element) { element.removeClass('style-dark'); }			
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }
 });
 
 Moobile.Entity.defineStyle('dark-translucent', Moobile.Bar, {
@@ -3066,7 +3066,7 @@ Moobile.Entity.defineStyle('dark-translucent', Moobile.Bar, {
 		element
 			.addClass('style-dark')
 			.addClass('style-dark-translucent');
-	},			
+	},
 	detach: function(element) {
 		element
 			.removeClass('style-dark')
@@ -3103,7 +3103,7 @@ Moobile.BarItem = new Class({
 	options: {
 		className: 'bar-item'
 	}
-	
+
 });
 
 
@@ -3139,7 +3139,7 @@ Moobile.BarTitle = new Class({
 	},
 
 	setText: function(text) {
-	
+
 		if (this.text) {
 			this.text = '';
 		}
@@ -3156,7 +3156,7 @@ Moobile.BarTitle = new Class({
 	getText: function() {
 		return this.text;
 	},
-	
+
 	destroy: function() {
 		this.text = null;
 		this.parent();
@@ -3201,12 +3201,12 @@ Moobile.BarButton = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('bar-button', null, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-bar-button') || Moobile.BarButton, element, null, name);
 	if (instance instanceof Moobile.BarButton) {
 		this.addChild(instance);
-	}	
-	
+	}
+
 	return instance;
 });
 
@@ -3216,37 +3216,37 @@ Moobile.Entity.defineRole('bar-button', null, function(element, name) {
 
 Moobile.Entity.defineStyle('active', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-active'); },
-	detach: function(element) { element.removeClass('style-active'); }			
+	detach: function(element) { element.removeClass('style-active'); }
 });
 
 Moobile.Entity.defineStyle('warning', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-warning'); },
-	detach: function(element) { element.removeClass('style-warning'); }			
+	detach: function(element) { element.removeClass('style-warning'); }
 });
 
 Moobile.Entity.defineStyle('back', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-back'); },
-	detach: function(element) { element.removeClass('style-back'); }			
+	detach: function(element) { element.removeClass('style-back'); }
 });
 
 Moobile.Entity.defineStyle('forward', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-forward'); },
-	detach: function(element) { element.removeClass('style-forward'); }			
+	detach: function(element) { element.removeClass('style-forward'); }
 });
 
 Moobile.Entity.defineStyle('dark', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-dark'); },
-	detach: function(element) { element.removeClass('style-dark'); }			
+	detach: function(element) { element.removeClass('style-dark'); }
 });
 
 Moobile.Entity.defineStyle('dark-back', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-dark-back'); },
-	detach: function(element) { element.removeClass('style-dark-back'); }			
+	detach: function(element) { element.removeClass('style-dark-back'); }
 });
 
 Moobile.Entity.defineStyle('dark-forward', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-dark-forward'); },
-	detach: function(element) { element.removeClass('style-dark-forward'); }			
+	detach: function(element) { element.removeClass('style-dark-forward'); }
 });
 
 
@@ -3287,13 +3287,13 @@ Moobile.BarButtonGroup = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('bar-button-group', null, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-bar-button-group') || Moobile.BarButtonGroup, element, null, name);
 	if (instance instanceof Moobile.BarButtonGroup) {
 		this.addChild(instance);
 	}
-	
-	return instance;	
+
+	return instance;
 });
 
 
@@ -3302,7 +3302,7 @@ Moobile.Entity.defineRole('bar-button-group', null, function(element, name) {
 
 name: NavigationBar
 
-description: Provides a NavigationBar control. 
+description: Provides a NavigationBar control.
 
 license: MIT-style license.
 
@@ -3322,11 +3322,11 @@ provides:
 Moobile.NavigationBar = new Class({
 
 	Extends: Moobile.Bar,
-	
+
 	addLeftBarButton: function(button) {
 		return this.addBarButton(button, 'top');
 	},
-	
+
 	addRightBarButton: function(button) {
 		return this.addBarButton(button, 'bottom');
 	},
@@ -3338,15 +3338,15 @@ Moobile.NavigationBar = new Class({
 	getTitle: function() {
 		return this.item.title;
 	},
-	
+
 	didLoad: function() {
-		
+
 		this.parent();
-	
+
 		if (this.options.className) {
 			this.element.addClass('navigation-' + this.options.className);
 		}
-	}	
+	}
 
 });
 
@@ -3359,8 +3359,8 @@ Moobile.Entity.defineRole('navigation-bar', null, function(element, name) {
 	var instance = Class.instantiate(element.get('data-navigation-bar') || Moobile.NavigationBar, element, null, name);
 	if (instance instanceof Moobile.NavigationBar) {
 		this.addChild(instance);
-	}	
-	
+	}
+
 	return instance;
 });
 
@@ -3374,8 +3374,8 @@ Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, name)
 	if (instance instanceof Moobile.NavigationBarItem) {
 		this.addChild(instance);
 		this.item = instance;
-	}	
-		
+	}
+
 	return instance;
 });
 
@@ -3404,9 +3404,9 @@ provides:
 Moobile.NavigationBarItem = new Class({
 
 	Extends: Moobile.BarItem,
-	
+
 	title: null,
-	
+
 	setTitle: function(title) {
 
 		if (this.title === title)
@@ -3422,7 +3422,7 @@ Moobile.NavigationBarItem = new Class({
 			} else {
 				this.replaceChildView(this.title, title);
 				this.title.destroy();
-				this.title = title;				
+				this.title = title;
 			}
 		}
 
@@ -3432,7 +3432,7 @@ Moobile.NavigationBarItem = new Class({
 	getTitle: function() {
 		return this.title;
 	},
-		
+
 	willLoad: function() {
 
 		this.parent();
@@ -3444,25 +3444,25 @@ Moobile.NavigationBarItem = new Class({
 			title.ingest(this.element);
 			title.inject(this.element);
 		}
-		
+
 		this.defineElementRole(title, 'title');
 	},
-	
+
 	didLoad: function() {
-		
+
 		this.parent();
-		
+
 		var className = this.options.className;
 		if (className) {
 			this.element.addClass('navigation-' + className);
 		}
-	},	
-	
+	},
+
 	destroy: function() {
 		this.title = null;
-		this.parent();		
+		this.parent();
 	},
-	
+
 });
 
 //------------------------------------------------------------------------------
@@ -3476,7 +3476,7 @@ Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element, 
 		this.addChild(instance);
 		this.title = instance;
 	}
-	
+
 	return instance;
 });
 
@@ -3564,9 +3564,9 @@ Moobile.Slider = new Class({
 	},
 
 	didBecomeReady: function() {
-		
+
 		this.parent();
-		
+
 		var options = {
 			snap: this.options.snap,
 			steps: this.options.max - this.options.min,
@@ -3577,8 +3577,8 @@ Moobile.Slider = new Class({
 		this.slider = new Slider(this.track, this.thumb, options);
 		this.slider.addEvent('move', this.bound('onMove'));
 		this.slider.addEvent('tick', this.bound('onTick'));
-		this.slider.addEvent('change', this.bound('onChange'));		
-		
+		this.slider.addEvent('change', this.bound('onChange'));
+
 		this.setValue(this.options.value);
 	},
 
@@ -3586,7 +3586,7 @@ Moobile.Slider = new Class({
 		this.thumb = null;
 		this.track = null;
 		this.slider = null;
-		this.parent();		
+		this.parent();
 	},
 
 	onMove: function(position) {
@@ -3612,12 +3612,12 @@ Moobile.Slider = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('slider', null, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-slider') || Moobile.Slider, element, null, name);
 	if (instance instanceof Moobile.Slider) {
 		this.addChild(instance);
-	}	
-	
+	}
+
 	return instance;
 });
 
@@ -3766,7 +3766,7 @@ Moobile.Entity.defineRole('list', null, function(element, name) {
 	if (instance instanceof Moobile.List) {
 		this.addChild(instance);
 	}
-	
+
 	return instance;
 });
 
@@ -3775,12 +3775,12 @@ Moobile.Entity.defineRole('list', null, function(element, name) {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('list-item', Moobile.List, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-list-item') || Moobile.ListItem, element, null, name);
 	if (instance instanceof Moobile.ListItem) {
 		this.addChild(instance);
 	}
-	
+
 	return instance;
 });
 
@@ -3789,7 +3789,7 @@ Moobile.Entity.defineRole('list-item', Moobile.List, function(element, name) {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineStyle('grouped', Moobile.List, {
-	attach: function(element) { element.addClass('style-grouped'); },			
+	attach: function(element) { element.addClass('style-grouped'); },
 	detach: function(element) { element.removeClass('style-grouped'); }
 });
 
@@ -3844,7 +3844,7 @@ Moobile.ListItem = new Class({
 			} else {
 				this.replaceChildView(this.label, label);
 				this.label.destroy();
-				this.label = label;				
+				this.label = label;
 			}
 		}
 
@@ -3867,7 +3867,7 @@ Moobile.ListItem = new Class({
 			} else {
 				this.replaceChildView(this.image, image);
 				this.image.destroy();
-				this.image = image;				
+				this.image = image;
 			}
 		}
 
@@ -3877,7 +3877,7 @@ Moobile.ListItem = new Class({
 	getImage: function() {
 		return this.image;
 	},
-	
+
 	setInfos: function(infos) {
 
 		if (this.infos === infos)
@@ -3891,7 +3891,7 @@ Moobile.ListItem = new Class({
 			} else {
 				this.replaceChildView(this.infos, infos);
 				this.infos.destroy();
-				this.infos = infos;				
+				this.infos = infos;
 			}
 		}
 
@@ -3901,15 +3901,15 @@ Moobile.ListItem = new Class({
 	getInfos: function() {
 		return this.infos;
 	},
-	
+
 	willLoad: function() {
-		
+
 		this.parent();
 
 		var image = this.getRoleElement('image');
 		var label = this.getRoleElement('label');
 		var infos = this.getRoleElement('infos');
-		
+
 		if (label == null) {
 			label = new Element('div');
 			label.ingest(this.element);
@@ -3920,17 +3920,17 @@ Moobile.ListItem = new Class({
 			image = new Element('div');
 			image.inject(this.element, 'top');
 		}
-		
+
 		if (infos == null) {
 			infos = new Element('div');
 			infos.inject(this.element);
 		}
-		
+
 		this.defineElementRole(label, 'label');
 		this.defineElementRole(image, 'image');
 		this.defineElementRole(infos, 'infos');
 	},
-	
+
 	destroy: function() {
 		this.label = null;
 		this.image = null;
@@ -3945,42 +3945,42 @@ Moobile.ListItem = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, null, name);
 	if (instance instanceof Moobile.Label) {
 		this.addChild(instance);
 		this.label = instance;
-	}				
-				
+	}
+
 	return instance;
 });
 
 
 Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-image') || Moobile.Image, element, null, name);
 	if (instance instanceof Moobile.Image) {
 		this.addChild(instance);
 	}
 
 	this.image = instance;
-	
+
 	if (!this.image.getSource()) {
 		this.image.hide();
 	}
-	
-	return instance;	
+
+	return instance;
 });
 
 Moobile.Entity.defineRole('infos', Moobile.ListItem, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-infos') || Moobile.Label, element, null, name);
 	if (instance instanceof Moobile.Label) {
 		this.addChild(instance);
 	}
 
 	this.detail = instance;
-	this.detail.getElement().addClass('infos');	
+	this.detail.getElement().addClass('infos');
 
 	return instance;
 });
@@ -4053,13 +4053,13 @@ Moobile.ActivityIndicator = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('activity-indicator', null, function(element, name) {
-	
+
 	var instance = Class.instantiate(element.get('data-activity-indicator') || Moobile.ActivityIndicator, element, null, name);
 	if (instance instanceof Moobile.ActivityIndicator) {
 		this.addChild(instance);
 	}
-	
-	return instance;	
+
+	return instance;
 });
 
 
@@ -4094,7 +4094,7 @@ Moobile.Image = new Class({
 		className: 'image',
 		tagName: 'img'
 	},
-	
+
 	setSource: function(source) {
 
 		this.element.set('src', null);
@@ -4111,7 +4111,7 @@ Moobile.Image = new Class({
 	getSource: function() {
 		return this.element.get('src');
 	},
-	
+
 	destroy: function() {
 		this.image = null;
 		this.parent();
@@ -4210,17 +4210,17 @@ Moobile.Overlay = new Class({
 
 	destroy: function() {
 		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
-		this.parent();		
+		this.parent();
 	},
 
 	onAnimationEnd: function(e) {
-		
+
 		if (this.element.hasClass('present')) this.didShow();
 		if (this.element.hasClass('dismiss')) {
 			this.element.hide();
-			this.didHide();		
+			this.didHide();
 		}
-		
+
 		this.element.removeClass('present');
 		this.element.removeClass('dismiss');
 	}
@@ -4255,26 +4255,26 @@ Moobile.Alert = new Class({
 	Extends: Moobile.Overlay,
 
 	title: null,
-	
+
 	message: null,
 
-	dialog: null,	
-	
+	dialog: null,
+
 	header: null,
-	
+
 	footer: null,
-	
+
 	content: null,
-	
+
 	buttons: [],
-	
+
 	options: {
 		className: 'alert'
 	},
-	
+
 	setTitle: function(title) {
 
-		if (this.title === title) 
+		if (this.title === title)
 			return this;
 
 		if (this.title instanceof Moobile.Entity) {
@@ -4282,9 +4282,9 @@ Moobile.Alert = new Class({
 			this.title.destroy();
 			this.title = null;
 		}
-				
+
 		this.header.empty();
-				
+
 		if (title instanceof Moobile.Entity) {
 			this.addChild(title, 'bottom', this.header);
 		} else {
@@ -4295,24 +4295,24 @@ Moobile.Alert = new Class({
 
 		return this;
 	},
-	
+
 	getTitle: function() {
 		return this.title;
 	},
 
 	setMessage: function(message) {
-		
+
 		if (this.message === message)
 			return this;
-		
+
 		if (this.message instanceof Moobile.Entity) {
 			this.message.removeFromOwner();
 			this.message.destroy();
 			this.message = null;
 		}
-				
+
 		this.content.empty();
-				
+
 		if (message instanceof Moobile.Entity) {
 			this.addChild(message, 'bottom', this.content);
 		} else {
@@ -4323,7 +4323,7 @@ Moobile.Alert = new Class({
 
 		return this;
 	},
-	
+
 	getMessage: function() {
 		return this.message;
 	},
@@ -4332,7 +4332,7 @@ Moobile.Alert = new Class({
 		this.addChild(button, 'bottom', this.footer);
 		return this;
 	},
-	
+
 	didLoad: function() {
 
 		this.parent();
@@ -4340,7 +4340,7 @@ Moobile.Alert = new Class({
 		this.header  = new Element('div.dialog-header');
 		this.footer  = new Element('div.dialog-footer');
 		this.content = new Element('div.dialog-content');
-		
+
 		this.dialog = new Element('div.dialog');
 		this.dialog.grab(this.header);
 		this.dialog.grab(this.content);
@@ -4348,71 +4348,71 @@ Moobile.Alert = new Class({
 
 		this.element.grab(this.dialog);
 	},
-	
+
 	didAddChild: function(entity) {
-		
+
 		this.parent(entity);
-		
+
 		if (entity instanceof Moobile.Button) {
-			entity.addEvent('click', this.bound('onButtonClick'));			
+			entity.addEvent('click', this.bound('onButtonClick'));
 			entity.addEvent('mouseup', this.bound('onButtonMouseUp'));
 			entity.addEvent('mousedown', this.bound('onButtonMouseUp'));
 			this.buttons.include(entity);
-		}	
+		}
 	},
-	
+
 	didRemoveChild: function(entity) {
-		
+
 		this.parent(entity);
-		
+
 		if (entity instanceof Moobile.Button) {
 			entity.removeEvent('click', this.bound('onButtonClick'));
 			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
-			entity.removeEvent('mousedown', this.bound('onButtonMouseUp'));			
+			entity.removeEvent('mousedown', this.bound('onButtonMouseUp'));
 			this.button.erase(entity);
-		}		
+		}
 	},
-	
+
 	willShow: function() {
-		
+
 		this.parent();
-		
+
 		if (this.buttons.length == 0) {
-			
+
 			var button = new Moobile.Button();
 			button.setLabel('OK');
 			button.setHighlighted(true);
-			
-			this.addButton(button);			
+
+			this.addButton(button);
 		}
 	},
 
 	destroy: function() {
-		
+
 		this.dialog = null;
 		this.header = null;
 		this.footer = null;
 		this.content = null;
-		this.buttons = null;	
+		this.buttons = null;
 		this.message = null;
 		this.title = null;
-		
-		this.parent();		
-	},	
+
+		this.parent();
+	},
 
 	onButtonClick: function(e) {
 
 		this.fireEvent('buttonClick', e.target);
-		
+
 		if (this.buttons.length == 1) {
 			this.hideAnimated();
 		}
 	},
-	
+
 	onButtonMouseUp: function() {
 		this.fireEvent('buttonMouseUp');
 	},
-	
+
 	onButtonMouseDown: function() {
 		this.fireEvent('buttonMouseDown');
 	}
@@ -4466,7 +4466,7 @@ Moobile.ViewContent = new Class({
 
 name: ScrollView
 
-description: Provides a view that scroll up or down when the content is larger 
+description: Provides a view that scroll up or down when the content is larger
              that the view area.
 
 license: MIT-style license.
@@ -4511,7 +4511,7 @@ Moobile.ScrollView = new Class({
 		this.scroller.scrollToPage(pageX, pageY, time);
 		return this;
 	},
-	
+
 	getWrapper: function() {
 		return this.wrapper;
 	},
@@ -4526,7 +4526,7 @@ Moobile.ScrollView = new Class({
 
 	getContentOffset: function() {
 		return this.scroller.getOffset();
-	},	
+	},
 
 	didLoad: function() {
 
@@ -4539,9 +4539,9 @@ Moobile.ScrollView = new Class({
 			this.element.addClass('scroll-' + this.options.className);
 			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
 		}
-		
+
 		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
-		
+
 		this.scroller.addEvent('scrollstart', this.bound('onViewScrollStart'));
 		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
 		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));
@@ -4565,16 +4565,16 @@ Moobile.ScrollView = new Class({
 	},
 
 	destroy: function() {
-		
+
 		this.scroller.removeEvent('scrollstart', this.bound('onViewScrollStart'));
 		this.scroller.removeEvent('scrollmove', this.bound('onViewScrollMove'));
 		this.scroller.removeEvent('scrollend', this.bound('onViewScrollEnd'));
-		this.scroller.removeEvent('refresh', this.bound('onViewScrollRefresh'));		
-		
+		this.scroller.removeEvent('refresh', this.bound('onViewScrollRefresh'));
+
 		this.scroller.destroy();
 		this.scroller = null;
 		this.wrapper = null;
-		
+
 		this.parent();
 	},
 
@@ -4633,7 +4633,7 @@ Moobile.ViewPanel = new Class({
 	getMainPanel: function() {
 		return this.content.getMainPanel();
 	},
-	
+
 	didLoad: function() {
 
 		this.parent();
@@ -4646,9 +4646,9 @@ Moobile.ViewPanel = new Class({
 
 	destroy: function() {
 		this.sidePanel = null;
-		this.mainPanel = null;	
-		this.parent();		
-	}	
+		this.mainPanel = null;
+		this.parent();
+	}
 
 });
 
@@ -4703,26 +4703,26 @@ Moobile.ViewPanelContent = new Class({
 	},
 
 	willLoad: function() {
-		
+
 		this.parent();
-		
+
 		var main = this.getRoleElement('main-panel');
 		if (main == null) {
 			main = new Element('div');
 			main.ingest(this.element);
 			main.inject(this.element);
 		}
-		
+
 		var side = this.getRoleElement('side-panel');
 		if (side == null) {
 			side = new Element('div');
 			side.inject(this.element, 'top');
 		}
-		
+
 		this.defineElementRole(main, 'main-panel');
 		this.defineElementRole(side, 'side-panel');
 	}
-	
+
 });
 
 //------------------------------------------------------------------------------
@@ -4730,11 +4730,11 @@ Moobile.ViewPanelContent = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(element, options) {
-	
+
 	this.sidePanel = new Moobile.Entity(element, options);
 
 	this.addChild(this.sidePanel);
-	
+
 	var className = this.options.className;
 	if (className) {
 		this.sidePanel.addClass('side-panel');
@@ -4742,11 +4742,11 @@ Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(eleme
 });
 
 Moobile.Entity.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
-	
+
 	this.mainPanel = new Moobile.Entity(element, options);
-	
+
 	this.addChild(this.mainPanel);
-	
+
 	var className = this.options.className;
 	if (className) {
 		this.mainPanel.addClass('main-panel');
@@ -4797,7 +4797,7 @@ Moobile.ViewStack = new Class({
 
 name: Scroller
 
-description: Provides a wrapper for the iScroll class. 
+description: Provides a wrapper for the iScroll class.
 
 license: MIT-style license.
 
@@ -4905,42 +4905,42 @@ Moobile.Scroller = new Class({
 			y: this.scroller.currPageY
 		};
 	},
-	
+
 	getAbsoluteDistance: function() {
 		return {
 			x: this.scroller.absDistX,
 			y: this.scroller.absDistY
 		};
 	},
-	
+
 	getDistance: function() {
 		return {
 			x: this.scroller.distX,
-			y: this.scroller.distY			
+			y: this.scroller.distY
 		};
 	},
-	
+
 	getDirection: function() {
 		return {
 			x: this.scroller.dirX,
 			y: this.scroller.dirY
-		};	
+		};
 	},
-	
+
 	getAbsoluteStart: function() {
 		return {
 			x: this.scroller.absStartX,
 			y: this.scroller.absStartY
 		};
 	},
-	
+
 	getStart: function() {
 		return {
 			x: this.scroller.startX,
 			y: this.scroller.startY
 		};
 	},
-	
+
 	getPages: function() {
 		return {
 			x: this.scroller.pagesX,
@@ -4950,7 +4950,7 @@ Moobile.Scroller = new Class({
 
 	getOffset: function() {
 
-		// TODO: I just realized this information might be found in iscroll 
+		// TODO: I just realized this information might be found in iscroll
 		// directly, I'll have to fix this instead of using "fancy"
 		// regular expressions
 
@@ -5218,30 +5218,30 @@ Moobile.ViewTransition = new Class({
 	},
 
 	enter: function(viewToShow, viewToHide, parentView, first) {
-		
+
 		if (viewToShow) {
 			viewToShow.show();
 			viewToShow.disable();
 		}
-		
+
 		if (viewToHide) {
 			viewToHide.disable();
 		}
-		
+
 		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
-		
+
 		if (viewToShow){
-			viewToShow.show();	
+			viewToShow.show();
 			viewToShow.disable();
-		} 
-		
+		}
+
 		if (viewToHide) {
 			viewToHide.disable();
 		}
-		
+
 		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
 	},
 
@@ -5250,29 +5250,29 @@ Moobile.ViewTransition = new Class({
 		if (viewToShow) {
 			viewToShow.enable();
 		}
-		 
+
 		if (viewToHide) {
-			viewToHide.hide();	
+			viewToHide.hide();
 			viewToHide.enable();
 		}
 	},
 
 	didLeave: function(viewToShow, viewToHide, parentView) {
-		
+
 		if (viewToShow) {
 			viewToShow.enable();
 		}
-		
+
 		if (viewToHide) {
-			viewToHide.hide();	
+			viewToHide.hide();
 			viewToHide.enable();
-		} 
+		}
 	},
 
 	onComplete: function(e) {
-		
+
 		e.stop();
-		
+
 		if (this.subjects.contains(e.target)) {
 			this.clearSubjects();
 			this.fireEvent('stop');
@@ -5370,38 +5370,38 @@ Moobile.ViewTransition.Cover = new Class({
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
-		
+
 		switch (this.options.presentation) {
-			
-			case 'box':					
+
+			case 'box':
 				this.overlay = new Moobile.Overlay();
 				viewToShow = new Element('div.transition-cover-view-wrapper').wraps(viewToShow);
-				parentView.addClass('transition-cover-box');				
+				parentView.addClass('transition-cover-box');
 				break;
-			
+
 			case 'center':
 				this.overlay = new Moobile.Overlay();
-				parentView.addClass('transition-cover-center');		
+				parentView.addClass('transition-cover-center');
 				break;
-			
+
 			case 'fullscreen':
 				this.overlay = null;
 				break;
 		}
-		
+
 		if (this.overlay) {
 
 			this.overlay.addClass('transition-cover-overlay');
-			
+
 			this.overlay.addEvent('show', this.bound('onMaskShow'));
 			this.overlay.addEvent('hide', this.bound('onMaskHide'));
-			
+
 			parentView.addChild(this.overlay)
-			
-			this.overlay.showAnimated();			
+
+			this.overlay.showAnimated();
 		}
 
-		if (first) {			
+		if (first) {
 			this.animate(viewToShow, 'transition-cover-enter-first');
 			return;
 		}
@@ -5423,11 +5423,11 @@ Moobile.ViewTransition.Cover = new Class({
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);
-		
+
 		if (this.overlay) {
 			this.overlay.hideAnimated();
 		}
-		
+
 		if (this.options.presentation == 'box') {
 			var viewToHideElement = document.id(viewToHide);
 			var viewToHideWrapper = viewToHideElement.getParent('.transition-cover-view-wrapper');
@@ -5435,21 +5435,21 @@ Moobile.ViewTransition.Cover = new Class({
 				viewToHide = viewToHideWrapper;
 			}
 		}
-		
+
 		this.addSubject(viewToShow, 'transition-view-to-show');
 		this.addSubject(viewToHide, 'transition-view-to-hide');
 
 		this.animate(parentView.getContent(), 'transition-cover-leave');
 	},
-	
+
 	didLeave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);
-		
+
 		switch (this.options.presentation) {
-			
-			case 'box':	
-								
+
+			case 'box':
+
 				var viewToHideElement = document.id(viewToHide);
 				var viewToHideWrapper = viewToHideElement.getParent('.transition-cover-view-wrapper');
 				if (viewToHideWrapper) {
@@ -5457,28 +5457,28 @@ Moobile.ViewTransition.Cover = new Class({
 					viewToHideWrapper.destroy();
 					viewToHideWrapper = null;
 				}
-					
+
 				parentView.removeClass('transition-cover-box');
-				
+
 				break;
-			
+
 			case 'center':
-				parentView.removeClass('transition-cover-center');		
+				parentView.removeClass('transition-cover-center');
 				break;
-			
+
 			case 'fullscreen':
 				break;
-		}	
-		
+		}
+
 		viewToHide.removeClass('transition-cover-foreground-view');
-		viewToShow.removeClass('transition-cover-background-view');		
-	
+		viewToShow.removeClass('transition-cover-background-view');
+
 	},
-	
+
 	onMaskShow: function() {
-		
+
 	},
-	
+
 	onMaskHide: function() {
 		this.overlay.destroy();
 		this.overlay = null;
@@ -5739,15 +5739,15 @@ Moobile.ViewController = new Class({
 	name: null,
 
 	title: null,
-	
+
 	image: null,
 
 	modal: false,
 
 	view: null,
-		
+
 	viewReady: false,
-		
+
 	viewTransition: null,
 
 	viewControllerStack: null,
@@ -5761,17 +5761,17 @@ Moobile.ViewController = new Class({
 	childViewControllers: [],
 
 	initialize: function(options, name) {
-		
+
 		this.name = name;
-		
+
 		this.setOptions(options);
-		
+
 		this.loadView();
-		
+
 		if (this.view) {
-			this.view.addEvent('ready', this.bound('onViewReady'));			
+			this.view.addEvent('ready', this.bound('onViewReady'));
 		}
-		
+
 		return this;
 	},
 
@@ -5780,7 +5780,7 @@ Moobile.ViewController = new Class({
 	},
 
 	destroy: function() {
-		
+
 		this.destroyChildViewControllers();
 
 		this.view.destroy();
@@ -5808,21 +5808,21 @@ Moobile.ViewController = new Class({
 			return false;
 
 		this.willAddChildViewController(viewController);
-		
+
 		viewController.parentViewControllerWillChange(this);
-		
+
 		if (!viewController.isModal()) {
 			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
 			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
 		}
-				
-		viewController.setParentViewController(this);	
+
+		viewController.setParentViewController(this);
 		viewController.parentViewControllerDidChange(this);
-		
+
 		this.childViewControllers.push(viewController);
 		this.view.addChild(viewController.getView(), where, context);
 		this.didAddChildViewController(viewController);
-		
+
 		return true;
 	},
 
@@ -5842,15 +5842,15 @@ Moobile.ViewController = new Class({
 			return false;
 
 		this.willRemoveChildViewController(viewController);
-		
+
 		this.childViewControllers.erase(viewController);
-		
+
 		viewController.parentViewControllerWillChange(null);
 		viewController.setViewControllerStack(null);
 		viewController.setViewControllerPanel(null);
 		viewController.setParentViewController(null);
 		viewController.parentViewControllerDidChange(null);
-		
+
 		this.didRemoveChildViewController(viewController);
 
 		viewController.getView().removeFromOwner();
@@ -5859,25 +5859,25 @@ Moobile.ViewController = new Class({
 	},
 
 	removeFromParentViewController: function() {
-		return this.parentViewController 
+		return this.parentViewController
 			 ? this.parentViewController.removeChildViewController(this)
 			 : false;
 	},
-	
+
 	presentModalViewController: function(viewController, viewTransition) {
-		
+
 		if (this.modalViewController)
 			return this;
-		
+
 		this.modalViewController = viewController;
 		this.modalViewController.modal = true;
-		
+
 		this.willPresentModalViewController();
 
 		var viewToShow = this.modalViewController.getView();
 		var viewToHide = this.view;
 		var parentView = this.view.getOwnerView();
-		
+
 		this.addChildViewController(this.modalViewController, 'after', viewToHide);
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
@@ -5915,8 +5915,8 @@ Moobile.ViewController = new Class({
 		);
 
 		return this;
-	},	
-	
+	},
+
 	getName: function() {
 		return this.name;
 	},
@@ -5933,7 +5933,7 @@ Moobile.ViewController = new Class({
 	setImage: function(image) {
 		this.image = image;
 	},
-	
+
 	getImage: function() {
 		return this.image;
 	},
@@ -5945,7 +5945,7 @@ Moobile.ViewController = new Class({
 	isViewReady: function() {
 		return this.viewReady;
 	},
-	
+
 	getView: function() {
 		return this.view;
 	},
@@ -5981,7 +5981,7 @@ Moobile.ViewController = new Class({
 		this.parentViewController = parentViewController;
 		return this;
 	},
-	
+
 	getParentViewController: function() {
 		return this.parentViewController;
 	},
@@ -6001,35 +6001,35 @@ Moobile.ViewController = new Class({
 	didRemoveChildViewController: function(viewController) {
 
 	},
-	
+
 	parentViewControllerWillChange: function(viewController) {
-		
+
 	},
-	
+
 	parentViewControllerDidChange: function(viewController) {
-		
+
 	},
 
 	willPresentModalViewController: function() {
 
 	},
-	
+
 	didPresentModalViewController: function() {
 
 	},
-	
+
 	willDismissModalViewController: function() {
 
 	},
-	
+
 	didDismissModalViewController: function() {
 
 	},
-	
+
 	viewDidBecomeReady: function() {
-		
+
 	},
-	
+
 	viewWillEnter: function() {
 
 	},
@@ -6059,7 +6059,7 @@ Moobile.ViewController = new Class({
 		this.modalViewController.viewDidEnter();
 		this.didPresentModalViewController()
 	},
-	
+
 	onDismissTransitionStart: function() {
 		this.modalViewController.viewWillLeave();
 	},
@@ -6110,7 +6110,7 @@ Moobile.ViewControllerStack = new Class({
 	getTopViewController: function() {
 		return this.topViewController;
 	},
-	
+
 	pushViewController: function(viewController, viewTransition) {
 
 		if (this.topViewController == viewController)
@@ -6276,7 +6276,7 @@ Moobile.ViewControllerStack = new Class({
 
 name: ViewControllerStack.Navigation
 
-description: Provides a ViewControllerStack that automatically add a 
+description: Provides a ViewControllerStack that automatically add a
              NavigationBar control to each view controller's wiew added.
 
 license: MIT-style license.
@@ -6485,14 +6485,14 @@ Moobile.Window = new Class({
 		return this;
 	},
 
-	didLoad: function() {		
+	didLoad: function() {
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
 
 	willUnload: function() {
 		window.removeEvent('load', this.bound('onWindowLoad'));
-		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));		
+		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
 
 	didAddChild: function(entity) {
@@ -6520,7 +6520,7 @@ Moobile.Entity.defineRole('content', Moobile.Window, function(element, name) {
 
 	if (instance instanceof Moobile.WindowContent) {
 		this.addChild(instance);
-		this.content = instance; // must be assigned after addChild is called		
+		this.content = instance; // must be assigned after addChild is called
 	}
 
 	return instance;
@@ -6585,11 +6585,11 @@ Moobile.WindowController = new Class({
 	Extends: Moobile.ViewController,
 
 	rootViewController: null,
-	
+
 	loadView: function() {
 		this.view = new Moobile.Window();
-	},	
-	
+	},
+
 	setRootViewController: function(rootViewController) {
 
 		if (this.rootViewController) {
@@ -6605,7 +6605,7 @@ Moobile.WindowController = new Class({
 
 		return this;
 	},
-	
+
 	getRootViewController: function() {
 		return this.rootViewController;
 	},
@@ -6780,18 +6780,18 @@ var events = {
 		active = true;
 		start = {x: touch.pageX, y: touch.pageY};
 	},
-	
+
 	touchmove: function(event){
 		event.preventDefault();
 		if (disabled || !active) return;
-		
+
 		var touch = event.changedTouches[0];
 		var end = {x: touch.pageX, y: touch.pageY};
 		if (this.retrieve(cancelKey) && Math.abs(start.y - end.y) > Math.abs(start.x - end.x)){
 			active = false;
 			return;
 		}
-		
+
 		var distance = this.retrieve(distanceKey, dflt),
 			diff = end.x - start.x,
 			isLeftSwipe = diff < -distance,
@@ -6799,12 +6799,12 @@ var events = {
 
 		if (!isRightSwipe && !isLeftSwipe)
 			return;
-		
+
 		active = false;
 		event.direction = (isLeftSwipe ? 'left' : 'right');
 		event.start = start;
 		event.end = end;
-		
+
 		this.fireEvent(name, event);
 	},
 
@@ -6872,7 +6872,7 @@ var events = {
 			clear();
 			return;
 		}
-		
+
 		timer = (function(){
 			this.fireEvent(name, event);
 		}).delay(this.retrieve(delayKey) || 750, this);
@@ -6931,7 +6931,7 @@ Class.Instantiate = function(klass, options){
 		if (object.getInstanceOf && object.getInstanceOf(klass)) return;
 		new klass(object, options);
 	};
-	
+
 	return function(objects){
 		objects.each(create);
 	};
@@ -6980,7 +6980,7 @@ Class.Singleton.prototype.check = function(item){
 
 	var instance = item.retrieve('single:' + this.$className);
 	if (!instance) item.store('single:' + this.$className, this);
-	
+
 	return instance;
 };
 

@@ -64,7 +64,7 @@ Moobile.Request.ViewElement = new Class( /** @lends Request.ViewElement.prototyp
 		var element = null;
 
 		this.addEvent('success:once', function(response) {
-			element = Elements.from(response)[0] || null;
+			element = Elements.from(response)[0] || null;
 		});
 
 		this.options.url = url;

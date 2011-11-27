@@ -106,7 +106,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @since 0.1
 	 */
 	setSelectedButtonIndex: function(index) {
-		this.setSelectedButton(this.children[index] || null);
+		this.setSelectedButton(this.children[index] || null);
 		return this;
 	},
 

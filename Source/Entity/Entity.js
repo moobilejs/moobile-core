@@ -223,7 +223,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	 * Add a child entity at a specific location. If the location is
 	 * unspecified, the child entity will go to the bottom.
 	 * @param {Entity} entity The child entity.
-	 * @param {String} where The child entity location can be top, bottom, before or after.
+	 * @param {String} where The child entity location can be top, bottom, before or after.
 	 * @param {Element} context The entity location context element.
 	 * @return {Boolean}
 	 * @since 0.1
