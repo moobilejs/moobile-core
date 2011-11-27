@@ -39,6 +39,27 @@ provides:
 	 */
 	options: {
 		className: 'text'
+	},
+
+	/**
+	 * Set the text content.
+	 * @param {String} text The text content.
+	 * @return {Text}
+	 * @since 0.1
+	 */
+	setText: function(text) {
+		this.element.set('html', text);
+		return this;
+	},
+
+	/**
+	 * Return the text content.
+	 * @param {String} text The text content.
+	 * @return {Text}
+	 * @since 0.1
+	 */
+	getText: function(text) {
+		return this.element.get('html');
 	}
 
 });
