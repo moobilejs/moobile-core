@@ -884,7 +884,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	 */
 	onMouseUp: function(e) {
 		e.target = this;
-		this.fireEvent('mouseUp', e);
+		this.fireEvent('mouseup', e);
 	},
 
 	/**
@@ -895,7 +895,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	 */
 	onMouseDown: function(e) {
 		e.target = this;
-		this.fireEvent('mouseDown', e);
+		this.fireEvent('mousedown', e);
 	},
 
 	toElement: function() {

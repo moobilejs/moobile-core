@@ -34,14 +34,6 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'bar'
-	},
-
-	/**
 	 * The bar item.
 	 * @type {BarItem}
 	 */
@@ -94,6 +86,14 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		}
 
 		this.defineElementRole(item, 'item');
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('bar');
 	},
 
 	/**

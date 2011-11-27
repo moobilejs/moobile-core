@@ -137,13 +137,8 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
-
 		this.parent();
-
-		var className = this.options.className;
-		if (className) {
-			this.element.addClass('navigation-' + className);
-		}
+		this.element.addClass('navigation-bar-item');
 	},
 
 	/**

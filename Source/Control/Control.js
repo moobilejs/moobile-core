@@ -177,7 +177,7 @@ Moobile.Control = new Class( /* @lends Control.prototype */ {
 
 		this[state] = value;
 
-		var klass = this.options.className + '-' + state;
+		var klass = 'is-' + state;
 		if (value)	this.element.addClass(klass);
 		else		this.element.removeClass(klass);
 

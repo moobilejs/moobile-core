@@ -40,14 +40,6 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	label: null,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'button',
-	},
-
-	/**
 	 * Set the button label.
 	 * @param {Mixed} label The label as a Label instance or as a string.
 	 * @return {Object}
@@ -99,6 +91,14 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	},
 
 	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('button');
+	},
+
+	/**
 	 * @see Entity#destroy
 	 */
 	destroy: function() {
@@ -114,7 +114,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	onMouseDown: function(e) {
 		this.parent(e);
-		this.element.addClass(this.options.className + '-down');
+		this.element.addClass('is-down');
 	},
 
 	/**
@@ -125,7 +125,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	onMouseUp: function(e) {
 		this.parent(e);
-		this.element.removeClass(this.options.className + '-down');
+		this.element.removeClass('is-down');
 	}
 
 });

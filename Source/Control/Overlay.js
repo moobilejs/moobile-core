@@ -34,14 +34,6 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'overlay'
-	},
-
-	/**
 	 * Show the overlay with an animation.
 	 * @return {Overlay}
 	 * @since 0.1
@@ -69,6 +61,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	 */
 	didLoad: function() {
 		this.parent();
+		this.element.addClass('overlay');
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 	},
 

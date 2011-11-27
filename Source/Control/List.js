@@ -52,7 +52,6 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 * @type {Object}
 	 */
 	options: {
-		className: 'list',
 		tagName: 'ul'
 	},
 
@@ -147,6 +146,14 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 */
 	clearItems: function() {
 		return this.removeChildren();
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('list');
 	},
 
 	/**

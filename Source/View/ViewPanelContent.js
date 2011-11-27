@@ -52,7 +52,7 @@ Moobile.ViewPanelContent = new Class({
 	},
 
 	/**
-	 * @see Entity#willLoad.
+	 * @see Entity#willLoad
 	 */
 	willLoad: function() {
 
@@ -73,6 +73,14 @@ Moobile.ViewPanelContent = new Class({
 
 		this.defineElementRole(main, 'main-panel');
 		this.defineElementRole(side, 'side-panel');
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addEvent('view-panel-content');
 	}
 
 });

@@ -31,7 +31,15 @@ provides:
  */
 Moobile.ViewStackContent = new Class({
 
-	Extends: Moobile.ViewContent
+	Extends: Moobile.ViewContent,
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('view-stack-content');
+	}
 
 });
 

@@ -36,14 +36,6 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	Extends: Moobile.View,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'window'
-	},
-
-	/**
 	 * Return the current orientation name: portrait or landscape.
 	 * @return {String}
 	 * @since 0.1
@@ -70,6 +62,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	 */
 	didLoad: function() {
 		this.parent();
+		this.element.set('class', 'window');
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},

@@ -36,16 +36,16 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	Extends: Moobile.View,
 
 	/**
-	 * The view content wrapper element.
-	 * @type {Element}
-	 */
-	wrapper: null,
-
-	/**
 	 * The scroller engine.
 	 * @type {Scroller}
 	 */
 	scroller: null,
+
+	/**
+	 * The view content wrapper element.
+	 * @type {Element}
+	 */
+	contentWrapper: null,
 
 	/**
 	 * The initial scroller position.
@@ -96,21 +96,21 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	},
 
 	/**
-	 * Return the view content wrapper element.
-	 * @return {Element}
-	 * @since 0.1
-	 */
-	getWrapper: function() {
-		return this.wrapper;
-	},
-
-	/**
 	 * Return the scroller engine.
 	 * @return {Scroller}
 	 * @since 0.1
 	 */
 	getScroller: function() {
 		return this.scroller;
+	},
+
+	/**
+	 * Return the view content wrapper element.
+	 * @return {Element}
+	 * @since 0.1
+	 */
+	getContentWrapper: function() {
+		return this.wrapper;
 	},
 
 	/**
@@ -138,16 +138,12 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 
 		this.parent();
 
-		this.wrapper = new Element('div.wrapper');
-		this.wrapper.wraps(this.content);
+		this.element.addClass('scroll-view');
 
-		if (this.options.className) {
-			this.element.addClass('scroll-' + this.options.className);
-			this.wrapper.addClass('scroll-' + this.options.className + '-wrapper');
-		}
+		this.contentWrapper = new Element('div.view-content-wrapper');
+		this.contentWrapper.wraps(this.content);
 
-		this.scroller = new Moobile.Scroller(this.wrapper, this.content);
-
+		this.scroller = new Moobile.Scroller(this.contentWrapper, this.content);
 		this.scroller.addEvent('scrollstart', this.bound('onViewScrollStart'));
 		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
 		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));

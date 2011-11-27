@@ -54,14 +54,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	detail: null,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'list-item'
-	},
-
-	/**
 	 * Set the list item image.
 	 * @param {Mixed} image The image as an Image instance or as a string.
 	 * @return {ListItem}
@@ -97,7 +89,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 
 	/**
 	 * Set the list item label label.
-	 * @param {Mixed} label The label as a Label instance or as a string.
+	 * @param {Label} label The label as a Label instance or as a string.
 	 * @return {ListItem}
 	 * @since 0.1
 	 */
@@ -195,6 +187,14 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		this.defineElementRole(label, 'label');
 		this.defineElementRole(image, 'image');
 		this.defineElementRole(detail, 'detail');
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('list-item');
 	},
 
 	/**

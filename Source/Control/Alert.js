@@ -76,14 +76,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	buttons: [],
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'alert'
-	},
-
-	/**
 	 * Set the title with either a string or an entity object.
 	 * @param {Mixed} title The title as a string or an entity object.
 	 * @returh {Alert}
@@ -179,6 +171,8 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 		this.parent();
 
+		this.element.addClass('alert');
+
 		this.header  = new Element('div.dialog-header');
 		this.footer  = new Element('div.dialog-footer');
 		this.content = new Element('div.dialog-content');
@@ -262,7 +256,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	onButtonClick: function(e) {
 
-		this.fireEvent('buttonClick', e.target);
+		this.fireEvent('buttonclick', e.target);
 
 		if (this.buttons.length == 1) {
 			this.hideAnimated();
@@ -276,7 +270,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since 0.1
 	 */
 	onButtonMouseUp: function() {
-		this.fireEvent('buttonMouseUp');
+		this.fireEvent('buttonmouseup');
 	},
 
 	/**
@@ -286,7 +280,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since 0.1
 	 */
 	onButtonMouseDown: function() {
-		this.fireEvent('buttonMouseDown');
+		this.fireEvent('buttonmousedown');
 	}
 
 });

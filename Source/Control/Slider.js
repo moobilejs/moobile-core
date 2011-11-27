@@ -73,7 +73,6 @@ Moobile.Slider = new Class({
 	 * @type {Object}
 	 */
 	options: {
-		className: 'slider',
 		snap: false,
 		mode: 'horizontal',
 		min: 0,
@@ -121,6 +120,8 @@ Moobile.Slider = new Class({
 	didLoad: function() {
 
 		this.parent();
+
+		this.element.addClass('slider');
 
 		this.thumb = new Element('div.' + this.options.className + '-thumb');
 		this.track = new Element('div.' + this.options.className + '-track');

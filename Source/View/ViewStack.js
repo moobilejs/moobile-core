@@ -39,13 +39,8 @@ Moobile.ViewStack = new Class( /* @lends ViewStack.prototype */ {
 	 * @see Entity#didLoad
 	 */
 	didLoad: function() {
-
 		this.parent();
-
-		var className = this.options.className;
-		if (className) {
-			this.element.addClass(className + '-stack');
-		}
+		this.element.addClass('view-stack');
 	}
 
 });

@@ -34,14 +34,6 @@ Moobile.Label = new Class( /** @lends Label.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'label'
-	},
-
-	/**
 	 * Set the label text.
 	 * @param {String} text The label text.
 	 * @return {Label}
@@ -59,6 +51,14 @@ Moobile.Label = new Class( /** @lends Label.prototype */ {
 	 */
 	getText: function() {
 		return this.element.get('html');
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('label');
 	}
 
 });

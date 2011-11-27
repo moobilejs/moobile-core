@@ -38,7 +38,6 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	 * @type {Object}
 	 */
 	options: {
-		className: 'image',
 		tagName: 'img'
 	},
 
@@ -76,6 +75,14 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	willLoad: function() {
 		this.parent();
 		if (!this.getSource()) this.element.hide();
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('image');
 	},
 
 	/**

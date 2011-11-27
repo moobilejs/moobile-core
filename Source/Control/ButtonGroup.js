@@ -52,7 +52,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @type {Object}
 	 */
 	options: {
-		className: 'button-group',
 		styleName: 'horizontal',
 		deselectable: false
 	},
@@ -152,6 +151,14 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	},
 
 	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('button-group');
+	},
+
+	/**
 	 * @see Entity#didAddChild
 	 */
 	didAddChild: function(entity) {
@@ -196,7 +203,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 */
 	onButtonClick: function(e) {
 		this.setSelectedButton(e.target);
-		this.fireEvent('buttonClick', e.target);
+		this.fireEvent('buttonclick', e.target);
 	},
 
 	/**
@@ -206,7 +213,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @since 0.1
 	 */
 	onButtonMouseUp: function(e) {
-		this.fireEvent('buttonMouseUp', e.target);
+		this.fireEvent('buttonmouseup', e.target);
 	},
 
 	/**
@@ -216,7 +223,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @since 0.1
 	 */
 	onButtonMouseDown: function(e) {
-		this.fireEvent('buttonMouseDown', e.target);
+		this.fireEvent('buttonmousedown', e.target);
 	}
 
 });

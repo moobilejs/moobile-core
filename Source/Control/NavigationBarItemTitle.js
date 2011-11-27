@@ -40,14 +40,6 @@ Moobile.NavigationBarItemTitle = new Class( /* @lends NavigationBarItemTitle.pro
 	text: null,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'bar-title'
-	},
-
-	/**
 	 * Set the title text.
 	 * @param {String} text The title text.
 	 * @return {NavigationBarItemTitle}
@@ -75,6 +67,14 @@ Moobile.NavigationBarItemTitle = new Class( /* @lends NavigationBarItemTitle.pro
 	 */
 	getText: function() {
 		return this.text;
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('bar-title');
 	},
 
 	/**

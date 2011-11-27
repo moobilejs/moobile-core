@@ -34,14 +34,6 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 	Extends: Moobile.Control,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'activity-indicator'
-	},
-
-	/**
 	 * Start the activity indicator animation.
 	 * @return {ActivityIndicator}
 	 * @since 0.1
@@ -59,6 +51,14 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 	stop: function() {
 		this.removeClass('activity');
 		return this;
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('activity-indicator');
 	}
 
 });

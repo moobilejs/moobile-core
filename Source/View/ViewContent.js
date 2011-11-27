@@ -34,12 +34,12 @@ Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 	Extends: Moobile.Entity,
 
 	/**
-	 * The class options.
-	 * @type {Object}
+	 * @see Entity#didLoad
 	 */
-	options: {
-		className: 'view-content'
-	}
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('view-content');
+	},
 
 });
 

@@ -41,14 +41,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	content: null,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'view'
-	},
-
-	/**
 	 * Enable the user interaction of the view.
 	 * @return {View}
 	 * @since 0.1
@@ -207,6 +199,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	didLoad: function() {
 		this.parent();
+		this.element.addClass('view');
 		this.element.addEvent('swipe', this.bound('onSwipe'));
 		this.element.addEvent('pinch', this.bound('onPinch'));
 	},

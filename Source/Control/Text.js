@@ -34,14 +34,6 @@ provides:
 	Extends: Moobile.Control,
 
 	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'text'
-	},
-
-	/**
 	 * Set the text content.
 	 * @param {String} text The text content.
 	 * @return {Text}
@@ -60,6 +52,14 @@ provides:
 	 */
 	getText: function(text) {
 		return this.element.get('html');
+	},
+
+	/**
+	 * @see Entity#didLoad
+	 */
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('text');
 	}
 
 });
