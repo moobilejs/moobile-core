@@ -72,14 +72,16 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.image === image)
 			return this;
 
-		if (typeof image == 'string') {
+		if (this.image == null) {
+			this.image = image;
+			this.addChild(image);
+		} else if (typeof image == 'string') {
 			this.image.setSource(image);
-			return this;
+		} else {
+			this.replaceChild(this.image, image);
+			this.image.destroy();
+			this.image = image;
 		}
-
-		this.replaceChild(this.image, image);
-		this.image.destroy();
-		this.image = image;
 
 		return this;
 	},
@@ -104,14 +106,16 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.label === label)
 			return this;
 
-		if (typeof label == 'string') {
+		if (this.label == null) {
+			this.label = label;
+			this.addChild(label);
+		} else if (typeof label == 'string') {
 			this.label.setText(label);
-			return this;
+		} else {
+			this.replaceChild(this.label, label);
+			this.label.destroy();
+			this.label = label;
 		}
-
-		this.replaceChild(this.label, label);
-		this.label.destroy();
-		this.label = label;
 
 		return this;
 	},
@@ -136,14 +140,18 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.detail === detail)
 			return this;
 
-		if (typeof infos == 'string') {
+		if (this.detail == null) {
+			this.detail = detail;
+			this.addChild(detail);
+		} else if (typeof detail == 'string') {
 			this.detail.setText(infos);
-			return this;
+		} else {
+			this.replaceChild(this.detail, detail);
+			this.detail.destroy();
+			this.detail = detail;
 		}
 
-		this.replaceChild(this.detail, infos);
-		this.detail.destroy();
-		this.detail = infos;
+		this.detail.addClass('detail');
 
 		return this;
 	},
@@ -207,25 +215,22 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 
 Moobile.Entity.defineRole('list-item', Moobile.List, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-list-item', Moobile.ListItem);
-	this.addChild(instance);
+	this.addItem(instance);
 });
 
 Moobile.Entity.defineRole('image', Moobile.ListItem, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-image', Moobile.Image);
-	this.addChild(instance);
-	this.image = instance;
+	this.setImage(instance);
 });
 
 Moobile.Entity.defineRole('label', Moobile.ListItem, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Label);
-	this.addChild(instance);
-	this.label = instance;
+	this.setLabel(instance);
 });
 
 Moobile.Entity.defineRole('detail', Moobile.ListItem, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-detail', Moobile.Label);
-	this.addChild(instance);
-	this.detail = instance;
+	this.setDetail(instance);
 });
 
 //------------------------------------------------------------------------------

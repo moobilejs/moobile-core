@@ -58,14 +58,16 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		if (this.label === label)
 			return this;
 
-		if (typeof label == 'string') {
+		if (this.label == null)  {
+			this.label = label;
+			this.addChild(label);
+		} else if (typeof label == 'string') {
 			this.label.setText(label);
-			return this;
+		} else {
+			this.replaceChild(this.label, label);
+			this.label.destroy();
+			this.label = label;
 		}
-
-		this.replaceChild(this.label, label);
-		this.label.destroy();
-		this.label = label;
 
 		return this;
 	},
@@ -137,17 +139,7 @@ Moobile.Entity.defineRole('button', null, function(element, name) {
 	this.addChild(instance);
 });
 
-//------------------------------------------------------------------------------
-// Child Roles
-//------------------------------------------------------------------------------
-
 Moobile.Entity.defineRole('label', Moobile.Button, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-label') || Moobile.Label, element, null, name);
-	if (instance instanceof Moobile.Entity) {
-		this.addChild(instance);
-		this.label = instance;
-	}
-
-	return instance;
+	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Label);
+	this.setLabel(instance);
 });

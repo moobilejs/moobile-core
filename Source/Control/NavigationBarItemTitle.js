@@ -93,6 +93,5 @@ Moobile.NavigationBarItemTitle = new Class( /* @lends NavigationBarItemTitle.pro
 
 Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-title', Moobile.NavigationBarItemTitle);
-	this.addChild(instance);
-	this.title = instance;
+	this.setTitle(instance);
 });

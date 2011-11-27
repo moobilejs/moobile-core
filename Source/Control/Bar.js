@@ -54,9 +54,19 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	 * @since 0.1
 	 */
 	setItem: function(item) {
-		this.replaceChild(this.item, item);
-		this.item.destroy();
-		this.item = item;
+
+		if (this.item === item)
+			return this;
+
+		if (this.item == null) {
+			this.item = item;
+			this.addChild(item);
+		} else {
+			this.replaceChild(this.item, item);
+			this.item.destroy();
+			this.item = item;
+		}
+
 		return this;
 	},
 
@@ -102,7 +112,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 Moobile.Entity.defineRole('bar', null, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-bar', Moobile.Bar);
-	this.addChild(instance);
+	this.setItem(instance);
 });
 
 //------------------------------------------------------------------------------
