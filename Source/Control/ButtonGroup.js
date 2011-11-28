@@ -58,7 +58,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 
 	/**
 	 * Set the selected button.
-	 * @param {Button} selectedButton The selected button.
+	 * @param {Button} selectedButton The selected button or null to clear the
+	 * current selection.
 	 * @return {ButtonGroup}
 	 * @since 0.1
 	 */
@@ -118,6 +119,11 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		return this.selectedButtonIndex;
 	},
 
+	clearSelectedButton: function() {
+		this.setSelectedButton(null);
+		return this;
+	},
+
 	/**
 	 * Add a button to the button group.
 	 * @see Entity#addChild
@@ -146,7 +152,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * Remove all buttons from the group.
 	 * @see Entity#removeChild
 	 */
-	clearButtons: function() {
+	removeAllButtons: function() {
 		return this.removeChildren();
 	},
 
