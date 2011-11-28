@@ -258,7 +258,7 @@ Moobile.View.atPath = function(path) {
 
 	var element = Moobile.View.elementAtPath(path);
 	if (element) {
-		return Class.instantiate(element.get('data-view') || 'Moobile.View', element, null, element.get('data-name'));
+		return Moobile.Entity.fromElement(element, 'data-view', Moobile.View);
 	}
 
 	return null;
