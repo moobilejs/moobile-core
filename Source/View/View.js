@@ -208,28 +208,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	destroy: function() {
 		this.content = null;
 		this.parent();
-	},
-
-	/**
-	 * Swipe event handler.
-	 * @param {Event} e The event.
-	 * @since 0.1
-	 * @private
-	 */
-	onSwipe: function(e) {
-		e.target = this;
-		this.fireEvent('swipe', e);
-	},
-
-	/**
-	 * Pinch event handler.
-	 * @param {Event} e The event.
-	 * @since 0.1
-	 * @private
-	 */
-	onPinch: function(e) {
-		e.target = this;
-		this.fireEvent('swipe', e);
 	}
 
 });

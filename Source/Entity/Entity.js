@@ -37,25 +37,22 @@ if (!window.Moobile) window.Moobile = {};
  *        be processed and, in most cases, child entities will be created and
  *        added as child of this entity.</p>
  *
- *        <p>Example:</p>
+ * @example
  *
- *        <p>Note: The role <code>button</code> creates a Button object and the
- *        role <code>label</code> used inside a button creates Label object.</p>
+ * //
+ * // Populate the entity with a Button child entity. Since the element with
+ * // the <code>label</code> data-role is inside the element with the
+ * // <code>button</code> data-role, the Label instance will be added as a
+ * // child entity of the Button.
+ * //
  *
- *        <code><pre>
- *        var element = '<div>' +
- *                          '<div data-role="button">' +
- *                              '<div data-role="label">Push me</div>' +
- *                          '</div>' +
- *                      '</div>';
+ * 	var html = '<div>' +
+ *               '<div data-role="button">' +
+ *                 '<div data-role="label">Push me</div>' +
+ *               '</div>' +
+ *             '</div>';
  *
- *        var entity = new Moobile.Entity(element);
- *        </pre></code>
- *
- *        This code will populate the entity with a Button child entity. Since
- *        the element with the <code>label</code> data-role is inside the
- *        element with the <code>button</code> data-role, the Label instance
- *        will be added as a child entity of the Button.
+ *  var entity = new Moobile.Entity(html);
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
@@ -236,9 +233,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			this.setStyle(styleName);
 		}
 
-		this.getRoleElements().each(function(element) {
-			this.defineElementRole(element, element.get('data-role'));
-		}, this);
+		this.processRoles();
 
 		this.didLoad();
 
@@ -338,20 +333,18 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		}
 
 		this.children.push(entity);
-
 		entity.setOwner(this);
+		entity.setWindow(this.window);
+		this.didAddChild(entity);
 
 		if (this.ready) {
 			entity.setReady();
-			entity.setWindow(this.window);
 		} else {
 			this.addEvent('ready:once', function() {
 				entity.setReady();
 				entity.setWindow(this.window);
 			}.bind(this));
 		}
-
-		this.didAddChild(entity);
 
 		return true;
 	},
@@ -784,6 +777,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return false;
 	},
 
+	processRoles: function() {
+		this.getRoleElements().each(function(element) {
+			this.defineElementRole(element, element.get('data-role'));
+		}, this);
+	},
+
 	/**
 	 * Executes the definition function of a role for the given element. This
 	 * method throws an exception if the given role is not defined.
@@ -819,7 +818,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 *
 	 * Sets the entity as being part of the DOM and at this point it is, for
 	 * instance measurable.
 	 *
@@ -1139,6 +1137,16 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	didHide: function() {
 
+	},
+
+	onSwipe: function(e) {
+		e.target = this;
+		this.fireEvent('swipe', e);
+	},
+
+	onPinch: function(e) {
+		e.target = this;
+		this.fireEvent('swipe', e);
 	},
 
 	onClick: function(e) {
