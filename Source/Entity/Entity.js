@@ -27,32 +27,32 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @name  Entity
+ * @class
  *
- * @class Provides the base class for objects that encapsulates a DOM
- *        element.
+ * Provides the base class for objects that encapsulates a DOM
+ * element.
  *
- *        <p>The element given to the class constructor may hold an already
- *        established hierarchy. Elements with a data-role attribute will then
- *        be processed and, in most cases, child entities will be created and
- *        added as child of this entity.</p>
+ * <p>The element given to the class constructor may hold an already
+ * established hierarchy. Elements with a data-role attribute will then be
+ * processed and, in most cases, child entities will be created and added as
+ * child of this entity.</p>
+ *
+ * <p>The example populate the entity with a Button child entity. Since the
+ * element with the <code>label</code> data-role is inside the element with
+ * the <code>button</code> data-role, the Label instance will be added as a
+ * child entity of the Button.</p>
+ *
+ * @name Entity
  *
  * @example
  *
- * //
- * // Populate the entity with a Button child entity. Since the element with
- * // the <code>label</code> data-role is inside the element with the
- * // <code>button</code> data-role, the Label instance will be added as a
- * // child entity of the Button.
- * //
+ * var html = '&lt;div&gt;' +
+ *               '&lt;div data-role="button"&gt;' +
+ *                 '&lt;div data-role="label"&gt;Push me&lt;/div&gt;' +
+ *               '&lt;/div&gt;' +
+ *             '&lt;/div&gt;';
  *
- * 	var html = '<div>' +
- *               '<div data-role="button">' +
- *                 '<div data-role="label">Push me</div>' +
- *               '</div>' +
- *             '</div>';
- *
- *  var entity = new Moobile.Entity(html);
+ * var entity = new Moobile.Entity(html);
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1

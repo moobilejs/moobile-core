@@ -20,10 +20,16 @@ provides:
 */
 
 /**
+ * @class
+ *
  * Provides a view that handles a panel with two panes.
  *
- * @name ViewPanel
- * @class ViewPanel
+ * <h2>Roles</h2>
+ * <p><code>view-panel</code> - efined for all classes that extends the Entity
+ * class, you may specify the view class using the <code>data-view-panel</code>
+ * attribute.</p>
+ *
+ * @name    ViewPanel
  * @extends View
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -35,8 +41,11 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 
 	/**
 	 * Return the view content side panel element.
-	 * @return {Element}
-	 * @since 0.1
+	 *
+	 * @return {Element} The side panel element.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getSidePanel: function() {
 		return this.content.getSidePanel();
@@ -44,15 +53,23 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 
 	/**
 	 * Return the view content main panel element.
-	 * @return {Element}
-	 * @since 0.1
+	 *
+	 * @return {Element} The main panel element.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getMainPanel: function() {
 		return this.content.getMainPanel();
 	},
 
 	/**
+	 * Add the proper CSS classes to the view panel's element.
+	 *
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didLoad: function() {
 		this.parent();
@@ -61,6 +78,9 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 
 	/**
 	 * @see Entity#destroy
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	destroy: function() {
 		this.sidePanel = null;

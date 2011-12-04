@@ -20,10 +20,14 @@ provides:
 */
 
 /**
+ * @class
+ *
  * Manages the content of a view.
  *
- * @name ViewContent
- * @class ViewContent
+ * <h2>Roles</h2>
+ * <p><code>view-content</code> - Defined for the View class</p>
+ *
+ * @name    ViewContent
  * @extends Entity
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -34,7 +38,12 @@ Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 	Extends: Moobile.Entity,
 
 	/**
+	 * Adds the proper CSS classes to this view content's element.
+	 *
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didLoad: function() {
 		this.parent();

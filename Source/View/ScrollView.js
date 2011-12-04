@@ -22,10 +22,11 @@ provides:
 */
 
 /**
+ * @class
+ *
  * Provides a view that scrolls when its content is larger than the view area.
  *
- * @name ScrollView
- * @class ScrollView
+ * @name    ScrollView
  * @extends View
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)

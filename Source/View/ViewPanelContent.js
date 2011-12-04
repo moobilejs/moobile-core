@@ -20,10 +20,14 @@ provides:
 */
 
 /**
+ * @class
+ *
  * Manages the content of a view panel.
  *
- * @name ViewPanelContent
- * @class ViewPanelContent
+ * <h2>Roles</h2>
+ * <p><code>view-content</code> - Defined for the ViewPanel class</p>
+ *
+ * @name    ViewPanelContent
  * @extends ViewContent
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -35,8 +39,11 @@ Moobile.ViewPanelContent = new Class({
 
 	/**
 	 * Return the side panel element.
-	 * @return {Element}
-	 * @since 0.1
+	 *
+	 * @return {Element} The side panel element.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getSidePanel: function() {
 		return this.sidePanel;
@@ -44,15 +51,24 @@ Moobile.ViewPanelContent = new Class({
 
 	/**
 	 * Return the main panel element.
-	 * @return {Element}
-	 * @since 0.1
+	 *
+	 * @return {Element} The side panel element.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getMainPanel: function() {
 		return this.mainPanel;
 	},
 
 	/**
+	 * Defines an element with the main-panel and side-panel role if they were
+	 * not yet defined for this view.
+	 *
 	 * @see Entity#willLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	willLoad: function() {
 
@@ -76,7 +92,12 @@ Moobile.ViewPanelContent = new Class({
 	},
 
 	/**
+	 * Add the proper CSS classes to the view panel content's element.
+	 *
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didLoad: function() {
 		this.parent();

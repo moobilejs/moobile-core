@@ -20,10 +20,14 @@ provides:
 */
 
 /**
+ * @class
+ *
  * Manages the content of a view stack.
  *
- * @name ViewStackContent
- * @class ViewStackContent
+ * <h2>Roles</h2>
+ * <p><code>view-content</code> - Defined for the ViewStack class</p>
+ *
+ * @name    ViewStackContent
  * @extends ViewContent
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -35,6 +39,9 @@ Moobile.ViewStackContent = new Class({
 
 	/**
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didLoad: function() {
 		this.parent();

@@ -21,10 +21,18 @@ provides:
 */
 
 /**
- * Provides an entity that handles an area in which a user can interract.
+ * @class
  *
- * @name View
- * @class View
+ * Provides an entity that handles an area in which a user can interract. The
+ * View is generally the root of a page.
+ *
+ * <h2>Roles</h2>
+ *
+ * <p><code>view</code> - Defined for all classes that extends the Entity
+ * class, you may specify the view class using the <code>data-view</code>
+ * attribute.</p>
+ *
+ * @name    View
  * @extends Entity
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -35,15 +43,22 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	Extends: Moobile.Entity,
 
 	/**
-	 * The view content.
-	 * @type {ViewContent}
+	 * This view's content.
+	 *
+	 * @see View#getContent
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	content: null,
 
 	/**
-	 * Enable the user interaction of the view.
-	 * @return {View}
-	 * @since 0.1
+	 * Enables the user interaction of the view.
+	 *
+	 * @return {View} This view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	enableTouch: function() {
 		this.element.removeClass('disable').addClass('enable');
@@ -51,9 +66,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Disable the user interaction of the view.
-	 * @return {View}
-	 * @since 0.1
+	 * Disables the user interaction of the view.
+	 *
+	 * @return {View} This view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	disableTouch: function() {
 		this.element.removeClass('enable').addClass('disable');
@@ -61,11 +79,14 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Add a child to the view content or the view itself. Use
+	 * Adds a child to the view content or the view itself. Use
 	 * <code>header</code> or <code>footer</code> as second parameter to add a
 	 * child at the top or bottom of the view itself.
-	 * @since 0.1
+	 *
 	 * @see Entity#addChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	addChild: function(entity, where, context) {
 
@@ -96,9 +117,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Return a child from the view or the view content.
-	 * @since 0.1
+	 * Returns a child from the view or the view content.
+	 *
 	 * @see Entity#getChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getChild: function(name) {
 		return this.content && this.content.hasOwner()
@@ -107,9 +131,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Indicate whether child exists in the view or the view content.
-	 * @since 0.1
+	 * Indicates whether child exists in the view or the view content.
+	 *
 	 * @see Entity#hasChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	hasChild: function(entity) {
 		return this.content && this.content.hasOwner()
@@ -118,9 +145,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Replace a child from the view or the view content.
-	 * @since 0.1
+	 * Replaces a child from the view or the view content.
+	 *
 	 * @see Entity#replaceChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	replaceChild: function(replace, entity) {
 		return this.content && this.content.hasOwner()
@@ -129,9 +159,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Remove a child from the view or the view content.
-	 * @since 0.1
+	 * Removes a child from the view or the view content.
+	 *
 	 * @see Entity#removeChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	removeChild: function(entity) {
 		return this.content && this.content.hasOwner()
@@ -140,18 +173,24 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Return the children of the view and the view content.
-	 * @since 0.1
+	 * Returns the children of the view and the view content.
+	 *
 	 * @see Entity#getChildren
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getChildren: function() {
 		return [].concat(this.content.getChildren(), this.parent());
 	},
 
 	/**
-	 * Return the view who owns this view.
-	 * @return {View}
-	 * @since 0.1
+	 * Returns the view who owns this view.
+	 *
+	 * @return {View} The view that owns this view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getOwnerView: function() {
 
@@ -169,16 +208,25 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Return the view content.
-	 * @return {ViewContent}
-	 * @since 0.1
+	 * Returns this view's content.
+	 *
+	 * @return {ViewContent} This view's content.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getContent: function() {
 		return this.content;
 	},
 
 	/**
+	 * Defines an element with the view-content role if it was not yet
+	 * defined for this view.
+	 *
 	 * @see Entity#willLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	willLoad: function() {
 
@@ -195,7 +243,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
+	 * Adds the proper css classes to this view's element.
+	 *
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didLoad: function() {
 		this.parent();
@@ -204,6 +257,9 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 
 	/**
 	 * @see Entity#destroy
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	destroy: function() {
 		this.content = null;
@@ -214,9 +270,13 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 
 /**
  * Return the view element of a file at a given path.
+ *
  * @param {String} path The file path.
- * @return {Element}
- * @since 0.1
+ *
+ * @return {Element} The element or <code>null</code> if no elements were found.
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.View.elementAtPath = function(path) {
 	return new Moobile.Request.ViewElement().load(path);
@@ -224,9 +284,13 @@ Moobile.View.elementAtPath = function(path) {
 
 /**
  * Return the view of a file at a given path.
+ *
  * @param {String} path The file path.
- * @return {View}
- * @since 0.1
+ *
+ * @return {View} The view or <code>null</code> if no view were found.
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.View.atPath = function(path) {
 

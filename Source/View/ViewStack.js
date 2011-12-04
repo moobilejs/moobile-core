@@ -21,11 +21,16 @@ provides:
 */
 
 /**
+ * @class
+ *
  * Provides a view that handles an infinite number of views arrenged as a
  * stack, one on the top of each others.
  *
- * @name ViewStack
- * @class ViewStack
+ * <p><code>view-stack</code> - Defined for all classes that extends the Entity
+ * class, you may specify the view class using the <code>data-view-stack</code>
+ * attribute.</p>
+ *
+ * @name    ViewStack
  * @extends View
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -37,6 +42,9 @@ Moobile.ViewStack = new Class( /* @lends ViewStack.prototype */ {
 
 	/**
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didLoad: function() {
 		this.parent();
