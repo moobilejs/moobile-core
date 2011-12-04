@@ -37,10 +37,10 @@ if (!window.Moobile) window.Moobile = {};
  *        be processed and, in most cases, child entities will be created and
  *        added as child of this entity.</p>
  *
- *        Example:
+ *        <p>Example:</p>
  *
- *        Note: The role <code>button</code> creates a Button object and the
- *        role <code>label</code> used inside a button creates Label object.
+ *        <p>Note: The role <code>button</code> creates a Button object and the
+ *        role <code>label</code> used inside a button creates Label object.</p>
  *
  *        <code><pre>
  *        var element = '<div>' +
@@ -234,8 +234,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			this.setStyle(styleName);
 		}
 
-		this.element.getElements('[data-role]').each(function(element) {
-			if (this.validateRoleElement(element)) this.defineElementRole(element, element.get('data-role'));
+		this.getRoleElements().each(function(element) {
+			this.defineElementRole(element, element.get('data-role'));
 		}, this);
 
 		this.didLoad();
@@ -336,18 +336,18 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		this.children.push(entity);
 
 		entity.setOwner(this);
-		entity.setWindow(this.window);
 
-		this.didAddChild(entity);
-
-		if (this.ready == false) {
+		if (this.ready) {
+			entity.setReady();
+			entity.setWindow(this.window);
+		} else {
 			this.addEvent('ready:once', function() {
 				entity.setReady();
-			});
-			return true;
+				entity.setWindow(this.window);
+			}.bind(this));
 		}
 
-		entity.setReady();
+		this.didAddChild(entity);
 
 		return true;
 	},
@@ -828,17 +828,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	setReady: function(ready) {
 
+		ready = ready || true;
+
 		if (this.ready == ready)
 			return this;
 
 		this.ready = ready;
-
 		if (this.ready) {
-
-			if (this.owner) {
-				this.window = this.owner.getWindow();
-			}
-
 			this.didBecomeReady();
 			this.fireEvent('ready');
 		}
