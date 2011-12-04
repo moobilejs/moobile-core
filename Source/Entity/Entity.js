@@ -218,6 +218,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.setOptions(options);
 
+		this.element.addEvent('swipe', this.bound('onSwipe'));
+		this.element.addEvent('pinch', this.bound('onPinch'));
 		this.element.addEvent('click', this.bound('onClick'));
 		this.element.addEvent('mouseup', this.bound('onMouseUp'))
 		this.element.addEvent('mousedown', this.bound('onMouseDown'));
@@ -261,6 +263,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.willUnload();
 
+		this.element.removeEvent('swipe', this.bound('onSwipe'));
+		this.element.removeEvent('pinch', this.bound('onPinch'));
 		this.element.removeEvent('click', this.bound('onClick'));
 		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
@@ -765,11 +769,16 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 	validateRoleElement: function(element) {
 
-		// TODO: Does not check if there is a data-role
-
 		var parent = element.getParent();
 		if (parent) {
-			return this.element === parent || this.validateRoleElement(parent);
+
+			if (parent === this.element)
+				return true;
+
+			if (parent.get('data-role'))
+				return false;
+
+			return this.validateRoleElement(parent);
 		}
 
 		return false;
@@ -791,16 +800,11 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	defineElementRole: function(element, role) {
 
-		// TODO: Rename method.
-		//	- applyRole
-		//	- applyElementRole
-		//	- executeRole
-		//	- performRole
-
-		// TODO: Validate the element using validateRoleElement
-
 		if (element.retrieve('entity.has-role'))
 			return this;
+
+		if (!this.validateRoleElement(element))
+			throw new Error('The element does not belong to this entity');
 
 		var definition = this.$roles[role];
 		if (definition == undefined) {

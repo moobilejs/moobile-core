@@ -200,16 +200,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('view');
-		this.element.addEvent('swipe', this.bound('onSwipe'));
-		this.element.addEvent('pinch', this.bound('onPinch'));
 	},
 
 	/**
 	 * @see Entity#destroy
 	 */
 	destroy: function() {
-		this.element.removeEvent('swipe', this.bound('onSwipe'));
-		this.element.removeEvent('pinch', this.bound('onPinch'));
 		this.content = null;
 		this.parent();
 	},
