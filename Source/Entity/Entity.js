@@ -27,16 +27,40 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * Provides the base class for objects that encapsulates a DOM element. Also
- * support methods to manage a hierarchy of entities.
+ * @name  Entity
  *
- * @name Entity
- * @class Entity
+ * @class Provides the base class for objects that encapsulates a DOM
+ *        element.
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ *        <p>The element given to the class constructor may hold an already
+ *        established hierarchy. Elements with a data-role attribute will then
+ *        be processed and, in most cases, child entities will be created and
+ *        added as child of this entity.</p>
+ *
+ *        Example:
+ *
+ *        Note: The role <code>button</code> creates a Button object and the
+ *        role <code>label</code> used inside a button creates Label object.
+ *
+ *        <code><pre>
+ *        var element = '<div>' +
+ *                          '<div data-role="button">' +
+ *                              '<div data-role="label">Push me</div>' +
+ *                          '</div>' +
+ *                      '</div>';
+ *
+ *        var entity = new Moobile.Entity(element);
+ *        </pre></code>
+ *
+ *        This code will populate the entity with a Button child entity. Since
+ *        the element with the <code>label</code> data-role is inside the
+ *        element with the <code>button</code> data-role, the Label instance
+ *        will be added as a child entity of the Button.
+ *
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.Entity = new Class(/** @lends Entity.prototype */{
+Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 	Implements: [
 		Events,
@@ -49,9 +73,12 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	$styles: {},
 
 	/**
-	 * The entity's current style.
+	 * This entity's current style.
 	 *
 	 * @type {Object}
+	 *
+	 * @see Entity#setStyle
+	 * @see Entity#getStyle
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -59,9 +86,12 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	style: null,
 
 	/**
-	 * The entity's owner.
+	 * This entity's owner.
 	 *
 	 * @type {Entity}
+	 *
+	 * @see Entity#setOwner
+	 * @see Entity#getOwner
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -69,9 +99,11 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	owner: null,
 
 	/**
-	 * The entity's name.
+	 * This entity's name.
 	 *
 	 * @type {String}
+	 *
+	 * @see Entity#getName
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -79,9 +111,11 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	name: null,
 
 	/**
-	 * The entity's DOM element.
+	 * This entity's DOM element.
 	 *
 	 * @type {Element}
+	 *
+	 * @see Entity#getElement
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -89,9 +123,11 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	element: null,
 
 	/**
-	 * The entity's children.
+	 * This entity's child entities.
 	 *
 	 * @type {Array}
+	 *
+	 * @see Entity#getChildren
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -99,9 +135,12 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	children: [],
 
 	/**
-	 * The entity's window.
+	 * This entity's window.
 	 *
 	 * @type {Window}
+	 *
+	 * @see Entity#setWindow
+	 * @see Entity#getWindow
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -109,9 +148,12 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	window: null,
 
 	/**
-	 * Indicates whether the entity is in the DOM.
+	 * Whether this entity is ready.
 	 *
 	 * @type {Boolean}
+	 *
+	 * @see Entity#setReady
+	 * @see Entity#isReady
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -120,7 +162,11 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 	/**
 	 * The class options.
+	 *
 	 * @type {Object}
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	options: {
 		className: null,
@@ -129,8 +175,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Initializes this entity using an element given as an <code>Element</code>
-	 * instance, an element id or a string representing an element.
+	 * Initializes this entity using an element given as an
+	 * <code>Element</code> an element id or an element HTML string.
 	 *
 	 * <p>If you override this method, make sure you call the parent method at
 	 * the beginning of your implementation.</p>
@@ -189,9 +235,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 		}
 
 		this.element.getElements('[data-role]').each(function(element) {
-			if (this.filterRoleElement(element)) {
-				this.defineElementRole(element, element.get('data-role'));
-			}
+			if (this.validateRoleElement(element)) this.defineElementRole(element, element.get('data-role'));
 		}, this);
 
 		this.didLoad();
@@ -200,7 +244,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Destroys this entity and its hierarchy thus freeing the memory.
+	 * Destroys this entity along with its hierarchy.
 	 *
 	 * <p>If you override this method, make sure you call the parent method at
 	 * the end of your implementation.</p>
@@ -245,14 +289,14 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Adds a child entity at a location specified by <code>where</code> and
+	 * Adds a child entity at a location given by <code>where</code> and
 	 * <code>context</code>. If none are specified, the child entity will go
-	 * at the bottom of this entity.
+	 * to the bottom of this entity.
 	 *
 	 * <p>The <code>where</code> parameter accepts <code>top</code>,
 	 * <code>bottom</code>, <code>before</code> or <code>after</code>. If a
-	 * <code>context</code> is specified, the <code>where</code> value will be
-	 * used relative to this context.</p>
+	 * <code>context</code> is specified, then the <code>where</code> value
+	 * will be used relative to this context.</p>
 	 *
 	 * @param {Entity}  entity  The child entity.
 	 * @param {String}  where   The child entity location.
@@ -612,7 +656,7 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Returns the name.
+	 * Returns this entity's name.
 	 *
 	 * @return {String} The name.
 	 *
@@ -625,10 +669,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 	/**
 	 * Returns this entity's element or the first element within this entity's
-	 * element that matches the selector.
-	 *
-	 * <p>This method will run the selector, if any, against all the child
-	 * elements of this entity's element.</p>
+	 * element that matches the selector, searching within all the child
+	 * elements of this entity's element.
 	 *
 	 * @param {String} selector An optional CSS selector.
 	 *
@@ -646,10 +688,8 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 
 	/**
 	 * Returns a collection of elements within this entity's element that
-	 * matches the given selector.
-	 *
-	 * <p>This method will run the selector against all the child elements of
-	 * this entity's element.</p>
+	 * matches the given selector, searching within all the child elements
+	 * of this entity's element.
 	 *
 	 * @param {String} selector The CSS selector.
 	 *
@@ -665,15 +705,13 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Indicates whether an element exists within this entity's element.
-	 *
-	 * <p>This method will search the given element againts all the child
-	 * elements of this entity's element.</p>
+	 * Indicates whether a given element is exists within this entity's
+	 * element, searching within all the child elements of this entity's
+	 * element.
 	 *
 	 * @param {Element} element The element to search for.
 	 *
-	 * @return {Boolean} Whether the element exists within this entity's
-	 *                   element.
+	 * @return {Boolean} Whether the element exists.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -683,11 +721,15 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Return an element performing a given role.
+	 * Returns an element that peforms a given role for this entity. This
+	 * method uses the data-role attribute to define the role name. Elements
+	 * within another element with the data-role attribute will be discarded as
+	 * they they don't perform a role for the current entity.
 	 *
 	 * @param {String} role The role.
 	 *
-	 * @return {Element}
+	 * @return {Element} The element that performs the given role or
+	 *                   <code>null</code> if no elements were found.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -697,48 +739,72 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Return a collection of elements performing a given role.
+	 * Returns a collection of elements that peforms a given role for this
+	 * entity. This method uses the data-role attribute to define the role
+	 * name. Elements within another element with the data-role attribute will
+	 * be discarded as they they don't perform a role for the current entity.
 	 *
-	 * @param {String} role The role.
+	 * @param {String} role The role name or <code>null</code> to return all
+	 *                      element that have the data-role attribute.
 	 *
-	 * @return {Elements}
+	 * @return {Elements} A collection of elements or an emtpy collection if
+	 *                    no elements were found.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getRoleElements: function(role) {
-		return this.element.getElements('[data-role=' + role + ']').filter(this.bound('filterRoleElement'));
+
+		var validate = this.bound('validateRoleElement');
+		var selector = role
+		             ? '[data-role=' + role + ']'
+		             : '[data-role]';
+
+		return this.element.getElements(selector).filter(validate);
 	},
 
-	filterRoleElement: function(element) {
+	validateRoleElement: function(element) {
+
+		// TODO: Does not check if there is a data-role
 
 		var parent = element.getParent();
 		if (parent) {
-			return this.element === parent || this.filterRoleElement(parent);
+			return this.element === parent || this.validateRoleElement(parent);
 		}
 
 		return false;
 	},
 
 	/**
-	 * Define the role of an element.
+	 * Executes the definition function of a role for the given element. This
+	 * method throws an exception if the given role is not defined.
 	 *
-	 * @param {Element} element The element.
-	 * @param {String} name The role.
+	 * @param {Element} element The entity's child element.
+	 * @param {String}  name    The role name.
 	 *
-	 * @return {Entity}
+	 * @return {Entity} This entity.
+	 *
+	 * @see Entity#defineRole
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	defineElementRole: function(element, role) {
 
+		// TODO: Rename method.
+		//	- applyRole
+		//	- applyElementRole
+		//	- executeRole
+		//	- performRole
+
+		// TODO: Validate the element using validateRoleElement
+
 		if (element.retrieve('entity.has-role'))
 			return this;
 
 		var definition = this.$roles[role];
 		if (definition == undefined) {
-			throw new Error('Role ' + role + ' does not exists.');
+			throw new Error('Role ' + role + ' is not defined');
 		}
 
 		definition.call(this, element, element.get('data-name'));
@@ -749,38 +815,33 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Return the size of the entity's element.
 	 *
-	 * @return {Object} An object that contains the size.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	getSize: function() {
-		return this.element.getSize();
-	},
-
-	/**
-	 * Set the entity as being part of the DOM and at this point it is, for
+	 * Sets the entity as being part of the DOM and at this point it is, for
 	 * instance measurable.
+	 *
+	 * @param {Boolean} ready Whether the entity is ready.
 	 *
 	 * @return {Entity} This entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	setReady: function() {
+	setReady: function(ready) {
 
-		if (this.ready)
+		if (this.ready == ready)
 			return this;
 
-		if (this.owner) {
-			this.window = this.owner.getWindow();
-		}
+		this.ready = ready;
 
-		this.ready = true;
-		this.didBecomeReady();
-		this.fireEvent('ready');
+		if (this.ready) {
+
+			if (this.owner) {
+				this.window = this.owner.getWindow();
+			}
+
+			this.didBecomeReady();
+			this.fireEvent('ready');
+		}
 
 		return this;
 	},
@@ -798,9 +859,28 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Show the entity.
+	 * Returns the size of the entity's element.
+	 *
+	 * @return {Object} An object with the following keys:
+	 *                  <ul>
+	 *                  	<li><code>x</code>: The width of the entity's element.</li>
+	 *                  	<li><code>y</code>: The height of the entity's element.</li>
+	 *                  </ul>
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getSize: function() {
+		return this.element.getSize();
+	},
+
+	/**
+	 * Shows this entity using its <code>display</code> property.
 	 *
 	 * @return {Entity} This entity.
+	 *
+	 * @see Entity#willShow
+	 * @see Entity#didShow
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -813,9 +893,12 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 	},
 
 	/**
-	 * Hide the entity.
+	 * Hides this entity using the <code>display</code> property.
 	 *
 	 * @return {Entity} This entity.
+	 *
+	 * @see Entity#willHide
+	 * @see Entity#didHide
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -1080,16 +1163,25 @@ Moobile.Entity = new Class(/** @lends Entity.prototype */{
 });
 
 /**
- * Instantiate an entity based on a property stored on an element and validates
+ * Instantiates an entity based on a property stored on an element and validates
  * the instance. If the propery does not contain the class name, an instance of
- * the the type will be returned.
+ * the the <code>type</code> will be returned.
+ *
  * @name Entity.fromElement
- * @param {Element} element The element.
- * @param {String} property The property that contains the class name.
- * @param {Object} type The class name must be an instance of this value.
- * @return {Object}
+ *
+ * @param {Element} element  The element.
+ * @param {String}  property The property that contains the class name.
+ * @param {Object}  type     The class name must be an instance of this value.
+ *
+ * @return {Object} An entity instance.
+ *
  * @function
- * @since 0.1
+ *
+ * @example
+ * var entity = Moobile.Entity.fromElement(new Element('div[data-button=MySpecialButton]'), 'data-button', MySpecialButton);
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Entity.fromElement = function(element, property, type) {
 
@@ -1110,26 +1202,57 @@ Moobile.Entity.fromElement = function(element, property, type) {
 };
 
 /**
- * Define a role.
+ * Defines the behavior of a role for a specific entity. The function used to
+ * define its behavoir will be bound to the entity and will receive two
+ * parameters, the element and the entity name.
+ *
  * @name Entity.defineRole
- * @param {String} name The role name.
- * @param {Entity} target The role target.
- * @param {Function} behavior The role behavior.
+ *
+ * @param {String}   name     The role name.
+ * @param {Entity}   target   The role target or <code>null</code> to define
+ *                            this role for all entities.
+ * @param {Function} behavior The function that defines the behavior. This
+ *                            function will receive the entity's element and
+ *                            the entity's name as parameters.
+ *
  * @function
- * @since 0.1
+ *
+ * @example
+ * Moobile.Entity.defineRole('label', null, function(element, name) {
+ * 	this.addChild(new Moobile.Label(element, null, name));
+ * });
+ *
+ * @example
+ * Moobile.Entity.defineRole('image', Moobile.Button, function(element, name)) {
+ * 	this.addChild(new Moobile.Image(element, null, name));
+ * });
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Entity.defineRole = function(name, target, behavior) {
 	(target || Moobile.Entity).prototype.$roles[name] = behavior;
 };
 
 /**
- * Define a style.
+ * Define a style for a specific entity. The option used to define its
+ * behavior is an object containing two methods, <code>attach</code> will be
+ * called when the style is added to entity and <code>detach</code> will be
+ * called when the style is removed from the entity.
+ *
  * @name Entity.defineStyle
- * @param {String} name The style name.
- * @param {Entity} target The style target.
- * @param {Object} behavior The style behavior.
+ *
+ * @param {String} name     The style name.
+ * @param {Entity} target   The style target or <code>null</code> to define
+ *                          style to all entities.
+ * @param {Object} behavior The style definition which consists in an object
+ *                          with an <code>attach</code> and <code>detach</code>
+ *                          methods.
+ *
  * @function
- * @since 0.1
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Entity.defineStyle = function(name, target, behavior) {
 	(target || Moobile.Entity).prototype.$styles[name] = Object.append({
