@@ -20,11 +20,15 @@ provides:
 */
 
 /**
- * Provides a control that indicates activities when animated.
+ * @name      ActivityIndicator
+ * @class     Provides a control that indicates activity when animated.
  *
- * @name ActivityIndicator
- * @class ActivityIndicator
- * @extends Control
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
@@ -35,26 +39,44 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 
 	/**
 	 * Start the activity indicator animation.
-	 * @return {ActivityIndicator}
-	 * @since 0.1
+	 *
+	 * This method will start the indicator animation by adding the `activity`
+	 * CSS class to the element. Update the CSS properties of this class to
+	 * customize the animation.
+	 *
+	 * @return {ActivityIndicator} This activity indicator.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	start: function() {
-		this.addClass('activity');
-		return this;
+		return this.addClass('activity');
 	},
 
 	/**
-	 * Start the activity indicator animation.
-	 * @return {ActivityIndicator}
-	 * @since 0.1
+	 * Stop the activity indicator animation.
+	 *
+	 * This method will stop the indicator animation by removing the `activity`
+	 * CSS class to the element. Update the CSS properties of this class to
+	 * customize the animation.
+	 *
+	 * @return {ActivityIndicator} This activity indicator.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	stop: function() {
-		this.removeClass('activity');
-		return this;
+		return this.removeClass('activity');
 	},
 
 	/**
+	 * Add the proper CSS classes to the activity indicator's element once
+	 * it's been correctly loaded.
+	 *
 	 * @see Entity#didLoad
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	didLoad: function() {
 		this.parent();
