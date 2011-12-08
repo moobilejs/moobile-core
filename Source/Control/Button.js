@@ -50,11 +50,15 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		if (this.label === label)
 			return this;
 
-		if (this.label == null)  {
+		if (typeof label == 'string') {
+			var text = label;
+			label = new Moobile.Label();
+			label.setText(text);
+		}
+
+		if (this.label == null) {
 			this.label = label;
 			this.addChild(label);
-		} else if (typeof label == 'string') {
-			this.label.setText(label);
 		} else {
 			this.replaceChild(this.label, label);
 			this.label.destroy();

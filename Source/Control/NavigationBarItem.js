@@ -52,11 +52,15 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 		if (this.title === title)
 			return this;
 
+		if (typeof title == 'string') {
+			var text = title;
+			title = new Moobile.NavigationBarItemTitle();
+			title.setText(text);
+		}
+
 		if (this.title == null) {
 			this.title = title;
 			this.addChild(title);
-		} else if (typeof title == 'string') {
-			this.title.setText(title);
 		} else {
 			this.replaceChild(this.title, title);
 			this.title.destroy();

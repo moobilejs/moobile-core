@@ -64,11 +64,15 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.image === image)
 			return this;
 
+		if (typeof image == 'string') {
+			var source = image;
+			image = new Moobile.Image();
+			image.setSource(text);
+		}
+
 		if (this.image == null) {
 			this.image = image;
 			this.addChild(image);
-		} else if (typeof image == 'string') {
-			this.image.setSource(image);
 		} else {
 			this.replaceChild(this.image, image);
 			this.image.destroy();
@@ -98,11 +102,15 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.label === label)
 			return this;
 
+		if (typeof label == 'string') {
+			var text = label;
+			label = new Moobile.Label();
+			label.setText(text);
+		}
+
 		if (this.label == null) {
 			this.label = label;
 			this.addChild(label);
-		} else if (typeof label == 'string') {
-			this.label.setText(label);
 		} else {
 			this.replaceChild(this.label, label);
 			this.label.destroy();
@@ -132,15 +140,19 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.detail === detail)
 			return this;
 
+		if (typeof detail == 'string') {
+			var text = detail;
+			detail = new Moobile.Label();
+			detail.setText(text);
+		}
+
 		if (this.detail == null) {
 			this.detail = detail;
 			this.addChild(detail);
-		} else if (typeof detail == 'string') {
-			this.detail.setText(infos);
 		} else {
 			this.replaceChild(this.detail, detail);
 			this.detail.destroy();
-			this.detail = detail;
+			this.detail = label;
 		}
 
 		this.detail.addClass('detail');
