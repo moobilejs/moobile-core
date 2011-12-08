@@ -27,32 +27,18 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @class
+ * @name  Entity
+ * @class Provides the base class for objects that encapsulates a DOM element.
  *
- * Provides the base class for objects that encapsulates a DOM
- * element.
+ * @classdesc
  *
- * <p>The element given to the class constructor may hold an already
- * established hierarchy. Elements with a data-role attribute will then be
+ * [TODO: Introduction]
+ * [TODO: Events]
+ *
+ * The element given to the class constructor may hold an already
+ * established hierarchy. Elements with a `data-role` attribute will then be
  * processed and, in most cases, child entities will be created and added as
- * child of this entity.</p>
- *
- * <p>The example populate the entity with a Button child entity. Since the
- * element with the <code>label</code> data-role is inside the element with
- * the <code>button</code> data-role, the Label instance will be added as a
- * child entity of the Button.</p>
- *
- * @name Entity
- *
- * @example
- *
- * var html = '&lt;div&gt;' +
- *               '&lt;div data-role="button"&gt;' +
- *                 '&lt;div data-role="label"&gt;Push me&lt;/div&gt;' +
- *               '&lt;/div&gt;' +
- *             '&lt;/div&gt;';
- *
- * var entity = new Moobile.Entity(html);
+ * child of this entity.
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
@@ -70,100 +56,58 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	$styles: {},
 
 	/**
-	 * This entity's current style.
-	 *
-	 * @type {Object}
-	 *
-	 * @see Entity#setStyle
-	 * @see Entity#getStyle
-	 *
+	 * @var    {Object} This entity's current style.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	style: null,
 
 	/**
-	 * This entity's owner.
-	 *
-	 * @type {Entity}
-	 *
-	 * @see Entity#setOwner
-	 * @see Entity#getOwner
-	 *
+	 * @var    {Entity} This entity's owner.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	owner: null,
 
 	/**
-	 * This entity's name.
-	 *
-	 * @type {String}
-	 *
-	 * @see Entity#getName
-	 *
+	 * @var    {String} This entity's name.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	name: null,
 
 	/**
-	 * This entity's DOM element.
-	 *
-	 * @type {Element}
-	 *
-	 * @see Entity#getElement
-	 *
+	 * @var    {Element} This entity's DOM element.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	element: null,
 
 	/**
-	 * This entity's child entities.
-	 *
-	 * @type {Array}
-	 *
-	 * @see Entity#getChildren
-	 *
+	 * @var    {Array} This entity's child entities.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	children: [],
 
 	/**
-	 * This entity's window.
-	 *
-	 * @type {Window}
-	 *
-	 * @see Entity#setWindow
-	 * @see Entity#getWindow
-	 *
+	 * @var    {Window} This entity's window.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	window: null,
 
 	/**
-	 * Whether this entity is ready.
-	 *
-	 * @type {Boolean}
-	 *
-	 * @see Entity#setReady
-	 * @see Entity#isReady
-	 *
+	 * @var    {Boolean} Whether this entity is ready.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	ready: false,
 
 	/**
-	 * The class options.
-	 *
-	 * @type {Object}
-	 *
+	 * @var    {Object} The class options.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		className: null,
@@ -172,18 +116,18 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Initializes this entity using an element given as an
-	 * <code>Element</code> an element id or an element HTML string.
+	 * Initializes this entity.
 	 *
-	 * <p>If you override this method, make sure you call the parent method at
-	 * the beginning of your implementation.</p>
+	 * The `element` given to this entity must be an instance of an `Element`,
+	 * an element id or an HTML string that represents an element. An empty
+	 * element is automatically created if none was supplied.
+	 *
+	 * If you override this method, make sure you call the parent method at the
+	 * beginning of your implementation.
 	 *
 	 * @param {Element}	element This entity element, element id or string.
 	 * @param {Object}  options This entity options.
 	 * @param {String}  name    This entity name.
-	 *
-	 * @see Entity#didLoad
-	 * @see Entity#willLoad
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -241,15 +185,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Destroys this entity along with its hierarchy.
+	 * Destroys this entity.
 	 *
-	 * <p>If you override this method, make sure you call the parent method at
-	 * the end of your implementation.</p>
+	 * This method will remove this entity from its owner then destroy all its
+	 * child entities. Finally, the entity's element will be destroyed.
+	 *
+	 * If you override this method, make sure you call the parent method at
+	 * the end of your implementation.
 	 *
 	 * @return {Entity} This entity.
-	 *
-	 * @see Entity#willUnload
-	 * @see Entity#didUnload
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -288,23 +232,25 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Adds a child entity at a location given by <code>where</code> and
-	 * <code>context</code>. If none are specified, the child entity will go
-	 * to the bottom of this entity.
+	 * Adds a child entity.
 	 *
-	 * <p>The <code>where</code> parameter accepts <code>top</code>,
-	 * <code>bottom</code>, <code>before</code> or <code>after</code>. If a
-	 * <code>context</code> is specified, then the <code>where</code> value
-	 * will be used relative to this context.</p>
+	 * This method adds a child entity at the bottom of this entity. You may
+	 * specify the location of the child entity using the `where` parameter
+	 * combined with the optional `context` parameter.
+	 *
+	 * If specified, the child entity can be added at the `top` or `bottom` of
+	 * this entity or `before` or `after` this entity. If an element is given
+	 * as the `context`, the location will be relative to this element.
+	 *
+	 * The child entity's element will not be re-injected in this entity's
+	 * element if it's already there, in this case only a reference of the
+	 * entity will be stored.
 	 *
 	 * @param {Entity}  entity  The child entity.
 	 * @param {String}  where   The child entity location.
 	 * @param {Element} context The child entity location context element.
 	 *
 	 * @return {Boolean} Whether the child was successfully added.
-	 *
-	 * @see Entity#willAddChild
-	 * @see Entity#didAddChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -326,36 +272,40 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			if (context == null) {
 				context = this.element;
 			} else if (!this.hasElement(context)) {
-				throw new Error('You are trying to add a child relative to an element that does not belong to this entity');
+				throw new Error('The context is not an element of this entity');
 			}
 
 			element.inject(context, where);
 		}
 
 		this.children.push(entity);
+
 		entity.setOwner(this);
 		entity.setWindow(this.window);
+
 		this.didAddChild(entity);
 
-		if (this.ready) {
-			entity.setReady();
-		} else {
+		if (this.ready == false) {
 			this.addEvent('ready:once', function() {
-				entity.setReady();
 				entity.setWindow(this.window);
+				entity.setReady();
 			}.bind(this));
+		} else {
+			entity.setReady();
 		}
 
 		return true;
 	},
 
 	/**
-	 * Returns whether this entity owns a given child entity, searching only
-	 * within direct descendants of this entity.
+	 * Indicates whether this has a given child entity.
 	 *
-	 * @param {Entity} entity The entity to search for.
+	 * This method will only compare the given entity against direct descendant
+	 * of this entity.
 	 *
-	 * @return {Boolean} Whether the entity owns the given entity.
+	 * @param {Entity} entity The entity.
+	 *
+	 * @return {Boolean} Whether this entity owns a given entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -365,13 +315,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns a child entity using the child entity's name, searching only
-	 * within direct descendants of this entity.
+	 * Returns a child entity.
 	 *
-	 * @param {String} name The entity name to search for.
+	 * This method will only compare the given entity's name against direct
+	 * descendant of this entity.
 	 *
-	 * @return {Entity} The child entity or <code>null</code> if there are no
-	 *                  entities with the given name.
+	 * @param {String} name The entity's name.
+	 *
+	 * @return {Entity} The child entity or `null` if no entities were found
+	 *                  using the given name.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -383,8 +335,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns an array which contains entities that are direct descendants
-	 * of this entity.
+	 * Returns all the child entities.
+	 *
+	 * This method will return an array containing only direct descendant of
+	 * this entity.
 	 *
 	 * @return {Array} The child entities.
 	 *
@@ -396,8 +350,11 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Removes a child entity without destroying it, removing only entities that
-	 * are direct descendants of this entity.
+	 * Remove a child entity.
+	 *
+	 * This method will only remove entities that are direct descendants of
+	 * this entity. The entity will not be destroyed upon removal, you must
+	 * do it manually to free memory.
 	 *
 	 * @param {Entity} entity The entity to remove.
 	 *
@@ -418,9 +375,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		this.willRemoveChild(entity);
 
 		entity.setOwner(null);
-		entity.setReady(false);
 		entity.setWindow(null);
-
 		element.dispose();
 
 		this.children.erase(entity);
@@ -431,8 +386,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Removes a child entity from its owner without destroying it. This method
-	 * returns <code>false</code> if this entity does not have an owner.
+	 * Remove this entity from its owner.
+	 *
+	 * This method does not destroy the entity upon removal, you must do it
+	 * manually to free memory.
 	 *
 	 * @return {Boolean} Whether this entity was successfully removed.
 	 *
@@ -446,10 +403,11 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Replaces a child entity with another entity. If the child entity cannot
-	 * be added, there will be no attempt to remove the entity to replace. This
-	 * method will only attempt to replace an entity that is a direct descendant
-	 * of this entity.
+	 * Replaces a child entity with another.
+	 *
+	 * This method will only replace a direct descendant of this entity. Also,
+	 * this method will not attempt to remove the current entity if the given
+	 * entity cannot be added.
 	 *
 	 * @param {Entity} replace The entity to remove.
 	 * @param {Entity} entity  The entity to add.
@@ -471,11 +429,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Assigns a style that was previously defined to this entity.
+	 * Sets the entity's style.
 	 *
-	 * <p>Do not confuse this method as it does not assign a CSS style. In
-	 * order to apply a style to this entity, its behavior must have been
-	 * previously define with <code>Entity.defineStyle</code>.</p>
+	 * This method must not be confused with the `Element.setStyle` as it does
+	 * not set a CSS style.
 	 *
 	 * @param {String} name The style name.
 	 *
@@ -503,16 +460,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns the style name that has been applied to this entity.
+	 * Return the entity's style.
 	 *
-	 * <p>Do not confuse this method as it does not return the value of a CSS
-	 * style. In order to retrieve the style name of this entity, it must have
-	 * been defined with <code>Entity.defineStyle</code> and then applied.</p>
+	 * This method must not be confused with the `Element.getStyle` as it does
+	 * not return a CSS style.
 	 *
-	 * @see Entity#defineStyle
-	 *
-	 * @return {String} The style name or <code>null</code> if a style has yet
-	 *                  to be applied to this element.
+	 * @return {String} The style name or `null` if no styles were applied to
+	 *                  this entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -522,7 +476,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Adds a CSS class to the entity's element.
+	 * Adds a CSS class to this entity.
+	 *
+	 * This method is simply a convenient shortcut that set a CSS class to this
+	 * entity's element.
 	 *
 	 * @param {String} name The CSS class.
 	 *
@@ -537,7 +494,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Removes a CSS class from the entity's element.
+	 * Removes a CSS class from this entity.
+	 *
+	 * This method is simply a convenient shortcut that removes a CSS class
+	 * from this entity's element.
 	 *
 	 * @param {String} name The CSS class.
 	 *
@@ -552,7 +512,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Adds or removes a CSS class name to the entity's element.
+	 * Adds or removes a CSS class from this entity.
+	 *
+	 * This method is simply a convenient shortcut that adds or removes a
+	 * CSS class from this entity's element.
 	 *
 	 * @param {String} name The CSS class.
 	 *
@@ -567,32 +530,36 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Sets the entity that owns this entity.
+	 * Sets this entity's owner.
 	 *
-	 * @param {Entity} owner The entity that owns this entity.
+	 * This method will assign a reference of the entity who's presented as
+	 * the owner of this entity. You should seldom need this method as it's
+	 * mostly used internally.
+	 *
+	 * @param {Entity} owner The owner.
 	 *
 	 * @return {Entity} This entity.
-	 *
-	 * @see Entity#ownerWillChange
-	 * @see Entity#ownerDidChange
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	setOwner: function(owner) {
+
 		this.ownerWillChange(owner);
 		this.owner = owner;
 		this.ownerDidChange(owner);
+
 		return this;
 	},
 
 	/**
-	 * Returns the entity that owns this entity.
+	 * Returns this entity's owner.
+	 *
+	 * This method will return a reference of the entity who's presented as
+	 * the owner of this entity. You should seldom need this method as it's
+	 * mostly used internally.
 	 *
 	 * @return {Entity} The entity that owns this entity.
-	 *
-	 * @see Entity#ownerWillChange
-	 * @see Entity#ownerDidChange
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -604,6 +571,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Indicates whether this entity has an owner.
 	 *
+	 * This method will indicates if a reference of the entity who's presented
+	 * as the owner of this entity has been set. You should seldom need this
+	 * method as it's mostly used internally.
+	 *
 	 * @return {Boolean} Whether this entity has an owner.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -614,7 +585,53 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Sets the window that owns this entity.
+	 * Sets this entity as ready.
+	 *
+	 * This method will mark this entity as being ready, which means its
+	 * element is part of an element that is part of the DOM and is, for
+	 * intsance measurable. You should seldom need this method as it's mostly
+	 * used internally.
+	 *
+	 * @return {Entity} This entity.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setReady: function() {
+
+		if (this.ready)
+			return this;
+
+		this.ready = true;
+		this.didBecomeReady();
+		this.fireEvent('ready');
+
+		return this;
+	},
+
+	/**
+	 * Indicates whether the entity is ready.
+	 *
+	 * This method will indicate whether the entity is ready which means its
+	 * element is part of an element that is part of the DOM and is, for
+	 * instance measurable. You should seldom need this method as it's mostly
+	 * used internally.
+	 *
+	 * @return {Boolean} Whether the entity is ready.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	isReady: function() {
+		return this.ready;
+	},
+
+	/**
+	 * Sets this entity's window.
+	 *
+	 * This method will assign a reference of the window entity, which contains
+	 * the whole application hierarchy. The window is only assigned when this
+	 * entity becomes ready.
 	 *
 	 * @param {Window} window The window.
 	 *
@@ -629,7 +646,11 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns the window that owns this entity.
+	 * Returns this entity's window.
+	 *
+	 * This method will return a reference of the window entity, which contains
+	 * the whole application hierarchy. The window is only available when this
+	 * entity becomes ready.
 	 *
 	 * @return {Window} The window.
 	 *
@@ -643,6 +664,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Indicates whether this entity has a window.
 	 *
+	 * This method will indicates if a reference of the window entity has been
+	 * set. The window is only available when this entity becomes ready.
+	 *
 	 * @return {Boolean} Whether this entity as a window.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -655,6 +679,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Returns this entity's name.
 	 *
+	 * This method will return the entity's name used to identify this entity
+	 * among its sibling. Given at initialization time, the name does not need
+	 * to be absolutely unique, only different from its siblings.
+	 *
 	 * @return {String} The name.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -665,14 +693,17 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns this entity's element or the first element within this entity's
-	 * element that matches the selector, searching within all the child
-	 * elements of this entity's element.
+	 * Returns this entity's element or the first element that matches the
+	 * optional selector.
 	 *
-	 * @param {String} selector An optional CSS selector.
+	 * This method is working at the element level which means that all
+	 * elements, either from this entity's element or a child entity's element
+	 * will be returned by this method if they match the given selector.
 	 *
-	 * @return {Element} This entity's element or an element that matches the
-	 *                   given selector.
+	 * @param {String} [selector] An CSS selector.
+	 *
+	 * @return {Element} This entity's element or the first element that
+	 *                   matches the selector.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -684,15 +715,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns a collection of elements within this entity's element that
-	 * matches the given selector, searching within all the child elements
-	 * of this entity's element.
+	 * Returns a collection of elements.
+	 *
+	 * This method is working at the element level which means that all
+	 * elements, either from this entity's element or a child entity's element
+	 * will be returned by this method if they match the given selector.
 	 *
 	 * @param {String} selector The CSS selector.
 	 *
-	 * @return {Elements} A collection of elements that matches the given
-	 *                    selector or an empty collection if no element were
-	 *                    matched by the selector.
+	 * @return {Elements} A collection of elements.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -702,11 +733,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Indicates whether a given element is exists within this entity's
-	 * element, searching within all the child elements of this entity's
-	 * element.
+	 * Indicates whether an element exists.
 	 *
-	 * @param {Element} element The element to search for.
+	 * This method is working at the element level which means that all
+	 * elements, either from this entity's element or a child entity's element
+	 * will return a positive if they match the given element.
+	 *
+	 * @param {Element} element The element.
 	 *
 	 * @return {Boolean} Whether the element exists.
 	 *
@@ -718,15 +751,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns an element that peforms a given role for this entity. This
-	 * method uses the data-role attribute to define the role name. Elements
-	 * within another element with the data-role attribute will be discarded as
-	 * they they don't perform a role for the current entity.
+	 * Returns an element with a given `data-role` attribute.
 	 *
-	 * @param {String} role The role.
+	 * This method will discard any element with a `data-role` attribue that
+	 * are child of another element with a `data-role` attribute unless the
+	 * latter is this entity's lement.
 	 *
-	 * @return {Element} The element that performs the given role or
-	 *                   <code>null</code> if no elements were found.
+	 * @param {String} role The role name.
+	 *
+	 * @return {Element} The element or `null` if no elements were found.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -736,16 +769,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Returns a collection of elements that peforms a given role for this
-	 * entity. This method uses the data-role attribute to define the role
-	 * name. Elements within another element with the data-role attribute will
-	 * be discarded as they they don't perform a role for the current entity.
+	 * Returns a collection of element with a given `data-role` attribute.
 	 *
-	 * @param {String} role The role name or <code>null</code> to return all
-	 *                      element that have the data-role attribute.
+	 * This method will discard any element with a `data-role` attribue that
+	 * are child of another element with a `data-role` attribute unless the
+	 * latter is this entity's lement.
 	 *
-	 * @return {Elements} A collection of elements or an emtpy collection if
-	 *                    no elements were found.
+	 * @param {String} role The role name.
+	 *
+	 * @return {Elements} A collection of elements.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -784,15 +816,16 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Executes the definition function of a role for the given element. This
-	 * method throws an exception if the given role is not defined.
+	 * Applies a role to an element.
 	 *
-	 * @param {Element} element The entity's child element.
+	 * This method will simply execute the function used to define the given
+	 * role for the given element. This methods throws an exception if the role
+	 * does has not been defined.
+	 *
+	 * @param {Element} element The element.
 	 * @param {String}  name    The role name.
 	 *
 	 * @return {Entity} This entity.
-	 *
-	 * @see Entity#defineRole
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -818,52 +851,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Sets the entity as being part of the DOM and at this point it is, for
-	 * instance measurable.
+	 * Returns this entity's size.
 	 *
-	 * @param {Boolean} ready Whether the entity is ready.
+	 * This method will return an object with two keys, `x` which indicates the
+	 * width of this entity and `y` which indicates the height of this entity.
 	 *
-	 * @return {Entity} This entity.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	setReady: function(ready) {
-
-		ready = ready || true;
-
-		if (this.ready == ready)
-			return this;
-
-		this.ready = ready;
-		if (this.ready) {
-			this.didBecomeReady();
-			this.fireEvent('ready');
-		}
-
-		return this;
-	},
-
-	/**
-	 * Indicates whether the entity is in the DOM.
-	 *
-	 * @return {Boolean} Whether the entity is in a DOM.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	isReady: function() {
-		return this.ready;
-	},
-
-	/**
-	 * Returns the size of the entity's element.
-	 *
-	 * @return {Object} An object with the following keys:
-	 *                  <ul>
-	 *                  	<li><code>x</code>: The width of the entity's element.</li>
-	 *                  	<li><code>y</code>: The height of the entity's element.</li>
-	 *                  </ul>
+	 * @return {Object} This entity's size.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -873,12 +866,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Shows this entity using its <code>display</code> property.
+	 * Shows this entity.
+	 *
+	 * This method will make this entitiy visible using the `display` CSS
+	 * property of this entity's element.
 	 *
 	 * @return {Entity} This entity.
-	 *
-	 * @see Entity#willShow
-	 * @see Entity#didShow
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -891,12 +884,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Hides this entity using the <code>display</code> property.
+	 * Hides this entity.
+	 *
+	 * This method will make this entitiy hidden using the `display` CSS
+	 * property of this entity's element.
 	 *
 	 * @return {Entity} This entity.
-	 *
-	 * @see Entity#willHide
-	 * @see Entity#didHide
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -914,9 +907,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * initialization such as processing elements with role and applying
 	 * style have taken place.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -930,9 +923,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * entire initialization process is completed, after elements with roles
 	 * were processed and style was loaded.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -945,9 +938,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * Tells the entity it's about to be unloaded. This method is called before
 	 * the entity's element and the child entities are destroyed.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -960,9 +953,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * Tells the entity it has been unloaded. This method is called once the
 	 * entity's element and the child entites are destroyed.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -975,9 +968,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * Tells the entity it has become part of the DOM document. This method is
 	 * usefull to perform actions such as measuring.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -989,9 +982,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tells the entity a child entity is about to be added.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @param {Entity} entity The entity that is going to be added.
 	 *
@@ -1005,9 +998,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity a child entity has been added.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @param {Entity} entity The entity that was added.
 	 *
@@ -1021,9 +1014,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity a child entity is about to be removed.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @param {Entity} entity The entity that will be removed.
 	 *
@@ -1037,10 +1030,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity a child entity has been removed.
 	 *
-	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @param {Entity} entity The entity that was removed.
 	 *
@@ -1054,9 +1046,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it's about to be moved to a new entity.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @param {Entity} owner The entity that will own this entity.
 	 *
@@ -1070,9 +1062,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it has been moved to a new entity.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @param {Entity} owner The entity that owns this entity.
 	 *
@@ -1086,9 +1078,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it's about to become visible.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -1100,9 +1092,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it became visible.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -1114,9 +1106,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it's about to become hidden.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -1128,9 +1120,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it became hidden.
 	 *
-	 * <p>The current implementation of this method does nothing. However it's a
+	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.</p>
+	 * the content of this method may change in the future.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -1140,28 +1132,23 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	onSwipe: function(e) {
-		e.target = this;
-		this.fireEvent('swipe', e);
+		this.fireEvent('swipe', e.target = this);
 	},
 
 	onPinch: function(e) {
-		e.target = this;
-		this.fireEvent('swipe', e);
+		this.fireEvent('swipe', e.target = this);
 	},
 
 	onClick: function(e) {
-		e.target = this;
-		this.fireEvent('click', e);
+		this.fireEvent('click', e.target = this);
 	},
 
 	onMouseUp: function(e) {
-		e.target = this;
-		this.fireEvent('mouseup', e);
+		this.fireEvent('mouseup', e.target = this);
 	},
 
 	onMouseDown: function(e) {
-		e.target = this;
-		this.fireEvent('mousedown', e);
+		this.fireEvent('mousedown', e.target = this);
 	},
 
 	toElement: function() {
@@ -1171,9 +1158,11 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 });
 
 /**
+ *
+ *
  * Instantiates an entity based on a property stored on an element and validates
  * the instance. If the propery does not contain the class name, an instance of
- * the the <code>type</code> will be returned.
+ * the the `type` will be returned.
  *
  * @name Entity.fromElement
  *
@@ -1217,7 +1206,7 @@ Moobile.Entity.fromElement = function(element, property, type) {
  * @name Entity.defineRole
  *
  * @param {String}   name     The role name.
- * @param {Entity}   target   The role target or <code>null</code> to define
+ * @param {Entity}   target   The role target or `null` to define
  *                            this role for all entities.
  * @param {Function} behavior The function that defines the behavior. This
  *                            function will receive the entity's element and
@@ -1244,17 +1233,17 @@ Moobile.Entity.defineRole = function(name, target, behavior) {
 
 /**
  * Define a style for a specific entity. The option used to define its
- * behavior is an object containing two methods, <code>attach</code> will be
- * called when the style is added to entity and <code>detach</code> will be
+ * behavior is an object containing two methods, `attach` will be
+ * called when the style is added to entity and `detach` will be
  * called when the style is removed from the entity.
  *
  * @name Entity.defineStyle
  *
  * @param {String} name     The style name.
- * @param {Entity} target   The style target or <code>null</code> to define
+ * @param {Entity} target   The style target or `null` to define
  *                          style to all entities.
  * @param {Object} behavior The style definition which consists in an object
- *                          with an <code>attach</code> and <code>detach</code>
+ *                          with an `attach` and `detach`
  *                          methods.
  *
  * @function
