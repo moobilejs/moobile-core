@@ -12,8 +12,6 @@ authors:
 
 requires:
 	- Control
-	- ButtonGroupRoles
-	- ButtonGroupStyle
 
 provides:
 	- ButtonGroup

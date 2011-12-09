@@ -12,8 +12,6 @@ authors:
 
 requires:
 	- Control
-	- ListItemRoles
-	- ListItemStyle
 
 provides:
 	- ListItem

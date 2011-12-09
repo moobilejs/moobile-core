@@ -12,8 +12,6 @@ authors:
 
 requires:
 	- Control
-	- ListRoles
-	- ListStyle
 
 provides:
 	- List

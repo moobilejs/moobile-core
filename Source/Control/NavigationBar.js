@@ -12,7 +12,6 @@ authors:
 
 requires:
 	- Bar
-	- NavigationBarRoles
 
 provides:
 	- NavigationBar

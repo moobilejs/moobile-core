@@ -14,7 +14,7 @@ requires:
 	- Control
 
 provides:
-	- Alert
+	- Text
 
 ...
 */
