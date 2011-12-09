@@ -20,13 +20,19 @@ provides:
 */
 
 /**
- * Provides an overlay control used to mask an entity.
+ * @name  Overlay
+ * @class Provides an overlay control.
  *
- * @name Overlay
- * @class Overlay
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
@@ -34,9 +40,16 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * Show the overlay with an animation.
-	 * @return {Overlay}
-	 * @since 0.1
+	 * Shows the overlay with an animation.
+	 *
+	 * This method will show the overlay by adding the `present` CSS class to
+	 * the element. Update the properties of this CSS class to create your own
+	 * animation.
+	 *
+	 * @return {Overlay} This overlay.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	showAnimated: function() {
 		this.willShow();
@@ -46,9 +59,16 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	},
 
 	/**
-	 * Hide the overlay with an animation.
-	 * @return {Overlay}
-	 * @since 0.1
+	 * Hides the overlay with an animation.
+	 *
+	 * This method will hide the overlay by adding the `dismiss` CSS class to
+	 * the element. Update the properties of this CSS class to create your own
+	 * animation.
+	 *
+	 * @return {Overlay} This overlay.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	hideAnimated: function() {
 		this.willHide();
@@ -56,29 +76,17 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 		return this;
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
+	destroy: function() {
+		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.parent();
+	},
+
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('overlay');
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
-		this.parent();
-	},
-
-	/**
-	 * The animation end event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onAnimationEnd: function(e) {
 
 		if (this.element.hasClass('present')) this.didShow();

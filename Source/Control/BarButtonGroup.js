@@ -20,22 +20,27 @@ provides:
 */
 
 /**
- * Provides a control that groups bar button.
+ * @name  BarButtonGroup
+ * @class Provides a bar button group control.
  *
- * @name BarButtonGroup
- * @class BarButtonGroup
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends ButtonGroup
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.BarButtonGroup = new Class( /** @lends BarButtonGroup.prototype */ {
 
 	Extends: Moobile.ButtonGroup,
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('bar-button-group');

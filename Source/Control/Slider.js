@@ -31,13 +31,19 @@ Class.refactor(Slider, {
 });
 
 /**
- * Provides a slider control with a knob.
+ * @name  Slider
+ * @class Provides a slider control.
  *
- * @name Slider
- * @class Slider
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Slider = new Class({
@@ -45,32 +51,37 @@ Moobile.Slider = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * The slider value.
-	 * @type {Number}
+	 * @var    {Number} This slider's value.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	value: 0,
 
 	/**
-	 * The slider engine.
-	 * @type {Slider}
+	 * @var    {Slider} This slider' slider engine.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	slider: null,
 
 	/**
-	 * The slider track element.
-	 * @type {Element}
+	 * @var    {Element} This silider's track element.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	track: null,
 
 	/**
-	 * The slider thumb element.
-	 * @type {Element}
+	 * @var    {Element} This slider's thumb element.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	thumb: null,
 
 	/**
-	 * The class options.
-	 * @type {Object}
+	 * @var    {Object} The class options.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	options: {
 		snap: false,
@@ -83,10 +94,17 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * Set the value of the slider.
+	 * Sets this slider's value.
+	 *
+	 * This method will set the slider value and move it's thumb element to the
+	 * appropriate position.
+	 *
 	 * @param {Integer} value The value.
-	 * @return {Slider}
-	 * @since 0.1
+	 *
+	 * @return {Slider} This slider.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setValue: function(value) {
 		this.slider.set(this.value = value);
@@ -94,30 +112,31 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * Return the value of the slider.
+	 * Returns this slider's value.
+	 *
 	 * @return {Integer}
-	 * @since 0.1
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getValue: function() {
 		return this.value;
 	},
 
-	/**
-	 * Adjust the track background image position when the slider value changes.
-	 * @param {Integer} position The slider position.
-	 * @private
-	 * @since 0.1
-	 */
 	updateTrack: function(position) {
 		this.track.setStyle('background-position',
 			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
 		);
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
-	didLoad: function() {
+	destroy: function() {
+		this.thumb = null;
+		this.track = null;
+		this.slider = null;
+		this.parent();
+	},
+
+	willLoad: function() {
 
 		this.parent();
 
@@ -131,9 +150,6 @@ Moobile.Slider = new Class({
 		this.element.grab(this.track);
 	},
 
-	/**
-	 * @see Entity#didBecomeReady
-	 */
 	didBecomeReady: function() {
 
 		this.parent();
@@ -153,44 +169,16 @@ Moobile.Slider = new Class({
 		this.setValue(this.options.value);
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.thumb = null;
-		this.track = null;
-		this.slider = null;
-		this.parent();
-	},
-
-	/**
-	 * The move event handler.
-	 * @param {Integer} position The slider position.
-	 * @private
-	 * @since 0.1
-	 */
 	onMove: function(position) {
 		this.updateTrack(position);
 		this.fireEvent('move', position);
 	},
 
-	/**
-	 * The tick event handler.
-	 * @param {Integer} position The slider position.
-	 * @private
-	 * @since 0.1
-	 */
 	onTick: function(position) {
 		this.updateTrack(position);
 		this.fireEvent('tick', position);
 	},
 
-	/**
-	 * The change event handler.
-	 * @param {Integer} step The slider step.
-	 * @private
-	 * @since 0.1
-	 */
 	onChange: function(step) {
 		this.value = step;
 		this.updateTrack(this.slider.toPosition(step));

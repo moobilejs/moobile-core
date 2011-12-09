@@ -20,13 +20,21 @@ provides:
 */
 
 /**
- * Provides a control that displays a modal alert message.
+ * @name  Alert
+ * @class Provides a modal alert control.
  *
- * @name Alert
- * @class Alert
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Overlay
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Alert = new Class( /** @lends Alert.prototype */ {
@@ -34,54 +42,71 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	Extends: Moobile.Overlay,
 
 	/**
-	 * The title.
-	 * @type {Entity}
+	 * @var    {Entity} This alert's title.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	title: null,
 
 	/**
-	 * The message.
-	 * @type {Entity}
+	 * @var    {Entity} This alert's message.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	message: null,
 
 	/**
-	 * The dialog element.
-	 * @type {Element}
+	 * @var    {Element} This alert's dialog container element.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	dialog: null,
 
 	/**
-	 * The dialog header element.
-	 * @type {Element}
+	 * @var    {Element} This alert's dialog header element.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
-	header: null,
+	dialogHeader: null,
 
 	/**
-	 * The dialog footer element.
-	 * @type {Element}
+	 * @var    {Element} This alert's dialog footer element.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
-	footer: null,
+	dialogFooter: null,
 
 	/**
-	 * The dialog content element.
-	 * @type {Element}
+	 * @var    {Element} This alert's dialog content element.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
-	content: null,
+	dialogContent: null,
 
 	/**
-	 * The buttons.
-	 * @type {Array}
+	 * @var    {Array} This alert's buttons.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	buttons: [],
 
 	/**
-	 * Set the title with either a string or an entity object.
-	 * @param {Mixed} title The title as a string or an entity object.
-	 * @returh {Alert}
-	 * @since 0.1
+	 * Sets this alert's title.
+	 *
+	 * This method will set the title using either a string or an instance of a
+	 * Label. When provided with a string, this methods instantiate a new Label
+	 * and assign the given string as its text.
+	 *
+	 * @param {Mixed} title The title as either a string or Label.
+	 *
+	 * @return {Alert} This alert.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setTitle: function(title) {
+
+		// TODO : Should work the same as the button label.
 
 		if (this.title === title)
 			return this;
@@ -92,12 +117,12 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			this.title = null;
 		}
 
-		this.header.empty();
+		this.dialogHeader.empty();
 
 		if (title instanceof Moobile.Entity) {
-			this.addChild(title, 'bottom', this.header);
+			this.addChild(title, 'bottom', this.dialogHeader);
 		} else {
-			this.header.set('html', title);
+			this.dialogHeader.set('html', title);
 		}
 
 		this.title = title;
@@ -106,21 +131,37 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Return the title entity.
-	 * @return {Entity}
-	 * @since 0.1
+	 * Return this alert's title.
+	 *
+	 * This method will always return a Label object even though the title may
+	 * have been set using a string.
+	 *
+	 * @return {Label} The title.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getTitle: function() {
 		return this.title;
 	},
 
 	/**
-	 * Set the message with either a string or an entity object.
-	 * @param {Mixed} message The message as a string or an entity object.
-	 * @return {Alert}
-	 * @since 0.1
+	 * Sets this alert's message.
+	 *
+	 * This method will set the title using either a string or an instance of a
+	 * Text. When provided with a string, this methods instantiate a new Text
+	 * and assign the given string as its text.
+	 *
+	 * @param {Mixed} message The message as either a string or a Text.
+	 *
+	 * @return {Alert} This alert.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setMessage: function(message) {
+
+		// TODO : Should work the same as the button label.
 
 		if (this.message === message)
 			return this;
@@ -131,12 +172,12 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			this.message = null;
 		}
 
-		this.content.empty();
+		this.dialogContent.empty();
 
 		if (message instanceof Moobile.Entity) {
-			this.addChild(message, 'bottom', this.content);
+			this.addChild(message, 'bottom', this.dialogContent);
 		} else {
-			this.content.set('html', message);
+			this.dialogContent.set('html', message);
 		}
 
 		this.message = message;
@@ -145,49 +186,71 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Return the message entity.
-	 * @return {Entity}
-	 * @since 0.1
+	 * Returns the message.
+	 *
+	 * This method will always return a Text object even though the message may
+	 * have been set using a string.
+	 *
+	 * @return {Text} The message.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getMessage: function() {
 		return this.message;
 	},
 
 	/**
-	 * Add a button to display at the bottom of the alert.
-	 * @param {Button} button Button
-	 * @return {Alert}
-	 * @since 0.1
+	 * Adds a button.
+	 *
+	 * This method will add the given button at the bottom of the element that
+	 * contains buttons. The presentation of the buttons, either vertical or
+	 * horizontal is defined by setting the proper style to this alert.
+	 *
+	 * @param {Button} button The button.
+	 *
+	 * @return {Alert} This alert.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	addButton: function(button) {
-		this.addChild(button, 'bottom', this.footer);
+		this.addChild(button, 'bottom', this.dialogFooter);
 		return this;
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
+	destroy: function() {
+
+		this.title = null;
+		this.message = null;
+		this.buttons = null;
+
+		this.dialog = null;
+		this.dialogHeader = null;
+		this.dialogFooter = null;
+		this.dialogContent = null;
+
+		this.parent();
+	},
+
 	didLoad: function() {
 
 		this.parent();
 
 		this.element.addClass('alert');
 
-		this.header  = new Element('div.dialog-header');
-		this.footer  = new Element('div.dialog-footer');
-		this.content = new Element('div.dialog-content');
+		this.dialogHeader  = new Element('div.dialog-dialogHeader');
+		this.dialogFooter  = new Element('div.dialog-dialogFooter');
+		this.dialogContent = new Element('div.dialog-dialogContent');
 
 		this.dialog = new Element('div.dialog');
-		this.dialog.grab(this.header);
-		this.dialog.grab(this.content);
-		this.dialog.grab(this.footer);
+		this.dialog.grab(this.dialogHeader);
+		this.dialog.grab(this.dialogContent);
+		this.dialog.grab(this.dialogFooter);
 
 		this.element.grab(this.dialog);
 	},
 
-	/**
-	 * @see Entity#didAddChild
-	 */
 	didAddChild: function(entity) {
 
 		this.parent(entity);
@@ -200,9 +263,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
-	/**
-	 * @see Entity#didRemoveChild
-	 */
 	didRemoveChild: function(entity) {
 
 		this.parent(entity);
@@ -215,45 +275,18 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
-	/**
-	 * @see Entity#willShow
-	 */
 	willShow: function() {
 
 		this.parent();
 
 		if (this.buttons.length == 0) {
-
 			var button = new Moobile.Button();
 			button.setLabel('OK');
 			button.setHighlighted(true);
-
 			this.addButton(button);
 		}
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-
-		this.dialog = null;
-		this.header = null;
-		this.footer = null;
-		this.content = null;
-		this.buttons = null;
-		this.message = null;
-		this.title = null;
-
-		this.parent();
-	},
-
-	/**
-	 * Button click event hand.er
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onButtonClick: function(e) {
 
 		this.fireEvent('buttonclick', e.target);
@@ -263,22 +296,10 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
-	/**
-	 * Button mouse up event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onButtonMouseUp: function() {
 		this.fireEvent('buttonmouseup');
 	},
 
-	/**
-	 * Button mouse down event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onButtonMouseDown: function() {
 		this.fireEvent('buttonmousedown');
 	}

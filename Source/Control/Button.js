@@ -19,14 +19,22 @@ provides:
 ...
 */
 
-/**
- * Provides a Button control.
+ /**
+ * @name  Button
+ * @class Provides a button control.
  *
- * @name Button
- * @class Button
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Button = new Class(/** @lends Button.prototype */ {
@@ -34,16 +42,25 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The button label entity.
-	 * @type {Label}
+	 * @var    {Label} This button's label.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	label: null,
 
 	/**
-	 * Set the button label.
-	 * @param {Mixed} label The label as a Label instance or as a string.
-	 * @return {Object}
-	 * @since 0.1
+	 * Sets this button's label.
+	 *
+	 * This method will set the label using either a string or an instance of a
+	 * Label. When provided with a string, this methods instantiate a new Label
+	 * and assign the given string as its text.
+	 *
+	 * @param {Mixed} label The label as either a string or Label.
+	 *
+	 * @return {Button} This button.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setLabel: function(label) {
 
@@ -69,17 +86,25 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	},
 
 	/**
-	 * Return the button label.
-	 * @return {Label}
-	 * @since 0.1
+	 * Return this button's label.
+	 *
+	 * This method will always return a Label object even though the label may
+	 * have been set using a string.
+	 *
+	 * @return {Label} The label.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getLabel: function() {
 		return this.label;
 	},
 
-	/**
-	 * @see Entity#willLoad
-	 */
+	destroy: function() {
+		this.label = null;
+		this.parent();
+	},
+
 	willLoad: function() {
 
 		this.parent();
@@ -94,42 +119,19 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		this.defineElementRole(label, 'label');
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('button');
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.label = null;
-		this.parent();
-	},
-
-	/**
-	 * Mouse down event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onMouseDown: function(e) {
 		this.parent(e);
-		this.element.addClass('is-down');
+		this.setHighlighted(true);
 	},
 
-	/**
-	 * Mouse up event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onMouseUp: function(e) {
 		this.parent(e);
-		this.element.removeClass('is-down');
+		this.setHighlighted(false);
 	}
 
 });

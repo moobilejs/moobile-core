@@ -20,42 +20,27 @@ provides:
 */
 
 /**
- * Provides a control that displays a label.
+ * @name  Label
+ * @class Provides a label control.
  *
- * @name Label
- * @class Label
- * @extends Control
+ * @classdesc
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
+ * @extends Text
+ *
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Label = new Class( /** @lends Label.prototype */ {
 
-	Extends: Moobile.Control,
+	Extends: Moobile.Text,
 
-	/**
-	 * Set the label text.
-	 * @param {String} text The label text.
-	 * @return {Label}
-	 * @since 0.1
-	 */
-	setText: function(text) {
-		this.element.set('html', text);
-		return this;
-	},
-
-	/**
-	 * Return the label text.
-	 * @return {String}
-	 * @since 0.1
-	 */
-	getText: function() {
-		return this.element.get('html');
-	},
-
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('label');

@@ -22,13 +22,21 @@ provides:
 */
 
 /**
- * Provides a control that handles a list of items.
+ * @name  List
+ * @class Provides a list control.
  *
- * @name List
- * @class List
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.List = new Class( /** @lends List.prototype */ {
@@ -36,30 +44,42 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The selected item.
-	 * @type {ListItem}
+	 * @var    {ListItem} The selected item.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	selectedItem: null,
 
 	/**
-	 * The selected item index.
-	 * @type {Number}
+	 * @var    {Number} The selected item index.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	selectedItemIndex: -1,
 
 	/**
-	 * The class options.
-	 * @type {Object}
+	 * @var    {Object} The class options.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'ul'
 	},
 
 	/**
-	 * Set the selected item.
-	 * @param {ListItem} selectedItem The selected item.
-	 * @return {List}
-	 * @since 0.1
+	 * Sets the selected item.
+	 *
+	 * This method will select the given item and deselect the current selected
+	 * item if any. You can also clear the selected item by passing `null` as
+	 * parameter.
+	 *
+	 * @param {ListItem} selectedItem The selected item or `null` to clear the
+	 *                                selection.
+	 *
+	 * @return {List} This list.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setSelectedItem: function(selectedItem) {
 
@@ -87,19 +107,33 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * Return the selected item.
-	 * @return {ListItem}
-	 * @since 0.1
+	 * Returns the selected item.
+	 *
+	 * this method will return the selected item or `null` if no items were
+	 * selected.
+	 *
+	 * @return {ListItem} The selected item.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getSelectedItem: function() {
 		return this.selectedItem;
 	},
 
 	/**
-	 * Set the selected item using its index.
-	 * @param {Number} index The item index.
-	 * @return {ListItem}
-	 * @since 0.1
+	 * Sets the selected item index.
+	 *
+	 * This method will select an item using its index, 0 being the first item
+	 * in the list. Passing an index that matches no items will clear the
+	 * selection.
+	 *
+	 * @param {Number} index The selected item index.
+	 *
+	 * @return {List} This list.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setSelectedItemIndex: function(index) {
 		this.setSelectedItem(this.children[index] || null);
@@ -107,9 +141,30 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * Unselect the current selected item.
-	 * @return {ListItem}
-	 * @since 0.1
+	 * Returns the selected item index.
+	 *
+	 * This method will return the index of the selected item, 0 being the
+	 * first item in the list. This method will return -1 if no item were
+	 * selected.
+	 *
+	 * @return {Number} The selected item index.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSelectedItemIndex: function() {
+		return this.selectedItemIndex
+	},
+
+	/**
+	 * Clear the selected button.
+	 *
+	 * This method is a conveniant shortcut for `setSelectedItem(null)`.
+	 *
+	 * @return {List} This list.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	clearSelectedItem: function() {
 		this.setSelectedItem(null);
@@ -117,48 +172,64 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * Add an item to the list.
+	 * Adds an item.
+	 *
 	 * @see Entity#addChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	addItem: function(item, where, context) {
 		return this.addChild(item, where, context);
 	},
 
 	/**
-	 * Return an item of the list.
+	 * Returns an item.
+	 *
 	 * @see Entity#getChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getItem: function(name) {
 		return this.getChild(name);
 	},
 
 	/**
-	 * Remove an item from the list.
+	 * Removes an item.
+	 *
 	 * @see Entity#removeChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	removeItem: function(item) {
 		return this.removeChild(item);
 	},
 
 	/**
-	 * Remove all items from the list
-	 * @see Entity#removeChildren
+	 * Removes all buttons.
+	 *
+	 * @see Entity#removeChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
-	clearItems: function() {
+	removeAllItems: function() {
 		return this.removeChildren();
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
+	destroy: function() {
+		this.selectedItem = null;
+		this.selectedItemIndex = -1;
+		this.parent();
+	},
+
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('list');
 	},
 
-	/**
-	 * @see Entity#didAddChild
-	 */
 	didAddChild: function(entity) {
 
 		this.parent(entity);
@@ -170,9 +241,6 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		}
 	},
 
-	/**
-	 * @see Entity#didRemoveChild
-	 */
 	didRemoveChild: function(entity) {
 
 		this.parent(entity);
@@ -184,45 +252,18 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		}
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.selectedItem = null;
-		this.selectedItemIndex = -1;
-		this.parent();
-	},
-
-	/**
-	 * Item click event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onItemClick: function(e) {
 		var item = e.target;
 		if (this.selectable) this.setSelectedItem(item);
 		this.fireEvent('click', e);
 	},
 
-	/**
-	 * Item mouse up event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onItemMouseUp: function(e) {
 		var item = e.target;
 		if (this.selectable && this.highlightable) item.setHighlighted(false);
 		this.fireEvent('mouseup', e);
 	},
 
-	/**
-	 * Item mouse down event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onItemMouseDown: function(e) {
 		var item = e.target;
 		if (this.selectable && this.highlightable) item.setHighlighted(true);

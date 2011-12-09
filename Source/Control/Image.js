@@ -19,14 +19,22 @@ provides:
 ...
 */
 
-/**
- * Provides a control that displays an image.
+ /**
+ * @name  Image
+ * @class Provides an image control.
  *
- * @name Image
- * @class Image
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Image = new Class( /** @lends Image.prototype */ {
@@ -34,63 +42,67 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The class options.
-	 * @type {Object}
+	 * @var    {Object} The class options.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'img'
 	},
 
 	/**
-	 * Set the image source.
+	 * Sets the image source.
+	 *
+	 * This method will set the source of the image if this image's element is
+	 * an image element.
+	 *
 	 * @param {String} source The image source.
-	 * @return {Image}
-	 * @since 0.1
+	 *
+	 * @return {Image} This image.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setSource: function(source) {
 
-		this.element.set('src', null);
-		this.element.hide();
-
-		if (source) {
-			this.element.set('src', image);
-			this.element.show();
+		if (this.element.get('tag') == 'img') {
+			this.element.set('src', source);
+			this.show();
 		}
 
 		return this;
 	},
 
 	/**
-	 * Return the image source.
-	 * @return {String}
-	 * @since 0.1
+	 * Returns the image source.
+	 *
+	 * This method will return this source of the image if this image's element
+	 * is an image element.
+	 *
+	 * @return {String} The image source.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getSource: function() {
 		return this.element.get('src');
 	},
 
-	/**
-	 * @see Entity#willLoad
-	 */
-	willLoad: function() {
-		this.parent();
-		if (!this.getSource()) this.element.hide();
-	},
-
-	/**
-	 * @see Entity#didLoad
-	 */
-	didLoad: function() {
-		this.parent();
-		this.element.addClass('image');
-	},
-
-	/**
-	 * @see Entity#destroy
-	 */
 	destroy: function() {
 		this.image = null;
 		this.parent();
-	}
+	},
 
+	willLoad: function() {
+		this.parent();
+		var source = this.getSource();
+		if (source.trim() == '') {
+			this.hide();
+		}
+	},
+
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('image');
+	}
 });

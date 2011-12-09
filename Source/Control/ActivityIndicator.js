@@ -20,8 +20,8 @@ provides:
 */
 
 /**
- * @name      ActivityIndicator
- * @class     Provides a control that indicates activity when animated.
+ * @name  ActivityIndicator
+ * @class Provides an activity indicator control.
  *
  * @classdesc
  *
@@ -29,6 +29,10 @@ provides:
  * [TODO: Events]
  * [TODO: Roles]
  * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
+ * @extends Control
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
@@ -41,8 +45,8 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 	 * Start the activity indicator animation.
 	 *
 	 * This method will start the indicator animation by adding the `activity`
-	 * CSS class to the element. Update the CSS properties of this class to
-	 * customize the animation.
+	 * CSS class to the element. Update the properties of this CSS class to
+	 * create your own animation.
 	 *
 	 * @return {ActivityIndicator} This activity indicator.
 	 *
@@ -57,8 +61,8 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 	 * Stop the activity indicator animation.
 	 *
 	 * This method will stop the indicator animation by removing the `activity`
-	 * CSS class to the element. Update the CSS properties of this class to
-	 * customize the animation.
+	 * CSS class to the element. Update the properties of this CSS class to
+	 * create your own animation.
 	 *
 	 * @return {ActivityIndicator} This activity indicator.
 	 *
@@ -69,15 +73,6 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 		return this.removeClass('activity');
 	},
 
-	/**
-	 * Add the proper CSS classes to the activity indicator's element once
-	 * it's been correctly loaded.
-	 *
-	 * @see Entity#didLoad
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('activity-indicator');

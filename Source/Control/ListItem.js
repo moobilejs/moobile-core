@@ -22,13 +22,21 @@ provides:
 */
 
 /**
- * Provides a list item control.
+ * @name  ListItem
+ * @class Provides a list item control.
  *
- * @name ListItem
- * @class ListItem
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
@@ -36,28 +44,39 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The list item image.
-	 * @type {Image}
+	 * @var    {Image} The list item image.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	image: null,
 
 	/**
-	 * The list item label.
-	 * @type {Label}
+	 * @var    {Label} The list item label.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	label: null,
 
 	/**
-	 * The list item info text.
-	 * @type {Label}
+	 * @var    {Label} The list item detail label.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	detail: null,
 
 	/**
-	 * Set the list item image.
-	 * @param {Mixed} image The image as an Image instance or as a string.
-	 * @return {ListItem}
-	 * @since 0.1
+	 * Sets this list item's image.
+	 *
+	 * This method will set the image using either a string or an instance of
+	 * am Image. When provided with a string, this methods instantiate a new
+	 * Image and assign the given string as its source.
+	 *
+	 * @param {Mixed} image The image as either a string or Image.
+	 *
+	 * @return {ListItem} This list item.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setImage: function(image) {
 
@@ -83,19 +102,33 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Return the image.
-	 * @return {Image}
-	 * @since 0.1
+	 * Return this list item's image.
+	 *
+	 * This method will always return an Image object even though the image may
+	 * have been set using a string.
+	 *
+	 * @return {Image} The image.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getImage: function() {
 		return this.image;
 	},
 
 	/**
-	 * Set the list item label label.
-	 * @param {Label} label The label as a Label instance or as a string.
-	 * @return {ListItem}
-	 * @since 0.1
+	 * Sets this list item's label.
+	 *
+	 * This method will set the label using either a string or an instance of a
+	 * Label. When provided with a string, this methods instantiate a new Label
+	 * and assign the given string as its text.
+	 *
+	 * @param {Mixed} label The label as either a string or Label.
+	 *
+	 * @return {ListItem} This list item.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setLabel: function(label) {
 
@@ -121,19 +154,33 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Return the list item label.
-	 * @return {Label}
-	 * @since 0.1
+	 * Return this list item's label.
+	 *
+	 * This method will always return a Label object even though the label may
+	 * have been set using a string.
+	 *
+	 * @return {Label} The label.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getLabel: function() {
 		return this.label;
 	},
 
 	/**
-	 * Set the list item detail.
-	 * @param {Mixed} detail The detail as a Label instance or as a string.
-	 * @return {Object}
-	 * @since 0.1
+	 * Sets this list item's detail label.
+	 *
+	 * This method will set the detail label using either a string or an
+	 * instance of a Label. When provided with a string, this methods
+	 * instantiate a new Label and assign the given string as its text.
+	 *
+	 * @param {Mixed} detail The detail label as either a string or Label.
+	 *
+	 * @return {ListItem} This list item.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setDetail: function(detail) {
 
@@ -161,17 +208,27 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Return the infos.
-	 * @return {Label} The infos.
-	 * @since 0.1
+	 * Return this list item's detail label.
+	 *
+	 * This method will always return a Label object even though the label may
+	 * have been set using a string.
+	 *
+	 * @return {Label} The detail label.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getDetail: function() {
 		return this.detail;
 	},
 
-	/**
-	 * @see Entity#willLoad
-	 */
+	destroy: function() {
+		this.label = null;
+		this.image = null;
+		this.detail = null;
+		this.parent();
+	},
+
 	willLoad: function() {
 
 		this.parent();
@@ -201,24 +258,10 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		this.defineElementRole(detail, 'detail');
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('list-item');
-	},
-
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.label = null;
-		this.image = null;
-		this.detail = null;
-		this.parent();
 	}
-
 });
 
 //------------------------------------------------------------------------------

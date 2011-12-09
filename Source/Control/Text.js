@@ -20,24 +20,39 @@ provides:
 */
 
 /**
- * Provides the base class for managing text.
+ * @name  Text
+ * @class Provides a text control.
  *
- * @name Text
- * @class Text
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
- Moobile.Text = new Class( /** @lends Text.prototype */ {
+Moobile.Text = new Class( /** @lends Text.prototype */ {
 
 	Extends: Moobile.Control,
 
 	/**
-	 * Set the text content.
+	 * Sets the text.
+	 *
+	 * This method will set the given text as the `html` property of this
+	 * text's element. This given text may contain HTML entities as well.
+	 *
 	 * @param {String} text The text content.
-	 * @return {Text}
-	 * @since 0.1
+	 *
+	 * @return {Text} This text.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setText: function(text) {
 		this.element.set('html', text);
@@ -45,18 +60,20 @@ provides:
 	},
 
 	/**
-	 * Return the text content.
-	 * @param {String} text The text content.
-	 * @return {Text}
-	 * @since 0.1
+	 * Returns the text.
+	 *
+	 * This method will return the content of this element's `html` property.
+	 * The returned text may contain HTML elements.
+	 *
+	 * @return {String} The text.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getText: function(text) {
 		return this.element.get('html');
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('text');

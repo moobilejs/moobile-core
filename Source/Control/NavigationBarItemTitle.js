@@ -31,55 +31,13 @@ provides:
  */
 Moobile.NavigationBarItemTitle = new Class( /* @lends NavigationBarItemTitle.prototype */ {
 
-	Extends: Moobile.Control,
+	Extends: Moobile.Text,
 
-	/**
-	 * The title text.
-	 * @type {String}
-	 */
-	text: null,
-
-	/**
-	 * Set the title text.
-	 * @param {String} text The title text.
-	 * @return {NavigationBarItemTitle}
-	 * @since 0.1
-	 */
-	setText: function(text) {
-
-		if (this.text) {
-			this.text = '';
-		}
-
-		if (text) {
-			this.text = text;
-		}
-
-		this.element.set('html', this.text);
-
-		return this;
-	},
-
-	/**
-	 * Return the title text.
-	 * @return {String}
-	 * @since 0.1
-	 */
-	getText: function() {
-		return this.text;
-	},
-
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('bar-title');
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
 	destroy: function() {
 		this.text = null;
 		this.parent();

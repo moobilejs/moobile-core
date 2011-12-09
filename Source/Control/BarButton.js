@@ -20,22 +20,27 @@ provides:
 */
 
 /**
- * Provides a button control used inside bar controls.
+ * @name  BarButton
+ * @class Provides a bar button control.
  *
- * @name BarButton
- * @class BarButton
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Button
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.BarButton = new Class( /** @lends BarButton.prototype */ {
 
 	Extends: Moobile.Button,
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('bar-button');

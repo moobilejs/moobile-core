@@ -19,23 +19,28 @@ provides:
 ...
 */
 
-/**
- * Provides a control that represents the content of a bar.
+ /**
+ * @name  BarItem
+ * @class Provides a bar item control.
  *
- * @name BarItem
- * @class BarItem
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.BarItem = new Class( /** @lends BarItem.prototype */ {
 
 	Extends: Moobile.Control,
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('bar-item');

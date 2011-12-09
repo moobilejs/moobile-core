@@ -298,7 +298,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Indicates whether this has a given child entity.
+	 * Indicates whether this entity has a given child entity.
 	 *
 	 * This method will only compare the given entity against direct descendant
 	 * of this entity.
@@ -1158,24 +1158,26 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 });
 
 /**
+ * Returns an entity defined within an element.
  *
- *
- * Instantiates an entity based on a property stored on an element and validates
- * the instance. If the propery does not contain the class name, an instance of
- * the the `type` will be returned.
+ * This function instantiates an entity based on a data-attribute stored on an
+ * element and validates the instance type. If the data-attribute is missing,
+ * an instance of the `type` will be returned.
  *
  * @name Entity.fromElement
  *
+ * @function
+ *
  * @param {Element} element  The element.
- * @param {String}  property The property that contains the class name.
- * @param {Object}  type     The class name must be an instance of this value.
+ * @param {String}  property The data-attribute that contains the class name.
+ * @param {Object}  type     The class instanceof.
  *
  * @return {Object} An entity instance.
  *
- * @function
- *
  * @example
- * var entity = Moobile.Entity.fromElement(new Element('div[data-button=MySpecialButton]'), 'data-button', MySpecialButton);
+ *
+ * var element = new Element('div[data-button=Moobile.Button');
+ * var entity  = Moobile.Entity.fromElement(element, 'data-button', Moobile.Button);
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
@@ -1199,54 +1201,69 @@ Moobile.Entity.fromElement = function(element, property, type) {
 };
 
 /**
- * Defines the behavior of a role for a specific entity. The function used to
- * define its behavoir will be bound to the entity and will receive two
- * parameters, the element and the entity name.
+ * Defines a role.
+ *
+ * This function defines the behavior of a role for an entity or all entities
+ * if the `target` parameter is `null`. The `behavior` function will be bound
+ * to the entity and receive it's element upon execution.
  *
  * @name Entity.defineRole
  *
- * @param {String}   name     The role name.
- * @param {Entity}   target   The role target or `null` to define
- *                            this role for all entities.
- * @param {Function} behavior The function that defines the behavior. This
- *                            function will receive the entity's element and
- *                            the entity's name as parameters.
- *
  * @function
  *
+ * @param {String}   name     The name.
+ * @param {Entity}   target   The target entity.
+ * @param {Function} behavior The function that defines the role's behavior.
+ *
  * @example
+ *
+ * // defines the role label for all entities
  * Moobile.Entity.defineRole('label', null, function(element, name) {
  * 	this.addChild(new Moobile.Label(element, null, name));
  * });
  *
  * @example
+ *
+ * // defines the role image for buttons
  * Moobile.Entity.defineRole('image', Moobile.Button, function(element, name)) {
  * 	this.addChild(new Moobile.Image(element, null, name));
  * });
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
- */
+*/
 Moobile.Entity.defineRole = function(name, target, behavior) {
 	(target || Moobile.Entity).prototype.$roles[name] = behavior;
 };
 
 /**
- * Define a style for a specific entity. The option used to define its
- * behavior is an object containing two methods, `attach` will be
- * called when the style is added to entity and `detach` will be
- * called when the style is removed from the entity.
+ * Define a style.
+ *
+ * This function defines a style for an entity or all entities if the `target`
+ * parameter is `null`. The `behavior` object needs an `attach` and `detach`
+ * method that will be used to install or remove the style. Both method will be
+ * bound to the entity upon execution.
  *
  * @name Entity.defineStyle
  *
- * @param {String} name     The style name.
- * @param {Entity} target   The style target or `null` to define
- *                          style to all entities.
- * @param {Object} behavior The style definition which consists in an object
- *                          with an `attach` and `detach`
- *                          methods.
- *
  * @function
+ *
+ * @param {String} name     The style name.
+ * @param {Entity} target   The entity that will use this style.
+ * @param {Object} behavior The style definition which consists of an object
+ *                          with an `attach` and `detach` method.
+ *
+ * @example
+ *
+ * // defines the style `big-and-bold` for the Moobile.Button entity
+ * Moobile.defineStyle('big-and-bold', Moobile.Button, {
+ * 	attach: function() {
+ *   this.element.addClass('some-big-and-bold-style');
+ * 	},
+ * 	detach: function() {
+ * 	 this.element.removeClass('some-big-and-bold-style');
+ * 	}
+ * });
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1

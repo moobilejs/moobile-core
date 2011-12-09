@@ -22,13 +22,21 @@ provides:
 */
 
 /**
- * Provides a control that groups button.
+ * @name  ButtonGroup
+ * @class Provides a button group control.
  *
- * @name ButtonGroup
- * @class ButtonGroup
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
@@ -36,20 +44,23 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The selected button.
-	 * @type {Button}
+	 * @var    {Button} The selected button.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	selectedButton: null,
 
 	/**
-	 * The selected button index.
-	 * @type {Number}
+	 * @var    {Number} The selected button index.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	selectedButtonIndex: -1,
 
 	/**
-	 * The class options.
-	 * @type {Object}
+	 * @var    {Object} The class options.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	options: {
 		styleName: 'horizontal',
@@ -57,11 +68,19 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	},
 
 	/**
-	 * Set the selected button.
-	 * @param {Button} selectedButton The selected button or null to clear the
-	 * current selection.
-	 * @return {ButtonGroup}
-	 * @since 0.1
+	 * Sets the selected button.
+	 *
+	 * This method will select the given button and deselect the current
+	 * selected button if any. You can also clear the selected button by
+	 * passing `null` as parameter.
+	 *
+	 * @param {Button} selectedButton The selected button or `null` to clear
+	 *                                the selection.
+	 *
+	 * @return {ButtonGroup} This button group.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setSelectedButton: function(selectedButton) {
 
@@ -91,19 +110,33 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	},
 
 	/**
-	 * Return the selected button.
-	 * @return {Button}.
-	 * @since 0.1
+	 * Returns the selected button.
+	 *
+	 * this method will return the selected button or `null` if no buttons were
+	 * selected.
+	 *
+	 * @return {Button} The selected button.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getSelectedButton: function() {
 		return this.selectedButton;
 	},
 
 	/**
-	 * Set the selected button using its index.
-	 * @param {Number} index The button index.
-	 * @return {ButtonGroup}
-	 * @since 0.1
+	 * Sets the selected button index.
+	 *
+	 * This method will select a button using its index, 0 being the first
+	 * button in the list. Passing an index that matches no buttons will
+	 * clear the selection.
+	 *
+	 * @param {Number} index The selected button index.
+	 *
+	 * @return {ButtonGroup} This button group.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setSelectedButtonIndex: function(index) {
 		this.setSelectedButton(this.children[index] || null);
@@ -111,62 +144,95 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	},
 
 	/**
-	 * Return the selected button index.
+	 * Returns the selected button index.
+	 *
+	 * This method will return the index of the selected button, 0 being the
+	 * first button in the list. This method will return -1 if no buttons were
+	 * selected.
+	 *
 	 * @return {Number} The selected button index.
-	 * @since 0.1
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getSelectedButtonIndex: function() {
 		return this.selectedButtonIndex;
 	},
 
+	/**
+	 * Clear the selected button.
+	 *
+	 * This method is a conveniant shortcut for `setSelectedButton(null)`.
+	 *
+	 * @return {ButtonGroup} This button group.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	clearSelectedButton: function() {
 		this.setSelectedButton(null);
 		return this;
 	},
 
 	/**
-	 * Add a button to the button group.
+	 * Adds a button.
+	 *
 	 * @see Entity#addChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	addButton: function(button, where, context) {
 		return this.addChild(button, where, context);
 	},
 
 	/**
-	 * Return a button of the button group.
+	 * Returns a button.
+	 *
 	 * @see Entity#getChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getButton: function(name) {
 		return this.getChild(name);
 	},
 
 	/**
-	 * Remove a button from the group.
+	 * Removes a button.
+	 *
 	 * @see Entity#removeChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	removeButton: function(button) {
 		return this.removeChild(button);
 	},
 
 	/**
-	 * Remove all buttons from the group.
+	 * Removes all buttons.
+	 *
 	 * @see Entity#removeChild
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	removeAllButtons: function() {
 		return this.removeChildren();
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
+	destroy: function() {
+		this.selectedButton = null;
+		this.selectedButtonIndex = -1;
+		this.parent();
+	},
+
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('button-group');
 	},
 
-	/**
-	 * @see Entity#didAddChild
-	 */
 	didAddChild: function(entity) {
 
 		this.parent(entity);
@@ -178,9 +244,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		}
 	},
 
-	/**
-	 * @see Entity#didRemoveChild
-	 */
 	didRemoveChild: function(entity) {
 
 		this.parent(entity);
@@ -192,42 +255,15 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		}
 	},
 
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.selectedButton = null;
-		this.selectedButtonIndex = -1;
-		this.parent();
-	},
-
-	/**
-	 * Button click event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onButtonClick: function(e) {
 		this.setSelectedButton(e.target);
 		this.fireEvent('buttonclick', e.target);
 	},
 
-	/**
-	 * Button mouse up event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onButtonMouseUp: function(e) {
 		this.fireEvent('buttonmouseup', e.target);
 	},
 
-	/**
-	 * Button mouse down event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onButtonMouseDown: function(e) {
 		this.fireEvent('buttonmousedown', e.target);
 	}

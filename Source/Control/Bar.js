@@ -20,13 +20,21 @@ provides:
 */
 
 /**
- * Provides a control that displays a bar.
+ * @name  Bar
+ * @class Provides a bar control.
  *
- * @name Bar
- * @class Bar
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Control
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Bar = new Class( /** @lends Bar.prototype */ {
@@ -34,16 +42,25 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The bar item.
-	 * @type {BarItem}
+	 * @var    {BarItem} This bar's item.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	item: null,
 
 	/**
-	 * Set the bar item.
+	 * Sets this bar's item.
+	 *
+	 * This method will set what represents the content of a bar. Objects such
+	 * as buttons, button groups, images should be added to this bar item and
+	 * not to the bar itself.
+	 *
 	 * @param {BarItem} item The bar item.
-	 * @return {Bar}
-	 * @since 0.1
+	 *
+	 * @return {Bar} This bar.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setItem: function(item) {
 
@@ -52,28 +69,37 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 		if (this.item == null) {
 			this.item = item;
-			this.addChild(item);
+			this.addChild(label);
 		} else {
 			this.replaceChild(this.item, item);
 			this.item.destroy();
-			this.item = item;
+			this.item = label;
 		}
 
 		return this;
 	},
 
 	/**
-	 * Return the bar item.
-	 * @return {BarItem}
-	 * @since 0.1
+	 * Returns the bar item.
+	 *
+	 * This method will return what represents the content of a bar. Objects
+	 * such as buttons, button groups, images should be added to this bar item
+	 * and not to the bar itself.
+	 *
+	 * @return {BarItem} The bar item.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getItem: function() {
 		return this.item;
 	},
 
-	/**
-	 * @see Entity#willLaod
-	 */
+	destroy: function() {
+		this.item = null;
+		this.parent();
+	},
+
 	willLoad: function() {
 
 		this.parent();
@@ -88,20 +114,9 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		this.defineElementRole(item, 'item');
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('bar');
-	},
-
-	/**
-	 * @see Entity#destroy
-	 */
-	destroy: function() {
-		this.item = null;
-		this.parent();
 	}
 
 });

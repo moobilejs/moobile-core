@@ -21,22 +21,25 @@ provides:
 */
 
 /**
- * Provides a bar control used to navigate between views.
+ * @name  NavigationBar
+ * @class Provides a navigation bar control.
  *
- * @name NavigationBar
- * @class NavigationBar
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
+ *
  * @extends Bar
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.NavigationBar = new Class( /* @lends NavigationBar.prototype */ {
 
 	Extends: Moobile.Bar,
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('navigation-bar');
