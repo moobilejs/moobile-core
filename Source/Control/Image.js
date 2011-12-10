@@ -94,10 +94,14 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	},
 
 	willLoad: function() {
+
 		this.parent();
+
+		this.hide();
+
 		var source = this.getSource();
-		if (source.trim() == '') {
-			this.hide();
+		if (source && source.trim()) {
+			this.show();
 		}
 	},
 
