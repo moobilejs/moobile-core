@@ -393,7 +393,6 @@ p small {
 	white-space: nowrap;										/* Important */
 }
 
-.button.is-down,
 .button.is-selected,
 .button.is-highlighted {
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6));
@@ -497,7 +496,6 @@ p small {
 	white-space: nowrap;										/* Important */
 }
 
-.bar-button.is-down,
 .bar-button.is-selected,
 .bar-button.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 30 5 1940 stretch stretch;
@@ -526,19 +524,16 @@ p small {
 	padding-right: 4px;
 }
 
-.bar-button-group.style-horizontal .bar-button.is-down,
-.bar-button-group.style-horizontal .bar-button.is-selected,
+..bar-button-group.style-horizontal .bar-button.is-selected,
 .bar-button-group.style-horizontal .bar-button.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 150 1 1820 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.is-down:first-child,
 .bar-button-group.style-horizontal .bar-button.is-selected:first-child,
 .bar-button-group.style-horizontal .bar-button.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 180 1 1790 5 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.is-down:last-child,
 .bar-button-group.style-horizontal .bar-button.is-selected:last-child,
 .bar-button-group.style-horizontal .bar-button.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 210 5 1760 1 stretch stretch;
@@ -552,7 +547,6 @@ p small {
 	padding-left: 0px;
 }
 
-.bar-button.style-back.is-down,
 .bar-button.style-back.is-selected,
 .bar-button.style-back.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 270 5 1700 13 stretch stretch;
@@ -566,7 +560,6 @@ p small {
 	padding-right: 0px;
 }
 
-.bar-button.style-forward.is-down,
 .bar-button.style-forward.is-selected,
 .bar-button.style-forward.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 330 13 1640 5 stretch stretch;
@@ -578,7 +571,6 @@ p small {
 	-webkit-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
 }
 
-.bar-button.bar-button.style-dark.is-down,
 .bar-button.bar-button.style-dark.is-selected,
 .bar-button.bar-button.style-dark.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
@@ -598,19 +590,16 @@ p small {
 	-webkit-border-image: url(../images/bar-button.png) 480 5 1490 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-dark.is-down,
 .bar-button-group.style-horizontal .bar-button.style-dark.is-selected,
 .bar-button-group.style-horizontal .bar-button.style-dark.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 510 1 1460 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-dark.is-down:first-child,
 .bar-button-group.style-horizontal .bar-button.style-dark.is-selected:first-child,
 .bar-button-group.style-horizontal .bar-button.style-dark.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 540 1 1430 5 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-dark.is-down:last-child,
 .bar-button-group.style-horizontal .bar-button.style-dark.is-selected:last-child,
 .bar-button-group.style-horizontal .bar-button.style-dark.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 570 5 1400 1 stretch stretch;
@@ -624,7 +613,6 @@ p small {
 	padding-left: 0px;
 }
 
-.bar-button.style-dark-back.is-down,
 .bar-button.style-dark-back.is-selected,
 .bar-button.style-dark-back.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 630 5 1340 13 stretch stretch;
@@ -638,7 +626,6 @@ p small {
 	padding-right: 0px;
 }
 
-.bar-button.style-dark-forward.is-down,
 .bar-button.style-dark-forward.is-selected,
 .bar-button.style-dark-forward.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 690 13 1280 5 stretch stretch;
@@ -650,7 +637,6 @@ p small {
 	-webkit-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
 }
 
-.bar-button.style-active.is-down,
 .bar-button.style-active.is-selected,
 .bar-button.style-active.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
@@ -678,19 +664,16 @@ p small {
 	padding-right: 4px;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-active.is-down,
 .bar-button-group.style-horizontal .bar-button.style-active.is-selected,
 .bar-button-group.style-horizontal .bar-button.style-active.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 870 1 1100 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-active.is-down:first-child,
 .bar-button-group.style-horizontal .bar-button.style-active.is-selected:first-child,
 .bar-button-group.style-horizontal .bar-button.style-active.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 900 1 1070 5 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-active.is-down:last-child,
 .bar-button-group.style-horizontal .bar-button.style-active.is-selected:last-child,
 .bar-button-group.style-horizontal .bar-button.style-active.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 930 5 1040 1 stretch stretch;
@@ -702,7 +685,6 @@ p small {
 	-webkit-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
 }
 
-.bar-button.style-warning.is-down,
 .bar-button.style-warning.is-selected,
 .bar-button.style-warning.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
@@ -730,19 +712,16 @@ p small {
 	padding-right: 4px;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-warning.is-down,
 .bar-button-group.style-horizontal .bar-button.style-warning.is-selected,
 .bar-button-group.style-horizontal .bar-button.style-warning.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 1110 1 860 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-warning.is-down:first-child,
 .bar-button-group.style-horizontal .bar-button.style-warning.is-selected:first-child,
 .bar-button-group.style-horizontal .bar-button.style-warning.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 1140 1 830 5 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.style-warning.is-down:last-child,
 .bar-button-group.style-horizontal .bar-button.style-warning.is-selected:last-child,
 .bar-button-group.style-horizontal .bar-button.style-warning.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 1170 5 800 1 stretch stretch;
@@ -914,7 +893,6 @@ p small {
 	font-weight: normal;
 }
 
-.list-item.is-down,
 .list-item.is-selected,
 .list-item.is-highlighted {
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6)) !important;
@@ -922,7 +900,6 @@ p small {
 	text-shadow: none;
 }
 
-.list-item.is-down .label.detail,
 .list-item.is-selected .label.detail,
 .list-item.is-highlighted .label.detail {
 	color: #ffffff;
@@ -949,7 +926,6 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat -60px center;
 }
 
-.list-item.style-checked.is-down > .label.detail:after,
 .list-item.style-checked.is-selected > .label.detail:after,
 .list-item.style-checked.is-highlighted > .label.detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
@@ -965,7 +941,6 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
 }
 
-.list-item.style-disclosed.is-down > .label.detail:after,
 .list-item.style-disclosed.is-selected > .label.detail:after,
 .list-item.style-disclosed.is-highlighted > .label.detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
@@ -981,7 +956,6 @@ p small {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
-.list-item.style-detailed.is-down > .label.accessory:after,
 .list-item.style-detailed.is-selected > .label.accessory:after,
 .list-item.style-detailed.is-highlighted > .label.accessory:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
@@ -1130,7 +1104,6 @@ p small {
 	background: none;
 }
 
-.alert .dialog-footer .button.is-down,
 .alert .dialog-footer .button.is-selected {
 	-webkit-border-image: url(../images/alert-button.png) 86 5 0 5 stretch stretch;
 	background: none;
