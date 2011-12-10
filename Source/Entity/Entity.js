@@ -1132,23 +1132,28 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	onSwipe: function(e) {
-		this.fireEvent('swipe', e.target = this);
+		e.target = this;
+		this.fireEvent('swipe', e);
 	},
 
 	onPinch: function(e) {
-		this.fireEvent('swipe', e.target = this);
+		e.target = this;
+		this.fireEvent('swipe', e);
 	},
 
 	onClick: function(e) {
-		this.fireEvent('click', e.target = this);
+		e.target = this;
+		this.fireEvent('click', e);
 	},
 
 	onMouseUp: function(e) {
-		this.fireEvent('mouseup', e.target = this);
+		e.target = this;
+		this.fireEvent('mouseup', e);
 	},
 
 	onMouseDown: function(e) {
-		this.fireEvent('mousedown', e.target = this);
+		e.target = this;
+		this.fireEvent('mousedown', e);
 	},
 
 	toElement: function() {
