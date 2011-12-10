@@ -54,6 +54,5 @@ Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 
 Moobile.Entity.defineRole('view-content', Moobile.View, function(element) {
 	var instance = new Moobile.ViewContent(element, null, name);
-	this.addChild(instance);
-	this.content = instance; // must be assigned after addChild is called
+	this.setContent(instance);
 });

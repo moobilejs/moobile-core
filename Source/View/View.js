@@ -234,6 +234,37 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
+	 * Sets the view content.
+	 *
+	 * This method will set the entity that is used as the content of this
+	 * view. This entity will contains all child entities except ones in this
+	 * view's header or footer.
+	 *
+	 * @param {ViewContent} content The view content.
+	 *
+	 * @return {View} This view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setContent: function(content) {
+
+		if (this.content == content)
+			return this;
+
+		if (this.content == null) {
+			this.addChild(content);
+			this.content = content;
+		} else {
+			this.replaceChild(this.content, content);
+			this.content.destroy();
+			this.content = content;
+		}
+
+		return this;
+	},
+
+	/**
 	 * Returns the view content.
 	 *
 	 * This method will return the entity that is used as the content of this
