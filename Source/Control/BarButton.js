@@ -32,6 +32,9 @@ provides:
  * [TODO: Options]
  * [TODO: Element Structure]
  *
+ * Note: The `button` role automatically creates a bar button if placed
+ * inside a bar, bar item, bar-button-group.
+ *
  * @extends Button
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
