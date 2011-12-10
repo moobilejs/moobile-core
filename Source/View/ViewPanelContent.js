@@ -90,8 +90,8 @@ Moobile.ViewPanelContent = new Class({
 			side.inject(this.element, 'top');
 		}
 
-		this.defineElementRole(main, 'main-panel');
-		this.defineElementRole(side, 'side-panel');
+		this.attachRole(main, 'main-panel');
+		this.attachRole(side, 'side-panel');
 	},
 
 	didLoad: function() {

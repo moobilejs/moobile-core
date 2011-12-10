@@ -113,7 +113,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 			label.inject(this.element);
 		}
 
-		this.defineElementRole(label, 'label');
+		this.attachRole(label, 'label');
 	},
 
 	didLoad: function() {

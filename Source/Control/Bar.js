@@ -109,7 +109,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 			item.inject(this.element);
 		}
 
-		this.defineElementRole(item, 'item');
+		this.attachRole(item, 'item');
 	},
 
 	didLoad: function() {

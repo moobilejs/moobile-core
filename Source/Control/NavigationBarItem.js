@@ -177,7 +177,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 			title.inject(this.element);
 		}
 
-		this.defineElementRole(title, 'title');
+		this.attachRole(title, 'title');
 	},
 
 	didLoad: function() {

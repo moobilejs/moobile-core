@@ -242,9 +242,9 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 			detail.inject(this.element);
 		}
 
-		this.defineElementRole(label, 'label');
-		this.defineElementRole(image, 'image');
-		this.defineElementRole(detail, 'detail');
+		this.attachRole(label, 'label');
+		this.attachRole(image, 'image');
+		this.attachRole(detail, 'detail');
 	},
 
 	didLoad: function() {

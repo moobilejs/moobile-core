@@ -265,7 +265,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 			content.inject(this.element);
 		}
 
-		this.defineElementRole(content, 'view-content');
+		this.attachRole(content, 'view-content');
 	},
 
 	didLoad: function() {

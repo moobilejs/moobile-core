@@ -778,7 +778,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	getRoleElements: function(role) {
 
-		var validate = this.bound('validateRoleElement');
+		var validate = this.bound('isValidRoleElement');
 		var selector = role
 		             ? '[data-role=' + role + ']'
 		             : '[data-role]';
@@ -786,7 +786,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return this.element.getElements(selector).filter(validate);
 	},
 
-	validateRoleElement: function(element) {
+	isValidRoleElement: function(element) {
 
 		var parent = element.getParent();
 		if (parent) {
@@ -797,53 +797,53 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			if (parent.get('data-role'))
 				return false;
 
-			return this.validateRoleElement(parent);
+			return this.isValidRoleElement(parent);
 		}
 
 		return false;
 	},
 
+	attachRoles: function() {
+		this.getRoleElements().each(function(element) { this.attachRole(element); }.bind(this));
+	},
+
 	/**
-	 * Applies a role to an element.
+	 * Attaches a role to an element.
 	 *
 	 * This method will simply execute the function used to define the given
 	 * role for the given element. This methods throws an exception if the role
 	 * does has not been defined.
 	 *
 	 * @param {Element} element The element.
-	 * @param {String}  name    The role name.
+	 * @param {String}  role    The role name.
 	 *
 	 * @return {Entity} This entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	defineElementRole: function(element, role) {
+	attachRole: function(element, role) {
 
-		if (element.retrieve('entity.has-role'))
+		if (element.retrieve('moobile.entity.role'))
 			return this;
 
-		if (!this.validateRoleElement(element))
-			throw new Error('The element does not belong to this entity');
+		if (this.isValidRoleElement(element)) {
 
-		var definition = this.$roles[role];
-		if (definition == undefined) {
-			throw new Error('Role ' + role + ' is not defined');
+			var name = role || element.get('data-role');
+			if (name) {
+
+				var handler = this.$roles[name];
+				if (handler) {
+					handler.call(this, element);
+					element.store('moobile.entity.role', handler);
+					return this;
+				}
+
+				throw new Error('The role ' + role + ' has not been defined');
+			}
 		}
 
-		definition.call(this, element);
-
-		element.store('entity.has-role', true);
-
-		return this;
-	},
-
-	attachRoles: function() {
-		this.getRoleElements().each(this.bound('attachRole'));
-	},
-
-	attachRole: function(element) {
-		this.defineElementRole(element, element.get('data-role'));
+		throw new Error('The role element does not beling in this entity');
 	},
 
 	/**
