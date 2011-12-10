@@ -20,17 +20,21 @@ provides:
 */
 
 /**
- * @class
+ * @name  View
+ * @class Provides an entity that manages the content of a view panel.
  *
- * Manages the content of a view panel.
+ * @classdesc
  *
- * <h2>Roles</h2>
- * <p><code>view-content</code> - Defined for the ViewPanel class</p>
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
  *
- * @name    ViewPanelContent
  * @extends ViewContent
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewPanelContent = new Class({
@@ -38,9 +42,13 @@ Moobile.ViewPanelContent = new Class({
 	Extends: Moobile.ViewContent,
 
 	/**
-	 * Return the side panel element.
+	 * Returns the side panel.
 	 *
-	 * @return {Element} The side panel element.
+	 * This method will return the element that is used as the side panel of
+	 * this view. The side panel is the smaller panel that generally contains
+	 * the navigation elements of this view.
+	 *
+	 * @return {Element} The side panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -50,9 +58,13 @@ Moobile.ViewPanelContent = new Class({
 	},
 
 	/**
-	 * Return the main panel element.
+	 * Returns the main panel.
 	 *
-	 * @return {Element} The side panel element.
+	 * This method will return the element that is used as the main panel of
+	 * this view. The side panel is the larger panel that generally contains
+	 * the content elements of this view.
+	 *
+	 * @return {Element} The side panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -61,15 +73,6 @@ Moobile.ViewPanelContent = new Class({
 		return this.mainPanel;
 	},
 
-	/**
-	 * Defines an element with the main-panel and side-panel role if they were
-	 * not yet defined for this view.
-	 *
-	 * @see Entity#willLoad
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	willLoad: function() {
 
 		this.parent();
@@ -91,14 +94,6 @@ Moobile.ViewPanelContent = new Class({
 		this.defineElementRole(side, 'side-panel');
 	},
 
-	/**
-	 * Add the proper CSS classes to the view panel content's element.
-	 *
-	 * @see Entity#didLoad
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addEvent('view-panel-content');

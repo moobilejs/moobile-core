@@ -20,29 +20,27 @@ provides:
 */
 
 /**
- * @class
+ * @name  View
+ * @class Provides an entity that manages the content of a view stack.
  *
- * Manages the content of a view stack.
+ * @classdesc
  *
- * <h2>Roles</h2>
- * <p><code>view-content</code> - Defined for the ViewStack class</p>
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
  *
- * @name    ViewStackContent
  * @extends ViewContent
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewStackContent = new Class({
 
 	Extends: Moobile.ViewContent,
 
-	/**
-	 * @see Entity#didLoad
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('view-stack-content');

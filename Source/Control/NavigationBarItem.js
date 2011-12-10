@@ -24,6 +24,8 @@ provides:
  * @name  NavigationBarItem
  * @class Provides a navigation bar item control.
  *
+ * @classdesc
+ *
  * [TODO: Description]
  * [TODO: Events]
  * [TODO: Roles]

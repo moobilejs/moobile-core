@@ -20,13 +20,18 @@ provides:
 */
 
 /**
- * Manages a view stack.
+ * @name  View
+ * @class Provides an object used to manage a view stack.
  *
- * @name ViewControllerStack
- * @class ViewControllerStack
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
  * @extends ViewController
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototype */ {
@@ -34,26 +39,22 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
-	 * The last pushed view controller.
-	 * @type {ViewController}
+	 * @var    {ViewController} The view controller on the top of the stack.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	topViewController: null,
 
 	/**
-	 * Return the last pushed view controller.
-	 * @return {ViewController}
-	 * @since 0.1
-	 */
-	getTopViewController: function() {
-		return this.topViewController;
-	},
-
-	/**
-	 * Push a new view controller into the stack using a view transition.
+	 * Pushes a new view controller into the stack using a view transition.
+	 *
 	 * @param {ViewController} viewController The view controller to push.
 	 * @param {viewTransition} viewTransition The view transition.
-	 * @return {ViewController}
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	pushViewController: function(viewController, viewTransition) {
 
@@ -96,10 +97,13 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Removes the top view controller using the same transition that was used
+	 * Pops the top view controller using the same transition that was used
 	 * to push it into the view controller stack.
-	 * @return {ViewController}
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	popViewController: function() {
 
@@ -126,10 +130,14 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Pop view controllers until a certain view controller is reached.
+	 * Pops view controllers until a certain view controller is reached.
+	 *
 	 * @param {ViewController} viewController The view controller to stop.
-	 * @return {ViewController}
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	popViewControllerUntil: function(viewController) {
 
@@ -156,15 +164,21 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * @see ViewController#loadView
+	 * Return the last pushed view controller.
+	 *
+	 * @return {ViewController} The last pushed view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
+	getTopViewController: function() {
+		return this.topViewController;
+	},
+
 	loadView: function() {
 		this.view = new Moobile.ViewStack();
 	},
 
-	/**
-	 * @see ViewController#willAddChildViewController
-	 */
 	willAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(this);
@@ -230,11 +244,6 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 	},
 
-	/**
-	 * The push transition start event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onPushTransitionStart: function() {
 
 		var viewControllerPushed = this.childViewControllers.lastItemAt(0);
@@ -246,11 +255,6 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		viewControllerPushed.viewWillEnter();
 	},
 
-	/**
-	 * The push transition complete event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onPushTransitionComplete: function() {
 
 		var viewControllerPushed = this.childViewControllers.lastItemAt(0);
@@ -264,11 +268,6 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		viewControllerPushed.viewDidEnter();
 	},
 
-	/**
-	 * The pop transition start event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onPopTransitionStart: function() {
 
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
@@ -278,11 +277,6 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		viewControllerPopped.viewWillLeave();
 	},
 
-	/**
-	 * The push transition complete event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onPopTransitionComplete: function() {
 
 		var viewControllerPopped = this.childViewControllers.lastItemAt(0);

@@ -24,16 +24,7 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
-/**
- * Provides a request that allow loading files locally.
- *
- * @name Request
- * @class Request
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
-Moobile.Request = new Class( /** @lends Request.prototype */ {
+Moobile.Request = new Class({
 
 	Extends: Request,
 
@@ -41,10 +32,6 @@ Moobile.Request = new Class( /** @lends Request.prototype */ {
 		Class.Binds
 	],
 
-	/**
-	 * The class options.
-	 * @type {Object}
-	 */
 	options: {
 		isSuccess: function() {
 			var status = this.status;

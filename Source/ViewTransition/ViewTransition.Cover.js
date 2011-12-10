@@ -19,16 +19,6 @@ provides:
 ...
 */
 
-/**
- * Provides a view transition that covers the current view.
- *
- * @name ViewTransition.Cover
- * @class ViewTransition.Cover
- * @extends ViewTransition
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.ViewTransition.Cover = new Class({
 
 	Extends: Moobile.ViewTransition,
@@ -39,9 +29,6 @@ Moobile.ViewTransition.Cover = new Class({
 
 	overlay: null,
 
-	/**
-	 * @see ViewTransition#enter
-	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
@@ -90,17 +77,11 @@ Moobile.ViewTransition.Cover = new Class({
 		this.animate(parentView.getContent(), 'transition-cover-enter');
 	},
 
-	/**
-	 * @see ViewTransition#didEnter
-	 */
 	didEnter: function(viewToShow, viewToHide, parentView, first) {
 		this.parent(viewToShow, viewToHide, parentView, first);
 		viewToHide.show();
 	},
 
-	/**
-	 * @see ViewTransition#leave
-	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);
@@ -123,9 +104,6 @@ Moobile.ViewTransition.Cover = new Class({
 		this.animate(parentView.getContent(), 'transition-cover-leave');
 	},
 
-	/**
-	 * @see ViewTransition#didLeave
-	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);

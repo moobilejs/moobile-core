@@ -19,16 +19,6 @@ provides:
 ...
 */
 
-/**
- * Provides a title control used inside navigation bar item.
- *
- * @name NavigationBarItemTitle
- * @class NavigationBarItemTitle
- * @extends Control
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.NavigationBarItemTitle = new Class( /* @lends NavigationBarItemTitle.prototype */ {
 
 	Extends: Moobile.Text,

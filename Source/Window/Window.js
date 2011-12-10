@@ -22,13 +22,18 @@ provides:
 if (!window.$moobile) window.$moobile = {};
 
 /**
- * Provides the root of a view hierarchy.
+ * @name  View
+ * @class Provides the root of a view hierarchy.
  *
- * @name Window
- * @class Window
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
  * @extends View
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.Window = new Class( /** @lends Window.prototype */ {
@@ -36,9 +41,12 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	Extends: Moobile.View,
 
 	/**
-	 * Return the current orientation name: portrait or landscape.
-	 * @return {String}
-	 * @since 0.1
+	 * Returns the current orientation name: portrait or landscape.
+	 *
+	 * @return {String} The current orientation.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getOrientation: function() {
 		var o = Math.abs(window.orientation);
@@ -48,18 +56,10 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		}
 	},
 
-	/**
-	 * Scroll the window at the top, hiding safari's address bar.
-	 * @since 0.1
-	 * @private
-	 */
 	position: function() {
 		window.scrollTo(0, 1);
 	},
 
-	/**
-	 * @see Entity#didLoad
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.set('class', 'window');
@@ -67,40 +67,22 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
 
-	/**
-	 * @see Entity#willUnload
-	 */
 	willUnload: function() {
 		this.parent();
 		window.removeEvent('load', this.bound('onWindowLoad'));
 		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
 
-	/**
-	 * @see Entity#didAddChild
-	 */
 	didAddChild: function(entity) {
 		this.parent(entity);
 		entity.setWindow(this);
 		entity.setOwner(this);
 	},
 
-	/**
-	 * Window load event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onWindowLoad: function(e) {
 		this.position.delay(250);
 	},
 
-	/**
-	 * Orientation change event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onWindowOrientationChange: function(e) {
 		this.position();
 		this.fireEvent('orientationchange', this.getOrientation());

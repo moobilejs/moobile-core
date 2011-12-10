@@ -34,6 +34,8 @@ Class.refactor(Slider, {
  * @name  Slider
  * @class Provides a slider control.
  *
+ * @classdesc
+ *
  * [TODO: Description]
  * [TODO: Events]
  * [TODO: Roles]

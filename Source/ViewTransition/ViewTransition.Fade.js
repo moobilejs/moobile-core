@@ -20,23 +20,10 @@ provides:
 ...
 */
 
-/**
- * Provides a transition that fade under the current view.
- *
- * @name ViewTransition.Fade
- * @class ViewTransition.Fade
- * @extends ViewTransition
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.ViewTransition.Fade = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	/**
-	 * @see ViewTransition#enter
-	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
@@ -52,9 +39,6 @@ Moobile.ViewTransition.Fade = new Class({
 		this.animate(parentView.getContent(), 'transition-fade-enter');
 	},
 
-	/**
-	 * @see ViewTransition#leave
-	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);

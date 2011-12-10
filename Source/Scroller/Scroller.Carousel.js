@@ -19,17 +19,7 @@ provides:
 ...
 */
 
-/**
- * Provides a scroller that snaps to elements to create a carousel. As for the
- * Scroller class, this class will receive a major refactor soon.
- *
- * @name Scroller.Carousel
- * @class Scroller.Carousel
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
-Moobile.Scroller.Carousel = new Class( /** @lends Scroller.Carousel.prototype */ {
+Moobile.Scroller.Carousel = new Class({
 
 	Extends: Moobile.Scroller,
 

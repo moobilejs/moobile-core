@@ -19,41 +19,16 @@ provides:
 ...
 */
 
-/**
- * Provides a request that returns a view element asynchrousnously.
- *
- * @name Request.ViewElement
- * @class Request.ViewElement
- * @extends Request
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
-Moobile.Request.ViewElement = new Class( /** @lends Request.ViewElement.prototype */ {
+Moobile.Request.ViewElement = new Class({
 
 	Extends: Moobile.Request,
 
-	/**
-	 * A cache of loaded elements.
-	 * @type {Object}
-	 */
 	elements: {},
 
-	/**
-	 * The class options.
-	 * @type {Object}
-	 */
 	options: {
 		method: 'get'
 	},
 
-	/**
-	 * Loads a view element from a remote files. This is done asyncronously so
-	 * this methods returns the element directly.
-	 * @param {String} url The url of the remote file.
-	 * @return {Element}
-	 * @since 0.1
-	 */
 	load: function(url) {
 
 		var element = this.elements[url];

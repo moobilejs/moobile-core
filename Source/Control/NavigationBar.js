@@ -23,6 +23,8 @@ provides:
  * @name  NavigationBar
  * @class Provides a navigation bar control.
  *
+ * @classdesc
+ *
  * [TODO: Description]
  * [TODO: Events]
  * [TODO: Roles]

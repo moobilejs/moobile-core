@@ -20,13 +20,18 @@ provides:
 */
 
 /**
- * Manages a view panel.
+ * @name  View
+ * @class Provides an object used to manage a view panel.
  *
- * @name ViewControllerPanel
- * @class ViewControllerPanel
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
  * @extends ViewController
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototype */ {
@@ -34,22 +39,28 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
-	 * The main view controller.
-	 * @type {ViewController}
+	 * @var    {ViewController} This view controller's main view controller.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	mainViewController: null,
 
 	/**
-	 * The side view controller.
-	 * @type {ViewController}
+	 * @var    {ViewController} This view controller's side view controller.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	sideViewController: null,
 
 	/**
-	 * Set the main view controller.
+	 * Sets the main view controller.
+	 *
 	 * @param {ViewController} mainViewController The main view controller.
-	 * @return {ViewControllerPanel}
-	 * @since 0.1
+	 *
+	 * @return {ViewControllerPanel} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setMainViewController: function(mainViewController) {
 
@@ -67,19 +78,26 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	},
 
 	/**
-	 * Return the main view controller.
-	 * @return {ViewController}
-	 * @since 0.1
+	 * Returns the main view controller.
+	 *
+	 * @return {ViewController} The main view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getMainViewController: function() {
 		return this.mainViewController;
 	},
 
 	/**
-	 * Set the side view controller.
-	 * @param {ViewController} mainViewController The side view controller.
-	 * @return {ViewControllerPanel}
-	 * @since 0.1
+	 * Sets the side view controller.
+	 *
+	 * @param {ViewController} sideViewController The side view controller.
+	 *
+	 * @return {ViewControllerPanel} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setSideViewController: function(sideViewController) {
 
@@ -96,24 +114,21 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	},
 
 	/**
-	 * Return the side view controller.
-	 * @return {ViewController}
-	 * @since 0.1
+	 * Returns the side view controller.
+	 *
+	 * @return {ViewController} The side view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getSideViewController: function() {
 		return this.sideViewController;
 	},
 
-	/**
-	 * @see ViewController#loadView
-	 */
 	loadView: function() {
 		this.view = new Moobile.ViewPanel();
 	},
 
-	/**
-	 * @see ViewControlelr#didAddChildViewController
-	 */
 	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerPanel(this);

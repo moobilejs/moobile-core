@@ -20,25 +20,27 @@ provides:
 */
 
 /**
- * Manages the content of a window.
+ * @name  View
+ * @class Provides content of a window.
  *
- * @name WindowContent
- * @class WindowContent
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
  * @extends ViewContent
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.WindowContent = new Class( /** @lends WindowContent.prototype */ {
 
 	Extends: Moobile.ViewContent,
 
-	/**
-	 * The class options.
-	 * @type {Object}
-	 */
-	options: {
-		className: 'window-content'
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('window-content');
 	}
 
 });

@@ -20,31 +20,27 @@ provides:
 */
 
 /**
- * @class
+ * @name  View
+ * @class Provides an entity that manages the content of a view.
  *
- * Manages the content of a view.
+ * @classdesc
  *
- * <h2>Roles</h2>
- * <p><code>view-content</code> - Defined for the View class</p>
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
  *
- * @name    ViewContent
  * @extends Entity
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 
 	Extends: Moobile.Entity,
 
-	/**
-	 * Adds the proper CSS classes to this view content's element.
-	 *
-	 * @see Entity#didLoad
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('view-content');
@@ -56,10 +52,6 @@ Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-/**
- * Defines the role 'view-content' for View.
- * @since 0.1
- */
 Moobile.Entity.defineRole('view-content', Moobile.View, function(element, name) {
 	var instance = new Moobile.ViewContent(element, null, name);
 	this.addChild(instance);

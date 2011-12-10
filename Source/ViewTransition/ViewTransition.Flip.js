@@ -20,23 +20,10 @@ provides:
 ...
 */
 
-/**
- * Provides a transition that flips the current view.
- *
- * @name ViewTransition.Flip
- * @class ViewTransition.Flip
- * @extends ViewTransition
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.ViewTransition.Flip = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	/**
-	 * @see ViewTransition#enter
-	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
@@ -54,9 +41,6 @@ Moobile.ViewTransition.Flip = new Class({
 		this.animate(parentView.content, 'transition-flip-enter');
 	},
 
-	/**
-	 * @see ViewTransition#leave
-	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);

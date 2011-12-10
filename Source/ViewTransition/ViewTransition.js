@@ -27,16 +27,6 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
-/**
- * Provides the base class that applies view transition. This class needs major
- * refactoring as it only supports animation, no transitions.
- *
- * @name ViewTransition
- * @class ViewTransition
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.ViewTransition = new Class({
 
 	Implements: [
@@ -46,37 +36,15 @@ Moobile.ViewTransition = new Class({
 		Class.Binds
 	],
 
-	/**
-	 * Elements that are likely to be animated.
-	 * @type {Array}
-	 */
 	subjects: [],
 
-	/**
-	 * The class options.
-	 * @type {Object}
-	 */
 	options: {},
 
-	/**
-	 * Initialize the view transition.
-	 * @param {Object} options The class options.
-	 * @return {ViewTransition}
-	 * @since 0.1
-	 */
 	initialize: function(options) {
 		this.setOptions(options);
 		return this;
 	},
 
-	/**
-	 * Add an element identified with a CSS class name that is a part of the
-	 * view transition.
-	 * @param {Element} subject The element.
-	 * @param {String} className The CSS class name.
-	 * @return {ViewTransition}
-	 * @since 0.1
-	 */
 	addSubject: function(subject, className) {
 
 		var element = document.id(subject);
@@ -92,12 +60,6 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	/**
-	 * Remove an element from the list of subjects.
-	 * @param {Element} subject The element.
-	 * @return {ViewTransition}
-	 * @since 0.1
-	 */
 	removeSubject: function(subject) {
 
 		var element = document.id(subject);
@@ -127,28 +89,12 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	/**
-	 * Add the final subject that will trigger the animation.
-	 * @param {Element} subject The element.
-	 * @param {String} className The CSS class name.
-	 * @return {ViewTransition}
-	 * @since 0.1
-	 */
 	animate: function(subject, className) {
 		this.addSubject(subject, className);
 		this.fireEvent('start');
 		return this;
 	},
 
-	/**
-	 * Override this method to define the animation used when the view enters.
-	 * Always call the parent at the top of the method.
-	 * @param {View} viewToShow The view to show.
-	 * @param {View} viewToHide The view to hide.
-	 * @param {View} parentView The view that contains both views.
-	 * @param {Boolean} first Whether this is the first view to show thus no view to hide.
-	 * @since 0.1
-	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		if (viewToShow) {
@@ -163,15 +109,6 @@ Moobile.ViewTransition = new Class({
 		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
 	},
 
-	/**
-	 * Override this method to define the animation used when the view leaves.
-	 * Always call the parent at the top of the method.
-	 * @param {View} viewToShow The view to show.
-	 * @param {View} viewToHide The view to hide.
-	 * @param {View} parentView The view that contains both views.
-	 * @param {Boolean} first Whether this is the first view to enter the parent.
-	 * @since 0.1
-	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		if (viewToShow){
@@ -186,14 +123,6 @@ Moobile.ViewTransition = new Class({
 		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
 	},
 
-	/**
-	 * Called by the view transition once the enter animation completed.
-	 * @param {View} viewToShow The view to show.
-	 * @param {View} viewToHide The view to hide.
-	 * @param {View} parentView The view that contains both views.
-	 * @param {Boolean} first Whether this is the first view to enter the parent.
-	 * @since 0.1
-	 */
 	didEnter: function(viewToShow, viewToHide, parentView, first) {
 
 		if (viewToShow) {
@@ -206,14 +135,6 @@ Moobile.ViewTransition = new Class({
 		}
 	},
 
-	/**
-	 * Called by the view transition once the leave animation completed.
-	 * @param {View} viewToShow The view to show.
-	 * @param {View} viewToHide The view to hide.
-	 * @param {View} parentView The view that contains both views.
-	 * @param {Boolean} first Whether this is the first view to enter the parent.
-	 * @since 0.1
-	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
 
 		if (viewToShow) {
@@ -226,12 +147,6 @@ Moobile.ViewTransition = new Class({
 		}
 	},
 
-	/**
-	 * The animation end event.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onComplete: function(e) {
 
 		e.stop();

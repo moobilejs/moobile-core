@@ -41,17 +41,6 @@ iScroll.prototype._checkDOMChanges = function() {
 
 })();
 
-/**
- * Provides a wrapper for the iScroll scroller. This class needs major refactor
- * as iScroll is becomming less usefull becase the performance are not very
- * good on android and iOS 5 provides native scrolling.
- *
- * @name Scroller
- * @class Scroller
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 
 	Implements: [
@@ -98,9 +87,6 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		return this;
 	},
 
-	/**
-	 * @private
-	 */
 	attachEvents: function() {
 		this.scroller.options.onScrollStart = this.bound('onScrollStart');
 		this.scroller.options.onScrollMove = this.bound('onScrollMove');
@@ -108,9 +94,6 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		this.scroller.options.onRefresh = this.bound('onRefresh');
 	},
 
-	/**
-	 * @private
-	 */
 	detachEvents: function() {
 		this.scroller.options.onScrollStart = null;
 		this.scroller.options.onScrollMove = null;

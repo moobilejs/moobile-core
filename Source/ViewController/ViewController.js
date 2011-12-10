@@ -30,12 +30,16 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * Manages a view.
+ * @name  View
+ * @class Provides an object used to manage a view.
  *
- * @name ViewController
- * @class ViewController
+ * @classdesc
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
@@ -47,83 +51,105 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	],
 
 	/**
-	 * The view controller name.
-	 * @type {String}
+	 * @var    {String} This view controller's name.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	name: null,
 
 	/**
-	 * The view controller title.
-	 * @type {String}
+	 * @var    {Label} This view controller's title.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	title: null,
 
 	/**
-	 * The view controller image.
-	 * @type {String}
+	 * @var    {Image} This view controller's image.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	image: null,
 
 	/**
-	 * Whether this view controller is modal.
-	 * @type {Boolean}
+	 * @var    {Boolean} Whether this view controller is modal.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	modal: false,
 
 	/**
-	 * The view managed by the view controller.
-	 * @type {View}
+	 * @var    {View} This view controller's managed view.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	view: null,
 
 	/**
-	 * Whether the view is ready.
-	 * @type {Boolean}
+	 * @var    {Boolean} Whether this view controller's view is ready.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	viewReady: false,
 
 	/**
-	 * The view transition that was used for the view.
-	 * @type {ViewTransition}
+	 * @var    {ViewTransition} This view controller's view transition.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	viewTransition: null,
 
 	/**
-	 * The view controller stack that owns this view controller.
-	 * @type {ViewControllerStack}
+	 * @var    {ViewControllerStack} This view controller's view controller stack.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	viewControllerStack: null,
 
 	/**
-	 * The view controller panel that owns this view controller.
-	 * @type {ViewControllerPanel}
+	 * @var    {ViewControllerPanel} This view controller's view controller panel.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	viewControllerPanel: null,
 
 	/**
-	 * The parent view controller.
-	 * @type {ViewController}
+	 * @var    {ViewController} This view controller's parent view controller.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	parentViewController: null,
 
 	/**
-	 * The modal view controller current being presented.
-	 * @type {ViewController}
+	 * @var    {ViewController} The modal view controller being presented.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	modalViewController: null,
 
 	/**
-	 * The child view controllers.
-	 * @type {Array}
+	 * @var    {Array} This view controller's child view controllers.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	childViewControllers: [],
 
 	/**
 	 * Initialize this view controller.
-	 * @param {Object} options The view controller options.
-	 * @param {String} name The view controller name.
-	 * @return {ViewController}
-	 * @since 0.1
+	 *
+	 * This method will initialize this view controller by calling the
+	 * `loadView` method.
+	 *
+	 * If you override this method, make sure you call the parent method at
+	 * the beginning of your implementation.
+	 *
+	 * @param {Object} options This view controller's options.
+	 * @param {String} name    this view controller's name.
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	initialize: function(options, name) {
 
@@ -141,17 +167,32 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Load the view. You must override this method and load the proper view
-	 * in the view attribute of this class.
-	 * @since 0.1
+	 * Loads the view.
+	 *
+	 * This method has to be overridden and needs to create a view instance in
+	 * the `view` property of this class. This method does not require a call
+	 * to its parent method.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	loadView: function() {
 		this.view = new Moobile.View();
 	},
 
 	/**
-	 * Destroy this view controller and its hierarchy.
-	 * @since 0.1
+	 * Destroys this view controller.
+	 *
+	 * This method will destroy this view controller's managed view and all its
+	 * child view controllers.
+	 *
+	 * If you override this method, make sure you call the parent method at
+	 * the end of your implementation.
+	 *
+	 * @return {Entity} This entity.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	destroy: function() {
 
@@ -166,29 +207,40 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		this.parentViewController = null;
 	},
 
-	/**
-	 * @private
-	 */
 	destroyChildViewControllers: function() {
 		this.childViewControllers.each(this.bound('destroyChildViewController'));
 		this.childViewControllers.empty();
 	},
 
-	/**
-	 * @private
-	 */
 	destroyChildViewController: function(viewController) {
 		viewController.destroy();
 		viewController = null;
 	},
 
 	/**
-	 * Add a child view controller at a specific location.
-	 * @param {ViewController} viewController The view controller.
-	 * @param {String} where The location passed to the view addChild method.
-	 * @param {String} context The context passed to the view addChild method.
-	 * @return {Boolean}
-	 * @since 0.1
+	 * Adds a child view controller.
+	 *
+	 * This method adds the child view controller'S view at the bottom of its
+	 * view. You may specify the location of the child view controller's view
+	 * using the `where` parameter combined with the optional `context`
+	 * parameter.
+	 *
+	 * If specified, the child view controller's view can be added at the `top`
+	 * or `bottom` of this view controller's view or `before` or `after` this
+	 * view controller's view. If an element is given as the `context`, the
+	 * location will be relative to this element.
+	 *
+	 * @param {ViewController} viewController The child view controller.
+	 * @param {String}         where          The child view controller
+	 *                                        location.
+	 * @param {Element}        context        The child view controller
+	 *                                        location context element.
+	 *
+	 * @return {Boolean} Whether the child view controller was successfully
+	 *                   added.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	addChildViewController: function(viewController, where, context) {
 
@@ -215,21 +267,18 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Indicate whether a view controller is a direct child of this
-	 * view controller.
-	 * @param {ViewController} viewController The view controller.
-	 * @return {Boolean}
-	 * @since 0.1
-	 */
-	hasChildViewController: function(viewController) {
-		return this.childViewControllers.contains(viewController);
-	},
-
-	/**
-	 * Return a child view controller by its name.
-	 * @param {String} name The view controller name.
-	 * @return {ViewController}
-	 * @since 0.1
+	 * Returns a child view controller.
+	 *
+	 * This method will attempt to return a child view controller using the
+	 * given name or `null` if no child view controllers were found.
+	 *
+	 * @param {String} name The child view controller name.
+	 *
+	 * @return {ViewController} The child view controller or `null` if no child
+	 *                          view controllers were found.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getChildViewController: function(name) {
 		return this.childViewControllers.find(function(viewController) {
@@ -238,19 +287,46 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return all child view controllers.
-	 * @return {Array}
-	 * @since 0.1
+	 * Indicates whether this view controller is the parent of a given child
+	 * view controller.
+	 *
+	 * @param {ViewController} viewController The view controller.
+	 *
+	 * @return {Boolean} Whether this view controller is the parent of the
+	 *                   given child view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasChildViewController: function(viewController) {
+		return this.childViewControllers.contains(viewController);
+	},
+
+	/**
+	 * Return all the child view controllers.
+	 *
+	 * @return {Array} The child view controllers.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getChildViewControllers: function() {
 		return this.childViewControllers;
 	},
 
 	/**
-	 * Remove a child view controller without destroying it.
+	 * Removes a child view controller.
+	 *
+	 * This method will not destroy the child view controller upon removal, you
+	 * must do it manually to free memory.
+	 *
 	 * @param {ViewController} viewController The view controller to remove.
-	 * @return {Boolean}
-	 * @since 0.1
+	 *
+	 * @return {Boolean} Whether the child view controller was successfully
+	 *                   removed.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	removeChildViewController: function(viewController) {
 
@@ -275,9 +351,16 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Remove a child view controller from its parent without destroying it.
-	 * @return {Boolean}
-	 * @since 0.1
+	 * Removes this view controller from its parent.
+	 *
+	 * This method does not destroy the child view controller upon removal, you
+	 * must do it manually to free memory.
+	 *
+	 * @return {Boolean} Whether this view controller was successfully removed
+	 *                   from its parent view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	removeFromParentViewController: function() {
 		return this.parentViewController
@@ -286,11 +369,15 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Present a modal view controller using a view transition.
+	 * Presents a modal view controller using a view transition.
+	 *
 	 * @param {ViewController} viewController The view controller.
 	 * @param {ViewTransition} viewTransition The view transition.
-	 * @return {ViewController}
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	presentModalViewController: function(viewController, viewTransition) {
 
@@ -323,9 +410,12 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Dismiss the current modal view controller.
-	 * @return {ViewController}
-	 * @since 0.1
+	 * Dismisses the current modal view controller.
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	dismissModalViewController: function() {
 
@@ -351,19 +441,26 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return the name of this view controller.
-	 * @return {String}
-	 * @since 0.1
+	 * Returns this view controller's name.
+	 *
+	 * @return {String} This view controller's name.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getName: function() {
 		return this.name;
 	},
 
 	/**
-	 * Set the view controller title.
-	 * @param {String} title The title.
-	 * @return {ViewController}
-	 * @since 0.1
+	 * Sets this view controller's title.
+	 *
+	 * @param {Mixed} title This view controller's title.
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setTitle: function(title) {
 		this.title = title;
@@ -371,28 +468,38 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return the view controller title.
-	 * @return {String}
-	 * @since 0.1
+	 * Returns this view controller title.
+	 *
+	 * @return {Label} This view controller's title.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getTitle: function() {
 		return this.title;
 	},
 
 	/**
-	 * Set the view controller image.
-	 * @param {String} image The image.
-	 * @return {ViewController}
-	 * @since 0.1
+	 * Sets this view controller's image.
+	 *
+	 * @param {Mixed} image This view controller's image.
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setImage: function(image) {
 		this.image = image;
 	},
 
 	/**
-	 * Return the view controller title.
-	 * @return {String}
-	 * @since0 .1
+	 * Returns this view controller's title.
+	 *
+	 * @return {Image} This view controller's image.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getImage: function() {
 		return this.image;
@@ -400,37 +507,49 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * Indicates whether this view controller is modal.
-	 * @return {Boolean}
-	 * @since 0.1
+	 *
+	 * @return {Boolean} Whether this view controller is modal.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	isModal: function() {
 		return this.modal;
 	},
 
 	/**
-	 * Indicates whether the view controller view is ready.
-	 * @return {Boolean}
-	 * @since 0.1
+	 * Indicates whether this view controller's managed view is ready.
+	 *
+	 * @return {Boolean} Whether this view controller's managed view is ready.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	isViewReady: function() {
 		return this.viewReady;
 	},
 
 	/**
-	 * Return the view controller view.
-	 * @return {View}
-	 * @since 0.1
+	 * Returns this view controller's managed view.
+	 *
+	 * @return {View} Thsi view controller's managed view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getView: function() {
 		return this.view;
 	},
 
 	/**
-	 * Set the view transition used for the view.
+	 * Sets the view transition used for the view.
+	 *
 	 * @param {ViewTransition} viewTransition The view transition.
-	 * @return {ViewController}
-	 * @private
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setViewTransition: function(viewTransition) {
 		this.viewTransition = viewTransition;
@@ -438,21 +557,26 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return the view transition used for the view.
-	 * @return {ViewTransition}
-	 * @private
-	 * @since 0.1
+	 * Returns the view transition used for the view.
+	 *
+	 * @return {ViewTransition} The view transition.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getViewTransition: function() {
 		return this.viewTransition;
 	},
 
 	/**
-	 * Set the view controller stack.
+	 * Sets the view controller stack.
+	 *
 	 * @param {ViewControllerStack} viewControllerStack The view controller stack.
-	 * @return {ViewController}
-	 * @private
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setViewControllerStack: function(viewControllerStack) {
 		this.viewControllerStack = viewControllerStack;
@@ -460,20 +584,26 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return the view controller stack.
-	 * @return {ViewControllerStack}
-	 * @since 0.1
+	 * Returns the view controller stack.
+	 *
+	 * @return {ViewControllerStack} The view controller stack.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getViewControllerStack: function() {
 		return this.viewControllerStack;
 	},
 
 	/**
-	 * Set the view controller panel.
+	 * Sets the view controller panel.
+	 *
 	 * @param {ViewControllerPanel} viewControllerPanel The view controller panel.
-	 * @return {ViewController}
-	 * @private
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setViewControllerPanel: function(viewControllerPanel) {
 		this.viewControllerPanel = viewControllerPanel;
@@ -481,20 +611,26 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return the view controller panel.
-	 * @return {ViewControllerPanel}
-	 * @since 0.1
+	 * Returns the view controller panel.
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getViewControllerPanel: function(viewControllerPanel) {
 		return this.viewControllerPanel;
 	},
 
 	/**
-	 * Set the parent view controller.
+	 * Sets the parent view controller.
+	 *
 	 * @param {ViewController} parentViewController The view controller.
-	 * @return {ViewController}
-	 * @private
-	 * @since 0.1
+	 *
+	 * @return {ViewController} This view controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setParentViewController: function(parentViewController) {
 		this.parentViewController = parentViewController;
@@ -502,47 +638,52 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Return the parent view controller.
+	 * Returns the parent view controller.
+	 *
 	 * @return {ViewController} The parent view controller.
-	 * @since 0.1
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getParentViewController: function() {
 		return this.parentViewController;
 	},
 
 	/**
-	 * Called by the view controller before a view controller is added as a
-	 * child view controller.
+	 * Tells this view controller a child view controller is about to be added.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @param {ViewController} viewController The view controller.
-	 * @since 0.1
+	 * @param {ViewController} viewController The view controller
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	willAddChildViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Called by the view controller after a view controller has been added as
-	 * a child view controller.
+	 * Tells this view controller a child view controller has been added.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
 	 * @param {ViewController} viewController The view controller.
-	 * @since 0.1
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	didAddChildViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Called by the view controller before a view controller is removed from
-	 * this view controller.
+	 * Tells this view controller a child view controller is about to be
+	 * removed.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -556,8 +697,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Called by the view controller after a view controller has been removed
-	 * from this view controller.
+	 * Tells this view controller a child view controller has been removed.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -571,118 +711,125 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Called by the view controller before the view controller that owns this
-	 * view controller changes.
+	 * Tells this view controller its parent view controller is about to change.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
 	 * @param {ViewController} viewController The parent view controller.
-	 * @since 0.1
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	parentViewControllerWillChange: function(viewController) {
 
 	},
 
 	/**
-	 * Called by the view controller after the view controller that owns this
-	 * view controller changed.
+	 * Tells this view controller its parent view controller has changed.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
 	 * @param {ViewController} viewController The parent view controller.
-	 * @since 0.1
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	parentViewControllerDidChange: function(viewController) {
 
 	},
 
 	/**
-	 * Called by the view controller before presenting a modal view controller.
+	 * Tells this view controller its about to present a modal view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @since 0.1
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	willPresentModalViewController: function() {
 
 	},
 
 	/**
-	 * Called by the view controller after presenting a modal view controller.
+	 * Tells this view controller it has presented a modal view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @since 0.1
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	didPresentModalViewController: function() {
 
 	},
 
 	/**
-	 * Called by the view controller before dismissing a modal view controller.
+	 * Tells this view controller its about to dismiss a modal view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @since 0.1
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	willDismissModalViewController: function() {
 
 	},
 
 	/**
-	 * Called by the view controller after dismissing a modal view controller.
+	 * Tells this view controller it has dismissed a modal view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @since 0.1
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	didDismissModalViewController: function() {
 
 	},
 
 	/**
-	 * Called by the view controller when the view managed by this view
-	 * controller becomes ready and is for instance measurable.
+	 * Tells this view controller its managed view became ready.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @since 0.1
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	viewDidBecomeReady: function() {
 
 	},
 
 	/**
-	 * Called by the view controller stack before the view managed by this
-	 * view controller enters the screen using a view transition.
+	 * Tells this view controller its managed view is about to enter the screen
+	 * and become the visible view of its hierarchy.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
 	 * may change in the future.
 	 *
-	 * @since 0.1
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	viewWillEnter: function() {
 
 	},
 
 	/**
-	 * Called by the view controller stack after the view managed by this
-	 * view controller enters the screen using a view transition.
+	 * Tells this view controller its managed view enterd the screen and became
+	 * the visible view of its hierarchy.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -695,8 +842,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Called by the view controller stack before the view managed by this
-	 * view controller leaves the screen using a view transition.
+	 * Tells this view controller its managed view is about to leave the screen
+	 * and become the hidden.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -709,8 +856,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Called by the view controller stack after the view managed by this
-	 * view controller leaves the screen using a view transition.
+	 * Tells this view controller its managed view is left the screen and
+	 * became hidden.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -722,49 +869,24 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	},
 
-	/**
-	 * View ready event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onViewReady: function() {
 		this.viewReady = true;
 		this.viewDidBecomeReady();
 	},
 
-	/**
-	 * Present modal view controller transition start event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onPresentTransitionStart: function() {
 		this.modalViewController.viewWillEnter();
 	},
 
-	/**
-	 * Present modal view controller transition completed event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onPresentTransitionCompleted: function() {
 		this.modalViewController.viewDidEnter();
 		this.didPresentModalViewController()
 	},
 
-	/**
-	 * Dismiss modal view controller transition start event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onDismissTransitionStart: function() {
 		this.modalViewController.viewWillLeave();
 	},
 
-	/**
-	 * Dismiss modal view controller transition completed event handler.
-	 * @private
-	 * @since 0.1
-	 */
 	onDismissTransitionCompleted: function() {
 		this.modalViewController.viewDidLeave();
 		this.modalViewController.removeFromParentViewController();

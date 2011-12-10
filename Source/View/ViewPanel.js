@@ -20,19 +20,21 @@ provides:
 */
 
 /**
- * @class
+ * @name  View
+ * @class Provides a view that handles a panel with two panes.
  *
- * Provides a view that handles a panel with two panes.
+ * @classdesc
  *
- * <h2>Roles</h2>
- * <p><code>view-panel</code> - efined for all classes that extends the Entity
- * class, you may specify the view class using the <code>data-view-panel</code>
- * attribute.</p>
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Roles]
+ * [TODO: Styles]
+ * [TODO: Options]
+ * [TODO: Element Structure]
  *
- * @name    ViewPanel
  * @extends View
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
@@ -40,9 +42,12 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 	Extends: Moobile.View,
 
 	/**
-	 * Return the view content side panel element.
+	 * Returns the side panel.
 	 *
-	 * @return {Element} The side panel element.
+	 * This method is a conveniant shortcut that retrieves this view's content
+	 * then the side panel element.
+	 *
+	 * @return {Element} The side panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -52,9 +57,12 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 	},
 
 	/**
-	 * Return the view content main panel element.
+	 * Returns the main panel.
 	 *
-	 * @return {Element} The main panel element.
+	 * This method is a conveniant shortcut that retrieves this view's content
+	 * then the main panel element.
+	 *
+	 * @return {Element} The main panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -63,29 +71,15 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 		return this.content.getMainPanel();
 	},
 
-	/**
-	 * Add the proper CSS classes to the view panel's element.
-	 *
-	 * @see Entity#didLoad
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	didLoad: function() {
-		this.parent();
-		this.element.addClass('view-panel');
-	},
-
-	/**
-	 * @see Entity#destroy
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	destroy: function() {
 		this.sidePanel = null;
 		this.mainPanel = null;
 		this.parent();
+	},
+
+	didLoad: function() {
+		this.parent();
+		this.element.addClass('view-panel');
 	}
 
 });

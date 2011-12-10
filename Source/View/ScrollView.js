@@ -22,7 +22,7 @@ provides:
 */
 
 
-Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
+Moobile.ScrollView = new Class({
 
 	Extends: Moobile.View,
 

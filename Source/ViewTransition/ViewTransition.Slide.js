@@ -19,23 +19,10 @@ provides:
 ...
 */
 
-/**
- * Provide an horizontal slide view transition effect.
- *
- * @name ViewTransition.Slide
- * @class ViewTransition.Slide
- * @extends ViewTransition
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
 Moobile.ViewTransition.Slide = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	/**
-	 * @see ViewTransition#enter
-	 */
 	enter: function(viewToShow, viewToHide, parentView, first) {
 
 		this.parent(viewToShow, viewToHide, parentView, first);
@@ -51,9 +38,6 @@ Moobile.ViewTransition.Slide = new Class({
 		this.animate(parentView.getContent(), 'transition-slide-enter');
 	},
 
-	/**
-	 * @see ViewTransition#leave
-	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		this.parent(viewToShow, viewToHide, parentView);

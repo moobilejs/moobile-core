@@ -23,6 +23,8 @@ provides:
  * @name  Overlay
  * @class Provides an overlay control.
  *
+ * @classdesc
+ *
  * [TODO: Description]
  * [TODO: Events]
  * [TODO: Roles]

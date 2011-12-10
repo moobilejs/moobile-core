@@ -21,14 +21,19 @@ provides:
 */
 
 /**
- * Provides a view controller stack that also handles a navigation bar and
- * its back button.
+ * @name  View
+ * @class Provides a view controller stack that also handles a navigation bar and
+ *        its back button.
  *
- * @name ViewControllerStack.Navigation
- * @class ViewControllerStack.Navigation
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
  * @extends ViewControllerStack
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerStack.Navigation.prototype */ {
@@ -36,17 +41,15 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 	Extends: Moobile.ViewControllerStack,
 
 	/**
-	 * The class options.
-	 * @type {Object}
+	 * @var    {Object} The class options.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	options: {
 		backButton: true,
 		backButtonLabel: 'Back'
 	},
 
-	/**
-	 * @see ViewController#willAddChildViewController
-	 */
 	willAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
@@ -77,9 +80,6 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 		}
 	},
 
-	/**
-	 * @see ViewController#didAddChildViewController
-	 */
 	didAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
@@ -94,12 +94,6 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 		}
 	},
 
-	/**
-	 * The back button click event handler.
-	 * @param {Event} e The event.
-	 * @private
-	 * @since 0.1
-	 */
 	onBackButtonClick: function(e) {
 		this.popViewController();
 	}

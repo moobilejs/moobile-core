@@ -20,13 +20,18 @@ provides:
 */
 
 /**
- * Manages a window.
+ * @name  View
+ * @class Manages a window.
  *
- * @name WindowController
- * @class WindowController
+ * @classdesc
+ *
+ * [TODO: Description]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
  * @extends ViewController
  *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
 Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
@@ -34,17 +39,22 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	Extends: Moobile.ViewController,
 
 	/**
-	 * The view controller at the root of the hierarchy.
-	 * @type {ViewController}
+	 * @var    {ViewController} The view controller at the root of the hierarchy.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	rootViewController: null,
 
 	/**
 	 * Set the view controller at the root of the hierarchy. The current root
 	 * view controller will be destroyed before the new one is assigned.
+	 *
 	 * @param {ViewController} rootViewController The view controller.
-	 * @return {WindowController}
-	 * @since 0.1
+	 *
+	 * @return {WindowController} This window controller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	setRootViewController: function(rootViewController) {
 
@@ -64,16 +74,16 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 
 	/**
 	 * Return the view controller at the root of the hierarchy.
-	 * @return {ViewController}
-	 * @since 0.1
+	 *
+	 * @return {ViewController} The view controller at the root of the hierarchy.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
 	 */
 	getRootViewController: function() {
 		return this.rootViewController;
 	},
 
-	/**
-	 * @see Entity#loadView
-	 */
 	loadView: function() {
 
 		var element = document.id('window');
@@ -86,9 +96,6 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 		this.view.setReady();
 	},
 
-	/**
-	 * @see Entity#didAddChildViewController
-	 */
 	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		this.rootViewController = viewController;

@@ -298,23 +298,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Indicates whether this entity has a given child entity.
-	 *
-	 * This method will only compare the given entity against direct descendant
-	 * of this entity.
-	 *
-	 * @param {Entity} entity The entity.
-	 *
-	 * @return {Boolean} Whether this entity owns a given entity.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	hasChild: function(entity) {
-		return this.children.contains(entity);
-	},
-
-	/**
 	 * Returns a child entity.
 	 *
 	 * This method will only compare the given entity's name against direct
@@ -335,6 +318,23 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
+	 * Indicates whether an entity is owned by this entity.
+	 *
+	 * This method will only compare the given entity against direct descendant
+	 * of this entity.
+	 *
+	 * @param {Entity} entity The entity.
+	 *
+	 * @return {Boolean} Whether this entity owns a given entity.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	hasChild: function(entity) {
+		return this.children.contains(entity);
+	},
+
+	/**
 	 * Returns all the child entities.
 	 *
 	 * This method will return an array containing only direct descendant of
@@ -350,7 +350,33 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Remove a child entity.
+	 * Replaces a child entity with another.
+	 *
+	 * This method will only replace a direct descendant of this entity. Also,
+	 * this method will not attempt to remove the current entity if the given
+	 * entity cannot be added.
+	 *
+	 * @param {Entity} replace The entity to remove.
+	 * @param {Entity} entity  The entity to add.
+	 *
+	 * @return {Boolean} Whether the entity to replace was successfully removed
+	 *                   and the entity to add was successfully added.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	replaceChild: function(replace, entity) {
+
+		var success = this.addChild(entity, 'before', replace);
+		if (success) {
+			return this.removeChild(replace);
+		}
+
+		return false;
+	},
+
+	/**
+	 * Removes a child entity.
 	 *
 	 * This method will only remove entities that are direct descendants of
 	 * this entity. The entity will not be destroyed upon removal, you must
@@ -386,7 +412,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Remove this entity from its owner.
+	 * Removes this entity from its owner.
 	 *
 	 * This method does not destroy the entity upon removal, you must do it
 	 * manually to free memory.
@@ -400,32 +426,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return this.owner
 		     ? this.owner.removeChild(this)
 		     : false;
-	},
-
-	/**
-	 * Replaces a child entity with another.
-	 *
-	 * This method will only replace a direct descendant of this entity. Also,
-	 * this method will not attempt to remove the current entity if the given
-	 * entity cannot be added.
-	 *
-	 * @param {Entity} replace The entity to remove.
-	 * @param {Entity} entity  The entity to add.
-	 *
-	 * @return {Boolean} Whether the entity to replace was successfully removed
-	 *                   and the entity to add was successfully added.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	replaceChild: function(replace, entity) {
-
-		var success = this.addChild(entity, 'before', replace);
-		if (success) {
-			return this.removeChild(replace);
-		}
-
-		return false;
 	},
 
 	/**
