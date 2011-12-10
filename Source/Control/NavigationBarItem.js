@@ -43,7 +43,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	Extends: Moobile.BarItem,
 
 	/**
-	 * @var    {NavigationBarItemTitle} This navigation bar item's title.
+	 * @var    {Label} The title.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -56,7 +56,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * `Label`. When provided with a string, this methods creates a `Label`
 	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} title The title as a string or `Label` instance.
+	 * @param {Mixed} title The title as a string or a `Label` instance.
 	 *
 	 * @return {NavigationBarItem} This navigation bar item.
 	 *
@@ -70,7 +70,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 		if (typeof title == 'string') {
 			var text = title;
-			title = new Moobile.NavigationBarItemTitle();
+			title = new Moobile.Label();
 			title.setText(text);
 		}
 
@@ -82,6 +82,8 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 			this.title.destroy();
 			this.title = title;
 		}
+
+		this.title.addClass('bar-title');
 
 		return this;
 	},
@@ -190,6 +192,10 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, name) {
 	var instance = Moobile.Entity.fromElement(element, 'data-item', Moobile.NavigationBarItem);
-	this.addChild(instance);
-	this.item = instance;
+	this.setItem(instance);
+});
+
+Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element, name) {
+	var instance = Moobile.Entity.fromElement(element, 'data-title', Moobile.Label);
+	this.setTitle(instance);
 });
