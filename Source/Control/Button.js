@@ -137,7 +137,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('button', null, function(element, name) {
+Moobile.Entity.defineRole('button', null, function(element) {
 
 	var type = Moobile.Button;
 
@@ -152,7 +152,7 @@ Moobile.Entity.defineRole('button', null, function(element, name) {
 	this.addChild(instance);
 });
 
-Moobile.Entity.defineRole('label', Moobile.Button, function(element, name) {
+Moobile.Entity.defineRole('label', Moobile.Button, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Label);
 	this.setLabel(instance);
 });

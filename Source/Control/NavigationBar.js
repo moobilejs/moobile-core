@@ -52,7 +52,7 @@ Moobile.NavigationBar = new Class( /* @lends NavigationBar.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('navigation-bar', null, function(element, name) {
+Moobile.Entity.defineRole('navigation-bar', null, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-navigation-bar', Moobile.NavigationBar);
 	this.addChild(instance);
 });

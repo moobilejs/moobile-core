@@ -52,7 +52,7 @@ Moobile.ViewStackContent = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.ViewStack, function(element, name) {
+Moobile.Entity.defineRole('view-content', Moobile.ViewStack, function(element) {
 	var instance = new Moobile.ViewStackContent(element, null, name);
 	this.addChild(instance);
 	this.content = instance;

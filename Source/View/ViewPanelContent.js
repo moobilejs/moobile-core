@@ -105,7 +105,7 @@ Moobile.ViewPanelContent = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.ViewPanel, function(element, name) {
+Moobile.Entity.defineRole('view-content', Moobile.ViewPanel, function(element) {
 	var instance = new Moobile.ViewPanelContent(element, null, name);
 	this.addChild(instance);
 	this.content = instance;

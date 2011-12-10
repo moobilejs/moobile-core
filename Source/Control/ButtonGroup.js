@@ -265,7 +265,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('button-group', null, function(element, name) {
+Moobile.Entity.defineRole('button-group', null, function(element) {
 
 	var type = Moobile.ButtonGroup;
 

@@ -190,12 +190,12 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element, name) {
+Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-item', Moobile.NavigationBarItem);
 	this.setItem(instance);
 });
 
-Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element, name) {
+Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-title', Moobile.Label);
 	this.setTitle(instance);
 });

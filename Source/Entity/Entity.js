@@ -175,7 +175,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			this.setStyle(styleName);
 		}
 
-		this.processRoles();
+		this.attachRoles();
 
 		this.didLoad();
 
@@ -803,12 +803,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return false;
 	},
 
-	processRoles: function() {
-		this.getRoleElements().each(function(element) {
-			this.defineElementRole(element, element.get('data-role'));
-		}, this);
-	},
-
 	/**
 	 * Applies a role to an element.
 	 *
@@ -837,11 +831,19 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			throw new Error('Role ' + role + ' is not defined');
 		}
 
-		definition.call(this, element, element.get('data-name'));
+		definition.call(this, element);
 
 		element.store('entity.has-role', true);
 
 		return this;
+	},
+
+	attachRoles: function() {
+		this.getRoleElements().each(this.bound('attachRole'));
+	},
+
+	attachRole: function(element) {
+		this.defineElementRole(element, element.get('data-role'));
 	},
 
 	/**
@@ -1223,14 +1225,14 @@ Moobile.Entity.fromElement = function(element, property, type) {
  * @example
  *
  * // defines the role label for all entities
- * Moobile.Entity.defineRole('label', null, function(element, name) {
+ * Moobile.Entity.defineRole('label', null, function(element) {
  * 	this.addChild(new Moobile.Label(element, null, name));
  * });
  *
  * @example
  *
  * // defines the role image for buttons
- * Moobile.Entity.defineRole('image', Moobile.Button, function(element, name)) {
+ * Moobile.Entity.defineRole('image', Moobile.Button, function(element)) {
  * 	this.addChild(new Moobile.Image(element, null, name));
  * });
  *

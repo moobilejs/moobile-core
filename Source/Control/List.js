@@ -267,7 +267,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('list', null, function(element, name) {
+Moobile.Entity.defineRole('list', null, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-list', Moobile.List);
 	this.addChild(instance);
 });

@@ -313,7 +313,7 @@ Moobile.View.atPath = function(path) {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view', null, function(element, name) {
+Moobile.Entity.defineRole('view', null, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-view', Moobile.View);
 	this.addChild(instance);
 });

@@ -96,14 +96,9 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 // Child Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.Window, function(element, name) {
-
-	var instance = Class.instantiate(element.get('data-content') || Moobile.WindowContent, element, null, name);
-
-	if (instance instanceof Moobile.WindowContent) {
-		this.addChild(instance);
-		this.content = instance; // must be assigned after addChild is called
-	}
-
+Moobile.Entity.defineRole('view-content', Moobile.Window, function(element) {
+	var instance = new Moobile.ViewContent(element, null, name);
+	this.addChild(instance);
+	this.content = instance; // must be assigned after addChild is called
 	return instance;
 });
