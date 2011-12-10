@@ -30,8 +30,8 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @name  View
- * @class Provides an object used to manage a view.
+ * @name  ViewController
+ * @class Provides a controller used to manage a view.
  *
  * @classdesc
  *
@@ -51,21 +51,21 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	],
 
 	/**
-	 * @var    {String} This view controller's name.
+	 * @var    {String} The name.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	name: null,
 
 	/**
-	 * @var    {Label} This view controller's title.
+	 * @var    {Label} The title.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	title: null,
 
 	/**
-	 * @var    {Image} This view controller's image.
+	 * @var    {Image} The image.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -79,42 +79,42 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	modal: false,
 
 	/**
-	 * @var    {View} This view controller's managed view.
+	 * @var    {View} The managed view.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	view: null,
 
 	/**
-	 * @var    {Boolean} Whether this view controller's view is ready.
+	 * @var    {Boolean} Whether the managed view is ready.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewReady: false,
 
 	/**
-	 * @var    {ViewTransition} This view controller's view transition.
+	 * @var    {ViewTransition} The view transition.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewTransition: null,
 
 	/**
-	 * @var    {ViewControllerStack} This view controller's view controller stack.
+	 * @var    {ViewControllerStack} The view controller stack.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewControllerStack: null,
 
 	/**
-	 * @var    {ViewControllerPanel} This view controller's view controller panel.
+	 * @var    {ViewControllerPanel} The view controller panel.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewControllerPanel: null,
 
 	/**
-	 * @var    {ViewController} This view controller's parent view controller.
+	 * @var    {ViewController} The parent view controller.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -128,7 +128,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	modalViewController: null,
 
 	/**
-	 * @var    {Array} This view controller's child view controllers.
+	 * @var    {Array} The child view controllers.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -137,14 +137,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Initialize this view controller.
 	 *
-	 * This method will initialize this view controller by calling the
-	 * `loadView` method.
-	 *
 	 * If you override this method, make sure you call the parent method at
 	 * the beginning of your implementation.
 	 *
-	 * @param {Object} options This view controller's options.
-	 * @param {String} name    this view controller's name.
+	 * @param {Object} options The options.
+	 * @param {String} name    The name.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -170,8 +167,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * Loads the view.
 	 *
 	 * This method has to be overridden and needs to create a view instance in
-	 * the `view` property of this class. This method does not require a call
-	 * to its parent method.
+	 * the `view` property of this class. Do not call the parent method unless
+	 * you are required to.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -220,24 +217,19 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Adds a child view controller.
 	 *
-	 * This method adds the child view controller'S view at the bottom of its
+	 * This method adds the child view controller's view at the bottom of its
 	 * view. You may specify the location of the child view controller's view
 	 * using the `where` parameter combined with the optional `context`
 	 * parameter.
 	 *
-	 * If specified, the child view controller's view can be added at the `top`
-	 * or `bottom` of this view controller's view or `before` or `after` this
-	 * view controller's view. If an element is given as the `context`, the
-	 * location will be relative to this element.
-	 *
 	 * @param {ViewController} viewController The child view controller.
-	 * @param {String}         where          The child view controller
-	 *                                        location.
-	 * @param {Element}        context        The child view controller
-	 *                                        location context element.
+	 * @param {String}         where          The location.
+	 * @param {Element}        context        The location context element.
 	 *
 	 * @return {Boolean} Whether the child view controller was successfully
 	 *                   added.
+	 *
+	 * @see View#addChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -269,8 +261,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Returns a child view controller.
 	 *
-	 * This method will attempt to return a child view controller using the
-	 * given name or `null` if no child view controllers were found.
+	 * This method will return an child view controller from its own child view
+	 * controllers that matches the given name.
 	 *
 	 * @param {String} name The child view controller name.
 	 *
@@ -287,13 +279,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Indicates whether this view controller is the parent of a given child
+	 * Indicates whether this view controller is the direct owner of a child
 	 * view controller.
 	 *
 	 * @param {ViewController} viewController The view controller.
 	 *
-	 * @return {Boolean} Whether this view controller is the parent of the
-	 *                   given child view controller.
+	 * @return {Boolean} Whether this view controller owns a given child view
+	 *                   controller.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -317,8 +309,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Removes a child view controller.
 	 *
-	 * This method will not destroy the child view controller upon removal, you
-	 * must do it manually to free memory.
+	 * This method will not destroy the given child view controller upon
+	 * removal since it could be added to another view controlelr. If you wish
+	 * to destroy the given child view controller, you must do so manually.
 	 *
 	 * @param {ViewController} viewController The view controller to remove.
 	 *
@@ -353,8 +346,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Removes this view controller from its parent.
 	 *
-	 * This method does not destroy the child view controller upon removal, you
-	 * must do it manually to free memory.
+	 * This method will not destroy the given child view controller upon
+	 * removal since it could be added to another view controlelr. If you wish
+	 * to destroy the given child view controller, you must do so manually.
 	 *
 	 * @return {Boolean} Whether this view controller was successfully removed
 	 *                   from its parent view controller.
@@ -369,12 +363,19 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Presents a modal view controller using a view transition.
+	 * Presents a modal view controller.
+	 *
+	 * This method will present a child view controller using a given
+	 * transition. The view controller presented as modal will only have a
+	 * reference to its parent view controller and will use it to dismiss
+	 * the modal view controller.
 	 *
 	 * @param {ViewController} viewController The view controller.
 	 * @param {ViewTransition} viewTransition The view transition.
 	 *
 	 * @return {ViewController} This view controller.
+	 *
+	 * @see ViewController#dismissModalViewController
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -412,6 +413,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Dismisses the current modal view controller.
 	 *
+	 * This method will dismiss the current modal view controller using the
+	 * transition used to present it. The modal view controller will be
+	 * destroyed at the end of the transition animation.
+	 *
 	 * @return {ViewController} This view controller.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -441,9 +446,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Returns this view controller's name.
+	 * Returns the name.
 	 *
-	 * @return {String} This view controller's name.
+	 * @return {String} The name.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -453,9 +458,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Sets this view controller's title.
+	 * Sets the title.
 	 *
-	 * @param {Mixed} title This view controller's title.
+	 * This method will set the title using either a string or an instance of a
+	 * `Label`. When provided with a string, this methods creates a `Label`
+	 * instance and assign the given string as its text.
+	 *
+	 * @param {Mixed} title The title as a string or a `Label` instance.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -468,9 +477,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Returns this view controller title.
+	 * Returns the title.
 	 *
-	 * @return {Label} This view controller's title.
+	 * @return {Label} The title.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -480,9 +489,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Sets this view controller's image.
+	 * Sets the image.
 	 *
-	 * @param {Mixed} image This view controller's image.
+	 * This method will set the image using either a string or an instance of
+	 * an `Image`. When provided with a string, this methods creates an `Image`
+	 * instance and assign the given string as its source.
+	 *
+	 * @param {Mixed} image The image as a string or a `Image` instance.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -494,9 +507,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Returns this view controller's title.
+	 * Returns the image.
 	 *
-	 * @return {Image} This view controller's image.
+	 * @return {Image} The image.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -508,6 +521,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Indicates whether this view controller is modal.
 	 *
+	 * This method will indicate whether this view controller is modal, meaning
+	 * this view controller needs to be dismissed before anything else can
+	 * be executed.
+	 *
 	 * @return {Boolean} Whether this view controller is modal.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -518,9 +535,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Indicates whether this view controller's managed view is ready.
+	 * Indicates whether the managed view is ready.
 	 *
-	 * @return {Boolean} Whether this view controller's managed view is ready.
+	 * This method will indicate whether the managed view is ready, meaning its
+	 * element is part of an element that is part of the DOM and can be, for
+	 * instance, measured.
+	 *
+	 * @return {Boolean} Whether the managed view is ready.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -530,9 +551,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Returns this view controller's managed view.
+	 * Returns the managed view.
 	 *
-	 * @return {View} Thsi view controller's managed view.
+	 * @return {View} The managed view.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -542,7 +563,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Sets the view transition used for the view.
+	 * Sets the view transition.
+	 *
+	 * This method will store the view transition used to push or present a
+	 * view controller then retrieve it to dismiss or pop it. You should seldom
+	 * need this method as it's mostly used internally.
 	 *
 	 * @param {ViewTransition} viewTransition The view transition.
 	 *
@@ -557,7 +582,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Returns the view transition used for the view.
+	 * Returns the view transition.
+	 *
+	 * This method will retrieve the view transition used to push or present a
+	 * view controller. You should seldom need this method as it's mostly used
+	 * internally.
 	 *
 	 * @return {ViewTransition} The view transition.
 	 *
@@ -571,7 +600,12 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Sets the view controller stack.
 	 *
-	 * @param {ViewControllerStack} viewControllerStack The view controller stack.
+	 * This method will set a reference of the view controller stack that owns
+	 * this view controller. You should seldom need this method as it's mostly
+	 * used internally.
+	 *
+	 * @param {ViewControllerStack} viewControllerStack The view controller
+	 *                                                  stack.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -586,7 +620,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Returns the view controller stack.
 	 *
-	 * @return {ViewControllerStack} The view controller stack.
+	 * This method will return a reference of the view controller stack that
+	 * owns this view controller. You should seldom need this method as it's
+	 * mostly used internally.
+	 *
+	 * @return {ViewControllerStack} The view controller stack or `null` if
+	 *                               this view controller is not owned by a
+	 *                               view controller stack.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -598,7 +638,12 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Sets the view controller panel.
 	 *
-	 * @param {ViewControllerPanel} viewControllerPanel The view controller panel.
+	 * This method will set a reference of the view controller panel that owns
+	 * this view controller. You should seldom need this method as it's mostly
+	 * used internally.
+	 *
+	 * @param {ViewControllerPanel} viewControllerPanel The view controller
+	 *                                                  panel.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -613,7 +658,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Returns the view controller panel.
 	 *
-	 * @return {ViewController} This view controller.
+	 * This method will return a reference of the view controller panel that
+	 * owns this view controller. You should seldom need this method as it's
+	 * mostly used internally.
+	 *
+	 * @return {ViewControllerStack} The view controller panel or `null` if
+	 *                               this view controller is not owned by a
+	 *                               view controller panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -625,7 +676,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Sets the parent view controller.
 	 *
-	 * @param {ViewController} parentViewController The view controller.
+	 * This method will set a reference of the view controller that is a direct
+	 * owner of this view controller. You should seldom need this method as
+	 * it's mostly used internally.
+	 *
+	 * @param {ViewController} parentViewController The parent view controller.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -639,6 +694,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	/**
 	 * Returns the parent view controller.
+	 *
+	 * This method will return a reference of the view controller that is a
+	 * direct owner of this view controller. You should seldom need this method
+	 * as it's mostly used internally.
 	 *
 	 * @return {ViewController} The parent view controller.
 	 *

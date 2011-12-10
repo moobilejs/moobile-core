@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @name  View
+ * @name  ViewPanel
  * @class Provides a view that handles a panel with two panes.
  *
  * @classdesc
@@ -44,7 +44,7 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 	/**
 	 * Returns the side panel.
 	 *
-	 * This method is a conveniant shortcut that retrieves this view's content
+	 * This method is a conveniant shortcut that retrieves the view content
 	 * then the side panel element.
 	 *
 	 * @return {Element} The side panel.
@@ -59,7 +59,7 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 	/**
 	 * Returns the main panel.
 	 *
-	 * This method is a conveniant shortcut that retrieves this view's content
+	 * This method is a conveniant shortcut that retrieves the view content
 	 * then the main panel element.
 	 *
 	 * @return {Element} The main panel.

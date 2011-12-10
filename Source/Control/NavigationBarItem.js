@@ -50,13 +50,13 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	title: null,
 
 	/**
-	 * Sets this navigation bar's title.
+	 * Sets the title.
 	 *
 	 * This method will set the title using either a string or an instance of a
-	 * Label. When provided with a string, this methods instantiate a new Label
-	 * and assign the given string as its text.
+	 * `Label`. When provided with a string, this methods creates a `Label`
+	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} title The title as either a string or Label.
+	 * @param {Mixed} title The title as a string or `Label` instance.
 	 *
 	 * @return {NavigationBarItem} This navigation bar item.
 	 *
@@ -87,10 +87,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	},
 
 	/**
-	 * Return this navigation bar item's title.
-	 *
-	 * This method will always return a Label object even though the title may
-	 * have been set using a string.
+	 * Returns the title.
 	 *
 	 * @return {NavigationBarItemTitle} The title.
 	 *

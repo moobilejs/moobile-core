@@ -22,8 +22,8 @@ provides:
 if (!window.$moobile) window.$moobile = {};
 
 /**
- * @name  View
- * @class Provides the root of a view hierarchy.
+ * @name  Window
+ * @class Provides the root view of the entire view hierarchy.
  *
  * @classdesc
  *
@@ -41,9 +41,12 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	Extends: Moobile.View,
 
 	/**
-	 * Returns the current orientation name: portrait or landscape.
+	 * Return the orientation.
 	 *
-	 * @return {String} The current orientation.
+	 * This method will return a string that is either `portrait` or `landscape`
+	 * representing the current orientation of the window.
+	 *
+	 * @return {String} The orientation.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

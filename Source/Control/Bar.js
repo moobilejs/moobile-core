@@ -42,18 +42,17 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {BarItem} This bar's item.
+	 * @var    {BarItem} The bar item.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	item: null,
 
 	/**
-	 * Sets this bar's item.
+	 * Sets the bar item.
 	 *
-	 * This method will set what represents the content of a bar. Objects such
-	 * as buttons, button groups, images should be added to this bar item and
-	 * not to the bar itself.
+	 * This method will set the object that contains buttons, button groupes,
+	 * images and so on in a bar control.
 	 *
 	 * @param {BarItem} item The bar item.
 	 *
@@ -82,9 +81,8 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	/**
 	 * Returns the bar item.
 	 *
-	 * This method will return what represents the content of a bar. Objects
-	 * such as buttons, button groups, images should be added to this bar item
-	 * and not to the bar itself.
+	 * This method will return the object that contains buttons, button groupes,
+	 * images and so on in a bar control.
 	 *
 	 * @return {BarItem} The bar item.
 	 *

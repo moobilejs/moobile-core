@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @name  View
+ * @name  ViewPanelContent
  * @class Provides an entity that manages the content of a view panel.
  *
  * @classdesc

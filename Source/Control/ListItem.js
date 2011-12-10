@@ -42,34 +42,34 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Image} The list item image.
+	 * @var    {Image} The image.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	image: null,
 
 	/**
-	 * @var    {Label} The list item label.
+	 * @var    {Label} The label.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	label: null,
 
 	/**
-	 * @var    {Label} The list item detail label.
+	 * @var    {Label} The detail label.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	detail: null,
 
 	/**
-	 * Sets this list item's image.
+	 * Sets the image.
 	 *
-	 * This method will set the image using either a string or an instance of
-	 * am Image. When provided with a string, this methods instantiate a new
-	 * Image and assign the given string as its source.
+	 * This method will set the label using either a string or an instance of
+	 * an `Image`. When provided with a string, this methods creates an `Image`
+	 * instance and assign the given string as its source.
 	 *
-	 * @param {Mixed} image The image as either a string or Image.
+	 * @param {Mixed} image The image as a string or an `Image` instance.
 	 *
 	 * @return {ListItem} This list item.
 	 *
@@ -100,10 +100,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Return this list item's image.
-	 *
-	 * This method will always return an Image object even though the image may
-	 * have been set using a string.
+	 * Returns the image.
 	 *
 	 * @return {Image} The image.
 	 *
@@ -115,13 +112,13 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Sets this list item's label.
+	 * Sets the label.
 	 *
 	 * This method will set the label using either a string or an instance of a
-	 * Label. When provided with a string, this methods instantiate a new Label
-	 * and assign the given string as its text.
+	 * `Label`. When provided with a string, this methods creates a `Label`
+	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} label The label as either a string or Label.
+	 * @param {Mixed} label The label as a string or `Label` instance.
 	 *
 	 * @return {ListItem} This list item.
 	 *
@@ -152,10 +149,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Return this list item's label.
-	 *
-	 * This method will always return a Label object even though the label may
-	 * have been set using a string.
+	 * Returns the label.
 	 *
 	 * @return {Label} The label.
 	 *
@@ -167,13 +161,13 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Sets this list item's detail label.
+	 * Sets the detail label.
 	 *
-	 * This method will set the detail label using either a string or an
-	 * instance of a Label. When provided with a string, this methods
-	 * instantiate a new Label and assign the given string as its text.
+	 * This method will set the label using either a string or an instance of a
+	 * `Label`. When provided with a string, this methods creates a `Label`
+	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} detail The detail label as either a string or Label.
+	 * @param {Mixed} label The label as a string or `Label` instance.
 	 *
 	 * @return {ListItem} This list item.
 	 *
@@ -206,10 +200,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	},
 
 	/**
-	 * Return this list item's detail label.
-	 *
-	 * This method will always return a Label object even though the label may
-	 * have been set using a string.
+	 * Returns the detail label.
 	 *
 	 * @return {Label} The detail label.
 	 *

@@ -44,7 +44,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	Extends: Moobile.Entity,
 
 	/**
-	 * @var    {ViewContent} This view's content entity.
+	 * @var    {ViewContent} The view content.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -208,12 +208,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Returns this view's owner view.
+	 * Returns the view that owns this view.
 	 *
-	 * This method will return the actual view that owns this view searching
-	 * for the first parent that is an instance of a View class.
+	 * This method should be used instead of `getOwner` because it will return
+	 * an view instead of a view content.
 	 *
-	 * @return {View} This view's owner view.
+	 * @return {View} The view that owns this view.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -234,13 +234,13 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Returns this view's content.
+	 * Returns the view content.
 	 *
-	 * This method will return the entity that will be used as the content of
-	 * this view. This entity will contains all child entities except one
-	 * placed to this view's header or footer.
+	 * This method will return the entity that is used as the content of this
+	 * view. This entity will contains all child entities except ones in this
+	 * view's header or footer.
 	 *
-	 * @return {ViewContent} This view's content.
+	 * @return {ViewContent} The view content.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1

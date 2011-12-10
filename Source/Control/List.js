@@ -107,10 +107,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Returns the selected item.
 	 *
-	 * this method will return the selected item or `null` if no items were
-	 * selected.
-	 *
-	 * @return {ListItem} The selected item.
+	 * @return {ListItem} The selected item or `null` if no items were
+	 *                    selected.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -141,11 +139,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Returns the selected item index.
 	 *
-	 * This method will return the index of the selected item, 0 being the
-	 * first item in the list. This method will return -1 if no item were
-	 * selected.
-	 *
-	 * @return {Number} The selected item index.
+	 * @return {Number} The selected item index or `-1` if no items were
+	 *                  selected.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -156,8 +151,6 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 
 	/**
 	 * Clear the selected button.
-	 *
-	 * This method is a conveniant shortcut for `setSelectedItem(null)`.
 	 *
 	 * @return {List} This list.
 	 *

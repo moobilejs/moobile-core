@@ -42,62 +42,62 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	Extends: Moobile.Overlay,
 
 	/**
-	 * @var    {Entity} This alert's title.
+	 * @var    {Label} The title.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	title: null,
 
 	/**
-	 * @var    {Entity} This alert's message.
+	 * @var    {Text} The message.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	message: null,
 
 	/**
-	 * @var    {Element} This alert's dialog container element.
+	 * @var    {Element} The dialog element.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialog: null,
 
 	/**
-	 * @var    {Element} This alert's dialog header element.
+	 * @var    {Element} The dialog header element.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialogHeader: null,
 
 	/**
-	 * @var    {Element} This alert's dialog footer element.
+	 * @var    {Element} The dialog footer element.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialogFooter: null,
 
 	/**
-	 * @var    {Element} This alert's dialog content element.
+	 * @var    {Element} The dialog content element.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialogContent: null,
 
 	/**
-	 * @var    {Array} This alert's buttons.
+	 * @var    {Array} The buttons.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	buttons: [],
 
 	/**
-	 * Sets this alert's title.
+	 * Sets the title.
 	 *
 	 * This method will set the title using either a string or an instance of a
-	 * Label. When provided with a string, this methods instantiate a new Label
-	 * and assign the given string as its text.
+	 * `Label`. When provided with a string, this methods creates a `Label`
+	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} title The title as either a string or Label.
+	 * @param {Mixed} title The title as a string or a `Label` instance.
 	 *
 	 * @return {Alert} This alert.
 	 *
@@ -131,10 +131,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Return this alert's title.
-	 *
-	 * This method will always return a Label object even though the title may
-	 * have been set using a string.
+	 * Returns the title.
 	 *
 	 * @return {Label} The title.
 	 *
@@ -146,13 +143,13 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Sets this alert's message.
+	 * Sets the message.
 	 *
-	 * This method will set the title using either a string or an instance of a
-	 * Text. When provided with a string, this methods instantiate a new Text
-	 * and assign the given string as its text.
+	 * This method will set the message using either a string or an instance of
+	 * a `Text`. When provided with a string, this methods creates a `Text`
+	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} message The message as either a string or a Text.
+	 * @param {Mixed} message The message as string or a `Text` instance.
 	 *
 	 * @return {Alert} This alert.
 	 *
@@ -187,9 +184,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 	/**
 	 * Returns the message.
-	 *
-	 * This method will always return a Text object even though the message may
-	 * have been set using a string.
 	 *
 	 * @return {Text} The message.
 	 *

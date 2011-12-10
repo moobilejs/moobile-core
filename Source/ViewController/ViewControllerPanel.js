@@ -39,14 +39,14 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @var    {ViewController} This view controller's main view controller.
+	 * @var    {ViewController} The main view controller.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	mainViewController: null,
 
 	/**
-	 * @var    {ViewController} This view controller's side view controller.
+	 * @var    {ViewController} The side view controller.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -55,9 +55,14 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	/**
 	 * Sets the main view controller.
 	 *
+	 * This method will set the main view controller and add its view to the
+	 * view's main panel. There can be only one main view controller at time
+	 * meaning setting a new main view controller when there is an existing one
+	 * will destroy the existing one.
+	 *
 	 * @param {ViewController} mainViewController The main view controller.
 	 *
-	 * @return {ViewControllerPanel} This view controller.
+	 * @return {ViewControllerPanel} This view controller panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -92,9 +97,14 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	/**
 	 * Sets the side view controller.
 	 *
+	 * This method will set the side view controller and add its view to the
+	 * view's side panel. There can be only one main view controller at time
+	 * meaning setting a new side view controller when there is an existing one
+	 * will destroy the existing one.
+	 *
 	 * @param {ViewController} sideViewController The side view controller.
 	 *
-	 * @return {ViewControllerPanel} This view controller.
+	 * @return {ViewControllerPanel} This view controller panel.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

@@ -45,7 +45,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	 * Shows the overlay with an animation.
 	 *
 	 * This method will show the overlay by adding the `present` CSS class to
-	 * the element. Update the properties of this CSS class to create your own
+	 * the element. Update the properties of this CSS class to customize the
 	 * animation.
 	 *
 	 * @return {Overlay} This overlay.
@@ -64,7 +64,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	 * Hides the overlay with an animation.
 	 *
 	 * This method will hide the overlay by adding the `dismiss` CSS class to
-	 * the element. Update the properties of this CSS class to create your own
+	 * the element. Update the properties of this CSS class to customize the
 	 * animation.
 	 *
 	 * @return {Overlay} This overlay.

@@ -49,13 +49,13 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	label: null,
 
 	/**
-	 * Sets this button's label.
+	 * Sets the label.
 	 *
 	 * This method will set the label using either a string or an instance of a
-	 * Label. When provided with a string, this methods instantiate a new Label
-	 * and assign the given string as its text.
+	 * `Label`. When provided with a string, this methods creates a `Label`
+	 * instance and assign the given string as its text.
 	 *
-	 * @param {Mixed} label The label as either a string or Label.
+	 * @param {Mixed} label The label as a string or a `Label` instance.
 	 *
 	 * @return {Button} This button.
 	 *
@@ -86,10 +86,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	},
 
 	/**
-	 * Return this button's label.
-	 *
-	 * This method will always return a Label object even though the label may
-	 * have been set using a string.
+	 * Returns the label.
 	 *
 	 * @return {Label} The label.
 	 *

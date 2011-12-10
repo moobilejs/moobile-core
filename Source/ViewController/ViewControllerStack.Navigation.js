@@ -21,9 +21,9 @@ provides:
 */
 
 /**
- * @name  View
- * @class Provides a view controller stack that also handles a navigation bar and
- *        its back button.
+ * @name  ViewControllerStack.Navigation
+ * @class Provides a view controller stack that also handles a navigation bar
+ *        and its back button.
  *
  * @classdesc
  *

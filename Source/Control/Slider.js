@@ -53,28 +53,28 @@ Moobile.Slider = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Number} This slider's value.
+	 * @var    {Number} The value.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	value: 0,
 
 	/**
-	 * @var    {Slider} This slider' slider engine.
+	 * @var    {Slider} The engine.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	slider: null,
 
 	/**
-	 * @var    {Element} This silider's track element.
+	 * @var    {Element} The track.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	track: null,
 
 	/**
-	 * @var    {Element} This slider's thumb element.
+	 * @var    {Element} The thumb that moves inside the track.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -96,10 +96,10 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * Sets this slider's value.
+	 * Sets the value.
 	 *
 	 * This method will set the slider value and move it's thumb element to the
-	 * appropriate position.
+	 * proper position.
 	 *
 	 * @param {Integer} value The value.
 	 *
@@ -114,7 +114,7 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * Returns this slider's value.
+	 * Returns the value.
 	 *
 	 * @return {Integer}
 	 *

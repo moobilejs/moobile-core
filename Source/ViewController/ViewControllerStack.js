@@ -20,8 +20,8 @@ provides:
 */
 
 /**
- * @name  View
- * @class Provides an object used to manage a view stack.
+ * @name  VewControllerStack
+ * @class Provides a controller that manages a view stack.
  *
  * @classdesc
  *
@@ -39,16 +39,21 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @var    {ViewController} The view controller on the top of the stack.
+	 * @var    {ViewController} The top view controller.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	topViewController: null,
 
 	/**
-	 * Pushes a new view controller into the stack using a view transition.
+	 * Pushes a view controller into the stack.
 	 *
-	 * @param {ViewController} viewController The view controller to push.
+	 * This method will add a new view controller at the end of the stack and
+	 * present it using a given view transition. The given transition will be
+	 * stored into the view controller so the same will be used when the
+	 * view controller will be popped.
+	 *
+	 * @param {ViewController} viewController The view controller.
 	 * @param {viewTransition} viewTransition The view transition.
 	 *
 	 * @return {ViewController} This view controller.
@@ -97,8 +102,11 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Pops the top view controller using the same transition that was used
-	 * to push it into the view controller stack.
+	 * Pops the top view controller.
+	 *
+	 * This method will pop the top view controller using the same view
+	 * transition that was used to push it and destroys the popped view
+	 * controller once the transition finishes.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -130,9 +138,13 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Pops view controllers until a certain view controller is reached.
+	 * Pops view controllers until a given view controller is reached.
 	 *
-	 * @param {ViewController} viewController The view controller to stop.
+	 * This method will pop view controllers until the given view controller is
+	 * reached and destroy popped view controllers when the transition
+	 * finishes.
+	 *
+	 * @param {ViewController} viewController The view controller to pop to.
 	 *
 	 * @return {ViewController} This view controller.
 	 *
@@ -164,9 +176,9 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Return the last pushed view controller.
+	 * Returns the top view controller.
 	 *
-	 * @return {ViewController} The last pushed view controller.
+	 * @return {ViewController} The top view controller.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -185,8 +197,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Called by the view controller before a new view controller is pushed
-	 * into the view controller stack.
+	 * Tells this view controller it's about to push a view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -200,8 +211,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Called by the view controller after a view controller has been pushed
-	 * into the view controller stack.
+	 * Tells the view controller it pushed a view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -215,8 +225,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Called by the view controller before a view controller is popped
-	 * from the view controller stack.
+	 * Tells the view controller it's about to pop a view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method
@@ -230,8 +239,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	},
 
 	/**
-	 * Called by the view controller after a view controller has been popped
-	 * from the view controller stack.
+	 * Tells the view controller it popped a view controller.
 	 *
 	 * The current implementation of this method does nothing. However it's a
 	 * good practice to call the parent as the implementation of this method

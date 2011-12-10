@@ -53,8 +53,8 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	/**
 	 * Sets the image source.
 	 *
-	 * This method will set the source of the image if this image's element is
-	 * an image element.
+	 * This method will set the image source into the `src` attribute of the
+	 * element if this image's element is an `img`.
 	 *
 	 * @param {String} source The image source.
 	 *
@@ -76,8 +76,8 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	/**
 	 * Returns the image source.
 	 *
-	 * This method will return this source of the image if this image's element
-	 * is an image element.
+	 * This method will return the image source from the `src` attribute of the
+	 * element if this image's element is an `img`.
 	 *
 	 * @return {String} The image source.
 	 *

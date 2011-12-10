@@ -110,10 +110,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Returns the selected button.
 	 *
-	 * this method will return the selected button or `null` if no buttons were
-	 * selected.
-	 *
-	 * @return {Button} The selected button.
+	 * @return {Button} The selected button or `null` if no buttons were
+	 *                  selected.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -144,11 +142,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Returns the selected button index.
 	 *
-	 * This method will return the index of the selected button, 0 being the
-	 * first button in the list. This method will return -1 if no buttons were
-	 * selected.
-	 *
-	 * @return {Number} The selected button index.
+	 * @return {Number} The selected button index or `-1` if no buttons were
+	 *                  selected.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -159,8 +154,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 
 	/**
 	 * Clear the selected button.
-	 *
-	 * This method is a conveniant shortcut for `setSelectedButton(null)`.
 	 *
 	 * @return {ButtonGroup} This button group.
 	 *

@@ -20,8 +20,8 @@ provides:
 */
 
 /**
- * @name  View
- * @class Manages a window.
+ * @name  WindowController
+ * @class Provides a view controller that manages a window.
  *
  * @classdesc
  *
@@ -39,17 +39,21 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @var    {ViewController} The view controller at the root of the hierarchy.
+	 * @var    {ViewController} The root view controller.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	rootViewController: null,
 
 	/**
-	 * Set the view controller at the root of the hierarchy. The current root
-	 * view controller will be destroyed before the new one is assigned.
+	 * Sets the root view controller.
 	 *
-	 * @param {ViewController} rootViewController The view controller.
+	 * This method will set the view controller at the root of the view
+	 * controller hierarchy. There can be only one root view controller at
+	 * time meaning setting a new root view controller when there is an
+	 * existing one will destroy the existing one.
+	 *
+	 * @param {ViewController} rootViewController The root view controller.
 	 *
 	 * @return {WindowController} This window controller.
 	 *
@@ -73,9 +77,14 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	},
 
 	/**
-	 * Return the view controller at the root of the hierarchy.
+	 * Returns the root view controller.
 	 *
-	 * @return {ViewController} The view controller at the root of the hierarchy.
+	 * This method will return the view controller at the root of the view
+	 * controller hierarchy. There can be only one root view controller at time
+	 * meaning setting a new root view controller when there is an existing one
+	 * will destroy the existing one.
+	 *
+	 * @return {ViewController} The root view controller.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

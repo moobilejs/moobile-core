@@ -20,8 +20,8 @@ provides:
 */
 
 /**
- * @name  View
- * @class Provides content of a window.
+ * @name  WindowContent
+ * @class Provides an entity that manages the content of a window.
  *
  * @classdesc
  *

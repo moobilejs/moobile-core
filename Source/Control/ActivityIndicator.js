@@ -46,7 +46,7 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 	 *
 	 * This method will start the indicator animation by adding the `activity`
 	 * CSS class to the element. Update the properties of this CSS class to
-	 * create your own animation.
+	 * customize the animation.
 	 *
 	 * @return {ActivityIndicator} This activity indicator.
 	 *
@@ -62,7 +62,7 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 	 *
 	 * This method will stop the indicator animation by removing the `activity`
 	 * CSS class to the element. Update the properties of this CSS class to
-	 * create your own animation.
+	 * customize the animation.
 	 *
 	 * @return {ActivityIndicator} This activity indicator.
 	 *
