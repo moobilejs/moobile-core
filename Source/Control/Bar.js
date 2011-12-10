@@ -68,11 +68,11 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 		if (this.item == null) {
 			this.item = item;
-			this.addChild(label);
+			this.addChild(item);
 		} else {
 			this.replaceChild(this.item, item);
 			this.item.destroy();
-			this.item = label;
+			this.item = item;
 		}
 
 		return this;
