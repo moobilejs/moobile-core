@@ -91,12 +91,3 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		this.fireEvent('orientationchange', this.getOrientation());
 	}
 });
-
-//------------------------------------------------------------------------------
-// Child Roles
-//------------------------------------------------------------------------------
-
-Moobile.Entity.defineRole('view-content', Moobile.Window, function(element) {
-	var instance = new Moobile.ViewContent(element, null, name);
-	this.setContent(instance);
-});
