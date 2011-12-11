@@ -1,11 +1,7 @@
 [submodule "Packager"]
 	path = Packager
 	url = git://github.com/kamicane/packager.git
-
-[submodule "mootools-mobile"]
-	path = Vendor/mootools-mobile
-	url = git://github.com/cpojer/mootools-mobile.git
-
+	o
 [submodule "mootools-custom-event"]
 	path = Vendor/mootools-custom-event
 	url = git://github.com/cpojer/mootools-custom-event.git
