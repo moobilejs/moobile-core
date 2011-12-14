@@ -839,7 +839,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 					return this;
 				}
 
-				throw new Error('The role ' + role + ' has not been defined');
+				throw new Error('The role ' + name + ' has not been defined');
 			}
 		}
 

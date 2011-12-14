@@ -80,3 +80,12 @@ Moobile.Text = new Class( /** @lends Text.prototype */ {
 	}
 
 });
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+Moobile.Entity.defineRole('text', null, function(element) {
+	var instance = Moobile.Entity.fromElement(element, 'data-text', Moobile.Text);
+	this.addChild(instance);
+});

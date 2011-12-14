@@ -164,7 +164,7 @@ Moobile.Control = new Class( /* @lends Control.prototype */ {
 	 * @since  0.1.0
 	 */
 	setHighlighted: function(value) {
-		return this._setState('highlighted', this.highlightable ? value : false);
+		return this._setState('highlighted', this.highlightable ? value : false);
 	},
 
 	/**

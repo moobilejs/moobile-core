@@ -110,3 +110,12 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		this.element.addClass('image');
 	}
 });
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+Moobile.Entity.defineRole('image', null, function(element) {
+	var instance = Moobile.Entity.fromElement(element, 'data-image', Moobile.Image);
+	this.addChild(instance);
+});
