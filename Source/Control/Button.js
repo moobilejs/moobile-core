@@ -138,17 +138,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('button', null, function(element) {
-
-	var type = Moobile.Button;
-
-	if (this.owner instanceof Moobile.BarButtonGroup ||
-		this.owner instanceof Moobile.BarItem || 
-		this.owner instanceof Moobile.Bar) {
-		type = Moobile.BarButton;
-	}
-
-	var instance = Moobile.Entity.fromElement(element, 'data-button',  type);
-
+	var instance = Moobile.Entity.fromElement(element, 'data-button',  Moobile.Button);
 	this.addChild(instance);
 });
 

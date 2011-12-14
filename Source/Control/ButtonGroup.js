@@ -266,16 +266,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Entity.defineRole('button-group', null, function(element) {
-
-	var type = Moobile.ButtonGroup;
-
-	if (this.owner instanceof Moobile.BarItem || 
-		this.owner instanceof Moobile.Bar) {
-		type = Moobile.BarButtonGroup;
-	}
-
 	var instance = Moobile.Entity.fromElement(element, 'data-button-group', Moobile.ButtonGroup);
-
 	this.addChild(instance);
 });
 
