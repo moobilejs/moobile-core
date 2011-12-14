@@ -732,6 +732,7 @@ p small {
 
 .bar {
 	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-box-sizing: border-box;								/* Important */
 	background: url(../images/bar.png) repeat-x 0px 0px;
 	color: #ffffff;
 	font-size: 20px;
@@ -746,6 +747,7 @@ p small {
 }
 
 .bar > .bar-item {
+	-webkit-box-sizing: border-box;								/* Important */
 	display: -webkit-box;										/* Important */
 	height: inherit;											/* Important */
 	position: relative;											/* Important */
