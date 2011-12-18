@@ -28,11 +28,13 @@ Moobile.ScrollView = new Class({
 
 	scroller: null,
 
-	contentWrapper: null,
+	wrapper: null,
 
-	defaultContentOffset: {
-		x: 0,
-		y: 0
+	options: {
+		offset: {
+			x: 0,
+			y: 0
+		}
 	},
 
 	scrollTo: function(x, y, time, relative) {
@@ -45,41 +47,27 @@ Moobile.ScrollView = new Class({
 		return this;
 	},
 
-	scrollToPage: function (pageX, pageY, time) {
-		this.scroller.scrollToPage(pageX, pageY, time);
-		return this;
-	},
-
-	getScroller: function() {
-		return this.scroller;
-	},
-
-	getContentWrapper: function() {
-		return this.wrapper;
-	},
-
-	getContentSize: function() {
+	getScrollSize: function() {
 		return this.content.getScrollSize();
 	},
 
-	getContentOffset: function() {
-		return this.scroller.getOffset();
+	getScroll: function() {
+		return this.scroller.getScroll();
 	},
 
-	didLoad: function() {
+	willLoad: function() {
 
 		this.parent();
 
 		this.element.addClass('scroll-view');
 
-		this.contentWrapper = new Element('div.view-content-wrapper');
-		this.contentWrapper.wraps(this.content);
+		this.scroller = new Moobile.Scroller(this.content);
+		this.scroller.addEvent('start', this.bound('onScrollStart'));
+		this.scroller.addEvent('move', this.bound('onScrollMove'));
+		this.scroller.addEvent('end', this.bound('onScrollEnd'));
 
-		this.scroller = new Moobile.Scroller(this.contentWrapper, this.content);
-		this.scroller.addEvent('scrollstart', this.bound('onViewScrollStart'));
-		this.scroller.addEvent('scrollmove', this.bound('onViewScrollMove'));
-		this.scroller.addEvent('scrollend', this.bound('onViewScrollEnd'));
-		this.scroller.addEvent('refresh', this.bound('onViewScrollRefresh'));
+		this.wrapper = this.scroller.getWrapper();
+		this.wrapper.addClass('view-content-wrapper');
 	},
 
 	didBecomeReady: function() {
@@ -88,43 +76,40 @@ Moobile.ScrollView = new Class({
 
 	willHide: function() {
 		this.parent();
-		this.defaultContentOffset = this.scroller.getOffset();
-		this.scroller.disable();
+		this.options.offset = this.scroller.getScroll();
 	},
 
 	didShow: function() {
+
 		this.parent();
-		this.scroller.enable();
-		this.scroller.scrollTo(this.defaultContentOffset.x, this.defaultContentOffset.y);
+
+		var offset = this.options.offset;
+		if (offset.x && offset.y) {
+			this.scroller.scrollTo(offset.x, offset.y);
+		}
 	},
 
 	destroy: function() {
 
-		this.scroller.removeEvent('scrollstart', this.bound('onViewScrollStart'));
-		this.scroller.removeEvent('scrollmove', this.bound('onViewScrollMove'));
-		this.scroller.removeEvent('scrollend', this.bound('onViewScrollEnd'));
-		this.scroller.removeEvent('refresh', this.bound('onViewScrollRefresh'));
+		this.scroller.removeEvent('start', this.bound('onScrollStart'));
+		this.scroller.removeEvent('move', this.bound('onScrollMove'));
+		this.scroller.removeEvent('end', this.bound('onScrollEnd'));
 
 		this.scroller.destroy();
 		this.scroller = null;
-		this.wrapper = null;
 
 		this.parent();
 	},
 
-	onViewScrollRefresh: function() {
-		this.fireEvent('scrollrefresh');
-	},
-
-	onViewScrollStart: function() {
+	onScrollStart: function() {
 		this.fireEvent('scrollstart');
 	},
 
-	onViewScrollMove: function() {
+	onScrollMove: function() {
 		this.fireEvent('scrollmove');
 	},
 
-	onViewScrollEnd: function() {
+	onScrollEnd: function() {
 		this.fireEvent('scrollend');
 	}
 
