@@ -285,9 +285,16 @@ p small {
 	-webkit-box-orient: vertical;								/* Important */
 	-webkit-box-flex: 1;										/* Important */
 	display: -webkit-box;										/* Important */
-	overflow: visible !important;								/* Important */
 	position: relative;											/* Important */
 	width: 100%;												/* Important */
+}
+
+.view.scroll-view > .view-content-wrapper.scroller-engine-iscroll {
+	overflow: visible !important;								/* Important */
+}
+
+.view.scroll-view > .view-content-wrapper.scroller-engine-native {
+	height: 1px;												/* Important */
 }
 
 .view.scroll-view > .view-content-wrapper > * {
