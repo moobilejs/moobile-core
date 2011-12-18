@@ -16,10 +16,6 @@ author:
 requires:
 	- Core/Event
 	- Core/Element.Event
-	- Custom-Event/Element.defineCustomEvent
-	- Mobile/Browser.Mobile
-	- Mobile/Click
-	- Mobile/Touch
 	- Event.Mobile
 
 provides:
@@ -36,34 +32,42 @@ provides:
 	var valid = true;
 
 	var onMouseDown = function(e) {
+
 		valid = true;
 		down = true;
-		x = e.page.x;
-		y = e.page.y;
+
+		x = e.client.x;
+		y = e.client.y;
 	};
 
 	var onMouseMove = function(e) {
+
 		if (down) {
-			valid = !moved(e);
-			if (valid == false) {
+			if (valid) valid = !moved(e);
+			if (!valid) {
 				this.removeEvent('mouseup', onMouseUp).fireEvent('mouseup', e).addEvent('mouseup', onMouseUp);
 			}
 		}
 	};
 
 	var onMouseUp = function(e) {
+
 		if (down) {
 			down = false;
-			valid = !moved(e);
 		}
 	};
 
 	var moved = function(e) {
-		var xmax = x + 5;
-		var xmin = x - 5;
-		var ymax = y + 5;
-		var ymin = y - 5;
-		return (e.page.x > xmax || e.page.x < xmin || e.page.y > ymax || e.page.y < ymin);
+
+		var xmax = x + 10;
+		var xmin = x - 10;
+		var ymax = y + 10;
+		var ymin = y - 10;
+
+		var xcur = e.client.x;
+		var ycur = e.client.y;
+
+		return (xcur > xmax || xcur < xmin || ycur > ymax || ycur < ymin);
 	};
 
 	Element.defineCustomEvent('click', {

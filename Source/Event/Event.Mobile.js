@@ -15,6 +15,10 @@ requires:
 	- Core/Element.Event
 	- Custom-Event/Element.defineCustomEvent
 	- Mobile/Browser.Mobile
+	- Mobile/Click
+	- Mobile/Touch
+	- Mobile/Pinch
+	- Mobile/Swipe
 
 provides:
 	- Event.Mobile
@@ -22,22 +26,35 @@ provides:
 ...
 */
 
-if (Browser.isMobile) {
+if (Browser.isMobile) (function() {
 
 	delete Element.NativeEvents['mousedown'];
 	delete Element.NativeEvents['mousemove'];
 	delete Element.NativeEvents['mouseup'];
 
+	var condition = function(e) {
+
+		var touch = e.changedTouches[0];
+
+		e.page   = {x:touch.pageX,   y:touch.pageY};
+		e.client = {x:touch.clientX, y:touch.clientY};
+
+		return true;
+	};
+
 	Element.defineCustomEvent('mousedown', {
-		base: 'touchstart'
+		base: 'touchstart',
+		condition: condition
 	});
 
 	Element.defineCustomEvent('mousemove', {
-		base: 'touchmove'
+		base: 'touchmove',
+		condition: condition
 	});
 
 	Element.defineCustomEvent('mouseup', {
-		base: 'touchend'
+		base: 'touchend',
+		condition: condition
 	});
 
-}
+})();
