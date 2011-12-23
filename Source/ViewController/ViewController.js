@@ -174,7 +174,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1.0
 	 */
 	loadView: function() {
-		this.view = new Moobile.View();
+		if (this.view == null) {
+			this.view = new Moobile.View();
+		}
 	},
 
 	/**
