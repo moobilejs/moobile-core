@@ -47,3 +47,12 @@ Moobile.Label = new Class( /** @lends Label.prototype */ {
 	}
 
 });
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+Moobile.Entity.defineRole('label', null, function(element) {
+	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Label);
+	this.addChild(instance);
+});
