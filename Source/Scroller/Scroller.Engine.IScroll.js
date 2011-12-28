@@ -1,9 +1,9 @@
 /*
 ---
 
-name: Scroller.Engine.IScroll
+name: Scroller.Engine.scroller
 
-description: Provides a wrapper for the IScroll scroller.
+description: Provides a wrapper for the scroller scroller.
 
 license: MIT-style license.
 
@@ -14,7 +14,7 @@ requires:
 	- Scroller.Engine
 
 provides:
-	- Scroller.Engine.IScroll
+	- Scroller.Engine.scroller
 
 ...
 */
@@ -34,88 +34,205 @@ iScroll.prototype._checkDOMChanges = function() {
 		this._currentSize = size;
 		this.refresh();
 	}
-
 };
 
 })();
 
-Moobile.Scroller.Engine.IScroll = new Class({
+/**
+ * @name  Scroller.Engine.Native
+ * @class Provides an engine that uses the iScroll scroller.
+ *
+ * @classdesc
+ *
+ * [TODO: Introduction]
+ * [TODO: Events]
+ * [TODO: Options]
+ *
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
+Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller.prototype */ {
 
 	Extends: Moobile.Scroller.Engine,
 
-	initialize: function(content) {
+	scroller: null,
 
-		this.parent(content);
+	scrolling: false,
 
-		this.wrapper.addClass('scroller-engine-iscroll');
+	/**
+	 * Initializes this scroller engine.
+	 *
+	 * This method will creates a `wrapper` element and wrap it around the
+	 * given `content` element.
+	 *
+	 * @param {Element}	[content] The Element, element id or string.
+	 * @param {Object}  [options] The options.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	initialize: function(content, options) {
+
+		this.parent(content, options);
+
+		this.wrapper.addClass('scroll-engine-scroller');
 
 		var options = {
+			hScroll: this.options.scrollX,
+			vScroll: this.options.scrollY,
+			momentum: this.options.momentum,
+			bounce: this.options.momentum,
+			hScrollbar: this.options.momentum,
+			vScrollbar: this.options.momentum,
 			useTransform: true,
 			useTransition: true,
 			hideScrollbar: true,
 			fadeScrollbar: true,
 			checkDOMChanges: true,
-			snap: false
+			snap: false,
+			onScrollStart: this.bound('onStart'),
+			onScrollMove: this.bound('onMove'),
+			onTouchEnd: this.bound('onEnd')
 		};
 
-		this.iscroll = new iScroll(this.wrapper, options);
-		this.iscroll.options.onScrollStart = this.bound('onScrollStart');
-		this.iscroll.options.onScrollMove = this.bound('onScrollMove');
-		this.iscroll.options.onScrollEnd = this.bound('onScrollEnd');
+		this.scroller = new iScroll(this.wrapper, options);
+
+		window.addEvent('orientationchange', this.bound('onOrientationChange'));
 
 		return this;
 	},
 
+	/**
+	 * Destroys this scroller engine.
+	 *
+	 * This method will remove the wrapper without removing the content
+	 * element.
+	 *
+	 * @return {Scroller.Engine} This scroller engine.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.iscroll.destroy();
+		this.scroller.destroy();
 		this.parent();
 		return this;
 	},
 
+	/**
+	 * Scrolls to a set of coordinates.
+	 *
+	 * @param {Number} x      The x coordinate.
+	 * @param {Number} y      The y coordinate.
+	 * @param {Number} [time] The duration of the scroll.
+	 *
+	 * @return {Scroller.Engine} This scroller engine.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	scrollTo: function(x, y, time, relative) {
-		(function() { this.iscroll.scrollTo(x, y, time, relative); }).delay(5, this);
+		(function() { this.scroller.scrollTo(x, y, time, relative); }).delay(5, this);
 		return this;
 	},
 
+	/**
+	 * Scrolls to an element.
+	 *
+	 * @param {Element} element The element to scroll to.
+	 * @param {Number}  [time]  The duration of the scroll.
+	 *
+	 * @return {Scroller.Engine} This scroller engine.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	scrollToElement: function(element, time) {
-		(function() { this.iscroll.scrollToElement(element, time); }).delay(5, this);
+		(function() { this.scroller.scrollToElement(element, time); }).delay(5, this);
 		return this;
 	},
 
+	/**
+	 * Refreshes this scroller engine.
+	 *
+	 * @return {Scroller} This scroller.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	refresh: function() {
-		this.iscroll.refresh();
+		this.scroller.refresh();
 		return this;
 	},
 
-	getScroll: function() {
-
-		// TODO: I just realized this information might be found in iscroll
-		// directly, I'll have to fix this instead of using "fancy"
-		// regular expressions
-
-		var x = 0;
-		var y = 0;
-
-		var position = this.content.getStyle('-webkit-transform');
-		if (position) position = position.match(/translate3d\(-*(\d+)px, -*(\d+)px, -*(\d+)px\)/);
-		if (position) {
-			if (position[1]) x = -position[1];
-			if (position[2]) y = -position[2];
-		}
-
-		return {x: x, y: y};
+	/**
+	 * Returns the size.
+	 *
+	 * This method will return the wrapper's size as an object with two keys,
+	 * `x` which indicates the width and `y` which indicates the height.
+	 *
+	 * @return {Object} The size.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getSize: function() {
+		return this.wrapper.getSize();
 	},
 
-	onScrollStart: function() {
+	/**
+	 * Returns the current scroll position.
+	 *
+	 * This method will return the current scroll position as an object
+	 * with two keys, `x` which indicates the horizontal scroll and `y` which
+	 * indicates the vertical scroll of this entity.
+	 *
+	 * @return {Object} The scroll position.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getScroll: function() {
+		return {x: this.scroller.x, y: this.scroller.y};
+	},
+
+	/**
+	 * Returns size including the scrolling area.
+	 *
+	 * This method will return the content's size as an object with two keys,
+	 * `x` which indicates the width and `y` which indicates the height.
+	 *
+	 * @return {Object} The size including the scrolling area.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getScrollSize: function() {
+		return this.content.getScrollSize();
+	},
+
+	onStart: function() {
+		this.scrolling = true;
 		this.fireEvent('start');
 	},
 
-	onScrollMove: function() {
-		this.fireEvent('scroll');
+	onMove: function() {
+		if (this.scrolling) this.fireEvent('move');
 	},
 
-	onScrollEnd: function() {
-		this.fireEvent('end');
+	onEnd: function() {
+		if (this.scrolling) {
+			this.scrolling = false;
+			this.fireEvent('end');
+		}
+	},
+
+	onOrientationChange: function() {
+		this.refresh();
 	}
 
 });
+
+Moobile.Scroller.Engine.IScroll.supportsCurrentPlatform = function() {
+	return true;
+};
