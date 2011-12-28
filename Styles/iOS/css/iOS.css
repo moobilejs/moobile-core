@@ -13,85 +13,85 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
 }
 
 body {
-    line-height: 1;
+	line-height: 1;
 }
 
 article,aside,canvas,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section,summary {
-    display: block;
+	display: block;
 }
 
 nav ul {
-    list-style: none;
+	list-style: none;
 }
 
 blockquote, q {
-    quotes: none;
+	quotes: none;
 }
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
-    content: none;
+	content: '';
+	content: none;
 }
 
 a {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
 }
 
 ins {
-    background-color: #ff9;
-    color: #000;
-    text-decoration: none;
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
 }
 
 mark {
-    background-color: #ff9;
-    color: #000;
-    font-style: italic;
-    font-weight: bold;
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: bold;
 }
 
 del {
-    text-decoration: line-through;
+	text-decoration: line-through;
 }
 
 abbr[title], dfn[title] {
-    border-bottom: 1px dotted #000;
-    cursor: help;
+	border-bottom: 1px dotted #000;
+	cursor: help;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #cccccc;
-    margin: 1em 0;
-    padding: 0;
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #cccccc;
+	margin: 1em 0;
+	padding: 0;
 }
 
 input, select {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 iframe {
@@ -106,18 +106,18 @@ iframe {
 -----------------------------------------------------------------------------*/
 
 html {
-	height: 100%;												/* Important */
-	width: 100%;												/* Important */
+	height: 100%;                                               /* Important */
+	width: 100%;                                                /* Important */
 }
 
 body {
 	-webkit-user-select: none;
-	-webkit-text-size-adjust: 100%;								/* Important */
+	-webkit-text-size-adjust: 100%;                             /* Important */
 	font-size: 15px;
 	font-weight: normal;
 	font-family: "Helvetica Neue", sans-serif;
-	height: 100%;												/* Important */
-	width: 100%;												/* Important */
+	height: 100%;                                               /* Important */
+	width: 100%;                                                /* Important */
 }
 
 input, select, textarea {
@@ -155,36 +155,36 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .window {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-orient: vertical;								/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-orient: vertical;                               /* Important */
 	background: black;
-	display: -webkit-box;										/* Important */
-	height: 100%;												/* Important */
-	overflow: hidden;											/* Important */
-	position: relative;											/* Important */
-	width: 100%;												/* Important */
+	display: -webkit-box;                                       /* Important */
+	height: 100%;                                               /* Important */
+	overflow: hidden;                                           /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
 }
 
 .window > .window-content {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-flex: 1;										/* Important */
-	display: block;												/* Important */
-	height: 100%;												/* Important */
-	position: relative;											/* Important */
-	width: 100%;												/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-flex: 1;                                        /* Important */
+	display: block;                                             /* Important */
+	height: 100%;                                               /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
 }
 
 .window-mask {
-	background: rgba(255, 255, 255, 0);							/* Important */
-	bottom: 0px;												/* Important */
-	height: 100%;												/* Important */
-	left: 0px;													/* Important */
-	position: absolute;											/* Important */
-	top: 0px;													/* Important */
-	width: 100%;												/* Important */
-	z-index: 1000;												/* Important */
+	background: rgba(255, 255, 255, 0);                         /* Important */
+	bottom: 0px;                                                /* Important */
+	height: 100%;                                               /* Important */
+	left: 0px;                                                  /* Important */
+	position: absolute;                                         /* Important */
+	top: 0px;                                                   /* Important */
+	width: 100%;                                                /* Important */
+	z-index: 1000;                                              /* Important */
 }
 
 /* Screen Landscape */
@@ -235,37 +235,37 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .view {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-orient: vertical;								/* Important */
-	-webkit-box-flex: 1;										/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-orient: vertical;                               /* Important */
+	-webkit-box-flex: 1;                                        /* Important */
 	background: #ffffff url(../images/background-striped.png);
 	color: #4c596e;
-	display: -webkit-box;										/* Important */
+	display: -webkit-box;                                       /* Important */
 	font-size: 15px;
 	font-weight: normal;
-	height: 100%;												/* Important */
-	overflow: hidden;											/* Important */
-	position: relative;											/* Important */
+	height: 100%;                                               /* Important */
+	overflow: hidden;                                           /* Important */
+	position: relative;                                         /* Important */
 	text-shadow: 0px 1px 0px #ffffff;
-	width: 100%;												/* Important */
-	z-index: 50;												/* Important */
+	width: 100%;                                                /* Important */
+	z-index: 50;                                                /* Important */
 }
 
 .view > * {
-	-webkit-box-flex: 0;										/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-box-flex: 0;                                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
 }
 
 .view > .view-content {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-orient: vertical;								/* Important */
-	-webkit-box-flex: 1;										/* Important */
-	display: -webkit-box;										/* Important */
-	height: 100%;												/* Important */
-	position: relative;											/* Important */
-	width: 100%;												/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-orient: vertical;                               /* Important */
+	-webkit-box-flex: 1;                                        /* Important */
+	display: -webkit-box;                                       /* Important */
+	height: 100%;                                               /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
 }
 
 .view.enable {
@@ -280,36 +280,36 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .view.scroll-view > .view-content-wrapper {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-orient: vertical;								/* Important */
-	-webkit-box-flex: 1;										/* Important */
-	display: -webkit-box;										/* Important */
-	position: relative;											/* Important */
-	width: 100%;												/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-orient: vertical;                               /* Important */
+	-webkit-box-flex: 1;                                        /* Important */
+	display: -webkit-box;                                       /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
 }
 
 .view.scroll-view > .view-content-wrapper.scroll-engine-iscroll {
-	overflow: visible !important;								/* Important */
+	overflow: visible !important;                               /* Important */
 }
 
 .view.scroll-view > .view-content-wrapper.scroll-engine-native {
-	height: 1px;												/* Important */
+	height: 1px;                                                /* Important */
 }
 
 .view.scroll-view > .view-content-wrapper > * {
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-box-flex: 0;                                        /* Important */
 }
 
 .view.scroll-view > .view-content-wrapper > .view-content {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-orient: vertical;
-	-webkit-box-flex: 1;										/* Important */
-	display: -webkit-box;										/* Important */
-	min-height: 100%;											/* Important */
-	position: relative;											/* Important */
-	width: 100%;												/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-orient: vertical;								/* Important */
+	-webkit-box-flex: 1;                                        /* Important */
+	display: -webkit-box;                                       /* Important */
+	min-height: 100%;                                           /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
 }
 
 /* View Stack
@@ -320,7 +320,7 @@ p small {
 }
 
 .view.view-stack > .view-content {
-	display: block;												/* Important */
+	display: block;                                             /* Important */
 }
 
 /* View Panel
@@ -331,22 +331,22 @@ p small {
 }
 
 .view.view-panel > .view-content {
-	-webkit-box-orient: horizontal;								/* Important */
+	-webkit-box-orient: horizontal;                             /* Important */
 }
 
 .view.view-panel .side-panel {
-	-webkit-box-flex: 0;										/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-box-flex: 0;                                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
 	border-right: 1px solid black;
-	height: 100%;												/* Important */
+	height: 100%;                                               /* Important */
 	width: 300px;
 }
 
 .view.view-panel .main-panel {
-	-webkit-box-flex: 1;										/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	height: 100%;												/* Important */
-	width: auto;												/* Important */
+	-webkit-box-flex: 1;                                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	height: 100%;                                               /* Important */
+	width: auto;                                                /* Important */
 }
 
 /* Button Group
@@ -373,7 +373,7 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .button {
-	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
 	-webkit-border-radius: 10px;
 	-webkit-box-sizing: border-box;
 	border: 1px solid #bbbbbb;
@@ -386,18 +386,18 @@ p small {
 	padding: 0px;
 	padding-left: 10px;
 	padding-right: 10px;
-	position: relative;											/* Important */
+	position: relative;                                         /* Important */
 	text-align: center;
 	width: 100%;
 }
 
 .button .label {
-	display: block;												/* Important */
-	height: inherit;											/* Important */
-	line-height: inherit;										/* Important */
-	overflow: hidden;											/* Important */
-	text-overflow: ellipsis;									/* Important */
-	white-space: nowrap;										/* Important */
+	display: block;                                             /* Important */
+	height: inherit;                                            /* Important */
+	line-height: inherit;                                       /* Important */
+	overflow: hidden;                                           /* Important */
+	text-overflow: ellipsis;                                    /* Important */
+	white-space: nowrap;                                        /* Important */
 }
 
 .button.is-selected,
@@ -472,8 +472,8 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .bar-button {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
 	-webkit-border-image: url(../images/bar-button.png) 0 5 1970 stretch stretch;
 	-webkit-border-radius: 0px;
 	background: none;
@@ -495,12 +495,12 @@ p small {
 }
 
 .bar-button .label {
-	display: block;												/* Important */
+	display: block;                                             /* Important */
 	height: inherit;
 	line-height: inherit;
-	overflow: hidden;											/* Important */
-	text-overflow: ellipsis;									/* Important */
-	white-space: nowrap;										/* Important */
+	overflow: hidden;                                           /* Important */
+	text-overflow: ellipsis;                                    /* Important */
+	white-space: nowrap;                                        /* Important */
 }
 
 .bar-button.is-selected,
@@ -738,27 +738,27 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .bar {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
 	background: url(../images/bar.png) repeat-x 0px 0px;
 	color: #ffffff;
 	font-size: 20px;
 	font-weight: bold;
-	height: 44px;												/* Important */
-	position: relative;											/* Important */
+	height: 44px;                                               /* Important */
+	position: relative;                                         /* Important */
 	padding-left:  7px;
 	padding-right: 7px;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-	width: 100%;												/* Important */
-	z-index: 50;												/* Important */
+	width: 100%;                                                /* Important */
+	z-index: 50;                                                /* Important */
 }
 
 .bar > .bar-item {
-	-webkit-box-sizing: border-box;								/* Important */
-	display: -webkit-box;										/* Important */
-	height: inherit;											/* Important */
-	position: relative;											/* Important */
-	width: 100%;												/* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	display: -webkit-box;                                       /* Important */
+	height: inherit;                                            /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
 }
 
 /* Translucent */
@@ -795,19 +795,19 @@ p small {
 }
 
 .bar.navigation-bar > .bar-item .bar-title {
-	-webkit-box-flex: 1;										/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
+	-webkit-box-flex: 1;                                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
 	height: inherit;
 	line-height: inherit;
 	text-align: center;
-	left: 0px;													/* Important */
-	overflow: hidden;											/* Important */
-	position: relative;											/* Important */
-	right: 0px;													/* Important */
-	text-overflow: ellipsis;									/* Important */
-	white-space: nowrap;										/* Important */
-	width: 100%;												/* Important */
-	z-index: 25;												/* Important */
+	left: 0px;                                                  /* Important */
+	overflow: hidden;                                           /* Important */
+	position: relative;                                         /* Important */
+	right: 0px;                                                 /* Important */
+	text-overflow: ellipsis;                                    /* Important */
+	white-space: nowrap;                                        /* Important */
+	width: 100%;                                                /* Important */
+	z-index: 25;                                                /* Important */
 }
 
 .bar.navigation-bar .bar-button {
@@ -819,7 +819,7 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .list {
-	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
 	background: #ffffff;
 	border-left: none;
 	border-right: none;
@@ -854,10 +854,10 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .list-item {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-orient: horizontal;								/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	-webkit-box-align: center;									/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-orient: horizontal;                             /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	-webkit-box-align: center;                                  /* Important */
 	background: #ffffff;
 	border-top: 1px solid #bbbbbb;
 	color: #000000;
@@ -866,11 +866,11 @@ p small {
 	font-weight: bold;
 	list-style: none;
 	list-style-position: outside;
-	overflow: hidden;											/* Important */
+	overflow: hidden;                                           /* Important */
 	padding: 15px;
 	padding-top: 13px;
 	padding-bottom: 13px;
-	position: relative;											/* Important */
+	position: relative;                                         /* Important */
 }
 
 .list-item:last-child {
@@ -878,7 +878,7 @@ p small {
 }
 
 .list-item > .image {
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-box-flex: 0;                                        /* Important */
 	-webkit-box-sizing: border-box;
 	-webkit-background-clip: padding-box;
 	-webkit-border-radius: 4px;
@@ -892,11 +892,11 @@ p small {
 }
 
 .list-item > .label {
-	-webkit-box-flex: 1;										/* Important */
+	-webkit-box-flex: 1;                                        /* Important */
 }
 
 .list-item > .label.detail {
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-box-flex: 0;                                        /* Important */
 	color: #395587;
 	font-size: 17px;
 	font-weight: normal;
@@ -974,19 +974,19 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .overlay {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-transform: translate3d(0, 0, 0);                    /* Important */
 	-webkit-box-orient: vertical;
 	-webkit-box-align: center;
 	-webkit-box-pack: center;
 	background: rgba(0, 0, 0, 0.30);
 	bottom: 0px;
 	display: -webkit-box;
-	left: 0px;													/* Important */
-	position: absolute;											/* Important */
-	right: 0px;													/* Important */
-	top: 0px;													/* Important */
-	z-index: 100;												/* Important */
+	left: 0px;                                                  /* Important */
+	position: absolute;                                         /* Important */
+	right: 0px;                                                 /* Important */
+	top: 0px;                                                   /* Important */
+	z-index: 100;                                               /* Important */
 }
 
 @-webkit-keyframes overlay-present {
@@ -1015,8 +1015,8 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .alert {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-transform: translate3d(0, 0, 0);                    /* Important */
 	-webkit-box-orient: vertical;
 	-webkit-box-align: center;
 	-webkit-box-pack: center;
@@ -1024,13 +1024,13 @@ p small {
 	bottom: 0px;
 	color: #ffffff;
 	display: -webkit-box;
-	left: 0px;													/* Important */
-	position: absolute;											/* Important */
-	right: 0px;													/* Important */
+	left: 0px;                                                  /* Important */
+	position: absolute;                                         /* Important */
+	right: 0px;                                                 /* Important */
 	text-align: center;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
-	top: 0px;													/* Important */
-	z-index: 100;												/* Important */
+	top: 0px;                                                   /* Important */
+	z-index: 100;                                               /* Important */
 }
 
 @-webkit-keyframes alert-overlay-present {
@@ -1091,7 +1091,7 @@ p small {
 .alert .dialog-footer .button {
 	-webkit-box-flex: 1;
 	-webkit-border-image: url(../images/alert-button.png) 0 5 86 5 stretch stretch;
- 	-webkit-border-radius: 4px;
+	-webkit-border-radius: 4px;
 	background: none;
 	border-width: 1px 5px;
 	color: #ffffff;
@@ -1131,7 +1131,7 @@ p small {
 }
 
 .alert.present .dialog {
- 	-webkit-animation-name: alert-present;
+	-webkit-animation-name: alert-present;
 	-webkit-animation-duration: 400ms;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
@@ -1139,7 +1139,7 @@ p small {
 }
 
 .alert.dismiss .dialog {
- 	-webkit-animation-name: alert-dismiss;
+	-webkit-animation-name: alert-dismiss;
 	-webkit-animation-duration: 250ms;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
@@ -1179,7 +1179,7 @@ p small {
 }
 
 .activity-indicator {
-	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
 	z-index: 100;
 	width: 21px;
 }
@@ -1224,19 +1224,19 @@ p small {
 -----------------------------------------------------------------------------*/
 
 .slider {
-	-webkit-transform: translate3d(0, 0, 0);					/* Important */
-	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-transform: translate3d(0, 0, 0);                    /* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
 }
 
 .slider-track {
-	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
 	-webkit-border-radius: 5px;
 	background: url(../images/slider-track.png) 0px 0px;
 	height: 9px;
 }
 
 .slider-thumb {
-	-webkit-backface-visibility: hidden;						/* Important */
+	-webkit-backface-visibility: hidden;                        /* Important */
 	-webkit-border-radius: 5px;
 	background: url(../images/slider-handle.png) no-repeat center center;
 	height: 24px;
@@ -1245,46 +1245,10 @@ p small {
 	width: 24px;
 }
 
-/* Carousel
+/* Transition - Fade Enter
 -----------------------------------------------------------------------------*/
 
-.carousel {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	overflow: hidden;											/* Important */
-	position: relative;											/* Important */
-	height: 100%;												/* Important */
-	width: 100%;												/* Important */
-}
-
-.carousel > * {
-	height: 100%;												/* Important */
-	width: 100%;												/* Important */
-}
-
-.carousel .slide {
-	-webkit-backface-visibility: hidden;						/* Important */
-	-webkit-box-sizing: border-box;								/* Important */
-	display: block;
-	list-style: none;
-	list-style-position: outside;
-	position: relative;											/* Important */
-	height: 100%;												/* Important */
-	width: 100%;												/* Important */
-}
-
-.carousel.carousel-horizontal .slide {
-	float: left;
-}
-
-.carousel.carousel-vertical .slide {
-	float: none;
-}
-
-/* Transition - Fade
------------------------------------------------------------------------------*/
-
-@-webkit-keyframes anim-fade-in {
+@-webkit-keyframes anim-fade-enter {
 	from {
 		opacity: 0;
 	}
@@ -1292,24 +1256,6 @@ p small {
 		opacity: 1;
 	}
 }
-
-@-webkit-keyframes anim-fade-out {
-	from {
-		opacity: 1;
-	}
-	to {
-		opacity: 0;
-	}
-}
-
-/* Enter First */
-
-.transition-fade-enter-first {
-	-webkit-animation: anim-fade-in 400ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-}
-
-/* Enter */
 
 .transition-fade-enter {
 	display: block !important;
@@ -1317,52 +1263,48 @@ p small {
 
 .transition-fade-enter .transition-view-to-show {
 	-webkit-transform: translateY(-100%);
-	-webkit-animation: anim-fade-in 350ms 1;
+	-webkit-animation: anim-fade-enter 350ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	z-index: 100;												/* Important */
+	z-index: 100;                                               /* Important */
 }
 
 .transition-fade-enter .transition-view-to-hide {
-	z-index: 75;												/* Important */
+	z-index: 75;                                                /* Important */
 }
 
-/* Leave */
+.transition-fade-enter.raise .transition-view-to-show {
+	-webkit-transform: translateY(0%);
+}
+
+/* Transition - Fade Leave
+-----------------------------------------------------------------------------*/
+
+@-webkit-keyframes anim-fade-leave {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
 
 .transition-fade-leave {
 	display: block !important;
 }
 
 .transition-fade-leave .transition-view-to-show {
-	z-index: 75;												/* Important */
+	z-index: 75;                                                /* Important */
 }
 
 .transition-fade-leave .transition-view-to-hide {
 	-webkit-transform: translateY(-100%);
-	-webkit-animation: anim-fade-out 350ms 1;
+	-webkit-animation: anim-fade-leave 350ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	z-index: 100;												/* Important */
+	z-index: 100;                                               /* Important */
 }
 
-/* Transition - Slide
+/* Transition - Slide Enter
 -----------------------------------------------------------------------------*/
-
-/* Enter First */
-
-@-webkit-keyframes anim-slide-enter-first {
-	from {
-		-webkit-transform: translateX(100%);
-	}
-	to {
-		-webkit-transform: translateX(0%);
-	}
-}
-
-.transition-slide-enter-first {
-	-webkit-animation: anim-slide-enter-first 400ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-}
-
-/* Enter */
 
 @-webkit-keyframes anim-slide-enter {
 	from {
@@ -1376,20 +1318,24 @@ p small {
 .transition-slide-enter {
 	-webkit-animation: anim-slide-enter 400ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	display: block; 											/* Important */
-	overflow: visible;											/* Important */
+	display: block;                                             /* Important */
+	overflow: visible;                                          /* Important */
 }
 
 .transition-slide-enter .transition-view-to-show {
-	-webkit-transform: translateY(-100%) translateX(100%);		/* Important */
-	-webkit-box-flex: 0;										/* Important */
-	overflow: visible;											/* Important */
+	-webkit-transform: translateY(-100%) translateX(100%);      /* Important */
+	-webkit-box-flex: 0;                                        /* Important */
+	overflow: visible;                                          /* Important */
 }
 
 .transition-slide-enter .transition-view-to-hide {
-	-webkit-transform: translateY(0%) translateX(0%);			/* Important */
-	-webkit-box-flex: 0;										/* Important */
-	overflow: visible;											/* Important */
+	-webkit-transform: translateY(0%) translateX(0%);           /* Important */
+	-webkit-box-flex: 0;                                        /* Important */
+	overflow: visible;                                          /* Important */
+}
+
+.transition-slide-enter.raise .transition-view-to-show {
+	-webkit-transform: translateY(0%) translateX(100%);         /* Important */
 }
 
 /* Enter Navigation Bar View */
@@ -1426,7 +1372,8 @@ p small {
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
-/* Leave */
+/* Transition - Slide Leave
+-----------------------------------------------------------------------------*/
 
 @-webkit-keyframes anim-slide-leave {
 	from {
@@ -1440,21 +1387,21 @@ p small {
 .transition-slide-leave {
 	-webkit-animation: anim-slide-leave 400ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	-webkit-box-orient: horizontal !important;					/* Important */
-	display: block; 											/* Important */
-	overflow: visible;											/* Important */
+	-webkit-box-orient: horizontal !important;                  /* Important */
+	display: block;                                             /* Important */
+	overflow: visible;                                          /* Important */
 }
 
 .transition-slide-leave .transition-view-to-show {
-	-webkit-transform: translateY(0%) translateX(0%);			/* Important */
-	-webkit-box-flex: 0;										/* Important */
-	overflow: visible;											/* Important */
+	-webkit-transform: translateY(0%) translateX(0%);           /* Important */
+	-webkit-box-flex: 0;                                        /* Important */
+	overflow: visible;                                          /* Important */
 }
 
 .transition-slide-leave .transition-view-to-hide {
-	-webkit-transform: translateY(-100%) translateX(100%);		/* Important */
-	-webkit-box-flex: 0;										/* Important */
-	overflow: visible;											/* Important */
+	-webkit-transform: translateY(-100%) translateX(100%);      /* Important */
+	-webkit-box-flex: 0;                                        /* Important */
+	overflow: visible;                                          /* Important */
 }
 
 /* Leave Navigation Bar View */
@@ -1491,34 +1438,15 @@ p small {
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
-/* Transition - Cover
+/* Transition - Cover Enter
 -----------------------------------------------------------------------------*/
-
-/* Enter First */
-
-@-webkit-keyframes anim-cover-enter-first {
-	from {
-		-webkit-transform: translateY(100%);
-	}
-	to {
-		-webkit-transform: translateY(0%);
-	}
-}
-
-.transition-cover-enter-first .transition-view-to-show {
-	-webkit-animation: anim-cover-enter-first 400ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	z-index: 75;
-}
-
-/* Enter */
 
 @-webkit-keyframes anim-cover-enter {
 	from {
-		-webkit-transform: translateY(100%);
+		-webkit-transform: translateY(0%);
 	}
 	to {
-		-webkit-transform: translateY(0%);
+		-webkit-transform: translateY(-100%);
 	}
 }
 
@@ -1533,53 +1461,15 @@ p small {
 }
 
 .transition-cover-enter .transition-view-to-hide {
-	position: absolute;
-}
-
-.transition-cover-view-wrapper {
-	-webkit-box-align: center;
-	-webkit-box-pack: center;
-	-webkit-box-flex: 1;
-	display: -webkit-box;
-	height: 100%;
-	width: 100%;
-	z-index: 70;
-}
-
-.transition-cover-background-view {
-	position: absolute;
 	z-index: 50;
 }
 
-.transition-cover-foreground-view {
-	position: relative;
-	z-index: 75;
+.transition-cover-enter.raise {
+	-webkit-transform: translateY(100%);
 }
 
-.transition-cover-overlay {
-	z-index: 65;
-}
-
-/* Enter - Center */
-
-.transition-cover-center .transition-cover-foreground-view {
-	-webkit-box-shadow: 0px 0px 10px #000000;
-	margin-left: auto;
-	margin-right: auto;
-	width: 768px;
-	z-index: 70;
-}
-
-/* Enter - Box */
-
-.transition-cover-box .transition-cover-foreground-view > .view {
-	-webkit-box-shadow: 0px 0px 10px #000000;
-	-webkit-box-flex: 0;
-	height: 620px;
-	width: 540px;
-}
-
-/* Leave */
+/* Transition - Cover Enter
+-----------------------------------------------------------------------------*/
 
 @-webkit-keyframes anim-cover-leave {
 	from {
@@ -1605,38 +1495,13 @@ p small {
 	z-index: 75;
 }
 
-/* Transition Cubic
+/* Transition Cubic Enter
 -----------------------------------------------------------------------------*/
 
 .transition-cubic-perspective {
-	-webkit-perspective: 1000;
-    -webkit-perspective-origin: 50% 50%;
+	-webkit-perspective: 800;
+	-webkit-perspective-origin: 50% 50%;
 }
-
-/* Enter First */
-
-@-webkit-keyframes anim-cubic-enter-first {
-	from {
-		-webkit-transform: translateX(0%) rotateY(0deg);
-	}
-	to {
-		-webkit-transform: translateX(-100%) rotateY(-90deg);
-	}
-}
-
-.transition-cubic-enter-first {
-	-webkit-animation: anim-cubic-enter-first 750ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	-webkit-transform-style: preserve-3d;
-    -webkit-transform-origin: 100% 50%;
-}
-
-.transition-cubic-enter-first .transition-view-to-show {
-	-webkit-transform-origin: center left;
-    -webkit-transform: translateX(100%) rotateY(90deg);
-}
-
-/* Enter */
 
 @-webkit-keyframes anim-cubic-enter {
 	from {
@@ -1650,24 +1515,29 @@ p small {
 .transition-cubic-enter {
 	-webkit-animation: anim-cubic-enter 750ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	-webkit-transform-style: preserve-3d;						/* Important */
-    -webkit-transform-origin: 100% 50%;							/* Important */
-	display: block !important;									/* Important */
+	-webkit-transform-style: preserve-3d;                       /* Important */
+	-webkit-transform-origin: 100% 50%;                         /* Important */
+	display: block !important;                                  /* Important */
 }
 
 .transition-cubic-enter .transition-view-to-show {
 	-webkit-transform-origin: center left;
-    -webkit-transform: translateY(-100%) translateX(100%) rotateY(90deg);
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-transform: translateY(-100%) translateX(100%) rotateY(90deg);
+	-webkit-box-flex: 0;                                        /* Important */
 }
 
 .transition-cubic-enter .transition-view-to-hide {
 	-webkit-transform-origin: center left;
-    -webkit-transform: rotateY(0deg);
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-transform: rotateY(0deg);
+	-webkit-box-flex: 0;                                        /* Important */
 }
 
-/* Leave */
+.transition-cubic-enter.raise .transition-view-to-show {
+	-webkit-transform: translateY(0%) translateX(100%) rotateY(90deg);
+}
+
+/* Transition Cubic Leave
+-----------------------------------------------------------------------------*/
 
 @-webkit-keyframes anim-cubic-leave {
 	from {
@@ -1682,143 +1552,79 @@ p small {
 	-webkit-animation: anim-cubic-leave 750ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
-    -webkit-transform-origin: 100% 50%;
-	display: block !important;									/* Important */
+	-webkit-transform-origin: 100% 50%;
+	display: block !important;                                  /* Important */
 }
 
 .transition-cubic-leave .transition-view-to-show {
 	-webkit-transform-origin: center left;
-    -webkit-transform: rotateY(0deg);
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-transform: rotateY(0deg);
+	-webkit-box-flex: 0;                                        /* Important */
 }
 
 .transition-cubic-leave .transition-view-to-hide {
 	-webkit-transform-origin: center left;
-    -webkit-transform: translateY(-100%) translateX(100%) rotateY(90deg);
-	-webkit-box-flex: 0;										/* Important */
+	-webkit-transform: translateY(-100%) translateX(100%) rotateY(90deg);
+	-webkit-box-flex: 0;                                        /* Important */
 }
 
-/* Transition Flip
+/* Transition Flip Enter
 -----------------------------------------------------------------------------*/
 
 .transition-flip-perspective {
-	-webkit-perspective: 1000;
-    -webkit-perspective-origin: 50% 50%;
+	-webkit-perspective: 800;
+	-webkit-perspective-origin: 50% 50%;
 }
-
-/* Enter First */
-
-@-webkit-keyframes anim-flip-enter-first {
-	from {
-		-webkit-transform: rotateY(0deg);
-	}
-	to {
-		-webkit-transform: rotateY(-90deg);
-	}
-}
-
-.transition-flip-enter-first {
-	-webkit-animation: anim-flip-enter-first 400ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	-webkit-transform-style: preserve-3d;
-    -webkit-transform-origin: 50% 50%;
-}
-
-.transition-flip-enter-first .transition-view-to-show {
-	-webkit-transform-origin: center center;
-    -webkit-transform: rotateY(90deg);
-}
-
-/* Enter */
 
 @-webkit-keyframes anim-flip-enter {
 	from {
-		-webkit-transform: rotateY(0deg);
+		-webkit-transform: translateX(0%) rotateY(0deg);
 	}
 	to {
-		-webkit-transform: rotateY(-180deg);
-	}
-}
-
-@-webkit-keyframes anim-view-to-show-flip-enter {
-	from {
-		-webkit-transform: translateY(-100%) rotateY(180deg);
-	}
-	to {
-		-webkit-transform: translateY(-100%) rotateY(180deg);
-	}
-}
-
-@-webkit-keyframes anim-view-to-hide-flip-enter {
-	from {
-		-webkit-transform: translateY(0%) rotateY(0deg);
-	}
-	to {
-		-webkit-transform: translateY(0%) rotateY(0deg);
+		-webkit-transform: translateX(-100%) rotateY(-180deg);
 	}
 }
 
 .transition-flip-enter {
 	-webkit-animation: anim-flip-enter 750ms 1;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
-    -webkit-transform-origin: 50% 50%;
+	-webkit-transform-origin: 100% 50%;
 	display: block !important;
 }
 
 .transition-flip-enter .transition-view-to-show {
-	-webkit-animation: anim-view-to-show-flip-enter 750ms 1;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-transform: translateY(-100%) rotateY(-180deg);
 }
 
-.transition-flip-enter .transition-view-to-hide {
-	-webkit-animation: anim-view-to-hide-flip-enter 750ms 1;
-	-webkit-animation-timing-function: ease-in-out;
+.transition-flip-enter.raise .transition-view-to-show {
+	-webkit-transform: translateY(0%) rotateY(-180deg);
 }
 
-/* Leave */
+/* Transition Flip Leave
+-----------------------------------------------------------------------------*/
 
 @-webkit-keyframes anim-flip-leave {
 	from {
-		-webkit-transform: rotateY(0deg);
+		-webkit-transform: translateX(0%) rotateY(0deg);
 	}
 	to {
-		-webkit-transform: rotateY(180deg);
-	}
-}
-
-@-webkit-keyframes anim-view-to-show-flip-leave {
-	from {
-		-webkit-transform: translateY(0%) rotateY(180deg);
-	}
-	to {
-		-webkit-transform: translateY(0%) rotateY(180deg);
-	}
-}
-
-@-webkit-keyframes anim-view-to-hide-flip-leave {
-	from {
-		-webkit-transform: translateY(-100%) rotateY(0deg);
-	}
-	to {
-		-webkit-transform: translateY(-100%) rotateY(0deg);
+		-webkit-transform: translateX(100%) rotateY(180deg);
 	}
 }
 
 .transition-flip-leave {
 	-webkit-animation: anim-flip-leave 750ms 1;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;
-    -webkit-transform-origin: 50% 50%;
+	-webkit-transform-origin: 0% 50%;
 	display: block !important;
 }
 
 .transition-flip-leave .transition-view-to-show {
-	-webkit-animation: anim-view-to-show-flip-leave 750ms 1;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-transform: translateY(0%) rotateY(180deg);
 }
 
 .transition-flip-leave .transition-view-to-hide {
-	-webkit-animation: anim-view-to-hide-flip-leave 750ms 1;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-transform: translateY(-100%) rotateY(0deg);
 }

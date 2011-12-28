@@ -32,11 +32,8 @@ Moobile.ViewTransition = new Class({
 	Implements: [
 		Events,
 		Options,
-		Chain,
 		Class.Binds
 	],
-
-	subjects: [],
 
 	options: {},
 
@@ -45,117 +42,70 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	addSubject: function(subject, className) {
-
-		var element = document.id(subject);
-		if (element == null)
-			return this;
-
-		element.store('view-transition:transition-class', className);
-		element.addClass(className);
-		element.addEvent('transitionend', this.bound('onComplete'));
-		element.addEvent('animationend', this.bound('onComplete'));
-		this.subjects.push(element);
-
-		return this;
-	},
-
-	removeSubject: function(subject) {
-
-		var element = document.id(subject);
-		if (element == null)
-			return this;
-
-		var className = element.retrieve('view-transition:transition-class');
-		element.removeClass(className);
-		element.removeEvent('transitionend', this.bound('onComplete'));
-		element.removeEvent('animationend', this.bound('onComplete'));
-		this.subjects.erase(element);
-
-		return this;
-	},
-
-	clearSubjects: function() {
-		this.subjects.each(this.bound('clearSubject'));
-		this.subjects = [];
-		return this;
-	},
-
-	clearSubject: function(subject) {
-		var className = subject.retrieve('view-transition:transition-class');
-		subject.removeClass(className);
-		subject.removeEvent('transitionend', this.bound('onComplete'));
-		subject.removeEvent('animationend', this.bound('onComplete'));
-		return this;
-	},
-
-	animate: function(subject, className) {
-		this.addSubject(subject, className);
-		this.fireEvent('start');
-		return this;
-	},
-
-	enter: function(viewToShow, viewToHide, parentView, first) {
-
-		if (viewToShow) {
-			viewToShow.show();
-			viewToShow.disableTouch();
-		}
+	enter: function(viewToShow, viewToHide, parentView, isFirstView) {
 
 		if (viewToHide) {
 			viewToHide.disableTouch();
 		}
 
-		this.addEvent('stop:once', this.didEnter.pass([viewToShow, viewToHide, parentView, first], this));
+		viewToShow.show();
+		viewToShow.disableTouch();
+
+		var start = isFirstView
+			? this.raiseAnimation(viewToShow, parentView)
+			: this.enterAnimation(viewToShow, viewToHide, parentView);
+
+		if (start != false) this.fireEvent('start');
+
+		return this;
 	},
 
 	leave: function(viewToShow, viewToHide, parentView) {
 
-		if (viewToShow){
-			viewToShow.show();
-			viewToShow.disableTouch();
+		viewToShow.show();
+		viewToShow.disableTouch();
+		viewToHide.disableTouch();
+
+		var start = this.leaveAnimation(viewToShow, viewToHide, parentView);
+		if (start != false) {
+			this.fireEvent('start');
 		}
 
-		if (viewToHide) {
-			viewToHide.disableTouch();
-		}
-
-		this.addEvent('stop:once', this.didLeave.pass([viewToShow, viewToHide, parentView], this));
+		return this;
 	},
 
-	didEnter: function(viewToShow, viewToHide, parentView, first) {
+	didRaise: function(viewToShow, parentView) {
+		viewToShow.enableTouch();
+		this.fireEvent('complete');
+		return this;
+	},
 
-		if (viewToShow) {
-			viewToShow.enableTouch();
-		}
-
-		if (viewToHide) {
-			viewToHide.hide();
-			viewToHide.enableTouch();
-		}
+	didEnter: function(viewToShow, viewToHide, parentView) {
+		viewToHide.hide();
+		viewToHide.enableTouch();
+		viewToShow.enableTouch();
+		this.fireEvent('complete');
+		return this;
 	},
 
 	didLeave: function(viewToShow, viewToHide, parentView) {
-
-		if (viewToShow) {
-			viewToShow.enableTouch();
-		}
-
-		if (viewToHide) {
-			viewToHide.hide();
-			viewToHide.enableTouch();
-		}
+		viewToHide.hide();
+		viewToHide.enableTouch();
+		viewToShow.enableTouch();
+		this.fireEvent('complete');
+		return this;
 	},
 
-	onComplete: function(e) {
+	raiseAnimation: function(viewToShow, parentView) {
+		throw new Error('You must override this method');
+	},
 
-		e.stop();
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+		throw new Error('You must override this method');
+	},
 
-		if (this.subjects.contains(e.target)) {
-			this.clearSubjects();
-			this.fireEvent('stop');
-			this.fireEvent('complete');
-		}
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+		throw new Error('You must override this method');
 	}
 
 });

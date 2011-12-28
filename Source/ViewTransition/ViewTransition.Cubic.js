@@ -19,37 +19,84 @@ provides:
 ...
 */
 
+/**
+ * @name  ViewTransition.Cover
+ * @class Provide a cubic view transition.
+ *
+ * @extends ViewTransition
+ *
+ * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @version 0.1
+ */
 Moobile.ViewTransition.Cubic = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	enter: function(viewToShow, viewToHide, parentView, first) {
+	raiseAnimation: function(viewToShow, parentView) {
 
-		this.parent(viewToShow, viewToHide, parentView, first);
+		var parentViewContent = parentView.getContent();
 
-		this.addSubject(parentView, 'transition-cubic-perspective');
-		this.addSubject(viewToShow, 'transition-view-to-show');
+		document.id(parentView).addEvent('animationend:once', function(e) {
 
-		if (first) {
-			this.animate(parentView.getContent(), 'transition-cubic-enter-first');
-			return this;
-		}
+			e.stop();
 
-		this.addSubject(viewToHide, 'transition-view-to-hide');
+			parentView.removeClass('transition-cubic-perspective');
+			parentViewContent.removeClass('transition-cubic-enter');
+			parentViewContent.removeClass('raise');
+			viewToShow.removeClass('transition-view-to-show');
 
-		this.animate(parentView.getContent(), 'transition-cubic-enter');
+			this.didRaise(viewToShow, parentView);
+
+		}.bind(this));
+
+		parentView.addClass('transition-cubic-perspective');
+		parentViewContent.addClass('transition-cubic-enter');
+		parentViewContent.addClass('raise');
+		viewToShow.addClass('transition-view-to-show');
 	},
 
-	leave: function(viewToShow, viewToHide, parentView) {
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
-		this.parent(viewToShow, viewToHide, parentView);
+		var parentViewContent = parentView.getContent();
 
-		this.addSubject(parentView, 'transition-cubic-perspective');
+		document.id(parentView).addEvent('animationend:once', function(e) {
 
-		this.addSubject(viewToShow, 'transition-view-to-show');
-		this.addSubject(viewToHide, 'transition-view-to-hide');
+			e.stop();
 
-		this.animate(parentView.getContent(), 'transition-cubic-leave');
+			parentView.removeClass('transition-cubic-perspective');
+			parentViewContent.removeClass('transition-cubic-enter');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToShow.removeClass('transition-view-to-show');
+
+			this.didEnter(viewToShow, viewToHide, parentView);
+
+		}.bind(this));
+
+		parentView.addClass('transition-cubic-perspective');
+		parentViewContent.addClass('transition-cubic-enter');
+		viewToHide.addClass('transition-view-to-hide');
+		viewToShow.addClass('transition-view-to-show');
+	},
+
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentViewContent = parentView.getContent();
+
+		document.id(parentView).addEvent('animationend:once', function(e) {
+
+			e.stop();
+
+			parentViewContent.removeClass('transition-cubic-leave');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToShow.removeClass('transition-view-to-show');
+
+			this.didLeave(viewToShow, viewToHide, parentView);
+
+		}.bind(this));
+
+		parentViewContent.addClass('transition-cubic-leave');
+		viewToHide.addClass('transition-view-to-hide');
+		viewToShow.addClass('transition-view-to-show');
 	}
 
 });
