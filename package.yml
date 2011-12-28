@@ -56,7 +56,6 @@ sources:
   - "Source/Scroller/Scroller.Engine.js"
   - "Source/Scroller/Scroller.Engine.IScroll.js"
   - "Source/Scroller/Scroller.Engine.Native.js"
-  - "Source/Scroller/Scroller.Carousel.js"
   - "Source/ViewTransition/ViewTransition.js"
   - "Source/ViewTransition/ViewTransition.Slide.js"
   - "Source/ViewTransition/ViewTransition.Cover.js"
