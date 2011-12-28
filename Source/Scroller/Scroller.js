@@ -123,30 +123,37 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		if (this.options.snapToPage)
 			this.options.momentum = false;
 
+		var engine = null;
+
 		Array.from(this.options.engine).each(function(name) {
 
-			var engine = Moobile.Scroller.Engine[name];
+			engine = Moobile.Scroller.Engine[name];
 			if (engine == undefined) {
 				throw new Error('The scroller engine ' + engine + ' does not exists');
 			}
 
 			if (engine.supportsCurrentPlatform &&
 				engine.supportsCurrentPlatform.call(this) == false) {
+				engine = null;
 				return;
 			}
 
-			var options = {
-				momentum: this.options.momentum,
-				scrollX: this.options.scrollX,
-				scrollY: this.options.scrollY
-			};
-
-			this.engine = new engine(content, options);
-			this.engine.addEvent('start', this.bound('onStart'));
-			this.engine.addEvent('move', this.bound('onMove'));
-			this.engine.addEvent('end', this.bound('onEnd'));
-
 		}, this);
+
+		if (engine == null) {
+			throw new Error('There are no scrolling engine available');
+		}
+
+		var options = {
+			momentum: this.options.momentum,
+			scrollX: this.options.scrollX,
+			scrollY: this.options.scrollY
+		};
+
+		this.engine = new engine(content, options);
+		this.engine.addEvent('start', this.bound('onStart'));
+		this.engine.addEvent('move', this.bound('onMove'));
+		this.engine.addEvent('end', this.bound('onEnd'));
 
 		this.wrapper = this.getWrapper();
 		this.content = this.getContent();

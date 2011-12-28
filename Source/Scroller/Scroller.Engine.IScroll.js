@@ -217,7 +217,9 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller
 	},
 
 	onMove: function() {
-		if (this.scrolling) this.fireEvent('move');
+		if (this.scrolling) {
+			this.fireEvent('move');
+		}
 	},
 
 	onEnd: function() {

@@ -224,7 +224,9 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	},
 
 	onTouchMove: function() {
-		if (this.scrolling) this.fireEvent('move');
+		if (this.scrolling) {
+			this.fireEvent('move');
+		}
 	},
 
 	onTouchEnd: function() {
