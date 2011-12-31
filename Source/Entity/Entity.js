@@ -256,10 +256,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	addChild: function(entity, where, context) {
 
 		var element = document.id(entity);
-		if (element == null)
-			return false;
-
-		if (this.hasChild(entity))
+		if (element == null || this.hasChild(entity))
 			return false;
 
 		this.willAddChild(entity);
@@ -278,18 +275,19 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.children.push(entity);
 
+		entity.removeFromOwner();
 		entity.setOwner(this);
 		entity.setWindow(this.window);
 
 		this.didAddChild(entity);
 
-		if (this.ready == false) {
+		if (this.ready) {
+			entity.setReady()
+		} else {
 			this.addEvent('ready:once', function() {
 				entity.setWindow(this.window);
 				entity.setReady();
 			}.bind(this));
-		} else {
-			entity.setReady();
 		}
 
 		return true;
