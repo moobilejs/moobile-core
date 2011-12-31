@@ -107,7 +107,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 			case 'footer': return this.parent(entity, 'bottom');
 		}
 
-		if (this.content && this.content.hasOwner()) {
+		if (this.content) {
 
 			if (this.hasChild(entity)) {
 				return false;
@@ -136,7 +136,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	getChild: function(name) {
-		return this.content && this.content.hasOwner()
+		return this.content
 			 ? this.content.getChild(name) || this.parent(name)
 			 : this.parent(name);
 	},
@@ -153,7 +153,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	hasChild: function(entity) {
-		return this.content && this.content.hasOwner()
+		return this.content
 		     ? this.content.hasChild(entity) || this.parent(entity)
 		     : this.parent(entity);
 	},
@@ -170,7 +170,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	getChildren: function() {
-		return [].concat(this.content.getChildren(), this.parent());
+		return [].concat(this.parent(), this.content.getChildren());
 	},
 
 	/**
@@ -185,7 +185,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	replaceChild: function(replace, entity) {
-		return this.content && this.content.hasOwner()
+		return this.content
 		     ? this.content.replaceChild(replace, entity) || this.parent(replace, entity)
 		     : this.parent(replace, entity);
 	},
@@ -202,7 +202,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	removeChild: function(entity) {
-		return this.content && this.content.hasOwner()
+		return this.content
 		     ? this.content.removeChild(entity) || this.parent(entity)
 		     : this.parent(entity);
 	},
