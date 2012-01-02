@@ -56,7 +56,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	showAnimated: function() {
 		this.willShow();
 		this.element.show();
-		this.element.addClass('present');
+		this.element.addClass('show-animated');
 		return this;
 	},
 
@@ -74,7 +74,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	 */
 	hideAnimated: function() {
 		this.willHide();
-		this.element.addClass('dismiss');
+		this.element.addClass('hide-animated');
 		return this;
 	},
 
@@ -91,14 +91,14 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 
 	onAnimationEnd: function(e) {
 
-		if (this.element.hasClass('present')) this.didShow();
-		if (this.element.hasClass('dismiss')) {
+		if (this.element.hasClass('show-animated')) this.didShow();
+		if (this.element.hasClass('hide-animated')) {
 			this.element.hide();
 			this.didHide();
 		}
 
-		this.element.removeClass('present');
-		this.element.removeClass('dismiss');
+		this.element.removeClass('show-animated');
+		this.element.removeClass('hide-animated');
 	}
 
 });

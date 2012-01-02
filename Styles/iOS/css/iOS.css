@@ -973,6 +973,16 @@ p small {
 /* Overlay
 -----------------------------------------------------------------------------*/
 
+@-webkit-keyframes anim-show-overlay {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+@-webkit-keyframes anim-hide-overlay {
+	from { opacity: 1; }
+	to   { opacity: 0; }
+}
+
 .overlay {
 	-webkit-backface-visibility: hidden;                        /* Important */
 	-webkit-transform: translate3d(0, 0, 0);                    /* Important */
@@ -989,24 +999,14 @@ p small {
 	z-index: 100;                                               /* Important */
 }
 
-@-webkit-keyframes overlay-present {
-	from { opacity: 0; }
-	to   { opacity: 1; }
-}
-
-@-webkit-keyframes overlay-dismiss {
-	from { opacity: 1; }
-	to   { opacity: 0; }
-}
-
-.overlay.present {
-	-webkit-animation: overlay-present 350ms 1;
+.overlay.show-animated {
+	-webkit-animation: anim-show-overlay 350ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 }
 
-.overlay.dismiss {
-	-webkit-animation: overlay-dismiss 350ms 1;
+.overlay.hide-animated {
+	-webkit-animation: anim-hide-overlay 350ms 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 }
