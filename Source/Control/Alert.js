@@ -39,7 +39,7 @@ provides:
  */
 Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
-	Extends: Moobile.Overlay,
+	Extends: Moobile.Control,
 
 	/**
 	 * @var    {Label} The title.
@@ -54,6 +54,13 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1.0
 	 */
 	message: null,
+
+	/**
+	 * @var    {Array} The buttons.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	buttons: [],
 
 	/**
 	 * @var    {Element} The dialog element.
@@ -84,11 +91,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	dialogContent: null,
 
 	/**
-	 * @var    {Array} The buttons.
+	 * @var    {Overlay} The alert overlay.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	buttons: [],
+	overlay: null,
 
 	/**
 	 * Sets the title.
@@ -106,26 +113,23 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	setTitle: function(title) {
 
-		// TODO : Should work the same as the button label.
-
 		if (this.title === title)
 			return this;
 
-		if (this.title instanceof Moobile.Entity) {
-			this.title.removeFromOwner();
-			this.title.destroy();
-			this.title = null;
+		if (typeof title == 'string') {
+			var text = title;
+			title = new Moobile.Label();
+			title.setText(text);
 		}
 
-		this.dialogHeader.empty();
-
-		if (title instanceof Moobile.Entity) {
-			this.addChild(title, 'bottom', this.dialogHeader);
+		if (this.title == null) {
+			this.title = title;
+			this.addChild(title, 'top', this.dialogHeader);
 		} else {
-			this.dialogHeader.set('html', title);
+			this.replaceChild(this.title, title);
+			this.title.destroy();
+			this.title = title;
 		}
-
-		this.title = title;
 
 		return this;
 	},
@@ -158,26 +162,23 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	setMessage: function(message) {
 
-		// TODO : Should work the same as the button label.
-
 		if (this.message === message)
 			return this;
 
-		if (this.message instanceof Moobile.Entity) {
-			this.message.removeFromOwner();
-			this.message.destroy();
-			this.message = null;
+		if (typeof message == 'string') {
+			var text = message;
+			message = new Moobile.Label();
+			message.setText(text);
 		}
 
-		this.dialogContent.empty();
-
-		if (message instanceof Moobile.Entity) {
-			this.addChild(message, 'bottom', this.dialogContent);
+		if (this.message == null) {
+			this.message = message;
+			this.addChild(message, 'top', this.dialogContent);
 		} else {
-			this.dialogContent.set('html', message);
+			this.replaceChild(this.message, message);
+			this.message.destroy();
+			this.message = message;
 		}
-
-		this.message = message;
 
 		return this;
 	},
@@ -213,16 +214,59 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		return this;
 	},
 
+	/**
+	 * Shows the overlay with an animation.
+	 *
+	 * This method will show the overlay by adding the `show-animated` CSS
+	 * class to the element. Update the properties of this CSS class to
+	 * customize the animation.
+	 *
+	 * @return {Overlay} This overlay.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	showAnimated: function() {
+		this.willShow();
+		this.element.show();
+		this.element.addClass('show-animated');
+		this.overlay.showAnimated();
+		return this;
+	},
+
+	/**
+	 * Hides the overlay with an animation.
+	 *
+	 * This method will hide the overlay by adding the `hide-animated` CSS
+	 * class to the element. Update the properties of this CSS class to
+	 * customize the animation.
+	 *
+	 * @return {Overlay} This overlay.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hideAnimated: function() {
+		this.willHide();
+		this.element.addClass('hide-animated');
+		this.overlay.hideAnimated();
+		return this;
+	},
+
 	destroy: function() {
+
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 
 		this.title = null;
 		this.message = null;
-		this.buttons = null;
 
 		this.dialog = null;
 		this.dialogHeader = null;
 		this.dialogFooter = null;
 		this.dialogContent = null;
+
+		this.overlay.destroy();
+		this.overlay = null;
 
 		this.parent();
 	},
@@ -232,10 +276,15 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.parent();
 
 		this.element.addClass('alert');
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 
-		this.dialogHeader  = new Element('div.dialog-dialogHeader');
-		this.dialogFooter  = new Element('div.dialog-dialogFooter');
-		this.dialogContent = new Element('div.dialog-dialogContent');
+		this.overlay = new Moobile.Overlay();
+		this.overlay.setStyle('radial');
+		this.addChild(this.overlay);
+
+		this.dialogHeader  = new Element('div.dialog-header');
+		this.dialogFooter  = new Element('div.dialog-footer');
+		this.dialogContent = new Element('div.dialog-content');
 
 		this.dialog = new Element('div.dialog');
 		this.dialog.grab(this.dialogHeader);
@@ -265,7 +314,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			entity.removeEvent('click', this.bound('onButtonClick'));
 			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
 			entity.removeEvent('mousedown', this.bound('onButtonMouseUp'));
-			this.button.erase(entity);
+			this.buttons.erase(entity);
 		}
 	},
 
@@ -276,26 +325,42 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		if (this.buttons.length == 0) {
 			var button = new Moobile.Button();
 			button.setLabel('OK');
-			button.setHighlighted(true);
 			this.addButton(button);
 		}
 	},
 
-	onButtonClick: function(e) {
-
-		this.fireEvent('buttonclick', e.target);
-
-		if (this.buttons.length == 1) {
-			this.hideAnimated();
-		}
+	didHide: function() {
+		this.parent();
+		this.destroy();
 	},
 
-	onButtonMouseUp: function() {
+	onButtonClick: function(e) {
+		this.fireEvent('buttonclick', e.target);
+		if (this.buttons.length == 1) this.hideAnimated();
+	},
+
+	onButtonMouseUp: function(e) {
 		this.fireEvent('buttonmouseup');
 	},
 
-	onButtonMouseDown: function() {
+	onButtonMouseDown: function(e) {
 		this.fireEvent('buttonmousedown');
+	},
+
+	onAnimationEnd: function(e) {
+
+		e.stop();
+
+		if (this.element.hasClass('show-animated')) {
+			this.element.removeClass('show-animated');
+			this.didShow();
+		}
+
+		if (this.element.hasClass('hide-animated')) {
+			this.element.removeClass('hide-animated');
+			this.element.hide();
+			this.didHide();
+		}
 	}
 
 });

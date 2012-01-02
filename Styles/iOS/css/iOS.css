@@ -1011,48 +1011,41 @@ p small {
 	-webkit-animation-fill-mode: both;
 }
 
+/* Style Radial */
+
+.overlay.style-radial {
+	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
+}
+
 /* Alert
 -----------------------------------------------------------------------------*/
 
-.alert {
-	-webkit-backface-visibility: hidden;                        /* Important */
-	-webkit-transform: translate3d(0, 0, 0);                    /* Important */
-	-webkit-box-orient: vertical;
-	-webkit-box-align: center;
-	-webkit-box-pack: center;
-	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
-	bottom: 0px;
-	color: #ffffff;
-	display: -webkit-box;
-	left: 0px;                                                  /* Important */
-	position: absolute;                                         /* Important */
-	right: 0px;                                                 /* Important */
-	text-align: center;
-	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
-	top: 0px;                                                   /* Important */
-	z-index: 100;                                               /* Important */
+@-webkit-keyframes anim-show-alert {
+	0%   { -webkit-transform: scale(0.6); }
+	45%  { -webkit-transform: scale(1.1); }
+	75%  { -webkit-transform: scale(0.9); }
+	100% { -webkit-transform: scale(1.0); }
 }
 
-@-webkit-keyframes alert-overlay-present {
-	from { opacity: 0; }
-	to   { opacity: 1; }
-}
-
-@-webkit-keyframes alert-overlay-dismiss {
+@-webkit-keyframes anim-hide-alert {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
 
-.alert.present {
-	-webkit-animation: alert-overlay-present 350ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
-	-webkit-animation-fill-mode: both;
-}
-
-.alert.dismiss {
-	-webkit-animation: alert-overlay-dismiss 350ms 1;
-	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
-	-webkit-animation-fill-mode: both;
+.alert {
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-orient: vertical;								/* Important */
+	-webkit-box-align: center;									/* Important */
+	-webkit-box-pack: center;									/* Important */
+	bottom: 0px;												/* Important */
+	color: #ffffff;
+	display: -webkit-box;										/* Important */
+	left: 0px;                                                  /* Important */
+	position: absolute;                                         /* Important */
+	right: 0px;                                                 /* Important */
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
+	top: 0px;                                                   /* Important */
+	z-index: 125;                                               /* Important */
 }
 
 .alert .dialog {
@@ -1062,7 +1055,9 @@ p small {
 	-webkit-border-radius: 12px;
 	border-width: 15px;
 	border-top-width: 35px;
+	position: relative;
 	width: 280px;
+	z-index: 125;                                               /* Important */
 }
 
 .alert .dialog-header {
@@ -1070,6 +1065,7 @@ p small {
 	font-weight: bold;
 	margin-top: -19px;
 	margin-bottom: 11px;
+	text-align: center;
 }
 
 .alert .dialog-content {
@@ -1109,37 +1105,23 @@ p small {
 }
 
 .alert .dialog-footer .button.is-highlighted {
-	-webkit-border-image: url(../images/alert-button.png) 43 5 43 5 stretch stretch;
-	background: none;
+	-webkit-border-image: url(../images/alert-button.png) 86 5 0 5 stretch stretch;
 }
 
 .alert .dialog-footer .button.is-selected {
-	-webkit-border-image: url(../images/alert-button.png) 86 5 0 5 stretch stretch;
-	background: none;
+	-webkit-border-image: url(../images/alert-button.png) 43 5 43 5 stretch stretch;
 }
 
-@-webkit-keyframes alert-present {
-	0%   { -webkit-transform: scale(0.6); }
-	45%  { -webkit-transform: scale(1.1); }
-	75%  { -webkit-transform: scale(0.9); }
-	100% { -webkit-transform: scale(1.0); }
-}
-
-@-webkit-keyframes alert-dismiss {
-	from { opacity: 1; }
-	to   { opacity: 0; }
-}
-
-.alert.present .dialog {
-	-webkit-animation-name: alert-present;
+.alert.show-animated .dialog {
+	-webkit-animation-name: anim-show-alert;
 	-webkit-animation-duration: 400ms;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 }
 
-.alert.dismiss .dialog {
-	-webkit-animation-name: alert-dismiss;
+.alert.hide-animated .dialog {
+	-webkit-animation-name: anim-hide-alert;
 	-webkit-animation-duration: 250ms;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 1);

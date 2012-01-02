@@ -44,9 +44,9 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	/**
 	 * Shows the overlay with an animation.
 	 *
-	 * This method will show the overlay by adding the `present` CSS class to
-	 * the element. Update the properties of this CSS class to customize the
-	 * animation.
+	 * This method will show the overlay by adding the `show-animated` CSS
+	 * class to the element. Update the properties of this CSS class to
+	 * customize the animation.
 	 *
 	 * @return {Overlay} This overlay.
 	 *
@@ -63,9 +63,9 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	/**
 	 * Hides the overlay with an animation.
 	 *
-	 * This method will hide the overlay by adding the `dismiss` CSS class to
-	 * the element. Update the properties of this CSS class to customize the
-	 * animation.
+	 * This method will hide the overlay by adding the `hide-animated` CSS
+	 * class to the element. Update the properties of this CSS class to
+	 * customize the animation.
 	 *
 	 * @return {Overlay} This overlay.
 	 *
@@ -91,14 +91,27 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 
 	onAnimationEnd: function(e) {
 
-		if (this.element.hasClass('show-animated')) this.didShow();
+		e.stop();
+
+		if (this.element.hasClass('show-animated')) {
+			this.element.removeClass('show-animated');
+			this.didShow();
+		}
+
 		if (this.element.hasClass('hide-animated')) {
+			this.element.removeClass('hide-animated');
 			this.element.hide();
 			this.didHide();
 		}
-
-		this.element.removeClass('show-animated');
-		this.element.removeClass('hide-animated');
 	}
 
+});
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+Moobile.Entity.defineStyle('radial', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-radial'); },
+	detach: function(element) { element.removeClass('style-radial'); }
 });
