@@ -48,6 +48,11 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	 */
 	item: null,
 
+	destroy: function() {
+		this.item = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the bar item.
 	 *
@@ -91,11 +96,6 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	 */
 	getItem: function() {
 		return this.item;
-	},
-
-	destroy: function() {
-		this.item = null;
-		this.parent();
 	},
 
 	willLoad: function() {

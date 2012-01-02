@@ -49,6 +49,11 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 */
 	title: null,
 
+	destroy: function() {
+		this.title = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the title.
 	 *
@@ -158,11 +163,6 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 */
 	removeAllBarButtons: function() {
 		return this.removeChildren();
-	},
-
-	destroy: function() {
-		this.title = null;
-		this.parent();
 	},
 
 	willLoad: function() {

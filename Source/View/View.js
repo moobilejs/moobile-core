@@ -50,6 +50,11 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	content: null,
 
+	destroy: function() {
+		this.content = null;
+		this.parent();
+	},
+
 	/**
 	 * Enables the touch interraction of the view.
 	 *
@@ -278,11 +283,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	getContent: function() {
 		return this.content;
-	},
-
-	destroy: function() {
-		this.content = null;
-		this.parent();
 	},
 
 	willLoad: function() {

@@ -48,6 +48,11 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	label: null,
 
+	destroy: function() {
+		this.label = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the label.
 	 *
@@ -95,11 +100,6 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	getLabel: function() {
 		return this.label;
-	},
-
-	destroy: function() {
-		this.label = null;
-		this.parent();
 	},
 
 	willLoad: function() {

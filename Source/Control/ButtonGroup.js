@@ -65,6 +65,12 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		deselectable: false
 	},
 
+	destroy: function() {
+		this.selectedButton = null;
+		this.selectedButtonIndex = -1;
+		this.parent();
+	},
+
 	/**
 	 * Sets the selected button.
 	 *
@@ -211,12 +217,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 */
 	removeAllButtons: function() {
 		return this.removeChildren();
-	},
-
-	destroy: function() {
-		this.selectedButton = null;
-		this.selectedButtonIndex = -1;
-		this.parent();
 	},
 
 	didLoad: function() {

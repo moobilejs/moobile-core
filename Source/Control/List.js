@@ -64,6 +64,12 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		tagName: 'ul'
 	},
 
+	destroy: function() {
+		this.selectedItem = null;
+		this.selectedItemIndex = -1;
+		this.parent();
+	},
+
 	/**
 	 * Sets the selected item.
 	 *
@@ -208,12 +214,6 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 */
 	removeAllItems: function() {
 		return this.removeChildren();
-	},
-
-	destroy: function() {
-		this.selectedItem = null;
-		this.selectedItemIndex = -1;
-		this.parent();
 	},
 
 	didLoad: function() {

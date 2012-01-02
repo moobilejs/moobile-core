@@ -41,6 +41,12 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 
 	Extends: Moobile.View,
 
+	destroy: function() {
+		this.sidePanel = null;
+		this.mainPanel = null;
+		this.parent();
+	},
+
 	/**
 	 * Returns the side panel.
 	 *
@@ -69,12 +75,6 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 	 */
 	getMainPanel: function() {
 		return this.content.getMainPanel();
-	},
-
-	destroy: function() {
-		this.sidePanel = null;
-		this.mainPanel = null;
-		this.parent();
 	},
 
 	didLoad: function() {

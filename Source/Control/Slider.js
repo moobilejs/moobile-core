@@ -95,6 +95,13 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
+	destroy: function() {
+		this.thumb = null;
+		this.track = null;
+		this.slider = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the value.
 	 *
@@ -129,13 +136,6 @@ Moobile.Slider = new Class({
 		this.track.setStyle('background-position',
 			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
 		);
-	},
-
-	destroy: function() {
-		this.thumb = null;
-		this.track = null;
-		this.slider = null;
-		this.parent();
 	},
 
 	willLoad: function() {
