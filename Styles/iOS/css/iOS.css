@@ -895,7 +895,7 @@ p small {
 	-webkit-box-flex: 1;                                        /* Important */
 }
 
-.list-item > .label.detail {
+.list-item > .detail {
 	-webkit-box-flex: 0;                                        /* Important */
 	color: #395587;
 	font-size: 17px;
@@ -909,14 +909,14 @@ p small {
 	text-shadow: none;
 }
 
-.list-item.is-selected .label.detail,
-.list-item.is-highlighted .label.detail {
+.list-item.is-selected .detail,
+.list-item.is-highlighted .detail {
 	color: #ffffff;
 }
 
 /* Styles */
 
-.list-item .label.detail:after {
+.list-item .detail:after {
 	content: '';
 	height: 100%;
 	position: absolute;
@@ -927,46 +927,46 @@ p small {
 
 /* Style Checked */
 
-.list-item.style-checked .label.detail {
+.list-item.style-checked .detail {
 	padding-right: 35px;
 }
 
-.list-item.style-checked .label.detail:after {
+.list-item.style-checked .detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -60px center;
 }
 
-.list-item.style-checked.is-selected > .label.detail:after,
-.list-item.style-checked.is-highlighted > .label.detail:after {
+.list-item.style-checked.is-selected > .detail:after,
+.list-item.style-checked.is-highlighted > .detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
 }
 
 /* Style Disclosed */
 
-.list-item.style-disclosed > .label.detail {
+.list-item.style-disclosed > .detail {
 	padding-right: 35px;
 }
 
-.list-item.style-disclosed > .label.detail:after {
+.list-item.style-disclosed > .detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
 }
 
-.list-item.style-disclosed.is-selected > .label.detail:after,
-.list-item.style-disclosed.is-highlighted > .label.detail:after {
+.list-item.style-disclosed.is-selected > .detail:after,
+.list-item.style-disclosed.is-highlighted > .detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
 }
 
 /* Style Detailed */
 
-.list-item.style-detailed > .label.detail {
+.list-item.style-detailed > .detail {
 	padding-right: 35px;
 }
 
-.list-item.style-detailed > .label.detail:after {
+.list-item.style-detailed > .detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
-.list-item.style-detailed.is-selected > .label.accessory:after,
-.list-item.style-detailed.is-highlighted > .label.accessory:after {
+.list-item.style-detailed.is-selected > .detail:after,
+.list-item.style-detailed.is-highlighted > .detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 

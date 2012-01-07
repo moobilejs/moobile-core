@@ -42,7 +42,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Label} This button's label.
+	 * @var    {Text} This button's label.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -69,7 +69,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 
 		if (typeof label == 'string') {
 			var text = label;
-			label = new Moobile.Label();
+			label = new Moobile.Text();
 			label.setText(text);
 		}
 
@@ -82,13 +82,15 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 			this.label = label;
 		}
 
+		label.addClass('label');
+
 		return this;
 	},
 
 	/**
 	 * Returns the label.
 	 *
-	 * @return {Label} The label.
+	 * @return {Text} The label.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -140,6 +142,6 @@ Moobile.Entity.defineRole('button', null, function(element) {
 });
 
 Moobile.Entity.defineRole('label', Moobile.Button, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Label);
+	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Text);
 	this.setLabel(instance);
 });

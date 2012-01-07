@@ -43,7 +43,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	Extends: Moobile.BarItem,
 
 	/**
-	 * @var    {Label} The title.
+	 * @var    {Text} The title.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -75,7 +75,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 		if (typeof title == 'string') {
 			var text = title;
-			title = new Moobile.Label();
+			title = new Moobile.Text();
 			title.setText(text);
 		}
 
@@ -193,6 +193,6 @@ Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element) {
 });
 
 Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-title', Moobile.Label);
+	var instance = Moobile.Entity.fromElement(element, 'data-title', Moobile.Text);
 	this.setTitle(instance);
 });

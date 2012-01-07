@@ -1163,8 +1163,8 @@ Moobile.Entity.fromElement = function(element, property, type) {
  * @example
  *
  * // defines the role label for all entities
- * Moobile.Entity.defineRole('label', null, function(element) {
- * 	this.addChild(new Moobile.Label(element, null, name));
+ * Moobile.Entity.defineRole('text', null, function(element) {
+ * 	this.addChild(new Moobile.Text(element, null, name));
  * });
  *
  * @example

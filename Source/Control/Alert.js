@@ -42,7 +42,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Label} The title.
+	 * @var    {Text} The title.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -118,7 +118,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 		if (typeof title == 'string') {
 			var text = title;
-			title = new Moobile.Label();
+			title = new Moobile.Text();
 			title.setText(text);
 		}
 
@@ -131,13 +131,15 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			this.title = title;
 		}
 
+		this.title.addClass('title');
+
 		return this;
 	},
 
 	/**
 	 * Returns the title.
 	 *
-	 * @return {Label} The title.
+	 * @return {Text} The title.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -167,7 +169,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 		if (typeof message == 'string') {
 			var text = message;
-			message = new Moobile.Label();
+			message = new Moobile.Text();
 			message.setText(text);
 		}
 
@@ -179,6 +181,8 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			this.message.destroy();
 			this.message = message;
 		}
+
+		this.message.addClass('message');
 
 		return this;
 	},

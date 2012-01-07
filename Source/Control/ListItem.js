@@ -49,14 +49,14 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	image: null,
 
 	/**
-	 * @var    {Label} The label.
+	 * @var    {Text} The label.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	label: null,
 
 	/**
-	 * @var    {Label} The detail label.
+	 * @var    {Text} The detail label.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -132,7 +132,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 
 		if (typeof label == 'string') {
 			var text = label;
-			label = new Moobile.Label();
+			label = new Moobile.Text();
 			label.setText(text);
 		}
 
@@ -145,13 +145,15 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 			this.label = label;
 		}
 
+		this.label.addClass('label');
+
 		return this;
 	},
 
 	/**
 	 * Returns the label.
 	 *
-	 * @return {Label} The label.
+	 * @return {Text} The label.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -181,7 +183,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 
 		if (typeof detail == 'string') {
 			var text = detail;
-			detail = new Moobile.Label();
+			detail = new Moobile.Text();
 			detail.setText(text);
 		}
 
@@ -202,7 +204,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	/**
 	 * Returns the detail label.
 	 *
-	 * @return {Label} The detail label.
+	 * @return {Text} The detail label.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -266,12 +268,12 @@ Moobile.Entity.defineRole('image', Moobile.ListItem, function(element) {
 });
 
 Moobile.Entity.defineRole('label', Moobile.ListItem, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Label);
+	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Text);
 	this.setLabel(instance);
 });
 
 Moobile.Entity.defineRole('detail', Moobile.ListItem, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-detail', Moobile.Label);
+	var instance = Moobile.Entity.fromElement(element, 'data-detail', Moobile.Text);
 	this.setDetail(instance);
 });
 

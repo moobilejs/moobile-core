@@ -58,7 +58,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	name: null,
 
 	/**
-	 * @var    {Label} The title.
+	 * @var    {Text} The title.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -444,7 +444,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	/**
 	 * Returns the title.
 	 *
-	 * @return {Label} The title.
+	 * @return {Text} The title.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
