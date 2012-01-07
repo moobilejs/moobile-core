@@ -41,7 +41,7 @@ Moobile.ViewStackContent = new Class({
 
 	Extends: Moobile.ViewContent,
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('view-stack-content');
 	}

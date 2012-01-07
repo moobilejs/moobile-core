@@ -93,7 +93,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		return this.element.get('src');
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
@@ -105,7 +105,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		}
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('image');
 	}

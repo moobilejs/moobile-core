@@ -165,7 +165,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 		return this.removeChildren();
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
@@ -180,7 +180,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 		this.attachRole(title, 'title');
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('navigation-bar-item');
 	}

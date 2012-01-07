@@ -219,7 +219,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		return this.removeChildren();
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('button-group');
 	},

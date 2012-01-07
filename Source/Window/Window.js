@@ -63,7 +63,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		window.scrollTo(0, 1);
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.set('class', 'window');
 		window.addEvent('load', this.bound('onWindowLoad'));

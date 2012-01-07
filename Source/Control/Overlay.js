@@ -83,7 +83,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 		return this;
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('overlay');
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));

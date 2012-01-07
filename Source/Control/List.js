@@ -216,7 +216,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		return this.removeChildren();
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('list');
 	},

@@ -163,7 +163,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		this.element.addEvent('mouseup', this.bound('onMouseUp'))
 		this.element.addEvent('mousedown', this.bound('onMouseDown'));
 
-		this.willLoad();
+		this.willBuild();
 
 		var className = this.options.className;
 		if (className) {
@@ -177,7 +177,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.attachRoles();
 
-		this.didLoad();
+		this.didBuild();
 
 		return this;
 	},
@@ -198,8 +198,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	destroy: function() {
 
-		this.willUnload();
-
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
 		this.element.removeEvent('pinch', this.bound('onPinch'));
 		this.element.removeEvent('click', this.bound('onClick'));
@@ -214,8 +212,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		this.element = null;
 		this.window = null;
 		this.parentEntity = null;
-
-		this.didUnload();
 
 		return this;
 	},
@@ -886,7 +882,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willLoad: function() {
+	willBuild: function() {
 
 	},
 
@@ -904,41 +900,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didLoad: function() {
-
-	},
-
-	/**
-	 * Tells the entity it's about to be unloaded.
-	 *
-	 * This method is called before the entity's element and the child entities
-	 * are destroyed.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	willUnload: function() {
-
-	},
-
-	/**
-	 * Tells the entity it has been unloaded.
-	 *
-	 * This method is called once the entity's element and the child entites
-	 * are destroyed.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	didUnload: function() {
+	didBuild: function() {
 
 	},
 

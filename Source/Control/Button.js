@@ -102,7 +102,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		return this.label;
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
@@ -116,7 +116,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		this.attachRole(label, 'label');
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('button');
 	},

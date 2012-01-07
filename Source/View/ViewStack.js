@@ -43,7 +43,7 @@ Moobile.ViewStack = new Class( /* @lends ViewStack.prototype */ {
 
 	Extends: Moobile.View,
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('view-stack');
 	}

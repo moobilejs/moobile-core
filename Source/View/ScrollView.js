@@ -158,7 +158,7 @@ Moobile.ScrollView = new Class({
 		return this.scroller.getScrollSize();
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 

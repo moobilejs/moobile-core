@@ -302,7 +302,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		return this.content;
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
@@ -316,7 +316,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		this.attachRole(content, 'view-content');
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('view');
 	},

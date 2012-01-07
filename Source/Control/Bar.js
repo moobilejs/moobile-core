@@ -98,7 +98,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		return this.item;
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
@@ -112,7 +112,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		this.attachRole(item, 'item');
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('bar');
 	}

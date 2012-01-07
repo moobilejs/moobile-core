@@ -73,7 +73,7 @@ Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ 
 		return this.removeClass('activity');
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('activity-indicator');
 	}

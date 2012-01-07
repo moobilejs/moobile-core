@@ -218,7 +218,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		return this.detail;
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
@@ -247,7 +247,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		this.attachRole(detail, 'detail');
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('list-item');
 	}

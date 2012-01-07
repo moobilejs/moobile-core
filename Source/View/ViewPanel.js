@@ -77,7 +77,7 @@ Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
 		return this.content.getMainPanel();
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('view-panel');
 	}

@@ -44,7 +44,7 @@ Moobile.BarButtonGroup = new Class( /** @lends BarButtonGroup.prototype */ {
 
 	Extends: Moobile.ButtonGroup,
 
-	didLoad: function() {
+	didBuild: function() {
 		this.parent();
 		this.element.addClass('bar-button-group');
 	}

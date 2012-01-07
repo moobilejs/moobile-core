@@ -271,7 +271,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		return this;
 	},
 
-	didLoad: function() {
+	didBuild: function() {
 
 		this.parent();
 

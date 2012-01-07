@@ -138,7 +138,7 @@ Moobile.Slider = new Class({
 		);
 	},
 
-	willLoad: function() {
+	willBuild: function() {
 
 		this.parent();
 
