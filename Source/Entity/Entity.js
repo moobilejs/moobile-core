@@ -464,7 +464,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	getStyle: function() {
-		return this.style.name;
+		return this.style ? this.style.name : null;
 	},
 
 	/**
