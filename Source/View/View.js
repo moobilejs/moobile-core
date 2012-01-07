@@ -306,6 +306,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 
 		this.parent();
 
+		this.element.addClass('view');
+
 		var content = this.getRoleElement('view-content');
 		if (content == null) {
 			content = new Element('div');
@@ -314,11 +316,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		}
 
 		this.attachRole(content, 'view-content');
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addClass('view');
 	},
 
 	/**

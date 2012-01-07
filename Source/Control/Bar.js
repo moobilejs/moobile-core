@@ -102,6 +102,8 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 		this.parent();
 
+		this.element.addClass('bar');
+
 		var item = this.getRoleElement('item');
 		if (item == null) {
 			item = new Element('div');
@@ -110,11 +112,6 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		}
 
 		this.attachRole(item, 'item');
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addClass('bar');
 	}
 
 });

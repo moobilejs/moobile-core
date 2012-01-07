@@ -41,7 +41,7 @@ Moobile.BarItem = new Class( /** @lends BarItem.prototype */ {
 
 	Extends: Moobile.Control,
 
-	didBuild: function() {
+	willBuild: function() {
 		this.parent();
 		this.element.addClass('bar-item');
 	}

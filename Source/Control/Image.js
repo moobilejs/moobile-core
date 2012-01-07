@@ -99,15 +99,12 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 
 		this.hide();
 
+		this.element.addClass('image');
+
 		var source = this.getSource();
 		if (source && source.trim()) {
 			this.show();
 		}
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addClass('image');
 	}
 });
 

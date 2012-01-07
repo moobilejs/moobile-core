@@ -41,7 +41,7 @@ Moobile.NavigationBar = new Class( /* @lends NavigationBar.prototype */ {
 
 	Extends: Moobile.Bar,
 
-	didBuild: function() {
+	willBuild: function() {
 		this.parent();
 		this.element.addClass('navigation-bar');
 	}

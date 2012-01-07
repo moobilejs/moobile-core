@@ -169,8 +169,9 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 		this.parent();
 
-		var title = this.getRoleElement('title');
+		this.element.addClass('navigation-bar-item');
 
+		var title = this.getRoleElement('title');
 		if (title == null) {
 			title = new Element('div');
 			title.ingest(this.element);
@@ -178,11 +179,6 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 		}
 
 		this.attachRole(title, 'title');
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addClass('navigation-bar-item');
 	}
 });
 

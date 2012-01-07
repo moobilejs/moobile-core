@@ -106,6 +106,8 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 
 		this.parent();
 
+		this.element.addClass('button');
+
 		var label = this.getRoleElement('label');
 		if (label == null) {
 			label = new Element('div');
@@ -114,11 +116,6 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		}
 
 		this.attachRole(label, 'label');
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addClass('button');
 	},
 
 	onMouseDown: function(e) {

@@ -77,6 +77,8 @@ Moobile.ViewPanelContent = new Class({
 
 		this.parent();
 
+		this.element.addEvent('view-panel-content');
+
 		var main = this.getRoleElement('main-panel');
 		if (main == null) {
 			main = new Element('div');
@@ -92,11 +94,6 @@ Moobile.ViewPanelContent = new Class({
 
 		this.attachRole(main, 'main-panel');
 		this.attachRole(side, 'side-panel');
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addEvent('view-panel-content');
 	}
 
 });

@@ -222,6 +222,8 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 
 		this.parent();
 
+		this.element.addClass('list-item');
+
 		var image  = this.getRoleElement('image');
 		var label  = this.getRoleElement('label');
 		var detail = this.getRoleElement('detail');
@@ -245,11 +247,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		this.attachRole(label, 'label');
 		this.attachRole(image, 'image');
 		this.attachRole(detail, 'detail');
-	},
-
-	didBuild: function() {
-		this.parent();
-		this.element.addClass('list-item');
 	}
 });
 

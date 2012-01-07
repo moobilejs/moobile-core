@@ -41,7 +41,7 @@ Moobile.Label = new Class( /** @lends Label.prototype */ {
 
 	Extends: Moobile.Text,
 
-	didBuild: function() {
+	willBuild: function() {
 		this.parent();
 		this.element.addClass('label');
 	}

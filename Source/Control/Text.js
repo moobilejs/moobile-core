@@ -74,7 +74,7 @@ Moobile.Text = new Class( /** @lends Text.prototype */ {
 		return this.element.get('html');
 	},
 
-	didBuild: function() {
+	willBuild: function() {
 		this.parent();
 		this.element.addClass('text');
 	}
