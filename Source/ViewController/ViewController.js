@@ -180,43 +180,6 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Destroys this view controller.
-	 *
-	 * This method will destroy this view controller's managed view and all its
-	 * child view controllers.
-	 *
-	 * If you override this method, make sure you call the parent method at
-	 * the end of your implementation.
-	 *
-	 * @return {Entity} This entity.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	destroy: function() {
-
-		this.destroyChildViewControllers();
-
-		this.view.destroy();
-		this.view = null;
-
-		this.viewTransition = null;
-		this.viewControllerStack = null;
-		this.viewControllerPanel = null;
-		this.parentViewController = null;
-	},
-
-	destroyChildViewControllers: function() {
-		this.childViewControllers.each(this.bound('destroyChildViewController'));
-		this.childViewControllers.empty();
-	},
-
-	destroyChildViewController: function(viewController) {
-		viewController.destroy();
-		viewController = null;
-	},
-
-	/**
 	 * Adds a child view controller.
 	 *
 	 * This method adds the child view controller's view at the bottom of its
@@ -928,6 +891,43 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	viewDidLeave: function() {
 
+	},
+
+	/**
+	 * Destroys this view controller.
+	 *
+	 * This method will destroy this view controller's managed view and all its
+	 * child view controllers.
+	 *
+	 * If you override this method, make sure you call the parent method at
+	 * the end of your implementation.
+	 *
+	 * @return {Entity} This entity.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	destroy: function() {
+
+		this.destroyChildViewControllers();
+
+		this.view.destroy();
+		this.view = null;
+
+		this.viewTransition = null;
+		this.viewControllerStack = null;
+		this.viewControllerPanel = null;
+		this.parentViewController = null;
+	},
+
+	destroyChildViewControllers: function() {
+		this.childViewControllers.each(this.bound('destroyChildViewController'));
+		this.childViewControllers.empty();
+	},
+
+	destroyChildViewController: function(viewController) {
+		viewController.destroy();
+		viewController = null;
 	},
 
 	onViewReady: function() {

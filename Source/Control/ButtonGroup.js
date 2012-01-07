@@ -65,12 +65,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		deselectable: false
 	},
 
-	destroy: function() {
-		this.selectedButton = null;
-		this.selectedButtonIndex = -1;
-		this.parent();
-	},
-
 	/**
 	 * Sets the selected button.
 	 *
@@ -244,6 +238,12 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
 			entity.removeEvent('mousedown', this.bound('onButtonMouseDown'));
 		}
+	},
+
+	destroy: function() {
+		this.selectedButton = null;
+		this.selectedButtonIndex = -1;
+		this.parent();
 	},
 
 	onButtonClick: function(e) {

@@ -62,13 +62,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	 */
 	detail: null,
 
-	destroy: function() {
-		this.label = null;
-		this.image = null;
-		this.detail = null;
-		this.parent();
-	},
-
 	/**
 	 * Sets the image.
 	 *
@@ -247,7 +240,15 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		this.attachRole(label, 'label');
 		this.attachRole(image, 'image');
 		this.attachRole(detail, 'detail');
+	},
+
+	destroy: function() {
+		this.label = null;
+		this.image = null;
+		this.detail = null;
+		this.parent();
 	}
+
 });
 
 //------------------------------------------------------------------------------

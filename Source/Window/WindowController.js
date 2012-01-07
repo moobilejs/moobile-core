@@ -45,6 +45,18 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	 */
 	rootViewController: null,
 
+	loadView: function() {
+
+		var element = document.id('window');
+		if (element == null) {
+			element = new Element('div');
+			element.inject(document.body);
+		}
+
+		this.view = new Moobile.Window(element);
+		this.view.setReady();
+	},
+
 	/**
 	 * Sets the root view controller.
 	 *
@@ -91,18 +103,6 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	 */
 	getRootViewController: function() {
 		return this.rootViewController;
-	},
-
-	loadView: function() {
-
-		var element = document.id('window');
-		if (element == null) {
-			element = new Element('div');
-			element.inject(document.body);
-		}
-
-		this.view = new Moobile.Window(element);
-		this.view.setReady();
 	},
 
 	didAddChildViewController: function(viewController) {

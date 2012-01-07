@@ -57,11 +57,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	parentView: null,
 
-	destroy: function() {
-		this.content = null;
-		this.parent();
-	},
-
 	/**
 	 * Enables the touch interraction of the view.
 	 *
@@ -348,6 +343,11 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	parentViewDidChange: function(parentView) {
 
+	},
+
+	destroy: function() {
+		this.content = null;
+		this.parent();
 	}
 
 });

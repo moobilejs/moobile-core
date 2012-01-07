@@ -52,6 +52,10 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	 */
 	sideViewController: null,
 
+	loadView: function() {
+		this.view = new Moobile.ViewPanel();
+	},
+
 	/**
 	 * Sets the main view controller.
 	 *
@@ -133,10 +137,6 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	 */
 	getSideViewController: function() {
 		return this.sideViewController;
-	},
-
-	loadView: function() {
-		this.view = new Moobile.ViewPanel();
 	},
 
 	didAddChildViewController: function(viewController) {

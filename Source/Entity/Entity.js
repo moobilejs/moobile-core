@@ -183,49 +183,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Destroys this entity.
-	 *
-	 * This method will remove this entity from its parent, destroy all its
-	 * child entities then destroy its element.
-	 *
-	 * If you override this method, make sure you call the parent method at
-	 * the end of your implementation.
-	 *
-	 * @return {Entity} This entity.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	destroy: function() {
-
-		this.element.removeEvent('swipe', this.bound('onSwipe'));
-		this.element.removeEvent('pinch', this.bound('onPinch'));
-		this.element.removeEvent('click', this.bound('onClick'));
-		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
-		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
-
-		this.removeFromParent();
-
-		this.destroyChildren();
-
-		this.element.destroy();
-		this.element = null;
-		this.window = null;
-		this.parentEntity = null;
-
-		return this;
-	},
-
-	destroyChildren: function() {
-		this.children.each(this.bound('destroyChild'));
-		this.children.empty();
-	},
-
-	destroyChild: function(entity) {
-		entity.destroy();
-	},
-
-	/**
 	 * Adds a child entity.
 	 *
 	 * This method adds a child entity at the bottom of this entity. You may
@@ -803,10 +760,11 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			var name = role || element.get('data-role');
 			if (name) {
 
+				element.store('moobile.entity.role', name);
+
 				var handler = this.$roles[name];
 				if (handler) {
 					handler.call(this, element);
-					element.store('moobile.entity.role', handler);
 					return this;
 				}
 
@@ -1068,6 +1026,49 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	didHide: function() {
 
+	},
+
+	/**
+	 * Destroys this entity.
+	 *
+	 * This method will remove this entity from its parent, destroy all its
+	 * child entities then destroy its element.
+	 *
+	 * If you override this method, make sure you call the parent method at
+	 * the end of your implementation.
+	 *
+	 * @return {Entity} This entity.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	destroy: function() {
+
+		this.element.removeEvent('swipe', this.bound('onSwipe'));
+		this.element.removeEvent('pinch', this.bound('onPinch'));
+		this.element.removeEvent('click', this.bound('onClick'));
+		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
+		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
+
+		this.removeFromParent();
+
+		this.destroyChildren();
+
+		this.element.destroy();
+		this.element = null;
+		this.window = null;
+		this.parentEntity = null;
+
+		return this;
+	},
+
+	destroyChildren: function() {
+		this.children.each(this.bound('destroyChild'));
+		this.children.empty();
+	},
+
+	destroyChild: function(entity) {
+		entity.destroy();
 	},
 
 	onSwipe: function(e) {

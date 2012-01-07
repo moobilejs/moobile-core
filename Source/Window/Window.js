@@ -63,23 +63,28 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		window.scrollTo(0, 1);
 	},
 
-	didBuild: function() {
+	willBuild: function() {
+
 		this.parent();
+
 		this.element.set('class', 'window');
+
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
-	},
-
-	willUnload: function() {
-		this.parent();
-		window.removeEvent('load', this.bound('onWindowLoad'));
-		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
 	},
 
 	didAddChild: function(entity) {
 		this.parent(entity);
 		entity.setWindow(this);
 		entity.setParent(this);
+	},
+
+	destroy: function() {
+
+		window.removeEvent('load', this.bound('onWindowLoad'));
+		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
+
+		this.parent();
 	},
 
 	onWindowLoad: function(e) {

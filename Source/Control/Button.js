@@ -48,11 +48,6 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	label: null,
 
-	destroy: function() {
-		this.label = null;
-		this.parent();
-	},
-
 	/**
 	 * Sets the label.
 	 *
@@ -116,6 +111,11 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		}
 
 		this.attachRole(label, 'label');
+	},
+
+	destroy: function() {
+		this.label = null;
+		this.parent();
 	},
 
 	onMouseDown: function(e) {

@@ -180,6 +180,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 		this.attachRole(title, 'title');
 	}
+
 });
 
 //------------------------------------------------------------------------------

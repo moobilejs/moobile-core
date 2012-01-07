@@ -45,6 +45,10 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	 */
 	topViewController: null,
 
+	loadView: function() {
+		this.view = new Moobile.ViewStack();
+	},
+
 	/**
 	 * Pushes a view controller into the stack.
 	 *
@@ -185,10 +189,6 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	 */
 	getTopViewController: function() {
 		return this.topViewController;
-	},
-
-	loadView: function() {
-		this.view = new Moobile.ViewStack();
 	},
 
 	willAddChildViewController: function(viewController) {

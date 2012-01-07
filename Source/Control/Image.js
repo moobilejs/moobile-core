@@ -50,11 +50,6 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		tagName: 'img'
 	},
 
-	destroy: function() {
-		this.image = null;
-		this.parent();
-	},
-
 	/**
 	 * Sets the image source.
 	 *
@@ -105,7 +100,13 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		if (source && source.trim()) {
 			this.show();
 		}
+	},
+
+	destroy: function() {
+		this.image = null;
+		this.parent();
 	}
+
 });
 
 //------------------------------------------------------------------------------

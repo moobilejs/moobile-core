@@ -95,13 +95,6 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
-	destroy: function() {
-		this.thumb = null;
-		this.track = null;
-		this.slider = null;
-		this.parent();
-	},
-
 	/**
 	 * Sets the value.
 	 *
@@ -169,6 +162,13 @@ Moobile.Slider = new Class({
 		this.slider.addEvent('change', this.bound('onChange'));
 
 		this.setValue(this.options.value);
+	},
+
+	destroy: function() {
+		this.thumb = null;
+		this.track = null;
+		this.slider = null;
+		this.parent();
 	},
 
 	onMove: function(position) {

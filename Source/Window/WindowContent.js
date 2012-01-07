@@ -38,7 +38,7 @@ Moobile.WindowContent = new Class( /** @lends WindowContent.prototype */ {
 
 	Extends: Moobile.ViewContent,
 
-	didBuild: function() {
+	willBuild: function() {
 		this.parent();
 		this.element.addClass('window-content');
 	}

@@ -97,24 +97,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	overlay: null,
 
-	destroy: function() {
-
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-
-		this.title = null;
-		this.message = null;
-
-		this.dialog = null;
-		this.dialogHeader = null;
-		this.dialogFooter = null;
-		this.dialogContent = null;
-
-		this.overlay.destroy();
-		this.overlay = null;
-
-		this.parent();
-	},
-
 	/**
 	 * Sets the title.
 	 *
@@ -332,6 +314,24 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	didHide: function() {
 		this.parent();
 		this.destroy();
+	},
+
+	destroy: function() {
+
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+
+		this.title = null;
+		this.message = null;
+
+		this.dialog = null;
+		this.dialogHeader = null;
+		this.dialogFooter = null;
+		this.dialogContent = null;
+
+		this.overlay.destroy();
+		this.overlay = null;
+
+		this.parent();
 	},
 
 	onButtonClick: function(e) {
