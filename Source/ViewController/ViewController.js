@@ -437,7 +437,23 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1.0
 	 */
 	setTitle: function(title) {
+
+		if (this.title === title)
+			return this;
+
+		if (typeof title == 'string') {
+			var text = title;
+			title = new Moobile.Text();
+			title.setText(text);
+		}
+
+		var parent = this.title ? this.title.getParent() : null;
+		if (parent) {
+			parent.replaceChild(this.title, title);
+		}
+
 		this.title = title;
+
 		return this;
 	},
 
@@ -468,7 +484,24 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1.0
 	 */
 	setImage: function(image) {
+
+		if (this.image === image)
+			return this;
+
+		if (typeof image == 'string') {
+			var source = image;
+			image = new Moobile.Text();
+			image.setSource(source);
+		}
+
+		var parent = this.image ? this.image.getParent() : null;
+		if (parent) {
+			parent.replaceChild(this.image, image);
+		}
+
 		this.image = image;
+
+		return this;
 	},
 
 	/**
