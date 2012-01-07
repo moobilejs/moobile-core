@@ -50,6 +50,13 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	content: null,
 
+	/**
+	 * @var    {View} The view that owns this view.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentView: null,
+
 	destroy: function() {
 		this.content = null;
 		this.parent();
@@ -103,30 +110,33 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	addChild: function(entity, where, context) {
 
-		if (entity instanceof Moobile.ViewContent) {
+		if (this.hasChild(entity))
+			return false;
+
+		if (entity instanceof Moobile.View)
+			entity.setParentView(this);
+
+		if (entity instanceof Moobile.ViewContent)
 			return this.parent(entity, where, context);
-		}
 
-		switch (where) {
-			case 'header': return this.parent(entity, 'top');
-			case 'footer': return this.parent(entity, 'bottom');
-		}
+		if (where == 'header')
+			return this.parent(entity, 'top');
 
-		if (this.content) {
+		if (where == 'footer')
+			return this.parent(entity, 'bottom');
 
-			if (this.hasChild(entity)) {
-				return false;
-			}
+		if (this.content == null)
+			return this.parent(entity, where, context);
 
-			if (this.hasElement(entity) && !this.content.hasElement(entity) ||
-				this.hasElement(context) && !this.content.hasElement(context)) {
-				return this.parent(entity, where, context);
-			}
+		// the entity is in the view but not in the view content
+		if (this.hasElement(entity) && !this.content.hasElement(entity))
+			return this.parent(entity, where, context);
 
-			return this.content.addChild(entity, where, context);
-		}
+		// the entity will go next to an element that is in the view but not in the view content
+		if (this.hasElement(context) && !this.content.hasElement(context))
+			return this.parent(entity, where, context);
 
-		return this.parent(entity, where, context);
+		return this.content.addChild(entity, where, context);
 	},
 
 	/**
@@ -213,9 +223,27 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
+	 * Set the view that owns this view.
+	 *
+	 * This method should be used instead of `setParent` because it will set
+	 * an view instead of a view content.
+	 *
+	 * @return {View} This view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setParentView: function(parentView) {
+		this.parentViewWillChange(parentView);
+		this.parentView = parentView;
+		this.parentViewDidChange(parentView);
+		return this;
+	},
+
+	/**
 	 * Returns the view that owns this view.
 	 *
-	 * This method should be used instead of `getOwner` because it will return
+	 * This method should be used instead of `getParent` because it will return
 	 * an view instead of a view content.
 	 *
 	 * @return {View} The view that owns this view.
@@ -223,19 +251,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getOwnerView: function() {
-
-		var owner = this.owner;
-		while (owner) {
-
-			if (owner instanceof Moobile.View) {
-				return owner;
-			}
-
-			owner = owner.getOwner();
-		}
-
-		return null;
+	getParentView: function() {
+		return this.parentView;
 	},
 
 	/**
@@ -302,6 +319,38 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	didLoad: function() {
 		this.parent();
 		this.element.addClass('view');
+	},
+
+	/**
+	 * Tell the view it's about to be moved to a new view.
+	 *
+	 * The current implementation of this method does nothing. However it's a
+	 * good practice to call the parent at the top of your implementation as
+	 * the content of this method may change in the future.
+	 *
+	 * @param {View} parentView The view that will own this view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	parentViewWillChange: function(parentView) {
+
+	},
+
+	/**
+	 * Tell the view it has been moved to a new view.
+	 *
+	 * The current implementation of this method does nothing. However it's a
+	 * good practice to call the parent at the top of your implementation as
+	 * the content of this method may change in the future.
+	 *
+	 * @param {View} parentView The view that owns this view.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	parentViewDidChange: function(parentView) {
+
 	}
 
 });

@@ -83,7 +83,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 
 			this.didLeave(viewToShow, viewToHide, parentView);
 
-			this.overlay.removeFromOwner();
+			this.overlay.removeFromParent();
 			this.overlay.destroy();
 			this.overlay = null;
 

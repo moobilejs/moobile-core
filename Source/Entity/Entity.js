@@ -61,13 +61,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	style: null,
 
 	/**
-	 * @var    {Entity} The entity that owns this entity.
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	owner: null,
-
-	/**
 	 * @var    {String} The name.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -87,6 +80,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1.0
 	 */
 	children: [],
+
+	/**
+	 * @var    {Entity} The entity that owns this entity.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentEntity: null,
 
 	/**
 	 * @var    {Window} The window.
@@ -185,7 +185,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Destroys this entity.
 	 *
-	 * This method will remove this entity from its owner, destroy all its
+	 * This method will remove this entity from its parent, destroy all its
 	 * child entities then destroy its element.
 	 *
 	 * If you override this method, make sure you call the parent method at
@@ -206,14 +206,14 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
 		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
 
-		this.removeFromOwner();
+		this.removeFromParent();
 
 		this.destroyChildren();
 
 		this.element.destroy();
 		this.element = null;
 		this.window = null;
-		this.owner = null;
+		this.parentEntity = null;
 
 		this.didUnload();
 
@@ -275,8 +275,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.children.push(entity);
 
-		entity.removeFromOwner();
-		entity.setOwner(this);
+		entity.removeFromParent();
+		entity.setParent(this);
 		entity.setWindow(this.window);
 
 		this.didAddChild(entity);
@@ -314,7 +314,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Indicates whether this entity is the direct owner of a given entity.
+	 * Indicates whether this entity is the direct parent of a given entity.
 	 *
 	 * @param {Entity} entity The entity.
 	 *
@@ -389,7 +389,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.willRemoveChild(entity);
 
-		entity.setOwner(null);
+		entity.setParent(null);
 		entity.setWindow(null);
 		element.dispose();
 
@@ -401,7 +401,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	/**
-	 * Removes this entity from its owner.
+	 * Removes this entity from its parent.
 	 *
 	 * This method will not destroy the given entity upon removal since it
 	 * could be added to another entity. If you wish to destroy the given
@@ -412,9 +412,9 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeFromOwner: function() {
-		return this.owner
-		     ? this.owner.removeChild(this)
+	removeFromParent: function() {
+		return this.parentEntity
+		     ? this.parentEntity.removeChild(this)
 		     : false;
 	},
 
@@ -524,22 +524,22 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Sets the entity that owns this entity.
 	 *
-	 * This method will assign a reference of the entity who acts as the owner
+	 * This method will assign a reference of the entity who acts as the parent
 	 * of this entity. You should seldom need this method as it's mostly used
 	 * internally.
 	 *
-	 * @param {Entity} owner The owner.
+	 * @param {Entity} parent The parent.
 	 *
 	 * @return {Entity} This entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	setOwner: function(owner) {
+	setParent: function(parent) {
 
-		this.ownerWillChange(owner);
-		this.owner = owner;
-		this.ownerDidChange(owner);
+		this.parentWillChange(parent);
+		this.parentEntity = parent;
+		this.parentDidChange(parent);
 
 		return this;
 	},
@@ -547,7 +547,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Returns the entity that owns this entitiy.
 	 *
-	 * This method will return a reference of the entity who acts as the owner
+	 * This method will return a reference of the entity who acts as the parent
 	 * of this entity. You should seldom need this method as it's mostly used
 	 * internally.
 	 *
@@ -556,24 +556,24 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getOwner: function() {
-		return this.owner;
+	getParent: function() {
+		return this.parentEntity;
 	},
 
 	/**
-	 * Indicates whether this entity has an owner.
+	 * Indicates whether this entity has a parent.
 	 *
 	 * This method will indicates if a reference of the entity who acts as the
-	 * owner of this entity has been set. You should seldom need this method as
-	 * it's mostly used internally.
+	 * parent of this entity has been set. You should seldom need this method
+	 * as it's mostly used internally.
 	 *
-	 * @return {Boolean} Whether this entity has an owner.
+	 * @return {Boolean} Whether this entity has an parent.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasOwner: function() {
-		return !!this.owner;
+	hasParent: function() {
+		return !!this.parentEntity;
 	},
 
 	/**
@@ -1027,12 +1027,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * good practice to call the parent at the top of your implementation as
 	 * the content of this method may change in the future.
 	 *
-	 * @param {Entity} owner The entity that will own this entity.
+	 * @param {Entity} parent The entity that will own this entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	ownerWillChange: function(owner) {
+	parentWillChange: function(parent) {
 
 	},
 
@@ -1043,12 +1043,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * good practice to call the parent at the top of your implementation as
 	 * the content of this method may change in the future.
 	 *
-	 * @param {Entity} owner The entity that owns this entity.
+	 * @param {Entity} parent The entity that owns this entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	ownerDidChange: function(owner) {
+	parentDidChange: function(parent) {
 
 	},
 

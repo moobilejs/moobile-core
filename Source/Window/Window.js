@@ -79,7 +79,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	didAddChild: function(entity) {
 		this.parent(entity);
 		entity.setWindow(this);
-		entity.setOwner(this);
+		entity.setParent(this);
 	},
 
 	onWindowLoad: function(e) {

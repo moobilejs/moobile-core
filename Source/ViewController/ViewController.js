@@ -340,7 +340,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		this.didRemoveChildViewController(viewController);
 
-		viewController.getView().removeFromOwner();
+		viewController.getView().removeFromParent();
 
 		return true;
 	},
@@ -394,7 +394,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		var viewToShow = this.modalViewController.getView();
 		var viewToHide = this.view;
-		var parentView = this.view.getOwnerView();
+		var parentView = this.view.getParentView();
 
 		this.addChildViewController(this.modalViewController, 'after', viewToHide);
 
@@ -433,7 +433,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		var viewToShow = this.view;
 		var viewToHide = this.modalViewController.getView();
-		var parentView = this.view.getOwnerView();
+		var parentView = this.view.getParentView();
 
 		var viewTransition = this.modalViewController.viewTransition;
 		viewTransition.addEvent('start:once', this.bound('onDismissTransitionStart'));

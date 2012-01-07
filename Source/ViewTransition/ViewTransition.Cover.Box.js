@@ -89,15 +89,15 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 
-			viewToHide.removeFromOwner();
+			viewToHide.removeFromParent();
 
 			this.didLeave(viewToShow, viewToHide, parentView);
 
-			this.viewToShowWrapper.removeFromOwner();
+			this.viewToShowWrapper.removeFromParent();
 			this.viewToShowWrapper.destroy();
 			this.viewToShowWrapper = null;
 
-			this.overlay.removeFromOwner();
+			this.overlay.removeFromParent();
 			this.overlay.destroy();
 			this.overlay = null;
 
