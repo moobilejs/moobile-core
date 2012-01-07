@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Array.Extras
+name: Array
 
 description: Provides extra methods to the Array prototype.
 
@@ -11,12 +11,12 @@ requires:
 	- Core/Array
 
 provides:
-	- Array.Extras
+	- Array
 
 ...
 */
 
-Array.implement( /** @lends Array.prototype */ {
+Array.implement({
 
 	find: function(fn) {
 		for (var i = 0; i < this.length; i++) {
