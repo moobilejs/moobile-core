@@ -15,18 +15,26 @@ authors: "Jean-Philippe Dery (jeanphilippe.dery@gmail.com)"
 sources:
 
   - "Vendor/iscroll/src/iscroll.js"
+
   - "Source/Browser/Browser.Platform.js"
+
   - "Source/Class/Class.Instantiate.js"
+
   - "Source/Types/String.js"
   - "Source/Types/Array.js"
+
   - "Source/Element/Element.js"
+
   - "Source/Event/Event.Mobile.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.Click.js"
   - "Source/Event/Event.CSS3.js"
+
   - "Source/Request/Request.js"
   - "Source/Request/Request.ViewElement.js"
+
   - "Source/Entity/Entity.js"
+
   - "Source/Control/Control.js"
   - "Source/Control/Button.js"
   - "Source/Control/ButtonGroup.js"
@@ -44,6 +52,7 @@ sources:
   - "Source/Control/Overlay.js"
   - "Source/Control/Alert.js"
   - "Source/Control/Text.js"
+
   - "Source/View/View.js"
   - "Source/View/ViewContent.js"
   - "Source/View/ScrollView.js"
@@ -51,10 +60,12 @@ sources:
   - "Source/View/ViewPanelContent.js"
   - "Source/View/ViewStack.js"
   - "Source/View/ViewStackContent.js"
+
   - "Source/Scroller/Scroller.js"
   - "Source/Scroller/Scroller.Engine.js"
   - "Source/Scroller/Scroller.Engine.IScroll.js"
   - "Source/Scroller/Scroller.Engine.Native.js"
+
   - "Source/ViewTransition/ViewTransition.js"
   - "Source/ViewTransition/ViewTransition.Slide.js"
   - "Source/ViewTransition/ViewTransition.Cover.js"
@@ -65,9 +76,11 @@ sources:
   - "Source/ViewTransition/ViewTransition.Flip.js"
   - "Source/ViewTransition/ViewTransition.None.js"
   - "Source/ViewController/ViewController.js"
+
   - "Source/ViewController/ViewControllerStack.js"
   - "Source/ViewController/ViewControllerStack.Navigation.js"
   - "Source/ViewController/ViewControllerPanel.js"
+
   - "Source/Window/Window.js"
   - "Source/Window/WindowContent.js"
   - "Source/Window/WindowController.js"
