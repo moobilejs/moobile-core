@@ -19,7 +19,7 @@ sources:
   - "Source/Class/Class.Instantiate.js"
   - "Source/Types/String.Extras.js"
   - "Source/Types/Array.Extras.js"
-  - "Source/Element/Element.Ingest.js"
+  - "Source/Element/Element.js"
   - "Source/Event/Event.Mobile.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.Click.js"

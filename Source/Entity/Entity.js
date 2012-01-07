@@ -757,7 +757,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	getRoleElement: function(role) {
-		return this.getRoleElements(role)[0] || null;
+		return this.element.getRoleElement(role);
 	},
 
 	/**
@@ -775,30 +775,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	getRoleElements: function(role) {
-
-		var validate = this.bound('isValidRoleElement');
-		var selector = role
-		             ? '[data-role=' + role + ']'
-		             : '[data-role]';
-
-		return this.element.getElements(selector).filter(validate);
-	},
-
-	isValidRoleElement: function(element) {
-
-		var parent = element.getParent();
-		if (parent) {
-
-			if (parent === this.element)
-				return true;
-
-			if (parent.get('data-role'))
-				return false;
-
-			return this.isValidRoleElement(parent);
-		}
-
-		return false;
+		return this.element.getRoleElements(role);
 	},
 
 	attachRoles: function() {
@@ -825,7 +802,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		if (element.retrieve('moobile.entity.role'))
 			return this;
 
-		if (this.isValidRoleElement(element)) {
+		if (this.element.ownsRoleElement(element)) {
 
 			var name = role || element.get('data-role');
 			if (name) {
