@@ -266,6 +266,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		});
 	},
 
+	getChildByType: function(type) {
+		return this.children.filter(function(children) {
+			return children instanceof type;
+		});
+	},
+
 	/**
 	 * Indicates whether this entity is the direct parent of a given entity.
 	 *
