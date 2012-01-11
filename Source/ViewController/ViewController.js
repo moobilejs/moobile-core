@@ -188,8 +188,6 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * parameter.
 	 *
 	 * @param {ViewController} viewController The child view controller.
-	 * @param {String}         where          The location.
-	 * @param {Element}        context        The location context element.
 	 *
 	 * @return {Boolean} Whether the child view controller was successfully
 	 *                   added.
@@ -199,7 +197,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	addChildViewController: function(viewController, where, context) {
+	addChildViewController: function(viewController) {
 
 		if (this.childViewControllers.contains(viewController))
 			return false;
@@ -217,7 +215,57 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		viewController.parentViewControllerDidChange(this);
 
 		this.childViewControllers.push(viewController);
-		this.view.addChild(viewController.getView(), where, context);
+		this.view.addChild(viewController.getView());
+		this.didAddChildViewController(viewController);
+
+		return true;
+	},
+
+	addChildViewControllerBefore: function(viewController, before) {
+
+		if (this.childViewControllers.contains(viewController) || 
+			this.childViewControllers.contains(before))
+			return false;
+
+		this.willAddChildViewController(viewController);
+
+		viewController.parentViewControllerWillChange(this);
+
+		if (!viewController.isModal()) {
+			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
+			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
+		}
+
+		viewController.setParentViewController(this);
+		viewController.parentViewControllerDidChange(this);
+
+		this.childViewControllers.splice(this.childViewControllers.indexOf(before), 0, viewController);
+		this.view.addChild(viewController.getView(), 'before', before.getView());
+		this.didAddChildViewController(viewController);
+
+		return true;
+	},
+
+	addChildViewControllerAfter: function(viewController, after) {
+
+		if (this.childViewControllers.contains(viewController) || 
+			this.childViewControllers.contains(after))
+			return false;
+
+		this.willAddChildViewController(viewController);
+
+		viewController.parentViewControllerWillChange(this);
+
+		if (!viewController.isModal()) {
+			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
+			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
+		}
+
+		viewController.setParentViewController(this);
+		viewController.parentViewControllerDidChange(this);
+
+		this.childViewControllers.splice(this.childViewControllers.indexOf(after + 1, 0, viewController);
+		this.view.addChild(viewController.getView(), 'after', after.getView());
 		this.didAddChildViewController(viewController);
 
 		return true;
