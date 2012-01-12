@@ -221,10 +221,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		return true;
 	},
 
+	// TODO: Fix this, there is too much duplicated code.
 	addChildViewControllerBefore: function(viewController, before) {
 
 		if (this.childViewControllers.contains(viewController) || 
-			this.childViewControllers.contains(before))
+			this.childViewControllers.contains(before) == false)
 			return false;
 
 		this.willAddChildViewController(viewController);
@@ -246,10 +247,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		return true;
 	},
 
+	// TODO: Fix this, there is too much duplicated code.
 	addChildViewControllerAfter: function(viewController, after) {
 
 		if (this.childViewControllers.contains(viewController) || 
-			this.childViewControllers.contains(after))
+			this.childViewControllers.contains(after) == false)
 			return false;
 
 		this.willAddChildViewController(viewController);
