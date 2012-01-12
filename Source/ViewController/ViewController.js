@@ -264,7 +264,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		viewController.setParentViewController(this);
 		viewController.parentViewControllerDidChange(this);
 
-		this.childViewControllers.splice(this.childViewControllers.indexOf(after + 1, 0, viewController);
+		this.childViewControllers.splice(this.childViewControllers.indexOf(after) + 1, 0, viewController);
 		this.view.addChild(viewController.getView(), 'after', after.getView());
 		this.didAddChildViewController(viewController);
 
