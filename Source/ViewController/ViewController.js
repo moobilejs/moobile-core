@@ -158,6 +158,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		if (this.view) {
 			this.view.addEvent('ready', this.bound('onViewReady'));
+			this.viewDidLoad();
 		}
 
 		return this;
@@ -902,6 +903,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1.0
 	 */
 	didDismissModalViewController: function() {
+
+	},
+
+	viewDidLoad: function() {
 
 	},
 
