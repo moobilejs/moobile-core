@@ -29,6 +29,7 @@ sources:
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.Click.js"
   - "Source/Event/Event.CSS3.js"
+  - "Source/Event/Event.Rotate.js"
 
   - "Source/Request/Request.js"
   - "Source/Request/Request.ViewElement.js"

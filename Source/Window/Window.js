@@ -40,37 +40,11 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 
 	Extends: Moobile.View,
 
-	/**
-	 * Return the orientation.
-	 *
-	 * This method will return a string that is either `portrait` or `landscape`
-	 * representing the current orientation of the window.
-	 *
-	 * @return {String} The orientation.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getOrientation: function() {
-		var o = Math.abs(window.orientation);
-		switch (o) {
-			case  0: return 'portrait';
-			case 90: return 'landscape';
-		}
-	},
-
-	position: function() {
-		window.scrollTo(0, 1);
-	},
-
 	willBuild: function() {
-
 		this.parent();
-
 		this.element.set('class', 'window');
-
 		window.addEvent('load', this.bound('onWindowLoad'));
-		window.addEvent('orientationchange', this.bound('onWindowOrientationChange'));
+		window.addEvent('rotate', this.bound('onWindowRotate'));
 	},
 
 	didAddChild: function(entity) {
@@ -80,10 +54,8 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	},
 
 	destroy: function() {
-
 		window.removeEvent('load', this.bound('onWindowLoad'));
-		window.removeEvent('orientationchange', this.bound('onWindowOrientationChange'));
-
+		window.removeEvent('rotate', this.bound('onWindowRotate'));
 		this.parent();
 	},
 
@@ -91,8 +63,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		this.position.delay(250);
 	},
 
-	onWindowOrientationChange: function(e) {
-		this.position();
-		this.fireEvent('orientationchange', this.getOrientation());
+	onWindowRotate: function(e) {
+		window.scrollTo(0, 1);
 	}
 });

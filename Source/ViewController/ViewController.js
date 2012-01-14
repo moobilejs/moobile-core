@@ -100,6 +100,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	viewTransition: null,
 
 	/**
+	 * @var    {WindowController} The window controller
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	windowController: null,
+
+	/**
 	 * @var    {ViewControllerStack} The view controller stack.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -112,6 +119,13 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1.0
 	 */
 	viewControllerPanel: null,
+
+	/**
+	 * @var    {ViewControllerTabs} The view controller tabs.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewControllerTabs: null,
 
 	/**
 	 * @var    {ViewController} The parent view controller.
@@ -155,11 +169,12 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		this.setOptions(options);
 
 		this.loadView();
-
 		if (this.view) {
 			this.view.addEvent('ready', this.bound('onViewReady'));
 			this.viewDidLoad();
 		}
+
+		window.addEvent('rotate', this.bound('onWindowRotate'));
 
 		return this;
 	},
@@ -210,8 +225,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		if (!viewController.isModal()) {
 			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
 			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
+			if (!viewController.getViewControllerTabs())  viewController.setViewControllerTabs(this.viewControllerTabs);
 		}
 
+		viewController.setWindowController(this.windowController);
 		viewController.setParentViewController(this);
 		viewController.parentViewControllerDidChange(this);
 
@@ -236,8 +253,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		if (!viewController.isModal()) {
 			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
 			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
+			if (!viewController.getViewControllerTabs())  viewController.setViewControllerTabs(this.viewControllerTabs);
 		}
 
+		viewController.setWindowController(this.windowController);
 		viewController.setParentViewController(this);
 		viewController.parentViewControllerDidChange(this);
 
@@ -262,8 +281,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		if (!viewController.isModal()) {
 			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
 			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
+			if (!viewController.getViewControllerTabs())  viewController.setViewControllerTabs(this.viewControllerTabs);
 		}
 
+		viewController.setWindowController(this.windowController);
 		viewController.setParentViewController(this);
 		viewController.parentViewControllerDidChange(this);
 
@@ -347,9 +368,12 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		this.childViewControllers.erase(viewController);
 
 		viewController.parentViewControllerWillChange(null);
+		viewController.setWindowController(null);
+		viewController.setParentViewController(null);
 		viewController.setViewControllerStack(null);
 		viewController.setViewControllerPanel(null);
-		viewController.setParentViewController(null);
+		viewController.setViewControllerTabs(null);
+
 		viewController.parentViewControllerDidChange(null);
 
 		this.didRemoveChildViewController(viewController);
@@ -646,6 +670,15 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		return this.viewTransition;
 	},
 
+	setWindowController: function(windowController) {
+		this.windowController = windowController;
+		return this;
+	},
+
+	getWindowController: function() {
+		return this.windowController;
+	},
+
 	/**
 	 * Sets the view controller stack.
 	 *
@@ -720,6 +753,15 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	getViewControllerPanel: function(viewControllerPanel) {
 		return this.viewControllerPanel;
+	},
+
+	setViewControllerTabs: function(viewControllerTabs) {
+		this.viewControllerTabs = viewControllerTabs;
+		return this;
+	},
+
+	getViewControllerTabs: function(viewControllerTabs) {
+		return this.viewControllerTabs;
 	},
 
 	/**
@@ -906,6 +948,32 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 	},
 
+	/**
+	 * Tells this view controller its orientation changed.
+	 *
+	 * The current implementation of this method does nothing. However it's a
+	 * good practice to call the parent as the implementation of this method
+	 * may change in the future.
+	 *
+	 * @param {String} orientation The orientation, `portrait` or `landscape`.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRotateToOrientation: function(orientation) {
+
+	},
+
+	/**
+	 * Tells this view controller its managed view was loaded.
+	 *
+	 * The current implementation of this method does nothing. However it's a
+	 * good practice to call the parent as the implementation of this method
+	 * may change in the future.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	viewDidLoad: function() {
 
 	},
@@ -1016,6 +1084,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	destroyChildViewController: function(viewController) {
 		viewController.destroy();
 		viewController = null;
+	},
+
+	onWindowRotate: function(e) {
+		this.didRotateToOrientation(e.orientationName);
 	},
 
 	onViewReady: function() {
