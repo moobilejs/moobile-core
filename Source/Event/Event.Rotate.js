@@ -36,7 +36,7 @@ provides:
 		return true;
 	};
 
-	Element.defineCustomEvent('ready', {
+	Element.defineCustomEvent('rotate', {
 		base: 'orientationchange',
 		condition: condition
 	});
