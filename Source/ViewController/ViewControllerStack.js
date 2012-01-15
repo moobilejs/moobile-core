@@ -39,6 +39,13 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
+	 * @var    {Boolean} Whether a child view is in a transition.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	inTransition: false,
+
+	/**
 	 * @var    {ViewController} The top view controller.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -67,8 +74,11 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	 */
 	pushViewController: function(viewController, viewTransition) {
 
+		if (this.inTransition)
+			return this;
+
 		if (this.topViewController == viewController)
-			return;
+			return this;
 
 		var viewControllerPushed = viewController; // ease of understanding
 
@@ -89,6 +99,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		var viewToHide = viewControllerBefore
 					   ? viewControllerBefore.view
 					   : null;
+
+		this.inTransition = true;
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.None();
 		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
@@ -119,6 +131,9 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	 */
 	popViewController: function() {
 
+		if (this.inTransition)
+			return this;
+
 		if (this.childViewControllers.length <= 1)
 			return this;
 
@@ -128,6 +143,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		this.willPopViewController(viewControllerPopped);
 
 		this.topViewController = viewControllerBefore;
+
+		this.inTransition = true;
 
 		var viewTransition = viewControllerPopped.viewTransition;
 		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
@@ -156,6 +173,9 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	 * @since  0.1.0
 	 */
 	popViewControllerUntil: function(viewController) {
+
+		if (this.inTransition)
+			return this;
 
 		if (this.childViewControllers.length <= 1)
 			return this;
@@ -191,9 +211,18 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		return this.topViewController;
 	},
 
-	willAddChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setViewControllerStack(this);
+	/**
+	 * Indicates whether this view controller is currently pusing or popping
+	 * a child view controller using a transition.
+	 *
+	 * @return {Boolean} Whether this view controller is currently pushing or
+	 *                   popping a child view controller using a transition.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isInTransition: function() {
+		return this.inTransition;
 	},
 
 	/**
@@ -252,7 +281,12 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 	},
 
-	onPushTransitionStart: function() {
+	willAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerStack(this);
+	},
+
+	onPushTransitionStart: function(e) {
 
 		var viewControllerPushed = this.childViewControllers.lastItemAt(0);
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
@@ -263,7 +297,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		viewControllerPushed.viewWillEnter();
 	},
 
-	onPushTransitionComplete: function() {
+	onPushTransitionComplete: function(e) {
 
 		var viewControllerPushed = this.childViewControllers.lastItemAt(0);
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
@@ -274,9 +308,11 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		this.didPushViewController(viewControllerPushed);
 
 		viewControllerPushed.viewDidEnter();
+
+		this.inTransition = false;
 	},
 
-	onPopTransitionStart: function() {
+	onPopTransitionStart: function(e) {
 
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
 		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
@@ -285,7 +321,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		viewControllerPopped.viewWillLeave();
 	},
 
-	onPopTransitionComplete: function() {
+	onPopTransitionComplete: function(e) {
 
 		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
 		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
@@ -298,6 +334,8 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 
 		viewControllerPopped.destroy();
 		viewControllerPopped = null;
+
+		this.inTransition = false;
 	}
 
 });
