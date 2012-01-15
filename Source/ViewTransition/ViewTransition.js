@@ -51,11 +51,13 @@ Moobile.ViewTransition = new Class({
 		viewToShow.show();
 		viewToShow.disableTouch();
 
-		var start = isFirstView
-			? this.raiseAnimation(viewToShow, parentView)
-			: this.enterAnimation(viewToShow, viewToHide, parentView);
+		this.fireEvent('start');
 
-		if (start != false) this.fireEvent('start');
+		if (isFirstView) {
+			this.raiseAnimation(viewToShow, parentView)
+		} else {
+			this.enterAnimation(viewToShow, viewToHide, parentView);
+		}
 
 		return this;
 	},
@@ -66,10 +68,8 @@ Moobile.ViewTransition = new Class({
 		viewToShow.disableTouch();
 		viewToHide.disableTouch();
 
-		var start = this.leaveAnimation(viewToShow, viewToHide, parentView);
-		if (start != false) {
-			this.fireEvent('start');
-		}
+		this.fireEvent('start');
+		this.leaveAnimation(viewToShow, viewToHide, parentView);
 
 		return this;
 	},
