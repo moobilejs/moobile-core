@@ -231,18 +231,23 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		pageX = pageX || 0;
 		pageY = pageY || 0;
 
-		var frameSize = this.getSize();
-		var scrollSize = this.getScrollSize();
+		var frame = this.getSize();
+		var scroll = this.getScrollSize();
 
-		var maxPageX = Math.ceil(scrollSize.x / frameSize.x);
-		var maxPageY = Math.ceil(scrollSize.y / frameSize.y);
+		var maxPageX = Math.ceil(scroll.x / frame.x) - 1;
+		var maxPageY = Math.ceil(scroll.y / frame.y) - 1;
+
+		if (pageX < 0) pageX = 0;
+		if (pageY < 0) pageY = 0;
+
 		if (pageX > maxPageX) pageX = maxPageX;
 		if (pageY > maxPageY) pageY = maxPageY;
 
-		var x = frameSize.x * pageX;
-		var y = frameSize.y * pageY;
-		if (pageX == maxPageX - 1) x -= maxPageX * frameSize.x - scrollSize.x;
-		if (pageY == maxPageY - 1) y -= maxPageX * frameSize.y - scrollSize.y;
+		var x = frame.x * pageX;
+		var y = frame.y * pageY;
+
+		if (pageX == maxPageX) x = scroll.x - frame.x;
+		if (pageY == maxPageY) y = scroll.y - frame.y;
 
 		this.scrollTo(x, y, time);
 
@@ -289,11 +294,13 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 
 		var pageX = this.startPage.x;
 		var pageY = this.startPage.y;
+
 		var moveX = Math.round((scroll.x - this.startScroll.x) * 100 / frame.x);
 		var moveY = Math.round((scroll.y - this.startScroll.y) * 100 / frame.y);
 
 		var dirX = moveX >= 0 ? 1 : -1;
 		var dirY = moveY >= 0 ? 1 : -1;
+
 		if (Math.abs(this.startScroll.x - scroll.x) < 10) dirX = 0;
 		if (Math.abs(this.startScroll.y - scroll.y) < 10) dirY = 0;
 
@@ -415,6 +422,8 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	onMove: function() {
+		this.page.x = Math.floor(this.getScroll().x / this.getSize().x);
+		this.page.y = Math.floor(this.getScroll().y / this.getSize().y);
 		this.fireEvent('move');
 	},
 
