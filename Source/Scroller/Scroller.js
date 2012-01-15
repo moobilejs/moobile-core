@@ -85,6 +85,16 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	startPage: null,
 
 	/**
+	 * @var    {Object} The current page.
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	page: {
+		x: 0,
+		y: 0
+	},
+
+	/**
 	 * @var    {Object} The class options.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -182,10 +192,8 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	 * @since  0.1
 	 */
 	destroy: function() {
-
 		this.engine.destroy();
 		this.engine = null;
-
 		return this;
 	},
 
@@ -223,11 +231,23 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		pageX = pageX || 0;
 		pageY = pageY || 0;
 
-		var size = this.getSize();
-		var x = size.x * pageX;
-		var y = size.y * pageY;
+		var frameSize = this.getSize();
+		var scrollSize = this.getScrollSize();
+
+		var maxPageX = Math.ceil(scrollSize.x / frameSize.x);
+		var maxPageY = Math.ceil(scrollSize.y / frameSize.y);
+		if (pageX > maxPageX) pageX = maxPageX;
+		if (pageY > maxPageY) pageY = maxPageY;
+
+		var x = frameSize.x * pageX;
+		var y = frameSize.y * pageY;
+		if (pageX == maxPageX - 1) x -= maxPageX * frameSize.x - scrollSize.x;
+		if (pageY == maxPageY - 1) y -= maxPageX * frameSize.y - scrollSize.y;
 
 		this.scrollTo(x, y, time);
+
+		this.page.x = pageX;
+		this.page.y = pageY;
 
 		return this;
 	},
@@ -262,19 +282,18 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	 */
 	snap: function() {
 
-		var size = this.getSize();
+		var frame = this.getSize();
 		var scroll = this.getScroll();
 
 		var time = Date.now() - this.startTime;
 
 		var pageX = this.startPage.x;
 		var pageY = this.startPage.y;
-		var moveX = Math.round((scroll.x - this.startPage.x * size.x) / size.x * 100);
-		var moveY = Math.round((scroll.y - this.startPage.y * size.y) / size.y * 100);
+		var moveX = Math.round((scroll.x - this.startScroll.x) * 100 / frame.x);
+		var moveY = Math.round((scroll.y - this.startScroll.y) * 100 / frame.y);
 
 		var dirX = moveX >= 0 ? 1 : -1;
 		var dirY = moveY >= 0 ? 1 : -1;
-
 		if (Math.abs(this.startScroll.x - scroll.x) < 10) dirX = 0;
 		if (Math.abs(this.startScroll.y - scroll.y) < 10) dirY = 0;
 
@@ -361,10 +380,7 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	 * @since  0.1
 	 */
 	getPage: function() {
-		return {
-			x: Math.floor(this.getScroll().x / this.getSize().x),
-			y: Math.floor(this.getScroll().y / this.getSize().y)
-		};
+		return this.page;
 	},
 
 	/**
