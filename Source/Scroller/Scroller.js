@@ -133,22 +133,23 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		if (this.options.snapToPage)
 			this.options.momentum = false;
 
-		var engine = null;
+		var engine  = null;
+		var engines = Array.from(this.options.engine);
 
-		Array.from(this.options.engine).each(function(name) {
+		for (var i = 0; i < engines.length; i++) {
 
-			engine = Moobile.Scroller.Engine[name];
-			if (engine == undefined) {
-				throw new Error('The scroller engine ' + engine + ' does not exists');
+			var candidate = Moobile.Scroller.Engine[engines[i]];
+			if (candidate == undefined) {
+				throw new Error('The scroller engine ' + candidate + ' does not exists');
 			}
 
-			if (engine.supportsCurrentPlatform &&
-				engine.supportsCurrentPlatform.call(this) == false) {
-				engine = null;
-				return;
+			if (candidate.supportsCurrentPlatform == undefined ||
+				candidate.supportsCurrentPlatform &&
+				candidate.supportsCurrentPlatform.call(this)) {
+				engine = candidate;
+				break;
 			}
-
-		}, this);
+		}
 
 		if (engine == null) {
 			throw new Error('There are no scrolling engine available');
