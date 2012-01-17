@@ -26,7 +26,7 @@ provides:
 	Object.append(window, {
 
 		getOrientationName: function() {
-			return 	Math.abs(window.orientation) == 0 ? 'portrait' : 'landscape';
+			return 	Math.abs(window.orientation) == 90 ? 'landscape' : 'portrait';
 		}
 
 	});
