@@ -45,6 +45,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		this.element.set('class', 'window');
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('rotate', this.bound('onWindowRotate'));
+		this.window = this; // weird but important
 	},
 
 	didAddChild: function(entity) {
