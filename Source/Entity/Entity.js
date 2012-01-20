@@ -216,6 +216,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		if (!this.hasElement(element)) {
 
+			where = where || 'bottom';
+
 			context = document.id(context);
 			if (context == null) {
 				context = this.element;
@@ -266,12 +268,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		});
 	},
 
-	getChildByType: function(type) {
-		return this.children.filter(function(children) {
-			return children instanceof type;
-		});
-	},
-
 	/**
 	 * Indicates whether this entity is the direct parent of a given entity.
 	 *
@@ -294,8 +290,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildren: function() {
-		return this.children;
+	getChildren: function(type) {
+		return type == undefined
+			? this.children
+			: this.children.filter(function(entity) {
+				return entity instanceof type;
+			});
 	},
 
 	/**
@@ -794,6 +794,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	getSize: function() {
 		return this.element.getSize();
+	},
+
+	getPosition: function(relative) {
+		return this.element.getPosition(document.id(relative) || this.parentEntity);
 	},
 
 	/**
