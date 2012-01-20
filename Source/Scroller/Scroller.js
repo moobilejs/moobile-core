@@ -270,7 +270,7 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	 * @since  0.1
 	 */
 	scrollToElement: function(element, time) {
-		this.engine.scrollToElement(element, time);
+		this.engine.scrollToElement(document.id(element), time);
 		return this;
 	},
 
