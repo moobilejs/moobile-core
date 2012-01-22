@@ -999,15 +999,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it became visible.
 	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.
+	 * The current implementation of this method fires the `show` event. Always
+	 * call the parent at the top of your implementation otherwise the event
+	 * will not be fired.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	didShow: function() {
-
+		this.fireEvent('show');
 	},
 
 	/**
@@ -1027,15 +1027,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	/**
 	 * Tell the entity it became hidden.
 	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.
+	 * The current implementation of this method fires the `hide` event. Always
+	 * call the parent at the top of your implementation otherwise the event
+	 * will not be fired.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	didHide: function() {
-
+		this.fireEvent('hide');
 	},
 
 	/**
