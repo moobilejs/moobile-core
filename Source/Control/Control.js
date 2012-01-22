@@ -269,7 +269,7 @@ Moobile.Control = new Class( /* @lends Control.prototype */ {
 	},
 
 	_getState: function(state) {
-		return this.states[state] || false;
+		return this[state] || false;
 	},
 
 	onSwipe: function(e) {
