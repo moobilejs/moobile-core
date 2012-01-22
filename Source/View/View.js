@@ -179,8 +179,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildren: function() {
-		return [].concat(this.parent(), this.content.getChildren());
+	getChildren: function(type) {
+		return [].concat(this.parent(type), this.content.getChildren(type));
 	},
 
 	/**
