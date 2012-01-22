@@ -1065,6 +1065,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	destroy: function() {
 
+		window.removeEvent('rotate', this.bound('onWindowRotate'));
+
 		this.destroyChildViewControllers();
 
 		this.view.destroy();
