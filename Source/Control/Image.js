@@ -41,6 +41,17 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 
 	Extends: Moobile.Control,
 
+	image: null,
+
+	source: null,
+
+	loaded: false,
+
+	originalSize: {
+		x: 0,
+		y: 0
+	},
+
 	/**
 	 * @var    {Object} The class options.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -66,8 +77,18 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	setSource: function(source) {
 
 		if (this.element.get('tag') == 'img') {
-			this.element.set('src', source);
-			this.show();
+
+			this.loaded = false;
+			this.source = source;
+
+			if (this.image) {
+				this.image.removeEvent('load', this.bound('onLoad'));
+				this.image = null;
+			}
+
+			this.image = new Image();
+			this.image.src = source;
+			this.image.addEvent('load', this.bound('onLoad'));
 		}
 
 		return this;
@@ -85,7 +106,19 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	 * @since  0.1.0
 	 */
 	getSource: function() {
-		return this.element.get('src');
+		return this.source;
+	},
+
+	getImage: function() {
+		return this.image;
+	},
+
+	getOriginalSize: function() {
+		return this.originalSize;
+	},
+
+	isLoaded: function() {
+		return this.loaded;
 	},
 
 	willBuild: function() {
@@ -96,15 +129,30 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 
 		this.element.addClass('image');
 
-		var source = this.getSource();
-		if (source && source.trim()) {
-			this.show();
+		if (this.element.get('tag') == 'img') {
+			var source = this.element.get('src');
+			if (source) {
+				this.setSource(source);
+			}
 		}
 	},
 
 	destroy: function() {
 		this.image = null;
 		this.parent();
+	},
+
+	onLoad: function() {
+
+		this.loaded = true;
+		this.originalSize.x = this.image.width;
+		this.originalSize.y = this.image.height;
+
+		this.element.set('src', this.source);
+
+		this.show();
+
+		this.fireEvent('load');
 	}
 
 });
