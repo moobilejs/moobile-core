@@ -35,9 +35,18 @@ if (Browser.isMobile) (function() {
 	var condition = function(e) {
 
 		var touch = e.changedTouches[0];
+		if (touch) {
 
-		e.page   = {x:touch.pageX,   y:touch.pageY};
-		e.client = {x:touch.clientX, y:touch.clientY};
+			e.client = {
+				x:touch.clientX,
+				y:touch.clientY
+			};
+
+			e.page = {
+				x:touch.pageX,
+				y:touch.pageY
+			};
+		}
 
 		return true;
 	};

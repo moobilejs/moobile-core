@@ -87,6 +87,24 @@ provides:
 		},
 
 		condition: function(e) {
+
+			if (Browser.isMobile) {
+
+				var touch = e.changedTouches[0];
+				if (touch) {
+
+					e.client = {
+						x:touch.clientX,
+						y:touch.clientY
+					};
+
+					e.page = {
+						x:touch.pageX,
+						y:touch.pageY
+					};
+				}
+			}
+
 			return valid;
 		}
 
