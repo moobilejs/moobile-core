@@ -122,7 +122,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 Moobile.Entity.defineRole('bar', null, function(element) {
 	var instance = Moobile.Entity.fromElement(element, 'data-bar', Moobile.Bar);
-	this.setItem(instance);
+	this.addChild(instance);
 });
 
 //------------------------------------------------------------------------------
