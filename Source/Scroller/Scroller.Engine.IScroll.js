@@ -90,12 +90,15 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller
 			fadeScrollbar: true,
 			checkDOMChanges: true,
 			snap: false,
-			onScrollStart: this.bound('onStart'),
-			onScrollMove: this.bound('onMove'),
-			onTouchEnd: this.bound('onEnd')
+			onScrollStart: this.bound('onScrollStart'),
+			onScrollMove: this.bound('onScrollMove'),
+			onScrollEnd: this.bound('onScrollEnd')
 		};
 
 		this.scroller = new iScroll(this.wrapper, options);
+
+		this.wrapper.addEvent('mousedown', this.bound('onMouseDown'));
+		this.wrapper.addEvent('mouseup', this.bound('onMouseUp'));
 
 		window.addEvent('orientationchange', this.bound('onOrientationChange'));
 
@@ -211,22 +214,45 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller
 		return this.content.getScrollSize();
 	},
 
-	onStart: function() {
+	_watch: null,
+
+	_startScrollWatch: function() {
+		this._watch = this._scrollWatch.periodical(1000 / 30, this);
+	},
+
+	_stopScrollWatch: function() {
+		clearTimeout(this._watch);
+	},
+
+	_scrollWatch: function() {
+		if (this.scrolling == false) {
+			this._stopScrollWatch();
+			return;
+		}
+		this.fireEvent('scrollmove');
+	},
+
+	onMouseDown: function() {
+		this.fireEvent('dragstart');
+	},
+
+	onMouseUp: function() {
+		this.fireEvent('dragend');
+		this._startScrollWatch();
+	},
+
+	onScrollStart: function() {
 		this.scrolling = true;
-		this.fireEvent('start');
+		this.fireEvent('scrollstart');
 	},
 
-	onMove: function() {
-		if (this.scrolling) {
-			this.fireEvent('move');
-		}
+	onScrollMove: function() {
+		this.fireEvent('scrollmove');
 	},
 
-	onEnd: function() {
-		if (this.scrolling) {
-			this.scrolling = false;
-			this.fireEvent('end');
-		}
+	onScrollEnd: function() {
+		this.scrolling = false;
+		this.fireEvent('scrollend');
 	},
 
 	onOrientationChange: function() {

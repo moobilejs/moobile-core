@@ -64,11 +64,11 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 
 		this.scroller = new Fx.Scroll(this.wrapper);
 
+		this.wrapper.addEvent('scroll', this.bound('onScroll'));
 		this.wrapper.addEvent('touchstart', this.bound('onTouchStart'));
-		this.wrapper.addEvent('touchmove', this.bound('onTouchMove'));
 		this.wrapper.addEvent('touchend', this.bound('onTouchEnd'));
 
-		window.addEvent('orientationchange', this.bound('onOrientationChange'));
+		window.addEvent('rotate', this.bound('onWindowRotate'));
 
 		return this;
 	},
@@ -85,6 +85,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	 * @since  0.1
 	 */
 	destroy: function() {
+		window.removeEvent('rotate', this.bound('onWindowRotate'));
 		this.scroller = null;
 		this.parent();
 	},
@@ -107,7 +108,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 
 		this.scroller.setOptions({duration: time});
 		this.scroller.start(x, y);
-
+		// TODO: proper events
 		return this;
 	},
 
@@ -200,43 +201,67 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 		return this.content.getScrollSize();
 	},
 
+	scrollWatch: null,
+
+	momentum: false,
+
+	watchScroll: function() {
+
+		if (this.momentum == false) {
+			this.disableScrollWatch();
+			this.fireEvent('scrollend');
+			return;
+		}
+
+		this.fireEvent('scrollmove');
+	},
+
+	enableScrollWatch: function() {
+		this.scrollWatch = this.watchScroll.periodical(1000 / 30, this);
+	},
+
+	disableScrollWatch: function() {
+		clearTimeout(this.scrollWatch);
+	},
+
 	onTouchStart: function() {
 
 		var scroll = this.wrapper.getScroll();
 		if (scroll.x == 0) {
-
 			if (scroll.y <= 0) {
 				this.wrapper.scrollTo(0, 1);
 			} else {
-				var max  = this.wrapper.getScrollSize();
+				var max = this.wrapper.getScrollSize();
 				var size = this.wrapper.getSize();
 				if (size.y + scroll.y >= max.y) {
 					this.wrapper.scrollTo(0, scroll.y - 1);
 				}
 			}
-
 		}
 
-		this.scroller.cancel();
-		this.scrolling = true;
-
-		this.fireEvent('start');
-	},
-
-	onTouchMove: function() {
-		if (this.scrolling) {
-			this.fireEvent('move');
+		if (this.momentum) {
+			this.disableScrollWatch();
+			this.fireEvent('scrollend');
 		}
+
+		this.momentum = false;
+
+		this.fireEvent('dragstart');
+		this.fireEvent('scrollstart');
 	},
 
 	onTouchEnd: function() {
-		if (this.scrolling) {
-			this.scrolling = false;
-			this.fireEvent('end');
-		}
+		this.momentum = true;
+		this.fireEvent('dragend');
+		this.enableScrollWatch();
 	},
 
-	onOrientationChange: function(e) {
+	onScroll: function() {
+		this.momentum = false;
+		this.fireEvent('scrollmove');
+	},
+
+	onWindowRotate: function(e) {
 		this.refresh();
 	}
 
