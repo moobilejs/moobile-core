@@ -58,7 +58,8 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	 * @since  0.1.0
 	 */
 	options: {
-		tagName: 'img'
+		tagName: 'img',
+		preLoad: false
 	},
 
 	/**
@@ -79,6 +80,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		if (this.element.get('tag') == 'img') {
 
 			this.loaded = false;
+
 			this.source = source;
 
 			if (this.image) {
@@ -86,9 +88,13 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 				this.image = null;
 			}
 
-			this.image = new Image();
-			this.image.src = source;
-			this.image.addEvent('load', this.bound('onLoad'));
+			if (this.options.preLoad) {
+				this.image = new Image();
+				this.image.src = source;
+				this.image.addEvent('load', this.bound('onLoad'));
+			} else {
+				this.onLoad();
+			}
 		}
 
 		return this;
@@ -145,8 +151,11 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	onLoad: function() {
 
 		this.loaded = true;
-		this.originalSize.x = this.image.width;
-		this.originalSize.y = this.image.height;
+
+		if (this.options.preLoad) {
+			this.originalSize.x = this.image.width;
+			this.originalSize.y = this.image.height;
+		}
 
 		this.element.set('src', this.source);
 
