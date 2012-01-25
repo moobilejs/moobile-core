@@ -214,39 +214,51 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller
 		return this.content.getScrollSize();
 	},
 
-	_watch: null,
+	watchTimer: null,
 
-	_startScrollWatch: function() {
-		this._watch = this._scrollWatch.periodical(1000 / 30, this);
-	},
+	watchScrollMove: function() {
 
-	_stopScrollWatch: function() {
-		clearTimeout(this._watch);
-	},
-
-	_scrollWatch: function() {
-		if (this.scrolling == false) {
-			this._stopScrollWatch();
-			return;
+		if (this.watchTimer == null) {
+			this.watchTimer = this.watchScrollMove.periodical(1000 / 20, this);
+			return this;
 		}
-		this.fireEvent('scrollmove');
+
+		if (this.scrolling) {
+			this.fireEvent('scrollmove');
+			return this;
+		}
+
+		clearTimeout(this.watchTimer);
+
+		this.watchTimer = null;
+
+		return this;
 	},
 
 	onMouseDown: function() {
+
+		if (this.scrolling) {
+			this.onScrollEnd();
+		}
+
 		this.fireEvent('dragstart');
 	},
 
 	onMouseUp: function() {
+
+		if (this.scrolling) {
+			this.watchScrollMove();
+		}
+
 		this.fireEvent('dragend');
-		this._startScrollWatch();
 	},
 
 	onScrollStart: function() {
-		this.scrolling = true;
 		this.fireEvent('scrollstart');
 	},
 
 	onScrollMove: function() {
+		this.scrolling = true;
 		this.fireEvent('scrollmove');
 	},
 
