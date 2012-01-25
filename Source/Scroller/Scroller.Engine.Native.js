@@ -64,9 +64,9 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 
 		this.scroller = new Fx.Scroll(this.wrapper);
 
-		this.wrapper.addEvent('scroll', this.bound('onScroll'));
 		this.wrapper.addEvent('touchstart', this.bound('onTouchStart'));
 		this.wrapper.addEvent('touchend', this.bound('onTouchEnd'));
+		this.wrapper.addEvent('scroll', this.bound('onScroll'));
 
 		window.addEvent('rotate', this.bound('onWindowRotate'));
 
@@ -201,64 +201,36 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 		return this.content.getScrollSize();
 	},
 
-	scrollWatch: null,
-
-	momentum: false,
-
-	watchScroll: function() {
-
-		if (this.momentum == false) {
-			this.disableScrollWatch();
-			this.fireEvent('scrollend');
-			return;
-		}
-
-		this.fireEvent('scrollmove');
-	},
-
-	enableScrollWatch: function() {
-		this.scrollWatch = this.watchScroll.periodical(1000 / 30, this);
-	},
-
-	disableScrollWatch: function() {
-		clearTimeout(this.scrollWatch);
-	},
-
 	onTouchStart: function() {
 
 		var scroll = this.wrapper.getScroll();
 		if (scroll.x == 0) {
+
 			if (scroll.y <= 0) {
+
+				// offset scroll top
 				this.wrapper.scrollTo(0, 1);
+
 			} else {
-				var max = this.wrapper.getScrollSize();
-				var size = this.wrapper.getSize();
-				if (size.y + scroll.y >= max.y) {
+
+				// offset scroll bottom
+				var totalSize = this.wrapper.getScrollSize();
+				var frameSize = this.wrapper.getSize();
+				if (frameSize.y + scroll.y >= totalSize.y) {
 					this.wrapper.scrollTo(0, scroll.y - 1);
 				}
 			}
 		}
 
-		if (this.momentum) {
-			this.disableScrollWatch();
-			this.fireEvent('scrollend');
-		}
-
-		this.momentum = false;
-
 		this.fireEvent('dragstart');
-		this.fireEvent('scrollstart');
 	},
 
 	onTouchEnd: function() {
-		this.momentum = true;
 		this.fireEvent('dragend');
-		this.enableScrollWatch();
 	},
 
 	onScroll: function() {
-		this.momentum = false;
-		this.fireEvent('scrollmove');
+		this.fireEvent('scroll');
 	},
 
 	onWindowRotate: function(e) {

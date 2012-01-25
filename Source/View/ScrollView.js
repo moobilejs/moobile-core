@@ -175,11 +175,9 @@ Moobile.ScrollView = new Class({
 		};
 
 		this.scroller = new Moobile.Scroller(this.content, options);
-		this.scroller.addEvent('scrollstart', this.bound('onScrollStart'));
-		this.scroller.addEvent('scrollmove', this.bound('onScrollMove'));
-		this.scroller.addEvent('scrollend', this.bound('onScrollEnd'));
 		this.scroller.addEvent('dragstart', this.bound('onDragStart'));
 		this.scroller.addEvent('dragend', this.bound('onDragEnd'));
+		this.scroller.addEvent('scroll', this.bound('onScroll'));
 
 		this.wrapper = this.scroller.getWrapper();
 		this.wrapper.addClass('view-content-wrapper');
@@ -216,24 +214,16 @@ Moobile.ScrollView = new Class({
 		this.parent();
 	},
 
-	onScrollStart: function() {
-		this.fireEvent('scrollstart');
-	},
-
-	onScrollMove: function() {
-		this.fireEvent('scrollmove');
-	},
-
-	onScrollEnd: function() {
-		this.fireEvent('scrollend');
-	},
-
 	onDragStart: function() {
 		this.fireEvent('dragstart');
 	},
 
 	onDragEnd: function() {
 		this.fireEvent('dragend');
+	},
+
+	onScroll: function() {
+		this.fireEvent('scroll');
 	}
 
 });
