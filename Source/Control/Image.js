@@ -157,7 +157,11 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 			this.originalSize.y = this.image.height;
 		}
 
-		this.element.set('src', this.source);
+		if (this.source) {
+			this.element.set('src', this.source);
+		} else {
+			this.element.erase('src');
+		}
 
 		this.show();
 
