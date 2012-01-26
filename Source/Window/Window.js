@@ -61,10 +61,10 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	},
 
 	onWindowLoad: function(e) {
-		this.position.delay(250);
+		(function() { window.scrollTo(0, 1) }).delay(250);
 	},
 
 	onWindowRotate: function(e) {
-		window.scrollTo(0, 1);
+		(function() { window.scrollTo(0, 1) }).delay(250);
 	}
 });
