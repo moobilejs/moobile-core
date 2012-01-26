@@ -131,8 +131,8 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	scrollTo: function(x, y, time, relative) {
-		(function() { this.scroller.scrollTo(-x, -y, time, relative); }).delay(5, this);
+	scrollTo: function(x, y, time) {
+		(function() { this.scroller.scrollTo(-x, -y, time); }).delay(5, this);
 		return this;
 	},
 
@@ -148,7 +148,8 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller
 	 * @since  0.1
 	 */
 	scrollToElement: function(element, time) {
-		(function() { this.scroller.scrollToElement(element, time); }).delay(5, this);
+		var p = element.getPosition(this.content);
+		this.scrollTo(p.x, p.y, time);
 		return this;
 	},
 
