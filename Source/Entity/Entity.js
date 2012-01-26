@@ -372,9 +372,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	removeFromParent: function() {
-		return this.parentEntity
-		     ? this.parentEntity.removeChild(this)
-		     : false;
+
+		if (this.parentEntity) {
+			this.parentEntity.removeChild(this)
+			this.parentEntity = null;
+		}
+
+		return true;
 	},
 
 	/**
@@ -1062,23 +1066,22 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.removeFromParent();
 
-		this.destroyChildren();
+		var entity = this.children.getLast();
+		while (entity) {
+			entity.destroy();
+			entity = this.children.getLast();
+		}
 
 		this.element.destroy();
 		this.element = null;
 		this.window = null;
-		this.parentEntity = null;
 
 		return this;
 	},
 
-	destroyChildren: function() {
-		this.children.each(this.bound('destroyChild'));
-		this.children.empty();
-	},
-
 	destroyChild: function(entity) {
 		entity.destroy();
+		entity = null;
 	},
 
 	onSwipe: function(e) {
