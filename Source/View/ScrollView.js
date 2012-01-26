@@ -89,8 +89,8 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	scrollTo: function(x, y, time, relative) {
-		this.scroller.scrollTo(x, y, time, relative);
+	scrollTo: function(x, y, time) {
+		this.scroller.scrollTo(x, y, time);
 		return this;
 	},
 
@@ -204,9 +204,9 @@ Moobile.ScrollView = new Class({
 
 	destroy: function() {
 
-		this.scroller.removeEvent('start', this.bound('onScrollStart'));
-		this.scroller.removeEvent('move', this.bound('onScrollMove'));
-		this.scroller.removeEvent('end', this.bound('onScrollEnd'));
+		this.scroller.removeEvent('dragstart', this.bound('onDragStart'));
+		this.scroller.removeEvent('dragend', this.bound('onDragEnd'));
+		this.scroller.removeEvent('scroll', this.bound('onScroll'));
 
 		this.scroller.destroy();
 		this.scroller = null;
