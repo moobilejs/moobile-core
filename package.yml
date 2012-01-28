@@ -25,11 +25,11 @@ sources:
 
   - "Source/Element/Element.js"
 
-  - "Source/Event/Event.Mobile.js"
   - "Source/Event/Event.Ready.js"
-  - "Source/Event/Event.Click.js"
   - "Source/Event/Event.CSS3.js"
   - "Source/Event/Event.Rotate.js"
+  - "Source/Event/Event.Mouse.js"
+  - "Source/Event/Event.Tap.js"
 
   - "Source/Request/Request.js"
   - "Source/Request/Request.ViewElement.js"
