@@ -23,22 +23,22 @@ provides:
 
 (function() {
 
-	Object.append(window, {
+if (!window.orientation) window.orientation = 0;
+if (!window.orientationName) window.orientationName = 'portrait';
 
-		getOrientationName: function() {
-			return 	Math.abs(window.orientation) == 90 ? 'landscape' : 'portrait';
-		}
+var orientation = function() {
+	window.orientationName = Math.abs(window.orientation) == 90 ? 'landscape' : 'portrait';
+};
 
-	});
+Element.defineCustomEvent('rotate', {
 
-	var condition = function(e) {
-		e.orientationName = window.getOrientationName();
+	base: 'orientationchange',
+
+	condition: function(e) {
+		orientation();
 		return true;
-	};
+	}
 
-	Element.defineCustomEvent('rotate', {
-		base: 'orientationchange',
-		condition: condition
-	});
+});
 
 })();
