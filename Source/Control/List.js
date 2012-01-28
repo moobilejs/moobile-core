@@ -226,9 +226,9 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		this.parent(entity);
 
 		if (entity instanceof Moobile.ListItem) {
-			entity.addEvent('click', this.bound('onItemClick'));
-			entity.addEvent('mouseup', this.bound('onItemMouseUp'));
-			entity.addEvent('mousedown', this.bound('onItemMouseDown'));
+			entity.addEvent('tapstart', this.bound('onItemTapStart'));
+			entity.addEvent('tapend', this.bound('onItemTapEnd'));
+			entity.addEvent('tap', this.bound('onItemTap'));
 		}
 	},
 
@@ -237,28 +237,28 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		this.parent(entity);
 
 		if (entity instanceof Moobile.ListItem) {
-			entity.removeEvent('click', this.bound('onItemClick'));
-			entity.removeEvent('mouseup', this.bound('onItemMouseUp'));
-			entity.removeEvent('mousedown', this.bound('onItemMouseDown'));
+			entity.removeEvent('tapstart', this.bound('onItemTapStart'));
+			entity.removeEvent('tapend', this.bound('onItemTapEnd'));
+			entity.removeEvent('tap', this.bound('onItemTap'));
 		}
 	},
 
-	onItemClick: function(e) {
-		var item = e.target;
-		if (this.selectable) this.setSelectedItem(item);
-		this.fireEvent('click', e);
-	},
-
-	onItemMouseUp: function(e) {
-		var item = e.target;
-		if (this.selectable && this.highlightable) item.setHighlighted(false);
-		this.fireEvent('mouseup', e);
-	},
-
-	onItemMouseDown: function(e) {
-		var item = e.target;
+	onItemTapStart: function(e) {
+		var item = e.targetEntity;
 		if (this.selectable && this.highlightable) item.setHighlighted(true);
-		this.fireEvent('mousedown', e);
+		this.fireEvent('tapstart', e);
+	},
+
+	onItemTapEnd: function(e) {
+		var item = e.targetEntity;
+		if (this.selectable && this.highlightable) item.setHighlighted(false);
+		this.fireEvent('tapend', e);
+	},
+
+	onItemTap: function(e) {
+		var item = e.targetEntity;
+		if (this.selectable) this.setSelectedItem(item);
+		this.fireEvent('tap', e);
 	}
 
 });

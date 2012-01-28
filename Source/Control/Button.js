@@ -120,12 +120,12 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		this.parent();
 	},
 
-	onMouseDown: function(e) {
+	onTapStart: function(e) {
 		this.parent(e);
 		this.setHighlighted(true);
 	},
 
-	onMouseUp: function(e) {
+	onTapEnd: function(e) {
 		this.parent(e);
 		this.setHighlighted(false);
 	}

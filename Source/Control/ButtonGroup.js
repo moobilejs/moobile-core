@@ -223,9 +223,9 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		this.parent(entity);
 
 		if (entity instanceof Moobile.Button) {
-			entity.addEvent('click', this.bound('onButtonClick'));
-			entity.addEvent('mouseup', this.bound('onButtonMouseUp'));
-			entity.addEvent('mousedown', this.bound('onButtonMouseDown'));
+			entity.addEvent('tapstart', this.bound('onButtonTapStart'));
+			entity.addEvent('tapend', this.bound('onButtonTapEnd'));
+			entity.addEvent('tap', this.bound('onButtonTap'));
 		}
 	},
 
@@ -234,9 +234,9 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		this.parent(entity);
 
 		if (entity instanceof Moobile.Button) {
-			entity.removeEvent('click', this.bound('onButtonClick'));
-			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
-			entity.removeEvent('mousedown', this.bound('onButtonMouseDown'));
+			entity.removeEvent('tapstart', this.bound('onButtonTapStart'));
+			entity.removeEvent('tapend', this.bound('onButtonTapEnd'));
+			entity.removeEvent('tap', this.bound('onButtonTap'));
 		}
 	},
 
@@ -246,17 +246,17 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		this.parent();
 	},
 
-	onButtonClick: function(e) {
-		this.setSelectedButton(e.target);
-		this.fireEvent('buttonclick', e.target);
+	onButtonTapStart: function(e) {
+		this.fireEvent('buttontapstart', e.targetEntity);
 	},
 
-	onButtonMouseUp: function(e) {
-		this.fireEvent('buttonmouseup', e.target);
+	onButtonTapEnd: function(e) {
+		this.fireEvent('buttontapend', e.targetEntity);
 	},
 
-	onButtonMouseDown: function(e) {
-		this.fireEvent('buttonmousedown', e.target);
+	onButtonTap: function(e) {
+		this.setSelectedButton(e.targetEntity);
+		this.fireEvent('buttontap', e.targetEntity);
 	}
 
 });

@@ -280,15 +280,15 @@ Moobile.Control = new Class( /* @lends Control.prototype */ {
 		if (!this.disabled) this.parent(e);
 	},
 
-	onClick: function(e) {
+	onTap: function(e) {
 		if (!this.disabled) this.parent(e);
 	},
 
-	onMouseUp: function(e) {
+	onTapStart: function(e) {
 		if (!this.disabled) this.parent(e);
 	},
 
-	onMouseDown: function(e) {
+	onTapEnd: function(e) {
 		if (!this.disabled) this.parent(e);
 	}
 

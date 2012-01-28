@@ -159,9 +159,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.element.addEvent('swipe', this.bound('onSwipe'));
 		this.element.addEvent('pinch', this.bound('onPinch'));
-		this.element.addEvent('click', this.bound('onClick'));
-		this.element.addEvent('mouseup', this.bound('onMouseUp'))
-		this.element.addEvent('mousedown', this.bound('onMouseDown'));
+
+		this.element.addEvent('touchstart', this.bound('onTouchStart'));
+		this.element.addEvent('touchmove', this.bound('onTouchMove'));
+		this.element.addEvent('touchend', this.bound('onTouchEnd'));
+
+		this.element.addEvent('tapstart', this.bound('onTapStart'));
+		this.element.addEvent('tapmove', this.bound('onTapMove'));
+		this.element.addEvent('tapend', this.bound('onTapEnd'));
+		this.element.addEvent('tap', this.bound('onTap'));
 
 		this.willBuild();
 
@@ -1060,9 +1066,15 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.element.removeEvent('swipe', this.bound('onSwipe'));
 		this.element.removeEvent('pinch', this.bound('onPinch'));
-		this.element.removeEvent('click', this.bound('onClick'));
-		this.element.removeEvent('mouseup', this.bound('onMouseUp'));
-		this.element.removeEvent('mousedown', this.bound('onMouseDown'));
+
+		this.element.removeEvent('touchstart', this.bound('onTouchStart'));
+		this.element.removeEvent('touchmove', this.bound('onTouchMove'));
+		this.element.removeEvent('touchend', this.bound('onTouchEnd'));
+
+		this.element.removeEvent('tapstart', this.bound('onTapStart'));
+		this.element.removeEvent('tapmove', this.bound('onTapMove'));
+		this.element.removeEvent('tapend', this.bound('onTapEnd'));
+		this.element.removeEvent('tap', this.bound('onTap'));
 
 		this.removeFromParent();
 
@@ -1085,28 +1097,48 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	onSwipe: function(e) {
-		e.target = this;
+		e.targetEntity = this;
 		this.fireEvent('swipe', e);
 	},
 
 	onPinch: function(e) {
-		e.target = this;
+		e.targetEntity = this;
 		this.fireEvent('swipe', e);
 	},
 
-	onClick: function(e) {
-		e.target = this;
-		this.fireEvent('click', e);
+	onTapStart: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('tapstart', e);
 	},
 
-	onMouseUp: function(e) {
-		e.target = this;
-		this.fireEvent('mouseup', e);
+	onTapMove: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('tapmove', e);
 	},
 
-	onMouseDown: function(e) {
-		e.target = this;
-		this.fireEvent('mousedown', e);
+	onTapEnd: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('tapend', e);
+	},
+
+	onTap: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('tap', e);
+	},
+
+	onTouchStart: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('touchstart', e);
+	},
+
+	onTouchMove: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('touchmove', e);
+	},
+
+	onTouchEnd: function(e) {
+		e.targetEntity = this;
+		this.fireEvent('touchend', e);
 	},
 
 	toElement: function() {

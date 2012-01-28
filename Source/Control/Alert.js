@@ -285,9 +285,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.parent(entity);
 
 		if (entity instanceof Moobile.Button) {
-			entity.addEvent('click', this.bound('onButtonClick'));
-			entity.addEvent('mouseup', this.bound('onButtonMouseUp'));
-			entity.addEvent('mousedown', this.bound('onButtonMouseUp'));
+			entity.addEvent('tap', this.bound('onButtonTap'));
 			this.buttons.include(entity);
 		}
 	},
@@ -297,9 +295,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.parent(entity);
 
 		if (entity instanceof Moobile.Button) {
-			entity.removeEvent('click', this.bound('onButtonClick'));
-			entity.removeEvent('mouseup', this.bound('onButtonMouseUp'));
-			entity.removeEvent('mousedown', this.bound('onButtonMouseUp'));
+			entity.removeEvent('tap', this.bound('onButtonTap'));
 			this.buttons.erase(entity);
 		}
 	},
@@ -338,17 +334,9 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.parent();
 	},
 
-	onButtonClick: function(e) {
-		this.fireEvent('buttonclick', e.target);
+	onButtonTap: function(e) {
+		this.fireEvent('select', e.targetEntity);
 		if (this.buttons.length == 1) this.hideAnimated();
-	},
-
-	onButtonMouseUp: function(e) {
-		this.fireEvent('buttonmouseup');
-	},
-
-	onButtonMouseDown: function(e) {
-		this.fireEvent('buttonmousedown');
 	},
 
 	onAnimationEnd: function(e) {
