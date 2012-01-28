@@ -20,9 +20,7 @@ provides:
 ...
 */
 
-if (!Browser.Features.Touch) (function(){
-
-var mouseDown = false;
+if (!Browser.Features.Touch) (function() {
 
 var fix = function(e) {
 	e.targetTouches = [];
@@ -34,20 +32,7 @@ var fix = function(e) {
 	}];
 };
 
-var touchStartCondition = function(e) {
-	fix(e);
-	return true;
-};
-
-var touchEndCondition = function(e) {
-	fix(e);
-	return true;
-};
-
-var touchMoveCondition = function(e) {
-	fix(e);
-	return mouseDown;
-};
+var mouseDown = false;
 
 var onMouseMoveStart = function(e) {
 	mouseDown = true;
@@ -57,26 +42,36 @@ var onMouseMoveEnd = function(e) {
 	mouseDown = false;
 };
 
-Element.Events['touchstart'] = {
+Element.defineCustomEvent('touchstart', {
 
 	base: 'mousedown',
 
-	condition: touchStartCondition
-};
+	condition: function(e) {
+		fix(e);
+		return true;
+	}
 
-Element.Events['touchend'] = {
+});
+
+Element.defineCustomEvent('touchend', {
 
 	base: 'mouseup',
 
-	condition: touchEndCondition
+	condition: function(e) {
+		fix(e);
+		return true;
+	}
 
-};
+});
 
-Element.Events['touchmove'] = {
+Element.defineCustomEvent('touchmove', {
 
 	base: 'mousemove',
 
-	condition: touchMoveCondition,
+	condition: function(e) {
+		fix(e);
+		return mouseDown;
+	},
 
 	onAdd: function() {
 		this.addEvent('mousedown', onMouseMoveStart);
@@ -88,6 +83,6 @@ Element.Events['touchmove'] = {
 		this.removeEvent('mouseup', onMouseMoveEnd);
 	}
 
-};
+});
 
 })();
