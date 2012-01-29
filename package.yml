@@ -35,6 +35,7 @@ sources:
   - "Source/Request/Request.ViewElement.js"
 
   - "Source/Entity/Entity.js"
+  - "Source/Entity/Entity.NativeEvents.js"
 
   - "Source/Control/Control.js"
   - "Source/Control/Button.js"
