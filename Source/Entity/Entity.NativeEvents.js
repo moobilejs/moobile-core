@@ -32,6 +32,9 @@ Moobile.Entity.NativeEvents = Array.append(
 	'tapend',
 	'tap',
 
+	'pinch',
+	'swipe',
+
 	'transitionEnd',
 	'animationEnd'
 

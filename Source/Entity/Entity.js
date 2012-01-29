@@ -22,7 +22,12 @@ provides:
 ...
 */
 
+(function() {
+
 if (!window.Moobile) window.Moobile = {};
+
+var addEvent = Events.prototype.addEvent;
+var fireEvent = Events.prototype.fireEvent;
 
 /**
  * @name  Entity
@@ -157,18 +162,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.setOptions(options);
 
-		this.element.addEvent('swipe', this.bound('onSwipe'));
-		this.element.addEvent('pinch', this.bound('onPinch'));
-
-		this.element.addEvent('touchstart', this.bound('onTouchStart'));
-		this.element.addEvent('touchmove', this.bound('onTouchMove'));
-		this.element.addEvent('touchend', this.bound('onTouchEnd'));
-
-		this.element.addEvent('tapstart', this.bound('onTapStart'));
-		this.element.addEvent('tapmove', this.bound('onTapMove'));
-		this.element.addEvent('tapend', this.bound('onTapEnd'));
-		this.element.addEvent('tap', this.bound('onTap'));
-
 		this.willBuild();
 
 		var className = this.options.className;
@@ -186,6 +179,31 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		this.didBuild();
 
 		return this;
+	},
+
+	addEvent: function(type, fn, internal) {
+
+		if (this.eventIsNative(type)) {
+			this.element.addEvent(type, function(e) {
+				e.targetEntity = this;
+				e.targetElement = this.element;
+				this.fireEvent(type, e);
+			}.bind(this), internal);
+		}
+
+		return addEvent.call(this, type, fn, internal);
+	},
+
+	fireEvent: function(type, args, delay) {
+		return this.eventShouldFire(type, args) ? fireEvent.call(this, type, args, delay) : this;
+	},
+
+	eventShouldFire: function(type, args) {
+		return true;
+	},
+
+	eventIsNative: function(type) {
+		return Moobile.Entity.NativeEvents.contains(type);
 	},
 
 	/**
@@ -1064,17 +1082,17 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	destroy: function() {
 
-		this.element.removeEvent('swipe', this.bound('onSwipe'));
-		this.element.removeEvent('pinch', this.bound('onPinch'));
+		// this.element.removeEvent('swipe', this.bound('onSwipe'));
+		// this.element.removeEvent('pinch', this.bound('onPinch'));
 
-		this.element.removeEvent('touchstart', this.bound('onTouchStart'));
-		this.element.removeEvent('touchmove', this.bound('onTouchMove'));
-		this.element.removeEvent('touchend', this.bound('onTouchEnd'));
+		// this.element.removeEvent('touchstart', this.bound('onTouchStart'));
+		// this.element.removeEvent('touchmove', this.bound('onTouchMove'));
+		// this.element.removeEvent('touchend', this.bound('onTouchEnd'));
 
-		this.element.removeEvent('tapstart', this.bound('onTapStart'));
-		this.element.removeEvent('tapmove', this.bound('onTapMove'));
-		this.element.removeEvent('tapend', this.bound('onTapEnd'));
-		this.element.removeEvent('tap', this.bound('onTap'));
+		// this.element.removeEvent('tapstart', this.bound('onTapStart'));
+		// this.element.removeEvent('tapmove', this.bound('onTapMove'));
+		// this.element.removeEvent('tapend', this.bound('onTapEnd'));
+		// this.element.removeEvent('tap', this.bound('onTap'));
 
 		this.removeFromParent();
 
@@ -1265,3 +1283,5 @@ Moobile.Entity.defineStyle = function(name, target, behavior) {
 		detach: function() {}
 	}, behavior);
 };
+
+})();
