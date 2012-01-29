@@ -38,10 +38,10 @@ provides:
 
 	/* events */
 
-	Element.NativeEvents[prefix + 'TransitionEnd'] = 2;
-	Element.Events.transitionend = { base: (prefix + 'TransitionEnd') };
+	Element.NativeEvents[prefix + 'TransitionEnd'] = 1;
+	Element.Events['transitionend'] = { base: (prefix + 'TransitionEnd') };
 
-	Element.NativeEvents[prefix + 'AnimationEnd'] = 2;
-	Element.Events.animationend = { base: (prefix + 'AnimationEnd') };
+	Element.NativeEvents[prefix + 'AnimationEnd'] = 1;
+	Element.Events['animationend'] = { base: (prefix + 'AnimationEnd') };
 
 })();
