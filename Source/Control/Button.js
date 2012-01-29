@@ -113,20 +113,23 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		}
 
 		this.attachRole(label, 'label');
+
+		this.addEvent('tapstart', this.bound('onTapStart'));
+		this.addEvent('tapend', this.bound('onTapEnd'));
 	},
 
 	destroy: function() {
+		this.removeEvent('tapstart', this.bound('onTapStart'));
+		this.removeEvent('tapend', this.bound('onTapEnd'));
 		this.label = null;
 		this.parent();
 	},
 
 	onTapStart: function(e) {
-		this.parent(e);
 		this.setHighlighted(true);
 	},
 
 	onTapEnd: function(e) {
-		this.parent(e);
 		this.setHighlighted(false);
 	}
 
