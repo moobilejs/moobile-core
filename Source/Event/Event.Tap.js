@@ -78,14 +78,14 @@ Element.defineCustomEvent('tap', {
 		return tapValid;
 	},
 
-	onAdd: function() {
+	onSetup: function() {
 		this.addEvent('touchstart', onTapTouchStart);
 		this.addEvent('touchmove', onTapTouchMove);
 	},
 
-	onRemove: function() {
-		this.removeEvent('touchstart', onTouchStart);
-		this.removeEvent('touchmove', onTouchMove);
+	onTeardown: function() {
+		this.removeEvent('touchstart', onTapTouchStart);
+		this.removeEvent('touchmove', onTapTouchMove);
 	}
 
 });
@@ -110,7 +110,7 @@ Element.defineCustomEvent('tapmove', {
 
 });
 
-Element.Events['tapend'] = {
+Element.defineCustomEvent('tapend', {
 
 	base: 'touchend',
 
@@ -118,6 +118,6 @@ Element.Events['tapend'] = {
 		return e.changedTouches.length == 1;
 	}
 
-};
+});
 
 })();

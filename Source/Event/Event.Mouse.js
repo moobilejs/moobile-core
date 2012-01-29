@@ -48,12 +48,12 @@ Element.defineCustomEvent('touchmove', {
 		return mouseDown;
 	},
 
-	onAdd: function() {
+	onSetup: function() {
 		this.addEvent('mousedown', onMouseMoveStart);
 		this.addEvent('mouseup', onMouseMoveEnd);
 	},
 
-	onRemove: function() {
+	onTeardown: function() {
 		this.removeEvent('mousedown', onMouseMoveStart);
 		this.removeEvent('mouseup', onMouseMoveEnd);
 	}
