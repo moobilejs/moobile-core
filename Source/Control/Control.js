@@ -254,6 +254,10 @@ Moobile.Control = new Class( /* @lends Control.prototype */ {
 		return this.highlightable;
 	},
 
+	eventShouldFire: function(type, args) {
+		return !this.disabled;
+	},
+
 	_setState: function(state, value) {
 
 		if (this[state] == value)
@@ -270,26 +274,6 @@ Moobile.Control = new Class( /* @lends Control.prototype */ {
 
 	_getState: function(state) {
 		return this[state] || false;
-	},
-
-	onSwipe: function(e) {
-		if (!this.disabled) this.parent(e);
-	},
-
-	onPinch: function(e) {
-		if (!this.disabled) this.parent(e);
-	},
-
-	onTap: function(e) {
-		if (!this.disabled) this.parent(e);
-	},
-
-	onTapStart: function(e) {
-		if (!this.disabled) this.parent(e);
-	},
-
-	onTapEnd: function(e) {
-		if (!this.disabled) this.parent(e);
 	}
 
 });
