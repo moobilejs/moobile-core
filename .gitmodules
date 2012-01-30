@@ -10,7 +10,6 @@
 [submodule "iscroll"]
 	path = Vendor/iscroll
 	url = git://github.com/cubiq/iscroll.git
-
 [submodule "Vendor/mootools-mobile"]
 	path = Vendor/mootools-mobile
-	url = https://github.com/cpojer/mootools-mobile.git
+	url = git://github.com/cpojer/mootools-mobile.git
