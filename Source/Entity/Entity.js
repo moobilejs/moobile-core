@@ -1114,51 +1114,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		entity = null;
 	},
 
-	onSwipe: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('swipe', e);
-	},
-
-	onPinch: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('swipe', e);
-	},
-
-	onTapStart: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('tapstart', e);
-	},
-
-	onTapMove: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('tapmove', e);
-	},
-
-	onTapEnd: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('tapend', e);
-	},
-
-	onTap: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('tap', e);
-	},
-
-	onTouchStart: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('touchstart', e);
-	},
-
-	onTouchMove: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('touchmove', e);
-	},
-
-	onTouchEnd: function(e) {
-		e.targetEntity = this;
-		this.fireEvent('touchend', e);
-	},
-
 	toElement: function() {
 		return this.element;
 	}
