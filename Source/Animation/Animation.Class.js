@@ -1,9 +1,9 @@
 /*
 ---
 
-name: Animation.FromClass
+name: Animation.Class
 
-description:
+description: Provides a wrapper for a CSS animation that uses a CSS class.
 
 license: MIT-style license.
 
@@ -14,30 +14,35 @@ requires:
 	- Animation
 
 provides:
-	- Animation.FromClass
+	- Animation.Class
 
 ...
 */
 
-Moobile.Animation.FromClass = new Class({
+Moobile.Animation.Class = new Class({
 
 	Extends: Moobile.Animation,
 
-	className: null,
+	animationClass: null,
 
-	initialize: function(element, className) {
-		this.className = className;
-		return this.parent(element);
+	setAnimationClass: function(animationClass) {
+		this.cancel();
+		this.animationClass = animationClass;
+		return this;
+	},
+
+	getAnimationClass: function() {
+		return this.animationClass;
 	},
 
 	enableStyles: function() {
-		this.element.addClass(this.className);
+		this.element.addClass(this.animationClass);
 		return this.parent();
 	},
 
-	disableStyle: function() {
-		this.element.removeClass(this.className);
+	disableStyles: function() {
+		this.element.removeClass(this.animationClass);
 		return this.parent();
 	}
 
-})
+});

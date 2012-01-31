@@ -3,7 +3,7 @@
 
 name: Animation
 
-description:
+description: Provides a wrapper for a CSS animation.
 
 license: MIT-style license.
 
@@ -19,19 +19,7 @@ provides:
 ...
 */
 
-(function() {
-
 if (!window.Moobile) window.Moobile = {};
-
-var styles = {
-	animationName: '-webkit-animation-name',
-	animationDuration: '-webkit-animation-duration',
-	animationIterationCount: '-webkit-animation-iteration-count',
-	animationDirection: '-webkit-animation-direction',
-	animationTimingFunction: '-webkit-animation-timing-function',
-	animationFillMode: '-webkit-animation-fill-mode',
-	animationDelay: '-webkit-animation-delay'
-};
 
 Moobile.Animation = new Class({
 
@@ -45,7 +33,7 @@ Moobile.Animation = new Class({
 
 	running: false,
 
-	options: {
+	styles: {
 		animationName: null,
 		animationDuration: null,
 		animationIterationCount: null,
@@ -56,33 +44,98 @@ Moobile.Animation = new Class({
 	},
 
 	initialize: function(element, options) {
-		this.setOptions(element);
+
+		this.setOptions(options);
+
 		this.element = document.id(element);
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+
 		return this;
+	},
+
+	setAnimationName: function(animationName) {
+		this.styles.animationName = animationName;
+		return this;
+	},
+
+	getAnimationName: function() {
+		return this.styles.animationName;
+	},
+
+	setAnimationDuration: function(animationDuration) {
+		this.styles.animationDuration = animationDuration;
+		return this;
+	},
+
+	getAnimationDuration: function() {
+		return this.styles.animationDuration;
+	},
+
+	setAnimationIterationCount: function(animationIterationCount) {
+		this.styles.animationIterationCount = animationIterationCount;
+		return this;
+	},
+
+	getAnimationIterationCount: function() {
+		return this.styles.animationIterationCount;
+	},
+
+	setAnimationDirection: function(animationDirection) {
+		this.styles.animationDirection = animationDirection;
+		return this;
+	},
+
+	getAnimationDirection: function() {
+		return this.styles.animationDirection;
+	},
+
+	setAnimationTimingFunction: function(animationTimingFunction) {
+		this.styles.animationTimingFunction = animationTimingFunction;
+		return this;
+	},
+
+	getAnimationTimingFunction: function() {
+		return this.styles.animationTimingFunction;
+	},
+
+	setAnimationFillMode: function(animationFillMode) {
+		this.styles.animationFillMode = animationFillMode;
+		return this;
+	},
+
+	getAnimationFillMode: function() {
+		return this.styles.animationFillMode;
+	},
+
+	setAnimationDelay: function(animationDelay) {
+		this.styles.animationDelay = animationDelay;
+		return this;
+	},
+
+	getAnimationDelay: function() {
+		return this.styles.animationDelay;
 	},
 
 	start: function() {
 
-		if (this.playing)
-			return this;
+		if (this.running == false) {
+			this.running = true;
+			this.enableStyles();
+			this.fireEvent('start');
+		}
 
-		this.playing = true;
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-		this.enableStyles();
-
-		return this.fireEvent('start', this);
+		return this;
 	},
 
 	cancel: function() {
 
-		if (this.playing == false)
-			return this;
+		if (this.running == false) {
+			this.running = false;
+			this.disableStyles();
+			this.fireEvent('cancel');
+		}
 
-		this.playing = false;
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
-		this.disableStyles();
-
-		return this.fireEvent('cancel', this);
+		return this;
 	},
 
 	isRunning: function() {
@@ -90,37 +143,23 @@ Moobile.Animation = new Class({
 	},
 
 	enableStyles: function() {
-
-		Object.each(styles, function(value, style) {
-			var option = this.options[style];
-			if (option) this.element.setStyle(style, option);
-		}, this);
-
+		Object.each(this.styles, function(value, style) { this.element.setStyle('-webkit-' + style.hyphenate(), value) }, this);
 		return this;
 	},
 
 	disableStyles: function() {
-
-		Object.each(styles, function(value, style) {
-			var option = this.options[style];
-			if (option) this.element.setStyle(style, null);
-		}, this);
-
+		Object.each(this.styles, function(value, style) { this.element.setStyle('-webkit-' + style.hyphenate(), null) }, this);
 		return this;
 	},
 
 	onAnimationEnd: function(e) {
 
-		if (!this.playing || this.element !== e.target)
+		if (!this.running || this.element !== e.target)
 			return;
 
-		this.playing = false;
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.running = false;
 		this.disableStyles();
-
-		this.fireEvent('end', this);
+		this.fireEvent('end');
 	}
 
 });
-
-})();
