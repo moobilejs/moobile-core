@@ -16,9 +16,8 @@ sources:
 
   - "Vendor/iscroll/src/iscroll.js"
 
-  - "Source/Animation/Animations.js"
   - "Source/Animation/Animation.js"
-  - "Source/Animation/Animation.FromClass.js"
+  - "Source/Animation/Animation.Class.js"
 
   - "Source/Browser/Browser.Platform.js"
 
