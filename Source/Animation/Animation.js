@@ -47,11 +47,6 @@ Moobile.Animation = new Class({
 		'animation-delay': null
 	},
 
-	options: {
-		removeAnimationClass: true,
-		removeAnimationProperties: true
-	},
-
 	initialize: function(options) {
 		this.setOptions(options);
 		return this;
@@ -162,16 +157,11 @@ Moobile.Animation = new Class({
 	detach: function() {
 
 		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.removeClass(this.animationClass);
 
-		if (this.options.removeAnimationClass) {
-			this.element.removeClass(this.animationClass);
-		}
-
-		if (this.options.removeAnimationProperties) {
-			Object.each(this.animationProperties, function(val, key) {
-				this.element.setStyle('-webkit-animation-' + key, null);
-			}, this);
-		}
+		Object.each(this.animationProperties, function(val, key) {
+			this.element.setStyle('-webkit-animation-' + key, null);
+		}, this);
 
 		return this;
 	},
