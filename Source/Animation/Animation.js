@@ -147,11 +147,6 @@ Moobile.Animation = new Class({
 		return this.animationProperties['delay'];
 	},
 
-	eachAnimationProperties:  function(fn, bind) {
-		Object.each(this.animationProperties, function(val, key) { fn.call(this, '-webkit-animation-' + key, val) }, this);
-		return this;
-	},
-
 	attach: function() {
 
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
