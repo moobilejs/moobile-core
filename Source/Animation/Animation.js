@@ -29,111 +29,178 @@ Moobile.Animation = new Class({
 		Class.Binds
 	],
 
+	name: null,
+
 	element: null,
 
 	running: false,
 
-	styles: {
-		animationName: null,
-		animationDuration: null,
-		animationIterationCount: null,
-		animationDirection: null,
-		animationTimingFunction: null,
-		animationFillMode: null,
-		animationDelay: null
+	animationClass: null,
+
+	animationProperties: {
+		'name': null,
+		'duration': null,
+		'iteration-count': null,
+		'animation-direction': null,
+		'animation-timing-function': null,
+		'animation-fill-mode': null,
+		'animation-delay': null
 	},
 
-	initialize: function(element, options) {
+	options: {
+		removeAnimationClass: true,
+		removeAnimationProperties: true
+	},
 
+	initialize: function(options) {
 		this.setOptions(options);
-
-		this.element = document.id(element);
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-
 		return this;
 	},
 
-	setAnimationName: function(animationName) {
-		this.styles.animationName = animationName;
+	setName: function(name) {
+		this.name = name;
+		return this;
+	},
+
+	getName: function() {
+		return this.name;
+	},
+
+	setElement: function(element) {
+		this.element = document.id(element);
+		return this;
+	},
+
+	getElement: function() {
+		return this.element;
+	},
+
+	setAnimationClass: function(value) {
+		this.animationClass = value;
+		return this;
+	},
+
+	getAnimationClass: function() {
+		return this.animationClass;
+	},
+
+	setAnimationName: function(value) {
+		this.animationProperties['name'] = value;
 		return this;
 	},
 
 	getAnimationName: function() {
-		return this.styles.animationName;
+		return this.animationProperties['name'];
 	},
 
-	setAnimationDuration: function(animationDuration) {
-		this.styles.animationDuration = animationDuration;
+	setAnimationDuration: function(value) {
+		this.animationProperties['duration'] = value;
 		return this;
 	},
 
 	getAnimationDuration: function() {
-		return this.styles.animationDuration;
+		return this.animationProperties['duration'];
 	},
 
-	setAnimationIterationCount: function(animationIterationCount) {
-		this.styles.animationIterationCount = animationIterationCount;
+	setAnimationIterationCount: function(value) {
+		this.animationProperties['iteration-count'] = value;
 		return this;
 	},
 
 	getAnimationIterationCount: function() {
-		return this.styles.animationIterationCount;
+		return this.animationProperties['iteration-count'];
 	},
 
-	setAnimationDirection: function(animationDirection) {
-		this.styles.animationDirection = animationDirection;
+	setAnimationDirection: function(value) {
+		this.animationProperties['direction'] = value;
 		return this;
 	},
 
 	getAnimationDirection: function() {
-		return this.styles.animationDirection;
+		return this.animationProperties['direction'];
 	},
 
-	setAnimationTimingFunction: function(animationTimingFunction) {
-		this.styles.animationTimingFunction = animationTimingFunction;
+	setAnimationTimingFunction: function(value) {
+		this.animationProperties['timing-function'] = value;
 		return this;
 	},
 
 	getAnimationTimingFunction: function() {
-		return this.styles.animationTimingFunction;
+		return this.animationProperties['timing-function'];
 	},
 
-	setAnimationFillMode: function(animationFillMode) {
-		this.styles.animationFillMode = animationFillMode;
+	setAnimationFillMode: function(value) {
+		this.animationProperties['fill-mode'] = value;
 		return this;
 	},
 
 	getAnimationFillMode: function() {
-		return this.styles.animationFillMode;
+		return this.animationProperties['fill-mode'];
 	},
 
-	setAnimationDelay: function(animationDelay) {
-		this.styles.animationDelay = animationDelay;
+	setAnimationDelay: function(value) {
+		this.animationProperties['delay'] = value;
 		return this;
 	},
 
 	getAnimationDelay: function() {
-		return this.styles.animationDelay;
+		return this.animationProperties['delay'];
 	},
 
-	start: function() {
+	eachAnimationProperties:  function(fn, bind) {
+		Object.each(this.animationProperties, function(val, key) { fn.call(this, '-webkit-animation-' + key, val) }, this);
+		return this;
+	},
 
-		if (this.running == false) {
-			this.running = true;
-			this.enableStyles();
-			this.fireEvent('start');
+	attach: function() {
+
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.addClass(this.animationClass);
+
+		Object.each(this.animationProperties, function(val, key) {
+			this.element.setStyle('-webkit-animation-' + key, val);
+		}, this);
+
+		return this;
+	},
+
+	detach: function() {
+
+		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+
+		if (this.options.removeAnimationClass) {
+			this.element.removeClass(this.animationClass);
+		}
+
+		if (this.options.removeAnimationProperties) {
+			Object.each(this.animationProperties, function(val, key) {
+				this.element.setStyle('-webkit-animation-' + key, null);
+			}, this);
 		}
 
 		return this;
 	},
 
-	cancel: function() {
+	start: function() {
 
-		if (this.running == false) {
-			this.running = false;
-			this.disableStyles();
-			this.fireEvent('cancel');
-		}
+		if (this.running)
+			return this;
+
+		this.running = true;
+		this.attach();
+		this.fireEvent('start');
+
+		return this;
+	},
+
+	stop: function() {
+
+		if (this.running == false)
+			return this;
+
+		this.running = false;
+		this.detach();
+		this.fireEvent('stop');
 
 		return this;
 	},
@@ -142,23 +209,18 @@ Moobile.Animation = new Class({
 		return this.running;
 	},
 
-	enableStyles: function() {
-		Object.each(this.styles, function(value, style) { this.element.setStyle('-webkit-' + style.hyphenate(), value) }, this);
-		return this;
-	},
-
-	disableStyles: function() {
-		Object.each(this.styles, function(value, style) { this.element.setStyle('-webkit-' + style.hyphenate(), null) }, this);
-		return this;
-	},
-
 	onAnimationEnd: function(e) {
 
-		if (!this.running || this.element !== e.target)
+		if (this.running == false)
 			return;
 
+		if (this.element !== e.target)
+			return;
+
+		e.stop();
+
 		this.running = false;
-		this.disableStyles();
+		this.detach();
 		this.fireEvent('end');
 	}
 
