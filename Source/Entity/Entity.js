@@ -154,6 +154,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		for (var option in this.options) {
 			var value = this.element.get('data-option-' + option.hyphenate());
 			if (value != null) {
+
+				var n = parseFloat(value);
+				if (isNaN(n) == false) {
+					value = n;
+				}
+
 				if (options[option] == undefined) {
 					options[option] = value;
 				}
