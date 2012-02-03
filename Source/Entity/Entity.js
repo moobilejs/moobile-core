@@ -1088,18 +1088,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	destroy: function() {
 
-		// this.element.removeEvent('swipe', this.bound('onSwipe'));
-		// this.element.removeEvent('pinch', this.bound('onPinch'));
-
-		// this.element.removeEvent('touchstart', this.bound('onTouchStart'));
-		// this.element.removeEvent('touchmove', this.bound('onTouchMove'));
-		// this.element.removeEvent('touchend', this.bound('onTouchEnd'));
-
-		// this.element.removeEvent('tapstart', this.bound('onTapStart'));
-		// this.element.removeEvent('tapmove', this.bound('onTapMove'));
-		// this.element.removeEvent('tapend', this.bound('onTapEnd'));
-		// this.element.removeEvent('tap', this.bound('onTap'));
-
 		this.removeFromParent();
 
 		var entity = this.children.getLast();
