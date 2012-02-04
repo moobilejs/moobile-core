@@ -154,6 +154,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		for (var option in this.options) {
 			var value = this.element.get('data-option-' + option.hyphenate());
 			if (value != null) {
+
+				var n = parseFloat(value);
+				if (isNaN(n) == false) {
+					value = n;
+				}
+
 				if (options[option] == undefined) {
 					options[option] = value;
 				}
@@ -1081,18 +1087,6 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	destroy: function() {
-
-		// this.element.removeEvent('swipe', this.bound('onSwipe'));
-		// this.element.removeEvent('pinch', this.bound('onPinch'));
-
-		// this.element.removeEvent('touchstart', this.bound('onTouchStart'));
-		// this.element.removeEvent('touchmove', this.bound('onTouchMove'));
-		// this.element.removeEvent('touchend', this.bound('onTouchEnd'));
-
-		// this.element.removeEvent('tapstart', this.bound('onTapStart'));
-		// this.element.removeEvent('tapmove', this.bound('onTapMove'));
-		// this.element.removeEvent('tapend', this.bound('onTapEnd'));
-		// this.element.removeEvent('tap', this.bound('onTap'));
 
 		this.removeFromParent();
 

@@ -32,9 +32,18 @@ Moobile.ViewTransition.Slide = new Class( /* @lends ViewTransition.Slide.prototy
 
 	Extends: Moobile.ViewTransition,
 
+
+
 	raiseAnimation: function(viewToShow, parentView) {
 
 		var parentViewContent = parentView.getContent();
+
+		var animation = new Moobile.Animation();
+
+		animation.setAnimationClass('transition-slide-enter');
+		animation.addEvent('end', function() {
+
+		})
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 

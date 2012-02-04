@@ -530,7 +530,7 @@ p small {
 	padding-right: 4px;
 }
 
-..bar-button-group.style-horizontal .bar-button.is-selected,
+.bar-button-group.style-horizontal .bar-button.is-selected,
 .bar-button-group.style-horizontal .bar-button.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 150 1 1820 1 stretch stretch;
 }

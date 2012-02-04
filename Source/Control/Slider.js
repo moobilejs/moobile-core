@@ -136,9 +136,8 @@ Moobile.Slider = new Class({
 		this.parent();
 
 		this.element.addClass('slider');
-
-		this.thumb = new Element('div.' + this.options.className + '-thumb');
-		this.track = new Element('div.' + this.options.className + '-track');
+		this.thumb = new Element('div.slider-thumb');
+		this.track = new Element('div.slider-track');
 		this.track.grab(this.thumb);
 
 		this.element.empty();
