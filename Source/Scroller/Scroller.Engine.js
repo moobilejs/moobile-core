@@ -45,21 +45,24 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	],
 
 	/**
-	 * @var    {Element} The content element.
+	 * The content element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	content: null,
 
 	/**
-	 * @var    {Element} The wrapper element.
+	 * The wrapper element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	wrapper: null,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

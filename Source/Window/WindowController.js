@@ -39,7 +39,8 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @var    {ViewController} The root view controller.
+	 * The root view controller.
+	 * @type   ViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

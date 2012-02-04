@@ -43,7 +43,8 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	Extends: Moobile.BarItem,
 
 	/**
-	 * @var    {Text} The title.
+	 * The title.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

@@ -36,42 +36,48 @@ Moobile.Control = new Class( /** @lends Control.prototype */ {
 	Extends: Moobile.Entity,
 
 	/**
-	 * @var    {Boolean} Whether the control is disabled.
+	 * Whether the control is disabled.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	disabled: false,
 
 	/**
-	 * @var    {Boolean} Whether the control is selected.
+	 * Whether the control is selected.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	selected: false,
 
 	/**
-	 * @var    {Boolean} Whether the control is highlighted.
+	 * Whether the control is highlighted.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	highlighted: false,
 
 	/**
-	 * @var    {Boolean} Whether the control is selectable.
+	 * Whether the control is selectable.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	selectable: true,
 
 	/**
-	 * @var    {Boolean} Whether the control is highlightable.
+	 * Whether the control is highlightable.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	highlightable: true,
 
 	/**
-	 * @var    {Object} The control options.
+	 * The control options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

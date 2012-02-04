@@ -53,35 +53,40 @@ Moobile.Slider = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Number} The value.
+	 * The value.
+	 * @type   Number
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	value: 0,
 
 	/**
-	 * @var    {Slider} The engine.
+	 * The engine.
+	 * @type   Slider
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	slider: null,
 
 	/**
-	 * @var    {Element} The track.
+	 * The track.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	track: null,
 
 	/**
-	 * @var    {Element} The thumb that moves inside the track.
+	 * The thumb that moves inside the track.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	thumb: null,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

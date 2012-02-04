@@ -53,7 +53,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	},
 
 	/**
-	 * @var    {Object} The class options.
+	 * @type   {Object} The class options.
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

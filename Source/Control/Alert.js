@@ -42,56 +42,64 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Text} The title.
+	 * The title.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	title: null,
 
 	/**
-	 * @var    {Text} The message.
+	 * The message.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	message: null,
 
 	/**
-	 * @var    {Array} The buttons.
+	 * The buttons.
+	 * @type   Array
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	buttons: [],
 
 	/**
-	 * @var    {Element} The dialog element.
+	 * The dialog element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialog: null,
 
 	/**
-	 * @var    {Element} The dialog header element.
+	 * The dialog header element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialogHeader: null,
 
 	/**
-	 * @var    {Element} The dialog footer element.
+	 * The dialog footer element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialogFooter: null,
 
 	/**
-	 * @var    {Element} The dialog content element.
+	 * The dialog content element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	dialogContent: null,
 
 	/**
-	 * @var    {Overlay} The alert overlay.
+	 * The alert overlay.
+	 * @type   Overlay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

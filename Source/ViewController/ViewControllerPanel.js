@@ -39,14 +39,16 @@ Moobile.ViewControllerPanel = new Class( /** @lends ViewControllerPanel.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @var    {ViewController} The main view controller.
+	 * The main view controller.
+	 * @type   ViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	mainViewController: null,
 
 	/**
-	 * @var    {ViewController} The side view controller.
+	 * The side view controller.
+	 * @type   ViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

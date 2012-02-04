@@ -41,7 +41,8 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 	Extends: Moobile.ViewControllerStack,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

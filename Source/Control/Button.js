@@ -42,7 +42,8 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Text} This button's label.
+	 * This button's label.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

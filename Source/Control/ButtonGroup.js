@@ -42,21 +42,24 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Button} The selected button.
+	 * The selected button.
+	 * @type   Button
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	selectedButton: null,
 
 	/**
-	 * @var    {Number} The selected button index.
+	 * The selected button index.
+	 * @type   Number
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	selectedButtonIndex: -1,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

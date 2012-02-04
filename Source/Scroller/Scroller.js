@@ -43,49 +43,56 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	],
 
 	/**
-	 * @var    {Scroller.Engine} The engine.
+	 * The engine.
+	 * @type   Scroller.Engine
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	engine: null,
 
 	/**
-	 * @var    {Element} The content element, with variable size.
+	 * The content element, with variable size.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	content: null,
 
 	/**
-	 * @var    {Element} The content wrapper element, with fixed size.
+	 * The content wrapper element, with fixed size.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	wrapper: null,
 
 	/**
-	 * @var    {Object} The scrolling position at the beginning of a scroll.
+	 * The scrolling position at the beginning of a scroll.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	startScroll: null,
 
 	/**
-	 * @var    {Object} The scrolling time at the beginning of a scroll.
+	 * The scrolling time at the beginning of a scroll.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	startTime: null,
 
 	/**
-	 * @var    {Object} The scrolling page at the beginning of a scroll.
+	 * The scrolling page at the beginning of a scroll.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	startPage: null,
 
 	/**
-	 * @var    {Object} The current page.
+	 * The current page.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -95,7 +102,8 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

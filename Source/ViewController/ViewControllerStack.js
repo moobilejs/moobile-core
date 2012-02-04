@@ -39,14 +39,16 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @var    {Boolean} Whether a child view is in a transition.
+	 * Whether a child view is in a transition.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	inTransition: false,
 
 	/**
-	 * @var    {ViewController} The top view controller.
+	 * The top view controller.
+	 * @type   ViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

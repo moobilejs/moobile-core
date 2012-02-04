@@ -51,98 +51,112 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	],
 
 	/**
-	 * @var    {String} The name.
+	 * The name.
+	 * @type   String
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	name: null,
 
 	/**
-	 * @var    {Text} The title.
+	 * The title.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	title: null,
 
 	/**
-	 * @var    {Image} The image.
+	 * The image.
+	 * @type   Image
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	image: null,
 
 	/**
-	 * @var    {Boolean} Whether this view controller is modal.
+	 * Whether this view controller is modal.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	modal: false,
 
 	/**
-	 * @var    {View} The managed view.
+	 * The managed view.
+	 * @type   View
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	view: null,
 
 	/**
-	 * @var    {Boolean} Whether the managed view is ready.
+	 * Whether the managed view is ready.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewReady: false,
 
 	/**
-	 * @var    {ViewTransition} The view transition.
+	 * The view transition.
+	 * @type   ViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewTransition: null,
 
 	/**
-	 * @var    {WindowController} The window controller
+	 * The window controller
+	 * @type   WindowController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	windowController: null,
 
 	/**
-	 * @var    {ViewControllerStack} The view controller stack.
+	 * The view controller stack.
+	 * @type   ViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewControllerStack: null,
 
 	/**
-	 * @var    {ViewControllerPanel} The view controller panel.
+	 * The view controller panel.
+	 * @type   ViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewControllerPanel: null,
 
 	/**
-	 * @var    {ViewControllerTabs} The view controller tabs.
+	 * The view controller tabs.
+	 * @type   ViewControllerTabs
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	viewControllerTabs: null,
 
 	/**
-	 * @var    {ViewController} The parent view controller.
+	 * The parent view controller.
+	 * @type   ViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	parentViewController: null,
 
 	/**
-	 * @var    {ViewController} The modal view controller being presented.
+	 * The modal view controller being presented.
+	 * @type   ViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	modalViewController: null,
 
 	/**
-	 * @var    {Array} The child view controllers.
+	 * The child view controllers.
+	 * @type   Array
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

@@ -44,14 +44,16 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	Extends: Moobile.Entity,
 
 	/**
-	 * @var    {ViewContent} The view content.
+	 * The view content.
+	 * @type   ViewContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	content: null,
 
 	/**
-	 * @var    {View} The view that owns this view.
+	 * The view that owns this view.
+	 * @type   View
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

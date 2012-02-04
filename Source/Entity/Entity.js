@@ -59,56 +59,64 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	$styles: {},
 
 	/**
-	 * @var    {Object} The current style.
+	 * The current style.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	style: null,
 
 	/**
-	 * @var    {String} The name.
+	 * The name.
+	 * @type   String
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	name: null,
 
 	/**
-	 * @var    {Element} The root element.
+	 * The root element.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	element: null,
 
 	/**
-	 * @var    {Array} The child entities.
+	 * The child entities.
+	 * @type   Array
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	children: [],
 
 	/**
-	 * @var    {Entity} The entity that owns this entity.
+	 * The entity that owns this entity.
+	 * @type   Entity
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	parentEntity: null,
 
 	/**
-	 * @var    {Window} The window.
+	 * The window.
+	 * @type   Window
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	window: null,
 
 	/**
-	 * @var    {Boolean} Whether this entity is ready.
+	 * Whether this entity is ready.
+	 * @type   Boolean
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	ready: false,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -187,6 +195,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return this;
 	},
 
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	addEvent: function(type, fn, internal) {
 
 		if (this.eventIsNative(type)) {
@@ -200,14 +212,26 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return addEvent.call(this, type, fn, internal);
 	},
 
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	fireEvent: function(type, args, delay) {
 		return this.eventShouldFire(type, args) ? fireEvent.call(this, type, args, delay) : this;
 	},
 
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	eventShouldFire: function(type, args) {
 		return true;
 	},
 
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	eventIsNative: function(type) {
 		return Moobile.Entity.NativeEvents.contains(type);
 	},
@@ -231,7 +255,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @param {String}  [where]   The location.
 	 * @param {Element} [context] The location context element.
 	 *
-	 * @return {Boolean} Whether the child was successfully added.
+	 * @return {Entity} This entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -240,7 +264,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		var element = document.id(entity);
 		if (element == null || this.hasChild(entity))
-			return false;
+			return this;
 
 		this.willAddChild(entity);
 
@@ -275,7 +299,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			}.bind(this));
 		}
 
-		return true;
+		return this;
 	},
 
 	/**
@@ -337,20 +361,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @param {Entity} oldEntity The entity to remove.
 	 * @param {Entity} newEntity The entity to add.
 	 *
-	 * @return {Boolean} Whether the entity to replace was successfully removed
-	 *                   and the entity to add was successfully added.
+	 * @return {Entity} This entity
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	replaceChild: function(oldEntity, newEntity) {
-
-		var success = this.addChild(newEntity, 'before', oldEntity);
-		if (success) {
-			return this.removeChild(oldEntity);
-		}
-
-		return false;
+		return this.addChild(newEntity, 'before', oldEntity).removeChild(oldEntity);
 	},
 
 	/**
@@ -362,7 +379,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 *
 	 * @param {Entity} entity The entity to remove.
 	 *
-	 * @return {Boolean} Whether the entity was successfully removed.
+	 * @return {Entity} This entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -371,10 +388,10 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		var element = document.id(entity);
 		if (element == null)
-			return false;
+			return this;
 
 		if (!this.hasElement(entity))
-			return false;
+			return this;
 
 		this.willRemoveChild(entity);
 
@@ -386,7 +403,24 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 
 		this.didRemoveChild(entity);
 
-		return true;
+		return this;
+	},
+
+	/**
+	 * Removes all children.
+	 *
+	 * This method will not destroy removed entities since they could be added
+	 * to another entity. If you wish to destroy the given entity, you must do
+	 * so manually.
+	 *
+	 * @return {Entity} This entity.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	removeAllChildren: function() {
+		this.children.each(this.bound('removeChild'));
+		return this;
 	},
 
 	/**
@@ -396,7 +430,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * could be added to another entity. If you wish to destroy the given
 	 * entity, you must do so manually.
 	 *
-	 * @return {Boolean} Whether this entity was successfully removed.
+	 * @return {Entity} This entity.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -408,7 +442,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			this.parentEntity = null;
 		}
 
-		return true;
+		return this;
 	},
 
 	/**

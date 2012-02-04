@@ -21,8 +21,6 @@ provides:
 ...
 */
 
-(function() {
-
 Moobile.Entity.NativeEvents = Array.append(
 
 	Object.keys(Element.NativeEvents), [
@@ -39,5 +37,3 @@ Moobile.Entity.NativeEvents = Array.append(
 	'animationEnd'
 
 ]);
-
-})();

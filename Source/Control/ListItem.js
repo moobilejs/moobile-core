@@ -42,21 +42,24 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {Image} The image.
+	 * The image.
+	 * @type   Image
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	image: null,
 
 	/**
-	 * @var    {Text} The label.
+	 * The label.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	label: null,
 
 	/**
-	 * @var    {Text} The detail label.
+	 * The detail label.
+	 * @type   Text
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

@@ -42,7 +42,8 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {BarItem} The bar item.
+	 * The bar item.
+	 * @type   BarItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

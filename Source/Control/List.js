@@ -42,21 +42,24 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @var    {ListItem} The selected item.
+	 * The selected item.
+	 * @type   ListItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	selectedItem: null,
 
 	/**
-	 * @var    {Number} The selected item index.
+	 * The selected item index.
+	 * @type   Number
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	selectedItemIndex: -1,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

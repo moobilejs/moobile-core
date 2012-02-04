@@ -45,21 +45,24 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	Extends: Moobile.View,
 
 	/**
-	 * @var    {Scroller} The scroller.
+	 * The scroller.
+	 * @type   Scroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	scroller: null,
 
 	/**
-	 * @var    {Element} The element that wraps the content and make it scrollable.
+	 * The element that wraps the content and make it scrollable.
+	 * @type   Element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	wrapper: null,
 
 	/**
-	 * @var    {Object} The class options.
+	 * The class options.
+	 * @type   Object
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
