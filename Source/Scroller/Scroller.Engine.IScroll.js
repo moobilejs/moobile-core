@@ -39,7 +39,7 @@ iScroll.prototype._checkDOMChanges = function() {
 })();
 
 /**
- * @name  Scroller.Engine.Native
+ * @name  Scroller.Engine.IScroll
  * @class Provides an engine that uses the iScroll scroller.
  *
  * @classdesc
@@ -51,7 +51,7 @@ iScroll.prototype._checkDOMChanges = function() {
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.scroller.prototype */ {
+Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.prototype */ {
 
 	Extends: Moobile.Scroller.Engine,
 

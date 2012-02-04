@@ -29,7 +29,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Fade = new Class({
+Moobile.ViewTransition.Fade = new Class( /* @lends ViewTransition.Fade.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

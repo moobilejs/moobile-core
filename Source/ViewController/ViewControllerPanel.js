@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @name  View
+ * @name  ViewControllerPanel
  * @class Provides an object used to manage a view panel.
  *
  * @classdesc

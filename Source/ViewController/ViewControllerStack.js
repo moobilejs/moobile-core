@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @name  VewControllerStack
+ * @name  ViewControllerStack
  * @class Provides a controller that manages a view stack.
  *
  * @classdesc

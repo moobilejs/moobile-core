@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @name  ViewTransition.Cover
+ * @name  ViewTransition.Cubic
  * @class Provide a cubic view transition.
  *
  * @extends ViewTransition
@@ -28,7 +28,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Cubic = new Class({
+Moobile.ViewTransition.Cubic = new Class( /* @lends ViewTransition.Cubic.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

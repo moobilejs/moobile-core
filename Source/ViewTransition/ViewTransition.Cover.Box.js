@@ -21,14 +21,14 @@ provides:
 
 /**
  * @name  ViewTransition.Cover.Box
- * @class Provides a view transition that covers the current view.
+ * @class Provides a view transition that covers the current view partially.
  *
  * @extends ViewTransition
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Cover.Box = new Class({
+Moobile.ViewTransition.Cover.Box = new Class( /* @lends ViewTransition.Cover.Box.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

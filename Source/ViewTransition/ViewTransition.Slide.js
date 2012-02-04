@@ -28,7 +28,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Slide = new Class({
+Moobile.ViewTransition.Slide = new Class( /* @lends ViewTransition.Slide.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 
