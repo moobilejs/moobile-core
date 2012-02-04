@@ -40,7 +40,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ScrollView = new Class({
+Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 
 	Extends: Moobile.View,
 

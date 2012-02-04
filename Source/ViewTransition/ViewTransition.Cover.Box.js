@@ -28,7 +28,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Cover.Box = new Class( /* @lends ViewTransition.Cover.Box.prototype */ {
+Moobile.ViewTransition.Cover.Box = new Class( /** @lends ViewTransition.Cover.Box.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

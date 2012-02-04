@@ -29,7 +29,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Flip = new Class( /* @lends ViewTransition.Flip.prototype */ {
+Moobile.ViewTransition.Flip = new Class( /** @lends ViewTransition.Flip.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

@@ -37,7 +37,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ActivityIndicator = new Class( /* @lends ActivityIndicator.prototype */ {
+Moobile.ActivityIndicator = new Class( /** @lends ActivityIndicator.prototype */ {
 
 	Extends: Moobile.Control,
 

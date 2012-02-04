@@ -39,7 +39,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewStack = new Class( /* @lends ViewStack.prototype */ {
+Moobile.ViewStack = new Class( /** @lends ViewStack.prototype */ {
 
 	Extends: Moobile.View,
 

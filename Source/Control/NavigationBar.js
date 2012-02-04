@@ -37,7 +37,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.NavigationBar = new Class( /* @lends NavigationBar.prototype */ {
+Moobile.NavigationBar = new Class( /** @lends NavigationBar.prototype */ {
 
 	Extends: Moobile.Bar,
 

@@ -28,7 +28,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.Cover.Page = new Class( /* @lends ViewTransition.Cover.Page.prototype */ {
+Moobile.ViewTransition.Cover.Page = new Class( /** @lends ViewTransition.Cover.Page.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

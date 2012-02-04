@@ -29,7 +29,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition.None = new Class( /* @lends ViewTransition.None.prototype */ {
+Moobile.ViewTransition.None = new Class( /** @lends ViewTransition.None.prototype */ {
 
 	Extends: Moobile.ViewTransition,
 

@@ -34,7 +34,7 @@ if (!window.Moobile) window.Moobile = {};
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewTransition = new Class( /* @lends ViewTransition.prototype */ {
+Moobile.ViewTransition = new Class( /** @lends ViewTransition.prototype */ {
 
 	Implements: [
 		Events,

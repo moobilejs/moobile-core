@@ -37,7 +37,7 @@ provides:
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.ViewPanel = new Class( /* @lends ViewPanel.prototype */ {
+Moobile.ViewPanel = new Class( /** @lends ViewPanel.prototype */ {
 
 	Extends: Moobile.View,
 

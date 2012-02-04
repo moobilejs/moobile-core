@@ -20,6 +20,8 @@ provides:
  * @name  Control
  * @class Provides the base class for controls.
  *
+ * @extends Entity
+ *
  * @classdesc
  *
  * This class contains the method that should be used in all controls. You
@@ -29,7 +31,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
  */
-Moobile.Control = new Class( /* @lends Control.prototype */ {
+Moobile.Control = new Class( /** @lends Control.prototype */ {
 
 	Extends: Moobile.Entity,
 
