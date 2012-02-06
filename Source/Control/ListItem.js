@@ -234,7 +234,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		}
 
 		if (image == null) {
-			image = new Element('div');
+			image = new Element('img');
 			image.inject(this.element, 'top');
 		}
 
