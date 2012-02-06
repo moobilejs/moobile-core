@@ -201,6 +201,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	},
 
 	fireEvent: function(type, args, delay) {
+
+		args = Array.from(args);
+		if (args.getLast() !== this) {
+			args.push(this);
+		}
+
 		return this.eventShouldFire(type, args) ? fireEvent.call(this, type, args, delay) : this;
 	},
 
