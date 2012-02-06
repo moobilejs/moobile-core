@@ -389,6 +389,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 		return true;
 	},
 
+	removeAllChildren: function() {
+		this.children.each(this.bound('removeChild'));
+		this.children.empty();
+		return this;
+	},
+
 	/**
 	 * Removes this entity from its parent.
 	 *
