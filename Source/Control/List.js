@@ -213,7 +213,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 * @since  0.1.0
 	 */
 	removeAllItems: function() {
-		return this.removeAllChildren();
+		return this.removeChildren();
 	},
 
 	willBuild: function() {
