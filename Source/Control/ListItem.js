@@ -62,6 +62,10 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	 */
 	detail: null,
 
+	options: {
+		tagName: 'li'
+	},
+
 	/**
 	 * Sets the image.
 	 *
