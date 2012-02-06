@@ -193,7 +193,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		} else {
 			this.replaceChild(this.detail, detail);
 			this.detail.destroy();
-			this.detail = label;
+			this.detail = detail;
 		}
 
 		this.detail.addClass('detail');
