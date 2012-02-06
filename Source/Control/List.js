@@ -212,7 +212,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	removeAllItems: function() {
+	empty: function() {
 		return this.removeChildren();
 	},
 
