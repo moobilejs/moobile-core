@@ -70,7 +70,7 @@ Moobile.Text = new Class( /** @lends Text.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getText: function(text) {
+	getText: function() {
 		return this.element.get('html');
 	},
 
