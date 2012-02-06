@@ -65,6 +65,10 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	 */
 	detail: null,
 
+	options: {
+		tagName: 'li'
+	},
+
 	/**
 	 * Sets the image.
 	 *
@@ -196,7 +200,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		} else {
 			this.replaceChild(this.detail, detail);
 			this.detail.destroy();
-			this.detail = label;
+			this.detail = detail;
 		}
 
 		this.detail.addClass('detail');
@@ -233,7 +237,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		}
 
 		if (image == null) {
-			image = new Element('div');
+			image = new Element('img');
 			image.inject(this.element, 'top');
 		}
 

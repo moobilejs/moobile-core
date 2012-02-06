@@ -217,6 +217,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	fireEvent: function(type, args, delay) {
+
+		args = Array.from(args);
+		if (args.getLast() !== this) {
+			args.push(this);
+		}
+
 		return this.eventShouldFire(type, args) ? fireEvent.call(this, type, args, delay) : this;
 	},
 
@@ -420,6 +426,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	removeAllChildren: function() {
 		this.children.each(this.bound('removeChild'));
+		return this;
+	},
+
+	removeChildren: function() {
+		this.children.each(this.bound('removeChild'));
+		this.children.empty();
 		return this;
 	},
 
