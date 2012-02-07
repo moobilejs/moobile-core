@@ -149,7 +149,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 		var contentSize = this.getScrollSize();
 
 		if (contentSize.y <= wrapperSize.y) {
-			this.content.setStyle('min-height', wrapperSize.y + 1);
+			this.content.setStyle('min-height', wrapperSize.y + 2);
 		}
 
 		return this;
