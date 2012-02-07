@@ -342,9 +342,14 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.parent();
 	},
 
-	onButtonTap: function(e) {
-		this.fireEvent('select', e.targetEntity);
-		if (this.buttons.length == 1) this.hideAnimated();
+	onButtonTap: function(e, sender) {
+
+		var index = this.getChildren(Moobile.Button).indexOf(e.targetEntity);
+		if (index >= 0) {
+			this.fireEvent('select', [sender, index]);
+		}
+
+		this.hideAnimated();
 	},
 
 	onAnimationEnd: function(e) {
