@@ -212,8 +212,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	empty: function() {
-		return this.removeChildren();
+	removeAllButtons: function() {
+		return this.removeChildren(Moobile.Button);
 	},
 
 	willBuild: function() {

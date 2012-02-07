@@ -208,15 +208,15 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * Removes all buttons.
+	 * Removes all items.
 	 *
 	 * @see Entity#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	empty: function() {
-		return this.removeChildren();
+	removeAllItems: function() {
+		return this.removeChildren(Moobile.ListItem);
 	},
 
 	willBuild: function() {

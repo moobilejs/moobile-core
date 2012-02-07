@@ -424,14 +424,17 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeAllChildren: function() {
-		this.children.each(this.bound('removeChild'));
-		return this;
-	},
+	removeChildren: function(type) {
 
-	removeChildren: function() {
-		this.children.each(this.bound('removeChild'));
-		this.children.empty();
+		var filter = function(entity) {
+			return entity instanceof type;
+		};
+
+		(type
+			? this.children.filter(filter)
+			: this.children
+		).each(this.bound('removeChild'));
+
 		return this;
 	},
 

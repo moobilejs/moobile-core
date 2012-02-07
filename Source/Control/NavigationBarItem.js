@@ -114,7 +114,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	addLeftBarButton: function(button) {
+	addLeftButton: function(button) {
 		return this.addChild(button, 'top');
 	},
 
@@ -126,7 +126,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	addRightBarButton: function(button) {
+	addRightButton: function(button) {
 		return this.addChild(button, 'bottom');
 	},
 
@@ -138,7 +138,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getBarButton: function(name) {
+	getButton: function(name) {
 		return this.getChild(name);
 	},
 
@@ -150,7 +150,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	removeBarButton: function(item) {
+	removeButton: function(item) {
 		return this.removeChild(item);
 	},
 
@@ -162,8 +162,8 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	removeAllBarButtons: function() {
-		return this.removeChildren();
+	removeAllButtons: function() {
+		return this.removeChildren(Moobile.Button);
 	},
 
 	willBuild: function() {
