@@ -26,6 +26,10 @@ Element.implement({
 		return this.adopt(Array.from(document.id(element).childNodes));
 	},
 
+	process: function(html) {
+		return this.adopt(Elements.from(html));
+	},
+
 	/**
 	 * Returns an element with a given `data-role` attribute.
 	 *
