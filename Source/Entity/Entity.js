@@ -323,8 +323,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	getChild: function(name) {
-		return this.children.find(function(children) {
-			return children.getName() == name;
+		return this.children.find(function(entity) {
+			return entity.getName() == name;
 		});
 	},
 
