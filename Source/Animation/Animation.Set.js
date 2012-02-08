@@ -31,11 +31,10 @@ Moobile.Animation.Set = new Class({
 
 	currentAnimation: null,
 
-	initialize: function(options) {
+	initialize: function(element, options) {
 
-		this.parent(options);
+		this.parent(element, options);
 
-		delete this.element;
 		delete this.running;
 		delete this.animationClass;
 		delete this.animationProperties;

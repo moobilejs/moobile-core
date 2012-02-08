@@ -47,7 +47,8 @@ Moobile.Animation = new Class({
 		'animation-delay': null
 	},
 
-	initialize: function(options) {
+	initialize: function(element, options) {
+		this.setElement(element);
 		this.setOptions(options);
 		return this;
 	},
