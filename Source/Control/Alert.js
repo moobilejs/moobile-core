@@ -346,7 +346,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 		var index = this.getChildren(Moobile.Button).indexOf(e.targetEntity);
 		if (index >= 0) {
-			this.fireEvent('select', [sender, index]);
+			this.fireEvent('dismiss', [sender, index]);
 		}
 
 		this.hideAnimated();
