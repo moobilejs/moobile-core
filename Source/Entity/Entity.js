@@ -257,7 +257,7 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * element if it's already there, in this case only a reference of the
 	 * child entity will be stored.
 	 *
-	 * @param {Entity}  entity    The entity.
+	 * @param {Entity}  child    The entity.
 	 * @param {String}  [where]   The location.
 	 * @param {Element} [context] The location context element.
 	 *
@@ -266,13 +266,13 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChild: function(entity, where, context) {
+	addChild: function(child, where, context) {
 
-		var element = document.id(entity);
-		if (element == null || this.hasChild(entity))
+		var element = document.id(child);
+		if (element == null || this.hasChild(child))
 			return this;
 
-		this.willAddChild(entity);
+		this.willAddChild(child);
 
 		if (!this.hasElement(element)) {
 
@@ -288,20 +288,20 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 			element.inject(context, where);
 		}
 
-		this.children.push(entity);
+		this.children.push(child);
 
-		entity.removeFromParent();
-		entity.setParent(this);
-		entity.setWindow(this.window);
+		child.removeFromParent();
+		child.setParent(this);
+		child.setWindow(this.window);
 
-		this.didAddChild(entity);
+		this.didAddChild(child);
 
 		if (this.ready) {
-			entity.setReady()
+			child.setReady()
 		} else {
 			this.addEvent('ready:once', function() {
-				entity.setWindow(this.window);
-				entity.setReady();
+				child.setWindow(this.window);
+				child.setReady();
 			}.bind(this));
 		}
 
@@ -323,8 +323,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @since  0.1
 	 */
 	getChild: function(name) {
-		return this.children.find(function(entity) {
-			return entity.getName() == name;
+		return this.children.find(function(child) {
+			return child.getName() == name;
 		});
 	},
 
@@ -338,8 +338,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasChild: function(entity) {
-		return this.children.contains(entity);
+	hasChild: function(child) {
+		return this.children.contains(child);
 	},
 
 	/**
@@ -353,8 +353,8 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	getChildren: function(type) {
 		return type == undefined
 			? this.children
-			: this.children.filter(function(entity) {
-				return entity instanceof type;
+			: this.children.filter(function(child) {
+				return child instanceof type;
 			});
 	},
 
@@ -364,16 +364,16 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * This method will not attempt to remove the entity to replace if the
 	 * entity to add could not be added.
 	 *
-	 * @param {Entity} oldEntity The entity to remove.
-	 * @param {Entity} newEntity The entity to add.
+	 * @param {Entity} child The entity to remove.
+	 * @param {Entity} replace The entity to add.
 	 *
 	 * @return {Entity} This entity
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	replaceChild: function(oldEntity, newEntity) {
-		return this.addChild(newEntity, 'before', oldEntity).removeChild(oldEntity);
+	replaceChild: function(child, replace) {
+		return this.addChild(replace, 'before', child).removeChild(child);
 	},
 
 	/**
@@ -390,24 +390,24 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChild: function(entity) {
+	removeChild: function(child) {
 
-		var element = document.id(entity);
+		var element = document.id(child);
 		if (element == null)
 			return this;
 
-		if (!this.hasElement(entity))
+		if (!this.hasElement(child))
 			return this;
 
-		this.willRemoveChild(entity);
+		this.willRemoveChild(child);
 
-		entity.setParent(null);
-		entity.setWindow(null);
+		child.setParent(null);
+		child.setWindow(null);
 		element.dispose();
 
-		this.children.erase(entity);
+		this.children.erase(child);
 
-		this.didRemoveChild(entity);
+		this.didRemoveChild(child);
 
 		return this;
 	},
@@ -426,13 +426,12 @@ Moobile.Entity = new Class( /** @lends Entity.prototype */ {
 	 */
 	removeChildren: function(type) {
 
-		var filter = function(entity) {
-			return entity instanceof type;
+		var filter = function(child) {
+			return child instanceof type;
 		};
 
-		(type
-			? this.children.filter(filter)
-			: this.children
+		(type ? this.children.filter(filter)
+			  : this.children
 		).each(this.bound('removeChild'));
 
 		return this;
