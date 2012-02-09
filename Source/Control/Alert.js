@@ -105,6 +105,10 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	overlay: null,
 
+	options: {
+		buttonLayout: 'vertical'
+	},
+
 	/**
 	 * Sets the title.
 	 *
@@ -286,6 +290,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.dialog.grab(this.dialogFooter);
 
 		this.element.grab(this.dialog);
+
+		var buttonLayout = this.options.buttonLayout;
+		if (buttonLayout) {
+			this.element.addClass('button-layout-' + buttonLayout);
+		}
 	},
 
 	didAddChild: function(entity) {
@@ -368,13 +377,4 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	}
 
-});
-
-//------------------------------------------------------------------------------
-// Styles
-//------------------------------------------------------------------------------
-
-Moobile.Entity.defineStyle('horizontal', Moobile.Alert, {
-	attach: function() { this.element.addClass('style-horizontal'); },
-	detach: function() { this.element.removeClass('style-horizontal'); }
 });
