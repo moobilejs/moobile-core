@@ -195,6 +195,10 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		return this.getChild(name);
 	},
 
+	getItems: function() {
+		return this.getChildren(Moobile.ListItem);
+	},
+
 	/**
 	 * Removes an item.
 	 *
