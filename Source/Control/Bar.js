@@ -100,7 +100,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 		this.element.addClass('bar');
 
-		var item = this.getRoleElement('item');
+		var item = this.element.getRoleElement('item');
 		if (item == null) {
 			item = new Element('div');
 			item.ingest(this.element);
@@ -121,8 +121,8 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('bar', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-bar', Moobile.Bar);
+Moobile.Component.defineRole('bar', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-bar', Moobile.Bar);
 	this.addChild(instance);
 });
 
@@ -130,17 +130,17 @@ Moobile.Entity.defineRole('bar', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineStyle('translucent', Moobile.Bar, {
+Moobile.Component.defineStyle('translucent', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-translucent'); },
 	detach: function(element) { element.removeClass('style-translucent'); }
 });
 
-Moobile.Entity.defineStyle('dark', Moobile.Bar, {
+Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-Moobile.Entity.defineStyle('dark-translucent', Moobile.Bar, {
+Moobile.Component.defineStyle('dark-translucent', Moobile.Bar, {
 	attach: function(element) {
 		element
 			.addClass('style-dark')

@@ -41,7 +41,7 @@ provides:
  */
 Moobile.View = new Class( /** @lends View.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.Component,
 
 	/**
 	 * The view content.
@@ -305,7 +305,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('view-content');
+		var content = this.element.getRoleElement('view-content');
 		if (content == null) {
 			content = new Element('div');
 			content.ingest(this.element);
@@ -365,9 +365,19 @@ Moobile.View = new Class( /** @lends View.prototype */ {
  * @since  0.1
  */
 Moobile.View.elementAtPath = function(path) {
-	return new Moobile.Request.ViewElement().load(path);
+	return Element.at(path);
 };
 
+/**
+ * Return the view of a file at a given path.
+ *
+ * @param {String} path The file path.
+ *
+ * @return {View} The view or <code>null</code> if no view were found.
+ *
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 /**
  * Return the view of a file at a given path.
  *
@@ -382,7 +392,7 @@ Moobile.View.atPath = function(path) {
 
 	var element = Moobile.View.elementAtPath(path);
 	if (element) {
-		return Moobile.Entity.fromElement(element, 'data-view', Moobile.View);
+		return Moobile.Component.fromElement(element, 'data-view', Moobile.View);
 	}
 
 	return null;
@@ -392,7 +402,7 @@ Moobile.View.atPath = function(path) {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-view', Moobile.View);
+Moobile.Component.defineRole('view', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-view', Moobile.View);
 	this.addChild(instance);
 });

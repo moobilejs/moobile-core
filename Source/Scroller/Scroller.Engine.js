@@ -11,8 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core/Class
-	- Core/Class.Extras
+	- Entity
 
 provides:
 	- Scroller.Engine
@@ -38,11 +37,7 @@ if (!window.Moobile.Scroller) window.Moobile.Scroller = {};
  */
 Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 
-	Implements: [
-		Events,
-		Options,
-		Class.Binds
-	],
+	Extends: Moobile.Entity,
 
 	/**
 	 * The content element.

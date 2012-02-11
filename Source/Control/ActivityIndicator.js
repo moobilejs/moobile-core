@@ -84,7 +84,7 @@ Moobile.ActivityIndicator = new Class( /** @lends ActivityIndicator.prototype */
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('activity-indicator', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-activity-indicator', Moobile.ActivityIndicator);
+Moobile.Component.defineRole('activity-indicator', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-activity-indicator', Moobile.ActivityIndicator);
 	this.addChild(instance);
 });

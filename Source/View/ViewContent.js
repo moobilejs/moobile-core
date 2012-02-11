@@ -39,7 +39,7 @@ provides:
  */
 Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.Component,
 
 	willBuild: function() {
 		this.parent();
@@ -52,7 +52,7 @@ Moobile.ViewContent = new Class( /** @lends ViewContent.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.View, function(element) {
+Moobile.Component.defineRole('view-content', Moobile.View, function(element) {
 	var instance = new Moobile.ViewContent(element, null, name);
 	this.setContent(instance);
 });

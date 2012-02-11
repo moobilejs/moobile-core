@@ -8,7 +8,7 @@ description: Provides the base class for controls.
 license: MIT-style license.
 
 requires:
-	- Entity
+	- Component
 
 provides:
 	- Control
@@ -33,7 +33,7 @@ provides:
  */
 Moobile.Control = new Class( /** @lends Control.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.Component,
 
 	/**
 	 * Whether the control is disabled.

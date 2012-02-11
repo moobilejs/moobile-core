@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Class-Extras/Class.Binds
+	- Entity
 
 provides:
 	- Animation
@@ -23,11 +23,7 @@ if (!window.Moobile) window.Moobile = {};
 
 Moobile.Animation = new Class({
 
-	Implements: [
-		Events,
-		Options,
-		Class.Binds
-	],
+	Extends: Moobile.Entity,
 
 	name: null,
 

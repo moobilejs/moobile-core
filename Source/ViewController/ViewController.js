@@ -11,15 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core/Class
-	- Core/Class.Extras
-	- Core/Event
-	- Core/Element
-	- Core/Element.Event
-	- Class-Extras/Class.Binds
-	- Class.Instantiate
-	- Class.Mutator.Property
-	- Event.Loaded
+	- Entity
 
 provides:
 	- ViewController
@@ -44,11 +36,7 @@ if (!window.Moobile) window.Moobile = {};
  */
 Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
-	Implements: [
-		Events,
-		Options,
-		Class.Binds
-	],
+	Extends: Moobile.Entity,
 
 	/**
 	 * The name.

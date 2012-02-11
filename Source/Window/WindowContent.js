@@ -49,7 +49,7 @@ Moobile.WindowContent = new Class( /** @lends WindowContent.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.Window, function(element) {
+Moobile.Component.defineRole('view-content', Moobile.Window, function(element) {
 	var instance = new Moobile.WindowContent(element, null, name);
 	this.setContent(instance);
 });

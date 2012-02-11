@@ -111,7 +111,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 // Styles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineStyle('radial', Moobile.Bar, {
+Moobile.Component.defineStyle('radial', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-radial'); },
 	detach: function(element) { element.removeClass('style-radial'); }
 });

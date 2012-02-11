@@ -172,7 +172,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 		this.element.addClass('navigation-bar-item');
 
-		var title = this.getRoleElement('title');
+		var title = this.element.getRoleElement('title');
 		if (title == null) {
 			title = new Element('div');
 			title.ingest(this.element);
@@ -188,12 +188,12 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('item', Moobile.NavigationBar, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-item', Moobile.NavigationBarItem);
+Moobile.Component.defineRole('item', Moobile.NavigationBar, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-item', Moobile.NavigationBarItem);
 	this.setItem(instance);
 });
 
-Moobile.Entity.defineRole('title', Moobile.NavigationBarItem, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-title', Moobile.Text);
+Moobile.Component.defineRole('title', Moobile.NavigationBarItem, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-title', Moobile.Text);
 	this.setTitle(instance);
 });

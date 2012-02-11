@@ -106,7 +106,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 
 		this.element.addClass('button');
 
-		var label = this.getRoleElement('label');
+		var label = this.element.getRoleElement('label');
 		if (label == null) {
 			label = new Element('div');
 			label.ingest(this.element);
@@ -140,12 +140,12 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('button', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-button',  Moobile.Button);
+Moobile.Component.defineRole('button', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-button',  Moobile.Button);
 	this.addChild(instance);
 });
 
-Moobile.Entity.defineRole('label', Moobile.Button, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-label', Moobile.Text);
+Moobile.Component.defineRole('label', Moobile.Button, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-label', Moobile.Text);
 	this.setLabel(instance);
 });

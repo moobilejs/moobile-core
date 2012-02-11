@@ -11,9 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core/Class
-	- Core/Class.Extras
-	- Class.Mutator.Property
+	- Entity
 
 provides:
 	- Scroller
@@ -36,11 +34,7 @@ provides:
  */
 Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 
-	Implements: [
-		Events,
-		Options,
-		Class.Binds
-	],
+	Extends: Moobile.Entity,
 
 	/**
 	 * The engine.

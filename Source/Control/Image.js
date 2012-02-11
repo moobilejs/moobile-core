@@ -174,7 +174,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('image', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-image', Moobile.Image);
+Moobile.Component.defineRole('image', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-image', Moobile.Image);
 	this.addChild(instance);
 });

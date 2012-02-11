@@ -22,45 +22,31 @@ provides:
 
 Element.implement({
 
+	/**
+	 * @see http://moobile.net/api/0.1/Element/Element#ingest
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	ingest: function(element) {
 		return this.adopt(Array.from(document.id(element).childNodes));
 	},
 
-	process: function(html) {
-		return this.adopt(Elements.from(html));
-	},
-
 	/**
-	 * Returns an element with a given `data-role` attribute.
-	 *
-	 * This method will discard any element with a `data-role` attribue that
-	 * are child of another element with a `data-role` attribute unless the
-	 * latter is this entity's lement.
-	 *
-	 * @param {String} role The role name.
-	 *
-	 * @return {Element} The element or `null` if no elements were found.
+	 * @see http://moobile.net/api/0.1/Element/Element#getRoleElement
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getRoleElement: function(role) {
 		return this.getRoleElements(role)[0] || null;
 	},
 
 	/**
-	 * Returns a collection of element with a given `data-role` attribute.
-	 *
-	 * This method will discard any element with a `data-role` attribue that
-	 * are child of another element with a `data-role` attribute unless the
-	 * latter is this entity's lement.
-	 *
-	 * @param {String} role The role name.
-	 *
-	 * @return {Elements} A collection of elements.
+	 * @see http://moobile.net/api/0.1/Element/Element#getRoleElements
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getRoleElements: function(role) {
 
@@ -72,20 +58,6 @@ Element.implement({
 		return this.getElements(selector).filter(validate);
 	},
 
-	/**
-	 * Indicate whether an element is owned by this element.
-	 *
-	 * This method will indicate whether the given element not is a child
-	 * element with a `data-role` attribute unless the element with the
-	 * `data-role` attribute is the element itself.
-	 *
-	 * @param {Element} element The element.
-	 *
-	 * @return {Boolean} Whether an element is owned by this element.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	ownsRoleElement: function(element) {
 
 		var parent = element.getParent();
@@ -101,6 +73,6 @@ Element.implement({
 		}
 
 		return false;
-	},
+	}
 
 });

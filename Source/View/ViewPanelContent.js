@@ -79,14 +79,14 @@ Moobile.ViewPanelContent = new Class({
 
 		this.element.addEvent('view-panel-content');
 
-		var main = this.getRoleElement('main-panel');
+		var main = this.element.getRoleElement('main-panel');
 		if (main == null) {
 			main = new Element('div');
 			main.ingest(this.element);
 			main.inject(this.element);
 		}
 
-		var side = this.getRoleElement('side-panel');
+		var side = this.element.getRoleElement('side-panel');
 		if (side == null) {
 			side = new Element('div');
 			side.inject(this.element, 'top');
@@ -102,19 +102,19 @@ Moobile.ViewPanelContent = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('view-content', Moobile.ViewPanel, function(element) {
+Moobile.Component.defineRole('view-content', Moobile.ViewPanel, function(element) {
 	var instance = new Moobile.ViewPanelContent(element, null, name);
 	this.setContent(instance);
 });
 
 
-Moobile.Entity.defineRole('side-panel', Moobile.ViewPanelContent, function(element, options) {
+Moobile.Component.defineRole('side-panel', Moobile.ViewPanelContent, function(element, options) {
 	this.sidePanel = new Moobile.Entity(element, options);
 	this.sidePanel.addClass('side-panel');
 	this.addChild(this.sidePanel);
 });
 
-Moobile.Entity.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
+Moobile.Component.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
 	this.mainPanel = new Moobile.Entity(element, options);
 	this.mainPanel.addClass('main-panel');
 	this.addChild(this.mainPanel);

@@ -55,8 +55,8 @@ Moobile.BarButton = new Class( /** @lends BarButton.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('bar-button', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-bar-button', Moobile.BarButton);
+Moobile.Component.defineRole('bar-button', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-bar-button', Moobile.BarButton);
 	this.addChild(instance);
 });
 
@@ -64,37 +64,37 @@ Moobile.Entity.defineRole('bar-button', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineStyle('active', Moobile.BarButton, {
+Moobile.Component.defineStyle('active', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-active'); },
 	detach: function(element) { element.removeClass('style-active'); }
 });
 
-Moobile.Entity.defineStyle('warning', Moobile.BarButton, {
+Moobile.Component.defineStyle('warning', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-warning'); },
 	detach: function(element) { element.removeClass('style-warning'); }
 });
 
-Moobile.Entity.defineStyle('back', Moobile.BarButton, {
+Moobile.Component.defineStyle('back', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-back'); },
 	detach: function(element) { element.removeClass('style-back'); }
 });
 
-Moobile.Entity.defineStyle('forward', Moobile.BarButton, {
+Moobile.Component.defineStyle('forward', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }
 });
 
-Moobile.Entity.defineStyle('dark', Moobile.BarButton, {
+Moobile.Component.defineStyle('dark', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-Moobile.Entity.defineStyle('dark-back', Moobile.BarButton, {
+Moobile.Component.defineStyle('dark-back', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-dark-back'); },
 	detach: function(element) { element.removeClass('style-dark-back'); }
 });
 
-Moobile.Entity.defineStyle('dark-forward', Moobile.BarButton, {
+Moobile.Component.defineStyle('dark-forward', Moobile.BarButton, {
 	attach: function(element) { element.addClass('style-dark-forward'); },
 	detach: function(element) { element.removeClass('style-dark-forward'); }
 });

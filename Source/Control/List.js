@@ -108,7 +108,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 			this.fireEvent('select', this.selectedItem);
 		}
 
-		this.selectedItemIndex = selectedItem ? this.children.indexOf(selectedItem) : -1;
+		this.selectedItemIndex = selectedItem ? this._children.indexOf(selectedItem) : -1;
 
 		return this;
 	},
@@ -141,7 +141,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 * @since  0.1.0
 	 */
 	setSelectedItemIndex: function(index) {
-		this.setSelectedItem(this.children[index] || null);
+		this.setSelectedItem(this._children[index] || null);
 		return this;
 	},
 
@@ -274,8 +274,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('list', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-list', Moobile.List);
+Moobile.Component.defineRole('list', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-list', Moobile.List);
 	this.addChild(instance);
 });
 
@@ -283,7 +283,7 @@ Moobile.Entity.defineRole('list', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineStyle('grouped', Moobile.List, {
+Moobile.Component.defineStyle('grouped', Moobile.List, {
 	attach: function(element) { element.addClass('style-grouped'); },
 	detach: function(element) { element.removeClass('style-grouped'); }
 });

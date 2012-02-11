@@ -105,7 +105,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 			this.fireEvent('select', this.selectedButton);
 		}
 
-		this.selectedButtonIndex = selectedButton ? this.children.indexOf(selectedButton) : -1;
+		this.selectedButtonIndex = selectedButton ? this._children.indexOf(selectedButton) : -1;
 
 		return this;
 	},
@@ -138,7 +138,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @since  0.1.0
 	 */
 	setSelectedButtonIndex: function(index) {
-		this.setSelectedButton(this.children[index] || null);
+		this.setSelectedButton(this._children[index] || null);
 		return this;
 	},
 
@@ -268,8 +268,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineRole('button-group', null, function(element) {
-	var instance = Moobile.Entity.fromElement(element, 'data-button-group', Moobile.ButtonGroup);
+Moobile.Component.defineRole('button-group', null, function(element) {
+	var instance = Moobile.Component.fromElement(element, 'data-button-group', Moobile.ButtonGroup);
 	this.addChild(instance);
 });
 
@@ -277,12 +277,12 @@ Moobile.Entity.defineRole('button-group', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-Moobile.Entity.defineStyle('horizontal', Moobile.ButtonGroup, {
+Moobile.Component.defineStyle('horizontal', Moobile.ButtonGroup, {
 	attach: function(element) { element.addClass('style-horizontal'); },
 	detach: function(element) { element.removeClass('style-horizontal'); }
 });
 
-Moobile.Entity.defineStyle('vertical', Moobile.ButtonGroup, {
+Moobile.Component.defineStyle('vertical', Moobile.ButtonGroup, {
 	attach: function(element) { element.addClass('style-vertical'); },
 	detach: function(element) { element.removeClass('style-vertical'); }
 });
