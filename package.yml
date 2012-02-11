@@ -18,28 +18,21 @@ sources:
 
   - "Source/Animation/Animation.js"
   - "Source/Animation/Animation.Set.js"
-
   - "Source/Browser/Browser.Platform.js"
-
   - "Source/Class/Class.Instantiate.js"
-
   - "Source/Types/String.js"
   - "Source/Types/Array.js"
-
   - "Source/Element/Element.js"
-
+  - "Source/Element/Element.From.js"
+  - "Source/Event/NativeEvents.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.CSS3.js"
   - "Source/Event/Event.Rotate.js"
   - "Source/Event/Event.Mouse.js"
   - "Source/Event/Event.Tap.js"
-
   - "Source/Request/Request.js"
-  - "Source/Request/Request.ViewElement.js"
-
   - "Source/Entity/Entity.js"
-  - "Source/Entity/Entity.NativeEvents.js"
-
+  - "Source/Component/Component.js"
   - "Source/Control/Control.js"
   - "Source/Control/Button.js"
   - "Source/Control/ButtonGroup.js"
@@ -57,7 +50,6 @@ sources:
   - "Source/Control/Overlay.js"
   - "Source/Control/Alert.js"
   - "Source/Control/Text.js"
-
   - "Source/View/View.js"
   - "Source/View/ViewContent.js"
   - "Source/View/ScrollView.js"
@@ -65,12 +57,10 @@ sources:
   - "Source/View/ViewPanelContent.js"
   - "Source/View/ViewStack.js"
   - "Source/View/ViewStackContent.js"
-
   - "Source/Scroller/Scroller.js"
   - "Source/Scroller/Scroller.Engine.js"
   - "Source/Scroller/Scroller.Engine.IScroll.js"
   - "Source/Scroller/Scroller.Engine.Native.js"
-
   - "Source/ViewTransition/ViewTransition.js"
   - "Source/ViewTransition/ViewTransition.Slide.js"
   - "Source/ViewTransition/ViewTransition.Cover.js"
@@ -81,11 +71,9 @@ sources:
   - "Source/ViewTransition/ViewTransition.Flip.js"
   - "Source/ViewTransition/ViewTransition.None.js"
   - "Source/ViewController/ViewController.js"
-
   - "Source/ViewController/ViewControllerStack.js"
   - "Source/ViewController/ViewControllerStack.Navigation.js"
   - "Source/ViewController/ViewControllerPanel.js"
-
   - "Source/Window/Window.js"
   - "Source/Window/WindowContent.js"
   - "Source/Window/WindowController.js"
