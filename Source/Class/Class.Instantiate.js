@@ -3,7 +3,7 @@
 
 name: Class.Instantiate
 
-description: Provides extra static methods to instantiate a class from a string.
+description:
 
 license: MIT-style license.
 
@@ -11,6 +11,7 @@ requires:
 	- Core/Class
 
 provides:
+	- Class.Parse
 	- Class.Instantiate
 
 ...
@@ -18,6 +19,11 @@ provides:
 
 Class.extend({
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Class/Class.Instantiate#parse
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	parse: function(name) {
 		name = name.trim();
 		name = name.split('.');
@@ -26,6 +32,11 @@ Class.extend({
 		return typeof func == 'function' ? func : null;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Class/Class.Instantiate#instantiate
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	instantiate: function(klass) {
 		if (typeof klass == 'string') klass = Class.parse(klass);
 		if (klass == null) return null;
