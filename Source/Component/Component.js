@@ -146,7 +146,7 @@ Moobile.Component = new Class({
 				return;
 			}
 
-			throw new Error('Role ' + name + ' is undefined');
+			throw new Error('Role ' + role + ' is undefined');
 
 		}, this);
 	},
