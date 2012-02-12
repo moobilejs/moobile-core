@@ -354,20 +354,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 });
 
 /**
- * Return the view element of a file at a given path.
- *
- * @param {String} path The file path.
- *
- * @return {Element} The element or <code>null</code> if no elements were found.
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
- */
-Moobile.View.elementAtPath = function(path) {
-	return Element.at(path);
-};
-
-/**
  * Return the view of a file at a given path.
  *
  * @param {String} path The file path.
@@ -377,19 +363,9 @@ Moobile.View.elementAtPath = function(path) {
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-/**
- * Return the view of a file at a given path.
- *
- * @param {String} path The file path.
- *
- * @return {View} The view or <code>null</code> if no view were found.
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
- */
-Moobile.View.atPath = function(path) {
+Moobile.View.at = function(path) {
 
-	var element = Moobile.View.elementAtPath(path);
+	var element = Element.at(path);
 	if (element) {
 		return Moobile.Component.create(Moobile.View, element, 'data-view');
 	}
