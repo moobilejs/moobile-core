@@ -21,6 +21,10 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
+(function() {
+
+var fireEvent = Events.prototype.fireEvent;
+
 /**
  * @see http://moobile.net/api/0.1/Entity/Entity
  *
@@ -45,11 +49,12 @@ Moobile.Entity = new Class({
 
 		args = Array.from(args).include(this);
 
-		if (this.eventShouldFire(type, args)) {
-			this.willFireEvent(type, args);
-			Events.prototype.fireEvent.call(this, type, args, delay);
-			this.didFireEvent(type, args);
-		}
+		if (!this.eventShouldFire(type, args))
+			return this;
+
+		this.willFireEvent(type, args);
+		fireEvent.call(this, type, args, delay);
+		this.didFireEvent(type, args);
 
 		return this;
 	},
@@ -85,3 +90,5 @@ Moobile.Entity = new Class({
 	}
 
 });
+
+})();
