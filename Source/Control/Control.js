@@ -16,70 +16,55 @@ provides:
 ...
 */
 
-/**
- * @name  Control
- * @class Provides the base class for controls.
- *
- * @extends Entity
- *
- * @classdesc
- *
- * This class contains the method that should be used in all controls. You
- * should not instantiate this class, instead you should extend this class to
- * create your own control.
- *
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
-Moobile.Control = new Class( /** @lends Control.prototype */ {
+Moobile.Control = new Class({
 
 	Extends: Moobile.Component,
 
 	/**
-	 * Whether the control is disabled.
-	 * @type   Boolean
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	disabled: false,
 
 	/**
-	 * Whether the control is selected.
-	 * @type   Boolean
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	selected: false,
 
 	/**
-	 * Whether the control is highlighted.
-	 * @type   Boolean
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	highlighted: false,
 
 	/**
-	 * Whether the control is selectable.
-	 * @type   Boolean
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	selectable: true,
 
 	/**
-	 * Whether the control is highlightable.
-	 * @type   Boolean
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	highlightable: true,
 
 	/**
-	 * The control options.
-	 * @type   Object
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	options: {
 		className: null,
@@ -87,123 +72,70 @@ Moobile.Control = new Class( /** @lends Control.prototype */ {
 	},
 
 	/**
-	 * Sets whether the control is disabled.
-	 *
-	 * This method will add the `is-disabled` CSS class to the control's
-	 * element upon disabling. What can and cannot be done when a control is
-	 * disabled is up to the control's implementation, however, core events
-	 * will not be propagated when a control is disabled.
-	 *
-	 * @param {Boolean} value Whether the control is disabled.
-	 *
-	 * @return {Control} This control.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setDisabled: function(value) {
 		return this._setState('disabled', value);
 	},
 
 	/**
-	 * Indicate whether the control is disabled.
-	 *
-	 * What can and cannot be done when a control is disabled is up to the
-	 * control's implementation, however, core events will not be propagated when a
-	 * control is disabled.
-	 *
-	 * @return {Boolean} Whether the control is disabled.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isDisabled: function() {
 		return this._getState('disabled');
 	},
 
 	/**
-	 * Sets whether the control is selected.
-	 *
-	 * This method will add the `is-selected` CSS class to the control's
-	 * element upon selecting. What can and cannot be done when a control is
-	 * selected is up to the control's implementation as the selected state
-	 * is mostly used for presentation purposes.
-	 *
-	 * @param {Boolean} value Whether the control is selected.
-	 *
-	 * @return {Control} This control.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSelected: function(value) {
 		return this._setState('selected', this.selectable ? value : false);
 	},
 
 	/**
-	 * Indicates whether the control is selected.
-	 *
-	 * What can and cannot be done when a control is selected is up to the
-	 * control's implementation as the selected state is mostly used for
-	 * presentation purposes.
-	 *
-	 * @return {Boolean} Whether the control is selected.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isSelected: function() {
 		return this._getState('selected');
 	},
 
 	/**
-	 * Sets whether the control is highlighted.
-	 *
-	 * This method will add the `is-highlighted` CSS class to the control's
-	 * element upon highlighting. What can and cannot be done when a control is
-	 * selected is up to the control's implementation as the highlighted state
-	 * is mostly used for presentation purposes.
-	 *
-	 * @param {Boolean} value Whether the control is highlighted.
-	 *
-	 * @return {Control} This control.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setHighlighted: function(value) {
 		return this._setState('highlighted', this.highlightable ? value : false);
 	},
 
 	/**
-	 * Indicate whether the control is highlighted.
-	 *
-	 * What can and cannot be done when a control is highlighted is up to the
-	 * control's implementation as the highlighted state is mostly used for
-	 * presentation purposes.
-	 *
-	 * @return {Boolean} Whether the control is highlighted.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isHighlighted: function() {
 		return this._getState('highlighted');
 	},
 
 	/**
-	 * Sets whether the control is selectable.
-	 *
-	 * This method will set whether this control can go from an unselected
-	 * state to a selected state. However, it will not be locked as the control
-	 * will always be able to go to the unselected state.
-	 *
-	 * @param {Boolean} value Whether the control is selectable.
-	 *
-	 * @return {Control} This control.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSelectable: function(value) {
 		this.selectable = value;
@@ -211,34 +143,20 @@ Moobile.Control = new Class( /** @lends Control.prototype */ {
 	},
 
 	/**
-	 * Indicates whether the control is selectable.
-	 *
-	 * This method will indicate whether this control can go from an unselected
-	 * state to a selected state. However, it will not be locked as the control
-	 * will always be able to go to the unselected state.
-	 *
-	 * @return {Boolean} Whether the control is selectable.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isSelectable: function() {
 		return this.selectable;
 	},
 
 	/**
-	 * Sets whether the control is highlightable.
-	 *
-	 * This method will set whether this control can go from an unhighlighted
-	 * state to an highlighted state. However, it will not be locked as the
-	 * control will always be able to go to the unhighlighted state.
-	 *
-	 * @param {Boolean} value Whether the control is highlightable.
-	 *
-	 * @return {Control} This control.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setHighlightable: function(value) {
 		this.highlightable = value;
@@ -246,30 +164,51 @@ Moobile.Control = new Class( /** @lends Control.prototype */ {
 	},
 
 	/**
-	 * Indicates whether the control is highlightable.
-	 *
-	 * This method will indicate whether this control can go from an
-	 * unhighlighted state to an highlighted state. However, it will not be
-	 * locked as the control will always be able to go to the unhighlighted
-	 * state.
-	 *
-	 * @return {Boolean} selectable Whether the control is highlightable.
+	 * @see http://moobile.net/api/0.1/Control/Control#element
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isHighlightable: function() {
 		return this.highlightable;
 	},
 
+	/**
+	 * @overrides
+	 */
 	eventShouldFire: function(type, args) {
 		return !this.disabled;
 	},
 
+	/**
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willSetState: function(state, value) {
+
+	},
+
+	/**
+	 * @see http://moobile.net/api/0.1/Control/Control#element
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didSetState: function(state, value) {
+
+	},
+
+	/**
+	 * @private
+	 */
 	_setState: function(state, value) {
 
 		if (this[state] == value)
 			return this;
+
+		this.willSetState(state, value);
 
 		this[state] = value;
 
@@ -277,9 +216,14 @@ Moobile.Control = new Class( /** @lends Control.prototype */ {
 		if (value)	this.element.addClass(klass);
 		else		this.element.removeClass(klass);
 
+		this.didSetState(state, value);
+
 		return this;
 	},
 
+	/**
+	 * @private
+	 */
 	_getState: function(state) {
 		return this[state] || false;
 	}
