@@ -275,7 +275,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('list', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.List, 'data-list');
+	var instance = Moobile.Component.create(Moobile.List, element, 'data-list');
 	this.addChild(instance);
 });
 

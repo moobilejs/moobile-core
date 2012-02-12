@@ -712,14 +712,19 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.Component.create = function(element, klass, descriptor) {
+Moobile.Component.create = function(klass, element, descriptor) {
+
 	element = Element.from(element);
-	if (element) {
-		if (descriptor) {
-			var instance = Class.instantiate(element.get(descriptor), element);
-			if (instance instanceof klass) return instance;
+
+	if (descriptor) {
+		var subclass = element.get(descriptor);
+		if (subclass) {
+			var instance = Class.instantiate(subclass, element);
+			if (instance instanceof klass) {
+				return instance;
+			}
 		}
-		return new klass(element);
 	}
-	return null;
+
+	return new klass(element);
 };

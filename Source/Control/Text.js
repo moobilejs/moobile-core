@@ -86,6 +86,6 @@ Moobile.Text = new Class( /** @lends Text.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('text', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.Text, 'data-text');
+	var instance = Moobile.Component.create(Moobile.Text, element, 'data-text');
 	this.addChild(instance);
 });

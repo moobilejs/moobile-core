@@ -140,11 +140,11 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('button', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.Button, 'data-button');
+	var instance = Moobile.Component.create(Moobile.Button, element, 'data-button');
 	this.addChild(instance);
 });
 
 Moobile.Component.defineRole('label', Moobile.Button, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.Text, 'data-label');
+	var instance = Moobile.Component.create(Moobile.Text, element, 'data-label');
 	this.setLabel(instance);
 });

@@ -63,6 +63,6 @@ Moobile.ActivityIndicator = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('activity-indicator', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.ActivityIndicator, 'data-activity-indicator');
+	var instance = Moobile.Component.create(Moobile.ActivityIndicator, element, 'data-activity-indicator');
 	this.addChild(instance);
 });

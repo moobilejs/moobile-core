@@ -391,7 +391,7 @@ Moobile.View.atPath = function(path) {
 
 	var element = Moobile.View.elementAtPath(path);
 	if (element) {
-		return Moobile.Component.create(element, Moobile.View, 'data-view');
+		return Moobile.Component.create(Moobile.View, element, 'data-view');
 	}
 
 	return null;
@@ -402,6 +402,6 @@ Moobile.View.atPath = function(path) {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.View, 'data-view');
+	var instance = Moobile.Component.create(Moobile.View, element, 'data-view');
 	this.addChild(instance);
 });

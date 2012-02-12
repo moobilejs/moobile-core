@@ -53,6 +53,6 @@ Moobile.BarItem = new Class( /** @lends BarItem.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('item', Moobile.Bar, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.BarItem, 'data-item');
+	var instance = Moobile.Component.create(Moobile.BarItem, element, 'data-item');
 	this.setItem(instance);
 });

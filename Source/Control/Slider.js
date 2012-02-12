@@ -198,6 +198,6 @@ Moobile.Slider = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('slider', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.Slider, 'data-slider');
+	var instance = Moobile.Component.create(Moobile.Slider, element, 'data-slider');
 	this.addChild(instance);
 });

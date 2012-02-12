@@ -173,6 +173,6 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('image', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.Image, 'data-image');
+	var instance = Moobile.Component.create(Moobile.Image, element, 'data-image');
 	this.addChild(instance);
 });

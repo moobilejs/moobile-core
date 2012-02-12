@@ -56,7 +56,7 @@ Moobile.BarButton = new Class( /** @lends BarButton.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('bar-button', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.BarButton, 'data-bar-button');
+	var instance = Moobile.Component.create(Moobile.BarButton, element, 'data-bar-button');
 	this.addChild(instance);
 });
 

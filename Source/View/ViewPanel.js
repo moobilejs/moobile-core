@@ -89,6 +89,6 @@ Moobile.ViewPanel = new Class( /** @lends ViewPanel.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view-panel', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.ViewPanel, 'data-view-panel');
+	var instance = Moobile.Component.create(Moobile.ViewPanel, element, 'data-view-panel');
 	this.addChild(instance);
 });

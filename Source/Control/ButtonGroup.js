@@ -269,7 +269,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('button-group', null, function(element) {
-	var instance = Moobile.Component.create(element, Moobile.ButtonGroup, 'data-button-group');
+	var instance = Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group');
 	this.addChild(instance);
 });
 
