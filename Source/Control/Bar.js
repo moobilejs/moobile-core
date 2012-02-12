@@ -121,7 +121,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('bar', null, function(element) {
-	var instance = Moobile.Component.fromElement(element, 'data-bar', Moobile.Bar);
+	var instance = Moobile.Component.create(element, Moobile.Bar, 'data-bar');
 	this.addChild(instance);
 });
 

@@ -708,24 +708,18 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
 };
 
 /**
- * @see    http://moobile.net/api/0.1/Component/Component#fromElement
+ * @see    http://moobile.net/api/0.1/Component/Component#create
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.Component.fromElement = function(element, property, type) {
-
-	var name = element.get('data-name');
-
-	var klass = element.get(property);
-	if (klass) {
-
-		var child = Class.instantiate(klass, element, null, name);
-		if (child instanceof type) {
-			return child;
+Moobile.Component.create = function(element, klass, descriptor) {
+	element = Element.from(element);
+	if (element) {
+		if (descriptor) {
+			var instance = Class.instantiate(element.get(descriptor), element);
+			if (instance instanceof klass) return instance;
 		}
-
-		throw new Error('Class ' + klass + ' is not a proper instance.');
+		return new klass(element);
 	}
-
-	return new type(element, null, name);
+	return null;
 };

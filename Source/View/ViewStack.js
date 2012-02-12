@@ -55,6 +55,6 @@ Moobile.ViewStack = new Class( /** @lends ViewStack.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view-stack', null, function(element) {
-	var instance = Moobile.Component.fromElement(element, 'data-view-stack', Moobile.ViewStack);
+	var instance = Moobile.Component.create(element, Moobile.ViewStack, 'data-view-stack');
 	this.addChild(instance);
 });
