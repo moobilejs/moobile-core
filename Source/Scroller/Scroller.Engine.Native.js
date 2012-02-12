@@ -240,6 +240,5 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 });
 
 Moobile.Scroller.Engine.Native.supportsCurrentPlatform = function() {
-	// TODO: Improve me, a lot.
-	return /CPU OS 5_0/.test(navigator.userAgent);
+	return 'WebkitOverflowScrolling' in new Element('div').style;
 };
