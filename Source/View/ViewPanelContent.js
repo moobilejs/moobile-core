@@ -41,6 +41,28 @@ Moobile.ViewPanelContent = new Class({
 
 	Extends: Moobile.ViewContent,
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addEvent('view-panel-content');
+
+		var main = this.element.getRoleElement('main-panel');
+		if (main == null) {
+			main = new Element('div');
+			main.ingest(this.element);
+			main.inject(this.element);
+			main.setRole('main-panel');
+		}
+
+		var side = this.element.getRoleElement('side-panel');
+		if (side == null) {
+			side = new Element('div');
+			side.inject(this.element, 'top');
+			side.setRole('side-panel');
+		}
+	},
+
 	/**
 	 * Returns the side panel.
 	 *
@@ -71,29 +93,6 @@ Moobile.ViewPanelContent = new Class({
 	 */
 	getMainPanel: function() {
 		return this.mainPanel;
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addEvent('view-panel-content');
-
-		var main = this.element.getRoleElement('main-panel');
-		if (main == null) {
-			main = new Element('div');
-			main.ingest(this.element);
-			main.inject(this.element);
-		}
-
-		var side = this.element.getRoleElement('side-panel');
-		if (side == null) {
-			side = new Element('div');
-			side.inject(this.element, 'top');
-		}
-
-		this.attachRole(main, 'main-panel');
-		this.attachRole(side, 'side-panel');
 	}
 
 });

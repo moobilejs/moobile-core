@@ -67,6 +67,11 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		tagName: 'ul'
 	},
 
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('list');
+	},
+
 	destroy: function() {
 		this.selectedItem = null;
 		this.selectedItemIndex = -1;
@@ -221,11 +226,6 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 */
 	removeAllItems: function() {
 		return this.removeChildren(Moobile.ListItem);
-	},
-
-	willBuild: function() {
-		this.parent();
-		this.element.addClass('list');
 	},
 
 	didAddChild: function(entity) {

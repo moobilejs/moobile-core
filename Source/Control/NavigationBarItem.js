@@ -50,6 +50,21 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 */
 	title: null,
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addClass('navigation-bar-item');
+
+		var title = this.element.getRoleElement('title');
+		if (title == null) {
+			title = new Element('div');
+			title.ingest(this.element);
+			title.inject(this.element);
+			title.setRole('title');
+		}
+	},
+
 	destroy: function() {
 		this.title = null;
 		this.parent();
@@ -164,22 +179,6 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 */
 	removeAllButtons: function() {
 		return this.removeChildren(Moobile.Button);
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('navigation-bar-item');
-
-		var title = this.element.getRoleElement('title');
-		if (title == null) {
-			title = new Element('div');
-			title.ingest(this.element);
-			title.inject(this.element);
-		}
-
-		this.attachRole(title, 'title');
 	}
 
 });

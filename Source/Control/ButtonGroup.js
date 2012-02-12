@@ -68,6 +68,17 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		deselectable: false
 	},
 
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('button-group');
+	},
+
+	destroy: function() {
+		this.selectedButton = null;
+		this.selectedButtonIndex = -1;
+		this.parent();
+	},
+
 	/**
 	 * Sets the selected button.
 	 *
@@ -216,11 +227,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 		return this.removeChildren(Moobile.Button);
 	},
 
-	willBuild: function() {
-		this.parent();
-		this.element.addClass('button-group');
-	},
-
 	didAddChild: function(entity) {
 
 		this.parent(entity);
@@ -241,12 +247,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 			entity.removeEvent('tapend', this.bound('onButtonTapEnd'));
 			entity.removeEvent('tap', this.bound('onButtonTap'));
 		}
-	},
-
-	destroy: function() {
-		this.selectedButton = null;
-		this.selectedButtonIndex = -1;
-		this.parent();
 	},
 
 	onButtonTapStart: function(e) {

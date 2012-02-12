@@ -48,16 +48,16 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		this.window = this; // weird but important
 	},
 
-	didAddChild: function(entity) {
-		this.parent(entity);
-		entity.setWindow(this);
-		entity.setParent(this);
-	},
-
 	destroy: function() {
 		window.removeEvent('load', this.bound('onWindowLoad'));
 		window.removeEvent('rotate', this.bound('onWindowRotate'));
 		this.parent();
+	},
+
+	didAddChild: function(entity) {
+		this.parent(entity);
+		entity.setWindow(this);
+		entity.setParent(this);
 	},
 
 	onWindowLoad: function(e) {

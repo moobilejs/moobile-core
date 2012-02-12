@@ -49,6 +49,31 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	label: null,
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addClass('button');
+
+		var label = this.element.getRoleElement('label');
+		if (label == null) {
+			label = new Element('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+
+		this.addEvent('tapstart', this.bound('onTapStart'));
+		this.addEvent('tapend', this.bound('onTapEnd'));
+	},
+
+	destroy: function() {
+		this.removeEvent('tapstart', this.bound('onTapStart'));
+		this.removeEvent('tapend', this.bound('onTapEnd'));
+		this.label = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the label.
 	 *
@@ -98,32 +123,6 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	 */
 	getLabel: function() {
 		return this.label;
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('button');
-
-		var label = this.element.getRoleElement('label');
-		if (label == null) {
-			label = new Element('div');
-			label.ingest(this.element);
-			label.inject(this.element);
-		}
-
-		this.attachRole(label, 'label');
-
-		this.addEvent('tapstart', this.bound('onTapStart'));
-		this.addEvent('tapend', this.bound('onTapEnd'));
-	},
-
-	destroy: function() {
-		this.removeEvent('tapstart', this.bound('onTapStart'));
-		this.removeEvent('tapend', this.bound('onTapEnd'));
-		this.label = null;
-		this.parent();
 	},
 
 	onTapStart: function(e) {

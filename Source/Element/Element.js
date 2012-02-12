@@ -33,6 +33,26 @@ Element.implement({
 	},
 
 	/**
+	 * @see http://moobile.net/api/0.1/Element/Element#setRole
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	 setRole: function(role) {
+	 	return this.set('data-role', role);
+	 },
+
+	/**
+	 * @see http://moobile.net/api/0.1/Element/Element#getRole
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	 getRole: function(role) {
+	 	return this.get('data-role');
+	 },
+
+	/**
 	 * @see http://moobile.net/api/0.1/Element/Element#getRoleElement
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)

@@ -69,6 +69,43 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		tagName: 'li'
 	},
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addClass('list-item');
+
+		var image  = this.element.getRoleElement('image');
+		var label  = this.element.getRoleElement('label');
+		var detail = this.element.getRoleElement('detail');
+
+		if (label == null) {
+			label = new Element('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+
+		if (image == null) {
+			image = new Element('img');
+			image.inject(this.element, 'top');
+			image.setRole('image');
+		}
+
+		if (detail == null) {
+			detail = new Element('div');
+			detail.inject(this.element);
+			image.setRole('detail');
+		}
+	},
+
+	destroy: function() {
+		this.label = null;
+		this.image = null;
+		this.detail = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the image.
 	 *
@@ -218,44 +255,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 	 */
 	getDetail: function() {
 		return this.detail;
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('list-item');
-
-		var image  = this.element.getRoleElement('image');
-		var label  = this.element.getRoleElement('label');
-		var detail = this.element.getRoleElement('detail');
-
-		if (label == null) {
-			label = new Element('div');
-			label.ingest(this.element);
-			label.inject(this.element);
-		}
-
-		if (image == null) {
-			image = new Element('img');
-			image.inject(this.element, 'top');
-		}
-
-		if (detail == null) {
-			detail = new Element('div');
-			detail.inject(this.element);
-		}
-
-		this.attachRole(label, 'label');
-		this.attachRole(image, 'image');
-		this.attachRole(detail, 'detail');
-	},
-
-	destroy: function() {
-		this.label = null;
-		this.image = null;
-		this.detail = null;
-		this.parent();
 	}
 
 });

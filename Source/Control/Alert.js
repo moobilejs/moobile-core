@@ -109,6 +109,52 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		buttonLayout: 'vertical'
 	},
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addClass('alert');
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+
+		this.overlay = new Moobile.Overlay();
+		this.overlay.setStyle('radial');
+		this.addChild(this.overlay);
+
+		this.dialogHeader  = new Element('div.dialog-header');
+		this.dialogFooter  = new Element('div.dialog-footer');
+		this.dialogContent = new Element('div.dialog-content');
+
+		this.dialog = new Element('div.dialog');
+		this.dialog.grab(this.dialogHeader);
+		this.dialog.grab(this.dialogContent);
+		this.dialog.grab(this.dialogFooter);
+
+		this.element.grab(this.dialog);
+
+		var buttonLayout = this.options.buttonLayout;
+		if (buttonLayout) {
+			this.element.addClass('button-layout-' + buttonLayout);
+		}
+	},
+
+	destroy: function() {
+
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+
+		this.title = null;
+		this.message = null;
+
+		this.dialog = null;
+		this.dialogHeader = null;
+		this.dialogFooter = null;
+		this.dialogContent = null;
+
+		this.overlay.destroy();
+		this.overlay = null;
+
+		this.parent();
+	},
+
 	/**
 	 * Sets the title.
 	 *
@@ -269,34 +315,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		return this;
 	},
 
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('alert');
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-
-		this.overlay = new Moobile.Overlay();
-		this.overlay.setStyle('radial');
-		this.addChild(this.overlay);
-
-		this.dialogHeader  = new Element('div.dialog-header');
-		this.dialogFooter  = new Element('div.dialog-footer');
-		this.dialogContent = new Element('div.dialog-content');
-
-		this.dialog = new Element('div.dialog');
-		this.dialog.grab(this.dialogHeader);
-		this.dialog.grab(this.dialogContent);
-		this.dialog.grab(this.dialogFooter);
-
-		this.element.grab(this.dialog);
-
-		var buttonLayout = this.options.buttonLayout;
-		if (buttonLayout) {
-			this.element.addClass('button-layout-' + buttonLayout);
-		}
-	},
-
 	didAddChild: function(entity) {
 
 		this.parent(entity);
@@ -331,24 +349,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	didHide: function() {
 		this.parent();
 		this.destroy();
-	},
-
-	destroy: function() {
-
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-
-		this.title = null;
-		this.message = null;
-
-		this.dialog = null;
-		this.dialogHeader = null;
-		this.dialogFooter = null;
-		this.dialogContent = null;
-
-		this.overlay.destroy();
-		this.overlay = null;
-
-		this.parent();
 	},
 
 	onButtonTap: function(e, sender) {

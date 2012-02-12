@@ -41,6 +41,17 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 
 	Extends: Moobile.Control,
 
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('overlay');
+		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+	},
+
+	destroy: function() {
+		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.parent();
+	},
+
 	/**
 	 * Shows the overlay with an animation.
 	 *
@@ -76,17 +87,6 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 		this.willHide();
 		this.element.addClass('hide-animated');
 		return this;
-	},
-
-	willBuild: function() {
-		this.parent();
-		this.element.addClass('overlay');
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
-	},
-
-	destroy: function() {
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
-		this.parent();
 	},
 
 	onAnimationEnd: function(e) {

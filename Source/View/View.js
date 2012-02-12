@@ -59,6 +59,26 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	parentView: null,
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addClass('view');
+
+		var content = this.element.getRoleElement('view-content');
+		if (content == null) {
+			content = new Element('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			content.setRole('view-content');
+		}
+	},
+
+	destroy: function() {
+		this.content = null;
+		this.parent();
+	},
+
 	/**
 	 * Enables the touch interraction of the view.
 	 *
@@ -299,22 +319,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		return this.content;
 	},
 
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('view');
-
-		var content = this.element.getRoleElement('view-content');
-		if (content == null) {
-			content = new Element('div');
-			content.ingest(this.element);
-			content.inject(this.element);
-		}
-
-		this.attachRole(content, 'view-content');
-	},
-
 	/**
 	 * Tell the view it's about to be moved to a new view.
 	 *
@@ -345,11 +349,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	parentViewDidChange: function(parentView) {
 
-	},
-
-	destroy: function() {
-		this.content = null;
-		this.parent();
 	}
 
 });

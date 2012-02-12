@@ -49,40 +49,35 @@ Moobile.Component = new Class({
 	_children: [],
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#element
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#style
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#style
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	style: null,
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#ready
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#ready
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	ready: false,
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#name
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#name
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	name: null,
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#options
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -93,19 +88,18 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#initialization
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#initialization
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	initialize: function(element, options, name) {
 
-		this.name = name;
-
 		this.element = Element.from(element);
 		if (this.element == null) {
 			this.element = new Element(this.options.tagName);
 		}
+
+		this.name = name || this.element.get('data-name');
 
 		options = options || {};
 
@@ -130,7 +124,9 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @private
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	build: function() {
 
@@ -141,13 +137,39 @@ Moobile.Component = new Class({
 		if (styleName) this.setStyle(styleName);
 
 		this.element.getRoleElements().each(function(element) {
-			this.attachRole(element);
+
+			var role = element.get('data-role');
+
+			var behavior = this.$roles[role];
+			if (behavior) {
+				behavior.call(this, element);
+				return;
+			}
+
+			throw new Error('Role ' + name + ' is undefined');
+
 		}, this);
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#addChild
-	 *
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addEvent: function(type, fn, internal) {
+
+		if (Moobile.NativeEvents.contains(type)) {
+			this.element.addEvent(type, function(e) {
+				e.targetElement = this.element;
+				this.fireEvent(type, e);
+			}.bind(this), internal);
+		}
+
+		return this.parent(type, fn, internal);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -184,8 +206,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -196,8 +217,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getChildAt
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -206,8 +226,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#hasChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -216,8 +235,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getChildren
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildren
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -228,8 +246,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#replaceChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -238,8 +255,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#removeChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -264,8 +280,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#replaceChildren
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChildren
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -275,8 +290,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#removeFromParent
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeFromParent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -287,8 +301,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#setParent
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#setParent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -300,8 +313,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getParent
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getParent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -310,8 +322,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#hasParent
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasParent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -320,8 +331,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#setWindow
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#setWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -331,8 +341,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getWindow
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -341,8 +350,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#hasWindow
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -351,8 +359,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#setReady
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#setReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -369,8 +376,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#isReady
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#isReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -379,36 +385,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * TODO rename and explain
-	 */
-	attachRole: function(element, role) {
-
-		if (element.retrieve('moobile.entity.role'))
-			return this;
-
-		if (this.element.ownsRoleElement(element)) {
-
-			var name = role || element.get('data-role');
-			if (name) {
-
-				element.store('moobile.entity.role', name);
-
-				var handler = this.$roles[name];
-				if (handler) {
-					handler.call(this, element);
-					return this;
-				}
-
-				throw new Error('The role ' + name + ' has not been defined');
-			}
-		}
-
-		throw new Error('The role element does not beling in this entity');
-	},
-
-	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getName
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -417,8 +394,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#setStyle
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#setStyle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -429,18 +405,14 @@ Moobile.Component = new Class({
 		}
 
 		var style = this.$styles[name];
-		if (style) {
-			style.attach.call(this, this.element);
-		}
-
+		if (style) style.attach.call(this, this.element);
 		this.style = style;
 
 		return this;
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getStyle
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getStyle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -449,8 +421,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#addClass
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -460,8 +431,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#addClass
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -471,8 +441,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#toggleClass
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#toggleClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -482,8 +451,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getElement
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -494,8 +462,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getElements
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -504,8 +471,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#hasElement
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -514,8 +480,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getSize
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -524,8 +489,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#getPosition
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#getPosition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -534,8 +498,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#show
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#show
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -551,8 +514,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#hide
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#hide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -568,8 +530,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#willBuild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#willBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -578,8 +539,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didBuild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#didBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -588,8 +548,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didBecomeReady
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#didBecomeReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -598,8 +557,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#willAddChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#willAddChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -608,8 +566,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didAddChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#didAddChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -618,8 +575,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#willRemoveChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#willRemoveChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -628,8 +584,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didRemoveChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#didRemoveChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -638,8 +593,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#parentWillChange
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#parentWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -648,8 +602,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#parentDidChange
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#parentDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -658,8 +611,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#willShow
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#willShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -668,8 +620,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didShow
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#didShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -678,8 +629,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#willHide
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#willHide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -688,8 +638,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didHide
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#didHide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -698,8 +647,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#destroy
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -722,8 +670,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#destroyChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#destroyChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -732,30 +679,26 @@ Moobile.Component = new Class({
 		entity = null;
 	},
 
-	/**
-	 * @private
-	 */
-	addEvent: function(type, fn, internal) {
-		if (Moobile.NativeEvents.contains(type)) {
-			this.element.addEvent(type, function(e) {
-				e.targetComponent = this;
-				e.targetElement = this.element;
-				this.fireEvent(type, e);
-			}.bind(this), internal);
-		}
-		return this.parent(type, fn, internal);
-	},
-
 	toElement: function() {
 		return this.element;
 	}
 
 });
 
+/**
+ * @see    http://moobile.net/api/0.1/Component/Component#defineRole
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.Component.defineRole = function(name, target, behavior) {
 	(target || Moobile.Component).prototype.$roles[name] = behavior;
 };
 
+/**
+ * @see    http://moobile.net/api/0.1/Component/Component#defineStyle
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.Component.defineStyle = function(name, target, behavior) {
 	(target || Moobile.Component).prototype.$styles[name] = Object.append({
 		name: name,
@@ -764,6 +707,11 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
 	}, behavior);
 };
 
+/**
+ * @see    http://moobile.net/api/0.1/Component/Component#fromElement
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.Component.fromElement = function(element, property, type) {
 
 	var name = element.get('data-name');

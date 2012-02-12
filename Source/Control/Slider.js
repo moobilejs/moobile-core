@@ -100,42 +100,6 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
-	/**
-	 * Sets the value.
-	 *
-	 * This method will set the slider value and move it's thumb element to the
-	 * proper position.
-	 *
-	 * @param {Integer} value The value.
-	 *
-	 * @return {Slider} This slider.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setValue: function(value) {
-		this.slider.set(this.value = value);
-		return this;
-	},
-
-	/**
-	 * Returns the value.
-	 *
-	 * @return {Integer}
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getValue: function() {
-		return this.value;
-	},
-
-	updateTrack: function(position) {
-		this.track.setStyle('background-position',
-			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
-		);
-	},
-
 	willBuild: function() {
 
 		this.parent();
@@ -173,6 +137,42 @@ Moobile.Slider = new Class({
 		this.track = null;
 		this.slider = null;
 		this.parent();
+	},
+
+	/**
+	 * Sets the value.
+	 *
+	 * This method will set the slider value and move it's thumb element to the
+	 * proper position.
+	 *
+	 * @param {Integer} value The value.
+	 *
+	 * @return {Slider} This slider.
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setValue: function(value) {
+		this.slider.set(this.value = value);
+		return this;
+	},
+
+	/**
+	 * Returns the value.
+	 *
+	 * @return {Integer}
+	 *
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getValue: function() {
+		return this.value;
+	},
+
+	updateTrack: function(position) {
+		this.track.setStyle('background-position',
+			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
+		);
 	},
 
 	onMove: function(position) {

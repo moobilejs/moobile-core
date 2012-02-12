@@ -41,6 +41,11 @@ Moobile.Text = new Class( /** @lends Text.prototype */ {
 
 	Extends: Moobile.Control,
 
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('text');
+	},
+
 	/**
 	 * Sets the text.
 	 *
@@ -72,11 +77,6 @@ Moobile.Text = new Class( /** @lends Text.prototype */ {
 	 */
 	getText: function() {
 		return this.element.get('html');
-	},
-
-	willBuild: function() {
-		this.parent();
-		this.element.addClass('text');
 	}
 
 });

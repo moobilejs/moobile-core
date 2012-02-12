@@ -80,6 +80,51 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 		}
 	},
 
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('scroll-view');
+	},
+
+	didBuild: function() {
+
+		this.parent();
+
+		var options = {
+			momentum: this.options.momentum,
+			scrollX: this.options.scrollX,
+			scrollY: this.options.scrollY,
+			snapToPage: this.options.snapToPage,
+			snapToPageAt: this.options.snapToPageAt,
+			snapToPageDuration: this.options.snapToPageDuration,
+			snapToPageDelay: this.options.snapToPageDelay
+		};
+
+		this.scroller = new Moobile.Scroller(this.content, options);
+		this.scroller.addEvent('dragstart', this.bound('onDragStart'));
+		this.scroller.addEvent('dragend', this.bound('onDragEnd'));
+		this.scroller.addEvent('scroll', this.bound('onScroll'));
+
+		this.wrapper = this.scroller.getWrapper();
+		this.wrapper.addClass('view-content-wrapper');
+	},
+
+	didBecomeReady: function() {
+		this.parent();
+		this.scroller.refresh();
+	},
+
+	destroy: function() {
+
+		this.scroller.removeEvent('dragstart', this.bound('onDragStart'));
+		this.scroller.removeEvent('dragend', this.bound('onDragEnd'));
+		this.scroller.removeEvent('scroll', this.bound('onScroll'));
+
+		this.scroller.destroy();
+		this.scroller = null;
+
+		this.parent();
+	},
+
 	/**
 	 * Scrolls to a set of coordinates.
 	 *
@@ -161,35 +206,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 		return this.scroller.getScrollSize();
 	},
 
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('scroll-view');
-
-		var options = {
-			momentum: this.options.momentum,
-			scrollX: this.options.scrollX,
-			scrollY: this.options.scrollY,
-			snapToPage: this.options.snapToPage,
-			snapToPageAt: this.options.snapToPageAt,
-			snapToPageDuration: this.options.snapToPageDuration,
-			snapToPageDelay: this.options.snapToPageDelay
-		};
-
-		this.scroller = new Moobile.Scroller(this.content, options);
-		this.scroller.addEvent('dragstart', this.bound('onDragStart'));
-		this.scroller.addEvent('dragend', this.bound('onDragEnd'));
-		this.scroller.addEvent('scroll', this.bound('onScroll'));
-
-		this.wrapper = this.scroller.getWrapper();
-		this.wrapper.addClass('view-content-wrapper');
-	},
-
-	didBecomeReady: function() {
-		this.scroller.refresh();
-	},
-
 	willHide: function() {
 		this.parent();
 		this.options.offset = this.scroller.getScroll();
@@ -203,18 +219,6 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 		if (offset.x && offset.y) {
 			this.scroller.scrollTo(offset.x, offset.y);
 		}
-	},
-
-	destroy: function() {
-
-		this.scroller.removeEvent('dragstart', this.bound('onDragStart'));
-		this.scroller.removeEvent('dragend', this.bound('onDragEnd'));
-		this.scroller.removeEvent('scroll', this.bound('onScroll'));
-
-		this.scroller.destroy();
-		this.scroller = null;
-
-		this.parent();
 	},
 
 	onDragStart: function() {

@@ -49,6 +49,26 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	 */
 	item: null,
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.element.addClass('bar');
+
+		var item = this.element.getRoleElement('item');
+		if (item == null) {
+			item = new Element('div');
+			item.ingest(this.element);
+			item.inject(this.element);
+			item.setRole('item');
+		}
+	},
+
+	destroy: function() {
+		this.item = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the bar item.
 	 *
@@ -92,27 +112,6 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 	 */
 	getItem: function() {
 		return this.item;
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('bar');
-
-		var item = this.element.getRoleElement('item');
-		if (item == null) {
-			item = new Element('div');
-			item.ingest(this.element);
-			item.inject(this.element);
-		}
-
-		this.attachRole(item, 'item');
-	},
-
-	destroy: function() {
-		this.item = null;
-		this.parent();
 	}
 
 });

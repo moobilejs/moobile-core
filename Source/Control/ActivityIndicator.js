@@ -3,7 +3,7 @@
 
 name: ActivityIndicator
 
-description: Provides a control that indicates activities when animated.
+description:
 
 license: MIT-style license.
 
@@ -20,62 +20,40 @@ provides:
 */
 
 /**
- * @name  ActivityIndicator
- * @class Provides an activity indicator control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
+ * @see    http://moobile.net/api/0.1/Control/ActivityIndicator
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @since  0.1
  */
-Moobile.ActivityIndicator = new Class( /** @lends ActivityIndicator.prototype */ {
+Moobile.ActivityIndicator = new Class({
 
 	Extends: Moobile.Control,
 
 	/**
-	 * Start the activity indicator animation.
-	 *
-	 * This method will start the indicator animation by adding the `activity`
-	 * CSS class to the element. Update the properties of this CSS class to
-	 * customize the animation.
-	 *
-	 * @return {ActivityIndicator} This activity indicator.
-	 *
+	 * @overrides
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('activity-indicator');
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/ActivityIndicator#start
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	start: function() {
 		return this.addClass('activity');
 	},
 
 	/**
-	 * Stop the activity indicator animation.
-	 *
-	 * This method will stop the indicator animation by removing the `activity`
-	 * CSS class to the element. Update the properties of this CSS class to
-	 * customize the animation.
-	 *
-	 * @return {ActivityIndicator} This activity indicator.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/ActivityIndicator#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	stop: function() {
 		return this.removeClass('activity');
-	},
-
-	willBuild: function() {
-		this.parent();
-		this.element.addClass('activity-indicator');
 	}
 
 });

@@ -62,6 +62,25 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 		preLoad: false
 	},
 
+	willBuild: function() {
+
+		this.parent();
+
+		this.hide();
+
+		this.element.addClass('image');
+
+		if (this.element.get('tag') == 'img') {
+			var source = this.element.get('src');
+			if (source) this.setSource(source);
+		}
+	},
+
+	destroy: function() {
+		this.image = null;
+		this.parent();
+	},
+
 	/**
 	 * Sets the image source.
 	 *
@@ -125,27 +144,6 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 
 	isLoaded: function() {
 		return this.loaded;
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.hide();
-
-		this.element.addClass('image');
-
-		if (this.element.get('tag') == 'img') {
-			var source = this.element.get('src');
-			if (source) {
-				this.setSource(source);
-			}
-		}
-	},
-
-	destroy: function() {
-		this.image = null;
-		this.parent();
 	},
 
 	onLoad: function() {
