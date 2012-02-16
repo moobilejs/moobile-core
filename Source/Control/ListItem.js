@@ -95,7 +95,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (detail == null) {
 			detail = new Element('div');
 			detail.inject(this.element);
-			image.setRole('detail');
+			detail.setRole('detail');
 		}
 	},
 
