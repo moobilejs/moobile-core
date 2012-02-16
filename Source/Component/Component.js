@@ -25,26 +25,22 @@ Moobile.Component = new Class({
 
 	/**
 	 * @private
-	 */
-	$roles: {},
-
-	/**
-	 * @private
-	 */
-	$styles: {},
-
-	/**
-	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	_window: null,
 
 	/**
 	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	_parent: null,
 
 	/**
 	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	_children: [],
 
@@ -140,7 +136,7 @@ Moobile.Component = new Class({
 
 			var role = element.get('data-role');
 
-			var behavior = this.$roles[role];
+			var behavior = Moobile.Component.getRole(role, this);
 			if (behavior) {
 				behavior.call(this, element);
 				return;
@@ -402,10 +398,14 @@ Moobile.Component = new Class({
 
 		if (this.style) {
 			this.style.detach.call(this, this.element);
+			this.style = null;
 		}
 
-		var style = this.$styles[name];
-		if (style) style.attach.call(this, this.element);
+		var style = Moobile.Component.getStyle(name, this);
+		if (style) {
+			style.attach.call(this, this.element);
+		}
+
 		this.style = style;
 
 		return this;
@@ -691,7 +691,20 @@ Moobile.Component = new Class({
  * @since  0.1
  */
 Moobile.Component.defineRole = function(name, target, behavior) {
-	(target || Moobile.Component).prototype.$roles[name] = behavior;
+	var context = (target || Moobile.Component).prototype;
+	if (context.__roles__ == undefined) {
+		context.__roles__ = {};
+	}
+	context.__roles__[name] = behavior;
+};
+
+/**
+ * @see    http://moobile.net/api/0.1/Component/Component#getRole
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
+Moobile.Component.getRole = function(name, target) {
+	return target.__roles__[name] || null;
 };
 
 /**
@@ -700,12 +713,26 @@ Moobile.Component.defineRole = function(name, target, behavior) {
  * @since  0.1
  */
 Moobile.Component.defineStyle = function(name, target, behavior) {
-	(target || Moobile.Component).prototype.$styles[name] = Object.append({
+	var context = (target || Moobile.Component).prototype;
+	if (context.__styles__ == undefined) {
+		context.__styles__ = {};
+	}
+	context.__styles__[name] = Object.append({
 		name: name,
 		attach: function() {},
 		detach: function() {}
 	}, behavior);
 };
+
+/**
+ * @see    http://moobile.net/api/0.1/Component/Component#getRole
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
+Moobile.Component.getStyle = function(name, target) {
+	return target.__styles__[name] || null;
+};
+
 
 /**
  * @see    http://moobile.net/api/0.1/Component/Component#create
