@@ -58,18 +58,18 @@ Moobile.Popover = new Class({
 		this.animations.addEvent('end', this.bound('onAnimationEnd'));
 	},
 
-	addChild: function(entity, where, context) {
+	addChild: function(child, where, context) {
 
-		if (this.hasChild(entity))
+		if (this.hasChild(child))
 			return false;
 
-		if (where == 'header') return this.parent(entity, 'top', context);
-		if (where == 'footer') return this.parent(entity, 'bottom', context);
+		if (where == 'header') return this.parent(child, 'top', context);
+		if (where == 'footer') return this.parent(child, 'bottom', context);
 
 		if (context == undefined)
 			context = this.content;
 
-		this.parent(entity, where, context);
+		this.parent(child, where, context);
 	},
 
 	position: function(x, y) {

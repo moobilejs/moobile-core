@@ -315,23 +315,23 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		return this;
 	},
 
-	didAddChild: function(entity) {
+	didAddChild: function(child) {
 
-		this.parent(entity);
+		this.parent(child);
 
-		if (entity instanceof Moobile.Button) {
-			entity.addEvent('tap', this.bound('onButtonTap'));
-			this.buttons.include(entity);
+		if (child instanceof Moobile.Button) {
+			child.addEvent('tap', this.bound('onButtonTap'));
+			this.buttons.include(child);
 		}
 	},
 
-	didRemoveChild: function(entity) {
+	didRemoveChild: function(child) {
 
-		this.parent(entity);
+		this.parent(child);
 
-		if (entity instanceof Moobile.Button) {
-			entity.removeEvent('tap', this.bound('onButtonTap'));
-			this.buttons.erase(entity);
+		if (child instanceof Moobile.Button) {
+			child.removeEvent('tap', this.bound('onButtonTap'));
+			this.buttons.erase(child);
 		}
 	},
 

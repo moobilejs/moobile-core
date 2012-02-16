@@ -3,7 +3,7 @@
 
 name: Mask
 
-description: Provides an overlay control used to mask an entity.
+description: Provides an overlay control used to mask an child.
 
 license: MIT-style license.
 

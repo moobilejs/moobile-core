@@ -228,44 +228,38 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		return this.removeChildren(Moobile.ListItem);
 	},
 
-	didAddChild: function(entity) {
+	didAddChild: function(child) {
 
-		this.parent(entity);
+		this.parent(child);
 
-		if (entity instanceof Moobile.ListItem) {
-			entity.addEvent('tapstart', this.bound('onItemTapStart'));
-			entity.addEvent('tapend', this.bound('onItemTapEnd'));
-			entity.addEvent('tap', this.bound('onItemTap'));
+		if (child instanceof Moobile.ListItem) {
+			child.addEvent('tapstart', this.bound('onItemTapStart'));
+			child.addEvent('tapend', this.bound('onItemTapEnd'));
+			child.addEvent('tap', this.bound('onItemTap'));
 		}
 	},
 
-	didRemoveChild: function(entity) {
+	didRemoveChild: function(child) {
 
-		this.parent(entity);
+		this.parent(child);
 
-		if (entity instanceof Moobile.ListItem) {
-			entity.removeEvent('tapstart', this.bound('onItemTapStart'));
-			entity.removeEvent('tapend', this.bound('onItemTapEnd'));
-			entity.removeEvent('tap', this.bound('onItemTap'));
+		if (child instanceof Moobile.ListItem) {
+			child.removeEvent('tapstart', this.bound('onItemTapStart'));
+			child.removeEvent('tapend', this.bound('onItemTapEnd'));
+			child.removeEvent('tap', this.bound('onItemTap'));
 		}
 	},
 
-	onItemTapStart: function(e) {
-		var item = e.targetEntity;
-		if (this.selectable && this.highlightable) item.setHighlighted(true);
-		this.fireEvent('tapstart', e);
+	onItemTapStart: function(e, sender) {
+		if (this.selectable && this.highlightable) sender.setHighlighted(true);
 	},
 
-	onItemTapEnd: function(e) {
-		var item = e.targetEntity;
-		if (this.selectable && this.highlightable) item.setHighlighted(false);
-		this.fireEvent('tapend', e);
+	onItemTapEnd: function(e, sender) {
+		if (this.selectable && this.highlightable) sender.setHighlighted(false);
 	},
 
-	onItemTap: function(e) {
-		var item = e.targetEntity;
-		if (this.selectable) this.setSelectedItem(item);
-		this.fireEvent('tap', e);
+	onItemTap: function(e, sender) {
+		if (this.selectable) this.setSelectedItem(sender);
 	}
 
 });
