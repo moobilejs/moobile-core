@@ -106,15 +106,14 @@ Moobile.Component.defineRole('view-content', Moobile.ViewPanel, function(element
 	this.setContent(instance);
 });
 
-
 Moobile.Component.defineRole('side-panel', Moobile.ViewPanelContent, function(element, options) {
-	this.sidePanel = new Moobile.Entity(element, options);
+	this.sidePanel = new Moobile.Component(element, options);
 	this.sidePanel.addClass('side-panel');
 	this.addChild(this.sidePanel);
 });
 
 Moobile.Component.defineRole('main-panel', Moobile.ViewPanelContent, function(element, options) {
-	this.mainPanel = new Moobile.Entity(element, options);
+	this.mainPanel = new Moobile.Component(element, options);
 	this.mainPanel.addClass('main-panel');
 	this.addChild(this.mainPanel);
 });
