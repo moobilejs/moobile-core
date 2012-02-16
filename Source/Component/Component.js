@@ -133,17 +133,13 @@ Moobile.Component = new Class({
 		if (styleName) this.setStyle(styleName);
 
 		this.element.getRoleElements().each(function(element) {
-
 			var role = element.get('data-role');
-
-			var behavior = Moobile.Component.getRole(role, this);
-			if (behavior) {
-				behavior.call(this, element);
+			var func = Moobile.Component.getRole(role, this);
+			if (func) {
+				func.call(this, element);
 				return;
 			}
-
 			throw new Error('Role ' + role + ' is undefined');
-
 		}, this);
 	},
 
