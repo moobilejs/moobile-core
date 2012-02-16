@@ -49,8 +49,9 @@ Element.at = function(path, async, fn) {
 
 	var element = elements[path];
 	if (element) {
-		if (fn) fn(element);
-		return element;
+		var clone = element.clone();
+		if (fn) fn(clone);
+		return clone;
 	}
 
 	async = async || false;
@@ -61,14 +62,14 @@ Element.at = function(path, async, fn) {
 		url: path
 	}).addEvent('success', function(response) {
 		element = Element.from(response);
-		if (fn) fn(element);
+		if (fn) fn(element.clone());
 	}).addEvent('failure', function(request) {
 		if (fn) fn(null);
 	}).send();
 
 	if (element) elements[path] = element;
 
-	return !async ? element : null;
+	return !async ? element.clone() : null;
 };
 
 })();
