@@ -153,12 +153,18 @@ Moobile.Popover = new Class({
 		return this;
 	},
 
+	didBecomeReady: function() {
+		console.log(this.getWindow());
+		console.log(this);
+	},
+
 	didShow: function() {
 		this.parent();
 		this.visible = true;
 		if (this.options.autoHide) {
-			if (this.window) {
-				this.window.addEvent('tap', this.bound('onTapOut'));
+			var win = this.getWindow();
+			if (win) {
+				win.addEvent('tap', this.bound('onTapOut'));
 			}
 		}
 	},
@@ -195,11 +201,13 @@ Moobile.Popover = new Class({
 			case 'show':
 				this.element.addClass('visible');
 				this.didShow();
+				this.fireEvent('show');
 				break;
 			case 'hide':
 				this.element.hide();
 				this.element.removeClass('visible');
 				this.didHide();
+				this.fireEvent('hide');
 				break;
 		}
 	}
