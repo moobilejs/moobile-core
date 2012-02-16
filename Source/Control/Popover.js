@@ -153,11 +153,6 @@ Moobile.Popover = new Class({
 		return this;
 	},
 
-	didBecomeReady: function() {
-		console.log(this.getWindow());
-		console.log(this);
-	},
-
 	didShow: function() {
 		this.parent();
 		this.visible = true;
