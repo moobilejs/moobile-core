@@ -21,7 +21,7 @@ provides:
 
 /**
  * @name  ViewStackContent
- * @class Provides an entity that manages the content of a view stack.
+ * @class Provides an child that manages the content of a view stack.
  *
  * @classdesc
  *

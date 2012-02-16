@@ -1060,7 +1060,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * If you override this method, make sure you call the parent method at
 	 * the end of your implementation.
 	 *
-	 * @return {Entity} This entity.
+	 * @return {Entity} This child.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1

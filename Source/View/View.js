@@ -3,7 +3,7 @@
 
 name: View
 
-description: Provides an entity that handles an area in which a user can
+description: Provides an child that handles an area in which a user can
              interract.
 
 license: MIT-style license.
@@ -22,7 +22,7 @@ provides:
 
 /**
  * @name  View
- * @class Provides an entity that handles an area in which a user can
+ * @class Provides an child that handles an area in which a user can
  *        interract.
  *
  * @classdesc
@@ -114,10 +114,10 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Adds a child entity to this view.
+	 * Adds a child child to this view.
 	 *
-	 * This method will add a child entity to this view's content entity. You
-	 * can add the child entity before or after this view's content entity by
+	 * This method will add a child child to this view's content child. You
+	 * can add the child child before or after this view's content child by
 	 * passing `header` or `footer` to the `where` parameter.
 	 *
 	 * @see Entity#addChild
@@ -125,42 +125,42 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChild: function(entity, where, context) {
+	addChild: function(child, where, context) {
 
-		if (this.hasChild(entity))
+		if (this.hasChild(child))
 			return false;
 
-		if (entity instanceof Moobile.View)
-			entity.setParentView(this);
+		if (child instanceof Moobile.View)
+			child.setParentView(this);
 
-		if (entity instanceof Moobile.ViewContent)
-			return this.parent(entity, where, context);
+		if (child instanceof Moobile.ViewContent)
+			return this.parent(child, where, context);
 
 		if (where == 'header')
-			return this.parent(entity, 'top');
+			return this.parent(child, 'top');
 
 		if (where == 'footer')
-			return this.parent(entity, 'bottom');
+			return this.parent(child, 'bottom');
 
 		if (this.content == null)
-			return this.parent(entity, where, context);
+			return this.parent(child, where, context);
 
-		// the entity is in the view but not in the view content
-		if (this.hasElement(entity) && !this.content.hasElement(entity))
-			return this.parent(entity, where, context);
+		// the child is in the view but not in the view content
+		if (this.hasElement(child) && !this.content.hasElement(child))
+			return this.parent(child, where, context);
 
-		// the entity will go next to an element that is in the view but not in the view content
+		// the child will go next to an element that is in the view but not in the view content
 		if (this.hasElement(context) && !this.content.hasElement(context))
-			return this.parent(entity, where, context);
+			return this.parent(child, where, context);
 
-		return this.content.addChild(entity, where, context);
+		return this.content.addChild(child, where, context);
 	},
 
 	/**
-	 * Returns a child entity from this view.
+	 * Returns a child child from this view.
 	 *
-	 * This method will attempt to find the given child entity from this view's
-	 * content entity then from the view itself if the former failed.
+	 * This method will attempt to find the given child child from this view's
+	 * content child then from the view itself if the former failed.
 	 *
 	 * @see Entity#getChild
 	 *
@@ -174,27 +174,27 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Indicates whether an entity is owned by this view.
+	 * Indicates whether an child is owned by this view.
 	 *
-	 * This method will attempt to find the given child entity from this view's
-	 * content entity then from the view itself if the former failed.
+	 * This method will attempt to find the given child child from this view's
+	 * content child then from the view itself if the former failed.
 	 *
 	 * @see Entity#hasChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasChild: function(entity) {
+	hasChild: function(child) {
 		return this.content
-		     ? this.content.hasChild(entity) || this.parent(entity)
-		     : this.parent(entity);
+		     ? this.content.hasChild(child) || this.parent(child)
+		     : this.parent(child);
 	},
 
 	/**
 	 * Returns all the child entities from this view.
 	 *
 	 * This method will return an array that contains both the child entites
-	 * from this view and the child entities from this view's content entity.
+	 * from this view and the child entities from this view's content child.
 	 *
 	 * @see Entity#getChildren
 	 *
@@ -206,37 +206,37 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Replaces a child entity with another within this view.
+	 * Replaces a child child with another within this view.
 	 *
-	 * This method will attempt to replace the entity from this view's content
-	 * entity first then from the view itself if the former failed.
+	 * This method will attempt to replace the child from this view's content
+	 * child first then from the view itself if the former failed.
 	 *
 	 * @see Entity#replaceChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	replaceChild: function(replace, entity) {
+	replaceChild: function(replace, child) {
 		return this.content
-		     ? this.content.replaceChild(replace, entity) || this.parent(replace, entity)
-		     : this.parent(replace, entity);
+		     ? this.content.replaceChild(replace, child) || this.parent(replace, child)
+		     : this.parent(replace, child);
 	},
 
 	/**
-	 * Removes a child entity.
+	 * Removes a child child.
 	 *
-	 * This method will attempt to remove the entity from this view's content
-	 * entity first then from the view itself if the former failed.
+	 * This method will attempt to remove the child from this view's content
+	 * child first then from the view itself if the former failed.
 	 *
 	 * @see Entity#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChild: function(entity) {
+	removeChild: function(child) {
 		return this.content
-		     ? this.content.removeChild(entity) || this.parent(entity)
-		     : this.parent(entity);
+		     ? this.content.removeChild(child) || this.parent(child)
+		     : this.parent(child);
 	},
 
 	/**
@@ -275,8 +275,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	/**
 	 * Sets the view content.
 	 *
-	 * This method will set the entity that is used as the content of this
-	 * view. This entity will contains all child entities except ones in this
+	 * This method will set the child that is used as the content of this
+	 * view. This child will contains all child entities except ones in this
 	 * view's header or footer.
 	 *
 	 * @param {ViewContent} content The view content.
@@ -306,8 +306,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	/**
 	 * Returns the view content.
 	 *
-	 * This method will return the entity that is used as the content of this
-	 * view. This entity will contains all child entities except ones in this
+	 * This method will return the child that is used as the content of this
+	 * view. This child will contains all child entities except ones in this
 	 * view's header or footer.
 	 *
 	 * @return {ViewContent} The view content.

@@ -175,7 +175,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	 *
 	 * This method will return the current scroll position as an object
 	 * with two keys, `x` which indicates the horizontal scroll and `y` which
-	 * indicates the vertical scroll of this entity.
+	 * indicates the vertical scroll of this child.
 	 *
 	 * @return {Object} The scroll position.
 	 *

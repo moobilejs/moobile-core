@@ -21,7 +21,7 @@ provides:
 
 /**
  * @name  WindowContent
- * @class Provides an entity that manages the content of a window.
+ * @class Provides an child that manages the content of a window.
  *
  * @classdesc
  *

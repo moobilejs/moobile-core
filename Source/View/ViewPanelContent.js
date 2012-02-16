@@ -21,7 +21,7 @@ provides:
 
 /**
  * @name  ViewPanelContent
- * @class Provides an entity that manages the content of a view panel.
+ * @class Provides an child that manages the content of a view panel.
  *
  * @classdesc
  *

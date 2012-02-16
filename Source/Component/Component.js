@@ -561,7 +561,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willAddChild: function(entity) {
+	willAddChild: function(child) {
 
 	},
 
@@ -570,7 +570,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didAddChild: function(entity) {
+	didAddChild: function(child) {
 
 	},
 
@@ -579,7 +579,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willRemoveChild: function(entity) {
+	willRemoveChild: function(child) {
 
 	},
 
@@ -588,7 +588,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRemoveChild: function(entity) {
+	didRemoveChild: function(child) {
 
 	},
 
@@ -655,10 +655,10 @@ Moobile.Component = new Class({
 
 		this.removeFromParent();
 
-		var entity = this._children.getLast();
-		while (entity) {
-			entity.destroy();
-			entity = this._children.getLast();
+		var child = this._children.getLast();
+		while (child) {
+			child.destroy();
+			child = this._children.getLast();
 		}
 
 		this.element.destroy();
@@ -674,9 +674,9 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	destroyChild: function(entity) {
-		entity.destroy();
-		entity = null;
+	destroyChild: function(child) {
+		child.destroy();
+		child = null;
 	},
 
 	toElement: function() {
