@@ -353,7 +353,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 	onButtonTap: function(e, sender) {
 
-		var index = this.getChildren(Moobile.Button).indexOf(e.targetEntity);
+		var index = this.getChildren(Moobile.Button).indexOf(sender);
 		if (index >= 0) {
 			this.fireEvent('dismiss', [sender, index]);
 		}
