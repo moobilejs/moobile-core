@@ -20,16 +20,33 @@ provides:
 */
 
 
+(function() {
+
+var adopt = Element.prototype.adopt;
+
 Element.implement({
 
 	/**
-	 * @see http://moobile.net/api/0.1/Element/Element#ingest
-	 *
+	 * @see    http://moobile.net/api/0.1/Element/Element#ingest
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	ingest: function(element) {
 		return this.adopt(Array.from(document.id(element).childNodes));
+	},
+
+	adopt: function() {
+		var args = [];
+		if (arguments.length == 1) {
+			var arg = arguments[0];
+			if (typeof arg == 'string') {
+				var args = Elements.from(arg);
+				if (args.length) {
+					return adopt.apply(this, args);
+				}
+			}
+		}
+		return adopt.apply(this, arguments);
 	},
 
 	/**
@@ -96,3 +113,5 @@ Element.implement({
 	}
 
 });
+
+})();
