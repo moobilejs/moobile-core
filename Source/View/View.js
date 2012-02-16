@@ -12,7 +12,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- View
@@ -34,7 +34,7 @@ provides:
  * [TODO: Options]
  * [TODO: Element Structure]
  *
- * @extends Entity
+ * @extends EventDispatcher
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1
@@ -120,7 +120,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * can add the child child before or after this view's content child by
 	 * passing `header` or `footer` to the `where` parameter.
 	 *
-	 * @see Entity#addChild
+	 * @see EventDispatcher#addChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -162,7 +162,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * This method will attempt to find the given child child from this view's
 	 * content child then from the view itself if the former failed.
 	 *
-	 * @see Entity#getChild
+	 * @see EventDispatcher#getChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -179,7 +179,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * This method will attempt to find the given child child from this view's
 	 * content child then from the view itself if the former failed.
 	 *
-	 * @see Entity#hasChild
+	 * @see EventDispatcher#hasChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -196,7 +196,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * This method will return an array that contains both the child entites
 	 * from this view and the child entities from this view's content child.
 	 *
-	 * @see Entity#getChildren
+	 * @see EventDispatcher#getChildren
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -211,7 +211,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * This method will attempt to replace the child from this view's content
 	 * child first then from the view itself if the former failed.
 	 *
-	 * @see Entity#replaceChild
+	 * @see EventDispatcher#replaceChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -228,7 +228,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * This method will attempt to remove the child from this view's content
 	 * child first then from the view itself if the former failed.
 	 *
-	 * @see Entity#removeChild
+	 * @see EventDispatcher#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1

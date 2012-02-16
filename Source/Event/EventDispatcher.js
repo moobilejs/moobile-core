@@ -1,7 +1,7 @@
 /*
 ---
 
-name: Entity
+name: EventDispatcher
 
 description: Provides the base class for Moobile objects.
 
@@ -14,7 +14,7 @@ requires:
 	- Class-Extras/Class.Binds
 
 provides:
-	- Entity
+	- EventDispatcher
 
 ...
 */
@@ -26,12 +26,12 @@ if (!window.Moobile) window.Moobile = {};
 var fireEvent = Events.prototype.fireEvent;
 
 /**
- * @see http://moobile.net/api/0.1/Entity/Entity
+ * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.Entity = new Class({
+Moobile.EventDispatcher = new Class({
 
 	Implements: [
 		Events,
@@ -40,7 +40,7 @@ Moobile.Entity = new Class({
 	],
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#fireEvent
+	 * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher#fireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -60,7 +60,7 @@ Moobile.Entity = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#eventShouldFire
+	 * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher#eventShouldFire
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -70,7 +70,7 @@ Moobile.Entity = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#willFireEvent
+	 * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher#willFireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -80,7 +80,7 @@ Moobile.Entity = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/Entity/Entity#didFireEvent
+	 * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher#didFireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1

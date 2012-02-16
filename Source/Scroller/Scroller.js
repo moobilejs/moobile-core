@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- Scroller
@@ -34,7 +34,7 @@ provides:
  */
 Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.EventDispatcher,
 
 	/**
 	 * The engine.

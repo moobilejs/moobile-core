@@ -179,7 +179,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Adds an item.
 	 *
-	 * @see Entity#addChild
+	 * @see EventDispatcher#addChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -191,7 +191,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Returns an item.
 	 *
-	 * @see Entity#getChild
+	 * @see EventDispatcher#getChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -207,7 +207,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Removes an item.
 	 *
-	 * @see Entity#removeChild
+	 * @see EventDispatcher#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -219,7 +219,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	/**
 	 * Removes all items.
 	 *
-	 * @see Entity#removeChild
+	 * @see EventDispatcher#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

@@ -182,7 +182,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Adds a button.
 	 *
-	 * @see Entity#addChild
+	 * @see EventDispatcher#addChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -194,7 +194,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Returns a button.
 	 *
-	 * @see Entity#getChild
+	 * @see EventDispatcher#getChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -206,7 +206,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Removes a button.
 	 *
-	 * @see Entity#removeChild
+	 * @see EventDispatcher#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -218,7 +218,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	/**
 	 * Removes all buttons.
 	 *
-	 * @see Entity#removeChild
+	 * @see EventDispatcher#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

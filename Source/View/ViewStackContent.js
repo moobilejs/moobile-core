@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- ViewContent

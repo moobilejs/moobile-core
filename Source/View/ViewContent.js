@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- ViewContent
@@ -32,7 +32,7 @@ provides:
  * [TODO: Options]
  * [TODO: Element Structure]
  *
- * @extends Entity
+ * @extends EventDispatcher
  *
  * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @version 0.1

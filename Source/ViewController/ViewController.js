@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- ViewController
@@ -36,7 +36,7 @@ if (!window.Moobile) window.Moobile = {};
  */
 Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.EventDispatcher,
 
 	/**
 	 * The name.
@@ -404,7 +404,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 			 : false;
 	},
 
-	/**
+		/**
 	 * Presents a modal view controller.
 	 *
 	 * This method will present a child view controller using a given
@@ -432,11 +432,15 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		this.willPresentModalViewController();
 
+		viewController.parentViewControllerWillChange(this);
+		viewController.setParentViewController(this);
+		viewController.parentViewControllerDidChange(this);
+
 		var viewToShow = this.modalViewController.getView();
 		var viewToHide = this.view;
 		var parentView = this.view.getParentView();
 
-		this.addChildViewController(this.modalViewController, 'after', viewToHide);
+		parentView.addChild(viewToShow);
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
 		viewTransition.addEvent('start:once', this.bound('onPresentTransitionStart'));
@@ -450,6 +454,15 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		this.modalViewController.setViewTransition(viewTransition);
 
 		return this;
+	},
+
+	onPresentTransitionStart: function() {
+		this.modalViewController.viewWillEnter();
+	},
+
+	onPresentTransitionCompleted: function() {
+		this.modalViewController.viewDidEnter();
+		this.didPresentModalViewController()
 	},
 
 	/**
@@ -485,6 +498,17 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		);
 
 		return this;
+	},
+
+	onDismissTransitionStart: function() {
+		this.modalViewController.viewWillLeave();
+	},
+
+	onDismissTransitionCompleted: function() {
+		this.modalViewController.viewDidLeave();
+		this.modalViewController.destroy();
+		this.modalViewController = null;
+		this.didDismissModalViewController();
 	},
 
 	/**
@@ -1060,7 +1084,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * If you override this method, make sure you call the parent method at
 	 * the end of your implementation.
 	 *
-	 * @return {Entity} This child.
+	 * @return {EventDispatcher} This child.
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -1097,27 +1121,6 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	onViewReady: function() {
 		this.viewReady = true;
 		this.viewDidBecomeReady();
-	},
-
-	onPresentTransitionStart: function() {
-		this.modalViewController.viewWillEnter();
-	},
-
-	onPresentTransitionCompleted: function() {
-		this.modalViewController.viewDidEnter();
-		this.didPresentModalViewController()
-	},
-
-	onDismissTransitionStart: function() {
-		this.modalViewController.viewWillLeave();
-	},
-
-	onDismissTransitionCompleted: function() {
-		this.modalViewController.viewDidLeave();
-		this.modalViewController.removeFromParentViewController();
-		this.modalViewController.destroy();
-		this.modalViewController = null;
-		this.didDismissModalViewController();
 	}
 
 });

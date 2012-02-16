@@ -124,7 +124,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	/**
 	 * Adds a button at the left of the title.
 	 *
-	 * @see Entity#addChild
+	 * @see EventDispatcher#addChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -136,7 +136,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	/**
 	 * Adds a button at the right of the title.
 	 *
-	 * @see Entity#addChild
+	 * @see EventDispatcher#addChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -148,7 +148,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	/**
 	 * Returns a bar button.
 	 *
-	 * @see Entity#getChild
+	 * @see EventDispatcher#getChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -160,7 +160,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	/**
 	 * Removes a bar button.
 	 *
-	 * @see Entity#removeChild
+	 * @see EventDispatcher#removeChild
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -172,7 +172,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	/**
 	 * Removes all bar buttons.
 	 *
-	 * @see Entity#removeChildren
+	 * @see EventDispatcher#removeChildren
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

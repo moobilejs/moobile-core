@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- Component
@@ -21,7 +21,7 @@ provides:
 
 Moobile.Component = new Class({
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.EventDispatcher,
 
 	/**
 	 * @private
@@ -704,7 +704,9 @@ Moobile.Component.defineRole = function(name, target, behavior) {
  * @since  0.1
  */
 Moobile.Component.getRole = function(name, target) {
-	return target.__roles__[name] || null;
+	return target.__roles__
+		 ? target.__roles__[name]
+		 : null;
 };
 
 /**
@@ -730,7 +732,9 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
  * @since  0.1
  */
 Moobile.Component.getStyle = function(name, target) {
-	return target.__styles__[name] || null;
+	return target.__styles__
+		 ? target.__styles__[name]
+		 : null;
 };
 
 

@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Entity
+	- EventDispatcher
 
 provides:
 	- Animation
@@ -28,7 +28,7 @@ if (!window.Moobile) window.Moobile = {};
  */
 Moobile.Animation = new Class({
 
-	Extends: Moobile.Entity,
+	Extends: Moobile.EventDispatcher,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Animation/Animation#name

@@ -78,7 +78,7 @@ Moobile.Popover = new Class({
 		var size = this.element.getSize();
 		this.element.hide();
 
-		if (x instanceof Element || x instanceof Moobile.Entity) {
+		if (x instanceof Element || x instanceof Moobile.EventDispatcher) {
 
 			var s = x.getSize();
 			var p = x.getPosition();
