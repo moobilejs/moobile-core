@@ -153,7 +153,7 @@ Moobile.Control = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	eventShouldFire: function(type, args) {
+	shouldFireEvent: function(type, args) {
 		return !this.disabled;
 	}
 
