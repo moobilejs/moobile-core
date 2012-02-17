@@ -277,6 +277,25 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/Control/Alert#setDefaultButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setDefaultButton: function(button) {
+		if (this.hasChild(button)) button.addClass('default');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/Alert#setDefaultButtonIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setDefaultButtonIndex: function(index) {
+		return this.setDefaultButton(this.getChildren(Moobile.Button)[index]);
+	},
+
+	/**
 	 * Shows the overlay with an animation.
 	 *
 	 * This method will show the overlay by adding the `show-animated` CSS
