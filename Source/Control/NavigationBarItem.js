@@ -63,6 +63,12 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 			title.inject(this.element);
 			title.setRole('title');
 		}
+
+		var wrapper = this.element.getElement('.bar-title');
+		if (wrapper == null) {
+			wrapper = new Element('div.bar-title');
+			wrapper.wraps(title);
+		}
 	},
 
 	destroy: function() {
@@ -97,14 +103,12 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 
 		if (this.title == null) {
 			this.title = title;
-			this.addChild(title);
+			this.addChild(title, null, this.element.getElement('.bar-title'));
 		} else {
 			this.replaceChild(this.title, title);
 			this.title.destroy();
 			this.title = title;
 		}
-
-		this.title.addClass('bar-title');
 
 		return this;
 	},
