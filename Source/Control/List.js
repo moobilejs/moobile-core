@@ -41,6 +41,8 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 
 	Extends: Moobile.Control,
 
+	_selectable: true,
+
 	/**
 	 * The selected item.
 	 * @type   ListItem
@@ -95,7 +97,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 */
 	setSelectedItem: function(selectedItem) {
 
-		if (selectedItem && selectedItem.isSelectable() == false)
+		if (this._selectable == false)
 			return this;
 
 		if (this.selectedItem == selectedItem)
@@ -228,6 +230,25 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		return this.removeChildren(Moobile.ListItem);
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#setSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSelectable: function(selectable) {
+		this._selectable = selectable;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#getSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isSelectable: function() {
+		return this._selectable;
+	},
+
 	didAddChild: function(child) {
 
 		this.parent(child);
@@ -251,15 +272,15 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	onItemTapStart: function(e, sender) {
-		if (this.selectable && this.highlightable) sender.setHighlighted(true);
+		if (this._selectable) sender.setHighlighted(true);
 	},
 
 	onItemTapEnd: function(e, sender) {
-		if (this.selectable && this.highlightable) sender.setHighlighted(false);
+		if (this._selectable) sender.setHighlighted(false);
 	},
 
 	onItemTap: function(e, sender) {
-		if (this.selectable) this.setSelectedItem(sender);
+		if (this._selectable) this.setSelectedItem(sender);
 	}
 
 });
