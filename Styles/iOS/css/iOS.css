@@ -1095,12 +1095,14 @@ p small {
 	margin-bottom: 0px;
 }
 
-.alert .dialog-footer .button.is-highlighted {
-	-webkit-border-image: url(../images/alert-button.png) 86 5 0 5 stretch stretch;
+.alert .dialog-footer .button.default,
+.alert .dialog-footer .button.default {
+	-webkit-border-image: url(../images/alert-button.png) 43 5 43 5 stretch stretch;
 }
 
-.alert .dialog-footer .button.is-selected {
-	-webkit-border-image: url(../images/alert-button.png) 43 5 43 5 stretch stretch;
+.alert .dialog-footer .button.is-selected,
+.alert .dialog-footer .button.is-highlighted {
+	-webkit-border-image: url(../images/alert-button.png) 86 5 0 5 stretch stretch;
 }
 
 .alert.show-animated .dialog {
@@ -1119,23 +1121,23 @@ p small {
 	-webkit-animation-fill-mode: both;
 }
 
-/* Style Horizontal */
+/* Horizontal Button Layout */
 
-.alert.style-horizontal .dialog-footer {
+.alert.button-layout-horizontal .dialog-footer {
 	-webkit-box-orient: horizontal;
 }
 
-.alert.style-horizontal .dialog-footer .button {
+.alert.button-layout-horizontal .dialog-footer .button {
 	margin: 0px;
 	margin-left: 4px;
 	margin-right: 4px;
 }
 
-.alert.style-horizontal .dialog-footer .button:first-child {
+.alert.button-layout-horizontal .dialog-footer .button:first-child {
 	margin-left: 0px;
 }
 
-.alert.alert-horizontal .dialog-footer .button:last-child {
+.alert.button-layout-horizontal .dialog-footer .button:last-child {
 	margin-right: 0px;
 }
 
