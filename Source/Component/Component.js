@@ -19,6 +19,11 @@ provides:
 ...
 */
 
+/**
+ * @see    http://moobile.net/api/0.1/Component/Component
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.Component = new Class({
 
 	Extends: Moobile.EventDispatcher,
@@ -162,19 +167,18 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChild: function(child, where) {
+	addChild: function(component, where) {
 
-		if (this.hasChild(child))
-			return this;
-
-		var element = child.getElement();
-		if (element) {
-			if (this.hasElement(element) === false) {
-				this.element.grab(element, where);
+		var elementHandler = function() {
+			var element = component.getElement();
+			if (element) {
+				if (this.hasElement(element) === false) {
+					this.element.grab(element, where);
+				}
 			}
 		}
 
-		return this._addChildAt(child, where === 'top' ? 0 : this._children.length);
+		return this._addChildAt(component, where === 'top' ? 0 : this._children.length, elementHandler);
 	},
 
 	/**
@@ -184,19 +188,21 @@ Moobile.Component = new Class({
 	 */
 	addChildInto: function(child, context, where) {
 
-		if (this.hasChild(child))
-			return this;
-
-		var element = child.getElement();
-		if (element) {
-			context = document.id(context);
-			if (this.hasElement(element) === false &&
-				this.hasElement(context) === true) {
-				context.grab(element, where);
+		var elementHandler = function() {
+			var element = component.getElement();
+			if (element) {
+				context = document.id(context);
+				if (this.hasElement(element) === false &&
+					this.hasElement(context) === true) {
+					context.grab(element, where);
+				}
 			}
-		}
+		};
 
-		return this._addChildAt(child, this._children.length);
+		// TODO: Maybe find the next or previous view element, compute the
+		// index and add it properly
+
+		return this._addChildAt(component, this._children.length, elementHandler);
 	},
 
 	/**
@@ -204,28 +210,27 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildAfter: function(child, after) {
-
-		if (this.hasChild(child))
-			return this;
-
-		var element = child.getElement();
-		if (element) {
-			var context = document.id(after);
-			if (context) {
-				if (this.hasElement(element) === false &&
-					this.hasElement(context) === true) {
-					element.inject(context, 'after');
-				}
-			}
-		}
+	addChildAfter: function(component, after) {
 
 		var index = this._children.length;
 		if (after instanceof Moobile.Component) {
 			index = this.getChildIndex(after) + 1;
 		}
 
-		return this._addChildAt(child, index);
+		var elementHandler = function() {
+			var element = component.getElement();
+			if (element) {
+				var context = document.id(after);
+				if (context) {
+					if (this.hasElement(element) === false &&
+						this.hasElement(context) === true) {
+						element.inject(context, 'after');
+					}
+				}
+			}
+		};
+
+		return this._addChildAt(child, index, elementHandler);
 	},
 
 	/**
@@ -233,28 +238,27 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildBefore: function(child, before) {
-
-		if (this.hasChild(child))
-			return this;
-
-		var element = child.getElement();
-		if (element) {
-			var context = document.id(before);
-			if (context) {
-				if (this.hasElement(element) === false &&
-					this.hasElement(context) === true) {
-					element.inject(context, 'before');
-				}
-			}
-		}
+	addChildBefore: function(component, before) {
 
 		var index = this._children.length;
 		if (before instanceof Moobile.Component) {
-			index = this.getChildIndex(after);
+			index = this.getChildIndex(before);
 		}
 
-		return this._addChildAt(child, index);
+		var elementHandler = function() {
+			var element = component.getElement();
+			if (element) {
+				var context = document.id(before);
+				if (context) {
+					if (this.hasElement(element) === false &&
+						this.hasElement(context) === true) {
+						element.inject(context, 'before');
+					}
+				}
+			}
+		};
+
+		return this._addChildAt(component, index, elementHandler);
 	},
 
 	/**
@@ -262,19 +266,25 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	_addChildAt: function(child, index) {
+	_addChildAt: function(component, index, elementHandler) {
 
-		if (this.hasChild(child))
+		if (this.hasChild(component))
 			return this;
 
-		child.removeFromParent();
+		component.removeFromParent();
 
-		this.willAddChild(child);
-		this._children.splice(index, 0, child);
-		child.setParent(this);
-		child.setWindow(this._window);
-		this.didAddChild(child);
-		child.setReady(this._ready);
+		this.willAddChild(component);
+		this._children.splice(index, 0, component);
+		component.setParent(this);
+		component.setWindow(this._window);
+
+		if (elementHandler) {
+			elementHandler.call(this);
+		}
+
+		this.didAddChild(component);
+
+		component.setReady(this._ready);
 
 		return this;
 	},
@@ -300,30 +310,21 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildOfTypeAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getChildOfTypeAt: function(index, type) {
+		return this.getChildOfType(type)[index] || null;
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#getChildIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getChildIndex: function(child) {
 		return this._children.indexOf(child);
-	},
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasChild
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	hasChild: function(child) {
-		return this._children.contains(child);
-	},
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildOfType
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	hasChildOfType: function(type) {
-		return this.getChildrenOfType(type).length > 0;
 	},
 
 	/**
@@ -345,12 +346,30 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasChild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	hasChild: function(child) {
+		return this._children.contains(child);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildOfType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	hasChildOfType: function(type) {
+		return this.getChildrenOfType(type).length > 0;
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	replaceChild: function(child, replacement, destroy) {
-		return this.addChild(replacement, 'before', child).removeChild(child, destroy);
+		return this.addChildBefore(child, replacement).removeChild(child, destroy);
 	},
 
 	/**
@@ -391,9 +410,12 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	removeChildren: function(destroy) {
-		this.getChildren().each(function(child) {
-			this.removeChild(child, destroy);
-		}, this)
+
+		var children = Array.clone(this._children);
+		for (var i = children.length - 1; i >= 0; i--) {
+			children[i].removeFromParent(destroy);
+		}
+
 		return this;
 	},
 
@@ -403,9 +425,14 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	removeChildrenOfType: function(type, destoy) {
-		this.getChildrenOfType(type).each(function(child) {
-			this.removeChild(child, destroy);
-		}, this)
+
+		var children = Array.clone(this._children);
+		for (var i = children.length - 1; i >= 0; i--) {
+			if (children[i] instanceof type) {
+				children[i].removeFromParent(destroy);
+			}
+		}
+
 		return this;
 	},
 
@@ -788,12 +815,7 @@ Moobile.Component = new Class({
 	destroy: function() {
 
 		this.removeFromParent();
-
-		var child = this._children.getLast();
-		while (child) {
-			child.destroy();
-			child = this._children.getLast();
-		}
+		this.removeChildren(true);
 
 		this.element.destroy();
 		this.element = null;
