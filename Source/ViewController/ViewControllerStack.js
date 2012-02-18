@@ -60,6 +60,7 @@ Moobile.ViewControllerStack = new Class({
 		var childViewControllers = this.getChildViewControllers();
 
 		viewController.removeFromParentViewController();
+		viewController.setViewControllerStack(this);
 		this.willPushViewController(viewController);
 		this.addChildViewController(viewController);
 
@@ -268,16 +269,6 @@ Moobile.ViewControllerStack = new Class({
 	 */
 	didPopViewController: function(viewController) {
 
-	},
-
-	/**
-	 * @overrides
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	willAddChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setViewControllerStack(this);
 	}
 
 });
@@ -285,11 +276,11 @@ Moobile.ViewControllerStack = new Class({
 Class.refactor(Moobile.ViewController, {
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewControllerStack
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	viewControllerStack: null,
+	_viewControllerStack: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setViewControllerStack
@@ -297,7 +288,7 @@ Class.refactor(Moobile.ViewController, {
 	 * @since  0.1
 	 */
 	setViewControllerStack: function(viewControllerStack) {
-		this.viewControllerStack = viewControllerStack;
+		this._viewControllerStack = viewControllerStack;
 		return this;
 	},
 
@@ -307,7 +298,7 @@ Class.refactor(Moobile.ViewController, {
 	 * @since  0.1
 	 */
 	getViewControllerStack: function() {
-		return this.viewControllerStack;
+		return this._viewControllerStack;
 	},
 
 	/**
@@ -318,7 +309,7 @@ Class.refactor(Moobile.ViewController, {
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
 		if (viewController.getViewControllerStack() == null) {
-			viewController.setViewControllerStack(this.viewControllerStack);
+			viewController.setViewControllerStack(this._viewControllerStack);
 		}
 	},
 

@@ -39,134 +39,83 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * The name.
-	 * @type   String
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	name: null,
+	_name: null,
 
 	/**
-	 * The title.
-	 * @type   Text
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	title: null,
+	_title: null,
 
 	/**
-	 * The image.
-	 * @type   Image
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	image: null,
+	_image: null,
 
 	/**
-	 * Whether this view controller is modal.
-	 * @type   Boolean
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	modal: false,
+	_viewReady: false,
 
 	/**
-	 * The managed view.
-	 * @type   View
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 */
+	_viewTransition: null,
+
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_parent: null,
+
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_children: [],
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#modal
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_modal: false,
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#modalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_modalViewController: null,
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#view
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	view: null,
 
 	/**
-	 * Whether the managed view is ready.
-	 * @type   Boolean
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	viewReady: false,
-
-	/**
-	 * The view transition.
-	 * @type   ViewTransition
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	viewTransition: null,
-
-	/**
-	 * The window controller
-	 * @type   WindowController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	windowController: null,
-
-	/**
-	 * The view controller stack.
-	 * @type   ViewControllerStack
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	viewControllerStack: null,
-
-	/**
-	 * The view controller panel.
-	 * @type   ViewControllerPanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	viewControllerPanel: null,
-
-	/**
-	 * The view controller tabs.
-	 * @type   ViewControllerTabs
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	viewControllerTabs: null,
-
-	/**
-	 * The parent view controller.
-	 * @type   ViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	parentViewController: null,
-
-	/**
-	 * The modal view controller being presented.
-	 * @type   ViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	modalViewController: null,
-
-	/**
-	 * The child view controllers.
-	 * @type   Array
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	childViewControllers: [],
-
-	/**
-	 * Initialize this view controller.
-	 *
-	 * If you override this method, make sure you call the parent method at
-	 * the beginning of your implementation.
-	 *
-	 * @param {Object} options The options.
-	 * @param {String} name    The name.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	initialize: function(options, name) {
 
-		this.name = name;
+		this._name = name;
 
 		this.setOptions(options);
 
@@ -182,14 +131,9 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Loads the view.
-	 *
-	 * This method has to be overridden and needs to create a view instance in
-	 * the `view` property of this class. Do not call the parent method unless
-	 * you are required to.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#loadView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	loadView: function() {
 		if (this.view === null) {
@@ -198,245 +142,212 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * Adds a child view controller.
-	 *
-	 * This method adds the child view controller's view at the bottom of its
-	 * view. You may specify the location of the child view controller's view
-	 * using the `where` parameter combined with the optional `context`
-	 * parameter.
-	 *
-	 * @param {ViewController} viewController The child view controller.
-	 *
-	 * @return {Boolean} Whether the child view controller was successfully
-	 *                   added.
-	 *
-	 * @see View#addChild
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#addChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	addChildViewController: function(viewController) {
 
-		if (this.childViewControllers.contains(viewController))
-			return false;
+		var viewHandler = function() {
+			var view = viewController.getView();
+			if (view) {
+				this.view.addChild(view);
+			}
+		};
 
-		this.willAddChildViewController(viewController);
-
-		viewController.parentViewControllerWillChange(this);
-
-		if (!viewController.isModal()) {
-			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
-			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
-			if (!viewController.getViewControllerTabs())  viewController.setViewControllerTabs(this.viewControllerTabs);
-		}
-
-		viewController.setWindowController(this.windowController);
-		viewController.setParentViewController(this);
-		viewController.parentViewControllerDidChange(this);
-
-		this.childViewControllers.push(viewController);
-		this.view.addChild(viewController.getView());
-		this.didAddChildViewController(viewController);
-
-		return true;
-	},
-
-	// TODO: Fix this, there is too much duplicated code.
-	addChildViewControllerBefore: function(viewController, before) {
-
-		if (this.childViewControllers.contains(viewController) || 
-			this.childViewControllers.contains(before) === false)
-			return false;
-
-		this.willAddChildViewController(viewController);
-
-		viewController.parentViewControllerWillChange(this);
-
-		if (!viewController.isModal()) {
-			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
-			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
-			if (!viewController.getViewControllerTabs())  viewController.setViewControllerTabs(this.viewControllerTabs);
-		}
-
-		viewController.setWindowController(this.windowController);
-		viewController.setParentViewController(this);
-		viewController.parentViewControllerDidChange(this);
-
-		this.childViewControllers.splice(this.childViewControllers.indexOf(before), 0, viewController);
-		this.view.addChild(viewController.getView(), 'before', before.getView());
-		this.didAddChildViewController(viewController);
-
-		return true;
-	},
-
-	// TODO: Fix this, there is too much duplicated code.
-	addChildViewControllerAfter: function(viewController, after) {
-
-		if (this.childViewControllers.contains(viewController) || 
-			this.childViewControllers.contains(after) === false)
-			return false;
-
-		this.willAddChildViewController(viewController);
-
-		viewController.parentViewControllerWillChange(this);
-
-		if (!viewController.isModal()) {
-			if (!viewController.getViewControllerStack()) viewController.setViewControllerStack(this.viewControllerStack);
-			if (!viewController.getViewControllerPanel()) viewController.setViewControllerPanel(this.viewControllerPanel);
-			if (!viewController.getViewControllerTabs())  viewController.setViewControllerTabs(this.viewControllerTabs);
-		}
-
-		viewController.setWindowController(this.windowController);
-		viewController.setParentViewController(this);
-		viewController.parentViewControllerDidChange(this);
-
-		this.childViewControllers.splice(this.childViewControllers.indexOf(after) + 1, 0, viewController);
-		this.view.addChild(viewController.getView(), 'after', after.getView());
-		this.didAddChildViewController(viewController);
-
-		return true;
+		return this._addChildViewControllerAt(viewController, this._children.length, viewHandler);
 	},
 
 	/**
-	 * Returns a child view controller.
-	 *
-	 * This method will return an child view controller from its own child view
-	 * controllers that matches the given name.
-	 *
-	 * @param {String} name The child view controller name.
-	 *
-	 * @return {ViewController} The child view controller or `null` if no child
-	 *                          view controllers were found.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#addChildViewControllerAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addChildViewControllerAfter: function(viewController, after) {
+
+		var index = this.getChildViewControllerIndex(after);
+		if (index === -1)
+			return this;
+
+		var viewHandler = function() {
+			var view = viewController.getView();
+			if (view) {
+				var afterView = after.getView();
+				if (afterView) {
+					this.view.addChildAfter(view, afterView);
+				}
+			}
+		};
+
+		return this._addChildViewControllerAt(viewController, index + 1, viewHandler);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#addChildViewControllerBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addChildViewControllerBefore: function(viewController, before) {
+
+		var index = this.getChildViewControllerIndex(before);
+		if (index === -1)
+			return this;
+
+		var viewHandler = function() {
+			var view = viewController.getView();
+			if (view) {
+				var beforeView = before.getView();
+				if (beforeView) {
+					this.view.addChildBefore(view, beforeView);
+				}
+			}
+		};
+
+		return this._addChildViewControllerAt(viewController, index, viewHandler);
+	},
+
+	/**
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
+	_addChildViewControllerAt: function(viewController, index, viewHandler) {
+
+		if (this.hasChildViewController(viewController))
+			return this;
+
+		viewController.removeFromParentViewController();
+
+		this.willAddChildViewController(viewController);
+		this._children.splice(index, 0, viewController);
+		viewController.setParentViewController(this);
+
+		if (viewHandler) {
+			viewHandler.call(this)
+		}
+
+		this.didAddChildViewController(viewController);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	getChildViewController: function(name) {
-		return this.childViewControllers.find(function(viewController) {
+		return this._children.find(function(viewController) {
 			return viewController.getName() === name;
 		});
 	},
 
 	/**
-	 * Indicates whether this view controller is the direct owner of a child
-	 * view controller.
-	 *
-	 * @param {ViewController} viewController The view controller.
-	 *
-	 * @return {Boolean} Whether this view controller owns a given child view
-	 *                   controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewControllerAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	hasChildViewController: function(viewController) {
-		return this.childViewControllers.contains(viewController);
+	getChildViewControllerAt: function(index) {
+		return this._children[index] || null;
 	},
 
 	/**
-	 * Return all the child view controllers.
-	 *
-	 * @return {Array} The child view controllers.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewControllerIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	getChildViewControllerIndex: function(viewController) {
+		return this._children.indexOf(viewController);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getChildViewControllers: function() {
-		return this.childViewControllers;
+		return this._children;
 	},
 
 	/**
-	 * Removes a child view controller.
-	 *
-	 * This method will not destroy the given child view controller upon
-	 * removal since it could be added to another view controlelr. If you wish
-	 * to destroy the given child view controller, you must do so manually.
-	 *
-	 * @param {ViewController} viewController The view controller to remove.
-	 *
-	 * @return {Boolean} Whether the child view controller was successfully
-	 *                   removed.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#hasChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	removeChildViewController: function(viewController) {
+	hasChildViewController: function(viewController) {
+		return this._children.contains(viewController);
+	},
 
-		if (!this.childViewControllers.contains(viewController))
-			return false;
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	removeChildViewController: function(viewController, destroy) {
+
+		if (!this.hasChildViewController(viewController))
+			return this;
 
 		this.willRemoveChildViewController(viewController);
-
-		this.childViewControllers.erase(viewController);
-
-		viewController.parentViewControllerWillChange(null);
-		viewController.setWindowController(null);
+		this._children.erase(viewController);
 		viewController.setParentViewController(null);
-		viewController.setViewControllerStack(null);
-		viewController.setViewControllerPanel(null);
-		viewController.setViewControllerTabs(null);
 
-		viewController.parentViewControllerDidChange(null);
+		var view = viewController.getView();
+		if (view) {
+			view.removeFromParent();
+		}
 
 		this.didRemoveChildViewController(viewController);
 
-		viewController.getView().removeFromParent();
+		if (destroy) {
+			viewController.destroy();
+		}
 
-		return true;
+		return this;
 	},
 
 	/**
-	 * Removes this view controller from its parent.
-	 *
-	 * This method will not destroy the given child view controller upon
-	 * removal since it could be added to another view controlelr. If you wish
-	 * to destroy the given child view controller, you must do so manually.
-	 *
-	 * @return {Boolean} Whether this view controller was successfully removed
-	 *                   from its parent view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeChildViewControllers
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	removeFromParentViewController: function() {
-		return this.parentViewController
-			 ? this.parentViewController.removeChildViewController(this)
+	removeChildViewControllers: function(destroy) {
+
+		var children = Array.clone(this._children);
+		for (var i = children.length - 1; i >= 0; i--) {
+			children[i].removeFromParentViewController(destroy);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeFromParentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	removeFromParentViewController: function(destroy) {
+		return this._parent
+			 ? this._parent.removeChildViewController(this, destroy)
 			 : false;
 	},
 
-		/**
-	 * Presents a modal view controller.
-	 *
-	 * This method will present a child view controller using a given
-	 * transition. The view controller presented as modal will only have a
-	 * reference to its parent view controller and will use it to dismiss
-	 * the modal view controller.
-	 *
-	 * @param {ViewController} viewController The view controller.
-	 * @param {ViewTransition} viewTransition The view transition.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
-	 * @see ViewController#dismissModalViewController
-	 *
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#presentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	presentModalViewController: function(viewController, viewTransition) {
 
-		if (this.modalViewController)
+		if (this._modalViewController)
 			return this;
 
-		this.modalViewController = viewController;
-		this.modalViewController.modal = true;
+		this.willPresentModalViewController(viewController);
 
-		this.willPresentModalViewController();
-
-		viewController.parentViewControllerWillChange(this);
 		viewController.setParentViewController(this);
-		viewController.parentViewControllerDidChange(this);
+		viewController.setModal(true);
 
-		var viewToShow = this.modalViewController.getView();
+		var viewToShow = viewController.getView();
 		var viewToHide = this.view;
 		var parentView = this.view.getParentView();
 
@@ -451,44 +362,49 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 			parentView
 		);
 
-		this.modalViewController.setViewTransition(viewTransition);
+		viewController.setViewTransition(viewTransition);
+
+		this._modalViewController = viewController;
 
 		return this;
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onPresentTransitionStart: function() {
-		this.modalViewController.viewWillEnter();
+		this._modalViewController.viewWillEnter();
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onPresentTransitionCompleted: function() {
-		this.modalViewController.viewDidEnter();
+		this._modalViewController.viewDidEnter();
 		this.didPresentModalViewController()
 	},
 
 	/**
-	 * Dismisses the current modal view controller.
-	 *
-	 * This method will dismiss the current modal view controller using the
-	 * transition used to present it. The modal view controller will be
-	 * destroyed at the end of the transition animation.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#dismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	dismissModalViewController: function() {
 
-		if (this.modalViewController === null)
+		if (this._modalViewController === null)
 			return this;
 
 		this.willDismissModalViewController()
 
 		var viewToShow = this.view;
-		var viewToHide = this.modalViewController.getView();
+		var viewToHide = this._modalViewController.getView();
 		var parentView = this.view.getParentView();
 
-		var viewTransition = this.modalViewController.viewTransition;
+		var viewTransition = this._modalViewController.viewTransition;
 		viewTransition.addEvent('start:once', this.bound('onDismissTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onDismissTransitionCompleted'));
 		viewTransition.leave(
@@ -500,46 +416,44 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		return this;
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onDismissTransitionStart: function() {
-		this.modalViewController.viewWillLeave();
+		this._modalViewController.viewWillLeave();
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onDismissTransitionCompleted: function() {
-		this.modalViewController.viewDidLeave();
-		this.modalViewController.destroy();
-		this.modalViewController = null;
+		this._modalViewController.viewDidLeave();
+		this._modalViewController.destroy();
+		this._modalViewController = null;
 		this.didDismissModalViewController();
 	},
 
 	/**
-	 * Returns the name.
-	 *
-	 * @return {String} The name.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getName: function() {
-		return this.name;
+		return this._name;
 	},
 
 	/**
-	 * Sets the title.
-	 *
-	 * This method will set the title using either a string or an instance of a
-	 * `Label`. When provided with a string, this methods creates a `Label`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} title The title as a string or a `Label` instance.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setTitle: function(title) {
 
-		if (this.title === title)
+		if (this._title === title)
 			return this;
 
 		if (typeof title === 'string') {
@@ -548,45 +462,33 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 			title.setText(text);
 		}
 
-		var parent = this.title ? this.title.getParent() : null;
+		var parent = this._title ? this._title.getParent() : null;
 		if (parent) {
-			parent.replaceChild(this.title, title);
+			parent.replaceChild(this._title, title);
 		}
 
-		this.title = title;
+		this._title = title;
 
 		return this;
 	},
 
 	/**
-	 * Returns the title.
-	 *
-	 * @return {Text} The title.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getTitle: function() {
-		return this.title;
+		return this._title;
 	},
 
 	/**
-	 * Sets the image.
-	 *
-	 * This method will set the image using either a string or an instance of
-	 * an `Image`. When provided with a string, this methods creates an `Image`
-	 * instance and assign the given string as its source.
-	 *
-	 * @param {Mixed} image The image as a string or a `Image` instance.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setImage: function(image) {
 
-		if (this.image === image)
+		if (this._image === image)
 			return this;
 
 		if (typeof image === 'string') {
@@ -595,497 +497,256 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 			image.setSource(source);
 		}
 
-		var parent = this.image ? this.image.getParent() : null;
+		var parent = this._image ? this._image.getParent() : null;
 		if (parent) {
-			parent.replaceChild(this.image, image);
+			parent.replaceChild(this._image, image);
 		}
 
-		this.image = image;
+		this._image = image;
 
 		return this;
 	},
 
 	/**
-	 * Returns the image.
-	 *
-	 * @return {Image} The image.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getImage: function() {
-		return this.image;
+		return this._image;
 	},
 
 	/**
-	 * Indicates whether this view controller is modal.
-	 *
-	 * This method will indicate whether this view controller is modal, meaning
-	 * this view controller needs to be dismissed before anything else can
-	 * be executed.
-	 *
-	 * @return {Boolean} Whether this view controller is modal.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setModal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	setModal: function(modal) {
+		this._modal = modal;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#isModal
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	isModal: function() {
-		return this.modal;
+		return this._modal;
 	},
 
 	/**
-	 * Indicates whether the managed view is ready.
-	 *
-	 * This method will indicate whether the managed view is ready, meaning its
-	 * element is part of an element that is part of the DOM and can be, for
-	 * instance, measured.
-	 *
-	 * @return {Boolean} Whether the managed view is ready.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#isViewReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isViewReady: function() {
-		return this.viewReady;
+		return this._viewReady;
 	},
 
 	/**
-	 * Returns the managed view.
-	 *
-	 * @return {View} The managed view.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getView: function() {
 		return this.view;
 	},
 
 	/**
-	 * Sets the view transition.
-	 *
-	 * This method will store the view transition used to push or present a
-	 * view controller then retrieve it to dismiss or pop it. You should seldom
-	 * need this method as it's mostly used internally.
-	 *
-	 * @param {ViewTransition} viewTransition The view transition.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setViewTransition: function(viewTransition) {
-		this.viewTransition = viewTransition;
+		this._viewTransition = viewTransition;
 		return this;
 	},
 
 	/**
-	 * Returns the view transition.
-	 *
-	 * This method will retrieve the view transition used to push or present a
-	 * view controller. You should seldom need this method as it's mostly used
-	 * internally.
-	 *
-	 * @return {ViewTransition} The view transition.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getViewTransition: function() {
-		return this.viewTransition;
-	},
-
-	setWindowController: function(windowController) {
-		this.windowController = windowController;
-		return this;
-	},
-
-	getWindowController: function() {
-		return this.windowController;
+		return this._viewTransition;
 	},
 
 	/**
-	 * Sets the view controller stack.
-	 *
-	 * This method will set a reference of the view controller stack that owns
-	 * this view controller. You should seldom need this method as it's mostly
-	 * used internally.
-	 *
-	 * @param {ViewControllerStack} viewControllerStack The view controller
-	 *                                                  stack.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	setViewControllerStack: function(viewControllerStack) {
-		this.viewControllerStack = viewControllerStack;
+	setParentViewController: function(viewController) {
+		this.parentViewControllerWillChange(viewController);
+		this._parent = viewController;
+		this.parentViewControllerDidChange(viewController);
 		return this;
 	},
 
 	/**
-	 * Returns the view controller stack.
-	 *
-	 * This method will return a reference of the view controller stack that
-	 * owns this view controller. You should seldom need this method as it's
-	 * mostly used internally.
-	 *
-	 * @return {ViewControllerStack} The view controller stack or `null` if
-	 *                               this view controller is not owned by a
-	 *                               view controller stack.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getViewControllerStack: function() {
-		return this.viewControllerStack;
-	},
-
-	/**
-	 * Sets the view controller panel.
-	 *
-	 * This method will set a reference of the view controller panel that owns
-	 * this view controller. You should seldom need this method as it's mostly
-	 * used internally.
-	 *
-	 * @param {ViewControllerPanel} viewControllerPanel The view controller
-	 *                                                  panel.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setViewControllerPanel: function(viewControllerPanel) {
-		this.viewControllerPanel = viewControllerPanel;
-		return this
-	},
-
-	/**
-	 * Returns the view controller panel.
-	 *
-	 * This method will return a reference of the view controller panel that
-	 * owns this view controller. You should seldom need this method as it's
-	 * mostly used internally.
-	 *
-	 * @return {ViewControllerStack} The view controller panel or `null` if
-	 *                               this view controller is not owned by a
-	 *                               view controller panel.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getViewControllerPanel: function(viewControllerPanel) {
-		return this.viewControllerPanel;
-	},
-
-	setViewControllerTabs: function(viewControllerTabs) {
-		this.viewControllerTabs = viewControllerTabs;
-		return this;
-	},
-
-	getViewControllerTabs: function(viewControllerTabs) {
-		return this.viewControllerTabs;
-	},
-
-	/**
-	 * Sets the parent view controller.
-	 *
-	 * This method will set a reference of the view controller that is a direct
-	 * owner of this view controller. You should seldom need this method as
-	 * it's mostly used internally.
-	 *
-	 * @param {ViewController} parentViewController The parent view controller.
-	 *
-	 * @return {ViewController} This view controller.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setParentViewController: function(parentViewController) {
-		this.parentViewController = parentViewController;
-		return this;
-	},
-
-	/**
-	 * Returns the parent view controller.
-	 *
-	 * This method will return a reference of the view controller that is a
-	 * direct owner of this view controller. You should seldom need this method
-	 * as it's mostly used internally.
-	 *
-	 * @return {ViewController} The parent view controller.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getParentViewController: function() {
-		return this.parentViewController;
+		return this._parent;
 	},
 
 	/**
-	 * Tells this view controller a child view controller is about to be added.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {ViewController} viewController The view controller
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willAddChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	willAddChildViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller a child view controller has been added.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {ViewController} viewController The view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didAddChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	didAddChildViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller a child view controller is about to be
-	 * removed.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {ViewController} viewController The view controller.
-	 * @since 0.1
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willRemoveChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	willRemoveChildViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller a child view controller has been removed.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {ViewController} viewController The view controller.
-	 * @since 0.1
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didRemoveChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	didRemoveChildViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller its parent view controller is about to change.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {ViewController} viewController The parent view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#parentViewControllerWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	parentViewControllerWillChange: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller its parent view controller has changed.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {ViewController} viewController The parent view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#parentViewControllerDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	parentViewControllerDidChange: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller its about to present a modal view controller.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willPresentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	willPresentModalViewController: function() {
+	willPresentModalViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller it has presented a modal view controller.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didPresentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	didPresentModalViewController: function() {
+	didPresentModalViewController: function(viewController) {
 
 	},
 
 	/**
-	 * Tells this view controller its about to dismiss a modal view controller.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willDismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	willDismissModalViewController: function() {
 
 	},
 
 	/**
-	 * Tells this view controller it has dismissed a modal view controller.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didDismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	didDismissModalViewController: function() {
 
 	},
 
 	/**
-	 * Tells this view controller its orientation changed.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @param {String} orientation The orientation, `portrait` or `landscape`.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didRotateToOrientation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	didRotateToOrientation: function(orientation) {
 
 	},
 
 	/**
-	 * Tells this view controller its managed view was loaded.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidLoad
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	viewDidLoad: function() {
 
 	},
 
 	/**
-	 * Tells this view controller its managed view became ready.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidBecomeReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	viewDidBecomeReady: function() {
 
 	},
 
 	/**
-	 * Tells this view controller its managed view is about to enter the screen
-	 * and become the visible view of its hierarchy.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewWillEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	viewWillEnter: function() {
 
 	},
 
 	/**
-	 * Tells this view controller its managed view enterd the screen and became
-	 * the visible view of its hierarchy.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @since 0.1
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidEnter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	viewDidEnter: function() {
 
 	},
 
 	/**
-	 * Tells this view controller its managed view is about to leave the screen
-	 * and become the hidden.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @since 0.1
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewWillLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	viewWillLeave: function() {
 
 	},
 
 	/**
-	 * Tells this view controller its managed view is left the screen and
-	 * became hidden.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent as the implementation of this method
-	 * may change in the future.
-	 *
-	 * @since 0.1
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	viewDidLeave: function() {
 
 	},
 
 	/**
-	 * Destroys this view controller.
-	 *
-	 * This method will destroy this view controller's managed view and all its
-	 * child view controllers.
-	 *
-	 * If you override this method, make sure you call the parent method at
-	 * the end of your implementation.
-	 *
-	 * @return {EventDispatcher} This child.
-	 *
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1093,25 +754,30 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		window.removeEvent('rotate', this.bound('onWindowRotate'));
 
-		this.destroyChildViewControllers();
+		this.removeFromParentViewController();
+		this.removeChildViewControllers(true);
+
+		if (this._modalViewController) {
+			this._modalViewController.destroy();
+			this._modalViewController = null;
+		}
 
 		this.view.destroy();
 		this.view = null;
 
-		this.viewTransition = null;
-		this.viewControllerStack = null;
-		this.viewControllerPanel = null;
-		this.parentViewController = null;
-	},
+		if (this._title) {
+			this._title.destroy();
+			this._title = null;
+		}
 
-	destroyChildViewControllers: function() {
-		this.childViewControllers.each(this.bound('destroyChildViewController'));
-		this.childViewControllers.empty();
-	},
+		if (this._image) {
+			this._image.destroy();
+			this._image = null;
+		}
 
-	destroyChildViewController: function(viewController) {
-		viewController.destroy();
-		viewController = null;
+		this._parent = null;
+		this._children = null
+		this._viewTransition = null;
 	},
 
 	onWindowRotate: function(e) {
@@ -1119,8 +785,10 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	onViewReady: function() {
-		this.viewReady = true;
-		this.viewDidBecomeReady();
+		if (this._viewReady === false) {
+			this._viewReady = true;
+			this.viewDidBecomeReady();
+		}
 	}
 
 });

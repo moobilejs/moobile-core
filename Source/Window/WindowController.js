@@ -104,14 +104,6 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	 */
 	getRootViewController: function() {
 		return this.rootViewController;
-	},
-
-	didAddChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setWindowController(this);
-		viewController.setParentViewController(this);
-		this.rootViewController = viewController;
-		return this;
 	}
 
 });

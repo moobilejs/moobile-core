@@ -131,7 +131,12 @@ Moobile.ViewControllerPanel = new Class({
 
 Class.refactor(Moobile.ViewController, {
 
-	viewControllerPanel: null,
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_viewControllerPanel: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerPanel#setViewControllerPanel
@@ -139,7 +144,7 @@ Class.refactor(Moobile.ViewController, {
 	 * @since  0.1
 	 */
 	setViewControllerPanel: function(viewControllerPanel) {
-		this.viewControllerPanel = viewControllerPanel;
+		this._viewControllerPanel = viewControllerPanel;
 		return this
 	},
 
@@ -149,7 +154,7 @@ Class.refactor(Moobile.ViewController, {
 	 * @since  0.1
 	 */
 	getViewControllerPanel: function(viewControllerPanel) {
-		return this.viewControllerPanel;
+		return this._viewControllerPanel;
 	},
 
 	/**
@@ -160,7 +165,7 @@ Class.refactor(Moobile.ViewController, {
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
 		if (viewController.getViewControllerPanel() === null) {
-			viewController.setViewControllerPanel(this.viewControllerPanel);
+			viewController.setViewControllerPanel(this._viewControllerPanel);
 		}
 	},
 
