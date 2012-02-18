@@ -95,7 +95,7 @@ Element.defineCustomEvent('tapstart', {
 	base: 'touchstart',
 
 	condition: function(e) {
-		return e.changedTouches.length == 1;
+		return e.changedTouches.length === 1;
 	}
 
 });
@@ -105,7 +105,7 @@ Element.defineCustomEvent('tapmove', {
 	base: 'touchmove',
 
 	condition: function(e) {
-		return e.changedTouches.length == 1;
+		return e.changedTouches.length === 1;
 	}
 
 });
@@ -115,7 +115,7 @@ Element.defineCustomEvent('tapend', {
 	base: 'touchend',
 
 	condition: function(e) {
-		return e.changedTouches.length == 1;
+		return e.changedTouches.length === 1;
 	}
 
 });

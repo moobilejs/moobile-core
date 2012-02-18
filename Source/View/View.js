@@ -44,20 +44,19 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	Extends: Moobile.Component,
 
 	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_parentView: null,
+
+	/**
 	 * The view content.
 	 * @type   ViewContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	content: null,
-
-	/**
-	 * The view that owns this view.
-	 * @type   View
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	parentView: null,
 
 	willBuild: function() {
 
@@ -66,7 +65,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		this.element.addClass('view');
 
 		var content = this.element.getRoleElement('view-content');
-		if (content == null) {
+		if (content === null) {
 			content = new Element('div');
 			content.ingest(this.element);
 			content.inject(this.element);
@@ -136,13 +135,13 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		if (child instanceof Moobile.ViewContent)
 			return this.parent(child, where, context);
 
-		if (where == 'header')
+		if (where === 'header')
 			return this.parent(child, 'top');
 
-		if (where == 'footer')
+		if (where === 'footer')
 			return this.parent(child, 'bottom');
 
-		if (this.content == null)
+		if (this.content === null)
 			return this.parent(child, where, context);
 
 		// the child is in the view but not in the view content
@@ -252,7 +251,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	setParentView: function(parentView) {
 		this.parentViewWillChange(parentView);
-		this.parentView = parentView;
+		this._parentView = parentView;
 		this.parentViewDidChange(parentView);
 		return this;
 	},
@@ -269,7 +268,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	getParentView: function() {
-		return this.parentView;
+		return this._parentView;
 	},
 
 	/**
@@ -288,14 +287,14 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	setContent: function(content) {
 
-		if (this.content == content)
+		if (this.content === content)
 			return this;
 
-		if (this.content == null) {
+		if (this.content === null) {
 			this.addChild(content);
 			this.content = content;
 		} else {
-			this.replaceChild(this.content, content);
+			this.replaceChild(this.content, content, true);
 			this.content.destroy();
 			this.content = content;
 		}

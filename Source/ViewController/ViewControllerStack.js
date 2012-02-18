@@ -79,7 +79,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 		if (this.inTransition)
 			return this;
 
-		if (this.topViewController == viewController)
+		if (this.topViewController === viewController)
 			return this;
 
 		var viewControllerPushed = viewController; // ease of understanding
@@ -111,7 +111,7 @@ Moobile.ViewControllerStack = new Class( /** @lends ViewControllerStack.prototyp
 			viewToShow,
 			viewToHide,
 			this.view,
-			this.childViewControllers.length == 1
+			this.childViewControllers.length === 1
 		);
 
 		viewControllerPushed.setViewTransition(viewTransition);

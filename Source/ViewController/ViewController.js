@@ -192,7 +192,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1.0
 	 */
 	loadView: function() {
-		if (this.view == null) {
+		if (this.view === null) {
 			this.view = new Moobile.View();
 		}
 	},
@@ -245,7 +245,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	addChildViewControllerBefore: function(viewController, before) {
 
 		if (this.childViewControllers.contains(viewController) || 
-			this.childViewControllers.contains(before) == false)
+			this.childViewControllers.contains(before) === false)
 			return false;
 
 		this.willAddChildViewController(viewController);
@@ -273,7 +273,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	addChildViewControllerAfter: function(viewController, after) {
 
 		if (this.childViewControllers.contains(viewController) || 
-			this.childViewControllers.contains(after) == false)
+			this.childViewControllers.contains(after) === false)
 			return false;
 
 		this.willAddChildViewController(viewController);
@@ -313,7 +313,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	getChildViewController: function(name) {
 		return this.childViewControllers.find(function(viewController) {
-			return viewController.getName() == name;
+			return viewController.getName() === name;
 		});
 	},
 
@@ -479,7 +479,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	dismissModalViewController: function() {
 
-		if (this.modalViewController == null)
+		if (this.modalViewController === null)
 			return this;
 
 		this.willDismissModalViewController()
@@ -542,7 +542,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		if (this.title === title)
 			return this;
 
-		if (typeof title == 'string') {
+		if (typeof title === 'string') {
 			var text = title;
 			title = new Moobile.Text();
 			title.setText(text);
@@ -589,7 +589,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		if (this.image === image)
 			return this;
 
-		if (typeof image == 'string') {
+		if (typeof image === 'string') {
 			var source = image;
 			image = new Moobile.Text();
 			image.setSource(source);

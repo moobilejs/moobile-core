@@ -95,10 +95,10 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 */
 	setSelectedItem: function(selectedItem) {
 
-		if (selectedItem && selectedItem.isSelectable() == false)
+		if (selectedItem && selectedItem.isSelectable() === false)
 			return this;
 
-		if (this.selectedItem == selectedItem)
+		if (this.selectedItem === selectedItem)
 			return this;
 
 		if (this.selectedItem) {

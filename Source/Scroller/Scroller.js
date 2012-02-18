@@ -141,11 +141,11 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		for (var i = 0; i < engines.length; i++) {
 
 			var candidate = Moobile.Scroller.Engine[engines[i]];
-			if (candidate == undefined) {
+			if (candidate === undefined) {
 				throw new Error('The scroller engine ' + candidate + ' does not exists');
 			}
 
-			if (candidate.supportsCurrentPlatform == undefined ||
+			if (candidate.supportsCurrentPlatform === undefined ||
 				candidate.supportsCurrentPlatform &&
 				candidate.supportsCurrentPlatform.call(this)) {
 				engine = candidate;
@@ -153,7 +153,7 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 			}
 		}
 
-		if (engine == null) {
+		if (engine === null) {
 			throw new Error('There are no scrolling engine available');
 		}
 
@@ -249,8 +249,8 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		var x = frame.x * pageX;
 		var y = frame.y * pageY;
 
-		if (pageX == maxPageX) x = scroll.x - frame.x;
-		if (pageY == maxPageY) y = scroll.y - frame.y;
+		if (pageX === maxPageX) x = scroll.x - frame.x;
+		if (pageY === maxPageY) y = scroll.y - frame.y;
 
 		this.scrollTo(x, y, time);
 
@@ -456,7 +456,7 @@ window.addEvent('domready', function(e) {
 
 	document.addEvent('touchmove', function(e) {
 
-		if (e.target.getParent('.scroll') == null) {
+		if (e.target.getParent('.scroll') === null) {
 			e.preventDefault();
 		} else {
 

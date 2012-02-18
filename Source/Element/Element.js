@@ -37,9 +37,9 @@ Element.implement({
 
 	adopt: function() {
 		var args = [];
-		if (arguments.length == 1) {
+		if (arguments.length === 1) {
 			var arg = arguments[0];
-			if (typeof arg == 'string') {
+			if (typeof arg === 'string') {
 				var args = Elements.from(arg);
 				if (args.length) {
 					return adopt.apply(this, args);

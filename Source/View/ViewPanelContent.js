@@ -48,7 +48,7 @@ Moobile.ViewPanelContent = new Class({
 		this.element.addEvent('view-panel-content');
 
 		var main = this.element.getRoleElement('main-panel');
-		if (main == null) {
+		if (main === null) {
 			main = new Element('div');
 			main.ingest(this.element);
 			main.inject(this.element);
@@ -56,7 +56,7 @@ Moobile.ViewPanelContent = new Class({
 		}
 
 		var side = this.element.getRoleElement('side-panel');
-		if (side == null) {
+		if (side === null) {
 			side = new Element('div');
 			side.inject(this.element, 'top');
 			side.setRole('side-panel');

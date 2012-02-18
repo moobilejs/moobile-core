@@ -56,7 +56,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		this.element.addClass('button');
 
 		var label = this.element.getRoleElement('label');
-		if (label == null) {
+		if (label === null) {
 			label = new Element('div');
 			label.ingest(this.element);
 			label.inject(this.element);
@@ -93,17 +93,17 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		if (this.label === label)
 			return this;
 
-		if (typeof label == 'string') {
+		if (typeof label === 'string') {
 			var text = label;
 			label = new Moobile.Text();
 			label.setText(text);
 		}
 
-		if (this.label == null) {
+		if (this.label === null) {
 			this.label = label;
 			this.addChild(label);
 		} else {
-			this.replaceChild(this.label, label);
+			this.replaceChild(this.label, label, true);
 			this.label.destroy();
 			this.label = label;
 		}

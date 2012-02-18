@@ -56,7 +56,7 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		this.element.addClass('bar');
 
 		var item = this.element.getRoleElement('item');
-		if (item == null) {
+		if (item === null) {
 			item = new Element('div');
 			item.ingest(this.element);
 			item.inject(this.element);
@@ -87,11 +87,11 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		if (this.item === item)
 			return this;
 
-		if (this.item == null) {
+		if (this.item === null) {
 			this.item = item;
 			this.addChild(item);
 		} else {
-			this.replaceChild(this.item, item);
+			this.replaceChild(this.item, item, true);
 			this.item.destroy();
 			this.item = item;
 		}

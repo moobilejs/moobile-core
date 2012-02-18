@@ -21,7 +21,7 @@ Array.implement({
 	find: function(fn) {
 		for (var i = 0; i < this.length; i++) {
 			var found = fn.call(this, this[i]);
-			if (found == true) {
+			if (found === true) {
 				return this[i];
 			}
 		}

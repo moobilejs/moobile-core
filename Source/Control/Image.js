@@ -70,7 +70,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 
 		this.element.addClass('image');
 
-		if (this.element.get('tag') == 'img') {
+		if (this.element.get('tag') === 'img') {
 			var source = this.element.get('src');
 			if (source) this.setSource(source);
 		}
@@ -96,7 +96,7 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 	 */
 	setSource: function(source) {
 
-		if (this.element.get('tag') == 'img') {
+		if (this.element.get('tag') === 'img') {
 
 			this.loaded = false;
 

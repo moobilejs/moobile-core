@@ -28,6 +28,13 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
+	_name: null,
+
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_window: null,
 
 	/**
@@ -45,32 +52,25 @@ Moobile.Component = new Class({
 	_children: [],
 
 	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_ready: false,
+
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_style: null,
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#style
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	style: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#ready
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	ready: false,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#name
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	name: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#options
@@ -91,11 +91,11 @@ Moobile.Component = new Class({
 	initialize: function(element, options, name) {
 
 		this.element = Element.from(element);
-		if (this.element == null) {
+		if (this.element === null) {
 			this.element = new Element(this.options.tagName);
 		}
 
-		this.name = name || this.element.get('data-name');
+		this._name = name || this.element.get('data-name');
 
 		options = options || {};
 
@@ -104,7 +104,7 @@ Moobile.Component = new Class({
 			if (value != null) {
 				var number = parseFloat(value);
 				if (!isNaN(number)) value = number;
-				if (options[option] == undefined) {
+				if (options[option] === undefined) {
 					options[option] = value;
 				}
 			}
@@ -150,12 +150,9 @@ Moobile.Component = new Class({
 	 */
 	addEvent: function(type, fn, internal) {
 
-		if (Moobile.NativeEvents.contains(type)) {
-			this.element.addEvent(type, function(e) {
-				e.targetElement = this.element;
-				this.fireEvent(type, e);
-			}.bind(this), internal);
-		}
+		if (Moobile.NativeEvents.contains(type)) this.element.addEvent(type, function(e) {
+			this.fireEvent(type, e);
+		}.bind(this), internal);
 
 		return this.parent(type, fn, internal);
 	},
@@ -165,7 +162,107 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChild: function(child, where, context) {
+	addChild: function(child, where) {
+
+		if (this.hasChild(child))
+			return this;
+
+		var element = child.getElement();
+		if (element) {
+			if (this.hasElement(element) === false) {
+				this.element.grab(element, where);
+			}
+		}
+
+		return this._addChildAt(child, where === 'top' ? 0 : this._children.length);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChildInto
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addChildInto: function(child, context, where) {
+
+		if (this.hasChild(child))
+			return this;
+
+		var element = child.getElement();
+		if (element) {
+			context = document.id(context);
+			if (this.hasElement(element) === false &&
+				this.hasElement(context) === true) {
+				context.grab(element, where);
+			}
+		}
+
+		return this._addChildAt(child, this._children.length);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addChildAfter: function(child, after) {
+
+		if (this.hasChild(child))
+			return this;
+
+		var element = child.getElement();
+		if (element) {
+			var context = document.id(after);
+			if (context) {
+				if (this.hasElement(element) === false &&
+					this.hasElement(context) === true) {
+					element.inject(context, 'after');
+				}
+			}
+		}
+
+		var index = this._children.length;
+		if (after instanceof Moobile.Component) {
+			index = this.getChildIndex(after) + 1;
+		}
+
+		return this._addChildAt(child, index);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addChildBefore: function(child, before) {
+
+		if (this.hasChild(child))
+			return this;
+
+		var element = child.getElement();
+		if (element) {
+			var context = document.id(before);
+			if (context) {
+				if (this.hasElement(element) === false &&
+					this.hasElement(context) === true) {
+					element.inject(context, 'before');
+				}
+			}
+		}
+
+		var index = this._children.length;
+		if (before instanceof Moobile.Component) {
+			index = this.getChildIndex(after);
+		}
+
+		return this._addChildAt(child, index);
+	},
+
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_addChildAt: function(child, index) {
 
 		if (this.hasChild(child))
 			return this;
@@ -173,26 +270,11 @@ Moobile.Component = new Class({
 		child.removeFromParent();
 
 		this.willAddChild(child);
-
-		var element = child.getElement();
-		if (element && !this.hasElement(element)) {
-			context = document.id(context) || this.element;
-			context = this.hasElement(context) ? context : this.element;
-			element.inject(context, where || 'bottom');
-		}
-
-		this._children.push(child);
+		this._children.splice(index, 0, child);
 		child.setParent(this);
+		child.setWindow(this._window);
 		this.didAddChild(child);
-
-		this.addEvent('ready:once', function() {
-			child.setWindow(this._window);
-			child.setReady();
-		}.bind(this));
-
-		if (this.ready) {
-			this.fireEvent('ready');
-		}
+		child.setReady(this._ready);
 
 		return this;
 	},
@@ -204,7 +286,7 @@ Moobile.Component = new Class({
 	 */
 	getChild: function(name) {
 		return this._children.find(function(child) {
-			return child.getName() == name;
+			return child.getName() === name;
 		});
 	},
 
@@ -218,6 +300,15 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getChildIndex: function(child) {
+		return this._children.indexOf(child);
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#hasChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -227,14 +318,30 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildOfType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	hasChildOfType: function(type) {
+		return this.getChildrenOfType(type).length > 0;
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#getChildren
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getChildren: function(type) {
-		return type
-			? this._children.filter(function(child) { return child instanceof type })
-			: this._children;
+		return this._children;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildrenOfType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getChildrenOfType: function(type) {
+		return this._children.filter(function(child) { return child instanceof type })
 	},
 
 	/**
@@ -242,8 +349,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	replaceChild: function(child, replacement) {
-		return this.addChild(replacement, 'before', child).removeChild(child);
+	replaceChild: function(child, replacement, destroy) {
+		return this.addChild(replacement, 'before', child).removeChild(child, destroy);
 	},
 
 	/**
@@ -251,7 +358,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChild: function(child) {
+	removeChild: function(child, destroy) {
 
 		if (!this.hasChild(child))
 			return this;
@@ -259,25 +366,46 @@ Moobile.Component = new Class({
 		this.willRemoveChild(child);
 		child.setParent(null);
 		child.setWindow(null);
+		child.setReady(false);
 
-		var element = document.id(child);
+		var element = child.getElement();
 		if (element) {
 			element.dispose();
 		}
 
 		this._children.erase(child);
+
 		this.didRemoveChild(child);
+
+		if (destroy) {
+			child.destroy();
+			child = null;
+		}
 
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChildren
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildren
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChildren: function(type) {
-		this.getChildren(type).each(this.bound('removeChild'));
+	removeChildren: function(destroy) {
+		this.getChildren().each(function(child) {
+			this.removeChild(child, destroy);
+		}, this)
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildrenOfType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	removeChildrenOfType: function(type, destoy) {
+		this.getChildrenOfType(type).each(function(child) {
+			this.removeChild(child, destroy);
+		}, this)
 		return this;
 	},
 
@@ -286,9 +414,9 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeFromParent: function() {
+	removeFromParent: function(destroy) {
 		var parent = this.getParent();
-		if (parent) parent.removeChild(this);
+		if (parent) parent.removeChild(this, destroy);
 		return this;
 	},
 
@@ -355,14 +483,24 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	setReady: function() {
+	setReady: function(ready) {
 
-		if (this.ready)
+		if (this._ready === ready)
 			return this;
 
-		this.ready = true;
-		this.didBecomeReady();
-		this.fireEvent('ready');
+		if (ready) {
+			if (this._parent instanceof Moobile.Window) this._window = this._parent;
+			if (this._parent instanceof Moobile.Component) this._window = this._parent.getWindow();
+		}
+
+		this._children.invoke('setReady', [ready]);
+
+		if (ready) {
+			this.didBecomeReady();
+			this.fireEvent('ready');
+		}
+
+		this._ready = ready;
 
 		return this;
 	},
@@ -373,7 +511,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	isReady: function() {
-		return this.ready;
+		return this._ready;
 	},
 
 	/**
@@ -382,7 +520,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	getName: function() {
-		return this.name;
+		return this._name;
 	},
 
 	/**
@@ -392,9 +530,9 @@ Moobile.Component = new Class({
 	 */
 	setStyle: function(name) {
 
-		if (this.style) {
-			this.style.detach.call(this, this.element);
-			this.style = null;
+		if (this._style) {
+			this._style.detach.call(this, this.element);
+			this._style = null;
 		}
 
 		var style = Moobile.Component.getStyle(name, this);
@@ -402,7 +540,7 @@ Moobile.Component = new Class({
 			style.attach.call(this, this.element);
 		}
 
-		this.style = style;
+		this._style = style;
 
 		return this;
 	},
@@ -413,7 +551,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	getStyle: function() {
-		return this.style ? this.style.name : null;
+		return this._style ? this._style.name : null;
 	},
 
 	/**
@@ -665,16 +803,6 @@ Moobile.Component = new Class({
 		return this;
 	},
 
-	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#destroyChild
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	destroyChild: function(child) {
-		child.destroy();
-		child = null;
-	},
-
 	toElement: function() {
 		return this.element;
 	}
@@ -688,7 +816,7 @@ Moobile.Component = new Class({
  */
 Moobile.Component.defineRole = function(name, target, behavior) {
 	var context = (target || Moobile.Component).prototype;
-	if (context.__roles__ == undefined) {
+	if (context.__roles__ === undefined) {
 		context.__roles__ = {};
 	}
 	context.__roles__[name] = behavior;
@@ -712,7 +840,7 @@ Moobile.Component.getRole = function(name, target) {
  */
 Moobile.Component.defineStyle = function(name, target, behavior) {
 	var context = (target || Moobile.Component).prototype;
-	if (context.__styles__ == undefined) {
+	if (context.__styles__ === undefined) {
 		context.__styles__ = {};
 	}
 	context.__styles__[name] = Object.append({

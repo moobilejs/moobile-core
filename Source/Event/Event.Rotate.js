@@ -27,7 +27,7 @@ if (!window.orientation) window.orientation = 0;
 if (!window.orientationName) window.orientationName = 'portrait';
 
 var orientation = function() {
-	window.orientationName = Math.abs(window.orientation) == 90 ? 'landscape' : 'portrait';
+	window.orientationName = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
 };
 
 Element.defineCustomEvent('rotate', {

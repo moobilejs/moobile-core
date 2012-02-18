@@ -174,17 +174,17 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		if (this.title === title)
 			return this;
 
-		if (typeof title == 'string') {
+		if (typeof title === 'string') {
 			var text = title;
 			title = new Moobile.Text();
 			title.setText(text);
 		}
 
-		if (this.title == null) {
+		if (this.title === null) {
 			this.title = title;
 			this.addChild(title, 'top', this.dialogHeader);
 		} else {
-			this.replaceChild(this.title, title);
+			this.replaceChild(this.title, title, true);
 			this.title.destroy();
 			this.title = title;
 		}
@@ -225,17 +225,17 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		if (this.message === message)
 			return this;
 
-		if (typeof message == 'string') {
+		if (typeof message === 'string') {
 			var text = message;
 			message = new Moobile.Text();
 			message.setText(text);
 		}
 
-		if (this.message == null) {
+		if (this.message === null) {
 			this.message = message;
 			this.addChild(message, 'top', this.dialogContent);
 		} else {
-			this.replaceChild(this.message, message);
+			this.replaceChild(this.message, message, true);
 			this.message.destroy();
 			this.message = message;
 		}
@@ -339,7 +339,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 		this.parent();
 
-		if (this.buttons.length == 0) {
+		if (this.buttons.length === 0) {
 			var button = new Moobile.Button();
 			button.setLabel('OK');
 			this.addButton(button);

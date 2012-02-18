@@ -332,7 +332,7 @@ Moobile.Animation = new Class({
 	 */
 	stop: function() {
 
-		if (this.running == false)
+		if (this.running === false)
 			return this;
 
 		this.running = false;
@@ -358,7 +358,7 @@ Moobile.Animation = new Class({
 	 */
 	onAnimationEnd: function(e) {
 
-		if (this.running == false)
+		if (this.running === false)
 			return;
 
 		if (this.element !== e.target)

@@ -29,7 +29,7 @@ Class.extend({
 		name = name.split('.');
 		var func = window;
 		for (var i = 0; i < name.length; i++) if (func[name[i]]) func = func[name[i]]; else return null;
-		return typeof func == 'function' ? func : null;
+		return typeof func === 'function' ? func : null;
 	},
 
 	/**
@@ -38,8 +38,8 @@ Class.extend({
 	 * @since  0.1
 	 */
 	instantiate: function(klass) {
-		if (typeof klass == 'string') klass = Class.parse(klass);
-		if (klass == null) return null;
+		if (typeof klass === 'string') klass = Class.parse(klass);
+		if (klass === null) return null;
 		klass.$prototyping = true;
 		var instance = new klass;
 		delete klass.$prototyping;

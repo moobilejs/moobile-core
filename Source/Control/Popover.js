@@ -63,10 +63,10 @@ Moobile.Popover = new Class({
 		if (this.hasChild(child))
 			return false;
 
-		if (where == 'header') return this.parent(child, 'top', context);
-		if (where == 'footer') return this.parent(child, 'bottom', context);
+		if (where === 'header') return this.parent(child, 'top', context);
+		if (where === 'footer') return this.parent(child, 'bottom', context);
 
-		if (context == undefined)
+		if (context === undefined)
 			context = this.content;
 
 		this.parent(child, where, context);

@@ -79,20 +79,20 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		var label  = this.element.getRoleElement('label');
 		var detail = this.element.getRoleElement('detail');
 
-		if (label == null) {
+		if (label === null) {
 			label = new Element('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 			label.setRole('label');
 		}
 
-		if (image == null) {
+		if (image === null) {
 			image = new Element('img');
 			image.inject(this.element, 'top');
 			image.setRole('image');
 		}
 
-		if (detail == null) {
+		if (detail === null) {
 			detail = new Element('div');
 			detail.inject(this.element);
 			detail.setRole('detail');
@@ -125,17 +125,17 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.image === image)
 			return this;
 
-		if (typeof image == 'string') {
+		if (typeof image === 'string') {
 			var source = image;
 			image = new Moobile.Image();
 			image.setSource(text);
 		}
 
-		if (this.image == null) {
+		if (this.image === null) {
 			this.image = image;
 			this.addChild(image);
 		} else {
-			this.replaceChild(this.image, image);
+			this.replaceChild(this.image, image, true);
 			this.image.destroy();
 			this.image = image;
 		}
@@ -174,17 +174,17 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.label === label)
 			return this;
 
-		if (typeof label == 'string') {
+		if (typeof label === 'string') {
 			var text = label;
 			label = new Moobile.Text();
 			label.setText(text);
 		}
 
-		if (this.label == null) {
+		if (this.label === null) {
 			this.label = label;
 			this.addChild(label);
 		} else {
-			this.replaceChild(this.label, label);
+			this.replaceChild(this.label, label, true);
 			this.label.destroy();
 			this.label = label;
 		}
@@ -225,17 +225,17 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (this.detail === detail)
 			return this;
 
-		if (typeof detail == 'string') {
+		if (typeof detail === 'string') {
 			var text = detail;
 			detail = new Moobile.Text();
 			detail.setText(text);
 		}
 
-		if (this.detail == null) {
+		if (this.detail === null) {
 			this.detail = detail;
 			this.addChild(detail);
 		} else {
-			this.replaceChild(this.detail, detail);
+			this.replaceChild(this.detail, detail, true);
 			this.detail.destroy();
 			this.detail = detail;
 		}

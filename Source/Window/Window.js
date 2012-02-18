@@ -45,7 +45,6 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 		this.element.set('class', 'window');
 		window.addEvent('load', this.bound('onWindowLoad'));
 		window.addEvent('rotate', this.bound('onWindowRotate'));
-		this.setWindow(this); // weird but important
 	},
 
 	destroy: function() {
@@ -57,7 +56,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	didAddChild: function(child) {
 		this.parent(child);
 		child.setWindow(this);
-		child.setParent(this);
+		child.setParent(null);
 	},
 
 	onWindowLoad: function(e) {

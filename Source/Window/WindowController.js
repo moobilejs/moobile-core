@@ -49,13 +49,13 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	loadView: function() {
 
 		var element = document.id('window');
-		if (element == null) {
+		if (element === null) {
 			element = new Element('div');
 			element.inject(document.body);
 		}
 
 		this.view = new Moobile.Window(element);
-		this.view.setReady();
+		this.view.setReady(true);
 	},
 
 	/**

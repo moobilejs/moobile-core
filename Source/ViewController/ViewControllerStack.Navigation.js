@@ -58,12 +58,12 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 		var view = viewController.getView();
 
 		var navigationBar = view.getChild('navigation-bar');
-		if (navigationBar == null) {
+		if (navigationBar === null) {
 			navigationBar = new Moobile.NavigationBar(null, null, 'navigation-bar');
 			view.addChild(navigationBar, 'header');
 		}
 
-		if (viewController.isModal() || this.childViewControllers.length == 0)
+		if (viewController.isModal() || this.childViewControllers.length === 0)
 			return this;
 
 		if (this.options.backButton) {
@@ -86,7 +86,7 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 		this.parent(viewController);
 
 		var navigationBar = viewController.getView().getChild('navigation-bar');
-		if (navigationBar == null)
+		if (navigationBar === null)
 			return this;
 
 		var title = viewController.getTitle();

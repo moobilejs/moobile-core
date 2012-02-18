@@ -205,7 +205,7 @@ Moobile.Control = new Class({
 	 */
 	_setState: function(state, value) {
 
-		if (this[state] == value)
+		if (this[state] === value)
 			return this;
 
 		this.willSetState(state, value);

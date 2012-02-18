@@ -204,7 +204,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	onTouchStart: function() {
 
 		var scroll = this.wrapper.getScroll();
-		if (scroll.x == 0) {
+		if (scroll.x === 0) {
 
 			if (scroll.y <= 0) {
 
