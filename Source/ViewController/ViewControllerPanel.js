@@ -68,6 +68,8 @@ Moobile.ViewControllerPanel = new Class({
 			this.view.addChildInto(view, this.view.getMainPanel());
 		}
 
+		viewController.setViewControllerPanel(this);
+
 		this.addChildViewController(mainViewController);
 
 		this._mainViewController = mainViewController;
@@ -101,6 +103,8 @@ Moobile.ViewControllerPanel = new Class({
 			this.view.addChildInto(view, this.view.getSidePanel())
 		}
 
+		viewController.setViewControllerPanel(this);
+
 		this.addChildViewController(sideViewController);
 
 		this._sideViewController = _sideViewController;
@@ -115,16 +119,6 @@ Moobile.ViewControllerPanel = new Class({
 	 */
 	getSideViewController: function() {
 		return this._sideViewController;
-	},
-
-	/**
-	 * @overrides
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	didAddChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setViewControllerPanel(this);
 	}
 
 });
