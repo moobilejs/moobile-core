@@ -49,7 +49,7 @@ Moobile.EventDispatcher = new Class({
 
 		args = Array.from(args).include(this);
 
-		if (!this.eventShouldFire(type, args))
+		if (!this.shouldFireEvent(type, args))
 			return this;
 
 		this.willFireEvent(type, args);
@@ -60,12 +60,12 @@ Moobile.EventDispatcher = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher#eventShouldFire
+	 * @see http://moobile.net/api/0.1/EventDispatcher/EventDispatcher#shouldFireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	eventShouldFire: function(type, args) {
+	shouldFireEvent: function(type, args) {
 		return true;
 	},
 
