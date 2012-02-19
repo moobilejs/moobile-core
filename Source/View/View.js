@@ -44,13 +44,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	Extends: Moobile.Component,
 
 	/**
-	 * @private
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_parentView: null,
-
-	/**
 	 * The view content.
 	 * @type   ViewContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -141,39 +134,6 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Set the view that owns this view.
-	 *
-	 * This method should be used instead of `setParent` because it will set
-	 * an view instead of a view content.
-	 *
-	 * @return {View} This view.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	setParentView: function(parentView) {
-		this.parentViewWillChange(parentView);
-		this._parentView = parentView;
-		this.parentViewDidChange(parentView);
-		return this;
-	},
-
-	/**
-	 * Returns the view that owns this view.
-	 *
-	 * This method should be used instead of `getParent` because it will return
-	 * an view instead of a view content.
-	 *
-	 * @return {View} The view that owns this view.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	getParentView: function() {
-		return this._parentView;
-	},
-
-	/**
 	 * Sets the view content.
 	 *
 	 * This method will set the child that is used as the content of this
@@ -223,14 +183,66 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Tell the view it's about to be moved to a new view.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.
-	 *
-	 * @param {View} parentView The view that will own this view.
-	 *
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willAddChild: function(component) {
+		this.parent(component);
+		component.setParentView(this);
+	},
+
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willRemoveChild: function(component) {
+		this.parent(component);
+		component.setParentView(null);
+	}
+
+});
+
+Class.refactor(Moobile.Component, {
+
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_parentView: null,
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#setParentView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setParentView: function(parentView) {
+
+		if (this._parentView === parentView)
+			return this;
+
+		this.parentViewWillChange(parentView);
+		this._parentView = parentView;
+		this.parentViewDidChange(parentView);
+
+		this.getChildren().invoke('setParentView', parentView);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#getParentView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getParentView: function() {
+		return this._parentView;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -239,14 +251,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Tell the view it has been moved to a new view.
-	 *
-	 * The current implementation of this method does nothing. However it's a
-	 * good practice to call the parent at the top of your implementation as
-	 * the content of this method may change in the future.
-	 *
-	 * @param {View} parentView The view that owns this view.
-	 *
+	 * @see    http://moobile.net/api/0.1/Component/Component#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -260,10 +265,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	willAddChild: function(component) {
-		this.parent(component);
-		if (component instanceof Moobile.View) {
-			component.setParentView(this);
-		}
+		this.previous(component);
+		component.setParentView(this._parentView);
 	},
 
 	/**
@@ -272,10 +275,8 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @since  0.1
 	 */
 	willRemoveChild: function(component) {
-		this.parent(component);
-		if (component instanceof Moobile.View) {
-			component.setParentView(null);
-		}
+		this.previous(component);
+		component.setParentView(null);
 	}
 
 });
