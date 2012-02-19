@@ -138,7 +138,6 @@ Moobile.Component = new Class({
 		if (styleName) this.setStyle(styleName);
 
 		this.element.executeDefinedRoles(this);
-
 	},
 
 	/**
@@ -288,9 +287,16 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	getChild: function(name) {
-		return this._children.find(function(child) {
-			return child.getName() === name;
-		});
+		return this._children.find(function(child) { return child.getName() === name; });
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildOfType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getChildOfType: function(type, name) {
+		return this._children.find(function(child) { return child instanceof type && child.getName() === name; });
 	},
 
 	/**
@@ -307,8 +313,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildOfTypeAt: function(index, type) {
-		return this.getChildOfType(type)[index] || null;
+	getChildOfTypeAt: function(type, index) {
+		return this.getChildrenOfType(type)[index] || null;
 	},
 
 	/**
@@ -316,8 +322,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildIndex: function(child) {
-		return this._children.indexOf(child);
+	getChildIndex: function(component) {
+		return this._children.indexOf(component);
 	},
 
 	/**
@@ -325,7 +331,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildren: function(type) {
+	getChildren: function() {
 		return this._children;
 	},
 
@@ -353,7 +359,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	hasChildOfType: function(type) {
-		return this.getChildrenOfType(type).length > 0;
+		return this._children.some(function(child) { return child instanceof type; });
 	},
 
 	/**
@@ -446,9 +452,14 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	setParent: function(parent) {
+
+		if (this._parent === parent)
+			return this;
+
 		this.parentWillChange(parent);
 		this._parent = parent;
 		this.parentDidChange(parent);
+
 		return this;
 	},
 
@@ -476,7 +487,13 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	setWindow: function(window) {
+
+		if (this._window === window)
+			return this;
+
 		this._window = window;
+		this._children.invoke('setWindow', window);
+
 		return this;
 	},
 
@@ -508,19 +525,13 @@ Moobile.Component = new Class({
 		if (this._ready === ready)
 			return this;
 
-		if (ready) {
-			if (this._parent instanceof Moobile.Window) this._window = this._parent;
-			if (this._parent instanceof Moobile.Component) this._window = this._parent.getWindow();
-		}
+		this._ready = ready;
+		this._children.invoke('setReady', ready);
 
-		this._children.invoke('setReady', [ready]);
-
-		if (ready) {
+		if (this._ready) {
 			this.didBecomeReady();
 			this.fireEvent('ready');
 		}
-
-		this._ready = ready;
 
 		return this;
 	},
