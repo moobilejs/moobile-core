@@ -78,10 +78,19 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didAddChild: function(child) {
-		this.parent(child);
-		child.setWindow(this);
-		child.setParent(null);
+	didAddChild: function(component) {
+		this.parent(component);
+		component.setWindow(this);
+	},
+
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didRemoveChild: function() {
+		this.parent(component);
+		component.setWindow(null);
 	},
 
 	/**
