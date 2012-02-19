@@ -227,7 +227,7 @@ Class.refactor(Moobile.Component, {
 		this._parentView = parentView;
 		this.parentViewDidChange(parentView);
 
-		this.getChildren().invoke('setParentView', parentView);
+		this._children.invoke('setParentView', parentView);
 
 		return this;
 	},
