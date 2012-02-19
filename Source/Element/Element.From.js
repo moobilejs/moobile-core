@@ -11,6 +11,7 @@ author:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Element
 
 provides:
 	- Element.From

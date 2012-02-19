@@ -24,6 +24,7 @@ sources:
   - "Source/Types/Array.js"
   - "Source/Element/Element.js"
   - "Source/Element/Element.From.js"
+  - "Source/Element/Element.Role.js"
   - "Source/Event/EventDispatcher.js"
   - "Source/Event/NativeEvents.js"
   - "Source/Event/Event.Ready.js"
