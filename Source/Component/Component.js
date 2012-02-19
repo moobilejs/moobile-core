@@ -137,15 +137,8 @@ Moobile.Component = new Class({
 		var styleName = this.options.styleName
 		if (styleName) this.setStyle(styleName);
 
-		this.element.getRoleElements().each(function(element) {
-			var role = element.get('data-role');
-			var func = Moobile.Component.getRole(role, this);
-			if (func) {
-				func.call(this, element);
-				return;
-			}
-			throw new Error('Role ' + role + ' is undefined');
-		}, this);
+		this.element.executeDefinedRoles(this);
+
 	},
 
 	/**
@@ -186,7 +179,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildInto: function(child, context, where) {
+	addChildInto: function(component, context, where) {
 
 		var elementHandler = function() {
 			var element = component.getElement();
@@ -342,7 +335,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	getChildrenOfType: function(type) {
-		return this._children.filter(function(child) { return child instanceof type })
+		return this._children.filter(function(child) { return child instanceof type });
 	},
 
 	/**
@@ -837,22 +830,7 @@ Moobile.Component = new Class({
  * @since  0.1
  */
 Moobile.Component.defineRole = function(name, target, behavior) {
-	var context = (target || Moobile.Component).prototype;
-	if (context.__roles__ === undefined) {
-		context.__roles__ = {};
-	}
-	context.__roles__[name] = behavior;
-};
-
-/**
- * @see    http://moobile.net/api/0.1/Component/Component#getRole
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
- */
-Moobile.Component.getRole = function(name, target) {
-	return target.__roles__
-		 ? target.__roles__[name]
-		 : null;
+	Element.defineRole(name, target || Moobile.Component, behavior);
 };
 
 /**
@@ -882,7 +860,6 @@ Moobile.Component.getStyle = function(name, target) {
 		 ? target.__styles__[name]
 		 : null;
 };
-
 
 /**
  * @see    http://moobile.net/api/0.1/Component/Component#create
