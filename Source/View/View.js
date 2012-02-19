@@ -58,6 +58,11 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	content: null,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -73,6 +78,11 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
 		this.content = null;
 		this.parent();
@@ -124,118 +134,10 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChild: function(child, where, context) {
-
-		if (this.hasChild(child))
-			return false;
-
-		if (child instanceof Moobile.View)
-			child.setParentView(this);
-
-		if (child instanceof Moobile.ViewContent)
-			return this.parent(child, where, context);
-
-		if (where === 'header')
-			return this.parent(child, 'top');
-
-		if (where === 'footer')
-			return this.parent(child, 'bottom');
-
-		if (this.content === null)
-			return this.parent(child, where, context);
-
-		// the child is in the view but not in the view content
-		if (this.hasElement(child) && !this.content.hasElement(child))
-			return this.parent(child, where, context);
-
-		// the child will go next to an element that is in the view but not in the view content
-		if (this.hasElement(context) && !this.content.hasElement(context))
-			return this.parent(child, where, context);
-
-		return this.content.addChild(child, where, context);
-	},
-
-	/**
-	 * Returns a child child from this view.
-	 *
-	 * This method will attempt to find the given child child from this view's
-	 * content child then from the view itself if the former failed.
-	 *
-	 * @see EventDispatcher#getChild
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	getChild: function(name) {
-		return this.content
-			 ? this.content.getChild(name) || this.parent(name)
-			 : this.parent(name);
-	},
-
-	/**
-	 * Indicates whether an child is owned by this view.
-	 *
-	 * This method will attempt to find the given child child from this view's
-	 * content child then from the view itself if the former failed.
-	 *
-	 * @see EventDispatcher#hasChild
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	hasChild: function(child) {
-		return this.content
-		     ? this.content.hasChild(child) || this.parent(child)
-		     : this.parent(child);
-	},
-
-	/**
-	 * Returns all the child entities from this view.
-	 *
-	 * This method will return an array that contains both the child entites
-	 * from this view and the child entities from this view's content child.
-	 *
-	 * @see EventDispatcher#getChildren
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	getChildren: function(type) {
-		return [].concat(this.parent(type), this.content.getChildren(type));
-	},
-
-	/**
-	 * Replaces a child child with another within this view.
-	 *
-	 * This method will attempt to replace the child from this view's content
-	 * child first then from the view itself if the former failed.
-	 *
-	 * @see EventDispatcher#replaceChild
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	replaceChild: function(replace, child) {
-		return this.content
-		     ? this.content.replaceChild(replace, child) || this.parent(replace, child)
-		     : this.parent(replace, child);
-	},
-
-	/**
-	 * Removes a child child.
-	 *
-	 * This method will attempt to remove the child from this view's content
-	 * child first then from the view itself if the former failed.
-	 *
-	 * @see EventDispatcher#removeChild
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	removeChild: function(child) {
-		return this.content
-		     ? this.content.removeChild(child) || this.parent(child)
-		     : this.parent(child);
+	addChild: function(component, where) {
+		if (where === 'header') return this.parent(component, 'top');
+		if (where === 'footer') return this.parent(component, 'bottom');
+		return this.addChildInto(component, this.content, where);
 	},
 
 	/**
@@ -291,13 +193,15 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 			return this;
 
 		if (this.content === null) {
-			this.addChild(content);
+			this.element.grab(content);
 			this.content = content;
 		} else {
-			this.replaceChild(this.content, content, true);
+			content.replaces(this.content);
 			this.content.destroy();
 			this.content = content;
 		}
+
+		this.content.addClass('view-content');
 
 		return this;
 	},
@@ -348,6 +252,30 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	 */
 	parentViewDidChange: function(parentView) {
 
+	},
+
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willAddChild: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.View) {
+			component.setParentView(this);
+		}
+	},
+
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willRemoveChild: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.View) {
+			component.setParentView(null);
+		}
 	}
 
 });
@@ -380,3 +308,7 @@ Moobile.Component.defineRole('view', null, function(element) {
 	var instance = Moobile.Component.create(Moobile.View, element, 'data-view');
 	this.addChild(instance);
 });
+
+Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true,	behavior: function(element) {
+	this.setContent(element);
+}});

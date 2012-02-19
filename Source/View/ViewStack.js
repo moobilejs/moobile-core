@@ -20,32 +20,28 @@ provides:
 ...
 */
 
-/**
- * @name  ViewStack
- * @class Provides a view that handles an infinite number of views arrenged as
- *        a stack, one on the top of each others.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends View
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
-Moobile.ViewStack = new Class( /** @lends ViewStack.prototype */ {
+Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('view-stack');
+	},
+
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.content.addClass('view-stack-content');
 	}
 
 });
