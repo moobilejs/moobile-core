@@ -72,6 +72,8 @@ Moobile.ViewControllerStack = new Class({
 					   ? viewControllerBefore.getView()
 					   : null;
 
+		this._animating = true; // needs to be set before the transition happens
+
 		viewTransition = viewTransition || new Moobile.ViewTransition.None();
 		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
@@ -81,8 +83,6 @@ Moobile.ViewControllerStack = new Class({
 			this.view,
 			childViewControllers.length === 1
 		);
-
-		this._animating = true;
 
 		viewControllerPushed.setViewTransition(viewTransition);
 
@@ -146,6 +146,8 @@ Moobile.ViewControllerStack = new Class({
 
 		this.willPopViewController(viewControllerPopped);
 
+		this._animating = true; // needs to be set before the transition happens
+
 		var viewTransition = viewControllerPopped.viewTransition;
 		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onPopTransitionComplete'));
@@ -154,8 +156,6 @@ Moobile.ViewControllerStack = new Class({
 			viewControllerPopped.view,
 			this.view
 		);
-
-		this._animating = true;
 
 		return this;
 	},
