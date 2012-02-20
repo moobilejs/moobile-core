@@ -55,7 +55,6 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 		}
 
 		this.view = new Moobile.Window(element);
-		this.view.setReady(true);
 	},
 
 	/**

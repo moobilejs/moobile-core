@@ -106,9 +106,9 @@ Moobile.Component = new Class({
 
 		for (var option in this.options) {
 			var value = this.element.get('data-option-' + option.hyphenate());
-			if (value != null) {
-				var number = parseFloat(value);
-				if (!isNaN(number)) value = number;
+			if (value !== null) {
+				var number = Number(value);
+				if (number !== NaN) value = number;
 				if (options[option] === undefined) {
 					options[option] = value;
 				}
@@ -147,9 +147,10 @@ Moobile.Component = new Class({
 	 */
 	addEvent: function(type, fn, internal) {
 
-		if (Moobile.NativeEvents.contains(type)) this.element.addEvent(type, function(e) {
-			this.fireEvent(type, e);
-		}.bind(this), internal);
+		if (Moobile.Component.hasNativeEvent(type))
+			this.element.addEvent(type, function(e) {
+				this.fireEvent(type, e);
+			}.bind(this), internal);
 
 		return this.parent(type, fn, internal);
 	},
@@ -190,9 +191,6 @@ Moobile.Component = new Class({
 				}
 			}
 		};
-
-		// TODO: Maybe find the next or previous view element, compute the
-		// index and add it properly
 
 		return this._addChildAt(component, this._children.length, elementHandler);
 	},
@@ -258,23 +256,29 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	_addChildAt: function(component, index, elementHandler) {
+	_addChildAt: function(component, index, handler) {
 
 		if (this.hasChild(component))
 			return this;
 
 		component.removeFromParent();
+
 		this.willAddChild(component);
 		this._children.splice(index, 0, component);
-		component.setParent(this);
-		if (elementHandler) {
-			elementHandler.call(this);
+
+		var componentParent = component.getParent();
+		if (componentParent === null) {
+			component.setParent(this);
 		}
+
+		if (handler) handler.call(this);
+
 		this.didAddChild(component);
 
-		component.setWindow(this._window);
-
-//		component.setReady(this._ready);
+		var componentWindow = component.getWindow();
+		if (componentWindow === null) {
+			component.setWindow(this._window);
+		}
 
 		return this;
 	},
@@ -489,6 +493,10 @@ Moobile.Component = new Class({
 
 		this._window = window;
 		this._children.invoke('setWindow', window);
+
+		if (this._window) {
+			this.setReady(true);
+		}
 
 		return this;
 	},
@@ -889,3 +897,30 @@ Moobile.Component.create = function(klass, element, descriptor) {
 
 	return new klass(element);
 };
+
+(function() {
+
+var events = Object.keys(Element.NativeEvents);
+
+Moobile.Component.addNativeEvent = function(name) {
+	events.include(name);
+};
+
+Moobile.Component.hasNativeEvent = function(name) {
+	return events.contains(name);
+};
+
+Moobile.Component.removeNativeEvent = function(name) {
+	events.erase(name);
+};
+
+Moobile.Component.addNativeEvent('tapstart');
+Moobile.Component.addNativeEvent('tapmove');
+Moobile.Component.addNativeEvent('tapend');
+Moobile.Component.addNativeEvent('tap');
+Moobile.Component.addNativeEvent('pinch');
+Moobile.Component.addNativeEvent('swipe');
+Moobile.Component.addNativeEvent('animationEnd');
+Moobile.Component.addNativeEvent('transitionEnd');
+
+})();
