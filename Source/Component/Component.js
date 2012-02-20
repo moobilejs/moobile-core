@@ -264,19 +264,17 @@ Moobile.Component = new Class({
 			return this;
 
 		component.removeFromParent();
-
 		this.willAddChild(component);
 		this._children.splice(index, 0, component);
 		component.setParent(this);
-		component.setWindow(this._window);
-
 		if (elementHandler) {
 			elementHandler.call(this);
 		}
-
 		this.didAddChild(component);
 
-		component.setReady(this._ready);
+		component.setWindow(this._window);
+
+//		component.setReady(this._ready);
 
 		return this;
 	},
@@ -409,13 +407,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	removeChildren: function(destroy) {
-
-		var children = Array.clone(this._children);
-		for (var i = children.length - 1; i >= 0; i--) {
-			children[i].removeFromParent(destroy);
-		}
-
-		return this;
+		return this.removeChildrenOfType(Moobile.Component, destroy);
 	},
 
 	/**
@@ -423,9 +415,13 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChildrenOfType: function(type, destoy) {
+	removeChildrenOfType: function(type, destroy) {
 
-		var children = Array.clone(this._children);
+		var children = [];
+		for (var i = 0; i < this._children.length; i++) {
+			children[i] = this._children[i];
+		}
+
 		for (var i = children.length - 1; i >= 0; i--) {
 			if (children[i] instanceof type) {
 				children[i].removeFromParent(destroy);
