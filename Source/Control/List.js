@@ -19,159 +19,129 @@ provides:
 ...
 */
 
-/**
- * @name  List
- * @class Provides a list control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
- */
+
 Moobile.List = new Class( /** @lends List.prototype */ {
 
 	Extends: Moobile.Control,
 
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_selectable: true,
 
 	/**
-	 * The selected item.
-	 * @type   ListItem
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	selectedItem: null,
 
 	/**
-	 * The selected item index.
-	 * @type   Number
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	selectedItemIndex: -1,
 
 	/**
-	 * The class options.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Control/List#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	options: {
 		tagName: 'ul'
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('list');
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.selectedItem = null;
-		this.selectedItemIndex = -1;
+		this._selectedItem = null;
+		this._selectedItemIndex = -1;
 		this.parent();
 	},
 
 	/**
-	 * Sets the selected item.
-	 *
-	 * This method will select the given item and deselect the current selected
-	 * item if any. You can also clear the selected item by passing `null` as
-	 * parameter.
-	 *
-	 * @param {ListItem} selectedItem The selected item or `null` to clear the
-	 *                                selection.
-	 *
-	 * @return {List} This list.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSelectedItem: function(selectedItem) {
 
 		if (this._selectable == false)
 			return this;
 
-		if (this.selectedItem === selectedItem)
+		if (this._selectedItem === selectedItem)
 			return this;
 
-		if (this.selectedItem) {
-			this.selectedItem.setSelected(false);
-			this.selectedItem = null;
-			this.fireEvent('deselect', this.selectedItem);
+		if (this._selectedItem) {
+			this._selectedItem.setSelected(false);
+			this._selectedItem = null;
+			this.fireEvent('deselect', this._selectedItem);
 		}
 
 		if (selectedItem) {
-			this.selectedItem = selectedItem;
-			this.selectedItem.setSelected(true);
-			this.fireEvent('select', this.selectedItem);
+			this._selectedItem = selectedItem;
+			this._selectedItem.setSelected(true);
+			this.fireEvent('select', this._selectedItem);
 		}
 
-		this.selectedItemIndex = selectedItem ? this._children.indexOf(selectedItem) : -1;
+		this._selectedItemIndex = selectedItem ? this.getChildIndex(selectedItem) : -1;
 
 		return this;
 	},
 
 	/**
-	 * Returns the selected item.
-	 *
-	 * @return {ListItem} The selected item or `null` if no items were
-	 *                    selected.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#getSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getSelectedItem: function() {
-		return this.selectedItem;
+		return this._selectedItem;
 	},
 
 	/**
-	 * Sets the selected item index.
-	 *
-	 * This method will select an item using its index, 0 being the first item
-	 * in the list. Passing an index that matches no items will clear the
-	 * selection.
-	 *
-	 * @param {Number} index The selected item index.
-	 *
-	 * @return {List} This list.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSelectedItemIndex: function(index) {
-		this.setSelectedItem(this._children[index] || null);
-		return this;
+
+		var child = null;
+		if (index >= 0) {
+			child = this.getChildOfTypeAt(Moobile.ListItem, index);
+		}
+
+		return this.setSelectedItem(child);
 	},
 
 	/**
-	 * Returns the selected item index.
-	 *
-	 * @return {Number} The selected item index or `-1` if no items were
-	 *                  selected.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#getSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getSelectedItemIndex: function() {
-		return this.selectedItemIndex
+		return this._selectedItemIndex
 	},
 
 	/**
-	 * Clear the selected button.
-	 *
-	 * @return {List} This list.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#clearSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	clearSelectedItem: function() {
 		this.setSelectedItem(null);
@@ -179,55 +149,84 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * Adds an item.
-	 *
-	 * @see EventDispatcher#addChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#addItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	addItem: function(item, where, context) {
-		return this.addChild(item, where, context);
+	addItem: function(item, where) {
+		return this.addChild(item, where);
 	},
 
 	/**
-	 * Returns an item.
-	 *
-	 * @see EventDispatcher#getChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#addItemAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	addItemAfter: function(item, after) {
+		return this.addChildAfter(item, after);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#addItemBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addItemBefore: function(item, before) {
+		return this.addChildBefore(item, before);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#getItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getItem: function(name) {
-		return this.getChild(name);
-	},
-
-	getItems: function() {
-		return this.getChildren(Moobile.ListItem);
+		return this.getChildOfType(Moobile.ListItem, name);
 	},
 
 	/**
-	 * Removes an item.
-	 *
-	 * @see EventDispatcher#removeChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#getItemAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	getItemAt: function(index) {
+		return this.getChildOfTypeAt(Moobile.ListItem, index)
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#getItemIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getItemIndex: function(item) {
+		return this.getChildIndex(item);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#getItems
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getItems: function() {
+		return this.getChildrenOfType(Moobile.ListItem);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#removeItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	removeItem: function(item) {
 		return this.removeChild(item);
 	},
 
 	/**
-	 * Removes all items.
-	 *
-	 * @see EventDispatcher#removeChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#removeAllItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	removeAllItems: function() {
-		return this.removeChildren(Moobile.ListItem);
+		return this.removeChildrenOfType(Moobile.ListItem);
 	},
 
 	/**
@@ -241,7 +240,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#getSelectable
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#isSelectable
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -249,36 +248,70 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 		return this._selectable;
 	},
 
-	didAddChild: function(child) {
-
-		this.parent(child);
-
-		if (child instanceof Moobile.ListItem) {
-			child.addEvent('tapstart', this.bound('onItemTapStart'));
-			child.addEvent('tapend', this.bound('onItemTapEnd'));
-			child.addEvent('tap', this.bound('onItemTap'));
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didAddChild: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.ListItem) {
+			component.addEvent('tapstart', this.bound('onItemTapStart'));
+			component.addEvent('tapend', this.bound('onItemTapEnd'));
+			component.addEvent('tap', this.bound('onItemTap'));
 		}
 	},
 
-	didRemoveChild: function(child) {
-
-		this.parent(child);
-
-		if (child instanceof Moobile.ListItem) {
-			child.removeEvent('tapstart', this.bound('onItemTapStart'));
-			child.removeEvent('tapend', this.bound('onItemTapEnd'));
-			child.removeEvent('tap', this.bound('onItemTap'));
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didRemoveChild: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.ListItem) {
+			component.removeEvent('tapstart', this.bound('onItemTapStart'));
+			component.removeEvent('tapend', this.bound('onItemTapEnd'));
+			component.removeEvent('tap', this.bound('onItemTap'));
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' ||
+			state == null) {
+			this.getChildren().invoke('setDisabled', state);
+		}
+	},
+
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onItemTapStart: function(e, sender) {
 		if (this._selectable) sender.setHighlighted(true);
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onItemTapEnd: function(e, sender) {
 		if (this._selectable) sender.setHighlighted(false);
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onItemTap: function(e, sender) {
 		if (this._selectable) this.setSelectedItem(sender);
 	}

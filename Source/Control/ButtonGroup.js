@@ -42,61 +42,58 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * The selected button.
-	 * @type   Button
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	selectedButton: null,
+	_selectedButton: null,
 
 	/**
-	 * The selected button index.
-	 * @type   Number
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	selectedButtonIndex: -1,
+	_selectedButtonIndex: -1,
 
 	/**
-	 * The class options.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	options: {
 		styleName: 'horizontal',
 		deselectable: false
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('button-group');
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.selectedButton = null;
-		this.selectedButtonIndex = -1;
+		this._selectedButton = null;
+		this._selectedButtonIndex = -1;
 		this.parent();
 	},
 
 	/**
-	 * Sets the selected button.
-	 *
-	 * This method will select the given button and deselect the current
-	 * selected button if any. You can also clear the selected button by
-	 * passing `null` as parameter.
-	 *
-	 * @param {Button} selectedButton The selected button or `null` to clear
-	 *                                the selection.
-	 *
-	 * @return {ButtonGroup} This button group.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSelectedButton: function(selectedButton) {
 
-		if (this.selectedButton === selectedButton) {
+		if (this._selectedButton === selectedButton) {
 			if (selectedButton && this.options.deselectable) {
 				selectedButton = null;
 			} else {
@@ -104,75 +101,60 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 			}
 		}
 
-		if (this.selectedButton) {
-			this.fireEvent('deselect', this.selectedButton);
-			this.selectedButton.setSelected(false);
-			this.selectedButton = null;
+		if (this._selectedButton) {
+			this.fireEvent('deselect', this._selectedButton);
+			this._selectedButton.setSelected(false);
+			this._selectedButton = null;
 		}
 
 		if (selectedButton) {
-			this.selectedButton = selectedButton;
-			this.selectedButton.setSelected(true);
-			this.fireEvent('select', this.selectedButton);
+			this._selectedButton = selectedButton;
+			this._selectedButton.setSelected(true);
+			this.fireEvent('select', this._selectedButton);
 		}
 
-		this.selectedButtonIndex = selectedButton ? this._children.indexOf(selectedButton) : -1;
+		this._selectedButtonIndex = selectedButton ? this.getChildIndex(selectedButton) : -1;
 
 		return this;
 	},
 
 	/**
-	 * Returns the selected button.
-	 *
-	 * @return {Button} The selected button or `null` if no buttons were
-	 *                  selected.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getSelectedButton: function() {
-		return this.selectedButton;
+		return this._selectedButton;
 	},
 
 	/**
-	 * Sets the selected button index.
-	 *
-	 * This method will select a button using its index, 0 being the first
-	 * button in the list. Passing an index that matches no buttons will
-	 * clear the selection.
-	 *
-	 * @param {Number} index The selected button index.
-	 *
-	 * @return {ButtonGroup} This button group.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSelectedButtonIndex: function(index) {
-		this.setSelectedButton(this._children[index] || null);
-		return this;
+
+		var child = null;
+		if (index >= 0) {
+			child = this.getChildOfTypeAt(Moobile.Button, index);
+		}
+
+		return this.setSelectedButton(child);
 	},
 
 	/**
-	 * Returns the selected button index.
-	 *
-	 * @return {Number} The selected button index or `-1` if no buttons were
-	 *                  selected.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getSelectedButtonIndex: function() {
-		return this.selectedButtonIndex;
+		return this._selectedButtonIndex;
 	},
 
 	/**
-	 * Clear the selected button.
-	 *
-	 * @return {ButtonGroup} This button group.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	clearSelectedButton: function() {
 		this.setSelectedButton(null);
@@ -180,71 +162,97 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	},
 
 	/**
-	 * Adds a button.
-	 *
-	 * @see EventDispatcher#addChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	addButton: function(button, where, context) {
+	addButton: function(button, where) {
 		return this.addChild(button, where, context);
 	},
 
 	/**
-	 * Returns a button.
-	 *
-	 * @see EventDispatcher#getChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	addButtonAfter: function(button, after) {
+		return this.addChildAfter(button, after);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	addButtonBefore: function(button, before) {
+		return this.addChildBefore(button, before);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	getButton: function(name) {
 		return this.getChild(name);
 	},
 
 	/**
-	 * Removes a button.
-	 *
-	 * @see EventDispatcher#removeChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	getButtonAt: function(index) {
+		return this.getChilOfTypeAt(Moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	removeButton: function(button) {
 		return this.removeChild(button);
 	},
 
 	/**
-	 * Removes all buttons.
-	 *
-	 * @see EventDispatcher#removeChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	removeAllButtons: function() {
-		return this.removeChildren(Moobile.Button);
+		return this.removeChildrenOfType(Moobile.Button);
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didAddChild: function(child) {
-
 		this.parent(child);
-
 		if (child instanceof Moobile.Button) {
 			child.addEvent('tap', this.bound('onButtonTap'));
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didRemoveChild: function(child) {
-
 		this.parent(child);
-
 		if (child instanceof Moobile.Button) {
 			child.removeEvent('tap', this.bound('onButtonTap'));
 		}
 	},
 
+	/**
+	 * @protected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onButtonTap: function(e, sender) {
 		this.setSelectedButton(sender);
 	}
