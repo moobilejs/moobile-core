@@ -136,7 +136,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 			this.addChild(image);
 		} else {
 			this.replaceChild(this.image, image, true);
-			this.image.destroy();
 			this.image = image;
 		}
 
@@ -185,7 +184,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 			this.addChild(label);
 		} else {
 			this.replaceChild(this.label, label, true);
-			this.label.destroy();
 			this.label = label;
 		}
 
@@ -236,7 +234,6 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 			this.addChild(detail);
 		} else {
 			this.replaceChild(this.detail, detail, true);
-			this.detail.destroy();
 			this.detail = detail;
 		}
 

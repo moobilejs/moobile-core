@@ -761,7 +761,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 			this._modalViewController.destroy();
 			this._modalViewController = null;
 		}
-
+		console.log('TEST');
 		this.view.destroy();
 		this.view = null;
 

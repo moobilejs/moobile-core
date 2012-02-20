@@ -104,7 +104,6 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 			this.addChild(label);
 		} else {
 			this.replaceChild(this.label, label, true);
-			this.label.destroy();
 			this.label = label;
 		}
 

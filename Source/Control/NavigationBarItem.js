@@ -106,7 +106,6 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 			this.addChild(title, null, this.element.getElement('.bar-title'));
 		} else {
 			this.replaceChild(this.title, title, true);
-			this.title.destroy();
 			this.title = title;
 		}
 

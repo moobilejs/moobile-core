@@ -366,7 +366,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	replaceChild: function(child, replacement, destroy) {
-		return this.addChildBefore(child, replacement).removeChild(child, destroy);
+		return this.addChildBefore(replacement, child).removeChild(child, destroy);
 	},
 
 	/**

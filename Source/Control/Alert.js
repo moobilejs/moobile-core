@@ -185,7 +185,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			this.addChild(title, 'top', this.dialogHeader);
 		} else {
 			this.replaceChild(this.title, title, true);
-			this.title.destroy();
 			this.title = title;
 		}
 
@@ -236,7 +235,6 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 			this.addChild(message, 'top', this.dialogContent);
 		} else {
 			this.replaceChild(this.message, message, true);
-			this.message.destroy();
 			this.message = message;
 		}
 
