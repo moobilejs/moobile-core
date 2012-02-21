@@ -207,7 +207,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 Class.refactor(Moobile.Component, {
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

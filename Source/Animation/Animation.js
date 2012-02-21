@@ -275,7 +275,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -292,7 +292,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -352,7 +352,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

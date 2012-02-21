@@ -21,7 +21,7 @@ Moobile.Control = new Class({
 	Extends: Moobile.Component,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -38,7 +38,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -59,7 +59,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

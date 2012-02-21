@@ -29,42 +29,42 @@ Moobile.Component = new Class({
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_name: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_window: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_parent: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_children: [],
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_ready: false,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -125,7 +125,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -252,7 +252,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

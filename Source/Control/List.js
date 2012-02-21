@@ -25,21 +25,21 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_selectable: true,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	selectedItem: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -290,7 +290,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -299,7 +299,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -308,7 +308,7 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

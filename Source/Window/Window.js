@@ -94,7 +94,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -103,7 +103,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

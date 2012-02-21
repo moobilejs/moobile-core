@@ -39,49 +39,49 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_name: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_title: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_image: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_viewReady: false,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_viewTransition: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_parent: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -207,7 +207,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -372,7 +372,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -381,7 +381,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -419,7 +419,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -428,7 +428,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

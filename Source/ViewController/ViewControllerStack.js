@@ -29,7 +29,7 @@ Moobile.ViewControllerStack = new Class({
 	Extends: Moobile.ViewController,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -90,7 +90,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -107,7 +107,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -192,7 +192,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -205,7 +205,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -276,7 +276,7 @@ Moobile.ViewControllerStack = new Class({
 Class.refactor(Moobile.ViewController, {
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

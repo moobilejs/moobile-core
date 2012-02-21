@@ -42,14 +42,14 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	Extends: Moobile.Control,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_selectedButton: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -249,7 +249,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	},
 
 	/**
-	 * @protected
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
