@@ -121,11 +121,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 
 		this.loadView();
 		if (this.view) {
-			this.view.addEvent('ready', this.bound('onViewReady'));
+			this.view.addEvent('ready', this.bound('_onViewReady'));
 			this.viewDidLoad();
 		}
 
-		window.addEvent('rotate', this.bound('onWindowRotate'));
+		window.addEvent('rotate', this.bound('_onWindowRotate'));
 
 		return this;
 	},
@@ -237,9 +237,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @since  0.1
 	 */
 	getChildViewController: function(name) {
-		return this._children.find(function(viewController) {
-			return viewController.getName() === name;
-		});
+		return this._children.find(function(viewController) { return viewController.getName() === name; });
 	},
 
 	/**
@@ -313,7 +311,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	removeChildViewControllers: function(destroy) {
 
-		var children = Array.clone(this._children);
+		var children = [];
+		for (var i = 0; i < this._children.length; i++) {
+			children[i] = this._children[i];
+		}
+
 		for (var i = children.length - 1; i >= 0; i--) {
 			children[i].removeFromParentViewController(destroy);
 		}
@@ -354,8 +356,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		parentView.addChild(viewToShow);
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
-		viewTransition.addEvent('start:once', this.bound('onPresentTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('onPresentTransitionCompleted'));
+		viewTransition.addEvent('start:once', this.bound('_onPresentTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPresentTransitionCompleted'));
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
@@ -374,7 +376,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onPresentTransitionStart: function() {
+	_onPresentTransitionStart: function() {
 		this._modalViewController.viewWillEnter();
 	},
 
@@ -383,7 +385,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onPresentTransitionCompleted: function() {
+	_onPresentTransitionCompleted: function() {
 		this._modalViewController.viewDidEnter();
 		this.didPresentModalViewController()
 	},
@@ -405,8 +407,8 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		var parentView = this.view.getParentView();
 
 		var viewTransition = this._modalViewController.viewTransition;
-		viewTransition.addEvent('start:once', this.bound('onDismissTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('onDismissTransitionCompleted'));
+		viewTransition.addEvent('start:once', this.bound('_onDismissTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onDismissTransitionCompleted'));
 		viewTransition.leave(
 			viewToShow,
 			viewToHide,
@@ -421,7 +423,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onDismissTransitionStart: function() {
+	_onDismissTransitionStart: function() {
 		this._modalViewController.viewWillLeave();
 	},
 
@@ -430,7 +432,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onDismissTransitionCompleted: function() {
+	_onDismissTransitionCompleted: function() {
 		this._modalViewController.viewDidLeave();
 		this._modalViewController.destroy();
 		this._modalViewController = null;
@@ -752,7 +754,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	 */
 	destroy: function() {
 
-		window.removeEvent('rotate', this.bound('onWindowRotate'));
+		window.removeEvent('rotate', this.bound('_onWindowRotate'));
 
 		this.removeFromParentViewController();
 		this.removeChildViewControllers(true);
@@ -761,7 +763,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 			this._modalViewController.destroy();
 			this._modalViewController = null;
 		}
-		console.log('TEST');
+
 		this.view.destroy();
 		this.view = null;
 
@@ -780,11 +782,11 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 		this._viewTransition = null;
 	},
 
-	onWindowRotate: function(e) {
+	_onWindowRotate: function(e) {
 		this.didRotateToOrientation(e.orientationName);
 	},
 
-	onViewReady: function() {
+	_onViewReady: function() {
 		if (this._viewReady === false) {
 			this._viewReady = true;
 			this.viewDidBecomeReady();
