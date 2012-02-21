@@ -88,16 +88,16 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 			fadeScrollbar: true,
 			checkDOMChanges: true,
 			snap: false,
-			onScrollMove: this.bound('onScrollMove'),
-			onScrollEnd: this.bound('onScrollEnd')
+			onScrollMove: this.bound('_onScrollMove'),
+			onScrollEnd: this.bound('_onScrollEnd')
 		};
 
 		this.scroller = new iScroll(this.wrapper, options);
 
-		this.wrapper.addEvent('mousedown', this.bound('onMouseDown'));
-		this.wrapper.addEvent('mouseup', this.bound('onMouseUp'));
+		this.wrapper.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.wrapper.addEvent('touchend', this.bound('_onTouchEnd'));
 
-		window.addEvent('orientationchange', this.bound('onOrientationChange'));
+		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
 		return this;
 	},
@@ -212,23 +212,23 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 		return this.content.getScrollSize();
 	},
 
-	onMouseDown: function() {
+	_onTouchStart: function() {
 		this.fireEvent('dragstart');
 	},
 
-	onMouseUp: function() {
+	_onTouchEnd: function() {
 		this.fireEvent('dragend');
 	},
 
-	onScrollMove: function() {
+	_onScrollMove: function() {
 		this.fireEvent('scroll');
 	},
 
-	onScrollEnd: function() {
+	_onScrollEnd: function() {
 		this.fireEvent('scroll');
 	},
 
-	onOrientationChange: function() {
+	_onOrientationChange: function() {
 		this.refresh();
 	}
 

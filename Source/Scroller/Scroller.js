@@ -164,9 +164,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		};
 
 		this.engine = new engine(content, options);
-		this.engine.addEvent('dragstart', this.bound('onDragStart'));
-		this.engine.addEvent('dragend', this.bound('onDragEnd'));
-		this.engine.addEvent('scroll', this.bound('onScroll'));
+		this.engine.addEvent('dragstart', this.bound('_onDragStart'));
+		this.engine.addEvent('dragend', this.bound('_onDragEnd'));
+		this.engine.addEvent('scroll', this.bound('_onScroll'));
 
 		this.wrapper = this.getWrapper();
 		this.content = this.getContent();
@@ -417,14 +417,14 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		return this.engine.getWrapper();
 	},
 
-	onDragStart: function() {
+	_onDragStart: function() {
 		this.startScroll = this.getScroll();
 		this.startPage = this.getPage();
 		this.startTime = Date.now();
 		this.fireEvent('dragstart');
 	},
 
-	onDragEnd: function() {
+	_onDragEnd: function() {
 
 		if (this.options.snapToPage)
 			this.snap();
@@ -436,7 +436,7 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		this.fireEvent('dragend');
 	},
 
-	onScroll: function() {
+	_onScroll: function() {
 		this.page.x = Math.floor(this.getScroll().x / this.getSize().x);
 		this.page.y = Math.floor(this.getScroll().y / this.getSize().y);
 		this.fireEvent('scroll');

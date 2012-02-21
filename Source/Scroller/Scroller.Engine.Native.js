@@ -64,11 +64,11 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 
 		this.scroller = new Fx.Scroll(this.wrapper);
 
-		this.wrapper.addEvent('touchstart', this.bound('onTouchStart'));
-		this.wrapper.addEvent('touchend', this.bound('onTouchEnd'));
-		this.wrapper.addEvent('scroll', this.bound('onScroll'));
+		this.wrapper.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.wrapper.addEvent('touchend', this.bound('_onTouchEnd'));
+		this.wrapper.addEvent('scroll', this.bound('_onScroll'));
 
-		window.addEvent('rotate', this.bound('onWindowRotate'));
+		window.addEvent('rotate', this.bound('_onWindowRotate'));
 
 		return this;
 	},
@@ -85,7 +85,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	 * @since  0.1
 	 */
 	destroy: function() {
-		window.removeEvent('rotate', this.bound('onWindowRotate'));
+		window.removeEvent('rotate', this.bound('_onWindowRotate'));
 		this.scroller = null;
 		this.parent();
 	},
@@ -201,7 +201,7 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 		return this.content.getScrollSize();
 	},
 
-	onTouchStart: function() {
+	_onTouchStart: function() {
 
 		var scroll = this.wrapper.getScroll();
 		if (scroll.x === 0) {
@@ -225,15 +225,15 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 		this.fireEvent('dragstart');
 	},
 
-	onTouchEnd: function() {
+	_onTouchEnd: function() {
 		this.fireEvent('dragend');
 	},
 
-	onScroll: function() {
+	_onScroll: function() {
 		this.fireEvent('scroll');
 	},
 
-	onWindowRotate: function(e) {
+	_onWindowRotate: function(e) {
 		this.refresh();
 	}
 

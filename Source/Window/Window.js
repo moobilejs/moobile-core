@@ -48,8 +48,8 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	willBuild: function() {
 		this.parent();
 		this.element.set('class', 'window');
-		window.addEvent('load', this.bound('onWindowLoad'));
-		window.addEvent('rotate', this.bound('onWindowRotate'));
+		window.addEvent('load', this.bound('_onWindowLoad'));
+		window.addEvent('rotate', this.bound('_onWindowRotate'));
 	},
 
 	/**
@@ -68,8 +68,8 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	 * @since  0.1
 	 */
 	destroy: function() {
-		window.removeEvent('load', this.bound('onWindowLoad'));
-		window.removeEvent('rotate', this.bound('onWindowRotate'));
+		window.removeEvent('load', this.bound('_onWindowLoad'));
+		window.removeEvent('rotate', this.bound('_onWindowRotate'));
 		this.parent();
 	},
 
@@ -98,7 +98,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onWindowLoad: function(e) {
+	_onWindowLoad: function(e) {
 		(function() { window.scrollTo(0, 1) }).delay(250);
 	},
 
@@ -107,7 +107,7 @@ Moobile.Window = new Class( /** @lends Window.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onWindowRotate: function(e) {
+	_onWindowRotate: function(e) {
 		(function() { window.scrollTo(0, 1) }).delay(250);
 	}
 
