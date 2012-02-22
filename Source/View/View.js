@@ -130,7 +130,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	addChild: function(component, where) {
 		if (where === 'header') return this.parent(component, 'top');
 		if (where === 'footer') return this.parent(component, 'bottom');
-		return this.addChildInto(component, this.content, where);
+		return this.addChildInside(component, this.content, where);
 	},
 
 	/**

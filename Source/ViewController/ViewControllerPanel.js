@@ -65,7 +65,7 @@ Moobile.ViewControllerPanel = new Class({
 
 		var view = mainViewController.getView();
 		if (view) {
-			this.view.addChildInto(view, this.view.getMainPanel());
+			this.view.addChildInside(view, this.view.getMainPanel());
 		}
 
 		viewController.setViewControllerPanel(this);
@@ -100,7 +100,7 @@ Moobile.ViewControllerPanel = new Class({
 
 		var view = sideViewController.getView();
 		if (view) {
-			this.view.addChildInto(view, this.view.getSidePanel())
+			this.view.addChildInside(view, this.view.getSidePanel())
 		}
 
 		viewController.setViewControllerPanel(this);

@@ -182,11 +182,11 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChildInto
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChildInside
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildInto: function(component, context, where) {
+	addChildInside: function(component, context, where) {
 
 		var elementHandler = function() {
 			var element = component.getElement();

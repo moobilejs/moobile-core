@@ -69,7 +69,7 @@ Moobile.Popover = new Class({
 	addChild: function(component, where) {
 		if (where === 'header') return this.parent(child, 'top');
 		if (where === 'footer') return this.parent(child, 'bottom');
-		return this.addChildInto(component, this.content, where);
+		return this.addChildInside(component, this.content, where);
 	},
 
 	position: function(x, y) {
