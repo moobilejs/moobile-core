@@ -71,6 +71,19 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		}
 	},
 
+	didBuild: function() {
+
+		this.parent();
+
+		var classes = this.element.get('class');
+		if (classes) {
+			classes.split(' ').each(function(klass) {
+				klass = klass.trim();
+				if (klass) this.content.addClass(klass + '-content');
+			}, this);
+		}
+	},
+
 	/**
 	 * @overrides
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
