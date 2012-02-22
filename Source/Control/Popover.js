@@ -27,10 +27,6 @@ Moobile.Popover = new Class({
 
 	visible: false,
 
-	showAnimation: null,
-
-	hideAnimation: null,
-
 	options: {
 		autoHide: true,
 		autoHideAnimated: true,
@@ -54,34 +50,42 @@ Moobile.Popover = new Class({
 		this.animations.setAnimation('hide', new Moobile.Animation().setAnimationClass('hide-animated'));
 		this.animations.setElement(this);
 
-		this.animations.addEvent('start', this.bound('onAnimationStart'));
-		this.animations.addEvent('end', this.bound('onAnimationEnd'));
+		this.animations.addEvent('start', this.bound('_onAnimationSetStart'));
+		this.animations.addEvent('end', this.bound('_onAnimationSetEnd'));
+
+		this.hide();
 	},
 
-	addChild: function(child, where, context) {
+	didBecomeReady: function() {
+		this.parent();
+		if (this.options.autoHide) this.getWindow().addEvent('tap', this.bound('_onTapOut'));
+	},
 
-		if (this.hasChild(child))
-			return false;
+	destroy: function() {
+		if (this.options.autoHide) this.getWindow().removeEvent('tap', this.bound('_onTapOut'));
+		this.parent();
+	},
 
-		if (where === 'header') return this.parent(child, 'top', context);
-		if (where === 'footer') return this.parent(child, 'bottom', context);
-
-		if (context === undefined)
-			context = this.content;
-
-		this.parent(child, where, context);
+	addChild: function(component, where) {
+		if (where === 'header') return this.parent(child, 'top');
+		if (where === 'footer') return this.parent(child, 'bottom');
+		return this.addChildInto(component, this.content, where);
 	},
 
 	position: function(x, y) {
+
+		if (!this.isReady()) throw new Error('Popover is not ready therefore cannot be positionned');
 
 		this.element.show();
 		var size = this.element.getSize();
 		this.element.hide();
 
-		if (x instanceof Element || x instanceof Moobile.EventDispatcher) {
+		if (x instanceof Element || x instanceof Moobile.Component) {
+
+			var relative = y instanceof Element || y instanceof Moobile.Component ? y : null;
 
 			var s = x.getSize();
-			var p = x.getPosition();
+			var p = x.getPosition(relative);
 
 			switch (this.options.direction) {
 				case 'top':
@@ -153,24 +157,8 @@ Moobile.Popover = new Class({
 		return this;
 	},
 
-	didShow: function() {
-		this.parent();
-		this.visible = true;
-		if (this.options.autoHide) {
-			var win = this.getWindow();
-			if (win) {
-				win.addEvent('tap', this.bound('onTapOut'));
-			}
-		}
-	},
-
-	didHide: function() {
-		this.parent();
-		this.visible = false;
-	},
-
-	onTapOut: function() {
-		if (this.options.autoHide) {
+	_onTapOut: function(e, sender) {
+		if (this.options.autoHide && this.isVisible() && !this.element.contains(e.target)) {
 			if (this.options.autoHideAnimated) {
 				this.hideAnimated();
 			} else {
@@ -179,7 +167,7 @@ Moobile.Popover = new Class({
 		}
 	},
 
-	onAnimationStart: function(animation) {
+	_onAnimationSetStart: function(animation) {
 		switch (animation.getName()) {
 			case 'show':
 				this.willShow();
@@ -191,16 +179,18 @@ Moobile.Popover = new Class({
 		}
 	},
 
-	onAnimationEnd: function(animation) {
+	_onAnimationSetEnd: function(animation) {
 		switch (animation.getName()) {
 			case 'show':
-				this.element.addClass('visible');
+				this._visible = true;
+				this.element.removeClass('hidden');
 				this.didShow();
 				this.fireEvent('show');
 				break;
 			case 'hide':
+				this._visible = false;
 				this.element.hide();
-				this.element.removeClass('visible');
+				this.element.addClass('hidden');
 				this.didHide();
 				this.fireEvent('hide');
 				break;
