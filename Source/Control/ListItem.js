@@ -128,7 +128,7 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		if (typeof image === 'string') {
 			var source = image;
 			image = new Moobile.Image();
-			image.setSource(text);
+			image.setSource(source);
 		}
 
 		if (this.image === null) {
