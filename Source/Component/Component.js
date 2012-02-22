@@ -61,6 +61,13 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
+	_visible: true,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_ready: false,
 
 	/**
@@ -673,13 +680,16 @@ Moobile.Component = new Class({
 	 */
 	show: function() {
 
+		if (this._visible)
+			return this;
+
 		this.willShow();
+		this._visible = true;
 		this.element.show();
+		this.element.removeClass('hidden');
 		this.didShow();
 
-		this.fireEvent('show');
-
-		return this;
+		return this.fireEvent('show');
 	},
 
 	/**
@@ -689,13 +699,25 @@ Moobile.Component = new Class({
 	 */
 	hide: function() {
 
+		if (this._visible === false)
+			return this;
+
 		this.willHide();
+		this._visible = false;
 		this.element.hide();
+		this.element.addClass('hidden');
 		this.didHide();
 
-		this.fireEvent('hide');
+		return this.fireEvent('hide');
+	},
 
-		return this;
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#isVisible
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	isVisible: function() {
+		return this._visible;
 	},
 
 	/**
