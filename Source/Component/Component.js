@@ -358,8 +358,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasChild: function(child) {
-		return this._children.contains(child);
+	hasChild: function(component) {
+		return this._children.contains(component);
 	},
 
 	/**
@@ -376,8 +376,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	replaceChild: function(child, replacement, destroy) {
-		return this.addChildBefore(replacement, child).removeChild(child, destroy);
+	replaceChild: function(component, replacement, destroy) {
+		return this.addChildBefore(replacement, component).removeChild(component, destroy);
 	},
 
 	/**
@@ -385,28 +385,28 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChild: function(child, destroy) {
+	removeChild: function(component, destroy) {
 
-		if (!this.hasChild(child))
+		if (!this.hasChild(component))
 			return this;
 
-		this.willRemoveChild(child);
-		child.setParent(null);
-		child.setWindow(null);
-		child.setReady(false);
+		this.willRemoveChild(component);
+		component.setParent(null);
+		component.setWindow(null);
+		component.setReady(false);
 
-		var element = child.getElement();
+		var element = component.getElement();
 		if (element) {
 			element.dispose();
 		}
 
-		this._children.erase(child);
+		this._children.erase(component);
 
-		this.didRemoveChild(child);
+		this.didRemoveChild(component);
 
 		if (destroy) {
-			child.destroy();
-			child = null;
+			component.destroy();
+			component = null;
 		}
 
 		return this;
