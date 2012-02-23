@@ -165,15 +165,16 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		if (this.content === content)
 			return this;
 
-		if (this.content === null) {
-			this.element.grab(content);
-			this.content = content;
-		} else {
-			content.replaces(this.content);
-			this.content.destroy();
-			this.content = content;
+		if (this.element.contains(content) === false) {
+			if (this.content) {
+				this.content.grab(content, 'after');
+				this.content.destroy();
+			} else {
+				this.element.grab(content);
+			}
 		}
 
+		this.content = content;
 		this.content.addClass('view-content');
 
 		return this;
