@@ -16,6 +16,11 @@ provides:
 ...
 */
 
+/**
+ * @see    http://moobile.net/api/0.1/Control/Control
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.Control = new Class({
 
 	Extends: Moobile.Component,
