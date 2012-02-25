@@ -19,36 +19,27 @@ provides:
 ...
 */
 
- /**
- * @name  Button
- * @class Provides a button control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+/**
+ * @see    http://moobile.net/api/0.1/Control/Button
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Button = new Class(/** @lends Button.prototype */ {
 
 	Extends: Moobile.Control,
 
 	/**
-	 * This button's label.
-	 * @type   Text
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	label: null,
+	_label: null,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -63,34 +54,30 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 			label.setRole('label');
 		}
 
-		this.addEvent('tapstart', this.bound('onTapStart'));
-		this.addEvent('tapend', this.bound('onTapEnd'));
+		this.addEvent('tapstart', this.bound('_onTapStart'));
+		this.addEvent('tapend', this.bound('_onTapEnd'));
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.removeEvent('tapstart', this.bound('onTapStart'));
-		this.removeEvent('tapend', this.bound('onTapEnd'));
+		this.removeEvent('tapstart', this.bound('_onTapStart'));
+		this.removeEvent('tapend', this.bound('_onTapEnd'));
 		this.label = null;
 		this.parent();
 	},
 
 	/**
-	 * Sets the label.
-	 *
-	 * This method will set the label using either a string or an instance of a
-	 * `Label`. When provided with a string, this methods creates a `Label`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} label The label as a string or a `Label` instance.
-	 *
-	 * @return {Button} This button.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Button#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setLabel: function(label) {
 
-		if (this.label === label)
+		if (this._label === label)
 			return this;
 
 		if (typeof label === 'string') {
@@ -99,12 +86,12 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 			label.setText(text);
 		}
 
-		if (this.label === null) {
-			this.label = label;
+		if (this._label === null) {
+			this._label = label;
 			this.addChild(label);
 		} else {
-			this.replaceChild(this.label, label, true);
-			this.label = label;
+			this.replaceChild(this._label, label, true);
+			this._label = label;
 		}
 
 		label.addClass('label');
@@ -113,22 +100,29 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 	},
 
 	/**
-	 * Returns the label.
-	 *
-	 * @return {Text} The label.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Button#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getLabel: function() {
-		return this.label;
+		return this._label;
 	},
 
-	onTapStart: function(e) {
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onTapStart: function(e) {
 		this.setHighlighted(true);
 	},
 
-	onTapEnd: function(e) {
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onTapEnd: function(e) {
 		this.setHighlighted(false);
 	}
 
@@ -143,7 +137,7 @@ Moobile.Component.defineRole('button', null, function(element) {
 	this.addChild(instance);
 });
 
-Moobile.Component.defineRole('label', Moobile.Button, function(element) {
-	var instance = Moobile.Component.create(Moobile.Text, element, 'data-label');
+Moobile.Component.defineRole('_label', Moobile.Button, function(element) {
+	var instance = Moobile.Component.create(Moobile.Text, element, 'data-_label');
 	this.setLabel(instance);
 });
