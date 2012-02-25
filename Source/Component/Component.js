@@ -188,6 +188,8 @@ Moobile.Component = new Class({
 	 */
 	addChildInside: function(component, context, where) {
 
+		component.removeFromParent();
+
 		var elementHandler = function() {
 			var element = component.getElement();
 			if (element) {
@@ -208,6 +210,8 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	addChildAfter: function(component, after) {
+
+		component.removeFromParent();
 
 		var index = this._children.length;
 		if (after instanceof Moobile.Component) {
@@ -236,6 +240,8 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	addChildBefore: function(component, before) {
+
+		component.removeFromParent();
 
 		var index = this._children.length;
 		if (before instanceof Moobile.Component) {
