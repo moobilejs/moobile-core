@@ -20,30 +20,19 @@ provides:
 */
 
 /**
- * @name  BarButtonGroup
- * @class Provides a bar button group control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * Note: The `button-group` role automatically creates a bar button if placed
- * inside a bar or bar item.
- *
- * @extends ButtonGroup
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/BarButtonGroup
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.BarButtonGroup = new Class( /** @lends BarButtonGroup.prototype */ {
+Moobile.BarButtonGroup = new Class({
 
 	Extends: Moobile.ButtonGroup,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('bar-button-group');
@@ -56,6 +45,5 @@ Moobile.BarButtonGroup = new Class( /** @lends BarButtonGroup.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('bar-button-group', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.BarButtonGroup, element, 'data-bar-button-group');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.BarButtonGroup, element, 'data-bar-button-group'));
 });

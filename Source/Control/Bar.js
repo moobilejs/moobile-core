@@ -20,35 +20,26 @@ provides:
 */
 
 /**
- * @name  Bar
- * @class Provides a bar control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/Bar
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 
 	Extends: Moobile.Control,
 
 	/**
-	 * The bar item.
-	 * @type   BarItem
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	item: null,
+	_item: null,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -64,53 +55,44 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.item = null;
+		this._item = null;
 		this.parent();
 	},
 
 	/**
-	 * Sets the bar item.
-	 *
-	 * This method will set the object that contains buttons, button groupes,
-	 * images and so on in a bar control.
-	 *
-	 * @param {BarItem} item The bar item.
-	 *
-	 * @return {Bar} This bar.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Bar#setItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setItem: function(item) {
 
-		if (this.item === item)
+		if (this._item === item)
 			return this;
 
-		if (this.item === null) {
-			this.item = item;
+		if (this._item === null) {
+			this._item = item;
 			this.addChild(item);
 		} else {
-			this.replaceChild(this.item, item, true);
-			this.item = item;
+			this.replaceChild(this._item, item, true);
+			this._item = item;
 		}
 
 		return this;
 	},
 
 	/**
-	 * Returns the bar item.
-	 *
-	 * This method will return the object that contains buttons, button groupes,
-	 * images and so on in a bar control.
-	 *
-	 * @return {BarItem} The bar item.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Bar#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getItem: function() {
-		return this.item;
+		return this._item;
 	}
 
 });
@@ -120,33 +102,14 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('bar', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.Bar, element, 'data-bar');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineStyle('translucent', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-translucent'); },
-	detach: function(element) { element.removeClass('style-translucent'); }
-});
-
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
-});
-
-Moobile.Component.defineStyle('dark-translucent', Moobile.Bar, {
-	attach: function(element) {
-		element
-			.addClass('style-dark')
-			.addClass('style-dark-translucent');
-	},
-	detach: function(element) {
-		element
-			.removeClass('style-dark')
-			.removeClass('style-dark-translucent');
-	}
 });

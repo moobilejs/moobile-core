@@ -20,27 +20,19 @@ provides:
 */
 
  /**
- * @name  BarItem
- * @class Provides a bar item control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/BarItem
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.BarItem = new Class( /** @lends BarItem.prototype */ {
 
 	Extends: Moobile.Control,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('bar-item');
@@ -53,6 +45,5 @@ Moobile.BarItem = new Class( /** @lends BarItem.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('item', Moobile.Bar, function(element) {
-	var instance = Moobile.Component.create(Moobile.BarItem, element, 'data-item');
-	this.setItem(instance);
+	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
 });

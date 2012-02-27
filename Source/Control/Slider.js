@@ -31,64 +31,46 @@ Class.refactor(Slider, {
 });
 
 /**
- * @name  Slider
- * @class Provides a slider control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/Slider
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Slider = new Class({
 
 	Extends: Moobile.Control,
 
 	/**
-	 * The value.
-	 * @type   Number
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	value: 0,
+	_value: 0,
 
 	/**
-	 * The engine.
-	 * @type   Slider
+	 * @see    http://moobile.net/api/0.1/Control/Slider#slider
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	slider: null,
 
 	/**
-	 * The track.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Control/Slider#track
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	track: null,
 
 	/**
-	 * The thumb that moves inside the track.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Control/Slider#thumb
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	thumb: null,
 
 	/**
-	 * The class options.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Control/Slider#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	options: {
 		snap: false,
@@ -100,6 +82,11 @@ Moobile.Slider = new Class({
 		value: 0
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -113,6 +100,11 @@ Moobile.Slider = new Class({
 		this.element.grab(this.track);
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didBecomeReady: function() {
 
 		this.parent();
@@ -125,13 +117,18 @@ Moobile.Slider = new Class({
 		};
 
 		this.slider = new Slider(this.track, this.thumb, options);
-		this.slider.addEvent('move', this.bound('onMove'));
-		this.slider.addEvent('tick', this.bound('onTick'));
-		this.slider.addEvent('change', this.bound('onChange'));
+		this.slider.addEvent('move', this.bound('_onMove'));
+		this.slider.addEvent('tick', this.bound('_onTick'));
+		this.slider.addEvent('change', this.bound('_onChange'));
 
 		this.setValue(this.options.value);
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
 		this.thumb = null;
 		this.track = null;
@@ -140,54 +137,63 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * Sets the value.
-	 *
-	 * This method will set the slider value and move it's thumb element to the
-	 * proper position.
-	 *
-	 * @param {Integer} value The value.
-	 *
-	 * @return {Slider} This slider.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setValue: function(value) {
-		this.slider.set(this.value = value);
+		this.slider.set(this._value = value);
 		return this;
 	},
 
 	/**
-	 * Returns the value.
-	 *
-	 * @return {Integer}
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getValue: function() {
-		return this.value;
+		return this._value;
 	},
 
-	updateTrack: function(position) {
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_updateTrack: function(position) {
 		this.track.setStyle('background-position',
 			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
 		);
 	},
 
-	onMove: function(position) {
-		this.updateTrack(position);
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onMove: function(position) {
+		this._updateTrack(position);
 		this.fireEvent('move', position);
 	},
 
-	onTick: function(position) {
-		this.updateTrack(position);
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onTick: function(position) {
+		this._updateTrack(position);
 		this.fireEvent('tick', position);
 	},
 
-	onChange: function(step) {
-		this.value = step;
-		this.updateTrack(this.slider.toPosition(step));
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onChange: function(step) {
+		this._value = step;
+		this._updateTrack(this.slider.toPosition(step));
 		this.fireEvent('change', step);
 	}
 
@@ -198,6 +204,5 @@ Moobile.Slider = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('slider', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.Slider, element, 'data-slider');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.Slider, element, 'data-slider'));
 });

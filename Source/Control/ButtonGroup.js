@@ -20,24 +20,11 @@ provides:
 */
 
 /**
- * @name  ButtonGroup
- * @class Provides a button group control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/ButtonGroup
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
+Moobile.ButtonGroup = new Class({
 
 	Extends: Moobile.Control,
 
@@ -61,7 +48,6 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @since  0.1
 	 */
 	options: {
-		styleName: 'horizontal',
 		deselectable: false
 	},
 
@@ -167,7 +153,7 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @since  0.1
 	 */
 	addButton: function(button, where) {
-		return this.addChild(button, where, context);
+		return this.addChild(button, where);
 	},
 
 	/**
@@ -211,8 +197,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeButton: function(button) {
-		return this.removeChild(button);
+	removeButton: function(button, destroy) {
+		return this.removeChild(button, destroy);
 	},
 
 	/**
@@ -220,8 +206,8 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeAllButtons: function() {
-		return this.removeChildrenOfType(Moobile.Button);
+	removeAllButtons: function(destroy) {
+		return this.removeChildrenOfType(Moobile.Button, destroy);
 	},
 
 	/**
@@ -264,18 +250,12 @@ Moobile.ButtonGroup = new Class( /** @lends ButtonGroup.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('button-group', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
-
-Moobile.Component.defineStyle('horizontal', Moobile.ButtonGroup, {
-	attach: function(element) { element.addClass('style-horizontal'); },
-	detach: function(element) { element.removeClass('style-horizontal'); }
-});
 
 Moobile.Component.defineStyle('vertical', Moobile.ButtonGroup, {
 	attach: function(element) { element.addClass('style-vertical'); },
