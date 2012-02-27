@@ -42,33 +42,33 @@
 
 /* Grouped */
 
-.bar-button-group.style-horizontal .bar-button {
+.bar-button-group .bar-button {
 	-webkit-border-image: url(../images/bar-button-ipad.png) 60 1 1910 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button:first-child {
+.bar-button-group .bar-button:first-child {
 	-webkit-border-image: url(../images/bar-button-ipad.png) 90 1 1880 5 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button:last-child {
+.bar-button-group .bar-button:last-child {
 	-webkit-border-image: url(../images/bar-button-ipad.png) 120 5 1850 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.bar-button-down,
-.bar-button-group.style-horizontal .bar-button.bar-button-selected,
-.bar-button-group.style-horizontal .bar-button.bar-button-highlighted {
+.bar-button-group .bar-button.bar-button-down,
+.bar-button-group .bar-button.bar-button-selected,
+.bar-button-group .bar-button.bar-button-highlighted {
 	-webkit-border-image: url(../images/bar-button-ipad.png) 150 1 1820 1 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.bar-button-down:first-child,
-.bar-button-group.style-horizontal .bar-button.bar-button-selected:first-child,
-.bar-button-group.style-horizontal .bar-button.bar-button-highlighted:first-child {
+.bar-button-group .bar-button.bar-button-down:first-child,
+.bar-button-group .bar-button.bar-button-selected:first-child,
+.bar-button-group .bar-button.bar-button-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button-ipad.png) 180 1 1790 5 stretch stretch;
 }
 
-.bar-button-group.style-horizontal .bar-button.bar-button-down:last-child,
-.bar-button-group.style-horizontal .bar-button.bar-button-selected:last-child,
-.bar-button-group.style-horizontal .bar-button.bar-button-highlighted:last-child {
+.bar-button-group .bar-button.bar-button-down:last-child,
+.bar-button-group .bar-button.bar-button-selected:last-child,
+.bar-button-group .bar-button.bar-button-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button-ipad.png) 210 5 1760 1 stretch stretch;
 }
 
@@ -81,7 +81,7 @@
 .bar-button.style-back.bar-button-down,
 .bar-button.style-back.bar-button-selected,
 .bar-button.style-back.bar-button-highlighted {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 270 5 1700 13 stretch stretch;	
+	-webkit-border-image: url(../images/bar-button-ipad.png) 270 5 1700 13 stretch stretch;
 }
 
 /* Forward */
@@ -93,7 +93,7 @@
 .bar-button.style-forward.bar-button-down,
 .bar-button.style-forward.bar-button-selected,
 .bar-button.style-forward.bar-button-highlighted {
-	-webkit-border-image: url(../images/bar-button-ipad.png) 330 13 1640 5 stretch stretch;	
+	-webkit-border-image: url(../images/bar-button-ipad.png) 330 13 1640 5 stretch stretch;
 }
 
 /* List
