@@ -21,35 +21,26 @@ provides:
 */
 
 /**
- * @name  NavigationBarItem
- * @class Provides a navigation bar item control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends BarItem
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/NavigationBarItem
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */ {
 
 	Extends: Moobile.BarItem,
 
 	/**
-	 * The title.
-	 * @type   Text
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	title: null,
+	_title: null,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -71,28 +62,24 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.title = null;
+		this._title = null;
 		this.parent();
 	},
 
 	/**
-	 * Sets the title.
-	 *
-	 * This method will set the title using either a string or an instance of a
-	 * `Label`. When provided with a string, this methods creates a `Label`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} title The title as a string or a `Label` instance.
-	 *
-	 * @return {NavigationBarItem} This navigation bar item.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setTitle: function(title) {
 
-		if (this.title === title)
+		if (this._title === title)
 			return this;
 
 		if (typeof title === 'string') {
@@ -101,87 +88,78 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 			title.setText(text);
 		}
 
-		if (this.title === null) {
-			this.title = title;
-			this.addChild(title, null, this.element.getElement('.bar-title'));
+		if (this._title === null) {
+			this._title = title;
+			this.addChildInside(title, null, '.bar-title');
 		} else {
-			this.replaceChild(this.title, title, true);
-			this.title = title;
+			this.replaceChild(this._title, title, true);
+			this._title = title;
 		}
 
 		return this;
 	},
 
 	/**
-	 * Returns the title.
-	 *
-	 * @return {NavigationBarItemTitle} The title.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getTitle: function() {
-		return this.title;
+		return this._title;
 	},
 
 	/**
-	 * Adds a button at the left of the title.
-	 *
-	 * @see EventDispatcher#addChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addLeftBarButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	addLeftButton: function(button) {
-		return this.addChild(button, 'top');
+	addLeftBarButton: function(button) {
+		return this.addChildBefore(button, this._title);
 	},
 
 	/**
-	 * Adds a button at the right of the title.
-	 *
-	 * @see EventDispatcher#addChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addRightBarButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	addRightButton: function(button) {
-		return this.addChild(button, 'bottom');
+	addRightBarButton: function(button) {
+		return this.addChildAfter(button, this._title);
 	},
 
 	/**
-	 * Returns a bar button.
-	 *
-	 * @see EventDispatcher#getChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getBarButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	getButton: function(name) {
-		return this.getChild(name);
+	getBarButton: function(name) {
+		return this.getChildOfType(Moobile.BarButton, name);
 	},
 
 	/**
-	 * Removes a bar button.
-	 *
-	 * @see EventDispatcher#removeChild
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getBarButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	removeButton: function(item) {
-		return this.removeChild(item);
+	getBarButtonAt: function(index) {
+		return this.getChildOfTypeAt(Moobile.BarButton, index);
 	},
 
 	/**
-	 * Removes all bar buttons.
-	 *
-	 * @see EventDispatcher#removeChildren
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeBarButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	removeAllButtons: function() {
-		return this.removeChildren(Moobile.Button);
+	removeBarButton: function(button, destroy) {
+		return this.removeChild(button, destroy);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeAllBarButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	removeAllBarButtons: function(destroy) {
+		return this.removeChildren(Moobile.Button, destroy);
 	}
 
 });
