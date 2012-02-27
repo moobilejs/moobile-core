@@ -115,7 +115,7 @@ Moobile.Component = new Class({
 			var value = this.element.get('data-option-' + option.hyphenate());
 			if (value !== null) {
 				var number = Number(value);
-				if (number !== NaN) value = number;
+				if (isFinite(number)) value = number;
 				if (options[option] === undefined) {
 					options[option] = value;
 				}
@@ -193,7 +193,7 @@ Moobile.Component = new Class({
 		var elementHandler = function() {
 			var element = component.getElement();
 			if (element) {
-				context = document.id(context);
+				context = document.id(context) || this.getElement(context);
 				if (this.hasElement(element) === false &&
 					this.hasElement(context) === true) {
 					context.grab(element, where);
@@ -397,6 +397,7 @@ Moobile.Component = new Class({
 			return this;
 
 		this.willRemoveChild(component);
+
 		component.setParent(null);
 		component.setWindow(null);
 		component.setReady(false);
@@ -505,6 +506,7 @@ Moobile.Component = new Class({
 			return this;
 
 		this._window = window;
+
 		this._children.invoke('setWindow', window);
 
 		if (this._window) {
@@ -543,6 +545,7 @@ Moobile.Component = new Class({
 			return this;
 
 		this._ready = ready;
+
 		this._children.invoke('setReady', ready);
 
 		if (this._ready) {
