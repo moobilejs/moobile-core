@@ -141,14 +141,14 @@ Moobile.ViewControllerStack = new Class({
 		if (childViewControllers.length <= 1)
 			return this;
 
-		var viewControllerPopped = this.childViewControllers.lastItemAt(0);
-		var viewControllerBefore = this.childViewControllers.lastItemAt(1);
+		var viewControllerPopped = childViewControllers.lastItemAt(0);
+		var viewControllerBefore = childViewControllers.lastItemAt(1);
 
 		this.willPopViewController(viewControllerPopped);
 
 		this._animating = true; // needs to be set before the transition happens
 
-		var viewTransition = viewControllerPopped.viewTransition;
+		var viewTransition = viewControllerPopped.getViewTransition();
 		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onPopTransitionComplete'));
 		viewTransition.leave(
