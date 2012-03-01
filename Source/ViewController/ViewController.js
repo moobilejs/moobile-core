@@ -783,7 +783,7 @@ Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
 	},
 
 	_onWindowRotate: function(e) {
-		this.didRotateToOrientation(e.orientationName);
+		this.didRotateToOrientation(window.orientationName);
 	},
 
 	_onViewReady: function() {
