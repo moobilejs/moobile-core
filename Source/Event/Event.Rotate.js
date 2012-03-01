@@ -41,4 +41,6 @@ Element.defineCustomEvent('rotate', {
 
 });
 
+orientation();
+
 })();
