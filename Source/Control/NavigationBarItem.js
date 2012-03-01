@@ -114,7 +114,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @since  0.1
 	 */
 	addLeftBarButton: function(button) {
-		return this.addChildBefore(button, this._title);
+		return this.addChild(button, 'top');
 	},
 
 	/**
@@ -123,7 +123,7 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 	 * @since  0.1
 	 */
 	addRightBarButton: function(button) {
-		return this.addChildAfter(button, this._title);
+		return this.addChild(button, 'bottom');
 	},
 
 	/**
