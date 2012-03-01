@@ -289,10 +289,6 @@ p small {
 	width: 100%;                                                /* Important */
 }
 
-.view.scroll-view > .view-content-wrapper > * {
-	-webkit-box-flex: 0;                                        /* Important */
-}
-
 .view.scroll-view > .view-content-wrapper > .view-content {
 	-webkit-backface-visibility: hidden;                        /* Important */
 	-webkit-box-sizing: border-box;                             /* Important */
@@ -302,6 +298,19 @@ p small {
 	min-height: 100%;                                           /* Important */
 	position: relative;                                         /* Important */
 	width: 100%;                                                /* Important */
+}
+
+.view.scroll-view > .view-content-wrapper.scroll-engine-native {
+
+	/*
+		For some reasons, safari mobile seems to have issue measuring elements
+		where the size is defined using box-flex. Whats happening is, when
+		adding an element within this element and reflowing occurs, the element
+		scrolls to its top, presumably because he's unable to calculate its
+		size properly...
+	*/
+
+	height: 1px;												/* Important */
 }
 
 /* View Stack
