@@ -231,7 +231,7 @@ Moobile.Component = new Class({
 			}
 		};
 
-		return this._addChildAt(child, index, elementHandler);
+		return this._addChildAt(component, index, elementHandler);
 	},
 
 	/**
