@@ -24,7 +24,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.BarItem = new Class( /** @lends BarItem.prototype */ {
+Moobile.BarItem = new Class({
 
 	Extends: Moobile.Control,
 

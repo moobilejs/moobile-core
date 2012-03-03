@@ -387,6 +387,18 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#replaceWith
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	replaceWith: function(component, destroy) {
+		if (this._parent) {
+			this._parent.replaceChild(this, component, destroy);
+		}
+		return this;
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Component/Component#removeChild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1

@@ -19,151 +19,186 @@ provides:
 ...
 */
 
- /**
- * @name  Image
- * @class Provides an image control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+/**
+ * @see    http://moobile.net/api/0.1/Control/Image
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.Image = new Class( /** @lends Image.prototype */ {
+Moobile.Image = new Class({
 
 	Extends: Moobile.Control,
 
-	image: null,
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_image: null,
 
-	source: null,
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_source: null,
 
-	loaded: false,
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_loaded: false,
 
-	originalSize: {
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_originalSize: {
 		x: 0,
 		y: 0
 	},
 
 	/**
-	 * @type   {Object} The class options.
+	 * @private
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	options: {
 		tagName: 'img',
-		preLoad: false
+		preload: false
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
 
-		this.hide();
+		if (this.element.get('tag') !== 'img')
+			throw new Error('Moobile.Image requires an <img> element.');
 
 		this.element.addClass('image');
 
-		if (this.element.get('tag') === 'img') {
-			var source = this.element.get('src');
-			if (source) this.setSource(source);
+		this.hide();
+
+		var source = this.element.get('src');
+		if (source) {
+			this.setSource(source);
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.image = null;
+		this._image = null;
 		this.parent();
 	},
 
 	/**
-	 * Sets the image source.
-	 *
-	 * This method will set the image source into the `src` attribute of the
-	 * element if this image's element is an `img`.
-	 *
-	 * @param {String} source The image source.
-	 *
-	 * @return {Image} This image.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/Image#setSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setSource: function(source) {
 
-		if (this.element.get('tag') === 'img') {
+		this._source = source;
 
-			this.loaded = false;
+		if (this._image) {
+			this._image.removeEvent('load', this.bound('_onLoad'));
+			this._image = null;
+		}
 
-			this.source = source;
-
-			if (this.image) {
-				this.image.removeEvent('load', this.bound('onLoad'));
-				this.image = null;
-			}
-
-			if (this.options.preLoad) {
-				this.image = new Image();
-				this.image.src = source;
-				this.image.addEvent('load', this.bound('onLoad'));
+		if (source) {
+			if (this.options.preload) {
+				this._loaded = false;
+				this._image = new Image();
+				this._image.src = source;
+				this._image.addEvent('load', this.bound('_onLoad'));
 			} else {
-				this.onLoad();
+				this._onLoad();
 			}
+		} else {
+			this._onUnload();
 		}
 
 		return this;
 	},
 
 	/**
-	 * Returns the image source.
-	 *
-	 * This method will return the image source from the `src` attribute of the
-	 * element if this image's element is an `img`.
-	 *
-	 * @return {String} The image source.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/getSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getSource: function() {
-		return this.source;
+		return this._source;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/getImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	getImage: function() {
-		return this.image;
+		return this._image;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/Image
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	getOriginalSize: function() {
-		return this.originalSize;
+		return this._originalSize;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/Image
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	isLoaded: function() {
-		return this.loaded;
+		return this._loaded;
 	},
 
-	onLoad: function() {
+	/**
+	 * @private
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onLoad: function() {
 
-		this.loaded = true;
+		this._loaded = true;
 
-		if (this.options.preLoad) {
-			this.originalSize.x = this.image.width;
-			this.originalSize.y = this.image.height;
+		if (this.options.preload) {
+			this._originalSize.x = 0;
+			this._originalSize.y = 0;
 		}
 
-		if (this.source) {
-			this.element.set('src', this.source);
-		} else {
-			this.element.erase('src');
+		this.element.erase('src');
+
+		this.fireEvent('unload');
+
+		this.hide();
+	},
+
+	onUnload: function() {
+
+		this._loaded = false;
+
+		if (this.options.preload) {
+			this._originalSize.x = this._image.width;
+			this._originalSize.y = this._image.height;
 		}
 
-		this.show();
-
-		this.fireEvent('load');
+					this.element.erase('src');
+			this.fireEvent('unload');
 	}
 
 });
@@ -173,6 +208,5 @@ Moobile.Image = new Class( /** @lends Image.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('image', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.Image, element, 'data-image');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });

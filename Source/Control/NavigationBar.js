@@ -24,7 +24,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.NavigationBar = new Class( /** @lends NavigationBar.prototype */ {
+Moobile.NavigationBar = new Class({
 
 	Extends: Moobile.Bar,
 
@@ -45,7 +45,6 @@ Moobile.NavigationBar = new Class( /** @lends NavigationBar.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('navigation-bar', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
 });
 

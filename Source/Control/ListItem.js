@@ -20,55 +20,49 @@ provides:
 */
 
 /**
- * @name  ListItem
- * @class Provides a list item control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Control/ListItem
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
+Moobile.ListItem = new Class({
 
 	Extends: Moobile.Control,
 
 	/**
-	 * The image.
-	 * @type   Image
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	image: null,
+	_image: null,
 
 	/**
-	 * The label.
-	 * @type   Text
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	label: null,
+	_label: null,
 
 	/**
-	 * The detail label.
-	 * @type   Text
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	detail: null,
+	_detail: null,
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	options: {
 		tagName: 'li'
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -99,159 +93,121 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-		this.label = null;
-		this.image = null;
-		this.detail = null;
+		this._label = null;
+		this._image = null;
+		this._detail = null;
 		this.parent();
 	},
 
 	/**
-	 * Sets the image.
-	 *
-	 * This method will set the label using either a string or an instance of
-	 * an `Image`. When provided with a string, this methods creates an `Image`
-	 * instance and assign the given string as its source.
-	 *
-	 * @param {Mixed} image The image as a string or an `Image` instance.
-	 *
-	 * @return {ListItem} This list item.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setImage: function(image) {
-
-		if (this.image === image)
-			return this;
-
-		if (typeof image === 'string') {
-			var source = image;
-			image = new Moobile.Image();
-			image.setSource(source);
-		}
-
-		if (this.image === null) {
-			this.image = image;
-			this.addChild(image);
-		} else {
-			this.replaceChild(this.image, image, true);
-			this.image = image;
-		}
-
-		return this;
-	},
-
-	/**
-	 * Returns the image.
-	 *
-	 * @return {Image} The image.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getImage: function() {
-		return this.image;
-	},
-
-	/**
-	 * Sets the label.
-	 *
-	 * This method will set the label using either a string or an instance of a
-	 * `Label`. When provided with a string, this methods creates a `Label`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} label The label as a string or `Label` instance.
-	 *
-	 * @return {ListItem} This list item.
-	 *
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setLabel: function(label) {
 
-		if (this.label === label)
+		if (this._label === label)
 			return this;
 
 		if (typeof label === 'string') {
-			var text = label;
-			label = new Moobile.Text();
-			label.setText(text);
+			label = new Moobile.Text().setText(label);
 		}
 
-		if (this.label === null) {
-			this.label = label;
-			this.addChild(label);
+		if (this._label) {
+			this._label.replaceWith(label, true);
 		} else {
-			this.replaceChild(this.label, label, true);
-			this.label = label;
+			this.addChild(label);
 		}
 
-		this.label.addClass('label');
+		this._label = label;
+		this._label.addClass('label');
 
 		return this;
 	},
 
 	/**
-	 * Returns the label.
-	 *
-	 * @return {Text} The label.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getLabel: function() {
-		return this.label;
+		return this._label;
 	},
 
 	/**
-	 * Sets the detail label.
-	 *
-	 * This method will set the label using either a string or an instance of a
-	 * `Label`. When provided with a string, this methods creates a `Label`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} label The label as a string or `Label` instance.
-	 *
-	 * @return {ListItem} This list item.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
+	 */
+	setImage: function(image) {
+
+		if (this._image === image)
+			return this;
+
+		if (typeof image === 'string') {
+			image = new Moobile.Image().setSource(image);
+		}
+
+		if (this._image) {
+			this._image.replaceWith(image, true);
+		} else {
+			this.addChild(image);
+		}
+
+		this._image = image;
+		this._image.addClass('image');
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#getImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getImage: function() {
+		return this._image;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#setDetail
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
 	 */
 	setDetail: function(detail) {
 
-		if (this.detail === detail)
+		if (this._detail === detail)
 			return this;
 
 		if (typeof detail === 'string') {
-			var text = detail;
-			detail = new Moobile.Text();
-			detail.setText(text);
+			detail = new Moobile.Text().setText(detail);
 		}
 
-		if (this.detail === null) {
-			this.detail = detail;
-			this.addChild(detail);
+		if (this._detail) {
+			this._detail.replaceWith(detail, true);
 		} else {
-			this.replaceChild(this.detail, detail, true);
-			this.detail = detail;
+			this.addChild(detail);
 		}
 
-		this.detail.addClass('detail');
+		this._detail = detail;
+		this._detail.addClass('detail');
 
 		return this;
 	},
 
 	/**
-	 * Returns the detail label.
-	 *
-	 * @return {Text} The detail label.
-	 *
+	 * @see    http://moobile.net/api/0.1/Control/ListItem#getDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getDetail: function() {
-		return this.detail;
+		return this._detail;
 	}
 
 });
@@ -261,23 +217,19 @@ Moobile.ListItem = new Class( /** @lends ListItem.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('list-item', Moobile.List, function(element) {
-	var instance = Moobile.Component.create(Moobile.ListItem, element, 'data-list-item');
-	this.addItem(instance);
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
 });
 
 Moobile.Component.defineRole('image', Moobile.ListItem, function(element) {
-	var instance = Moobile.Component.create(Moobile.Image, element, 'data-image');
-	this.setImage(instance);
+	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
 Moobile.Component.defineRole('label', Moobile.ListItem, function(element) {
-	var instance = Moobile.Component.create(Moobile.Text, element, 'data-label');
-	this.setLabel(instance);
+	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
 Moobile.Component.defineRole('detail', Moobile.ListItem, function(element) {
-	var instance = Moobile.Component.create(Moobile.Text, element, 'data-detail');
-	this.setDetail(instance);
+	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
 
 //------------------------------------------------------------------------------
