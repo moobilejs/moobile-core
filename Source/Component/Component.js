@@ -11,6 +11,9 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Element
+	- Element.From
+	- Element.Role
 	- EventDispatcher
 
 provides:
@@ -392,9 +395,8 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	replaceWith: function(component, destroy) {
-		if (this._parent) {
-			this._parent.replaceChild(this, component, destroy);
-		}
+		var parent = this.getParent();
+		if (parent) parent.replaceChild(this, component, destroy);
 		return this;
 	},
 

@@ -12,7 +12,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- EventDispatcher
+	- Component
 
 provides:
 	- View
@@ -21,33 +21,18 @@ provides:
 */
 
 /**
- * @name  View
- * @class Provides an child that handles an area in which a user can
- *        interract.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends EventDispatcher
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/View/View
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.View = new Class( /** @lends View.prototype */ {
+Moobile.View = new Class({
 
 	Extends: Moobile.Component,
 
 	/**
-	 * The view content.
-	 * @type   ViewContent
+	 * @see    http://moobile.net/api/0.1/View/View#content
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	content: null,
 
@@ -71,6 +56,11 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didBuild: function() {
 
 		this.parent();
@@ -95,14 +85,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Enables the touch interraction of the view.
-	 *
-	 * This method will enable the touch interraction of this view by swapping
-	 * the CSS class from `disable` to `enable`. This will set the CSS style
-	 * `pointer-events` to `auto` thus enabling touch events.
-	 *
-	 * @return {View} This view.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/View#enableTouch
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -112,14 +95,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Disables the touch interaction of the view.
-	 *
-	 * This method will disable the touch interraction of this view by swapping
-	 * the CSS class from `enable` to `disable`. This will set the CSS style
-	 * `pointer-events` to `none` thus disabling touch events.
-	 *
-	 * @return {View} This view.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/View#disableTouch
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -129,14 +105,7 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Adds a child child to this view.
-	 *
-	 * This method will add a child child to this view's content child. You
-	 * can add the child child before or after this view's content child by
-	 * passing `header` or `footer` to the `where` parameter.
-	 *
-	 * @see EventDispatcher#addChild
-	 *
+	 * @overrides
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -147,16 +116,27 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Sets the view content.
-	 *
-	 * This method will set the child that is used as the content of this
-	 * view. This child will contains all child entities except ones in this
-	 * view's header or footer.
-	 *
-	 * @param {ViewContent} content The view content.
-	 *
-	 * @return {View} This view.
-	 *
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willAddChild: function(component) {
+		this.parent(component);
+		component.setParentView(this);
+	},
+
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willRemoveChild: function(component) {
+		this.parent(component);
+		component.setParentView(null);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/View/View#setContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -181,39 +161,12 @@ Moobile.View = new Class( /** @lends View.prototype */ {
 	},
 
 	/**
-	 * Returns the view content.
-	 *
-	 * This method will return the child that is used as the content of this
-	 * view. This child will contains all child entities except ones in this
-	 * view's header or footer.
-	 *
-	 * @return {ViewContent} The view content.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/View#getContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getContent: function() {
 		return this.content;
-	},
-
-	/**
-	 * @overrides
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	willAddChild: function(component) {
-		this.parent(component);
-		component.setParentView(this);
-	},
-
-	/**
-	 * @overrides
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	willRemoveChild: function(component) {
-		this.parent(component);
-		component.setParentView(null);
 	}
 
 });
@@ -296,12 +249,7 @@ Class.refactor(Moobile.Component, {
 });
 
 /**
- * Return the view of a file at a given path.
- *
- * @param {String} path The file path.
- *
- * @return {View} The view or <code>null</code> if no view were found.
- *
+ * @see    http://moobile.net/api/0.1/View/View#MoobileViewAt
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -320,8 +268,7 @@ Moobile.View.at = function(path) {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.View, element, 'data-view');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true,	behavior: function(element) {

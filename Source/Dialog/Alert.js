@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Control
+	- Component
 
 provides:
 	- Alert
@@ -39,7 +39,7 @@ provides:
  */
 Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
-	Extends: Moobile.Control,
+	Extends: Moobile.Component,
 
 	/**
 	 * The title.

@@ -22,21 +22,11 @@ provides:
 if (!window.$moobile) window.$moobile = {};
 
 /**
- * @name  Window
- * @class Provides the root view of the entire view hierarchy.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @extends View
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Window/Window
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.Window = new Class( /** @lends Window.prototype */ {
+Moobile.Window = new Class({
 
 	Extends: Moobile.View,
 

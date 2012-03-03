@@ -28,13 +28,11 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @name  ViewTransition
- * @class Provides the base class for view transitions.
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewTransition = new Class( /** @lends ViewTransition.prototype */ {
+Moobile.ViewTransition = new Class({
 
 	Implements: [
 		Events,

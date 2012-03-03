@@ -19,13 +19,28 @@ provides:
 ...
 */
 
+/**
+ * @see    http://moobile.net/api/0.1/View/ViewPanel
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.ViewPanel = new Class({
 
 	Extends: Moobile.View,
 
-	mainPanel: null,
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_mainPanel: null,
 
-	sidePanel: null,
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_sidePanel: null,
 
 	/**
 	 * @overrides
@@ -72,38 +87,37 @@ Moobile.ViewPanel = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-		this.sidePanel = null;
-		this.mainPanel = null;
+		this._sidePanel = null;
+		this._mainPanel = null;
 		this.parent();
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/View/ViewPanel#setSidePanel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	setSidePanel: function(sidePanel) {
 
-		if (this.sidePanel === sidePanel)
+		if (this._sidePanel === sidePanel)
 			return this;
 
-		if (this.sidePanel === null) {
+		if (this._sidePanel === null) {
 			this.content.grab(sidePanel);
-			this.sidePanel = sidePanel;
+			this._sidePanel = sidePanel;
 		} else {
-			sidePanel.replaces(this.sidePanel);
-			this.sidePanel.destroy();
-			this.sidePanel = sidePanel;
+			sidePanel.replaces(this._sidePanel);
+			this._sidePanel.destroy();
+			this._sidePanel = sidePanel;
 		}
 
-		this.sidePanel.addClass('side-panel');
+		this._sidePanel.addClass('side-panel');
 
 		return this;
 	},
 
 	/**
-	 * Returns the side panel.
-	 *
-	 * This method is a conveniant shortcut that retrieves the view content
-	 * then the side panel element.
-	 *
-	 * @return {Element} The side panel.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ViewPanel#getSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -111,33 +125,32 @@ Moobile.ViewPanel = new Class({
 		return this.content.getSidePanel();
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/View/ViewPanel#setMainPanel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	setMainPanel: function(mainPanel) {
 
-		if (this.mainPanel === mainPanel)
+		if (this._mainPanel === mainPanel)
 			return this;
 
-		if (this.mainPanel === null) {
+		if (this._mainPanel === null) {
 			this.content.grab(mainPanel);
-			this.mainPanel = mainPanel;
+			this._mainPanel = mainPanel;
 		} else {
-			mainPanel.replaces(this.mainPanel);
-			this.mainPanel.destroy();
-			this.mainPanel = mainPanel;
+			mainPanel.replaces(this._mainPanel);
+			this._mainPanel.destroy();
+			this._mainPanel = mainPanel;
 		}
 
-		this.mainPanel.addClass('main-panel');
+		this._mainPanel.addClass('main-panel');
 
 		return this;
 	},
 
 	/**
-	 * Returns the main panel.
-	 *
-	 * This method is a conveniant shortcut that retrieves the view content
-	 * then the main panel element.
-	 *
-	 * @return {Element} The main panel.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ViewPanel#getMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -152,8 +165,7 @@ Moobile.ViewPanel = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view-panel', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.ViewPanel, element, 'data-view-panel');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.ViewPanel, element, 'data-view-panel'));
 });
 
 Moobile.Component.defineRole('side-panel', Moobile.ViewPanel, {traversable: true, behavior: function(element) {
@@ -161,5 +173,5 @@ Moobile.Component.defineRole('side-panel', Moobile.ViewPanel, {traversable: true
 }});
 
 Moobile.Component.defineRole('main-panel', Moobile.ViewPanel, {traversable: true, behavior: function(element) {
-	this.setMainPanel(Element);
+	this.setMainPanel(element);
 }});

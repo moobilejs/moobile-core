@@ -21,15 +21,11 @@ provides:
 */
 
 /**
- * @name  ViewTransition.Fade
- * @class Provides a transition that fade under the current view.
- *
- * @extends ViewTransition
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition.Fade
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewTransition.Fade = new Class( /** @lends ViewTransition.Fade.prototype */ {
+Moobile.ViewTransition.Fade = new Class({
 
 	Extends: Moobile.ViewTransition,
 

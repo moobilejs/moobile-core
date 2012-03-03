@@ -39,7 +39,7 @@ provides:
  */
 Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 
-	Extends: Moobile.Control,
+	Extends: Moobile.Component,
 
 	willBuild: function() {
 		this.parent();

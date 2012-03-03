@@ -20,19 +20,13 @@ provides:
 */
 
 /**
- * @name  ViewTransition.Slide
- * @class Provide an horizontal slide view transition effect.
- *
- * @extends ViewTransition
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition.Slide
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewTransition.Slide = new Class( /** @lends ViewTransition.Slide.prototype */ {
+Moobile.ViewTransition.Slide = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-
 
 	raiseAnimation: function(viewToShow, parentView) {
 

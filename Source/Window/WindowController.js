@@ -20,32 +20,26 @@ provides:
 */
 
 /**
- * @name  WindowController
- * @class Provides a view controller that manages a window.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @extends ViewController
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Window/WindowController
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
+Moobile.WindowController = new Class({
 
 	Extends: Moobile.ViewController,
 
 	/**
-	 * The root view controller.
-	 * @type   ViewController
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	rootViewController: null,
+	_rootViewController: null,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	loadView: function() {
 
 		var element = document.id('window');
@@ -58,51 +52,33 @@ Moobile.WindowController = new Class( /** @lends WindowController.prototype */ {
 	},
 
 	/**
-	 * Sets the root view controller.
-	 *
-	 * This method will set the view controller at the root of the view
-	 * controller hierarchy. There can be only one root view controller at
-	 * time meaning setting a new root view controller when there is an
-	 * existing one will destroy the existing one.
-	 *
-	 * @param {ViewController} rootViewController The root view controller.
-	 *
-	 * @return {WindowController} This window controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Window/WindowController#setRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	setRootViewController: function(rootViewController) {
+	setRootViewController: function(_rootViewController) {
 
-		if (this.rootViewController) {
-			this.rootViewController.removeFromParentViewController();
-			this.rootViewController.destroy();
-			this.rootViewController = null;
+		if (this._rootViewController) {
+			this._rootViewController.destroy();
+			this._rootViewController = null;
 		}
 
-		if (rootViewController) {
-			this.rootViewController = rootViewController;
-			this.addChildViewController(rootViewController);
+		if (_rootViewController) {
+ 			this.addChildViewController(_rootViewController);
 		}
+
+		this._rootViewController = _rootViewController;
 
 		return this;
 	},
 
 	/**
-	 * Returns the root view controller.
-	 *
-	 * This method will return the view controller at the root of the view
-	 * controller hierarchy. There can be only one root view controller at time
-	 * meaning setting a new root view controller when there is an existing one
-	 * will destroy the existing one.
-	 *
-	 * @return {ViewController} The root view controller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Window/WindowController#getRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getRootViewController: function() {
-		return this.rootViewController;
+		return this._rootViewController;
 	}
 
 });
