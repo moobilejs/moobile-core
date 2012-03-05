@@ -203,6 +203,14 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 	 * @since  0.1
 	 */
 	getScrollSize: function() {
+		return this.getContentScrollSize();
+	},
+
+	getContentSize: function() {
+		return this.wrapper.getSize();
+	},
+
+	getContentScrollSize: function() {
 		return this.scroller.getScrollSize();
 	},
 
