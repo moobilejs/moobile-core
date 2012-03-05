@@ -62,7 +62,12 @@ Moobile.Popover = new Class({
 	},
 
 	destroy: function() {
-		if (this.options.autoHide) this.getWindow().removeEvent('tap', this.bound('_onTapOut'));
+		if (this.options.autoHide) {
+			var window = this.getWindow();
+			if (window) {
+				window.removeEvent('tap', this.bound('_onTapOut'));
+			}
+		}
 		this.parent();
 	},
 
