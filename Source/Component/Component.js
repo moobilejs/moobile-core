@@ -282,12 +282,12 @@ Moobile.Component = new Class({
 		this.willAddChild(component);
 		this._children.splice(index, 0, component);
 
+		if (handler) handler.call(this);
+
 		var componentParent = component.getParent();
 		if (componentParent === null) {
 			component.setParent(this);
 		}
-
-		if (handler) handler.call(this);
 
 		this.didAddChild(component);
 
