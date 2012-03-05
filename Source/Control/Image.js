@@ -122,10 +122,10 @@ Moobile.Image = new Class({
 				this._image.src = source;
 				this._image.addEvent('load', this.bound('_onLoad'));
 			} else {
-				this._onLoad();
+				this._load();
 			}
 		} else {
-			this._onUnload();
+			this._unload();
 		}
 
 		return this;
@@ -172,7 +172,7 @@ Moobile.Image = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	_onLoad: function() {
+	_load: function() {
 
 		this._loaded = true;
 
@@ -181,14 +181,12 @@ Moobile.Image = new Class({
 			this._originalSize.y = 0;
 		}
 
-		this.element.erase('src');
-
-		this.fireEvent('unload');
-
-		this.hide();
+		this.element.set('src', this._source);
+		this.fireEvent('load');
+		this.show();
 	},
 
-	onUnload: function() {
+	_unload: function() {
 
 		this._loaded = false;
 
@@ -197,8 +195,13 @@ Moobile.Image = new Class({
 			this._originalSize.y = this._image.height;
 		}
 
-					this.element.erase('src');
-			this.fireEvent('unload');
+		this.element.erase('src');
+		this.fireEvent('unload');
+		this.hide();
+	},
+
+	_onLoad: function() {
+		this._load();
 	}
 
 });
