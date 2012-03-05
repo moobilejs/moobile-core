@@ -32,8 +32,6 @@ Moobile.ViewTransition.Slide = new Class( /** @lends ViewTransition.Slide.protot
 
 	Extends: Moobile.ViewTransition,
 
-
-
 	raiseAnimation: function(viewToShow, parentView) {
 
 		var parentViewContent = parentView.getContent();
@@ -66,7 +64,10 @@ Moobile.ViewTransition.Slide = new Class( /** @lends ViewTransition.Slide.protot
 
 		var parentViewContent = parentView.getContent();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var handler = function(e) {
+
+			if (e.target !== parentViewContent)
+				return;
 
 			e.stop();
 
@@ -76,7 +77,11 @@ Moobile.ViewTransition.Slide = new Class( /** @lends ViewTransition.Slide.protot
 
 			this.didEnter(viewToShow, viewToHide, parentView);
 
-		}.bind(this));
+			parentViewContent.removeEvent('animationend', handler);
+
+		}.bind(this);
+
+		parentViewContent.addEvent('animationend', handler);
 
 		parentViewContent.addClass('transition-slide-enter');
 		viewToHide.addClass('transition-view-to-hide');
@@ -87,7 +92,10 @@ Moobile.ViewTransition.Slide = new Class( /** @lends ViewTransition.Slide.protot
 
 		var parentViewContent = parentView.getContent();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var handler = function(e) {
+
+			if (e.target !== parentViewContent)
+				return;
 
 			e.stop();
 
@@ -97,7 +105,9 @@ Moobile.ViewTransition.Slide = new Class( /** @lends ViewTransition.Slide.protot
 
 			this.didLeave(viewToShow, viewToHide, parentView);
 
-		}.bind(this));
+		}.bind(this);
+
+		parentViewContent.addEvent('animationend', handler);
 
 		parentViewContent.addClass('transition-slide-leave');
 		viewToHide.addClass('transition-view-to-hide');
