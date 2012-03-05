@@ -20,6 +20,11 @@ provides:
 ...
 */
 
+/**
+ * @see    http://moobile.net/api/0.1/View/ViewStack
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.ViewStack = new Class({
 
 	Extends: Moobile.View,
@@ -51,6 +56,5 @@ Moobile.ViewStack = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view-stack', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
 });

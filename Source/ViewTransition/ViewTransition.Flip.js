@@ -21,15 +21,11 @@ provides:
 */
 
 /**
- * @name  ViewTransition.Flip
- * @class Provides a transition that flips the current view.
- *
- * @extends ViewTransition
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition.Flip
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewTransition.Flip = new Class( /** @lends ViewTransition.Flip.prototype */ {
+Moobile.ViewTransition.Flip = new Class({
 
 	Extends: Moobile.ViewTransition,
 
@@ -101,36 +97,5 @@ Moobile.ViewTransition.Flip = new Class( /** @lends ViewTransition.Flip.prototyp
 		viewToHide.addClass('transition-view-to-hide');
 		viewToShow.addClass('transition-view-to-show');
 	}
-
-/*
-	enter: function(viewToShow, viewToHide, parentView, first) {
-
-		this.parent(viewToShow, viewToHide, parentView, first);
-
-		this.addSubject(parentView, 'transition-flip-perspective');
-		this.addSubject(viewToShow, 'transition-view-to-show');
-
-		if (first) {
-			this.animate(parentView.getContent(), 'transition-flip-enter-first');
-			return this;
-		}
-
-		this.addSubject(viewToHide, 'transition-view-to-hide');
-
-		this.animate(parentView.content, 'transition-flip-enter');
-	},
-
-	leave: function(viewToShow, viewToHide, parentView) {
-
-		this.parent(viewToShow, viewToHide, parentView);
-
-		this.addSubject(parentView, 'transition-flip-perspective');
-
-		this.addSubject(viewToHide, 'transition-view-to-hide');
-		this.addSubject(viewToShow, 'transition-view-to-show');
-
-		this.animate(parentView.getContent(), 'transition-flip-leave');
-	}
-	*/
 
 });

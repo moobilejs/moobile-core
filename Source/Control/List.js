@@ -19,7 +19,11 @@ provides:
 ...
 */
 
-
+/**
+ * @see    http://moobile.net/api/0.1/Control/List
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Moobile.List = new Class( /** @lends List.prototype */ {
 
 	Extends: Moobile.Control,
@@ -36,14 +40,14 @@ Moobile.List = new Class( /** @lends List.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	selectedItem: null,
+	_selectedItem: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	selectedItemIndex: -1,
+	_selectedItemIndex: -1,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Control/List#options

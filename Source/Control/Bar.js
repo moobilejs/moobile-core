@@ -75,13 +75,14 @@ Moobile.Bar = new Class( /** @lends Bar.prototype */ {
 		if (this._item === item)
 			return this;
 
-		if (this._item === null) {
-			this._item = item;
-			this.addChild(item);
+		if (this._item) {
+			this._item.replaceWith(item, true);
 		} else {
-			this.replaceChild(this._item, item, true);
-			this._item = item;
+			this.addChild(item);
 		}
+
+		this._item = item;
+		this._item.addClass('bar-item');
 
 		return this;
 	},

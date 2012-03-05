@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Control
+	- Component
 
 provides:
 	- Popover
@@ -21,7 +21,7 @@ provides:
 
 Moobile.Popover = new Class({
 
-	Extends: Moobile.Control,
+	Extends: Moobile.Component,
 
 	content: null,
 

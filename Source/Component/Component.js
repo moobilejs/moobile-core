@@ -11,6 +11,9 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Element
+	- Element.From
+	- Element.Role
 	- EventDispatcher
 
 provides:
@@ -384,6 +387,17 @@ Moobile.Component = new Class({
 	 */
 	replaceChild: function(component, replacement, destroy) {
 		return this.addChildBefore(replacement, component).removeChild(component, destroy);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Component/Component#replaceWith
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	replaceWith: function(component, destroy) {
+		var parent = this.getParent();
+		if (parent) parent.replaceChild(this, component, destroy);
+		return this;
 	},
 
 	/**

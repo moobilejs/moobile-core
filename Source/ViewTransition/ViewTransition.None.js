@@ -21,15 +21,11 @@ provides:
 */
 
 /**
- * @name  ViewTransition.None
- * @class Provide a non-animated view transition.
- *
- * @extends ViewTransition
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition.None
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewTransition.None = new Class( /** @lends ViewTransition.None.prototype */ {
+Moobile.ViewTransition.None = new Class({
 
 	Extends: Moobile.ViewTransition,
 

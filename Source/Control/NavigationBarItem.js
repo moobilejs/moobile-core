@@ -83,18 +83,17 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 			return this;
 
 		if (typeof title === 'string') {
-			var text = title;
-			title = new Moobile.Text();
-			title.setText(text);
+			title = new Moobile.Text().setText(title);
 		}
 
-		if (this._title === null) {
-			this._title = title;
-			this.addChildInside(title, null, '.bar-title');
+		if (this._title) {
+			this._title.replaceWith(title, true);
 		} else {
-			this.replaceChild(this._title, title, true);
-			this._title = title;
+			this.addChildInside(title, null, '.bar-title');
 		}
+
+		this._title = title;
+		this._title.addClass('title');
 
 		return this;
 	},
@@ -169,11 +168,9 @@ Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('item', Moobile.NavigationBar, function(element) {
-	var instance = Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item');
-	this.setItem(instance);
+	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
 });
 
 Moobile.Component.defineRole('title', Moobile.NavigationBarItem, function(element) {
-	var instance = Moobile.Component.create(Moobile.Text, element, 'data-title');
-	this.setTitle(instance);
+	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });

@@ -81,20 +81,17 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 			return this;
 
 		if (typeof label === 'string') {
-			var text = label;
-			label = new Moobile.Text();
-			label.setText(text);
+			label = new Moobile.Text().setText(label);
 		}
 
-		if (this._label === null) {
-			this._label = label;
-			this.addChild(label);
+		if (this._label) {
+			this._label.replaceWith(label, true);
 		} else {
-			this.replaceChild(this._label, label, true);
-			this._label = label;
+			this.addChild(label);
 		}
 
-		label.addClass('label');
+		this._label = label;
+		this._label.addClass('label');
 
 		return this;
 	},
