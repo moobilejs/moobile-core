@@ -22,49 +22,32 @@ provides:
 */
 
 /**
- * @name  ScrollView
- * @class Provides supports for displaying content that is larger tha this view
- *        size.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends View
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/View/ScrollView
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 
 	Extends: Moobile.View,
 
 	/**
-	 * The scroller.
-	 * @type   Scroller
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
-	scroller: null,
+	_scroller: null,
 
 	/**
-	 * The element that wraps the content and make it scrollable.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	wrapper: null,
 
 	/**
-	 * The class options.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	options: {
 		momentum: true,
@@ -80,11 +63,21 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('scroll-view');
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didBuild: function() {
 
 		this.parent();
@@ -99,144 +92,133 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 			snapToPageDelay: this.options.snapToPageDelay
 		};
 
-		this.scroller = new Moobile.Scroller(this.content, options);
-		this.scroller.addEvent('dragstart', this.bound('_onDragStart'));
-		this.scroller.addEvent('dragend', this.bound('_onDragEnd'));
-		this.scroller.addEvent('scroll', this.bound('_onScroll'));
+		this._scroller = new Moobile.Scroller(this.content, options);
+		this._scroller.addEvent('dragstart', this.bound('_onDragStart'));
+		this._scroller.addEvent('dragend', this.bound('_onDragEnd'));
+		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
-		this.wrapper = this.scroller.getWrapper();
+		this.wrapper = this._scroller.getWrapper();
 		this.wrapper.addClass('view-content-wrapper');
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didBecomeReady: function() {
 		this.parent();
-		this.scroller.refresh();
+		this._scroller.refresh();
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
-
-		this.scroller.removeEvent('dragstart', this.bound('_onDragStart'));
-		this.scroller.removeEvent('dragend', this.bound('_onDragEnd'));
-		this.scroller.removeEvent('scroll', this.bound('_onScroll'));
-
-		this.scroller.destroy();
-		this.scroller = null;
-
+		this._scroller.removeEvent('dragstart', this.bound('_onDragStart'));
+		this._scroller.removeEvent('dragend', this.bound('_onDragEnd'));
+		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
+		this._scroller.destroy();
+		this._scroller = null;
 		this.parent();
 	},
 
 	/**
-	 * Scrolls to a set of coordinates.
-	 *
-	 * @param {Number} x      The x coordinate.
-	 * @param {Number} y      The y coordinate.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {ScrollView} This scroll view.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ScrollView#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	scrollTo: function(x, y, time) {
-		this.scroller.scrollTo(x, y, time);
+		this._scroller.scrollTo(x, y, time);
 		return this;
 	},
 
 	/**
-	 * Scrolls to page.
-	 *
-	 * @param {Number} pageX  The horizontal page number.
-	 * @param {Number} pageY  The vertical page number.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ScrollView#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	scrollToPage: function(pageX, pageY, time) {
-		this.scroller.scrollToPage(pageX, pageY, time);
+		this._scroller.scrollToPage(pageX, pageY, time);
 		return this;
 	},
 
 	/**
-	 * Scrolls to an element.
-	 *
-	 * @param {Element} element The element to scroll to.
-	 * @param {Number}  [time]  The duration of the scroll.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ScrollView#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	scrollToElement: function(element, time) {
-		this.scroller.scrollToElement(element, time);
+		this._scroller.scrollToElement(element, time);
 		return this;
 	},
 
 	/**
-	 * Returns the current scroll position.
-	 *
-	 * This method will return the current scroll position as an object
-	 * with two keys, `x` which indicates the horizontal scroll and `y` which
-	 * indicates the vertical scroll of this child.
-	 *
-	 * @return {Object} The scroll position.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ScrollView#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getScroll: function() {
-		return this.scroller.getScroll();
+		return this._scroller.getScroll();
 	},
 
 	/**
-	 * Returns the content's size including the scrolling area.
-	 *
-	 * This method will return the content's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size including the scrolling area.
-	 *
+	 * @see    http://moobile.net/api/0.1/View/ScrollView#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getScrollSize: function() {
-		return this.getContentScrollSize();
+		return this._scroller.getScrollSize();
 	},
 
-	getContentSize: function() {
-		return this.wrapper.getSize();
-	},
-
-	getContentScrollSize: function() {
-		return this.scroller.getScrollSize();
-	},
-
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willHide: function() {
 		this.parent();
-		this.options.offset = this.scroller.getScroll();
+		this.options.offset = this._scroller.getScroll();
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didShow: function() {
-
 		this.parent();
-
 		var offset = this.options.offset;
 		if (offset.x && offset.y) {
-			this.scroller.scrollTo(offset.x, offset.y);
+			this._scroller.scrollTo(offset.x, offset.y);
 		}
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_onDragStart: function() {
 		this.fireEvent('dragstart');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_onDragEnd: function() {
 		this.fireEvent('dragend');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
 	}
