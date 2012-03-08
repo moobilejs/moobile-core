@@ -1,4 +1,4 @@
-
+/*
 Class.refactor(Moobile.Component, {
 
 	_animations: null,
@@ -57,3 +57,4 @@ Class.refactor(Moobile.Component, {
 	}
 
 })
+*/
