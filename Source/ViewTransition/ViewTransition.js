@@ -42,11 +42,21 @@ Moobile.ViewTransition = new Class({
 
 	options: {},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#initialize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	initialize: function(options) {
 		this.setOptions(options);
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#enter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	enter: function(viewToShow, viewToHide, parentView, isFirstView) {
 
 		if (viewToHide) {
@@ -67,6 +77,11 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#leave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
 		viewToShow.show();
@@ -79,12 +94,22 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didRaise
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didRaise: function(viewToShow, parentView) {
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didEnter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didEnter: function(viewToShow, viewToHide, parentView) {
 		viewToHide.hide();
 		viewToHide.enableTouch();
@@ -93,6 +118,11 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
 		viewToHide.hide();
 		viewToHide.enableTouch();
@@ -101,14 +131,29 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#firstAnimation
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You must override this method');
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#enterAnimation
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 		throw new Error('You must override this method');
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#leaveAnimation
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 		throw new Error('You must override this method');
 	}
