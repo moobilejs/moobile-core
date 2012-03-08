@@ -32,18 +32,18 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#content
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	content: null,
+	contentElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#wrapper
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#wrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	wrapper: null,
+	wrapperElement: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#options
@@ -67,9 +67,9 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 
 		this.setOptions(options);
 
-		this.content = content;
-		this.wrapper = new Element('div');
-		this.wrapper.wraps(content);
+		this.wrapperElement = new Element('div');
+		this.wrapperElement.wraps(content);
+		this.contentElement = content;
 
 		return this;
 	},
@@ -81,11 +81,11 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	 */
 	destroy: function() {
 
-		this.content.wraps(this.wrapper);
-		this.content = null;
+		this.contentElement.wraps(this.wrapperElement);
+		this.contentElement = null;
 
-		this.wrapper.destroy();
-		this.wrapper = null;
+		this.wrapperElement.destroy();
+		this.wrapperElement = null;
 
 		return this;
 	},
@@ -145,21 +145,21 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getContent
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getContent: function() {
-		return this.content;
+	getContentElement: function() {
+		return this.contentElement;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getWrapper
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getWrapper: function() {
-		return this.wrapper;
+	getWrapperElement: function() {
+		return this.wrapperElement;
 	}
 
 });

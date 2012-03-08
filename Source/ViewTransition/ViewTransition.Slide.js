@@ -30,7 +30,7 @@ Moobile.ViewTransition.Slide = new Class({
 
 	firstAnimation: function(viewToShow, parentView) {
 
-		var parentViewContent = parentView.getContent();
+		var parentViewContent = parentView.getContentElement();
 
 		var animation = new Moobile.Animation();
 
@@ -58,7 +58,7 @@ Moobile.ViewTransition.Slide = new Class({
 
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContent();
+		var parentViewContent = parentView.getContentElement();
 
 		var handler = function(e) {
 
@@ -86,7 +86,7 @@ Moobile.ViewTransition.Slide = new Class({
 
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContent();
+		var parentViewContent = parentView.getContentElement();
 
 		var handler = function(e) {
 

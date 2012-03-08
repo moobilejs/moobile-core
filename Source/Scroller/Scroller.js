@@ -36,18 +36,18 @@ Moobile.Scroller = new Class({
 	engine: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#content
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	content: null,
+	contentElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#wrapper
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#wrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	wrapper: null,
+	wrapperElement: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startScroll
@@ -141,17 +141,17 @@ Moobile.Scroller = new Class({
 		this.engine.addEvent('dragend', this.bound('_onDragEnd'));
 		this.engine.addEvent('scroll', this.bound('_onScroll'));
 
-		this.wrapper = this.getWrapper();
-		this.content = this.getContent();
+		this.wrapperElement = this.getWrapperElement();
+		this.contentElement = this.getContentElement();
 
-		var classes = this.content.get('class');
+		var classes = this.contentElement.get('class');
 		if (classes) {
 			classes.split(' ').each(function(klass) {
-				this.wrapper.addClass(klass + '-wrapper');
+				this.wrapperElement.addClass(klass + '-wrapper');
 			}, this);
 		}
 
-		this.wrapper.addClass('scroll');
+		this.wrapperElement.addClass('scroll');
 
 		return this;
 	},
@@ -302,21 +302,21 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getContent
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getContent: function() {
-		return this.engine.getContent();
+	getContentElement: function() {
+		return this.engine.getContentElement();
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getWrapper
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getWrapper: function() {
-		return this.engine.getWrapper();
+	getWrapperElement: function() {
+		return this.engine.getWrapperElement();
 	},
 
 	/**

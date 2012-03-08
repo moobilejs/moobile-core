@@ -38,7 +38,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContent();
+		var parentViewContent = parentView.getContentElement();
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 
@@ -73,7 +73,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContent();
+		var parentViewContent = parentView.getContentElement();
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 

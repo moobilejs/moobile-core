@@ -34,7 +34,7 @@ Moobile.View = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	content: null,
+	contentElement: null,
 
 	/**
 	 * @overrides
@@ -67,7 +67,7 @@ Moobile.View = new Class({
 		if (classes) {
 			classes.split(' ').each(function(klass) {
 				klass = klass.trim();
-				if (klass) this.content.addClass(klass + '-content');
+				if (klass) this.contentElement.addClass(klass + '-content');
 			}, this);
 		}
 	},
@@ -78,7 +78,7 @@ Moobile.View = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-		this.content = null;
+		this.contentElement = null;
 		this.parent();
 	},
 
@@ -110,7 +110,7 @@ Moobile.View = new Class({
 	addChild: function(component, where) {
 		if (where === 'header') return this.parent(component, 'top');
 		if (where === 'footer') return this.parent(component, 'bottom');
-		return this.addChildInside(component, this.content, where);
+		return this.addChildInside(component, this.contentElement, where);
 	},
 
 	/**
@@ -134,37 +134,37 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/View#setContent
+	 * @see    http://moobile.net/api/0.1/View/View#setContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	setContent: function(content) {
+	setContentElement: function(content) {
 
-		if (this.content === content)
+		if (this.contentElement === content)
 			return this;
 
 		if (this.element.contains(content) === false) {
-			if (this.content) {
-				this.content.grab(content, 'after');
-				this.content.destroy();
+			if (this.contentElement) {
+				this.contentElement.grab(content, 'after');
+				this.contentElement.destroy();
 			} else {
 				this.element.grab(content);
 			}
 		}
 
-		this.content = content;
-		this.content.addClass('view-content');
+		this.contentElement = content;
+		this.contentElement.addClass('view-content');
 
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/View#getContent
+	 * @see    http://moobile.net/api/0.1/View/View#getContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getContent: function() {
-		return this.content;
+	getContentElement: function() {
+		return this.contentElement;
 	}
 
 });
@@ -270,5 +270,5 @@ Moobile.Component.defineRole('view', null, function(element) {
 });
 
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true,	behavior: function(element) {
-	this.setContent(element);
+	this.setContentElement(element);
 }});

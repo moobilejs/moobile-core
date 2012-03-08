@@ -92,13 +92,13 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 			snapToPageDelay: this.options.snapToPageDelay
 		};
 
-		this._scroller = new Moobile.Scroller(this.content, options);
+		this._scroller = new Moobile.Scroller(this.contentElement, options);
 		this._scroller.addEvent('dragstart', this.bound('_onDragStart'));
 		this._scroller.addEvent('dragend', this.bound('_onDragEnd'));
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
-		this.wrapper = this._scroller.getWrapper();
-		this.wrapper.addClass('view-content-wrapper');
+		this.wrapperElement = this._scroller.getWrapperElement();
+		this.wrapperElement.addClass('view-content-wrapper');
 	},
 
 	/**

@@ -63,7 +63,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 
 		this.parent(content, options);
 
-		this.wrapper.addClass('scroll-engine-iscroll');
+		this.wrapperElement.addClass('scroll-engine-iscroll');
 
 		var options = {
 			hScroll: this.options.scrollX,
@@ -82,10 +82,10 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			onScrollEnd: this.bound('_onScrollEnd')
 		};
 
-		this.scroller = new iScroll(this.wrapper, options);
+		this.scroller = new iScroll(this.wrapperElement, options);
 
-		this.wrapper.addEvent('touchstart', this.bound('_onTouchStart'));
-		this.wrapper.addEvent('touchend', this.bound('_onTouchEnd'));
+		this.wrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.wrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -119,7 +119,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
-		var p = element.getPosition(this.content);
+		var p = element.getPosition(this.contentElement);
 		this.scrollTo(p.x, p.y, time);
 		return this;
 	},
@@ -140,7 +140,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	getSize: function() {
-		return this.wrapper.getSize();
+		return this.wrapperElement.getSize();
 	},
 
 	/**
@@ -158,7 +158,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
-		return this.content.getScrollSize();
+		return this.contentElement.getScrollSize();
 	},
 
 	/**

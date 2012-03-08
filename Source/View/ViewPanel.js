@@ -78,7 +78,7 @@ Moobile.ViewPanel = new Class({
 	 */
 	didBuild: function() {
 		this.parent();
-		this.content.addClass('view-panel-content');
+		this.contentElement.addClass('view-panel-content');
 	},
 
 	/**
@@ -103,7 +103,7 @@ Moobile.ViewPanel = new Class({
 			return this;
 
 		if (this._sidePanel === null) {
-			this.content.grab(sidePanel);
+			this.contentElement.grab(sidePanel);
 			this._sidePanel = sidePanel;
 		} else {
 			sidePanel.replaces(this._sidePanel);
@@ -122,7 +122,7 @@ Moobile.ViewPanel = new Class({
 	 * @since  0.1
 	 */
 	getSidePanel: function() {
-		return this.content.getSidePanel();
+		return this.contentElement.getSidePanel();
 	},
 
 	/**
@@ -136,7 +136,7 @@ Moobile.ViewPanel = new Class({
 			return this;
 
 		if (this._mainPanel === null) {
-			this.content.grab(mainPanel);
+			this.contentElement.grab(mainPanel);
 			this._mainPanel = mainPanel;
 		} else {
 			mainPanel.replaces(this._mainPanel);
@@ -155,7 +155,7 @@ Moobile.ViewPanel = new Class({
 	 * @since  0.1
 	 */
 	getMainPanel: function() {
-		return this.content.getMainPanel();
+		return this.contentElement.getMainPanel();
 	}
 
 });

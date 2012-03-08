@@ -49,7 +49,7 @@ Moobile.Window = new Class({
 	 */
 	didBuild: function() {
 		this.parent();
-		this.content.addClass('window-content');
+		this.contentElement.addClass('window-content');
 	},
 
 	/**

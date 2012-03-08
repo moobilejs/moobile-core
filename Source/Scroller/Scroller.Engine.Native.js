@@ -51,17 +51,17 @@ Moobile.Scroller.Engine.Native = new Class({
 
 		this.parent(content, options);
 
-		this.wrapper.addClass('scroll-engine-native');
+		this.wrapperElement.addClass('scroll-engine-native');
 
-		if (this.options.scrollX)  this.wrapper.setStyle('overflow-x', 'scroll');
-		if (this.options.scrollY)  this.wrapper.setStyle('overflow-y', 'scroll');
-		if (this.options.momentum) this.wrapper.setStyle('-webkit-overflow-scrolling', 'touch');
+		if (this.options.scrollX)  this.wrapperElement.setStyle('overflow-x', 'scroll');
+		if (this.options.scrollY)  this.wrapperElement.setStyle('overflow-y', 'scroll');
+		if (this.options.momentum) this.wrapperElement.setStyle('-webkit-overflow-scrolling', 'touch');
 
-		this.scroller = new Fx.Scroll(this.wrapper);
+		this.scroller = new Fx.Scroll(this.wrapperElement);
 
-		this.wrapper.addEvent('touchstart', this.bound('_onTouchStart'));
-		this.wrapper.addEvent('touchend', this.bound('_onTouchEnd'));
-		this.wrapper.addEvent('scroll', this.bound('_onScroll'));
+		this.wrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.wrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
+		this.wrapperElement.addEvent('scroll', this.bound('_onScroll'));
 
 		window.addEvent('rotate', this.bound('_onWindowRotate'));
 
@@ -122,7 +122,7 @@ Moobile.Scroller.Engine.Native = new Class({
 		var contentSize = this.getScrollSize();
 
 		if (contentSize.y <= wrapperSize.y) {
-			this.content.setStyle('min-height', wrapperSize.y + 2);
+			this.contentElement.setStyle('min-height', wrapperSize.y + 2);
 		}
 
 		return this;
@@ -134,7 +134,7 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @since  0.1.0
 	 */
 	getSize: function() {
-		return this.wrapper.getSize();
+		return this.wrapperElement.getSize();
 	},
 
 	/**
@@ -143,7 +143,7 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @since  0.1.0
 	 */
 	getScroll: function() {
-		return this.wrapper.getScroll();
+		return this.wrapperElement.getScroll();
 	},
 
 	/**
@@ -152,7 +152,7 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
-		return this.content.getScrollSize();
+		return this.contentElement.getScrollSize();
 	},
 
 	/**
@@ -162,21 +162,21 @@ Moobile.Scroller.Engine.Native = new Class({
 	 */
 	_onTouchStart: function() {
 
-		var scroll = this.wrapper.getScroll();
+		var scroll = this.wrapperElement.getScroll();
 		if (scroll.x === 0) {
 
 			if (scroll.y <= 0) {
 
 				// offset scroll top
-				this.wrapper.scrollTo(0, 1);
+				this.wrapperElement.scrollTo(0, 1);
 
 			} else {
 
 				// offset scroll bottom
-				var totalSize = this.wrapper.getScrollSize();
-				var frameSize = this.wrapper.getSize();
+				var totalSize = this.wrapperElement.getScrollSize();
+				var frameSize = this.wrapperElement.getSize();
 				if (frameSize.y + scroll.y >= totalSize.y) {
-					this.wrapper.scrollTo(0, scroll.y - 1);
+					this.wrapperElement.scrollTo(0, scroll.y - 1);
 				}
 			}
 		}
