@@ -20,95 +20,84 @@ provides:
 */
 
 /**
- * @name  Alert
- * @class Provides a modal alert control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Overlay
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Dialog/Alert
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
 Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 
 	Extends: Moobile.Component,
 
 	/**
-	 * The title.
-	 * @type   Text
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	title: null,
 
 	/**
-	 * The message.
-	 * @type   Text
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	message: null,
 
 	/**
-	 * The buttons.
-	 * @type   Array
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	buttons: [],
 
 	/**
-	 * The dialog element.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	dialog: null,
 
 	/**
-	 * The dialog header element.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	dialogHeader: null,
 
 	/**
-	 * The dialog footer element.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	dialogFooter: null,
 
 	/**
-	 * The dialog content element.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	dialogContent: null,
 
 	/**
-	 * The alert overlay.
-	 * @type   Overlay
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	overlay: null,
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	options: {
 		buttonLayout: 'vertical'
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willBuild: function() {
 
 		this.parent();
@@ -137,6 +126,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
 
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
@@ -156,18 +150,9 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Sets the title.
-	 *
-	 * This method will set the title using either a string or an instance of a
-	 * `Label`. When provided with a string, this methods creates a `Label`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} title The title as a string or a `Label` instance.
-	 *
-	 * @return {Alert} This alert.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setTitle: function(title) {
 
@@ -194,30 +179,18 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Returns the title.
-	 *
-	 * @return {Text} The title.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getTitle: function() {
 		return this.title;
 	},
 
 	/**
-	 * Sets the message.
-	 *
-	 * This method will set the message using either a string or an instance of
-	 * a `Text`. When provided with a string, this methods creates a `Text`
-	 * instance and assign the given string as its text.
-	 *
-	 * @param {Mixed} message The message as string or a `Text` instance.
-	 *
-	 * @return {Alert} This alert.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setMessage: function(message) {
 
@@ -244,30 +217,18 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Returns the message.
-	 *
-	 * @return {Text} The message.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getMessage: function() {
 		return this.message;
 	},
 
 	/**
-	 * Adds a button.
-	 *
-	 * This method will add the given button at the bottom of the element that
-	 * contains buttons. The presentation of the buttons, either vertical or
-	 * horizontal is defined by setting the proper style to this alert.
-	 *
-	 * @param {Button} button The button.
-	 *
-	 * @return {Alert} This alert.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	addButton: function(button) {
 		this.addChild(button, 'bottom', this.dialogFooter);
@@ -275,7 +236,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Alert#setDefaultButton
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -285,7 +246,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Alert#setDefaultButtonIndex
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -294,16 +255,9 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Shows the overlay with an animation.
-	 *
-	 * This method will show the overlay by adding the `show-animated` CSS
-	 * class to the element. Update the properties of this CSS class to
-	 * customize the animation.
-	 *
-	 * @return {Overlay} This overlay.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	showAnimated: function() {
 		this.willShow();
@@ -314,16 +268,9 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * Hides the overlay with an animation.
-	 *
-	 * This method will hide the overlay by adding the `hide-animated` CSS
-	 * class to the element. Update the properties of this CSS class to
-	 * customize the animation.
-	 *
-	 * @return {Overlay} This overlay.
-	 *
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	hideAnimated: function() {
 		this.willHide();
@@ -332,6 +279,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didAddChild: function(child) {
 
 		this.parent(child);
@@ -342,6 +294,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didRemoveChild: function(child) {
 
 		this.parent(child);
@@ -352,6 +309,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willShow: function() {
 
 		this.parent();
@@ -363,11 +325,21 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		}
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didHide: function() {
 		this.parent();
 		this.destroy();
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onButtonTap: function(e, sender) {
 
 		var index = this.getChildren(Moobile.Button).indexOf(sender);
@@ -378,6 +350,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.hideAnimated();
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	onAnimationEnd: function(e) {
 
 		e.stop();

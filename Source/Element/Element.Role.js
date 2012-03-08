@@ -21,6 +21,11 @@ provides:
 
 (function() {
 
+/**
+ * @see    http://moobile.net/api/0.1/Element/Element.Role#defineRole
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Element.defineRole = function(name, context, behavior) {
 
 	context = (context || Element).prototype;
@@ -55,8 +60,12 @@ Element.implement({
 	 	return this.get('data-role');
 	 },
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Element/Element#getRoleDefinition
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	 getRoleDefinition: function(context) {
-
 	 	return (context || this).__roles__
 	 	     ? (context || this).__roles__[this.getRole()]
 	 	     : null;
@@ -86,6 +95,11 @@ Element.implement({
 		return this.getElements(selector).filter(validate);
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Element/Element#ownsRoleElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	ownsRoleElement: function(element) {
 
 		var parent = element.getParent();

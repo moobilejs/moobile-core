@@ -17,6 +17,11 @@ provides:
 ...
 */
 
+/**
+ * @see    http://moobile.net/api/0.1/Class/Class
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
 Class.extend({
 
 	/**

@@ -20,47 +20,37 @@ provides:
 */
 
 /**
- * @name  Overlay
- * @class Provides an overlay control.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Roles]
- * [TODO: Styles]
- * [TODO: Options]
- * [TODO: Element Structure]
- *
- * @extends Control
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Util/Overlay
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
  */
-Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
+Moobile.Overlay = new Class({
 
 	Extends: Moobile.Component,
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('overlay');
 		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	destroy: function() {
 		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
 		this.parent();
 	},
 
 	/**
-	 * Shows the overlay with an animation.
-	 *
-	 * This method will show the overlay by adding the `show-animated` CSS
-	 * class to the element. Update the properties of this CSS class to
-	 * customize the animation.
-	 *
-	 * @return {Overlay} This overlay.
-	 *
+	 * @see    http://moobile.net/api/0.1/Util/Overlay#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -72,14 +62,7 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 	},
 
 	/**
-	 * Hides the overlay with an animation.
-	 *
-	 * This method will hide the overlay by adding the `hide-animated` CSS
-	 * class to the element. Update the properties of this CSS class to
-	 * customize the animation.
-	 *
-	 * @return {Overlay} This overlay.
-	 *
+	 * @see    http://moobile.net/api/0.1/Util/Overlay#hideAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -89,6 +72,11 @@ Moobile.Overlay = new Class( /** @lends Overlay.prototype */ {
 		return this;
 	},
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Util/Overlay#onAnimationEnd
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	onAnimationEnd: function(e) {
 
 		e.stop();

@@ -24,14 +24,20 @@ provides:
 
 if (!window.Moobile) window.Moobile = {};
 
+/**
+ * @see    http://moobile.net/api/0.1/Request/Request
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Request = new Class({
 
 	Extends: Request,
 
-	Implements: [
-		Class.Binds
-	],
-
+	/**
+	 * @see    http://moobile.net/api/0.1/Request/Request#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	options: {
 		isSuccess: function() {
 			var status = this.status;

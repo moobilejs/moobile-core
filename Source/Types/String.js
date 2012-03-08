@@ -16,8 +16,18 @@ provides:
 ...
 */
 
+/**
+ * @see    http://moobile.net/api/0.1/Types/String
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 String.implement({
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Types/String#toCamelCase
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	toCamelCase: function() {
 		return this.camelCase().replace('-', '').replace(/\s\D/g, function(match){
             return match.charAt(1).toUpperCase();

@@ -20,73 +20,58 @@ provides:
 */
 
 /**
- * @name  Scroller
- * @class Provides the class that wraps a scroller engine.
- *
- * @classdesc
- *
- * [TODO: Introduction]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Scroller/Scroller
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
  */
-Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
+Moobile.Scroller = new Class({
 
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * The engine.
-	 * @type   Scroller.Engine
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#engine
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	engine: null,
 
 	/**
-	 * The content element, with variable size.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#content
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	content: null,
 
 	/**
-	 * The content wrapper element, with fixed size.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#wrapper
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	wrapper: null,
 
 	/**
-	 * The scrolling position at the beginning of a scroll.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	startScroll: null,
 
 	/**
-	 * The scrolling time at the beginning of a scroll.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startTime
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	startTime: null,
 
 	/**
-	 * The scrolling page at the beginning of a scroll.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	startPage: null,
 
 	/**
-	 * The current page.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#page
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -96,8 +81,7 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * The class options.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -113,20 +97,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Initializes this scroller.
-	 *
-	 * This `content` element given to this method will be wrapped with an
-	 * other element. Any CSS classes given to the `content` element will be
-	 * added to the wrapper element with the `-wrapper` suffix.
-	 *
-	 * This method also creates a scroller engine that is proper for the
-	 * current platform based on the `engine` option.
-	 *
-	 * @param {Element}	[content] The Element, element id or string.
-	 * @param {Object}  [options] The options.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	initialize: function(content, options) {
 
@@ -184,15 +157,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Destroys this scroller.
-	 *
-	 * This method will destroy the scroller engine. The scrollable content
-	 * will not be removed upon destruction as the content wrapper will.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this.engine.destroy();
@@ -201,16 +168,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Scrolls to a set of coordinates.
-	 *
-	 * @param {Number} x      The x coordinate.
-	 * @param {Number} y      The y coordinate.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
 		this.engine.scrollTo(x, y, time);
@@ -218,16 +178,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Scrolls to page.
-	 *
-	 * @param {Number} pageX  The horizontal page number.
-	 * @param {Number} pageY  The vertical page number.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollToPage: function(pageX, pageY, time) {
 
@@ -261,15 +214,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Scrolls to an element.
-	 *
-	 * @param {Element} element The element to scroll to.
-	 * @param {Number}  [time]  The duration of the scroll.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
 		this.engine.scrollToElement(document.id(element), time);
@@ -277,16 +224,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Snaps to the proper page.
-	 *
-	 * This method will snap to the closest page based on the scroller options.
-	 * You should seldom need to call this method as it's called automatically
-	 * when the `snapToPage` option is enabled.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#snap
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	snap: function() {
 
@@ -316,15 +256,9 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Refreshes this scroller.
-	 *
-	 * What this method exacly does is based on this scroller engine
-	 * implementation of the `refresh` method.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	refresh: function() {
 		this.engine.refresh();
@@ -332,91 +266,64 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 	},
 
 	/**
-	 * Returns the size.
-	 *
-	 * This method will return the wrapper's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSize: function() {
 		return this.engine.getSize();
 	},
 
 	/**
-	 * Returns the current scroll position.
-	 *
-	 * This method will return the current scroll position as an object
-	 * with two keys, `x` which indicates the horizontal scroll and `y` which
-	 * indicates the vertical scroll of this child.
-	 *
-	 * @return {Object} The scroll position.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScroll: function() {
 		return this.engine.getScroll();
 	},
 
 	/**
-	 * Returns size including the scrolling area.
-	 *
-	 * This method will return the content's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size including the scrolling area.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
 		return this.engine.getScrollSize();
 	},
 
 	/**
-	 * Returns the current page.
-	 *
-	 * This method will return the current page as an object with two keys,
-	 * `x` which indicates horizontal page and `y` which indicates the vertical
-	 * page.
-	 *
-	 * @return {Object} This scroller's current page.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getPage: function() {
 		return this.page;
 	},
 
 	/**
-	 * Returns the content element.
-	 *
-	 * @return {Element} The content element.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getContent: function() {
 		return this.engine.getContent();
 	},
 
 	/**
-	 * Returns the wrapper element.
-	 *
-	 * @return {Element} The wrapper element.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getWrapper
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getWrapper: function() {
 		return this.engine.getWrapper();
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onDragStart: function() {
 		this.startScroll = this.getScroll();
 		this.startPage = this.getPage();
@@ -424,6 +331,11 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		this.fireEvent('dragstart');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onDragEnd: function() {
 
 		if (this.options.snapToPage)
@@ -436,6 +348,11 @@ Moobile.Scroller = new Class( /** @lends Scroller.prototype */ {
 		this.fireEvent('dragend');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onScroll: function() {
 		this.page.x = Math.floor(this.getScroll().x / this.getSize().x);
 		this.page.y = Math.floor(this.getScroll().y / this.getSize().y);

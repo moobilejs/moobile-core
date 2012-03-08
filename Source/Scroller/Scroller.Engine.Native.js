@@ -20,37 +20,32 @@ provides:
 */
 
 /**
- * @name  Scroller.Engine.Native
- * @class Provides an engine that uses the native scroller overflow.
- *
- * @classdesc
- *
- * [TODO: Introduction]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
  */
-Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.prototype */ {
+Moobile.Scroller.Engine.Native = new Class({
 
 	Extends: Moobile.Scroller.Engine,
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#scroller
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	scroller: null,
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#scrolling
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	scrolling: false,
 
 	/**
-	 * Initializes this scroller engine.
-	 *
-	 * This method will creates a `wrapper` element and wrap it around the
-	 * given `content` element.
-	 *
-	 * @param {Element}	[content] The Element, element id or string.
-	 * @param {Object}  [options] The options.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	initialize: function(content, options) {
 
@@ -74,15 +69,9 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	},
 
 	/**
-	 * Destroys this scroller engine.
-	 *
-	 * This method will remove the wrapper without removing the content
-	 * element.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		window.removeEvent('rotate', this.bound('_onWindowRotate'));
@@ -91,16 +80,9 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	},
 
 	/**
-	 * Scrolls to a set of coordinates.
-	 *
-	 * @param {Number} x      The x coordinate.
-	 * @param {Number} y      The y coordinate.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
 
@@ -113,15 +95,9 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	},
 
 	/**
-	 * Scrolls to an element.
-	 *
-	 * @param {Element} element The element to scroll to.
-	 * @param {Number}  [time]  The duration of the scroll.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
 
@@ -136,12 +112,9 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	},
 
 	/**
-	 * Refreshes this scroller engine.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	refresh: function() {
 
@@ -156,51 +129,37 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 	},
 
 	/**
-	 * Returns the size.
-	 *
-	 * This method will return the wrapper's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSize: function() {
 		return this.wrapper.getSize();
 	},
 
 	/**
-	 * Returns the current scroll position.
-	 *
-	 * This method will return the current scroll position as an object
-	 * with two keys, `x` which indicates the horizontal scroll and `y` which
-	 * indicates the vertical scroll of this child.
-	 *
-	 * @return {Object} The scroll position.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScroll: function() {
 		return this.wrapper.getScroll();
 	},
 
 	/**
-	 * Returns size including the scrolling area.
-	 *
-	 * This method will return the content's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size including the scrolling area.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.Native#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
 		return this.content.getScrollSize();
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onTouchStart: function() {
 
 		var scroll = this.wrapper.getScroll();
@@ -225,14 +184,29 @@ Moobile.Scroller.Engine.Native = new Class( /** @lends Scroller.Engine.Native.pr
 		this.fireEvent('dragstart');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onTouchEnd: function() {
 		this.fireEvent('dragend');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onWindowRotate: function(e) {
 		this.refresh();
 	}

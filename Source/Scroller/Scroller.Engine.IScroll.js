@@ -39,35 +39,25 @@ iScroll.prototype._checkDOMChanges = function() {
 })();
 
 /**
- * @name  Scroller.Engine.IScroll
- * @class Provides an engine that uses the iScroll scroller.
- *
- * @classdesc
- *
- * [TODO: Introduction]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
  */
-Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.prototype */ {
+Moobile.Scroller.Engine.IScroll = new Class({
 
 	Extends: Moobile.Scroller.Engine,
 
+	/**
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#scroller
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	scroller: null,
 
 	/**
-	 * Initializes this scroller engine.
-	 *
-	 * This method will creates a `wrapper` element and wrap it around the
-	 * given `content` element.
-	 *
-	 * @param {Element}	[content] The Element, element id or string.
-	 * @param {Object}  [options] The options.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	initialize: function(content, options) {
 
@@ -103,15 +93,9 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 	},
 
 	/**
-	 * Destroys this scroller engine.
-	 *
-	 * This method will remove the wrapper without removing the content
-	 * element.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this.scroller.destroy();
@@ -120,16 +104,9 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 	},
 
 	/**
-	 * Scrolls to a set of coordinates.
-	 *
-	 * @param {Number} x      The x coordinate.
-	 * @param {Number} y      The y coordinate.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
 		(function() { this.scroller.scrollTo(-x, -y, time); }).delay(5, this);
@@ -137,15 +114,9 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 	},
 
 	/**
-	 * Scrolls to an element.
-	 *
-	 * @param {Element} element The element to scroll to.
-	 * @param {Number}  [time]  The duration of the scroll.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
 		var p = element.getPosition(this.content);
@@ -154,12 +125,9 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 	},
 
 	/**
-	 * Refreshes this scroller engine.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	refresh: function() {
 		this.scroller.refresh();
@@ -167,67 +135,73 @@ Moobile.Scroller.Engine.IScroll = new Class( /** @lends Scroller.Engine.IScroll.
 	},
 
 	/**
-	 * Returns the size.
-	 *
-	 * This method will return the wrapper's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSize: function() {
 		return this.wrapper.getSize();
 	},
 
 	/**
-	 * Returns the current scroll position.
-	 *
-	 * This method will return the current scroll position as an object
-	 * with two keys, `x` which indicates the horizontal scroll and `y` which
-	 * indicates the vertical scroll of this child.
-	 *
-	 * @return {Object} The scroll position.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScroll: function() {
 		return {x: -this.scroller.x, y: -this.scroller.y};
 	},
 
 	/**
-	 * Returns size including the scrolling area.
-	 *
-	 * This method will return the content's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size including the scrolling area.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
 		return this.content.getScrollSize();
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onTouchStart: function() {
 		this.fireEvent('dragstart');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onTouchEnd: function() {
 		this.fireEvent('dragend');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onScrollMove: function() {
 		this.fireEvent('scroll');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onScrollEnd: function() {
 		this.fireEvent('scroll');
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onOrientationChange: function() {
 		this.refresh();
 	}

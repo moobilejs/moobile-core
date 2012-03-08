@@ -23,41 +23,30 @@ if (!window.Moobile) window.Moobile = {};
 if (!window.Moobile.Scroller) window.Moobile.Scroller = {};
 
 /**
- * @name  Scroller.Engine
- * @class Provides the base class for scroller engine.
- *
- * @classdesc
- *
- * [TODO: Introduction]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
  */
 Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * The content element.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#content
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	content: null,
 
 	/**
-	 * The wrapper element.
-	 * @type   Element
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#wrapper
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	wrapper: null,
 
 	/**
-	 * The class options.
-	 * @type   Object
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -68,16 +57,9 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	},
 
 	/**
-	 * Initializes this scroller engine.
-	 *
-	 * This method will creates a `wrapper` element and wrap it around the
-	 * given `content` element.
-	 *
-	 * @param {Element}	[content] The Element, element id or string.
-	 * @param {Object}  [options] The options.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	initialize: function(content, options) {
 
@@ -93,15 +75,9 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	},
 
 	/**
-	 * Destroys this scroller engine.
-	 *
-	 * This method will remove the wrapper without removing the content
-	 * element.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 
@@ -115,113 +91,72 @@ Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
 	},
 
 	/**
-	 * Scrolls to a set of coordinates.
-	 *
-	 * @param {Number} x      The x coordinate.
-	 * @param {Number} y      The y coordinate.
-	 * @param {Number} [time] The duration of the scroll.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
 		throw new Error('You must override this method');
 	},
 
 	/**
-	 * Scrolls to an element.
-	 *
-	 * @param {Element} element The element to scroll to.
-	 * @param {Number}  [time]  The duration of the scroll.
-	 *
-	 * @return {Scroller.Engine} This scroller engine.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
 		throw new Error('You must override this method');
 	},
 
 	/**
-	 * Refreshes this scroller engine.
-	 *
-	 * @return {Scroller} This scroller.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	refresh: function() {
 		throw new Error('You must override this method');
 	},
 
 	/**
-	 * Returns the size.
-	 *
-	 * This method will return the wrapper's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSize: function() {
 		throw new Error('You must override this method');
 	},
 
 	/**
-	 * Returns the current scroll position.
-	 *
-	 * This method will return the current scroll position as an object
-	 * with two keys, `x` which indicates the horizontal scroll and `y` which
-	 * indicates the vertical scroll of this child.
-	 *
-	 * @return {Object} The scroll position.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScroll: function() {
 		throw new Error('You must override this method');
 	},
 
 	/**
-	 * Returns size including the scrolling area.
-	 *
-	 * This method will return the content's size as an object with two keys,
-	 * `x` which indicates the width and `y` which indicates the height.
-	 *
-	 * @return {Object} The size including the scrolling area.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
 		throw new Error('You must override this method');
 	},
 
 	/**
-	 * Returns the content element.
-	 *
-	 * @return {Element} The content element.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getContent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getContent: function() {
 		return this.content;
 	},
 
 	/**
-	 * Returns the wrapper element.
-	 *
-	 * @return {Element} The wrapper element.
-	 *
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#getWrapper
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getWrapper: function() {
 		return this.wrapper;
