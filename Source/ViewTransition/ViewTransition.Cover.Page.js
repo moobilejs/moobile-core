@@ -30,7 +30,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 
 	overlay: null,
 
-	raiseAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You cannot use this transition for the first view of a stack');
 	},
 

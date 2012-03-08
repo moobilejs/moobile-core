@@ -29,7 +29,7 @@ Moobile.ViewTransition.Flip = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	raiseAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 
 		var parentViewContent = parentView.getContent();
 

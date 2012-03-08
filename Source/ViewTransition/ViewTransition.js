@@ -59,7 +59,7 @@ Moobile.ViewTransition = new Class({
 		this.fireEvent('start');
 
 		if (isFirstView) {
-			this.raiseAnimation(viewToShow, parentView)
+			this.firstAnimation(viewToShow, parentView)
 		} else {
 			this.enterAnimation(viewToShow, viewToHide, parentView);
 		}
@@ -101,7 +101,7 @@ Moobile.ViewTransition = new Class({
 		return this;
 	},
 
-	raiseAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You must override this method');
 	},
 

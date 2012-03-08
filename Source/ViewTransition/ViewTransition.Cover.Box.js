@@ -32,7 +32,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 
 	viewToShowWrapper: null,
 
-	raiseAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You cannot use this transition for the first view of a stack');
 	},
 

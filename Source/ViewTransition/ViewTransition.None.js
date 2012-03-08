@@ -29,7 +29,7 @@ Moobile.ViewTransition.None = new Class({
 
 	Extends: Moobile.ViewTransition,
 
-	raiseAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 		this.didRaise(viewToShow, parentView);
 	},
 
