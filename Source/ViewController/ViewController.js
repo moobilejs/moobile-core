@@ -677,11 +677,11 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didRotateToOrientation
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didRotate
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRotateToOrientation: function(orientation) {
+	didRotate: function(orientation) {
 
 	},
 
@@ -775,7 +775,7 @@ Moobile.ViewController = new Class({
 	},
 
 	_onWindowRotate: function(e) {
-		this.didRotateToOrientation(window.orientationName);
+		this.didRotate(window.orientationName);
 	},
 
 	_onViewReady: function() {
