@@ -260,9 +260,9 @@ Moobile.List = new Class({
 	didAddChild: function(component) {
 		this.parent(component);
 		if (component instanceof Moobile.ListItem) {
-			component.addEvent('tapstart', this.bound('onItemTapStart'));
-			component.addEvent('tapend', this.bound('onItemTapEnd'));
-			component.addEvent('tap', this.bound('onItemTap'));
+			component.addEvent('tapstart', this.bound('_onItemTapStart'));
+			component.addEvent('tapend', this.bound('_onItemTapEnd'));
+			component.addEvent('tap', this.bound('_onItemTap'));
 		}
 	},
 
@@ -274,9 +274,9 @@ Moobile.List = new Class({
 	didRemoveChild: function(component) {
 		this.parent(component);
 		if (component instanceof Moobile.ListItem) {
-			component.removeEvent('tapstart', this.bound('onItemTapStart'));
-			component.removeEvent('tapend', this.bound('onItemTapEnd'));
-			component.removeEvent('tap', this.bound('onItemTap'));
+			component.removeEvent('tapstart', this.bound('_onItemTapStart'));
+			component.removeEvent('tapend', this.bound('_onItemTapEnd'));
+			component.removeEvent('tap', this.bound('_onItemTap'));
 		}
 	},
 
@@ -287,8 +287,7 @@ Moobile.List = new Class({
 	 */
 	didChangeState: function(state) {
 		this.parent(state)
-		if (state === 'disabled' ||
-			state == null) {
+		if (state === 'disabled' || state == null) {
 			this.getChildren().invoke('setDisabled', state);
 		}
 	},
@@ -298,7 +297,7 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onItemTapStart: function(e, sender) {
+	_onItemTapStart: function(e, sender) {
 		if (this._selectable) sender.setHighlighted(true);
 	},
 
@@ -307,7 +306,7 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onItemTapEnd: function(e, sender) {
+	_onItemTapEnd: function(e, sender) {
 		if (this._selectable) sender.setHighlighted(false);
 	},
 
@@ -316,7 +315,7 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onItemTap: function(e, sender) {
+	_onItemTap: function(e, sender) {
 		if (this._selectable) this.setSelectedItem(sender);
 	}
 

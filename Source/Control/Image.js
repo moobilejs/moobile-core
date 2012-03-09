@@ -29,28 +29,28 @@ Moobile.Image = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_image: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_source: null,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_loaded: false,
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -60,7 +60,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -132,7 +132,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/getSource
+	 * @see    http://moobile.net/api/0.1/Control/Image#getSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -141,7 +141,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/getImage
+	 * @see    http://moobile.net/api/0.1/Control/Image#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -150,7 +150,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image
+	 * @see    http://moobile.net/api/0.1/Control/Image#getOriginalSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -159,7 +159,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image
+	 * @see    http://moobile.net/api/0.1/Control/Image#isLoaded
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -168,7 +168,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @private
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -186,6 +186,11 @@ Moobile.Image = new Class({
 		this.show();
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_unload: function() {
 
 		this._loaded = false;
@@ -200,6 +205,11 @@ Moobile.Image = new Class({
 		this.hide();
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	_onLoad: function() {
 		this._load();
 	}
