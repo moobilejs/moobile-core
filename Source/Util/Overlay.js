@@ -36,7 +36,7 @@ Moobile.Overlay = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('overlay');
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
 	},
 
 	/**
@@ -45,7 +45,7 @@ Moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.removeEvent('animationend', this.bound('_onAnimationEnd'));
 		this.parent();
 	},
 
@@ -73,11 +73,11 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Util/Overlay#onAnimationEnd
+	 * @see    http://moobile.net/api/0.1/Util/Overlay#_onAnimationEnd
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onAnimationEnd: function(e) {
+	_onAnimationEnd: function(e) {
 
 		e.stop();
 

@@ -40,8 +40,6 @@ Moobile.ViewTransition = new Class({
 		Class.Binds
 	],
 
-	options: {},
-
 	/**
 	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)

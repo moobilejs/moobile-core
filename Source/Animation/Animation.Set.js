@@ -28,12 +28,7 @@ Moobile.Animation.Set = new Class({
 
 	Extends: Moobile.Animation,
 
-	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation.Set#name
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	name: null,
+
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Animation/Animation.Set#element
@@ -65,7 +60,6 @@ Moobile.Animation.Set = new Class({
 
 		this.parent(element, options);
 
-		delete this.running;
 		delete this.animationClass;
 		delete this.animationProperties;
 

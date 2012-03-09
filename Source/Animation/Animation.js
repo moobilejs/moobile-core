@@ -31,11 +31,18 @@ Moobile.Animation = new Class({
 	Extends: Moobile.EventDispatcher,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#name
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	name: null,
+	_name: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_running: false,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Animation/Animation#element
@@ -43,13 +50,6 @@ Moobile.Animation = new Class({
 	 * @since  0.1
 	 */
 	element: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#running
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	running: false,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Animation/Animation#animationClass
@@ -90,7 +90,7 @@ Moobile.Animation = new Class({
 	 * @since  0.1
 	 */
 	setName: function(name) {
-		this.name = name;
+		this._name = name;
 		return this;
 	},
 
@@ -100,7 +100,7 @@ Moobile.Animation = new Class({
 	 * @since  0.1
 	 */
 	getName: function() {
-		return this.name;
+		return this._name;
 	},
 
 	/**
@@ -315,10 +315,10 @@ Moobile.Animation = new Class({
 	 */
 	start: function() {
 
-		if (this.running)
+		if (this._running)
 			return this;
 
-		this.running = true;
+		this._running = true;
 		this.attach();
 		this.fireEvent('start');
 
@@ -332,10 +332,10 @@ Moobile.Animation = new Class({
 	 */
 	stop: function() {
 
-		if (this.running === false)
+		if (this._running === false)
 			return this;
 
-		this.running = false;
+		this._running = false;
 		this.detach();
 		this.fireEvent('stop');
 
@@ -348,7 +348,7 @@ Moobile.Animation = new Class({
 	 * @since  0.1
 	 */
 	isRunning: function() {
-		return this.running;
+		return this._running;
 	},
 
 	/**
@@ -358,7 +358,7 @@ Moobile.Animation = new Class({
 	 */
 	onAnimationEnd: function(e) {
 
-		if (this.running === false)
+		if (this._running === false)
 			return;
 
 		if (this.element !== e.target)
@@ -366,7 +366,7 @@ Moobile.Animation = new Class({
 
 		e.stop();
 
-		this.running = false;
+		this._running = false;
 		this.detach();
 		this.fireEvent('end');
 	}

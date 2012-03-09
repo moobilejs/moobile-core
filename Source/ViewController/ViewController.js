@@ -22,19 +22,11 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @name  ViewController
- * @class Provides a controller used to manage a view.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewController/ViewController
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewController = new Class( /** @lends ViewController.prototype */ {
+Moobile.ViewController = new Class({
 
 	Extends: Moobile.EventDispatcher,
 

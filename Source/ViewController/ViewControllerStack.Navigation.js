@@ -21,22 +21,11 @@ provides:
 */
 
 /**
- * @name  ViewControllerStack.Navigation
- * @class Provides a view controller stack that also handles a navigation bar
- *        and its back button.
- *
- * @classdesc
- *
- * [TODO: Description]
- * [TODO: Events]
- * [TODO: Options]
- *
- * @extends ViewControllerStack
- *
- * @author  Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @version 0.1
+ * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack.Navigation
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
  */
-Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerStack.Navigation.prototype */ {
+Moobile.ViewControllerStack.Navigation = new Class({
 
 	Extends: Moobile.ViewControllerStack,
 
@@ -51,6 +40,11 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 		backButtonLabel: 'Back'
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	willAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
@@ -74,13 +68,18 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 				var backButton = new Moobile.BarButton(null, null, 'back');
 				backButton.setStyle('back');
 				backButton.setLabel(backButtonLabel);
-				backButton.addEvent('tap', this.bound('onBackButtonTap'));
+				backButton.addEvent('tap', this.bound('_onBackButtonTap'));
 
 				navigationBar.getItem().addLeftBarButton(backButton);
 			}
 		}
 	},
 
+	/**
+	 * @overrides
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	didAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
@@ -95,7 +94,12 @@ Moobile.ViewControllerStack.Navigation = new Class( /** @lends ViewControllerSta
 		}
 	},
 
-	onBackButtonTap: function(e) {
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_onBackButtonTap: function(e) {
 		this.popViewController();
 	}
 

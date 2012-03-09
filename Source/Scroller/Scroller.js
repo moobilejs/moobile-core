@@ -29,6 +29,37 @@ Moobile.Scroller = new Class({
 	Extends: Moobile.EventDispatcher,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_startScroll: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_startTime: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_startPage: null,
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#page
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_page: {
+		x: 0,
+		y: 0
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#engine
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -48,37 +79,6 @@ Moobile.Scroller = new Class({
 	 * @since  0.1.0
 	 */
 	wrapperElement: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startScroll
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	startScroll: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startTime
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	startTime: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#startPage
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	startPage: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#page
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	page: {
-		x: 0,
-		y: 0
-	},
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#options
@@ -207,8 +207,8 @@ Moobile.Scroller = new Class({
 
 		this.scrollTo(x, y, time);
 
-		this.page.x = pageX;
-		this.page.y = pageY;
+		this._page.x = pageX;
+		this._page.y = pageY;
 
 		return this;
 	},
@@ -233,19 +233,19 @@ Moobile.Scroller = new Class({
 		var frame = this.getSize();
 		var scroll = this.getScroll();
 
-		var time = Date.now() - this.startTime;
+		var time = Date.now() - this._startTime;
 
-		var pageX = this.startPage.x;
-		var pageY = this.startPage.y;
+		var pageX = this._startPage.x;
+		var pageY = this._startPage.y;
 
-		var moveX = Math.round((scroll.x - this.startScroll.x) * 100 / frame.x);
-		var moveY = Math.round((scroll.y - this.startScroll.y) * 100 / frame.y);
+		var moveX = Math.round((scroll.x - this._startScroll.x) * 100 / frame.x);
+		var moveY = Math.round((scroll.y - this._startScroll.y) * 100 / frame.y);
 
 		var dirX = moveX >= 0 ? 1 : -1;
 		var dirY = moveY >= 0 ? 1 : -1;
 
-		if (Math.abs(this.startScroll.x - scroll.x) < 10) dirX = 0;
-		if (Math.abs(this.startScroll.y - scroll.y) < 10) dirY = 0;
+		if (Math.abs(this._startScroll.x - scroll.x) < 10) dirX = 0;
+		if (Math.abs(this._startScroll.y - scroll.y) < 10) dirY = 0;
 
 		if (Math.abs(moveX) >= this.options.snapToPageAt || time <= this.options.snapToPageDelay) pageX += dirX;
 		if (Math.abs(moveY) >= this.options.snapToPageAt || time <= this.options.snapToPageDelay) pageY += dirY;
@@ -298,7 +298,7 @@ Moobile.Scroller = new Class({
 	 * @since  0.1.0
 	 */
 	getPage: function() {
-		return this.page;
+		return this._page;
 	},
 
 	/**
@@ -325,9 +325,9 @@ Moobile.Scroller = new Class({
 	 * @since  0.1.0
 	 */
 	_onDragStart: function() {
-		this.startScroll = this.getScroll();
-		this.startPage = this.getPage();
-		this.startTime = Date.now();
+		this._startScroll = this.getScroll();
+		this._startPage = this.getPage();
+		this._startTime = Date.now();
 		this.fireEvent('dragstart');
 	},
 
@@ -341,9 +341,9 @@ Moobile.Scroller = new Class({
 		if (this.options.snapToPage)
 			this.snap();
 
-		this.startScroll = null;
-		this.startPage = null;
-		this.startTime = null;
+		this._startScroll = null;
+		this._startPage = null;
+		this._startTime = null;
 
 		this.fireEvent('dragend');
 	},
@@ -354,8 +354,8 @@ Moobile.Scroller = new Class({
 	 * @since  0.1.0
 	 */
 	_onScroll: function() {
-		this.page.x = Math.floor(this.getScroll().x / this.getSize().x);
-		this.page.y = Math.floor(this.getScroll().y / this.getSize().y);
+		this._page.x = Math.floor(this.getScroll().x / this.getSize().x);
+		this._page.y = Math.floor(this.getScroll().y / this.getSize().y);
 		this.fireEvent('scroll');
 	}
 
