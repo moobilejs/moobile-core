@@ -109,11 +109,11 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.overlay.setStyle('radial');
 		this.addChild(this.overlay);
 
-		this.headerElement = new Element('div.dialog-header');
-		this.footerElement = new Element('div.dialog-footer');
-		this.contentElement = new Element('div.dialog-content');
+		this.headerElement  = new Element('div.alert-header');
+		this.footerElement  = new Element('div.alert-footer');
+		this.contentElement = new Element('div.alert-content');
 
-		this.wrapperElement = new Element('div.dialog');
+		this.wrapperElement = new Element('div.alert-wrapper');
 		this.wrapperElement.grab(this.headerElement);
 		this.wrapperElement.grab(this.contentElement);
 		this.wrapperElement.grab(this.footerElement);

@@ -91,7 +91,7 @@ Moobile.Button = new Class(/** @lends Button.prototype */ {
 		}
 
 		this._label = label;
-		this._label.addClass('label');
+		this._label.addClass('button-label');
 
 		return this;
 	},

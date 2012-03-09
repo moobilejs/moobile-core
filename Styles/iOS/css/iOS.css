@@ -392,7 +392,7 @@ p small {
 	width: 100%;
 }
 
-.button .label {
+.button .button-label {
 	display: block;                                             /* Important */
 	height: inherit;                                            /* Important */
 	line-height: inherit;                                       /* Important */
@@ -495,7 +495,7 @@ p small {
 	width: auto;
 }
 
-.button.bar-button .label {
+.button.bar-button .button-label {
 	display: block;                                             /* Important */
 	height: inherit;
 	line-height: inherit;
@@ -880,7 +880,7 @@ p small {
 	border-bottom: 1px solid #bbbbbb;
 }
 
-.list-item > .image {
+.list-item > .list-item-image {
 	-webkit-box-flex: 0;                                        /* Important */
 	-webkit-box-sizing: border-box;
 	-webkit-background-clip: padding-box;
@@ -894,11 +894,11 @@ p small {
 	width: 29px;
 }
 
-.list-item > .label {
+.list-item > .list-item-label {
 	-webkit-box-flex: 1;                                        /* Important */
 }
 
-.list-item > .detail {
+.list-item > .list-item-detail {
 	-webkit-box-flex: 0;                                        /* Important */
 	color: #395587;
 	font-size: 17px;
@@ -912,14 +912,14 @@ p small {
 	text-shadow: none;
 }
 
-.list-item.is-selected .detail,
-.list-item.is-highlighted .detail {
+.list-item.is-selected .list-item-detail,
+.list-item.is-highlighted .list-item-detail {
 	color: #ffffff;
 }
 
 /* Styles */
 
-.list-item .detail:after {
+.list-item .list-item-detail:after {
 	content: '';
 	height: 100%;
 	position: absolute;
@@ -930,46 +930,46 @@ p small {
 
 /* Style Checked */
 
-.list-item.style-checked .detail {
+.list-item.style-checked .list-item-detail {
 	padding-right: 35px;
 }
 
-.list-item.style-checked .detail:after {
+.list-item.style-checked .list-item-detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -60px center;
 }
 
-.list-item.style-checked.is-selected > .detail:after,
-.list-item.style-checked.is-highlighted > .detail:after {
+.list-item.style-checked.is-selected > .list-item-detail:after,
+.list-item.style-checked.is-highlighted > .list-item-detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
 }
 
 /* Style Disclosed */
 
-.list-item.style-disclosed > .detail {
+.list-item.style-disclosed > .list-item-detail {
 	padding-right: 35px;
 }
 
-.list-item.style-disclosed > .detail:after {
+.list-item.style-disclosed > .list-item-detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
 }
 
-.list-item.style-disclosed.is-selected > .detail:after,
-.list-item.style-disclosed.is-highlighted > .detail:after {
+.list-item.style-disclosed.is-selected > .list-item-detail:after,
+.list-item.style-disclosed.is-highlighted > .list-item-detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
 }
 
 /* Style Detailed */
 
-.list-item.style-detailed > .detail {
+.list-item.style-detailed > .list-item-detail {
 	padding-right: 35px;
 }
 
-.list-item.style-detailed > .detail:after {
+.list-item.style-detailed > .list-item-detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
-.list-item.style-detailed.is-selected > .detail:after,
-.list-item.style-detailed.is-highlighted > .detail:after {
+.list-item.style-detailed.is-selected > .list-item-detail:after,
+.list-item.style-detailed.is-highlighted > .list-item-detail:after {
 	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
 }
 
@@ -1051,7 +1051,7 @@ p small {
 	z-index: 125;                                               /* Important */
 }
 
-.alert .dialog {
+.alert .alert-wrapper {
 	-webkit-box-sizing: border-box;
 	-webkit-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
 	-webkit-border-image: url(../images/alert.png) 35 15 15 15 stretch;
@@ -1063,7 +1063,7 @@ p small {
 	z-index: 125;                                               /* Important */
 }
 
-.alert .dialog-header {
+.alert .alert-header {
 	font-size: 18px;
 	font-weight: bold;
 	margin-top: -19px;
@@ -1071,7 +1071,7 @@ p small {
 	text-align: center;
 }
 
-.alert .dialog-content {
+.alert .alert-content {
 	font-size: 16px;
 	font-weight: normal;
 	line-height: 20px;
@@ -1079,7 +1079,7 @@ p small {
 	text-align: center;
 }
 
-.alert .dialog-footer {
+.alert .alert-footer {
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
 	margin-left: -5px;
@@ -1087,7 +1087,7 @@ p small {
 	margin-bottom: -5px;
 }
 
-.alert .dialog-footer .button {
+.alert .alert-footer .button {
 	-webkit-box-flex: 1;
 	-webkit-border-image: url(../images/alert-button.png) 0 5 86 5 stretch stretch;
 	-webkit-border-radius: 4px;
@@ -1103,21 +1103,21 @@ p small {
 	text-align: center;
 }
 
-.alert .dialog-footer .button:last-child {
+.alert .alert-footer .button:last-child {
 	margin-bottom: 0px;
 }
 
-.alert .dialog-footer .button.default,
-.alert .dialog-footer .button.default {
+.alert .alert-footer .button.default,
+.alert .alert-footer .button.default {
 	-webkit-border-image: url(../images/alert-button.png) 43 5 43 5 stretch stretch;
 }
 
-.alert .dialog-footer .button.is-selected,
-.alert .dialog-footer .button.is-highlighted {
+.alert .alert-footer .button.is-selected,
+.alert .alert-footer .button.is-highlighted {
 	-webkit-border-image: url(../images/alert-button.png) 86 5 0 5 stretch stretch;
 }
 
-.alert.show-animated .dialog {
+.alert.show-animated .alert-wrapper {
 	-webkit-animation-name: anim-show-alert;
 	-webkit-animation-duration: 400ms;
 	-webkit-animation-iteration-count: 1;
@@ -1125,7 +1125,7 @@ p small {
 	-webkit-animation-fill-mode: both;
 }
 
-.alert.hide-animated .dialog {
+.alert.hide-animated .alert-wrapper {
 	-webkit-animation-name: anim-hide-alert;
 	-webkit-animation-duration: 250ms;
 	-webkit-animation-iteration-count: 1;
@@ -1135,21 +1135,21 @@ p small {
 
 /* Horizontal Button Layout */
 
-.alert.button-layout-horizontal .dialog-footer {
+.alert.button-layout-horizontal .alert-footer {
 	-webkit-box-orient: horizontal;
 }
 
-.alert.button-layout-horizontal .dialog-footer .button {
+.alert.button-layout-horizontal .alert-footer .button {
 	margin: 0px;
 	margin-left: 4px;
 	margin-right: 4px;
 }
 
-.alert.button-layout-horizontal .dialog-footer .button:first-child {
+.alert.button-layout-horizontal .alert-footer .button:first-child {
 	margin-left: 0px;
 }
 
-.alert.button-layout-horizontal .dialog-footer .button:last-child {
+.alert.button-layout-horizontal .alert-footer .button:last-child {
 	margin-right: 0px;
 }
 
