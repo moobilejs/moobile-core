@@ -56,18 +56,18 @@ Moobile.WindowController = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	setRootViewController: function(_rootViewController) {
+	setRootViewController: function(rootViewController) {
 
 		if (this._rootViewController) {
 			this._rootViewController.destroy();
 			this._rootViewController = null;
 		}
 
-		if (_rootViewController) {
- 			this.addChildViewController(_rootViewController);
+		if (rootViewController) {
+ 			this.addChildViewController(rootViewController);
 		}
 
-		this._rootViewController = _rootViewController;
+		this.rootViewController = rootViewController;
 
 		return this;
 	},
