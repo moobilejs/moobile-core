@@ -65,7 +65,7 @@ Moobile.ViewControllerStack = new Class({
 		this.addChildViewController(viewController);
 
 		var viewControllerPushed = viewController;
-		var viewControllerBefore = childViewControllers.lastItemAt(1);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 
 		var viewToShow = viewControllerPushed.getView();
 		var viewToHide = viewControllerBefore
@@ -97,8 +97,8 @@ Moobile.ViewControllerStack = new Class({
 	onPushTransitionStart: function(e) {
 
 		var childViewControllers = this.getChildViewControllers();
-		var viewControllerPushed = childViewControllers.lastItemAt(0);
-		var viewControllerBefore = childViewControllers.lastItemAt(1);
+		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 		if (viewControllerBefore) {
 			viewControllerBefore.viewWillLeave();
 		}
@@ -114,8 +114,8 @@ Moobile.ViewControllerStack = new Class({
 	onPushTransitionComplete: function(e) {
 
 		var childViewControllers = this.getChildViewControllers();
-		var viewControllerPushed = childViewControllers.lastItemAt(0);
-		var viewControllerBefore = childViewControllers.lastItemAt(1);
+		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 		if (viewControllerBefore) {
 			viewControllerBefore.viewDidLeave();
 		}
@@ -141,8 +141,8 @@ Moobile.ViewControllerStack = new Class({
 		if (childViewControllers.length <= 1)
 			return this;
 
-		var viewControllerPopped = childViewControllers.lastItemAt(0);
-		var viewControllerBefore = childViewControllers.lastItemAt(1);
+		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 
 		this.willPopViewController(viewControllerPopped);
 
@@ -198,8 +198,8 @@ Moobile.ViewControllerStack = new Class({
 	 */
 	onPopTransitionStart: function(e) {
 		var childViewControllers = this.getChildViewControllers();
-		var viewControllerBefore = childViewControllers.lastItemAt(1);
-		var viewControllerPopped = childViewControllers.lastItemAt(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
 		viewControllerBefore.viewWillEnter();
 		viewControllerPopped.viewWillLeave();
 	},
@@ -212,8 +212,8 @@ Moobile.ViewControllerStack = new Class({
 	onPopTransitionComplete: function(e) {
 
 		var childViewControllers = this.getChildViewControllers();
-		var viewControllerPopped = childViewControllers.lastItemAt(0);
-		var viewControllerBefore = childViewControllers.lastItemAt(1);
+		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 		viewControllerBefore.viewDidEnter();
 		viewControllerPopped.viewDidLeave();
 		viewControllerPopped.removeFromParentViewController();
