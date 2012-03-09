@@ -230,6 +230,5 @@ Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('scroll-view', null, function(element) {
-	var instance = Moobile.Component.create(Moobile.ScrollView, element, 'data-scroll-view');
-	this.addChild(instance);
+	this.addChild(Moobile.Component.create(Moobile.ScrollView, element, 'data-scroll-view'));
 });
