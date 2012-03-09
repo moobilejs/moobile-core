@@ -29,32 +29,32 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	Extends: Moobile.Component,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	title: null,
+	_title: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_message: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_buttons: [],
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Dialog/Alert
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	message: null,
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	buttons: [],
-
-	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	dialog: null,
+	contentElement: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Dialog/Alert
@@ -94,7 +94,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @overrides
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -103,22 +103,22 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 		this.parent();
 
 		this.element.addClass('alert');
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this.overlay = new Moobile.Overlay();
 		this.overlay.setStyle('radial');
 		this.addChild(this.overlay);
 
-		this.dialogHeader  = new Element('div.dialog-header');
-		this.dialogFooter  = new Element('div.dialog-footer');
-		this.dialogContent = new Element('div.dialog-content');
+		this.headerElement = new Element('div.dialog-header');
+		this.footerElement = new Element('div.dialog-footer');
+		this.contentElement = new Element('div.dialog-content');
 
-		this.dialog = new Element('div.dialog');
-		this.dialog.grab(this.dialogHeader);
-		this.dialog.grab(this.dialogContent);
-		this.dialog.grab(this.dialogFooter);
+		this.wrapperElement = new Element('div.dialog');
+		this.wrapperElement.grab(this.headerElement);
+		this.wrapperElement.grab(this.contentElement);
+		this.wrapperElement.grab(this.footerElement);
 
-		this.element.grab(this.dialog);
+		this.element.grab(this.wrapperElement);
 
 		var buttonLayout = this.options.buttonLayout;
 		if (buttonLayout) {
@@ -127,21 +127,21 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @overrides
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	destroy: function() {
 
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
 
-		this.title = null;
-		this.message = null;
+		this._title = null;
+		this._message = null;
 
-		this.dialog = null;
-		this.dialogHeader = null;
-		this.dialogFooter = null;
-		this.dialogContent = null;
+		this.wrapperElement = null;
+		this.headerElement = null;
+		this.footerElement = null;
+		this.contentElement = null;
 
 		this.overlay.destroy();
 		this.overlay = null;
@@ -156,24 +156,21 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	setTitle: function(title) {
 
-		if (this.title === title)
+		if (this._title === title)
 			return this;
 
 		if (typeof title === 'string') {
-			var text = title;
-			title = new Moobile.Text();
-			title.setText(text);
+			title = new Moobile.Text().setText(title);
 		}
 
-		if (this.title === null) {
-			this.title = title;
-			this.addChild(title, 'top', this.dialogHeader);
+		if (this._title) {
+			this._title.replaceWith(title, true);
 		} else {
-			this.replaceChild(this.title, title, true);
-			this.title = title;
+			this.addChildInside(title, this.headerElement);
 		}
 
-		this.title.addClass('title');
+		this._title = title;
+		this._title.addClass('title');
 
 		return this;
 	},
@@ -184,7 +181,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	getTitle: function() {
-		return this.title;
+		return this._title;
 	},
 
 	/**
@@ -194,24 +191,21 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 */
 	setMessage: function(message) {
 
-		if (this.message === message)
+		if (this._message === message)
 			return this;
 
 		if (typeof message === 'string') {
-			var text = message;
-			message = new Moobile.Text();
-			message.setText(text);
+			message = new Moobile.Text().setText(message);
 		}
 
-		if (this.message === null) {
-			this.message = message;
-			this.addChild(message, 'top', this.dialogContent);
+		if (this._message) {
+			this._message.replaceWith(message, true);
 		} else {
-			this.replaceChild(this.message, message, true);
-			this.message = message;
+			this.addChildInside(message, this.contentElement);
 		}
 
-		this.message.addClass('message');
+		this._message = message;
+		this._message.addClass('message');
 
 		return this;
 	},
@@ -222,7 +216,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	getMessage: function() {
-		return this.message;
+		return this._message;
 	},
 
 	/**
@@ -231,7 +225,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	addButton: function(button) {
-		this.addChild(button, 'bottom', this.dialogFooter);
+		this.addChildInside(button, this.footerElement);
 		return this;
 	},
 
@@ -251,7 +245,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	setDefaultButtonIndex: function(index) {
-		return this.setDefaultButton(this.getChildren(Moobile.Button)[index]);
+		return this.setDefaultButton(this.getChildOfTypeAt(Moobile.Button, index));
 	},
 
 	/**
@@ -285,12 +279,10 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	didAddChild: function(child) {
-
 		this.parent(child);
-
 		if (child instanceof Moobile.Button) {
-			child.addEvent('tap', this.bound('onButtonTap'));
-			this.buttons.include(child);
+			child.addEvent('tap', this.bound('_onButtonTap'));
+			this._buttons.include(child);
 		}
 	},
 
@@ -300,12 +292,10 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	didRemoveChild: function(child) {
-
 		this.parent(child);
-
 		if (child instanceof Moobile.Button) {
-			child.removeEvent('tap', this.bound('onButtonTap'));
-			this.buttons.erase(child);
+			child.removeEvent('tap', this.bound('_onButtonTap'));
+			this._buttons.erase(child);
 		}
 	},
 
@@ -315,10 +305,8 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @since  0.1
 	 */
 	willShow: function() {
-
 		this.parent();
-
-		if (this.buttons.length === 0) {
+		if (this._buttons.length === 0) {
 			var button = new Moobile.Button();
 			button.setLabel('OK');
 			this.addButton(button);
@@ -340,7 +328,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onButtonTap: function(e, sender) {
+	_onButtonTap: function(e, sender) {
 
 		var index = this.getChildren(Moobile.Button).indexOf(sender);
 		if (index >= 0) {
@@ -355,7 +343,7 @@ Moobile.Alert = new Class( /** @lends Alert.prototype */ {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	onAnimationEnd: function(e) {
+	_onAnimationEnd: function(e) {
 
 		e.stop();
 
