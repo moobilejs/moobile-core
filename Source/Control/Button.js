@@ -36,7 +36,7 @@ Moobile.Button = new Class({
 	_label: null,
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -59,7 +59,7 @@ Moobile.Button = new Class({
 	},
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

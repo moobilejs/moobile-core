@@ -36,7 +36,7 @@ Moobile.ViewControllerStack = new Class({
 	_animating: false,
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -302,7 +302,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -314,7 +314,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

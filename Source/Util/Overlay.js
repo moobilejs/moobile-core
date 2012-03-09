@@ -29,7 +29,7 @@ Moobile.Overlay = new Class({
 	Extends: Moobile.Component,
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -40,7 +40,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

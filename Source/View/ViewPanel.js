@@ -43,7 +43,7 @@ Moobile.ViewPanel = new Class({
 	_sidePanel: null,
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -72,7 +72,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -82,7 +82,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

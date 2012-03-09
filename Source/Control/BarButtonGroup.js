@@ -29,7 +29,7 @@ Moobile.BarButtonGroup = new Class({
 	Extends: Moobile.ButtonGroup,
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

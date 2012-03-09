@@ -36,7 +36,7 @@ Moobile.WindowController = new Class({
 	_rootViewController: null,
 
 	/**
-	 * @overrides
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
