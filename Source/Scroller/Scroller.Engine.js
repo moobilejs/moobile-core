@@ -27,7 +27,7 @@ if (!window.Moobile.Scroller) window.Moobile.Scroller = {};
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
-Moobile.Scroller.Engine = new Class( /** @lends Scroller.Engine.prototype */ {
+Moobile.Scroller.Engine = new Class({
 
 	Extends: Moobile.EventDispatcher,
 

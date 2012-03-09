@@ -24,7 +24,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.Button = new Class(/** @lends Button.prototype */ {
+Moobile.Button = new Class({
 
 	Extends: Moobile.Control,
 

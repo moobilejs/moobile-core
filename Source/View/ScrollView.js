@@ -26,7 +26,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.ScrollView = new Class( /** @lends ScrollView.prototype */ {
+Moobile.ScrollView = new Class({
 
 	Extends: Moobile.View,
 

@@ -24,7 +24,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.List = new Class( /** @lends List.prototype */ {
+Moobile.List = new Class({
 
 	Extends: Moobile.Control,
 

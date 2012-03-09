@@ -25,7 +25,7 @@ provides:
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
-Moobile.NavigationBarItem = new Class( /** @lends NavigationBarItem.prototype */ {
+Moobile.NavigationBarItem = new Class({
 
 	Extends: Moobile.BarItem,
 
