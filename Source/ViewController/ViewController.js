@@ -341,6 +341,8 @@ Moobile.ViewController = new Class({
 		viewController.setParentViewController(this);
 		viewController.setModal(true);
 
+		this._modalViewController = viewController;
+
 		var viewToShow = viewController.getView();
 		var viewToHide = this.view;
 		var parentView = this.view.getParentView();
@@ -357,8 +359,6 @@ Moobile.ViewController = new Class({
 		);
 
 		viewController.setViewTransition(viewTransition);
-
-		this._modalViewController = viewController;
 
 		return this;
 	},
@@ -398,7 +398,7 @@ Moobile.ViewController = new Class({
 		var viewToHide = this._modalViewController.getView();
 		var parentView = this.view.getParentView();
 
-		var viewTransition = this._modalViewController.viewTransition;
+		var viewTransition = this._modalViewController.getViewTransition();
 		viewTransition.addEvent('start:once', this.bound('_onDismissTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('_onDismissTransitionCompleted'));
 		viewTransition.leave(
