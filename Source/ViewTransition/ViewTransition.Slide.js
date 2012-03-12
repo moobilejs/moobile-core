@@ -101,6 +101,8 @@ Moobile.ViewTransition.Slide = new Class({
 
 			this.didLeave(viewToShow, viewToHide, parentView);
 
+			parentViewContent.removeEvent('animationend', handler);
+
 		}.bind(this);
 
 		parentViewContent.addEvent('animationend', handler);
