@@ -225,8 +225,12 @@ Moobile.Alert = new Class({
 	 * @since  0.1
 	 */
 	addButton: function(button) {
-		this.addChildInside(button, this.footerElement);
-		return this;
+
+		if (typeof button === 'string') {
+			button = new Moobile.Button().setLabel(button);
+		}
+
+		return this.addChildInside(button, this.footerElement);
 	},
 
 	/**
