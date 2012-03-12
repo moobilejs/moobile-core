@@ -1121,6 +1121,8 @@ p small {
 
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
+/* Activity Indicator
+-----------------------------------------------------------------------------*/
 
 @-webkit-keyframes activity-indicator-rotation-keyframes {
 	from {
@@ -1132,45 +1134,13 @@ p small {
 }
 
 .activity-indicator {
+	-webkit-animation: activity-indicator-rotation-keyframes 1s infinite;
+	-webkit-animation-timing-function: linear;
+	-webkit-transform-origin: 50% 50%;
 	-webkit-backface-visibility: hidden;                        /* Important */
-	z-index: 100;
-	width: 21px;
-}
-
-/* Style Default */
-
-.activity-indicator.style-default .activity-indicator-content {
 	background: url(../images/activity-indicator.png);
-}
-
-.activity-indicator.style-default.activity .activity-indicator-content {
-	-webkit-animation: activity-indicator-rotation-keyframes 1s infinite;
-	-webkit-animation-timing-function: linear;
-	-webkit-transform-origin: 50% 50%;
-}
-
-/* Style Box */
-
-.activity-indicator.style-box {
-	-webkit-border-radius: 8px;
-	-webkit-box-align: center;
-	background: rgba(0, 0, 0, 0.5);
-	display: -webkit-box;
-	height: 60px;
-	padding: 8px;
-	width: 60px;
-}
-
-.activity-indicator.style-box .activity-indicator-content {
-	background: url(../images/activity-indicator.png) no-repeat -21px 0px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.activity-indicator.style-box.activity .activity-indicator-content {
-	-webkit-animation: activity-indicator-rotation-keyframes 1s infinite;
-	-webkit-animation-timing-function: linear;
-	-webkit-transform-origin: 50% 50%;
+	height: 21px;
+	width: 21px;
 }
 
 /* Slider
