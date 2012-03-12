@@ -26,8 +26,6 @@ sources:
   - "Source/Control/ButtonGroup.js"
   - "Source/Control/Bar.js"
   - "Source/Control/BarItem.js"
-  - "Source/Control/BarButton.js"
-  - "Source/Control/BarButtonGroup.js"
   - "Source/Control/NavigationBar.js"
   - "Source/Control/NavigationBarItem.js"
   - "Source/Control/Slider.js"

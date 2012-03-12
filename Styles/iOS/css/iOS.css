@@ -350,6 +350,75 @@ p small {
 	width: auto;                                                /* Important */
 }
 
+/* Bar
+-----------------------------------------------------------------------------*/
+
+.bar {
+	-webkit-backface-visibility: hidden;                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	background: url(../images/bar.png) repeat-x 0px 0px;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
+	height: 44px;                                               /* Important */
+	position: relative;                                         /* Important */
+	padding-left:  7px;
+	padding-right: 7px;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+	width: 100%;                                                /* Important */
+	z-index: 50;                                                /* Important */
+}
+
+.bar > .bar-item {
+	-webkit-box-sizing: border-box;                             /* Important */
+	display: -webkit-box;                                       /* Important */
+	height: inherit;                                            /* Important */
+	position: relative;                                         /* Important */
+	width: 100%;                                                /* Important */
+}
+
+/* Dark */
+
+.bar.style-dark {
+	background: url(../images/bar.png) repeat-x 0px -88px;
+	color: #ffffff;
+	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Navigation Bar
+-----------------------------------------------------------------------------*/
+
+.bar.navigation-bar {
+	height: 44px;
+	line-height: 43px;
+}
+
+.bar.navigation-bar > .bar-item {
+	height: inherit;
+	line-height: inherit;
+}
+
+.bar.navigation-bar > .bar-item .bar-title {
+	-webkit-box-flex: 1;                                        /* Important */
+	-webkit-box-sizing: border-box;                             /* Important */
+	height: inherit;
+	line-height: inherit;
+	text-align: center;
+	left: 0px;                                                  /* Important */
+	overflow: hidden;                                           /* Important */
+	position: relative;                                         /* Important */
+	right: 0px;                                                 /* Important */
+	text-overflow: ellipsis;                                    /* Important */
+	white-space: nowrap;                                        /* Important */
+	width: 100%;                                                /* Important */
+	z-index: 25;                                                /* Important */
+}
+
+.bar.navigation-bar .button {
+	position: relative;
+	z-index: 35;
+}
+
 /* Button Group
 -----------------------------------------------------------------------------*/
 
@@ -449,31 +518,9 @@ p small {
 	-webkit-border-bottom-right-radius: 10px;
 }
 
-/* Bar Button Group
------------------------------------------------------------------------------*/
+/* Inside a Bar */
 
-.button-group.bar-button-group {
-	-webkit-box-orient: horizontal;
-	-webkit-box-pack: center;
-	display: -webkit-box;
-}
-
-.button-group.bar-button-group.style-vertical {
-	-webkit-box-orient: vertical;
-	-webkit-box-pack: start;
-	display: -webkit-box;
-}
-
-.button-group.bar-button-group .button.bar-button {
-	-webkit-box-flex: 1;
-	display: block;
-	margin: 0px;
-}
-
-/* Bar Button
------------------------------------------------------------------------------*/
-
-.button.bar-button {
+.bar .button {
 	-webkit-backface-visibility: hidden;                        /* Important */
 	-webkit-box-sizing: border-box;                             /* Important */
 	-webkit-border-image: url(../images/bar-button.png) 0 5 1970 stretch stretch;
@@ -495,7 +542,7 @@ p small {
 	width: auto;
 }
 
-.button.bar-button .button-label {
+.bar .button .button-label {
 	display: block;                                             /* Important */
 	height: inherit;
 	line-height: inherit;
@@ -504,17 +551,60 @@ p small {
 	white-space: nowrap;                                        /* Important */
 }
 
-.button.bar-button.is-selected,
-.button.bar-button.is-highlighted {
+.bar .button.is-selected,
+.bar .button.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 30 5 1940 stretch stretch;
 	background-image: none;
 	color: #ffffff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-/* Grouped */
+/* Inside a Bar + Back */
 
-.button-group.bar-button-group .button.bar-button {
+.bar .button.style-back {
+	-webkit-border-image: url(../images/bar-button.png) 240 5 1730 13 stretch stretch;
+	border-left-width: 13px;
+	padding-left: 0px;
+}
+
+.bar .button.style-back.is-selected,
+.bar .button.style-back.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 270 5 1700 13 stretch stretch;
+}
+
+/* Inside a Bar + Forward */
+
+.bar .button.style-forward {
+	-webkit-border-image: url(../images/bar-button.png) 300 13 1670 5 stretch stretch;
+	border-right-width: 13px;
+	padding-right: 0px;
+}
+
+/* Inside a Bar + Active */
+
+.bar .button.style-active {
+	-webkit-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
+}
+
+.bar .button.style-active.is-selected,
+.bar .button.style-active.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
+}
+
+/* Inside a Bar + Warning */
+
+.bar .button.style-warning {
+	-webkit-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
+}
+
+.bar .button.style-warning.is-selected,
+.bar .button.style-warning.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
+}
+
+/* Inside a Bar + Grouped */
+
+.bar .button-group .button {
 	-webkit-box-flex: 0;
 	-webkit-border-image: url(../images/bar-button.png) 60 1 1910 1 stretch stretch;
 	border-width: 0px 1px 0px 0px;
@@ -522,139 +612,41 @@ p small {
 	padding-right: 8px;
 }
 
-.button-group.bar-button-group .button.bar-button:first-child {
+.bar .button-group .button:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 90 1 1880 5 stretch stretch;
 	border-width: 0px 1px 0px 5px;
 	padding-left: 4px;
 }
 
-.button-group.bar-button-group .button.bar-button:last-child {
+.bar .button-group .button:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 120 5 1850 1 stretch stretch;
 	border-width: 0px 5px 0px 0px;
 	padding-right: 4px;
 }
 
-.button-group.bar-button-group .button.bar-button.is-selected,
-.button-group.bar-button-group .button.bar-button.is-highlighted {
+.bar .button-group .button.is-selected,
+.bar .button-group .button.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 150 1 1820 1 stretch stretch;
 }
 
-.button-group.bar-button-group .button.bar-button.is-selected:first-child,
-.button-group.bar-button-group .button.bar-button.is-highlighted:first-child {
+.bar .button-group .button.is-selected:first-child,
+.bar .button-group .button.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 180 1 1790 5 stretch stretch;
 }
 
-.button-group.bar-button-group .button.bar-button.is-selected:last-child,
-.button-group.bar-button-group .button.bar-button.is-highlighted:last-child {
+.bar .button-group .button.is-selected:last-child,
+.bar .button-group .button.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 210 5 1760 1 stretch stretch;
 }
 
-/* Back */
-
-.button.bar-button.style-back {
-	-webkit-border-image: url(../images/bar-button.png) 240 5 1730 13 stretch stretch;
-	border-left-width: 13px;
-	padding-left: 0px;
-}
-
-.button.bar-button.style-back.is-selected,
-.button.bar-button.style-back.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 270 5 1700 13 stretch stretch;
-}
-
-/* Forward */
-
-.button.bar-button.style-forward {
-	-webkit-border-image: url(../images/bar-button.png) 300 13 1670 5 stretch stretch;
-	border-right-width: 13px;
-	padding-right: 0px;
-}
-
-.button.bar-button.style-forward.is-selected,
-.button.bar-button.style-forward.is-highlighted {
+.bar .button.style-forward.is-selected,
+.bar .button.style-forward.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 330 13 1640 5 stretch stretch;
 }
 
-/* Dark */
+/* Inside a Bar + Grouped + Active */
 
-.button.bar-button.style-dark {
-	-webkit-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
-}
-
-.button.bar-button.style-dark.is-selected,
-.button.bar-button.style-dark.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
-}
-
-/* Dark + Grouped */
-
-.button-group.bar-button-group .button.bar-button.style-dark {
-	-webkit-border-image: url(../images/bar-button.png) 420 1 1550 1 stretch stretch;
-}
-
-.button-group.bar-button-group .button.bar-button.style-dark:first-child {
-	-webkit-border-image: url(../images/bar-button.png) 450 1 1520 5 stretch stretch;
-}
-
-.button-group.bar-button-group .button.bar-button.style-dark:last-child {
-	-webkit-border-image: url(../images/bar-button.png) 480 5 1490 1 stretch stretch;
-}
-
-.button-group.bar-button-group .button.bar-button.style-dark.is-selected,
-.button-group.bar-button-group .button.bar-button.style-dark.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 510 1 1460 1 stretch stretch;
-}
-
-.button-group.bar-button-group .button.bar-button.style-dark.is-selected:first-child,
-.button-group.bar-button-group .button.bar-button.style-dark.is-highlighted:first-child {
-	-webkit-border-image: url(../images/bar-button.png) 540 1 1430 5 stretch stretch;
-}
-
-.button-group.bar-button-group .button.bar-button.style-dark.is-selected:last-child,
-.button-group.bar-button-group .button.bar-button.style-dark.is-highlighted:last-child {
-	-webkit-border-image: url(../images/bar-button.png) 570 5 1400 1 stretch stretch;
-}
-
-/* Dark Back */
-
-.button.bar-button.style-dark-back {
-	-webkit-border-image: url(../images/bar-button.png) 600 5 1370 13 stretch stretch;
-	border-left-width: 13px;
-	padding-left: 0px;
-}
-
-.button.bar-button.style-dark-back.is-selected,
-.button.bar-button.style-dark-back.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 630 5 1340 13 stretch stretch;
-}
-
-/* Dark Forward */
-
-.button.bar-button.style-dark-forward {
-	-webkit-border-image: url(../images/bar-button.png) 660 13 1310 5 stretch stretch;
-	border-right-width: 13px;
-	padding-right: 0px;
-}
-
-.button.bar-button.style-dark-forward.is-selected,
-.button.bar-button.style-dark-forward.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 690 13 1280 5 stretch stretch;
-}
-
-/* Active */
-
-.button.bar-button.style-active {
-	-webkit-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
-}
-
-.button.bar-button.style-active.is-selected,
-.button.bar-button.style-active.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
-}
-
-/* Active + Grouped */
-
-.button-group.bar-button-group .button.bar-button.style-active {
+.bar .button-group .button.style-active {
 	-webkit-box-flex: 0;
 	-webkit-border-image: url(../images/bar-button.png) 780 1 1190 1 stretch stretch;
 	border-width: 0px 1px 0px 0px;
@@ -662,47 +654,36 @@ p small {
 	padding-right: 8px;
 }
 
-.button-group.bar-button-group .button.bar-button.style-active:first-child {
+.bar .button-group .button.style-active:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 810 1 1160 5 stretch stretch;
 	border-width: 0px 1px 0px 5px;
 	padding-left: 4px;
 }
 
-.button-group.bar-button-group .button.bar-button.style-active:last-child {
+.bar .button-group .button.style-active:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 840 5 1130 1 stretch stretch;
 	border-width: 0px 5px 0px 0px;
 	padding-right: 4px;
 }
 
-.button-group.bar-button-group .button.bar-button.style-active.is-selected,
-.button-group.bar-button-group .button.bar-button.style-active.is-highlighted {
+.bar .button-group .button.style-active.is-selected,
+.bar .button-group .button.style-active.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 870 1 1100 1 stretch stretch;
 }
 
-.button-group.bar-button-group .button.bar-button.style-active.is-selected:first-child,
-.button-group.bar-button-group .button.bar-button.style-active.is-highlighted:first-child {
+.bar .button-group .button.style-active.is-selected:first-child,
+.bar .button-group .button.style-active.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 900 1 1070 5 stretch stretch;
 }
 
-.button-group.bar-button-group .button.bar-button.style-active.is-selected:last-child,
-.button-group.bar-button-group .button.bar-button.style-active.is-highlighted:last-child {
+.bar .button-group .button.style-active.is-selected:last-child,
+.bar .button-group .button.style-active.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 930 5 1040 1 stretch stretch;
 }
 
-/* Warning */
+/* Inside a Bar + Grouped + Warning */
 
-.button.bar-button.style-warning {
-	-webkit-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
-}
-
-.button.bar-button.style-warning.is-selected,
-.button.bar-button.style-warning.is-highlighted {
-	-webkit-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
-}
-
-/* Active + Grouped */
-
-.button-group.bar-button-group .button.bar-button.style-warning {
+.bar .button-group .button.style-warning {
 	-webkit-box-flex: 0;
 	-webkit-border-image: url(../images/bar-button.png) 1020 1 950 1 stretch stretch;
 	border-width: 0px 1px 0px 0px;
@@ -710,112 +691,97 @@ p small {
 	padding-right: 8px;
 }
 
-.button-group.bar-button-group .button.bar-button.style-warning:first-child {
+.bar .button-group .button.style-warning:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 1050 1 920 5 stretch stretch;
 	border-width: 0px 1px 0px 5px;
 	padding-left: 4px;
 }
 
-.button-group.bar-button-group .button.bar-button.style-warning:last-child {
+.bar .button-group .button.style-warning:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 1080 5 890 1 stretch stretch;
 	border-width: 0px 5px 0px 0px;
 	padding-right: 4px;
 }
 
-.button-group.bar-button-group .button.bar-button.style-warning.is-selected,
-.button-group.bar-button-group .button.bar-button.style-warning.is-highlighted {
+.bar .button-group .button.style-warning.is-selected,
+.bar .button-group .button.style-warning.is-highlighted {
 	-webkit-border-image: url(../images/bar-button.png) 1110 1 860 1 stretch stretch;
 }
 
-.button-group.bar-button-group .button.bar-button.style-warning.is-selected:first-child,
-.button-group.bar-button-group .button.bar-button.style-warning.is-highlighted:first-child {
+.bar .button-group .button.style-warning.is-selected:first-child,
+.bar .button-group .button.style-warning.is-highlighted:first-child {
 	-webkit-border-image: url(../images/bar-button.png) 1140 1 830 5 stretch stretch;
 }
 
-.button-group.bar-button-group .button.bar-button.style-warning.is-selected:last-child,
-.button-group.bar-button-group .button.bar-button.style-warning.is-highlighted:last-child {
+.bar .button-group .button.style-warning.is-selected:last-child,
+.bar .button-group .button.style-warning.is-highlighted:last-child {
 	-webkit-border-image: url(../images/bar-button.png) 1170 5 800 1 stretch stretch;
 }
 
-/* Bar
------------------------------------------------------------------------------*/
+/* Inside a Dark Bar */
 
-.bar {
-	-webkit-backface-visibility: hidden;                        /* Important */
-	-webkit-box-sizing: border-box;                             /* Important */
-	background: url(../images/bar.png) repeat-x 0px 0px;
-	color: #ffffff;
-	font-size: 20px;
-	font-weight: bold;
-	height: 44px;                                               /* Important */
-	position: relative;                                         /* Important */
-	padding-left:  7px;
-	padding-right: 7px;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
-	width: 100%;                                                /* Important */
-	z-index: 50;                                                /* Important */
+.bar.style-dark .button {
+	-webkit-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
 }
 
-.bar > .bar-item {
-	-webkit-box-sizing: border-box;                             /* Important */
-	display: -webkit-box;                                       /* Important */
-	height: inherit;                                            /* Important */
-	position: relative;                                         /* Important */
-	width: 100%;                                                /* Important */
+.bar.style-dark .button.is-selected,
+.bar.style-dark .button.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
 }
 
-/* Translucent */
+/* Inside a Dark Bar + Back */
 
-.bar.style-translucent {
-	background: url(../images/bar.png) repeat-x 0px -44px;
-	color: #ffffff;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+.bar.style-dark .button.style-back {
+	-webkit-border-image: url(../images/bar-button.png) 600 5 1370 13 stretch stretch;
+	border-left-width: 13px;
+	padding-left: 0px;
 }
 
-.bar.style-black {
-	background: url(../images/bar.png) repeat-x 0px -88px;
-	color: #ffffff;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+.bar.style-dark .button.style-back.is-selected,
+.bar.style-dark .button.style-back.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 630 5 1340 13 stretch stretch;
 }
 
-.bar.style-black.style-black-translucent {
-	background: url(../images/bar.png) repeat-x 0px -132px;
-	color: #ffffff;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+/* Inside a Dark Bar + Forward */
+
+.bar.style-dark .button.style-forward {
+	-webkit-border-image: url(../images/bar-button.png) 660 13 1310 5 stretch stretch;
+	border-right-width: 13px;
+	padding-right: 0px;
 }
 
-/* Bar View (Navigation Bar)
------------------------------------------------------------------------------*/
-
-.bar.navigation-bar {
-	height: 44px;
-	line-height: 43px;
+.bar.style-dark .button.style-forward.is-selected,
+.bar.style-dark .button.style-forward.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 690 13 1280 5 stretch stretch;
 }
 
-.bar.navigation-bar > .bar-item {
-	height: inherit;
-	line-height: inherit;
+/* Inside a Dark Bar + Grouped */
+
+.bar.style-dark .button-group .button {
+	-webkit-border-image: url(../images/bar-button.png) 420 1 1550 1 stretch stretch;
 }
 
-.bar.navigation-bar > .bar-item .bar-title {
-	-webkit-box-flex: 1;                                        /* Important */
-	-webkit-box-sizing: border-box;                             /* Important */
-	height: inherit;
-	line-height: inherit;
-	text-align: center;
-	left: 0px;                                                  /* Important */
-	overflow: hidden;                                           /* Important */
-	position: relative;                                         /* Important */
-	right: 0px;                                                 /* Important */
-	text-overflow: ellipsis;                                    /* Important */
-	white-space: nowrap;                                        /* Important */
-	width: 100%;                                                /* Important */
-	z-index: 25;                                                /* Important */
+.bar.style-dark .button-group .button:first-child {
+	-webkit-border-image: url(../images/bar-button.png) 450 1 1520 5 stretch stretch;
 }
 
-.bar.navigation-bar .bar-button {
-	position: relative;
-	z-index: 35;
+.bar.style-dark .button-group .button.style-dark:last-child {
+	-webkit-border-image: url(../images/bar-button.png) 480 5 1490 1 stretch stretch;
+}
+
+.bar.style-dark .button-group .button.is-selected,
+.bar.style-dark .button-group .button.is-highlighted {
+	-webkit-border-image: url(../images/bar-button.png) 510 1 1460 1 stretch stretch;
+}
+
+.bar.style-dark .button-group .button.is-selected:first-child,
+.bar.style-dark .button-group .button.is-highlighted:first-child {
+	-webkit-border-image: url(../images/bar-button.png) 540 1 1430 5 stretch stretch;
+}
+
+.bar.style-dark .button-group .button.is-selected:last-child,
+.bar.style-dark .button-group .button.is-highlighted:last-child {
+	-webkit-border-image: url(../images/bar-button.png) 570 5 1400 1 stretch stretch;
 }
 
 /* List

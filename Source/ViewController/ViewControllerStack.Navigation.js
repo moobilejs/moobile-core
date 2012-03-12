@@ -65,12 +65,12 @@ Moobile.ViewControllerStack.Navigation = new Class({
 			var backButtonLabel = this.topViewController.getTitle() || this.options.backButtonLabel;
 			if (backButtonLabel) {
 
-				var backButton = new Moobile.BarButton(null, null, 'back');
+				var backButton = new Moobile.Button(null, null, 'back');
 				backButton.setStyle('back');
 				backButton.setLabel(backButtonLabel);
 				backButton.addEvent('tap', this.bound('_onBackButtonTap'));
 
-				navigationBar.getItem().addLeftBarButton(backButton);
+				navigationBar.getItem().addLeftButton(backButton);
 			}
 		}
 	},

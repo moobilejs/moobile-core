@@ -108,56 +108,56 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addLeftBarButton
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addLeftButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addLeftBarButton: function(button) {
+	addLeftButton: function(button) {
 		return this.addChild(button, 'top');
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addRightBarButton
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addRightButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addRightBarButton: function(button) {
+	addRightButton: function(button) {
 		return this.addChild(button, 'bottom');
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getBarButton
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getBarButton: function(name) {
-		return this.getChildOfType(Moobile.BarButton, name);
+	getButton: function(name) {
+		return this.getChildOfType(Moobile.Button, name);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getBarButton
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getBarButtonAt: function(index) {
-		return this.getChildOfTypeAt(Moobile.BarButton, index);
+	getButtonAt: function(index) {
+		return this.getChildOfTypeAt(Moobile.Button, index);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeBarButton
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeBarButton: function(button, destroy) {
+	removeButton: function(button, destroy) {
 		return this.removeChild(button, destroy);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeAllBarButtons
+	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeAllBarButtons: function(destroy) {
+	removeAllButtons: function(destroy) {
 		return this.removeChildren(Moobile.Button, destroy);
 	}
 

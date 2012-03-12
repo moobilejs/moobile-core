@@ -136,3 +136,28 @@ Moobile.Component.defineRole('button', null, function(element) {
 Moobile.Component.defineRole('label', Moobile.Button, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+Moobile.Component.defineStyle('active', Moobile.Button, {
+	attach: function(element) { element.addClass('style-active'); },
+	detach: function(element) { element.removeClass('style-active'); }
+});
+
+Moobile.Component.defineStyle('warning', Moobile.Button, {
+	attach: function(element) { element.addClass('style-warning'); },
+	detach: function(element) { element.removeClass('style-warning'); }
+});
+
+Moobile.Component.defineStyle('back', Moobile.Button, {
+	attach: function(element) { element.addClass('style-back'); },
+	detach: function(element) { element.removeClass('style-back'); }
+});
+
+Moobile.Component.defineStyle('forward', Moobile.Button, {
+	attach: function(element) { element.addClass('style-forward'); },
+	detach: function(element) { element.removeClass('style-forward'); }
+});
+
