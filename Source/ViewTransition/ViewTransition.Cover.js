@@ -42,7 +42,7 @@ Moobile.ViewTransition.Cover = new Class({
 			e.stop();
 
 			parentElem.removeClass('transition-cover-enter');
-			parentElem.removeClass('raise');
+			parentElem.removeClass('first');
 			viewToShow.removeClass('transition-view-to-show');
 
 			this.didEnterFirst(viewToShow, parentView);
@@ -50,7 +50,7 @@ Moobile.ViewTransition.Cover = new Class({
 		}.bind(this));
 
 		parentElem.addClass('transition-cover-enter');
-		parentElem.addClass('raise');
+		parentElem.addClass('first');
 		viewToShow.addClass('transition-view-to-show');
 	},
 
@@ -65,19 +65,19 @@ Moobile.ViewTransition.Cover = new Class({
 
 		var onStart = function() {
 			parentView.addClass('transition-cover-perspective');
+			parentElem.addClass('transition-cover-enter');
 			viewToHide.addClass('transition-view-to-hide');
-			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
 			parentView.removeClass('transition-cover-perspective');
+			parentElem.removeClass('transition-cover-enter');
 			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
-		var animation = new Moobile.Animation(parentElem);
-		animation.setAnimationClass('transition-cover-enter');
+		var animation = new Moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
 		animation.addEvent('start', onStart);
 		animation.addEvent('end', onEnd);
 		animation.start();
