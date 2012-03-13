@@ -29,19 +29,23 @@ Moobile.ViewTransition.Fade = new Class({
 
 	Extends: Moobile.ViewTransition,
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	firstAnimation: function(viewToShow, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		var onStart = function() {
-			parentViewContent.addClass('transition-fade-enter');
-			parentViewContent.addClass('first');
-			viewToShow.addClass('first');
+			parentElem.addClass('transition-fade-enter');
+			parentElem.addClass('first');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentViewContent.removeClass('transition-fade-enter');
-			parentViewContent.removeClass('first');
+			parentElem.removeClass('transition-fade-enter');
+			parentElem.removeClass('first');
 			this.didEnterFirst(viewToShow, parentView);
 		}.bind(this);
 
@@ -52,17 +56,22 @@ Moobile.ViewTransition.Fade = new Class({
 		animation.start();
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		var onStart = function() {
-			parentViewContent.addClass('transition-fade-enter');
+			parentElem.addClass('transition-fade-enter');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentViewContent.removeClass('transition-fade-enter');
+			parentElem.removeClass('transition-fade-enter');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
@@ -74,17 +83,22 @@ Moobile.ViewTransition.Fade = new Class({
 		animation.start();
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		var onStart = function() {
-			parentViewContent.addClass('transition-fade-leave');
+			parentElem.addClass('transition-fade-leave');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentViewContent.removeClass('transition-fade-leave');
+			parentElem.removeClass('transition-fade-leave');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);

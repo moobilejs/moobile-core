@@ -30,19 +30,29 @@ Moobile.ViewTransition.Cover.Page = new Class({
 
 	overlay: null,
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You cannot use this transition for the first view of a stack');
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 
 			e.stop();
 
-			parentViewContent.removeClass('transition-cover-page-enter');
+			parentElem.removeClass('transition-cover-page-enter');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 
@@ -56,22 +66,27 @@ Moobile.ViewTransition.Cover.Page = new Class({
 
 		viewToHide.addChild(this.overlay, 'header');
 
-		parentViewContent.addClass('transition-cover-page-enter');
+		parentElem.addClass('transition-cover-page-enter');
 		viewToHide.addClass('transition-cover-page-background-view');
 		viewToShow.addClass('transition-cover-page-foreground-view');
 		viewToHide.addClass('transition-view-to-hide');
 		viewToShow.addClass('transition-view-to-show');
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 
 			e.stop();
 
-			parentViewContent.removeClass('transition-cover-page-leave');
+			parentElem.removeClass('transition-cover-page-leave');
 			viewToHide.removeClass('transition-cover-page-background-view');
 			viewToShow.removeClass('transition-cover-page-foreground-view');
 			viewToHide.removeClass('transition-view-to-hide');
@@ -87,7 +102,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 
 		this.overlay.hideAnimated();
 
-		parentViewContent.addClass('transition-cover-page-leave');
+		parentElem.addClass('transition-cover-page-leave');
 		viewToHide.addClass('transition-view-to-hide');
 		viewToShow.addClass('transition-view-to-show');
 	}

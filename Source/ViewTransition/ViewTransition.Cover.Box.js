@@ -32,19 +32,29 @@ Moobile.ViewTransition.Cover.Box = new Class({
 
 	viewToShowWrapper: null,
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You cannot use this transition for the first view of a stack');
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 
 			e.stop();
 
-			parentViewContent.removeClass('transition-cover-box-enter');
+			parentElem.removeClass('transition-cover-box-enter');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 
@@ -64,22 +74,27 @@ Moobile.ViewTransition.Cover.Box = new Class({
 
 		parentView.addChild(this.viewToShowWrapper);
 
-		parentViewContent.addClass('transition-cover-box-enter');
+		parentElem.addClass('transition-cover-box-enter');
 		viewToHide.addClass('transition-cover-box-background-view');
 		viewToShow.addClass('transition-cover-box-foreground-view');
 		viewToHide.addClass('transition-view-to-hide');
 		viewToShow.addClass('transition-view-to-show');
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
-		var parentViewContent = parentView.getContentElement();
+		var parentElem = parentView.getContentElement();
 
 		document.id(parentView).addEvent('animationend:once', function(e) {
 
 			e.stop();
 
-			parentViewContent.removeClass('transition-cover-box-leave');
+			parentElem.removeClass('transition-cover-box-leave');
 			viewToHide.removeClass('transition-cover-box-background-view');
 			viewToShow.removeClass('transition-cover-box-foreground-view');
 			viewToHide.removeClass('transition-view-to-hide');
@@ -101,7 +116,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 
 		this.overlay.hideAnimated();
 
-		parentViewContent.addClass('transition-cover-box-leave');
+		parentElem.addClass('transition-cover-box-leave');
 		viewToHide.addClass('transition-view-to-hide');
 		viewToShow.addClass('transition-view-to-show');
 	}
