@@ -33,63 +33,67 @@ Moobile.ViewTransition.Fade = new Class({
 
 		var parentViewContent = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentViewContent.addClass('transition-fade-enter');
+			parentViewContent.addClass('first');
+			viewToShow.addClass('first');
+		}.bind(this);
 
-			e.stop();
-
+		var onEnd = function() {
 			parentViewContent.removeClass('transition-fade-enter');
-			parentViewContent.removeClass('raise');
-			viewToShow.removeClass('transition-view-to-show');
+			parentViewContent.removeClass('first');
+			this.didEnterFirst(viewToShow, parentView);
+		}.bind(this);
 
-			this.didRaise(viewToShow, parentView);
-
-		}.bind(this));
-
-		parentViewContent.addClass('transition-fade-enter');
-		parentViewContent.addClass('raise');
-		viewToShow.addClass('transition-view-to-show');
+		var animation = new Moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	},
 
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentViewContent = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentViewContent.addClass('transition-fade-enter');
+			viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
 
-			e.stop();
-
+		var onEnd = function() {
 			parentViewContent.removeClass('transition-fade-enter');
-			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
-
 			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
 
-		}.bind(this));
-
-		parentViewContent.addClass('transition-fade-enter');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		var animation = new Moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	},
 
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentViewContent = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentViewContent.addClass('transition-fade-leave');
+			viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
 
-			e.stop();
-
+		var onEnd = function() {
 			parentViewContent.removeClass('transition-fade-leave');
-			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
 
-			this.didLeave(viewToShow, viewToHide, parentView);
-
-		}.bind(this));
-
-		parentViewContent.addClass('transition-fade-leave');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		var animation = new Moobile.Animation(viewToHide);
+		animation.setAnimationClass('transition-view-to-hide');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	}
 
 });

@@ -30,7 +30,7 @@ Moobile.ViewTransition.None = new Class({
 	Extends: Moobile.ViewTransition,
 
 	firstAnimation: function(viewToShow, parentView) {
-		this.didRaise(viewToShow, parentView);
+		this.didEnterFirst(viewToShow, parentView);
 	},
 
 	enterAnimation: function(viewToShow, viewToHide, parentView) {

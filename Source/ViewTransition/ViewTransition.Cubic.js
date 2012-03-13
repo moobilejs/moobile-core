@@ -32,67 +32,70 @@ Moobile.ViewTransition.Cubic = new Class({
 
 		var parentViewContent = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentView.addClass('transition-cubic-perspective');
+			parentViewContent.addClass('first');
+			viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
 
-			e.stop();
-
+		var onEnd = function() {
 			parentView.removeClass('transition-cubic-perspective');
-			parentViewContent.removeClass('transition-cubic-enter');
-			parentViewContent.removeClass('raise');
+			parentViewContent.removeClass('first');
 			viewToShow.removeClass('transition-view-to-show');
+			this.didEnterFirst(viewToShow, parentView);
+		}.bind(this);
 
-			this.didRaise(viewToShow, parentView);
-
-		}.bind(this));
-
-		parentView.addClass('transition-cubic-perspective');
-		parentViewContent.addClass('transition-cubic-enter');
-		parentViewContent.addClass('raise');
-		viewToShow.addClass('transition-view-to-show');
+		var animation = new Moobile.Animation(parentViewContent);
+		animation.setAnimationClass('transition-cubic-enter');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	},
 
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentViewContent = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
 
-			e.stop();
-
-			parentView.removeClass('transition-cubic-perspective');
-			parentViewContent.removeClass('transition-cubic-enter');
+		var onEnd = function() {
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
-
 			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
 
-		}.bind(this));
-
-		parentView.addClass('transition-cubic-perspective');
-		parentViewContent.addClass('transition-cubic-enter');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		var animation = new Moobile.Animation(parentViewContent);
+		animation.setAnimationClass('transition-cubic-enter');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	},
 
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentViewContent = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentView.addClass('transition-cubic-perspective');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
 
-			e.stop();
-
-			parentViewContent.removeClass('transition-cubic-leave');
+		var onEnd = function() {
+			parentView.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
-
 			this.didLeave(viewToShow, viewToHide, parentView);
+		}.bind(this);
 
-		}.bind(this));
-
-		parentViewContent.addClass('transition-cubic-leave');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		var animation = new Moobile.Animation(parentViewContent);
+		animation.setAnimationClass('transition-cubic-leave');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	}
 
 });

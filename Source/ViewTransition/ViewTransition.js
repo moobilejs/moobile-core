@@ -93,11 +93,11 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didRaise
+	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didEnterFirst
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRaise: function(viewToShow, parentView) {
+	didEnterFirst: function(viewToShow, parentView) {
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
 		return this;

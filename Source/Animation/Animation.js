@@ -318,9 +318,10 @@ Moobile.Animation = new Class({
 		if (this._running)
 			return this;
 
+
 		this._running = true;
-		this.attach();
 		this.fireEvent('start');
+		this.attach();
 
 		return this;
 	},
