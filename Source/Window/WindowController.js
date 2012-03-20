@@ -67,7 +67,7 @@ Moobile.WindowController = new Class({
  			this.addChildViewController(rootViewController);
 		}
 
-		this.rootViewController = rootViewController;
+		this._rootViewController = rootViewController;
 
 		return this;
 	},
