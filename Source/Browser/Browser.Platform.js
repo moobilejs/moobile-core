@@ -12,6 +12,8 @@ author:
 
 requires:
 	- Core/Browser
+	- Mobile/Browser.Mobile
+	- Mobile/Browser.Features.Touch
 
 provides:
 	- Browser.Platform
@@ -19,7 +21,4 @@ provides:
 ...
 */
 
-Browser.Platform.phonegap =
-	window.device &&
-	window.device.phonegap;
-	
+Browser.Platform.cordova = window.Cordova && Browser.isMobile && !Browser.safari;

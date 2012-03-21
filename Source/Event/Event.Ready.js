@@ -27,22 +27,30 @@ provides:
 
 (function() {
 
-	Element.NativeEvents.deviceready = 1;
-
-	var domready = Browser.Platform.phonegap ? 'deviceready' : 'domready';
-
-	var onReady = function(e) {
-		this.fireEvent('ready');
+	var onReady = function() {
+		window.fireEvent('ready');
 	};
 
 	Element.defineCustomEvent('ready', {
 
 		onSetup: function() {
-			this.addEvent(domready, onReady);
+
+			if (Browser.Platform.cordova) {
+				document.addEventListener('deviceready', onReady);
+				return;
+			}
+
+			window.addEvent('domready', onReady);
 		},
 
 		onTeardown: function() {
-			this.removeEvent(domready, onReady);
+
+			if (Browser.Platform.cordova) {
+				document.removeEventListener('deviceready', onReady);
+				return;
+			}
+
+			window.removeEvent('domready', onReady);
 		}
 
 	});
