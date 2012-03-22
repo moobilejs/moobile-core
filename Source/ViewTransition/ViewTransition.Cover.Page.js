@@ -87,8 +87,8 @@ Moobile.ViewTransition.Cover.Page = new Class({
 			e.stop();
 
 			parentElem.removeClass('transition-cover-page-leave');
-			viewToHide.removeClass('transition-cover-page-background-view');
-			viewToShow.removeClass('transition-cover-page-foreground-view');
+			viewToShow.removeClass('transition-cover-page-background-view');
+			viewToHide.removeClass('transition-cover-page-foreground-view');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 
