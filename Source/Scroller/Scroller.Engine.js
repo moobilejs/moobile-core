@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- EventDispatcher
+	- EventFirer
 
 provides:
 	- Scroller.Engine
@@ -29,7 +29,7 @@ if (!window.Moobile.Scroller) window.Moobile.Scroller = {};
  */
 Moobile.Scroller.Engine = new Class({
 
-	Extends: Moobile.EventDispatcher,
+	Extends: Moobile.EventFirer,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine#contentElement

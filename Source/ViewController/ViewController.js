@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- EventDispatcher
+	- EventFirer
 
 provides:
 	- ViewController
@@ -28,7 +28,7 @@ if (!window.Moobile) window.Moobile = {};
  */
 Moobile.ViewController = new Class({
 
-	Extends: Moobile.EventDispatcher,
+	Extends: Moobile.EventFirer,
 
 	/**
 	 * @hidden

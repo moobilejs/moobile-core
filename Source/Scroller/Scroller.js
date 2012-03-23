@@ -11,7 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- EventDispatcher
+	- EventFirer
 
 provides:
 	- Scroller
@@ -26,7 +26,7 @@ provides:
  */
 Moobile.Scroller = new Class({
 
-	Extends: Moobile.EventDispatcher,
+	Extends: Moobile.EventFirer,
 
 	/**
 	 * @hidden

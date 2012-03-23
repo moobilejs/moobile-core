@@ -14,7 +14,7 @@ requires:
 	- Element
 	- Element.From
 	- Element.Role
-	- EventDispatcher
+	- EventFirer
 
 provides:
 	- Component
@@ -29,7 +29,7 @@ provides:
  */
 Moobile.Component = new Class({
 
-	Extends: Moobile.EventDispatcher,
+	Extends: Moobile.EventFirer,
 
 	/**
 	 * @hidden
