@@ -965,7 +965,7 @@ Moobile.Component.addNativeEvent('tapend');
 Moobile.Component.addNativeEvent('tap');
 Moobile.Component.addNativeEvent('pinch');
 Moobile.Component.addNativeEvent('swipe');
-Moobile.Component.addNativeEvent('animationEnd');
-Moobile.Component.addNativeEvent('transitionEnd');
+Moobile.Component.addNativeEvent('animationend');
+Moobile.Component.addNativeEvent('transitionend');
 
 })();
