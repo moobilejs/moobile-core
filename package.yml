@@ -40,7 +40,6 @@ sources:
   - "Source/Element/Element.From.js"
   - "Source/Element/Element.Role.js"
   - "Source/Event/EventDispatcher.js"
-  - "Source/Event/NativeEvents.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.CSS3.js"
   - "Source/Event/Event.Rotate.js"
