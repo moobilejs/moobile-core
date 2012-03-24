@@ -55,4 +55,11 @@ provides:
 
 	});
 
+	// simulator hook
+	window.addEvent('ready', function() {
+		if (parent) {
+			parent.fireEvent('appready');
+		}
+	});
+
 })();
