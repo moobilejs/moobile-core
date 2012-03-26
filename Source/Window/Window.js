@@ -78,7 +78,7 @@ Moobile.Window = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRemoveChild: function() {
+	didRemoveChild: function(component) {
 		this.parent(component);
 		component.setWindow(null);
 	},
