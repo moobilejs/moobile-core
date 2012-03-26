@@ -111,7 +111,7 @@ Moobile.Button = new Class({
 	 * @since  0.1
 	 */
 	_onTapStart: function(e) {
-		this.setHighlighted(true);
+		if (!this.isSelected()) this.setHighlighted(true);
 	},
 
 	/**
@@ -120,7 +120,7 @@ Moobile.Button = new Class({
 	 * @since  0.1
 	 */
 	_onTapEnd: function(e) {
-		this.setHighlighted(false);
+		if (!this.isSelected()) this.setHighlighted(false);
 	}
 
 });

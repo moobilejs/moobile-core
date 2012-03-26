@@ -298,7 +298,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	_onItemTapStart: function(e, sender) {
-		if (this._selectable) sender.setHighlighted(true);
+		if (this._selectable && !sender.isSelected()) sender.setHighlighted(true);
 	},
 
 	/**
@@ -307,7 +307,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	_onItemTapEnd: function(e, sender) {
-		if (this._selectable) sender.setHighlighted(false);
+		if (this._selectable && !sender.isSelected()) sender.setHighlighted(false);
 	},
 
 	/**
