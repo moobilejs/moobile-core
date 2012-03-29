@@ -51,7 +51,7 @@ Moobile.ScrollView = new Class({
 	 */
 	options: {
 		momentum: true,
-		scrollX: true,
+		scrollX: false,
 		scrollY: true,
 		snapToPage: false,
 		snapToPageAt: 35,

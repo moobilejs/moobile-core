@@ -53,9 +53,9 @@ Moobile.Scroller.Engine.Native = new Class({
 
 		this.wrapperElement.addClass('scroll-engine-native');
 
-		if (this.options.scrollX)  this.wrapperElement.setStyle('overflow-x', 'scroll');
-		if (this.options.scrollY)  this.wrapperElement.setStyle('overflow-y', 'scroll');
-		if (this.options.momentum) this.wrapperElement.setStyle('-webkit-overflow-scrolling', 'touch');
+		this.wrapperElement.setStyle('overflow-x', this.options.scrollX ? 'scroll' : 'hidden');
+		this.wrapperElement.setStyle('overflow-y', this.options.scrollY ? 'scroll' : 'hidden');
+		this.wrapperElement.setStyle('-webkit-overflow-scrolling', this.options.momentum ? 'touch' : 'auto');
 
 		this.scroller = new Fx.Scroll(this.wrapperElement);
 
