@@ -449,16 +449,9 @@ Moobile.Component = new Class({
 	 */
 	removeChildrenOfType: function(type, destroy) {
 
-		var children = [];
-		for (var i = 0; i < this._children.length; i++) {
-			children[i] = this._children[i];
-		}
-
-		for (var i = children.length - 1; i >= 0; i--) {
-			if (children[i] instanceof type) {
-				children[i].removeFromParent(destroy);
-			}
-		}
+		this._children.filter(function(child) {
+			return child instanceof type;
+		}).invoke('removeFromParent', destroy);
 
 		return this;
 	},

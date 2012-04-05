@@ -303,14 +303,9 @@ Moobile.ViewController = new Class({
 	 */
 	removeChildViewControllers: function(destroy) {
 
-		var children = [];
-		for (var i = 0; i < this._children.length; i++) {
-			children[i] = this._children[i];
-		}
-
-		for (var i = children.length - 1; i >= 0; i--) {
-			children[i].removeFromParentViewController(destroy);
-		}
+		this._children.filter(function() {
+			return true;
+		}).invoke('removeFromParentViewController', destroy);
 
 		return this;
 	},
