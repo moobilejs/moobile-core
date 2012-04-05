@@ -58,14 +58,14 @@ Moobile.Slider = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	track: null,
+	trackElement: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Control/Slider#thumb
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	thumb: null,
+	thumbElement: null,
 
 	/**
 	 * @see    http://moobile.net/api/0.1/Control/Slider#options
@@ -92,12 +92,12 @@ Moobile.Slider = new Class({
 		this.parent();
 
 		this.element.addClass('slider');
-		this.thumb = new Element('div.slider-thumb');
-		this.track = new Element('div.slider-track');
-		this.track.grab(this.thumb);
+		this.thumbElement = new Element('div.slider-thumb');
+		this.trackElement = new Element('div.slider-track');
+		this.trackElement.grab(this.thumbElement);
 
 		this.element.empty();
-		this.element.grab(this.track);
+		this.element.grab(this.trackElement);
 	},
 
 	/**
@@ -116,7 +116,7 @@ Moobile.Slider = new Class({
 			mode: this.options.mode
 		};
 
-		this.slider = new Slider(this.track, this.thumb, options);
+		this.slider = new Slider(this.trackElement, this.thumbElement, options);
 		this.slider.addEvent('move', this.bound('_onMove'));
 		this.slider.addEvent('tick', this.bound('_onTick'));
 		this.slider.addEvent('change', this.bound('_onChange'));
@@ -130,8 +130,8 @@ Moobile.Slider = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-		this.thumb = null;
-		this.track = null;
+		this.thumbElement = null;
+		this.trackElement = null;
 		this.slider = null;
 		this.parent();
 	},
@@ -161,8 +161,8 @@ Moobile.Slider = new Class({
 	 * @since  0.1
 	 */
 	_updateTrack: function(position) {
-		this.track.setStyle('background-position',
-			(-this.options.backgroundSize / 2) + (position + this.thumb.getSize().x / 2)
+		this.trackElement.setStyle('background-position',
+			(-this.options.backgroundSize / 2) + (position + this.thumbElement.getSize().x / 2)
 		);
 	},
 
