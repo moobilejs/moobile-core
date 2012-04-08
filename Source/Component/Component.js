@@ -659,7 +659,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	getElements: function(selector) {
-		return this.element.getElements(selector);
+		return this.element.getElements(selector || '*');
 	},
 
 	/**
