@@ -31,7 +31,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should add a child', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		p.addChild(c1);
 		expect(p.getChildren()[0]).toEqual(c1);
@@ -87,21 +87,21 @@ describe('Component/Component', function() {
 	});
 
 	it('should find a child using its name', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component(null, null, 'me');
 		p.addChild(c1);
 		expect(p.getChild('me')).toEqual(c1);
 	});
 
 	it('should find a child using its index', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		p.addChild(c1);
 		expect(p.getChildAt(0)).toEqual(c1);
 	});
 
 	it('should find a child of a given type using its index', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new MyComponent();
 		p.addChild(c1);
@@ -110,14 +110,14 @@ describe('Component/Component', function() {
 	});
 
 	it('should find the index of a child', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		p.addChild(c1);
 		expect(p.getChildIndex(c1)).toEqual(0);
 	});
 
 	it('should return all children', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		p.addChild(c1);
@@ -128,7 +128,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should return all children of a given type', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		var c3 = new MyComponent();
@@ -140,14 +140,14 @@ describe('Component/Component', function() {
 	});
 
 	it('should know if a child exists', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		p.addChild(c1);
 		expect(p.hasChild(c1)).toEqual(true);
 	});
 
 	it('should know if a child of a given type exists', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new MyComponent();
 		p.addChild(c1);
@@ -156,7 +156,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should replace a child', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		p.addChild(c1);
@@ -165,7 +165,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should a child be replaced with another', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		p.addChild(c1);
@@ -174,7 +174,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should remove a child', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		p.addChild(c1);
 		p.removeChild(c1);
@@ -182,7 +182,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should remove all children', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		p.addChild(c1);
@@ -192,7 +192,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should remove all children of a given type', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new MyComponent();
 		p.addChild(c1);
@@ -202,7 +202,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should a child remove itself', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		p.addChild(c1);
 		c1.removeFromParent();
@@ -210,7 +210,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should set/get/has parent', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		c1.setParent(p);
 		expect(c1.getParent()).toEqual(p);
@@ -218,8 +218,8 @@ describe('Component/Component', function() {
 	});
 
 	it('should set the window through all child', function() {
-		var w = new Moobile.Window();
-		var p = new Moobile.Component();
+		var w  = new Moobile.Window();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		p.addChild(c1);
@@ -232,7 +232,7 @@ describe('Component/Component', function() {
 	});
 
 	it('should set the ready flag through all child', function() {
-		var p = new Moobile.Component();
+		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		p.addChild(c1);

@@ -1,0 +1,4 @@
+
+describe('Control/BarItem', function() {
+
+});
