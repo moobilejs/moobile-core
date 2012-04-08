@@ -33,7 +33,7 @@ Moobile.ViewTransition.Cover = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	firstAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 
 		var parentElem = parentView.getContentElement();
 

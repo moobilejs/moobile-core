@@ -86,7 +86,7 @@ Moobile.Scroller.Engine.Native = new Class({
 	 */
 	scrollTo: function(x, y, time) {
 
-		time = time || 0;
+		time = time || 0;
 
 		this.scroller.setOptions({duration: time});
 		this.scroller.start(x, y);
@@ -101,7 +101,7 @@ Moobile.Scroller.Engine.Native = new Class({
 	 */
 	scrollToElement: function(element, time) {
 
-		time = time || 0;
+		time = time || 0;
 
 		element = document.id(element);
 

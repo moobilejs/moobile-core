@@ -134,7 +134,7 @@ Moobile.ViewTransition = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	firstAnimation: function(viewToShow, parentView) {
+	firstAnimation: function(viewToShow, parentView) {
 		throw new Error('You must override this method');
 	},
 

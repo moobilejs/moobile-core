@@ -35,7 +35,7 @@ var tapValid = true;
 
 var onTapTouchStart = function(e) {
 
-	if (e.changedTouches.length > 1) {
+	if (e.changedTouches.length > 1) {
 		tapValid = false;
 		return;
 	}
@@ -53,7 +53,7 @@ var onTapTouchStart = function(e) {
 
 var onTapTouchMove = function(e) {
 
-	if (e.changedTouches.length > 1) {
+	if (e.changedTouches.length > 1) {
 		tapValid = false;
 		return;
 	}
