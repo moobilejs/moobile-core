@@ -73,7 +73,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#setSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -105,7 +105,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#getSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -114,7 +114,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#setSelectedButtonIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -129,7 +129,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#getSelectedButtonIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -138,7 +138,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#clearSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -148,7 +148,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#addButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -157,7 +157,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#addButtonAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -166,7 +166,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#addButtonBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -175,25 +175,34 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#getButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getButtons: function() {
+		return this.getChildrenOfType(Moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getButton: function(name) {
-		return this.getChild(name);
+		return this.getChildOfType(Moobile.Button, name);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#getButtonAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getButtonAt: function(index) {
-		return this.getChilOfTypeAt(Moobile.Button, index);
+		return this.getChildOfTypeAt(Moobile.Button, index);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -202,7 +211,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobile.net/api/0.1/Control/ButtonGroup#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
