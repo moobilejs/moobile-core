@@ -297,20 +297,6 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeChildViewControllers
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	removeChildViewControllers: function(destroy) {
-
-		this._children.filter(function() {
-			return true;
-		}).invoke('removeFromParentViewController', destroy);
-
-		return this;
-	},
-
-	/**
 	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeFromParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -319,6 +305,20 @@ Moobile.ViewController = new Class({
 		return this._parent
 			 ? this._parent.removeChildViewController(this, destroy)
 			 : false;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeAllChildViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	removeAllChildViewControllers: function(destroy) {
+
+		this._children.filter(function() {
+			return true;
+		}).invoke('removeFromParentViewController', destroy);
+
+		return this;
 	},
 
 	/**
@@ -451,10 +451,12 @@ Moobile.ViewController = new Class({
 			title.setText(text);
 		}
 
-		var parent = this._title ? this._title.getParentComponent() : null;
-		if (parent) {
-			parent.replaceChildComponent(this._title, title);
-		}
+		// Not totally sure about that yet
+		// var parent = this._title ? this._title.getParentComponent() : null;
+		// if (parent) {
+		// 	parent.replaceChildComponent(this._title, title);
+		// }
+
 
 		this._title = title;
 
@@ -482,14 +484,15 @@ Moobile.ViewController = new Class({
 
 		if (typeof image === 'string') {
 			var source = image;
-			image = new Moobile.Text();
+			image = new Moobile.Image();
 			image.setSource(source);
 		}
 
-		var parent = this._image ? this._image.getParentComponent() : null;
-		if (parent) {
-			parent.replaceChildComponent(this._image, image);
-		}
+		// Not totally sure about that yet
+		// var parent = this._image ? this._image.getParentComponent() : null;
+		// if (parent) {
+		//	parent.replaceChildComponent(this._image, image);
+		// }
 
 		this._image = image;
 
@@ -744,7 +747,7 @@ Moobile.ViewController = new Class({
 		window.removeEvent('rotate', this.bound('_onWindowRotate'));
 
 		this.removeFromParentViewController();
-		this.removeChildViewControllers(true);
+		this.removeAllChildViewControllers(true);
 
 		if (this._modalViewController) {
 			this._modalViewController.destroy();
