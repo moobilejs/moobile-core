@@ -64,7 +64,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 		this.overlay.hide();
 		this.overlay.showAnimated();
 
-		viewToHide.addChild(this.overlay, 'header');
+		viewToHide.addChildComponent(this.overlay, 'header');
 
 		parentElem.addClass('transition-cover-page-enter');
 		viewToHide.addClass('transition-cover-page-background-view');
@@ -94,7 +94,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 
 			this.didLeave(viewToShow, viewToHide, parentView);
 
-			this.overlay.removeFromParent();
+			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();
 			this.overlay = null;
 

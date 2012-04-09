@@ -76,9 +76,9 @@ Moobile.Bar = new Class({
 			return this;
 
 		if (this._item) {
-			this._item.replaceWith(item, true);
+			this._item.replaceWithComponent(item, true);
 		} else {
-			this.addChild(item);
+			this.addChildComponent(item);
 		}
 
 		this._item = item;
@@ -103,7 +103,7 @@ Moobile.Bar = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('bar', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
+	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
 //------------------------------------------------------------------------------

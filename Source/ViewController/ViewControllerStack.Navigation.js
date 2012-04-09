@@ -51,10 +51,10 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 		var view = viewController.getView();
 
-		var navigationBar = view.getChild('navigation-bar');
+		var navigationBar = view.getChildComponent('navigation-bar');
 		if (navigationBar === null) {
 			navigationBar = new Moobile.NavigationBar(null, null, 'navigation-bar');
-			view.addChild(navigationBar, 'header');
+			view.addChildComponent(navigationBar, 'header');
 		}
 
 		if (viewController.isModal() || this.childViewControllers.length === 0)
@@ -84,7 +84,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 
 		this.parent(viewController);
 
-		var navigationBar = viewController.getView().getChild('navigation-bar');
+		var navigationBar = viewController.getView().getChildComponent('navigation-bar');
 		if (navigationBar === null)
 			return this;
 

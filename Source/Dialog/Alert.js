@@ -107,7 +107,7 @@ Moobile.Alert = new Class({
 
 		this.overlay = new Moobile.Overlay();
 		this.overlay.setStyle('radial');
-		this.addChild(this.overlay);
+		this.addChildComponent(this.overlay);
 
 		this.headerElement  = new Element('div.alert-header');
 		this.footerElement  = new Element('div.alert-footer');
@@ -164,9 +164,9 @@ Moobile.Alert = new Class({
 		}
 
 		if (this._title) {
-			this._title.replaceWith(title, true);
+			this._title.replaceWithComponent(title, true);
 		} else {
-			this.addChildInside(title, this.headerElement);
+			this.addChildComponentInside(title, this.headerElement);
 		}
 
 		this._title = title;
@@ -199,9 +199,9 @@ Moobile.Alert = new Class({
 		}
 
 		if (this._message) {
-			this._message.replaceWith(message, true);
+			this._message.replaceWithComponent(message, true);
 		} else {
-			this.addChildInside(message, this.contentElement);
+			this.addChildComponentInside(message, this.contentElement);
 		}
 
 		this._message = message;
@@ -230,7 +230,7 @@ Moobile.Alert = new Class({
 			button = new Moobile.Button().setLabel(button);
 		}
 
-		return this.addChildInside(button, this.footerElement);
+		return this.addChildComponentInside(button, this.footerElement);
 	},
 
 	/**
@@ -239,7 +239,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1
 	 */
 	setDefaultButton: function(button) {
-		if (this.hasChild(button)) button.addClass('default');
+		if (this.hasChildComponent(button)) button.addClass('default');
 		return this;
 	},
 
@@ -249,7 +249,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1
 	 */
 	setDefaultButtonIndex: function(index) {
-		return this.setDefaultButton(this.getChildOfTypeAt(Moobile.Button, index));
+		return this.setDefaultButton(this.getChildComponentOfTypeAt(Moobile.Button, index));
 	},
 
 	/**
@@ -282,7 +282,7 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didAddChild: function(child) {
+	didAddChildComponent: function(child) {
 		this.parent(child);
 		if (child instanceof Moobile.Button) {
 			child.addEvent('tap', this.bound('_onButtonTap'));
@@ -295,7 +295,7 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRemoveChild: function(child) {
+	didRemoveChildComponent: function(child) {
 		this.parent(child);
 		if (child instanceof Moobile.Button) {
 			child.removeEvent('tap', this.bound('_onButtonTap'));
@@ -334,7 +334,7 @@ Moobile.Alert = new Class({
 	 */
 	_onButtonTap: function(e, sender) {
 
-		var index = this.getChildrenOfType(Moobile.Button).indexOf(sender);
+		var index = this.getAllChildComponentsOfType(Moobile.Button).indexOf(sender);
 		if (index >= 0) {
 			this.fireEvent('dismiss', [sender, index]);
 		}

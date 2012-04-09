@@ -99,7 +99,7 @@ Moobile.ButtonGroup = new Class({
 			this.fireEvent('select', this._selectedButton);
 		}
 
-		this._selectedButtonIndex = selectedButton ? this.getChildIndex(selectedButton) : -1;
+		this._selectedButtonIndex = selectedButton ? this.getChildComponentIndex(selectedButton) : -1;
 
 		return this;
 	},
@@ -122,7 +122,7 @@ Moobile.ButtonGroup = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildOfTypeAt(Moobile.Button, index);
+			child = this.getChildComponentOfTypeAt(Moobile.Button, index);
 		}
 
 		return this.setSelectedButton(child);
@@ -153,7 +153,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	addButton: function(button, where) {
-		return this.addChild(button, where);
+		return this.addChildComponent(button, where);
 	},
 
 	/**
@@ -162,7 +162,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	addButtonAfter: function(button, after) {
-		return this.addChildAfter(button, after);
+		return this.addChildComponentAfter(button, after);
 	},
 
 	/**
@@ -171,7 +171,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	addButtonBefore: function(button, before) {
-		return this.addChildBefore(button, before);
+		return this.addChildComponentBefore(button, before);
 	},
 
 	/**
@@ -180,7 +180,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	getButtons: function() {
-		return this.getChildrenOfType(Moobile.Button);
+		return this.getAllChildComponentsOfType(Moobile.Button);
 	},
 
 	/**
@@ -189,7 +189,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	getButton: function(name) {
-		return this.getChildOfType(Moobile.Button, name);
+		return this.getChildComponentOfType(Moobile.Button, name);
 	},
 
 	/**
@@ -198,7 +198,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	getButtonAt: function(index) {
-		return this.getChildOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentOfTypeAt(Moobile.Button, index);
 	},
 
 	/**
@@ -207,7 +207,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	removeButton: function(button, destroy) {
-		return this.removeChild(button, destroy);
+		return this.removeChildComponent(button, destroy);
 	},
 
 	/**
@@ -216,7 +216,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	removeAllButtons: function(destroy) {
-		return this.removeChildrenOfType(Moobile.Button, destroy);
+		return this.removeAllChildComponentsOfType(Moobile.Button, destroy);
 	},
 
 	/**
@@ -224,7 +224,7 @@ Moobile.ButtonGroup = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didAddChild: function(child) {
+	didAddChildComponent: function(child) {
 		this.parent(child);
 		if (child instanceof Moobile.Button) {
 			child.addEvent('tap', this.bound('onButtonTap'));
@@ -236,7 +236,7 @@ Moobile.ButtonGroup = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRemoveChild: function(child) {
+	didRemoveChildComponent: function(child) {
 		this.parent(child);
 		if (child instanceof Moobile.Button) {
 			child.removeEvent('tap', this.bound('onButtonTap'));
@@ -259,7 +259,7 @@ Moobile.ButtonGroup = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('button-group', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
+	this.addChildComponent(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });
 
 //------------------------------------------------------------------------------

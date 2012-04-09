@@ -33,17 +33,17 @@ describe('Component/Component', function() {
 	it('should add a child', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		p.addChild(c1);
-		expect(p.getChildren()[0]).toEqual(c1);
+		p.addChildComponent(c1);
+		expect(p.getAllChildComponents()[0]).toEqual(c1);
 	});
 
 	it('should add a child at the top', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChild(c2, 'top');
-		expect(p.getChildAt(0)).toEqual(c2);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2, 'top');
+		expect(p.getChildComponentAt(0)).toEqual(c2);
 		expect(p.getElements()[0]).toEqual(c2.getElement());
 	});
 
@@ -51,9 +51,9 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChild(c2, 'bottom');
-		expect(p.getChildAt(1)).toEqual(c2);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2, 'bottom');
+		expect(p.getChildComponentAt(1)).toEqual(c2);
 		expect(p.getElements()[1]).toEqual(c2.getElement());
 	});
 
@@ -61,8 +61,8 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component('<div><div class="me"></div>');
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChildInside(c2, '.me');
+		p.addChildComponent(c1);
+		p.addChildComponentInside(c2, '.me');
 		expect(c2.getElement().getParent().get('class')).toEqual('me');
 	});
 
@@ -70,9 +70,9 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChildAfter(c2, c1);
-		expect(p.getChildAt(1)).toEqual(c2);
+		p.addChildComponent(c1);
+		p.addChildComponentAfter(c2, c1);
+		expect(p.getChildComponentAt(1)).toEqual(c2);
 		expect(p.getElements()[1]).toEqual(c2.getElement());
 	});
 
@@ -80,49 +80,49 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChildBefore(c2, c1);
-		expect(p.getChildAt(0)).toEqual(c2);
+		p.addChildComponent(c1);
+		p.addChildComponentBefore(c2, c1);
+		expect(p.getChildComponentAt(0)).toEqual(c2);
 		expect(p.getElements()[0]).toEqual(c2.getElement());
 	});
 
 	it('should find a child using its name', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component(null, null, 'me');
-		p.addChild(c1);
-		expect(p.getChild('me')).toEqual(c1);
+		p.addChildComponent(c1);
+		expect(p.getChildComponent('me')).toEqual(c1);
 	});
 
 	it('should find a child using its index', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		p.addChild(c1);
-		expect(p.getChildAt(0)).toEqual(c1);
+		p.addChildComponent(c1);
+		expect(p.getChildComponentAt(0)).toEqual(c1);
 	});
 
 	it('should find a child of a given type using its index', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new MyComponent();
-		p.addChild(c1);
-		p.addChild(c2);
-		expect(p.getChildOfTypeAt(MyComponent, 0)).toEqual(c2);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		expect(p.getChildComponentOfTypeAt(MyComponent, 0)).toEqual(c2);
 	});
 
 	it('should find the index of a child', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		p.addChild(c1);
-		expect(p.getChildIndex(c1)).toEqual(0);
+		p.addChildComponent(c1);
+		expect(p.getChildComponentIndex(c1)).toEqual(0);
 	});
 
 	it('should return all children', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChild(c2);
-		var children = p.getChildren();
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		var children = p.getAllChildComponents();
 		expect(children[0]).toEqual(c1);
 		expect(children[1]).toEqual(c2);
 	});
@@ -132,89 +132,89 @@ describe('Component/Component', function() {
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		var c3 = new MyComponent();
-		p.addChild(c1);
-		p.addChild(c2);
-		p.addChild(c3);
-		var children = p.getChildrenOfType(MyComponent);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		p.addChildComponent(c3);
+		var children = p.getAllChildComponentsOfType(MyComponent);
 		expect(children[0]).toEqual(c3);
 	});
 
 	it('should know if a child exists', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		p.addChild(c1);
-		expect(p.hasChild(c1)).toEqual(true);
+		p.addChildComponent(c1);
+		expect(p.hasChildComponent(c1)).toEqual(true);
 	});
 
 	it('should know if a child of a given type exists', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new MyComponent();
-		p.addChild(c1);
-		p.addChild(c2);
-		expect(p.hasChildOfType(MyComponent)).toEqual(true);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		expect(p.hasChildComponentOfType(MyComponent)).toEqual(true);
 	});
 
 	it('should replace a child', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.replaceChild(c1, c2);
-		expect(p.getChildAt(0)).toEqual(c2);
+		p.addChildComponent(c1);
+		p.replaceChildComponent(c1, c2);
+		expect(p.getChildComponentAt(0)).toEqual(c2);
 	});
 
 	it('should a child be replaced with another', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		c1.replaceWith(c2);
-		expect(p.getChildAt(0)).toEqual(c2);
+		p.addChildComponent(c1);
+		c1.replaceWithComponent(c2);
+		expect(p.getChildComponentAt(0)).toEqual(c2);
 	});
 
 	it('should remove a child', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		p.addChild(c1);
-		p.removeChild(c1);
-		expect(p.getChildAt(0)).toEqual(null);
+		p.addChildComponent(c1);
+		p.removeChildComponent(c1);
+		expect(p.getChildComponentAt(0)).toEqual(null);
 	});
 
 	it('should remove all children', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChild(c2);
-		p.removeChildren();
-		expect(p.getChildren().length).toEqual(0);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		p.removeAllChildComponents();
+		expect(p.getAllChildComponents().length).toEqual(0);
 	});
 
 	it('should remove all children of a given type', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new MyComponent();
-		p.addChild(c1);
-		p.addChild(c2);
-		p.removeChildrenOfType(MyComponent);
-		expect(p.getChildren().length).toEqual(1);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		p.removeAllChildComponentsOfType(MyComponent);
+		expect(p.getAllChildComponents().length).toEqual(1);
 	});
 
 	it('should a child remove itself', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		p.addChild(c1);
-		c1.removeFromParent();
-		expect(p.getChildren().length).toEqual(0);
+		p.addChildComponent(c1);
+		c1.removeFromParentComponent();
+		expect(p.getAllChildComponents().length).toEqual(0);
 	});
 
 	it('should set/get/has parent', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
-		c1.setParent(p);
-		expect(c1.getParent()).toEqual(p);
-		expect(c1.hasParent()).toEqual(true);
+		c1.setParentComponent(p);
+		expect(c1.getParentComponent()).toEqual(p);
+		expect(c1.hasParentComponent()).toEqual(true);
 	});
 
 	it('should set the window through all child', function() {
@@ -222,8 +222,8 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChild(c2);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
 		p.setWindow(w);
 		expect(p.getWindow()).toEqual(w);
 		expect(p.hasWindow()).toEqual(true);
@@ -235,8 +235,8 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		p.addChild(c1);
-		p.addChild(c2);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
 		p.setReady(true);
 		expect(p.isReady()).toEqual(true);
 		expect(c1.isReady()).toEqual(true);

@@ -5,7 +5,7 @@ describe('Control/ButtonGroup', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
 		g.addButton(b1);
-		expect(g.getChildren()[0]).toEqual(b1);
+		expect(g.getAllChildComponents()[0]).toEqual(b1);
 	});
 
 	it('should add a button at the top', function() {
@@ -52,8 +52,8 @@ describe('Control/ButtonGroup', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
 		var b2 = new Moobile.Button();
-		g.addChild(b1);
-		g.addChild(b2);
+		g.addChildComponent(b1);
+		g.addChildComponent(b2);
 		var children = g.getButtons();
 		expect(children[0]).toEqual(b1);
 		expect(children[1]).toEqual(b2);
@@ -91,21 +91,25 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getButtons().length).toEqual(0);
 	});
 
-	it('should call didAddChild when adding a button', function() {
+	it('should call willAddChildComponent/didAddChildComponent when adding a button', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
-		spyOn(g, 'didAddChild');
+		spyOn(g, 'willAddChildComponent');
+		spyOn(g, 'didAddChildComponent');
 		g.addButton(b1);
-		expect(g.didAddChild).toHaveBeenCalled();
+		expect(g.willAddChildComponent).toHaveBeenCalled();
+		expect(g.didAddChildComponent).toHaveBeenCalled();
 	});
 
-	it('should call didRemoveChild when removing a button', function() {
+	it('should call willRemoveChildComponent / didRemoveChildComponent when removing a button', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
-		spyOn(g, 'didRemoveChild');
+		spyOn(g, 'willRemoveChildComponent');
+		spyOn(g, 'didRemoveChildComponent');
 		g.addButton(b1);
 		g.removeButton(b1);
-		expect(g.didRemoveChild).toHaveBeenCalled();
+		expect(g.willRemoveChildComponent).toHaveBeenCalled();
+		expect(g.didRemoveChildComponent).toHaveBeenCalled();
 	});
 
 	it('should select a button using the button instance', function() {

@@ -204,5 +204,5 @@ Moobile.Slider = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('slider', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.Slider, element, 'data-slider'));
+	this.addChildComponent(Moobile.Component.create(Moobile.Slider, element, 'data-slider'));
 });

@@ -73,5 +73,5 @@ Moobile.Text = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('text', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.Text, element, 'data-text'));
+	this.addChildComponent(Moobile.Component.create(Moobile.Text, element, 'data-text'));
 });

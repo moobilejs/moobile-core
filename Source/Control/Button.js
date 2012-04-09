@@ -85,9 +85,9 @@ Moobile.Button = new Class({
 		}
 
 		if (this._label) {
-			this._label.replaceWith(label, true);
+			this._label.replaceWithComponent(label, true);
 		} else {
-			this.addChild(label);
+			this.addChildComponent(label);
 		}
 
 		this._label = label;
@@ -130,7 +130,7 @@ Moobile.Button = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('button', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.Button, element, 'data-button'));
+	this.addChildComponent(Moobile.Component.create(Moobile.Button, element, 'data-button'));
 });
 
 Moobile.Component.defineRole('label', Moobile.Button, function(element) {

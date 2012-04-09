@@ -110,7 +110,7 @@ Moobile.View = new Class({
 	addChild: function(component, where) {
 		if (where === 'header') return this.parent(component, 'top');
 		if (where === 'footer') return this.parent(component, 'bottom');
-		return this.addChildInside(component, this.contentElement, where);
+		return this.addChildComponentInside(component, this.contentElement, where);
 	},
 
 	/**
@@ -118,7 +118,7 @@ Moobile.View = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willAddChild: function(component) {
+	willAddChildComponent: function(component) {
 		this.parent(component);
 		component.setParentView(this);
 	},
@@ -128,7 +128,7 @@ Moobile.View = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willRemoveChild: function(component) {
+	willRemoveChildComponent: function(component) {
 		this.parent(component);
 		component.setParentView(null);
 	},
@@ -229,7 +229,7 @@ Class.refactor(Moobile.Component, {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willAddChild: function(component) {
+	willAddChildComponent: function(component) {
 		this.previous(component);
 		component.setParentView(this._parentView);
 	},
@@ -239,7 +239,7 @@ Class.refactor(Moobile.Component, {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willRemoveChild: function(component) {
+	willRemoveChildComponent: function(component) {
 		this.previous(component);
 		component.setParentView(null);
 	}
@@ -266,7 +266,7 @@ Moobile.View.at = function(path) {
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.View, element, 'data-view'));
+	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true,	behavior: function(element) {

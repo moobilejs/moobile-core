@@ -165,7 +165,7 @@ Moobile.ViewPanel = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view-panel', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.ViewPanel, element, 'data-view-panel'));
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewPanel, element, 'data-view-panel'));
 });
 
 Moobile.Component.defineRole('side-panel', Moobile.ViewPanel, {traversable: true, behavior: function(element) {

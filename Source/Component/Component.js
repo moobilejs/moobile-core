@@ -166,11 +166,11 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChild: function(component, where) {
+	addChildComponent: function(component, where) {
 
 		var elementHandler = function() {
 			var element = component.getElement();
@@ -181,17 +181,15 @@ Moobile.Component = new Class({
 			}
 		}
 
-		return this._addChildAt(component, where === 'top' ? 0 : this._children.length, elementHandler);
+		return this._addChildComponentAt(component, where === 'top' ? 0 : this._children.length, elementHandler);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChildInside
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponentInside
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildInside: function(component, context, where) {
-
-		component.removeFromParent();
+	addChildComponentInside: function(component, context, where) {
 
 		var elementHandler = function() {
 			var element = component.getElement();
@@ -204,21 +202,19 @@ Moobile.Component = new Class({
 			}
 		};
 
-		return this._addChildAt(component, this._children.length, elementHandler);
+		return this._addChildComponentAt(component, this._children.length, elementHandler);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponentAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildAfter: function(component, after) {
-
-		component.removeFromParent();
+	addChildComponentAfter: function(component, after) {
 
 		var index = this._children.length;
 		if (after instanceof Moobile.Component) {
-			index = this.getChildIndex(after) + 1;
+			index = this.getChildComponentIndex(after) + 1;
 		}
 
 		var elementHandler = function() {
@@ -234,21 +230,19 @@ Moobile.Component = new Class({
 			}
 		};
 
-		return this._addChildAt(component, index, elementHandler);
+		return this._addChildComponentAt(component, index, elementHandler);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponentBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	addChildBefore: function(component, before) {
-
-		component.removeFromParent();
+	addChildComponentBefore: function(component, before) {
 
 		var index = this._children.length;
 		if (before instanceof Moobile.Component) {
-			index = this.getChildIndex(before);
+			index = this.getChildComponentIndex(before);
 		}
 
 		var elementHandler = function() {
@@ -264,7 +258,7 @@ Moobile.Component = new Class({
 			}
 		};
 
-		return this._addChildAt(component, index, elementHandler);
+		return this._addChildComponentAt(component, index, elementHandler);
 	},
 
 	/**
@@ -272,24 +266,24 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	_addChildAt: function(component, index, handler) {
+	_addChildComponentAt: function(component, index, handler) {
 
-		if (this.hasChild(component))
+		if (this.hasChildComponent(component))
 			return this;
 
-		component.removeFromParent();
+		component.removeFromParentComponent();
 
-		this.willAddChild(component);
+		this.willAddChildComponent(component);
 		this._children.splice(index, 0, component);
 
 		if (handler) handler.call(this);
 
-		var componentParent = component.getParent();
+		var componentParent = component.getParentComponent();
 		if (componentParent === null) {
-			component.setParent(this);
+			component.setParentComponent(this);
 		}
 
-		this.didAddChild(component);
+		this.didAddChildComponent(component);
 
 		var componentWindow = component.getWindow();
 		if (componentWindow === null) {
@@ -300,119 +294,119 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChild: function(name) {
+	getChildComponent: function(name) {
 		return this._children.find(function(child) { return child.getName() === name; });
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildOfType
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildOfType: function(type, name) {
+	getChildComponentOfType: function(type, name) {
 		return this._children.find(function(child) { return child instanceof type && child.getName() === name; });
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildAt
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildAt: function(index) {
+	getChildComponentAt: function(index) {
 		return this._children[index] || null;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildOfTypeAt
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentOfTypeAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildOfTypeAt: function(type, index) {
-		return this.getChildrenOfType(type)[index] || null;
+	getChildComponentOfTypeAt: function(type, index) {
+		return this.getAllChildComponentsOfType(type)[index] || null;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildIndex
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildIndex: function(component) {
+	getChildComponentIndex: function(component) {
 		return this._children.indexOf(component);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildren
+	 * @see    http://moobile.net/api/0.1/Component/Component#getAllChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildren: function() {
+	getAllChildComponents: function() {
 		return this._children;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildrenOfType
+	 * @see    http://moobile.net/api/0.1/Component/Component#getAllChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getChildrenOfType: function(type) {
+	getAllChildComponentsOfType: function(type) {
 		return this._children.filter(function(child) { return child instanceof type });
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasChild: function(component) {
+	hasChildComponent: function(component) {
 		return this._children.contains(component);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildOfType
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasChildOfType: function(type) {
+	hasChildComponentOfType: function(type) {
 		return this._children.some(function(child) { return child instanceof type; });
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	replaceChild: function(component, replacement, destroy) {
-		return this.addChildBefore(replacement, component).removeChild(component, destroy);
+	replaceChildComponent: function(component, replacement, destroy) {
+		return this.addChildComponentBefore(replacement, component).removeChildComponent(component, destroy);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#replaceWith
+	 * @see    http://moobile.net/api/0.1/Component/Component#replaceWithComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	replaceWith: function(component, destroy) {
-		var parent = this.getParent();
-		if (parent) parent.replaceChild(this, component, destroy);
+	replaceWithComponent: function(component, destroy) {
+		var parent = this.getParentComponent();
+		if (parent) parent.replaceChildComponent(this, component, destroy);
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChild: function(component, destroy) {
+	removeChildComponent: function(component, destroy) {
 
-		if (!this.hasChild(component))
+		if (!this.hasChildComponent(component))
 			return this;
 
-		this.willRemoveChild(component);
+		this.willRemoveChildComponent(component);
 
-		component.setParent(null);
+		component.setParentComponent(null);
 		component.setWindow(null);
 		component.setReady(false);
 
@@ -423,7 +417,7 @@ Moobile.Component = new Class({
 
 		this._children.erase(component);
 
-		this.didRemoveChild(component);
+		this.didRemoveChildComponent(component);
 
 		if (destroy) {
 			component.destroy();
@@ -434,20 +428,20 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildren
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeAllChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChildren: function(destroy) {
-		return this.removeChildrenOfType(Moobile.Component, destroy);
+	removeAllChildComponents: function(destroy) {
+		return this.removeAllChildComponentsOfType(Moobile.Component, destroy);
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildrenOfType
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeChildrenOfType: function(type, destroy) {
+	removeAllChildComponentsOfType: function(type, destroy) {
 
 		this._children.filter(function(child) {
 			return child instanceof type;
@@ -457,48 +451,48 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeFromParent
+	 * @see    http://moobile.net/api/0.1/Component/Component#removeFromParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	removeFromParent: function(destroy) {
-		var parent = this.getParent();
-		if (parent) parent.removeChild(this, destroy);
+	removeFromParentComponent: function(destroy) {
+		var parent = this.getParentComponent();
+		if (parent) parent.removeChildComponent(this, destroy);
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#setParent
+	 * @see    http://moobile.net/api/0.1/Component/Component#setParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	setParent: function(parent) {
+	setParentComponent: function(parent) {
 
 		if (this._parent === parent)
 			return this;
 
-		this.parentWillChange(parent);
+		this.parentComponentWillChange(parent);
 		this._parent = parent;
-		this.parentDidChange(parent);
+		this.parentComponentDidChange(parent);
 
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getParent
+	 * @see    http://moobile.net/api/0.1/Component/Component#getParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getParent: function() {
+	getParentComponent: function() {
 		return this._parent;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasParent
+	 * @see    http://moobile.net/api/0.1/Component/Component#hasParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	hasParent: function() {
+	hasParentComponent: function() {
 		return !!this._parent;
 	},
 
@@ -764,56 +758,56 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willAddChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#willAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willAddChild: function(child) {
+	willAddChildComponent: function(component) {
 
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didAddChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#didAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didAddChild: function(child) {
+	didAddChildComponent: function(component) {
 
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willRemoveChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#willRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	willRemoveChild: function(child) {
+	willRemoveChildComponent: function(component) {
 
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didRemoveChild
+	 * @see    http://moobile.net/api/0.1/Component/Component#didRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRemoveChild: function(child) {
+	didRemoveChildComponent: function(component) {
 
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#parentWillChange
+	 * @see    http://moobile.net/api/0.1/Component/Component#parentComponentWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	parentWillChange: function(parent) {
+	parentComponentWillChange: function(parent) {
 
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#parentDidChange
+	 * @see    http://moobile.net/api/0.1/Component/Component#parentComponentDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	parentDidChange: function(parent) {
+	parentComponentDidChange: function(parent) {
 
 	},
 
@@ -860,8 +854,8 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		this.removeFromParent();
-		this.removeChildren(true);
+		this.removeFromParentComponent();
+		this.removeAllChildComponents(true);
 
 		this.element.destroy();
 		this.element = null;
@@ -962,3 +956,54 @@ Moobile.Component.addNativeEvent('animationend');
 Moobile.Component.addNativeEvent('transitionend');
 
 })();
+
+//<pre-0.1-compat>
+
+Moobile.Component.prototype.addChild = Moobile.Component.prototype.addChildComponent;
+Moobile.Component.prototype.addChildInside = Moobile.Component.prototype.addChildComponentInside;
+Moobile.Component.prototype.addChildAfter = Moobile.Component.prototype.addChildComponentAfter;
+Moobile.Component.prototype.addChildBefore = Moobile.Component.prototype.addChildComponentBefore;
+Moobile.Component.prototype.getChild = Moobile.Component.prototype.getChildComponent;
+Moobile.Component.prototype.getChildOfType = Moobile.Component.prototype.getChildComponentOfType;
+Moobile.Component.prototype.getChildAt = Moobile.Component.prototype.getChildComponentAt;
+Moobile.Component.prototype.getChildOfTypeAt = Moobile.Component.prototype.getChildComponentOfTypeAt;
+Moobile.Component.prototype.getChildIndex = Moobile.Component.prototype.getChildComponentIndex;
+Moobile.Component.prototype.getChildren = Moobile.Component.prototype.getAllChildComponents;
+Moobile.Component.prototype.getChildrenOfType = Moobile.Component.prototype.getAllChildComponentsOfType;
+Moobile.Component.prototype.hasChild = Moobile.Component.prototype.hasChildComponent;
+Moobile.Component.prototype.hasChildOfType = Moobile.Component.prototype.hasChildComponentOfType;
+Moobile.Component.prototype.replaceChild = Moobile.Component.prototype.replaceChildComponent;
+Moobile.Component.prototype.replaceWith = Moobile.Component.prototype.replaceWithComponent;
+Moobile.Component.prototype.removeChild = Moobile.Component.prototype.removeChildComponent;
+Moobile.Component.prototype.removeChildren = Moobile.Component.prototype.removeAllChildComponents;
+Moobile.Component.prototype.removeChildrenOfType = Moobile.Component.prototype.removeAllChildComponentsOfType;
+Moobile.Component.prototype.removeFromParent = Moobile.Component.prototype.removeFromParentComponent;
+Moobile.Component.prototype.setParent = Moobile.Component.prototype.setParentComponent;
+Moobile.Component.prototype.getParent = Moobile.Component.prototype.getParentComponent;
+Moobile.Component.prototype.hasParent = Moobile.Component.prototype.hasParentComponent;
+
+Moobile.Component.prototype.willAddChild = function() {
+	throw new Error('This method is deprecated, use "willAddChildComponent" instead');
+};
+
+Moobile.Component.prototype.didAddChild = function() {
+	throw new Error('This method is deprecated, use "didAddChildComponent" instead');
+};
+
+Moobile.Component.prototype.willRemoveChild = function() {
+	throw new Error('This method is deprecated, use "willRemoveChildComponent" instead');
+};
+
+Moobile.Component.prototype.didRemoveChild = function() {
+	throw new Error('This method is deprecated, use "didRemoveChildComponent" instead');
+};
+
+Moobile.Component.prototype.parentWillChange = function() {
+	throw new Error('This method is deprecated, use "parentComponentWillChange" instead');
+};
+
+Moobile.Component.prototype.parentDidChange = function() {
+	throw new Error('This method is deprecated, use "parentComponentDidChange" instead');
+};
+
+//</pre-0.1-compat>

@@ -87,9 +87,9 @@ Moobile.NavigationBarItem = new Class({
 		}
 
 		if (this._title) {
-			this._title.replaceWith(title, true);
+			this._title.replaceWithComponent(title, true);
 		} else {
-			this.addChildInside(title, null, '.bar-title');
+			this.addChildComponentInside(title, null, '.bar-title');
 		}
 
 		this._title = title;
@@ -113,7 +113,7 @@ Moobile.NavigationBarItem = new Class({
 	 * @since  0.1
 	 */
 	addLeftButton: function(button) {
-		return this.addChild(button, 'top');
+		return this.addChildComponent(button, 'top');
 	},
 
 	/**
@@ -122,7 +122,7 @@ Moobile.NavigationBarItem = new Class({
 	 * @since  0.1
 	 */
 	addRightButton: function(button) {
-		return this.addChild(button, 'bottom');
+		return this.addChildComponent(button, 'bottom');
 	},
 
 	/**
@@ -131,7 +131,7 @@ Moobile.NavigationBarItem = new Class({
 	 * @since  0.1
 	 */
 	getButton: function(name) {
-		return this.getChildOfType(Moobile.Button, name);
+		return this.getChildComponentOfType(Moobile.Button, name);
 	},
 
 	/**
@@ -140,7 +140,7 @@ Moobile.NavigationBarItem = new Class({
 	 * @since  0.1
 	 */
 	getButtonAt: function(index) {
-		return this.getChildOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentOfTypeAt(Moobile.Button, index);
 	},
 
 	/**
@@ -149,7 +149,7 @@ Moobile.NavigationBarItem = new Class({
 	 * @since  0.1
 	 */
 	removeButton: function(button, destroy) {
-		return this.removeChild(button, destroy);
+		return this.removeChildComponent(button, destroy);
 	},
 
 	/**
@@ -158,7 +158,7 @@ Moobile.NavigationBarItem = new Class({
 	 * @since  0.1
 	 */
 	removeAllButtons: function(destroy) {
-		return this.removeChildren(Moobile.Button, destroy);
+		return this.removeAllChildComponents(Moobile.Button, destroy);
 	}
 
 });

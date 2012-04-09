@@ -56,5 +56,5 @@ Moobile.ViewStack = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('view-stack', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
 });

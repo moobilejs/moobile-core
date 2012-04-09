@@ -143,7 +143,7 @@ Moobile.ViewController = new Class({
 		var viewHandler = function() {
 			var view = viewController.getView();
 			if (view) {
-				this.view.addChild(view);
+				this.view.addChildComponent(view);
 			}
 		};
 
@@ -166,7 +166,7 @@ Moobile.ViewController = new Class({
 			if (view) {
 				var afterView = after.getView();
 				if (afterView) {
-					this.view.addChildAfter(view, afterView);
+					this.view.addChildComponentAfter(view, afterView);
 				}
 			}
 		};
@@ -190,7 +190,7 @@ Moobile.ViewController = new Class({
 			if (view) {
 				var beforeView = before.getView();
 				if (beforeView) {
-					this.view.addChildBefore(view, beforeView);
+					this.view.addChildComponentBefore(view, beforeView);
 				}
 			}
 		};
@@ -284,7 +284,7 @@ Moobile.ViewController = new Class({
 
 		var view = viewController.getView();
 		if (view) {
-			view.removeFromParent();
+			view.removeFromParentComponent();
 		}
 
 		this.didRemoveChildViewController(viewController);
@@ -342,7 +342,7 @@ Moobile.ViewController = new Class({
 		var viewToHide = this.view;
 		var parentView = this.view.getParentView();
 
-		parentView.addChild(viewToShow);
+		parentView.addChildComponent(viewToShow);
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.Cover;
 		viewTransition.addEvent('start:once', this.bound('_onPresentTransitionStart'));
@@ -451,9 +451,9 @@ Moobile.ViewController = new Class({
 			title.setText(text);
 		}
 
-		var parent = this._title ? this._title.getParent() : null;
+		var parent = this._title ? this._title.getParentComponent() : null;
 		if (parent) {
-			parent.replaceChild(this._title, title);
+			parent.replaceChildComponent(this._title, title);
 		}
 
 		this._title = title;
@@ -486,9 +486,9 @@ Moobile.ViewController = new Class({
 			image.setSource(source);
 		}
 
-		var parent = this._image ? this._image.getParent() : null;
+		var parent = this._image ? this._image.getParentComponent() : null;
 		if (parent) {
-			parent.replaceChild(this._image, image);
+			parent.replaceChildComponent(this._image, image);
 		}
 
 		this._image = image;

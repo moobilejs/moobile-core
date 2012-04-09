@@ -120,9 +120,9 @@ Moobile.ListItem = new Class({
 		}
 
 		if (this._label) {
-			this._label.replaceWith(label, true);
+			this._label.replaceWithComponent(label, true);
 		} else {
-			this.addChild(label);
+			this.addChildComponent(label);
 		}
 
 		this._label = label;
@@ -155,9 +155,9 @@ Moobile.ListItem = new Class({
 		}
 
 		if (this._image) {
-			this._image.replaceWith(image, true);
+			this._image.replaceWithComponent(image, true);
 		} else {
-			this.addChild(image);
+			this.addChildComponent(image);
 		}
 
 		this._image = image;
@@ -190,9 +190,9 @@ Moobile.ListItem = new Class({
 		}
 
 		if (this._detail) {
-			this._detail.replaceWith(detail, true);
+			this._detail.replaceWithComponent(detail, true);
 		} else {
-			this.addChild(detail);
+			this.addChildComponent(detail);
 		}
 
 		this._detail = detail;

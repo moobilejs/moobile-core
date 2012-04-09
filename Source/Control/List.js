@@ -104,7 +104,7 @@ Moobile.List = new Class({
 			this.fireEvent('select', this._selectedItem);
 		}
 
-		this._selectedItemIndex = selectedItem ? this.getChildIndex(selectedItem) : -1;
+		this._selectedItemIndex = selectedItem ? this.getChildComponentIndex(selectedItem) : -1;
 
 		return this;
 	},
@@ -127,7 +127,7 @@ Moobile.List = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildOfTypeAt(Moobile.ListItem, index);
+			child = this.getChildComponentOfTypeAt(Moobile.ListItem, index);
 		}
 
 		return this.setSelectedItem(child);
@@ -158,7 +158,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	addItem: function(item, where) {
-		return this.addChild(item, where);
+		return this.addChildComponent(item, where);
 	},
 
 	/**
@@ -167,7 +167,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	addItemAfter: function(item, after) {
-		return this.addChildAfter(item, after);
+		return this.addChildComponentAfter(item, after);
 	},
 
 	/**
@@ -176,7 +176,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	addItemBefore: function(item, before) {
-		return this.addChildBefore(item, before);
+		return this.addChildComponentBefore(item, before);
 	},
 
 	/**
@@ -185,7 +185,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	getItem: function(name) {
-		return this.getChildOfType(Moobile.ListItem, name);
+		return this.getChildComponentOfType(Moobile.ListItem, name);
 	},
 
 	/**
@@ -194,7 +194,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	getItemAt: function(index) {
-		return this.getChildOfTypeAt(Moobile.ListItem, index)
+		return this.getChildComponentOfTypeAt(Moobile.ListItem, index)
 	},
 
 	/**
@@ -203,7 +203,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	getItemIndex: function(item) {
-		return this.getChildIndex(item);
+		return this.getChildComponentIndex(item);
 	},
 
 	/**
@@ -212,7 +212,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	getItems: function() {
-		return this.getChildrenOfType(Moobile.ListItem);
+		return this.getAllChildComponentsOfType(Moobile.ListItem);
 	},
 
 	/**
@@ -221,7 +221,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	removeItem: function(item) {
-		return this.removeChild(item);
+		return this.removeChildComponent(item);
 	},
 
 	/**
@@ -230,7 +230,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	removeAllItems: function() {
-		return this.removeChildrenOfType(Moobile.ListItem);
+		return this.removeAllChildComponentsOfType(Moobile.ListItem);
 	},
 
 	/**
@@ -257,7 +257,7 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didAddChild: function(component) {
+	didAddChildComponent: function(component) {
 		this.parent(component);
 		if (component instanceof Moobile.ListItem) {
 			component.addEvent('tapstart', this.bound('_onItemTapStart'));
@@ -271,7 +271,7 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	didRemoveChild: function(component) {
+	didRemoveChildComponent: function(component) {
 		this.parent(component);
 		if (component instanceof Moobile.ListItem) {
 			component.removeEvent('tapstart', this.bound('_onItemTapStart'));
@@ -288,7 +288,7 @@ Moobile.List = new Class({
 	didChangeState: function(state) {
 		this.parent(state)
 		if (state === 'disabled' || state == null) {
-			this.getChildren().invoke('setDisabled', state);
+			this.getAllChildComponents().invoke('setDisabled', state);
 		}
 	},
 
@@ -326,7 +326,7 @@ Moobile.List = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('list', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.List, element, 'data-list'));
+	this.addChildComponent(Moobile.Component.create(Moobile.List, element, 'data-list'));
 });
 
 //------------------------------------------------------------------------------

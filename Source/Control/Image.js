@@ -221,5 +221,5 @@ Moobile.Image = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('image', null, function(element) {
-	this.addChild(Moobile.Component.create(Moobile.Image, element, 'data-image'));
+	this.addChildComponent(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
