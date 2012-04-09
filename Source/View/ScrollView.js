@@ -174,6 +174,15 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
+	 * @see    http://moobile.net/api/0.1/View/ScrollView#getScroller
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getScroller: function() {
+		return this._scroller;
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/View/ScrollView#getWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
