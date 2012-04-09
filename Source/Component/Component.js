@@ -326,7 +326,7 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	getChildComponentOfTypeAt: function(type, index) {
-		return this.getAllChildComponentsOfType(type)[index] || null;
+		return this.getChildComponentsOfType(type)[index] || null;
 	},
 
 	/**
@@ -339,20 +339,20 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getAllChildComponents
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getAllChildComponents: function() {
+	getChildComponents: function() {
 		return this._children;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getAllChildComponentsOfType
+	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	getAllChildComponentsOfType: function(type) {
+	getChildComponentsOfType: function(type) {
 		return this._children.filter(function(child) { return child instanceof type });
 	},
 
@@ -968,8 +968,8 @@ Moobile.Component.prototype.getChildOfType = Moobile.Component.prototype.getChil
 Moobile.Component.prototype.getChildAt = Moobile.Component.prototype.getChildComponentAt;
 Moobile.Component.prototype.getChildOfTypeAt = Moobile.Component.prototype.getChildComponentOfTypeAt;
 Moobile.Component.prototype.getChildIndex = Moobile.Component.prototype.getChildComponentIndex;
-Moobile.Component.prototype.getChildren = Moobile.Component.prototype.getAllChildComponents;
-Moobile.Component.prototype.getChildrenOfType = Moobile.Component.prototype.getAllChildComponentsOfType;
+Moobile.Component.prototype.getChildren = Moobile.Component.prototype.getChildComponents;
+Moobile.Component.prototype.getChildrenOfType = Moobile.Component.prototype.getChildComponentsOfType;
 Moobile.Component.prototype.hasChild = Moobile.Component.prototype.hasChildComponent;
 Moobile.Component.prototype.hasChildOfType = Moobile.Component.prototype.hasChildComponentOfType;
 Moobile.Component.prototype.replaceChild = Moobile.Component.prototype.replaceChildComponent;

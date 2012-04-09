@@ -152,8 +152,8 @@ Moobile.ViewControllerStack = new Class({
 		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onPopTransitionComplete'));
 		viewTransition.leave(
-			viewControllerBefore.view,
-			viewControllerPopped.view,
+			viewControllerBefore.getView(),
+			viewControllerPopped.getView(),
 			this.view
 		);
 
@@ -236,6 +236,26 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerStack(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerStack(null);
+	},
+
+	/**
 	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#willPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -283,22 +303,56 @@ Class.refactor(Moobile.ViewController, {
 	_viewControllerStack: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setViewControllerStack
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#setViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	setViewControllerStack: function(viewControllerStack) {
+
+		if (this._viewControllerStack === viewControllerStack)
+			return this;
+
+		this.parentViewControllerStackWillChange(viewControllerStack);
 		this._viewControllerStack = viewControllerStack;
+		this.parentViewControllerStackDidChange(viewControllerStack);
+
+		if (this instanceof Moobile.ViewControllerStack)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof Moobile.ViewControllerStack);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerStack', viewControllerStack);
+
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getViewControllerStack
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#getViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	getViewControllerStack: function() {
 		return this._viewControllerStack;
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#parentViewControllerStackWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	parentViewControllerStackWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#parentViewControllerStackDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	parentViewControllerStackDidChange: function(viewController) {
+
 	},
 
 	/**
@@ -308,9 +362,7 @@ Class.refactor(Moobile.ViewController, {
 	 */
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
-		if (viewController.getViewControllerStack() == null) {
-			viewController.setViewControllerStack(this._viewControllerStack);
-		}
+		viewController.setViewControllerStack(this._viewControllerStack);
 	},
 
 	/**

@@ -1,4 +1,3 @@
-
 describe('Control/Control', function() {
 
 	var control = null;
@@ -14,6 +13,8 @@ describe('Control/Control', function() {
 		control = null;
 	});
 
+	//--------------------------------------------------------------------------
+
 	it('should set its state to disabled', function() {
 		control.setDisabled(true);
 		expect(control.isDisabled()).toEqual(true);
@@ -21,6 +22,8 @@ describe('Control/Control', function() {
 		expect(control.willChangeState).toHaveBeenCalledWith('disabled');
 		expect(control.didChangeState).toHaveBeenCalledWith('disabled');
 	});
+
+	//--------------------------------------------------------------------------
 
 	it('should set its state to selected', function() {
 		control.setSelected(true);
@@ -30,6 +33,8 @@ describe('Control/Control', function() {
 		expect(control.didChangeState).toHaveBeenCalledWith('selected');
 	});
 
+	//--------------------------------------------------------------------------
+
 	it('should set its state to highlighted', function() {
 		control.setHighlighted(true);
 		expect(control.isHighlighted()).toEqual(true);
@@ -37,5 +42,7 @@ describe('Control/Control', function() {
 		expect(control.willChangeState).toHaveBeenCalledWith('highlighted');
 		expect(control.didChangeState).toHaveBeenCalledWith('highlighted');
 	});
+
+	//--------------------------------------------------------------------------
 
 });

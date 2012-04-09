@@ -334,7 +334,7 @@ Moobile.Alert = new Class({
 	 */
 	_onButtonTap: function(e, sender) {
 
-		var index = this.getAllChildComponentsOfType(Moobile.Button).indexOf(sender);
+		var index = this.getChildComponentsOfType(Moobile.Button).indexOf(sender);
 		if (index >= 0) {
 			this.fireEvent('dismiss', [sender, index]);
 		}

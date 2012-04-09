@@ -212,7 +212,7 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	getItems: function() {
-		return this.getAllChildComponentsOfType(Moobile.ListItem);
+		return this.getChildComponentsOfType(Moobile.ListItem);
 	},
 
 	/**
@@ -288,7 +288,7 @@ Moobile.List = new Class({
 	didChangeState: function(state) {
 		this.parent(state)
 		if (state === 'disabled' || state == null) {
-			this.getAllChildComponents().invoke('setDisabled', state);
+			this.getChildComponents().invoke('setDisabled', state);
 		}
 	},
 

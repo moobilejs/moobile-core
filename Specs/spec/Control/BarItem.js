@@ -1,4 +1,3 @@
-
 describe('Control/BarItem', function() {
 
 });

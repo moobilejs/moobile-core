@@ -180,7 +180,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	getButtons: function() {
-		return this.getAllChildComponentsOfType(Moobile.Button);
+		return this.getChildComponentsOfType(Moobile.Button);
 	},
 
 	/**

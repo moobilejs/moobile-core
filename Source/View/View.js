@@ -179,7 +179,7 @@ Class.refactor(Moobile.Component, {
 	_parentView: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#setParentView
+	 * @see    http://moobile.net/api/0.1/View/View#setParentView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -192,13 +192,20 @@ Class.refactor(Moobile.Component, {
 		this._parentView = parentView;
 		this.parentViewDidChange(parentView);
 
-		this._children.invoke('setParentView', parentView);
+		if (this instanceof Moobile.View)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof Moobile.View);
+		};
+
+		this.getChildComponents().filter(by).invoke('setParentView', parentView);
 
 		return this;
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getParentView
+	 * @see    http://moobile.net/api/0.1/View/View#getParentView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -207,7 +214,7 @@ Class.refactor(Moobile.Component, {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#parentViewDidChange
+	 * @see    http://moobile.net/api/0.1/View/View#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -216,7 +223,7 @@ Class.refactor(Moobile.Component, {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#parentViewDidChange
+	 * @see    http://moobile.net/api/0.1/View/View#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
