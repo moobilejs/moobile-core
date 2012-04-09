@@ -261,6 +261,10 @@ Moobile.View.at = function(path) {
 	return null;
 };
 
+//<pre-0.1-compat>
+Moobile.View.prototype.addChild = Moobile.View.prototype.addChildComponent;
+//</pre-0.1-compat>
+
 //------------------------------------------------------------------------------
 // Roles
 //------------------------------------------------------------------------------
