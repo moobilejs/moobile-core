@@ -4,57 +4,41 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-		<title>moobile-core-test</title>
+		<title></title>
 
 		<!-- default iOS styles -->
 		<link rel="stylesheet" href="css/iOS.css" />
-		<link rel="stylesheet" href="css/iOS.iPad.css" />
 
 		<!-- your own styles -->
 		<link rel="stylesheet" href="css/styles.css" />
+		<!--link rel="stylesheet" href="css/styles.min.css" /-->
 
 		<!-- mootools -->
-		<script type="text/javascript" src="js/mootools-core.js"></script>
-		<script type="text/javascript" src="js/mootools-more.js"></script>
+		<script type="text/javascript" src="js/libs/mootools-core-1.4.5.min.js"></script>
+		<script type="text/javascript" src="js/libs/mootools-more-1.4.0.1.min.js"></script>
 
 		<!-- moobile -->
-		<script type="text/javascript" src="js/moobile.js"></script>
-
+		<script type="text/javascript" src="js/libs/moobile-0.1.js"></script>
+		<!--script type="text/javascript" src="js/libs/moobile-0.1.min.js"></script-->
 
 		<!-- your app code -->
 		<script type="text/javascript" src="js/app.js"></script>
+		<!--script type="text/javascript" src="js/app.min.js"></script -->
 
 	</head>
 	<body>
 
 		<script type="text/javascript">
-		// <![CDATA["
 
 			window.addEvent('ready', function() {
 
-				/**
-				 * The following example explain how to create a navigation
-				 * application for the iPhone. We simply need to use the
-				 * ViewControllerStack.Navigation object and push our view
-				 * controllers through it.
-				 */
+				var rootViewController = /* instantiate your root view controller here */;
 
-				var viewControllerStack = new Moobile.ViewControllerStack.Navigation();
-
-				// create a window controller and set the root view controller
-				var windowController = new Moobile.WindowController('window');
-				windowController.setRootViewController(viewControllerStack);
-
-				// load the first view without a transition
-				var viewController = new MyApp.HomeViewController('views/home.html');
-				viewControllerStack.pushViewController(viewController);
-
+				var windowController = new Moobile.WindowController();
+				windowController.setRootViewController(rootViewController);
 			});
 
-		// "]]>
 		</script>
-
-		<div id="window"></div>
 
 	</body>
 </html>
