@@ -18,14 +18,14 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Class/Class
+ * @see    http://moobilejs.com/doc/0.1/Class/Class
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
 Class.extend({
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Class/Class.Instantiate#parse
+	 * @see    http://moobilejs.com/doc/0.1/Class/Class.Instantiate#parse
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -38,7 +38,7 @@ Class.extend({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Class/Class.Instantiate#instantiate
+	 * @see    http://moobilejs.com/doc/0.1/Class/Class.Instantiate#instantiate
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

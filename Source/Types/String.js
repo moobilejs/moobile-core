@@ -17,14 +17,14 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Types/String
+ * @see    http://moobilejs.com/doc/0.1/Types/String
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
 String.implement({
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Types/String#toCamelCase
+	 * @see    http://moobilejs.com/doc/0.1/Types/String#toCamelCase
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

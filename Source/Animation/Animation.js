@@ -22,7 +22,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobile.net/api/0.1/Animation/Animation
+ * @see    http://moobilejs.com/doc/0.1/Animation/Animation
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -45,21 +45,21 @@ Moobile.Animation = new Class({
 	_running: false,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#element
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#animationClass
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	animationClass: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#animationProperties
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationProperties
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -74,7 +74,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#initialize
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -85,7 +85,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -95,7 +95,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -104,7 +104,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setElement
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -114,7 +114,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getElement
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -123,7 +123,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationClass
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -133,7 +133,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationClass
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -142,7 +142,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -152,7 +152,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -161,7 +161,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationDuration
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -171,7 +171,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationDuration
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -180,7 +180,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -190,7 +190,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -199,7 +199,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationDirection
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -209,7 +209,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationDirection
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -218,7 +218,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -228,7 +228,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -237,7 +237,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationFillMode
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -247,7 +247,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationFillMode
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -256,7 +256,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#setAnimationDelay
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -266,7 +266,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#getAnimationDelay
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -309,7 +309,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#start
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -327,7 +327,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#stop
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -344,7 +344,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Animation/Animation#isRunning
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#isRunning
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

@@ -22,7 +22,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/View/ScrollView
+ * @see    http://moobilejs.com/doc/0.1/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -38,14 +38,14 @@ Moobile.ScrollView = new Class({
 	_scroller: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	wrapperElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -126,7 +126,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#scrollTo
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -136,7 +136,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#scrollToPage
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -146,7 +146,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#scrollToElement
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -156,7 +156,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#getScroll
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -165,7 +165,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#getScrollSize
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -174,7 +174,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#getScroller
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -183,7 +183,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/View/ScrollView#getWrapperElement
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

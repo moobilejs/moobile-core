@@ -39,7 +39,7 @@ iScroll.prototype._checkDOMChanges = function() {
 })();
 
 /**
- * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll
+ * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -48,14 +48,14 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	Extends: Moobile.Scroller.Engine,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#scroller
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	scroller: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#initialize
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -93,7 +93,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#destroy
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -104,7 +104,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#scrollTo
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -114,7 +114,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#scrollToElement
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -125,7 +125,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#refresh
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -135,7 +135,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#getSize
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -144,7 +144,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#getScroll
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -153,7 +153,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller.Engine.IScroll#getScrollSize
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

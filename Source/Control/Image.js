@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Control/Image
+ * @see    http://moobilejs.com/doc/0.1/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -102,7 +102,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image#setSource
+	 * @see    http://moobilejs.com/doc/0.1/Control/Image#setSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -132,7 +132,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image#getSource
+	 * @see    http://moobilejs.com/doc/0.1/Control/Image#getSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -141,7 +141,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image#getImage
+	 * @see    http://moobilejs.com/doc/0.1/Control/Image#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -150,7 +150,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image#getOriginalSize
+	 * @see    http://moobilejs.com/doc/0.1/Control/Image#getOriginalSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -159,7 +159,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Image#isLoaded
+	 * @see    http://moobilejs.com/doc/0.1/Control/Image#isLoaded
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

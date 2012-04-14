@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition.Slide
+ * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Slide
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

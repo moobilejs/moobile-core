@@ -26,7 +26,7 @@ if (!window.Moobile) window.Moobile = {};
 var fireEvent = Events.prototype.fireEvent;
 
 /**
- * @see http://moobile.net/api/0.1/EventFirer/EventFirer
+ * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer
  *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
@@ -40,7 +40,7 @@ Moobile.EventFirer = new Class({
 	],
 
 	/**
-	 * @see http://moobile.net/api/0.1/EventFirer/EventFirer#fireEvent
+	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#fireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -60,7 +60,7 @@ Moobile.EventFirer = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/EventFirer/EventFirer#shouldFireEvent
+	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#shouldFireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -70,7 +70,7 @@ Moobile.EventFirer = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/EventFirer/EventFirer#willFireEvent
+	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#willFireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -80,7 +80,7 @@ Moobile.EventFirer = new Class({
 	},
 
 	/**
-	 * @see http://moobile.net/api/0.1/EventFirer/EventFirer#didFireEvent
+	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#didFireEvent
 	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1

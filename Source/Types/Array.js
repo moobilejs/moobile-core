@@ -17,14 +17,14 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Types/Array
+ * @see    http://moobilejs.com/doc/0.1/Types/Array
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
 Array.implement({
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Types/Array#find
+	 * @see    http://moobilejs.com/doc/0.1/Types/Array#find
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -39,7 +39,7 @@ Array.implement({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Types/Array#getLastItemAtOffset
+	 * @see    http://moobilejs.com/doc/0.1/Types/Array#getLastItemAtOffset
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

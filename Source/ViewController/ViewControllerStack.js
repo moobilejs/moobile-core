@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack
+ * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -45,7 +45,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#pushViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#pushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -128,7 +128,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#popViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#popViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -161,7 +161,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#popViewControllerUntil
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#popViewControllerUntil
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -227,7 +227,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#getTopViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#getTopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -256,7 +256,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#willPushViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#willPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -265,7 +265,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#didPushViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#didPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -274,7 +274,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#willPopViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#willPopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -283,7 +283,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#didPopViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#didPopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -303,7 +303,7 @@ Class.refactor(Moobile.ViewController, {
 	_viewControllerStack: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#setViewControllerStack
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#setViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -329,7 +329,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#getViewControllerStack
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#getViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -338,7 +338,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#parentViewControllerStackWillChange
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#parentViewControllerStackWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -347,7 +347,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewControllerStack#parentViewControllerStackDidChange
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#parentViewControllerStackDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
