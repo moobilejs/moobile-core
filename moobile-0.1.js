@@ -2547,13 +2547,20 @@ Moobile.Component = new Class({
 		options = options || {};
 
 		for (var option in this.options) {
-			var value = this.element.get('data-option-' + option.hyphenate());
-			if (value !== null) {
-				var number = Number(value);
-				if (isFinite(number)) value = number;
-				if (options[option] === undefined) {
-					options[option] = value;
+			if (options[option] !== undefined) break;
+			var attrb = option.hyphenate();
+			var value = this.element.get('data-option-' + attrb);
+			if (value != null) {
+				if (value === 'null') {
+					value = null;
+				} else if (value === 'false') {
+					value = false;
+				} else if (value === 'true') {
+					value = true
+				} else if (/^-{0,1}\d*\.{0,1}\d+$/.test(value)) {
+					value = Number(value);
 				}
+				options[option] = value;
 			}
 		}
 
@@ -3823,7 +3830,8 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	options: {
-		deselectable: false
+		deselectable: false,
+		selectedButtonIndex: -1
 	},
 
 	/**
@@ -3834,6 +3842,16 @@ Moobile.ButtonGroup = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('button-group');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
 	},
 
 	/**
@@ -4713,7 +4731,9 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	options: {
-		tagName: 'ul'
+		tagName: 'ul',
+		selectable: true,
+		selectedItemIndex: -1
 	},
 
 	/**
@@ -4724,6 +4744,17 @@ Moobile.List = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('list');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.setSelectable(this.options.selectable);
+		this.setSelectedItemIndex(this.options.selectedItemIndex);
 	},
 
 	/**

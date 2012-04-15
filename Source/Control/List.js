@@ -55,7 +55,9 @@ Moobile.List = new Class({
 	 * @since  0.1
 	 */
 	options: {
-		tagName: 'ul'
+		tagName: 'ul',
+		selectable: true,
+		selectedItemIndex: -1
 	},
 
 	/**
@@ -66,6 +68,17 @@ Moobile.List = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('list');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.setSelectable(this.options.selectable);
+		this.setSelectedItemIndex(this.options.selectedItemIndex);
 	},
 
 	/**

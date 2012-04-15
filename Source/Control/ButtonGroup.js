@@ -48,7 +48,8 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1
 	 */
 	options: {
-		deselectable: false
+		deselectable: false,
+		selectedButtonIndex: -1
 	},
 
 	/**
@@ -59,6 +60,16 @@ Moobile.ButtonGroup = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('button-group');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
 	},
 
 	/**
