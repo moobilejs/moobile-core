@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Control/ListItem
+ * @see    http://moobilejs.com/doc/0.1/Control/ListItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -106,7 +106,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#setLabel
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -132,7 +132,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#getLabel
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -141,7 +141,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#setImage
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -167,7 +167,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#getImage
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -176,7 +176,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#setDetail
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -202,7 +202,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#getDetail
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#getDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

@@ -23,7 +23,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Component/Component
+ * @see    http://moobilejs.com/doc/0.1/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -81,14 +81,14 @@ Moobile.Component = new Class({
 	_style: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#element
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#options
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -99,7 +99,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#initialization
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#initialization
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -115,13 +115,20 @@ Moobile.Component = new Class({
 		options = options || {};
 
 		for (var option in this.options) {
-			var value = this.element.get('data-option-' + option.hyphenate());
-			if (value !== null) {
-				var number = Number(value);
-				if (isFinite(number)) value = number;
-				if (options[option] === undefined) {
-					options[option] = value;
+			if (options[option] !== undefined) break;
+			var attrb = option.hyphenate();
+			var value = this.element.get('data-option-' + attrb);
+			if (value != null) {
+				if (value === 'null') {
+					value = null;
+				} else if (value === 'false') {
+					value = false;
+				} else if (value === 'true') {
+					value = true
+				} else if (/^-{0,1}\d*\.{0,1}\d+$/.test(value)) {
+					value = Number(value);
 				}
+				options[option] = value;
 			}
 		}
 
@@ -166,7 +173,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -185,7 +192,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponentInside
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponentInside
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -206,7 +213,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponentAfter
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponentAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -234,7 +241,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addChildComponentBefore
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponentBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -292,7 +299,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -301,7 +308,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentOfType
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -310,7 +317,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentAt
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -319,7 +326,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentOfTypeAt
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentOfTypeAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -328,7 +335,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentIndex
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -337,7 +344,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponents
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -346,7 +353,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getChildComponentsOfType
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -355,7 +362,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -364,7 +371,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasChildComponentOfType
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -373,7 +380,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#replaceChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#replaceChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -382,7 +389,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#replaceWithComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#replaceWithComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -393,7 +400,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -426,7 +433,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeAllChildComponents
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeAllChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -435,7 +442,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeChildComponentsOfType
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -449,7 +456,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#removeFromParentComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeFromParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -460,7 +467,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#setParentComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -477,7 +484,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getParentComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -486,7 +493,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasParentComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -495,7 +502,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#setWindow
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -516,7 +523,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getWindow
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -525,7 +532,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasWindow
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -534,7 +541,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#setReady
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -556,7 +563,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#isReady
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#isReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -565,7 +572,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getName
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -574,7 +581,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#setStyle
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setStyle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -596,7 +603,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getStyle
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getStyle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -605,7 +612,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addClass
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -615,7 +622,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#addClass
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -625,7 +632,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#toggleClass
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#toggleClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -635,7 +642,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getElement
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -646,7 +653,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getElements
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -655,7 +662,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hasElement
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -664,7 +671,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getSize
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -673,7 +680,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#getPosition
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getPosition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -682,7 +689,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#show
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#show
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -701,7 +708,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#hide
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -720,7 +727,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#isVisible
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#isVisible
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -729,7 +736,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willBuild
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -738,7 +745,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didBuild
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -747,7 +754,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didBecomeReady
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didBecomeReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -756,7 +763,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willAddChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -765,7 +772,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didAddChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -774,7 +781,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willRemoveChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -783,7 +790,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didRemoveChildComponent
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -792,7 +799,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#parentComponentWillChange
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#parentComponentWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -801,7 +808,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#parentComponentDidChange
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#parentComponentDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -810,7 +817,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willShow
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -819,7 +826,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didShow
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -828,7 +835,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#willHide
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willHide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -837,7 +844,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#didHide
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didHide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -846,7 +853,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Component/Component#destroy
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -870,7 +877,7 @@ Moobile.Component = new Class({
 });
 
 /**
- * @see    http://moobile.net/api/0.1/Component/Component#defineRole
+ * @see    http://moobilejs.com/doc/0.1/Component/Component#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -879,7 +886,7 @@ Moobile.Component.defineRole = function(name, target, behavior) {
 };
 
 /**
- * @see    http://moobile.net/api/0.1/Component/Component#defineStyle
+ * @see    http://moobilejs.com/doc/0.1/Component/Component#defineStyle
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -896,7 +903,7 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
 };
 
 /**
- * @see    http://moobile.net/api/0.1/Component/Component#getRole
+ * @see    http://moobilejs.com/doc/0.1/Component/Component#getRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -907,7 +914,7 @@ Moobile.Component.getStyle = function(name, target) {
 };
 
 /**
- * @see    http://moobile.net/api/0.1/Component/Component#create
+ * @see    http://moobilejs.com/doc/0.1/Component/Component#create
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

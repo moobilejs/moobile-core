@@ -28,7 +28,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition
+ * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -41,7 +41,7 @@ Moobile.ViewTransition = new Class({
 	],
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#initialize
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -51,7 +51,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#enter
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#enter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -76,7 +76,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#leave
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#leave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -93,7 +93,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didEnterFirst
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#didEnterFirst
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -104,7 +104,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didEnter
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#didEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -117,7 +117,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#didLeave
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#didLeave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -130,7 +130,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#firstAnimation
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#firstAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -139,7 +139,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#enterAnimation
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#enterAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -148,7 +148,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition#leaveAnimation
+	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#leaveAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

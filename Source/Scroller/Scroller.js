@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Scroller/Scroller
+ * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -50,7 +50,7 @@ Moobile.Scroller = new Class({
 	_startPage: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#page
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#page
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -60,28 +60,28 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#engine
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#engine
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	engine: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#contentElement
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	contentElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#wrapperElement
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#wrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	wrapperElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#options
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -97,7 +97,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#initialize
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -157,7 +157,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#destroy
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -168,7 +168,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#scrollTo
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -178,7 +178,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#scrollToPage
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -214,7 +214,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#scrollToElement
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -224,7 +224,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#snap
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#snap
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -256,7 +256,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#refresh
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -266,7 +266,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getSize
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -275,7 +275,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getScroll
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -284,7 +284,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getScrollSize
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -293,7 +293,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getPage
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#getPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -302,7 +302,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getContentElement
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#getContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -311,7 +311,7 @@ Moobile.Scroller = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Scroller/Scroller#getWrapperElement
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller#getWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

@@ -21,7 +21,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Control/NavigationBarItem
+ * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -73,7 +73,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#setTitle
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -99,7 +99,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getTitle
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -108,7 +108,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addLeftButton
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#addLeftButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -117,7 +117,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#addRightButton
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#addRightButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -126,7 +126,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getButton
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -135,7 +135,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#getButton
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -144,7 +144,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeButton
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -153,7 +153,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/NavigationBarItem#removeAllButtons
+	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

@@ -21,7 +21,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/ViewTransition/ViewTransition.Fade
+ * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Fade
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

@@ -22,7 +22,7 @@ provides:
 (function() {
 
 /**
- * @see    http://moobile.net/api/0.1/Element/Element.Role#defineRole
+ * @see    http://moobilejs.com/doc/0.1/Element/Element.Role#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -43,7 +43,7 @@ Element.defineRole = function(name, context, behavior) {
 Element.implement({
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#setRole
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#setRole
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -52,7 +52,7 @@ Element.implement({
 	 },
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#getRole
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRole
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -61,7 +61,7 @@ Element.implement({
 	 },
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#getRoleDefinition
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRoleDefinition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -72,7 +72,7 @@ Element.implement({
 	 },
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#getRoleElement
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -81,7 +81,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#getRoleElements
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -96,7 +96,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#ownsRoleElement
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -118,7 +118,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Element/Element#executeDefinedRoles
+	 * @see    http://moobilejs.com/doc/0.1/Element/Element#executeDefinedRoles
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

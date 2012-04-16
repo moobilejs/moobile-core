@@ -22,7 +22,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobile.net/api/0.1/ViewController/ViewController
+ * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -80,28 +80,28 @@ Moobile.ViewController = new Class({
 	_children: [],
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#modal
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#modal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_modal: false,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#modalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#modalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_modalViewController: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#view
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#view
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	view: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#initialize
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -123,7 +123,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#loadView
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#loadView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -134,7 +134,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#addChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#addChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -151,7 +151,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#addChildViewControllerAfter
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#addChildViewControllerAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -175,7 +175,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#addChildViewControllerBefore
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#addChildViewControllerBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -224,7 +224,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -233,7 +233,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewControllerAt
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewControllerAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -242,7 +242,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewControllerIndex
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewControllerIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -251,7 +251,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getChildViewControllers
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewControllers
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -260,7 +260,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#hasChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#hasChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -269,7 +269,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#removeChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -297,7 +297,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeFromParentViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#removeFromParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -308,7 +308,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#removeAllChildViewControllers
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#removeAllChildViewControllers
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -322,7 +322,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#presentModalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#presentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -378,7 +378,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#dismissModalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#dismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -427,7 +427,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getName
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -436,7 +436,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setTitle
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -464,7 +464,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getTitle
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -473,7 +473,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setImage
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -500,7 +500,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getImage
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -509,7 +509,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setModal
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setModal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -518,7 +518,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#isModal
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#isModal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -527,7 +527,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#isViewReady
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#isViewReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -536,7 +536,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getView
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -545,7 +545,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setViewTransition
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -555,7 +555,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getViewTransition
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -564,7 +564,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#setParentViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -576,7 +576,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#getParentViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -585,7 +585,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willAddChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willAddChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -594,7 +594,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didAddChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didAddChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -603,7 +603,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willRemoveChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willRemoveChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -612,7 +612,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didRemoveChildViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didRemoveChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -621,7 +621,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#parentViewControllerWillChange
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#parentViewControllerWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -630,7 +630,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#parentViewControllerDidChange
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#parentViewControllerDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -639,7 +639,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willPresentModalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willPresentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -648,7 +648,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didPresentModalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didPresentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -657,7 +657,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#willDismissModalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willDismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -666,7 +666,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didDismissModalViewController
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didDismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -675,7 +675,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#didRotate
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didRotate
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -684,7 +684,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidLoad
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidLoad
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -693,7 +693,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidBecomeReady
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidBecomeReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -702,7 +702,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewWillEnter
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewWillEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -711,7 +711,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidEnter
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -720,7 +720,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewWillLeave
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewWillLeave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -729,7 +729,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#viewDidLeave
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidLeave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -738,7 +738,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/ViewController/ViewController#destroy
+	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

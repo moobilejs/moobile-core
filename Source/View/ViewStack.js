@@ -21,7 +21,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/View/ViewStack
+ * @see    http://moobilejs.com/doc/0.1/View/ViewStack
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

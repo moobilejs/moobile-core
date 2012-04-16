@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Control/List
+ * @see    http://moobilejs.com/doc/0.1/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -50,12 +50,14 @@ Moobile.List = new Class({
 	_selectedItemIndex: -1,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#options
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	options: {
-		tagName: 'ul'
+		tagName: 'ul',
+		selectable: true,
+		selectedItemIndex: -1
 	},
 
 	/**
@@ -73,6 +75,17 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
+	didBuild: function() {
+		this.parent();
+		this.setSelectable(this.options.selectable);
+		this.setSelectedItemIndex(this.options.selectedItemIndex);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
 	destroy: function() {
 		this._selectedItem = null;
 		this._selectedItemIndex = -1;
@@ -80,7 +93,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItem
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -110,7 +123,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#getSelectedItem
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#getSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -119,7 +132,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#setSelectedItemIndex
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#setSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -134,7 +147,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#getSelectedItemIndex
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#getSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -143,7 +156,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#clearSelectedItem
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#clearSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -153,7 +166,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#addItem
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#addItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -162,7 +175,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#addItemAfter
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#addItemAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -171,7 +184,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#addItemBefore
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#addItemBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -180,7 +193,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#getItem
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -189,7 +202,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#getItemAt
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItemAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -198,7 +211,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#getItemIndex
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -207,7 +220,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#getItems
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -216,7 +229,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#removeItem
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#removeItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -225,7 +238,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/List#removeAllItems
+	 * @see    http://moobilejs.com/doc/0.1/Control/List#removeAllItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -234,7 +247,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#setSelectable
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setSelectable
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -244,7 +257,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/ListItem#isSelectable
+	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#isSelectable
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

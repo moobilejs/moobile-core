@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Dialog/Alert
+ * @see    http://moobilejs.com/doc/0.1/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -50,42 +50,49 @@ Moobile.Alert = new Class({
 	_buttons: [],
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#wrapperElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	wrapperElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	contentElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#headerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	dialogHeader: null,
+	headerElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#footerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	dialogFooter: null,
+	footerElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	dialogContent: null,
+	contentElement: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#overlay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	overlay: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -150,7 +157,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -176,7 +183,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -185,7 +192,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setMessage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -211,7 +218,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#getMessage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -220,7 +227,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#addButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -234,7 +241,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setDefaultButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -244,7 +251,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setDefaultButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -253,7 +260,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -266,7 +273,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#hideAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -278,7 +285,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -291,7 +298,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -304,7 +311,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -318,7 +325,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -328,7 +335,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -343,7 +350,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Dialog/Alert
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

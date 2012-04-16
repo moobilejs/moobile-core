@@ -17,7 +17,7 @@ provides:
 */
 
 /**
- * @see    http://moobile.net/api/0.1/Control/Control
+ * @see    http://moobilejs.com/doc/0.1/Control/Control
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -33,7 +33,7 @@ Moobile.Control = new Class({
 	_state: null,
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#options
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -73,7 +73,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#shouldAllowState
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#shouldAllowState
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -82,7 +82,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#setDisabled
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#setDisabled
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -91,7 +91,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#isDisabled
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#isDisabled
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -100,7 +100,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#setSelected
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#setSelected
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -109,7 +109,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#isSelected
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#isSelected
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -118,7 +118,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#setHighlighted
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#setHighlighted
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -127,7 +127,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#isHighlighted
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#isHighlighted
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -136,7 +136,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#willChangeState
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#willChangeState
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -145,7 +145,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobile.net/api/0.1/Control/Control#didChangeState
+	 * @see    http://moobilejs.com/doc/0.1/Control/Control#didChangeState
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
