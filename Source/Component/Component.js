@@ -268,12 +268,10 @@ Moobile.Component = new Class({
 	 */
 	_addChildComponentAt: function(component, index, handler) {
 
-		if (this.hasChildComponent(component))
-			return this;
-
 		component.removeFromParentComponent();
 
 		this.willAddChildComponent(component);
+
 		this._children.splice(index, 0, component);
 
 		if (handler) handler.call(this);
