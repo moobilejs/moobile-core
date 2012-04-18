@@ -209,7 +209,7 @@ Moobile.ScrollView = new Class({
 	didShow: function() {
 		this.parent();
 		var offset = this.options.offset;
-		if (offset.x && offset.y) {
+		if (offset.x >= 0 || offset.y >= 0) {
 			this._scroller.scrollTo(offset.x, offset.y);
 		}
 	},
