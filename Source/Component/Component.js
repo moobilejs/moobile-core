@@ -411,10 +411,6 @@ Moobile.Component = new Class({
 
 		this.willRemoveChildComponent(component);
 
-		component.setParentComponent(null);
-		component.setWindow(null);
-		component.setReady(false);
-
 		var element = component.getElement();
 		if (element) {
 			element.dispose();
@@ -422,11 +418,14 @@ Moobile.Component = new Class({
 
 		this._children.erase(component);
 
+		component.setParentComponent(null);
+		component.setWindow(null);
+		component.setReady(false);
+
 		this.didRemoveChildComponent(component);
 
 		if (destroy) {
 			component.destroy();
-			component = null;
 		}
 
 		return this;
@@ -450,7 +449,7 @@ Moobile.Component = new Class({
 
 		this._children.filter(function(child) {
 			return child instanceof type;
-		}).invoke('removeFromParent', destroy);
+		}).invoke('removeFromParentComponent', destroy);
 
 		return this;
 	},
@@ -511,7 +510,9 @@ Moobile.Component = new Class({
 		if (this._window === window)
 			return this;
 
+		this.windowWillChange(window);
 		this._window = window;
+		this.windowDidChange(window);
 
 		this._children.invoke('setWindow', window);
 
@@ -817,6 +818,24 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#windowWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2
+	 */
+	windowWillChange: function(window) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#windowDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2
+	 */
+	windowDidChange: function(window) {
+
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -858,15 +877,12 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-
-		this.removeFromParentComponent();
 		this.removeAllChildComponents(true);
-
+		this.removeFromParentComponent();
 		this.element.destroy();
 		this.element = null;
 		this._window = null;
 		this._parent = null;
-
 		return this;
 	},
 

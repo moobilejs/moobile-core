@@ -746,8 +746,9 @@ Moobile.ViewController = new Class({
 
 		window.removeEvent('rotate', this.bound('_onWindowRotate'));
 
-		this.removeFromParentViewController();
 		this.removeAllChildViewControllers(true);
+
+		this.removeFromParentViewController();
 
 		if (this._modalViewController) {
 			this._modalViewController.destroy();
