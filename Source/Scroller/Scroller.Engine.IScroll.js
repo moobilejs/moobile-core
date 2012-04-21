@@ -29,7 +29,7 @@ iScroll.prototype._checkDOMChanges = function() {
 
 	_checkDOMChanges.call(this);
 
-	var size = this.wrapper.getSize();
+	var size = this.wrapper.getScrollSize();
 	if (this._currentSize.x != size.x || this._currentSize.y != size.y) {
 		this._currentSize = size;
 		this.refresh();
