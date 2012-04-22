@@ -210,8 +210,7 @@ Moobile.ScrollView = new Class({
 		this.parent();
 		var offset = this.options.offset;
 		if (offset.x >= 0 || offset.y >= 0) {
-			// disable untill the flick issue is fixed
-			// this._scroller.scrollTo(offset.x, offset.y);
+			this._scroller.scrollTo(offset.x, offset.y);
 		}
 	},
 

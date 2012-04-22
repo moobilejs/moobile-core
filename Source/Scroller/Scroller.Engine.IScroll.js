@@ -109,7 +109,8 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
-		(function() { this.scroller.scrollTo(-x, -y, time); }).delay(5, this);
+		this.scroller.refresh();
+		this.scroller.scrollTo(-x, -y, time);
 		return this;
 	},
 
