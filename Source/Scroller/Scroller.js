@@ -229,7 +229,7 @@ Moobile.Scroller = new Class({
 	 * @since  0.1.0
 	 */
 	snap: function() {
-
+console.log('Ssnap X ' + this._startPage.x);
 		var frame = this.getSize();
 		var scroll = this.getScroll();
 
@@ -326,7 +326,7 @@ Moobile.Scroller = new Class({
 	 */
 	_onDragStart: function() {
 		this._startScroll = this.getScroll();
-		this._startPage = this.getPage();
+		this._startPage = Object.clone(this.getPage());
 		this._startTime = Date.now();
 		this.fireEvent('dragstart');
 	},
