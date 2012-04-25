@@ -2843,10 +2843,6 @@ Moobile.Component = new Class({
 
 		this.willRemoveChildComponent(component);
 
-		component.setParentComponent(null);
-		component.setWindow(null);
-		component.setReady(false);
-
 		var element = component.getElement();
 		if (element) {
 			element.dispose();
@@ -2854,11 +2850,14 @@ Moobile.Component = new Class({
 
 		this._children.erase(component);
 
+		component.setParentComponent(null);
+		component.setWindow(null);
+		component.setReady(false);
+
 		this.didRemoveChildComponent(component);
 
 		if (destroy) {
 			component.destroy();
-			component = null;
 		}
 
 		return this;
@@ -2882,7 +2881,7 @@ Moobile.Component = new Class({
 
 		this._children.filter(function(child) {
 			return child instanceof type;
-		}).invoke('removeFromParent', destroy);
+		}).invoke('removeFromParentComponent', destroy);
 
 		return this;
 	},
@@ -2943,7 +2942,9 @@ Moobile.Component = new Class({
 		if (this._window === window)
 			return this;
 
+		this.windowWillChange(window);
 		this._window = window;
+		this.windowDidChange(window);
 
 		this._children.invoke('setWindow', window);
 
@@ -3249,6 +3250,24 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#windowWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2
+	 */
+	windowWillChange: function(window) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Component/Component#windowDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2
+	 */
+	windowDidChange: function(window) {
+
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -3290,15 +3309,12 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-
-		this.removeFromParentComponent();
 		this.removeAllChildComponents(true);
-
+		this.removeFromParentComponent();
 		this.element.destroy();
 		this.element = null;
 		this._window = null;
 		this._parent = null;
-
 		return this;
 	},
 
@@ -7177,7 +7193,7 @@ Moobile.Scroller = new Class({
 	 */
 	_onDragStart: function() {
 		this._startScroll = this.getScroll();
-		this._startPage = this.getPage();
+		this._startPage = Object.clone(this.getPage());
 		this._startTime = Date.now();
 		this.fireEvent('dragstart');
 	},
@@ -7224,10 +7240,10 @@ window.addEvent('domready', function(e) {
 
 	document.addEvent('touchmove', function(e) {
 
-		if (e.target.getParent('.scroll') === null) {
+		if (!e.target.hasClass('scroll') &&
+			!e.target.getParent('.scroll')) {
 			e.preventDefault();
 		} else {
-
 			//
 			// TODO
 			// This part has to be improved, right now only a pure horizontal
@@ -7491,7 +7507,10 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			checkDOMChanges: true,
 			snap: false,
 			onScrollMove: this.bound('_onScrollMove'),
-			onScrollEnd: this.bound('_onScrollEnd')
+			onScrollEnd: this.bound('_onScrollEnd'),
+			onBeforeScrollStart: function (e) {
+				// something has to be done here to make iScroll work with form elements.
+			}
 		};
 
 		this.scroller = new iScroll(this.wrapperElement, options);
@@ -7521,7 +7540,8 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
-		(function() { this.scroller.scrollTo(-x, -y, time); }).delay(5, this);
+		this.scroller.refresh();
+		this.scroller.scrollTo(-x, -y, time);
 		return this;
 	},
 
@@ -8384,6 +8404,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1
 	 */
 	options: {
+		engine: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -8417,6 +8438,7 @@ Moobile.ScrollView = new Class({
 		this.parent();
 
 		var options = {
+			engine: this.options.engine,
 			momentum: this.options.momentum,
 			scrollX: this.options.scrollX,
 			scrollY: this.options.scrollY,
@@ -8544,8 +8566,7 @@ Moobile.ScrollView = new Class({
 		this.parent();
 		var offset = this.options.offset;
 		if (offset.x >= 0 || offset.y >= 0) {
-			// disable untill the flick issue is fixed
-			// this._scroller.scrollTo(offset.x, offset.y);
+			this._scroller.scrollTo(offset.x, offset.y);
 		}
 	},
 
@@ -9576,8 +9597,9 @@ Moobile.ViewController = new Class({
 
 		window.removeEvent('rotate', this.bound('_onWindowRotate'));
 
-		this.removeFromParentViewController();
 		this.removeAllChildViewControllers(true);
+
+		this.removeFromParentViewController();
 
 		if (this._modalViewController) {
 			this._modalViewController.destroy();
@@ -10341,12 +10363,10 @@ Moobile.ViewTransition = new Class({
 	 */
 	enter: function(viewToShow, viewToHide, parentView, isFirstView) {
 
+		viewToShow.disableTouch();
 		if (viewToHide) {
 			viewToHide.disableTouch();
 		}
-
-		viewToShow.show();
-		viewToShow.disableTouch();
 
 		this.fireEvent('start');
 
@@ -10355,6 +10375,8 @@ Moobile.ViewTransition = new Class({
 		} else {
 			this.enterAnimation(viewToShow, viewToHide, parentView);
 		}
+
+		viewToShow.show();
 
 		return this;
 	},
@@ -10366,12 +10388,13 @@ Moobile.ViewTransition = new Class({
 	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
-		viewToShow.show();
 		viewToShow.disableTouch();
 		viewToHide.disableTouch();
 
 		this.fireEvent('start');
 		this.leaveAnimation(viewToShow, viewToHide, parentView);
+
+		viewToShow.show();
 
 		return this;
 	},
