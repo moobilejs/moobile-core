@@ -79,7 +79,10 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			checkDOMChanges: true,
 			snap: false,
 			onScrollMove: this.bound('_onScrollMove'),
-			onScrollEnd: this.bound('_onScrollEnd')
+			onScrollEnd: this.bound('_onScrollEnd'),
+			onBeforeScrollStart: function (e) {
+				// something has to be done here to make iScroll work with form elements.
+			}
 		};
 
 		this.scroller = new iScroll(this.wrapperElement, options);
