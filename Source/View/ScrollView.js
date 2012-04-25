@@ -50,6 +50,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1
 	 */
 	options: {
+		engine: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -83,6 +84,7 @@ Moobile.ScrollView = new Class({
 		this.parent();
 
 		var options = {
+			engine: this.options.engine,
 			momentum: this.options.momentum,
 			scrollX: this.options.scrollX,
 			scrollY: this.options.scrollY,
