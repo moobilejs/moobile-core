@@ -373,10 +373,10 @@ window.addEvent('domready', function(e) {
 
 	document.addEvent('touchmove', function(e) {
 
-		if (e.target.getParent('.scroll') === null) {
+		if (!e.target.hasClass('scroll') &&
+			!e.target.getParent('.scroll')) {
 			e.preventDefault();
 		} else {
-
 			//
 			// TODO
 			// This part has to be improved, right now only a pure horizontal
