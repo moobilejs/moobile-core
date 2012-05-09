@@ -95,8 +95,8 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			e.stop();
 
 			parentElem.removeClass('transition-cover-box-leave');
-			viewToHide.removeClass('transition-cover-box-background-view');
-			viewToShow.removeClass('transition-cover-box-foreground-view');
+			viewToHide.removeClass('transition-cover-box-foreground-view');
+			viewToShow.removeClass('transition-cover-box-background-view');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 
