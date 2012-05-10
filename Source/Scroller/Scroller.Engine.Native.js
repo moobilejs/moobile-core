@@ -214,5 +214,5 @@ Moobile.Scroller.Engine.Native = new Class({
 });
 
 Moobile.Scroller.Engine.Native.supportsCurrentPlatform = function() {
-	return 'WebkitOverflowScrolling' in new Element('div').style;
+	return Browser.Platform.ios && 'WebkitOverflowScrolling' in new Element('div').style;
 };
