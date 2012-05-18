@@ -164,9 +164,11 @@ Moobile.Component = new Class({
 	 */
 	addEvent: function(type, fn, internal) {
 
-		if (Moobile.Component.hasNativeEvent(type))
+		var name = type.split(':')[0];
+
+		if (Moobile.Component.hasNativeEvent(name))
 			this.element.addEvent(type, function(e) {
-				this.fireEvent(type, e);
+				this.fireEvent(name, e);
 			}.bind(this), internal);
 
 		return this.parent(type, fn, internal);
