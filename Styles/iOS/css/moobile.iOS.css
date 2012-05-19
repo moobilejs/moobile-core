@@ -1286,4 +1286,7 @@ p small {
 	    -ms-box-shadow: 0px 0px 10px #000000;
 	     -o-box-shadow: 0px 0px 10px #000000;
 	        box-shadow: 0px 0px 10px #000000;
+	margin-left: auto;
+	margin-right: auto;
+	width: 768px;
 }
