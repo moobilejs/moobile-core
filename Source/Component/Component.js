@@ -107,7 +107,7 @@ Moobile.Component = new Class({
 
 		this.element = Element.from(element);
 		if (this.element === null) {
-			this.element = new Element(this.options.tagName);
+			this.element = document.createElement(this.options.tagName);
 		}
 
 		this._name = name || this.element.get('data-name');
@@ -147,6 +147,8 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	build: function() {
+
+		// TODO Clone and replace
 
 		var className = this.options.className;
 		if (className) this.addClass(className);
