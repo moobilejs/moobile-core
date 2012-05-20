@@ -102,7 +102,7 @@ Element.implement({
 	 */
 	ownsRoleElement: function(element) {
 
-		var parent = element.getParent();
+		var parent = element.parentNode;
 		if (parent) {
 
 			if (parent === this)
