@@ -53,6 +53,10 @@ Moobile.Text = new Class({
 	 * @since  0.1
 	 */
 	setText: function(text) {
+
+		if (text instanceof Moobile.Text)
+			text = text.getText();
+
 		this.element.set('html', text);
 		return this;
 	},

@@ -57,7 +57,8 @@ provides:
 
 	// simulator hook
 	window.addEvent('ready', function() {
-		if (parent) {
+		if (parent &&
+			parent.fireEvent) {
 			parent.fireEvent('appready');
 		}
 	});

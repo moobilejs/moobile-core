@@ -107,7 +107,7 @@ Moobile.Component = new Class({
 
 		this.element = Element.from(element);
 		if (this.element === null) {
-			this.element = new Element(this.options.tagName);
+			this.element = document.createElement(this.options.tagName);
 		}
 
 		this._name = name || this.element.get('data-name');
@@ -148,6 +148,8 @@ Moobile.Component = new Class({
 	 */
 	build: function() {
 
+		// TODO Clone and replace
+
 		var className = this.options.className;
 		if (className) this.addClass(className);
 
@@ -164,9 +166,11 @@ Moobile.Component = new Class({
 	 */
 	addEvent: function(type, fn, internal) {
 
-		if (Moobile.Component.hasNativeEvent(type))
+		var name = type.split(':')[0];
+
+		if (Moobile.Component.hasNativeEvent(name))
 			this.element.addEvent(type, function(e) {
-				this.fireEvent(type, e);
+				this.fireEvent(name, e);
 			}.bind(this), internal);
 
 		return this.parent(type, fn, internal);

@@ -81,7 +81,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			onScrollMove: this.bound('_onScrollMove'),
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
-				// something has to be done here to make iScroll work with form elements.
+				e.preventDefault(); // This fixes an Android issue where the content would not scroll
 			}
 		};
 
