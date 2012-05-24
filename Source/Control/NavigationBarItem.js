@@ -54,12 +54,6 @@ Moobile.NavigationBarItem = new Class({
 			title.inject(this.element);
 			title.setRole('title');
 		}
-
-		var wrapper = this.element.getElement('.bar-title');
-		if (wrapper == null) {
-			wrapper = new Element('div.bar-title');
-			wrapper.wraps(title);
-		}
 	},
 
 	/**
@@ -93,7 +87,7 @@ Moobile.NavigationBarItem = new Class({
 		}
 
 		this._title = title;
-		this._title.addClass('title');
+		this._title.addClass('bar-title');
 
 		return this;
 	},
