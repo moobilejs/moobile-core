@@ -99,18 +99,18 @@ Moobile.ButtonGroup = new Class({
 		}
 
 		if (this._selectedButton) {
-			this.fireEvent('deselect', this._selectedButton);
 			this._selectedButton.setSelected(false);
+			this.fireEvent('deselect', this._selectedButton);
 			this._selectedButton = null;
 		}
+
+		this._selectedButtonIndex = selectedButton ? this.getChildComponentIndex(selectedButton) : -1;
 
 		if (selectedButton) {
 			this._selectedButton = selectedButton;
 			this._selectedButton.setSelected(true);
 			this.fireEvent('select', this._selectedButton);
 		}
-
-		this._selectedButtonIndex = selectedButton ? this.getChildComponentIndex(selectedButton) : -1;
 
 		return this;
 	},

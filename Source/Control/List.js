@@ -107,17 +107,17 @@ Moobile.List = new Class({
 
 		if (this._selectedItem) {
 			this._selectedItem.setSelected(false);
-			this._selectedItem = null;
 			this.fireEvent('deselect', this._selectedItem);
+			this._selectedItem = null;
 		}
+
+		this._selectedItemIndex = selectedItem ? this.getChildComponentIndex(selectedItem) : -1;
 
 		if (selectedItem) {
 			this._selectedItem = selectedItem;
 			this._selectedItem.setSelected(true);
 			this.fireEvent('select', this._selectedItem);
 		}
-
-		this._selectedItemIndex = selectedItem ? this.getChildComponentIndex(selectedItem) : -1;
 
 		return this;
 	},
