@@ -418,6 +418,7 @@ input, select, textarea {
 	    -ms-box-flex: 1;                                         /* Important */
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
+	display: block;
 	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
 	text-align: center;

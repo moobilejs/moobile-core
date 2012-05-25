@@ -177,8 +177,8 @@ Moobile.Image = new Class({
 		this._loaded = true;
 
 		if (this.options.preload) {
-			this._originalSize.x = 0;
-			this._originalSize.y = 0;
+			this._originalSize.x = this._image.width;
+			this._originalSize.y = this._image.height;
 		}
 
 		this.element.set('src', this._source);
@@ -196,8 +196,8 @@ Moobile.Image = new Class({
 		this._loaded = false;
 
 		if (this.options.preload) {
-			this._originalSize.x = this._image.width;
-			this._originalSize.y = this._image.height;
+			this._originalSize.x = 0;
+			this._originalSize.y = 0;
 		}
 
 		this.element.erase('src');
