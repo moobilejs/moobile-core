@@ -46,6 +46,7 @@ sources:
   - "Source/Event/Event.Rotate.js"
   - "Source/Event/Event.Mouse.js"
   - "Source/Event/Event.Tap.js"
+  - "Source/Event/Event.Touch.js"
   - "Source/Request/Request.js"
   - "Source/Scroller/Scroller.js"
   - "Source/Scroller/Scroller.Engine.js"
