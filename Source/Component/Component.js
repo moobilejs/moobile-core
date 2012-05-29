@@ -168,12 +168,31 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (Moobile.Component.hasNativeEvent(name))
-			this.element.addEvent(type, function(e) {
-				this.fireEvent(name, e);
-			}.bind(this), internal);
+		if (Moobile.Component.hasNativeEvent(name)) {
 
-		return this.parent(type, fn, internal);
+			var self = this;
+			this.element.addEvent(type, function(e) {
+
+				//
+				// This part duplicates code from the EventFirer class. A better
+				// solution needs to be found. Previously, I was calling
+				// fireEvent directly but found out it was multiplying the calls
+				// made to the event listener.
+				//
+
+				var args = Array.from(e).include(self);
+				if (self.shouldFireEvent(name, args)) {
+					self.willFireEvent(name, args);
+					fn.apply(self, args);
+					self.didFireEvent(name, args);
+				}
+			}, internal);
+
+		} else {
+			this.parent(type, fn, internal);
+		}
+
+		return this;
 	},
 
 	/**
