@@ -83,7 +83,7 @@ Moobile.NavigationBarItem = new Class({
 		if (this._title) {
 			this._title.replaceWithComponent(title, true);
 		} else {
-			this.addChildComponentInside(title, null, '.bar-title');
+			this.addChildComponent(title);
 		}
 
 		this._title = title;
