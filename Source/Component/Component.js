@@ -188,9 +188,10 @@ Moobile.Component = new Class({
 				}
 			}, internal);
 
-		} else {
-			this.parent(type, fn, internal);
 		}
+
+		// also needs to be added here
+		this.parent(type, fn, internal);
 
 		return this;
 	},
