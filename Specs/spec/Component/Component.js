@@ -194,6 +194,19 @@ describe('Component/Component', function() {
 
 	//--------------------------------------------------------------------------
 
+	it('should find a descendant using its name', function() {
+		var p  = new Moobile.Component();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component(null, null, 'me');
+		p.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+		expect(p.getDescendantComponent('me')).toEqual(c3);
+	});
+
+	//--------------------------------------------------------------------------
+
 	it('should replace a child', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
