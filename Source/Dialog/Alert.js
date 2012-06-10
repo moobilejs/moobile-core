@@ -266,8 +266,8 @@ Moobile.Alert = new Class({
 	 */
 	showAnimated: function() {
 		this.willShow();
-		this.element.show();
 		this.element.addClass('show-animated');
+		this.element.show();
 		this.overlay.showAnimated();
 		return this;
 	},
