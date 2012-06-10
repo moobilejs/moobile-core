@@ -14,3 +14,5 @@ Visit [http://moobilejs.com](http://moobilejs.com) for more informations.
 - Moved the presentation logic into a separate CSS file.
 - Added CSS vendor prefixes.
 - Fixed a few scroller issues that prevented scrolling on android devices.
+- Fixed slider
+- Added retina display images

@@ -142,9 +142,28 @@ p small {
 /* Dark */
 
 .bar.style-dark {
-	background: url(../images/bar.png) repeat-x 0px -88px;
+	background-position: 0px -88px;
 	color: #ffffff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Bar (Retina Display)
+-----------------------------------------------------------------------------*/
+
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   -moz-min-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2) {
+
+	.bar {
+		background-image: url(../images/bar-2x.png);
+		background-size: 100px 176px
+	}
+
+	.bar.style-dark {
+		background-position: 0px -88px;
+	}
 }
 
 /* Navigation Bar
@@ -243,6 +262,7 @@ p small {
 	    -ms-border-radius: 0px;
 	     -o-border-radius: 0px;
 	        border-radius: 0px;
+	border-width: 1px;
 	border-top-width: 0px;
 }
 
@@ -684,6 +704,384 @@ p small {
 	        border-image: url(../images/bar-button.png) 1170 5 800 1 stretch stretch;
 }
 
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   -moz-min-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2) {
+
+	/* Inside a Bar */
+
+	.bar .button {
+		-webkit-border-image: url(../images/bar-button-2x.png) 0 10 3940 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 0 10 3940 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 0 10 3940 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 0 10 3940 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 0 10 1970 stretch stretch;
+	}
+
+	.bar .button.is-selected,
+	.bar .button.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 60 10 3880 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 60 10 3880 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 60 10 3880 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 60 10 3880 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 60 10 3880 stretch stretch;
+	}
+
+	/* Inside a Bar (Dark) */
+
+	.bar.style-dark .button {
+		-webkit-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
+		   -moz-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
+		    -ms-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
+		     -o-border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
+		        border-image: url(../images/bar-button.png) 360 5 1610 stretch stretch;
+	}
+
+	.bar.style-dark .button.is-selected,
+	.bar.style-dark .button.is-highlighted {
+		-webkit-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
+		   -moz-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
+		    -ms-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
+		     -o-border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
+		        border-image: url(../images/bar-button.png) 390 5 1580 stretch stretch;
+	}
+
+	/* Inside a Bar + Back */
+
+	.bar .button.style-back {
+		-webkit-border-image: url(../images/bar-button-2x.png) 480 10 3460 26 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 480 10 3460 26 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 480 10 3460 26 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 480 10 3460 26 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 480 10 3460 26 stretch stretch;
+	}
+
+	.bar .button.style-back.is-selected,
+	.bar .button.style-back.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 540 10 3400 26 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 540 10 3400 26 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 540 10 3400 26 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 540 10 3400 26 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 540 10 3400 26 stretch stretch;
+	}
+
+	/* Inside a Bar (Dark) + Back */
+
+	.bar.style-dark .button.style-back {
+		-webkit-border-image: url(../images/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
+	}
+
+	.bar.style-dark .button.style-back.is-selected,
+	.bar.style-dark .button.style-back.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
+	}
+
+	/* Inside a Bar + Forward */
+
+	.bar .button.style-forward {
+		-webkit-border-image: url(../images/bar-button-2x.png) 600 26 3340 10 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 600 26 3340 10 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 600 26 3340 10 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 600 26 3340 10 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 600 26 3340 10 stretch stretch;
+	}
+
+	.bar .button.style-forward.is-selected,
+	.bar .button.style-forward.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 660 26 3280 10 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 660 26 3280 10 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 660 26 3280 10 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 660 26 3280 10 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 660 26 3280 10 stretch stretch;
+	}
+
+	/* Inside a Bar (Dark) + Forward */
+
+	.bar.style-dark .button.style-forward {
+		-webkit-border-image: url(../images/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
+	}
+
+	.bar.style-dark .button.style-forward.is-selected,
+	.bar.style-dark .button.style-forward.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
+	}
+
+	/* Inside a Bar + Active */
+
+	.bar .button.style-active {
+		-webkit-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
+		   -moz-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
+		    -ms-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
+		     -o-border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
+		        border-image: url(../images/bar-button.png) 720 5 1250 stretch stretch;
+	}
+
+	.bar .button.style-active.is-selected,
+	.bar .button.style-active.is-highlighted {
+		-webkit-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
+		     -o-border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
+		        border-image: url(../images/bar-button.png) 750 5 1220 stretch stretch;
+	}
+
+	/* Inside a Bar + Warning */
+
+	.bar .button.style-warning {
+		-webkit-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
+		   -moz-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
+		    -ms-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
+		     -o-border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
+		        border-image: url(../images/bar-button.png) 960 5 1010 stretch stretch;
+	}
+
+	.bar .button.style-warning.is-selected,
+	.bar .button.style-warning.is-highlighted {
+		-webkit-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
+		   -moz-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
+		    -ms-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
+		     -o-border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
+		        border-image: url(../images/bar-button.png) 990 5 980 stretch stretch;
+	}
+
+	/* Inside a Bar + Grouped */
+
+	.bar .button-group .button {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.is-selected,
+	.bar .button-group .button.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.is-selected:first-child,
+	.bar .button-group .button.is-highlighted:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.is-selected:last-child,
+	.bar .button-group .button.is-highlighted:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	/* Inside a Bar (Dark) + Grouped */
+
+	.bar.style-dark .button-group .button {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar.style-dark .button-group .button:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar.style-dark .button-group .button.style-dark:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar.style-dark .button-group .button.is-selected,
+	.bar.style-dark .button-group .button.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar.style-dark .button-group .button.is-selected:first-child,
+	.bar.style-dark .button-group .button.is-highlighted:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar.style-dark .button-group .button.is-selected:last-child,
+	.bar.style-dark .button-group .button.is-highlighted:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	/* Inside a Bar + Grouped + Active */
+
+	.bar .button-group .button.style-active {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		border-width: 0px 1px 0px 0px;
+		padding-left: 9px;
+		padding-right: 8px;
+	}
+
+	.bar .button-group .button.style-active:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		border-width: 0px 1px 0px 5px;
+		padding-left: 4px;
+	}
+
+	.bar .button-group .button.style-active:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		border-width: 0px 5px 0px 0px;
+		padding-right: 4px;
+	}
+
+	.bar .button-group .button.style-active.is-selected,
+	.bar .button-group .button.style-active.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-active.is-selected:first-child,
+	.bar .button-group .button.style-active.is-highlighted:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-active.is-selected:last-child,
+	.bar .button-group .button.style-active.is-highlighted:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	/* Inside a Bar + Grouped + Warning */
+
+	.bar .button-group .button.style-warning {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-warning:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-warning:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-warning.is-selected,
+	.bar .button-group .button.style-warning.is-highlighted {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-warning.is-selected:first-child,
+	.bar .button-group .button.style-warning.is-highlighted:first-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+
+	.bar .button-group .button.style-warning.is-selected:last-child,
+	.bar .button-group .button.style-warning.is-highlighted:last-child {
+		-webkit-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		   -moz-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		    -ms-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		     -o-border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+		        border-image: url(../images/bar-button-2x.png) 720 10 3220 stretch stretch;
+	}
+}
+
 /* List
 -----------------------------------------------------------------------------*/
 
@@ -791,7 +1189,7 @@ p small {
 	text-shadow: none;
 }
 
-.list-item.is-selected .list-item-detail,
+.list-item.is-selected    .list-item-detail,
 .list-item.is-highlighted .list-item-detail {
 	color: #ffffff;
 }
@@ -800,49 +1198,71 @@ p small {
 	width: 30px;
 }
 
-/* Checked */
+ /* Checked, Detailed, Disclosed */
 
-.list-item.style-checked .list-item-detail {
-	padding-right: 35px;
-}
-
-.list-item.style-checked .list-item-detail:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -60px center;
-}
-
-.list-item.style-checked.is-selected > .list-item-detail:after,
-.list-item.style-checked.is-highlighted > .list-item-detail:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -90px center;
-}
-
-/* Disclosed */
-
+.list-item.style-checked   > .list-item-detail,
+.list-item.style-detailed  > .list-item-detail,
 .list-item.style-disclosed > .list-item-detail {
 	padding-right: 35px;
 }
 
+.list-item.style-checked   > .list-item-detail:after,
+.list-item.style-detailed  > .list-item-detail:after,
 .list-item.style-disclosed > .list-item-detail:after {
-	background: url(../images/list-item-style-icon.png) no-repeat 0px center;
+	background-image: url(../images/list-item-style-icon.png);
+	background-repeat: no-repeat;
 }
 
-.list-item.style-disclosed.is-selected > .list-item-detail:after,
-.list-item.style-disclosed.is-highlighted > .list-item-detail:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -30px center;
+/* Checked */
+
+.list-item.style-checked > .list-item-detail:after {
+	background-position: -60px center;
 }
 
-/* Style Detailed */
-
-.list-item.style-detailed > .list-item-detail {
-	padding-right: 35px;
+.list-item.style-checked.is-selected    > .list-item-detail:after,
+.list-item.style-checked.is-highlighted > .list-item-detail:after {
+	background-position: -90px center;
 }
+
+/* Detailed */
 
 .list-item.style-detailed > .list-item-detail:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
+	background-position: -120px center;
 }
 
-.list-item.style-detailed.is-selected > .list-item-detail:after,
+.list-item.style-detailed.is-selected    > .list-item-detail:after,
 .list-item.style-detailed.is-highlighted > .list-item-detail:after {
-	background: url(../images/list-item-style-icon.png) no-repeat -120px center;
+	background-position: -120px center;
+}
+
+/* Disclosed */
+
+.list-item.style-disclosed > .list-item-detail:after {
+	background-position: 0px center;
+}
+
+.list-item.style-disclosed.is-selected    > .list-item-detail:after,
+.list-item.style-disclosed.is-highlighted > .list-item-detail:after {
+	background-position: -30px center;
+}
+
+/* List Item (Retina)
+-----------------------------------------------------------------------------*/
+
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   -moz-min-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2) {
+
+    /* Checked, Detailed, Disclosed */
+
+	.list-item.style-checked   > .list-item-detail:after,
+	.list-item.style-detailed  > .list-item-detail:after,
+	.list-item.style-disclosed > .list-item-detail:after {
+		background-image: url(../images/list-item-style-icon-2x.png);
+		background-size: 150px 30px;
+	}
 }
 
 /* Overlay
@@ -857,6 +1277,7 @@ p small {
 .overlay.style-radial {
 	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
 }
+
 
 /* Alert
 -----------------------------------------------------------------------------*/
@@ -930,13 +1351,13 @@ p small {
 	    -ms-border-image: url(../images/alert-button.png) 0 5 86 5 stretch stretch;
 	     -o-border-image: url(../images/alert-button.png) 0 5 86 5 stretch stretch;
 	        border-image: url(../images/alert-button.png) 0 5 86 5 stretch stretch;
-	-webkit-border-radius: 4px;
-	   -moz-border-radius: 4px;
-	    -ms-border-radius: 4px;
-	     -o-border-radius: 4px;
-	        border-radius: 4px;
+	-webkit-border-radius: 0px;
+	   -moz-border-radius: 0px;
+	    -ms-border-radius: 0px;
+	     -o-border-radius: 0px;
+	        border-radius: 0px;
 	background: none;
-	border-width: 1px 5px;
+	border-width: 0px 5px;
 	color: #ffffff;
 	font-size: 18px;
 	font-weight: bold;
@@ -1059,6 +1480,46 @@ p small {
 .alert.button-layout-horizontal .alert-footer .button:first-child { margin-left: 0px; }
 .alert.button-layout-horizontal .alert-footer .button:last-child  { margin-right: 0px; }
 
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   -moz-min-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2) {
+
+	.alert .alert-wrapper {
+		-webkit-border-image: url(../images/alert-2x.png) 70 30 30 30 stretch;
+		   -moz-border-image: url(../images/alert-2x.png) 70 30 30 30 stretch;
+		    -ms-border-image: url(../images/alert-2x.png) 70 30 30 30 stretch;
+		     -o-border-image: url(../images/alert-2x.png) 70 30 30 30 stretch;
+		        border-image: url(../images/alert-2x.png) 70 30 30 30 stretch;
+	}
+
+	.alert .alert-footer .button {
+		-webkit-border-image: url(../images/alert-button-2x.png) 0 10 173 10 stretch stretch;
+		   -moz-border-image: url(../images/alert-button-2x.png) 0 10 173 10 stretch stretch;
+		    -ms-border-image: url(../images/alert-button-2x.png) 0 10 173 10 stretch stretch;
+		     -o-border-image: url(../images/alert-button-2x.png) 0 10 173 10 stretch stretch;
+		        border-image: url(../images/alert-button-2x.png) 0 10 173 10 stretch stretch;
+	}
+
+	.alert .alert-footer .button.default {
+		-webkit-border-image: url(../images/alert-button-2x.png) 86 10 87 10 stretch stretch;
+		   -moz-border-image: url(../images/alert-button-2x.png) 86 10 87 10 stretch stretch;
+		    -ms-border-image: url(../images/alert-button-2x.png) 86 10 87 10 stretch stretch;
+		     -o-border-image: url(../images/alert-button-2x.png) 86 10 87 10 stretch stretch;
+		        border-image: url(../images/alert-button-2x.png) 86 10 87 10 stretch stretch;
+	}
+
+	.alert .alert-footer .button.is-selected,
+	.alert .alert-footer .button.is-highlighted {
+		-webkit-border-image: url(../images/alert-button-2x.png) 173 10 0 10 stretch stretch;
+		   -moz-border-image: url(../images/alert-button-2x.png) 173 10 0 10 stretch stretch;
+		    -ms-border-image: url(../images/alert-button-2x.png) 173 10 0 10 stretch stretch;
+		     -o-border-image: url(../images/alert-button-2x.png) 173 10 0 10 stretch stretch;
+		        border-image: url(../images/alert-button-2x.png) 173 10 0 10 stretch stretch;
+	}
+}
+
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 
@@ -1071,6 +1532,18 @@ p small {
 	background: url(../images/activity-indicator.png);
 	height: 21px;
 	width: 21px;
+}
+
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   -moz-min-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2) {
+
+	.activity-indicator {
+		background-image: url(../images/activity-indicator-2x.png);
+		background-size: 21px 20px;
+	}
 }
 
 /* Slider
@@ -1092,11 +1565,28 @@ p small {
 	    -ms-border-radius: 5px;
 	     -o-border-radius: 5px;
 	        border-radius: 5px;
-	background: url(../images/slider-handle.png) no-repeat center center;
+	background: url(../images/slider-thumb.png) no-repeat center center;
 	height: 24px;
 	position: absolute;
 	margin-top: -6px;
 	width: 24px;
+}
+
+@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   -moz-min-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2) {
+
+	.slider-track {
+		background-image: url(../images/slider-track-2x.png);
+		background-size: 2048px 9px;
+	}
+
+	.slider-thumb {
+		background-image: url(../images/slider-thumb-2x.png);
+		background-size: 24px 24px;
+	}
 }
 
 /* Transition Slide (Enter)

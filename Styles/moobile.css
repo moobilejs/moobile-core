@@ -983,25 +983,23 @@ input, select, textarea {
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 
-/* TODO : Stop and Start animations */;
-
-@-webkit-keyframes anim-activity-indicator {
+@-webkit-keyframes anim-activity-indicator-active {
 	from { -webkit-transform: rotate(0deg); }
 	to   { -webkit-transform: rotate(360deg); }
 }
-@-moz-keyframes anim-activity-indicator {
+@-moz-keyframes anim-activity-indicator-active {
 	from { -moz-transform: rotate(0deg); }
 	to   { -moz-transform: rotate(360deg); }
 }
-@-ms-keyframes anim-activity-indicator {
+@-ms-keyframes anim-activity-indicator-active {
 	from { -ms-transform: rotate(0deg); }
 	to   { -ms-transform: rotate(360deg); }
 }
-@-o-keyframes anim-activity-indicator {
+@-o-keyframes anim-activity-indicator-active {
 	from { -o-transform: rotate(0deg); }
 	to   { -o-transform: rotate(360deg); }
 }
-@keyframes anim-activity-indicator {
+@keyframes anim-activity-indicator-active {
 	from { transform: rotate(0deg); }
 	to   { transform: rotate(360deg); }
 }
@@ -1022,6 +1020,12 @@ input, select, textarea {
 	    -ms-animation: anim-activity-indicator 1s linear infinite;
 	     -o-animation: anim-activity-indicator 1s linear infinite;
 	        animation: anim-activity-indicator 1s linear infinite;
+}
+
+
+.activity-indicator.active {
+	-webkit-animation: anim-activity-indicator-active 750ms infinite linear;
+	-webkit-animation-fill-mode: both;
 }
 
 /* Slider
