@@ -7,6 +7,7 @@ var m = Math,
 	mround = function (r) { return r >> 0; },
 	vendor = (/webkit/i).test(navigator.appVersion) ? 'webkit' :
 		(/firefox/i).test(navigator.userAgent) ? 'Moz' :
+		(/trident/i).test(navigator.userAgent) ? 'ms' :
 		'opera' in window ? 'O' : '',
 
     // Browser capabilities
@@ -26,7 +27,7 @@ var m = Math,
 			|| window.mozRequestAnimationFrame
 			|| window.oRequestAnimationFrame
 			|| window.msRequestAnimationFrame
-			|| function(callback) { return setTimeout(callback, 1); }
+			|| function(callback) { return setTimeout(callback, 1); };
 	})(),
 	cancelFrame = (function () {
 	    return window.cancelRequestAnimationFrame
@@ -35,7 +36,7 @@ var m = Math,
 			|| window.mozCancelRequestAnimationFrame
 			|| window.oCancelRequestAnimationFrame
 			|| window.msCancelRequestAnimationFrame
-			|| clearTimeout
+			|| clearTimeout;
 	})(),
 
 	// Events
@@ -425,12 +426,12 @@ iScroll.prototype = {
 			newY = that.options.bounce ? that.y + (deltaY / 2) : newY >= that.minScrollY || that.maxScrollY >= 0 ? that.minScrollY : that.maxScrollY;
 		}
 
-		if (that.absDistX < 6 && that.absDistY < 6) {
-			that.distX += deltaX;
-			that.distY += deltaY;
-			that.absDistX = m.abs(that.distX);
-			that.absDistY = m.abs(that.distY);
+		that.distX += deltaX;
+		that.distY += deltaY;
+		that.absDistX = m.abs(that.distX);
+		that.absDistY = m.abs(that.distY);
 
+		if (that.absDistX < 6 && that.absDistY < 6) {
 			return;
 		}
 
@@ -627,10 +628,12 @@ iScroll.prototype = {
 		if ('wheelDeltaX' in e) {
 			wheelDeltaX = e.wheelDeltaX / 12;
 			wheelDeltaY = e.wheelDeltaY / 12;
+		} else if('wheelDelta' in e) {
+			wheelDeltaX = wheelDeltaY = e.wheelDelta / 12;
 		} else if ('detail' in e) {
 			wheelDeltaX = wheelDeltaY = -e.detail * 3;
 		} else {
-			wheelDeltaX = wheelDeltaY = -e.wheelDelta;
+			return;
 		}
 		
 		if (that.options.wheelAction == 'zoom') {
@@ -661,8 +664,10 @@ iScroll.prototype = {
 
 		if (deltaY > that.minScrollY) deltaY = that.minScrollY;
 		else if (deltaY < that.maxScrollY) deltaY = that.maxScrollY;
-
-		that.scrollTo(deltaX, deltaY, 0);
+    
+    if(that.maxScrollY < 0){
+		  that.scrollTo(deltaX, deltaY, 0);
+    }
 	},
 	
 	_mouseout: function (e) {
@@ -2238,7 +2243,10 @@ Element.from = function(text) {
 
 	switch (typeof text) {
 		case 'object': return document.id(text);
-		case 'string': return Elements.from(text).pop();
+		case 'string':
+			var element = document.createElement('div');
+			element.innerHTML = text;
+			return element.childNodes[0] || null;
 	}
 
 	return null;
@@ -2384,7 +2392,7 @@ Element.implement({
 	 */
 	ownsRoleElement: function(element) {
 
-		var parent = element.getParent();
+		var parent = element.parentNode;
 		if (parent) {
 
 			if (parent === this)
@@ -2539,7 +2547,7 @@ Moobile.Component = new Class({
 
 		this.element = Element.from(element);
 		if (this.element === null) {
-			this.element = new Element(this.options.tagName);
+			this.element = document.createElement(this.options.tagName);
 		}
 
 		this._name = name || this.element.get('data-name');
@@ -2580,6 +2588,8 @@ Moobile.Component = new Class({
 	 */
 	build: function() {
 
+		// TODO Clone and replace
+
 		var className = this.options.className;
 		if (className) this.addClass(className);
 
@@ -2596,12 +2606,34 @@ Moobile.Component = new Class({
 	 */
 	addEvent: function(type, fn, internal) {
 
-		if (Moobile.Component.hasNativeEvent(type))
-			this.element.addEvent(type, function(e) {
-				this.fireEvent(type, e);
-			}.bind(this), internal);
+		var name = type.split(':')[0];
 
-		return this.parent(type, fn, internal);
+		if (Moobile.Component.hasNativeEvent(name)) {
+
+			var self = this;
+			this.element.addEvent(type, function(e) {
+
+				//
+				// This part duplicates code from the EventFirer class. A better
+				// solution needs to be found. Previously, I was calling
+				// fireEvent directly but found out it was multiplying the calls
+				// made to the event listener.
+				//
+
+				var args = Array.from(e).include(self);
+				if (self.shouldFireEvent(name, args)) {
+					self.willFireEvent(name, args);
+					fn.apply(self, args);
+					self.didFireEvent(name, args);
+				}
+			}, internal);
+
+		}
+
+		// also needs to be added here
+		this.parent(type, fn, internal);
+
+		return this;
 	},
 
 	/**
@@ -2809,6 +2841,20 @@ Moobile.Component = new Class({
 	 */
 	hasChildComponentOfType: function(type) {
 		return this._children.some(function(child) { return child instanceof type; });
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1.1/Component/Component#getDescendantComponent
+	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @since  0.1.1
+	 */
+	getDescendantComponent: function(name) {
+	    var component = null;
+	    var comparator = function(child) {
+	        if (child.getName() === name) {component = child;return true;} else if (child.getChildComponents().length > 0) {return child.getChildComponents().find(comparator);} else return false;
+	    }
+	    this._children.find(comparator);
+	    return component;
 	},
 
 	/**
@@ -3895,18 +3941,18 @@ Moobile.ButtonGroup = new Class({
 		}
 
 		if (this._selectedButton) {
-			this.fireEvent('deselect', this._selectedButton);
 			this._selectedButton.setSelected(false);
+			this.fireEvent('deselect', this._selectedButton);
 			this._selectedButton = null;
 		}
+
+		this._selectedButtonIndex = selectedButton ? this.getChildComponentIndex(selectedButton) : -1;
 
 		if (selectedButton) {
 			this._selectedButton = selectedButton;
 			this._selectedButton.setSelected(true);
 			this.fireEvent('select', this._selectedButton);
 		}
-
-		this._selectedButtonIndex = selectedButton ? this.getChildComponentIndex(selectedButton) : -1;
 
 		return this;
 	},
@@ -4356,12 +4402,6 @@ Moobile.NavigationBarItem = new Class({
 			title.inject(this.element);
 			title.setRole('title');
 		}
-
-		var wrapper = this.element.getElement('.bar-title');
-		if (wrapper == null) {
-			wrapper = new Element('div.bar-title');
-			wrapper.wraps(title);
-		}
 	},
 
 	/**
@@ -4391,11 +4431,11 @@ Moobile.NavigationBarItem = new Class({
 		if (this._title) {
 			this._title.replaceWithComponent(title, true);
 		} else {
-			this.addChildComponentInside(title, null, '.bar-title');
+			this.addChildComponent(title);
 		}
 
 		this._title = title;
-		this._title.addClass('title');
+		this._title.addClass('bar-title');
 
 		return this;
 	},
@@ -4797,17 +4837,17 @@ Moobile.List = new Class({
 
 		if (this._selectedItem) {
 			this._selectedItem.setSelected(false);
-			this._selectedItem = null;
 			this.fireEvent('deselect', this._selectedItem);
+			this._selectedItem = null;
 		}
+
+		this._selectedItemIndex = selectedItem ? this.getChildComponentIndex(selectedItem) : -1;
 
 		if (selectedItem) {
 			this._selectedItem = selectedItem;
 			this._selectedItem.setSelected(true);
 			this.fireEvent('select', this._selectedItem);
 		}
-
-		this._selectedItemIndex = selectedItem ? this.getChildComponentIndex(selectedItem) : -1;
 
 		return this;
 	},
@@ -5544,8 +5584,8 @@ Moobile.Image = new Class({
 		this._loaded = true;
 
 		if (this.options.preload) {
-			this._originalSize.x = 0;
-			this._originalSize.y = 0;
+			this._originalSize.x = this._image.width;
+			this._originalSize.y = this._image.height;
 		}
 
 		this.element.set('src', this._source);
@@ -5563,8 +5603,8 @@ Moobile.Image = new Class({
 		this._loaded = false;
 
 		if (this.options.preload) {
-			this._originalSize.x = this._image.width;
-			this._originalSize.y = this._image.height;
+			this._originalSize.x = 0;
+			this._originalSize.y = 0;
 		}
 
 		this.element.erase('src');
@@ -5646,6 +5686,10 @@ Moobile.Text = new Class({
 	 * @since  0.1
 	 */
 	setText: function(text) {
+
+		if (text instanceof Moobile.Text)
+			text = text.getText();
+
 		this.element.set('html', text);
 		return this;
 	},
@@ -6473,7 +6517,8 @@ provides:
 
 	// simulator hook
 	window.addEvent('ready', function() {
-		if (parent) {
+		if (parent &&
+			parent.fireEvent) {
 			parent.fireEvent('appready');
 		}
 	});
@@ -6814,6 +6859,101 @@ Element.defineCustomEvent('tapend', {
 
 })();
 
+
+/*
+---
+
+name: Event.Touch
+
+description: Provides several touch events.
+
+license: MIT-style license.
+
+author:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Mobile/Browser.Features.Touch
+	- Event.Mouse
+
+provides:
+	- Event.Touch
+
+...
+*/
+
+(function() {
+
+var touchOverTargets = [];
+var touchOutTargets = [];
+
+Element.defineCustomEvent('touchover', {
+
+	base: 'touchmove',
+
+	condition: function() {
+		return false;
+	},
+
+	onSetup: function() {
+		touchOverTargets.include(this);
+	},
+
+	onTeardown: function() {
+		touchOverTargets.erase(this);
+	}
+
+});
+
+Element.defineCustomEvent('touchleave', {
+
+	base: 'touchmove',
+
+	condition: function() {
+		return false;
+	},
+
+	onSetup: function() {
+		touchOutTargets.include(this);
+	},
+
+	onTeardown: function() {
+		touchOutTargets.erase(this);
+	}
+});
+
+var onDocumentTouchMove = function(e) {
+
+	if (touchOverTargets.length === 0 &&
+		touchOutTargets.length === 0)
+		return;
+
+	var touches = e.targetTouches;
+	for (var i = 0; i < touches.length; i++) {
+		var touch = touches[i];
+		var element = document.elementFromPoint(touch.pageX, touch.pageY);
+		if (element) {
+			for (var j = 0; j < touchOverTargets.length; j++) {
+				var target = touchOverTargets[j];
+				if (target === element || target.contains(element)) {
+					target.fireEvent('touchover', e);
+				}
+			}
+			for (var j = 0; j < touchOutTargets.length; j++) {
+				var target = touchOutTargets[j];
+				if (target !== element && target.contains(element) === false) {
+					target.fireEvent('touchout', e);
+				}
+			}
+		}
+	}
+};
+
+window.addEvent('ready', function() {
+	document.addEvent('touchmove', onDocumentTouchMove);
+});
+
+})();
 
 /*
 ---
@@ -7509,7 +7649,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			onScrollMove: this.bound('_onScrollMove'),
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
-				// something has to be done here to make iScroll work with form elements.
+				e.preventDefault(); // This fixes an Android issue where the content would not scroll
 			}
 		};
 
@@ -7861,7 +8001,7 @@ Moobile.Scroller.Engine.Native = new Class({
 });
 
 Moobile.Scroller.Engine.Native.supportsCurrentPlatform = function() {
-	return 'WebkitOverflowScrolling' in new Element('div').style;
+	return Browser.Platform.ios && 'WebkitOverflowScrolling' in new Element('div').style;
 };
 
 
@@ -10793,8 +10933,8 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			e.stop();
 
 			parentElem.removeClass('transition-cover-box-leave');
-			viewToHide.removeClass('transition-cover-box-background-view');
-			viewToShow.removeClass('transition-cover-box-foreground-view');
+			viewToHide.removeClass('transition-cover-box-foreground-view');
+			viewToShow.removeClass('transition-cover-box-background-view');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 
@@ -11563,11 +11703,6 @@ provides: Touch
 
 (function(){
 
-var preventDefault = function(event){
-	if (!event.target || event.target.tagName.toLowerCase() != 'select')
-		event.preventDefault();
-};
-
 var disabled;
 
 Element.defineCustomEvent('touch', {
@@ -11575,7 +11710,7 @@ Element.defineCustomEvent('touch', {
 	base: 'touchend',
 
 	condition: function(event){
-		if (disabled || event.targetTouches.length != 0) return false;
+		if (disabled || event.targetTouches.length !== 0) return false;
 
 		var touch = event.changedTouches[0],
 			target = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -11585,14 +11720,6 @@ Element.defineCustomEvent('touch', {
 		} while (target && (target = target.parentNode));
 
 		return false;
-	},
-
-	onSetup: function(){
-		this.addEvent('touchstart', preventDefault);
-	},
-
-	onTeardown: function(){
-		this.removeEvent('touchstart', preventDefault);
 	},
 
 	onEnable: function(){
