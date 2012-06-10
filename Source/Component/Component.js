@@ -404,6 +404,20 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/0.1.1/Component/Component#getDescendantComponent
+	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @since  0.1.1
+	 */
+	getDescendantComponent: function(name) {
+	    var component = null;
+	    var comparator = function(child) {
+	        if (child.getName() === name) {component = child;return true;} else if (child.getChildComponents().length > 0) {return child.getChildComponents().find(comparator);} else return false;
+	    }
+	    this._children.find(comparator);
+	    return component;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/Component/Component#replaceChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
