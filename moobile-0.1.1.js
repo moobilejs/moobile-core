@@ -5982,8 +5982,8 @@ Moobile.Alert = new Class({
 	 */
 	showAnimated: function() {
 		this.willShow();
-		this.element.show();
 		this.element.addClass('show-animated');
+		this.element.show();
 		this.overlay.showAnimated();
 		return this;
 	},
@@ -6882,78 +6882,30 @@ provides:
 ...
 */
 
-(function() {
+if (Browser.Features.Touch) (function() {
 
-var touchOverTargets = [];
-var touchOutTargets = [];
+// This fixes stuff that still uses mouse events such as Drag.Move
 
-Element.defineCustomEvent('touchover', {
+delete Element.NativeEvents['mousedown'];
+delete Element.NativeEvents['mousemove'];
+delete Element.NativeEvents['mouseup'];
 
-	base: 'touchmove',
+Element.defineCustomEvent('mousedown', {
 
-	condition: function() {
-		return false;
-	},
+	base: 'touchstart',
 
-	onSetup: function() {
-		touchOverTargets.include(this);
-	},
+}).defineCustomEvent('mousemove', {
 
-	onTeardown: function() {
-		touchOverTargets.erase(this);
-	}
+	base: 'touchmove'
 
-});
+}).defineCustomEvent('mouseup', {
 
-Element.defineCustomEvent('touchleave', {
+	base: 'touchend',
 
-	base: 'touchmove',
-
-	condition: function() {
-		return false;
-	},
-
-	onSetup: function() {
-		touchOutTargets.include(this);
-	},
-
-	onTeardown: function() {
-		touchOutTargets.erase(this);
-	}
-});
-
-var onDocumentTouchMove = function(e) {
-
-	if (touchOverTargets.length === 0 &&
-		touchOutTargets.length === 0)
-		return;
-
-	var touches = e.targetTouches;
-	for (var i = 0; i < touches.length; i++) {
-		var touch = touches[i];
-		var element = document.elementFromPoint(touch.pageX, touch.pageY);
-		if (element) {
-			for (var j = 0; j < touchOverTargets.length; j++) {
-				var target = touchOverTargets[j];
-				if (target === element || target.contains(element)) {
-					target.fireEvent('touchover', e);
-				}
-			}
-			for (var j = 0; j < touchOutTargets.length; j++) {
-				var target = touchOutTargets[j];
-				if (target !== element && target.contains(element) === false) {
-					target.fireEvent('touchout', e);
-				}
-			}
-		}
-	}
-};
-
-window.addEvent('ready', function() {
-	document.addEvent('touchmove', onDocumentTouchMove);
 });
 
 })();
+
 
 /*
 ---
@@ -8063,8 +8015,8 @@ Moobile.Overlay = new Class({
 	 */
 	showAnimated: function() {
 		this.willShow();
-		this.element.show();
 		this.element.addClass('show-animated');
+		this.element.show();
 		return this;
 	},
 
