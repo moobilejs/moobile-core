@@ -151,7 +151,7 @@ Moobile.Scroller = new Class({
 			}, this);
 		}
 
-		this.wrapperElement.addClass('scroll');
+		this.wrapperElement.addClass('scrollable');
 
 		return this;
 	},
@@ -373,8 +373,8 @@ window.addEvent('domready', function(e) {
 
 	document.addEvent('touchmove', function(e) {
 
-		if (!e.target.hasClass('scroll') &&
-			!e.target.getParent('.scroll')) {
+		if (!e.target.hasClass('scrollable') &&
+			!e.target.getParent('.scrollable')) {
 			e.preventDefault();
 		} else {
 			//

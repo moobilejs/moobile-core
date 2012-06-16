@@ -7583,7 +7583,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 
 		this.parent(content, options);
 
-		this.wrapperElement.addClass('scroll-engine-iscroll');
+		this.wrapperElement.addClass('scroller-engine-iscroll');
 
 		var options = {
 			hScroll: this.options.scrollX,
@@ -7790,7 +7790,7 @@ Moobile.Scroller.Engine.Native = new Class({
 
 		this.parent(content, options);
 
-		this.wrapperElement.addClass('scroll-engine-native');
+		this.wrapperElement.addClass('scroller-engine-native');
 
 		this.wrapperElement.setStyle('overflow-x', this.options.scrollX ? 'scroll' : 'hidden');
 		this.wrapperElement.setStyle('overflow-y', this.options.scrollY ? 'scroll' : 'hidden');

@@ -63,7 +63,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 
 		this.parent(content, options);
 
-		this.wrapperElement.addClass('scroll-engine-iscroll');
+		this.wrapperElement.addClass('scroller-engine-iscroll');
 
 		var options = {
 			hScroll: this.options.scrollX,

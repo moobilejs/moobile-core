@@ -291,7 +291,7 @@ input, select, textarea {
 	position: relative;                                          /* Important */
 }
 
-.view.scroll-view > .view-content-wrapper.scroll-engine-native {
+.view.scroll-view > .view-content-wrapper.scroller-engine-native {
 
 	/*
 		For some reasons, safari mobile seems to have issue measuring elements

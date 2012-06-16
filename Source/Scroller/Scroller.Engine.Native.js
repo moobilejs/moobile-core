@@ -43,6 +43,20 @@ Moobile.Scroller.Engine.Native = new Class({
 	scrolling: false,
 
 	/**
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.Native#outerElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	outerElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.Native#innerElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	innerElement: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.Native#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -51,11 +65,11 @@ Moobile.Scroller.Engine.Native = new Class({
 
 		this.parent(content, options);
 
-		this.wrapperElement.addClass('scroll-engine-native');
+		this.wrapperElement.addClass('scroller-engine-native');
 
-		this.wrapperElement.setStyle('overflow-x', this.options.scrollX ? 'scroll' : 'hidden');
-		this.wrapperElement.setStyle('overflow-y', this.options.scrollY ? 'scroll' : 'hidden');
-		this.wrapperElement.setStyle('-webkit-overflow-scrolling', this.options.momentum ? 'touch' : 'auto');
+		// this.wrapperElement.setStyle('overflow-x', this.options.scrollX ? 'scroll' : 'hidden');
+		// this.wrapperElement.setStyle('overflow-y', this.options.scrollY ? 'scroll' : 'hidden');
+		// this.wrapperElement.setStyle('-webkit-overflow-scrolling', this.options.momentum ? 'touch' : 'auto');
 
 		this.scroller = new Fx.Scroll(this.wrapperElement);
 
