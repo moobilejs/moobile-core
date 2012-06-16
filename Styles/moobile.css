@@ -864,7 +864,7 @@ input, select, textarea {
 	z-index: 125;                                                /* Important */
 }
 
-.alert .alert-wrapper {
+.alert .alert-box {
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -927,7 +927,7 @@ input, select, textarea {
 	to   { opacity: 1; }
 }
 
-.alert.show-animated .alert-wrapper {
+.alert.show-animated .alert-box {
 	-webkit-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	   -moz-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	    -ms-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
@@ -963,7 +963,7 @@ input, select, textarea {
 	to   { opacity: 0; }
 }
 
-.alert.hide-animated .alert-wrapper {
+.alert.hide-animated .alert-box {
 	-webkit-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	   -moz-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	    -ms-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);

@@ -50,11 +50,11 @@ Moobile.Alert = new Class({
 	_buttons: [],
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#wrapperElement
+	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#boxElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	wrapperElement: null,
+	boxElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#contentElement
@@ -76,13 +76,6 @@ Moobile.Alert = new Class({
 	 * @since  0.1
 	 */
 	footerElement: null,
-
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#contentElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	contentElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#overlay
@@ -120,12 +113,12 @@ Moobile.Alert = new Class({
 		this.footerElement  = new Element('div.alert-footer');
 		this.contentElement = new Element('div.alert-content');
 
-		this.wrapperElement = new Element('div.alert-wrapper');
-		this.wrapperElement.grab(this.headerElement);
-		this.wrapperElement.grab(this.contentElement);
-		this.wrapperElement.grab(this.footerElement);
+		this.boxElement = new Element('div.alert-box');
+		this.boxElement.grab(this.headerElement);
+		this.boxElement.grab(this.contentElement);
+		this.boxElement.grab(this.footerElement);
 
-		this.element.grab(this.wrapperElement);
+		this.element.grab(this.boxElement);
 
 		var buttonLayout = this.options.buttonLayout;
 		if (buttonLayout) {
@@ -145,7 +138,7 @@ Moobile.Alert = new Class({
 		this._title = null;
 		this._message = null;
 
-		this.wrapperElement = null;
+		this.boxElement = null;
 		this.headerElement = null;
 		this.footerElement = null;
 		this.contentElement = null;
