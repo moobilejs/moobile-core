@@ -152,6 +152,7 @@ Moobile.Scroller = new Class({
 		}
 
 		this.wrapperElement.addClass('scrollable');
+		this.contentElement.addClass('scrollable-content');
 
 		return this;
 	},
