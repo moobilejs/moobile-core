@@ -81,7 +81,10 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			onScrollMove: this.bound('_onScrollMove'),
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
-				e.preventDefault(); // This fixes an Android issue where the content would not scroll
+				var target = e.target.nodeName.toLowerCase();
+				if (target !== 'input' && target !== 'select') {
+					e.preventDefault();	// This fixes an Android issue where the content would not scroll
+				}
 			}
 		};
 
