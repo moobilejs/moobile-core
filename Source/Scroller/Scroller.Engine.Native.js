@@ -29,6 +29,13 @@ Moobile.Scroller.Engine.Native = new Class({
 	Extends: Moobile.Scroller.Engine,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouch: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.Native#scroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -67,17 +74,28 @@ Moobile.Scroller.Engine.Native = new Class({
 
 		this.wrapperElement.addClass('scroller-engine-native');
 
-		// this.wrapperElement.setStyle('overflow-x', this.options.scrollX ? 'scroll' : 'hidden');
-		// this.wrapperElement.setStyle('overflow-y', this.options.scrollY ? 'scroll' : 'hidden');
-		// this.wrapperElement.setStyle('-webkit-overflow-scrolling', this.options.momentum ? 'touch' : 'auto');
+		var scrollable = this.wrapperElement;
 
-		this.scroller = new Fx.Scroll(this.wrapperElement);
+		if (this.options.momentum) {
 
+			this.innerElement = new Element('div.scroller-engine-native-inner');
+			this.outerElement = new Element('div.scroller-engine-native-outer');
+			this.innerElement.wraps(this.contentElement);
+			this.outerElement.wraps(this.innerElement);
+
+			scrollable = this.innerElement;
+
+			if (this.options.scrollX) this.contentElement.setStyle('margin-right', '-1px');
+			if (this.options.scrollY) this.contentElement.setStyle('margin-bottom', '-1px');
+		}
+
+		this.scroller = new Fx.Scroll(scrollable);
+
+		this.wrapperElement.addEvent('touchcancel', this.bound('_onTouchCancel'));
 		this.wrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.wrapperElement.addEvent('touchmove', this.bound('_onTouchMove'));
 		this.wrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
 		this.wrapperElement.addEvent('scroll', this.bound('_onScroll'));
-
-		window.addEvent('rotate', this.bound('_onWindowRotate'));
 
 		return this;
 	},
@@ -88,7 +106,11 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		window.removeEvent('rotate', this.bound('_onWindowRotate'));
+		this.wrapperElement.removeEvent('touchcancel', this.bound('_onTouchCancel'));
+		this.wrapperElement.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.wrapperElement.removeEvent('touchmove', this.bound('_onTouchMove'));
+		this.wrapperElement.removeEvent('touchend', this.bound('_onTouchEnd'));
+		this.wrapperElement.removeEvent('scroll', this.bound('_onScroll'));
 		this.scroller = null;
 		this.parent();
 	},
@@ -131,14 +153,6 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @since  0.1.0
 	 */
 	refresh: function() {
-
-		var wrapperSize = this.getSize();
-		var contentSize = this.getScrollSize();
-
-		if (contentSize.y <= wrapperSize.y) {
-			this.contentElement.setStyle('min-height', wrapperSize.y + 2);
-		}
-
 		return this;
 	},
 
@@ -157,7 +171,7 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @since  0.1.0
 	 */
 	getScroll: function() {
-		return this.wrapperElement.getScroll();
+		return this.innerElement.getScroll();
 	},
 
 	/**
@@ -174,28 +188,21 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onTouchStart: function() {
-
-		var scroll = this.wrapperElement.getScroll();
-		if (scroll.x === 0) {
-
-			if (scroll.y <= 0) {
-
-				// offset scroll top
-				this.wrapperElement.scrollTo(0, 1);
-
-			} else {
-
-				// offset scroll bottom
-				var totalSize = this.wrapperElement.getScrollSize();
-				var frameSize = this.wrapperElement.getSize();
-				if (frameSize.y + scroll.y >= totalSize.y) {
-					this.wrapperElement.scrollTo(0, scroll.y - 1);
-				}
-			}
+	_onTouchStart: function(e) {
+		if (this._activeTouch === null) {
+			this._activeTouch = e.changedTouches[0];
+			this.fireEvent('dragstart'); // Deprecated 0.2
+			this.fireEvent('scrollstart');
 		}
+	},
 
-		this.fireEvent('dragstart');
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchMove: function(e) {
+
 	},
 
 	/**
@@ -203,8 +210,24 @@ Moobile.Scroller.Engine.Native = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onTouchEnd: function() {
-		this.fireEvent('dragend');
+	_onTouchEnd: function(e) {
+		if (this._activeTouch &&
+			this._activeTouch.identifier === e.changedTouches[0].identifier) {
+			this._activeTouch = null;
+			this.fireEvent('dragend'); // Deprecated 0.2
+			this.fireEvent('scrollend');
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchCancel: function(e) {
+		this._activeTouch = null;
+		this.fireEvent('dragend'); // Deprecated 0.2
+		this.fireEvent('scrollend');
 	},
 
 	/**
@@ -214,15 +237,6 @@ Moobile.Scroller.Engine.Native = new Class({
 	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_onWindowRotate: function(e) {
-		this.refresh();
 	}
 
 });
