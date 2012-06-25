@@ -321,6 +321,7 @@ input, select, textarea {
 
 .view.view-stack > .view-content {
 	display: block;                                              /* Important */
+	overflow: visible;                                           /* Important */
 }
 
 /* View Panel
