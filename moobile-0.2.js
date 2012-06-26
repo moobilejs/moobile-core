@@ -7584,6 +7584,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			fadeScrollbar: true,
 			checkDOMChanges: true,
 			snap: false,
+			onScrollStart: this.bound('_onScrollStart'),
 			onScrollMove: this.bound('_onScrollMove'),
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
@@ -7596,10 +7597,6 @@ Moobile.Scroller.Engine.IScroll = new Class({
 
 		this.scroller = new iScroll(this.wrapperElement, options);
 
-		this.wrapperElement.addEvent('touchcancel', this.bound('_onTouchCancel'));
-		this.wrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
-		this.wrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
-
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
 		return this;
@@ -7611,7 +7608,9 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+		window.removeEvent('orientationchange', this.bound('_onOrientationChange'));
 		this.scroller.destroy();
+		this.scroller = null;
 		this.parent();
 		return this;
 	},
@@ -7633,8 +7632,8 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
-		var p = element.getPosition(this.contentElement);
-		this.scrollTo(p.x, p.y, time);
+		this.scroller.refresh();
+		this.scroller.scrollToElement(element, time);
 		return this;
 	},
 
@@ -7678,39 +7677,10 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_onTouchStart: function(e) {
-		if (this._activeTouch === null) {
-			this._activeTouch = e.changedTouches[0];
-			this.fireEvent('dragstart'); // deprecated 0.2
-			this.fireEvent('scrollstart');
-		}
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_onTouchEnd: function(e) {
-		if (this._activeTouch &&
-			this._activeTouch.identifier === e.changedTouches[0].identifier) {
-			this._activeTouch = null;
-			this.fireEvent('dragend'); // deprecated 0.2
-			this.fireEvent('scrollend');
-		}
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_onTouchCancel: function(e) {
-		this._activeTouch = null;
-		this.fireEvent('dragend'); // deprecated 0.2
-		this.fireEvent('scrollend');
+	_onScrollStart: function() {
+		this.fireEvent('scrollstart');
 	},
 
 	/**
