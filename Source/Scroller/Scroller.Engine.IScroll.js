@@ -48,6 +48,13 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	Extends: Moobile.Scroller.Engine,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouch: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -81,7 +88,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			onScrollMove: this.bound('_onScrollMove'),
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
-				var target = e.target.nodeName.toLowerCase();
+				var target = e.target.get('tag');
 				if (target !== 'input' && target !== 'select') {
 					e.preventDefault();	// This fixes an Android issue where the content would not scroll
 				}
@@ -90,6 +97,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 
 		this.scroller = new iScroll(this.wrapperElement, options);
 
+		this.wrapperElement.addEvent('touchcancel', this.bound('_onTouchCancel'));
 		this.wrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
 		this.wrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
 
@@ -173,8 +181,12 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onTouchStart: function() {
-		this.fireEvent('dragstart');
+	_onTouchStart: function(e) {
+		if (this._activeTouch === null) {
+			this._activeTouch = e.changedTouches[0];
+			this.fireEvent('dragstart'); // deprecated 0.2
+			this.fireEvent('scrollstart');
+		}
 	},
 
 	/**
@@ -182,8 +194,24 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onTouchEnd: function() {
-		this.fireEvent('dragend');
+	_onTouchEnd: function(e) {
+		if (this._activeTouch &&
+			this._activeTouch.identifier === e.changedTouches[0].identifier) {
+			this._activeTouch = null;
+			this.fireEvent('dragend'); // deprecated 0.2
+			this.fireEvent('scrollend');
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchCancel: function(e) {
+		this._activeTouch = null;
+		this.fireEvent('dragend'); // deprecated 0.2
+		this.fireEvent('scrollend');
 	},
 
 	/**
@@ -202,6 +230,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	 */
 	_onScrollEnd: function() {
 		this.fireEvent('scroll');
+		this.fireEvent('scrollend');
 	},
 
 	/**

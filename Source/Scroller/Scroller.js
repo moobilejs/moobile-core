@@ -137,8 +137,8 @@ Moobile.Scroller = new Class({
 		};
 
 		this.engine = new engine(content, options);
-		this.engine.addEvent('dragstart', this.bound('_onDragStart'));
-		this.engine.addEvent('dragend', this.bound('_onDragEnd'));
+		this.engine.addEvent('scrollstart', this.bound('_onScrollStart'));
+		this.engine.addEvent('scrollend', this.bound('_onScrollEnd'));
 		this.engine.addEvent('scroll', this.bound('_onScroll'));
 
 		this.wrapperElement = this.getWrapperElement();
@@ -325,11 +325,11 @@ Moobile.Scroller = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onDragStart: function() {
+	_onScrollStart: function() {
 		this._startScroll = this.getScroll();
 		this._startPage = Object.clone(this.getPage());
 		this._startTime = Date.now();
-		this.fireEvent('dragstart');
+		this.fireEvent('scrollstart');
 	},
 
 	/**
@@ -337,7 +337,7 @@ Moobile.Scroller = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onDragEnd: function() {
+	_onScrollEnd: function() {
 
 		if (this.options.snapToPage)
 			this.snap();
@@ -346,7 +346,7 @@ Moobile.Scroller = new Class({
 		this._startPage = null;
 		this._startTime = null;
 
-		this.fireEvent('dragend');
+		this.fireEvent('scrollend');
 	},
 
 	/**
@@ -366,28 +366,13 @@ Moobile.Scroller = new Class({
 
 window.addEvent('domready', function(e) {
 
-	var pos = null;
-
 	document.addEvent('touchstart', function(e) {
-		pos = e.client;
-	});
-
-	document.addEvent('touchmove', function(e) {
-
 		if (!e.target.hasClass('scrollable') &&
 			!e.target.getParent('.scrollable')) {
 			e.preventDefault();
-		} else {
-			//
-			// TODO
-			// This part has to be improved, right now only a pure horizontal
-			// move will allow the whole thing to move
-			//
-
-			//if (Math.abs(e.client.y - pos.y) > Math.abs(e.client.x - pos.x))
-			//	e.preventDefault();
 		}
 	});
+
 });
 
 })();

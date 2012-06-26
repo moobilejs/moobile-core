@@ -95,8 +95,8 @@ Moobile.ScrollView = new Class({
 		};
 
 		this._scroller = new Moobile.Scroller(this.contentElement, options);
-		this._scroller.addEvent('dragstart', this.bound('_onDragStart'));
-		this._scroller.addEvent('dragend', this.bound('_onDragEnd'));
+		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
+		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
 		this.wrapperElement = this._scroller.getWrapperElement();
@@ -119,8 +119,8 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-		this._scroller.removeEvent('dragstart', this.bound('_onDragStart'));
-		this._scroller.removeEvent('dragend', this.bound('_onDragEnd'));
+		this._scroller.removeEvent('scrollstart', this.bound('_onScrollStart'));
+		this._scroller.removeEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
 		this._scroller.destroy();
 		this._scroller = null;
@@ -221,8 +221,8 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	_onDragStart: function() {
-		this.fireEvent('dragstart');
+	_onScrollStart: function() {
+		this.fireEvent('scrollstart');
 	},
 
 	/**
@@ -230,8 +230,8 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	_onDragEnd: function() {
-		this.fireEvent('dragend');
+	_onScrollEnd: function() {
+		this.fireEvent('scrollend');
 	},
 
 	/**
