@@ -105,7 +105,6 @@ iframe {
 /* Body
 -----------------------------------------------------------------------------*/
 
-
 html {
 	height: 100%;                                               /* Important */
 	width: 100%;                                                 /* Important */
@@ -179,7 +178,8 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.window > .window-content {
+.window .window-content-wrapper,
+.window .window-content {
 	display: block;                                              /* Important */
 	height: 100%;                                                /* Important */
 	position: relative;                                          /* Important */
@@ -222,6 +222,16 @@ input, select, textarea {
 	z-index: 50;                                                 /* Important */
 }
 
+.view .view-content-wrapper {
+	-webkit-box-flex: 1;                                         /* Important */
+	   -moz-box-flex: 1;                                         /* Important */
+	    -ms-box-flex: 1;                                         /* Important */
+	     -o-box-flex: 1;                                         /* Important */
+	        box-flex: 1;                                         /* Important */
+	overflow: hidden;
+	position: relative;                                          /* Important */
+}
+
 .view .view-content {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
@@ -248,10 +258,11 @@ input, select, textarea {
 	display:     -ms-box;                                        /* Important */
 	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
-	height: 100%;                                                /* Important */
-	overflow: hidden;
-	position: relative;                                          /* Important */
-	width: 100%;                                                 /* Important */
+	left: 0px;                                                   /* Important */
+	min-width: 100%;                                             /* Important */
+	min-height: 100%;                                            /* Important */
+	position: absolute;                                          /* Important */
+	top: 0px;                                                    /* Important */
 }
 
 .view.enable {
@@ -260,60 +271,6 @@ input, select, textarea {
 
 .view.disable {
 	pointer-events: none;				 						/* Important */
-}
-
-/* ScrollView
------------------------------------------------------------------------------*/
-
-.view.scroll-view > .view-content-wrapper {
-	-webkit-box-sizing: border-box;                              /* Important */
-	   -moz-box-sizing: border-box;                              /* Important */
-	    -ms-box-sizing: border-box;                              /* Important */
-	     -o-box-sizing: border-box;                              /* Important */
-	        box-sizing: border-box;                              /* Important */
-	-webkit-box-orient: vertical;                                /* Important */
-	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
-	-webkit-box-flex: 1;                                         /* Important */
-	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
-	height: 100%;                                                /* Important */
-	position: relative;                                          /* Important */
-	width: 100%;                                                 /* Important */
-}
-
-.view.scroll-view > .view-content-wrapper > .view-content {
-	height: auto;                                                /* Important */
-	min-height: 100%;                                            /* Important */
-	min-width: 100%;                                             /* Important */
-	margin-bottom: -1px;										 /* Important */
-	width: auto;                                                 /* Important */
-}
-
-/* With Native Scrolling Engine */
-
-.view.scroll-view .scroller-engine-native-outer,
-.view.scroll-view .scroller-engine-native-inner {
-	-webkit-overflow-scrolling: touch;							/* Important */
-	-webkit-box-orient: vertical;								/* Important */
-	display: -webkit-box;										/* Important */
-	overflow: auto;												/* Important */
-}
-
-.view.scroll-view > .view-content-wrapper > .scroller-engine-native-outer > .scroller-engine-native-inner > .view-content {
-	height: auto;                                                /* Important */
-	min-height: 100%;                                            /* Important */
-	min-width: 100%;                                             /* Important */
-	width: auto;                                                 /* Important */
 }
 
 /* View Stack

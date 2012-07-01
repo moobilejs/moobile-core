@@ -23,23 +23,30 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/0.1/View/View
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.View = new Class({
 
 	Extends: Moobile.Component,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#content
+	 * @see    http://moobilejs.com/doc/0.1/View/View#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	contentElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/0.1/View/View#contentWrapperElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	contentWrapperElement: null,
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -49,7 +56,7 @@ Moobile.View = new Class({
 
 		var content = this.element.getRoleElement('view-content');
 		if (content === null) {
-			content = new Element('div');
+			content = document.createElement('div');
 			content.ingest(this.element);
 			content.inject(this.element);
 			content.setRole('view-content');
@@ -59,10 +66,16 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
+		this.contentWrapperElement = document.createElement('div');
+		this.contentWrapperElement.addClass('view-content-wrapper');
+		this.contentWrapperElement.wraps(this.contentElement);
+
 		var classes = this.element.get('class');
 		if (classes) {
 			classes.split(' ').each(function(klass) {
@@ -75,7 +88,7 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this.contentElement = null;
@@ -85,7 +98,7 @@ Moobile.View = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#enableTouch
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	enableTouch: function() {
 		this.element.removeClass('disable').addClass('enable');
@@ -95,7 +108,7 @@ Moobile.View = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#disableTouch
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	disableTouch: function() {
 		this.element.removeClass('enable').addClass('disable');
@@ -105,7 +118,7 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addChildComponent: function(component, where) {
 		if (where === 'header') return this.parent(component, 'top');
@@ -116,7 +129,7 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willAddChildComponent: function(component) {
 		this.parent(component);
@@ -126,7 +139,7 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willRemoveChildComponent: function(component) {
 		this.parent(component);
@@ -136,23 +149,23 @@ Moobile.View = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#setContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
-	setContentElement: function(content) {
+	setContentElement: function(contentElement) {
 
-		if (this.contentElement === content)
+		if (this.contentElement === contentElement)
 			return this;
 
-		if (this.element.contains(content) === false) {
+		if (this.element.contains(contentElement) === false) {
 			if (this.contentElement) {
-				this.contentElement.grab(content, 'after');
+				this.contentElement.grab(contentElement, 'after');
 				this.contentElement.destroy();
 			} else {
-				this.element.grab(content);
+				this.contentWrapperElement.grab(contentElement);
 			}
 		}
 
-		this.contentElement = content;
+		this.contentElement = contentElement;
 		this.contentElement.addClass('view-content');
 
 		return this;
@@ -161,10 +174,19 @@ Moobile.View = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#getContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getContentElement: function() {
 		return this.contentElement;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/View/View#getContentWrapperElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentWrapperElement: function() {
+		return this.contentWrapperElement;
 	}
 
 });
@@ -181,7 +203,7 @@ Class.refactor(Moobile.Component, {
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#setParentView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setParentView: function(parentView) {
 
@@ -207,7 +229,7 @@ Class.refactor(Moobile.Component, {
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#getParentView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getParentView: function() {
 		return this._parentView;
@@ -216,7 +238,7 @@ Class.refactor(Moobile.Component, {
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	parentViewWillChange: function(parentView) {
 
@@ -225,7 +247,7 @@ Class.refactor(Moobile.Component, {
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/View#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	parentViewDidChange: function(parentView) {
 
@@ -234,7 +256,7 @@ Class.refactor(Moobile.Component, {
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willAddChildComponent: function(component) {
 		this.previous(component);
@@ -244,7 +266,7 @@ Class.refactor(Moobile.Component, {
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willRemoveChildComponent: function(component) {
 		this.previous(component);
@@ -256,7 +278,7 @@ Class.refactor(Moobile.Component, {
 /**
  * @see    http://moobilejs.com/doc/0.1/View/View#MoobileViewAt
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.View.at = function(path) {
 
