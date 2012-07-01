@@ -42,15 +42,8 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	wrapperElement: null,
-
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	options: {
-		engine: ['Native', 'IScroll'],
+		scroller: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -84,23 +77,20 @@ Moobile.ScrollView = new Class({
 		this.parent();
 
 		var options = {
-			engine: this.options.engine,
 			momentum: this.options.momentum,
 			scrollX: this.options.scrollX,
 			scrollY: this.options.scrollY,
-			snapToPage: this.options.snapToPage,
-			snapToPageAt: this.options.snapToPageAt,
-			snapToPageDuration: this.options.snapToPageDuration,
-			snapToPageDelay: this.options.snapToPageDelay
 		};
 
-		this._scroller = new Moobile.Scroller(this.contentElement, options);
+		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
 		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
 		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
-		this.wrapperElement = this._scroller.getWrapperElement();
-		this.wrapperElement.addClass('view-content-wrapper');
+		var name = this._scroller.getName();
+		if (name) {
+			this.element.addClass(name + '-engine');
+		}
 	},
 
 	/**
@@ -182,15 +172,6 @@ Moobile.ScrollView = new Class({
 	 */
 	getScroller: function() {
 		return this._scroller;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getWrapperElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	getWrapperElement: function() {
-		return this.wrapperElement;
 	},
 
 	/**

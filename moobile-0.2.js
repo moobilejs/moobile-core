@@ -7185,13 +7185,11 @@ Moobile.Scroller.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	initialize: function(content, options) {
+	initialize: function(contentElement, contentWrapperElement, options) {
 
-		this.parent(content, options);
+		this.parent(contentElement, contentWrapperElement, options);
 
-		this.wrapperElement.addClass('scroller-engine-iscroll');
-
-		var options = {
+		this.iscroll = new iScroll(this.contentWrapperElement, {
 			hScroll: this.options.scrollX,
 			vScroll: this.options.scrollY,
 			momentum: this.options.momentum,
@@ -7209,13 +7207,14 @@ Moobile.Scroller.IScroll = new Class({
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
 				var target = e.target.get('tag');
-				if (target !== 'input' && target !== 'select') {
-					e.preventDefault();	// This fixes an Android issue where the content would not scroll
+				if (target !== 'input' &&
+					target !== 'select') {
+					// This fixes an Android issue where the content would
+					// not scroll and enable input items to be selected
+					e.preventDefault();
 				}
 			}
-		};
-
-		this.iscroll = new iScroll(this.wrapperElement, options);
+		});
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -8237,15 +8236,8 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
-	wrapperElement: null,
-
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
 	options: {
-		engine: ['Native', 'IScroll'],
+		scroller: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -8279,23 +8271,20 @@ Moobile.ScrollView = new Class({
 		this.parent();
 
 		var options = {
-			engine: this.options.engine,
 			momentum: this.options.momentum,
 			scrollX: this.options.scrollX,
 			scrollY: this.options.scrollY,
-			snapToPage: this.options.snapToPage,
-			snapToPageAt: this.options.snapToPageAt,
-			snapToPageDuration: this.options.snapToPageDuration,
-			snapToPageDelay: this.options.snapToPageDelay
 		};
 
-		this._scroller = new Moobile.Scroller(this.contentElement, options);
+		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
 		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
 		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
-		this.wrapperElement = this._scroller.getWrapperElement();
-		this.wrapperElement.addClass('view-content-wrapper');
+		var name = this._scroller.getName();
+		if (name) {
+			this.element.addClass(name + '-engine');
+		}
 	},
 
 	/**
@@ -8377,15 +8366,6 @@ Moobile.ScrollView = new Class({
 	 */
 	getScroller: function() {
 		return this._scroller;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getWrapperElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	getWrapperElement: function() {
-		return this.wrapperElement;
 	},
 
 	/**

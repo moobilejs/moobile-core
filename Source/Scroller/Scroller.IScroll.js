@@ -1,9 +1,9 @@
 /*
 ---
 
-name: Scroller.Engine.scroller
+name: Scroller.IScroll
 
-description: Provides a wrapper for the scroller scroller.
+description: Provides a scroller that uses the iScroll scroller.
 
 license: MIT-style license.
 
@@ -11,10 +11,10 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Scroller.Engine
+	- Scroller
 
 provides:
-	- Scroller.Engine.scroller
+	- Scroller.IScroll
 
 ...
 */
@@ -39,40 +39,31 @@ iScroll.prototype._checkDOMChanges = function() {
 })();
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll
+ * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
+ * @since  0.2.0
  */
-Moobile.Scroller.Engine.IScroll = new Class({
+Moobile.Scroller.IScroll = new Class({
 
-	Extends: Moobile.Scroller.Engine,
+	Extends: Moobile.Scroller,
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#iscroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouch: null,
+	iscroll: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scroller
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
-	scroller: null,
+	initialize: function(contentElement, contentWrapperElement, options) {
 
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#initialize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	initialize: function(content, options) {
+		this.parent(contentElement, contentWrapperElement, options);
 
-		this.parent(content, options);
-
-		this.wrapperElement.addClass('scroller-engine-iscroll');
-
-		var options = {
+		this.iscroll = new iScroll(this.contentWrapperElement, {
 			hScroll: this.options.scrollX,
 			vScroll: this.options.scrollY,
 			momentum: this.options.momentum,
@@ -90,13 +81,14 @@ Moobile.Scroller.Engine.IScroll = new Class({
 			onScrollEnd: this.bound('_onScrollEnd'),
 			onBeforeScrollStart: function (e) {
 				var target = e.target.get('tag');
-				if (target !== 'input' && target !== 'select') {
-					e.preventDefault();	// This fixes an Android issue where the content would not scroll
+				if (target !== 'input' &&
+					target !== 'select') {
+					// This fixes an Android issue where the content would
+					// not scroll and enable input items to be selected
+					e.preventDefault();
 				}
 			}
-		};
-
-		this.scroller = new iScroll(this.wrapperElement, options);
+		});
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -104,75 +96,83 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#destroy
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	destroy: function() {
 		window.removeEvent('orientationchange', this.bound('_onOrientationChange'));
-		this.scroller.destroy();
-		this.scroller = null;
-		this.parent();
-		return this;
+		this.iscroll.destroy();
+		this.iscroll = null;
+		return this.parent();
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scrollTo
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
+	 */
+	getName: function() {
+		return 'iscroll';
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#scrollTo
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
 	 */
 	scrollTo: function(x, y, time) {
-		this.scroller.refresh();
-		this.scroller.scrollTo(-x, -y, time);
+		this.iscroll.refresh();
+		this.iscroll.scrollTo(-x, -y, time);
 		return this;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#scrollToElement
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	scrollToElement: function(element, time) {
-		this.scroller.refresh();
-		this.scroller.scrollToElement(element, time);
+		this.iscroll.refresh();
+		this.iscroll.scrollToElement(element, time);
 		return this;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#refresh
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	refresh: function() {
-		this.scroller.refresh();
+		this.iscroll.refresh();
 		return this;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#getSize
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getSize: function() {
-		return this.wrapperElement.getSize();
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#getScroll
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	getScroll: function() {
-		return {x: -this.scroller.x, y: -this.scroller.y};
+		return {x: -this.iscroll.x, y: -this.iscroll.y};
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Scroller/Scroller.Engine.IScroll#getScrollSize
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
+	 */
+	getSize: function() {
+		return this.contentWrapperElement.getSize();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#getScrollSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
 	 */
 	getScrollSize: function() {
-		return this.contentElement.getScrollSize();
+		return this.contentWrapperElement.getScrollSize();
 	},
 
 	/**
@@ -187,7 +187,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	_onScrollMove: function() {
 		this.fireEvent('scroll');
@@ -196,7 +196,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	_onScrollEnd: function() {
 		this.fireEvent('scroll');
@@ -206,7 +206,7 @@ Moobile.Scroller.Engine.IScroll = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	_onOrientationChange: function() {
 		this.refresh();
@@ -214,6 +214,6 @@ Moobile.Scroller.Engine.IScroll = new Class({
 
 });
 
-Moobile.Scroller.Engine.IScroll.supportsCurrentPlatform = function() {
+Moobile.Scroller.IScroll.supportsCurrentPlatform = function() {
 	return true;
 };
