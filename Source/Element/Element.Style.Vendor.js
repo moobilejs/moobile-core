@@ -32,7 +32,7 @@ var cache = {};
 
 Element.implement({
 
-	getPrefixed: function (property) {
+	getPrefixed: function(property) {
 
 		property = property.camelCase();
 
@@ -51,6 +51,9 @@ Element.implement({
 				break
 			}
 		}
+
+		if (cache[property] === undefined)
+			cache[property] = property;
 
 		return cache[property];
 	},
