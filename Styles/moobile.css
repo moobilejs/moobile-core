@@ -132,36 +132,6 @@ input, select, textarea {
 	font-family: sans-serif;
 }
 
-/* Scroller
------------------------------------------------------------------------------*/
-
-.scroller-engine-iscroll,
-.scroller-engine-native {
-	position: relative;
-}
-
-.scroller-engine-native {
-
-	/*
-		For some reasons, safari mobile seems to have issue measuring elements
-		where the size is defined using box-flex. Whats happening is (I think),
-		when adding an element within this element and reflow occurs, the element
-		scrolls to its top, presumably because it's unable to calculate its
-		size properly...
-	*/
-
-	height: 1px !important;										/* Important */
-}
-
-.scroller-engine-native .scroller-engine-native-outer,
-.scroller-engine-native .scroller-engine-native-inner {
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	position: absolute;
-	top: 0px;
-}
-
 /* Window
 -----------------------------------------------------------------------------*/
 
@@ -228,8 +198,9 @@ input, select, textarea {
 	    -ms-box-flex: 1;                                         /* Important */
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
-	overflow: hidden;
+	height: 100%;                                                /* Important */
 	position: relative;                                          /* Important */
+	width: 100%;                                                 /* Important */
 }
 
 .view .view-content {
@@ -259,8 +230,9 @@ input, select, textarea {
 	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
 	left: 0px;                                                   /* Important */
-	min-width: 100%;                                             /* Important */
 	min-height: 100%;                                            /* Important */
+	min-width: 100%;                                             /* Important */
+	overflow: hidden;                                            /* Important */
 	position: absolute;                                          /* Important */
 	top: 0px;                                                    /* Important */
 }
@@ -276,9 +248,11 @@ input, select, textarea {
 /* View Stack
 -----------------------------------------------------------------------------*/
 
-.view.view-stack > .view-content {
-	display: block;                                              /* Important */
-	overflow: visible;                                           /* Important */
+.view.view-stack > .view-content-wrapper > .view-content {
+	display: block;
+	height: 100%;
+	overflow: visible;
+	width: 100%;
 }
 
 /* View Panel

@@ -13,7 +13,6 @@ authors:
 
 requires:
 	- View
-	- ScrollViewRoles
 
 provides:
 	- ScrollView
@@ -38,6 +37,13 @@ Moobile.ScrollView = new Class({
 	_scroller: null,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	_scroll: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
@@ -47,6 +53,7 @@ Moobile.ScrollView = new Class({
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
+		pageSize: null,
 		snapToPage: false,
 		snapToPageAt: 35,
 		snapToPageDuration: 150,
@@ -83,8 +90,6 @@ Moobile.ScrollView = new Class({
 		};
 
 		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
-		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
-		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
 		var name = this._scroller.getName();
@@ -101,6 +106,10 @@ Moobile.ScrollView = new Class({
 	didBecomeReady: function() {
 		this.parent();
 		this._scroller.refresh();
+		this._scroller.scrollTo(
+			this.options.offset.x,
+			this.options.offset.y
+		);
 	},
 
 	/**
@@ -109,8 +118,6 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1
 	 */
 	destroy: function() {
-		this._scroller.removeEvent('scrollstart', this.bound('_onScrollStart'));
-		this._scroller.removeEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
 		this._scroller.destroy();
 		this._scroller = null;
@@ -181,7 +188,7 @@ Moobile.ScrollView = new Class({
 	 */
 	willHide: function() {
 		this.parent();
-		this.options.offset = this._scroller.getScroll();
+		this._scroll = this._scroller.getScroll();
 	},
 
 	/**
@@ -191,28 +198,8 @@ Moobile.ScrollView = new Class({
 	 */
 	didShow: function() {
 		this.parent();
-		var offset = this.options.offset;
-		if (offset.x >= 0 || offset.y >= 0) {
-			this._scroller.scrollTo(offset.x, offset.y);
-		}
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	_onScrollStart: function() {
-		this.fireEvent('scrollstart');
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	_onScrollEnd: function() {
-		this.fireEvent('scrollend');
+		this._scroller.refresh();
+		this._scroller.scrollTo(this._scroll.x, this._scroll.y);
 	},
 
 	/**

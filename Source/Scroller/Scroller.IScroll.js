@@ -76,18 +76,10 @@ Moobile.Scroller.IScroll = new Class({
 			fadeScrollbar: true,
 			checkDOMChanges: true,
 			snap: false,
-			onScrollStart: this.bound('_onScrollStart'),
+			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
+			onAnimationEnd: this.bound('_onAnimationEnd'),
 			onScrollMove: this.bound('_onScrollMove'),
-			onScrollEnd: this.bound('_onScrollEnd'),
-			onBeforeScrollStart: function (e) {
-				var target = e.target.get('tag');
-				if (target !== 'input' &&
-					target !== 'select') {
-					// This fixes an Android issue where the content would
-					// not scroll and enable input items to be selected
-					e.preventDefault();
-				}
-			}
+			onScrollEnd: this.bound('_onScrollEnd')
 		});
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
@@ -123,7 +115,7 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	scrollTo: function(x, y, time) {
 		this.iscroll.refresh();
-		this.iscroll.scrollTo(-x, -y, time);
+		this.iscroll.scrollTo(-x, -y, time || 0);
 		return this;
 	},
 
@@ -134,7 +126,7 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	scrollToElement: function(element, time) {
 		this.iscroll.refresh();
-		this.iscroll.scrollToElement(element, time);
+		this.iscroll.scrollToElement(document.id(element), time || 0);
 		return this;
 	},
 
@@ -180,8 +172,23 @@ Moobile.Scroller.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_onScrollStart: function() {
-		this.fireEvent('scrollstart');
+	_onBeforeScrollStart: function(e) {
+		// this fixes an Android issue where the content would not scroll and
+		// enable input items to be selected
+		var target = e.target.get('tag');
+		if (target !== 'input' &&
+			target !== 'select') {
+			e.preventDefault();
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onAnimationEnd: function() {
+		this.fireEvent('scroll');
 	},
 
 	/**
@@ -199,8 +206,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollEnd: function() {
-		this.fireEvent('scroll');
-		this.fireEvent('scrollend');
+		// apparently scrollend is not very consistent..
 	},
 
 	/**

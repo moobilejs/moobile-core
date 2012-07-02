@@ -61,6 +61,8 @@ Moobile.Scroller = new Class({
 	initialize: function(contentElement, contentWrapperElement, options) {
 		this.contentElement = document.id(contentElement);
 		this.contentWrapperElement = document.id(contentWrapperElement);
+		this.contentElement.addClass('scrollable-content');
+		this.contentWrapperElement.addClass('scrollable');
 		this.setOptions(options);
 		return this;
 	},
@@ -141,8 +143,6 @@ Moobile.Scroller = new Class({
 
 });
 
-(function() {
-
 Moobile.Scroller.create = function(contentElement, contentWrapperElement, scrollers, options) {
 
 	scrollers = scrollers ? Array.from(scrollers) : ['Native', 'IScroll'];
@@ -169,4 +169,11 @@ Moobile.Scroller.create = function(contentElement, contentWrapperElement, scroll
 	return new scroller(contentElement, contentWrapperElement, options);
 };
 
-})();
+window.addEvent('domready', function(e) {
+	document.addEvent('touchstart', function(e) {
+		if (!e.target.hasClass('scrollable') &&
+			!e.target.getParent('.scrollable')) {
+			e.preventDefault();
+		}
+	});
+});
