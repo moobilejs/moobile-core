@@ -27,6 +27,8 @@ var _checkDOMChanges = iScroll.prototype._checkDOMChanges;
 
 iScroll.prototype._checkDOMChanges = function() {
 
+	// TODO: Check if really necessary
+
 	_checkDOMChanges.call(this);
 
 	var size = this.wrapper.getScrollSize();
@@ -46,6 +48,20 @@ iScroll.prototype._checkDOMChanges = function() {
 Moobile.Scroller.IScroll = new Class({
 
 	Extends: Moobile.Scroller,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouch: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_moving: false,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#iscroll
@@ -82,6 +98,9 @@ Moobile.Scroller.IScroll = new Class({
 			onScrollEnd: this.bound('_onScrollEnd')
 		});
 
+		contentWrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		contentWrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
+
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
 		return this;
@@ -114,7 +133,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	scrollTo: function(x, y, time) {
-		this.iscroll.refresh();
+		this._moving = true;
 		this.iscroll.scrollTo(-x, -y, time || 0);
 		return this;
 	},
@@ -125,7 +144,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	scrollToElement: function(element, time) {
-		this.iscroll.refresh();
+		this._moving = true;
 		this.iscroll.scrollToElement(document.id(element), time || 0);
 		return this;
 	},
@@ -173,11 +192,10 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onBeforeScrollStart: function(e) {
-		// this fixes an Android issue where the content would not scroll and
-		// enable input items to be selected
 		var target = e.target.get('tag');
 		if (target !== 'input' &&
 			target !== 'select') {
+			// fixes android issue
 			e.preventDefault();
 		}
 	},
@@ -188,6 +206,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onAnimationEnd: function() {
+		this._moving = false;
 		this.fireEvent('scroll');
 	},
 
@@ -206,7 +225,33 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollEnd: function() {
-		// apparently scrollend is not very consistent..
+		// this event is not reliable
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchStart: function(e) {
+		if (this._activeTouch === null) {
+			this._activeTouch = e.changedTouches[0];
+			if (this._moving) {
+				this._moving = false;
+				this.fireEvent('scroll');
+			}
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd: function(e) {
+		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
+			this._activeTouch = null;
+		}
 	},
 
 	/**
