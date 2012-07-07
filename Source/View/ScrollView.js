@@ -34,6 +34,13 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
+	_activeTouch: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
 	_scroller: null,
 
 	/**
@@ -41,7 +48,7 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_scroll: null,
+	_offset: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
@@ -236,7 +243,7 @@ Moobile.ScrollView = new Class({
 	 */
 	willHide: function() {
 		this.parent();
-		this._scroll = this._scroller.getScroll();
+		this._offset = this._scroller.getScroll();
 	},
 
 	/**
@@ -247,7 +254,48 @@ Moobile.ScrollView = new Class({
 	didShow: function() {
 		this.parent();
 		this._scroller.refresh();
-		this._scroller.scrollTo(this._scroll.x, this._scroll.y);
+		this._scroller.scrollTo(this._offset.x, this._offset.y);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_snapToPage: function() {
+
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onTouchCancel: function() {
+		this._activeTouch = null;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onTouchStart: function(e) {
+		if (this._activeTouch === null) {
+			this._activeTouch = e.changedTouches[0];
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onTouchEnd: function(e) {
+		if (this._activeTouch.identifier === e.changedTouches.identifier) {
+			this._activeTouch = null;
+			if (this.options.snapToPage) this._snapToPage();
+		}
 	},
 
 	/**
