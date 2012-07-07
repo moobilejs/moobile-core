@@ -41,6 +41,48 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
+	_activeTouchTimestamp: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouchStartX: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouchStartY: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouchDuration: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouchDirectionX: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_activeTouchDirectionY: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
 	_scroller: null,
 
 	/**
@@ -61,7 +103,7 @@ Moobile.ScrollView = new Class({
 		scrollX: false,
 		scrollY: true,
 		snapToPage: false,
-		snapToPageAt: 35,
+		snapToPageAt: 20,
 		snapToPageSizeX: null,
 		snapToPageSizeY: null,
 		snapToPageDuration: 150,
@@ -99,6 +141,9 @@ Moobile.ScrollView = new Class({
 
 		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
+
+		this.contentElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentElement.addEvent('touchend', this.bound('_onTouchEnd'));
 
 		var name = this._scroller.getName();
 		if (name) {
@@ -185,27 +230,21 @@ Moobile.ScrollView = new Class({
 		pageY = pageY || 0;
 
 		var frame = this.getSize();
-		var scroll = this.getScrollSize();
+		var total = this.getScrollSize();
 
-		var maxPageX = Math.ceil(scroll.x / frame.x) - 1;
-		var maxPageY = Math.ceil(scroll.y / frame.y) - 1;
+		var max = {
+			x: total.x - frame.x,
+			y: total.y - frame.y
+		};
 
-		if (pageX < 0) pageX = 0;
-		if (pageY < 0) pageY = 0;
+		var x = (this.options.snapToPageSizeX || frame.x) * pageX;
+		var y = (this.options.snapToPageSizeY || frame.y) * pageY;
 
-		if (pageX > maxPageX) pageX = maxPageX;
-		if (pageY > maxPageY) pageY = maxPageY;
+		if (x > max.x) x = max.x;
+		if (y > max.y) y = max.y;
 
-		var x = frame.x * pageX;
-		var y = frame.y * pageY;
+		this.scrollTo(x, y, time);
 
-		if (pageX === maxPageX) x = scroll.x - frame.x;
-		if (pageY === maxPageY) y = scroll.y - frame.y;
-
-		this._scroller.scrollTo(x, y, time);
-
-		this._page.x = pageX;
-		this._page.y = pageY;
 		return this;
 	},
 
@@ -264,6 +303,25 @@ Moobile.ScrollView = new Class({
 	 */
 	_snapToPage: function() {
 
+		var scroll = this.getScroll();
+
+		var frame = this.getSize();
+		var pageSizeX = (this.options.snapToPageSizeX || frame.x);
+		var pageSizeY = (this.options.snapToPageSizeY || frame.y);
+
+		var pageX = Math.floor(scroll.x / pageSizeX);
+		var pageY = Math.floor(scroll.y / pageSizeY);
+
+		var diffPageX = (scroll.x / pageSizeX - pageX) * 100;
+		var diffPageY = (scroll.y / pageSizeY - pageY) * 100;
+
+		if (diffPageX > this.options.snapToPageAt || this._activeTouchDuration < this.options.snapToPageDelay) pageX += 1;
+		if (diffPageY > this.options.snapToPageAt || this._activeTouchDuration < this.options.snapToPageDelay) pageY += 1;
+
+		if (this._activeTouchDirectionX === 'left') pageX -= 1;
+		if (this._activeTouchDirectionY === 'top') pageY -= 1;
+
+		return this.scrollToPage(pageX, pageY, this.options.snapToPageDuration);
 	},
 
 	/**
@@ -283,6 +341,9 @@ Moobile.ScrollView = new Class({
 	_onTouchStart: function(e) {
 		if (this._activeTouch === null) {
 			this._activeTouch = e.changedTouches[0];
+			this._activeTouchTimestamp = Date.now();
+			this._activeTouchStartX = this._activeTouch.pageX;
+			this._activeTouchStartY = this._activeTouch.pageY;
 		}
 	},
 
@@ -292,8 +353,16 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	_onTouchEnd: function(e) {
-		if (this._activeTouch.identifier === e.changedTouches.identifier) {
+		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
 			this._activeTouch = null;
+			this._activeTouchDuration = Date.now() - this._activeTouchTimestamp;
+
+			if (this._activeTouchStartX === e.changedTouches[0].pageX &&
+				this._activeTouchStartY === e.changedTouches[0].pageY)
+				return;
+
+			this._activeTouchDirectionX = this._activeTouchStartX < e.changedTouches[0].pageX ? 'left' : 'right';
+			this._activeTouchDirectionY = this._activeTouchStartY < e.changedTouches[0].pageY ? 'top' : 'bottom';
 			if (this.options.snapToPage) this._snapToPage();
 		}
 	},
