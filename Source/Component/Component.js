@@ -991,6 +991,8 @@ Moobile.Component.create = function(klass, element, descriptor) {
 
 (function() {
 
+// TODO: Also add native events to Element.NativeEvent when using addNativeEvent
+
 var events = Object.keys(Element.NativeEvents);
 
 Moobile.Component.addNativeEvent = function(name) {

@@ -21,7 +21,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/View
+ * @see    http://moobilejs.com/doc/latest/View/View
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -30,14 +30,14 @@ Moobile.View = new Class({
 	Extends: Moobile.Component,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#contentElement
+	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	contentElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#contentWrapperElement
+	 * @see    http://moobilejs.com/doc/latest/View/View#contentWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -96,7 +96,7 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#enableTouch
+	 * @see    http://moobilejs.com/doc/latest/View/View#enableTouch
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -106,7 +106,7 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#disableTouch
+	 * @see    http://moobilejs.com/doc/latest/View/View#disableTouch
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -147,7 +147,7 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#setContentElement
+	 * @see    http://moobilejs.com/doc/latest/View/View#setContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -172,7 +172,7 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#getContentElement
+	 * @see    http://moobilejs.com/doc/latest/View/View#getContentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -181,7 +181,7 @@ Moobile.View = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#getContentWrapperElement
+	 * @see    http://moobilejs.com/doc/latest/View/View#getContentWrapperElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -201,7 +201,7 @@ Class.refactor(Moobile.Component, {
 	_parentView: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#setParentView
+	 * @see    http://moobilejs.com/doc/latest/View/View#setParentView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -227,7 +227,7 @@ Class.refactor(Moobile.Component, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#getParentView
+	 * @see    http://moobilejs.com/doc/latest/View/View#getParentView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -236,7 +236,7 @@ Class.refactor(Moobile.Component, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#parentViewDidChange
+	 * @see    http://moobilejs.com/doc/latest/View/View#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -245,7 +245,7 @@ Class.refactor(Moobile.Component, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/View#parentViewDidChange
+	 * @see    http://moobilejs.com/doc/latest/View/View#parentViewDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -276,7 +276,7 @@ Class.refactor(Moobile.Component, {
 });
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/View#MoobileViewAt
+ * @see    http://moobilejs.com/doc/latest/View/View#MoobileViewAt
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
