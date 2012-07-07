@@ -23,7 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/0.1/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ScrollView = new Class({
 
@@ -32,42 +32,41 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.2.0
 	 */
 	_scroller: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_scroll: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		scroller: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
-		pageSize: null,
 		snapToPage: false,
 		snapToPageAt: 35,
+		snapToPageSizeX: null,
+		snapToPageSizeY: null,
 		snapToPageDuration: 150,
 		snapToPageDelay: 150,
-		offset: {
-			x: 0,
-			y: 0
-		}
+		initialScrollX: 0,
+		initialScrollY: 0
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 		this.parent();
@@ -77,11 +76,13 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBuild: function() {
 
 		this.parent();
+
+		if (this.options.snapToPage) this.options.momentum = false;
 
 		var options = {
 			momentum: this.options.momentum,
@@ -101,33 +102,55 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBecomeReady: function() {
 		this.parent();
 		this._scroller.refresh();
 		this._scroller.scrollTo(
-			this.options.offset.x,
-			this.options.offset.y
+			this.options.initialScrollX,
+			this.options.initialScrollY
 		);
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
+
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
 		this._scroller.destroy();
 		this._scroller = null;
+
 		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setContentSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setContentSize: function(x, y) {
+		this.contentElement.setStyle('width', x);
+		this.contentElement.setStyle('height', y);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#getContentSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getContentSize: function() {
+		return this.contentElement.getScrollSize();
 	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
 		this._scroller.scrollTo(x, y, time);
@@ -135,19 +158,9 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToPage
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
-	 */
-	scrollToPage: function(pageX, pageY, time) {
-		this._scroller.scrollToPage(pageX, pageY, time);
-		return this;
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
 		this._scroller.scrollToElement(element, time);
@@ -155,9 +168,44 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToPage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	scrollToPage: function(pageX, pageY, time) {
+
+		pageX = pageX || 0;
+		pageY = pageY || 0;
+
+		var frame = this.getSize();
+		var scroll = this.getScrollSize();
+
+		var maxPageX = Math.ceil(scroll.x / frame.x) - 1;
+		var maxPageY = Math.ceil(scroll.y / frame.y) - 1;
+
+		if (pageX < 0) pageX = 0;
+		if (pageY < 0) pageY = 0;
+
+		if (pageX > maxPageX) pageX = maxPageX;
+		if (pageY > maxPageY) pageY = maxPageY;
+
+		var x = frame.x * pageX;
+		var y = frame.y * pageY;
+
+		if (pageX === maxPageX) x = scroll.x - frame.x;
+		if (pageY === maxPageY) y = scroll.y - frame.y;
+
+		this._scroller.scrollTo(x, y, time);
+
+		this._page.x = pageX;
+		this._page.y = pageY;
+		return this;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScroll: function() {
 		return this._scroller.getScroll();
@@ -166,7 +214,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
 		return this._scroller.getScrollSize();
@@ -175,7 +223,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getScroller: function() {
 		return this._scroller;
@@ -184,7 +232,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willHide: function() {
 		this.parent();
@@ -194,7 +242,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didShow: function() {
 		this.parent();
@@ -205,7 +253,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
