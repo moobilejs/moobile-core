@@ -229,6 +229,9 @@ Moobile.ScrollView = new Class({
 		pageX = pageX || 0;
 		pageY = pageY || 0;
 
+		if (pageX < 0) pageX = 0;
+		if (pageY < 0) pageY = 0;
+
 		var frame = this.getSize();
 		var total = this.getScrollSize();
 
