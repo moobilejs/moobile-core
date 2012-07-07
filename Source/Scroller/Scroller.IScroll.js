@@ -98,8 +98,8 @@ Moobile.Scroller.IScroll = new Class({
 			onScrollEnd: this.bound('_onScrollEnd')
 		});
 
-		contentWrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
-		contentWrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
+		this.contentWrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentWrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -113,6 +113,8 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	destroy: function() {
 		window.removeEvent('orientationchange', this.bound('_onOrientationChange'));
+		this.contentWrapperElement.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentWrapperElement.removeEvent('touchend', this.bound('_onTouchEnd'));
 		this.iscroll.destroy();
 		this.iscroll = null;
 		return this.parent();

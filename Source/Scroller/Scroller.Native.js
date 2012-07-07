@@ -29,25 +29,25 @@ Moobile.Scroller.Native = new Class({
 	Extends: Moobile.Scroller,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#scroller
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	scroller: null,
+	_activeTouch: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#outerWrapperElement
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#contentScroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	outerWrapperElement: null,
+	contentScroller: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#innerWrapperElement
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#contentScrollerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	innerWrapperElement: null,
+	contentScrollerElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#initialize
@@ -65,15 +65,19 @@ Moobile.Scroller.Native = new Class({
 			'overflow-scrolling': this.options.momentum ? 'touch' : 'auto'
 		};
 
-		this.outerWrapperElement = document.createElement('div');
-		this.innerWrapperElement = document.createElement('div');
-		this.outerWrapperElement.setStyles(styles);
-		this.innerWrapperElement.setStyles(styles);
-		this.outerWrapperElement.wraps(contentElement);
-		this.innerWrapperElement.wraps(contentElement);
-		this.innerWrapperElement.addEvent('scroll', this.bound('_onScroll'));
+		var scrollFixOuterDiv = document.createElement('div');
+		var scrollFixInnerDiv = document.createElement('div');
+		scrollFixOuterDiv.setStyles(styles);
+		scrollFixInnerDiv.setStyles(styles);
+		scrollFixOuterDiv.wraps(contentElement);
+		scrollFixInnerDiv.wraps(contentElement);
 
-		this.scroller = new Fx.Scroll(this.innerWrapperElement);
+		this.contentScrollerElement = scrollFixInnerDiv;
+		this.contentScrollerElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentScrollerElement.addEvent('touchend', this.bound('_onTouchEnd'));
+		this.contentScrollerElement.addEvent('scroll', this.bound('_onScroll'));
+
+		this.contentScroller = new Fx.Scroll(this.contentScrollerElement);
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -87,11 +91,12 @@ Moobile.Scroller.Native = new Class({
 	 */
 	destroy: function() {
 
-		this.innerWrapperElement.removeEvent('scroll', this.bound('_onScroll'));
-		this.innerWrapperElement = null;
-		this.outerWrapperElement = null;
+		this.contentScrollerElement.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchEnd'));
+		this.contentScrollerElement.removeEvent('scroll', this.bound('_onScroll'));
+		this.contentScrollerElement = null;
 
-		this.scroller = null;
+		this.contentScroller = null;
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -114,17 +119,27 @@ Moobile.Scroller.Native = new Class({
 	 */
 	scrollTo: function(x, y, time) {
 
-		var onEnd = function() {
-			this.fireEvent('scroll');
-			this._attachScrollListener();
+		x = x || 0;
+		y = y || 0;
+
+		var onStart = function() {
+			this._detachEvents();
 		}.bind(this);
 
-		this._detachScrollListener();
+		var onComplete = function() {
+			this._attachEvents();
+			this.contentScroller.removeEvents('cancel');
+			this.contentScroller.removeEvents('complete');
+			this.fireEvent('scroll');
+		}.bind(this);
 
-		this.scroller.setOptions({duration: time || 0});
-		this.scroller.start(x, y);
-		this.scroller.addEvent('cancel:once', onEnd);
-		this.scroller.addEvent('complete:once', onEnd);
+		this.contentScroller.cancel();
+
+		this.contentScroller.setOptions({duration: time || 0});
+		this.contentScroller.addEvent('start:once', onStart)
+		this.contentScroller.addEvent('cancel:once', onComplete);
+		this.contentScroller.addEvent('complete:once', onComplete);
+		this.contentScroller.start(x, y);
 
 		return this;
 	},
@@ -136,17 +151,24 @@ Moobile.Scroller.Native = new Class({
 	 */
 	scrollToElement: function(element, time) {
 
-		var onEnd = function() {
-			this.fireEvent('scroll');
-			this._attachScrollListener();
+		var onStart = function() {
+			this._detachEvents();
 		}.bind(this);
 
-		this._detachScrollListener();
+		var onComplete = function() {
+			this._attachEvents();
+			this.contentScroller.removeEvents('cancel');
+			this.contentScroller.removeEvents('complete');
+			this.fireEvent('scroll');
+		}.bind(this);
 
-		this.scroller.setOptions({duration: time || 0});
-		this.scroller.toElement(element);
-		this.scroller.addEvent('cancel:once', onEnd);
-		this.scroller.addEvent('complete:once', onEnd);
+		this.contentScroller.cancel();
+
+		this.contentScroller.setOptions({duration: time || 0});
+		this.contentScroller.addEvent('start:once', onStart)
+		this.contentScroller.addEvent('cancel:once', onComplete);
+		this.contentScroller.addEvent('complete:once', onComplete);
+		this.contentScroller.toElement(element);
 
 		return this;
 	},
@@ -163,7 +185,7 @@ Moobile.Scroller.Native = new Class({
 
 		if (this.options.momentum) {
 			if (this.options.scrollY && contentSize.y <= wrapperSize.y) this.contentElement.setStyle('min-height', wrapperSize.y + 1);
-			if (this.options.scrollX && contentSize.x <= contentSize.x) this.contentElement.setStyle('min-width',  wrapperSize.x + 1);
+			if (this.options.scrollX && contentSize.x <= wrapperSize.x) this.contentElement.setStyle('min-width',  wrapperSize.x + 1);
 		}
 
 		return this;
@@ -174,8 +196,28 @@ Moobile.Scroller.Native = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
+	_attachEvents: function() {
+		this.contentScrollerElement.addEvent('scroll', this.bound('_onScroll'));
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_detachEvents: function() {
+		this.contentScrollerElement.removeEvent('scroll', this.bound('_onScroll'));
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
 	getSize: function() {
-		return this.contentWrapperElement.getSize();
+		return this.contentScrollerElement.getSize();
 	},
 
 	/**
@@ -184,7 +226,7 @@ Moobile.Scroller.Native = new Class({
 	 * @since  0.2.0
 	 */
 	getScroll: function() {
-		return this.innerWrapperElement.getScroll();
+		return this.contentScrollerElement.getScroll();
 	},
 
 	/**
@@ -193,27 +235,7 @@ Moobile.Scroller.Native = new Class({
 	 * @since  0.2.0
 	 */
 	getScrollSize: function() {
-		return this.innerWrapperElement.getScrollSize();
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_attachScrollListener: function() {
-		this.innerWrapperElement.addEvent('scroll', this.bound('_onScroll'));
-		return this;
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_detachScrollListener: function() {
-		this.innerWrapperElement.removeEvent('scroll', this.bound('_onScroll'));
-		return this;
+		return this.contentElement.getScrollSize();
 	},
 
 	/**
@@ -223,6 +245,31 @@ Moobile.Scroller.Native = new Class({
 	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchStart: function(e) {
+		if (this._activeTouch === null) {
+			this._activeTouch = e.changedTouches[0];
+			if (this.contentScroller.isRunning()) {
+				this.contentScroller.cancel();
+			}
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd: function(e) {
+		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
+			this._activeTouch = null;
+		}
 	},
 
 	/**
