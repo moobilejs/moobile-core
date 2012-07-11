@@ -244,6 +244,33 @@ p small {
 	text-shadow: none;
 }
 
+.button .button-label {
+	-webkit-box-orient: horizontal;                               /* Important */
+	   -moz-box-orient: horizontal;                              /* Important */
+	    -ms-box-orient: horizontal;                              /* Important */
+	     -o-box-orient: horizontal;                              /* Important */
+	        box-orient: horizontal;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	height: 100%;
+	overflow: hidden;                                            /* Important */
+	text-overflow: ellipsis;                                     /* Important */
+	white-space: nowrap;                                         /* Important */
+}
+
 /* Inside a Group (Horizontal) */
 
 .button-group .button {
@@ -1184,7 +1211,34 @@ p small {
 	border-bottom: 1px solid #bbbbbb;
 }
 
-.list-item > .list-item-image {
+.list-item .list-item-label {
+	-webkit-box-orient: horizontal;                               /* Important */
+	   -moz-box-orient: horizontal;                              /* Important */
+	    -ms-box-orient: horizontal;                              /* Important */
+	     -o-box-orient: horizontal;                              /* Important */
+	        box-orient: horizontal;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: start;                                     /* Important */
+	   -moz-box-pack: start;                                     /* Important */
+	    -ms-box-pack: start;                                     /* Important */
+	     -o-box-pack: start;                                     /* Important */
+	        box-pack: start;                                     /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	height: 100%;                                                /* Important */
+	overflow: hidden;                                            /* Important */
+	text-overflow: ellipsis;                                     /* Important */
+	white-space: nowrap;                                         /* Important */
+}
+
+.list-item .list-item-image {
 	-webkit-background-clip: padding-box;
 	   -moz-background-clip: padding-box;
 	    -ms-background-clip: padding-box;
@@ -1200,10 +1254,31 @@ p small {
 	width: 29px;
 }
 
-.list-item > .list-item-detail {
+.list-item .list-item-detail {
+	-webkit-box-orient: horizontal;                              /* Important */
+	   -moz-box-orient: horizontal;                              /* Important */
+	    -ms-box-orient: horizontal;                              /* Important */
+	     -o-box-orient: horizontal;                              /* Important */
+	        box-orient: horizontal;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: start;                                     /* Important */
+	   -moz-box-pack: start;                                     /* Important */
+	    -ms-box-pack: start;                                     /* Important */
+	     -o-box-pack: start;                                     /* Important */
+	        box-pack: start;                                     /* Important */
 	color: #395587;
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
 	font-size: 17px;
 	font-weight: normal;
+	height: 100%;                                                /* Important */
 }
 
 .list-item.is-selected,
@@ -1228,49 +1303,49 @@ p small {
 
  /* Checked, Detailed, Disclosed */
 
-.list-item.style-checked   > .list-item-detail,
-.list-item.style-detailed  > .list-item-detail,
-.list-item.style-disclosed > .list-item-detail {
+.list-item.style-checked   .list-item-detail,
+.list-item.style-detailed  .list-item-detail,
+.list-item.style-disclosed .list-item-detail {
 	padding-right: 35px;
 }
 
-.list-item.style-checked   > .list-item-detail:after,
-.list-item.style-detailed  > .list-item-detail:after,
-.list-item.style-disclosed > .list-item-detail:after {
+.list-item.style-checked   .list-item-detail:after,
+.list-item.style-detailed  .list-item-detail:after,
+.list-item.style-disclosed .list-item-detail:after {
 	background-image: url(../images/list-item-style-icon.png);
 	background-repeat: no-repeat;
 }
 
 /* Checked */
 
-.list-item.style-checked > .list-item-detail:after {
+.list-item.style-checked .list-item-detail:after {
 	background-position: -60px center;
 }
 
-.list-item.style-checked.is-selected    > .list-item-detail:after,
-.list-item.style-checked.is-highlighted > .list-item-detail:after {
+.list-item.style-checked.is-selected    .list-item-detail:after,
+.list-item.style-checked.is-highlighted .list-item-detail:after {
 	background-position: -90px center;
 }
 
 /* Detailed */
 
-.list-item.style-detailed > .list-item-detail:after {
+.list-item.style-detailed .list-item-detail:after {
 	background-position: -120px center;
 }
 
-.list-item.style-detailed.is-selected    > .list-item-detail:after,
-.list-item.style-detailed.is-highlighted > .list-item-detail:after {
+.list-item.style-detailed.is-selected    .list-item-detail:after,
+.list-item.style-detailed.is-highlighted .list-item-detail:after {
 	background-position: -120px center;
 }
 
 /* Disclosed */
 
-.list-item.style-disclosed > .list-item-detail:after {
+.list-item.style-disclosed .list-item-detail:after {
 	background-position: 0px center;
 }
 
-.list-item.style-disclosed.is-selected    > .list-item-detail:after,
-.list-item.style-disclosed.is-highlighted > .list-item-detail:after {
+.list-item.style-disclosed.is-selected    .list-item-detail:after,
+.list-item.style-disclosed.is-highlighted .list-item-detail:after {
 	background-position: -30px center;
 }
 
@@ -1285,9 +1360,9 @@ p small {
 
     /* Checked, Detailed, Disclosed */
 
-	.list-item.style-checked   > .list-item-detail:after,
-	.list-item.style-detailed  > .list-item-detail:after,
-	.list-item.style-disclosed > .list-item-detail:after {
+	.list-item.style-checked   .list-item-detail:after,
+	.list-item.style-detailed  .list-item-detail:after,
+	.list-item.style-disclosed .list-item-detail:after {
 		background-image: url(../images/list-item-style-icon-2x.png);
 		background-size: 150px 30px;
 	}
@@ -1680,7 +1755,7 @@ p small {
 	to   { transform: translateX(75%) translateZ(10px); opacity: 0; }
 }
 
-.transition-slide-enter .transition-view-to-show .bar > .bar-item {
+.transition-slide-enter .transition-view-to-show .bar .bar-item {
 	-webkit-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	   -moz-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	    -ms-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
@@ -1693,7 +1768,7 @@ p small {
 	        transform: translateZ(10px);                         /* Important */
 }
 
-.transition-slide-enter .transition-view-to-hide .bar > .bar-item {
+.transition-slide-enter .transition-view-to-hide .bar .bar-item {
 	-webkit-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	   -moz-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	    -ms-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
@@ -1769,7 +1844,7 @@ p small {
 	to   { transform: translateX(-75%) translateZ(10px); opacity: 0; }
 }
 
-.transition-slide-leave .transition-view-to-show .bar > .bar-item {
+.transition-slide-leave .transition-view-to-show .bar .bar-item {
 	-webkit-transform: translateZ(10px);
 	   -moz-transform: translateZ(10px);
 	    -ms-transform: translateZ(10px);
@@ -1782,7 +1857,7 @@ p small {
 	        animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
-.transition-slide-leave .transition-view-to-hide .bar > .bar-item {
+.transition-slide-leave .transition-view-to-hide .bar .bar-item {
 	-webkit-transform: translateZ(10px);
 	   -moz-transform: translateZ(10px);
 	    -ms-transform: translateZ(10px);
