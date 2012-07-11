@@ -88,7 +88,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	_offset: null,
 
@@ -236,7 +236,6 @@ Moobile.ScrollView = new Class({
 
 		var xmax = total.x - frame.x;
 		var ymax = total.y - frame.y;
-
 		var x = (this.options.snapToPageSizeX || frame.x) * pageX;
 		var y = (this.options.snapToPageSizeY || frame.y) * pageY;
 		if (x > xmax) x = xmax;
