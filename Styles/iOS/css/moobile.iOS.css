@@ -139,6 +139,10 @@ p small {
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
+.bar .bar-item {
+	height: 100%;
+}
+
 /* Dark */
 
 .bar.style-dark {
@@ -173,10 +177,34 @@ p small {
 	height: 44px;
 }
 
-.bar.navigation-bar > .bar-item > .bar-title {
+.bar.navigation-bar .bar-item .bar-title {
+	-webkit-box-orient: horizontal;                              /* Important */
+	   -moz-box-orient: horizontal;                              /* Important */
+	    -ms-box-orient: horizontal;                              /* Important */
+	     -o-box-orient: horizontal;                              /* Important */
+	        box-orient: horizontal;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
 	margin-top: -1px;
 	margin-left: 8px;
 	margin-right: 8px;
+	height: inherit;
+	overflow: hidden;                                            /* Important */
+	text-overflow: ellipsis;                                     /* Important */
+	white-space: nowrap;                                         /* Important */
 }
 
 /* Button Group

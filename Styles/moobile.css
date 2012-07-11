@@ -363,11 +363,8 @@ input, select, textarea {
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
 	display: block;
-	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
 	text-align: center;
-	text-overflow: ellipsis;                                     /* Important */
-	white-space: nowrap;                                         /* Important */
 	width: 100%;                                                 /* Important */
 }
 
