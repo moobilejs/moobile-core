@@ -1137,7 +1137,6 @@ var fireEvent = Events.prototype.fireEvent;
 
 /**
  * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer
- *
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -1151,7 +1150,6 @@ Moobile.EventFirer = new Class({
 
 	/**
 	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#fireEvent
-	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1171,7 +1169,6 @@ Moobile.EventFirer = new Class({
 
 	/**
 	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#shouldFireEvent
-	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1181,7 +1178,6 @@ Moobile.EventFirer = new Class({
 
 	/**
 	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#willFireEvent
-	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1191,7 +1187,6 @@ Moobile.EventFirer = new Class({
 
 	/**
 	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#didFireEvent
-	 *
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
