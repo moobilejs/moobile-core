@@ -25,7 +25,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Request/Request
+ * @see    http://moobilejs.com/doc/latest/Request/Request
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -34,7 +34,7 @@ Moobile.Request = new Class({
 	Extends: Request,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Request/Request#options
+	 * @see    http://moobilejs.com/doc/latest/Request/Request#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/ActivityIndicator
+ * @see    http://moobilejs.com/doc/latest/Control/ActivityIndicator
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -39,7 +39,7 @@ Moobile.ActivityIndicator = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ActivityIndicator#start
+	 * @see    http://moobilejs.com/doc/latest/Control/ActivityIndicator#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -48,7 +48,7 @@ Moobile.ActivityIndicator = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ActivityIndicator#stop
+	 * @see    http://moobilejs.com/doc/latest/Control/ActivityIndicator#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

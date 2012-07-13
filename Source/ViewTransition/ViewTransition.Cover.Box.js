@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Cover.Box
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

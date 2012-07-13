@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Bar
+ * @see    http://moobilejs.com/doc/latest/Control/Bar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -66,7 +66,7 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Bar#setItem
+	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -88,7 +88,7 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Bar#getItem
+	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

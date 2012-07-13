@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Util/Overlay
+ * @see    http://moobilejs.com/doc/latest/Util/Overlay
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -50,7 +50,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Util/Overlay#showAnimated
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -62,7 +62,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Util/Overlay#hideAnimated
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#hideAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -73,7 +73,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Util/Overlay#_onAnimationEnd
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#_onAnimationEnd
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

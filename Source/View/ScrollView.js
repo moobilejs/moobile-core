@@ -21,7 +21,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/ScrollView
+ * @see    http://moobilejs.com/doc/latest/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -93,7 +93,7 @@ Moobile.ScrollView = new Class({
 	_offset: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -199,7 +199,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollTo
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -209,7 +209,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToElement
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -219,7 +219,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToPage
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -247,7 +247,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroll
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -256,7 +256,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScrollSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -265,7 +265,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroller
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

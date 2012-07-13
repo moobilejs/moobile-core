@@ -23,7 +23,7 @@ provides:
 (function() {
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Element/Element.From#Element-from
+ * @see    http://moobilejs.com/doc/latest/Element/Element.From#Element-from
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -43,7 +43,7 @@ Element.from = function(text) {
 var elements = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Element/Element.From#Element-at
+ * @see    http://moobilejs.com/doc/latest/Element/Element.From#Element-at
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */

@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Button
+ * @see    http://moobilejs.com/doc/latest/Control/Button
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -71,7 +71,7 @@ Moobile.Button = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Button#setLabel
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -97,7 +97,7 @@ Moobile.Button = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Button#getLabel
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

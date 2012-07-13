@@ -22,7 +22,7 @@ provides:
 if (!window.$moobile) window.$moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Window/Window
+ * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

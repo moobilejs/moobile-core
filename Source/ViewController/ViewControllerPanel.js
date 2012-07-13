@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -52,7 +52,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#setMainViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setMainViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -78,7 +78,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#getMainViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getMainViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -87,7 +87,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#setSideViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setSideViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -113,7 +113,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#getSideViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getSideViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -133,7 +133,7 @@ Class.refactor(Moobile.ViewController, {
 	_viewControllerPanel: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#setViewControllerPanel
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -143,7 +143,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#getViewControllerPanel
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

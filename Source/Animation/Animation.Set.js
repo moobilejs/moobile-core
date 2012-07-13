@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set
+ * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -31,28 +31,28 @@ Moobile.Animation.Set = new Class({
 
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#element
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#animations
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#animations
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	animations: [],
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#currentAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#currentAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	currentAnimation: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#initialize
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -67,7 +67,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -92,7 +92,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -103,7 +103,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#removeAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#removeAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -129,7 +129,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setElement
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -140,7 +140,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getElement
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -149,7 +149,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -159,7 +159,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -168,7 +168,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -178,7 +178,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -187,7 +187,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationDuration
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -197,7 +197,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationDuration
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -206,7 +206,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -216,7 +216,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -225,7 +225,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationDirection
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -235,7 +235,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationDirection
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -244,7 +244,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -254,7 +254,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -263,7 +263,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationFillMode
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -273,7 +273,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationFillMode
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -282,7 +282,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationDelay
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -292,7 +292,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationDelay
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -301,7 +301,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#attach
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#attach
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -311,7 +311,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#detach
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#detach
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -321,7 +321,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#start
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -339,7 +339,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#stop
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -354,7 +354,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#isRunning
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#isRunning
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

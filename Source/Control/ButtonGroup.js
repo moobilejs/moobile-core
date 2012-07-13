@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup
+ * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -43,7 +43,7 @@ Moobile.ButtonGroup = new Class({
 	_selectedButtonIndex: -1,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#options
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -84,7 +84,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#setSelectedButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -116,7 +116,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getSelectedButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -125,7 +125,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#setSelectedButtonIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectedButtonIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -140,7 +140,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getSelectedButtonIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getSelectedButtonIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -149,7 +149,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#clearSelectedButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#clearSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -159,7 +159,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#addButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -168,7 +168,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#addButtonAfter
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -177,7 +177,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#addButtonBefore
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -186,7 +186,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getButtons
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -195,7 +195,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -204,7 +204,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getButtonAt
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getButtonAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -213,7 +213,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#removeButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -222,7 +222,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#removeAllButtons
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

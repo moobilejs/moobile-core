@@ -27,7 +27,7 @@ var adopt = Element.prototype.adopt;
 Element.implement({
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#ingest
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#ingest
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -36,7 +36,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#adopt
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#adopt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */

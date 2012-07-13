@@ -1136,7 +1136,7 @@ if (!window.Moobile) window.Moobile = {};
 var fireEvent = Events.prototype.fireEvent;
 
 /**
- * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer
+ * @see http://moobilejs.com/doc/latest/EventFirer/EventFirer
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -1149,7 +1149,7 @@ Moobile.EventFirer = new Class({
 	],
 
 	/**
-	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#fireEvent
+	 * @see http://moobilejs.com/doc/latest/EventFirer/EventFirer#fireEvent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1168,7 +1168,7 @@ Moobile.EventFirer = new Class({
 	},
 
 	/**
-	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#shouldFireEvent
+	 * @see http://moobilejs.com/doc/latest/EventFirer/EventFirer#shouldFireEvent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1177,7 +1177,7 @@ Moobile.EventFirer = new Class({
 	},
 
 	/**
-	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#willFireEvent
+	 * @see http://moobilejs.com/doc/latest/EventFirer/EventFirer#willFireEvent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1186,7 +1186,7 @@ Moobile.EventFirer = new Class({
 	},
 
 	/**
-	 * @see http://moobilejs.com/doc/0.1/EventFirer/EventFirer#didFireEvent
+	 * @see http://moobilejs.com/doc/latest/EventFirer/EventFirer#didFireEvent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1222,7 +1222,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Animation/Animation
+ * @see    http://moobilejs.com/doc/latest/Animation/Animation
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -1245,21 +1245,21 @@ Moobile.Animation = new Class({
 	_running: false,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#element
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#animationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	animationClass: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationProperties
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#animationProperties
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1274,7 +1274,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#initialize
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1285,7 +1285,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1295,7 +1295,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1304,7 +1304,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setElement
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1314,7 +1314,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getElement
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1323,7 +1323,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1333,7 +1333,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1342,7 +1342,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1352,7 +1352,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1361,7 +1361,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDuration
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1371,7 +1371,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDuration
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1380,7 +1380,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1390,7 +1390,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1399,7 +1399,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDirection
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1409,7 +1409,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDirection
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1418,7 +1418,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1428,7 +1428,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1437,7 +1437,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationFillMode
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1447,7 +1447,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationFillMode
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1456,7 +1456,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDelay
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1466,7 +1466,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDelay
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1509,7 +1509,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#start
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1527,7 +1527,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#stop
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1544,7 +1544,7 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#isRunning
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#isRunning
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1597,7 +1597,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set
+ * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -1608,28 +1608,28 @@ Moobile.Animation.Set = new Class({
 
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#element
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#animations
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#animations
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	animations: [],
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#currentAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#currentAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	currentAnimation: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#initialize
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1644,7 +1644,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1669,7 +1669,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1680,7 +1680,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#removeAnimation
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#removeAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1706,7 +1706,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setElement
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1717,7 +1717,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getElement
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1726,7 +1726,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1736,7 +1736,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationClass
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1745,7 +1745,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1755,7 +1755,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationName
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1764,7 +1764,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationDuration
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1774,7 +1774,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationDuration
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1783,7 +1783,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1793,7 +1793,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1802,7 +1802,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationDirection
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1812,7 +1812,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationDirection
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1821,7 +1821,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1831,7 +1831,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1840,7 +1840,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationFillMode
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1850,7 +1850,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationFillMode
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1859,7 +1859,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#setAnimationDelay
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1869,7 +1869,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#getAnimationDelay
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1878,7 +1878,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#attach
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#attach
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1888,7 +1888,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#detach
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#detach
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1898,7 +1898,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#start
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1916,7 +1916,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#stop
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -1931,7 +1931,7 @@ Moobile.Animation.Set = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation.Set#isRunning
+	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#isRunning
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2110,14 +2110,14 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Class/Class
+ * @see    http://moobilejs.com/doc/latest/Class/Class
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
 Class.extend({
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Class/Class.Instantiate#parse
+	 * @see    http://moobilejs.com/doc/latest/Class/Class.Instantiate#parse
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2130,7 +2130,7 @@ Class.extend({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Class/Class.Instantiate#instantiate
+	 * @see    http://moobilejs.com/doc/latest/Class/Class.Instantiate#instantiate
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2177,7 +2177,7 @@ var adopt = Element.prototype.adopt;
 Element.implement({
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#ingest
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#ingest
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2186,7 +2186,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#adopt
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#adopt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2232,7 +2232,7 @@ provides:
 (function() {
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Element/Element.From#Element-from
+ * @see    http://moobilejs.com/doc/latest/Element/Element.From#Element-from
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -2252,7 +2252,7 @@ Element.from = function(text) {
 var elements = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Element/Element.From#Element-at
+ * @see    http://moobilejs.com/doc/latest/Element/Element.From#Element-at
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -2309,7 +2309,7 @@ provides:
 (function() {
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Element/Element.Role#defineRole
+ * @see    http://moobilejs.com/doc/latest/Element/Element.Role#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -2330,7 +2330,7 @@ Element.defineRole = function(name, context, behavior) {
 Element.implement({
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#setRole
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#setRole
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2339,7 +2339,7 @@ Element.implement({
 	 },
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRole
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRole
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2348,7 +2348,7 @@ Element.implement({
 	 },
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRoleDefinition
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleDefinition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2359,7 +2359,7 @@ Element.implement({
 	 },
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRoleElement
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2368,7 +2368,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#getRoleElements
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2383,7 +2383,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#ownsRoleElement
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2405,7 +2405,7 @@ Element.implement({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Element/Element#executeDefinedRoles
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#executeDefinedRoles
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -2460,7 +2460,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Component/Component
+ * @see    http://moobilejs.com/doc/latest/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -2518,14 +2518,14 @@ Moobile.Component = new Class({
 	_style: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#element
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#options
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2536,7 +2536,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#initialization
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#initialization
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2634,7 +2634,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2653,7 +2653,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponentInside
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentInside
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2674,7 +2674,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponentAfter
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2702,7 +2702,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addChildComponentBefore
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2760,7 +2760,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2769,7 +2769,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2778,7 +2778,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentAt
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2787,7 +2787,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentOfTypeAt
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentOfTypeAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2796,7 +2796,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentIndex
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2805,7 +2805,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponents
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2814,7 +2814,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getChildComponentsOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2823,7 +2823,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2832,7 +2832,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasChildComponentOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2855,7 +2855,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#replaceChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#replaceChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2864,7 +2864,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#replaceWithComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#replaceWithComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2875,7 +2875,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2907,7 +2907,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeAllChildComponents
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeAllChildComponents
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2916,7 +2916,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeChildComponentsOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2930,7 +2930,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#removeFromParentComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeFromParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2941,7 +2941,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setParentComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2958,7 +2958,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getParentComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2967,7 +2967,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasParentComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2976,7 +2976,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setWindow
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -2999,7 +2999,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getWindow
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3008,7 +3008,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasWindow
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3017,7 +3017,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setReady
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3039,7 +3039,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#isReady
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#isReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3048,7 +3048,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getName
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3057,7 +3057,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#setStyle
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setStyle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3079,7 +3079,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getStyle
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getStyle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3088,7 +3088,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addClass
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3098,7 +3098,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#addClass
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3108,7 +3108,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#toggleClass
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#toggleClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3118,7 +3118,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getElement
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3129,7 +3129,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getElements
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3138,7 +3138,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hasElement
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3147,7 +3147,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getSize
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3156,7 +3156,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#getPosition
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getPosition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3165,7 +3165,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#show
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#show
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3184,7 +3184,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#hide
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3203,7 +3203,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#isVisible
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#isVisible
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3212,7 +3212,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willBuild
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3221,7 +3221,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didBuild
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3230,7 +3230,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didBecomeReady
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBecomeReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3239,7 +3239,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willAddChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3248,7 +3248,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didAddChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3257,7 +3257,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willRemoveChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3266,7 +3266,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didRemoveChildComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3275,7 +3275,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#parentComponentWillChange
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#parentComponentWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3284,7 +3284,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#parentComponentDidChange
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#parentComponentDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3293,7 +3293,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#windowWillChange
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#windowWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2
 	 */
@@ -3302,7 +3302,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#windowDidChange
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#windowDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2
 	 */
@@ -3311,7 +3311,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willShow
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3320,7 +3320,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didShow
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3329,7 +3329,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#willHide
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willHide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3338,7 +3338,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#didHide
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didHide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3347,7 +3347,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Component/Component#destroy
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3368,7 +3368,7 @@ Moobile.Component = new Class({
 });
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Component/Component#defineRole
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3377,7 +3377,7 @@ Moobile.Component.defineRole = function(name, target, behavior) {
 };
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Component/Component#defineStyle
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineStyle
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3394,7 +3394,7 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
 };
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Component/Component#getRole
+ * @see    http://moobilejs.com/doc/latest/Component/Component#getRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3405,7 +3405,7 @@ Moobile.Component.getStyle = function(name, target) {
 };
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Component/Component#create
+ * @see    http://moobilejs.com/doc/latest/Component/Component#create
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3526,7 +3526,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Control
+ * @see    http://moobilejs.com/doc/latest/Control/Control
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3542,7 +3542,7 @@ Moobile.Control = new Class({
 	_state: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#options
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3582,7 +3582,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#shouldAllowState
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#shouldAllowState
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3591,7 +3591,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#setDisabled
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#setDisabled
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3600,7 +3600,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#isDisabled
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#isDisabled
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3609,7 +3609,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#setSelected
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#setSelected
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3618,7 +3618,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#isSelected
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#isSelected
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3627,7 +3627,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#setHighlighted
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#setHighlighted
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3636,7 +3636,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#isHighlighted
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#isHighlighted
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3645,7 +3645,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#willChangeState
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#willChangeState
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3654,7 +3654,7 @@ Moobile.Control = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Control#didChangeState
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#didChangeState
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3696,7 +3696,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Button
+ * @see    http://moobilejs.com/doc/latest/Control/Button
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3747,7 +3747,7 @@ Moobile.Button = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Button#setLabel
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3773,7 +3773,7 @@ Moobile.Button = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Button#getLabel
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3861,7 +3861,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup
+ * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -3884,7 +3884,7 @@ Moobile.ButtonGroup = new Class({
 	_selectedButtonIndex: -1,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#options
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3925,7 +3925,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#setSelectedButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3957,7 +3957,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getSelectedButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3966,7 +3966,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#setSelectedButtonIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectedButtonIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3981,7 +3981,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getSelectedButtonIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getSelectedButtonIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -3990,7 +3990,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#clearSelectedButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#clearSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4000,7 +4000,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#addButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4009,7 +4009,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#addButtonAfter
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4018,7 +4018,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#addButtonBefore
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4027,7 +4027,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getButtons
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4036,7 +4036,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4045,7 +4045,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#getButtonAt
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#getButtonAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4054,7 +4054,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#removeButton
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4063,7 +4063,7 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ButtonGroup#removeAllButtons
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4146,7 +4146,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Bar
+ * @see    http://moobilejs.com/doc/latest/Control/Bar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -4192,7 +4192,7 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Bar#setItem
+	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4214,7 +4214,7 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Bar#getItem
+	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4264,7 +4264,7 @@ provides:
 */
 
  /**
- * @see    http://moobilejs.com/doc/0.1/Control/BarItem
+ * @see    http://moobilejs.com/doc/latest/Control/BarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -4315,7 +4315,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/NavigationBar
+ * @see    http://moobilejs.com/doc/latest/Control/NavigationBar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -4368,7 +4368,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem
+ * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -4414,7 +4414,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#setTitle
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4440,7 +4440,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#getTitle
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4449,7 +4449,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#addLeftButton
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#addLeftButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4458,7 +4458,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#addRightButton
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#addRightButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4467,7 +4467,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#getButton
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4476,7 +4476,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#getButton
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4485,7 +4485,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#removeButton
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4494,7 +4494,7 @@ Moobile.NavigationBarItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/NavigationBarItem#removeAllButtons
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4550,7 +4550,7 @@ Class.refactor(Slider, {
 });
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Slider
+ * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -4566,28 +4566,28 @@ Moobile.Slider = new Class({
 	_value: 0,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#slider
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#slider
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	slider: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#track
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#track
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	trackElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#thumb
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#thumb
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	thumbElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#options
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4656,7 +4656,7 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#setValue
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4666,7 +4666,7 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#setValue
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4749,7 +4749,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/List
+ * @see    http://moobilejs.com/doc/latest/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -4779,7 +4779,7 @@ Moobile.List = new Class({
 	_selectedItemIndex: -1,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#options
+	 * @see    http://moobilejs.com/doc/latest/Control/List#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4822,7 +4822,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#setSelectedItem
+	 * @see    http://moobilejs.com/doc/latest/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4852,7 +4852,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#getSelectedItem
+	 * @see    http://moobilejs.com/doc/latest/Control/List#getSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4861,7 +4861,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#setSelectedItemIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/List#setSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4876,7 +4876,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#getSelectedItemIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/List#getSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4885,7 +4885,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#clearSelectedItem
+	 * @see    http://moobilejs.com/doc/latest/Control/List#clearSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4895,7 +4895,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#addItem
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4904,7 +4904,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#addItemAfter
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4913,7 +4913,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#addItemBefore
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4922,7 +4922,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItem
+	 * @see    http://moobilejs.com/doc/latest/Control/List#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4931,7 +4931,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItemAt
+	 * @see    http://moobilejs.com/doc/latest/Control/List#getItemAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4940,7 +4940,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItemIndex
+	 * @see    http://moobilejs.com/doc/latest/Control/List#getItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4949,7 +4949,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#getItems
+	 * @see    http://moobilejs.com/doc/latest/Control/List#getItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4958,7 +4958,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#removeItem
+	 * @see    http://moobilejs.com/doc/latest/Control/List#removeItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4967,7 +4967,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/List#removeAllItems
+	 * @see    http://moobilejs.com/doc/latest/Control/List#removeAllItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -4976,7 +4976,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setSelectable
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setSelectable
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -4986,7 +4986,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#isSelectable
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#isSelectable
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -5103,7 +5103,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/ListItem
+ * @see    http://moobilejs.com/doc/latest/Control/ListItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -5189,7 +5189,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setLabel
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5215,7 +5215,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#getLabel
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5224,7 +5224,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setImage
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5250,7 +5250,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#getImage
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5259,7 +5259,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#setDetail
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5285,7 +5285,7 @@ Moobile.ListItem = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ListItem#getDetail
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5357,7 +5357,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/ActivityIndicator
+ * @see    http://moobilejs.com/doc/latest/Control/ActivityIndicator
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -5376,7 +5376,7 @@ Moobile.ActivityIndicator = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ActivityIndicator#start
+	 * @see    http://moobilejs.com/doc/latest/Control/ActivityIndicator#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5385,7 +5385,7 @@ Moobile.ActivityIndicator = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/ActivityIndicator#stop
+	 * @see    http://moobilejs.com/doc/latest/Control/ActivityIndicator#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5426,7 +5426,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Image
+ * @see    http://moobilejs.com/doc/latest/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -5508,7 +5508,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Image#setSource
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#setSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5538,7 +5538,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Image#getSource
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#getSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5547,7 +5547,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Image#getImage
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5556,7 +5556,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Image#getOriginalSize
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#getOriginalSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5565,7 +5565,7 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Image#isLoaded
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#isLoaded
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5652,7 +5652,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Text
+ * @see    http://moobilejs.com/doc/latest/Control/Text
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -5661,7 +5661,7 @@ Moobile.Text = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Text#options
+	 * @see    http://moobilejs.com/doc/latest/Control/Text#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5680,7 +5680,7 @@ Moobile.Text = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Text#setText
+	 * @see    http://moobilejs.com/doc/latest/Control/Text#setText
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5694,7 +5694,7 @@ Moobile.Text = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Text#getText
+	 * @see    http://moobilejs.com/doc/latest/Control/Text#getText
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5735,7 +5735,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Dialog/Alert
+ * @see    http://moobilejs.com/doc/latest/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -5765,42 +5765,42 @@ Moobile.Alert = new Class({
 	_buttons: [],
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#boxElement
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#boxElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	boxElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#contentElement
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	contentElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#headerElement
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#headerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	headerElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#footerElement
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#footerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	footerElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#overlay
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#overlay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	overlay: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#options
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5865,7 +5865,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setTitle
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5891,7 +5891,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#getTitle
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5900,7 +5900,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setMessage
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setMessage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5926,7 +5926,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#getMessage
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getMessage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5935,7 +5935,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#addButton
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5949,7 +5949,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setDefaultButton
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setDefaultButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5959,7 +5959,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#setDefaultButtons
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setDefaultButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5968,7 +5968,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#showAnimated
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -5981,7 +5981,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Dialog/Alert#hideAnimated
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#hideAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -6957,7 +6957,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Request/Request
+ * @see    http://moobilejs.com/doc/latest/Request/Request
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -6966,7 +6966,7 @@ Moobile.Request = new Class({
 	Extends: Request,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Request/Request#options
+	 * @see    http://moobilejs.com/doc/latest/Request/Request#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -7747,7 +7747,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Util/Overlay
+ * @see    http://moobilejs.com/doc/latest/Util/Overlay
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -7777,7 +7777,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Util/Overlay#showAnimated
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -7789,7 +7789,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Util/Overlay#hideAnimated
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#hideAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -7800,7 +7800,7 @@ Moobile.Overlay = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Util/Overlay#_onAnimationEnd
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#_onAnimationEnd
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -7851,14 +7851,14 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Types/String
+ * @see    http://moobilejs.com/doc/latest/Types/String
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
 String.implement({
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Types/String#toCamelCase
+	 * @see    http://moobilejs.com/doc/latest/Types/String#toCamelCase
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -7890,14 +7890,14 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Types/Array
+ * @see    http://moobilejs.com/doc/latest/Types/Array
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
 Array.implement({
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Types/Array#find
+	 * @see    http://moobilejs.com/doc/latest/Types/Array#find
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -7912,7 +7912,7 @@ Array.implement({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Types/Array#getLastItemAtOffset
+	 * @see    http://moobilejs.com/doc/latest/Types/Array#getLastItemAtOffset
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8257,7 +8257,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/ScrollView
+ * @see    http://moobilejs.com/doc/latest/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
@@ -8329,7 +8329,7 @@ Moobile.ScrollView = new Class({
 	_offset: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8435,7 +8435,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollTo
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollTo
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8445,7 +8445,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToElement
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollToElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8455,7 +8455,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#scrollToPage
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8483,7 +8483,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroll
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScroll
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8492,7 +8492,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScrollSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScrollSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8501,7 +8501,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ScrollView#getScroller
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8668,7 +8668,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/ViewPanel
+ * @see    http://moobilejs.com/doc/latest/View/ViewPanel
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -8741,7 +8741,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#setSidePanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -8765,7 +8765,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#getSidePanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -8774,7 +8774,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#setMainPanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -8798,7 +8798,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#getMainPanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -8848,7 +8848,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/ViewStack
+ * @see    http://moobilejs.com/doc/latest/View/ViewStack
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -8911,7 +8911,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -8969,28 +8969,28 @@ Moobile.ViewController = new Class({
 	_children: [],
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#modal
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#modal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_modal: false,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#modalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#modalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	_modalViewController: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#view
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#view
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	view: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#initialize
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9012,7 +9012,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#loadView
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#loadView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9023,7 +9023,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#addChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9040,7 +9040,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#addChildViewControllerAfter
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9064,7 +9064,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#addChildViewControllerBefore
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9113,7 +9113,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9122,7 +9122,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewControllerAt
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewControllerAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9131,7 +9131,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewControllerIndex
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewControllerIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9140,7 +9140,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getChildViewControllers
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewControllers
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9149,7 +9149,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#hasChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#hasChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9158,7 +9158,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#removeChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9186,7 +9186,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#removeFromParentViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeFromParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9197,7 +9197,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#removeAllChildViewControllers
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeAllChildViewControllers
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9211,7 +9211,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#presentModalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#presentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9267,7 +9267,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#dismissModalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#dismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9316,7 +9316,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getName
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9325,7 +9325,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setTitle
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9353,7 +9353,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getTitle
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9362,7 +9362,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setImage
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9389,7 +9389,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getImage
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9398,7 +9398,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setModal
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setModal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9407,7 +9407,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#isModal
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#isModal
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9416,7 +9416,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#isViewReady
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#isViewReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9425,7 +9425,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getView
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9434,7 +9434,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setViewTransition
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9444,7 +9444,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getViewTransition
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getViewTransition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9453,7 +9453,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#setParentViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9465,7 +9465,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#getParentViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9474,7 +9474,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willAddChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willAddChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9483,7 +9483,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didAddChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didAddChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9492,7 +9492,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willRemoveChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willRemoveChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9501,7 +9501,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didRemoveChildViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didRemoveChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9510,7 +9510,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#parentViewControllerWillChange
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#parentViewControllerWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9519,7 +9519,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#parentViewControllerDidChange
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#parentViewControllerDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9528,7 +9528,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willPresentModalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willPresentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9537,7 +9537,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didPresentModalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didPresentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9546,7 +9546,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#willDismissModalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willDismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9555,7 +9555,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didDismissModalViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didDismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9564,7 +9564,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#didRotate
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didRotate
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9573,7 +9573,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidLoad
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidLoad
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9582,7 +9582,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidBecomeReady
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidBecomeReady
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9591,7 +9591,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewWillEnter
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewWillEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9600,7 +9600,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidEnter
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9609,7 +9609,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewWillLeave
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewWillLeave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9618,7 +9618,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#viewDidLeave
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidLeave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9627,7 +9627,7 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewController#destroy
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9698,7 +9698,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -9723,7 +9723,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#pushViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#pushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9806,7 +9806,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#popViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#popViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9839,7 +9839,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#popViewControllerUntil
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#popViewControllerUntil
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9905,7 +9905,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#getTopViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#getTopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9934,7 +9934,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#willPushViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#willPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9943,7 +9943,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#didPushViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#didPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9952,7 +9952,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#willPopViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#willPopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9961,7 +9961,7 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#didPopViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#didPopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -9981,7 +9981,7 @@ Class.refactor(Moobile.ViewController, {
 	_viewControllerStack: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#setViewControllerStack
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#setViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10007,7 +10007,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#getViewControllerStack
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#getViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10016,7 +10016,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#parentViewControllerStackWillChange
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#parentViewControllerStackWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10025,7 +10025,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack#parentViewControllerStackDidChange
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#parentViewControllerStackDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10079,7 +10079,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerStack.Navigation
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack.Navigation
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10186,7 +10186,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10218,7 +10218,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#setMainViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setMainViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10244,7 +10244,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#getMainViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getMainViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10253,7 +10253,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#setSideViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setSideViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10279,7 +10279,7 @@ Moobile.ViewControllerPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#getSideViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getSideViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10299,7 +10299,7 @@ Class.refactor(Moobile.ViewController, {
 	_viewControllerPanel: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#setViewControllerPanel
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10309,7 +10309,7 @@ Class.refactor(Moobile.ViewController, {
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewController/ViewControllerPanel#getViewControllerPanel
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10372,7 +10372,7 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10385,7 +10385,7 @@ Moobile.ViewTransition = new Class({
 	],
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#initialize
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10395,7 +10395,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#enter
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#enter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10420,7 +10420,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#leave
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#leave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10438,7 +10438,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#didEnterFirst
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#didEnterFirst
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10449,7 +10449,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#didEnter
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#didEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10462,7 +10462,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#didLeave
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#didLeave
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10475,7 +10475,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#firstAnimation
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#firstAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10484,7 +10484,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#enterAnimation
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#enterAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10493,7 +10493,7 @@ Moobile.ViewTransition = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition#leaveAnimation
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#leaveAnimation
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -10526,7 +10526,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Slide
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Slide
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10640,7 +10640,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Cover
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10756,7 +10756,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Cover.Box
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10882,7 +10882,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Cover.Page
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Page
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -10994,7 +10994,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Cubic
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cubic
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -11115,7 +11115,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Fade
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Fade
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -11230,7 +11230,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.Flip
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Flip
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -11351,7 +11351,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/ViewTransition/ViewTransition.None
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.None
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -11413,7 +11413,7 @@ provides:
 if (!window.$moobile) window.$moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Window/Window
+ * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -11518,7 +11518,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Window/WindowController
+ * @see    http://moobilejs.com/doc/latest/Window/WindowController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -11550,7 +11550,7 @@ Moobile.WindowController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Window/WindowController#setRootViewController
+	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#setRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -11571,7 +11571,7 @@ Moobile.WindowController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Window/WindowController#getRootViewController
+	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#getRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

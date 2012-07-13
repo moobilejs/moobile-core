@@ -31,7 +31,7 @@ Class.refactor(Slider, {
 });
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Control/Slider
+ * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -47,28 +47,28 @@ Moobile.Slider = new Class({
 	_value: 0,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#slider
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#slider
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	slider: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#track
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#track
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	trackElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#thumb
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#thumb
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
 	thumbElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#options
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -137,7 +137,7 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#setValue
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -147,7 +147,7 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Control/Slider#setValue
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

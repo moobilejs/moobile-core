@@ -20,7 +20,7 @@ provides:
 */
 
  /**
- * @see    http://moobilejs.com/doc/0.1/Control/BarItem
+ * @see    http://moobilejs.com/doc/latest/Control/BarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */

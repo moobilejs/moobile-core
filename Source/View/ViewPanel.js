@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/View/ViewPanel
+ * @see    http://moobilejs.com/doc/latest/View/ViewPanel
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -93,7 +93,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#setSidePanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -117,7 +117,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#getSidePanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -126,7 +126,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#setMainPanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -150,7 +150,7 @@ Moobile.ViewPanel = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/View/ViewPanel#getMainPanel
+	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */

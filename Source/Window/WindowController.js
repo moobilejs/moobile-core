@@ -20,7 +20,7 @@ provides:
 */
 
 /**
- * @see    http://moobilejs.com/doc/0.1/Window/WindowController
+ * @see    http://moobilejs.com/doc/latest/Window/WindowController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1
  */
@@ -52,7 +52,7 @@ Moobile.WindowController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Window/WindowController#setRootViewController
+	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#setRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
@@ -73,7 +73,7 @@ Moobile.WindowController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/0.1/Window/WindowController#getRootViewController
+	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#getRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1
 	 */
