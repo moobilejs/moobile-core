@@ -22,24 +22,18 @@ provides:
 
 if (Browser.Features.Touch) (function() {
 
-// This fixes stuff that still uses mouse events such as Drag.Move
+// fixes stuff that still uses mouse events such as Drag.Move
 
 delete Element.NativeEvents['mousedown'];
 delete Element.NativeEvents['mousemove'];
 delete Element.NativeEvents['mouseup'];
 
 Element.defineCustomEvent('mousedown', {
-
 	base: 'touchstart',
-
 }).defineCustomEvent('mousemove', {
-
 	base: 'touchmove'
-
 }).defineCustomEvent('mouseup', {
-
 	base: 'touchend',
-
 });
 
 })();
