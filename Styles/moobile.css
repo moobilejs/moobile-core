@@ -595,7 +595,6 @@ input, select, textarea {
 	display:         box;                                        /* Important */
 	list-style: none;
 	list-style-position: outside;
-	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
 }
 
