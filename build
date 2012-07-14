@@ -7,6 +7,9 @@ require dirname(__FILE__) . '/Packager/packager.php';
 
 $executable = array_shift($argv);
 $package = dirname(__FILE__);
+$exclude = array(
+	'Mobile/Mouse'
+);
 
 $packages = array(
 	$package,
@@ -33,6 +36,10 @@ foreach ($argv as $arg){
 $files = (empty($argv)) ? $pkg->get_all_files() : $pkg->components_to_files($argv);
 
 $files = $pkg->complete_files($files);
+
+foreach ($files as $i => $file){
+	if (in_array($file, $exclude)) unset($files[$i]);
+}
 
 foreach ($files as $file){
 	fwrite($stderr, "- $file: [" . implode(", ", $pkg->get_file_provides($file)) . "]\n");
