@@ -101,6 +101,7 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#initialization
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2
 	 * @since  0.1
 	 */
 	initialize: function(element, options, name) {
@@ -138,17 +139,18 @@ Moobile.Component = new Class({
 		this.build();
 		this.didBuild();
 
+		this.element.store('moobile:component', this);
+
 		return this;
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2
 	 * @since  0.1
 	 */
 	build: function() {
-
-		// TODO Clone and replace
 
 		var className = this.options.className;
 		if (className) this.addClass(className);
@@ -156,7 +158,43 @@ Moobile.Component = new Class({
 		var styleName = this.options.styleName
 		if (styleName) this.setStyle(styleName);
 
-		this.element.executeDefinedRoles(this);
+		var owner = this;
+		var roles = this.__roles__;
+
+		var build = function(element) {
+
+			var nodes = element.childNodes;
+			for (var i = 0, len = nodes.length; i < len; i++) {
+
+				var node = nodes[i];
+				if (node.nodeType !== 1)
+					continue;
+
+				var role = node.getRole();
+				if (role === null) {
+					build(node);
+					return;
+				}
+
+				var behavior = roles[role] || null;
+				if (behavior && behavior instanceof Function) {
+					behavior.call(owner, node);
+
+					var component = node.retrieve('moobile:component');
+					if (component === null) {
+						build(node);
+					}
+
+				} else {
+					throw new Error('Role ' + role + ' has not beed defined for this component.');
+				}
+			}
+		};
+
+		// TODO Think about cloning the element when he's in the DOM and
+		// then replacing
+
+		build(this.element);
 	},
 
 	/**
@@ -933,10 +971,19 @@ Moobile.Component = new Class({
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @update 0.2
  * @since  0.1
  */
-Moobile.Component.defineRole = function(name, target, behavior) {
-	Element.defineRole(name, target || Moobile.Component, behavior);
+Moobile.Component.defineRole = function(name, context, func) {
+	context = (context || Moobile.Component).prototype;
+	if (context.__roles__ === undefined) {
+	 	context.__roles__ = {};
+	}
+	//<pre-0.1-compat>
+	if (func.behavior) {
+		func = func.behavior;
+	}
+	context.__roles__[name] = func;
 };
 
 /**

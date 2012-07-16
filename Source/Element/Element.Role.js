@@ -64,6 +64,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleDefinition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	 getRoleDefinition: function(context) {
 	 	return (context || this).__roles__
@@ -75,6 +76,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	getRoleElement: function(role) {
 		return this.getRoleElements(role)[0] || null;
@@ -84,6 +86,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	getRoleElements: function(role) {
 
@@ -99,6 +102,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	ownsRoleElement: function(element) {
 
@@ -121,6 +125,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#executeDefinedRoles
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	executeDefinedRoles: function(context) {
 
