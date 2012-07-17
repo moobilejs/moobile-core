@@ -2351,6 +2351,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleDefinition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	 getRoleDefinition: function(context) {
 	 	return (context || this).__roles__
@@ -2362,6 +2363,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	getRoleElement: function(role) {
 		return this.getRoleElements(role)[0] || null;
@@ -2371,6 +2373,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	getRoleElements: function(role) {
 
@@ -2386,6 +2389,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+	 * @deprecated
 	 */
 	ownsRoleElement: function(element) {
 
@@ -2573,9 +2577,20 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
+		var temp = null;
+		var root = this.element;
+		while (root.parentNode) root = root.parentNode;
+
+		if (root === document) {
+			temp = this.element;
+			this.element = this.element.clone(true, true);
+		}
+
 		this.willBuild();
 		this.build();
 		this.didBuild();
+
+		if (temp) this.element.replaces(temp);
 
 		this.element.store('moobile:component', this);
 
@@ -2589,8 +2604,6 @@ Moobile.Component = new Class({
 	 * @since  0.1
 	 */
 	build: function() {
-
-		// TODO Clone and replace
 
 		var className = this.options.className;
 		if (className) this.addClass(className);
@@ -3416,10 +3429,9 @@ Moobile.Component.defineRole = function(name, context, func) {
 	if (context.__roles__ === undefined) {
 	 	context.__roles__ = {};
 	}
-	//<pre-0.1-compat>
-	if (func.behavior) {
-		func = func.behavior;
-	}
+	// <0.1-compat>
+	if (func.behavior) func = func.behavior;
+	// </0.1-compat>
 	context.__roles__[name] = func;
 };
 
