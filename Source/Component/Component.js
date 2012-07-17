@@ -135,9 +135,20 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
+		var temp = null;
+		var root = this.element;
+		while (root.parentNode) root = root.parentNode;
+
+		if (root === document) {
+			temp = this.element;
+			this.element = this.element.clone(true, true);
+		}
+
 		this.willBuild();
 		this.build();
 		this.didBuild();
+
+		if (temp) this.element.replaces(temp);
 
 		this.element.store('moobile:component', this);
 
@@ -190,9 +201,6 @@ Moobile.Component = new Class({
 				}
 			}
 		};
-
-		// TODO Think about cloning the element when he's in the DOM and
-		// then replacing
 
 		build(this.element);
 	},
@@ -979,10 +987,9 @@ Moobile.Component.defineRole = function(name, context, func) {
 	if (context.__roles__ === undefined) {
 	 	context.__roles__ = {};
 	}
-	//<pre-0.1-compat>
-	if (func.behavior) {
-		func = func.behavior;
-	}
+	// <0.1-compat>
+	if (func.behavior) func = func.behavior;
+	// </0.1-compat>
 	context.__roles__[name] = func;
 };
 
