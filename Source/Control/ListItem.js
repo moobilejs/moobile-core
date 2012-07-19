@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ListItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ListItem = new Class({
 
@@ -31,28 +31,28 @@ Moobile.ListItem = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_image: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_label: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_detail: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'li'
@@ -61,7 +61,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -96,7 +96,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this._label = null;
@@ -108,7 +108,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setLabel: function(label) {
 
@@ -134,7 +134,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getLabel: function() {
 		return this._label;
@@ -143,7 +143,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setImage: function(image) {
 
@@ -169,7 +169,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getImage: function() {
 		return this._image;
@@ -178,7 +178,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setDetail: function(detail) {
 
@@ -204,7 +204,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getDetail: function() {
 		return this._detail;

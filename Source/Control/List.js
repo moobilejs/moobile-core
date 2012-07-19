@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.List = new Class({
 
@@ -31,28 +31,28 @@ Moobile.List = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_selectable: true,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_selectedItem: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_selectedItemIndex: -1,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'ul',
@@ -63,7 +63,7 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 		this.parent();
@@ -73,7 +73,7 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBuild: function() {
 		this.parent();
@@ -84,7 +84,7 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this._selectedItem = null;
@@ -95,7 +95,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#setSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setSelectedItem: function(selectedItem) {
 
@@ -125,7 +125,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#getSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSelectedItem: function() {
 		return this._selectedItem;
@@ -134,7 +134,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#setSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setSelectedItemIndex: function(index) {
 
@@ -149,7 +149,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#getSelectedItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSelectedItemIndex: function() {
 		return this._selectedItemIndex
@@ -158,7 +158,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#clearSelectedItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	clearSelectedItem: function() {
 		this.setSelectedItem(null);
@@ -168,7 +168,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#addItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addItem: function(item, where) {
 		return this.addChildComponent(item, where);
@@ -177,7 +177,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addItemAfter: function(item, after) {
 		return this.addChildComponentAfter(item, after);
@@ -186,7 +186,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addItemBefore: function(item, before) {
 		return this.addChildComponentBefore(item, before);
@@ -195,7 +195,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getItem: function(name) {
 		return this.getChildComponentOfType(Moobile.ListItem, name);
@@ -204,7 +204,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#getItemAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getItemAt: function(index) {
 		return this.getChildComponentOfTypeAt(Moobile.ListItem, index)
@@ -213,7 +213,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#getItemIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getItemIndex: function(item) {
 		return this.getChildComponentIndex(item);
@@ -222,7 +222,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#getItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getItems: function() {
 		return this.getChildComponentsOfType(Moobile.ListItem);
@@ -231,7 +231,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#removeItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	removeItem: function(item) {
 		return this.removeChildComponent(item);
@@ -240,7 +240,7 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#removeAllItems
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	removeAllItems: function() {
 		return this.removeAllChildComponentsOfType(Moobile.ListItem);
@@ -268,7 +268,7 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didAddChildComponent: function(component) {
 		this.parent(component);
@@ -282,7 +282,7 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didRemoveChildComponent: function(component) {
 		this.parent(component);
@@ -296,7 +296,7 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didChangeState: function(state) {
 		this.parent(state)
@@ -308,7 +308,7 @@ Moobile.List = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onItemTapStart: function(e, sender) {
 		if (this._selectable && !sender.isSelected()) sender.setHighlighted(true);
@@ -317,7 +317,7 @@ Moobile.List = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onItemTapEnd: function(e, sender) {
 		if (this._selectable && !sender.isSelected()) sender.setHighlighted(false);
@@ -326,7 +326,7 @@ Moobile.List = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onItemTap: function(e, sender) {
 		if (this._selectable) this.setSelectedItem(sender);

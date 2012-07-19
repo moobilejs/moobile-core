@@ -23,7 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Fade
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewTransition.Fade = new Class({
 
@@ -32,7 +32,7 @@ Moobile.ViewTransition.Fade = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	firstAnimation: function(viewToShow, parentView) {
 
@@ -59,7 +59,7 @@ Moobile.ViewTransition.Fade = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
@@ -86,7 +86,7 @@ Moobile.ViewTransition.Fade = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 

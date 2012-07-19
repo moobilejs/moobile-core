@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Button
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.Button = new Class({
 
@@ -31,14 +31,14 @@ Moobile.Button = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_label: null,
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -61,7 +61,7 @@ Moobile.Button = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this.removeEvent('tapstart', this.bound('_onTapStart'));
@@ -73,7 +73,7 @@ Moobile.Button = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Button#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setLabel: function(label) {
 
@@ -99,7 +99,7 @@ Moobile.Button = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Button#getLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getLabel: function() {
 		return this._label;
@@ -108,7 +108,7 @@ Moobile.Button = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onTapStart: function(e) {
 		if (!this.isSelected()) this.setHighlighted(true);
@@ -117,7 +117,7 @@ Moobile.Button = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onTapEnd: function(e) {
 		if (!this.isSelected()) this.setHighlighted(false);

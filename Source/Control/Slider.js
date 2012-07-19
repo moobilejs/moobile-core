@@ -33,7 +33,7 @@ Class.refactor(Slider, {
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.Slider = new Class({
 
@@ -42,35 +42,35 @@ Moobile.Slider = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_value: 0,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#slider
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	slider: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#track
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	trackElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#thumb
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	thumbElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		snap: false,
@@ -85,7 +85,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -103,7 +103,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBecomeReady: function() {
 
@@ -127,7 +127,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this.thumbElement = null;
@@ -139,7 +139,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setValue: function(value) {
 		this.slider.set(this._value = value);
@@ -149,7 +149,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getValue: function() {
 		return this._value;
@@ -158,7 +158,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_updateTrack: function(position) {
 		this.trackElement.setStyle('background-position',
@@ -169,7 +169,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onMove: function(position) {
 		this._updateTrack(position);
@@ -179,7 +179,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onTick: function(position) {
 		this._updateTrack(position);
@@ -189,7 +189,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onChange: function(step) {
 		this._value = step;

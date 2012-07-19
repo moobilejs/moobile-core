@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.Alert = new Class({
 
@@ -31,63 +31,63 @@ Moobile.Alert = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_title: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_message: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_buttons: [],
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#boxElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	boxElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	contentElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#headerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	headerElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#footerElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	footerElement: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#overlay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	overlay: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		buttonLayout: 'vertical'
@@ -96,7 +96,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -129,7 +129,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 
@@ -152,7 +152,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setTitle: function(title) {
 
@@ -178,7 +178,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getTitle: function() {
 		return this._title;
@@ -187,7 +187,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setMessage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setMessage: function(message) {
 
@@ -213,7 +213,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getMessage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getMessage: function() {
 		return this._message;
@@ -222,7 +222,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addButton: function(button) {
 
@@ -236,7 +236,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setDefaultButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setDefaultButton: function(button) {
 		if (this.hasChildComponent(button)) button.addClass('default');
@@ -246,7 +246,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setDefaultButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setDefaultButtonIndex: function(index) {
 		return this.setDefaultButton(this.getChildComponentOfTypeAt(Moobile.Button, index));
@@ -255,7 +255,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	showAnimated: function() {
 		this.willShow();
@@ -268,7 +268,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#hideAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	hideAnimated: function() {
 		this.willHide();
@@ -280,7 +280,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didAddChildComponent: function(child) {
 		this.parent(child);
@@ -293,7 +293,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didRemoveChildComponent: function(child) {
 		this.parent(child);
@@ -306,7 +306,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willShow: function() {
 		this.parent();
@@ -320,7 +320,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didHide: function() {
 		this.parent();
@@ -330,7 +330,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onButtonTap: function(e, sender) {
 
@@ -345,7 +345,7 @@ Moobile.Alert = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onAnimationEnd: function(e) {
 

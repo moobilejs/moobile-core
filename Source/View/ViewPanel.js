@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/View/ViewPanel
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewPanel = new Class({
 
@@ -31,21 +31,21 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_mainPanel: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_sidePanel: null,
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -74,7 +74,7 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBuild: function() {
 		this.parent();
@@ -84,7 +84,7 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this._sidePanel = null;
@@ -95,7 +95,7 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setSidePanel: function(sidePanel) {
 
@@ -119,7 +119,7 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getSidePanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSidePanel: function() {
 		return this.contentElement.getSidePanel();
@@ -128,7 +128,7 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setMainPanel: function(mainPanel) {
 
@@ -152,7 +152,7 @@ Moobile.ViewPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getMainPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getMainPanel: function() {
 		return this.contentElement.getMainPanel();

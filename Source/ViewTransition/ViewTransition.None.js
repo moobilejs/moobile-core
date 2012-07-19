@@ -23,7 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.None
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewTransition.None = new Class({
 
@@ -32,7 +32,7 @@ Moobile.ViewTransition.None = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	firstAnimation: function(viewToShow, parentView) {
 		this.didEnterFirst(viewToShow, parentView);
@@ -41,7 +41,7 @@ Moobile.ViewTransition.None = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 		this.didEnter(viewToShow, viewToHide, parentView);
@@ -50,7 +50,7 @@ Moobile.ViewTransition.None = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 		this.didLeave(viewToShow, viewToHide, parentView);

@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.Image = new Class({
 
@@ -31,28 +31,28 @@ Moobile.Image = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_image: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_source: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_loaded: false,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_originalSize: {
 		x: 0,
@@ -62,7 +62,7 @@ Moobile.Image = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'img',
@@ -72,7 +72,7 @@ Moobile.Image = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -94,7 +94,7 @@ Moobile.Image = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this._image = null;
@@ -104,7 +104,7 @@ Moobile.Image = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#setSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setSource: function(source) {
 
@@ -134,7 +134,7 @@ Moobile.Image = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#getSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSource: function() {
 		return this._source;
@@ -143,7 +143,7 @@ Moobile.Image = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#getImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getImage: function() {
 		return this._image;
@@ -152,7 +152,7 @@ Moobile.Image = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#getOriginalSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getOriginalSize: function() {
 		return this._originalSize;
@@ -161,7 +161,7 @@ Moobile.Image = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#isLoaded
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	isLoaded: function() {
 		return this._loaded;
@@ -170,7 +170,7 @@ Moobile.Image = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_load: function() {
 
@@ -189,7 +189,7 @@ Moobile.Image = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_unload: function() {
 
@@ -208,7 +208,7 @@ Moobile.Image = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onLoad: function() {
 		this._load();

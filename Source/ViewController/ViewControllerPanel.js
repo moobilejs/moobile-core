@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewControllerPanel = new Class({
 
@@ -31,21 +31,21 @@ Moobile.ViewControllerPanel = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_mainViewController: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_sideViewController: null,
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	loadView: function() {
 		this.view = new Moobile.ViewPanel();
@@ -54,7 +54,7 @@ Moobile.ViewControllerPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setMainViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setMainViewController: function(mainViewController) {
 
@@ -80,7 +80,7 @@ Moobile.ViewControllerPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getMainViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getMainViewController: function() {
 		return this._mainViewController;
@@ -89,7 +89,7 @@ Moobile.ViewControllerPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setSideViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setSideViewController: function(sideViewController) {
 
@@ -115,7 +115,7 @@ Moobile.ViewControllerPanel = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getSideViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getSideViewController: function() {
 		return this._sideViewController;
@@ -128,14 +128,14 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_viewControllerPanel: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setViewControllerPanel: function(viewControllerPanel) {
 		this._viewControllerPanel = viewControllerPanel;
@@ -145,7 +145,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getViewControllerPanel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getViewControllerPanel: function(viewControllerPanel) {
 		return this._viewControllerPanel;
@@ -154,7 +154,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
@@ -166,7 +166,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willRemoveChildViewController: function(viewController) {
 		this.previous(viewController);

@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Text
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.Text = new Class({
 
@@ -31,7 +31,7 @@ Moobile.Text = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Text#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'span'
@@ -40,7 +40,7 @@ Moobile.Text = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 		this.parent();
@@ -50,7 +50,7 @@ Moobile.Text = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Text#setText
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setText: function(text) {
 
@@ -64,7 +64,7 @@ Moobile.Text = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Text#getText
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getText: function() {
 		return this.element.get('html');

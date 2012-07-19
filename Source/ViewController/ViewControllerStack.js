@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewControllerStack = new Class({
 
@@ -31,14 +31,14 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_animating: false,
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	loadView: function() {
 		this.view = new Moobile.ViewStack();
@@ -47,7 +47,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#pushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	pushViewController: function(viewController, viewTransition) {
 
@@ -92,7 +92,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	onPushTransitionStart: function(e) {
 
@@ -109,7 +109,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	onPushTransitionComplete: function(e) {
 
@@ -130,7 +130,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#popViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	popViewController: function() {
 
@@ -163,7 +163,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#popViewControllerUntil
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	popViewControllerUntil: function(viewController) {
 
@@ -194,7 +194,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	onPopTransitionStart: function(e) {
 		var childViewControllers = this.getChildViewControllers();
@@ -207,7 +207,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	onPopTransitionComplete: function(e) {
 
@@ -229,7 +229,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#getTopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getTopViewController: function() {
 		return this.getChildViewControllers().getLast();
@@ -238,7 +238,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willAddChildViewController: function(viewController) {
 		this.parent(viewController);
@@ -248,7 +248,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
@@ -258,7 +258,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#willPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willPushViewController: function(viewController) {
 
@@ -267,7 +267,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#didPushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didPushViewController: function(viewController) {
 
@@ -276,7 +276,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#willPopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willPopViewController: function(viewController) {
 
@@ -285,7 +285,7 @@ Moobile.ViewControllerStack = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#didPopViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didPopViewController: function(viewController) {
 
@@ -298,14 +298,14 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_viewControllerStack: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#setViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setViewControllerStack: function(viewControllerStack) {
 
@@ -331,7 +331,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#getViewControllerStack
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getViewControllerStack: function() {
 		return this._viewControllerStack;
@@ -340,7 +340,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#parentViewControllerStackWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	parentViewControllerStackWillChange: function(viewController) {
 
@@ -349,7 +349,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#parentViewControllerStackDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	parentViewControllerStackDidChange: function(viewController) {
 
@@ -358,7 +358,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
@@ -368,7 +368,7 @@ Class.refactor(Moobile.ViewController, {
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willRemoveChildViewController: function(viewController) {
 		this.previous(viewController);

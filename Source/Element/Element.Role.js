@@ -24,7 +24,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Element/Element.Role#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Element.defineRole = function(name, context, behavior) {
 

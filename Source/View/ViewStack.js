@@ -23,7 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/View/ViewStack
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewStack = new Class({
 
@@ -32,7 +32,7 @@ Moobile.ViewStack = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 		this.parent();
@@ -42,7 +42,7 @@ Moobile.ViewStack = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didBuild: function() {
 		this.parent();

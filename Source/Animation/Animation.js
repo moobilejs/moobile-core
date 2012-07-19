@@ -24,7 +24,7 @@ if (!window.Moobile) window.Moobile = {};
 /**
  * @see    http://moobilejs.com/doc/latest/Animation/Animation
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.Animation = new Class({
 
@@ -33,35 +33,35 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_name: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_running: false,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	element: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#animationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	animationClass: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#animationProperties
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	animationProperties: {
 		'name': null,
@@ -76,7 +76,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	initialize: function(element, options) {
 		this.setElement(element);
@@ -87,7 +87,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setName: function(name) {
 		this._name = name;
@@ -97,7 +97,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getName: function() {
 		return this._name;
@@ -106,7 +106,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setElement: function(element) {
 		this.element = document.id(element);
@@ -116,7 +116,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getElement: function() {
 		return this.element;
@@ -125,7 +125,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationClass: function(value) {
 		this.animationClass = value;
@@ -135,7 +135,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationClass: function() {
 		return this.animationClass;
@@ -144,7 +144,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationName: function(value) {
 		this.animationProperties['name'] = value;
@@ -154,7 +154,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationName: function() {
 		return this.animationProperties['name'];
@@ -163,7 +163,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationDuration: function(value) {
 		this.animationProperties['duration'] = value;
@@ -173,7 +173,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationDuration: function() {
 		return this.animationProperties['duration'];
@@ -182,7 +182,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationIterationCount: function(value) {
 		this.animationProperties['iteration-count'] = value;
@@ -192,7 +192,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationIterationCount: function() {
 		return this.animationProperties['iteration-count'];
@@ -201,7 +201,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationDirection: function(value) {
 		this.animationProperties['direction'] = value;
@@ -211,7 +211,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationDirection: function() {
 		return this.animationProperties['direction'];
@@ -220,7 +220,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationTimingFunction: function(value) {
 		this.animationProperties['timing-function'] = value;
@@ -230,7 +230,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationTimingFunction: function() {
 		return this.animationProperties['timing-function'];
@@ -239,7 +239,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationFillMode: function(value) {
 		this.animationProperties['fill-mode'] = value;
@@ -249,7 +249,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationFillMode: function() {
 		return this.animationProperties['fill-mode'];
@@ -258,7 +258,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setAnimationDelay: function(value) {
 		this.animationProperties['delay'] = value;
@@ -268,7 +268,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getAnimationDelay: function() {
 		return this.animationProperties['delay'];
@@ -277,7 +277,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	attach: function() {
 
@@ -294,7 +294,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	detach: function() {
 
@@ -311,7 +311,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	start: function() {
 
@@ -329,7 +329,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	stop: function() {
 
@@ -346,7 +346,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#isRunning
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	isRunning: function() {
 		return this._running;
@@ -355,7 +355,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	onAnimationEnd: function(e) {
 

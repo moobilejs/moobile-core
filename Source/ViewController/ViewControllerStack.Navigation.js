@@ -23,7 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack.Navigation
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.ViewControllerStack.Navigation = new Class({
 
@@ -43,7 +43,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willAddChildViewController: function(viewController) {
 
@@ -78,7 +78,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	didAddChildViewController: function(viewController) {
 
@@ -97,7 +97,7 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_onBackButtonTap: function(e) {
 		this.popViewController();

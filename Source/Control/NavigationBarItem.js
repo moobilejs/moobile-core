@@ -23,7 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.NavigationBarItem = new Class({
 
@@ -32,14 +32,14 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_title: null,
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
@@ -59,7 +59,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	destroy: function() {
 		this._title = null;
@@ -69,7 +69,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setTitle: function(title) {
 
@@ -95,7 +95,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getTitle: function() {
 		return this._title;
@@ -104,7 +104,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#addLeftButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addLeftButton: function(button) {
 		return this.addChildComponent(button, 'top');
@@ -113,7 +113,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#addRightButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	addRightButton: function(button) {
 		return this.addChildComponent(button, 'bottom');
@@ -122,7 +122,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getButton: function(name) {
 		return this.getChildComponentOfType(Moobile.Button, name);
@@ -131,7 +131,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getButtonAt: function(index) {
 		return this.getChildComponentOfTypeAt(Moobile.Button, index);
@@ -140,7 +140,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#removeButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	removeButton: function(button, destroy) {
 		return this.removeChildComponent(button, destroy);
@@ -149,7 +149,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#removeAllButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	removeAllButtons: function(destroy) {
 		return this.removeAllChildComponents(Moobile.Button, destroy);

@@ -22,7 +22,7 @@ provides:
  /**
  * @see    http://moobilejs.com/doc/latest/Control/BarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.BarItem = new Class({
 
@@ -31,7 +31,7 @@ Moobile.BarItem = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
 		this.parent();

@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Window/WindowController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1
+ * @since  0.1.0
  */
 Moobile.WindowController = new Class({
 
@@ -31,14 +31,14 @@ Moobile.WindowController = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	_rootViewController: null,
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	loadView: function() {
 
@@ -54,7 +54,7 @@ Moobile.WindowController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#setRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	setRootViewController: function(rootViewController) {
 
@@ -75,7 +75,7 @@ Moobile.WindowController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#getRootViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1
+	 * @since  0.1.0
 	 */
 	getRootViewController: function() {
 		return this._rootViewController;
