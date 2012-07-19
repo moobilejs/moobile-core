@@ -135,20 +135,15 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
-		var temp = null;
-		var root = this.element;
-		while (root.parentNode) root = root.parentNode;
-
-		if (root === document) {
-			temp = this.element;
-			this.element = this.element.clone(true, true);
-		}
+		var maker = this.element;
+		var clone = document.contains(this.element);
+		if (clone) this.element = this.element.clone(true, true);
 
 		this.willBuild();
 		this.build();
 		this.didBuild();
 
-		if (temp) this.element.replaces(temp);
+		if (clone) this.element.replaces(maker);
 
 		this.element.store('moobile:component', this);
 
