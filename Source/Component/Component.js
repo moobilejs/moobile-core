@@ -191,14 +191,16 @@ Moobile.Component = new Class({
 				if (behavior && behavior instanceof Function) {
 					behavior.call(owner, node);
 
+					// stops here if the role created a component with this node
 					var component = node.retrieve('moobile:component');
 					if (component === null) {
 						build(node);
 					}
 
-				} else {
-					throw new Error('Role ' + role + ' has not beed defined for this component.');
+					return;
 				}
+
+				throw new Error('Role ' + role + ' has not beed defined for this component.');
 			}
 		};
 
