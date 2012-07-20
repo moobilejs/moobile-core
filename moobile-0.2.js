@@ -2523,6 +2523,16 @@ Moobile.Component = new Class({
 	_style: null,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_events: {
+		listeners: {},
+		callbacks: {}
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -2577,7 +2587,7 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
-		var maker = this.element;
+		var old = this.element;
 		var clone = document.contains(this.element);
 		if (clone) this.element = this.element.clone(true, true);
 
@@ -2585,7 +2595,7 @@ Moobile.Component = new Class({
 		this.build();
 		this.didBuild();
 
-		if (clone) this.element.replaces(maker);
+		if (clone) this.element.replaces(old);
 
 		this.element.store('moobile:component', this);
 
@@ -2634,10 +2644,9 @@ Moobile.Component = new Class({
 						build(node);
 					}
 
-					return;
+				} else {
+					throw new Error('Role ' + role + ' has not beed defined for this component.');
 				}
-
-				throw new Error('Role ' + role + ' has not beed defined for this component.');
 			}
 		};
 
@@ -2647,6 +2656,7 @@ Moobile.Component = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	addEvent: function(type, fn, internal) {
@@ -2656,29 +2666,49 @@ Moobile.Component = new Class({
 		if (Moobile.Component.hasNativeEvent(name)) {
 
 			var self = this;
-			this.element.addEvent(type, function(e) {
 
-				//
-				// This part duplicates code from the EventFirer class. A better
-				// solution needs to be found. Previously, I was calling
-				// fireEvent directly but found out it was multiplying the calls
-				// made to the event listener.
-				//
+			var listeners = this._events.listeners;
+			var callbacks = this._events.callbacks;
 
-				var args = Array.from(e).include(self);
-				if (self.shouldFireEvent(name, args)) {
-					self.willFireEvent(name, args);
-					fn.apply(self, args);
-					self.didFireEvent(name, args);
-				}
-			}, internal);
+			if (callbacks[name] === undefined) {
+				callbacks[name] = [];
+				listeners[name] = function(e) {
+					self.fireEvent(name, e);
+				};
+			}
 
+			callbacks[name].include(fn);
+
+			this.element.addEvent(name, listeners[name]);
 		}
 
-		// also needs to be added here
-		this.parent(type, fn, internal);
+		return this.parent(type, fn, internal);
+	},
 
-		return this;
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeEvent: function(type, fn) {
+
+		var name = type.split(':')[0];
+
+		if (Moobile.Component.hasNativeEvent(name)) {
+
+			var listeners = this._events.listeners;
+			var callbacks = this._events.callbacks;
+
+			if (callbacks[name].contains(fn)) {
+				callbacks[name].erase(fn);
+				if (callbacks[name].length === 0) {
+					this.element.removeEvent(name, listeners[name]);
+					delete listeners[name];
+				}
+			}
+		}
+
+		return this.parent(fn, type);
 	},
 
 	/**
