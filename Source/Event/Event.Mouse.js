@@ -23,104 +23,69 @@ if (!Browser.Features.Touch) (function() {
 var target = null;
 var uniqid = null;
 
-var dispatch = function(name, e) {
-	var event = document.createEvent('MouseEvents');
-	event.initMouseEvent(name, true, true, window, 0, e.page.x, e.page.y, e.client.x, e.client.y, false, false, false, false, 0, null);
-	event.$valid = true;
-	populate(event, e);
-	target.dispatchEvent(event);
-	return this;
+var redispatch = function(e) {
+	e.fake = true;
+	target.dispatchEvent(e);
 };
 
-var populate = function(dest, from) {
-
-	var list = [{
-		identifier: uniqid,
-		target: target,
-		pageX: from.page.x,
-		pageY: from.page.y,
-		clientX: from.client.x,
-		clientY: from.client.y
-	}];
-
-	dest.touches = list;
-	dest.targetTouches = list;
-	dest.changedTouches = list;
-
-	return this;
-};
-
-var reassign = function(dest, from) {
-
-	dest.touches = from.touches;
-	dest.targetTouches = from.targetTouches;
-	dest.changedTouches = from.changedTouches;
-
-	return this;
+var onDocumentMouseDown = function(e) {
+	if (target === null) {
+		target = e.target;
+		uniqid = e.event.timeStamp;
+		redispatch(e.event);
+	}
 };
 
 var onDocumentMouseMove = function(e) {
-	if (!e.event.$valid && target) dispatch('mousemove', e);
+	if (target) redispatch(e.event);
 };
 
 var onDocumentMouseUp = function(e) {
-	if (!e.event.$valid && target) dispatch('mouseup', e);
+	if (target) {
+		redispatch(e.event);
+		target = null
+		uniqid = null;
+	}
 };
 
+document.addEvent('mousedown', onDocumentMouseDown);
 document.addEvent('mousemove', onDocumentMouseMove);
 document.addEvent('mouseup', onDocumentMouseUp);
 
-Element.defineCustomEvent('touchstart', {
+var condition = function(e) {
 
-	base: 'mousedown',
+	var touch = {
+		identifier: uniqid,
+		target: target,
+		pageX: e.page.x,
+		pageY: e.page.y,
+		clientX: e.client.x,
+		clientY: e.client.y
+	};
 
-	condition: function(e) {
+	e.touches = e.targetTouches = e.changedTouches = [touch];
 
-		if (target === null) {
-			target = e.target;
-			uniqid = e.event.timeStamp;
-		}
-
-		populate(e, e);
-
+	if (e.event.fake) {
+		e.stop();
 		return true;
 	}
+
+	return false;
+};
+
+Element.defineCustomEvent('touchstart', {
+	base: 'mousedown',
+	condition: condition
 });
 
 Element.defineCustomEvent('touchmove', {
-
 	base: 'mousemove',
-
-	condition: function(e) {
-
-		if (e.event.$valid) {
-			e.stop();
-			reassign(e, e.event);
-			return true;
-		}
-
-		return false;
-	}
-
+	condition: condition
 });
 
 Element.defineCustomEvent('touchend', {
-
 	base: 'mouseup',
-
-	condition: function(e) {
-
-		if (e.event.$valid) {
-			e.stop();
-			reassign(e, e.event);
-			target = null;
-			uniqid = null;
-			return true;
-		}
-
-		return false;
-	}
-
+	condition: condition
 });
 
 })();
