@@ -189,7 +189,7 @@ Moobile.Component = new Class({
 				var role = node.getRole();
 				if (role === null) {
 					build(node);
-					return;
+					continue;
 				}
 
 				var behavior = roles[role] || null;
