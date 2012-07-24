@@ -13,31 +13,6 @@ input, select, textarea {
 	font-family: "Helvetica Neue", sans-serif;
 }
 
-/* Header Text
------------------------------------------------------------------------------*/
-
-h1 {
-	color: #4c596e;
-	font-size: 17px;
-	font-weight: bold;
-	margin-bottom: 12px;
-}
-
-h2 {
-	color: #4c596e;
-	font-size: 16px;
-	font-weight: bold;
-	margin-bottom: 12px;
-}
-
-p {
-	margin-bottom: 12px;
-}
-
-p small {
-	font-size: 12px;
-}
-
 /* Window
 -----------------------------------------------------------------------------*/
 
@@ -100,6 +75,44 @@ p small {
 	text-shadow: 0px 1px 0px #fff;
 }
 
+.view h1 {
+	color: #4c596e;
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+
+.view h2 {
+	color: #4c596e;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+
+.view p {
+	margin-bottom: 12px;
+}
+
+.view p small {
+	font-size: 12px;
+}
+
+/* Style Dark */
+
+.view.style-dark {
+	background: #000;
+	color: #fff;
+	text-shadow: none;
+}
+
+.view.style-dark h1 {
+	color: #fff;
+}
+
+.view.style-dark h2 {
+	color: #fff;
+}
+
 /* View Stack
 -----------------------------------------------------------------------------*/
 
@@ -145,7 +158,7 @@ p small {
 
 /* Dark */
 
-.bar.style-dark {
+.view.style-dark .bar {
 	background-position: 0px -88px;
 	color: #fff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
@@ -165,7 +178,7 @@ p small {
 		background-size: 100px 176px
 	}
 
-	.bar.style-dark {
+	.view.style-dark .bar {
 		background-position: 0px -88px;
 	}
 }
@@ -387,7 +400,7 @@ p small {
 
 /* Inside a Bar (Dark) */
 
-.bar.style-dark .button {
+.view.style-dark .bar .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
@@ -395,8 +408,8 @@ p small {
 	        border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
 }
 
-.bar.style-dark .button.is-selected,
-.bar.style-dark .button.is-highlighted {
+.view.style-dark .bar .button.is-selected,
+.view.style-dark .bar .button.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 390 5 1580 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 390 5 1580 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 390 5 1580 stretch stretch;
@@ -427,7 +440,7 @@ p small {
 
 /* Inside a Bar (Dark) + Back */
 
-.bar.style-dark .button.style-back {
+.view.style-dark .bar .button.style-back {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 stretch stretch;
@@ -437,8 +450,8 @@ p small {
 	padding-left: 0px;
 }
 
-.bar.style-dark .button.style-back.is-selected,
-.bar.style-dark .button.style-back.is-highlighted {
+.view.style-dark .bar .button.style-back.is-selected,
+.view.style-dark .bar .button.style-back.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 stretch stretch;
@@ -469,7 +482,7 @@ p small {
 
 /* Inside a Bar (Dark) + Forward */
 
-.bar.style-dark .button.style-forward {
+.view.style-dark .bar .button.style-forward {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 stretch stretch;
@@ -479,8 +492,8 @@ p small {
 	padding-right: 0px;
 }
 
-.bar.style-dark .button.style-forward.is-selected,
-.bar.style-dark .button.style-forward.is-highlighted {
+.view.style-dark .bar .button.style-forward.is-selected,
+.view.style-dark .bar .button.style-forward.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 stretch stretch;
@@ -588,7 +601,7 @@ p small {
 
 /* Inside a Bar (Dark) + Grouped */
 
-.bar.style-dark .button-group .button {
+.view.style-dark .bar .button-group .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 stretch stretch;
@@ -596,7 +609,7 @@ p small {
 	        border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 stretch stretch;
 }
 
-.bar.style-dark .button-group .button:first-child {
+.view.style-dark .bar .button-group .button:first-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 stretch stretch;
@@ -604,7 +617,7 @@ p small {
 	        border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 stretch stretch;
 }
 
-.bar.style-dark .button-group .button.style-dark:last-child {
+.view.style-dark .bar .button-group .button.style-dark:last-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 stretch stretch;
@@ -612,8 +625,8 @@ p small {
 	        border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 stretch stretch;
 }
 
-.bar.style-dark .button-group .button.is-selected,
-.bar.style-dark .button-group .button.is-highlighted {
+.view.style-dark .bar .button-group .button.is-selected,
+.view.style-dark .bar .button-group .button.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 stretch stretch;
@@ -621,8 +634,8 @@ p small {
 	        border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 stretch stretch;
 }
 
-.bar.style-dark .button-group .button.is-selected:first-child,
-.bar.style-dark .button-group .button.is-highlighted:first-child {
+.view.style-dark .bar .button-group .button.is-selected:first-child,
+.view.style-dark .bar .button-group .button.is-highlighted:first-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 stretch stretch;
@@ -630,8 +643,8 @@ p small {
 	        border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 stretch stretch;
 }
 
-.bar.style-dark .button-group .button.is-selected:last-child,
-.bar.style-dark .button-group .button.is-highlighted:last-child {
+.view.style-dark .bar .button-group .button.is-selected:last-child,
+.view.style-dark .bar .button-group .button.is-highlighted:last-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 stretch stretch;
@@ -786,7 +799,7 @@ p small {
 
 	/* Inside a Bar (Dark) */
 
-	.bar.style-dark .button {
+	.view.style-dark .bar .button {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
@@ -794,8 +807,8 @@ p small {
 		        border-image: url(../images/iOS/bar-button.png) 360 5 1610 stretch stretch;
 	}
 
-	.bar.style-dark .button.is-selected,
-	.bar.style-dark .button.is-highlighted {
+	.view.style-dark .bar .button.is-selected,
+	.view.style-dark .bar .button.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 390 5 1580 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button.png) 390 5 1580 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button.png) 390 5 1580 stretch stretch;
@@ -824,7 +837,7 @@ p small {
 
 	/* Inside a Bar (Dark) + Back */
 
-	.bar.style-dark .button.style-back {
+	.view.style-dark .bar .button.style-back {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
@@ -832,8 +845,8 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 stretch stretch;
 	}
 
-	.bar.style-dark .button.style-back.is-selected,
-	.bar.style-dark .button.style-back.is-highlighted {
+	.view.style-dark .bar .button.style-back.is-selected,
+	.view.style-dark .bar .button.style-back.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 stretch stretch;
@@ -862,7 +875,7 @@ p small {
 
 	/* Inside a Bar (Dark) + Forward */
 
-	.bar.style-dark .button.style-forward {
+	.view.style-dark .bar .button.style-forward {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
@@ -870,8 +883,8 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 stretch stretch;
 	}
 
-	.bar.style-dark .button.style-forward.is-selected,
-	.bar.style-dark .button.style-forward.is-highlighted {
+	.view.style-dark .bar .button.style-forward.is-selected,
+	.view.style-dark .bar .button.style-forward.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 stretch stretch;
@@ -972,7 +985,7 @@ p small {
 
 	/* Inside a Bar (Dark) + Grouped */
 
-	.bar.style-dark .button-group .button {
+	.view.style-dark .bar .button-group .button {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
@@ -980,7 +993,7 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 	}
 
-	.bar.style-dark .button-group .button:first-child {
+	.view.style-dark .bar .button-group .button:first-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
@@ -988,7 +1001,7 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 	}
 
-	.bar.style-dark .button-group .button.style-dark:last-child {
+	.view.style-dark .bar .button-group .button.style-dark:last-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
@@ -996,8 +1009,8 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 	}
 
-	.bar.style-dark .button-group .button.is-selected,
-	.bar.style-dark .button-group .button.is-highlighted {
+	.view.style-dark .bar .button-group .button.is-selected,
+	.view.style-dark .bar .button-group .button.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
@@ -1005,8 +1018,8 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 	}
 
-	.bar.style-dark .button-group .button.is-selected:first-child,
-	.bar.style-dark .button-group .button.is-highlighted:first-child {
+	.view.style-dark .bar .button-group .button.is-selected:first-child,
+	.view.style-dark .bar .button-group .button.is-highlighted:first-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
@@ -1014,8 +1027,8 @@ p small {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 	}
 
-	.bar.style-dark .button-group .button.is-selected:last-child,
-	.bar.style-dark .button-group .button.is-highlighted:last-child {
+	.view.style-dark .bar .button-group .button.is-selected:last-child,
+	.view.style-dark .bar .button-group .button.is-highlighted:last-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 stretch stretch;

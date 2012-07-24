@@ -106,11 +106,3 @@ Moobile.Component.defineRole('bar', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
-//------------------------------------------------------------------------------
-// Styles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineStyle('dark', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-dark'); },
-	detach: function(element) { element.removeClass('style-dark'); }
-});

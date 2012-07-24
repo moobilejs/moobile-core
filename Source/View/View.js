@@ -302,6 +302,15 @@ Moobile.Component.defineRole('view', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
-Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true,	behavior: function(element) {
+Moobile.Component.defineRole('view-content', Moobile.View, function(element) {
 	this.setContentElement(element);
-}});
+});
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+Moobile.Component.defineStyle('dark', Moobile.View, {
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }
+});
