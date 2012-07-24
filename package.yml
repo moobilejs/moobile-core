@@ -50,6 +50,7 @@ sources:
   - "Source/Request/Request.js"
   - "Source/Scroller/Scroller.js"
   - "Source/Scroller/Scroller.IScroll.js"
+  - "Source/Scroller/Scroller.IScroll.Android.js"
   - "Source/Scroller/Scroller.Native.js"
   - "Source/Util/Overlay.js"
   - "Source/Types/String.js"
