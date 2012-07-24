@@ -95,10 +95,11 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	options: {
-		scroller: ['Native', 'IScroll'],
+		scroller: ['IScroll.Android', 'Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -125,6 +126,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
@@ -139,10 +141,12 @@ Moobile.ScrollView = new Class({
 			scrollY: this.options.scrollY,
 		};
 
-		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
-		this._scroller.addEvent('scroll', this.bound('_onScroll'));
+		this.contentElement.addEvent('touchcancel', this.bound('_onTouchCancel'));
 		this.contentElement.addEvent('touchstart', this.bound('_onTouchStart'));
 		this.contentElement.addEvent('touchend', this.bound('_onTouchEnd'));
+
+		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
+		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 
 		var name = this._scroller.getName();
 		if (name) {
@@ -153,6 +157,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	didBecomeReady: function() {
@@ -167,9 +172,11 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+		this.contentElement.removeEvent('touchcancel', this.bound('_onTouchCancel'));
 		this.contentElement.removeEvent('touchstart', this.bound('_onTouchStart'));
 		this.contentElement.removeEvent('touchend', this.bound('_onTouchEnd'));
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
@@ -181,7 +188,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/View#setContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
 		this.contentElement.setStyle('width', x);
@@ -221,6 +228,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#scrollToPage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	scrollToPage: function(pageX, pageY, time) {
@@ -372,8 +380,6 @@ Moobile.ScrollView = new Class({
 			this._activeTouchDuration = Date.now() - this._activeTouchTime;
 			this._activeTouchDirectionX = this._activeTouchStartX < touch.pageX ? 'left' : 'right';
 			this._activeTouchDirectionY = this._activeTouchStartY < touch.pageY ? 'top'  : 'bottom';
-
-			// TODO: Check whether the scroll is 0 and direction is left
 
 			if (this.options.snapToPage) {
 				if (this._activeTouchStartX !== touch.pageX ||
