@@ -50,7 +50,7 @@ Moobile.Scroller.Native = new Class({
 	contentScrollerElement: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#initialize
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -85,7 +85,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#destroy
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -104,7 +104,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getName
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -113,7 +113,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#scrollTo
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -145,7 +145,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#scrollToElement
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -174,7 +174,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#refresh
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -192,7 +192,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getSize
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -202,7 +202,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getSize
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -212,7 +212,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getSize
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -221,7 +221,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getScroll
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -230,7 +230,7 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#getScrollSize
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
