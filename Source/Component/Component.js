@@ -249,8 +249,6 @@ Moobile.Component = new Class({
 	 */
 	removeEvent: function(type, fn) {
 
-		var name = type.split(':')[0];
-
 		if (Moobile.Component.hasNativeEvent(name)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
@@ -263,7 +261,7 @@ Moobile.Component = new Class({
 			}
 		}
 
-		return this.parent(fn, type);
+		return this.parent(type, fn);
 	},
 
 	/**
