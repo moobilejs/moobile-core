@@ -145,12 +145,12 @@ Moobile.Scroller = new Class({
 
 Moobile.Scroller.create = function(contentElement, contentWrapperElement, scrollers, options) {
 
-	scrollers = scrollers ? Array.from(scrollers) : ['Native', 'IScroll'];
+	scrollers = scrollers ? Array.from(scrollers) : ['IScroll.Android', 'Native', 'IScroll'];
 
 	for (var i = 0; i < scrollers.length; i++) {
 
-		var candidate = Moobile.Scroller[scrollers[i]];
-		if (candidate === undefined) {
+		var candidate = Class.parse('Moobile.Scroller.' + scrollers[i]);
+		if (candidate === null) {
 			throw new Error('The scroller scroller ' + scrollers[i] + ' does not exists');
 		}
 
