@@ -39,14 +39,14 @@ Moobile.Scroller.IScroll.Android = new Class({
 		this.iscroll = new iScroll(this.contentWrapperElement, {
 			hScroll: this.options.scrollX,
 			vScroll: this.options.scrollY,
-			momentum: false,
+			momentum: this.options.momentum,
 			bounce: false,
 			hScrollbar: true,
 			vScrollbar: true,
 			hideScrollbar: true,
 			fadeScrollbar: true,
 			checkDOMChanges: true,
-			snap: false,
+			scrollbarClass: 'scroll-bar-',
 			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
 			onAnimationEnd: this.bound('_onAnimationEnd'),
 			onScrollMove: this.bound('_onScrollMove'),
@@ -68,5 +68,6 @@ Moobile.Scroller.IScroll.Android = new Class({
 });
 
 Moobile.Scroller.IScroll.Android.supportsCurrentPlatform = function() {
+	return true;
 	return Browser.Platform.android;
 };

@@ -6727,9 +6727,19 @@ var target = null;
 var uniqid = null;
 
 var redispatch = function(e) {
-	if (e.fake) return;
-	e.fake = true;
-	target.dispatchEvent(e);
+
+	if (e.fake)
+		return;
+
+	var faked = document.createEvent('MouseEvent');
+	faked.fake = true;
+	faked.initMouseEvent(
+		e.type, true, true, window, 0,
+    	e.screenX, e.screenY,
+    	e.clientX, e.clientY,
+    	false, false, false, false, 0, null);
+
+	target.dispatchEvent(faked);
 };
 
 var onDocumentMouseDown = function(e) {
@@ -7517,13 +7527,14 @@ Moobile.Scroller.IScroll.Android = new Class({
 		this.iscroll = new iScroll(this.contentWrapperElement, {
 			hScroll: this.options.scrollX,
 			vScroll: this.options.scrollY,
-			momentum: false,
+			momentum: this.options.momentum,
 			bounce: false,
 			hScrollbar: true,
 			vScrollbar: true,
 			hideScrollbar: true,
 			fadeScrollbar: true,
 			checkDOMChanges: true,
+			scrollbarClass: 'scroll-bar-',
 			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
 			onAnimationEnd: this.bound('_onAnimationEnd'),
 			onScrollMove: this.bound('_onScrollMove'),
@@ -7545,6 +7556,7 @@ Moobile.Scroller.IScroll.Android = new Class({
 });
 
 Moobile.Scroller.IScroll.Android.supportsCurrentPlatform = function() {
+	return true;
 	return Browser.Platform.android;
 };
 
