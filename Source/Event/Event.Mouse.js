@@ -24,9 +24,19 @@ var target = null;
 var uniqid = null;
 
 var redispatch = function(e) {
-	if (e.fake) return;
-	e.fake = true;
-	target.dispatchEvent(e);
+
+	if (e.fake)
+		return;
+
+	var faked = document.createEvent('MouseEvent');
+	faked.fake = true;
+	faked.initMouseEvent(
+		e.type, true, true, window, 0,
+    	e.screenX, e.screenY,
+    	e.clientX, e.clientY,
+    	false, false, false, false, 0, null);
+
+	target.dispatchEvent(faked);
 };
 
 var onDocumentMouseDown = function(e) {
