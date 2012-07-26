@@ -68,6 +68,5 @@ Moobile.Scroller.IScroll.Android = new Class({
 });
 
 Moobile.Scroller.IScroll.Android.supportsCurrentPlatform = function() {
-	return true;
 	return Browser.Platform.android;
 };
