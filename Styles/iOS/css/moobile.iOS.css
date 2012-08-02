@@ -26,10 +26,6 @@ input, select, textarea {
 		height: 300px;
 		width: 480px;
 	}
-	.window-input-mask {
-		height: 300px;
-		width: 480px;
-	}
 }
 
 /* iPhone Safari Mobile Portrait */
