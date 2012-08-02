@@ -87,8 +87,8 @@ Moobile.Overlay = new Class({
 		}
 
 		if (this.element.hasClass('hide-animated')) {
-			this.element.removeClass('hide-animated');
 			this.element.hide();
+			this.element.removeClass('hide-animated');
 			this.didHide();
 		}
 	}
