@@ -93,7 +93,7 @@ Moobile.ScrollView = new Class({
 	_offset: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ScrollView
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
 	 * @since  0.1.0
@@ -186,7 +186,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#setContentSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#setContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -197,7 +197,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#getContentSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
