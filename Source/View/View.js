@@ -30,6 +30,13 @@ Moobile.View = new Class({
 	Extends: Moobile.Component,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_layout: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -42,6 +49,15 @@ Moobile.View = new Class({
 	 * @since  0.2.0
 	 */
 	contentWrapperElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		layout: 'vertical'
+	},
 
 	/**
 	 * @overridden
@@ -83,6 +99,8 @@ Moobile.View = new Class({
 				if (klass) this.contentElement.addClass(klass + '-content');
 			}, this);
 		}
+
+		this.setLayout(this.options.layout);
 	},
 
 	/**
@@ -187,6 +205,53 @@ Moobile.View = new Class({
 	 */
 	getContentWrapperElement: function() {
 		return this.contentWrapperElement;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setLayout: function(layout) {
+
+		if (this._layout === layout)
+			return this;
+
+		if (layout) {
+			this.willChangeLayout(layout);
+			this.element.removeClass('view-layout-' + this._layout).addClass('view-layout-' + layout);
+			this._layout = layout;
+			this.didChangeLayout(layout);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getLayout: function() {
+		return this._layout;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#willChangeLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willChangeLayout: function(layout) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#didChangeLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didChangeLayout: function(layout) {
+
 	}
 
 });
