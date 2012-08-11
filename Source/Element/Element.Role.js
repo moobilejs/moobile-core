@@ -74,7 +74,6 @@ Element.implement({
 	 },
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -84,7 +83,6 @@ Element.implement({
 	},
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -100,7 +98,6 @@ Element.implement({
 	},
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
