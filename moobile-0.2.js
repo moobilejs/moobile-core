@@ -3820,7 +3820,7 @@ Moobile.Button = new Class({
 
 		var label = this.element.getRoleElement('label');
 		if (label === null) {
-			label = new Element('div');
+			label = document.createElement('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 			label.setRole('label');
@@ -4270,7 +4270,7 @@ Moobile.Bar = new Class({
 
 		var item = this.element.getRoleElement('item');
 		if (item === null) {
-			item = new Element('div');
+			item = document.createElement('div');
 			item.ingest(this.element);
 			item.inject(this.element);
 			item.setRole('item');
@@ -4484,7 +4484,7 @@ Moobile.NavigationBarItem = new Class({
 
 		var title = this.element.getRoleElement('title');
 		if (title === null) {
-			title = new Element('div');
+			title = document.createElement('div');
 			title.ingest(this.element);
 			title.inject(this.element);
 			title.setRole('title');
@@ -4699,8 +4699,10 @@ Moobile.Slider = new Class({
 		this.parent();
 
 		this.element.addClass('slider');
-		this.thumbElement = new Element('div.slider-thumb');
-		this.trackElement = new Element('div.slider-track');
+		this.thumbElement = document.createElement('div');
+		this.thumbElement.addClass('slider-thumb');
+		this.trackElement = document.createElement('div');
+		this.trackElement.addClass('slider-track');
 		this.trackElement.grab(this.thumbElement);
 
 		this.element.empty();
@@ -5245,20 +5247,20 @@ Moobile.ListItem = new Class({
 		var detail = this.element.getRoleElement('detail');
 
 		if (label === null) {
-			label = new Element('div');
+			label = document.createElement('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 			label.setRole('label');
 		}
 
 		if (image === null) {
-			image = new Element('img');
+			image = document.createElement('img');
 			image.inject(this.element, 'top');
 			image.setRole('image');
 		}
 
 		if (detail === null) {
-			detail = new Element('div');
+			detail = document.createElement('div');
 			detail.inject(this.element);
 			detail.setRole('detail');
 		}
@@ -5912,11 +5914,17 @@ Moobile.Alert = new Class({
 		this.overlay.setStyle('radial');
 		this.addChildComponent(this.overlay);
 
-		this.headerElement  = new Element('div.alert-header');
-		this.footerElement  = new Element('div.alert-footer');
-		this.contentElement = new Element('div.alert-content');
+		this.headerElement = document.createElement('div');
+		this.headerElement.addClass('alert-header');
 
-		this.boxElement = new Element('div.alert-box');
+		this.footerElement = document.createElement('div');
+		this.footerElement.addClass('alert-footer');
+
+		this.contentElement = document.createElement('div');
+		this.contentElement.addClass('alert-content');
+
+		this.boxElement = document.createElement('div');
+		this.boxElement.addClass('alert-box');
 		this.boxElement.grab(this.headerElement);
 		this.boxElement.grab(this.contentElement);
 		this.boxElement.grab(this.footerElement);
@@ -6213,7 +6221,8 @@ Moobile.Popover = new Class({
 		this.element.addClass('popover-direction-' + this.options.direction);
 		this.element.addClass('popover-alignment-' + this.options.alignment);
 
-		this.contentElement = new Element('div.popover-content');
+		this.contentElement = document.createElement('div');
+		this.contentElement.addClass('popover-content');
 		this.contentElement.inject(this.element);
 
 		this.animations = new Moobile.Animation.Set();
@@ -7846,7 +7855,7 @@ Moobile.Scroller.Native = new Class({
 });
 
 Moobile.Scroller.Native.supportsCurrentPlatform = function() {
-	return Browser.Platform.ios && 'WebkitOverflowScrolling' in new Element('div').style;
+	return Browser.Platform.ios && 'WebkitOverflowScrolling' in document.createElement('div').style;
 };
 
 
@@ -7939,8 +7948,8 @@ Moobile.Overlay = new Class({
 		}
 
 		if (this.element.hasClass('hide-animated')) {
-			this.element.removeClass('hide-animated');
 			this.element.hide();
+			this.element.removeClass('hide-animated');
 			this.didHide();
 		}
 	}
@@ -8082,6 +8091,13 @@ Moobile.View = new Class({
 	Extends: Moobile.Component,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_layout: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -8094,6 +8110,15 @@ Moobile.View = new Class({
 	 * @since  0.2.0
 	 */
 	contentWrapperElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		layout: 'vertical'
+	},
 
 	/**
 	 * @overridden
@@ -8135,6 +8160,8 @@ Moobile.View = new Class({
 				if (klass) this.contentElement.addClass(klass + '-content');
 			}, this);
 		}
+
+		this.setLayout(this.options.layout);
 	},
 
 	/**
@@ -8239,6 +8266,53 @@ Moobile.View = new Class({
 	 */
 	getContentWrapperElement: function() {
 		return this.contentWrapperElement;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setLayout: function(layout) {
+
+		if (this._layout === layout)
+			return this;
+
+		if (layout) {
+			this.willChangeLayout(layout);
+			this.element.removeClass('view-layout-' + this._layout).addClass('view-layout-' + layout);
+			this._layout = layout;
+			this.didChangeLayout(layout);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getLayout: function() {
+		return this._layout;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#willChangeLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willChangeLayout: function(layout) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#didChangeLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didChangeLayout: function(layout) {
+
 	}
 
 });
@@ -8463,7 +8537,7 @@ Moobile.ScrollView = new Class({
 	_offset: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ScrollView
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
 	 * @since  0.1.0
@@ -8556,7 +8630,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#setContentSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#setContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
@@ -8567,7 +8641,7 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#getContentSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -8789,185 +8863,6 @@ Moobile.Component.defineRole('scroll-view', null, function(element) {
 /*
 ---
 
-name: ViewPanel
-
-description: Provides a view that handles a panel with two panes.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- View
-
-provides:
-	- ViewPanel
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/View/ViewPanel
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
-Moobile.ViewPanel = new Class({
-
-	Extends: Moobile.View,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_mainPanel: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_sidePanel: null,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('view-panel');
-
-		var content = this.element.getRoleElement('view-content');
-
-		var main = content.getRoleElement('main-panel');
-		if (main === null) {
-			main = new Element('div');
-			main.ingest(content);
-			main.inject(content);
-			main.setRole('main-panel');
-		}
-
-		var side = content.getRoleElement('side-panel');
-		if (side === null) {
-			side = new Element('div');
-			side.inject(content, 'top');
-			side.setRole('side-panel');
-		}
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didBuild: function() {
-		this.parent();
-		this.contentElement.addClass('view-panel-content');
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	destroy: function() {
-		this._sidePanel = null;
-		this._mainPanel = null;
-		this.parent();
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setSidePanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setSidePanel: function(sidePanel) {
-
-		if (this._sidePanel === sidePanel)
-			return this;
-
-		if (this._sidePanel === null) {
-			this.contentElement.grab(sidePanel);
-			this._sidePanel = sidePanel;
-		} else {
-			sidePanel.replaces(this._sidePanel);
-			this._sidePanel.destroy();
-			this._sidePanel = sidePanel;
-		}
-
-		this._sidePanel.addClass('side-panel');
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getSidePanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getSidePanel: function() {
-		return this.contentElement.getSidePanel();
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#setMainPanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setMainPanel: function(mainPanel) {
-
-		if (this._mainPanel === mainPanel)
-			return this;
-
-		if (this._mainPanel === null) {
-			this.contentElement.grab(mainPanel);
-			this._mainPanel = mainPanel;
-		} else {
-			mainPanel.replaces(this._mainPanel);
-			this._mainPanel.destroy();
-			this._mainPanel = mainPanel;
-		}
-
-		this._mainPanel.addClass('main-panel');
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ViewPanel#getMainPanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getMainPanel: function() {
-		return this.contentElement.getMainPanel();
-	}
-
-});
-
-//------------------------------------------------------------------------------
-// Roles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineRole('view-panel', null, function(element) {
-	this.addChildComponent(Moobile.Component.create(Moobile.ViewPanel, element, 'data-view-panel'));
-});
-
-Moobile.Component.defineRole('side-panel', Moobile.ViewPanel, {traversable: true, behavior: function(element) {
-	this.setSidePanel(element);
-}});
-
-Moobile.Component.defineRole('main-panel', Moobile.ViewPanel, {traversable: true, behavior: function(element) {
-	this.setMainPanel(element);
-}});
-
-
-/*
----
-
 name: ViewStack
 
 description: Provides a view that handles an infinite number of views arrenged
@@ -9004,16 +8899,6 @@ Moobile.ViewStack = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('view-stack');
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didBuild: function() {
-		this.parent();
-		this.contentElement.addClass('view-stack-content');
 	}
 
 });
@@ -10307,184 +10192,6 @@ Moobile.ViewControllerStack.Navigation = new Class({
 /*
 ---
 
-name: ViewControllerPanel
-
-description: Manages a view panel.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- ViewControllerCollection
-
-provides:
-	- ViewControllerPanel
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
-Moobile.ViewControllerPanel = new Class({
-
-	Extends: Moobile.ViewController,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_mainViewController: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_sideViewController: null,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	loadView: function() {
-		this.view = new Moobile.ViewPanel();
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setMainViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setMainViewController: function(mainViewController) {
-
-		if (this._mainViewController) {
-			this._mainViewController.destroy();
-			this._mainViewController = null;
-		}
-
-		var view = mainViewController.getView();
-		if (view) {
-			this.view.addChildComponentInside(view, this.view.getMainPanel());
-		}
-
-		viewController.setViewControllerPanel(this);
-
-		this.addChildViewController(mainViewController);
-
-		this._mainViewController = mainViewController;
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getMainViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getMainViewController: function() {
-		return this._mainViewController;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setSideViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setSideViewController: function(sideViewController) {
-
-		if (this._sideViewController) {
-			this._sideViewController.destroy();
-			this._sideViewController = null;
-		}
-
-		var view = sideViewController.getView();
-		if (view) {
-			this.view.addChildComponentInside(view, this.view.getSidePanel())
-		}
-
-		viewController.setViewControllerPanel(this);
-
-		this.addChildViewController(sideViewController);
-
-		this._sideViewController = _sideViewController;
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getSideViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getSideViewController: function() {
-		return this._sideViewController;
-	}
-
-});
-
-Class.refactor(Moobile.ViewController, {
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_viewControllerPanel: null,
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#setViewControllerPanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setViewControllerPanel: function(viewControllerPanel) {
-		this._viewControllerPanel = viewControllerPanel;
-		return this
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerPanel#getViewControllerPanel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getViewControllerPanel: function(viewControllerPanel) {
-		return this._viewControllerPanel;
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willAddChildViewController: function(viewController) {
-		this.previous(viewController);
-		if (viewController.getViewControllerPanel() === null) {
-			viewController.setViewControllerPanel(this._viewControllerPanel);
-		}
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willRemoveChildViewController: function(viewController) {
-		this.previous(viewController);
-		viewController.setViewControllerPanel(null);
-	}
-
-});
-
-
-/*
----
-
 name: ViewTransition
 
 description: Provides the base class that applies view transition.
@@ -11682,7 +11389,7 @@ Moobile.WindowController = new Class({
 
 		var element = document.id('window');
 		if (element === null) {
-			element = new Element('div');
+			element = document.createElement('div');
 			element.inject(document.body);
 		}
 

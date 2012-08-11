@@ -42,7 +42,8 @@ Moobile.Popover = new Class({
 		this.element.addClass('popover-direction-' + this.options.direction);
 		this.element.addClass('popover-alignment-' + this.options.alignment);
 
-		this.contentElement = new Element('div.popover-content');
+		this.contentElement = document.createElement('div');
+		this.contentElement.addClass('popover-content');
 		this.contentElement.inject(this.element);
 
 		this.animations = new Moobile.Animation.Set();

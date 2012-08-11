@@ -109,11 +109,17 @@ Moobile.Alert = new Class({
 		this.overlay.setStyle('radial');
 		this.addChildComponent(this.overlay);
 
-		this.headerElement  = new Element('div.alert-header');
-		this.footerElement  = new Element('div.alert-footer');
-		this.contentElement = new Element('div.alert-content');
+		this.headerElement = document.createElement('div');
+		this.headerElement.addClass('alert-header');
 
-		this.boxElement = new Element('div.alert-box');
+		this.footerElement = document.createElement('div');
+		this.footerElement.addClass('alert-footer');
+
+		this.contentElement = document.createElement('div');
+		this.contentElement.addClass('alert-content');
+
+		this.boxElement = document.createElement('div');
+		this.boxElement.addClass('alert-box');
 		this.boxElement.grab(this.headerElement);
 		this.boxElement.grab(this.contentElement);
 		this.boxElement.grab(this.footerElement);

@@ -74,20 +74,20 @@ Moobile.ListItem = new Class({
 		var detail = this.element.getRoleElement('detail');
 
 		if (label === null) {
-			label = new Element('div');
+			label = document.createElement('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 			label.setRole('label');
 		}
 
 		if (image === null) {
-			image = new Element('img');
+			image = document.createElement('img');
 			image.inject(this.element, 'top');
 			image.setRole('image');
 		}
 
 		if (detail === null) {
-			detail = new Element('div');
+			detail = document.createElement('div');
 			detail.inject(this.element);
 			detail.setRole('detail');
 		}

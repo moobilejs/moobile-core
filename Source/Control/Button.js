@@ -48,7 +48,7 @@ Moobile.Button = new Class({
 
 		var label = this.element.getRoleElement('label');
 		if (label === null) {
-			label = new Element('div');
+			label = document.createElement('div');
 			label.ingest(this.element);
 			label.inject(this.element);
 			label.setRole('label');

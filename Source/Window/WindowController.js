@@ -44,7 +44,7 @@ Moobile.WindowController = new Class({
 
 		var element = document.id('window');
 		if (element === null) {
-			element = new Element('div');
+			element = document.createElement('div');
 			element.inject(document.body);
 		}
 
