@@ -170,11 +170,6 @@ input, select, textarea {
 	    -ms-box-sizing: border-box;                              /* Important */
 	     -o-box-sizing: border-box;                              /* Important */
 	        box-sizing: border-box;                              /* Important */
-	-webkit-box-orient: vertical;                                /* Important */
-	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
@@ -190,6 +185,22 @@ input, select, textarea {
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
 	z-index: 50;                                                 /* Important */
+}
+
+.view.view-layout-vertical {
+	-webkit-box-orient: vertical;                                /* Important */
+	   -moz-box-orient: vertical;                                /* Important */
+	    -ms-box-orient: vertical;                                /* Important */
+	     -o-box-orient: vertical;                                /* Important */
+	        box-orient: vertical;                                /* Important */
+}
+
+.view.view-layout-horizontal {
+	-webkit-box-orient: horizontal;                              /* Important */
+	   -moz-box-orient: horizontal;                              /* Important */
+	    -ms-box-orient: horizontal;                              /* Important */
+	     -o-box-orient: horizontal;                              /* Important */
+	        box-orient: horizontal;                              /* Important */
 }
 
 .view .view-content-wrapper {
