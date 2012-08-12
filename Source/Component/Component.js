@@ -723,7 +723,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	getRoleElement: function(role) {
+	getRoleElement: function(name) {
 		return this.getRoleElements(name, 1)[0] || null;
 	},
 
