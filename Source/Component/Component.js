@@ -1010,20 +1010,24 @@ Moobile.Component = new Class({
  * @since  0.1.0
  */
 Moobile.Component.defineRole = function(name, context, options, handler) {
+
 	context = (context || Moobile.Component).prototype;
 	if (context.__roles__ === undefined) {
 	 	context.__roles__ = {};
 	}
+
 	if (typeof options === 'function') {
 		handler = options;
 		options = {};
 	}
+
 	// <0.1-compat>
 	if (typeof handler === 'object') {
 		options.traversable = handler.traversable;
 		handler = handler.behavior;
 	}
 	// </0.1-compat>
+
 	context.__roles__[name] = {
 		handler: handler || function(){},
 		options: options || {}
@@ -1108,54 +1112,3 @@ Moobile.Component.addNativeEvent('animationend');
 Moobile.Component.addNativeEvent('transitionend');
 
 })();
-
-//<pre-0.1-compat>
-
-Moobile.Component.prototype.addChild = Moobile.Component.prototype.addChildComponent;
-Moobile.Component.prototype.addChildInside = Moobile.Component.prototype.addChildComponentInside;
-Moobile.Component.prototype.addChildAfter = Moobile.Component.prototype.addChildComponentAfter;
-Moobile.Component.prototype.addChildBefore = Moobile.Component.prototype.addChildComponentBefore;
-Moobile.Component.prototype.getChild = Moobile.Component.prototype.getChildComponent;
-Moobile.Component.prototype.getChildOfType = Moobile.Component.prototype.getChildComponentOfType;
-Moobile.Component.prototype.getChildAt = Moobile.Component.prototype.getChildComponentAt;
-Moobile.Component.prototype.getChildOfTypeAt = Moobile.Component.prototype.getChildComponentOfTypeAt;
-Moobile.Component.prototype.getChildIndex = Moobile.Component.prototype.getChildComponentIndex;
-Moobile.Component.prototype.getChildren = Moobile.Component.prototype.getChildComponents;
-Moobile.Component.prototype.getChildrenOfType = Moobile.Component.prototype.getChildComponentsOfType;
-Moobile.Component.prototype.hasChild = Moobile.Component.prototype.hasChildComponent;
-Moobile.Component.prototype.hasChildOfType = Moobile.Component.prototype.hasChildComponentOfType;
-Moobile.Component.prototype.replaceChild = Moobile.Component.prototype.replaceChildComponent;
-Moobile.Component.prototype.replaceWith = Moobile.Component.prototype.replaceWithComponent;
-Moobile.Component.prototype.removeChild = Moobile.Component.prototype.removeChildComponent;
-Moobile.Component.prototype.removeChildren = Moobile.Component.prototype.removeAllChildComponents;
-Moobile.Component.prototype.removeChildrenOfType = Moobile.Component.prototype.removeAllChildComponentsOfType;
-Moobile.Component.prototype.removeFromParent = Moobile.Component.prototype.removeFromParentComponent;
-Moobile.Component.prototype.setParent = Moobile.Component.prototype.setParentComponent;
-Moobile.Component.prototype.getParent = Moobile.Component.prototype.getParentComponent;
-Moobile.Component.prototype.hasParent = Moobile.Component.prototype.hasParentComponent;
-
-Moobile.Component.prototype.willAddChild = function() {
-	throw new Error('This method is deprecated, use "willAddChildComponent" instead');
-};
-
-Moobile.Component.prototype.didAddChild = function() {
-	throw new Error('This method is deprecated, use "didAddChildComponent" instead');
-};
-
-Moobile.Component.prototype.willRemoveChild = function() {
-	throw new Error('This method is deprecated, use "willRemoveChildComponent" instead');
-};
-
-Moobile.Component.prototype.didRemoveChild = function() {
-	throw new Error('This method is deprecated, use "didRemoveChildComponent" instead');
-};
-
-Moobile.Component.prototype.parentWillChange = function() {
-	throw new Error('This method is deprecated, use "parentComponentWillChange" instead');
-};
-
-Moobile.Component.prototype.parentDidChange = function() {
-	throw new Error('This method is deprecated, use "parentComponentDidChange" instead');
-};
-
-//</pre-0.1-compat>
