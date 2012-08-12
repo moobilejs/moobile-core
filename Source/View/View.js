@@ -77,6 +77,13 @@ Moobile.View = new Class({
 			content.inject(this.element);
 			content.setRole('view-content');
 		}
+
+		var wrapper = this.getRoleElement('view-content-wrapper');
+		if (wrapper === null) {
+			wrapper = document.createElement('div');
+			wrapper.wraps(content);
+			wrapper.setRole('view-content-wrapper');
+		}
 	},
 
 	/**
@@ -87,10 +94,6 @@ Moobile.View = new Class({
 	didBuild: function() {
 
 		this.parent();
-
-		this.contentWrapperElement = document.createElement('div');
-		this.contentWrapperElement.addClass('view-content-wrapper');
-		this.contentWrapperElement.wraps(this.contentElement);
 
 		var classes = this.element.get('class');
 		if (classes) {
@@ -162,31 +165,6 @@ Moobile.View = new Class({
 	willRemoveChildComponent: function(component) {
 		this.parent(component);
 		component.setParentView(null);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#setContentElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setContentElement: function(contentElement) {
-
-		if (this.contentElement === contentElement)
-			return this;
-
-		if (this.element.contains(contentElement) === false) {
-			if (this.contentElement) {
-				this.contentElement.grab(contentElement, 'after');
-				this.contentElement.destroy();
-			} else {
-				this.contentWrapperElement.grab(contentElement);
-			}
-		}
-
-		this.contentElement = contentElement;
-		this.contentElement.addClass('view-content');
-
-		return this;
 	},
 
 	/**
@@ -363,12 +341,18 @@ Moobile.View.prototype.addChild = Moobile.View.prototype.addChildComponent;
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('view', null, function(element) {
+Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
-	this.setContentElement(element);
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
+});
+
+Moobile.Component.defineRole('view-content-wrapper', Moobile.View, {traversable: true}, function(element) {
+	this.contentWrapperElement = element
+	this.contentWrapperElement.addClass('view-content-wrapper');
 });
 
 //------------------------------------------------------------------------------

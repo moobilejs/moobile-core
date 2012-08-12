@@ -2345,12 +2345,14 @@ provides:
 (function() {
 
 /**
- * @deprecated
  * @see    http://moobilejs.com/doc/latest/Element/Element.Role#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
+ * @deprecated 0.2.0
  */
 Element.defineRole = function(name, context, behavior) {
+
+	console.log("[DEPRECATION NOTICE] Element.defineRole will be removed in version 0.3.");
 
 	context = (context || Element).prototype;
 	if (context.__roles__ === undefined) {
@@ -2370,7 +2372,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#setRole
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
-	 */
+ 	 */
 	 setRole: function(role) {
 	 	return this.set('data-role', role);
 	 },
@@ -2385,34 +2387,38 @@ Element.implement({
 	 },
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleDefinition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	 getRoleDefinition: function(context) {
+	 	console.log("[DEPRECATION NOTICE] Element.getRoleDefinition will be removed in version 0.3.");
 	 	return (context || this).__roles__
 	 	     ? (context || this).__roles__[this.getRole()]
 	 	     : null;
 	 },
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	getRoleElement: function(role) {
+		console.log("[DEPRECATION NOTICE] Element.getRoleElement will be removed in version 0.3.");
 		return this.getRoleElements(role)[0] || null;
 	},
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	getRoleElements: function(role) {
+
+		console.log("[DEPRECATION NOTICE] Element.getRoleElements will be removed in version 0.3.");
 
 		var validate = this.ownsRoleElement.bind(this);
 		var selector = role
@@ -2423,12 +2429,14 @@ Element.implement({
 	},
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	ownsRoleElement: function(element) {
+
+		console.log("[DEPRECATION NOTICE] Element.ownsRoleElement will be removed in version 0.3.");
 
 		var parent = element.parentNode;
 		if (parent) {
@@ -2446,12 +2454,14 @@ Element.implement({
 	},
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#executeDefinedRoles
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	executeDefinedRoles: function(context) {
+
+		console.log("[DEPRECATION NOTICE] Element.executeDefinedRoles will be removed in version 0.3.");
 
 		context = context || this;
 
@@ -2624,17 +2634,15 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
-		var placeholder = this.element;
-		var contains = document.contains(this.element);
-		if (contains) this.element = this.element.clone(true, true);
+		var marker = this.element;
+		var exists = document.contains(this.element);
+		if (exists) this.element = this.element.clone(true, true);
 
 		this.willBuild();
 		this.build();
 		this.didBuild();
 
-		if (contains) this.element.replaces(placeholder);
-
-		this.element.store('moobile:component', this);
+		if (exists) this.element.replaces(marker);
 
 		return this;
 	},
@@ -2656,38 +2664,12 @@ Moobile.Component = new Class({
 		var owner = this;
 		var roles = this.__roles__;
 
-		var build = function(element) {
-
-			var nodes = element.childNodes;
-			for (var i = 0, len = nodes.length; i < len; i++) {
-
-				var node = nodes[i];
-				if (node.nodeType !== 1)
-					continue;
-
-				var role = node.getRole();
-				if (role === null) {
-					build(node);
-					continue;
-				}
-
-				var behavior = roles[role] || null;
-				if (behavior && behavior instanceof Function) {
-					behavior.call(owner, node);
-
-					// stops here if the role created a component with this node
-					var component = node.retrieve('moobile:component');
-					if (component === null) {
-						build(node);
-					}
-
-				} else {
-					throw new Error('Role ' + role + ' has not beed defined for this component.');
-				}
+		this.getRoleElements().each(function(element) {
+			var behavior = roles[element.getRole()];
+			if (behavior.handler) {
+				behavior.handler.call(owner, element);
 			}
-		};
-
-		build(this.element);
+		});
 	},
 
 	/**
@@ -3226,6 +3208,61 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getRoleElement: function(name) {
+		return this.getRoleElements(name, 1)[0] || null;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElements
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getRoleElements: function(name, limit) {
+
+		var roles = this.__roles__;
+		var found = [];
+
+		var walk = function(element) {
+
+			if (limit && limit <= found.length)
+				return;
+
+			var nodes = element.childNodes;
+			for (var i = 0, len = nodes.length; i < len; i++) {
+
+				var node = nodes[i];
+				if (node.nodeType !== 1)
+					continue;
+
+				var role = node.getRole();
+				if (role === null) {
+					walk(node);
+					continue;
+				}
+
+				if (name === role || !name) found.push(node);
+
+				var behavior = roles[role] || null;
+				if (behavior === undefined) {
+					throw new Error('Role ' + role + ' has not beed defined for this component.');
+				}
+
+				if (behavior.options.traversable) {
+					walk(node);
+				}
+			}
+		};
+
+		walk(this.element);
+
+		return found;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -3458,18 +3495,36 @@ Moobile.Component = new Class({
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @update 0.2.0
+ * @edited 0.2.0
  * @since  0.1.0
  */
-Moobile.Component.defineRole = function(name, context, func) {
+Moobile.Component.defineRole = function(name, context, options, handler) {
+
 	context = (context || Moobile.Component).prototype;
 	if (context.__roles__ === undefined) {
 	 	context.__roles__ = {};
 	}
+
+	if (typeof options === 'function') {
+		handler = options;
+		options = {};
+	}
+
 	// <0.1-compat>
-	if (func.behavior) func = func.behavior;
+	if (typeof handler === 'object') {
+		options.traversable = handler.traversable;
+		handler = handler.behavior;
+	}
 	// </0.1-compat>
-	context.__roles__[name] = func;
+
+	options = Object.append({
+		traversable: false
+	}, options);
+
+	context.__roles__[name] = {
+		handler: handler,
+		options: options
+	};
 };
 
 /**
@@ -3818,7 +3873,7 @@ Moobile.Button = new Class({
 
 		this.element.addClass('button');
 
-		var label = this.element.getRoleElement('label');
+		var label = this.getRoleElement('label');
 		if (label === null) {
 			label = document.createElement('div');
 			label.ingest(this.element);
@@ -4268,7 +4323,7 @@ Moobile.Bar = new Class({
 
 		this.element.addClass('bar');
 
-		var item = this.element.getRoleElement('item');
+		var item = this.getRoleElement('item');
 		if (item === null) {
 			item = document.createElement('div');
 			item.ingest(this.element);
@@ -4482,7 +4537,7 @@ Moobile.NavigationBarItem = new Class({
 
 		this.element.addClass('navigation-bar-item');
 
-		var title = this.element.getRoleElement('title');
+		var title = this.getRoleElement('title');
 		if (title === null) {
 			title = document.createElement('div');
 			title.ingest(this.element);
@@ -5242,9 +5297,9 @@ Moobile.ListItem = new Class({
 
 		this.element.addClass('list-item');
 
-		var image  = this.element.getRoleElement('image');
-		var label  = this.element.getRoleElement('label');
-		var detail = this.element.getRoleElement('detail');
+		var image  = this.getRoleElement('image');
+		var label  = this.getRoleElement('label');
+		var detail = this.getRoleElement('detail');
 
 		if (label === null) {
 			label = document.createElement('div');
@@ -8131,12 +8186,19 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.element.getRoleElement('view-content');
+		var content = this.getRoleElement('view-content');
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
 			content.inject(this.element);
 			content.setRole('view-content');
+		}
+
+		var wrapper = this.getRoleElement('view-content-wrapper');
+		if (wrapper === null) {
+			wrapper = document.createElement('div');
+			wrapper.wraps(content);
+			wrapper.setRole('view-content-wrapper');
 		}
 	},
 
@@ -8148,10 +8210,6 @@ Moobile.View = new Class({
 	didBuild: function() {
 
 		this.parent();
-
-		this.contentWrapperElement = document.createElement('div');
-		this.contentWrapperElement.addClass('view-content-wrapper');
-		this.contentWrapperElement.wraps(this.contentElement);
 
 		var classes = this.element.get('class');
 		if (classes) {
@@ -8223,31 +8281,6 @@ Moobile.View = new Class({
 	willRemoveChildComponent: function(component) {
 		this.parent(component);
 		component.setParentView(null);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#setContentElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setContentElement: function(contentElement) {
-
-		if (this.contentElement === contentElement)
-			return this;
-
-		if (this.element.contains(contentElement) === false) {
-			if (this.contentElement) {
-				this.contentElement.grab(contentElement, 'after');
-				this.contentElement.destroy();
-			} else {
-				this.contentWrapperElement.grab(contentElement);
-			}
-		}
-
-		this.contentElement = contentElement;
-		this.contentElement.addClass('view-content');
-
-		return this;
 	},
 
 	/**
@@ -8424,12 +8457,18 @@ Moobile.View.prototype.addChild = Moobile.View.prototype.addChildComponent;
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('view', null, function(element) {
+Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
-Moobile.Component.defineRole('view-content', Moobile.View, function(element) {
-	this.setContentElement(element);
+Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
+});
+
+Moobile.Component.defineRole('view-content-wrapper', Moobile.View, {traversable: true}, function(element) {
+	this.contentWrapperElement = element
+	this.contentWrapperElement.addClass('view-content-wrapper');
 });
 
 //------------------------------------------------------------------------------
