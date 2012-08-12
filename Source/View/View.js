@@ -70,7 +70,7 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('view-content');
+		var content = this.getRoleElement('content') /*<0.1-compat>*/ || this.getRoleElement('view-content') /*</0.1-compat>*/;
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
@@ -78,7 +78,7 @@ Moobile.View = new Class({
 			content.setRole('view-content');
 		}
 
-		var wrapper = this.getRoleElement('view-content-wrapper');
+		var wrapper = this.getRoleElement('content-wrapper') /*<0.1-compat>*/ || this.getRoleElement('view-content-wrapper') /*</0.1-compat>*/;
 		if (wrapper === null) {
 			wrapper = document.createElement('div');
 			wrapper.wraps(content);
@@ -345,6 +345,18 @@ Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
+Moobile.Component.defineRole('content', Moobile.View, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
+});
+
+Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true}, function(element) {
+	this.contentWrapperElement = element
+	this.contentWrapperElement.addClass('view-content-wrapper');
+});
+
+// <0.1-compat>
+
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
@@ -354,6 +366,8 @@ Moobile.Component.defineRole('view-content-wrapper', Moobile.View, {traversable:
 	this.contentWrapperElement = element
 	this.contentWrapperElement.addClass('view-content-wrapper');
 });
+
+// </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
