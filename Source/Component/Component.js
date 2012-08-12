@@ -176,9 +176,9 @@ Moobile.Component = new Class({
 		var roles = this.__roles__;
 
 		this.getRoleElements().each(function(element) {
-			var behavior = roles[element.getRole()];
-			if (behavior.handler) {
-				behavior.handler.call(owner, element);
+			var handler = roles[element.getRole()].handler;
+			if (handler instanceof Function) {
+				handler.call(owner, element);
 			}
 		});
 	},
@@ -1010,31 +1010,23 @@ Moobile.Component = new Class({
  * @since  0.1.0
  */
 Moobile.Component.defineRole = function(name, context, options, handler) {
-
 	context = (context || Moobile.Component).prototype;
 	if (context.__roles__ === undefined) {
 	 	context.__roles__ = {};
 	}
-
 	if (typeof options === 'function') {
 		handler = options;
 		options = {};
 	}
-
 	// <0.1-compat>
 	if (typeof handler === 'object') {
 		options.traversable = handler.traversable;
 		handler = handler.behavior;
 	}
 	// </0.1-compat>
-
-	options = Object.append({
-		traversable: false
-	}, options);
-
 	context.__roles__[name] = {
-		handler: handler,
-		options: options
+		handler: handler || function(){},
+		options: options || {}
 	};
 };
 
