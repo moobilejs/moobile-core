@@ -32,7 +32,7 @@ Element.implement({
 	 * @since  0.1.0
 	 */
 	ingest: function(element) {
-		return this.adopt(Array.from(document.id(element).childNodes));
+		return this.adopt(document.id(element).childNodes);
 	},
 
 	/**

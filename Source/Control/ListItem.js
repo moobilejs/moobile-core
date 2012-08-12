@@ -216,19 +216,19 @@ Moobile.ListItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('list-item', Moobile.List, function(element) {
+Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
 });
 
-Moobile.Component.defineRole('image', Moobile.ListItem, function(element) {
+Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
 	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
-Moobile.Component.defineRole('label', Moobile.ListItem, function(element) {
+Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
-Moobile.Component.defineRole('detail', Moobile.ListItem, function(element) {
+Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
 

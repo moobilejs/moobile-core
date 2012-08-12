@@ -129,11 +129,11 @@ Moobile.Button = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('button', null, function(element) {
+Moobile.Component.defineRole('button', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Button, element, 'data-button'));
 });
 
-Moobile.Component.defineRole('label', Moobile.Button, function(element) {
+Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 

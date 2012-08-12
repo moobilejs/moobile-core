@@ -102,7 +102,7 @@ Moobile.Bar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('bar', null, function(element) {
+Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 

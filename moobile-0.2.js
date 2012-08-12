@@ -2218,7 +2218,7 @@ Element.implement({
 	 * @since  0.1.0
 	 */
 	ingest: function(element) {
-		return this.adopt(Array.from(document.id(element).childNodes));
+		return this.adopt(document.id(element).childNodes);
 	},
 
 	/**
@@ -2665,9 +2665,9 @@ Moobile.Component = new Class({
 		var roles = this.__roles__;
 
 		this.getRoleElements().each(function(element) {
-			var behavior = roles[element.getRole()];
-			if (behavior.handler) {
-				behavior.handler.call(owner, element);
+			var handler = roles[element.getRole()].handler;
+			if (handler instanceof Function) {
+				handler.call(owner, element);
 			}
 		});
 	},
@@ -3517,13 +3517,9 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
 	}
 	// </0.1-compat>
 
-	options = Object.append({
-		traversable: false
-	}, options);
-
 	context.__roles__[name] = {
-		handler: handler,
-		options: options
+		handler: handler || function(){},
+		options: options || {}
 	};
 };
 
@@ -3956,11 +3952,11 @@ Moobile.Button = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('button', null, function(element) {
+Moobile.Component.defineRole('button', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Button, element, 'data-button'));
 });
 
-Moobile.Component.defineRole('label', Moobile.Button, function(element) {
+Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
@@ -4379,7 +4375,7 @@ Moobile.Bar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('bar', null, function(element) {
+Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
@@ -4431,7 +4427,7 @@ Moobile.BarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('item', Moobile.Bar, function(element) {
+Moobile.Component.defineRole('item', Moobile.Bar, null, function(element) {
 	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
 });
 
@@ -5444,19 +5440,19 @@ Moobile.ListItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('list-item', Moobile.List, function(element) {
+Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
 });
 
-Moobile.Component.defineRole('image', Moobile.ListItem, function(element) {
+Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
 	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
-Moobile.Component.defineRole('label', Moobile.ListItem, function(element) {
+Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
-Moobile.Component.defineRole('detail', Moobile.ListItem, function(element) {
+Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
 
@@ -5544,7 +5540,7 @@ Moobile.ActivityIndicator = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('activity-indicator', null, function(element) {
+Moobile.Component.defineRole('activity-indicator', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ActivityIndicator, element, 'data-activity-indicator'));
 });
 
@@ -5771,7 +5767,7 @@ Moobile.Image = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('image', null, function(element) {
+Moobile.Component.defineRole('image', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
@@ -8946,7 +8942,7 @@ Moobile.ViewStack = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('view-stack', null, function(element) {
+Moobile.Component.defineRole('view-stack', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
 });
 

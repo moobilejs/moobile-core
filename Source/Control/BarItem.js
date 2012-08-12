@@ -44,6 +44,6 @@ Moobile.BarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('item', Moobile.Bar, function(element) {
+Moobile.Component.defineRole('item', Moobile.Bar, null, function(element) {
 	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
 });
