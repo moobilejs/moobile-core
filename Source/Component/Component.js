@@ -145,17 +145,15 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
-		var placeholder = this.element;
-		var contains = document.contains(this.element);
-		if (contains) this.element = this.element.clone(true, true);
+		var marker = this.element;
+		var exists = document.contains(this.element);
+		if (exists) this.element = this.element.clone(true, true);
 
 		this.willBuild();
 		this.build();
 		this.didBuild();
 
-		if (contains) this.element.replaces(placeholder);
-
-		this.element.store('moobile:component', this);
+		if (exists) this.element.replaces(marker);
 
 		return this;
 	},
@@ -177,38 +175,12 @@ Moobile.Component = new Class({
 		var owner = this;
 		var roles = this.__roles__;
 
-		var build = function(element) {
-
-			var nodes = element.childNodes;
-			for (var i = 0, len = nodes.length; i < len; i++) {
-
-				var node = nodes[i];
-				if (node.nodeType !== 1)
-					continue;
-
-				var role = node.getRole();
-				if (role === null) {
-					build(node);
-					continue;
-				}
-
-				var behavior = roles[role] || null;
-				if (behavior && behavior instanceof Function) {
-					behavior.call(owner, node);
-
-					// stops here if the role created a component with this node
-					var component = node.retrieve('moobile:component');
-					if (component === null) {
-						build(node);
-					}
-
-				} else {
-					throw new Error('Role ' + role + ' has not beed defined for this component.');
-				}
+		this.getRoleElements().each(function(element) {
+			var behavior = roles[element.getRole()];
+			if (behavior.handler) {
+				behavior.handler.call(owner, element);
 			}
-		};
-
-		build(this.element);
+		});
 	},
 
 	/**
@@ -747,6 +719,61 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getRoleElement: function(role) {
+		return this.getRoleElements(name, 1)[0] || null;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElements
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getRoleElements: function(name, limit) {
+
+		var roles = this.__roles__;
+		var found = [];
+
+		var walk = function(element) {
+
+			if (limit && limit <= found.length)
+				return;
+
+			var nodes = element.childNodes;
+			for (var i = 0, len = nodes.length; i < len; i++) {
+
+				var node = nodes[i];
+				if (node.nodeType !== 1)
+					continue;
+
+				var role = node.getRole();
+				if (role === null) {
+					walk(node);
+					continue;
+				}
+
+				if (name === role || !name) found.push(node);
+
+				var behavior = roles[role] || null;
+				if (behavior === undefined) {
+					throw new Error('Role ' + role + ' has not beed defined for this component.');
+				}
+
+				if (behavior.options.traversable) {
+					walk(node);
+				}
+			}
+		};
+
+		walk(this.element);
+
+		return found;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -979,18 +1006,36 @@ Moobile.Component = new Class({
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @update 0.2.0
+ * @edited 0.2.0
  * @since  0.1.0
  */
-Moobile.Component.defineRole = function(name, context, func) {
+Moobile.Component.defineRole = function(name, context, options, handler) {
+
 	context = (context || Moobile.Component).prototype;
 	if (context.__roles__ === undefined) {
 	 	context.__roles__ = {};
 	}
+
+	if (typeof options === 'function') {
+		handler = options;
+		options = {};
+	}
+
 	// <0.1-compat>
-	if (func.behavior) func = func.behavior;
+	if (typeof handler === 'object') {
+		options.traversable = handler.traversable;
+		handler = handler.behavior;
+	}
 	// </0.1-compat>
-	context.__roles__[name] = func;
+
+	options = Object.append({
+		traversable: false
+	}, options);
+
+	context.__roles__[name] = {
+		handler: handler,
+		options: options
+	};
 };
 
 /**

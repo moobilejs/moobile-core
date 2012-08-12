@@ -46,7 +46,7 @@ Moobile.Button = new Class({
 
 		this.element.addClass('button');
 
-		var label = this.element.getRoleElement('label');
+		var label = this.getRoleElement('label');
 		if (label === null) {
 			label = document.createElement('div');
 			label.ingest(this.element);

@@ -22,12 +22,14 @@ provides:
 (function() {
 
 /**
- * @deprecated
  * @see    http://moobilejs.com/doc/latest/Element/Element.Role#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
+ * @deprecated 0.2.0
  */
 Element.defineRole = function(name, context, behavior) {
+
+	console.log("[DEPRECATION NOTICE] Element.defineRole will be removed in version 0.3.");
 
 	context = (context || Element).prototype;
 	if (context.__roles__ === undefined) {
@@ -47,7 +49,7 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#setRole
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
-	 */
+ 	 */
 	 setRole: function(role) {
 	 	return this.set('data-role', role);
 	 },
@@ -62,12 +64,13 @@ Element.implement({
 	 },
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleDefinition
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	 getRoleDefinition: function(context) {
+	 	console.log("[DEPRECATION NOTICE] Element.getRoleDefinition will be removed in version 0.3.");
 	 	return (context || this).__roles__
 	 	     ? (context || this).__roles__[this.getRole()]
 	 	     : null;
@@ -77,8 +80,10 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	getRoleElement: function(role) {
+		console.log("[DEPRECATION NOTICE] Element.getRoleElement will be removed in version 0.3.");
 		return this.getRoleElements(role)[0] || null;
 	},
 
@@ -86,8 +91,11 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	getRoleElements: function(role) {
+
+		console.log("[DEPRECATION NOTICE] Element.getRoleElements will be removed in version 0.3.");
 
 		var validate = this.ownsRoleElement.bind(this);
 		var selector = role
@@ -101,8 +109,11 @@ Element.implement({
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	ownsRoleElement: function(element) {
+
+		console.log("[DEPRECATION NOTICE] Element.ownsRoleElement will be removed in version 0.3.");
 
 		var parent = element.parentNode;
 		if (parent) {
@@ -120,12 +131,14 @@ Element.implement({
 	},
 
 	/**
-	 * @deprecated
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#executeDefinedRoles
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
+ 	 * @deprecated 0.2.0
 	 */
 	executeDefinedRoles: function(context) {
+
+		console.log("[DEPRECATION NOTICE] Element.executeDefinedRoles will be removed in version 0.3.");
 
 		context = context || this;
 

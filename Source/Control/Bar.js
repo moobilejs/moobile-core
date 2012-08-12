@@ -46,7 +46,7 @@ Moobile.Bar = new Class({
 
 		this.element.addClass('bar');
 
-		var item = this.element.getRoleElement('item');
+		var item = this.getRoleElement('item');
 		if (item === null) {
 			item = document.createElement('div');
 			item.ingest(this.element);

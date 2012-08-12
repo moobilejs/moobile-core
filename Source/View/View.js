@@ -70,7 +70,7 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.element.getRoleElement('view-content');
+		var content = this.getRoleElement('view-content');
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
@@ -367,7 +367,7 @@ Moobile.Component.defineRole('view', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
-Moobile.Component.defineRole('view-content', Moobile.View, function(element) {
+Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	this.setContentElement(element);
 });
 

@@ -37,16 +37,6 @@ Moobile.ViewStack = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.addClass('view-stack');
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didBuild: function() {
-		this.parent();
-		this.contentElement.addClass('view-stack-content');
 	}
 
 });

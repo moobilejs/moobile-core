@@ -69,9 +69,9 @@ Moobile.ListItem = new Class({
 
 		this.element.addClass('list-item');
 
-		var image  = this.element.getRoleElement('image');
-		var label  = this.element.getRoleElement('label');
-		var detail = this.element.getRoleElement('detail');
+		var image  = this.getRoleElement('image');
+		var label  = this.getRoleElement('label');
+		var detail = this.getRoleElement('detail');
 
 		if (label === null) {
 			label = document.createElement('div');
