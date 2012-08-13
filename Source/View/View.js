@@ -62,6 +62,7 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
@@ -75,14 +76,14 @@ Moobile.View = new Class({
 			content = document.createElement('div');
 			content.ingest(this.element);
 			content.inject(this.element);
-			content.setRole('view-content');
+			content.setRole('content');
 		}
 
 		var wrapper = this.getRoleElement('content-wrapper') /*<0.1-compat>*/ || this.getRoleElement('view-content-wrapper') /*</0.1-compat>*/;
 		if (wrapper === null) {
 			wrapper = document.createElement('div');
 			wrapper.wraps(content);
-			wrapper.setRole('view-content-wrapper');
+			wrapper.setRole('content-wrapper');
 		}
 	},
 
