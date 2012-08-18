@@ -95,17 +95,17 @@ input, select, textarea {
 
 /* Style Dark */
 
-.view.style-dark {
+.bar.style-dark {
 	background: #000;
 	color: #fff;
 	text-shadow: none;
 }
 
-.view.style-dark h1 {
+.bar.style-dark h1 {
 	color: #fff;
 }
 
-.view.style-dark h2 {
+.bar.style-dark h2 {
 	color: #fff;
 }
 
@@ -136,7 +136,7 @@ input, select, textarea {
 
 /* Dark */
 
-.view.style-dark .bar {
+.bar.style-dark {
 	background-position: 0px -88px;
 	color: #fff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
@@ -156,7 +156,7 @@ input, select, textarea {
 		background-size: 100px 176px
 	}
 
-	.view.style-dark .bar {
+	.bar.style-dark .bar {
 		background-position: 0px -88px;
 	}
 }
@@ -378,7 +378,7 @@ input, select, textarea {
 
 /* Inside a Bar (Dark) */
 
-.view.style-dark .bar .button {
+.bar.style-dark .bar .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
@@ -386,8 +386,8 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
 }
 
-.view.style-dark .bar .button.is-selected,
-.view.style-dark .bar .button.is-highlighted {
+.bar.style-dark .bar .button.is-selected,
+.bar.style-dark .bar .button.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
@@ -418,7 +418,7 @@ input, select, textarea {
 
 /* Inside a Bar (Dark) + Back */
 
-.view.style-dark .bar .button.style-back {
+.bar.style-dark .bar .button.style-back {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 fill stretch stretch;
@@ -428,8 +428,8 @@ input, select, textarea {
 	padding-left: 0px;
 }
 
-.view.style-dark .bar .button.style-back.is-selected,
-.view.style-dark .bar .button.style-back.is-highlighted {
+.bar.style-dark .bar .button.style-back.is-selected,
+.bar.style-dark .bar .button.style-back.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 fill stretch stretch;
@@ -460,7 +460,7 @@ input, select, textarea {
 
 /* Inside a Bar (Dark) + Forward */
 
-.view.style-dark .bar .button.style-forward {
+.bar.style-dark .bar .button.style-forward {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 fill stretch stretch;
@@ -470,8 +470,8 @@ input, select, textarea {
 	padding-right: 0px;
 }
 
-.view.style-dark .bar .button.style-forward.is-selected,
-.view.style-dark .bar .button.style-forward.is-highlighted {
+.bar.style-dark .bar .button.style-forward.is-selected,
+.bar.style-dark .bar .button.style-forward.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 fill stretch stretch;
@@ -579,7 +579,7 @@ input, select, textarea {
 
 /* Inside a Bar (Dark) + Grouped */
 
-.view.style-dark .bar .button-group .button {
+.bar.style-dark .bar .button-group .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 fill stretch stretch;
@@ -587,7 +587,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 fill stretch stretch;
 }
 
-.view.style-dark .bar .button-group .button:first-child {
+.bar.style-dark .bar .button-group .button:first-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 fill stretch stretch;
@@ -595,7 +595,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 fill stretch stretch;
 }
 
-.view.style-dark .bar .button-group .button.style-dark:last-child {
+.bar.style-dark .bar .button-group .button.style-dark:last-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
@@ -603,8 +603,8 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
 }
 
-.view.style-dark .bar .button-group .button.is-selected,
-.view.style-dark .bar .button-group .button.is-highlighted {
+.bar.style-dark .bar .button-group .button.is-selected,
+.bar.style-dark .bar .button-group .button.is-highlighted {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 fill stretch stretch;
@@ -612,8 +612,8 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 510 1 1460 1 fill stretch stretch;
 }
 
-.view.style-dark .bar .button-group .button.is-selected:first-child,
-.view.style-dark .bar .button-group .button.is-highlighted:first-child {
+.bar.style-dark .bar .button-group .button.is-selected:first-child,
+.bar.style-dark .bar .button-group .button.is-highlighted:first-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 fill stretch stretch;
@@ -621,8 +621,8 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 540 1 1430 5 fill stretch stretch;
 }
 
-.view.style-dark .bar .button-group .button.is-selected:last-child,
-.view.style-dark .bar .button-group .button.is-highlighted:last-child {
+.bar.style-dark .bar .button-group .button.is-selected:last-child,
+.bar.style-dark .bar .button-group .button.is-highlighted:last-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 fill stretch stretch;
@@ -777,7 +777,7 @@ input, select, textarea {
 
 	/* Inside a Bar (Dark) */
 
-	.view.style-dark .bar .button {
+	.bar.style-dark .bar .button {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
@@ -785,8 +785,8 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button.is-selected,
-	.view.style-dark .bar .button.is-highlighted {
+	.bar.style-dark .bar .button.is-selected,
+	.bar.style-dark .bar .button.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
@@ -815,7 +815,7 @@ input, select, textarea {
 
 	/* Inside a Bar (Dark) + Back */
 
-	.view.style-dark .bar .button.style-back {
+	.bar.style-dark .bar .button.style-back {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
@@ -823,8 +823,8 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button.style-back.is-selected,
-	.view.style-dark .bar .button.style-back.is-highlighted {
+	.bar.style-dark .bar .button.style-back.is-selected,
+	.bar.style-dark .bar .button.style-back.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
@@ -853,7 +853,7 @@ input, select, textarea {
 
 	/* Inside a Bar (Dark) + Forward */
 
-	.view.style-dark .bar .button.style-forward {
+	.bar.style-dark .bar .button.style-forward {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
@@ -861,8 +861,8 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button.style-forward.is-selected,
-	.view.style-dark .bar .button.style-forward.is-highlighted {
+	.bar.style-dark .bar .button.style-forward.is-selected,
+	.bar.style-dark .bar .button.style-forward.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
@@ -963,7 +963,7 @@ input, select, textarea {
 
 	/* Inside a Bar (Dark) + Grouped */
 
-	.view.style-dark .bar .button-group .button {
+	.bar.style-dark .bar .button-group .button {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -971,7 +971,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button-group .button:first-child {
+	.bar.style-dark .bar .button-group .button:first-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -979,7 +979,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button-group .button.style-dark:last-child {
+	.bar.style-dark .bar .button-group .button.style-dark:last-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -987,8 +987,8 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button-group .button.is-selected,
-	.view.style-dark .bar .button-group .button.is-highlighted {
+	.bar.style-dark .bar .button-group .button.is-selected,
+	.bar.style-dark .bar .button-group .button.is-highlighted {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -996,8 +996,8 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button-group .button.is-selected:first-child,
-	.view.style-dark .bar .button-group .button.is-highlighted:first-child {
+	.bar.style-dark .bar .button-group .button.is-selected:first-child,
+	.bar.style-dark .bar .button-group .button.is-highlighted:first-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -1005,8 +1005,8 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	.view.style-dark .bar .button-group .button.is-selected:last-child,
-	.view.style-dark .bar .button-group .button.is-highlighted:last-child {
+	.bar.style-dark .bar .button-group .button.is-selected:last-child,
+	.bar.style-dark .bar .button-group .button.is-highlighted:last-child {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		   -moz-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 		    -ms-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;

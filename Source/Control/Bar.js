@@ -106,3 +106,30 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+Moobile.Component.defineStyle('dark', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+Moobile.Component.defineStyle('light', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
+});
+
+/* android only */
+
+Moobile.Component.defineStyle('light-blue', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-light-blue'); },
+	detach: function(element) { element.removeClass('style-light-blue'); }
+});
+
+/* android only */
+
+Moobile.Component.defineStyle('dark-blue', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-dark-blue'); },
+	detach: function(element) { element.removeClass('style-dark-blue'); }
+});

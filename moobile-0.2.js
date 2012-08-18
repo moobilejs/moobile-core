@@ -2655,14 +2655,25 @@ Moobile.Component = new Class({
 	 */
 	build: function() {
 
+		var owner = this;
+		var roles = this.__roles__;
+		var attrs = this.__attributes__;
+
+		for (var key in attrs) {
+			var value = this.element.get(key);
+			if (value !== null) {
+				var handler = attrs[key];
+				if (handler instanceof Function) {
+					handler.call(this, value);
+				}
+			}
+		}
+
 		var className = this.options.className;
 		if (className) this.addClass(className);
 
 		var styleName = this.options.styleName
 		if (styleName) this.setStyle(styleName);
-
-		var owner = this;
-		var roles = this.__roles__;
 
 		this.getRoleElements().each(function(element) {
 			var handler = roles[element.getRole()].handler;
@@ -3523,12 +3534,27 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
 	};
 };
 
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineAttribute
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.Component.defineAttribute = function(name, target, handler) {
+	var context = (target || Moobile.Component).prototype;
+	if (context.__attributes__ === undefined) {
+		context.__attributes__ = {};
+	}
+	context.__attributes__[name] = handler;
+};
+
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component#defineStyle
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
-Moobile.Component.defineStyle = function(name, target, behavior) {
+Moobile.Component.defineStyle = function(name, target, handler) {
 	var context = (target || Moobile.Component).prototype;
 	if (context.__styles__ === undefined) {
 		context.__styles__ = {};
@@ -3537,7 +3563,7 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
 		name: name,
 		attach: function() {},
 		detach: function() {}
-	}, behavior);
+	}, handler);
 };
 
 /**
@@ -3602,56 +3628,9 @@ Moobile.Component.addNativeEvent('transitionend');
 
 })();
 
-//<pre-0.1-compat>
-
-Moobile.Component.prototype.addChild = Moobile.Component.prototype.addChildComponent;
-Moobile.Component.prototype.addChildInside = Moobile.Component.prototype.addChildComponentInside;
-Moobile.Component.prototype.addChildAfter = Moobile.Component.prototype.addChildComponentAfter;
-Moobile.Component.prototype.addChildBefore = Moobile.Component.prototype.addChildComponentBefore;
-Moobile.Component.prototype.getChild = Moobile.Component.prototype.getChildComponent;
-Moobile.Component.prototype.getChildOfType = Moobile.Component.prototype.getChildComponentOfType;
-Moobile.Component.prototype.getChildAt = Moobile.Component.prototype.getChildComponentAt;
-Moobile.Component.prototype.getChildOfTypeAt = Moobile.Component.prototype.getChildComponentOfTypeAt;
-Moobile.Component.prototype.getChildIndex = Moobile.Component.prototype.getChildComponentIndex;
-Moobile.Component.prototype.getChildren = Moobile.Component.prototype.getChildComponents;
-Moobile.Component.prototype.getChildrenOfType = Moobile.Component.prototype.getChildComponentsOfType;
-Moobile.Component.prototype.hasChild = Moobile.Component.prototype.hasChildComponent;
-Moobile.Component.prototype.hasChildOfType = Moobile.Component.prototype.hasChildComponentOfType;
-Moobile.Component.prototype.replaceChild = Moobile.Component.prototype.replaceChildComponent;
-Moobile.Component.prototype.replaceWith = Moobile.Component.prototype.replaceWithComponent;
-Moobile.Component.prototype.removeChild = Moobile.Component.prototype.removeChildComponent;
-Moobile.Component.prototype.removeChildren = Moobile.Component.prototype.removeAllChildComponents;
-Moobile.Component.prototype.removeChildrenOfType = Moobile.Component.prototype.removeAllChildComponentsOfType;
-Moobile.Component.prototype.removeFromParent = Moobile.Component.prototype.removeFromParentComponent;
-Moobile.Component.prototype.setParent = Moobile.Component.prototype.setParentComponent;
-Moobile.Component.prototype.getParent = Moobile.Component.prototype.getParentComponent;
-Moobile.Component.prototype.hasParent = Moobile.Component.prototype.hasParentComponent;
-
-Moobile.Component.prototype.willAddChild = function() {
-	throw new Error('This method is deprecated, use "willAddChildComponent" instead');
-};
-
-Moobile.Component.prototype.didAddChild = function() {
-	throw new Error('This method is deprecated, use "didAddChildComponent" instead');
-};
-
-Moobile.Component.prototype.willRemoveChild = function() {
-	throw new Error('This method is deprecated, use "willRemoveChildComponent" instead');
-};
-
-Moobile.Component.prototype.didRemoveChild = function() {
-	throw new Error('This method is deprecated, use "didRemoveChildComponent" instead');
-};
-
-Moobile.Component.prototype.parentWillChange = function() {
-	throw new Error('This method is deprecated, use "parentComponentWillChange" instead');
-};
-
-Moobile.Component.prototype.parentDidChange = function() {
-	throw new Error('This method is deprecated, use "parentComponentDidChange" instead');
-};
-
-//</pre-0.1-compat>
+Moobile.Component.defineAttribute('data-style', null, function(value) {
+	this.options.styleName = value;
+});
 
 
 /*
@@ -4379,6 +4358,33 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+Moobile.Component.defineStyle('dark', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+Moobile.Component.defineStyle('light', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
+});
+
+/* android only */
+
+Moobile.Component.defineStyle('light-blue', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-light-blue'); },
+	detach: function(element) { element.removeClass('style-light-blue'); }
+});
+
+/* android only */
+
+Moobile.Component.defineStyle('dark-blue', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-dark-blue'); },
+	detach: function(element) { element.removeClass('style-dark-blue'); }
+});
 
 
 /*
@@ -8174,6 +8180,7 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
@@ -8182,19 +8189,19 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('view-content');
+		var content = this.getRoleElement('content') /*<0.1-compat>*/ || this.getRoleElement('view-content') /*</0.1-compat>*/;
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
 			content.inject(this.element);
-			content.setRole('view-content');
+			content.setRole('content');
 		}
 
-		var wrapper = this.getRoleElement('view-content-wrapper');
+		var wrapper = this.getRoleElement('content-wrapper') /*<0.1-compat>*/ || this.getRoleElement('view-content-wrapper') /*</0.1-compat>*/;
 		if (wrapper === null) {
 			wrapper = document.createElement('div');
 			wrapper.wraps(content);
-			wrapper.setRole('view-content-wrapper');
+			wrapper.setRole('content-wrapper');
 		}
 	},
 
@@ -8457,6 +8464,18 @@ Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
+Moobile.Component.defineRole('content', Moobile.View, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
+});
+
+Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true}, function(element) {
+	this.contentWrapperElement = element
+	this.contentWrapperElement.addClass('view-content-wrapper');
+});
+
+// <0.1-compat>
+
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
@@ -8466,6 +8485,8 @@ Moobile.Component.defineRole('view-content-wrapper', Moobile.View, {traversable:
 	this.contentWrapperElement = element
 	this.contentWrapperElement.addClass('view-content-wrapper');
 });
+
+// </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles

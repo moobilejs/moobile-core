@@ -13,20 +13,8 @@ input, select, textarea {
 	font-family: "Roboto", sans-serif;
 }
 
-/* Loader
------------------------------------------------------------------------------*/
-
-.loader {
-	background:
-		url(../images/android/overlay-bg.png);
-	opacity: 0;
-	pointer-events: none;
-}
-
 /* Scroll Bar
 -----------------------------------------------------------------------------*/
-
-/* Horizontal */
 
 .scroll-bar-H {
 	bottom: 2px;
@@ -38,17 +26,11 @@ input, select, textarea {
 }
 
 .scroll-bar-H > div {
-	background: url(../images/android/scrollbar-dark-bg.png);
+	background: rgba(0, 0, 0, 0.3);
 	height: 100%;
 	position: absolute;
 	z-index: 100;
 }
-
-.view.style-dark .scroll-bar-H > div {
-	background: url(../images/android/scrollbar-bright-bg.png);
-}
-
-/* Vertical */
 
 .scroll-bar-V {
 	bottom: 2px;
@@ -60,15 +42,16 @@ input, select, textarea {
 }
 
 .scroll-bar-V > div {
-	background: url(../images/android/scrollbar-dark-bg.png);
+	background: rgba(0, 0, 0, 0.3);
 	position: absolute;
 	width: 100%;
 	z-index: 100;
 }
 
-.view.style-dark .scroll-bar-V > div {
-	background: url(../images/android/scrollbar-bright-bg.png);
-}
+/* Dark View */
+
+.view.style-dark .scroll-bar-H > div { background: rgba(255, 255, 255, 0.3); }
+.view.style-dark .scroll-bar-V > div { background: rgba(255, 255, 255, 0.3); }
 
 /* Window
 -----------------------------------------------------------------------------*/
@@ -120,7 +103,6 @@ input, select, textarea {
 	color: #fff;
 }
 
-
 /* View Stack
 -----------------------------------------------------------------------------*/
 
@@ -128,88 +110,96 @@ input, select, textarea {
 	background: transparent;
 }
 
-/* ScrollView
------------------------------------------------------------------------------*/
-
-/* View Stack
------------------------------------------------------------------------------*/
-
-/* View Panel
------------------------------------------------------------------------------*/
-
 /* Bar
 -----------------------------------------------------------------------------*/
 
 .bar {
-	background: #dddddd;
-	border-top: 1px solid rgba(255, 255, 255, 0.10);
-	border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+	background: -webkit-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 46px,
+		rgba(0, 0, 0, 0.05) 46px
+	), #ddd;
+	background: -moz-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 46px,
+		rgba(0, 0, 0, 0.05) 46px
+	), #ddd;
+	background: -ms-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 46px,
+		rgba(0, 0, 0, 0.05) 46px
+	), #ddd;
+	background: -o-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 46px,
+		rgba(0, 0, 0, 0.05) 46px
+	), #ddd;
+	background: linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 46px,
+		rgba(0, 0, 0, 0.05) 46px
+	), #ddd;
 	height: 48px;
 }
 
 .bar:after {
-	background: -webkit-gradient(
-		linear, left top, left bottom,
-		color-stop(10%,  rgba(0, 0, 0, 0.27)),
-		color-stop(15%,  rgba(0, 0, 0, 0.14)),
-		color-stop(30%,  rgba(0, 0, 0, 0.07)),
-		color-stop(40%,  rgba(0, 0, 0, 0.05)),
-		color-stop(50%,  rgba(0, 0, 0, 0.04)),
-		color-stop(60%,  rgba(0, 0, 0, 0.01)),
-		color-stop(100%, rgba(0, 0, 0, 0.00))
-	);
 	background: -webkit-linear-gradient(top,
-		rgba(0, 0, 0, 0.27) 10%,
-		rgba(0, 0, 0, 0.14) 15%,
-		rgba(0, 0, 0, 0.07) 30%,
-		rgba(0, 0, 0, 0.05) 40%,
-		rgba(0, 0, 0, 0.04) 50%,
-		rgba(0, 0, 0, 0.01) 60%,
-		rgba(0, 0, 0, 0.00) 100%
-	);
-	background-image: -moz-linear-gradient(top,
-		rgba(0, 0, 0, 0.27) 10%,
-		rgba(0, 0, 0, 0.14) 15%,
-		rgba(0, 0, 0, 0.07) 30%,
-		rgba(0, 0, 0, 0.05) 40%,
-		rgba(0, 0, 0, 0.04) 50%,
-		rgba(0, 0, 0, 0.01) 60%,
-		rgba(0, 0, 0, 0.00) 100%
-	);
-	background-image: -ms-linear-gradient(top,
-		rgba(0, 0, 0, 0.27) 10%,
-		rgba(0, 0, 0, 0.14) 15%,
-		rgba(0, 0, 0, 0.07) 30%,
-		rgba(0, 0, 0, 0.05) 40%,
-		rgba(0, 0, 0, 0.04) 50%,
-		rgba(0, 0, 0, 0.01) 60%,
-		rgba(0, 0, 0, 0.00) 100%
-	);
-	background-image: -o-linear-gradient(top,
-		rgba(0, 0, 0, 0.27) 10%,
-		rgba(0, 0, 0, 0.14) 15%,
-		rgba(0, 0, 0, 0.07) 30%,
-		rgba(0, 0, 0, 0.05) 40%,
-		rgba(0, 0, 0, 0.04) 50%,
-		rgba(0, 0, 0, 0.01) 60%,
-		rgba(0, 0, 0, 0.00) 100%
-	);
+		rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px,
+		rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px,
+		rgba(0, 0, 0, 0.07) 2px,
+		rgba(0, 0, 0, 0.05) 3px,
+		rgba(0, 0, 0, 0.03) 4px,
+		rgba(0, 0, 0, 0.02) 5px,
+		rgba(0, 0, 0, 0.01) 6px,
+		rgba(0, 0, 0, 0.00) 7px);
+	background: -moz-linear-gradient(top,
+		rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px,
+		rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px,
+		rgba(0, 0, 0, 0.07) 2px,
+		rgba(0, 0, 0, 0.05) 3px,
+		rgba(0, 0, 0, 0.03) 4px,
+		rgba(0, 0, 0, 0.02) 5px,
+		rgba(0, 0, 0, 0.01) 6px,
+		rgba(0, 0, 0, 0.00) 7px);
+	background: -ms-linear-gradient(top,
+		rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px,
+		rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px,
+		rgba(0, 0, 0, 0.07) 2px,
+		rgba(0, 0, 0, 0.05) 3px,
+		rgba(0, 0, 0, 0.03) 4px,
+		rgba(0, 0, 0, 0.02) 5px,
+		rgba(0, 0, 0, 0.01) 6px,
+		rgba(0, 0, 0, 0.00) 7px);
+	background: -o-linear-gradient(top,
+		rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px,
+		rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px,
+		rgba(0, 0, 0, 0.07) 2px,
+		rgba(0, 0, 0, 0.05) 3px,
+		rgba(0, 0, 0, 0.03) 4px,
+		rgba(0, 0, 0, 0.02) 5px,
+		rgba(0, 0, 0, 0.01) 6px,
+		rgba(0, 0, 0, 0.00) 7px);
 	background: linear-gradient(top,
-		rgba(0, 0, 0, 0.27) 10%,
-		rgba(0, 0, 0, 0.14) 15%,
-		rgba(0, 0, 0, 0.07) 30%,
-		rgba(0, 0, 0, 0.05) 40%,
-		rgba(0, 0, 0, 0.04) 50%,
-		rgba(0, 0, 0, 0.01) 60%,
-		rgba(0, 0, 0, 0.00) 100%
-	);
-	bottom: -12px;
+		rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px,
+		rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px,
+		rgba(0, 0, 0, 0.07) 2px,
+		rgba(0, 0, 0, 0.05) 3px,
+		rgba(0, 0, 0, 0.03) 4px,
+		rgba(0, 0, 0, 0.02) 5px,
+		rgba(0, 0, 0, 0.01) 6px,
+		rgba(0, 0, 0, 0.00) 7px);
+	bottom: -10px;
 	content: "";
 	display: block;
 	height: 10px;
 	left: 0px;
 	position: absolute;
-	width: 100%;
+	right: 0px;
 }
 
 .bar .bar-item {
@@ -218,12 +208,147 @@ input, select, textarea {
 	padding-right: 4px;
 }
 
-/* Inside View - Style Dark */
+/* Style Light */
 
-.view.style-dark .bar {
-	background: #222222;
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
-	border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+.bar.style-light {
+	background: -webkit-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #fff;
+	background: -moz-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #fff;
+	background: -ms-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #fff;
+	background: -o-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #fff;
+	background: linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #fff;
+	color: #222;
+}
+
+/* Style Dark */
+
+.bar.style-dark {
+	background: -webkit-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		rgba(0, 0, 0, 0.05) 45px
+	), #222;
+	background: -moz-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		rgba(0, 0, 0, 0.05) 45px
+	), #222;
+	background: -ms-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		rgba(0, 0, 0, 0.05) 45px
+	), #222;
+	background: -o-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		rgba(0, 0, 0, 0.05) 45px
+	), #222;
+	background: linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		rgba(0, 0, 0, 0.05) 45px
+	), #222;
+	color: #fff;
+}
+
+/* Style Light Blue */
+
+.bar.style-light-blue {
+	background: -webkit-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#0099cc 45px
+	), #33b5e5;
+	background: -moz-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#0099cc 45px
+	), #33b5e5;
+	background: -ms-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#0099cc 45px
+	), #33b5e5;
+	background: -o-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#0099cc 45px
+	), #33b5e5;
+	background: linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#0099cc 45px
+	), #33b5e5;
+	color: #fff;
+}
+
+/* Style Dark Blue */
+
+.bar.style-dark-blue {
+	background: -webkit-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #002e3e;
+	background: -moz-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #002e3e;
+	background: -ms-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #002e3e;
+	background: -o-linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #002e3e;
+	background: linear-gradient(top,
+		rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px,
+		rgba(0, 0, 0, 0) 1px,
+		rgba(0, 0, 0, 0) 45px,
+		#33b5e5 45px
+	), #002e3e;
 	color: #fff;
 }
 
@@ -261,31 +386,15 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .button {
-	background: rgba(153, 153, 153, 0.4);
-	border: 1px solid rgba(153, 153, 153, 0.15);
-	border-top: 1px solid rgba(255, 255, 255, 0.30);
-	border-bottom: 1px solid rgba(0, 0, 0, 0.30);
+	background: rgba(255, 0, 0, 0.5);
+	border: 1px solid #c8c8c8;
+	border-bottom: 1px solid #979797;
 	border-radius: 1px;
 	color: #333333;
 	font-size: 18px;
 	font-weight: normal;
 	height: 40px;
 	text-align: center;
-}
-
-.button:before {
-	-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-	   -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-	    -ms-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-	     -o-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-	        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-	bottom: -1px;
-	content: "";
-	display: block;
-	left: -1px;
-	position: absolute;
-	right: -1px;
-	top: -1px;
 }
 
 .button.is-disabled {
@@ -314,7 +423,7 @@ input, select, textarea {
 }
 
 .button .button-label {
-	-webkit-box-orient: horizontal;                               /* Important */
+	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
 	     -o-box-orient: horizontal;                              /* Important */
@@ -449,7 +558,7 @@ input, select, textarea {
 	background: rgba(51, 181, 229, 0.6);
 }
 
-/* Dark */
+/* Inside a View - Style Dark */
 
 .view.style-dark .list-item {
 	border-bottom: 1px solid #292929;
@@ -521,52 +630,39 @@ input, select, textarea {
 }
 
 .overlay {
-	background: url(../images/android/overlay-bg.png);
+	background: rgba(0, 0, 0, 0.6);
 }
 
 /* Alert
 -----------------------------------------------------------------------------*/
 
-.alert {
-
-	color: #fff;
-	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
-}
-
 .alert .alert-box {
-	-webkit-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
-	   -moz-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
-	    -ms-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
-	     -o-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
-	        box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
-	-webkit-border-image: url(../images/iOS/alert.png) 35 15 15 15 stretch;
-	   -moz-border-image: url(../images/iOS/alert.png) 35 15 15 15 stretch;
-	    -ms-border-image: url(../images/iOS/alert.png) 35 15 15 15 stretch;
-	     -o-border-image: url(../images/iOS/alert.png) 35 15 15 15 stretch;
-	        border-image: url(../images/iOS/alert.png) 35 15 15 15 stretch;
-	-webkit-border-radius: 12px;
-	   -moz-border-radius: 12px;
-	    -ms-border-radius: 12px;
-	     -o-border-radius: 12px;
-	        border-radius: 12px;
-	border-width: 15px;
-	border-top-width: 35px;
-	width: 280px;
+	-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
+	   -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
+	    -ms-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
+	     -o-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
+	        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
+	background: #292829;
+	color: #f7f3f7;
+	width: 290px;
 }
 
 .alert .alert-header {
+	border-bottom: 2px solid #24dfff;
+	color: #24caff;
 	font-size: 18px;
-	font-weight: bold;
-	margin-top: -19px;
-	margin-bottom: 11px;
+	font-weight: normal;
+	line-height: 20px;
+	padding: 15px;
 	text-align: center;
 }
 
 .alert .alert-content {
-	font-size: 16px;
+	border-bottom: 1px solid #424542;
+	font-size: 18px;
 	font-weight: normal;
 	line-height: 20px;
-	margin-bottom: 15px;
+	padding: 15px;
 	text-align: center;
 }
 
@@ -581,130 +677,100 @@ input, select, textarea {
 	display:     -ms-box;                                        /* Important */
 	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
-	margin-left: -5px;
-	margin-right: -5px;
-	margin-bottom: -5px;
 }
 
-.alert .alert-footer .button {
+.alert .button {
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
-	-webkit-border-image: url(../images/iOS/alert-button.png) 0 5 86 5 stretch stretch;
-	   -moz-border-image: url(../images/iOS/alert-button.png) 0 5 86 5 stretch stretch;
-	    -ms-border-image: url(../images/iOS/alert-button.png) 0 5 86 5 stretch stretch;
-	     -o-border-image: url(../images/iOS/alert-button.png) 0 5 86 5 stretch stretch;
-	        border-image: url(../images/iOS/alert-button.png) 0 5 86 5 stretch stretch;
-	-webkit-border-radius: 0px;
-	   -moz-border-radius: 0px;
-	    -ms-border-radius: 0px;
-	     -o-border-radius: 0px;
-	        border-radius: 0px;
-	background: none;
-	border-width: 0px 5px;
-	color: #fff;
-	font-size: 18px;
-	font-weight: bold;
-	height: 43px;
-	line-height: 42px;
-	margin-bottom: 5px;
-	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
-	text-align: center;
+	background: transparent;
+	border: none;
+	border-radius: 0px;
+	color: #ffffff;
+	height: 47px;
 }
 
-.alert .alert-footer .button:last-child {
-	margin-bottom: 0px;
+/* Focused */
+.alert .button.is-selected {
+	background: #a6daed;
+	border: 2px solid #30abd4;
 }
 
-.alert .alert-footer .button.default {
-	-webkit-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 stretch stretch;
-	   -moz-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 stretch stretch;
-	    -ms-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 stretch stretch;
-	     -o-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 stretch stretch;
-	        border-image: url(../images/iOS/alert-button.png) 43 5 43 5 stretch stretch;
-}
-
-.alert .alert-footer .button.is-selected,
-.alert .alert-footer .button.is-highlighted {
-	-webkit-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 stretch stretch;
-	   -moz-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 stretch stretch;
-	    -ms-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 stretch stretch;
-	     -o-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 stretch stretch;
-	        border-image: url(../images/iOS/alert-button.png) 86 5 0 5 stretch stretch;
+/* Pressed */
+.alert .button.is-highlighted {
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	    -ms-box-shadow: none;
+	     -o-box-shadow: none;
+	        box-shadow: none;
+	background: rgba(51, 181, 229, 0.8);
+	color: #333333;
 }
 
 /* Show Animation */
 
-@-webkit-keyframes anim-show-alert-ios {
-	0%   { -webkit-transform: scale(0.6); opacity: 0; }
-	45%  { -webkit-transform: scale(1.1); opacity: 1; }
-	75%  { -webkit-transform: scale(0.9); }
-	100% { -webkit-transform: scale(1.0); }
+@-webkit-keyframes anim-show-alert-android {
+	from { -webkit-transform: scale(0.5); opacity: 0; }
+	99%  { -webkit-transform: scale(1.0); opacity: 1; }
+	to   {}
 }
-@-moz-keyframes anim-show-alert-ios {
-	0%   { -webkit-transform: scale(0.6); opacity: 0; }
-	45%  { -webkit-transform: scale(1.1); opacity: 1; }
-	75%  { -webkit-transform: scale(0.9); }
-	100% { -webkit-transform: scale(1.0); }
+@-moz-keyframes anim-show-alert-android {
+	from { -webkit-transform: scale(0.6); opacity: 0; }
+	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
-@-ms-keyframes anim-show-alert-ios {
-	0%   { -webkit-transform: scale(0.6); opacity: 0; }
-	45%  { -webkit-transform: scale(1.1); opacity: 1; }
-	75%  { -webkit-transform: scale(0.9); }
-	100% { -webkit-transform: scale(1.0); }
+@-ms-keyframes anim-show-alert-android {
+	from { -webkit-transform: scale(0.6); opacity: 0; }
+	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
-@-o-keyframes anim-show-alert-ios {
-	0%   { -webkit-transform: scale(0.6); opacity: 0; }
-	45%  { -webkit-transform: scale(1.1); opacity: 1; }
-	75%  { -webkit-transform: scale(0.9); }
-	100% { -webkit-transform: scale(1.0); }
+@-o-keyframes anim-show-alert-android {
+	from { -webkit-transform: scale(0.6); opacity: 0; }
+	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
-@keyframes anim-show-alert-ios {
-	0%   { -webkit-transform: scale(0.6); opacity: 0; }
-	45%  { -webkit-transform: scale(1.1); opacity: 1; }
-	75%  { -webkit-transform: scale(0.9); }
-	100% { -webkit-transform: scale(1.0); }
+@keyframes anim-show-alert-android {
+	from { -webkit-transform: scale(0.6); opacity: 0; }
+	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
 
 .alert.show-animated .alert-box {
-	-webkit-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	   -moz-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	    -ms-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	     -o-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	        animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
 }
 
 /* Hide Animation */
 
-@-webkit-keyframes anim-hide-alert-ios {
+@-webkit-keyframes anim-hide-alert-android {
+	from { opacity: 1; }
+	99%  { opacity: 0; }
+	to   {}
+}
+@-moz-keyframes anim-hide-alert-android {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-moz-keyframes anim-hide-alert-ios {
+@-ms-keyframes anim-hide-alert-android {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-ms-keyframes anim-hide-alert-ios {
+@-o-keyframes anim-hide-alert-android {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-o-keyframes anim-hide-alert-ios {
-	from { opacity: 1; }
-	to   { opacity: 0; }
-}
-@keyframes anim-hide-alert-ios {
+@keyframes anim-hide-alert-android {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
 
 .alert.hide-animated .alert-box {
-	-webkit-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	   -moz-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	    -ms-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	     -o-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	        animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	-webkit-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	   -moz-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	    -ms-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	     -o-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	        animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
 }
 
 /* Horizontal Button Layout */
@@ -717,54 +783,8 @@ input, select, textarea {
 	        box-orient: horizontal;
 }
 
-.alert.button-layout-horizontal .alert-footer .button {
-	margin: 0px;
-	margin-left: 4px;
-	margin-right: 4px;
-}
-
 .alert.button-layout-horizontal .alert-footer .button:first-child { margin-left: 0px; }
 .alert.button-layout-horizontal .alert-footer .button:last-child  { margin-right: 0px; }
-
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
-
-	.alert .alert-box {
-		-webkit-border-image: url(../images/iOS/alert-2x.png) 70 30 30 30 stretch;
-		   -moz-border-image: url(../images/iOS/alert-2x.png) 70 30 30 30 stretch;
-		    -ms-border-image: url(../images/iOS/alert-2x.png) 70 30 30 30 stretch;
-		     -o-border-image: url(../images/iOS/alert-2x.png) 70 30 30 30 stretch;
-		        border-image: url(../images/iOS/alert-2x.png) 70 30 30 30 stretch;
-	}
-
-	.alert .alert-footer .button {
-		-webkit-border-image: url(../images/iOS/alert-button-2x.png) 0 10 173 10 stretch stretch;
-		   -moz-border-image: url(../images/iOS/alert-button-2x.png) 0 10 173 10 stretch stretch;
-		    -ms-border-image: url(../images/iOS/alert-button-2x.png) 0 10 173 10 stretch stretch;
-		     -o-border-image: url(../images/iOS/alert-button-2x.png) 0 10 173 10 stretch stretch;
-		        border-image: url(../images/iOS/alert-button-2x.png) 0 10 173 10 stretch stretch;
-	}
-
-	.alert .alert-footer .button.default {
-		-webkit-border-image: url(../images/iOS/alert-button-2x.png) 86 10 87 10 stretch stretch;
-		   -moz-border-image: url(../images/iOS/alert-button-2x.png) 86 10 87 10 stretch stretch;
-		    -ms-border-image: url(../images/iOS/alert-button-2x.png) 86 10 87 10 stretch stretch;
-		     -o-border-image: url(../images/iOS/alert-button-2x.png) 86 10 87 10 stretch stretch;
-		        border-image: url(../images/iOS/alert-button-2x.png) 86 10 87 10 stretch stretch;
-	}
-
-	.alert .alert-footer .button.is-selected,
-	.alert .alert-footer .button.is-highlighted {
-		-webkit-border-image: url(../images/iOS/alert-button-2x.png) 173 10 0 10 stretch stretch;
-		   -moz-border-image: url(../images/iOS/alert-button-2x.png) 173 10 0 10 stretch stretch;
-		    -ms-border-image: url(../images/iOS/alert-button-2x.png) 173 10 0 10 stretch stretch;
-		     -o-border-image: url(../images/iOS/alert-button-2x.png) 173 10 0 10 stretch stretch;
-		        border-image: url(../images/iOS/alert-button-2x.png) 173 10 0 10 stretch stretch;
-	}
-}
 
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
@@ -778,18 +798,6 @@ input, select, textarea {
 	background: url(../images/iOS/activity-indicator.png);
 	height: 21px;
 	width: 21px;
-}
-
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
-
-	.activity-indicator {
-		background-image: url(../images/iOS/activity-indicator-2x.png);
-		background-size: 21px 20px;
-	}
 }
 
 /* Slider
@@ -817,21 +825,3 @@ input, select, textarea {
 	margin-top: -6px;
 	width: 24px;
 }
-
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
-
-	.slider-track {
-		background-image: url(../images/iOS/slider-track-2x.png);
-		background-size: 2048px 9px;
-	}
-
-	.slider-thumb {
-		background-image: url(../images/iOS/slider-thumb-2x.png);
-		background-size: 24px 24px;
-	}
-}
-
