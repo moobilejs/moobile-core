@@ -127,8 +127,6 @@ Moobile.Component.defineStyle('light-blue', Moobile.Bar, {
 	detach: function(element) { element.removeClass('style-light-blue'); }
 });
 
-/* android only */
-
 Moobile.Component.defineStyle('dark-blue', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark-blue'); },
 	detach: function(element) { element.removeClass('style-dark-blue'); }
