@@ -166,14 +166,25 @@ Moobile.Component = new Class({
 	 */
 	build: function() {
 
+		var owner = this;
+		var roles = this.__roles__;
+		var attrs = this.__attributes__;
+
+		for (var key in attrs) {
+			var value = this.element.get(key);
+			if (value !== null) {
+				var handler = attrs[key];
+				if (handler instanceof Function) {
+					handler.call(this, value);
+				}
+			}
+		}
+
 		var className = this.options.className;
 		if (className) this.addClass(className);
 
 		var styleName = this.options.styleName
 		if (styleName) this.setStyle(styleName);
-
-		var owner = this;
-		var roles = this.__roles__;
 
 		this.getRoleElements().each(function(element) {
 			var handler = roles[element.getRole()].handler;
@@ -1034,12 +1045,27 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
 	};
 };
 
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineAttribute
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.Component.defineAttribute = function(name, target, handler) {
+	var context = (target || Moobile.Component).prototype;
+	if (context.__attributes__ === undefined) {
+		context.__attributes__ = {};
+	}
+	context.__attributes__[name] = handler;
+};
+
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component#defineStyle
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
-Moobile.Component.defineStyle = function(name, target, behavior) {
+Moobile.Component.defineStyle = function(name, target, handler) {
 	var context = (target || Moobile.Component).prototype;
 	if (context.__styles__ === undefined) {
 		context.__styles__ = {};
@@ -1048,7 +1074,7 @@ Moobile.Component.defineStyle = function(name, target, behavior) {
 		name: name,
 		attach: function() {},
 		detach: function() {}
-	}, behavior);
+	}, handler);
 };
 
 /**
@@ -1112,3 +1138,7 @@ Moobile.Component.addNativeEvent('animationend');
 Moobile.Component.addNativeEvent('transitionend');
 
 })();
+
+Moobile.Component.defineAttribute('data-style', null, function(value) {
+	this.options.styleName = value;
+});
