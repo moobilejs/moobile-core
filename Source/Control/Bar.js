@@ -115,19 +115,16 @@ Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-Moobile.Component.defineStyle('light', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-light'); },
-	detach: function(element) { element.removeClass('style-light'); }
-});
+// TODO add styles for all ios colors
 
 /* android only */
 
-Moobile.Component.defineStyle('light-blue', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-light-blue'); },
-	detach: function(element) { element.removeClass('style-light-blue'); }
+Moobile.Component.defineStyle('contextual', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-contextual'); },
+	detach: function(element) { element.removeClass('style-contextual'); }
 });
 
-Moobile.Component.defineStyle('dark-blue', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-dark-blue'); },
-	detach: function(element) { element.removeClass('style-dark-blue'); }
+Moobile.Component.defineStyle('contextual-dark', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-contextual-dark'); },
+	detach: function(element) { element.removeClass('style-contextual-dark'); }
 });
