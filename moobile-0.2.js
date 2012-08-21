@@ -2615,20 +2615,12 @@ Moobile.Component = new Class({
 		options = options || {};
 
 		for (var option in this.options) {
-			if (options[option] !== undefined) break;
-			var attrb = option.hyphenate();
-			var value = this.element.get('data-option-' + attrb);
-			if (value != null) {
-				if (value === 'null') {
-					value = null;
-				} else if (value === 'false') {
-					value = false;
-				} else if (value === 'true') {
-					value = true
-				} else if (/^-{0,1}\d*\.{0,1}\d+$/.test(value)) {
-					value = Number(value);
+			if (options[option] === undefined) {
+				var value = this.element.get('data-option-' + option.hyphenate());
+				if (value !== null) {
+					try { value = JSON.parse(value) } catch (e) {}
+					options[option] = value;
 				}
-				options[option] = value;
 			}
 		}
 
@@ -3255,15 +3247,15 @@ Moobile.Component = new Class({
 					continue;
 				}
 
-				if (name === role || !name) found.push(node);
+				var behavior = roles[role];
+				if (behavior) {
 
-				var behavior = roles[role] || null;
-				if (behavior === undefined) {
-					throw new Error('Role ' + role + ' has not beed defined for this component.');
-				}
+					if (name === role || !name) found.push(node);
 
-				if (behavior.options.traversable) {
-					walk(node);
+					if (behavior.options.traversable) {
+						walk(node);
+						continue;
+					}
 				}
 			}
 		};
@@ -4479,7 +4471,7 @@ Moobile.NavigationBar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('navigation-bar', null, function(element) {
+Moobile.Component.defineRole('navigation-bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
 });
 
@@ -4648,11 +4640,11 @@ Moobile.NavigationBarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('item', Moobile.NavigationBar, function(element) {
+Moobile.Component.defineRole('item', Moobile.NavigationBar, null, function(element) {
 	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
 });
 
-Moobile.Component.defineRole('title', Moobile.NavigationBarItem, function(element) {
+Moobile.Component.defineRole('title', Moobile.NavigationBarItem, null, function(element) {
 	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });
 
@@ -5476,6 +5468,56 @@ Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 	detach: function(element) { element.removeClass('style-detailed'); }
 });
 
+
+/*
+---
+
+name: ListItemHeader
+
+description: Provides a list item header control.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ListItem
+
+provides:
+	- ListItemHeader
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/ListItemHEader
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.ListItemHeader = new Class({
+
+	Extends: Moobile.ListItem,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('list-item-header');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+Moobile.Component.defineRole('list-item-header', Moobile.List, null, function(element) {
+	this.addItem(Moobile.Component.create(Moobile.ListItemHeader, element, 'data-list-item-header'));
+});
 
 /*
 ---
@@ -7034,6 +7076,54 @@ Element.defineCustomEvent('mousedown', {
 /*
 ---
 
+name: Event.HashChange
+
+description: Provides history based events
+
+license: MIT-style license.
+
+author:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Custom-Event/Element.defineCustomEvent
+
+provides:
+	- Event.HashChange
+
+...
+*/
+
+(function() {
+
+var count = 0;
+var timer = null;
+var value = null;
+
+var check = function() {
+	var hash = location.hash;
+	if (hash !== value) {
+		value = location.hash;
+		window.fireEvent('hashchange', value.indexOf('#') == 0 ? value.substr(1) : value);
+	}
+};
+
+Element.defineCustomEvent('hashchange', {
+
+	onSetup: function() {
+		if (++count === 0) timer = check.periodical(200);
+	},
+
+	onTeardown: function() {
+		if (--count === 0) clearTimeout(timer);
+	}
+});
+
+})();
+
+/*
+---
+
 name: Request
 
 description: Provides a request that allow loading files locally.
@@ -8184,7 +8274,7 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('content') /*<0.1-compat>*/ || this.getRoleElement('view-content') /*</0.1-compat>*/;
+		var content = this.getRoleElement('content');
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
@@ -8192,7 +8282,7 @@ Moobile.View = new Class({
 			content.setRole('content');
 		}
 
-		var wrapper = this.getRoleElement('content-wrapper') /*<0.1-compat>*/ || this.getRoleElement('view-content-wrapper') /*</0.1-compat>*/;
+		var wrapper = this.getRoleElement('content-wrapper');
 		if (wrapper === null) {
 			wrapper = document.createElement('div');
 			wrapper.wraps(content);
@@ -8998,6 +9088,13 @@ Moobile.ViewController = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_id: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_name: null,
@@ -9401,6 +9498,25 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getId
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getId: function() {
+
+		var name = this.getName();
+		if (name) {
+			return name;
+		}
+
+		if (this._id === null) {
+			this._id = String.uniqueID();
+		}
+
+		return this._id;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -9799,6 +9915,26 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	viewDidLoad: function() {
+		this.parent();
+		window.addEvent('hashchange', this.bound('onHashChange'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	destroy: function() {
+		window.removeEvent('hashchange', this.bound('onHashChange'));
+		this.parent();
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#pushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -9839,6 +9975,8 @@ Moobile.ViewControllerStack = new Class({
 		);
 
 		viewControllerPushed.setViewTransition(viewTransition);
+
+		window.location.hash = viewControllerPushed.getId();
 
 		return this;
 	},
@@ -9910,6 +10048,8 @@ Moobile.ViewControllerStack = new Class({
 			viewControllerPopped.getView(),
 			this.view
 		);
+
+		window.location.hash = viewControllerBefore.getId();
 
 		return this;
 	},
@@ -10043,6 +10183,26 @@ Moobile.ViewControllerStack = new Class({
 	 */
 	didPopViewController: function(viewController) {
 
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	onHashChange: function(hash) {
+
+		if (this.getTopViewController().getId() === hash)
+			return;
+
+		var viewControllers = this.getChildViewControllers();
+		for (var i = 0; i< viewControllers.length; i++) {
+			var viewController = viewControllers[i];
+			if (viewController.getId() === hash) {
+				this.popViewControllerUntil(viewController);
+				break;
+			}
+		}
 	}
 
 });
