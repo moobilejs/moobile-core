@@ -126,20 +126,12 @@ Moobile.Component = new Class({
 		options = options || {};
 
 		for (var option in this.options) {
-			if (options[option] !== undefined) break;
-			var attrb = option.hyphenate();
-			var value = this.element.get('data-option-' + attrb);
-			if (value != null) {
-				if (value === 'null') {
-					value = null;
-				} else if (value === 'false') {
-					value = false;
-				} else if (value === 'true') {
-					value = true
-				} else if (/^-{0,1}\d*\.{0,1}\d+$/.test(value)) {
-					value = Number(value);
+			if (options[option] === undefined) {
+				var value = this.element.get('data-option-' + option.hyphenate());
+				if (value !== null) {
+					try { value = JSON.parse(value) } catch (e) {}
+					options[option] = value;
 				}
-				options[option] = value;
 			}
 		}
 
@@ -766,15 +758,15 @@ Moobile.Component = new Class({
 					continue;
 				}
 
-				if (name === role || !name) found.push(node);
+				var behavior = roles[role];
+				if (behavior) {
 
-				var behavior = roles[role] || null;
-				if (behavior === undefined) {
-					throw new Error('Role ' + role + ' has not beed defined for this component.');
-				}
+					if (name === role || !name) found.push(node);
 
-				if (behavior.options.traversable) {
-					walk(node);
+					if (behavior.options.traversable) {
+						walk(node);
+						continue;
+					}
 				}
 			}
 		};
