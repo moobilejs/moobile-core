@@ -241,11 +241,11 @@ input, select, textarea {
 	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
 	left: 0px;                                                   /* Important */
-	min-height: 100%;                                            /* Important */
-	min-width: 100%;                                             /* Important */
+	height: 100%;                                                /* Important */
 	overflow: hidden;                                            /* Important */
 	position: absolute;                                          /* Important */
 	top: 0px;                                                    /* Important */
+	width: 100%;                                                 /* Important */
 }
 
 .view.enable {
@@ -254,6 +254,16 @@ input, select, textarea {
 
 .view.disable {
 	pointer-events: none;				 						/* Important */
+}
+
+/* Scroll View
+-----------------------------------------------------------------------------*/
+
+.view.scroll-view .view-content.scroll-view-content {
+	height: auto;                                                /* Important */
+	min-height: 100%;                                            /* Important */
+	min-width: 100%;                                             /* Important */
+	width: auto;                                                 /* Important */
 }
 
 /* View Stack
