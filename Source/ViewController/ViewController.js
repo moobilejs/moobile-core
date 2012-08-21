@@ -33,6 +33,13 @@ Moobile.ViewController = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_id: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_name: null,
@@ -433,6 +440,25 @@ Moobile.ViewController = new Class({
 	 */
 	getName: function() {
 		return this._name;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getId
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getId: function() {
+
+		var name = this.getName();
+		if (name) {
+			return name;
+		}
+
+		if (this._id === null) {
+			this._id = String.uniqueID();
+		}
+
+		return this._id;
 	},
 
 	/**
