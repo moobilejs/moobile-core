@@ -36,7 +36,7 @@ var check = function() {
 Element.defineCustomEvent('hashchange', {
 
 	onSetup: function() {
-		if (++count === 0) timer = check.periodical(200);
+		if (++count === 1) timer = check.periodical(200);
 	},
 
 	onTeardown: function() {
