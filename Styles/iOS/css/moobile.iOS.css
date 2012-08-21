@@ -134,7 +134,7 @@ input, select, textarea {
 	height: 100%;
 }
 
-/* Dark */
+/* Style Dark */
 
 .bar.style-dark {
 	background-position: 0px -88px;
@@ -145,16 +145,14 @@ input, select, textarea {
 /* Bar (Retina Display)
 -----------------------------------------------------------------------------*/
 
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
 	.bar {
 		background-image: url(../images/iOS/bar-2x.png);
 		background-size: 100px 176px
 	}
+
+	/* Style Dark */
 
 	.bar.style-dark .bar {
 		background-position: 0px -88px;
@@ -197,9 +195,6 @@ input, select, textarea {
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
-
-/* Button Group
------------------------------------------------------------------------------*/
 
 /* Button
 -----------------------------------------------------------------------------*/
@@ -258,7 +253,7 @@ input, select, textarea {
 	white-space: nowrap;                                         /* Important */
 }
 
-/* Inside a Group (Horizontal) */
+/* Inside a Button Group */
 
 .button-group .button {
 	border-radius: 0px;
@@ -276,7 +271,7 @@ input, select, textarea {
 	border-bottom-right-radius: 10px;
 }
 
-/* Inside a Group (Vertical) */
+/* Inside a Button Group Style Vertical */
 
 .button-group.style-vertical .button {
     border-radius: 0px;
@@ -345,7 +340,7 @@ input, select, textarea {
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-/* Inside a Bar (Dark) */
+/* Inside a Bar Style Dark */
 
 .bar.style-dark .bar .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
@@ -364,7 +359,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
 }
 
-/* Inside a Bar + Back */
+/* Inside a Bar + Style Back */
 
 .bar .button.style-back {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 240 5 1730 13 fill stretch stretch;
@@ -385,7 +380,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 270 5 1700 13 fill stretch stretch;
 }
 
-/* Inside a Bar (Dark) + Back */
+/* Inside a Bar Style Dark + Style Back */
 
 .bar.style-dark .bar .button.style-back {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 600 5 1370 13 fill stretch stretch;
@@ -406,7 +401,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 630 5 1340 13 fill stretch stretch;
 }
 
-/* Inside a Bar + Forward */
+/* Inside a Bar + Style Forward */
 
 .bar .button.style-forward {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 300 13 1670 5 fill stretch stretch;
@@ -427,7 +422,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 330 13 1640 5 fill stretch stretch;
 }
 
-/* Inside a Bar (Dark) + Forward */
+/* Inside a Bar Style Dark + Style Forward */
 
 .bar.style-dark .bar .button.style-forward {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 660 13 1310 5 fill stretch stretch;
@@ -448,7 +443,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 690 13 1280 5 fill stretch stretch;
 }
 
-/* Inside a Bar + Active */
+/* Inside a Bar + Style Active */
 
 .bar .button.style-active {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 720 5 1250 fill stretch stretch;
@@ -467,7 +462,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 750 5 1220 fill stretch stretch;
 }
 
-/* Inside a Bar + Warning */
+/* Inside a Bar + Style Warning */
 
 .bar .button.style-warning {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 960 5 1010 fill stretch stretch;
@@ -486,7 +481,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 990 5 980 fill stretch stretch;
 }
 
-/* Inside a Bar + Grouped */
+/* Inside a Bar + Inside a Button Group */
 
 .bar .button-group .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 60 1 1910 1 fill stretch stretch;
@@ -546,7 +541,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 210 5 1760 1 fill stretch stretch;
 }
 
-/* Inside a Bar (Dark) + Grouped */
+/* Inside a Bar Style Dark + Inside a Button Group */
 
 .bar.style-dark .bar .button-group .button {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 420 1 1550 1 fill stretch stretch;
@@ -599,7 +594,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 570 5 1400 1 fill stretch stretch;
 }
 
-/* Inside a Bar + Grouped + Active */
+/* Inside a Bar + Inside a Button Group + Style Active */
 
 .bar .button-group .button.style-active {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 780 1 1190 1 fill stretch stretch;
@@ -659,7 +654,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 930 5 1040 1 fill stretch stretch;
 }
 
-/* Inside a Bar + Grouped + Warning */
+/* Inside a Bar + Inside a Button Group + Style Warning */
 
 .bar .button-group .button.style-warning {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 1020 1 950 1 fill stretch stretch;
@@ -719,11 +714,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 1170 5 800 1 fill stretch stretch;
 }
 
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
 	/* Inside a Bar */
 
@@ -744,7 +735,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 60 10 3880 fill stretch stretch;
 	}
 
-	/* Inside a Bar (Dark) */
+	/* Inside a Bar Style Dark */
 
 	.bar.style-dark .bar .button {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 360 5 1610 fill stretch stretch;
@@ -763,7 +754,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button.png) 390 5 1580 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Back */
+	/* Inside a Bar + Style Back */
 
 	.bar .button.style-back {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 480 10 3460 26 fill stretch stretch;
@@ -782,7 +773,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 540 10 3400 26 fill stretch stretch;
 	}
 
-	/* Inside a Bar (Dark) + Back */
+	/* Inside a Bar Style Dark + Style Back */
 
 	.bar.style-dark .bar .button.style-back {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
@@ -801,7 +792,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Forward */
+	/* Inside a Bar + Style Forward */
 
 	.bar .button.style-forward {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 600 26 3340 10 fill stretch stretch;
@@ -820,7 +811,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 660 26 3280 10 fill stretch stretch;
 	}
 
-	/* Inside a Bar (Dark) + Forward */
+	/* Inside a Bar Style Dark + Style Forward */
 
 	.bar.style-dark .bar .button.style-forward {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
@@ -839,7 +830,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Active */
+	/* Inside a Bar + Style Active */
 
 	.bar .button.style-active {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 720 5 1250 fill stretch stretch;
@@ -858,7 +849,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button.png) 750 5 1220 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Warning */
+	/* Inside a Bar + Style Warning */
 
 	.bar .button.style-warning {
 		-webkit-border-image: url(../images/iOS/bar-button.png) 960 5 1010 fill stretch stretch;
@@ -877,7 +868,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button.png) 990 5 980 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Grouped */
+	/* Inside a Bar + Inside a Button Group */
 
 	.bar .button-group .button {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -930,7 +921,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	/* Inside a Bar (Dark) + Grouped */
+	/* Inside a Bar Style Dark + Inside a Button Group */
 
 	.bar.style-dark .bar .button-group .button {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -983,7 +974,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Grouped + Active */
+	/* Inside a Bar + Inside a Button Group + Style Active */
 
 	.bar .button-group .button.style-active {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -1043,7 +1034,7 @@ input, select, textarea {
 		        border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Grouped + Warning */
+	/* Inside a Bar + Inside a Button Group + Style Warning */
 
 	.bar .button-group .button.style-warning {
 		-webkit-border-image: url(../images/iOS/bar-button-2x.png) 720 10 3220 fill stretch stretch;
@@ -1106,7 +1097,7 @@ input, select, textarea {
 	border-right: none;
 }
 
-/* Grouped Style */
+/* Style Grouped */
 
 .list.style-grouped {
 	-webkit-background-clip: padding-box;
@@ -1116,39 +1107,6 @@ input, select, textarea {
 	        background-clip: padding-box;
 	border-radius: 8px;
 	margin-bottom: 24px;
-}
-
-.list.style-grouped .list-item {
-	background: #fff;
-	border: 1px solid #bbb;
-	border-bottom: none;
-}
-
-.list.style-grouped .list-item:first-child {
-	-webkit-border-top-left-radius: 8px;
-	   -moz-border-top-left-radius: 8px;
-	    -ms-border-top-left-radius: 8px;
-	     -o-border-top-left-radius: 8px;
-	        border-top-left-radius: 8px;
-	-webkit-border-top-right-radius: 8px;
-	   -moz-border-top-right-radius: 8px;
-	    -ms-border-top-right-radius: 8px;
-	     -o-border-top-right-radius: 8px;
-	        border-top-right-radius: 8px;
-}
-
-.list.style-grouped .list-item:last-child {
-	-webkit-border-bottom-left-radius: 8px;
-	   -moz-border-bottom-left-radius: 8px;
-	    -ms-border-bottom-left-radius: 8px;
-	     -o-border-bottom-left-radius: 8px;
-	        border-bottom-left-radius: 8px;
-	-webkit-border-bottom-right-radius: 8px;
-	   -moz-border-bottom-right-radius: 8px;
-	    -ms-border-bottom-right-radius: 8px;
-	     -o-border-bottom-right-radius: 8px;
-	        border-bottom-right-radius: 8px;
-	border: 1px solid #bbb;
 }
 
 /* List Item
@@ -1169,7 +1127,7 @@ input, select, textarea {
 }
 
 .list-item .list-item-label {
-	-webkit-box-orient: horizontal;                               /* Important */
+	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
 	     -o-box-orient: horizontal;                              /* Important */
@@ -1236,6 +1194,7 @@ input, select, textarea {
 
 .list-item.is-selected,
 .list-item.is-highlighted {
+	/* TODO: Use new syntax */;
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6)) !important;
 	background:    -moz-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6)) !important;
 	background:     -ms-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6)) !important;
@@ -1254,7 +1213,7 @@ input, select, textarea {
 	width: 30px;
 }
 
- /* Checked, Detailed, Disclosed */
+ /* Style Checked, Style Detailed, Style Disclosed */
 
 .list-item.style-checked   .list-item-detail,
 .list-item.style-detailed  .list-item-detail,
@@ -1269,7 +1228,7 @@ input, select, textarea {
 	background-repeat: no-repeat;
 }
 
-/* Checked */
+/* Style Checked */
 
 .list-item.style-checked .list-item-detail:after {
 	background-position: -60px center;
@@ -1280,7 +1239,7 @@ input, select, textarea {
 	background-position: -90px center;
 }
 
-/* Detailed */
+/* Style Detailed */
 
 .list-item.style-detailed .list-item-detail:after {
 	background-position: -120px center;
@@ -1291,7 +1250,7 @@ input, select, textarea {
 	background-position: -120px center;
 }
 
-/* Disclosed */
+/* Style Disclosed */
 
 .list-item.style-disclosed .list-item-detail:after {
 	background-position: 0px center;
@@ -1302,16 +1261,44 @@ input, select, textarea {
 	background-position: -30px center;
 }
 
-/* List Item (Retina)
------------------------------------------------------------------------------*/
+/* Inside a List Style Grouped */
 
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
+.list.style-grouped .list-item {
+	background: #fff;
+	border: 1px solid #bbb;
+	border-bottom: none;
+}
 
-    /* Checked, Detailed, Disclosed */
+.list.style-grouped .list-item:first-child {
+	-webkit-border-top-left-radius: 8px;
+	   -moz-border-top-left-radius: 8px;
+	    -ms-border-top-left-radius: 8px;
+	     -o-border-top-left-radius: 8px;
+	        border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+	   -moz-border-top-right-radius: 8px;
+	    -ms-border-top-right-radius: 8px;
+	     -o-border-top-right-radius: 8px;
+	        border-top-right-radius: 8px;
+}
+
+.list.style-grouped .list-item:last-child {
+	-webkit-border-bottom-left-radius: 8px;
+	   -moz-border-bottom-left-radius: 8px;
+	    -ms-border-bottom-left-radius: 8px;
+	     -o-border-bottom-left-radius: 8px;
+	        border-bottom-left-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	   -moz-border-bottom-right-radius: 8px;
+	    -ms-border-bottom-right-radius: 8px;
+	     -o-border-bottom-right-radius: 8px;
+	        border-bottom-right-radius: 8px;
+	border: 1px solid #bbb;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+
+    /* Style Checked, Style Detailed, Style Disclosed */
 
 	.list-item.style-checked   .list-item-detail:after,
 	.list-item.style-detailed  .list-item-detail:after,
@@ -1320,6 +1307,29 @@ input, select, textarea {
 		background-size: 150px 30px;
 	}
 }
+
+/* List Item Header
+-----------------------------------------------------------------------------*/
+
+.list-item.list-item-header {
+	background: url(../images/iOS/list-item-header.png) !important;
+	border: none;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	height: 23px;
+	padding: 0px 15px;
+	pointer-events: none;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.list-item.list-item-header.is-selected,
+.list-item.list-item-header.is-highlighted {
+	background: url(../images/iOS/list-item-header.png) !important;
+	border: none;
+}
+
+/* Style Grouped */
 
 /* Overlay
 -----------------------------------------------------------------------------*/
@@ -1528,11 +1538,7 @@ input, select, textarea {
 .alert.button-layout-horizontal .alert-footer .button:first-child { margin-left: 0px; }
 .alert.button-layout-horizontal .alert-footer .button:last-child  { margin-right: 0px; }
 
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
 	.alert .alert-box {
 		-webkit-border-image: url(../images/iOS/alert-2x.png) 70 30 30 30 stretch;
@@ -1582,11 +1588,7 @@ input, select, textarea {
 	width: 21px;
 }
 
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
 	.activity-indicator {
 		background-image: url(../images/iOS/activity-indicator-2x.png);
@@ -1612,11 +1614,7 @@ input, select, textarea {
 	width: 24px;
 }
 
-@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   -moz-min-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1),
-    only screen and (        min-device-pixel-ratio: 2) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
 	.slider-track {
 		background-image: url(../images/iOS/slider-track-2x.png);
