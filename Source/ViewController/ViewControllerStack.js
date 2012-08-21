@@ -45,6 +45,26 @@ Moobile.ViewControllerStack = new Class({
 	},
 
 	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	viewDidLoad: function() {
+		this.parent();
+		window.addEvent('hashchange', this.bound('onHashChange'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	destroy: function() {
+		window.removeEvent('hashchange', this.bound('onHashChange'));
+		this.parent();
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerStack#pushViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -85,6 +105,8 @@ Moobile.ViewControllerStack = new Class({
 		);
 
 		viewControllerPushed.setViewTransition(viewTransition);
+
+		window.location.hash = viewControllerPushed.getId();
 
 		return this;
 	},
@@ -156,6 +178,8 @@ Moobile.ViewControllerStack = new Class({
 			viewControllerPopped.getView(),
 			this.view
 		);
+
+		window.location.hash = viewControllerBefore.getId();
 
 		return this;
 	},
@@ -289,6 +313,26 @@ Moobile.ViewControllerStack = new Class({
 	 */
 	didPopViewController: function(viewController) {
 
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	onHashChange: function(hash) {
+
+		if (this.getTopViewController().getId() === hash)
+			return;
+
+		var viewControllers = this.getChildViewControllers();
+		for (var i = 0; i< viewControllers.length; i++) {
+			var viewController = viewControllers[i];
+			if (viewController.getId() === hash) {
+				this.popViewControllerUntil(viewController);
+				break;
+			}
+		}
 	}
 
 });
