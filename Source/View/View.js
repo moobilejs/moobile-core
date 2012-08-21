@@ -71,7 +71,7 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('content') /*<0.1-compat>*/ || this.getRoleElement('view-content') /*</0.1-compat>*/;
+		var content = this.getRoleElement('content');
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
@@ -79,7 +79,7 @@ Moobile.View = new Class({
 			content.setRole('content');
 		}
 
-		var wrapper = this.getRoleElement('content-wrapper') /*<0.1-compat>*/ || this.getRoleElement('view-content-wrapper') /*</0.1-compat>*/;
+		var wrapper = this.getRoleElement('content-wrapper');
 		if (wrapper === null) {
 			wrapper = document.createElement('div');
 			wrapper.wraps(content);
