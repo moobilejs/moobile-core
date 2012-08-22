@@ -81,7 +81,7 @@ Moobile.Button = new Class({
 			return this;
 
 		label = label || '';
-		if (typeof label || '' === 'string') {
+		if (typeof label === 'string') {
 			label = new Moobile.Text().setText(label);
 		}
 
