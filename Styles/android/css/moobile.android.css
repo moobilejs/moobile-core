@@ -234,9 +234,16 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .button {
-	background: rgba(255, 0, 0, 0.5);
-	border: 1px solid #c8c8c8;
-	border-bottom: 1px solid #979797;
+	-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+	   -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+	    -ms-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+	     -o-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+	        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+	background: rgba(153, 153, 153, 0.4);
+	border-top: 1px solid rgba(255, 255, 255, 0.35);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	border-left: 1px solid rgba(0, 0, 0, 0.04);
+	border-right: 1px solid rgba(0, 0, 0, 0.04);
 	border-radius: 1px;
 	color: #333333;
 	font-size: 18px;
@@ -262,10 +269,6 @@ input, select, textarea {
 	        box-shadow: 0px 0px 0px 5px rgba(51, 181, 229, 0.4);
 	background: rgba(51, 181, 229, 0.8);
 	color: #333333;
-}
-
-.view.style-dark .button {
-	color: #fff;
 }
 
 .button .button-label {
@@ -312,6 +315,12 @@ input, select, textarea {
 	        box-shadow: none;
 }
 
+/* Inside a View Style Dark */
+
+.view.style-dark .button {
+	color: #fff;
+}
+
 /* List
 -----------------------------------------------------------------------------*/
 
@@ -321,15 +330,22 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .list-item {
+	-webkit-box-orient: vertical;
+	-webkit-box-align: start;
+	-webkit-box-pack: center;
 	border-bottom: 1px solid #d9d9d9;
 	color: #222;
 	font-size: 18px;
 	font-weight: normal;
 	min-height: 48px;
+	position: relative;
+	padding-left: 7px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 .list-item .list-item-label {
-	-webkit-box-orient: horizontal;                               /* Important */
+	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
 	     -o-box-orient: horizontal;                              /* Important */
@@ -349,15 +365,17 @@ input, select, textarea {
 	display:     -ms-box;                                        /* Important */
 	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
-	height: 100%;                                                /* Important */
 	overflow: hidden;                                            /* Important */
-	padding-left: 7px;
-	padding-right: 7px;
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
 
 .list-item .list-item-image {
+	position: absolute;
+	top: 50%;
+	bottom: 50%;
+	margin-top: -24px;
+	right: 0px;
 	height: 48px;
 	width: 48px;
 }
@@ -386,8 +404,11 @@ input, select, textarea {
 	display:         box;                                        /* Important */
 	font-size: 14px;
 	font-weight: normal;
-	padding-right: 7px;
-	height: 100%;                                                /* Important */
+	margin-top: 6px;
+}
+
+.list-item .list-item-detail:empty {
+	margin-top: 0px;
 }
 
 .list-item.is-disabled {
@@ -404,7 +425,7 @@ input, select, textarea {
 	background: rgba(51, 181, 229, 0.6);
 }
 
-/* Inside a View - Style Dark */
+/* Inside a View Style Dark */
 
 .view.style-dark .list-item {
 	border-bottom: 1px solid #292929;
@@ -538,13 +559,11 @@ input, select, textarea {
 	height: 47px;
 }
 
-/* Focused */
 .alert .button.is-selected {
 	background: #a6daed;
 	border: 2px solid #30abd4;
 }
 
-/* Pressed */
 .alert .button.is-highlighted {
 	-webkit-box-shadow: none;
 	   -moz-box-shadow: none;
