@@ -3874,7 +3874,8 @@ Moobile.Button = new Class({
 		if (this._label === label)
 			return this;
 
-		if (typeof label === 'string') {
+		label = label || '';
+		if (typeof label || '' === 'string') {
 			label = new Moobile.Text().setText(label);
 		}
 
@@ -3886,6 +3887,8 @@ Moobile.Button = new Class({
 
 		this._label = label;
 		this._label.addClass('button-label');
+
+		this.element.toggleClass('no-button-label', this._label.isEmpty());
 
 		return this;
 	},
@@ -4555,6 +4558,7 @@ Moobile.NavigationBarItem = new Class({
 		if (this._title === title)
 			return this;
 
+		title = title || '';
 		if (typeof title === 'string') {
 			title = new Moobile.Text().setText(title);
 		}
@@ -4567,6 +4571,8 @@ Moobile.NavigationBarItem = new Class({
 
 		this._title = title;
 		this._title.addClass('bar-title');
+
+		this.element.toggleClass('no-bar-title', this._title.isEmpty());
 
 		return this;
 	},
@@ -5332,6 +5338,7 @@ Moobile.ListItem = new Class({
 		if (this._label === label)
 			return this;
 
+		label = label || '';
 		if (typeof label === 'string') {
 			label = new Moobile.Text().setText(label);
 		}
@@ -5344,6 +5351,8 @@ Moobile.ListItem = new Class({
 
 		this._label = label;
 		this._label.addClass('list-item-label');
+
+		this.element.toggleClass('no-list-item-label', this._label.isEmpty());
 
 		return this;
 	},
@@ -5367,6 +5376,7 @@ Moobile.ListItem = new Class({
 		if (this._image === image)
 			return this;
 
+		image = image || '';
 		if (typeof image === 'string') {
 			image = new Moobile.Image().setSource(image);
 		}
@@ -5379,6 +5389,8 @@ Moobile.ListItem = new Class({
 
 		this._image = image;
 		this._image.addClass('list-item-image');
+
+		this.element.toggleClass('no-list-item-image', this._image.isEmpty());
 
 		return this;
 	},
@@ -5402,6 +5414,7 @@ Moobile.ListItem = new Class({
 		if (this._detail === detail)
 			return this;
 
+		detail = detail || '';
 		if (typeof detail === 'string') {
 			detail = new Moobile.Text().setText(detail);
 		}
@@ -5414,6 +5427,8 @@ Moobile.ListItem = new Class({
 
 		this._detail = detail;
 		this._detail.addClass('list-item-detail');
+
+		this.element.toggleClass('no-list-item-detail', this._detail.isEmpty());
 
 		return this;
 	},
@@ -5758,6 +5773,15 @@ Moobile.Image = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#isEmpty
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isEmpty: function() {
+		return this.getSource() === '';
+	},
+
+	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -5870,10 +5894,12 @@ Moobile.Text = new Class({
 	 */
 	setText: function(text) {
 
-		if (text instanceof Moobile.Text)
+		if (text instanceof Moobile.Text) {
 			text = text.getText();
+		}
 
 		this.element.set('html', text);
+
 		return this;
 	},
 
@@ -5884,6 +5910,15 @@ Moobile.Text = new Class({
 	 */
 	getText: function() {
 		return this.element.get('html');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Text#isEmpty
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isEmpty: function() {
+		return this.getText() === '';
 	}
 
 });
@@ -6064,6 +6099,7 @@ Moobile.Alert = new Class({
 		if (this._title === title)
 			return this;
 
+		title = title || '';
 		if (typeof title === 'string') {
 			title = new Moobile.Text().setText(title);
 		}
@@ -6075,7 +6111,9 @@ Moobile.Alert = new Class({
 		}
 
 		this._title = title;
-		this._title.addClass('title');
+		this._title.addClass('alert-title');
+
+		this.element.toggleClass('no-alert-title', this._title.isEmpty());
 
 		return this;
 	},
@@ -6099,6 +6137,7 @@ Moobile.Alert = new Class({
 		if (this._message === message)
 			return this;
 
+		message = message || '';
 		if (typeof message === 'string') {
 			message = new Moobile.Text().setText(message);
 		}
@@ -6110,7 +6149,9 @@ Moobile.Alert = new Class({
 		}
 
 		this._message = message;
-		this._message.addClass('message');
+		this._message.addClass('alert-message');
+
+		this.element.toggleClass('no-alert-message', this._message.isEmpty());
 
 		return this;
 	},

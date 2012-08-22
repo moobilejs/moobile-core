@@ -80,7 +80,8 @@ Moobile.Button = new Class({
 		if (this._label === label)
 			return this;
 
-		if (typeof label === 'string') {
+		label = label || '';
+		if (typeof label || '' === 'string') {
 			label = new Moobile.Text().setText(label);
 		}
 
@@ -92,6 +93,8 @@ Moobile.Button = new Class({
 
 		this._label = label;
 		this._label.addClass('button-label');
+
+		this.element.toggleClass('no-button-label', this._label.isEmpty());
 
 		return this;
 	},

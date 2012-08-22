@@ -165,6 +165,7 @@ Moobile.Alert = new Class({
 		if (this._title === title)
 			return this;
 
+		title = title || '';
 		if (typeof title === 'string') {
 			title = new Moobile.Text().setText(title);
 		}
@@ -176,7 +177,9 @@ Moobile.Alert = new Class({
 		}
 
 		this._title = title;
-		this._title.addClass('title');
+		this._title.addClass('alert-title');
+
+		this.element.toggleClass('no-alert-title', this._title.isEmpty());
 
 		return this;
 	},
@@ -200,6 +203,7 @@ Moobile.Alert = new Class({
 		if (this._message === message)
 			return this;
 
+		message = message || '';
 		if (typeof message === 'string') {
 			message = new Moobile.Text().setText(message);
 		}
@@ -211,7 +215,9 @@ Moobile.Alert = new Class({
 		}
 
 		this._message = message;
-		this._message.addClass('message');
+		this._message.addClass('alert-message');
+
+		this.element.toggleClass('no-alert-message', this._message.isEmpty());
 
 		return this;
 	},

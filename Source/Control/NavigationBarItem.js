@@ -76,6 +76,7 @@ Moobile.NavigationBarItem = new Class({
 		if (this._title === title)
 			return this;
 
+		title = title || '';
 		if (typeof title === 'string') {
 			title = new Moobile.Text().setText(title);
 		}
@@ -88,6 +89,8 @@ Moobile.NavigationBarItem = new Class({
 
 		this._title = title;
 		this._title.addClass('bar-title');
+
+		this.element.toggleClass('no-bar-title', this._title.isEmpty());
 
 		return this;
 	},

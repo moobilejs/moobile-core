@@ -115,6 +115,7 @@ Moobile.ListItem = new Class({
 		if (this._label === label)
 			return this;
 
+		label = label || '';
 		if (typeof label === 'string') {
 			label = new Moobile.Text().setText(label);
 		}
@@ -127,6 +128,8 @@ Moobile.ListItem = new Class({
 
 		this._label = label;
 		this._label.addClass('list-item-label');
+
+		this.element.toggleClass('no-list-item-label', this._label.isEmpty());
 
 		return this;
 	},
@@ -150,6 +153,7 @@ Moobile.ListItem = new Class({
 		if (this._image === image)
 			return this;
 
+		image = image || '';
 		if (typeof image === 'string') {
 			image = new Moobile.Image().setSource(image);
 		}
@@ -162,6 +166,8 @@ Moobile.ListItem = new Class({
 
 		this._image = image;
 		this._image.addClass('list-item-image');
+
+		this.element.toggleClass('no-list-item-image', this._image.isEmpty());
 
 		return this;
 	},
@@ -185,6 +191,7 @@ Moobile.ListItem = new Class({
 		if (this._detail === detail)
 			return this;
 
+		detail = detail || '';
 		if (typeof detail === 'string') {
 			detail = new Moobile.Text().setText(detail);
 		}
@@ -197,6 +204,8 @@ Moobile.ListItem = new Class({
 
 		this._detail = detail;
 		this._detail.addClass('list-item-detail');
+
+		this.element.toggleClass('no-list-item-detail', this._detail.isEmpty());
 
 		return this;
 	},
