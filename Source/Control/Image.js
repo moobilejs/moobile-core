@@ -168,6 +168,15 @@ Moobile.Image = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#isEmpty
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isEmpty: function() {
+		return this.getSource() === '';
+	},
+
+	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

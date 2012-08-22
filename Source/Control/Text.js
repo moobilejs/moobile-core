@@ -54,10 +54,12 @@ Moobile.Text = new Class({
 	 */
 	setText: function(text) {
 
-		if (text instanceof Moobile.Text)
+		if (text instanceof Moobile.Text) {
 			text = text.getText();
+		}
 
 		this.element.set('html', text);
+
 		return this;
 	},
 
@@ -68,6 +70,15 @@ Moobile.Text = new Class({
 	 */
 	getText: function() {
 		return this.element.get('html');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Text#isEmpty
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isEmpty: function() {
+		return this.getText() === '';
 	}
 
 });
