@@ -113,34 +113,14 @@ input, select, textarea {
 /* Bar
 -----------------------------------------------------------------------------*/
 
-/*
-	The top white transparent border and bottom dark border are rendered using
-	a linear gradient as follow:
-
-	background-image: -webkit-linear-gradient(top,
-
-		// this creates the top 1px white transparent border
-		rgba(255, 255, 255, 0.1) 0px,
-		rgba(255, 255, 255, 0.1) 1px,
-
-		// this leaves the middle transparent
-		transparent 1px,
-		transparent 46px,
-
-		// this creates the bottom black transparent border
-		rgba(0, 0, 0, 0.05) 46px
-	);
-
-*/
-
 .bar {
-	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
+	background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),    -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
+	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),     -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
+	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),      -o-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
+	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),         linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
 	background-color: #ddd;
-	height: 48px;
+	height: 56px;
 }
 
 .bar:after {
@@ -165,11 +145,6 @@ input, select, textarea {
 /* Style Dark */
 
 .bar.style-dark {
-	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
-	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 46px, rgba(0, 0, 0, 0.05) 46px);
 	background-color: #222;
 	color: #fff;
 }
@@ -177,13 +152,12 @@ input, select, textarea {
 /* Style Contextual */
 
 .bar.style-contextual {
-	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -webkit-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
+	background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),    -moz-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
+	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),     -ms-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
+	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),      -o-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
+	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px),         linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
 	background-color: transparent;
-	color: #fff;
 }
 
 /* Navigation Bar
@@ -200,10 +174,10 @@ input, select, textarea {
 	    -ms-box-align: center;                                   /* Important */
 	     -o-box-align: center;                                   /* Important */
 	        box-align: center;                                   /* Important */
-	-webkit-box-pack: center;                                    /* Important */
-	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
+	-webkit-box-pack: start;                                    /* Important */
+	   -moz-box-pack: start;                                    /* Important */
+	    -ms-box-pack: start;                                    /* Important */
+	     -o-box-pack: start;                                    /* Important */
 	        box-pack: center;                                    /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
@@ -212,6 +186,8 @@ input, select, textarea {
 	display:         box;                                        /* Important */
 	height: inherit;
 	overflow: hidden;                                            /* Important */
+	margin-left: 12px;
+	margin-right: 12px;
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
@@ -334,11 +310,6 @@ input, select, textarea {
 	color: #fff;
 }
 
-/* List
------------------------------------------------------------------------------*/
-
-.list {}
-
 /* List Item
 -----------------------------------------------------------------------------*/
 
@@ -352,9 +323,14 @@ input, select, textarea {
 	font-weight: normal;
 	min-height: 48px;
 	position: relative;
-	padding-left: 7px;
+	padding: 7px;
+	padding-right: 56px;
 	padding-top: 15px;
 	padding-bottom: 15px;
+}
+
+.list-item.no-list-item-image {
+	padding-right: 7px;
 }
 
 .list-item .list-item-label {
@@ -428,12 +404,10 @@ input, select, textarea {
 	opacity: 0.3;
 }
 
-/* Focused */
 .list-item.is-selected {
 	background: rgba(51, 181, 229, 0.3);
 }
 
-/* Pressed */
 .list-item.is-highlighted {
 	background: rgba(51, 181, 229, 0.6);
 }
@@ -443,6 +417,31 @@ input, select, textarea {
 .view.style-dark .list-item {
 	border-bottom: 1px solid #292929;
 	color: #ffffff;
+}
+
+/* List Item Header
+-----------------------------------------------------------------------------*/
+
+.list-item.list-item-header {
+	-webkit-box-orient: horizontal;
+	-webkit-box-align: end;
+	border-bottom: 2px solid #bababa;
+	color: #999999;
+	font-size: 14px;
+	font-weight: bold;
+	min-height: 40px;
+	padding: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
+	text-transform: uppercase;
+}
+
+.list-item.list-item-header.is-selected {
+	background: inherit;
+}
+
+.list-item.list-item-header.is-highlighted {
+	background: inherit;
 }
 
 /* Overlay
