@@ -123,8 +123,3 @@ Moobile.Component.defineStyle('contextual', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-contextual'); },
 	detach: function(element) { element.removeClass('style-contextual'); }
 });
-
-Moobile.Component.defineStyle('contextual-dark', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-contextual-dark'); },
-	detach: function(element) { element.removeClass('style-contextual-dark'); }
-});

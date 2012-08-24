@@ -3161,6 +3161,15 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasStyle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	hasStyle: function(style) {
+		return this._style ? this._style.name === style : false;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -3183,10 +3192,11 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#toggleClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
-	toggleClass: function(name) {
-		this.element.toggleClass(name);
+	toggleClass: function(name, force) {
+		this.element.toggleClass(name, force);
 		return this;
 	},
 
@@ -3875,7 +3885,7 @@ Moobile.Button = new Class({
 			return this;
 
 		label = label || '';
-		if (typeof label || '' === 'string') {
+		if (typeof label === 'string') {
 			label = new Moobile.Text().setText(label);
 		}
 

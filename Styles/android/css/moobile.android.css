@@ -57,7 +57,7 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .window {
-	background: black;
+	background: #111;
 }
 
 /* View
@@ -160,9 +160,7 @@ input, select, textarea {
 
 .bar .bar-item {
 	height: 100%;
-	padding-left: 4px;
-	padding-right: 4px;
-}
+ }
 
 /* Style Dark */
 
@@ -184,19 +182,7 @@ input, select, textarea {
 	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
 	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
 	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-color: #fff;
-	color: #222;
-}
-
-/* Style Contextual Blue */
-
-.bar.style-contextual-dark {
-	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:      -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-image:         linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 45px, #33b5e5 45px);
-	background-color: #002e3e;
+	background-color: transparent;
 	color: #fff;
 }
 
@@ -301,18 +287,45 @@ input, select, textarea {
 /* Inside a Bar */
 
 .bar .button {
-	background: none;
-	border: none;
-	font-size: 14px;
-	font-weight: normal;
-}
-
-.button:before {
 	-webkit-box-shadow: none;
 	   -moz-box-shadow: none;
 	    -ms-box-shadow: none;
 	     -o-box-shadow: none;
 	        box-shadow: none;
+	background: none;
+	border: none;
+	height: 100%;
+	font-size: 14px;
+	font-weight: normal;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.bar .button.is-selected,
+.bar .button.is-highlighted {
+	background: rgba(51, 181, 229, 0.6);
+}
+
+/* Inside a Bar Style Dark */
+
+.bar.style-dark .button {
+	color: #fff;
+}
+
+.bar.style-dark .button.is-selected,
+.bar.style-dark .button.is-highlighted {
+	background: rgba(51, 181, 229, 0.6);
+}
+
+/* Inside a Bar Style Contextual */
+
+.bar.style-contextual .button {
+	color: #fff;
+}
+
+.bar.style-contextual .button.is-selected,
+.bar.style-contextual .button.is-highlighted {
+	background: rgba(51, 181, 229, 0.6);
 }
 
 /* Inside a View Style Dark */
@@ -437,8 +450,7 @@ input, select, textarea {
 
 @-webkit-keyframes android-anim-show-overlay {
 	from { opacity: 0; }
-	99%  { opacity: 1; }
-	to   {}
+	to   { opacity: 1; }
 }
 @-moz-keyframes android-anim-show-overlay {
 	from { opacity: 0; }
@@ -454,14 +466,12 @@ input, select, textarea {
 }
 @keyframes android-anim-show-overlay {
 	from { opacity: 0; }
-	99%  { opacity: 1; }
-	to   {}
+	to   { opacity: 1; }
 }
 
 @-webkit-keyframes android-anim-hide-overlay {
 	from { opacity: 1; }
-	99%  { opacity: 0; }
-	to   {}
+	to   { opacity: 0; }
 }
 @-moz-keyframes android-anim-hide-overlay {
 	from { opacity: 1; }
@@ -481,19 +491,19 @@ input, select, textarea {
 }
 
 .overlay.show-animated {
-	-webkit-animation: android-anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: android-anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: android-anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: android-anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: android-anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: android-anim-show-overlay 100ms ease-out 1;
+	   -moz-animation: android-anim-show-overlay 100ms ease-out 1;
+	    -ms-animation: android-anim-show-overlay 100ms ease-out 1;
+	     -o-animation: android-anim-show-overlay 100ms ease-out 1;
+	        animation: android-anim-show-overlay 100ms ease-out 1;
 }
 
 .overlay.hide-animated {
-	-webkit-animation: android-anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: android-anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: android-anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: android-anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: android-anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: android-anim-hide-overlay 100ms ease-out 1;
+	   -moz-animation: android-anim-hide-overlay 100ms ease-out 1;
+	    -ms-animation: android-anim-hide-overlay 100ms ease-out 1;
+	     -o-animation: android-anim-hide-overlay 100ms ease-out 1;
+	        animation: android-anim-hide-overlay 100ms ease-out 1;
 }
 
 .overlay {
@@ -577,65 +587,68 @@ input, select, textarea {
 /* Show Animation */
 
 @-webkit-keyframes anim-show-alert-android {
-	from { -webkit-transform: scale(0.5); opacity: 0; }
-	99%  { -webkit-transform: scale(1.0); opacity: 1; }
-	to   {}
+	from { -webkit-transform: scale(0.95); opacity: 0; }
+	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
 @-moz-keyframes anim-show-alert-android {
-	from { -webkit-transform: scale(0.6); opacity: 0; }
+	from { -webkit-transform: scale(0.95); opacity: 0; }
 	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
 @-ms-keyframes anim-show-alert-android {
-	from { -webkit-transform: scale(0.6); opacity: 0; }
+	from { -webkit-transform: scale(0.95); opacity: 0; }
 	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
 @-o-keyframes anim-show-alert-android {
-	from { -webkit-transform: scale(0.6); opacity: 0; }
+	from { -webkit-transform: scale(0.95); opacity: 0; }
 	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
 @keyframes anim-show-alert-android {
-	from { -webkit-transform: scale(0.6); opacity: 0; }
+	from { -webkit-transform: scale(0.95); opacity: 0; }
 	to   { -webkit-transform: scale(1.0); opacity: 1; }
 }
 
 .alert.show-animated .alert-box {
-	-webkit-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-show-alert-android 200ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: anim-show-alert-android 100ms ease-out 1;
+	   -moz-animation: anim-show-alert-android 100ms ease-out 1;
+	    -ms-animation: anim-show-alert-android 100ms ease-out 1;
+	     -o-animation: anim-show-alert-android 100ms ease-out 1;
+	        animation: anim-show-alert-android 100ms ease-out 1;
+}
+
+.alert .alert-box {
+	height: 400px;
+	width: 400px;
 }
 
 /* Hide Animation */
 
 @-webkit-keyframes anim-hide-alert-android {
-	from { opacity: 1; }
-	99%  { opacity: 0; }
-	to   {}
+	from { -webkit-transform: scale(1.0); opacity: 1; }
+	to   { -webkit-transform: scale(0.95); opacity: 0; }
 }
 @-moz-keyframes anim-hide-alert-android {
-	from { opacity: 1; }
-	to   { opacity: 0; }
+	from { -webkit-transform: scale(1.0); opacity: 1; }
+	to   { -webkit-transform: scale(0.95); opacity: 0; }
 }
 @-ms-keyframes anim-hide-alert-android {
-	from { opacity: 1; }
-	to   { opacity: 0; }
+	from { -webkit-transform: scale(1.0); opacity: 1; }
+	to   { -webkit-transform: scale(0.95); opacity: 0; }
 }
 @-o-keyframes anim-hide-alert-android {
-	from { opacity: 1; }
-	to   { opacity: 0; }
+	from { -webkit-transform: scale(1.0); opacity: 1; }
+	to   { -webkit-transform: scale(0.95); opacity: 0; }
 }
 @keyframes anim-hide-alert-android {
-	from { opacity: 1; }
-	to   { opacity: 0; }
+	from { -webkit-transform: scale(1.0); opacity: 1; }
+	to   { -webkit-transform: scale(0.95); opacity: 0; }
 }
 
 .alert.hide-animated .alert-box {
-	-webkit-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	   -moz-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	    -ms-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	     -o-animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	        animation: anim-hide-alert-android 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	-webkit-animation: anim-hide-alert-android 100ms ease-out 1;
+	   -moz-animation: anim-hide-alert-android 100ms ease-out 1;
+	    -ms-animation: anim-hide-alert-android 100ms ease-out 1;
+	     -o-animation: anim-hide-alert-android 100ms ease-out 1;
+	        animation: anim-hide-alert-android 100ms ease-out 1;
 }
 
 /* Horizontal Button Layout */
