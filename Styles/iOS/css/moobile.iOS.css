@@ -559,7 +559,7 @@ input, select, textarea {
 	        border-image: url(../images/iOS/bar-button.png) 450 1 1520 5 fill stretch stretch;
 }
 
-.bar.style-dark .button-group .button.style-dark:last-child {
+.bar.style-dark .button-group .button:last-child {
 	-webkit-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/bar-button.png) 480 5 1490 1 fill stretch stretch;
