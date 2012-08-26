@@ -11,9 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- Core/Event
-	- Core/Element
-	- Core/Element.Event
+	- Custom-Event/Element.defineCustomEvent
 
 provides:
 	- Event.CSS3
@@ -35,9 +33,25 @@ if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
 }
 
 Element.NativeEvents[prefix + 'TransitionEnd'] = 2;
-Element.Events['transitionend'] = { base: (prefix + 'TransitionEnd') };
+Element.Events['transitionend'] = { base: (prefix + 'TransitionEnd'), onAdd: function(){}, onRemove: function(){} };
 
 Element.NativeEvents[prefix + 'AnimationEnd'] = 2;
-Element.Events['animationend'] = { base: (prefix + 'AnimationEnd') };
+Element.Events['animationend'] = { base: (prefix + 'AnimationEnd'), onAdd: function(){}, onRemove: function(){} };
+
+Element.defineCustomEvent('owntransitionend', {
+	base: 'transitionend',
+	condition: function(e) {
+		e.stop();
+		return e.target === this;
+	}
+});
+
+Element.defineCustomEvent('ownanimationend', {
+	base: 'animationend',
+	condition: function(e) {
+		e.stop();
+		return e.target === this;
+	}
+})
 
 })();
