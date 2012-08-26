@@ -1599,32 +1599,202 @@ input, select, textarea {
 /* Slider
 -----------------------------------------------------------------------------*/
 
-.slider-track {
-	background: url(../images/iOS/slider-track.png) 0px 0px;
-	border-radius: 5px;
+.slider.slider-mode-horizontal,
+.slider.slider-mode-vertical {
+	position: relative;                                          /* Important */
+}
+
+.slider.slider-mode-horizontal {
 	height: 9px;
 }
 
-.slider-thumb {
+.slider.slider-mode-vertical {
+	width: 9px;
+}
+
+.slider .slider-track {
+	position: absolute;                                          /* Important */
+	z-index: 25;                                                 /* Important */
+}
+
+.slider.slider-mode-horizontal .slider-track {
+	-webkit-border-image: url(../images/iOS/slider-track-background-h.png) 0 5 fill stretch stretch;
+	   -moz-border-image: url(../images/iOS/slider-track-background-h.png) 0 5 fill stretch stretch;
+	    -ms-border-image: url(../images/iOS/slider-track-background-h.png) 0 5 fill stretch stretch;
+	     -o-border-image: url(../images/iOS/slider-track-background-h.png) 0 5 fill stretch stretch;
+	        border-image: url(../images/iOS/slider-track-background-h.png) 0 5 fill stretch stretch;
+	border-left: 5px;
+	border-right: 5px;
+	height: 100%;                                                /* Important */
+	left: 0px;                                                   /* Important */
+	right: 0px;                                                  /* Important */
+}
+
+.slider.slider-mode-vertical .slider-track {
+	-webkit-border-image: url(../images/iOS/slider-track-background-v.png) 5 0 fill stretch stretch;
+	   -moz-border-image: url(../images/iOS/slider-track-background-v.png) 5 0 fill stretch stretch;
+	    -ms-border-image: url(../images/iOS/slider-track-background-v.png) 5 0 fill stretch stretch;
+	     -o-border-image: url(../images/iOS/slider-track-background-v.png) 5 0 fill stretch stretch;
+	        border-image: url(../images/iOS/slider-track-background-v.png) 5 0 fill stretch stretch;
+	border-top: 5px;
+	border-bottom: 5px;
+	bottom: 0px;                                                 /* Important */
+	top: 0px;                                                    /* Important */
+	width: 100%;                                                 /* Important */
+}
+
+.slider .slider-track:after {
+	display: block;                                              /* Important */
+	content: '';                                                 /* Important */
+	position: absolute;                                          /* Important */
+}
+
+.slider.slider-mode-horizontal .slider-track:after {
+	background: url(../images/iOS/slider-track-foreground-h.png) no-repeat center left;
+	background-size: 50px 9px;
+	height: 9px;
+	left: -5px;                                                  /* Important */
+	top: 0px;                                                    /* Important */
+	width: 10px;                                                 /* Important */
+}
+
+.slider.slider-mode-vertical .slider-track:after {
+	background: url(../images/iOS/slider-track-foreground-v.png) no-repeat center top;
+	background-size: 9px 50px;
+	height: 10px;
+	left: 0px;                                                   /* Important */
+	top: -5px;                                                   /* Important */
+	width: 9px;
+}
+
+.slider .slider-thumb {
 	background: url(../images/iOS/slider-thumb.png) no-repeat center center;
-	border-radius: 5px;
+	background-size: 24px 24px;
 	height: 24px;
-	position: absolute;
-	margin-top: -6px;
+	position: absolute;                                          /* Important */
 	width: 24px;
+	z-index: 75;                                                 /* Important */
+}
+
+.slider.slider-mode-horizontal .slider-thumb {
+	margin-top: -7px;
+}
+
+.slider.slider-mode-vertical .slider-thumb {
+	margin-left: -7px;
+}
+
+.slider .slider-range {
+	overflow: hidden;                                            /* Important */
+	position: absolute;                                          /* Important */
+	z-index: 50;                                                 /* Important */
+}
+
+.slider.slider-mode-horizontal .slider-range {
+	height: 100%;
+	left: 10px;
+	right: 10px;
+}
+
+.slider.slider-mode-vertical .slider-range {
+	bottom: 10px;
+	top: 10px;
+	width: 100%;
+}
+
+.slider .slider-value {
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
+	position: absolute;                                          /* Important */
+}
+
+.slider.slider-mode-horizontal .slider-value {
+	-webkit-border-image: url(../images/iOS/slider-track-foreground-h.png) 0 5 fill stretch stretch;
+	   -moz-border-image: url(../images/iOS/slider-track-foreground-h.png) 0 5 fill stretch stretch;
+	    -ms-border-image: url(../images/iOS/slider-track-foreground-h.png) 0 5 fill stretch stretch;
+	     -o-border-image: url(../images/iOS/slider-track-foreground-h.png) 0 5 fill stretch stretch;
+	        border-image: url(../images/iOS/slider-track-foreground-h.png) 0 5 fill stretch stretch;
+	border-left: 5px;
+	border-right: 5px;
+	height: 9px;
+	top: 0px;                                                    /* Important */
+	left: -110%;                                                 /* Important */
+	width: 110%;                                                 /* Important */
+}
+
+.slider.slider-mode-vertical .slider-value {
+	-webkit-border-image: url(../images/iOS/slider-track-foreground-v.png) 5 0 fill stretch stretch;
+	   -moz-border-image: url(../images/iOS/slider-track-foreground-v.png) 5 0 fill stretch stretch;
+	    -ms-border-image: url(../images/iOS/slider-track-foreground-v.png) 5 0 fill stretch stretch;
+	     -o-border-image: url(../images/iOS/slider-track-foreground-v.png) 5 0 fill stretch stretch;
+	        border-image: url(../images/iOS/slider-track-foreground-v.png) 5 0 fill stretch stretch;
+	border-top: 5px;
+	border-bottom: 5px;
+	left: 0px;                                                   /* Important */
+	height: 110%;                                                /* Important */
+	top: -110%;                                                  /* Important */
+	width: 9px;
+}
+
+/* Hit Area */
+
+.slider-thumb .hit-area {
+	bottom: -10px;
+	display: block;
+	content: '';
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	left: -10px;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
-	.slider-track {
-		background-image: url(../images/iOS/slider-track-2x.png);
-		background-size: 2048px 9px;
+	.slider.slider-mode-horizontal .slider-track {
+		-webkit-border-image: url(../images/iOS/slider-track-background-h-2x.png) 0 5 fill stretch stretch;
+		   -moz-border-image: url(../images/iOS/slider-track-background-h-2x.png) 0 5 fill stretch stretch;
+		    -ms-border-image: url(../images/iOS/slider-track-background-h-2x.png) 0 5 fill stretch stretch;
+		     -o-border-image: url(../images/iOS/slider-track-background-h-2x.png) 0 5 fill stretch stretch;
+		        border-image: url(../images/iOS/slider-track-background-h-2x.png) 0 5 fill stretch stretch;
 	}
 
-	.slider-thumb {
-		background-image: url(../images/iOS/slider-thumb-2x.png);
-		background-size: 24px 24px;
+	.slider.slider-mode-vertical .slider-track {
+		-webkit-border-image: url(../images/iOS/slider-track-background-v-2x.png) 5 0 fill stretch stretch;
+		   -moz-border-image: url(../images/iOS/slider-track-background-v-2x.png) 5 0 fill stretch stretch;
+		    -ms-border-image: url(../images/iOS/slider-track-background-v-2x.png) 5 0 fill stretch stretch;
+		     -o-border-image: url(../images/iOS/slider-track-background-v-2x.png) 5 0 fill stretch stretch;
+		        border-image: url(../images/iOS/slider-track-background-v-2x.png) 5 0 fill stretch stretch;
 	}
+
+	.slider.slider-mode-horizontal .slider-track:after {
+		background: url(../images/iOS/slider-track-foreground-h-2x.png) no-repeat center left;
+	}
+
+	.slider.slider-mode-vertical .slider-track:after {
+		background: url(../images/iOS/slider-track-foreground-v-2x.png) no-repeat center top;
+	}
+
+	.slider .slider-thumb {
+		background: url(../images/iOS/slider-thumb-2x.png) no-repeat center center;
+	}
+
+	.slider.slider-mode-horizontal .slider-value {
+		-webkit-border-image: url(../images/iOS/slider-track-foreground-h-2x.png) 0 5 fill stretch stretch;
+		   -moz-border-image: url(../images/iOS/slider-track-foreground-h-2x.png) 0 5 fill stretch stretch;
+		    -ms-border-image: url(../images/iOS/slider-track-foreground-h-2x.png) 0 5 fill stretch stretch;
+		     -o-border-image: url(../images/iOS/slider-track-foreground-h-2x.png) 0 5 fill stretch stretch;
+		        border-image: url(../images/iOS/slider-track-foreground-h-2x.png) 0 5 fill stretch stretch;
+	}
+
+	.slider.slider-mode-vertical .slider-value {
+		-webkit-border-image: url(../images/iOS/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
+		   -moz-border-image: url(../images/iOS/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
+		    -ms-border-image: url(../images/iOS/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
+		     -o-border-image: url(../images/iOS/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
+		        border-image: url(../images/iOS/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
 }
 
 /* Transition Slide (Enter)
