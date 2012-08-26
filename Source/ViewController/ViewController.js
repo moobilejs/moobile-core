@@ -338,16 +338,18 @@ Moobile.ViewController = new Class({
 		if (this._modalViewController)
 			return this;
 
+		var parentView = this.view.getWindow();
+		if (parentView === null)
+			throw new Error('The view to present is not ready');
+
 		this.willPresentModalViewController(viewController);
 
-		viewController.setParentViewController(this);
-		viewController.setModal(true);
-
 		this._modalViewController = viewController;
+		this._modalViewController.setParentViewController(this);
+		this._modalViewController.setModal(true);
 
-		var viewToShow = viewController.getView();
-		var viewToHide = this.view;
-		var parentView = this.view.getParentView();
+		var viewToShow = this._modalViewController.getView();
+		var viewToHide = parentView.getChildComponentsOfType(Moobile.View).getLastItemAtOffset(0);
 
 		parentView.addChildComponent(viewToShow);
 
@@ -394,11 +396,14 @@ Moobile.ViewController = new Class({
 		if (this._modalViewController === null)
 			return this;
 
+		var parentView = this.view.getWindow();
+		if (parentView === null)
+			throw new Error('The view to dismiss is not ready');
+
 		this.willDismissModalViewController()
 
-		var viewToShow = this.view;
+		var viewToShow = parentView.getChildComponentsOfType(Moobile.View).getLastItemAtOffset(1);
 		var viewToHide = this._modalViewController.getView();
-		var parentView = this.view.getParentView();
 
 		var viewTransition = this._modalViewController.getViewTransition();
 		viewTransition.addEvent('start:once', this.bound('_onDismissTransitionStart'));
@@ -428,6 +433,8 @@ Moobile.ViewController = new Class({
 	 */
 	_onDismissTransitionCompleted: function() {
 		this._modalViewController.viewDidLeave();
+		this._modalViewController.setParentViewController(this);
+		this._modalViewController.setModal(false);
 		this._modalViewController.destroy();
 		this._modalViewController = null;
 		this.didDismissModalViewController();
