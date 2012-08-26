@@ -147,6 +147,8 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
+		this.element.store('moobile:component', this);
+
 		return this;
 	},
 
@@ -301,10 +303,7 @@ Moobile.Component = new Class({
 			document.id(component).inject(context, where);
 		}
 
-		var index = this._getChildComponentIndexForElement(component);
-		if (index === null) {
-			index = 0;
-		}
+		var index = this._getChildComponentIndexForElement(component) || 0;
 
 		this._children.splice(index, 0, component);
 		component.setParentComponent(this);
