@@ -306,12 +306,12 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeFromParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	removeFromParentViewController: function(destroy) {
-		return this._parent
-			 ? this._parent.removeChildViewController(this, destroy)
-			 : false;
+		if (this._parent) this._parent.removeChildViewController(this, destroy);
+		return this;
 	},
 
 	/**
@@ -331,6 +331,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#presentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	presentModalViewController: function(viewController, viewTransition) {
@@ -389,6 +390,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#dismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	dismissModalViewController: function() {
