@@ -359,13 +359,7 @@ Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true
 // <0.1-compat>
 
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
-	this.contentElement = element;
-	this.contentElement.addClass('view-content');
-});
-
-Moobile.Component.defineRole('view-content-wrapper', Moobile.View, {traversable: true}, function(element) {
-	this.contentWrapperElement = element
-	this.contentWrapperElement.addClass('view-content-wrapper');
+	throw new Error('The role "view-content" has been deprecated, use the role "content" instead')
 });
 
 // </0.1-compat>
