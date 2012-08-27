@@ -44,7 +44,7 @@ Moobile.ActivityIndicator = new Class({
 	 * @since  0.1.0
 	 */
 	start: function() {
-		return this.addClass('activity');
+		return this.addClass('active');
 	},
 
 	/**
@@ -53,7 +53,7 @@ Moobile.ActivityIndicator = new Class({
 	 * @since  0.1.0
 	 */
 	stop: function() {
-		return this.removeClass('activity');
+		return this.removeClass('active');
 	}
 
 });
