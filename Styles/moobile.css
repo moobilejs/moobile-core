@@ -1305,6 +1305,68 @@ input, select, textarea {
 	z-index: 75;
 }
 
+/* Transition Cover Box (Shared)
+-----------------------------------------------------------------------------*/
+
+.transition-cover-page-foreground-view-wrapper {
+	-webkit-transform: translateY(-100%);                        /* Important */
+	   -moz-transform: translateY(-100%);                        /* Important */
+		-ms-transform: translateY(-100%);                        /* Important */
+		 -o-transform: translateY(-100%);                        /* Important */
+			transform: translateY(-100%);                        /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+		-ms-box-sizing: border-box;                              /* Important */
+		 -o-box-sizing: border-box;                              /* Important */
+			box-sizing: border-box;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+		-ms-box-align: center;                                   /* Important */
+		 -o-box-align: center;                                   /* Important */
+			box-align: center;                                   /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+		-ms-box-pack: center;                                    /* Important */
+		 -o-box-pack: center;                                    /* Important */
+			box-pack: center;                                    /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	height: 100%;                                                /* Important */
+	position: relative;                                          /* Important */
+	width: 100%;                                                 /* Important */
+	z-index: 75;                                                 /* Important */
+}
+
+.transition-cover-page-foreground-view {
+	-webkit-box-shadow: 0px 0px 10px #000000;
+	   -moz-box-shadow: 0px 0px 10px #000000;
+		-ms-box-shadow: 0px 0px 10px #000000;
+		 -o-box-shadow: 0px 0px 10px #000000;
+			box-shadow: 0px 0px 10px #000000;
+	-webkit-box-flex: 0;                                         /* Important */
+	   -moz-box-flex: 0;                                         /* Important */
+		-ms-box-flex: 0;                                         /* Important */
+		 -o-box-flex: 0;                                         /* Important */
+			box-flex: 0;                                         /* Important */
+	height: 100%;
+	width: 768px;
+}
+
+.transition-cover-page-background-view {
+	display: -webkit-box !important;                             /* Important */
+	display:    -moz-box !important;                             /* Important */
+	display:     -ms-box !important;                             /* Important */
+	display:      -o-box !important;                             /* Important */
+	display:         box !important;                             /* Important */
+}
+
+.transition-cover-page-overlay {
+	z-index: 50;
+}
+
 /* Transition Cover Page (Enter)
 -----------------------------------------------------------------------------*/
 
@@ -1333,55 +1395,35 @@ input, select, textarea {
 	display: block !important;
 }
 
-.transition-cover-page-enter .transition-cover-page-foreground-view {
+.transition-cover-page-enter .transition-cover-page-foreground-view-wrapper {
 	-webkit-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	   -moz-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+
 }
 
-.transition-cover-page-background-view {
-	/*
-	Is this really required ?
-	display: -webkit-box !important;
-	display:    -moz-box !important;
-	display:     -ms-box !important;
-	display:      -o-box !important;
-	display:         box !important;
-	*/
-	z-index: 50;
-}
-
-.transition-cover-page-foreground-view {
-	-webkit-transform: translateY(-100%);
-	   -moz-transform: translateY(-100%);
-	    -ms-transform: translateY(-100%);
-	     -o-transform: translateY(-100%);
-	        transform: translateY(-100%);
-	z-index: 75;
-}
-
-/* Transition Cover Page (Leave)
+/* Transition Cover Page Leave
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes transition-cover-page-leave {
+@-webkit-keyframes anim-cover-page-leave {
 	from { -webkit-transform: translateY(-100%); }
 	to   { -webkit-transform: translateY(0%); }
 }
-@-moz-keyframes transition-cover-page-leave {
+@-moz-keyframes anim-cover-page-leave {
 	from { -moz-transform: translateY(-100%); }
 	to   { -moz-transform: translateY(0%); }
 }
-@-ms-keyframes transition-cover-page-leave {
+@-ms-keyframes anim-cover-page-leave {
 	from { -ms-transform: translateY(-100%); }
 	to   { -ms-transform: translateY(0%); }
 }
-@-o-keyframes transition-cover-page-leave {
+@-o-keyframes anim-cover-page-leave {
 	from { -o-transform: translateY(-100%); }
 	to   { -o-transform: translateY(0%); }
 }
-@keyframes transition-cover-page-leave {
+@keyframes anim-cover-page-leave {
 	from { transform: translateY(-100%); }
 	to   { transform: translateY(0%); }
 }
@@ -1390,12 +1432,12 @@ input, select, textarea {
 	display: block !important;
 }
 
-.transition-cover-page-leave .transition-cover-page-foreground-view {
-	-webkit-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+.transition-cover-page-leave .transition-cover-page-foreground-view-wrapper {
+	-webkit-animation: anim-cover-page-leave 400ms 1  cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: anim-cover-page-leave 400ms 1  cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: anim-cover-page-leave 400ms 1  cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: anim-cover-page-leave 400ms 1  cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: anim-cover-page-leave 400ms 1  cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Transition Cover Box (Shared)
