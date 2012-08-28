@@ -23,6 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.NavigationBarItem = new Class({
@@ -69,6 +70,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setTitle: function(title) {

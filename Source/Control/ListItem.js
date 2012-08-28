@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ListItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ListItem = new Class({
@@ -108,6 +109,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setLabel: function(label) {
@@ -146,6 +148,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setImage: function(image) {
@@ -184,6 +187,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setDetail: function(detail) {
@@ -244,6 +248,8 @@ Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element)
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
+
+/* iOS  */
 
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
