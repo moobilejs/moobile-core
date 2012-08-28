@@ -2636,6 +2636,8 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
+		this.element.store('moobile:component', this);
+
 		return this;
 	},
 
@@ -2790,10 +2792,7 @@ Moobile.Component = new Class({
 			document.id(component).inject(context, where);
 		}
 
-		var index = this._getChildComponentIndexForElement(component);
-		if (index === null) {
-			index = 0;
-		}
+		var index = this._getChildComponentIndexForElement(component) || 0;
 
 		this._children.splice(index, 0, component);
 		component.setParentComponent(this);
@@ -3627,6 +3626,8 @@ Moobile.Component.addNativeEvent('pinch');
 Moobile.Component.addNativeEvent('swipe');
 Moobile.Component.addNativeEvent('animationend');
 Moobile.Component.addNativeEvent('transitionend');
+Moobile.Component.addNativeEvent('owntransitionend');
+Moobile.Component.addNativeEvent('ownanimationend');
 
 })();
 
@@ -5807,7 +5808,7 @@ Moobile.ActivityIndicator = new Class({
 	 * @since  0.1.0
 	 */
 	start: function() {
-		return this.addClass('activity');
+		return this.addClass('active');
 	},
 
 	/**
@@ -5816,7 +5817,7 @@ Moobile.ActivityIndicator = new Class({
 	 * @since  0.1.0
 	 */
 	stop: function() {
-		return this.removeClass('activity');
+		return this.removeClass('active');
 	}
 
 });
@@ -9637,12 +9638,12 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeFromParentViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	removeFromParentViewController: function(destroy) {
-		return this._parent
-			 ? this._parent.removeChildViewController(this, destroy)
-			 : false;
+		if (this._parent) this._parent.removeChildViewController(this, destroy);
+		return this;
 	},
 
 	/**
@@ -9662,6 +9663,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#presentModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	presentModalViewController: function(viewController, viewTransition) {
@@ -9669,16 +9671,18 @@ Moobile.ViewController = new Class({
 		if (this._modalViewController)
 			return this;
 
+		var parentView = this.view.getWindow();
+		if (parentView === null)
+			throw new Error('The view to present is not ready');
+
 		this.willPresentModalViewController(viewController);
 
-		viewController.setParentViewController(this);
-		viewController.setModal(true);
-
 		this._modalViewController = viewController;
+		this._modalViewController.setParentViewController(this);
+		this._modalViewController.setModal(true);
 
-		var viewToShow = viewController.getView();
-		var viewToHide = this.view;
-		var parentView = this.view.getParentView();
+		var viewToShow = this._modalViewController.getView();
+		var viewToHide = parentView.getChildComponentsOfType(Moobile.View).getLastItemAtOffset(0);
 
 		parentView.addChildComponent(viewToShow);
 
@@ -9718,6 +9722,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#dismissModalViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	dismissModalViewController: function() {
@@ -9725,11 +9730,14 @@ Moobile.ViewController = new Class({
 		if (this._modalViewController === null)
 			return this;
 
+		var parentView = this.view.getWindow();
+		if (parentView === null)
+			throw new Error('The view to dismiss is not ready');
+
 		this.willDismissModalViewController()
 
-		var viewToShow = this.view;
+		var viewToShow = parentView.getChildComponentsOfType(Moobile.View).getLastItemAtOffset(1);
 		var viewToHide = this._modalViewController.getView();
-		var parentView = this.view.getParentView();
 
 		var viewTransition = this._modalViewController.getViewTransition();
 		viewTransition.addEvent('start:once', this.bound('_onDismissTransitionStart'));
@@ -9759,6 +9767,8 @@ Moobile.ViewController = new Class({
 	 */
 	_onDismissTransitionCompleted: function() {
 		this._modalViewController.viewDidLeave();
+		this._modalViewController.setParentViewController(this);
+		this._modalViewController.setModal(false);
 		this._modalViewController.destroy();
 		this._modalViewController = null;
 		this.didDismissModalViewController();
@@ -11092,15 +11102,26 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover.Box = new Class({
 
 	Extends: Moobile.ViewTransition,
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	overlay: null,
 
-	viewToShowWrapper: null,
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	wrapper: null,
 
 	/**
 	 * @overridden
@@ -11114,81 +11135,77 @@ Moobile.ViewTransition.Cover.Box = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
-
-			e.stop();
-
-			parentElem.removeClass('transition-cover-box-enter');
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-
-			this.didEnter(viewToShow, viewToHide, parentView);
-
-		}.bind(this));
-
 		this.overlay = new Moobile.Overlay();
+		this.overlay.addClass('transition-cover-box-overlay');
 		this.overlay.hide();
-		this.overlay.showAnimated();
 
-		viewToHide.addChildComponent(this.overlay, 'header');
+		parentView.addChildComponent(this.overlay);
 
-		this.viewToShowWrapper = new Moobile.View();
-		this.viewToShowWrapper.addChildComponent(viewToShow);
-		this.viewToShowWrapper.addClass('transition-cover-box-foreground-view-wrapper');
+		this.wrapper = document.createElement('div');
+		this.wrapper.addClass('transition-cover-box-foreground-view-wrapper');
+		this.wrapper.wraps(viewToShow);
 
-		parentView.addChildComponent(this.viewToShowWrapper);
+		var onStart = function() {
+			parentElem.addClass('transition-cover-box-enter');
+			viewToHide.addClass('transition-cover-box-background-view');
+			viewToShow.addClass('transition-cover-box-foreground-view');
+			this.overlay.showAnimated();
+		}.bind(this);
 
-		parentElem.addClass('transition-cover-box-enter');
-		viewToHide.addClass('transition-cover-box-background-view');
-		viewToShow.addClass('transition-cover-box-foreground-view');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		var onEnd = function() {
+			parentElem.removeClass('transition-cover-box-enter');
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new Moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentElem.addClass('transition-cover-box-leave');
+			this.overlay.hideAnimated();
+		}.bind(this);
 
-			e.stop();
+		var onEnd = function() {
 
 			parentElem.removeClass('transition-cover-box-leave');
-			viewToHide.removeClass('transition-cover-box-foreground-view');
 			viewToShow.removeClass('transition-cover-box-background-view');
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-
-			viewToHide.removeFromParentComponent();
-
-			this.didLeave(viewToShow, viewToHide, parentView);
-
-			this.viewToShowWrapper.removeFromParentComponent();
-			this.viewToShowWrapper.destroy();
-			this.viewToShowWrapper = null;
+			viewToHide.removeClass('transition-cover-box-foreground-view');
 
 			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();
 			this.overlay = null;
 
-		}.bind(this));
+			this.didLeave(viewToShow, viewToHide, parentView);
 
-		this.overlay.hideAnimated();
+			this.wrapper.destroy();
+			this.wrapper = null;
 
-		parentElem.addClass('transition-cover-box-leave');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
+
+		var animation = new Moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	}
 
 });
@@ -11218,13 +11235,26 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Page
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover.Page = new Class({
 
 	Extends: Moobile.ViewTransition,
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	overlay: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	wrapper: null,
 
 	/**
 	 * @overridden
@@ -11238,69 +11268,77 @@ Moobile.ViewTransition.Cover.Page = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
-
-			e.stop();
-
-			parentElem.removeClass('transition-cover-page-enter');
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-
-			this.didEnter(viewToShow, viewToHide, parentView);
-
-		}.bind(this));
-
 		this.overlay = new Moobile.Overlay();
+		this.overlay.addClass('transition-cover-page-overlay');
 		this.overlay.hide();
-		this.overlay.showAnimated();
 
-		viewToHide.addChildComponent(this.overlay, 'header');
+		parentView.addChildComponent(this.overlay);
 
-		parentElem.addClass('transition-cover-page-enter');
-		viewToHide.addClass('transition-cover-page-background-view');
-		viewToShow.addClass('transition-cover-page-foreground-view');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		this.wrapper = document.createElement('div');
+		this.wrapper.addClass('transition-cover-page-foreground-view-wrapper');
+		this.wrapper.wraps(viewToShow);
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-page-enter');
+			viewToHide.addClass('transition-cover-page-background-view');
+			viewToShow.addClass('transition-cover-page-foreground-view');
+			this.overlay.showAnimated();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-cover-page-enter');
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new Moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
 
-		document.id(parentView).addEvent('animationend:once', function(e) {
+		var onStart = function() {
+			parentElem.addClass('transition-cover-page-leave');
+			this.overlay.hideAnimated();
+		}.bind(this);
 
-			e.stop();
+		var onEnd = function() {
 
 			parentElem.removeClass('transition-cover-page-leave');
 			viewToShow.removeClass('transition-cover-page-background-view');
 			viewToHide.removeClass('transition-cover-page-foreground-view');
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-
-			this.didLeave(viewToShow, viewToHide, parentView);
 
 			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();
 			this.overlay = null;
 
-		}.bind(this));
+			this.didLeave(viewToShow, viewToHide, parentView);
 
-		this.overlay.hideAnimated();
+			this.wrapper.destroy();
+			this.wrapper = null;
 
-		parentElem.addClass('transition-cover-page-leave');
-		viewToHide.addClass('transition-view-to-hide');
-		viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
+
+		var animation = new Moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
 	}
 
 });
