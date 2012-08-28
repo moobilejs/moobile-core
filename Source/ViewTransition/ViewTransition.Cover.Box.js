@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover.Box = new Class({
@@ -54,6 +55,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
@@ -78,7 +80,6 @@ Moobile.ViewTransition.Cover.Box = new Class({
 		}.bind(this);
 
 		var onEnd = function() {
-			console.log('enter end');
 			parentElem.removeClass('transition-cover-box-enter');
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
@@ -92,6 +93,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
