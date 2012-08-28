@@ -1398,6 +1398,68 @@ input, select, textarea {
 	        animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
+/* Transition Cover Box (Shared)
+-----------------------------------------------------------------------------*/
+
+.transition-cover-box-foreground-view-wrapper {
+	-webkit-transform: translateY(-100%);                        /* Important */
+	   -moz-transform: translateY(-100%);                        /* Important */
+	    -ms-transform: translateY(-100%);                        /* Important */
+	     -o-transform: translateY(-100%);                        /* Important */
+	        transform: translateY(-100%);                        /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	height: 100%;                                                /* Important */
+	position: relative;                                          /* Important */
+	width: 100%;                                                 /* Important */
+	z-index: 75;                                                 /* Important */
+}
+
+.transition-cover-box-foreground-view {
+	-webkit-box-shadow: 0px 0px 10px #000000;
+	   -moz-box-shadow: 0px 0px 10px #000000;
+	    -ms-box-shadow: 0px 0px 10px #000000;
+	     -o-box-shadow: 0px 0px 10px #000000;
+	        box-shadow: 0px 0px 10px #000000;
+	-webkit-box-flex: 0;                                         /* Important */
+	   -moz-box-flex: 0;                                         /* Important */
+	    -ms-box-flex: 0;                                         /* Important */
+	     -o-box-flex: 0;                                         /* Important */
+	        box-flex: 0;                                         /* Important */
+	height: 620px;
+	width: 540px;
+}
+
+.transition-cover-box-background-view {
+	display: -webkit-box !important;                             /* Important */
+	display:    -moz-box !important;                             /* Important */
+	display:     -ms-box !important;                             /* Important */
+	display:      -o-box !important;                             /* Important */
+	display:         box !important;                             /* Important */
+}
+
+.transition-cover-box-overlay {
+	z-index: 50;
+}
+
 /* Transition Cover Box (Enter)
 -----------------------------------------------------------------------------*/
 
@@ -1432,64 +1494,7 @@ input, select, textarea {
 	    -ms-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	     -o-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	        animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-}
 
-.transition-cover-box-foreground-view-wrapper {
-	-webkit-transform: translateY(-100%);
-	   -moz-transform: translateY(-100%);
-	    -ms-transform: translateY(-100%);
-	     -o-transform: translateY(-100%);
-	        transform: translateY(-100%);
-	-webkit-box-sizing: border-box;                              /* Important */
-	   -moz-box-sizing: border-box;                              /* Important */
-	    -ms-box-sizing: border-box;                              /* Important */
-	     -o-box-sizing: border-box;                              /* Important */
-	        box-sizing: border-box;                              /* Important */
-	-webkit-box-align: center;
-	   -moz-box-align: center;
-	    -ms-box-align: center;
-	     -o-box-align: center;
-	        box-align: center;
-	-webkit-box-pack: center;
-	   -moz-box-pack: center;
-	    -ms-box-pack: center;
-	     -o-box-pack: center;
-	        box-pack: center;
-	-webkit-box-flex: 1;
-	   -moz-box-flex: 1;
-	    -ms-box-flex: 1;
-	     -o-box-flex: 1;
-	        box-flex: 1;
-	background: transparent;
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
-	height: 100%;
-	width: 100%;
-	z-index: 75;
-}
-
-/*
-Is this even used ?
-.transition-cover-box-foreground-view-wrapper > .view-content {
-	-webkit-box-shadow: 0px 0px 10px #000000;
-	-webkit-box-flex: 0;
-	margin-left: auto;
-	margin-right: auto;
-	height: 620px;
-	width: 540px;
-	z-index: 75;
-}
-*/
-
-.transition-cover-box-background-view {
-	z-index: 50;
-}
-
-.transition-cover-box-foreground-view {
-	z-index: 75;
 }
 
 /* Transition - Cover Box Leave
