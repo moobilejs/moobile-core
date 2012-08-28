@@ -94,12 +94,3 @@ Moobile.Overlay = new Class({
 	}
 
 });
-
-//------------------------------------------------------------------------------
-// Styles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineStyle('radial', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-radial'); },
-	detach: function(element) { element.removeClass('style-radial'); }
-});

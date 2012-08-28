@@ -1338,13 +1338,6 @@ input, select, textarea {
 	background: rgba(0, 0, 0, 0.30);
 }
 
-/* Style Radial */
-
-.overlay.style-radial {
-	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
-}
-
-
 /* Alert
 -----------------------------------------------------------------------------*/
 
@@ -1445,6 +1438,15 @@ input, select, textarea {
 	    -ms-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 fill stretch stretch;
 	     -o-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 fill stretch stretch;
 	        border-image: url(../images/iOS/alert-button.png) 86 5 0 5 fill stretch stretch;
+}
+
+.alert .overlay {
+	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
+	background: -webkit-radial-gradient(circle, rgba(0, 0, 0, 0.10) 0px, rgba(0, 0, 0, 0.30) 250px);
+	background:    -moz-radial-gradient(circle, rgba(0, 0, 0, 0.10) 0px, rgba(0, 0, 0, 0.30) 250px);
+	background:     -ms-radial-gradient(circle, rgba(0, 0, 0, 0.10) 0px, rgba(0, 0, 0, 0.30) 250px);
+	background:      -o-radial-gradient(circle, rgba(0, 0, 0, 0.10) 0px, rgba(0, 0, 0, 0.30) 250px);
+	background:         radial-gradient(circle, rgba(0, 0, 0, 0.10) 0px, rgba(0, 0, 0, 0.30) 250px);
 }
 
 /* Show Animation */
