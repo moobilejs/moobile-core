@@ -77,7 +77,6 @@ var condition = function(e) {
 	e.touches = e.targetTouches = e.changedTouches = [touch];
 
 	if (e.event.fake) {
-		e.stop();
 		return true;
 	}
 
