@@ -376,7 +376,6 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_onThumbTouchStart: function(e) {
-		e.stop();
 		var touch = e.changedTouches[0];
 		if (this._activeTouch === null) {
 			this._activeTouch = touch
@@ -397,7 +396,6 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_onThumbTouchMove: function(e) {
-		e.stop();
 		var touch = e.changedTouches[0];
 		if (this._activeTouch.identifier === touch.identifier) {
 			var x = touch.pageX - this._activeTouchOffsetX + this._activeTouchInitialThumbX;
@@ -412,7 +410,6 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_onThumbTouchEnd: function(e) {
-		e.stop();
 		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
 			this._activeTouch = null;
 			this._activeTouchOffsetX = null;
