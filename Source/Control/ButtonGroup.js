@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ButtonGroup = new Class({
@@ -48,6 +49,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
+		layout: null,
 		deselectable: false,
 		selectedButtonIndex: -1
 	},
@@ -55,11 +57,19 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
+
 		this.parent();
+
 		this.element.addClass('button-group');
+
+		var layout = this.options.layout;
+		if (layout) {
+			this.element.addClass('button-group-layout-' + layout);
+		}
 	},
 
 	/**
@@ -273,11 +283,3 @@ Moobile.Component.defineRole('button-group', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });
 
-//------------------------------------------------------------------------------
-// Styles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineStyle('vertical', Moobile.ButtonGroup, {
-	attach: function(element) { element.addClass('style-vertical'); },
-	detach: function(element) { element.removeClass('style-vertical'); }
-});

@@ -271,15 +271,15 @@ input, select, textarea {
 	border-bottom-right-radius: 10px;
 }
 
-/* Inside a Button Group Style Vertical */
+/* Inside a Button Group Vertical Layout */
 
-.button-group.style-vertical .button {
+.button-group.button-group-layout-vertical .button {
     border-radius: 0px;
 	border-width: 1px;
 	border-top-width: 0px;
 }
 
-.button-group.style-vertical .button:first-child {
+.button-group.button-group-layout-vertical .button:first-child {
 	-webkit-border-top-left-radius: 10px;
 	   -moz-border-top-left-radius: 10px;
 	    -ms-border-top-left-radius: 10px;
@@ -293,7 +293,7 @@ input, select, textarea {
 	border-top-width: 1px;
 }
 
-.button-group.style-vertical .button:last-child {
+.button-group.button-group-layout-vertical .button:last-child {
 	-webkit-border-bottom-left-radius: 10px;
 	   -moz-border-bottom-left-radius: 10px;
 	    -ms-border-bottom-left-radius: 10px;
