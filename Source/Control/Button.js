@@ -144,21 +144,25 @@ Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/* Active Style - iOS */
 Moobile.Component.defineStyle('active', Moobile.Button, {
 	attach: function(element) { element.addClass('style-active'); },
 	detach: function(element) { element.removeClass('style-active'); }
 });
 
+/* Warning Style - iOS */
 Moobile.Component.defineStyle('warning', Moobile.Button, {
 	attach: function(element) { element.addClass('style-warning'); },
 	detach: function(element) { element.removeClass('style-warning'); }
 });
 
+/* Back Style - iOS Android */
 Moobile.Component.defineStyle('back', Moobile.Button, {
 	attach: function(element) { element.addClass('style-back'); },
 	detach: function(element) { element.removeClass('style-back'); }
 });
 
+/* Forward Style - iOS Android */
 Moobile.Component.defineStyle('forward', Moobile.Button, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }
