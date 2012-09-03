@@ -72,7 +72,7 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('content');
+		var content = this.getRoleElement('content') /* <0.1-compat> */ || this.getRoleElement('view-content') /* </0.1-compat> */;
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
@@ -335,10 +335,6 @@ Moobile.View.at = function(path) {
 	return null;
 };
 
-//<pre-0.1-compat>
-Moobile.View.prototype.addChild = Moobile.View.prototype.addChildComponent;
-//</pre-0.1-compat>
-
 //------------------------------------------------------------------------------
 // Roles
 //------------------------------------------------------------------------------
@@ -358,11 +354,11 @@ Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true
 });
 
 // <0.1-compat>
-
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
-	throw new Error('The role "view-content" has been deprecated, use the role "content" instead')
+	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
 });
-
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
