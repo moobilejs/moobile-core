@@ -282,6 +282,18 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this._selectedItem === component) {
+			this.clearSelectedItem();
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	didRemoveChildComponent: function(component) {
