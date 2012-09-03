@@ -111,15 +111,13 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/* Dark Style - iOS - Android */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-// TODO add styles for all ios colors
-
-/* android only */
-
+/* Contextual Style - Android */
 Moobile.Component.defineStyle('contextual', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-contextual'); },
 	detach: function(element) { element.removeClass('style-contextual'); }
