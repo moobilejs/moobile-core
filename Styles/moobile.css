@@ -853,6 +853,11 @@ input, select, textarea {
 	    -ms-box-sizing: border-box;                              /* Important */
 	     -o-box-sizing: border-box;                              /* Important */
 	        box-sizing: border-box;                              /* Important */
+	-webkit-box-orient: horizontal;
+	   -moz-box-orient: horizontal;
+	    -ms-box-orient: horizontal;
+	     -o-box-orient: horizontal;
+	        box-orient: horizontal;
 }
 
 .alert .alert-footer .button {}

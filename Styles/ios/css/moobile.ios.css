@@ -1380,11 +1380,6 @@ input, select, textarea {
 }
 
 .alert .alert-footer {
-	-webkit-box-orient: vertical;                                /* Important */
-	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
 	display:     -ms-box;                                        /* Important */
@@ -1414,16 +1409,22 @@ input, select, textarea {
 	font-weight: bold;
 	height: 43px;
 	line-height: 42px;
-	margin-bottom: 5px;
+	margin: 0px;
+	margin-left: 4px;
+	margin-right: 4px;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
 	text-align: center;
 }
 
-.alert .alert-footer .button:last-child {
-	margin-bottom: 0px;
+.alert .alert-footer .button:first-child {
+	margin-left: 0px;
 }
 
-.alert .alert-footer .button.default {
+.alert .alert-footer .button:last-child {
+ 	margin-right: 0px;
+ }
+
+.alert .alert-footer .button.is-default {
 	-webkit-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 fill stretch stretch;
 	   -moz-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 fill stretch stretch;
 	    -ms-border-image: url(../images/iOS/alert-button.png) 43 5 43 5 fill stretch stretch;
@@ -1439,6 +1440,28 @@ input, select, textarea {
 	     -o-border-image: url(../images/iOS/alert-button.png) 86 5 0 5 fill stretch stretch;
 	        border-image: url(../images/iOS/alert-button.png) 86 5 0 5 fill stretch stretch;
 }
+
+/* Vertical Layout */
+
+.alert.alert-layout-vertical .alert-footer {
+	-webkit-box-orient: vertical;                                /* Important */
+	   -moz-box-orient: vertical;                                /* Important */
+	    -ms-box-orient: vertical;                                /* Important */
+	     -o-box-orient: vertical;                                /* Important */
+	        box-orient: vertical;                                /* Important */
+}
+
+.alert.alert-layout-vertical .alert-footer .button {
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.alert.alert-layout-vertical .alert-footer .button:last-child {
+	margin-bottom: 0px;
+}
+
+/* Overlay */
 
 .alert .overlay {
 	background: -webkit-gradient(radial, center center, 0, center center, 250, from(rgba(0, 0, 0, 0.10)), to(rgba(0, 0, 0, 0.30)));
@@ -1520,25 +1543,6 @@ input, select, textarea {
 	     -o-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
 	        animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
 }
-
-/* Horizontal Button Layout */
-
-.alert.button-layout-horizontal .alert-footer {
-	-webkit-box-orient: horizontal;
-	   -moz-box-orient: horizontal;
-	    -ms-box-orient: horizontal;
-	     -o-box-orient: horizontal;
-	        box-orient: horizontal;
-}
-
-.alert.button-layout-horizontal .alert-footer .button {
-	margin: 0px;
-	margin-left: 4px;
-	margin-right: 4px;
-}
-
-.alert.button-layout-horizontal .alert-footer .button:first-child { margin-left: 0px; }
-.alert.button-layout-horizontal .alert-footer .button:last-child  { margin-right: 0px; }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 

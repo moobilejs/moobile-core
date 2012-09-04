@@ -91,7 +91,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		buttonLayout: 'vertical'
+		layout: null
 	},
 
 	/**
@@ -128,9 +128,9 @@ Moobile.Alert = new Class({
 
 		this.element.grab(this.boxElement);
 
-		var buttonLayout = this.options.buttonLayout;
-		if (buttonLayout) {
-			this.element.addClass('button-layout-' + buttonLayout);
+		var layout = this.options.layout;
+		if (layout) {
+			this.element.addClass('alert-layout-' + layout);
 		}
 	},
 
@@ -253,7 +253,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	setDefaultButton: function(button) {
-		if (this.hasChildComponent(button)) button.addClass('default');
+		if (this.hasChildComponent(button)) button.addClass('is-default');
 		return this;
 	},
 

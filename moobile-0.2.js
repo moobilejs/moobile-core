@@ -1,5 +1,5 @@
 /*!
- * iScroll v4.2 ~ Copyright (c) 2012 Matteo Spinelli, http://cubiq.org
+ * iScroll v4.2.2 ~ Copyright (c) 2012 Matteo Spinelli, http://cubiq.org
  * Released under MIT license, http://cubiq.org/license
  */
 (function(window, doc){
@@ -53,7 +53,7 @@ var m = Math,
 				''			: 'transitionend',
 				'webkit'	: 'webkitTransitionEnd',
 				'Moz'		: 'transitionend',
-				'O'			: 'oTransitionEnd',
+				'O'			: 'otransitionend',
 				'ms'		: 'MSTransitionEnd'
 			};
 
@@ -177,7 +177,6 @@ var m = Math,
 		that._bind(RESIZE_EV, window);
 		that._bind(START_EV);
 		if (!hasTouch) {
-			that._bind('mouseout', that.wrapper);
 			if (that.options.wheelAction != 'none')
 				that._bind(WHEEL_EV);
 		}
@@ -211,7 +210,6 @@ iScroll.prototype = {
 			case CANCEL_EV: that._end(e); break;
 			case RESIZE_EV: that._resize(); break;
 			case WHEEL_EV: that._wheel(e); break;
-			case 'mouseout': that._mouseout(e); break;
 			case TRNEND_EV: that._transitionEnd(e); break;
 		}
 	},
@@ -377,11 +375,11 @@ iScroll.prototype = {
 			if (that.options.useTransform) {
 				// Very lame general purpose alternative to CSSMatrix
 				matrix = getComputedStyle(that.scroller, null)[transform].replace(/[^0-9\-.,]/g, '').split(',');
-				x = matrix[4] * 1;
-				y = matrix[5] * 1;
+				x = +matrix[4];
+				y = +matrix[5];
 			} else {
-				x = getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g, '') * 1;
-				y = getComputedStyle(that.scroller, null).top.replace(/[^0-9-]/g, '') * 1;
+				x = +getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g, '');
+				y = +getComputedStyle(that.scroller, null).top.replace(/[^0-9-]/g, '');
 			}
 			
 			if (x != that.x || y != that.y) {
@@ -389,6 +387,7 @@ iScroll.prototype = {
 				else cancelFrame(that.aniTime);
 				that.steps = [];
 				that._pos(x, y);
+				if (that.options.onScrollEnd) that.options.onScrollEnd.call(that);
 			}
 		}
 
@@ -404,9 +403,9 @@ iScroll.prototype = {
 
 		if (that.options.onScrollStart) that.options.onScrollStart.call(that, e);
 
-		that._bind(MOVE_EV);
-		that._bind(END_EV);
-		that._bind(CANCEL_EV);
+		that._bind(MOVE_EV, window);
+		that._bind(END_EV, window);
+		that._bind(CANCEL_EV, window);
 	},
 	
 	_move: function (e) {
@@ -506,9 +505,9 @@ iScroll.prototype = {
 			snap,
 			scale;
 
-		that._unbind(MOVE_EV);
-		that._unbind(END_EV);
-		that._unbind(CANCEL_EV);
+		that._unbind(MOVE_EV, window);
+		that._unbind(END_EV, window);
+		that._unbind(CANCEL_EV, window);
 
 		if (that.options.onBeforeScrollEnd) that.options.onBeforeScrollEnd.call(that, e);
 
@@ -566,7 +565,7 @@ iScroll.prototype = {
 				}
 			}
 
-			that._resetPos(200);
+			that._resetPos(400);
 
 			if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
 			return;
@@ -700,19 +699,6 @@ iScroll.prototype = {
 		}
 	},
 	
-	_mouseout: function (e) {
-		var t = e.relatedTarget;
-
-		if (!t) {
-			this._end(e);
-			return;
-		}
-
-		while (t = t.parentNode) if (t == this.wrapper) return;
-		
-		this._end(e);
-	},
-
 	_transitionEnd: function (e) {
 		var that = this;
 
@@ -899,12 +885,11 @@ iScroll.prototype = {
 		// Remove the event listeners
 		that._unbind(RESIZE_EV, window);
 		that._unbind(START_EV);
-		that._unbind(MOVE_EV);
-		that._unbind(END_EV);
-		that._unbind(CANCEL_EV);
+		that._unbind(MOVE_EV, window);
+		that._unbind(END_EV, window);
+		that._unbind(CANCEL_EV, window);
 		
 		if (!that.options.hasTouch) {
-			that._unbind('mouseout', that.wrapper);
 			that._unbind(WHEEL_EV);
 		}
 		
@@ -985,7 +970,7 @@ iScroll.prototype = {
 
 		if (!that.zoomed) {
 			that.scroller.style[transitionDuration] = '0';
-			that._resetPos(200);
+			that._resetPos(400);
 		}
 	},
 
@@ -1056,9 +1041,9 @@ iScroll.prototype = {
 		this.enabled = false;
 
 		// If disabled after touchstart we make sure that there are no left over events
-		this._unbind(MOVE_EV);
-		this._unbind(END_EV);
-		this._unbind(CANCEL_EV);
+		this._unbind(MOVE_EV, window);
+		this._unbind(END_EV, window);
+		this._unbind(CANCEL_EV, window);
 	},
 	
 	enable: function () {
@@ -2347,6 +2332,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Element/Element.Role#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @eduted 0.2.0
  * @since  0.1.0
  * @deprecated 0.2.0
  */
@@ -2514,6 +2500,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Component = new Class({
@@ -3949,21 +3936,25 @@ Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/* Active Style - iOS */
 Moobile.Component.defineStyle('active', Moobile.Button, {
 	attach: function(element) { element.addClass('style-active'); },
 	detach: function(element) { element.removeClass('style-active'); }
 });
 
+/* Warning Style - iOS */
 Moobile.Component.defineStyle('warning', Moobile.Button, {
 	attach: function(element) { element.addClass('style-warning'); },
 	detach: function(element) { element.removeClass('style-warning'); }
 });
 
+/* Back Style - iOS Android */
 Moobile.Component.defineStyle('back', Moobile.Button, {
 	attach: function(element) { element.addClass('style-back'); },
 	detach: function(element) { element.removeClass('style-back'); }
 });
 
+/* Forward Style - iOS Android */
 Moobile.Component.defineStyle('forward', Moobile.Button, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }
@@ -3995,6 +3986,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ButtonGroup = new Class({
@@ -4021,6 +4013,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
+		layout: null,
 		deselectable: false,
 		selectedButtonIndex: -1
 	},
@@ -4028,11 +4021,19 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
+
 		this.parent();
+
 		this.element.addClass('button-group');
+
+		var layout = this.options.layout;
+		if (layout) {
+			this.element.addClass('button-group-layout-' + layout);
+		}
 	},
 
 	/**
@@ -4246,14 +4247,6 @@ Moobile.Component.defineRole('button-group', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });
 
-//------------------------------------------------------------------------------
-// Styles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineStyle('vertical', Moobile.ButtonGroup, {
-	attach: function(element) { element.addClass('style-vertical'); },
-	detach: function(element) { element.removeClass('style-vertical'); }
-});
 
 
 /*
@@ -4280,6 +4273,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Bar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Bar = new Class({
@@ -4368,15 +4362,13 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/* Dark Style - iOS - Android */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-// TODO add styles for all ios colors
-
-/* android only */
-
+/* Contextual Style - Android */
 Moobile.Component.defineStyle('contextual', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-contextual'); },
 	detach: function(element) { element.removeClass('style-contextual'); }
@@ -4511,6 +4503,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.NavigationBarItem = new Class({
@@ -4557,6 +4550,7 @@ Moobile.NavigationBarItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#setTitle
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setTitle: function(title) {
@@ -4709,6 +4703,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Slider = new Class({
@@ -5038,7 +5033,6 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_onThumbTouchStart: function(e) {
-		e.stop();
 		var touch = e.changedTouches[0];
 		if (this._activeTouch === null) {
 			this._activeTouch = touch
@@ -5059,7 +5053,6 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_onThumbTouchMove: function(e) {
-		e.stop();
 		var touch = e.changedTouches[0];
 		if (this._activeTouch.identifier === touch.identifier) {
 			var x = touch.pageX - this._activeTouchOffsetX + this._activeTouchInitialThumbX;
@@ -5074,7 +5067,6 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_onThumbTouchEnd: function(e) {
-		e.stop();
 		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
 			this._activeTouch = null;
 			this._activeTouchOffsetX = null;
@@ -5379,6 +5371,18 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this._selectedItem === component) {
+			this.clearSelectedItem();
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	didRemoveChildComponent: function(component) {
@@ -5473,6 +5477,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ListItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ListItem = new Class({
@@ -5559,6 +5564,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setLabel
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setLabel: function(label) {
@@ -5597,6 +5603,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setImage
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setImage: function(image) {
@@ -5635,6 +5642,7 @@ Moobile.ListItem = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setDetail
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setDetail: function(detail) {
@@ -5695,6 +5703,8 @@ Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element)
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
+
+/* iOS  */
 
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
@@ -5855,6 +5865,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Image = new Class({
@@ -6090,6 +6101,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Text
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Text = new Class({
@@ -6118,6 +6130,7 @@ Moobile.Text = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Text#setText
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setText: function(text) {
@@ -6184,6 +6197,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Alert = new Class({
@@ -6252,12 +6266,13 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		buttonLayout: 'vertical'
+		layout: null
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
@@ -6288,9 +6303,9 @@ Moobile.Alert = new Class({
 
 		this.element.grab(this.boxElement);
 
-		var buttonLayout = this.options.buttonLayout;
-		if (buttonLayout) {
-			this.element.addClass('button-layout-' + buttonLayout);
+		var layout = this.options.layout;
+		if (layout) {
+			this.element.addClass('alert-layout-' + layout);
 		}
 	},
 
@@ -6413,7 +6428,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	setDefaultButton: function(button) {
-		if (this.hasChildComponent(button)) button.addClass('default');
+		if (this.hasChildComponent(button)) button.addClass('is-default');
 		return this;
 	},
 
@@ -7166,7 +7181,6 @@ var condition = function(e) {
 	e.touches = e.targetTouches = e.changedTouches = [touch];
 
 	if (e.event.fake) {
-		e.stop();
 		return true;
 	}
 
@@ -8308,6 +8322,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Util/Overlay
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Overlay = new Class({
@@ -8379,15 +8394,6 @@ Moobile.Overlay = new Class({
 		}
 	}
 
-});
-
-//------------------------------------------------------------------------------
-// Styles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineStyle('radial', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-radial'); },
-	detach: function(element) { element.removeClass('style-radial'); }
 });
 
 
@@ -8509,6 +8515,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/View/View
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.View = new Class({
@@ -8557,7 +8564,7 @@ Moobile.View = new Class({
 
 		this.element.addClass('view');
 
-		var content = this.getRoleElement('content');
+		var content = this.getRoleElement('content') /* <0.1-compat> */ || this.getRoleElement('view-content') /* </0.1-compat> */;
 		if (content === null) {
 			content = document.createElement('div');
 			content.ingest(this.element);
@@ -8820,10 +8827,6 @@ Moobile.View.at = function(path) {
 	return null;
 };
 
-//<pre-0.1-compat>
-Moobile.View.prototype.addChild = Moobile.View.prototype.addChildComponent;
-//</pre-0.1-compat>
-
 //------------------------------------------------------------------------------
 // Roles
 //------------------------------------------------------------------------------
@@ -8843,11 +8846,11 @@ Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true
 });
 
 // <0.1-compat>
-
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
-	throw new Error('The role "view-content" has been deprecated, use the role "content" instead')
+	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
 });
-
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
@@ -8885,6 +8888,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ScrollView = new Class({
@@ -9356,6 +9360,7 @@ if (!window.Moobile) window.Moobile = {};
 /**
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewController = new Class({
@@ -9763,6 +9768,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	_onDismissTransitionCompleted: function() {
