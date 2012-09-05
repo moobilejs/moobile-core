@@ -204,7 +204,6 @@ Moobile.Component = new Class({
 			var self = this;
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
-
 			if (callbacks[name] === undefined) {
 				callbacks[name] = [];
 				listeners[name] = function(e) {
@@ -214,7 +213,7 @@ Moobile.Component = new Class({
 
 			callbacks[name].include(fn);
 
-			this.element.addEvent(name, listeners[name]);
+			if (callbacks[name].length === 1) this.element.addEvent(name, listeners[name]);
 		}
 
 		return this.parent(type, fn, internal);
@@ -227,14 +226,15 @@ Moobile.Component = new Class({
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(name)) {
+		if (Moobile.Component.hasNativeEvent(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
-			if (callbacks[name] && callbacks[name].contains(fn)) {
-				callbacks[name].erase(fn);
-				if (callbacks[name].length === 0) {
-					this.element.removeEvent(name, listeners[name]);
-					delete listeners[name];
+			if (callbacks[type] && callbacks[type].contains(fn)) {
+				callbacks[type].erase(fn);
+				if (callbacks[type].length === 0) {
+					this.element.removeEvent(type, listeners[type]);
+					delete listeners[type];
+					delete callbacks[type];
 				}
 			}
 		}
