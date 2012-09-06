@@ -94,6 +94,20 @@ Moobile.ScrollView = new Class({
 	_offset: null,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_snapping: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_snappingTo: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
@@ -252,6 +266,8 @@ Moobile.ScrollView = new Class({
 
 		this.scrollTo(x, y, time);
 
+		this.fireEvent('scrolltopage', [pageX, pageY], time);
+
 		return this;
 	},
 
@@ -262,6 +278,32 @@ Moobile.ScrollView = new Class({
 	 */
 	getScroll: function() {
 		return this._scroller.getScroll();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getPage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getPage: function() {
+
+		var frame = this.getSize();
+		var pageSizeX = this.options.snapToPageSizeX || frame.x;
+		var pageSizeY = this.options.snapToPageSizeY || frame.y;
+
+		var scroll = this.getScroll();
+		var pageX = Math.floor(scroll.x / pageSizeX);
+		var pageY = Math.floor(scroll.y / pageSizeY);
+
+		if (this._activeTouch) {
+			if (this._activeTouchDirectionX === 'left') pageX += 1
+			if (this._activeTouchDirectionY === 'top')  pageY += 1;
+		}
+
+		return {
+			x: pageX,
+			y: pageY
+		};
 	},
 
 	/**
@@ -319,15 +361,23 @@ Moobile.ScrollView = new Class({
 		var pageY = Math.floor(scroll.y / pageSizeY);
 		var moveX = (scroll.x / pageSizeX - pageX) * 100;
 		var moveY = (scroll.y / pageSizeY - pageY) * 100;
-		if (this._activeTouchDirectionX === 'left') moveX = 100 - moveX;
-		if (this._activeTouchDirectionY === 'top')  moveY = 100 - moveY;
 
-		// in this case it's still the page we started from
-		if (this._activeTouchDirectionX === 'left') pageX += 1;
-		if (this._activeTouchDirectionY === 'top')  pageY += 1;
+		if (this._activeTouchDirectionX === 'left') {
+			moveX = 100 - moveX;
+			pageX += 1
+		}
+
+		if (this._activeTouchDirectionY === 'top') {
+			moveY = 100 - moveY;
+			pageY += 1;
+		}
+
+		var currentPageX = pageX;
+		var currentPageY = pageY;
 
 		var snapToPageAt = this.options.snapToPageAt;
 		var snapToPageDelay = this.options.snapToPageDelay;
+		var snapToPageDuration = this.options.snapToPageDuration
 
 		if (moveX > snapToPageAt || this._activeTouchDuration < snapToPageDelay) {
 			switch (this._activeTouchDirectionX) {
@@ -343,7 +393,12 @@ Moobile.ScrollView = new Class({
 			}
 		}
 
-		return this.scrollToPage(pageX, pageY, this.options.snapToPageDuration);
+		if (pageX !== currentPageX ||
+			pageY !== currentPageY) {
+			this.scrollToPage(pageX, pageY, snapToPageDuration)
+		}
+
+		return this;
 	},
 
 	/**
