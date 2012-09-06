@@ -290,20 +290,20 @@ Moobile.ScrollView = new Class({
 		var frame = this.getSize();
 		var pageSizeX = this.options.snapToPageSizeX || frame.x;
 		var pageSizeY = this.options.snapToPageSizeY || frame.y;
+		var pageX = 0;
+		var pageY = 0;
 
-		var scroll = this.getScroll();
-		var pageX = Math.floor(scroll.x / pageSizeX);
-		var pageY = Math.floor(scroll.y / pageSizeY);
-
-		if (this._activeTouch) {
-			if (this._activeTouchDirectionX === 'left') pageX += 1
-			if (this._activeTouchDirectionY === 'top')  pageY += 1;
+		if (pageSizeY && pageSizeY) {
+			var scroll = this.getScroll();
+			pageX = Math.floor(scroll.x / pageSizeX);
+			pageY = Math.floor(scroll.y / pageSizeY);
+			if (this._activeTouch) {
+				if (this._activeTouchDirectionX === 'left') pageX += 1
+				if (this._activeTouchDirectionY === 'top')  pageY += 1;
+			}
 		}
 
-		return {
-			x: pageX,
-			y: pageY
-		};
+		return {x: pageX, y: pageY};
 	},
 
 	/**
