@@ -174,10 +174,10 @@ input, select, textarea {
 	    -ms-box-align: center;                                   /* Important */
 	     -o-box-align: center;                                   /* Important */
 	        box-align: center;                                   /* Important */
-	-webkit-box-pack: start;                                    /* Important */
-	   -moz-box-pack: start;                                    /* Important */
-	    -ms-box-pack: start;                                    /* Important */
-	     -o-box-pack: start;                                    /* Important */
+	-webkit-box-pack: start;                                     /* Important */
+	   -moz-box-pack: start;                                     /* Important */
+	    -ms-box-pack: start;                                     /* Important */
+	     -o-box-pack: start;                                     /* Important */
 	        box-pack: center;                                    /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
@@ -614,11 +614,6 @@ input, select, textarea {
 	        animation: anim-show-alert-android 100ms ease-out 1;
 }
 
-.alert .alert-box {
-	height: 400px;
-	width: 400px;
-}
-
 /* Hide Animation */
 
 @-webkit-keyframes anim-hide-alert-android {
@@ -680,25 +675,118 @@ input, select, textarea {
 /* Slider
 -----------------------------------------------------------------------------*/
 
-.slider-track {
-	-webkit-border-radius: 5px;
-	   -moz-border-radius: 5px;
-	    -ms-border-radius: 5px;
-	     -o-border-radius: 5px;
-	        border-radius: 5px;
-	background: url(../images/iOS/slider-track.png) 0px 0px;
-	height: 9px;
+.slider {
+	background: rgba(0, 0, 0, 0.3);
+	height: 2px;
+	margin: 0px;
+	margin-top: 14px;
+	margin-bottom: 14px;
+	position: relative;                                          /* Important */
 }
 
-.slider-thumb {
-	-webkit-border-radius: 5px;
-	   -moz-border-radius: 5px;
-	    -ms-border-radius: 5px;
-	     -o-border-radius: 5px;
-	        border-radius: 5px;
-	background: url(../images/iOS/slider-thumb.png) no-repeat center center;
-	height: 24px;
+.slider .slider-track {
+	height: 2px;
+	left: -15px;
 	position: absolute;
-	margin-top: -6px;
-	width: 24px;
+	right: -15px;
+}
+
+.slider .slider-thumb {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	     -o-box-sizing: border-box;
+	        box-sizing: border-box;
+	border: 2px solid transparent;
+	background: rgba(51, 181, 229, 0.3);
+	border-radius: 30px;
+	height: 30px;
+	position: absolute;
+	top: -14px;
+	width: 30px;
+	z-index: 50;
+}
+
+.slider .slider-thumb:after {
+	background: #33b5e5;
+	border-radius: 8px;
+	content: "";
+	display: block;
+	height: 8px;
+	left: 9px;
+	position: absolute;
+	top: 9px;
+	width: 8px;
+}
+
+.slider .slider-range {
+	height: 2px;
+	left: 15px;
+	overflow: hidden;
+	position: absolute;
+	right: 15px;
+	top: 0px;
+	z-index: 20;
+}
+
+.slider .slider-value {
+	background :#33b5e5;
+	height: 2px;
+	left: -100%;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+
+/* Vertical Mode */
+
+.slider.slider-mode-vertical {
+	height: auto;
+	margin: 0px;
+	margin-left: 14px;
+	margin-right: 14px;
+	width: 2px;
+}
+
+.slider.slider-mode-vertical .slider-track {
+	bottom: -15px;
+	height: auto;
+	left: auto;
+	position: absolute;
+	top: -15px;
+	right: auto;
+	width: 2px;
+}
+
+.slider.slider-mode-vertical .slider-thumb {
+	left: -14px;
+	top: auto;
+}
+
+.slider.slider-mode-vertical .slider-range {
+	height: auto;
+	left: auto;
+	top: 15px;
+	bottom: 15px;
+	right: auto;
+	width: 2px;
+}
+
+.slider.slider-mode-vertical .slider-value {
+	height: 100%;
+	left: 0px;
+	top: -100%;
+	width: 2px;
+}
+
+/* Hit Area */
+
+.slider-thumb .hit-area {
+	bottom: -10px;
+	display: block;
+	content: '';
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	left: -10px;
 }

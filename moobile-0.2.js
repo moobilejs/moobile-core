@@ -4750,6 +4750,13 @@ Moobile.Slider = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
+	_mode: 'horizontal',
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
 	_position: {x: -1, y: -1},
 
 	/**
@@ -4809,7 +4816,7 @@ Moobile.Slider = new Class({
 	 */
 	options: {
 		value: 0,
-		mode: 'horizontal',
+		mode: null,
 		snap: false,
 		min: 0,
 		max: 100
@@ -4825,17 +4832,19 @@ Moobile.Slider = new Class({
 
 		this.parent();
 
+		this.element.addClass('slider');
+
 		this.trackElement = document.createElement('div');
 		this.trackElement.addClass('slider-track');
 		this.trackElement.inject(this.element);
 
 		this.thumbElement = document.createElement('div')
 		this.thumbElement.addClass('slider-thumb');
-		this.thumbElement.inject(this.element);
+		this.thumbElement.inject(this.trackElement);
 
 		this.rangeElement = document.createElement('div');
 		this.rangeElement.addClass('slider-range');
-		this.rangeElement.inject(this.element);
+		this.rangeElement.inject(this.trackElement);
 
 		this.valueElement = document.createElement('div');
 		this.valueElement.addClass('slider-value');
@@ -4843,8 +4852,12 @@ Moobile.Slider = new Class({
 
 		this.hitAreaElement = new Element('div.hit-area').inject(this.thumbElement);
 
-		this.element.addClass('slider');
-		this.element.addClass('slider-mode-' + this.options.mode);
+		var mode = this.options.mode;
+		if (mode) {
+			this.element.addClass('slider-mode-' + mode);
+		}
+
+		this._mode = mode || 'horizontal';
 	},
 
 	/**
@@ -4854,7 +4867,13 @@ Moobile.Slider = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
+		this.element.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.element.addEvent('touchmove', this.bound('_onTouchMove'));
+		this.element.addEvent('touchend', this.bound('_onTouchEnd'));
+
 		this.thumbElement.addEvent('touchcancel', this.bound('_onThumbTouchCancel'));
 		this.thumbElement.addEvent('touchstart', this.bound('_onThumbTouchStart'));
 		this.thumbElement.addEvent('touchmove', this.bound('_onThumbTouchMove'));
@@ -4879,14 +4898,21 @@ Moobile.Slider = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+
+		this.element.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.element.removeEvent('touchmove', this.bound('_onTouchMove'));
+		this.element.removeEvent('touchend', this.bound('_onTouchEnd'));
+
 		this.thumbElement.removeEvent('touchcancel', this.bound('_onThumbTouchCancel'));
 		this.thumbElement.removeEvent('touchstart', this.bound('_onThumbTouchStart'));
 		this.thumbElement.removeEvent('touchmove', this.bound('_onThumbTouchMove'));
 		this.thumbElement.removeEvent('touchend', this.bound('_onThumbTouchEnd'));
+
 		this.thumbElement = null;
 		this.trackElement = null;
 		this.valueElement = null;
 		this.rangeElement = null;
+
 		this.parent();
 	},
 
@@ -4921,12 +4947,15 @@ Moobile.Slider = new Class({
 		var trackSize = this.trackElement.getSize();
 		var thumbSize = this.thumbElement.getSize();
 
-		var k = this.options.mode === 'horizontal' ? 'x' : 'y';
-
 		var range = 0;
-		switch (this.options.mode) {
-			case 'horizontal': range = trackSize.x - thumbSize.x; break;
-			case 'vertical':   range = trackSize.y - thumbSize.y; break;
+
+		switch (this._mode) {
+			case 'horizontal':
+				range = trackSize.x - thumbSize.x;
+				break;
+			case 'vertical':
+				range = trackSize.y - thumbSize.y;
+				break;
 		}
 
 		this._valueRange = this.options.max - this.options.min;
@@ -4946,7 +4975,7 @@ Moobile.Slider = new Class({
 	 */
 	_move: function(x, y) {
 
-		switch (this.options.mode) {
+		switch (this._mode) {
 			case 'horizontal':
 				y = 0;
 				if (x < this._trackLimit.min) x = this._trackLimit.min;
@@ -4991,7 +5020,7 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_valueFromPosition: function(x, y) {
-		return (this.options.mode === 'horizontal' ? x : y) * this._valueRange / this._trackRange + this.options.min;
+		return (this._mode === 'horizontal' ? x : y) * this._valueRange / this._trackRange + this.options.min;
 	},
 
 	/**
@@ -5006,12 +5035,39 @@ Moobile.Slider = new Class({
 
 		var pos = (value - this.options.min) * this._trackRange / this._valueRange;
 
-		switch (this.options.mode) {
+		switch (this._mode) {
 			case 'horizontal': x = pos.round(2); break;
 			case 'vertical':   y = pos.round(2); break;
 		}
 
 		return {x: x, y: y};
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchStart: function(e) {
+		e.stop();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchMove: function(e) {
+		e.stop();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd: function(e) {
+		e.stop();
 	},
 
 	/**
