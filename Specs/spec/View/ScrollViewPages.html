@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=medium-dpi" />
+
+		<title></title>
+
+		<!-- moobile stylesheets -->
+		<link rel="stylesheet" href="../../../Styles/moobile.css" />
+		<link rel="stylesheet" href="../../../Styles/ios/css/moobile.ios.css" />
+
+		<!-- mootools -->
+		<script type="text/javascript" src="../../libs/mootools-core-1.4.5.js"></script>
+		<script type="text/javascript" src="../../libs/mootools-more-1.4.0.1.js"></script>
+
+		<!-- moobile -->
+		<script type="text/javascript" src="../../../moobile-0.2.js"></script>
+
+	</head>
+	<body>
+
+		<script type="text/javascript">
+
+			window.addEvent('ready', function() {
+
+				var window = new Moobile.Window(document.id('window'));
+				var view = new Moobile.ScrollView(document.id('view'), {
+					scrollX: true,
+					scrollY: true,
+					snapToPage: true,
+					snapToPageSizeX: 250,
+					snapToPageSizeY: 250
+				});
+				view.setContentSize(1250, 1250);
+
+
+			});
+
+		</script>
+
+		<style type="text/css">
+
+			#view .view-content {
+				display: block;
+			}
+
+			.block {
+				-webkit-box-sizing: border-box;
+				   -moz-box-sizing: border-box;
+				   -ms-box-sizing: border-box;
+				    -o-box-sizing: border-box;
+				       box-sizing: border-box;
+				font-size: 45px;
+				font-weight: bold;
+				float: left;
+				padding: 10px;
+				position: relative;
+				height: 250px;
+				width: 250px;
+			}
+
+			.block:nth-child(odd) {
+				background: rgba(0, 255, 0, 0.5);
+			}
+
+			.block:nth-child(even) {
+				background: rgba(255, 0, 0, 0.5);
+			}
+
+		</style>
+
+		<div id="window">
+			<div id="view">
+
+				<div class="block">0</div>
+				<div class="block">1</div>
+				<div class="block">2</div>
+				<div class="block">3</div>
+				<div class="block">4</div>
+
+				<div class="block">1</div>
+				<div class="block">1</div>
+				<div class="block">1</div>
+				<div class="block">1</div>
+				<div class="block">1</div>
+
+				<div class="block">2</div>
+				<div class="block">2</div>
+				<div class="block">2</div>
+				<div class="block">2</div>
+				<div class="block">2</div>
+
+				<div class="block">3</div>
+				<div class="block">3</div>
+				<div class="block">3</div>
+				<div class="block">3</div>
+				<div class="block">3</div>
+
+				<div class="block">4</div>
+				<div class="block">4</div>
+				<div class="block">4</div>
+				<div class="block">4</div>
+				<div class="block">4</div>
+
+				<div class="clear"></div>
+
+			</div>
+		</div>
+
+	</body>
+</html>
