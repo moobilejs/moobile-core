@@ -4,7 +4,7 @@
 name: ScrollView
 
 description: Provides a view that scrolls when its content is larger than the
-             view area.
+			 view area.
 
 license: MIT-style license.
 
@@ -49,21 +49,7 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouchStartX: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchStartY: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchStartPage: null,
+	_activeTouchStartScroll: null,
 
 	/**
 	 * @hidden
@@ -71,20 +57,6 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	_activeTouchDuration: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchDirectionX: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchDirectionY: null,
 
 	/**
 	 * @hidden
@@ -274,17 +246,18 @@ Moobile.ScrollView = new Class({
 		if (y > ymax) y = ymax;
 
 		var scroll = this.getScroll();
-		if (scroll.x !== x &&
+		if (scroll.x !== x ||
 			scroll.y !== y) {
 			this.scrollTo(x, y, time);
 		}
 
 		if (this._page.x !== pageX ||
 			this._page.y !== pageY) {
-			this._page.x = pageX;
-			this._page.y = pageY;
 			this.fireEvent('scrolltopage', null, time);
 		}
+
+		this._page.x = pageX;
+		this._page.y = pageY;
 
 		return this;
 	},
@@ -312,36 +285,13 @@ Moobile.ScrollView = new Class({
 		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
 
 		if (pageSizeX && pageSizeY) {
+
 			var scroll = this.getScroll();
 			scroll.x = scroll.x > 0 ? scroll.x : 0;
 			scroll.y = scroll.y > 0 ? scroll.y : 0;
+
 			x = Math.floor(scroll.x / pageSizeX);
 			y = Math.floor(scroll.y / pageSizeY);
-		}
-
-		return {x: x, y: y};
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getPageLocation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getPageScroll: function() {
-
-		var x = 0;
-		var y = 0;
-
-		var pageSizeX = this.options.snapToPageSizeX || this.getSize().x;
-		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
-
-		if (pageSizeX && pageSizeY) {
-			var page = this.getPage();
-			var scroll = this.getScroll();
-			scroll.x = scroll.x > 0 ? scroll.x : 0;
-			scroll.y = scroll.y > 0 ? scroll.y : 0;
-			x = (scroll.x / pageSizeX - page.x) * 100;
-			y = (scroll.y / pageSizeY - page.y) * 100;
 		}
 
 		return {x: x, y: y};
@@ -393,38 +343,47 @@ Moobile.ScrollView = new Class({
 	 */
 	_snapToPage: function() {
 
-		var snapToPageAt = this.options.snapToPageAt;
-		var snapToPageDelay = this.options.snapToPageDelay;
-		var snapToPageDuration = this.options.snapToPageDuration
-
 		var scroll = this.getScroll();
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
 
+		var moveX = scroll.x - this._activeTouchStartScroll.x;
+		var moveY = scroll.y - this._activeTouchStartScroll.y;
+		var absMoveX = Math.abs(moveX);
+		var absMoveY = Math.abs(moveY);
+
+		if (moveX === 0 && moveY === 0)
+			return this;
+
+		var pageSizeX = this.options.snapToPageSizeX || this.getSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
+		var pageMoveX = Math.floor(absMoveX / pageSizeX);
+		var pageMoveY = Math.floor(absMoveY / pageSizeY);
+		var pageAreaX = (absMoveX - pageMoveX * pageSizeX) * 100 / pageSizeX;
+		var pageAreaY = (absMoveY - pageMoveY * pageSizeY) * 100 / pageSizeY;
+
 		var page = this.getPage();
-		var move = this.getPageScroll();
+		if (moveX < 0) page.x = page.x + 1;
+		if (moveY < 0) page.y = page.y + 1;
 
-		if (scroll.x > 0 && this._activeTouchDirectionX === 'lf') {
-			move.x = 100 - move.x;
-			page.x += 1
+		var frame = this.getSize();
+		var total = this.getScrollSize();
+
+		if (scroll.x + frame.x === total.x ||
+			scroll.y + frame.y === total.y) {
+			// handles uneven pages
+			if ((scroll.x / pageSizeX - page.x) * 100 > 0) page.x = page.x + 1;
+			if ((scroll.y / pageSizeY - page.y) * 100 > 0) page.y = page.y + 1;
 		}
 
-		if (scroll.y > 0 && this._activeTouchDirectionY === 'tp') {
-			move.y = 100 - move.y;
-			page.y += 1;
-		}
+		var snapToPageAt = this.options.snapToPageAt;
+		var snapToPageDelay = this.options.snapToPageDelay;
+		var snapToPageDuration = this.options.snapToPageDuration
 
-		var values = {
-			'rg':  1,
-			'lf': -1,
-			'tp': -1,
-			'bt':  1
-		};
+		if (pageAreaX > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.x += moveX > 0 ? 1 : -1;
+		if (pageAreaY > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.y += moveY > 0 ? 1 : -1;
 
-		if (move.x > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.x += values[this._activeTouchDirectionX];
-		if (move.y > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.y += values[this._activeTouchDirectionY];
-
-		this.scrollToPage(page.x, page.y, snapToPageDuration);
+		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
 
 		return this;
 	},
@@ -438,10 +397,7 @@ Moobile.ScrollView = new Class({
 		this._activeTouch = null;
 		this._activeTouchTime = null;
 		this._activeTouchDuration = null;
-		this._activeTouchStartX = null;
-		this._activeTouchStartY = null;
-		this._activeTouchDirectionX = null;
-		this._activeTouchDirectionY = null;
+		this._activeTouchStartScroll = null;
 	},
 
 	/**
@@ -456,8 +412,7 @@ Moobile.ScrollView = new Class({
 		if (this._activeTouch === null) {
 			this._activeTouch = touch;
 			this._activeTouchTime = Date.now();
-			this._activeTouchStartX = touch.pageX;
-			this._activeTouchStartY = touch.pageY;
+			this._activeTouchStartScroll = this.getScroll();
 		}
 	},
 
@@ -472,8 +427,6 @@ Moobile.ScrollView = new Class({
 
 		if (this._activeTouch.identifier === touch.identifier) {
 			this._activeTouchDuration = Date.now() - this._activeTouchTime;
-			this._activeTouchDirectionX = this._activeTouchStartX < touch.pageX ? 'lf' : 'rg';
-			this._activeTouchDirectionY = this._activeTouchStartY < touch.pageY ? 'tp' : 'bt';
 
 			if (this.options.snapToPage) {
 				if (this._activeTouchStartX !== touch.pageX ||
@@ -485,10 +438,7 @@ Moobile.ScrollView = new Class({
 			this._activeTouch = null;
 			this._activeTouchTime = null;
 			this._activeTouchDuration = null;
-			this._activeTouchStartX = null;
-			this._activeTouchStartY = null;
-			this._activeTouchDirectionX = null;
-			this._activeTouchDirectionY = null;
+			this._activeTouchStartScroll = null;
 		}
 	},
 
