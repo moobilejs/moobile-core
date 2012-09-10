@@ -427,14 +427,19 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getDescendantComponent
 	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.1
 	 */
 	getDescendantComponent: function(name) {
-	    var component = null;
-	    var comparator = function(child) {
-	        if (child.getName() === name) {component = child;return true;} else if (child.getChildComponents().length > 0) {return child.getChildComponents().find(comparator);} else return false;
+
+	    var component = this.getChildComponent(name);
+	    if (component === null) {
+	    	for (var i = 0, len = this._children.length; i < len; i++) {
+	    		return this._children[i].getDescendantComponent(name);
+	    	}
 	    }
-	    this._children.find(comparator);
+
 	    return component;
 	},
 
