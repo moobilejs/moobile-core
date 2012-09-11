@@ -27,16 +27,30 @@ describe('Component/Component', function() {
 
 	//--------------------------------------------------------------------------
 
-	it('should read options using the data-attribute', function() {
+	it('should read string options using data-attribute', function() {
 		var component = new Moobile.Component('<div data-option-style-name="foo"></div>');
 		expect(component.options.styleName).toEqual('foo');
 	});
 
 	//--------------------------------------------------------------------------
 
-	it('should read numeric options using the data-attribute', function() {
+	it('should read numeric options using data-attribute', function() {
 		var component = new Moobile.Component('<div data-option-style-name="1"></div>');
 		expect(component.options.styleName).toEqual(1);
+	});
+
+	//--------------------------------------------------------------------------
+
+	it('should read boolean options using data-attribute', function() {
+		var component = new Moobile.Component('<div data-option-style-name="true"></div>');
+		expect(component.options.styleName).toEqual(true);
+	});
+
+	//--------------------------------------------------------------------------
+
+	it('should read array options using data-attribute', function() {
+		var component = new Moobile.Component('<div data-option-style-name="[1]"></div>');
+		expect(component.options.styleName).toContain(1);
 	});
 
 	//--------------------------------------------------------------------------
@@ -105,6 +119,34 @@ describe('Component/Component', function() {
 		p.addChildComponentBefore(c2, c1);
 		expect(p.getChildComponentAt(0)).toEqual(c2);
 		expect(p.getElements()[0]).toEqual(c2.getElement());
+	});
+
+	//--------------------------------------------------------------------------
+
+	it('should properly manage component indexes', function() {
+		var p = new Moobile.Component(
+			'<div>' +
+				'<div data-role="button" data-name="b1">B1</div>' +
+					'<div>' +
+						'<div data-role="button" data-name="b2">B2</div>' +
+					'</div>' +
+				'<div data-role="button" data-name="b3">B1</div>' +
+			'</div>'
+		);
+		var b1 = p.getChildComponent('b1');
+		var b2 = p.getChildComponent('b2');
+		var b3 = p.getChildComponent('b3');
+		console.log(b1, b2, b3);
+		console.log('WAT');
+		expect(p.getChildComponentIndex(b1)).toEqual(0);
+		expect(p.getChildComponentIndex(b2)).toEqual(1);
+		expect(p.getChildComponentIndex(b3)).toEqual(2);
+		var b4 = new Moobile.Button();
+		p.addChildComponentAfter(b4, b2);
+		expect(p.getChildComponentIndex(b1)).toEqual(0);
+		expect(p.getChildComponentIndex(b2)).toEqual(1);
+		expect(p.getChildComponentIndex(b3)).toEqual(3);
+		expect(p.getChildComponentIndex(b4)).toEqual(2);
 	});
 
 	//--------------------------------------------------------------------------
@@ -359,7 +401,7 @@ describe('Component/Component', function() {
 
 	//--------------------------------------------------------------------------
 
-	it('should return the component elements or elemenst that matches a selector', function() {
+	it('should return the component elements or elements that matches a selector', function() {
 		var component = new Moobile.Component('<div><span></span><span></span><p></p></div>');
 		expect(component.getElements().length).toEqual(3);
 		expect(component.getElements('span').length).toEqual(2);
