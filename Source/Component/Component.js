@@ -696,6 +696,15 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	hasClass: function(name) {
+		return this.element.hasClass(name);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
