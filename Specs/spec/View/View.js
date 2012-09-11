@@ -1,20 +1,14 @@
 describe('View/View', function() {
 
-	//--------------------------------------------------------------------------
-
 	it('should create a content element on initialization', function() {
 		var view = new Moobile.View();
 		expect(view.getContentElement()).not.toBeNull();
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should create a content wrapper element on initialization', function() {
 		var view = new Moobile.ScrollView();
 		expect(view.getContentWrapperElement()).not.toBeNull();
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should set the parent view to a child component', function() {
 
@@ -28,8 +22,6 @@ describe('View/View', function() {
 		expect(component1.getParentView()).toEqual(view);
 		expect(component2.getParentView()).toEqual(view);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should set the parent view to a child component recursively', function() {
 
@@ -63,8 +55,6 @@ describe('View/View', function() {
 		expect(subView.getParentView()).toEqual(view);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should set the parent view to a child recursively but not child inside another child view', function() {
 
 		var view              = new Moobile.View();
@@ -87,7 +77,5 @@ describe('View/View', function() {
 		expect(subView.getParentView()).toEqual(view);
 
 	});
-
-	//--------------------------------------------------------------------------
 
 });

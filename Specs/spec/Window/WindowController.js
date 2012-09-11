@@ -1,13 +1,9 @@
 describe('Window/WindowController', function() {
 
-	//--------------------------------------------------------------------------
-
 	it('should create a window upon initialization', function() {
 		var windowController = new Moobile.WindowController();
 		expect(windowController.getView() instanceof Moobile.Window).toEqual(true);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should set the root view controller', function() {
 
@@ -18,8 +14,6 @@ describe('Window/WindowController', function() {
 
 		expect(windowController.getRootViewController()).toEqual(viewController);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should destroy the current root view controller when setting a new root view controller', function() {
 
@@ -34,7 +28,5 @@ describe('Window/WindowController', function() {
 
 		expect(viewController1.destroy).toHaveBeenCalled();
 	});
-
-	//--------------------------------------------------------------------------
 
 });

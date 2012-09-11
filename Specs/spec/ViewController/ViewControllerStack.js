@@ -1,13 +1,9 @@
 describe('ViewController/ViewControllerStack', function() {
 
- 	//--------------------------------------------------------------------------
-
 	it('should create a view on initialization', function() {
 		var viewControllerStack = new Moobile.ViewControllerStack();
 		expect(viewControllerStack.getView() instanceof Moobile.ViewStack).toEqual(true);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should push a view controller', function() {
 
@@ -18,8 +14,6 @@ describe('ViewController/ViewControllerStack', function() {
 
 		expect(viewControllerStack.getChildViewControllerAt(0)).toEqual(viewController);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should pop a view controller', function() {
 
@@ -33,8 +27,6 @@ describe('ViewController/ViewControllerStack', function() {
 
 		expect(viewControllerStack.getTopViewController()).toEqual(viewController1);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should pop view controllers until a given view controller', function() {
 
@@ -54,8 +46,6 @@ describe('ViewController/ViewControllerStack', function() {
 		expect(viewControllerStack.getChildViewControllerAt(2)).toEqual(null);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should retrieve the top view controller', function() {
 
 		var viewControllerStack = new Moobile.ViewControllerStack();
@@ -70,8 +60,6 @@ describe('ViewController/ViewControllerStack', function() {
 		expect(viewControllerStack.getTopViewController()).toEqual(viewController3);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should call willPushViewController and didPushViewController upon pushing a view controller', function() {
 
 		var viewControllerStack = new Moobile.ViewControllerStack();
@@ -85,8 +73,6 @@ describe('ViewController/ViewControllerStack', function() {
 		expect(viewControllerStack.willPushViewController).toHaveBeenCalledWith(viewController);
 		expect(viewControllerStack.didPushViewController).toHaveBeenCalledWith(viewController);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should call willPopViewController and didPopViewController upon popping a view controller', function() {
 
@@ -105,8 +91,6 @@ describe('ViewController/ViewControllerStack', function() {
 		expect(viewControllerStack.didPopViewController).toHaveBeenCalledWith(viewController2);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should set the view controller stack to the child view controller recursively upon adding', function() {
 
 		var viewControllerStack = new Moobile.ViewControllerStack();
@@ -122,7 +106,5 @@ describe('ViewController/ViewControllerStack', function() {
 		expect(subViewController1.getViewControllerStack()).toEqual(viewControllerStack);
 		expect(subViewController2.getViewControllerStack()).toEqual(viewControllerStack);
 	});
-
-	//--------------------------------------------------------------------------
 
 });

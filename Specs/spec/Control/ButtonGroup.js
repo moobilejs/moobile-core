@@ -1,15 +1,11 @@
 describe('Control/ButtonGroup', function() {
 
-	//--------------------------------------------------------------------------
-
 	it('should add a button', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
 		g.addButton(b1);
 		expect(g.getChildComponents()[0]).toEqual(b1);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should add a button at the top', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -21,8 +17,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getElements('>')[0]).toEqual(b2.getElement());
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should add a button at the bottom', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
@@ -32,8 +26,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getButtonAt(1)).toEqual(b2);
 		expect(g.getElements('>')[1]).toEqual(b2.getElement());
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should add a button after another button', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -45,8 +37,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getElements('>')[1]).toEqual(b2.getElement());
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should add a button before another button', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
@@ -56,8 +46,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getButtonAt(0)).toEqual(b2);
 		expect(g.getElements()[0]).toEqual(b2.getElement());
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should return all buttons', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -70,16 +58,12 @@ describe('Control/ButtonGroup', function() {
 		expect(children[1]).toEqual(b2);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should find a button using its name', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button(null, null, 'me');
 		g.addButton(b1);
 		expect(g.getButton('me')).toEqual(b1);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should find a button using its index', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -88,8 +72,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getButtonAt(0)).toEqual(b1);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should remove a button', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
@@ -97,8 +79,6 @@ describe('Control/ButtonGroup', function() {
 		g.removeButton(b1);
 		expect(g.getButtonAt(0)).toEqual(null);
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should remove all buttons', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -110,8 +90,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getButtons().length).toEqual(0);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should call willAddChildComponent/didAddChildComponent when adding a button', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
@@ -121,8 +99,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.willAddChildComponent).toHaveBeenCalled();
 		expect(g.didAddChildComponent).toHaveBeenCalled();
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should call willRemoveChildComponent / didRemoveChildComponent when removing a button', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -134,8 +110,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.willRemoveChildComponent).toHaveBeenCalled();
 		expect(g.didRemoveChildComponent).toHaveBeenCalled();
 	});
-
-	//--------------------------------------------------------------------------
 
 	it('should select a button using the button instance', function() {
 		var g  = new Moobile.ButtonGroup();
@@ -149,8 +123,6 @@ describe('Control/ButtonGroup', function() {
 		expect(g.getSelectedButton()).toEqual(b1);
 	});
 
-	//--------------------------------------------------------------------------
-
 	it('should select a button using the button index', function() {
 		var g  = new Moobile.ButtonGroup();
 		var b1 = new Moobile.Button();
@@ -162,7 +134,5 @@ describe('Control/ButtonGroup', function() {
 		g.setSelectedButtonIndex(0);
 		expect(g.getSelectedButton()).toEqual(b1);
 	});
-
-	//--------------------------------------------------------------------------
 
 });
