@@ -55,6 +55,27 @@ describe('Component/Component', function() {
 
 	//--------------------------------------------------------------------------
 
+	it('should handler events handler properly', function() {
+		var c = new Moobile.Component();
+		var f1 = function(){};
+		var f2 = function(){};
+		var f3 = function(){};
+		spyOn(c.element, 'addEvent');
+		spyOn(c.element, 'removeEvent');
+		c.addEvent('tap', f1);
+		c.addEvent('tap', f2);
+		c.addEvent('tap', f3);
+		c.removeEvent('tap', f1);
+		c.removeEvent('tap', f2);
+		c.removeEvent('tap', f3);
+		expect(c.element.addEvent).toHaveBeenCalled();
+		expect(c.element.addEvent.calls.length).toEqual(1);
+		expect(c.element.removeEvent).toHaveBeenCalled();
+		expect(c.element.removeEvent.calls.length).toEqual(1);
+	});
+
+	//--------------------------------------------------------------------------
+
 	it('should add a child', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
@@ -370,6 +391,14 @@ describe('Component/Component', function() {
 		var component = new Moobile.Component();
 		component.addClass('foo');
 		expect(component.getElement().get('class')).toEqual('foo');
+	});
+
+	//--------------------------------------------------------------------------
+
+	it('should indicate whether a CSS class name is set for a component', function() {
+		var component = new Moobile.Component();
+		component.addClass('foo');
+		expect(component.hasClass('foo').toEqual(true);
 	});
 
 	//--------------------------------------------------------------------------
