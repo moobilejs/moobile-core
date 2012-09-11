@@ -9,6 +9,13 @@ describe('View/View', function() {
 
 	//--------------------------------------------------------------------------
 
+	it('should create a content wrapper element on initialization', function() {
+		var view = new Moobile.ScrollView();
+		expect(view.getContentWrapperElement()).not.toBeNull();
+	});
+
+	//--------------------------------------------------------------------------
+
 	it('should set the parent view to a child component', function() {
 
 		var view = new Moobile.View();

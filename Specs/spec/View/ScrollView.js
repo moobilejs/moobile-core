@@ -7,13 +7,4 @@ describe('View/ScrollView', function() {
 		expect(view.getScroller() instanceof Moobile.Scroller).toEqual(true);
 	});
 
-	//--------------------------------------------------------------------------
-
-	it('should create a wrapper element on initialization', function() {
-		var view = new Moobile.ScrollView();
-		expect(view.getWrapperElement()).not.toBeNull();
-	});
-
-	//--------------------------------------------------------------------------
-
 });
