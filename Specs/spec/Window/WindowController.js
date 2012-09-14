@@ -1,9 +1,13 @@
 describe('Window/WindowController', function() {
 
+	// initialize
+
 	it('should create a window upon initialization', function() {
 		var wc = new Moobile.WindowController();
 		expect(wc.getView() instanceof Moobile.Window).toEqual(true);
 	});
+
+	// setRootViewController
 
 	it('should set the root view controller', function() {
 		var wc = new Moobile.WindowController();

@@ -12,9 +12,13 @@ describe('ViewController/ViewController', function() {
 	it('should add a child view controller', function() {
 		var p = new Moobile.ViewController();
 		var c = new Moobile.ViewController();
+		spyOn(p, 'willAddChildViewController');
+		spyOn(p, 'didAddChildViewController');
 		p.addChildViewController(c);
-		expect(p.getChildViewControllerAt(0)).toEqual(c);
 		expect(p.getView().getChildComponentAt(0)).toEqual(c.getView());
+		expect(p.getChildViewControllerAt(0)).toEqual(c);
+		expect(p.willAddChildViewController).toHaveBeenCalledWith(c);
+		expect(p.didAddChildViewController).toHaveBeenCalledWith(c);
 	});
 
 	// addChildViewControllerAfter
@@ -39,27 +43,6 @@ describe('ViewController/ViewController', function() {
 		p.addChildViewControllerBefore(c2, c1);
 		expect(p.getChildViewControllerAt(0)).toEqual(c2);
 		expect(p.getView().getChildComponentAt(0)).toEqual(c2.getView());
-	});
-
-	it('should call willAddChildViewController and didAddChildViewController upon adding a child view controller', function() {
-		var p = new Moobile.ViewController();
-		var c = new Moobile.ViewController();
-		spyOn(p, 'willAddChildViewController');
-		spyOn(p, 'didAddChildViewController');
-		p.addChildViewController(c);
-		expect(p.willAddChildViewController).toHaveBeenCalledWith(c);
-		expect(p.didAddChildViewController).toHaveBeenCalledWith(c);
-	});
-
-	it('should call willRemoveChildViewController and didRemoveChildViewController upon removing a child view controller', function() {
-		var p = new Moobile.ViewController();
-		var c = new Moobile.ViewController();
-		spyOn(p, 'willRemoveChildViewController');
-		spyOn(p, 'didRemoveChildViewController');
-		p.addChildViewController(c);
-		p.removeChildViewController(c);
-		expect(p.willRemoveChildViewController).toHaveBeenCalledWith(c);
-		expect(p.didRemoveChildViewController).toHaveBeenCalledWith(c);
 	});
 
 	// getChildViewController
@@ -111,9 +94,13 @@ describe('ViewController/ViewController', function() {
 	it('should remove a child view controller', function() {
 		var p = new Moobile.ViewController();
 		var c = new Moobile.ViewController();
+		spyOn(p, 'willRemoveChildViewController');
+		spyOn(p, 'didRemoveChildViewController');
 		p.addChildViewController(c);
 		p.removeChildViewController(c);
 		expect(c.hasChildViewController(c)).toEqual(false);
+		expect(p.willRemoveChildViewController).toHaveBeenCalledWith(c);
+		expect(p.didRemoveChildViewController).toHaveBeenCalledWith(c);
 	});
 
 	// removeFromParentViewController
