@@ -197,12 +197,11 @@ Moobile.View = new Class({
 		if (this._layout === layout)
 			return this;
 
-		if (layout) {
-			this.willChangeLayout(layout);
-			this.element.removeClass('view-layout-' + this._layout).addClass('view-layout-' + layout);
-			this._layout = layout;
-			this.didChangeLayout(layout);
-		}
+		this.willChangeLayout(layout);
+		if (this._layout) this.element.removeClass('view-layout-' + this._layout);
+		this._layout = layout;
+		if (this._layout) this.element.addClass('view-layout-' + this._layout);
+		this.didChangeLayout(layout);
 
 		return this;
 	},
