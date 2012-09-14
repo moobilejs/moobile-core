@@ -54,9 +54,9 @@ Moobile.Control = new Class({
 
 		if (this.shouldAllowState(state) || state == null) {
 			this.willChangeState(state)
-			if (this._state) this.removeClass('is-' + this._state);
+			if (this._state) this.element.removeClass('is-' + this._state);
 			this._state = state;
-			if (this._state) this.addClass('is-' + this._state);
+			if (this._state) this.element.addClass('is-' + this._state);
 			this.didChangeState(state)
 		}
 
