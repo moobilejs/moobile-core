@@ -87,7 +87,7 @@ Moobile.Control = new Class({
 	 * @since  0.1.0
 	 */
 	setDisabled: function(disabled) {
-		return this._setState(disabled ? 'disabled' : null);
+		return this._setState(disabled !== false ? 'disabled' : null);
 	},
 
 	/**
@@ -105,7 +105,7 @@ Moobile.Control = new Class({
 	 * @since  0.1.0
 	 */
 	setSelected: function(selected) {
-		return this._setState(selected ? 'selected' : null);
+		return this._setState(selected !== false ? 'selected' : null);
 	},
 
 	/**
@@ -123,7 +123,7 @@ Moobile.Control = new Class({
 	 * @since  0.1.0
 	 */
 	setHighlighted: function(highlighted) {
-		return this._setState(highlighted ? 'highlighted' : null);
+		return this._setState(highlighted !== false ? 'highlighted' : null);
 	},
 
 	/**
