@@ -73,14 +73,12 @@ Moobile.Image = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
 		this.parent();
-
-		if (this.element.get('tag') !== 'img')
-			throw new Error('Moobile.Image requires an <img> element.');
 
 		this.element.addClass('image');
 
