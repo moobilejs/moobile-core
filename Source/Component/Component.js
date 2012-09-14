@@ -696,15 +696,6 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasClass
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	hasClass: function(name) {
-		return this.element.hasClass(name);
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -726,14 +717,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElement
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
-	getElement: function(selector) {
-		return selector
-			? this.element.getElement(selector)
-			: this.element;
+	hasClass: function(name) {
+		return this.element.hasClass(name);
 	},
 
 	/**
@@ -746,8 +735,29 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getElement: function(selector) {
+		return selector
+			? this.element.getElement(selector)
+			: this.element;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasElement: function(element) {
+		return this.element === document.id(element) || this.element.contains(document.id(element));
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getRoleElement: function(name) {
@@ -757,6 +767,7 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getRoleElements: function(name, limit) {
@@ -798,15 +809,6 @@ Moobile.Component = new Class({
 		walk(this.element);
 
 		return found;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	hasElement: function(element) {
-		return this.element === document.id(element) || this.element.contains(document.id(element));
 	},
 
 	/**
