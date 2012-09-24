@@ -199,7 +199,7 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (Moobile.Component.hasNativeEvent(name)) {
+		if (Moobile.Component.hasNativeEvent(name) && this.shouldHandleNativeEvent(name)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
@@ -226,7 +226,7 @@ Moobile.Component = new Class({
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(type)) {
+		if (Moobile.Component.hasNativeEvent(type) && this.shouldHandleNativeEvent(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
 			if (callbacks[type] && callbacks[type].contains(fn)) {
@@ -240,6 +240,15 @@ Moobile.Component = new Class({
 		}
 
 		return this.parent(type, fn);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldHandleNativeEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHandleNativeEvent: function(name) {
+		return true
 	},
 
 	/**
