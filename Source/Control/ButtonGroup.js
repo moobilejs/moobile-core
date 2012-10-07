@@ -46,11 +46,12 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	options: {
 		layout: null,
-		deselectable: false,
+		selectable: true,
 		selectedButtonIndex: -1
 	},
 
@@ -75,10 +76,12 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
 		this.parent();
+		this.setSelectable(this.options.selectable);
 		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
 	},
 
@@ -96,17 +99,16 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setSelectedButton: function(selectedButton) {
 
-		if (this._selectedButton === selectedButton) {
-			if (selectedButton && this.options.deselectable) {
-				selectedButton = null;
-			} else {
-				return this;
-			}
-		}
+		if (this._selectable === false)
+			return this;
+
+		if (this._selectedButton === selectedButton)
+			return this;
 
 		if (this._selectedButton) {
 			this._selectedButton.setSelected(false);
@@ -241,6 +243,37 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setSelectable: function(selectable) {
+		this._selectable = selectable;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#isSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isSelectable: function() {
+		return this._selectable;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this._selectedButton === component) {
+			this.clearSelectedButton();
+		}
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -261,6 +294,18 @@ Moobile.ButtonGroup = new Class({
 		this.parent(child);
 		if (child instanceof Moobile.Button) {
 			child.removeEvent('tap', this.bound('onButtonTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' || state == null) {
+			this.getChildComponents().invoke('setDisabled', state);
 		}
 	},
 
