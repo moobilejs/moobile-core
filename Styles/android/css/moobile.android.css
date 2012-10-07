@@ -667,7 +667,7 @@ input, select, textarea {
 	    -ms-transform-origin: 50% 50%;
 	     -o-transform-origin: 50% 50%;
 	        transform-origin: 50% 50%;
-	background: url(../images/iOS/activity-indicator.png);
+	background: url(../images/android/activity-indicator.png);
 	height: 21px;
 	width: 21px;
 }
