@@ -20,7 +20,7 @@ provides:
 */
 
 (function() {
-
+/*
 var count = 0;
 var timer = null;
 var value = null;
@@ -43,5 +43,5 @@ Element.defineCustomEvent('hashchange', {
 		if (--count === 0) clearTimeout(timer);
 	}
 });
-
+*/
 })();

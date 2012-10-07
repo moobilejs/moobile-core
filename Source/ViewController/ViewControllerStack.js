@@ -51,7 +51,7 @@ Moobile.ViewControllerStack = new Class({
 	 */
 	viewDidLoad: function() {
 		this.parent();
-		window.addEvent('hashchange', this.bound('onHashChange'));
+		window.addEventListener('hashchange', this.bound('_onHashChange'));
 	},
 
 	/**
@@ -60,7 +60,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @since  0.2.0
 	 */
 	destroy: function() {
-		window.removeEvent('hashchange', this.bound('onHashChange'));
+		window.removeEventListener('hashchange', this.bound('_onHashChange'));
 		this.parent();
 	},
 
@@ -106,7 +106,7 @@ Moobile.ViewControllerStack = new Class({
 
 		viewControllerPushed.setViewTransition(viewTransition);
 
-		window.location.hash = viewControllerPushed.getId();
+		this._setLocationHash(viewControllerPushed.getId());
 
 		return this;
 	},
@@ -179,7 +179,7 @@ Moobile.ViewControllerStack = new Class({
 			this.view
 		);
 
-		window.location.hash = viewControllerBefore.getId();
+		this._setLocationHash(viewControllerBefore.getId());
 
 		return this;
 	},
@@ -320,17 +320,50 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	onHashChange: function(hash) {
+	_setLocationHash: function(value) {
+		(function() {
+			window.location.hash = '#' + value;
+		}).delay(50);
+		return this;
+	},
 
-		if (this.getTopViewController().getId() === hash)
-			return;
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_getLocationHash: function() {
+		return window.location.hash.substring(1);
+	},
 
-		var viewControllers = this.getChildViewControllers();
-		for (var i = 0; i< viewControllers.length; i++) {
-			var viewController = viewControllers[i];
-			if (viewController.getId() === hash) {
-				this.popViewControllerUntil(viewController);
-				break;
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onHashChange: function() {
+
+		var hash = this._getLocationHash();
+		if (hash) {
+
+
+			var vc = this.getChildViewControllers().find(function(vc) {
+				return vc.getId() === hash;
+			});
+
+			console.log('Hash Changed to ' + hash + ' vc at ' + this.getChildViewControllerIndex(vc));
+
+
+			if (this.getTopViewController().getId() === hash)
+				return;
+
+			var viewControllers = this.getChildViewControllers();
+			for (var i = 0; i < viewControllers.length; i++) {
+				var viewController = viewControllers[i];
+				if (viewController.getId() === hash) {
+					this.popViewControllerUntil(viewController);
+					break;
+				}
 			}
 		}
 	}
