@@ -117,6 +117,12 @@ Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
+/* Dark Style - iOS - Android */
+Moobile.Component.defineStyle('light', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
+});
+
 /* Contextual Style - Android */
 Moobile.Component.defineStyle('contextual', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-contextual'); },

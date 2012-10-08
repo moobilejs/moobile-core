@@ -20,46 +20,6 @@ input, select, textarea {
 	background: black;
 }
 
-/* Screen Landscape */
-@media screen and (width: 480px) and (height: 300px) {
-	.window {
-		height: 300px;
-		width: 480px;
-	}
-}
-
-/* iPhone Safari Mobile Portrait */
-@media screen and (width:320px) and (height: 356px) {
-	.window {
-		height: 416px;
-		width: 320px;
-	}
-}
-
-/* iPhone Safari Mobile Landscape */
-@media screen and (width: 480px) and (height: 208px) {
-	.window {
-		height: 268px;
-		width: 480px;
-	}
-}
-
-/* iPad Safari Mobile Portrait */
-@media screen and (width:768px) and (height: 946px) {
-	.window {
-		height: 946px;
-		width: 768px;
-	}
-}
-
-/* iPad Safari Mobile Landscape */
-@media screen and (width:1024px) and (height: 690px) {
-	.window {
-		height: 690px;
-		width: 1024px;
-	}
-}
-
 /* View
 -----------------------------------------------------------------------------*/
 
@@ -95,17 +55,17 @@ input, select, textarea {
 
 /* Style Dark */
 
-.bar.style-dark {
+.view.style-dark {
 	background: #000;
 	color: #fff;
 	text-shadow: none;
 }
 
-.bar.style-dark h1 {
+.view.style-dark h1 {
 	color: #fff;
 }
 
-.bar.style-dark h2 {
+.view.style-dark h2 {
 	color: #fff;
 }
 
@@ -137,9 +97,17 @@ input, select, textarea {
 /* Style Dark */
 
 .bar.style-dark {
-	background-position: 0px -88px;
+	background-position: 0px -44px;
 	color: #fff;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Style Light */
+
+.bar.style-light {
+	background-position: 0px -88px;
+	color: #717880;
+	text-shadow: 0px -1px 1px rgba(255, 255, 255, 0.55);
 }
 
 /* Bar (Retina Display)
@@ -149,12 +117,18 @@ input, select, textarea {
 
 	.bar {
 		background-image: url(../images/ios/bar-2x.png);
-		background-size: 100px 176px
+		background-size: 50px 132px
 	}
 
 	/* Style Dark */
 
 	.bar.style-dark {
+		background-position: 0px -44px;
+	}
+
+	/* Style Light */
+
+	.bar.style-light {
 		background-position: 0px -88px;
 	}
 }
@@ -309,12 +283,11 @@ input, select, textarea {
 /* Inside a Bar */
 
 .bar .button {
-	-webkit-border-image: url(../images/ios/bar-button.png) 0 5 1970 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 0 5 1970 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 0 5 1970 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 0 5 1970 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 0 5 1970 fill stretch stretch;
-
+	-webkit-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
 	background: none;
 	border-radius: 0px;
 	border-width: 0px 5px;
@@ -325,393 +298,395 @@ input, select, textarea {
 	line-height: 30px;
 	margin: 7px 0px;
 	padding: 0px 4px;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
 }
 
 .bar .button.is-selected,
 .bar .button.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 30 5 1940 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 30 5 1940 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 30 5 1940 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 30 5 1940 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 30 5 1940 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 30 5 1140 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 30 5 1140 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 30 5 1140 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 30 5 1140 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 30 5 1140 fill stretch stretch;
 	background-image: none;
 	color: #fff;
-	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* Inside a Bar Style Dark */
 
 .bar.style-dark .button {
-	-webkit-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 360 5 810 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 360 5 810 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 360 5 810 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 360 5 810 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 360 5 810 fill stretch stretch;
+	text-shadow: none;
 }
 
 .bar.style-dark .button.is-selected,
 .bar.style-dark .button.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 390 5 780 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 390 5 780 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 390 5 780 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 390 5 780 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 390 5 780 fill stretch stretch;
+	text-shadow: none;
+}
+
+/* Inside a Bar Style Light */
+
+.bar.style-light .button {
+	-webkit-border-image: url(../images/ios/bar-button.png) 720 5 450 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 720 5 450 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 720 5 450 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 720 5 450 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 720 5 450 fill stretch stretch;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.45);
+}
+
+.bar.style-light .button.is-selected,
+.bar.style-light .button.is-highlighted {
+	-webkit-border-image: url(../images/ios/bar-button.png) 750 5 420 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 750 5 420 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 750 5 420 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 750 5 420 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 750 5 420 fill stretch stretch;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.45);
 }
 
 /* Inside a Bar + Style Back */
 
 .bar .button.style-back {
-	-webkit-border-image: url(../images/ios/bar-button.png) 240 5 1730 13 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 240 5 1730 13 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 240 5 1730 13 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 240 5 1730 13 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 240 5 1730 13 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 240 5 930 13 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 240 5 930 13 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 240 5 930 13 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 240 5 930 13 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 240 5 930 13 fill stretch stretch;
 	border-left-width: 13px;
 	padding-left: 0px;
 }
 
 .bar .button.style-back.is-selected,
 .bar .button.style-back.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 270 5 1700 13 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 270 5 1700 13 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 270 5 1700 13 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 270 5 1700 13 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 270 5 1700 13 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 270 5 900 13 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 270 5 900 13 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 270 5 900 13 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 270 5 900 13 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 270 5 900 13 fill stretch stretch;
 }
 
 /* Inside a Bar Style Dark + Style Back */
 
 .bar.style-dark .button.style-back {
-	-webkit-border-image: url(../images/ios/bar-button.png) 600 5 1370 13 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 600 5 1370 13 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 600 5 1370 13 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 600 5 1370 13 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 600 5 1370 13 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 600 5 570 13 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 600 5 570 13 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 600 5 570 13 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 600 5 570 13 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 600 5 570 13 fill stretch stretch;
 	border-left-width: 13px;
 	padding-left: 0px;
 }
 
 .bar.style-dark .button.style-back.is-selected,
 .bar.style-dark .button.style-back.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 630 5 1340 13 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 630 5 1340 13 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 630 5 1340 13 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 630 5 1340 13 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 630 5 1340 13 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 630 5 540 13 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 630 5 540 13 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 630 5 540 13 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 630 5 540 13 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 630 5 540 13 fill stretch stretch;
+}
+
+/* Inside a Bar Style Light + Style Back */
+
+.bar.style-light .button.style-back {
+	-webkit-border-image: url(../images/ios/bar-button.png) 960 5 210 13 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 960 5 210 13 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 960 5 210 13 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 960 5 210 13 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 960 5 210 13 fill stretch stretch;
+	border-left-width: 13px;
+	padding-left: 0px;
+}
+
+.bar.style-light .button.style-back.is-selected,
+.bar.style-light .button.style-back.is-highlighted {
+	-webkit-border-image: url(../images/ios/bar-button.png) 990 5 180 13 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 990 5 180 13 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 990 5 180 13 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 990 5 180 13 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 990 5 180 13 fill stretch stretch;
 }
 
 /* Inside a Bar + Style Forward */
 
 .bar .button.style-forward {
-	-webkit-border-image: url(../images/ios/bar-button.png) 300 13 1670 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 300 13 1670 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 300 13 1670 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 300 13 1670 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 300 13 1670 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 300 13 870 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 300 13 870 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 300 13 870 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 300 13 870 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 300 13 870 5 fill stretch stretch;
 	border-right-width: 13px;
 	padding-right: 0px;
 }
 
 .bar .button.style-forward.is-selected,
 .bar .button.style-forward.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 330 13 1640 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 330 13 1640 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 330 13 1640 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 330 13 1640 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 330 13 1640 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 330 13 840 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 330 13 840 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 330 13 840 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 330 13 840 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 330 13 840 5 fill stretch stretch;
 }
 
 /* Inside a Bar Style Dark + Style Forward */
 
 .bar.style-dark .button.style-forward {
-	-webkit-border-image: url(../images/ios/bar-button.png) 660 13 1310 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 660 13 1310 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 660 13 1310 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 660 13 1310 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 660 13 1310 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 660 13 510 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 660 13 510 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 660 13 510 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 660 13 510 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 660 13 510 5 fill stretch stretch;
 	border-right-width: 13px;
 	padding-right: 0px;
 }
 
 .bar.style-dark .button.style-forward.is-selected,
 .bar.style-dark .button.style-forward.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 690 13 1280 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 690 13 1280 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 690 13 1280 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 690 13 1280 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 690 13 1280 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 690 13 480 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 690 13 480 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 690 13 480 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 690 13 480 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 690 13 480 5 fill stretch stretch;
+}
+
+/* Inside a Bar Style Light + Style Forward */
+
+.bar.style-light .button.style-forward {
+	-webkit-border-image: url(../images/ios/bar-button.png) 1020 13 150 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 1020 13 150 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 1020 13 150 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 1020 13 150 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 1020 13 150 5 fill stretch stretch;
+	border-right-width: 13px;
+	padding-right: 0px;
+}
+
+.bar.style-light .button.style-forward.is-selected,
+.bar.style-light .button.style-forward.is-highlighted {
+	-webkit-border-image: url(../images/ios/bar-button.png) 1050 13 120 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 1050 13 120 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 1050 13 120 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 1050 13 120 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 1050 13 120 5 fill stretch stretch;
 }
 
 /* Inside a Bar + Style Active */
 
 .bar .button.style-active {
-	-webkit-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 1080 5 90 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 1080 5 90 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 1080 5 90 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 1080 5 90 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 1080 5 90 fill stretch stretch;
 }
 
 .bar .button.style-active.is-selected,
 .bar .button.style-active.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 1110 5 60 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 1110 5 60 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 1110 5 60 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 1110 5 60 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 1110 5 60 fill stretch stretch;
 }
 
 /* Inside a Bar + Style Warning */
 
 .bar .button.style-warning {
-	-webkit-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 1140 5 30 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 1140 5 30 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 1140 5 30 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 1140 5 30 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 1140 5 30 fill stretch stretch;
 }
 
 .bar .button.style-warning.is-selected,
 .bar .button.style-warning.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 1170 5 0 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 1170 5 0 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 1170 5 0 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 1170 5 0 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 1170 5 0 fill stretch stretch;
 }
 
 /* Inside a Bar + Inside a Button Group */
 
 .bar .button-group .button {
-	-webkit-border-image: url(../images/ios/bar-button.png) 60 1 1910 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 60 1 1910 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 60 1 1910 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 60 1 1910 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 60 1 1910 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 60 1 1110 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 60 1 1110 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 60 1 1110 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 60 1 1110 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 60 1 1110 1 fill stretch stretch;
 	border-width: 0px 1px 0px 0px;
 	padding-left: 9px;
 	padding-right: 8px;
 }
 
 .bar .button-group .button:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 90 1 1880 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 90 1 1880 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 90 1 1880 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 90 1 1880 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 90 1 1880 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 90 1 1080 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 90 1 1080 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 90 1 1080 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 90 1 1080 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 90 1 1080 5 fill stretch stretch;
 	border-width: 0px 1px 0px 5px;
 	padding-left: 4px;
 }
 
 .bar .button-group .button:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 120 5 1850 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 120 5 1850 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 120 5 1850 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 120 5 1850 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 120 5 1850 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 120 5 1050 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 120 5 1050 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 120 5 1050 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 120 5 1050 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 120 5 1050 1 fill stretch stretch;
 	border-width: 0px 5px 0px 0px;
 	padding-right: 4px;
 }
 
 .bar .button-group .button.is-selected,
 .bar .button-group .button.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 150 1 1820 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 150 1 1820 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 150 1 1820 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 150 1 1820 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 150 1 1820 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 150 1 1020 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 150 1 1020 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 150 1 1020 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 150 1 1020 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 150 1 1020 1 fill stretch stretch;
 }
 
 .bar .button-group .button.is-selected:first-child,
 .bar .button-group .button.is-highlighted:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 180 1 1790 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 180 1 1790 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 180 1 1790 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 180 1 1790 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 180 1 1790 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 180 1 990 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 180 1 990 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 180 1 990 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 180 1 990 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 180 1 990 5 fill stretch stretch;
 }
 
 .bar .button-group .button.is-selected:last-child,
 .bar .button-group .button.is-highlighted:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 210 5 1760 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 210 5 1760 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 210 5 1760 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 210 5 1760 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 210 5 1760 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 210 5 960 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 210 5 960 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 210 5 960 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 210 5 960 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 210 5 960 1 fill stretch stretch;
 }
 
 /* Inside a Bar Style Dark + Inside a Button Group */
 
 .bar.style-dark .button-group .button {
-	-webkit-border-image: url(../images/ios/bar-button.png) 420 1 1550 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 420 1 1550 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 420 1 1550 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 420 1 1550 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 420 1 1550 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 420 1 750 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 420 1 750 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 420 1 750 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 420 1 750 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 420 1 750 1 fill stretch stretch;
 }
 
 .bar.style-dark .button-group .button:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 450 1 1520 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 450 1 1520 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 450 1 1520 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 450 1 1520 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 450 1 1520 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 450 1 720 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 450 1 720 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 450 1 720 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 450 1 720 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 450 1 720 5 fill stretch stretch;
 }
 
 .bar.style-dark .button-group .button:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 480 5 1490 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 480 5 1490 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 480 5 1490 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 480 5 1490 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 480 5 1490 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 480 5 690 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 480 5 690 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 480 5 690 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 480 5 690 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 480 5 690 1 fill stretch stretch;
 }
 
 .bar.style-dark .button-group .button.is-selected,
 .bar.style-dark .button-group .button.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 510 1 1460 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 510 1 1460 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 510 1 1460 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 510 1 1460 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 510 1 1460 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 510 1 660 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 510 1 660 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 510 1 660 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 510 1 660 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 510 1 660 1 fill stretch stretch;
 }
 
 .bar.style-dark .button-group .button.is-selected:first-child,
 .bar.style-dark .button-group .button.is-highlighted:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 540 1 1430 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 540 1 1430 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 540 1 1430 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 540 1 1430 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 540 1 1430 5 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 540 1 630 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 540 1 630 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 540 1 630 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 540 1 630 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 540 1 630 5 fill stretch stretch;
 }
 
 .bar.style-dark .button-group .button.is-selected:last-child,
 .bar.style-dark .button-group .button.is-highlighted:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 570 5 1400 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 570 5 1400 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 570 5 1400 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 570 5 1400 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 570 5 1400 1 fill stretch stretch;
+	-webkit-border-image: url(../images/ios/bar-button.png) 570 5 600 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 570 5 600 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 570 5 600 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 570 5 600 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 570 5 600 1 fill stretch stretch;
 }
 
-/* Inside a Bar + Inside a Button Group + Style Active */
+/* Inside a Bar Style Light + Inside a Button Group */
 
-.bar .button-group .button.style-active {
-	-webkit-border-image: url(../images/ios/bar-button.png) 780 1 1190 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 780 1 1190 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 780 1 1190 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 780 1 1190 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 780 1 1190 1 fill stretch stretch;
-	border-width: 0px 1px 0px 0px;
-	padding-left: 9px;
-	padding-right: 8px;
+.bar.style-light .button-group .button {
+	-webkit-border-image: url(../images/ios/bar-button.png) 780 1 390 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 780 1 390 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 780 1 390 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 780 1 390 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 780 1 390 1 fill stretch stretch;
+	color: #4f5459;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
 }
 
-.bar .button-group .button.style-active:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 810 1 1160 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 810 1 1160 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 810 1 1160 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 810 1 1160 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 810 1 1160 5 fill stretch stretch;
-	border-width: 0px 1px 0px 5px;
-	padding-left: 4px;
+.bar.style-light .button-group .button:first-child {
+	-webkit-border-image: url(../images/ios/bar-button.png) 810 1 360 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 810 1 360 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 810 1 360 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 810 1 360 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 810 1 360 5 fill stretch stretch;
 }
 
-.bar .button-group .button.style-active:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 840 5 1130 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 840 5 1130 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 840 5 1130 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 840 5 1130 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 840 5 1130 1 fill stretch stretch;
-	border-width: 0px 5px 0px 0px;
-	padding-right: 4px;
+.bar.style-light .button-group .button:last-child {
+	-webkit-border-image: url(../images/ios/bar-button.png) 840 5 330 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 840 5 330 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 840 5 330 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 840 5 330 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 840 5 330 1 fill stretch stretch;
 }
 
-.bar .button-group .button.style-active.is-selected,
-.bar .button-group .button.style-active.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 870 1 1100 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 870 1 1100 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 870 1 1100 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 870 1 1100 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 870 1 1100 1 fill stretch stretch;
+.bar.style-light .button-group .button.is-selected,
+.bar.style-light .button-group .button.is-highlighted {
+	-webkit-border-image: url(../images/ios/bar-button.png) 870 1 300 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 870 1 300 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 870 1 300 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 870 1 300 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 870 1 300 1 fill stretch stretch;
+	color: #fff;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.45);
 }
 
-.bar .button-group .button.style-active.is-selected:first-child,
-.bar .button-group .button.style-active.is-highlighted:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 900 1 1070 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 900 1 1070 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 900 1 1070 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 900 1 1070 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 900 1 1070 5 fill stretch stretch;
+.bar.style-light .button-group .button.is-selected:first-child,
+.bar.style-light .button-group .button.is-highlighted:first-child {
+	-webkit-border-image: url(../images/ios/bar-button.png) 900 1 270 5 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 900 1 270 5 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 900 1 270 5 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 900 1 270 5 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 900 1 270 5 fill stretch stretch;
 }
 
-.bar .button-group .button.style-active.is-selected:last-child,
-.bar .button-group .button.style-active.is-highlighted:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 930 5 1040 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 930 5 1040 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 930 5 1040 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 930 5 1040 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 930 5 1040 1 fill stretch stretch;
-}
-
-/* Inside a Bar + Inside a Button Group + Style Warning */
-
-.bar .button-group .button.style-warning {
-	-webkit-border-image: url(../images/ios/bar-button.png) 1020 1 950 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 1020 1 950 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 1020 1 950 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 1020 1 950 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 1020 1 950 1 fill stretch stretch;
-	border-width: 0px 1px 0px 0px;
-	padding-left: 9px;
-	padding-right: 8px;
-}
-
-.bar .button-group .button.style-warning:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 1050 1 920 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 1050 1 920 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 1050 1 920 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 1050 1 920 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 1050 1 920 5 fill stretch stretch;
-	border-width: 0px 1px 0px 5px;
-	padding-left: 4px;
-}
-
-.bar .button-group .button.style-warning:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 1080 5 890 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 1080 5 890 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 1080 5 890 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 1080 5 890 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 1080 5 890 1 fill stretch stretch;
-	border-width: 0px 5px 0px 0px;
-	padding-right: 4px;
-}
-
-.bar .button-group .button.style-warning.is-selected,
-.bar .button-group .button.style-warning.is-highlighted {
-	-webkit-border-image: url(../images/ios/bar-button.png) 1110 1 860 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 1110 1 860 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 1110 1 860 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 1110 1 860 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 1110 1 860 1 fill stretch stretch;
-}
-
-.bar .button-group .button.style-warning.is-selected:first-child,
-.bar .button-group .button.style-warning.is-highlighted:first-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 1140 1 830 5 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 1140 1 830 5 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 1140 1 830 5 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 1140 1 830 5 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 1140 1 830 5 fill stretch stretch;
-}
-
-.bar .button-group .button.style-warning.is-selected:last-child,
-.bar .button-group .button.style-warning.is-highlighted:last-child {
-	-webkit-border-image: url(../images/ios/bar-button.png) 1170 5 800 1 fill stretch stretch;
-	   -moz-border-image: url(../images/ios/bar-button.png) 1170 5 800 1 fill stretch stretch;
-	    -ms-border-image: url(../images/ios/bar-button.png) 1170 5 800 1 fill stretch stretch;
-	     -o-border-image: url(../images/ios/bar-button.png) 1170 5 800 1 fill stretch stretch;
-	        border-image: url(../images/ios/bar-button.png) 1170 5 800 1 fill stretch stretch;
+.bar.style-light .button-group .button.is-selected:last-child,
+.bar.style-light .button-group .button.is-highlighted:last-child {
+	-webkit-border-image: url(../images/ios/bar-button.png) 930 5 240 1 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/bar-button.png) 930 5 240 1 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/bar-button.png) 930 5 240 1 fill stretch stretch;
+	     -o-border-image: url(../images/ios/bar-button.png) 930 5 240 1 fill stretch stretch;
+	        border-image: url(../images/ios/bar-button.png) 930 5 240 1 fill stretch stretch;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
@@ -719,372 +694,373 @@ input, select, textarea {
 	/* Inside a Bar */
 
 	.bar .button {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 0 10 3940 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 0 10 3940 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 0 10 3940 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 0 10 3940 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 0 10 3940 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 0 10 2340 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 0 10 2340 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 0 10 2340 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 0 10 2340 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 0 10 2340 fill stretch stretch;
 	}
 
 	.bar .button.is-selected,
 	.bar .button.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 60 10 3880 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 60 10 3880 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 60 10 3880 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 60 10 3880 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 60 10 3880 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 60 10 2280 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 60 10 2280 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 60 10 2280 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 60 10 2280 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 60 10 2280 fill stretch stretch;
 	}
 
 	/* Inside a Bar Style Dark */
 
 	.bar.style-dark .button {
-		-webkit-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button.png) 360 5 1610 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 1620 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 1620 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 1620 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 1620 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 720 10 1620 fill stretch stretch;
 	}
 
 	.bar.style-dark .button.is-selected,
 	.bar.style-dark .button.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button.png) 390 5 1580 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 780 10 1560 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 780 10 1560 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 780 10 1560 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 780 10 1560 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 780 10 1560 fill stretch stretch;
+	}
+
+	/* Inside a Bar Style Light */
+
+	.bar.style-light .button {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1440 10 900 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1440 10 900 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1440 10 900 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1440 10 900 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1440 10 900 fill stretch stretch;
+	}
+
+	.bar.style-light .button.is-selected,
+	.bar.style-light .button.is-highlighted {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1500 10 840 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1500 10 840 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1500 10 840 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1500 10 840 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1500 10 840 fill stretch stretch;
 	}
 
 	/* Inside a Bar + Style Back */
 
 	.bar .button.style-back {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 480 10 3460 26 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 480 10 3460 26 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 480 10 3460 26 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 480 10 3460 26 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 480 10 3460 26 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 480 10 1860 26 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 480 10 1860 26 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 480 10 1860 26 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 480 10 1860 26 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 480 10 1860 26 fill stretch stretch;
 	}
 
 	.bar .button.style-back.is-selected,
 	.bar .button.style-back.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 540 10 3400 26 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 540 10 3400 26 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 540 10 3400 26 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 540 10 3400 26 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 540 10 3400 26 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 540 10 1800 26 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 540 10 1800 26 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 540 10 1800 26 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 540 10 1800 26 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 540 10 1800 26 fill stretch stretch;
 	}
 
 	/* Inside a Bar Style Dark + Style Back */
 
 	.bar.style-dark .button.style-back {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 1200 10 2740 26 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1200 10 1140 26 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1200 10 1140 26 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1200 10 1140 26 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1200 10 1140 26 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1200 10 1140 26 fill stretch stretch;
 	}
 
 	.bar.style-dark .button.style-back.is-selected,
 	.bar.style-dark .button.style-back.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 1260 10 2680 26 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1260 10 1080 26 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1260 10 1080 26 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1260 10 1080 26 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1260 10 1080 26 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1260 10 1080 26 fill stretch stretch;
+	}
+
+	/* Inside a Bar Style Light + Style Back */
+
+	.bar.style-light .button.style-back {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1920 10 420 26 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1920 10 420 26 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1920 10 420 26 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1920 10 420 26 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1920 10 420 26 fill stretch stretch;
+		border-left-width: 13px;
+		padding-left: 0px;
+	}
+
+	.bar.style-light .button.style-back.is-selected,
+	.bar.style-light .button.style-back.is-highlighted {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1980 10 360 26 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1980 10 360 26 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1980 10 360 26 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1980 10 360 26 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1980 10 360 26 fill stretch stretch;
 	}
 
 	/* Inside a Bar + Style Forward */
 
 	.bar .button.style-forward {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 600 26 3340 10 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 600 26 3340 10 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 600 26 3340 10 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 600 26 3340 10 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 600 26 3340 10 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 600 26 1740 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 600 26 1740 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 600 26 1740 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 600 26 1740 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 600 26 1740 10 fill stretch stretch;
 	}
 
 	.bar .button.style-forward.is-selected,
 	.bar .button.style-forward.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 660 26 3280 10 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 660 26 3280 10 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 660 26 3280 10 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 660 26 3280 10 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 660 26 3280 10 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 660 26 1680 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 660 26 1680 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 660 26 1680 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 660 26 1680 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 660 26 1680 10 fill stretch stretch;
 	}
 
 	/* Inside a Bar Style Dark + Style Forward */
 
 	.bar.style-dark .button.style-forward {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 1320 26 2620 10 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1320 26 1020 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1320 26 1020 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1320 26 1020 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1320 26 1020 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1320 26 1020 10 fill stretch stretch;
 	}
 
 	.bar.style-dark .button.style-forward.is-selected,
 	.bar.style-dark .button.style-forward.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 1380 26 2560 10 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1380 26 960 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1380 26 960 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1380 26 960 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1380 26 960 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1380 26 960 10 fill stretch stretch;
+	}
+
+	/* Inside a Bar Style Light + Style Forward */
+
+	.bar.style-light .button.style-forward {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 2040 26 300 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 2040 26 300 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 2040 26 300 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 2040 26 300 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 2040 26 300 10 fill stretch stretch;
+		border-right-width: 13px;
+		padding-right: 0px;
+	}
+
+	.bar.style-light .button.style-forward.is-selected,
+	.bar.style-light .button.style-forward.is-highlighted {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 2100 26 240 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 2100 26 240 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 2100 26 240 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 2100 26 240 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 2100 26 240 10 fill stretch stretch;
 	}
 
 	/* Inside a Bar + Style Active */
 
 	.bar .button.style-active {
-		-webkit-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button.png) 720 5 1250 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 2160 10 180 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 2160 10 180 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 2160 10 180 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 2160 10 180 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 2160 10 180 fill stretch stretch;
 	}
 
 	.bar .button.style-active.is-selected,
 	.bar .button.style-active.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button.png) 750 5 1220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 2220 10 120 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 2220 10 120 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 2220 10 120 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 2220 10 120 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 2220 10 120 fill stretch stretch;
 	}
 
 	/* Inside a Bar + Style Warning */
 
 	.bar .button.style-warning {
-		-webkit-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button.png) 960 5 1010 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 2280 10 60 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 2280 10 60 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 2280 10 60 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 2280 10 60 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 2280 10 60 fill stretch stretch;
 	}
 
 	.bar .button.style-warning.is-selected,
 	.bar .button.style-warning.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button.png) 990 5 980 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 2340 10 0 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 2340 10 0 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 2340 10 0 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 2340 10 0 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 2340 10 0 fill stretch stretch;
 	}
 
 	/* Inside a Bar + Inside a Button Group */
 
 	.bar .button-group .button {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 120 2 2220 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 120 2 2220 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 120 2 2220 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 120 2 2220 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 120 2 2220 2 fill stretch stretch;
 	}
 
 	.bar .button-group .button:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 180 2 2160 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 180 2 2160 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 180 2 2160 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 180 2 2160 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 180 2 2160 10 fill stretch stretch;
 	}
 
 	.bar .button-group .button:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 240 10 2100 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 240 10 2100 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 240 10 2100 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 240 10 2100 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 240 10 2100 2 fill stretch stretch;
 	}
 
 	.bar .button-group .button.is-selected,
 	.bar .button-group .button.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 300 2 2040 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 300 2 2040 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 300 2 2040 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 300 2 2040 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 300 2 2040 2 fill stretch stretch;
 	}
 
 	.bar .button-group .button.is-selected:first-child,
 	.bar .button-group .button.is-highlighted:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 360 2 1980 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 360 2 1980 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 360 2 1980 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 360 2 1980 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 360 2 1980 10 fill stretch stretch;
 	}
 
 	.bar .button-group .button.is-selected:last-child,
 	.bar .button-group .button.is-highlighted:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 420 10 1920 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 420 10 1920 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 420 10 1920 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 420 10 1920 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 420 10 1920 2 fill stretch stretch;
 	}
 
 	/* Inside a Bar Style Dark + Inside a Button Group */
 
 	.bar.style-dark .button-group .button {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 840 2 1500 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 840 2 1500 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 840 2 1500 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 840 2 1500 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 840 2 1500 2 fill stretch stretch;
 	}
 
 	.bar.style-dark .button-group .button:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 900 2 1440 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 900 2 1440 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 900 2 1440 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 900 2 1440 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 900 2 1440 10 fill stretch stretch;
 	}
 
 	.bar.style-dark .button-group .button.style-dark:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 960 10 1380 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 960 10 1380 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 960 10 1380 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 960 10 1380 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 960 10 1380 2 fill stretch stretch;
 	}
 
 	.bar.style-dark .button-group .button.is-selected,
 	.bar.style-dark .button-group .button.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1020 2 1320 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1020 2 1320 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1020 2 1320 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1020 2 1320 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1020 2 1320 fill stretch stretch;
 	}
 
 	.bar.style-dark .button-group .button.is-selected:first-child,
 	.bar.style-dark .button-group .button.is-highlighted:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1080 2 1260 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1080 2 1260 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1080 2 1260 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1080 2 1260 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1080 2 1260 10 fill stretch stretch;
 	}
 
 	.bar.style-dark .button-group .button.is-selected:last-child,
 	.bar.style-dark .button-group .button.is-highlighted:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1140 10 1200 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1140 10 1200 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1140 10 1200 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1140 10 1200 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1140 10 1200 2 fill stretch stretch;
 	}
 
-	/* Inside a Bar + Inside a Button Group + Style Active */
+	/* Inside a Bar Style Light + Inside a Button Group */
 
-	.bar .button-group .button.style-active {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		border-width: 0px 1px 0px 0px;
-		padding-left: 9px;
-		padding-right: 8px;
+	.bar.style-light .button-group .button {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1560 2 780 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1560 2 780 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1560 2 780 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1560 2 780 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1560 2 780 2 fill stretch stretch;
 	}
 
-	.bar .button-group .button.style-active:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		border-width: 0px 1px 0px 5px;
-		padding-left: 4px;
+	.bar.style-light .button-group .button:first-child {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1620 2 720 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1620 2 720 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1620 2 720 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1620 2 720 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1620 2 720 10 fill stretch stretch;
 	}
 
-	.bar .button-group .button.style-active:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		border-width: 0px 5px 0px 0px;
-		padding-right: 4px;
+	.bar.style-light .button-group .button:last-child {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1680 10 660 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1680 10 660 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1680 10 660 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1680 10 660 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1680 10 660 2 fill stretch stretch;
 	}
 
-	.bar .button-group .button.style-active.is-selected,
-	.bar .button-group .button.style-active.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+	.bar.style-light .button-group .button.is-selected,
+	.bar.style-light .button-group .button.is-highlighted {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1740 2 600 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1740 2 600 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1740 2 600 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1740 2 600 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1740 2 600 2 fill stretch stretch;
 	}
 
-	.bar .button-group .button.style-active.is-selected:first-child,
-	.bar .button-group .button.style-active.is-highlighted:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+	.bar.style-light .button-group .button.is-selected:first-child,
+	.bar.style-light .button-group .button.is-highlighted:first-child {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1800 2 540 10 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1800 2 540 10 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1800 2 540 10 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1800 2 540 10 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1800 2 540 10 fill stretch stretch;
 	}
 
-	.bar .button-group .button.style-active.is-selected:last-child,
-	.bar .button-group .button.style-active.is-highlighted:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-	}
-
-	/* Inside a Bar + Inside a Button Group + Style Warning */
-
-	.bar .button-group .button.style-warning {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-	}
-
-	.bar .button-group .button.style-warning:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-	}
-
-	.bar .button-group .button.style-warning:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-	}
-
-	.bar .button-group .button.style-warning.is-selected,
-	.bar .button-group .button.style-warning.is-highlighted {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-	}
-
-	.bar .button-group .button.style-warning.is-selected:first-child,
-	.bar .button-group .button.style-warning.is-highlighted:first-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-	}
-
-	.bar .button-group .button.style-warning.is-selected:last-child,
-	.bar .button-group .button.style-warning.is-highlighted:last-child {
-		-webkit-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		   -moz-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		    -ms-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		     -o-border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
-		        border-image: url(../images/ios/bar-button-2x.png) 720 10 3220 fill stretch stretch;
+	.bar.style-light .button-group .button.is-selected:last-child,
+	.bar.style-light .button-group .button.is-highlighted:last-child {
+		-webkit-border-image: url(../images/ios/bar-button-2x.png) 1860 10 480 2 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/bar-button-2x.png) 1860 10 480 2 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/bar-button-2x.png) 1860 10 480 2 fill stretch stretch;
+		     -o-border-image: url(../images/ios/bar-button-2x.png) 1860 10 480 2 fill stretch stretch;
+		        border-image: url(../images/ios/bar-button-2x.png) 1860 10 480 2 fill stretch stretch;
 	}
 }
 
@@ -1329,8 +1305,6 @@ input, select, textarea {
 	border: none;
 }
 
-/* Style Grouped */
-
 /* Overlay
 -----------------------------------------------------------------------------*/
 
@@ -1352,11 +1326,11 @@ input, select, textarea {
 	    -ms-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
 	     -o-box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
 	        box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
-	-webkit-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch;
-	   -moz-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch;
-	    -ms-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch;
-	     -o-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch;
-	        border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch;
+	-webkit-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch stretch;
+	   -moz-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch stretch;
+	    -ms-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch stretch;
+	     -o-border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch stretch;
+	        border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch stretch;
 	border-radius: 12px;
 	border-width: 15px;
 	border-top-width: 35px;
@@ -1547,11 +1521,11 @@ input, select, textarea {
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
 	.alert .alert-box {
-		-webkit-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 stretch;
-		   -moz-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 stretch;
-		    -ms-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 stretch;
-		     -o-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 stretch;
-		        border-image: url(../images/ios/alert-2x.png) 70 30 30 30 stretch;
+		-webkit-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 fill stretch stretch;
+		   -moz-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 fill stretch stretch;
+		    -ms-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 fill stretch stretch;
+		     -o-border-image: url(../images/ios/alert-2x.png) 70 30 30 30 fill stretch stretch;
+		        border-image: url(../images/ios/alert-2x.png) 70 30 30 30 fill stretch stretch;
 	}
 
 	.alert .alert-footer .button {

@@ -1243,9 +1243,9 @@ provides:
 if (!window.Moobile) window.Moobile = {};
 
 /**
- * @see    http://moobilejs.com/doc/latest/Animation/Animation
+ * @see    http://moobilejs.com/doc/0.1/Animation/Animation
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
+ * @since  0.1
  */
 Moobile.Animation = new Class({
 
@@ -1254,35 +1254,35 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	_name: null,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	_running: false,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#element
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	element: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#animationClass
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	animationClass: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#animationProperties
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationProperties
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	animationProperties: {
 		'name': null,
@@ -1295,9 +1295,9 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#initialize
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#initialize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	initialize: function(element, options) {
 		this.setElement(element);
@@ -1306,9 +1306,9 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setName: function(name) {
 		this._name = name;
@@ -1316,18 +1316,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getName: function() {
 		return this._name;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setElement
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setElement: function(element) {
 		this.element = document.id(element);
@@ -1335,18 +1335,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getElement
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getElement: function() {
 		return this.element;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationClass
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationClass: function(value) {
 		this.animationClass = value;
@@ -1354,18 +1354,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationClass
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationClass: function() {
 		return this.animationClass;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationName: function(value) {
 		this.animationProperties['name'] = value;
@@ -1373,18 +1373,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationName
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationName
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationName: function() {
 		return this.animationProperties['name'];
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDuration
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationDuration: function(value) {
 		this.animationProperties['duration'] = value;
@@ -1392,18 +1392,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDuration
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDuration
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationDuration: function() {
 		return this.animationProperties['duration'];
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationIterationCount: function(value) {
 		this.animationProperties['iteration-count'] = value;
@@ -1411,18 +1411,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationIterationCount
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationIterationCount
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationIterationCount: function() {
 		return this.animationProperties['iteration-count'];
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDirection
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationDirection: function(value) {
 		this.animationProperties['direction'] = value;
@@ -1430,18 +1430,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDirection
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDirection
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationDirection: function() {
 		return this.animationProperties['direction'];
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationTimingFunction: function(value) {
 		this.animationProperties['timing-function'] = value;
@@ -1449,18 +1449,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationTimingFunction
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationTimingFunction
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationTimingFunction: function() {
 		return this.animationProperties['timing-function'];
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationFillMode
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationFillMode: function(value) {
 		this.animationProperties['fill-mode'] = value;
@@ -1468,18 +1468,18 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationFillMode
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationFillMode
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationFillMode: function() {
 		return this.animationProperties['fill-mode'];
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#setAnimationDelay
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	setAnimationDelay: function(value) {
 		this.animationProperties['delay'] = value;
@@ -1487,9 +1487,9 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#getAnimationDelay
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDelay
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	getAnimationDelay: function() {
 		return this.animationProperties['delay'];
@@ -1498,15 +1498,15 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	attach: function() {
 
-		this.element.addEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.addEvent('ownanimationend', this.bound('onAnimationEnd'));
 		this.element.addClass(this.animationClass);
 
 		Object.each(this.animationProperties, function(val, key) {
-			this.element.setStyle('-webkit-animation-' + key, val);
+			this.element.setStyle('animation-' + key, val);
 		}, this);
 
 		return this;
@@ -1515,30 +1515,29 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	detach: function() {
 
-		this.element.removeEvent('animationend', this.bound('onAnimationEnd'));
+		this.element.removeEvent('ownanimationend', this.bound('onAnimationEnd'));
 		this.element.removeClass(this.animationClass);
 
 		Object.each(this.animationProperties, function(val, key) {
-			this.element.setStyle('-webkit-animation-' + key, null);
+			this.element.setStyle('animation-' + key, null);
 		}, this);
 
 		return this;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#start
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#start
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	start: function() {
 
 		if (this._running)
 			return this;
-
 
 		this._running = true;
 		this.fireEvent('start');
@@ -1548,9 +1547,9 @@ Moobile.Animation = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#stop
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#stop
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	stop: function() {
 
@@ -1558,16 +1557,16 @@ Moobile.Animation = new Class({
 			return this;
 
 		this._running = false;
-		this.detach();
 		this.fireEvent('stop');
+		this.detach();
 
 		return this;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation#isRunning
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#isRunning
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	isRunning: function() {
 		return this._running;
@@ -1576,7 +1575,7 @@ Moobile.Animation = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.1
 	 */
 	onAnimationEnd: function(e) {
 
@@ -1589,409 +1588,11 @@ Moobile.Animation = new Class({
 		e.stop();
 
 		this._running = false;
-		this.detach();
 		this.fireEvent('end');
+		this.detach();
 	}
 
 });
-
-
-/*
----
-
-name: Animation.Set
-
-description: Provides a container for multiple animations.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Animation
-
-provides:
-	- Animation.Set
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
-Moobile.Animation.Set = new Class({
-
-	Extends: Moobile.Animation,
-
-
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#element
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	element: null,
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#animations
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	animations: [],
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#currentAnimation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	currentAnimation: null,
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#initialize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	initialize: function(element, options) {
-
-		this.parent(element, options);
-
-		delete this.animationClass;
-		delete this.animationProperties;
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimation: function(name, animation) {
-
-		animation.setName(name);
-		animation.setOptions(this.options);
-
-		this.removeAnimation(name);
-
-		animation.addEvent('start', this.bound('onAnimationStart'));
-		animation.addEvent('stop', this.bound('onAnimationStop'));
-		animation.addEvent('end', this.bound('onAnimationEnd'));
-
-		if (this.element) {
-			animation.setElement(this.element);
-		}
-
-		this.animations.include(animation);
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimation: function(name) {
-		return this.animations.find(function(animation) {
-			return animation.getName() === name;
-		});
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#removeAnimation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeAnimation: function(name) {
-
-		var animation = this.getAnimation(name);
-		if (animation) {
-			animation.cancel();
-			animation.removeEvent('start', this.bound('onAnimationStart'));
-			animation.removeEvent('stop', this.bound('onAnimationStop'));
-			animation.removeEvent('end', this.bound('onAnimationEnd'));
-
-			if (this.currentAnimation === animation) {
-				this.currentAnimation = null;
-			}
-
-			this.animations.erase(animation);
-
-			animation = null;
-		}
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setElement: function(element) {
-		this.element = document.id(element);
-		this.animations.invoke('setElement', this.element);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getElement: function() {
-		return this.animations.invoke('getElement');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationClass
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationClass: function(value) {
-		this.animations.invoke('setAnimationClass', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationClass
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationClass: function() {
-		return this.animations.invoke('getAnimationClass');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationName
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationName: function(value) {
-		this.animations.invoke('setAnimationName', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationName
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationName: function() {
-		return this.animations.invoke('getAnimationName');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDuration
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationDuration: function(value) {
-		this.animations.invoke('setAnimationDuration', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDuration
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationDuration: function() {
-		return this.animations.invoke('getAnimationDuration');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationIterationCount
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationIterationCount: function(value) {
-		this.animations.invoke('setAnimationIterationCount', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationIterationCount
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationIterationCount: function() {
-		return this.animations.invoke('getAnimationIterationCount');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDirection
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationDirection: function(value) {
-		this.animations.invoke('setAnimationDirection', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDirection
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationDirection: function() {
-		return this.animations.invoke('getAnimationDirection');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationTimingFunction
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationTimingFunction: function(value) {
-		this.animations.invoke('setAnimationTimingFunction', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationTimingFunction
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationTimingFunction: function() {
-		return this.animations.invoke('getAnimationTimingFunction');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationFillMode
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationFillMode: function(value) {
-		this.animations.invoke('setAnimationFillMode', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationFillMode
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationFillMode: function() {
-		return this.animations.invoke('getAnimationFillMode');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#setAnimationDelay
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setAnimationDelay: function(value) {
-		this.animations.invoke('setAnimationDelay', value);
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#getAnimationDelay
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getAnimationDelay: function() {
-		return this.animations.invoke('getAnimationDelay');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#attach
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	attach: function() {
-		this.animations.invoke('attach');
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#detach
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	detach: function() {
-		this.animations.invoke('detach');
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#start
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	start: function(name) {
-
-		this.stop();
-
-		var animation = this.getAnimation(name);
-		if (animation) {
-			this.currentAnimation = animation;
-			this.currentAnimation.start();
-		}
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#stop
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	stop: function() {
-
-		if (this.currentAnimation) {
-			this.currentAnimation.stop()
-			this.currentAnimation = null;
-		}
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Animation/Animation.Set#isRunning
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	isRunning: function() {
-		return this.animations.some(function(animation) {
-			return animation.isRunning();
-		});
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	onAnimationStart: function() {
-		this.fireEvent('start', this.currentAnimation);
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	onAnimationStop: function() {
-		this.fireEvent('stop', this.currentAnimation);
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	onAnimationEnd: function() {
-		this.fireEvent('end', this.currentAnimation);
-		this.currentAnimation = null;
-	},
-
-});
-
 
 /*
 ---
@@ -2902,14 +2503,19 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getDescendantComponent
 	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.1
 	 */
 	getDescendantComponent: function(name) {
-	    var component = null;
-	    var comparator = function(child) {
-	        if (child.getName() === name) {component = child;return true;} else if (child.getChildComponents().length > 0) {return child.getChildComponents().find(comparator);} else return false;
+
+	    var component = this.getChildComponent(name);
+	    if (component === null) {
+	    	for (var i = 0, len = this._children.length; i < len; i++) {
+	    		return this._children[i].getDescendantComponent(name);
+	    	}
 	    }
-	    this._children.find(comparator);
+
 	    return component;
 	},
 
@@ -3187,14 +2793,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElement
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasClass
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
-	getElement: function(selector) {
-		return selector
-			? this.element.getElement(selector)
-			: this.element;
+	hasClass: function(name) {
+		return this.element.hasClass(name);
 	},
 
 	/**
@@ -3207,8 +2811,29 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getElement: function(selector) {
+		return selector
+			? this.element.getElement(selector)
+			: this.element;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasElement: function(element) {
+		return this.element === document.id(element) || this.element.contains(document.id(element));
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getRoleElement: function(name) {
@@ -3218,6 +2843,7 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElements
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getRoleElements: function(name, limit) {
@@ -3259,15 +2885,6 @@ Moobile.Component = new Class({
 		walk(this.element);
 
 		return found;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	hasElement: function(element) {
-		return this.element === document.id(element) || this.element.contains(document.id(element));
 	},
 
 	/**
@@ -3679,9 +3296,9 @@ Moobile.Control = new Class({
 
 		if (this.shouldAllowState(state) || state == null) {
 			this.willChangeState(state)
-			if (this._state) this.removeClass('is-' + this._state);
+			if (this._state) this.element.removeClass('is-' + this._state);
 			this._state = state;
-			if (this._state) this.addClass('is-' + this._state);
+			if (this._state) this.element.addClass('is-' + this._state);
 			this.didChangeState(state)
 		}
 
@@ -3712,7 +3329,7 @@ Moobile.Control = new Class({
 	 * @since  0.1.0
 	 */
 	setDisabled: function(disabled) {
-		return this._setState(disabled ? 'disabled' : null);
+		return this._setState(disabled !== false ? 'disabled' : null);
 	},
 
 	/**
@@ -3730,7 +3347,7 @@ Moobile.Control = new Class({
 	 * @since  0.1.0
 	 */
 	setSelected: function(selected) {
-		return this._setState(selected ? 'selected' : null);
+		return this._setState(selected !== false ? 'selected' : null);
 	},
 
 	/**
@@ -3748,7 +3365,7 @@ Moobile.Control = new Class({
 	 * @since  0.1.0
 	 */
 	setHighlighted: function(highlighted) {
-		return this._setState(highlighted ? 'highlighted' : null);
+		return this._setState(highlighted !== false ? 'highlighted' : null);
 	},
 
 	/**
@@ -4010,11 +3627,12 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	options: {
 		layout: null,
-		deselectable: false,
+		selectable: true,
 		selectedButtonIndex: -1
 	},
 
@@ -4039,10 +3657,12 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
 		this.parent();
+		this.setSelectable(this.options.selectable);
 		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
 	},
 
@@ -4060,17 +3680,16 @@ Moobile.ButtonGroup = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectedButton
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setSelectedButton: function(selectedButton) {
 
-		if (this._selectedButton === selectedButton) {
-			if (selectedButton && this.options.deselectable) {
-				selectedButton = null;
-			} else {
-				return this;
-			}
-		}
+		if (this._selectable === false)
+			return this;
+
+		if (this._selectedButton === selectedButton)
+			return this;
 
 		if (this._selectedButton) {
 			this._selectedButton.setSelected(false);
@@ -4205,6 +3824,37 @@ Moobile.ButtonGroup = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#setSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setSelectable: function(selectable) {
+		this._selectable = selectable;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#isSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isSelectable: function() {
+		return this._selectable;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this._selectedButton === component) {
+			this.clearSelectedButton();
+		}
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -4225,6 +3875,18 @@ Moobile.ButtonGroup = new Class({
 		this.parent(child);
 		if (child instanceof Moobile.Button) {
 			child.removeEvent('tap', this.bound('onButtonTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' || state == null) {
+			this.getChildComponents().invoke('setDisabled', state);
 		}
 	},
 
@@ -4366,6 +4028,12 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+/* Dark Style - iOS - Android */
+Moobile.Component.defineStyle('light', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
 });
 
 /* Contextual Style - Android */
@@ -5167,6 +4835,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.List = new Class({
@@ -5972,14 +5641,12 @@ Moobile.Image = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
 		this.parent();
-
-		if (this.element.get('tag') !== 'img')
-			throw new Error('Moobile.Image requires an <img> element.');
 
 		this.element.addClass('image');
 
@@ -6605,214 +6272,6 @@ Moobile.Alert = new Class({
 			this.element.removeClass('hide-animated');
 			this.element.hide();
 			this.didHide();
-		}
-	}
-
-});
-
-
-/*
----
-
-name: Popover
-
-description: Provides a Popover control.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Component
-
-provides:
-	- Popover
-
-...
-*/
-
-Moobile.Popover = new Class({
-
-	Extends: Moobile.Component,
-
-	content: null,
-
-	visible: false,
-
-	options: {
-		autoHide: true,
-		autoHideAnimated: true,
-		direction: 'top',
-		alignment: 'center'
-	},
-
-	willBuild: function() {
-
-		this.parent();
-
-		this.element.addClass('popover');
-		this.element.addClass('popover-direction-' + this.options.direction);
-		this.element.addClass('popover-alignment-' + this.options.alignment);
-
-		this.contentElement = document.createElement('div');
-		this.contentElement.addClass('popover-content');
-		this.contentElement.inject(this.element);
-
-		this.animations = new Moobile.Animation.Set();
-		this.animations.setAnimation('show', new Moobile.Animation().setAnimationClass('show-animated'));
-		this.animations.setAnimation('hide', new Moobile.Animation().setAnimationClass('hide-animated'));
-		this.animations.setElement(this);
-
-		this.animations.addEvent('start', this.bound('_onAnimationSetStart'));
-		this.animations.addEvent('end', this.bound('_onAnimationSetEnd'));
-
-		this.hide();
-	},
-
-	didBecomeReady: function() {
-		this.parent();
-		if (this.options.autoHide) this.getWindow().addEvent('tap', this.bound('_onTapOut'));
-	},
-
-	destroy: function() {
-		if (this.options.autoHide) {
-			var window = this.getWindow();
-			if (window) {
-				window.removeEvent('tap', this.bound('_onTapOut'));
-			}
-		}
-		this.parent();
-	},
-
-	addChild: function(component, where) {
-		if (where === 'header') return this.parent(child, 'top');
-		if (where === 'footer') return this.parent(child, 'bottom');
-		return this.addChildComponentInside(component, this.contentElement, where);
-	},
-
-	position: function(x, y) {
-
-		if (!this.isReady()) throw new Error('Popover is not ready therefore cannot be positionned');
-
-		this.element.show();
-		var size = this.element.getSize();
-		this.element.hide();
-
-		if (x instanceof Element || x instanceof Moobile.Component) {
-
-			var relative = y instanceof Element || y instanceof Moobile.Component ? y : null;
-
-			var s = x.getSize();
-			var p = x.getPosition(relative);
-
-			switch (this.options.direction) {
-				case 'top':
-					x = p.x + s.x / 2;
-					y = p.y + s.y;
-					break;
-				case 'bottom':
-					x = p.x + s.x / 2;
-					y = p.y;
-					break;
-				case 'left':
-					x = p.x + s.x;
-					y = p.y + s.y / 2;
-					break;
-				case 'right':
-					x = p.x;
-					y = p.y + s.y / 2;
-					break;
-			}
-		}
-
-		switch (this.options.direction) {
-			case 'top':
-				// y = y;
-				break;
-			case 'bottom':
-				y = y - size.y;
-				break;
-			case 'left':
-				// x = x;
-				break;
-			case 'right':
-				x = x - size.x;
-				break;
-		}
-
-		switch (this.options.alignment) {
-			case 'left':
-				// x = x;
-				break;
-			case 'right':
-				x = x - size.x;
-				break;
-			case 'center':
-				x = x - size.x / 2;
-				break;
-			case 'top':
-				// y = y;
-				break;
-			case 'bottom':
-				y = y - size.y;
-				break;
-			case 'middle':
-				y = y - size.y / 2;
-				break;
-		}
-
-		this.element.setStyle('top', Math.round(y));
-		this.element.setStyle('left', Math.round(x));
-	},
-
-	showAnimated: function() {
-		this.animations.start('show');
-		return this;
-	},
-
-	hideAnimated: function() {
-		this.animations.start('hide');
-		return this;
-	},
-
-	_onTapOut: function(e, sender) {
-		if (this.options.autoHide && this.isVisible() && !this.element.contains(e.target)) {
-			if (this.options.autoHideAnimated) {
-				this.hideAnimated();
-			} else {
-				this.hide();
-			}
-		}
-	},
-
-	_onAnimationSetStart: function(animation) {
-		switch (animation.getName()) {
-			case 'show':
-				this.willShow();
-				this.element.show();
-				break;
-			case 'hide':
-				this.willHide();
-				break;
-		}
-	},
-
-	_onAnimationSetEnd: function(animation) {
-		switch (animation.getName()) {
-			case 'show':
-				this._visible = true;
-				this.element.removeClass('hidden');
-				this.didShow();
-				this.fireEvent('show');
-				break;
-			case 'hide':
-				this._visible = false;
-				this.element.hide();
-				this.element.addClass('hidden');
-				this.didHide();
-				this.fireEvent('hide');
-				break;
 		}
 	}
 
@@ -7448,7 +6907,7 @@ provides:
 */
 
 (function() {
-
+/*
 var count = 0;
 var timer = null;
 var value = null;
@@ -7471,7 +6930,7 @@ Element.defineCustomEvent('hashchange', {
 		if (--count === 0) clearTimeout(timer);
 	}
 });
-
+*/
 })();
 
 /*
@@ -8745,12 +8204,11 @@ Moobile.View = new Class({
 		if (this._layout === layout)
 			return this;
 
-		if (layout) {
-			this.willChangeLayout(layout);
-			this.element.removeClass('view-layout-' + this._layout).addClass('view-layout-' + layout);
-			this._layout = layout;
-			this.didChangeLayout(layout);
-		}
+		this.willChangeLayout(layout);
+		if (this._layout) this.element.removeClass('view-layout-' + this._layout);
+		this._layout = layout;
+		if (this._layout) this.element.addClass('view-layout-' + this._layout);
+		this.didChangeLayout(layout);
 
 		return this;
 	},
@@ -8925,7 +8383,7 @@ Moobile.Component.defineStyle('dark', Moobile.View, {
 name: ScrollView
 
 description: Provides a view that scrolls when its content is larger than the
-             view area.
+			 view area.
 
 license: MIT-style license.
 
@@ -8970,21 +8428,7 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouchStartX: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchStartY: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchStartPage: null,
+	_activeTouchStartScroll: null,
 
 	/**
 	 * @hidden
@@ -8992,20 +8436,6 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	_activeTouchDuration: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchDirectionX: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_activeTouchDirectionY: null,
 
 	/**
 	 * @hidden
@@ -9195,17 +8625,18 @@ Moobile.ScrollView = new Class({
 		if (y > ymax) y = ymax;
 
 		var scroll = this.getScroll();
-		if (scroll.x !== x &&
+		if (scroll.x !== x ||
 			scroll.y !== y) {
 			this.scrollTo(x, y, time);
 		}
 
 		if (this._page.x !== pageX ||
 			this._page.y !== pageY) {
-			this._page.x = pageX;
-			this._page.y = pageY;
 			this.fireEvent('scrolltopage', null, time);
 		}
+
+		this._page.x = pageX;
+		this._page.y = pageY;
 
 		return this;
 	},
@@ -9233,36 +8664,13 @@ Moobile.ScrollView = new Class({
 		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
 
 		if (pageSizeX && pageSizeY) {
+
 			var scroll = this.getScroll();
 			scroll.x = scroll.x > 0 ? scroll.x : 0;
 			scroll.y = scroll.y > 0 ? scroll.y : 0;
+
 			x = Math.floor(scroll.x / pageSizeX);
 			y = Math.floor(scroll.y / pageSizeY);
-		}
-
-		return {x: x, y: y};
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getPageLocation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getPageScroll: function() {
-
-		var x = 0;
-		var y = 0;
-
-		var pageSizeX = this.options.snapToPageSizeX || this.getSize().x;
-		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
-
-		if (pageSizeX && pageSizeY) {
-			var page = this.getPage();
-			var scroll = this.getScroll();
-			scroll.x = scroll.x > 0 ? scroll.x : 0;
-			scroll.y = scroll.y > 0 ? scroll.y : 0;
-			x = (scroll.x / pageSizeX - page.x) * 100;
-			y = (scroll.y / pageSizeY - page.y) * 100;
 		}
 
 		return {x: x, y: y};
@@ -9314,38 +8722,47 @@ Moobile.ScrollView = new Class({
 	 */
 	_snapToPage: function() {
 
-		var snapToPageAt = this.options.snapToPageAt;
-		var snapToPageDelay = this.options.snapToPageDelay;
-		var snapToPageDuration = this.options.snapToPageDuration
-
 		var scroll = this.getScroll();
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
 
+		var moveX = scroll.x - this._activeTouchStartScroll.x;
+		var moveY = scroll.y - this._activeTouchStartScroll.y;
+		var absMoveX = Math.abs(moveX);
+		var absMoveY = Math.abs(moveY);
+
+		if (moveX === 0 && moveY === 0)
+			return this;
+
+		var pageSizeX = this.options.snapToPageSizeX || this.getSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
+		var pageMoveX = Math.floor(absMoveX / pageSizeX);
+		var pageMoveY = Math.floor(absMoveY / pageSizeY);
+		var pageAreaX = (absMoveX - pageMoveX * pageSizeX) * 100 / pageSizeX;
+		var pageAreaY = (absMoveY - pageMoveY * pageSizeY) * 100 / pageSizeY;
+
 		var page = this.getPage();
-		var move = this.getPageScroll();
+		if (moveX < 0) page.x = page.x + 1;
+		if (moveY < 0) page.y = page.y + 1;
 
-		if (scroll.x > 0 && this._activeTouchDirectionX === 'lf') {
-			move.x = 100 - move.x;
-			page.x += 1
+		var frame = this.getSize();
+		var total = this.getScrollSize();
+
+		if (scroll.x + frame.x === total.x ||
+			scroll.y + frame.y === total.y) {
+			// handles uneven pages
+			if ((scroll.x / pageSizeX - page.x) * 100 > 0) page.x = page.x + 1;
+			if ((scroll.y / pageSizeY - page.y) * 100 > 0) page.y = page.y + 1;
 		}
 
-		if (scroll.y > 0 && this._activeTouchDirectionY === 'tp') {
-			move.y = 100 - move.y;
-			page.y += 1;
-		}
+		var snapToPageAt = this.options.snapToPageAt;
+		var snapToPageDelay = this.options.snapToPageDelay;
+		var snapToPageDuration = this.options.snapToPageDuration
 
-		var values = {
-			'rg':  1,
-			'lf': -1,
-			'tp': -1,
-			'bt':  1
-		};
+		if (pageAreaX > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.x += moveX > 0 ? 1 : -1;
+		if (pageAreaY > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.y += moveY > 0 ? 1 : -1;
 
-		if (move.x > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.x += values[this._activeTouchDirectionX];
-		if (move.y > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.y += values[this._activeTouchDirectionY];
-
-		this.scrollToPage(page.x, page.y, snapToPageDuration);
+		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
 
 		return this;
 	},
@@ -9359,10 +8776,7 @@ Moobile.ScrollView = new Class({
 		this._activeTouch = null;
 		this._activeTouchTime = null;
 		this._activeTouchDuration = null;
-		this._activeTouchStartX = null;
-		this._activeTouchStartY = null;
-		this._activeTouchDirectionX = null;
-		this._activeTouchDirectionY = null;
+		this._activeTouchStartScroll = null;
 	},
 
 	/**
@@ -9377,8 +8791,7 @@ Moobile.ScrollView = new Class({
 		if (this._activeTouch === null) {
 			this._activeTouch = touch;
 			this._activeTouchTime = Date.now();
-			this._activeTouchStartX = touch.pageX;
-			this._activeTouchStartY = touch.pageY;
+			this._activeTouchStartScroll = this.getScroll();
 		}
 	},
 
@@ -9393,8 +8806,6 @@ Moobile.ScrollView = new Class({
 
 		if (this._activeTouch.identifier === touch.identifier) {
 			this._activeTouchDuration = Date.now() - this._activeTouchTime;
-			this._activeTouchDirectionX = this._activeTouchStartX < touch.pageX ? 'lf' : 'rg';
-			this._activeTouchDirectionY = this._activeTouchStartY < touch.pageY ? 'tp' : 'bt';
 
 			if (this.options.snapToPage) {
 				if (this._activeTouchStartX !== touch.pageX ||
@@ -9406,10 +8817,7 @@ Moobile.ScrollView = new Class({
 			this._activeTouch = null;
 			this._activeTouchTime = null;
 			this._activeTouchDuration = null;
-			this._activeTouchStartX = null;
-			this._activeTouchStartY = null;
-			this._activeTouchDirectionX = null;
-			this._activeTouchDirectionY = null;
+			this._activeTouchStartScroll = null;
 		}
 	},
 
@@ -10364,7 +9772,7 @@ Moobile.ViewControllerStack = new Class({
 	 */
 	viewDidLoad: function() {
 		this.parent();
-		window.addEvent('hashchange', this.bound('onHashChange'));
+		window.addEventListener('hashchange', this.bound('_onHashChange'));
 	},
 
 	/**
@@ -10373,7 +9781,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @since  0.2.0
 	 */
 	destroy: function() {
-		window.removeEvent('hashchange', this.bound('onHashChange'));
+		window.removeEventListener('hashchange', this.bound('_onHashChange'));
 		this.parent();
 	},
 
@@ -10419,7 +9827,7 @@ Moobile.ViewControllerStack = new Class({
 
 		viewControllerPushed.setViewTransition(viewTransition);
 
-		window.location.hash = viewControllerPushed.getId();
+		this._setLocationHash(viewControllerPushed.getId());
 
 		return this;
 	},
@@ -10492,7 +9900,7 @@ Moobile.ViewControllerStack = new Class({
 			this.view
 		);
 
-		window.location.hash = viewControllerBefore.getId();
+		this._setLocationHash(viewControllerBefore.getId());
 
 		return this;
 	},
@@ -10633,17 +10041,50 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	onHashChange: function(hash) {
+	_setLocationHash: function(value) {
+		(function() {
+			window.location.hash = '#' + value;
+		}).delay(50);
+		return this;
+	},
 
-		if (this.getTopViewController().getId() === hash)
-			return;
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_getLocationHash: function() {
+		return window.location.hash.substring(1);
+	},
 
-		var viewControllers = this.getChildViewControllers();
-		for (var i = 0; i< viewControllers.length; i++) {
-			var viewController = viewControllers[i];
-			if (viewController.getId() === hash) {
-				this.popViewControllerUntil(viewController);
-				break;
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onHashChange: function() {
+
+		var hash = this._getLocationHash();
+		if (hash) {
+
+
+			var vc = this.getChildViewControllers().find(function(vc) {
+				return vc.getId() === hash;
+			});
+
+			console.log('Hash Changed to ' + hash + ' vc at ' + this.getChildViewControllerIndex(vc));
+
+
+			if (this.getTopViewController().getId() === hash)
+				return;
+
+			var viewControllers = this.getChildViewControllers();
+			for (var i = 0; i < viewControllers.length; i++) {
+				var viewController = viewControllers[i];
+				if (viewController.getId() === hash) {
+					this.popViewControllerUntil(viewController);
+					break;
+				}
 			}
 		}
 	}
