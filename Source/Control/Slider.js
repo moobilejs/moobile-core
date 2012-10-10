@@ -349,8 +349,8 @@ Moobile.Slider = new Class({
 
 		this._position.x = x;
 		this._position.y = y;
-		this.thumbElement.setStyle('transform', 'translateX(' + x + 'px) translateY(' + y + 'px)');
-		this.valueElement.setStyle('transform', 'translateX(' + x + 'px) translateY(' + y + 'px)');
+		this.thumbElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
+		this.valueElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
 
 		this.fireEvent('change', value);
 
