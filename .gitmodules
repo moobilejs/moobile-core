@@ -13,3 +13,6 @@
 [submodule "Vendor/mootools-mobile"]
 	path = Vendor/mootools-mobile
 	url = git://github.com/cpojer/mootools-mobile.git
+[submodule "Vendor/scroller"]
+	path = Vendor/scroller
+	url = https://github.com/zynga/scroller.git

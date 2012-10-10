@@ -2,7 +2,6 @@
 /* Body
 -----------------------------------------------------------------------------*/
 
-
 body {
 	font-family: "Helvetica Neue", sans-serif;
 }
@@ -1768,6 +1767,7 @@ input, select, textarea {
 		    -ms-border-image: url(../images/ios/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
 		     -o-border-image: url(../images/ios/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
 		        border-image: url(../images/ios/slider-track-foreground-v-2x.png) 5 0 fill stretch stretch;
+	}
 }
 
 /* Transition Slide (Enter)
