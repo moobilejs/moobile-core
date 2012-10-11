@@ -193,6 +193,11 @@ input, select, textarea {
 }
 
 .view .view-content-wrapper {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
@@ -252,7 +257,6 @@ input, select, textarea {
 	     -o-box-orient: horizontal;                              /* Important */
 	        box-orient: horizontal;                              /* Important */
 }
-
 
 .view.enable {
 	pointer-events: auto;		 								/* Important */
@@ -315,6 +319,11 @@ input, select, textarea {
 }
 
 .bar .bar-item {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -349,6 +358,11 @@ input, select, textarea {
 .bar.navigation-bar {}
 
 .bar.navigation-bar .bar-title {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -437,6 +451,11 @@ input, select, textarea {
 }
 
 .button .button-label {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
@@ -596,6 +615,11 @@ input, select, textarea {
 }
 
 .list-item .list-item-image {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -610,6 +634,11 @@ input, select, textarea {
 }
 
 .list-item .list-item-label {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -623,6 +652,11 @@ input, select, textarea {
 }
 
 .list-item .list-item-detail {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -798,6 +832,11 @@ input, select, textarea {
 }
 
 .alert .alert-box {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -808,6 +847,11 @@ input, select, textarea {
 }
 
 .alert .alert-header {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -816,6 +860,11 @@ input, select, textarea {
 }
 
 .alert .alert-content {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -824,6 +873,11 @@ input, select, textarea {
 }
 
 .alert .alert-footer {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -943,16 +997,16 @@ input, select, textarea {
 }
 
 .activity-indicator {
-	-webkit-box-sizing: border-box;                              /* Important */
-	   -moz-box-sizing: border-box;                              /* Important */
-	    -ms-box-sizing: border-box;                              /* Important */
-	     -o-box-sizing: border-box;                              /* Important */
-	        box-sizing: border-box;                              /* Important */
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */
 	     -o-backface-visibility: hidden;                         /* Important */
 	        backface-visibility: hidden;                         /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
 	-webkit-animation: anim-activity-indicator 1s linear infinite;
 	   -moz-animation: anim-activity-indicator 1s linear infinite;
 	    -ms-animation: anim-activity-indicator 1s linear infinite;
@@ -977,8 +1031,21 @@ input, select, textarea {
 	        backface-visibility: hidden;                         /* Important */
 }
 
-.slider-track {}
-.slider-thumb {}
+.slider-track {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+}
+
+.slider-thumb {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+}
 
 /* Transition Fade (Enter)
 -----------------------------------------------------------------------------*/
@@ -1273,11 +1340,11 @@ input, select, textarea {
 }
 
 .transition-cover-leave .transition-view-to-hide {
-	-webkit-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 75;
 }
 
