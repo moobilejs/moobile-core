@@ -204,6 +204,7 @@ input, select, textarea {
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
 	height: 100%;                                                /* Important */
+	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
 }
@@ -236,7 +237,6 @@ input, select, textarea {
 	display:         box;                                        /* Important */
 	left: 0px;                                                   /* Important */
 	height: 100%;                                                /* Important */
-	overflow: hidden;                                            /* Important */
 	position: absolute;                                          /* Important */
 	top: 0px;                                                    /* Important */
 	width: 100%;                                                 /* Important */
@@ -269,15 +269,24 @@ input, select, textarea {
 /* Scroll View
 -----------------------------------------------------------------------------*/
 
-.view.scroll-view .view-content-wrapper {
-	overflow: hidden;
-}
-
 .view.scroll-view .view-content.scroll-view-content {
 	height: auto;                                                /* Important */
 	min-height: 100%;                                            /* Important */
 	min-width: 100%;                                             /* Important */
 	width: auto;                                                 /* Important */
+}
+
+/* IScroll Engine */
+
+.view.scroll-view.iscroll-engine .scrollbar-H,
+.view.scroll-view.iscroll-engine .scrollbar-V,
+.view.scroll-view.iscroll-engine .scrollbar-H > div,
+.view.scroll-view.iscroll-engine .scrollbar-V > div {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
 }
 
 /* View Stack
