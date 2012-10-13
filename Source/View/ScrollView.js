@@ -92,7 +92,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		scroller: ['IScroll.Android', 'Native', 'IScroll'],
+		scroller: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -142,6 +142,8 @@ Moobile.ScrollView = new Class({
 
 		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
+		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
+		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
 
 		var name = this._scroller.getName();
 		if (name) {
@@ -172,12 +174,17 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+
 		this.contentElement.removeEvent('touchcancel', this.bound('_onTouchCancel'));
 		this.contentElement.removeEvent('touchstart', this.bound('_onTouchStart'));
 		this.contentElement.removeEvent('touchend', this.bound('_onTouchEnd'));
+
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
+		this._scroller.removeEvent('scrollend', this.bound('_onScrollEnd'));
+		this._scroller.removeEvent('scrollstart', this.bound('_onScrollStart'));
 		this._scroller.destroy();
 		this._scroller = null;
+
 		this.parent();
 	},
 
@@ -187,8 +194,8 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
-		this.contentElement.setStyle('width', x);
-		this.contentElement.setStyle('height', y);
+		if (x >= 0) this.contentElement.setStyle('width', x);
+		if (y >= 0) this.contentElement.setStyle('height', y);
 		return this;
 	},
 
@@ -449,6 +456,24 @@ Moobile.ScrollView = new Class({
 	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollStart: function() {
+		this.fireEvent('scrollstart');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollEnd: function() {
+		this.fireEvent('scrollend');
 	}
 
 });
