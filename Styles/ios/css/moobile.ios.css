@@ -23,7 +23,8 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .view {
-	background: #fff url(../images/ios/background-striped.png);
+	background: #fff url(../images/ios/view-background.png);
+	background-size: 320px 40px;
 	color: #4c596e;
 	font-size: 15px;
 	font-weight: normal;
@@ -63,6 +64,12 @@ input, select, textarea {
 .view.style-dark h1,
 .view.style-dark h2 {
 	color: #fff;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+	.view {
+		background: #fff url(../images/ios/view-background-2x.png);
+	}
 }
 
 /* ScrollView
@@ -178,9 +185,6 @@ input, select, textarea {
 	color: #717880;
 	text-shadow: 0px -1px 1px rgba(255, 255, 255, 0.55);
 }
-
-/* Bar (Retina Display)
------------------------------------------------------------------------------*/
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 
@@ -1154,6 +1158,14 @@ input, select, textarea {
 	margin-bottom: 24px;
 }
 
+.list.style-grouped .list-item:last-child {
+	-webkit-box-shadow: 0px 1px 1px #fff;
+	   -moz-box-shadow: 0px 1px 1px #fff;
+	    -ms-box-shadow: 0px 1px 1px #fff;
+	     -o-box-shadow: 0px 1px 1px #fff;
+	        box-shadow: 0px 1px 1px #fff;
+}
+
 /* List Item
 -----------------------------------------------------------------------------*/
 
@@ -1172,21 +1184,21 @@ input, select, textarea {
 }
 
 .list-item .list-item-label {
-	-webkit-box-orient: horizontal;                              /* Important */
-	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
-	-webkit-box-pack: start;                                     /* Important */
-	   -moz-box-pack: start;                                     /* Important */
-	    -ms-box-pack: start;                                     /* Important */
-	     -o-box-pack: start;                                     /* Important */
-	        box-pack: start;                                     /* Important */
+	-webkit-box-orient: vertical;                                /* Important */
+	   -moz-box-orient: vertical;                                /* Important */
+	    -ms-box-orient: vertical;                                /* Important */
+	     -o-box-orient: vertical;                                /* Important */
+	        box-orient: vertical;                                /* Important */
+	-webkit-box-align: start;                                    /* Important */
+	   -moz-box-align: start;                                    /* Important */
+	    -ms-box-align: start;                                    /* Important */
+	     -o-box-align: start;                                    /* Important */
+	        box-align: start;                                    /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
 	display:     -ms-box;                                        /* Important */
@@ -1211,21 +1223,21 @@ input, select, textarea {
 }
 
 .list-item .list-item-detail {
-	-webkit-box-orient: horizontal;                              /* Important */
-	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
-	-webkit-box-pack: start;                                     /* Important */
-	   -moz-box-pack: start;                                     /* Important */
-	    -ms-box-pack: start;                                     /* Important */
-	     -o-box-pack: start;                                     /* Important */
-	        box-pack: start;                                     /* Important */
+	-webkit-box-orient: vertical;                                /* Important */
+	   -moz-box-orient: vertical;                                /* Important */
+	    -ms-box-orient: vertical;                                /* Important */
+	     -o-box-orient: vertical;                                /* Important */
+	        box-orient: vertical;                                /* Important */
+	-webkit-box-align: start;                                    /* Important */
+	   -moz-box-align: start;                                    /* Important */
+	    -ms-box-align: start;                                    /* Important */
+	     -o-box-align: start;                                    /* Important */
+	        box-align: start;                                    /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
 	color: #395587;
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
