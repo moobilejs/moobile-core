@@ -101,6 +101,15 @@ Moobile.Image = new Class({
 	},
 
 	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHandleNativeEvent: function(name) {
+		return name != 'load';
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#setSource
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
