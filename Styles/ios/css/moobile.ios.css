@@ -60,12 +60,77 @@ input, select, textarea {
 	text-shadow: none;
 }
 
-.view.style-dark h1 {
+.view.style-dark h1,
+.view.style-dark h2 {
 	color: #fff;
 }
 
-.view.style-dark h2 {
-	color: #fff;
+/* ScrollView
+-----------------------------------------------------------------------------*/
+
+/* IScroll Engine */
+
+.view.scroll-view.iscroll-engine .scrollbar-H,
+.view.scroll-view.iscroll-engine .scrollbar-V,
+.view.scroll-view.iscroll-engine .scrollbar-H > div,
+.view.scroll-view.iscroll-engine .scrollbar-V > div {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+	pointer-events: none;
+	position: absolute;
+	z-index: 100;
+}
+
+.view.scroll-view.iscroll-engine .scrollbar-V {
+	bottom: 2px;
+	overflow: hidden;
+	top: 2px;
+	right: 1px;
+	width: 7px;
+}
+
+.view.scroll-view.iscroll-engine .scrollbar-V > div {
+	 -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	     -ms-box-sizing: border-box;
+	      -o-box-sizing: border-box;
+	         box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	   -moz-background-clip: padding-box;
+	    -ms-background-clip: padding-box;
+	     -o-background-clip: padding-box;
+	        background-clip: padding-box;
+	 background: rgba(0, 0, 0, 0.5);
+	 border: 1px solid rgba(255, 255, 255, 0.9);
+	 border-radius: 3px;
+	 width: 100%;
+}
+
+.view.scroll-view.iscroll-engine .scrollbar-H {
+	bottom: 1px;
+	height: 7px;
+	left: 2px;
+	right: 7px;
+}
+
+.view.scroll-view.iscroll-engine .scrollbar-H > div {
+	 -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	     -ms-box-sizing: border-box;
+	      -o-box-sizing: border-box;
+	         box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	   -moz-background-clip: padding-box;
+	    -ms-background-clip: padding-box;
+	     -o-background-clip: padding-box;
+	        background-clip: padding-box;
+	 background: rgba(0, 0, 0, 0.5);
+	 border: 1px solid rgba(255, 255, 255, 0.9);
+	 border-radius: 3px;
+	 height: 100%;
 }
 
 /* View Stack
