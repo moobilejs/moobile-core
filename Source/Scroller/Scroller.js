@@ -61,7 +61,6 @@ Moobile.Scroller = new Class({
 	initialize: function(contentElement, contentWrapperElement, options) {
 		this.contentElement = document.id(contentElement);
 		this.contentWrapperElement = document.id(contentWrapperElement);
-		this.contentElement.addClass('scrollable-content');
 		this.contentWrapperElement.addClass('scrollable');
 		this.setOptions(options);
 		return this;
