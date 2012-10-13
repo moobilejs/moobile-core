@@ -207,6 +207,7 @@ input, select, textarea {
 	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
+	z-index: 50;                                                 /* Important */
 }
 
 .view .view-content {
@@ -325,6 +326,7 @@ input, select, textarea {
 	display:         box;                                        /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
+	z-index: 75;                                                 /* Important */
 }
 
 .bar .bar-item {
