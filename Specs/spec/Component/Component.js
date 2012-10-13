@@ -522,6 +522,56 @@ describe('Component/Component', function() {
 		);
 	});
 
+	// show, hide
+
+	it('should hide and show the component and its child components', function() {
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+		spyOn(c1, 'willHide');
+		spyOn(c1, 'didHide');
+		spyOn(c1, 'willShow');
+		spyOn(c1, 'didShow');
+		spyOn(c2, 'willHide');
+		spyOn(c2, 'didHide');
+		spyOn(c2, 'willShow');
+		spyOn(c2, 'didShow');
+		spyOn(c3, 'willHide');
+		spyOn(c3, 'didHide');
+		spyOn(c3, 'willShow');
+		spyOn(c3, 'didShow');
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+		w.addChildComponent(c1);
+		c1.hide();
+		c1.show();
+		expect(c1.willHide).toHaveBeenCalled();
+		expect(c1.didHide).toHaveBeenCalled();
+		expect(c2.willHide).toHaveBeenCalled();
+		expect(c2.didHide).toHaveBeenCalled();
+		expect(c3.willHide).toHaveBeenCalled();
+		expect(c3.didHide).toHaveBeenCalled();
+		expect(c1.willHide.calls.length).toEqual(1);
+		expect(c1.didHide.calls.length).toEqual(1);
+		expect(c2.willHide.calls.length).toEqual(1);
+		expect(c2.didHide.calls.length).toEqual(1);
+		expect(c3.willHide.calls.length).toEqual(1);
+		expect(c3.didHide.calls.length).toEqual(1);
+		expect(c1.willShow).toHaveBeenCalled();
+		expect(c1.didShow).toHaveBeenCalled();
+		expect(c2.willShow).toHaveBeenCalled();
+		expect(c2.didShow).toHaveBeenCalled();
+		expect(c3.willShow).toHaveBeenCalled();
+		expect(c3.didShow).toHaveBeenCalled();
+		expect(c1.willShow.calls.length).toEqual(1);
+		expect(c1.didShow.calls.length).toEqual(1);
+		expect(c2.willShow.calls.length).toEqual(1);
+		expect(c2.didShow.calls.length).toEqual(1);
+		expect(c3.willShow.calls.length).toEqual(1);
+		expect(c3.didShow.calls.length).toEqual(1);
+	});
+
 	// TODO: Test Size
 	// TODO: Test Position
 	// TODO: Test visibility
