@@ -4674,8 +4674,8 @@ Moobile.Slider = new Class({
 
 		this._position.x = x;
 		this._position.y = y;
-		this.thumbElement.setStyle('transform', 'translateX(' + x + 'px) translateY(' + y + 'px)');
-		this.valueElement.setStyle('transform', 'translateX(' + x + 'px) translateY(' + y + 'px)');
+		this.thumbElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
+		this.valueElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
 
 		this.fireEvent('change', value);
 
@@ -7046,7 +7046,6 @@ Moobile.Scroller = new Class({
 	initialize: function(contentElement, contentWrapperElement, options) {
 		this.contentElement = document.id(contentElement);
 		this.contentWrapperElement = document.id(contentWrapperElement);
-		this.contentElement.addClass('scrollable-content');
 		this.contentWrapperElement.addClass('scrollable');
 		this.setOptions(options);
 		return this;
@@ -7216,25 +7215,11 @@ Moobile.Scroller.IScroll = new Class({
 	Extends: Moobile.Scroller,
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#scroller
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouch: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_moving: false,
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#iscroll
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	iscroll: null,
+	scroller: null,
 
 	/**
 	 * @overridden
@@ -7243,44 +7228,26 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	initialize: function(contentElement, contentWrapperElement, options) {
 
-		this.parent(contentElement, contentWrapperElement, options);
-
-		this.loadEngine();
-		this.contentWrapperElement.addEvent('touchstart', this.bound('_onTouchStart'));
-		this.contentWrapperElement.addEvent('touchend', this.bound('_onTouchEnd'));
-
-		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#loadEngine
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	loadEngine: function() {
-
-		this.iscroll = new iScroll(this.contentWrapperElement, {
+		this.scroller = new iScroll(contentWrapperElement, {
+			scrollbarClass: 'scrollbar-',
 			hScroll: this.options.scrollX,
 			vScroll: this.options.scrollY,
-			momentum: this.options.momentum,
-			bounce: this.options.momentum,
 			hScrollbar: this.options.momentum,
 			vScrollbar: this.options.momentum,
-			useTransform: true,
-			useTransition: true,
+			momentum: this.options.momentum,
+			bounce: this.options.momentum && Browser.Platform.ios,
 			hideScrollbar: true,
 			fadeScrollbar: true,
 			checkDOMChanges: true,
-			snap: false,
 			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
-			onAnimationEnd: this.bound('_onAnimationEnd'),
+			onScrollStart: this.bound('_onScrollStart'),
 			onScrollMove: this.bound('_onScrollMove'),
 			onScrollEnd: this.bound('_onScrollEnd')
 		});
 
-		return this;
+		window.addEvent('resize', this.bound('refresh'));
+
+		return this.parent(contentElement, contentWrapperElement, options);
 	},
 
 	/**
@@ -7289,11 +7256,9 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	destroy: function() {
-		window.removeEvent('orientationchange', this.bound('_onOrientationChange'));
-		this.contentWrapperElement.removeEvent('touchstart', this.bound('_onTouchStart'));
-		this.contentWrapperElement.removeEvent('touchend', this.bound('_onTouchEnd'));
-		this.iscroll.destroy();
-		this.iscroll = null;
+		window.removeEvent('resize', this.bound('refresh'));
+		this.scroller.destroy();
+		this.scroller = null;
 		return this.parent();
 	},
 
@@ -7312,8 +7277,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	scrollTo: function(x, y, time) {
-		this._moving = true;
-		this.iscroll.scrollTo(-x, -y, time || 0);
+		this.scroller.scrollTo(-x, -y, time || 0);
 		return this;
 	},
 
@@ -7323,8 +7287,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	scrollToElement: function(element, time) {
-		this._moving = true;
-		this.iscroll.scrollToElement(document.id(element), time || 0);
+		this.scroller.scrollToElement(document.id(element), time || 0);
 		return this;
 	},
 
@@ -7334,7 +7297,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	refresh: function() {
-		this.iscroll.refresh();
+		this.scroller.refresh();
 		return this;
 	},
 
@@ -7344,7 +7307,10 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	getScroll: function() {
-		return {x: -this.iscroll.x, y: -this.iscroll.y};
+		return {
+			x: -this.scroller.x,
+			y: -this.scroller.y
+		};
 	},
 
 	/**
@@ -7374,7 +7340,6 @@ Moobile.Scroller.IScroll = new Class({
 		var target = e.target.get('tag');
 		if (target !== 'input' &&
 			target !== 'select') {
-			// fixes android issue
 			e.preventDefault();
 		}
 	},
@@ -7384,9 +7349,8 @@ Moobile.Scroller.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_onAnimationEnd: function() {
-		this._moving = false;
-		this.fireEvent('scroll');
+	_onScrollStart: function() {
+		this.fireEvent('scrollstart');
 	},
 
 	/**
@@ -7404,122 +7368,14 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollEnd: function() {
-		// this event is not reliable
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_onTouchStart: function(e) {
-		if (this._activeTouch === null) {
-			this._activeTouch = e.changedTouches[0];
-			if (this._moving) {
-				this._moving = false;
-				this.fireEvent('scroll');
-			}
-		}
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_onTouchEnd: function(e) {
-		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
-			this._activeTouch = null;
-		}
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_onOrientationChange: function() {
-		this.refresh();
+		this.fireEvent('scroll');
+		this.fireEvent('scrollend');
 	}
 
 });
 
 Moobile.Scroller.IScroll.supportsCurrentPlatform = function() {
 	return true;
-};
-
-
-/*
----
-
-name: Scroller.IScroll.Android
-
-description: Provides a scroller that uses the iScroll scroller.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Scroller.IScroll
-
-provides:
-	- Scroller.IScroll.Android
-
-...
-*/
-
-
-/**
- * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll.Android
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.2.0
- */
-Moobile.Scroller.IScroll.Android = new Class({
-
-	Extends: Moobile.Scroller.IScroll,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	loadEngine: function() {
-
-		this.iscroll = new iScroll(this.contentWrapperElement, {
-			hScroll: this.options.scrollX,
-			vScroll: this.options.scrollY,
-			momentum: this.options.momentum,
-			bounce: false,
-			hScrollbar: true,
-			vScrollbar: true,
-			hideScrollbar: true,
-			fadeScrollbar: true,
-			checkDOMChanges: true,
-			scrollbarClass: 'scroll-bar-',
-			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
-			onAnimationEnd: this.bound('_onAnimationEnd'),
-			onScrollMove: this.bound('_onScrollMove'),
-			onScrollEnd: this.bound('_onScrollEnd')
-		});
-
-		return this;
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getName: function() {
-		return 'iscroll-android';
-	},
-
-});
-
-Moobile.Scroller.IScroll.Android.supportsCurrentPlatform = function() {
-	return Browser.Platform.android;
 };
 
 
@@ -8471,7 +8327,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		scroller: ['IScroll.Android', 'Native', 'IScroll'],
+		scroller: ['Native', 'IScroll'],
 		momentum: true,
 		scrollX: false,
 		scrollY: true,
@@ -8521,6 +8377,8 @@ Moobile.ScrollView = new Class({
 
 		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
+		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
+		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
 
 		var name = this._scroller.getName();
 		if (name) {
@@ -8551,12 +8409,17 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+
 		this.contentElement.removeEvent('touchcancel', this.bound('_onTouchCancel'));
 		this.contentElement.removeEvent('touchstart', this.bound('_onTouchStart'));
 		this.contentElement.removeEvent('touchend', this.bound('_onTouchEnd'));
+
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
+		this._scroller.removeEvent('scrollend', this.bound('_onScrollEnd'));
+		this._scroller.removeEvent('scrollstart', this.bound('_onScrollStart'));
 		this._scroller.destroy();
 		this._scroller = null;
+
 		this.parent();
 	},
 
@@ -8566,8 +8429,8 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
-		this.contentElement.setStyle('width', x);
-		this.contentElement.setStyle('height', y);
+		if (x >= 0) this.contentElement.setStyle('width', x);
+		if (y >= 0) this.contentElement.setStyle('height', y);
 		return this;
 	},
 
@@ -8828,6 +8691,24 @@ Moobile.ScrollView = new Class({
 	 */
 	_onScroll: function() {
 		this.fireEvent('scroll');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollStart: function() {
+		this.fireEvent('scrollstart');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollEnd: function() {
+		this.fireEvent('scrollend');
 	}
 
 });
