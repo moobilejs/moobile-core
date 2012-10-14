@@ -368,7 +368,7 @@ input, select, textarea {
 
 .bar.navigation-bar {}
 
-.bar.navigation-bar .bar-title {
+.bar.navigation-bar .bar-title-wrapper {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */
@@ -384,10 +384,27 @@ input, select, textarea {
 	    -ms-box-flex: 1;                                         /* Important */
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
-	display: block;
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
 	position: relative;                                          /* Important */
-	text-align: center;
 	width: 100%;                                                 /* Important */
+}
+
+.bar.navigation-bar .bar-title {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
+	display: block;
 }
 
 /* Button Group
@@ -1480,7 +1497,6 @@ input, select, textarea {
 		-ms-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 		 -o-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 			animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-
 }
 
 /* Transition Cover Page Leave

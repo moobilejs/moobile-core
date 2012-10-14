@@ -151,11 +151,6 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .bar {
-	-webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.6);
-	   -moz-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.6);
-	    -ms-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.6);
-	     -o-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.6);
-	        box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.6);
 	background: url(../images/ios/bar.png) repeat-x 0px 0px;
 	color: #fff;
 	font-size: 20px;
@@ -164,6 +159,36 @@ input, select, textarea {
 	padding-left: 7px;
 	padding-right: 7px;
 	text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.bar:before,
+.bar:after {
+	content: '';
+	display: block;
+	height: 3px;
+	left: 0px;
+	position: absolute;
+	right: 0px;
+}
+
+.bar:after {
+	background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:    -moz-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:     -ms-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:      -o-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:         linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	bottom: -3px;
+	width: 100%;
+}
+
+.bar:before {
+	background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:    -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:     -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:      -o-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background:         linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	top: -3px;
+	width: 100%;
 }
 
 .bar .bar-item {
@@ -213,12 +238,24 @@ input, select, textarea {
 	height: 44px;
 }
 
+.bar.navigation-bar .bar-item .bar-title-wrapper {
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
+	margin-top: -1px;
+	margin-left: 8px;
+	margin-right: 8px;
+	height: inherit;
+}
+
 .bar.navigation-bar .bar-item .bar-title {
-	-webkit-box-orient: horizontal;                              /* Important */
-	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
 	    -ms-box-align: center;                                   /* Important */
@@ -234,13 +271,9 @@ input, select, textarea {
 	display:     -ms-box;                                        /* Important */
 	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
-	margin-top: -1px;
-	margin-left: 8px;
-	margin-right: 8px;
-	height: inherit;
-	overflow: hidden;                                            /* Important */
-	text-overflow: ellipsis;                                     /* Important */
-	white-space: nowrap;                                         /* Important */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 /* Button

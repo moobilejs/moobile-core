@@ -55,6 +55,10 @@ Moobile.NavigationBarItem = new Class({
 			title.inject(this.element);
 			title.setRole('title');
 		}
+
+		var wrapper = document.createElement('div');
+		wrapper.addClass('bar-title-wrapper');
+		wrapper.wraps(title);
 	},
 
 	/**
