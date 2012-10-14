@@ -21,6 +21,10 @@ provides:
 
 if (!window.$moobile) window.$moobile = {};
 
+(function() {
+
+var instance = null;
+
 /**
  * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -29,6 +33,16 @@ if (!window.$moobile) window.$moobile = {};
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	initialize: function(element, options, name) {
+		instance = this;
+		return this.parent(element, options, name);
+	},
 
 	/**
 	 * @overridden
@@ -103,3 +117,9 @@ Moobile.Window = new Class({
 	}
 
 });
+
+Moobile.Window.getCurrentInstance = function() {
+	return instance;
+};
+
+})()
