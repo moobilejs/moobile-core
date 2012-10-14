@@ -1504,11 +1504,17 @@ input, select, textarea {
 }
 
 .alert .alert-footer .button {
+
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	    -ms-box-shadow: none;
+	     -o-box-shadow: none;
+	        box-shadow: none;
 	-webkit-border-image: url(../images/ios/alert-button.png) 0 5 86 5 fill stretch stretch;
 	   -moz-border-image: url(../images/ios/alert-button.png) 0 5 86 5 fill stretch stretch;
 	    -ms-border-image: url(../images/ios/alert-button.png) 0 5 86 5 fill stretch stretch;
