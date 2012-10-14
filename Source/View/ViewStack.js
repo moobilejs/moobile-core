@@ -36,7 +36,7 @@ Moobile.ViewStack = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('view-stack');
+		this.addClass('view-stack');
 	}
 
 });

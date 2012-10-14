@@ -68,7 +68,7 @@ Moobile.List = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('list');
+		this.addClass('list');
 	},
 
 	/**

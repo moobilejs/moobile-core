@@ -46,7 +46,7 @@ Moobile.NavigationBarItem = new Class({
 
 		this.parent();
 
-		this.element.addClass('navigation-bar-item');
+		this.addClass('navigation-bar-item');
 
 		var title = this.getRoleElement('title');
 		if (title === null) {
@@ -82,10 +82,7 @@ Moobile.NavigationBarItem = new Class({
 		if (this._title === title)
 			return this;
 
-		title = title || '';
-		if (typeof title === 'string') {
-			title = new Moobile.Text().setText(title);
-		}
+		title = Moobile.Text.from(title);
 
 		if (this._title) {
 			this._title.replaceWithComponent(title, true);
@@ -95,8 +92,7 @@ Moobile.NavigationBarItem = new Class({
 
 		this._title = title;
 		this._title.addClass('bar-title');
-
-		this.element.toggleClass('no-bar-title', this._title.isEmpty());
+		this.toggleClass('no-bar-title', this._title.isEmpty());
 
 		return this;
 	},

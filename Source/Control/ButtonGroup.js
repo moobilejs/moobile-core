@@ -65,11 +65,11 @@ Moobile.ButtonGroup = new Class({
 
 		this.parent();
 
-		this.element.addClass('button-group');
+		this.addClass('button-group');
 
 		var layout = this.options.layout;
 		if (layout) {
-			this.element.addClass('button-group-layout-' + layout);
+			this.addClass('button-group-layout-' + layout);
 		}
 	},
 

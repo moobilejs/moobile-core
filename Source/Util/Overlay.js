@@ -36,8 +36,8 @@ Moobile.Overlay = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('overlay');
-		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
+		this.addClass('overlay');
+		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 	},
 
 	/**
@@ -46,7 +46,7 @@ Moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		this.element.removeEvent('animationend', this.bound('_onAnimationEnd'));
+		this.removeEvent('animationend', this.bound('_onAnimationEnd'));
 		this.parent();
 	},
 
@@ -82,14 +82,14 @@ Moobile.Overlay = new Class({
 
 		e.stop();
 
-		if (this.element.hasClass('show-animated')) {
-			this.element.removeClass('show-animated');
+		if (this.hasClass('show-animated')) {
+			this.removeClass('show-animated');
 			this.didShow();
 		}
 
-		if (this.element.hasClass('hide-animated')) {
+		if (this.hasClass('hide-animated')) {
 			this.element.hide();
-			this.element.removeClass('hide-animated');
+			this.removeClass('hide-animated');
 			this.didHide();
 		}
 	}

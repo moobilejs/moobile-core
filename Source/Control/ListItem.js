@@ -68,7 +68,7 @@ Moobile.ListItem = new Class({
 
 		this.parent();
 
-		this.element.addClass('list-item');
+		this.addClass('list-item');
 
 		var image  = this.getRoleElement('image');
 		var label  = this.getRoleElement('label');
@@ -117,10 +117,7 @@ Moobile.ListItem = new Class({
 		if (this._label === label)
 			return this;
 
-		label = label || '';
-		if (typeof label === 'string') {
-			label = new Moobile.Text().setText(label);
-		}
+		label = Moobile.Text.from(label);
 
 		if (this._label) {
 			this._label.replaceWithComponent(label, true);
@@ -130,8 +127,7 @@ Moobile.ListItem = new Class({
 
 		this._label = label;
 		this._label.addClass('list-item-label');
-
-		this.element.toggleClass('no-list-item-label', this._label.isEmpty());
+		this.toggleClass('no-list-item-label', this._label.isEmpty());
 
 		return this;
 	},
@@ -156,10 +152,7 @@ Moobile.ListItem = new Class({
 		if (this._image === image)
 			return this;
 
-		image = image || '';
-		if (typeof image === 'string') {
-			image = new Moobile.Image().setSource(image);
-		}
+		image = Moobile.Image.from(image);
 
 		if (this._image) {
 			this._image.replaceWithComponent(image, true);
@@ -169,8 +162,7 @@ Moobile.ListItem = new Class({
 
 		this._image = image;
 		this._image.addClass('list-item-image');
-
-		this.element.toggleClass('no-list-item-image', this._image.isEmpty());
+		this.toggleClass('no-list-item-image', this._image.isEmpty());
 
 		return this;
 	},
@@ -195,10 +187,7 @@ Moobile.ListItem = new Class({
 		if (this._detail === detail)
 			return this;
 
-		detail = detail || '';
-		if (typeof detail === 'string') {
-			detail = new Moobile.Text().setText(detail);
-		}
+		detail = Moobile.Text.from(detail);
 
 		if (this._detail) {
 			this._detail.replaceWithComponent(detail, true);
@@ -208,8 +197,7 @@ Moobile.ListItem = new Class({
 
 		this._detail = detail;
 		this._detail.addClass('list-item-detail');
-
-		this.element.toggleClass('no-list-item-detail', this._detail.isEmpty());
+		this.toggleClass('no-list-item-detail', this._detail.isEmpty());
 
 		return this;
 	},

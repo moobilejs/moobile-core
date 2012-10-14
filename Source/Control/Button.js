@@ -44,7 +44,7 @@ Moobile.Button = new Class({
 
 		this.parent();
 
-		this.element.addClass('button');
+		this.addClass('button');
 
 		var label = this.getRoleElement('label');
 		if (label === null) {
@@ -80,10 +80,7 @@ Moobile.Button = new Class({
 		if (this._label === label)
 			return this;
 
-		label = label || '';
-		if (typeof label === 'string') {
-			label = new Moobile.Text().setText(label);
-		}
+		label = Moobile.Text.from(label);
 
 		if (this._label) {
 			this._label.replaceWithComponent(label, true);
@@ -93,8 +90,7 @@ Moobile.Button = new Class({
 
 		this._label = label;
 		this._label.addClass('button-label');
-
-		this.element.toggleClass('no-button-label', this._label.isEmpty());
+		this.toggleClass('no-button-label', this._label.isEmpty());
 
 		return this;
 	},

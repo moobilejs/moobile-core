@@ -175,7 +175,7 @@ Moobile.Slider = new Class({
 
 		this.parent();
 
-		this.element.addClass('slider');
+		this.addClass('slider');
 
 		this.trackElement = document.createElement('div');
 		this.trackElement.addClass('slider-track');
@@ -197,7 +197,7 @@ Moobile.Slider = new Class({
 
 		var mode = this.options.mode;
 		if (mode) {
-			this.element.addClass('slider-mode-' + mode);
+			this.addClass('slider-mode-' + mode);
 		}
 
 		this._mode = mode || 'horizontal';

@@ -70,7 +70,7 @@ Moobile.View = new Class({
 
 		this.parent();
 
-		this.element.addClass('view');
+		this.addClass('view');
 
 		var content = this.getRoleElement('content') /* <0.1-compat> */ || this.getRoleElement('view-content') /* </0.1-compat> */;
 		if (content === null) {
@@ -124,7 +124,7 @@ Moobile.View = new Class({
 	 * @since  0.1.0
 	 */
 	enableTouch: function() {
-		this.element.removeClass('disable').addClass('enable');
+		this.removeClass('disable').addClass('enable');
 		return this;
 	},
 
@@ -134,7 +134,7 @@ Moobile.View = new Class({
 	 * @since  0.1.0
 	 */
 	disableTouch: function() {
-		this.element.removeClass('enable').addClass('disable');
+		this.removeClass('enable').addClass('disable');
 		return this;
 	},
 
@@ -198,9 +198,9 @@ Moobile.View = new Class({
 			return this;
 
 		this.willChangeLayout(layout);
-		if (this._layout) this.element.removeClass('view-layout-' + this._layout);
+		if (this._layout) this.removeClass('view-layout-' + this._layout);
 		this._layout = layout;
-		if (this._layout) this.element.addClass('view-layout-' + this._layout);
+		if (this._layout) this.addClass('view-layout-' + this._layout);
 		this.didChangeLayout(layout);
 
 		return this;

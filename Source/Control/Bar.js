@@ -45,7 +45,7 @@ Moobile.Bar = new Class({
 
 		this.parent();
 
-		this.element.addClass('bar');
+		this.addClass('bar');
 
 		var item = this.getRoleElement('item');
 		if (item === null) {

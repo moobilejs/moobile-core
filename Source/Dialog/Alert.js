@@ -106,8 +106,8 @@ Moobile.Alert = new Class({
 
 		this.parent();
 
-		this.element.addClass('alert');
-		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
+		this.addClass('alert');
+		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this.overlay = new Moobile.Overlay();
 		this.overlay.setStyle('radial');
@@ -132,7 +132,7 @@ Moobile.Alert = new Class({
 
 		var layout = this.options.layout;
 		if (layout) {
-			this.element.addClass('alert-layout-' + layout);
+			this.addClass('alert-layout-' + layout);
 		}
 	},
 
@@ -143,7 +143,7 @@ Moobile.Alert = new Class({
 	 */
 	destroy: function() {
 
-		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
+		this.removeEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this._title = null;
 		this._message = null;
@@ -169,10 +169,7 @@ Moobile.Alert = new Class({
 		if (this._title === title)
 			return this;
 
-		title = title || '';
-		if (typeof title === 'string') {
-			title = new Moobile.Text().setText(title);
-		}
+		title = Moobile.Text.from(title);
 
 		if (this._title) {
 			this._title.replaceWithComponent(title, true);
@@ -182,8 +179,7 @@ Moobile.Alert = new Class({
 
 		this._title = title;
 		this._title.addClass('alert-title');
-
-		this.element.toggleClass('no-alert-title', this._title.isEmpty());
+		this.toggleClass('no-alert-title', this._title.isEmpty());
 
 		return this;
 	},
@@ -207,10 +203,7 @@ Moobile.Alert = new Class({
 		if (this._message === message)
 			return this;
 
-		message = message || '';
-		if (typeof message === 'string') {
-			message = new Moobile.Text().setText(message);
-		}
+		message = Moobile.Text.from(message);
 
 		if (this._message) {
 			this._message.replaceWithComponent(message, true);
@@ -220,8 +213,7 @@ Moobile.Alert = new Class({
 
 		this._message = message;
 		this._message.addClass('alert-message');
-
-		this.element.toggleClass('no-alert-message', this._message.isEmpty());
+		this.toggleClass('no-alert-message', this._message.isEmpty());
 
 		return this;
 	},
@@ -431,13 +423,13 @@ Moobile.Alert = new Class({
 
 		e.stop();
 
-		if (this.element.hasClass('show-animated')) {
-			this.element.removeClass('show-animated');
+		if (this.hasClass('show-animated')) {
+			this.removeClass('show-animated');
 			this.didShow();
 		}
 
-		if (this.element.hasClass('hide-animated')) {
-			this.element.removeClass('hide-animated');
+		if (this.hasClass('hide-animated')) {
+			this.removeClass('hide-animated');
 			this.element.hide();
 			this.didHide();
 		}

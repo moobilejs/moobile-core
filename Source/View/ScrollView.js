@@ -115,7 +115,7 @@ Moobile.ScrollView = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('scroll-view');
+		this.addClass('scroll-view');
 	},
 
 	/**
@@ -147,7 +147,7 @@ Moobile.ScrollView = new Class({
 
 		var name = this._scroller.getName();
 		if (name) {
-			this.element.addClass(name + '-engine');
+			this.addClass(name + '-engine');
 		}
 	},
 

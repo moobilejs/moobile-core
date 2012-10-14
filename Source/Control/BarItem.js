@@ -35,7 +35,7 @@ Moobile.BarItem = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('bar-item');
+		this.addClass('bar-item');
 	}
 
 });

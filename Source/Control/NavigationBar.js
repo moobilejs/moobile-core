@@ -35,7 +35,7 @@ Moobile.NavigationBar = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('navigation-bar');
+		this.addClass('navigation-bar');
 	}
 
 });

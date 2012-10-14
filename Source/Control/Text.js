@@ -45,7 +45,7 @@ Moobile.Text = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('text');
+		this.addClass('text');
 	},
 
 	/**
@@ -55,13 +55,7 @@ Moobile.Text = new Class({
 	 * @since  0.1.0
 	 */
 	setText: function(text) {
-
-		if (text instanceof Moobile.Text) {
-			text = text.getText();
-		}
-
-		this.element.set('html', text);
-
+		this.element.set('html', text instanceof Moobile.Text ? text.getText() : text);
 		return this;
 	},
 

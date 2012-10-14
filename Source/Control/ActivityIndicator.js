@@ -35,7 +35,7 @@ Moobile.ActivityIndicator = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('activity-indicator');
+		this.addClass('activity-indicator');
 	},
 
 	/**

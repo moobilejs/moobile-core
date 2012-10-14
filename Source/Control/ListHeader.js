@@ -53,7 +53,7 @@ Moobile.ListHeader = new Class({
 
 		this.parent();
 
-		this.element.addClass('list-header');
+		this.addClass('list-header');
 
 		var label  = this.getRoleElement('label');
 		if (label === null) {
@@ -75,10 +75,7 @@ Moobile.ListHeader = new Class({
 		if (this._label === label)
 			return this;
 
-		label = label || '';
-		if (typeof label === 'string') {
-			label = new Moobile.Text().setText(label);
-		}
+		label = Moobile.Text.from(label);
 
 		if (this._label) {
 			this._label.replaceWithComponent(label, true);
@@ -88,8 +85,7 @@ Moobile.ListHeader = new Class({
 
 		this._label = label;
 		this._label.addClass('list-header-label');
-
-		this.element.toggleClass('no-list-header-label', this._label.isEmpty());
+		this.toggleClass('no-list-header-label', this._label.isEmpty());
 
 		return this;
 	},

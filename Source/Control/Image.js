@@ -81,7 +81,7 @@ Moobile.Image = new Class({
 		this.parent();
 
 		this.hide();
-		this.element.addClass('image');
+		this.addClass('image');
 
 		var source = this.element.get('src');
 		if (source) {

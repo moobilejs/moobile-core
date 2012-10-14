@@ -2275,7 +2275,7 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (Moobile.Component.hasNativeEvent(name) && this.shouldHandleNativeEvent(name)) {
+		if (this.eventIsNative(name)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
@@ -2302,7 +2302,7 @@ Moobile.Component = new Class({
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(type) && this.shouldHandleNativeEvent(type)) {
+		if (Moobile.Component.hasNativeEvent(type) && this.eventIsNative(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
 			if (callbacks[type] && callbacks[type].contains(fn)) {
@@ -2319,12 +2319,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldHandleNativeEvent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#eventIsNative
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	shouldHandleNativeEvent: function(name) {
-		return true
+	eventIsNative: function(name) {
+		return Moobile.Component.hasNativeEvent(name);
 	},
 
 	/**
@@ -2929,7 +2929,7 @@ Moobile.Component = new Class({
 		this.element.show();
 		this.element.removeClass('hidden');
 
-		this._children.invoke('show');
+	//	this._children.invoke('show');
 
 		this.didShow();
 
@@ -2951,7 +2951,7 @@ Moobile.Component = new Class({
 		this.element.hide();
 		this.element.addClass('hidden');
 
-		this._children.invoke('hide');
+	//	this._children.invoke('hide');
 
 		this.didHide();
 
@@ -3513,9 +3513,9 @@ Moobile.Control = new Class({
 
 		if (this.shouldAllowState(state) || state == null) {
 			this.willChangeState(state)
-			if (this._state) this.element.removeClass('is-' + this._state);
+			if (this._state) this.removeClass('is-' + this._state);
 			this._state = state;
-			if (this._state) this.element.addClass('is-' + this._state);
+			if (this._state) this.addClass('is-' + this._state);
 			this.didChangeState(state)
 		}
 
@@ -3670,7 +3670,7 @@ Moobile.Button = new Class({
 
 		this.parent();
 
-		this.element.addClass('button');
+		this.addClass('button');
 
 		var label = this.getRoleElement('label');
 		if (label === null) {
@@ -3706,10 +3706,7 @@ Moobile.Button = new Class({
 		if (this._label === label)
 			return this;
 
-		label = label || '';
-		if (typeof label === 'string') {
-			label = new Moobile.Text().setText(label);
-		}
+		label = Moobile.Text.from(label);
 
 		if (this._label) {
 			this._label.replaceWithComponent(label, true);
@@ -3719,7 +3716,6 @@ Moobile.Button = new Class({
 
 		this._label = label;
 		this._label.addClass('button-label');
-
 		this.element.toggleClass('no-button-label', this._label.isEmpty());
 
 		return this;
@@ -3753,6 +3749,18 @@ Moobile.Button = new Class({
 	}
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Button#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+Moobile.Button.from = function(source) {
+	if (source instanceof Moobile.Button) return source;
+	var button = new Moobile.Button();
+	button.setLabel(source);
+	return button;
+};
 
 //------------------------------------------------------------------------------
 // Roles
@@ -3863,11 +3871,11 @@ Moobile.ButtonGroup = new Class({
 
 		this.parent();
 
-		this.element.addClass('button-group');
+		this.addClass('button-group');
 
 		var layout = this.options.layout;
 		if (layout) {
-			this.element.addClass('button-group-layout-' + layout);
+			this.addClass('button-group-layout-' + layout);
 		}
 	},
 
@@ -4175,7 +4183,7 @@ Moobile.Bar = new Class({
 
 		this.parent();
 
-		this.element.addClass('bar');
+		this.addClass('bar');
 
 		var item = this.getRoleElement('item');
 		if (item === null) {
@@ -4297,7 +4305,7 @@ Moobile.BarItem = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('bar-item');
+		this.addClass('bar-item');
 	}
 
 });
@@ -4348,7 +4356,7 @@ Moobile.NavigationBar = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('navigation-bar');
+		this.addClass('navigation-bar');
 	}
 
 });
@@ -4411,7 +4419,7 @@ Moobile.NavigationBarItem = new Class({
 
 		this.parent();
 
-		this.element.addClass('navigation-bar-item');
+		this.addClass('navigation-bar-item');
 
 		var title = this.getRoleElement('title');
 		if (title === null) {
@@ -4420,6 +4428,10 @@ Moobile.NavigationBarItem = new Class({
 			title.inject(this.element);
 			title.setRole('title');
 		}
+
+		var wrapper = document.createElement('div');
+		wrapper.addClass('bar-title-wrapper');
+		wrapper.wraps(title);
 	},
 
 	/**
@@ -4443,10 +4455,7 @@ Moobile.NavigationBarItem = new Class({
 		if (this._title === title)
 			return this;
 
-		title = title || '';
-		if (typeof title === 'string') {
-			title = new Moobile.Text().setText(title);
-		}
+		title = Moobile.Text.from(title);
 
 		if (this._title) {
 			this._title.replaceWithComponent(title, true);
@@ -4717,7 +4726,7 @@ Moobile.Slider = new Class({
 
 		this.parent();
 
-		this.element.addClass('slider');
+		this.addClass('slider');
 
 		this.trackElement = document.createElement('div');
 		this.trackElement.addClass('slider-track');
@@ -4739,7 +4748,7 @@ Moobile.Slider = new Class({
 
 		var mode = this.options.mode;
 		if (mode) {
-			this.element.addClass('slider-mode-' + mode);
+			this.addClass('slider-mode-' + mode);
 		}
 
 		this._mode = mode || 'horizontal';
@@ -5098,7 +5107,7 @@ Moobile.List = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('list');
+		this.addClass('list');
 	},
 
 	/**
@@ -5485,7 +5494,7 @@ Moobile.ListItem = new Class({
 
 		this.parent();
 
-		this.element.addClass('list-item');
+		this.addClass('list-item');
 
 		var image  = this.getRoleElement('image');
 		var label  = this.getRoleElement('label');
@@ -5534,10 +5543,7 @@ Moobile.ListItem = new Class({
 		if (this._label === label)
 			return this;
 
-		label = label || '';
-		if (typeof label === 'string') {
-			label = new Moobile.Text().setText(label);
-		}
+		label = Moobile.Text.from(label);
 
 		if (this._label) {
 			this._label.replaceWithComponent(label, true);
@@ -5547,7 +5553,6 @@ Moobile.ListItem = new Class({
 
 		this._label = label;
 		this._label.addClass('list-item-label');
-
 		this.element.toggleClass('no-list-item-label', this._label.isEmpty());
 
 		return this;
@@ -5573,10 +5578,7 @@ Moobile.ListItem = new Class({
 		if (this._image === image)
 			return this;
 
-		image = image || '';
-		if (typeof image === 'string') {
-			image = new Moobile.Image().setSource(image);
-		}
+		image = Moobile.Image.from(image);
 
 		if (this._image) {
 			this._image.replaceWithComponent(image, true);
@@ -5586,7 +5588,6 @@ Moobile.ListItem = new Class({
 
 		this._image = image;
 		this._image.addClass('list-item-image');
-
 		this.element.toggleClass('no-list-item-image', this._image.isEmpty());
 
 		return this;
@@ -5612,10 +5613,7 @@ Moobile.ListItem = new Class({
 		if (this._detail === detail)
 			return this;
 
-		detail = detail || '';
-		if (typeof detail === 'string') {
-			detail = new Moobile.Text().setText(detail);
-		}
+		detail = Moobile.Text.from(detail);
 
 		if (this._detail) {
 			this._detail.replaceWithComponent(detail, true);
@@ -5625,7 +5623,6 @@ Moobile.ListItem = new Class({
 
 		this._detail = detail;
 		this._detail.addClass('list-item-detail');
-
 		this.element.toggleClass('no-list-item-detail', this._detail.isEmpty());
 
 		return this;
@@ -5746,7 +5743,7 @@ Moobile.ListHeader = new Class({
 
 		this.parent();
 
-		this.element.addClass('list-header');
+		this.addClass('list-header');
 
 		var label  = this.getRoleElement('label');
 		if (label === null) {
@@ -5768,10 +5765,7 @@ Moobile.ListHeader = new Class({
 		if (this._label === label)
 			return this;
 
-		label = label || '';
-		if (typeof label === 'string') {
-			label = new Moobile.Text().setText(label);
-		}
+		label = Moobile.Text.from(label);
 
 		if (this._label) {
 			this._label.replaceWithComponent(label, true);
@@ -5781,7 +5775,6 @@ Moobile.ListHeader = new Class({
 
 		this._label = label;
 		this._label.addClass('list-header-label');
-
 		this.element.toggleClass('no-list-header-label', this._label.isEmpty());
 
 		return this;
@@ -5848,7 +5841,7 @@ Moobile.ActivityIndicator = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('activity-indicator');
+		this.addClass('activity-indicator');
 	},
 
 	/**
@@ -5962,9 +5955,8 @@ Moobile.Image = new Class({
 
 		this.parent();
 
-		this.element.addClass('image');
-
 		this.hide();
+		this.addClass('image');
 
 		var source = this.element.get('src');
 		if (source) {
@@ -5982,14 +5974,6 @@ Moobile.Image = new Class({
 		this.parent();
 	},
 
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	shouldHandleNativeEvent: function(name) {
-		return name != 'load';
-	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#setSource
@@ -6081,7 +6065,6 @@ Moobile.Image = new Class({
 		}
 
 		this.element.set('src', this._source);
-		this.fireEvent('load');
 		this.show();
 	},
 
@@ -6110,10 +6093,23 @@ Moobile.Image = new Class({
 	 * @since  0.1.0
 	 */
 	_onLoad: function() {
+		this.fireEvent('preload');
 		this._load();
 	}
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Image#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.Image.from = function(source) {
+	if (source instanceof Moobile.Image) return source;
+	var image = new Moobile.Image();
+	image.setSource(source);
+	return image;
+};
 
 //------------------------------------------------------------------------------
 // Roles
@@ -6170,7 +6166,7 @@ Moobile.Text = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('text');
+		this.addClass('text');
 	},
 
 	/**
@@ -6180,13 +6176,7 @@ Moobile.Text = new Class({
 	 * @since  0.1.0
 	 */
 	setText: function(text) {
-
-		if (text instanceof Moobile.Text) {
-			text = text.getText();
-		}
-
-		this.element.set('html', text);
-
+		this.element.set('html', text instanceof Moobile.Text ? text.getText() : text);
 		return this;
 	},
 
@@ -6209,6 +6199,18 @@ Moobile.Text = new Class({
 	}
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Text#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.Text.from = function(source) {
+	if (source instanceof Moobile.Text) return source;
+	var text = new Moobile.Text();
+	text.setText(source);
+	return text;
+};
 
 //------------------------------------------------------------------------------
 // Roles
@@ -6239,6 +6241,8 @@ provides:
 
 ...
 */
+
+// TODO: Unit tests for buttons methods
 
 /**
  * @see    http://moobilejs.com/doc/latest/Dialog/Alert
@@ -6325,8 +6329,8 @@ Moobile.Alert = new Class({
 
 		this.parent();
 
-		this.element.addClass('alert');
-		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
+		this.addClass('alert');
+		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this.overlay = new Moobile.Overlay();
 		this.overlay.setStyle('radial');
@@ -6351,7 +6355,7 @@ Moobile.Alert = new Class({
 
 		var layout = this.options.layout;
 		if (layout) {
-			this.element.addClass('alert-layout-' + layout);
+			this.addClass('alert-layout-' + layout);
 		}
 	},
 
@@ -6362,7 +6366,7 @@ Moobile.Alert = new Class({
 	 */
 	destroy: function() {
 
-		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
+		this.removeEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this._title = null;
 		this._message = null;
@@ -6460,12 +6464,70 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	addButton: function(button) {
+		return this.addChildComponentInside(Moobile.Button.from(button), this.footerElement);
+	},
 
-		if (typeof button === 'string') {
-			button = new Moobile.Button().setLabel(button);
-		}
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonAfter: function(button, after) {
+		return this.addChildComponentAfter(Moobile.Button.from(button), after);
+	},
 
-		return this.addChildComponentInside(button, this.footerElement);
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonBefore: function(button, before) {
+		return this.addChildComponentBefore(Moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentOfType(Moobile.Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButtons: function() {
+		return this.getChildComponentsOfType(Moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtonAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	removeButton: function(button) {
+		return this.removeChildComponent(button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	removeAllButton: function() {
+		return this.removeAllChildComponentsOfType(Moobile.Button);
 	},
 
 	/**
@@ -6517,11 +6579,11 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	didAddChildComponent: function(child) {
-		this.parent(child);
-		if (child instanceof Moobile.Button) {
-			child.addEvent('tap', this.bound('_onButtonTap'));
-			this._buttons.include(child);
+	didAddChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.Button) {
+			component.addEvent('tap', this.bound('_onButtonTap'));
+			this._buttons.include(component);
 		}
 	},
 
@@ -6530,26 +6592,32 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	didRemoveChildComponent: function(child) {
-		this.parent(child);
-		if (child instanceof Moobile.Button) {
-			child.removeEvent('tap', this.bound('_onButtonTap'));
-			this._buttons.erase(child);
+	didRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.Button) {
+			component.removeEvent('tap', this.bound('_onButtonTap'));
+			this._buttons.erase(component);
 		}
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willShow: function() {
+
 		this.parent();
-		if (this._buttons.length === 0) {
-			var button = new Moobile.Button();
-			button.setLabel('OK');
-			this.addButton(button);
+
+		if (this.getParentView() === null) {
+			var instance = Moobile.Window.getCurrentInstance();
+			if (instance) {
+				instance.addChildComponent(this);
+			}
 		}
+
+		if (this._buttons.length === 0) this.addButton('OK');
 	},
 
 	/**
@@ -6559,7 +6627,7 @@ Moobile.Alert = new Class({
 	 */
 	didHide: function() {
 		this.parent();
-		this.destroy();
+		this.removeFromParentComponent();
 	},
 
 	/**
@@ -8030,8 +8098,8 @@ Moobile.Overlay = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('overlay');
-		this.element.addEvent('animationend', this.bound('_onAnimationEnd'));
+		this.addClass('overlay');
+		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 	},
 
 	/**
@@ -8040,7 +8108,7 @@ Moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		this.element.removeEvent('animationend', this.bound('_onAnimationEnd'));
+		this.removeEvent('animationend', this.bound('_onAnimationEnd'));
 		this.parent();
 	},
 
@@ -8256,7 +8324,7 @@ Moobile.View = new Class({
 
 		this.parent();
 
-		this.element.addClass('view');
+		this.addClass('view');
 
 		var content = this.getRoleElement('content') /* <0.1-compat> */ || this.getRoleElement('view-content') /* </0.1-compat> */;
 		if (content === null) {
@@ -8384,9 +8452,9 @@ Moobile.View = new Class({
 			return this;
 
 		this.willChangeLayout(layout);
-		if (this._layout) this.element.removeClass('view-layout-' + this._layout);
+		if (this._layout) this.removeClass('view-layout-' + this._layout);
 		this._layout = layout;
-		if (this._layout) this.element.addClass('view-layout-' + this._layout);
+		if (this._layout) this.addClass('view-layout-' + this._layout);
 		this.didChangeLayout(layout);
 
 		return this;
@@ -8673,7 +8741,7 @@ Moobile.ScrollView = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('scroll-view');
+		this.addClass('scroll-view');
 	},
 
 	/**
@@ -8705,7 +8773,7 @@ Moobile.ScrollView = new Class({
 
 		var name = this._scroller.getName();
 		if (name) {
-			this.element.addClass(name + '-engine');
+			this.addClass(name + '-engine');
 		}
 	},
 
@@ -9083,7 +9151,7 @@ Moobile.ViewStack = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.element.addClass('view-stack');
+		this.addClass('view-stack');
 	}
 
 });
@@ -11184,15 +11252,16 @@ Moobile.ViewTransition.Cubic = new Class({
 	firstAnimation: function(viewToShow, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cubic-perspective');
+			parentWrap.addClass('transition-cubic-perspective');
 			parentElem.addClass('first');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cubic-perspective');
+			parentWrap.removeClass('transition-cubic-perspective');
 			parentElem.removeClass('first');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnterFirst(viewToShow, parentView);
@@ -11213,15 +11282,16 @@ Moobile.ViewTransition.Cubic = new Class({
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cubic-perspective');
+			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cubic-perspective');
+			parentWrap.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
@@ -11242,15 +11312,16 @@ Moobile.ViewTransition.Cubic = new Class({
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cubic-perspective');
+			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cubic-perspective');
+			parentWrap.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didLeave(viewToShow, viewToHide, parentView);
@@ -11420,15 +11491,16 @@ Moobile.ViewTransition.Flip = new Class({
 	firstAnimation: function(viewToShow, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-flip-perspective');
+			parentWrap.addClass('transition-flip-perspective');
 			parentElem.addClass('first');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-flip-perspective');
+			parentWrap.removeClass('transition-flip-perspective');
 			parentElem.removeClass('first');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnterFirst(viewToShow, parentView);
@@ -11449,15 +11521,16 @@ Moobile.ViewTransition.Flip = new Class({
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-flip-perspective');
+			parentWrap.addClass('transition-flip-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-flip-perspective');
+			parentWrap.removeClass('transition-flip-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
@@ -11478,15 +11551,16 @@ Moobile.ViewTransition.Flip = new Class({
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-flip-perspective');
+			parentWrap.addClass('transition-flip-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-flip-perspective');
+			parentWrap.removeClass('transition-flip-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didLeave(viewToShow, viewToHide, parentView);
@@ -11586,6 +11660,10 @@ provides:
 
 if (!window.$moobile) window.$moobile = {};
 
+(function() {
+
+var instance = null;
+
 /**
  * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -11594,6 +11672,16 @@ if (!window.$moobile) window.$moobile = {};
 Moobile.Window = new Class({
 
 	Extends: Moobile.View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	initialize: function(element, options, name) {
+		instance = this;
+		return this.parent(element, options, name);
+	},
 
 	/**
 	 * @overridden
@@ -11668,6 +11756,12 @@ Moobile.Window = new Class({
 	}
 
 });
+
+Moobile.Window.getCurrentInstance = function() {
+	return instance;
+};
+
+})()
 
 
 /*
