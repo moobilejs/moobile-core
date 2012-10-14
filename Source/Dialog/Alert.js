@@ -19,6 +19,8 @@ provides:
 ...
 */
 
+// TODO: Unit tests for buttons methods
+
 /**
  * @see    http://moobilejs.com/doc/latest/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -354,11 +356,11 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	didAddChildComponent: function(child) {
-		this.parent(child);
-		if (child instanceof Moobile.Button) {
-			child.addEvent('tap', this.bound('_onButtonTap'));
-			this._buttons.include(child);
+	didAddChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.Button) {
+			component.addEvent('tap', this.bound('_onButtonTap'));
+			this._buttons.include(component);
 		}
 	},
 
@@ -367,11 +369,11 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	didRemoveChildComponent: function(child) {
-		this.parent(child);
-		if (child instanceof Moobile.Button) {
-			child.removeEvent('tap', this.bound('_onButtonTap'));
-			this._buttons.erase(child);
+	didRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof Moobile.Button) {
+			component.removeEvent('tap', this.bound('_onButtonTap'));
+			this._buttons.erase(component);
 		}
 	},
 
@@ -392,11 +394,7 @@ Moobile.Alert = new Class({
 			}
 		}
 
-		if (this._buttons.length === 0) {
-			var button = new Moobile.Button();
-			button.setLabel('OK');
-			this.addButton(button);
-		}
+		if (this._buttons.length === 0) this.addButton('OK');
 	},
 
 	/**

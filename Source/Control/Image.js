@@ -80,9 +80,8 @@ Moobile.Image = new Class({
 
 		this.parent();
 
-		this.element.addClass('image');
-
 		this.hide();
+		this.element.addClass('image');
 
 		var source = this.element.get('src');
 		if (source) {
@@ -100,14 +99,6 @@ Moobile.Image = new Class({
 		this.parent();
 	},
 
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	shouldHandleNativeEvent: function(name) {
-		return name != 'load';
-	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Image#setSource
@@ -199,7 +190,6 @@ Moobile.Image = new Class({
 		}
 
 		this.element.set('src', this._source);
-		this.fireEvent('load');
 		this.show();
 	},
 
@@ -228,10 +218,23 @@ Moobile.Image = new Class({
 	 * @since  0.1.0
 	 */
 	_onLoad: function() {
+		this.fireEvent('preload');
 		this._load();
 	}
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Image#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.Image.from = function(source) {
+	if (source instanceof Moobile.Image) return source;
+	var image = new Moobile.Image();
+	image.setSource(source);
+	return image;
+};
 
 //------------------------------------------------------------------------------
 // Roles

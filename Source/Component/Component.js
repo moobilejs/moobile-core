@@ -199,7 +199,7 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (Moobile.Component.hasNativeEvent(name) && this.shouldHandleNativeEvent(name)) {
+		if (this.eventIsNative(name)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
@@ -226,7 +226,7 @@ Moobile.Component = new Class({
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(type) && this.shouldHandleNativeEvent(type)) {
+		if (Moobile.Component.hasNativeEvent(type) && this.eventIsNative(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
 			if (callbacks[type] && callbacks[type].contains(fn)) {
@@ -243,12 +243,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldHandleNativeEvent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#eventIsNative
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	shouldHandleNativeEvent: function(name) {
-		return true
+	eventIsNative: function(name) {
+		return Moobile.Component.hasNativeEvent(name);
 	},
 
 	/**
@@ -853,7 +853,7 @@ Moobile.Component = new Class({
 		this.element.show();
 		this.element.removeClass('hidden');
 
-		this._children.invoke('show');
+	//	this._children.invoke('show');
 
 		this.didShow();
 
@@ -875,7 +875,7 @@ Moobile.Component = new Class({
 		this.element.hide();
 		this.element.addClass('hidden');
 
-		this._children.invoke('hide');
+	//	this._children.invoke('hide');
 
 		this.didHide();
 

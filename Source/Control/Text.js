@@ -85,6 +85,18 @@ Moobile.Text = new Class({
 
 });
 
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Text#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.Text.from = function(source) {
+	if (source instanceof Moobile.Text) return source;
+	var text = new Moobile.Text();
+	text.setText(source);
+	return text;
+};
+
 //------------------------------------------------------------------------------
 // Roles
 //------------------------------------------------------------------------------
