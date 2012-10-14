@@ -2275,7 +2275,7 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (Moobile.Component.hasNativeEvent(name)) {
+		if (Moobile.Component.hasNativeEvent(name) && this.shouldHandleNativeEvent(name)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
@@ -2302,7 +2302,7 @@ Moobile.Component = new Class({
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(type)) {
+		if (Moobile.Component.hasNativeEvent(type) && this.shouldHandleNativeEvent(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
 			if (callbacks[type] && callbacks[type].contains(fn)) {
@@ -2316,6 +2316,15 @@ Moobile.Component = new Class({
 		}
 
 		return this.parent(type, fn);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldHandleNativeEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHandleNativeEvent: function(name) {
+		return true
 	},
 
 	/**
@@ -2919,6 +2928,9 @@ Moobile.Component = new Class({
 		this._visible = true;
 		this.element.show();
 		this.element.removeClass('hidden');
+
+		this._children.invoke('show');
+
 		this.didShow();
 
 		return this.fireEvent('show');
@@ -2938,6 +2950,9 @@ Moobile.Component = new Class({
 		this._visible = false;
 		this.element.hide();
 		this.element.addClass('hidden');
+
+		this._children.invoke('hide');
+
 		this.didHide();
 
 		return this.fireEvent('hide');
@@ -3104,7 +3119,209 @@ Moobile.Component = new Class({
 
 	toElement: function() {
 		return this.element;
+	},
+
+	// <0.1-compat>
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChild: function() {
+		console.log('[DEPRECATION NOTICE] The method "addChild" will be removed in 0.3, use the method "addChildComponent" instead');
+		return this.addChildComponent.apply(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildInside: function() {
+		console.log('[DEPRECATION NOTICE] The method "addChildInside" will be removed in 0.3, use the method "addChildComponentInside" instead');
+		return this.addChildComponentInside.apply(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildAfter: function() {
+		console.log('[DEPRECATION NOTICE] The method "addChildAfter" will be removed in 0.3, use the method "addChildComponentAfter" instead');
+		return this.addChildComponentAfter.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildBefore: function() {
+		console.log('[DEPRECATION NOTICE] The method "addChildBefore" will be removed in 0.3, use the method "addChildComponentBefore" instead');
+		return this.addChildComponentBefore.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChild: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChild" will be removed in 0.3, use the method "getChildComponent" instead');
+		return this.getChildComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildOfType: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChildOfType" will be removed in 0.3, use the method "getChildComponentOfType" instead');
+		return this.getChildComponentOfType.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildAt: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChildAt" will be removed in 0.3, use the method "getChildComponentAt" instead');
+		return this.getChildComponentAt.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildOfTypeAt: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChildOfTypeAt" will be removed in 0.3, use the method "getChildComponentOfTypeAt" instead');
+		return this.getChildComponentOfTypeAt.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildIndex: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChildIndex" will be removed in 0.3, use the method "getChildComponentIndex" instead');
+		return this.getChildComponentIndex.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildren: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChildren" will be removed in 0.3, use the method "getChildComponents" instead');
+		return this.getChildComponents.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildrenOfType: function() {
+		console.log('[DEPRECATION NOTICE] The method "getChildrenOfType" will be removed in 0.3, use the method "getChildComponentsOfType" instead');
+		return this.getChildComponentsOfType.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasChild: function() {
+		console.log('[DEPRECATION NOTICE] The method "hasChild" will be removed in 0.3, use the method "hasChildComponent" instead');
+		return this.hasChildComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasChildOfType: function() {
+		console.log('[DEPRECATION NOTICE] The method "hasChildOfType" will be removed in 0.3, use the method "hasChildComponentOfType" instead');
+		return this.hasChildComponentOfType.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	replaceChild: function() {
+		console.log('[DEPRECATION NOTICE] The method "replaceChild" will be removed in 0.3, use the method "replaceChildComponent" instead');
+		return this.replaceChildComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	replaceWith: function() {
+		console.log('[DEPRECATION NOTICE] The method "replaceWith" will be removed in 0.3, use the method "replaceWithComponent" instead');
+		return this.replaceWithComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeChild: function() {
+		console.log('[DEPRECATION NOTICE] The method "removeChild" will be removed in 0.3, use the method "removeChildComponent" instead');
+		return this.removeChildComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeChildren: function() {
+		console.log('[DEPRECATION NOTICE] The method "removeChildren" will be removed in 0.3, use the method "removeAllChildComponents" instead');
+		return this.removeAllChildComponents.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeChildrenOfType: function() {
+		console.log('[DEPRECATION NOTICE] The method "removeChildrenOfType" will be removed in 0.3, use the method "removeAllChildComponentsOfType" instead');
+		return this.removeAllChildComponentsOfType.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeFromParent: function() {
+		console.log('[DEPRECATION NOTICE] The method "removeFromParent" will be removed in 0.3, use the method "removeFromParentComponent" instead');
+		return this.removeFromParentComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setParent: function() {
+		console.log('[DEPRECATION NOTICE] The method "setParent" will be removed in 0.3, use the method "setParentComponent" instead');
+		return this.setParentComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getParent: function() {
+		console.log('[DEPRECATION NOTICE] The method "getParent" will be removed in 0.3, use the method "getParentComponent" instead');
+		return this.getParentComponent.call(this, arguments);
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasParent: function() {
+		console.log('[DEPRECATION NOTICE] The method "hasParent" will be removed in 0.3, use the "hasParentComponent" instead');
+		return this.hasParentComponent.apply(this, arguments);
 	}
+
+	// </0.1-compat>
 
 });
 
@@ -3134,7 +3351,7 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
 	// </0.1-compat>
 
 	context.__roles__[name] = {
-		handler: handler || function(){},
+		handler: handler || function() {},
 		options: options || {}
 	};
 };
@@ -5085,11 +5302,31 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	didAddChildComponent: function(component) {
+
 		this.parent(component);
+
 		if (component instanceof Moobile.ListItem) {
 			component.addEvent('tapstart', this.bound('_onItemTapStart'));
 			component.addEvent('tapend', this.bound('_onItemTapEnd'));
 			component.addEvent('tap', this.bound('_onItemTap'));
+		}
+
+		var components = this.getChildComponents();
+		for (var i = 0; i < components.length; i++) {
+			var prev = components[i - 1];
+			var next = components[i + 1];
+			var curr = components[i];
+			if (curr instanceof Moobile.ListHeader) {
+				if (next) next.addClass('list-section-header');
+				if (prev) prev.addClass('list-section-footer');
+			} else {
+				if (next && next instanceof Moobile.ListHeader ||
+					prev && prev instanceof Moobile.ListHeader) {
+					continue;
+				}
+				curr.removeClass('list-section-header');
+				curr.removeClass('list-section-footer');
+			}
 		}
 	},
 
@@ -5409,8 +5646,8 @@ Moobile.ListItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
-	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
+Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
 });
 
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
@@ -5424,6 +5661,13 @@ Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) 
 Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
+
+// <0.1-compat>
+Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
+});
+// </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
@@ -5450,7 +5694,7 @@ Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 /*
 ---
 
-name: ListItemHeader
+name: ListHeader
 
 description: Provides a list item header control.
 
@@ -5463,29 +5707,94 @@ requires:
 	- ListItem
 
 provides:
-	- ListItemHeader
+	- ListHeader
 
 ...
 */
 
 /**
- * @see    http://moobilejs.com/doc/latest/Control/ListItemHEader
+ * @see    http://moobilejs.com/doc/latest/Control/ListHeader
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.2.0
  */
-Moobile.ListItemHeader = new Class({
+Moobile.ListHeader = new Class({
 
-	Extends: Moobile.ListItem,
+	Extends: Moobile.Component,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_label: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	options: {
+		tagName: 'li'
+	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
+	 * @since  0.1.0
 	 */
 	willBuild: function() {
+
 		this.parent();
-		this.element.addClass('list-item-header');
-	}
+
+		this.element.addClass('list-header');
+
+		var label  = this.getRoleElement('label');
+		if (label === null) {
+			label = document.createElement('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	setLabel: function(label) {
+
+		if (this._label === label)
+			return this;
+
+		label = label || '';
+		if (typeof label === 'string') {
+			label = new Moobile.Text().setText(label);
+		}
+
+		if (this._label) {
+			this._label.replaceWithComponent(label, true);
+		} else {
+			this.addChildComponent(label);
+		}
+
+		this._label = label;
+		this._label.addClass('list-header-label');
+
+		this.element.toggleClass('no-list-header-label', this._label.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getLabel: function() {
+		return this._label;
+	},
 
 });
 
@@ -5493,9 +5802,14 @@ Moobile.ListItemHeader = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('list-item-header', Moobile.List, null, function(element) {
-	this.addItem(Moobile.Component.create(Moobile.ListItemHeader, element, 'data-list-item-header'));
+Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
+	this.addItem(Moobile.Component.create(Moobile.ListHeader, element, 'data-header'));
 });
+
+Moobile.Component.defineRole('label', Moobile.ListHeader, null, function(element) {
+	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
+});
+
 
 /*
 ---
@@ -5666,6 +5980,15 @@ Moobile.Image = new Class({
 	destroy: function() {
 		this._image = null;
 		this.parent();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHandleNativeEvent: function(name) {
+		return name != 'load';
 	},
 
 	/**

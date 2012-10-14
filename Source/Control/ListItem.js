@@ -229,8 +229,8 @@ Moobile.ListItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
-	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
+Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
 });
 
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
@@ -244,6 +244,13 @@ Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) 
 Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
+
+// <0.1-compat>
+Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
+});
+// </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles

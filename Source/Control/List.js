@@ -272,11 +272,31 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	didAddChildComponent: function(component) {
+
 		this.parent(component);
+
 		if (component instanceof Moobile.ListItem) {
 			component.addEvent('tapstart', this.bound('_onItemTapStart'));
 			component.addEvent('tapend', this.bound('_onItemTapEnd'));
 			component.addEvent('tap', this.bound('_onItemTap'));
+		}
+
+		var components = this.getChildComponents();
+		for (var i = 0; i < components.length; i++) {
+			var prev = components[i - 1];
+			var next = components[i + 1];
+			var curr = components[i];
+			if (curr instanceof Moobile.ListHeader) {
+				if (next) next.addClass('list-section-header');
+				if (prev) prev.addClass('list-section-footer');
+			} else {
+				if (next && next instanceof Moobile.ListHeader ||
+					prev && prev instanceof Moobile.ListHeader) {
+					continue;
+				}
+				curr.removeClass('list-section-header');
+				curr.removeClass('list-section-footer');
+			}
 		}
 	},
 

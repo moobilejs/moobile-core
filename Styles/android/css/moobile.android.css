@@ -422,7 +422,7 @@ input, select, textarea {
 /* List Item Header
 -----------------------------------------------------------------------------*/
 
-.list-item.list-item-header {
+.list-header {
 	-webkit-box-orient: horizontal;
 	-webkit-box-align: end;
 	border-bottom: 2px solid #bababa;
@@ -436,11 +436,11 @@ input, select, textarea {
 	text-transform: uppercase;
 }
 
-.list-item.list-item-header.is-selected {
+.list-header.is-selected {
 	background: inherit;
 }
 
-.list-item.list-item-header.is-highlighted {
+.list-header.is-highlighted {
 	background: inherit;
 }
 
