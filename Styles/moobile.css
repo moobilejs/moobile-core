@@ -1064,7 +1064,15 @@ input, select, textarea {
 
 .activity-indicator.active {
 	-webkit-animation: anim-activity-indicator-active 1s infinite linear;
+	   -moz-animation: anim-activity-indicator-active 1s infinite linear;
+	    -ms-animation: anim-activity-indicator-active 1s infinite linear;
+	     -o-animation: anim-activity-indicator-active 1s infinite linear;
+	        animation: anim-activity-indicator-active 1s infinite linear;
 	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	    -ms-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
 }
 
 /* Slider
