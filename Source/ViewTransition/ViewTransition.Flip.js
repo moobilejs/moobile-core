@@ -37,15 +37,16 @@ Moobile.ViewTransition.Flip = new Class({
 	firstAnimation: function(viewToShow, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-flip-perspective');
+			parentWrap.addClass('transition-flip-perspective');
 			parentElem.addClass('first');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-flip-perspective');
+			parentWrap.removeClass('transition-flip-perspective');
 			parentElem.removeClass('first');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnterFirst(viewToShow, parentView);
@@ -66,15 +67,16 @@ Moobile.ViewTransition.Flip = new Class({
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-flip-perspective');
+			parentWrap.addClass('transition-flip-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-flip-perspective');
+			parentWrap.removeClass('transition-flip-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
@@ -95,15 +97,16 @@ Moobile.ViewTransition.Flip = new Class({
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-flip-perspective');
+			parentWrap.addClass('transition-flip-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-flip-perspective');
+			parentWrap.removeClass('transition-flip-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didLeave(viewToShow, viewToHide, parentView);

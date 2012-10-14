@@ -36,15 +36,16 @@ Moobile.ViewTransition.Cubic = new Class({
 	firstAnimation: function(viewToShow, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cubic-perspective');
+			parentWrap.addClass('transition-cubic-perspective');
 			parentElem.addClass('first');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cubic-perspective');
+			parentWrap.removeClass('transition-cubic-perspective');
 			parentElem.removeClass('first');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnterFirst(viewToShow, parentView);
@@ -65,15 +66,16 @@ Moobile.ViewTransition.Cubic = new Class({
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cubic-perspective');
+			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cubic-perspective');
+			parentWrap.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didEnter(viewToShow, viewToHide, parentView);
@@ -94,15 +96,16 @@ Moobile.ViewTransition.Cubic = new Class({
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
 		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cubic-perspective');
+			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cubic-perspective');
+			parentWrap.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
 			this.didLeave(viewToShow, viewToHide, parentView);
