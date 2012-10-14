@@ -361,6 +361,11 @@ input, select, textarea {
 /* Inside a Bar */
 
 .bar .button {
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	    -ms-box-shadow: none;
+	     -o-box-shadow: none;
+	        box-shadow: none;
 	-webkit-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
 	   -moz-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
 	    -ms-border-image: url(../images/ios/bar-button.png) 0 5 1170 fill stretch stretch;
@@ -1147,6 +1152,7 @@ input, select, textarea {
 
 .list-item {
 	background: #fff;
+	border: none;
 	border-bottom: 1px solid #e0e0e0;
 	color: #000;
 	font-size: 17px;
@@ -1154,7 +1160,6 @@ input, select, textarea {
 	height: 45px;
 	padding: 0px 15px;
 }
-
 
 .list-item .list-item-label {
 	-webkit-box-orient: vertical;                                /* Important */
