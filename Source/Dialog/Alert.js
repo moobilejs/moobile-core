@@ -239,12 +239,70 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	addButton: function(button) {
+		return this.addChildComponentInside(Moobile.Button.from(button), this.footerElement);
+	},
 
-		if (typeof button === 'string') {
-			button = new Moobile.Button().setLabel(button);
-		}
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonAfter: function(button, after) {
+		return this.addChildComponentAfter(Moobile.Button.from(button), after);
+	},
 
-		return this.addChildComponentInside(button, this.footerElement);
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonBefore: function(button, before) {
+		return this.addChildComponentBefore(Moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentOfType(Moobile.Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButtons: function() {
+		return this.getChildComponentsOfType(Moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtonAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	removeButton: function(button) {
+		return this.removeChildComponent(button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	removeAllButton: function() {
+		return this.removeAllChildComponentsOfType(Moobile.Button);
 	},
 
 	/**
@@ -320,10 +378,20 @@ Moobile.Alert = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	willShow: function() {
+
 		this.parent();
+
+		if (this.getParentView() === null) {
+			var instance = Moobile.Window.getCurrentInstance();
+			if (instance) {
+				instance.addChildComponent(this);
+			}
+		}
+
 		if (this._buttons.length === 0) {
 			var button = new Moobile.Button();
 			button.setLabel('OK');
@@ -338,7 +406,7 @@ Moobile.Alert = new Class({
 	 */
 	didHide: function() {
 		this.parent();
-		this.destroy();
+		this.removeFromParentComponent();
 	},
 
 	/**
