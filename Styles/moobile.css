@@ -1060,16 +1060,10 @@ input, select, textarea {
 	    -ms-box-sizing: border-box;                              /* Important */
 	     -o-box-sizing: border-box;                              /* Important */
 	        box-sizing: border-box;                              /* Important */
-	-webkit-animation: anim-activity-indicator 1s linear infinite;
-	   -moz-animation: anim-activity-indicator 1s linear infinite;
-	    -ms-animation: anim-activity-indicator 1s linear infinite;
-	     -o-animation: anim-activity-indicator 1s linear infinite;
-	        animation: anim-activity-indicator 1s linear infinite;
 }
 
-
 .activity-indicator.active {
-	-webkit-animation: anim-activity-indicator-active 750ms infinite linear;
+	-webkit-animation: anim-activity-indicator-active 1s infinite linear;
 	-webkit-animation-fill-mode: both;
 }
 

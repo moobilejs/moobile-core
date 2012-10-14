@@ -1422,9 +1422,11 @@ input, select, textarea {
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+
 	.list-header {
-		background: url(../images/ios/list-header-2x.png) !important;
+		background: url(../images/ios/list-header-2x.png);
 	}
+
 }
 
 /* List
@@ -1694,22 +1696,165 @@ input, select, textarea {
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 
+@-webkit-keyframes anim-activity-indicator-active-ios {
+	0.00%  { -webkit-transform: rotate(0deg);  }
+	8.32%  { -webkit-transform: rotate(0deg);  }
+	8.33%  { -webkit-transform: rotate(30deg); }
+	16.62% { -webkit-transform: rotate(30deg); }
+	16.66% { -webkit-transform: rotate(60deg); }
+	24.98% { -webkit-transform: rotate(60deg); }
+	24.99% { -webkit-transform: rotate(90deg); }
+	33.32% { -webkit-transform: rotate(90deg); }
+	33.33% { -webkit-transform: rotate(120deg); }
+	41.65% { -webkit-transform: rotate(120deg); }
+	41.66% { -webkit-transform: rotate(150deg); }
+	49.98% { -webkit-transform: rotate(150deg); }
+	49.99% { -webkit-transform: rotate(180deg); }
+	58.32% { -webkit-transform: rotate(180deg); }
+	58.33% { -webkit-transform: rotate(210deg); }
+	66.65% { -webkit-transform: rotate(210deg); }
+	66.66% { -webkit-transform: rotate(240deg); }
+	74.98% { -webkit-transform: rotate(240deg); }
+	74.99% { -webkit-transform: rotate(270deg); }
+	83.32% { -webkit-transform: rotate(270deg); }
+	83.33% { -webkit-transform: rotate(300deg); }
+	91.65% { -webkit-transform: rotate(300deg); }
+	91.66% { -webkit-transform: rotate(330deg); }
+	99.98% { -webkit-transform: rotate(330deg); }
+}
+@-moz-keyframes anim-activity-indicator-active-ios {
+	0.00%  { -moz-transform: rotate(0deg);  }
+	8.32%  { -moz-transform: rotate(0deg);  }
+	8.33%  { -moz-transform: rotate(30deg); }
+	16.62% { -moz-transform: rotate(30deg); }
+	16.66% { -moz-transform: rotate(60deg); }
+	24.98% { -moz-transform: rotate(60deg); }
+	24.99% { -moz-transform: rotate(90deg); }
+	33.32% { -moz-transform: rotate(90deg); }
+	33.33% { -moz-transform: rotate(120deg); }
+	41.65% { -moz-transform: rotate(120deg); }
+	41.66% { -moz-transform: rotate(150deg); }
+	49.98% { -moz-transform: rotate(150deg); }
+	49.99% { -moz-transform: rotate(180deg); }
+	58.32% { -moz-transform: rotate(180deg); }
+	58.33% { -moz-transform: rotate(210deg); }
+	66.65% { -moz-transform: rotate(210deg); }
+	66.66% { -moz-transform: rotate(240deg); }
+	74.98% { -moz-transform: rotate(240deg); }
+	74.99% { -moz-transform: rotate(270deg); }
+	83.32% { -moz-transform: rotate(270deg); }
+	83.33% { -moz-transform: rotate(300deg); }
+	91.65% { -moz-transform: rotate(300deg); }
+	91.66% { -moz-transform: rotate(330deg); }
+	99.98% { -moz-transform: rotate(330deg); }
+}
+@-ms-keyframes anim-activity-indicator-active-ios {
+	0.00%  { -ms-transform: rotate(0deg);  }
+	8.32%  { -ms-transform: rotate(0deg);  }
+	8.33%  { -ms-transform: rotate(30deg); }
+	16.62% { -ms-transform: rotate(30deg); }
+	16.66% { -ms-transform: rotate(60deg); }
+	24.98% { -ms-transform: rotate(60deg); }
+	24.99% { -ms-transform: rotate(90deg); }
+	33.32% { -ms-transform: rotate(90deg); }
+	33.33% { -ms-transform: rotate(120deg); }
+	41.65% { -ms-transform: rotate(120deg); }
+	41.66% { -ms-transform: rotate(150deg); }
+	49.98% { -ms-transform: rotate(150deg); }
+	49.99% { -ms-transform: rotate(180deg); }
+	58.32% { -ms-transform: rotate(180deg); }
+	58.33% { -ms-transform: rotate(210deg); }
+	66.65% { -ms-transform: rotate(210deg); }
+	66.66% { -ms-transform: rotate(240deg); }
+	74.98% { -ms-transform: rotate(240deg); }
+	74.99% { -ms-transform: rotate(270deg); }
+	83.32% { -ms-transform: rotate(270deg); }
+	83.33% { -ms-transform: rotate(300deg); }
+	91.65% { -ms-transform: rotate(300deg); }
+	91.66% { -ms-transform: rotate(330deg); }
+	99.98% { -ms-transform: rotate(330deg); }
+}
+@-o-keyframes anim-activity-indicator-active-ios {
+	0.00%  { -o-transform: rotate(0deg);  }
+	8.32%  { -o-transform: rotate(0deg);  }
+	8.33%  { -o-transform: rotate(30deg); }
+	16.62% { -o-transform: rotate(30deg); }
+	16.66% { -o-transform: rotate(60deg); }
+	24.98% { -o-transform: rotate(60deg); }
+	24.99% { -o-transform: rotate(90deg); }
+	33.32% { -o-transform: rotate(90deg); }
+	33.33% { -o-transform: rotate(120deg); }
+	41.65% { -o-transform: rotate(120deg); }
+	41.66% { -o-transform: rotate(150deg); }
+	49.98% { -o-transform: rotate(150deg); }
+	49.99% { -o-transform: rotate(180deg); }
+	58.32% { -o-transform: rotate(180deg); }
+	58.33% { -o-transform: rotate(210deg); }
+	66.65% { -o-transform: rotate(210deg); }
+	66.66% { -o-transform: rotate(240deg); }
+	74.98% { -o-transform: rotate(240deg); }
+	74.99% { -o-transform: rotate(270deg); }
+	83.32% { -o-transform: rotate(270deg); }
+	83.33% { -o-transform: rotate(300deg); }
+	91.65% { -o-transform: rotate(300deg); }
+	91.66% { -o-transform: rotate(330deg); }
+	99.98% { -o-transform: rotate(330deg); }
+}
+@keyframes anim-activity-indicator-active-ios {
+	0.00%  { transform: rotate(0deg);  }
+	8.32%  { transform: rotate(0deg);  }
+	8.33%  { transform: rotate(30deg); }
+	16.62% { transform: rotate(30deg); }
+	16.66% { transform: rotate(60deg); }
+	24.98% { transform: rotate(60deg); }
+	24.99% { transform: rotate(90deg); }
+	33.32% { transform: rotate(90deg); }
+	33.33% { transform: rotate(120deg); }
+	41.65% { transform: rotate(120deg); }
+	41.66% { transform: rotate(150deg); }
+	49.98% { transform: rotate(150deg); }
+	49.99% { transform: rotate(180deg); }
+	58.32% { transform: rotate(180deg); }
+	58.33% { transform: rotate(210deg); }
+	66.65% { transform: rotate(210deg); }
+	66.66% { transform: rotate(240deg); }
+	74.98% { transform: rotate(240deg); }
+	74.99% { transform: rotate(270deg); }
+	83.32% { transform: rotate(270deg); }
+	83.33% { transform: rotate(300deg); }
+	91.65% { transform: rotate(300deg); }
+	91.66% { transform: rotate(330deg); }
+	99.98% { transform: rotate(330deg); }
+}
+
 .activity-indicator {
 	-webkit-transform-origin: 50% 50%;
 	   -moz-transform-origin: 50% 50%;
 	    -ms-transform-origin: 50% 50%;
 	     -o-transform-origin: 50% 50%;
 	        transform-origin: 50% 50%;
-	background: url(../images/ios/activity-indicator.png);
-	height: 21px;
-	width: 21px;
+	background: url(../images/ios/activity-indicator.png) center  center;
+	background-size: 20px 20px;
+	height: 20px;
+	width: 20px;
+}
+
+.activity-indicator.active {
+	-webkit-animation: anim-activity-indicator-active-ios 1s infinite linear;
+	   -moz-animation: anim-activity-indicator-active-ios 1s infinite linear;
+	    -ms-animation: anim-activity-indicator-active-ios 1s infinite linear;
+	     -o-animation: anim-activity-indicator-active-ios 1s infinite linear;
+	        animation: anim-activity-indicator-active-ios 1s infinite linear;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	    -ms-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
-
 	.activity-indicator {
 		background-image: url(../images/ios/activity-indicator-2x.png);
-		background-size: 21px 20px;
 	}
 }
 
