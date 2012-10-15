@@ -45,7 +45,6 @@ sources:
   - "Source/Event/Event.Mouse.js"
   - "Source/Event/Event.Tap.js"
   - "Source/Event/Event.Touch.js"
-  - "Source/Event/Event.HashChange.js"
   - "Source/Request/Request.js"
   - "Source/Scroller/Scroller.js"
   - "Source/Scroller/Scroller.IScroll.js"
