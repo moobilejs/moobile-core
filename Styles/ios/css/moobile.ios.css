@@ -1415,7 +1415,7 @@ input, select, textarea {
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
 }
 
-.list.style-grouped .list-header.no-list-header-label {
+.list.style-grouped .list-header.list-header-label-empty {
 	height: 20px;
 	margin: 0px;
 	padding: 0px;

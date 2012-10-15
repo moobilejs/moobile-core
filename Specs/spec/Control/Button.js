@@ -26,7 +26,7 @@ describe('Control/Button', function() {
 		var b = new Moobile.Button();
 		b.setLabel(null);
 		expect(b.getLabel().getText()).toEqual('');
-		expect(b.hasClass('no-button-label'));
+		expect(b.hasClass('button-label-empty'));
 	});
 
 	it('should replace the label', function() {

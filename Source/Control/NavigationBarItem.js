@@ -92,7 +92,7 @@ Moobile.NavigationBarItem = new Class({
 
 		this._title = title;
 		this._title.addClass('bar-title');
-		this.toggleClass('no-bar-title', this._title.isEmpty());
+		this.toggleClass('bar-title-empty', this._title.isEmpty());
 
 		return this;
 	},

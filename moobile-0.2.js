@@ -3716,7 +3716,7 @@ Moobile.Button = new Class({
 
 		this._label = label;
 		this._label.addClass('button-label');
-		this.element.toggleClass('no-button-label', this._label.isEmpty());
+		this.toggleClass('button-label-empty', this._label.isEmpty());
 
 		return this;
 	},
@@ -4465,8 +4465,7 @@ Moobile.NavigationBarItem = new Class({
 
 		this._title = title;
 		this._title.addClass('bar-title');
-
-		this.element.toggleClass('no-bar-title', this._title.isEmpty());
+		this.toggleClass('bar-title-empty', this._title.isEmpty());
 
 		return this;
 	},
@@ -5553,7 +5552,7 @@ Moobile.ListItem = new Class({
 
 		this._label = label;
 		this._label.addClass('list-item-label');
-		this.element.toggleClass('no-list-item-label', this._label.isEmpty());
+		this.toggleClass('list-item-label-empty', this._label.isEmpty());
 
 		return this;
 	},
@@ -5588,7 +5587,7 @@ Moobile.ListItem = new Class({
 
 		this._image = image;
 		this._image.addClass('list-item-image');
-		this.element.toggleClass('no-list-item-image', this._image.isEmpty());
+		this.toggleClass('list-item-image-empty', this._image.isEmpty());
 
 		return this;
 	},
@@ -5623,7 +5622,7 @@ Moobile.ListItem = new Class({
 
 		this._detail = detail;
 		this._detail.addClass('list-item-detail');
-		this.element.toggleClass('no-list-item-detail', this._detail.isEmpty());
+		this.toggleClass('list-item-detail-empty', this._detail.isEmpty());
 
 		return this;
 	},
@@ -5775,7 +5774,7 @@ Moobile.ListHeader = new Class({
 
 		this._label = label;
 		this._label.addClass('list-header-label');
-		this.element.toggleClass('no-list-header-label', this._label.isEmpty());
+		this.toggleClass('list-header-label-empty', this._label.isEmpty());
 
 		return this;
 	},
@@ -6392,10 +6391,7 @@ Moobile.Alert = new Class({
 		if (this._title === title)
 			return this;
 
-		title = title || '';
-		if (typeof title === 'string') {
-			title = new Moobile.Text().setText(title);
-		}
+		title = Moobile.Text.from(title);
 
 		if (this._title) {
 			this._title.replaceWithComponent(title, true);
@@ -6405,8 +6401,7 @@ Moobile.Alert = new Class({
 
 		this._title = title;
 		this._title.addClass('alert-title');
-
-		this.element.toggleClass('no-alert-title', this._title.isEmpty());
+		this.toggleClass('alert-title-empty', this._title.isEmpty());
 
 		return this;
 	},
@@ -6430,10 +6425,7 @@ Moobile.Alert = new Class({
 		if (this._message === message)
 			return this;
 
-		message = message || '';
-		if (typeof message === 'string') {
-			message = new Moobile.Text().setText(message);
-		}
+		message = Moobile.Text.from(message);
 
 		if (this._message) {
 			this._message.replaceWithComponent(message, true);
@@ -6443,8 +6435,7 @@ Moobile.Alert = new Class({
 
 		this._message = message;
 		this._message.addClass('alert-message');
-
-		this.element.toggleClass('no-alert-message', this._message.isEmpty());
+		this.toggleClass('alert-message-empty', this._message.isEmpty());
 
 		return this;
 	},
@@ -6654,13 +6645,13 @@ Moobile.Alert = new Class({
 
 		e.stop();
 
-		if (this.element.hasClass('show-animated')) {
-			this.element.removeClass('show-animated');
+		if (this.hasClass('show-animated')) {
+			this.removeClass('show-animated');
 			this.didShow();
 		}
 
-		if (this.element.hasClass('hide-animated')) {
-			this.element.removeClass('hide-animated');
+		if (this.hasClass('hide-animated')) {
+			this.removeClass('hide-animated');
 			this.element.hide();
 			this.didHide();
 		}
@@ -8144,14 +8135,14 @@ Moobile.Overlay = new Class({
 
 		e.stop();
 
-		if (this.element.hasClass('show-animated')) {
-			this.element.removeClass('show-animated');
+		if (this.hasClass('show-animated')) {
+			this.removeClass('show-animated');
 			this.didShow();
 		}
 
-		if (this.element.hasClass('hide-animated')) {
+		if (this.hasClass('hide-animated')) {
 			this.element.hide();
-			this.element.removeClass('hide-animated');
+			this.removeClass('hide-animated');
 			this.didHide();
 		}
 	}
@@ -8378,7 +8369,7 @@ Moobile.View = new Class({
 	 * @since  0.1.0
 	 */
 	enableTouch: function() {
-		this.element.removeClass('disable').addClass('enable');
+		this.removeClass('disable').addClass('enable');
 		return this;
 	},
 
@@ -8388,7 +8379,7 @@ Moobile.View = new Class({
 	 * @since  0.1.0
 	 */
 	disableTouch: function() {
-		this.element.removeClass('enable').addClass('disable');
+		this.removeClass('enable').addClass('disable');
 		return this;
 	},
 

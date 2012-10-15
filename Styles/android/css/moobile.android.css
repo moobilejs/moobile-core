@@ -329,7 +329,7 @@ input, select, textarea {
 	padding-bottom: 15px;
 }
 
-.list-item.no-list-item-image {
+.list-item.list-item-image-empty {
 	padding-right: 7px;
 }
 

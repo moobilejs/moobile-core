@@ -90,7 +90,7 @@ Moobile.Button = new Class({
 
 		this._label = label;
 		this._label.addClass('button-label');
-		this.toggleClass('no-button-label', this._label.isEmpty());
+		this.toggleClass('button-label-empty', this._label.isEmpty());
 
 		return this;
 	},

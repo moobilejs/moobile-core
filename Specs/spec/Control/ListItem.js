@@ -28,7 +28,7 @@ describe('Control/ListItem', function() {
 		var i = new Moobile.ListItem();
 		i.setLabel(null);
 		expect(i.getLabel().getText()).toEqual('');
-		expect(i.hasClass('no-list-item-label')).toEqual(true);
+		expect(i.hasClass('list-item-label-empty')).toEqual(true);
 	});
 
 	it('should replace the label when setting a new one', function() {
@@ -60,7 +60,7 @@ describe('Control/ListItem', function() {
 		var i = new Moobile.ListItem();
 		i.setDetail(null);
 		expect(i.getLabel().getText()).toEqual('');
-		expect(i.hasClass('no-list-item-detail')).toEqual(true);
+		expect(i.hasClass('list-item-detail-empty')).toEqual(true);
 	});
 
 	it('should replace the detail when setting a new one', function() {
@@ -92,7 +92,7 @@ describe('Control/ListItem', function() {
 		var i = new Moobile.ListItem();
 		i.setImage(null);
 		expect(i.getImage().getSource()).toEqual('');
-		expect(i.hasClass('no-list-item-image')).toEqual(true);
+		expect(i.hasClass('list-item-image-empty')).toEqual(true);
 	});
 
 	it('should replace the image when setting a new one', function() {

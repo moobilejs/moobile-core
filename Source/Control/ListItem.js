@@ -127,7 +127,7 @@ Moobile.ListItem = new Class({
 
 		this._label = label;
 		this._label.addClass('list-item-label');
-		this.toggleClass('no-list-item-label', this._label.isEmpty());
+		this.toggleClass('list-item-label-empty', this._label.isEmpty());
 
 		return this;
 	},
@@ -162,7 +162,7 @@ Moobile.ListItem = new Class({
 
 		this._image = image;
 		this._image.addClass('list-item-image');
-		this.toggleClass('no-list-item-image', this._image.isEmpty());
+		this.toggleClass('list-item-image-empty', this._image.isEmpty());
 
 		return this;
 	},
@@ -197,7 +197,7 @@ Moobile.ListItem = new Class({
 
 		this._detail = detail;
 		this._detail.addClass('list-item-detail');
-		this.toggleClass('no-list-item-detail', this._detail.isEmpty());
+		this.toggleClass('list-item-detail-empty', this._detail.isEmpty());
 
 		return this;
 	},

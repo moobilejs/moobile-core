@@ -85,7 +85,7 @@ Moobile.ListHeader = new Class({
 
 		this._label = label;
 		this._label.addClass('list-header-label');
-		this.toggleClass('no-list-header-label', this._label.isEmpty());
+		this.toggleClass('list-header-label-empty', this._label.isEmpty());
 
 		return this;
 	},

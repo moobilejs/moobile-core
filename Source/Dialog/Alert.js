@@ -179,7 +179,7 @@ Moobile.Alert = new Class({
 
 		this._title = title;
 		this._title.addClass('alert-title');
-		this.toggleClass('no-alert-title', this._title.isEmpty());
+		this.toggleClass('alert-title-empty', this._title.isEmpty());
 
 		return this;
 	},
@@ -213,7 +213,7 @@ Moobile.Alert = new Class({
 
 		this._message = message;
 		this._message.addClass('alert-message');
-		this.toggleClass('no-alert-message', this._message.isEmpty());
+		this.toggleClass('alert-message-empty', this._message.isEmpty());
 
 		return this;
 	},
