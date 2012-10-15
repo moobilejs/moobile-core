@@ -65,13 +65,11 @@ Moobile.ViewTransition.Cover = new Class({
 		var parentElem = parentView.getContentElement();
 
 		var onStart = function() {
-			parentView.addClass('transition-cover-perspective');
 			parentElem.addClass('transition-cover-enter');
 			viewToHide.addClass('transition-view-to-hide');
 		}.bind(this);
 
 		var onEnd = function() {
-			parentView.removeClass('transition-cover-perspective');
 			parentElem.removeClass('transition-cover-enter');
 			viewToHide.removeClass('transition-view-to-hide');
 			this.didEnter(viewToShow, viewToHide, parentView);

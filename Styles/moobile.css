@@ -1316,24 +1316,24 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 @-webkit-keyframes transition-cover-enter {
-	from { -webkit-transform: translate3d(0, 0, 0); }
-	to   { -webkit-transform: translate3d(0, -100%, 0); }
+	from { -webkit-transform: translate3d(0, 100%, 0); }
+	to   { -webkit-transform: translate3d(0, 0%, 0); }
 }
 @-moz-keyframes transition-cover-enter {
-	from { -moz-transform: translate3d(0, 0, 0); }
-	to   { -moz-transform: translate3d(0, -100%, 0); }
+	from { -moz-transform: translate3d(0, 100%, 0); }
+	to   { -moz-transform: translate3d(0, 0%, 0); }
 }
 @-ms-keyframes transition-cover-enter {
-	from { -ms-transform: translate3d(0, 0, 0); }
-	to   { -ms-transform: translate3d(0, -100%, 0); }
+	from { -ms-transform: translate3d(0, 100%, 0); }
+	to   { -ms-transform: translate3d(0, 0%, 0); }
 }
 @-o-keyframes transition-cover-enter {
-	from { -o-transform: translate3d(0, 0, 0); }
-	to   { -o-transform: translate3d(0, -100%, 0); }
+	from { -o-transform: translate3d(0, 100%, 0); }
+	to   { -o-transform: translate3d(0, 0%, 0); }
 }
 @keyframes transition-cover-enter {
-	from { transform: translate3d(0, 0, 0); }
-	to   { transform: translate3d(0, -100%, 0); }
+	from { transform: translate3d(0, 100%, 0); }
+	to   { transform: translate3d(0, 0%, 0); }
 }
 
 .transition-cover-enter {
@@ -1350,6 +1350,7 @@ input, select, textarea {
 }
 
 .transition-cover-enter .transition-view-to-hide {
+	position: absolute;
 	z-index: 50;
 }
 
@@ -1395,11 +1396,11 @@ input, select, textarea {
 }
 
 .transition-cover-leave .transition-view-to-hide {
-	-webkit-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: anim-cover-leave 2400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 75;
 }
 
