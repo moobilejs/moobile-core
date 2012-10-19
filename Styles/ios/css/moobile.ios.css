@@ -249,29 +249,22 @@ input, select, textarea {
 	    -ms-box-pack: center;                                    /* Important */
 	     -o-box-pack: center;                                    /* Important */
 	        box-pack: center;                                    /* Important */
-	margin-top: -1px;
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
 	margin-left: 8px;
 	margin-right: 8px;
 	height: inherit;
 }
 
 .bar.navigation-bar .bar-item .bar-title {
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
-	-webkit-box-pack: center;                                    /* Important */
-	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
+	display: block;
+	margin-top: -1px;
 	overflow: hidden;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -312,28 +305,9 @@ input, select, textarea {
 }
 
 .button .button-label {
-	-webkit-box-orient: horizontal;                              /* Important */
-	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
-	-webkit-box-pack: center;                                    /* Important */
-	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
-	height: 100%;
 	overflow: hidden;                                            /* Important */
+	padding-top: 10px;
+	padding-bottom: 10px;
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
@@ -1194,33 +1168,6 @@ input, select, textarea {
 	padding: 0px 15px;
 }
 
-.list-item .list-item-label {
-	-webkit-box-orient: vertical;                                /* Important */
-	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
-	-webkit-box-align: start;                                    /* Important */
-	   -moz-box-align: start;                                    /* Important */
-	    -ms-box-align: start;                                    /* Important */
-	     -o-box-align: start;                                    /* Important */
-	        box-align: start;                                    /* Important */
-	-webkit-box-pack: center;                                    /* Important */
-	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
-	height: 100%;                                                /* Important */
-	overflow: hidden;                                            /* Important */
-	text-overflow: ellipsis;                                     /* Important */
-	white-space: nowrap;                                         /* Important */
-}
-
 .list-item .list-item-image {
 	-webkit-background-clip: padding-box;
 	   -moz-background-clip: padding-box;
@@ -1233,31 +1180,23 @@ input, select, textarea {
 	width: 29px;
 }
 
+.list-item .list-item-label {
+	overflow: hidden;                                            /* Important */
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-overflow: ellipsis;                                     /* Important */
+	white-space: nowrap;                                         /* Important */
+}
+
 .list-item .list-item-detail {
-	-webkit-box-orient: vertical;                                /* Important */
-	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
-	-webkit-box-align: start;                                    /* Important */
-	   -moz-box-align: start;                                    /* Important */
-	    -ms-box-align: start;                                    /* Important */
-	     -o-box-align: start;                                    /* Important */
-	        box-align: start;                                    /* Important */
-	-webkit-box-pack: center;                                    /* Important */
-	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
 	color: #395587;
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
 	font-size: 17px;
 	font-weight: normal;
-	height: 100%;                                                /* Important */
+	overflow: hidden;                                            /* Important */
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-overflow: ellipsis;                                     /* Important */
+	white-space: nowrap;                                         /* Important */
 }
 
 .list-item.is-selected,

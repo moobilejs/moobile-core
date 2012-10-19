@@ -274,7 +274,7 @@ input, select, textarea {
 	height: auto;                                                /* Important */
 	min-height: 100%;                                            /* Important */
 	min-width: 100%;                                             /* Important */
-	width: auto;                                                 /* Important */
+	width: 100%;                                                 /* Important */
 }
 
 /* IScroll Engine */
@@ -405,6 +405,7 @@ input, select, textarea {
 	     -o-box-sizing: border-box;                              /* Important */
 	        box-sizing: border-box;                              /* Important */
 	display: block;
+	width: 100%;
 }
 
 /* Button Group
