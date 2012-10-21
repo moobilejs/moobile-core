@@ -322,13 +322,14 @@ Class.refactor(Moobile.Component, {
 /**
  * @see    http://moobilejs.com/doc/latest/View/View#MoobileViewAt
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
-Moobile.View.at = function(path) {
+Moobile.View.at = function(path, options, name) {
 
 	var element = Element.at(path);
 	if (element) {
-		return Moobile.Component.create(Moobile.View, element, 'data-view');
+		return Moobile.Component.create(Moobile.View, element, 'data-view', options, name);
 	}
 
 	return null;
@@ -353,6 +354,9 @@ Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true
 });
 
 // <0.1-compat>
+/**
+ * @deprecated
+ */
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
 	this.contentElement = element;
