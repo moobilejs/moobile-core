@@ -120,24 +120,6 @@ Moobile.Scroller = new Class({
 	 */
 	getScroll: function() {
 		throw new Error('You must override this method');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getSize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getSize: function() {
-		throw new Error('You must override this method');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getScrollSize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getScrollSize: function() {
-		throw new Error('You must override this method');
 	}
 
 });
@@ -169,10 +151,52 @@ Moobile.Scroller.create = function(contentElement, contentWrapperElement, scroll
 };
 
 window.addEvent('domready', function(e) {
+
+	var scrolls = {};
+
 	document.addEvent('touchstart', function(e) {
-		if (!e.target.hasClass('scrollable') &&
-			!e.target.getParent('.scrollable')) {
-			e.preventDefault();
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+
+			var touch = touches[i];
+			var target = touch.target;
+			var identifier = touch.identifier;
+
+			if (target.tagName.match(/input|textarea|select/i)) {
+				scrolls[identifier] = false;
+				return;
+			}
+
+			if (target.hasClass('scrollable') ||
+				target.getParent('.scrollable')) {
+				scrolls[identifier] = true;
+			} else {
+				scroll[identifier] = false;
+				e.preventDefault();
+			}
 		}
 	});
+
+	document.addEvent('touchmove', function(e) {
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+			if (scrolls[touches[i].identifier] === false) e.preventDefault();
+		}
+
+	});
+
+	document.addEvent('touchend', function(e) {
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+			delete scrolls[touches[i].identifier];
+		}
+
+	});
+
 });
