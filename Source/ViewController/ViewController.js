@@ -125,7 +125,7 @@ Moobile.ViewController = new Class({
 			this.viewDidLoad();
 		}
 
-		window.addEvent('rotate', this.bound('_onWindowRotate'));
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		return this;
 	},
@@ -712,15 +712,6 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didRotate
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didRotate: function(orientation) {
-
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidLoad
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -775,6 +766,15 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidRotate
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	viewDidRotate: function(orientation) {
+
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -810,15 +810,35 @@ Moobile.ViewController = new Class({
 		this._viewTransition = null;
 	},
 
-	_onWindowRotate: function(e) {
-		this.didRotate(window.orientationName);
-	},
-
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onViewReady: function() {
 		if (this._viewReady === false) {
 			this._viewReady = true;
 			this.viewDidBecomeReady();
 		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onWindowOrientationChange: function(e) {
+
+		var name = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
+
+		// <0.1-compat>
+		if (this.didRotate) {
+			this.didRotate(name);
+			console.log('[DEPRECATION NOTICE] The method "didRotate" will be removed in 0.4, use the method "viewDidRotate" instead');
+		}
+		// </0.1-compat>
+
+		this.viewDidRotate(name);
 	}
 
 });
