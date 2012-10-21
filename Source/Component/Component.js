@@ -1048,6 +1048,7 @@ Moobile.Component = new Class({
 	// <0.1-compat>
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1057,6 +1058,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1066,6 +1068,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1075,6 +1078,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1084,6 +1088,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1093,6 +1098,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1102,6 +1108,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1111,6 +1118,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1120,6 +1128,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1129,6 +1138,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1138,6 +1148,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1147,6 +1158,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1156,6 +1168,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1165,6 +1178,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1174,6 +1188,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1183,6 +1198,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1192,6 +1208,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1201,6 +1218,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1210,6 +1228,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1219,6 +1238,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1228,6 +1248,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1237,6 +1258,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -1328,14 +1350,14 @@ Moobile.Component.getStyle = function(name, target) {
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
-Moobile.Component.create = function(klass, element, descriptor) {
+Moobile.Component.create = function(klass, element, descriptor, options, name) {
 
 	element = Element.from(element);
 
 	if (descriptor) {
 		var subclass = element.get(descriptor);
 		if (subclass) {
-			var instance = Class.instantiate(subclass, element);
+			var instance = Class.instantiate(subclass, element, options, name);
 			if (instance instanceof klass) {
 				return instance;
 			}

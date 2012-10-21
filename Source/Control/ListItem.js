@@ -234,6 +234,9 @@ Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element)
 });
 
 // <0.1-compat>
+/**
+ * @deprecated
+ */
 Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
