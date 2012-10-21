@@ -464,11 +464,6 @@ input, select, textarea {
 	    -ms-box-sizing: border-box;                              /* Important */
 	     -o-box-sizing: border-box;                              /* Important */
 	        box-sizing: border-box;                              /* Important */
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
 	cursor: pointer;
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
@@ -485,6 +480,11 @@ input, select, textarea {
 	    -ms-backface-visibility: hidden;                         /* Important */
 	     -o-backface-visibility: hidden;                         /* Important */
 	        backface-visibility: hidden;                         /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
@@ -1079,28 +1079,21 @@ input, select, textarea {
 /* Slider
 -----------------------------------------------------------------------------*/
 
-.slider {
+.slider,
+.slider-track,
+.slider-thumb,
+.slider-range,
+.slider-value {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */
 	     -o-backface-visibility: hidden;                         /* Important */
 	        backface-visibility: hidden;                         /* Important */
-}
-
-.slider-track {
-	-webkit-backface-visibility: hidden;                         /* Important */
-	   -moz-backface-visibility: hidden;                         /* Important */
-	    -ms-backface-visibility: hidden;                         /* Important */
-	     -o-backface-visibility: hidden;                         /* Important */
-	        backface-visibility: hidden;                         /* Important */
-}
-
-.slider-thumb {
-	-webkit-backface-visibility: hidden;                         /* Important */
-	   -moz-backface-visibility: hidden;                         /* Important */
-	    -ms-backface-visibility: hidden;                         /* Important */
-	     -o-backface-visibility: hidden;                         /* Important */
-	        backface-visibility: hidden;                         /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
 }
 
 /* Transition Fade (Enter)

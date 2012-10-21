@@ -261,11 +261,11 @@ input, select, textarea {
 
 .bar.navigation-bar .bar-item .bar-title {
 	display: block;
-	margin-top: -1px;
 	overflow: hidden;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	text-overflow: ellipsis;
+	text-align: center;
 	white-space: nowrap;
 }
 
@@ -278,6 +278,16 @@ input, select, textarea {
 	    -ms-box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
 	     -o-box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
 	        box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
+	-webkit-box-pack: center;                                    /* Important */
+	   -moz-box-pack: center;                                    /* Important */
+	    -ms-box-pack: center;                                    /* Important */
+	     -o-box-pack: center;                                    /* Important */
+	        box-pack: center;                                    /* Important */
 	background: #fff;
 	border: 1px solid #ababab;
 	border-radius: 10px;
@@ -306,8 +316,9 @@ input, select, textarea {
 
 .button .button-label {
 	overflow: hidden;                                            /* Important */
-	padding-top: 10px;
-	padding-bottom: 10px;
+	position: relative;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
@@ -385,10 +396,14 @@ input, select, textarea {
 	font-size: 12px;
 	font-weight: bold;
 	height: 30px;
-	line-height: 30px;
-	margin: 7px 0px;
 	padding: 0px 4px;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+}
+
+.bar .button .button-label {
+	margin-top: -1px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 .bar .button.is-selected,
@@ -1182,8 +1197,8 @@ input, select, textarea {
 
 .list-item .list-item-label {
 	overflow: hidden;                                            /* Important */
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
@@ -1193,8 +1208,8 @@ input, select, textarea {
 	font-size: 17px;
 	font-weight: normal;
 	overflow: hidden;                                            /* Important */
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	text-overflow: ellipsis;                                     /* Important */
 	white-space: nowrap;                                         /* Important */
 }
@@ -1354,6 +1369,10 @@ input, select, textarea {
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
 }
 
+.list.style-grouped .list-header:first-child {
+	margin-top: 10px;
+}
+
 .list.style-grouped .list-header.list-header-label-empty {
 	height: 20px;
 	margin: 0px;
@@ -1381,6 +1400,10 @@ input, select, textarea {
 	        background-clip: padding-box;
 	margin-bottom: 20px;
 	padding: 10px 9px;
+}
+
+.list.style-grouped:last-child {
+	margin-bottom: 0px;
 }
 
 /* Overlay
@@ -1443,7 +1466,6 @@ input, select, textarea {
 }
 
 .alert .alert-footer .button {
-
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
 	    -ms-box-flex: 1;                                         /* Important */
@@ -1472,6 +1494,7 @@ input, select, textarea {
 	margin-right: 4px;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
 	text-align: center;
+	width: 0%;
 }
 
 .alert .alert-footer .button:first-child {
@@ -1513,6 +1536,7 @@ input, select, textarea {
 	margin-left: 0px;
 	margin-right: 0px;
 	margin-bottom: 5px;
+	width: 100%;
 }
 
 .alert.alert-layout-vertical .alert-footer .button:last-child {
@@ -1822,9 +1846,9 @@ input, select, textarea {
 
 .slider .slider-track {
 	height: 9px;
-	left: -12px;
+	left: -10px;
 	position: absolute;
-	right: -12px;
+	right: -10px;
 }
 
 .slider .slider-track:after {
@@ -1895,10 +1919,10 @@ input, select, textarea {
 }
 
 .slider.slider-mode-vertical .slider-track {
-	bottom: -12px;
+	bottom: -10px;
 	height: auto;
 	left: auto;
-	top: -12px;
+	top: -10px;
 	right: auto;
 	width: 9px;
 }
