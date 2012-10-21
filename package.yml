@@ -41,7 +41,6 @@ sources:
   - "Source/Event/EventFirer.js"
   - "Source/Event/Event.Ready.js"
   - "Source/Event/Event.CSS3.js"
-  - "Source/Event/Event.Rotate.js"
   - "Source/Event/Event.Mouse.js"
   - "Source/Event/Event.Tap.js"
   - "Source/Event/Event.Touch.js"
