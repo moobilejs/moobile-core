@@ -8980,8 +8980,8 @@ Moobile.ScrollView = new Class({
 		var x = 0;
 		var y = 0;
 
-		var pageSizeX = this.options.snapToPageSizeX || this.getSize().x;
-		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
+		var pageSizeX = this.options.snapToPageSizeX || this.getContentWrapperSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getContentWrapperSize().y;
 
 		if (pageSizeX && pageSizeY) {
 
