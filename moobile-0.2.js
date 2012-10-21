@@ -142,7 +142,7 @@ var m = Math,
 
 		// User defined options
 		for (i in options) that.options[i] = options[i];
-		
+
 		// Set starting position
 		that.x = that.options.x;
 		that.y = that.options.y;
@@ -160,13 +160,13 @@ var m = Math,
 		if ( that.options.zoom && isAndroid ){
 			translateZ = '';
 		}
-		
+
 		// Set some default styles
 		that.scroller.style[transitionProperty] = that.options.useTransform ? cssVendor + 'transform' : 'top left';
 		that.scroller.style[transitionDuration] = '0';
 		that.scroller.style[transformOrigin] = '0 0';
 		if (that.options.useTransition) that.scroller.style[transitionTimingFunction] = 'cubic-bezier(0.33,0.66,0.66,1)';
-		
+
 		if (that.options.useTransform) that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px)' + translateZ;
 		else that.scroller.style.cssText += ';position:absolute;top:' + that.y + 'px;left:' + that.x + 'px';
 
@@ -197,7 +197,7 @@ iScroll.prototype = {
 	pagesX: [], pagesY: [],
 	aniTime: null,
 	wheelZoomCount: 0,
-	
+
 	handleEvent: function (e) {
 		var that = this;
 		switch(e.type) {
@@ -213,14 +213,14 @@ iScroll.prototype = {
 			case TRNEND_EV: that._transitionEnd(e); break;
 		}
 	},
-	
+
 	_checkDOMChanges: function () {
 		if (this.moved || this.zoomed || this.animating ||
 			(this.scrollerW == this.scroller.offsetWidth * this.scale && this.scrollerH == this.scroller.offsetHeight * this.scale)) return;
 
 		this.refresh();
 	},
-	
+
 	_scrollbar: function (dir) {
 		var that = this,
 			bar;
@@ -277,12 +277,12 @@ iScroll.prototype = {
 		// Reset position
 		that._scrollbarPos(dir, true);
 	},
-	
+
 	_resize: function () {
 		var that = this;
 		setTimeout(function () { that.refresh(); }, isAndroid ? 200 : 0);
 	},
-	
+
 	_pos: function (x, y) {
 		if (this.zoomed) return;
 
@@ -336,7 +336,7 @@ iScroll.prototype = {
 		that[dir + 'ScrollbarWrapper'].style.opacity = hidden && that.options.hideScrollbar ? '0' : '1';
 		that[dir + 'ScrollbarIndicator'].style[transform] = 'translate(' + (dir == 'h' ? pos + 'px,0)' : '0,' + pos + 'px)') + translateZ;
 	},
-	
+
 	_start: function (e) {
 		var that = this,
 			point = hasTouch ? e.touches[0] : e,
@@ -381,7 +381,7 @@ iScroll.prototype = {
 				x = +getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g, '');
 				y = +getComputedStyle(that.scroller, null).top.replace(/[^0-9-]/g, '');
 			}
-			
+
 			if (x != that.x || y != that.y) {
 				if (that.options.useTransition) that._unbind(TRNEND_EV);
 				else cancelFrame(that.aniTime);
@@ -407,7 +407,7 @@ iScroll.prototype = {
 		that._bind(END_EV, window);
 		that._bind(CANCEL_EV, window);
 	},
-	
+
 	_move: function (e) {
 		var that = this,
 			point = hasTouch ? e.touches[0] : e,
@@ -485,10 +485,10 @@ iScroll.prototype = {
 			that.startX = that.x;
 			that.startY = that.y;
 		}
-		
+
 		if (that.options.onScrollMove) that.options.onScrollMove.call(that, e);
 	},
-	
+
 	_end: function (e) {
 		if (hasTouch && e.touches.length !== 0) return;
 
@@ -520,10 +520,10 @@ iScroll.prototype = {
 
 			that.x = that.originX - that.originX * that.lastScale + that.x;
 			that.y = that.originY - that.originY * that.lastScale + that.y;
-			
+
 			that.scroller.style[transitionDuration] = '200ms';
 			that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px) scale(' + that.scale + ')' + translateZ;
-			
+
 			that.zoomed = false;
 			that.refresh();
 
@@ -621,7 +621,7 @@ iScroll.prototype = {
 		that._resetPos(200);
 		if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
 	},
-	
+
 	_resetPos: function (time) {
 		var that = this,
 			resetX = that.x >= 0 ? 0 : that.x < that.maxScrollX ? that.maxScrollX : that.x,
@@ -664,27 +664,27 @@ iScroll.prototype = {
 		} else {
 			return;
 		}
-		
+
 		if (that.options.wheelAction == 'zoom') {
 			deltaScale = that.scale * Math.pow(2, 1/3 * (wheelDeltaY ? wheelDeltaY / Math.abs(wheelDeltaY) : 0));
 			if (deltaScale < that.options.zoomMin) deltaScale = that.options.zoomMin;
 			if (deltaScale > that.options.zoomMax) deltaScale = that.options.zoomMax;
-			
+
 			if (deltaScale != that.scale) {
 				if (!that.wheelZoomCount && that.options.onZoomStart) that.options.onZoomStart.call(that, e);
 				that.wheelZoomCount++;
-				
+
 				that.zoom(e.pageX, e.pageY, deltaScale, 400);
-				
+
 				setTimeout(function() {
 					that.wheelZoomCount--;
 					if (!that.wheelZoomCount && that.options.onZoomEnd) that.options.onZoomEnd.call(that, e);
 				}, 400);
 			}
-			
+
 			return;
 		}
-		
+
 		deltaX = that.x + wheelDeltaX;
 		deltaY = that.y + wheelDeltaY;
 
@@ -693,19 +693,19 @@ iScroll.prototype = {
 
 		if (deltaY > that.minScrollY) deltaY = that.minScrollY;
 		else if (deltaY < that.maxScrollY) deltaY = that.maxScrollY;
-    
+
 		if (that.maxScrollY < 0) {
 			that.scrollTo(deltaX, deltaY, 0);
 		}
 	},
-	
+
 	_transitionEnd: function (e) {
 		var that = this;
 
 		if (e.target != that.scroller) return;
 
 		that._unbind(TRNEND_EV);
-		
+
 		that._startAni();
 	},
 
@@ -723,19 +723,19 @@ iScroll.prototype = {
 			animate;
 
 		if (that.animating) return;
-		
+
 		if (!that.steps.length) {
 			that._resetPos(400);
 			return;
 		}
-		
+
 		step = that.steps.shift();
-		
+
 		if (step.x == startX && step.y == startY) step.time = 0;
 
 		that.animating = true;
 		that.moved = true;
-		
+
 		if (that.options.useTransition) {
 			that._transitionTime(step.time);
 			that._pos(step.x, step.y);
@@ -803,12 +803,12 @@ iScroll.prototype = {
 	_offset: function (el) {
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
-			
+
 		while (el = el.offsetParent) {
 			left -= el.offsetLeft;
 			top -= el.offsetTop;
 		}
-		
+
 		if (el != this.wrapper) {
 			left *= this.scale;
 			top *= this.scale;
@@ -888,15 +888,15 @@ iScroll.prototype = {
 		that._unbind(MOVE_EV, window);
 		that._unbind(END_EV, window);
 		that._unbind(CANCEL_EV, window);
-		
+
 		if (!that.options.hasTouch) {
 			that._unbind(WHEEL_EV);
 		}
-		
+
 		if (that.options.useTransition) that._unbind(TRNEND_EV);
-		
+
 		if (that.options.checkDOMChanges) clearInterval(that.checkDOMTime);
-		
+
 		if (that.options.onDestroy) that.options.onDestroy.call(that);
 	},
 
@@ -982,7 +982,7 @@ iScroll.prototype = {
 		that.stop();
 
 		if (!step.length) step = [{ x: x, y: y, time: time, relative: relative }];
-		
+
 		for (i=0, l=step.length; i<l; i++) {
 			if (step[i].relative) { step[i].x = that.x - step[i].x; step[i].y = that.y - step[i].y; }
 			that.steps.push({ x: step[i].x, y: step[i].y, time: step[i].time || 0 });
@@ -1009,7 +1009,7 @@ iScroll.prototype = {
 
 	scrollToPage: function (pageX, pageY, time) {
 		var that = this, x, y;
-		
+
 		time = time === undefined ? 400 : time;
 
 		if (that.options.onScrollStart) that.options.onScrollStart.call(that);
@@ -1045,11 +1045,11 @@ iScroll.prototype = {
 		this._unbind(END_EV, window);
 		this._unbind(CANCEL_EV, window);
 	},
-	
+
 	enable: function () {
 		this.enabled = true;
 	},
-	
+
 	stop: function () {
 		if (this.options.useTransition) this._unbind(TRNEND_EV);
 		else cancelFrame(this.aniTime);
@@ -1057,7 +1057,7 @@ iScroll.prototype = {
 		this.moved = false;
 		this.animating = false;
 	},
-	
+
 	zoom: function (x, y, scale, time) {
 		var that = this,
 			relScale = scale / that.scale;
@@ -1081,7 +1081,7 @@ iScroll.prototype = {
 		that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px) scale(' + scale + ')' + translateZ;
 		that.zoomed = false;
 	},
-	
+
 	isReady: function () {
 		return !this.moved && !this.zoomed && !this.animating;
 	}
@@ -3124,6 +3124,7 @@ Moobile.Component = new Class({
 	// <0.1-compat>
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3133,6 +3134,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3142,6 +3144,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3151,6 +3154,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3160,6 +3164,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3169,6 +3174,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3178,6 +3184,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3187,6 +3194,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3196,6 +3204,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3205,6 +3214,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3214,6 +3224,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3223,6 +3234,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3232,6 +3244,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3241,6 +3254,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3250,6 +3264,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3259,6 +3274,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3268,6 +3284,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3277,6 +3294,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3286,6 +3304,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3295,6 +3314,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3304,6 +3324,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3313,6 +3334,7 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -3404,14 +3426,14 @@ Moobile.Component.getStyle = function(name, target) {
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.1.0
  */
-Moobile.Component.create = function(klass, element, descriptor) {
+Moobile.Component.create = function(klass, element, descriptor, options, name) {
 
 	element = Element.from(element);
 
 	if (descriptor) {
 		var subclass = element.get(descriptor);
 		if (subclass) {
-			var instance = Class.instantiate(subclass, element);
+			var instance = Class.instantiate(subclass, element, options, name);
 			if (instance instanceof klass) {
 				return instance;
 			}
@@ -5659,6 +5681,9 @@ Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element)
 });
 
 // <0.1-compat>
+/**
+ * @deprecated
+ */
 Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
@@ -6955,53 +6980,6 @@ Element.defineCustomEvent('ownanimationend', {
 /*
 ---
 
-name: Event.Rotate
-
-description: Provides an event that indicates the window rotated.
-
-license: MIT-style license.
-
-author:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Core/Event
-	- Core/Element.Event
-	- Custom-Event/Element.defineCustomEvent
-
-provides:
-	- Event.Rotate
-
-...
-*/
-
-(function() {
-
-if (!window.orientation) window.orientation = 0;
-if (!window.orientationName) window.orientationName = 'portrait';
-
-var orientation = function() {
-	window.orientationName = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
-};
-
-Element.defineCustomEvent('rotate', {
-
-	base: 'orientationchange',
-
-	condition: function(e) {
-		orientation();
-		return true;
-	}
-
-});
-
-orientation();
-
-})();
-
-/*
----
-
 name: Event.Mouse
 
 description: Correctly translate mouse events to touch events.
@@ -7439,24 +7417,6 @@ Moobile.Scroller = new Class({
 	 */
 	getScroll: function() {
 		throw new Error('You must override this method');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getSize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getSize: function() {
-		throw new Error('You must override this method');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getScrollSize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getScrollSize: function() {
-		throw new Error('You must override this method');
 	}
 
 });
@@ -7488,12 +7448,54 @@ Moobile.Scroller.create = function(contentElement, contentWrapperElement, scroll
 };
 
 window.addEvent('domready', function(e) {
+
+	var scrolls = {};
+
 	document.addEvent('touchstart', function(e) {
-		if (!e.target.hasClass('scrollable') &&
-			!e.target.getParent('.scrollable')) {
-			e.preventDefault();
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+
+			var touch = touches[i];
+			var target = touch.target;
+			var identifier = touch.identifier;
+
+			if (target.tagName.match(/input|textarea|select/i)) {
+				scrolls[identifier] = false;
+				return;
+			}
+
+			if (target.hasClass('scrollable') ||
+				target.getParent('.scrollable')) {
+				scrolls[identifier] = true;
+			} else {
+				scroll[identifier] = false;
+				e.preventDefault();
+			}
 		}
 	});
+
+	document.addEvent('touchmove', function(e) {
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+			if (scrolls[touches[i].identifier] === false) e.preventDefault();
+		}
+
+	});
+
+	document.addEvent('touchend', function(e) {
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+			delete scrolls[touches[i].identifier];
+		}
+
+	});
+
 });
 
 
@@ -7539,6 +7541,22 @@ iScroll.prototype._checkDOMChanges = function() {
 
 })();
 
+var touchid = null;
+
+var fixtouch = function(e) {
+
+	var touch = {
+		identifier: touchid,
+		target: e.target,
+		pageX: e.pageX,
+		pageY: e.pageY,
+		clientX: e.clientX,
+		clientY: e.clientY
+	};
+
+	e.touches = e.targetTouches = e.changedTouches = [touch];
+};
+
 /**
  * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -7562,26 +7580,29 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	initialize: function(contentElement, contentWrapperElement, options) {
 
+		this.parent(contentElement, contentWrapperElement, options)
+
 		this.scroller = new iScroll(contentWrapperElement, {
 			scrollbarClass: 'scrollbar-',
-			hScroll: this.options.scrollX,
-			vScroll: this.options.scrollY,
-			hScrollbar: this.options.momentum,
-			vScrollbar: this.options.momentum,
+			hScroll: this.options.scroll === 'both' || this.options.scroll === 'horizontal',
+			vScroll: this.options.scroll === 'both' || this.options.scroll === 'vertical',
+			hScrollbar: this.options.scrollbar === 'both' || this.options.scrollbar === 'horizontal',
+			vScrollbar: this.options.scrollbar === 'both' || this.options.scrollbar === 'vertical',
 			momentum: this.options.momentum,
-			bounce: this.options.momentum && Browser.Platform.ios,
+			bounce: this.options.bounce,
 			hideScrollbar: true,
 			fadeScrollbar: true,
 			checkDOMChanges: true,
 			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
 			onScrollStart: this.bound('_onScrollStart'),
 			onScrollMove: this.bound('_onScrollMove'),
-			onScrollEnd: this.bound('_onScrollEnd')
+			onScrollEnd: this.bound('_onScrollEnd'),
+			onTouchEnd: this.bound('_onTouchEnd')
 		});
 
 		window.addEvent('resize', this.bound('refresh'));
 
-		return this.parent(contentElement, contentWrapperElement, options);
+		return this;
 	},
 
 	/**
@@ -7648,24 +7669,6 @@ Moobile.Scroller.IScroll = new Class({
 	},
 
 	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getSize: function() {
-		return this.contentWrapperElement.getSize();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getScrollSize: function() {
-		return this.contentWrapperElement.getScrollSize();
-	},
-
-	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
@@ -7683,7 +7686,21 @@ Moobile.Scroller.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_onScrollStart: function() {
+	_onScrollStart: function(e) {
+
+		if (!('touches' in e)) {
+
+			if (touchid)
+				return this;
+
+			if (touchid === null) {
+				touchid = String.uniqueID();
+				fixtouch(e);
+			}
+		}
+
+
+		this.fireEvent('touchstart', e);
 		this.fireEvent('scrollstart');
 	},
 
@@ -7692,7 +7709,13 @@ Moobile.Scroller.IScroll = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_onScrollMove: function() {
+	_onScrollMove: function(e) {
+
+		if (touchid) {
+			fixtouch(e);
+		}
+
+		this.fireEvent('touchmove', e);
 		this.fireEvent('scroll');
 	},
 
@@ -7704,6 +7727,21 @@ Moobile.Scroller.IScroll = new Class({
 	_onScrollEnd: function() {
 		this.fireEvent('scroll');
 		this.fireEvent('scrollend');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd:  function(e) {
+
+		if (touchid) {
+			fixtouch(e);
+			touchid = null;
+		}
+
+		this.fireEvent('touchend', e);
 	}
 
 });
@@ -7734,6 +7772,41 @@ provides:
 ...
 */
 
+(function() {
+
+//
+// Note:
+// requestAnimationFrame polyfill by Erik Möller
+//
+
+var requestAnimationFrame;
+var cancelAnimationFrame;
+
+var lastTime = 0;
+
+var vendors = ['ms', 'moz', 'webkit', 'o'];
+
+for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+    requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+    cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+}
+
+if (requestAnimationFrame == undefined) {
+    requestAnimationFrame = function(callback, element) {
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+        var id = window.setTimeout(function() { callback(currTime + timeToCall); }, timeToCall);
+        lastTime = currTime + timeToCall;
+        return id;
+    };
+}
+
+if (cancelAnimationFrame === undefined) {
+    cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+    };
+}
+
 /**
  * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -7748,14 +7821,14 @@ Moobile.Scroller.Native = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouch: null,
+	_animating: false,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#contentScroller
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	contentScroller: null,
+	_animation: null,
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#contentScrollerElement
@@ -7773,6 +7846,11 @@ Moobile.Scroller.Native = new Class({
 
 		this.parent(contentElement, contentWrapperElement, options);
 
+		if (this.options.snapToPage) {
+			this.options.momentum = false;
+			this.options.bounce = false;
+		}
+
 		var styles = {
 			'top': 0, 'left': 0, 'bottom': 0, 'right': 0,
 			'position': 'absolute',
@@ -7789,10 +7867,8 @@ Moobile.Scroller.Native = new Class({
 
 		this.contentScrollerElement = scrollFixInnerDiv;
 		this.contentScrollerElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentScrollerElement.addEvent('touchmove', this.bound('_onTouchMove'));
 		this.contentScrollerElement.addEvent('touchend', this.bound('_onTouchEnd'));
-		this.contentScrollerElement.addEvent('scroll', this.bound('_onScroll'));
-
-		this.contentScroller = new Fx.Scroll(this.contentScrollerElement);
 
 		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
 
@@ -7807,6 +7883,7 @@ Moobile.Scroller.Native = new Class({
 	destroy: function() {
 
 		this.contentScrollerElement.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchMove'));
 		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchEnd'));
 		this.contentScrollerElement.removeEvent('scroll', this.bound('_onScroll'));
 		this.contentScrollerElement = null;
@@ -7837,25 +7914,53 @@ Moobile.Scroller.Native = new Class({
 		x = x || 0;
 		y = y || 0;
 
-		var onStart = function() {
-			this._detachEvents();
-		}.bind(this);
+		if (this._animating) {
+			this._animating = false;
+			cancelAnimationFrame(this._animation);
+		}
 
-		var onComplete = function() {
-			this._attachEvents();
-			this.contentScroller.removeEvents('cancel');
-			this.contentScroller.removeEvents('complete');
-			this.fireEvent('scroll');
-		}.bind(this);
+		var now = Date.now();
 
-		this.contentScroller.cancel();
+		var self = this;
+		var elem = this.contentScrollerElement;
 
-		this.contentScroller.setOptions({duration: time || 0});
-		this.contentScroller.addEvent('start:once', onStart)
-		this.contentScroller.addEvent('cancel:once', onComplete);
-		this.contentScroller.addEvent('complete:once', onComplete);
-		this.contentScroller.start(x, y);
+		var absX = Math.abs(x);
+		var absY = Math.abs(y);
 
+		var currX = elem.scrollLeft;
+		var currY = elem.scrollTop;
+
+		var dirX = x - currX;
+		var dirY = y = currY;
+
+		var update = function() {
+console.log('bin la');
+			if (elem.scrollLeft === x &&
+				elem.scrollTop === y) {
+				self.fireEvent('scroll');
+				self._animating = false;
+				self._animation = null;
+				return;
+			}
+
+			var valueX = ((Date.now() - now) * (x - currX) / time);
+			var valueY = ((Date.now() - now) * (y - currY) / time);
+			var scrollX = valueX + currX;
+			var scrollY = valueY + currY;
+
+			if ((scrollX >= x && dirX >= 0) || (scrollX < x && dirX < 0)) scrollX = x ;
+			if ((scrollY >= y && dirY >= 0) || (scrollY < y && dirY < 0)) scrollTop = y;
+
+			elem.scrollLeft = scrollX;
+			elem.scrollTop  = scrollY;
+
+			self._animating = true;
+			self._animation = requestAnimationFrame(update);
+		};
+
+		//this._animation = requestAnimationFrame(update);
+console.log('wat');
+update();
 		return this;
 	},
 
@@ -7865,27 +7970,8 @@ Moobile.Scroller.Native = new Class({
 	 * @since  0.2.0
 	 */
 	scrollToElement: function(element, time) {
-
-		var onStart = function() {
-			this._detachEvents();
-		}.bind(this);
-
-		var onComplete = function() {
-			this._attachEvents();
-			this.contentScroller.removeEvents('cancel');
-			this.contentScroller.removeEvents('complete');
-			this.fireEvent('scroll');
-		}.bind(this);
-
-		this.contentScroller.cancel();
-
-		this.contentScroller.setOptions({duration: time || 0});
-		this.contentScroller.addEvent('start:once', onStart)
-		this.contentScroller.addEvent('cancel:once', onComplete);
-		this.contentScroller.addEvent('complete:once', onComplete);
-		this.contentScroller.toElement(element);
-
-		return this;
+		var postition = element.getPosition(this.contentScrollerElement);
+		return this.scrollTo(position.x, position.y, time);
 	},
 
 	/**
@@ -7895,8 +7981,8 @@ Moobile.Scroller.Native = new Class({
 	 */
 	refresh: function() {
 
-		var wrapperSize = this.getSize();
-		var contentSize = this.getScrollSize();
+		var wrapperSize = this.contentWrapperElement.getSize();
+		var contentSize = this.contentElement.getScrollSize();
 
 		if (this.options.momentum) {
 			if (this.options.scrollY && contentSize.y <= wrapperSize.y) this.contentElement.setStyle('min-height', wrapperSize.y + 1);
@@ -7945,15 +8031,6 @@ Moobile.Scroller.Native = new Class({
 	},
 
 	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getScrollSize: function() {
-		return this.contentElement.getScrollSize();
-	},
-
-	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
@@ -7968,12 +8045,16 @@ Moobile.Scroller.Native = new Class({
 	 * @since  0.2.0
 	 */
 	_onTouchStart: function(e) {
-		if (this._activeTouch === null) {
-			this._activeTouch = e.changedTouches[0];
-			if (this.contentScroller.isRunning()) {
-				this.contentScroller.cancel();
-			}
-		}
+		this.fireEvent('touchstart', e);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchMove: function(e) {
+		this.fireEvent('touchmove', e);
 	},
 
 	/**
@@ -7982,9 +8063,7 @@ Moobile.Scroller.Native = new Class({
 	 * @since  0.2.0
 	 */
 	_onTouchEnd: function(e) {
-		if (this._activeTouch.identifier === e.changedTouches[0].identifier) {
-			this._activeTouch = null;
-		}
+		this.fireEvent('touchend', e);
 	},
 
 	/**
@@ -8002,6 +8081,7 @@ Moobile.Scroller.Native.supportsCurrentPlatform = function() {
 	return Browser.Platform.ios && 'WebkitOverflowScrolling' in document.createElement('div').style;
 };
 
+})();
 
 /*
 ---
@@ -8519,13 +8599,14 @@ Class.refactor(Moobile.Component, {
 /**
  * @see    http://moobilejs.com/doc/latest/View/View#MoobileViewAt
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
  * @since  0.1.0
  */
-Moobile.View.at = function(path) {
+Moobile.View.at = function(path, options, name) {
 
 	var element = Element.at(path);
 	if (element) {
-		return Moobile.Component.create(Moobile.View, element, 'data-view');
+		return Moobile.Component.create(Moobile.View, element, 'data-view', options, name);
 	}
 
 	return null;
@@ -8550,6 +8631,9 @@ Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true
 });
 
 // <0.1-compat>
+/**
+ * @deprecated
+ */
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
 	this.contentElement = element;
@@ -8655,6 +8739,16 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_pageOffset: {
+		x: 0,
+		y: 0,
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
@@ -8662,9 +8756,10 @@ Moobile.ScrollView = new Class({
 	 */
 	options: {
 		scroller: ['Native', 'IScroll'],
+		scroll: 'vertical',
+		scrollbar: 'vertical',
+		bounce: Browser.Platform.ios,
 		momentum: true,
-		scrollX: false,
-		scrollY: true,
 		snapToPage: false,
 		snapToPageAt: 20,
 		snapToPageSizeX: null,
@@ -8697,22 +8792,39 @@ Moobile.ScrollView = new Class({
 
 		this.parent();
 
-		if (this.options.snapToPage) this.options.momentum = false;
+		// <0.1 compat>
+		if ('scrollX' in this.options || 'scrollY' in this.options) {
+			console.log('[DEPRECATION NOTICE] The options "scrollX" and "scrollY" will be removed in 0.4, use the "scroll" option instead');
+			if (this.options.scrollX &&
+				this.options.scrollY) {
+				this.options.scroll = 'both';
+			} else {
+				if (this.options.scrollX) this.options.scroll = 'horizontal';
+				if (this.options.scrollY) this.options.scroll = 'vertical';
+			}
+		}
+		// </0.1 compat>
 
 		var options = {
+			scroll: this.options.scroll,
+			scrollbar: this.options.scrollbar,
+			bounce: this.options.bounce,
 			momentum: this.options.momentum,
-			scrollX: this.options.scrollX,
-			scrollY: this.options.scrollY,
+			snapToPage: this.options.snapToPage,
+			snapToPageAt: this.options.snapToPageAt,
+			snapToPageSizeX: this.options.snapToPageSizeX,
+			snapToPageSizeY: this.options.snapToPageSizeY,
+			snapToPageDuration: this.options.snapToPageDuration,
+			snapToPageDelay: this.options.snapToPageDelay
 		};
-
-		this.contentElement.addEvent('touchcancel', this.bound('_onTouchCancel'));
-		this.contentElement.addEvent('touchstart', this.bound('_onTouchStart'));
-		this.contentElement.addEvent('touchend', this.bound('_onTouchEnd'));
 
 		this._scroller = Moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
 		this._scroller.addEvent('scroll', this.bound('_onScroll'));
 		this._scroller.addEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.addEvent('scrollstart', this.bound('_onScrollStart'));
+		this._scroller.addEvent('touchcancel', this.bound('_onTouchCancel'));
+		this._scroller.addEvent('touchstart', this.bound('_onTouchStart'));
+		this._scroller.addEvent('touchend', this.bound('_onTouchEnd'));
 
 		var name = this._scroller.getName();
 		if (name) {
@@ -8743,17 +8855,14 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-
-		this.contentElement.removeEvent('touchcancel', this.bound('_onTouchCancel'));
-		this.contentElement.removeEvent('touchstart', this.bound('_onTouchStart'));
-		this.contentElement.removeEvent('touchend', this.bound('_onTouchEnd'));
-
 		this._scroller.removeEvent('scroll', this.bound('_onScroll'));
 		this._scroller.removeEvent('scrollend', this.bound('_onScrollEnd'));
 		this._scroller.removeEvent('scrollstart', this.bound('_onScrollStart'));
+		this._scroller.removeEvent('touchcancel', this.bound('_onTouchCancel'));
+		this._scroller.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this._scroller.removeEvent('touchend', this.bound('_onTouchEnd'));
 		this._scroller.destroy();
 		this._scroller = null;
-
 		this.parent();
 	},
 
@@ -8771,10 +8880,28 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
 	getContentSize: function() {
 		return this.contentElement.getScrollSize();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getContentWrapperSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentWrapperSize: function() {
+		return this.contentWrapperElement.getSize();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getContentScroll
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentScroll: function() {
+		return this._scroller.getScroll();;
 	},
 
 	/**
@@ -8811,17 +8938,20 @@ Moobile.ScrollView = new Class({
 		if (pageX < 0) pageX = 0;
 		if (pageY < 0) pageY = 0;
 
-		var frame = this.getSize();
-		var total = this.getScrollSize();
+		var frame = this.getContentWrapperSize();
+		var total = this.getContentSize();
+
+		var pageSizeX = this.options.snapToPageSizeX || this.getContentWrapperSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getContentWrapperSize().y;
 
 		var xmax = total.x - frame.x;
 		var ymax = total.y - frame.y;
-		var x = (this.options.snapToPageSizeX || frame.x) * pageX;
-		var y = (this.options.snapToPageSizeY || frame.y) * pageY;
+		var x = pageSizeX * pageX;
+		var y = pageSizeY * pageY;
 		if (x > xmax) x = xmax;
 		if (y > ymax) y = ymax;
 
-		var scroll = this.getScroll();
+		var scroll = this.getContentScroll();
 		if (scroll.x !== x ||
 			scroll.y !== y) {
 			this.scrollTo(x, y, time);
@@ -8829,22 +8959,15 @@ Moobile.ScrollView = new Class({
 
 		if (this._page.x !== pageX ||
 			this._page.y !== pageY) {
-			this.fireEvent('scrolltopage', null, time);
+			this._pageOffset.x = Math.abs(x - pageX * pageSizeX);
+			this._pageOffset.y = Math.abs(y - pageY * pageSizeY);
+			this.fireEvent('scrolltopage', [this._page.x, this._page.y], time);
 		}
 
 		this._page.x = pageX;
 		this._page.y = pageY;
 
 		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScroll
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getScroll: function() {
-		return this._scroller.getScroll();
 	},
 
 	/**
@@ -8862,7 +8985,7 @@ Moobile.ScrollView = new Class({
 
 		if (pageSizeX && pageSizeY) {
 
-			var scroll = this.getScroll();
+			var scroll = this.getContentScroll();
 			scroll.x = scroll.x > 0 ? scroll.x : 0;
 			scroll.y = scroll.y > 0 ? scroll.y : 0;
 
@@ -8874,12 +8997,12 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getScrollSize
+	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#getPageOffset
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
-	getScrollSize: function() {
-		return this._scroller.getScrollSize();
+	getPageOffset: function() {
+		return this._pageOffset;
 	},
 
 	/**
@@ -8919,7 +9042,7 @@ Moobile.ScrollView = new Class({
 	 */
 	_snapToPage: function() {
 
-		var scroll = this.getScroll();
+		var scroll = this.getContentScroll();
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
 
@@ -8931,33 +9054,25 @@ Moobile.ScrollView = new Class({
 		if (moveX === 0 && moveY === 0)
 			return this;
 
-		var pageSizeX = this.options.snapToPageSizeX || this.getSize().x;
-		var pageSizeY = this.options.snapToPageSizeY || this.getSize().y;
-		var pageMoveX = Math.floor(absMoveX / pageSizeX);
-		var pageMoveY = Math.floor(absMoveY / pageSizeY);
-		var pageAreaX = (absMoveX - pageMoveX * pageSizeX) * 100 / pageSizeX;
-		var pageAreaY = (absMoveY - pageMoveY * pageSizeY) * 100 / pageSizeY;
-
-		var page = this.getPage();
-		if (moveX < 0) page.x = page.x + 1;
-		if (moveY < 0) page.y = page.y + 1;
-
-		var frame = this.getSize();
-		var total = this.getScrollSize();
-
-		if (scroll.x + frame.x === total.x ||
-			scroll.y + frame.y === total.y) {
-			// handles uneven pages
-			if ((scroll.x / pageSizeX - page.x) * 100 > 0) page.x = page.x + 1;
-			if ((scroll.y / pageSizeY - page.y) * 100 > 0) page.y = page.y + 1;
-		}
+		var scrollX = this.options.scroll === 'both' || this.options.scroll === 'horizontal';
+		var scrollY = this.options.scroll === 'both' || this.options.scroll === 'vertical';
 
 		var snapToPageAt = this.options.snapToPageAt;
 		var snapToPageDelay = this.options.snapToPageDelay;
 		var snapToPageDuration = this.options.snapToPageDuration
 
-		if (pageAreaX > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.x += moveX > 0 ? 1 : -1;
-		if (pageAreaY > snapToPageAt || this._activeTouchDuration < snapToPageDelay) page.y += moveY > 0 ? 1 : -1;
+		var pageSizeX = this.options.snapToPageSizeX || this.getContentWrapperSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getContentWrapperSize().y;
+		var pageMoveX = (absMoveX - Math.floor(absMoveX / pageSizeX) * pageSizeX) * 100 / pageSizeX;
+		var pageMoveY = (absMoveY - Math.floor(absMoveY / pageSizeY) * pageSizeY) * 100 / pageSizeY;
+
+		var page = this.getPage();
+
+		if (moveX < 0 || this._pageOffset.x > 0) page.x += 1;
+		if (moveY < 0 || this._pageOffset.y > 0) page.y += 1;
+
+		if (absMoveX >= 10 && (pageMoveX >= snapToPageAt || this._activeTouchDuration < snapToPageDelay)) page.x += moveX > 0 ? 1 : -1;
+		if (absMoveY >= 10 && (pageMoveY >= snapToPageAt || this._activeTouchDuration < snapToPageDelay)) page.y += moveY > 0 ? 1 : -1;
 
 		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
 
@@ -8988,7 +9103,7 @@ Moobile.ScrollView = new Class({
 		if (this._activeTouch === null) {
 			this._activeTouch = touch;
 			this._activeTouchTime = Date.now();
-			this._activeTouchStartScroll = this.getScroll();
+			this._activeTouchStartScroll = this.getContentScroll();
 		}
 	},
 
@@ -9043,9 +9158,44 @@ Moobile.ScrollView = new Class({
 	 */
 	_onScrollEnd: function() {
 		this.fireEvent('scrollend');
-	}
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getScrollSize: function() {
+		console.log('[DEPRECATION NOTICE] The method "getScrollSize" will be removed in 0.3, use the method "getContentSize" instead');
+		return this.getContentSize();
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getScroll: function() {
+		console.log('[DEPRECATION NOTICE] The method "getScroll" will be removed in 0.3, use the method "getContentScroll" instead');
+		return this.getContentScroll();
+	},
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/View#MoobileViewAt
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.ScrollView.at = function(path, options, name) {
+
+	var element = Element.at(path);
+	if (element) {
+		return Moobile.Component.create(Moobile.ScrollView, element, 'data-view', options, name);
+	}
+
+	return null;
+};
 
 //------------------------------------------------------------------------------
 // Roles
@@ -9235,7 +9385,7 @@ Moobile.ViewController = new Class({
 			this.viewDidLoad();
 		}
 
-		window.addEvent('rotate', this.bound('_onWindowRotate'));
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		return this;
 	},
@@ -9822,15 +9972,6 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didRotate
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didRotate: function(orientation) {
-
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidLoad
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -9885,6 +10026,15 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidRotate
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	viewDidRotate: function(orientation) {
+
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -9920,15 +10070,35 @@ Moobile.ViewController = new Class({
 		this._viewTransition = null;
 	},
 
-	_onWindowRotate: function(e) {
-		this.didRotate(window.orientationName);
-	},
-
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onViewReady: function() {
 		if (this._viewReady === false) {
 			this._viewReady = true;
 			this.viewDidBecomeReady();
 		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onWindowOrientationChange: function(e) {
+
+		var name = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
+
+		// <0.1-compat>
+		if (this.didRotate) {
+			this.didRotate(name);
+			console.log('[DEPRECATION NOTICE] The method "didRotate" will be removed in 0.4, use the method "viewDidRotate" instead');
+		}
+		// </0.1-compat>
+
+		this.viewDidRotate(name);
 	}
 
 });
