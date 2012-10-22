@@ -781,7 +781,7 @@ Moobile.ViewController = new Class({
 	 */
 	destroy: function() {
 
-		window.removeEvent('rotate', this.bound('_onWindowRotate'));
+		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.removeAllChildViewControllers(true);
 

@@ -48,9 +48,10 @@ Moobile.Scroller = new Class({
 	 * @since  0.2.0
 	 */
 	options: {
+		scroll: 'vertial',
+		scrollbar: 'vertical',
 		momentum: true,
-		scrollX: true,
-		scrollY: true,
+		bounce: true
 	},
 
 	/**

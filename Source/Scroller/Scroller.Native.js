@@ -181,7 +181,7 @@ Moobile.Scroller.Native = new Class({
 		var dirY = y = currY;
 
 		var update = function() {
-console.log('bin la');
+
 			if (elem.scrollLeft === x &&
 				elem.scrollTop === y) {
 				self.fireEvent('scroll');
@@ -195,8 +195,8 @@ console.log('bin la');
 			var scrollX = valueX + currX;
 			var scrollY = valueY + currY;
 
-			if ((scrollX >= x && dirX >= 0) || (scrollX < x && dirX < 0)) scrollX = x ;
-			if ((scrollY >= y && dirY >= 0) || (scrollY < y && dirY < 0)) scrollTop = y;
+			if ((scrollX >= x && dirX >= 0) || (scrollX < x && dirX < 0)) scrollX = x;
+			if ((scrollY >= y && dirY >= 0) || (scrollY < y && dirY < 0)) scrollY = y;
 
 			elem.scrollLeft = scrollX;
 			elem.scrollTop  = scrollY;
@@ -205,9 +205,8 @@ console.log('bin la');
 			self._animation = requestAnimationFrame(update);
 		};
 
-		//this._animation = requestAnimationFrame(update);
-console.log('wat');
-update();
+		this._animation = requestAnimationFrame(update);
+
 		return this;
 	},
 
@@ -232,8 +231,10 @@ update();
 		var contentSize = this.contentElement.getScrollSize();
 
 		if (this.options.momentum) {
-			if (this.options.scrollY && contentSize.y <= wrapperSize.y) this.contentElement.setStyle('min-height', wrapperSize.y + 1);
-			if (this.options.scrollX && contentSize.x <= wrapperSize.x) this.contentElement.setStyle('min-width',  wrapperSize.x + 1);
+			var scrollX = this.options.scroll === 'both' || this.options.scroll === 'horizontal';
+			var scrollY = this.options.scroll === 'both' || this.options.scroll === 'vertical';
+			if (scrollY && contentSize.y <= wrapperSize.y) this.contentElement.setStyle('min-height', wrapperSize.y + 1);
+			if (scrollX && contentSize.x <= wrapperSize.x) this.contentElement.setStyle('min-width',  wrapperSize.x + 1);
 		}
 
 		return this;
