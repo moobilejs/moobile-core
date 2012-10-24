@@ -1709,7 +1709,7 @@ provides:
 ...
 */
 
-Browser.Platform.cordova = window.Cordova && Browser.isMobile && !Browser.safari;
+Browser.Platform.cordova = (window.Phonegap || window.Cordova || window.cordova) && Browser.isMobile && !Browser.safari;
 
 
 /*
@@ -7424,6 +7424,8 @@ Moobile.Scroller = new Class({
 
 Moobile.Scroller.create = function(contentElement, contentWrapperElement, scrollers, options) {
 
+	var scroller = null;
+
 	scrollers = scrollers ? Array.from(scrollers) : ['IScroll.Android', 'Native', 'IScroll'];
 
 	for (var i = 0; i < scrollers.length; i++) {
@@ -7932,7 +7934,7 @@ Moobile.Scroller.Native = new Class({
 		var currY = elem.scrollTop;
 
 		var dirX = x - currX;
-		var dirY = y = currY;
+		var dirY = y - currY;
 
 		var update = function() {
 
