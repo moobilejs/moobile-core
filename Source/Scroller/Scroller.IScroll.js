@@ -175,7 +175,8 @@ Moobile.Scroller.IScroll = new Class({
 	_onBeforeScrollStart: function(e) {
 		var target = e.target.get('tag');
 		if (target !== 'input' &&
-			target !== 'select') {
+			target !== 'select' &&
+			target !== 'textarea') {
 			e.preventDefault();
 		}
 	},

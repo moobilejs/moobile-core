@@ -183,23 +183,17 @@ window.addEvent('domready', function(e) {
 	});
 
 	document.addEvent('touchmove', function(e) {
-
 		var touches = e.changedTouches;
-
 		for (var i = 0, l = touches.length; i < l; i++) {
 			if (scrolls[touches[i].identifier] === false) e.preventDefault();
 		}
-
 	});
 
 	document.addEvent('touchend', function(e) {
-
 		var touches = e.changedTouches;
-
 		for (var i = 0, l = touches.length; i < l; i++) {
 			delete scrolls[touches[i].identifier];
 		}
-
 	});
 
 });
