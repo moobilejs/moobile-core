@@ -178,7 +178,7 @@ Moobile.Scroller.Native = new Class({
 		var currY = elem.scrollTop;
 
 		var dirX = x - currX;
-		var dirY = y = currY;
+		var dirY = y - currY;
 
 		var update = function() {
 
