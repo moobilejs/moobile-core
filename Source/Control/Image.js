@@ -172,7 +172,16 @@ Moobile.Image = new Class({
 	 * @since  0.2.0
 	 */
 	isEmpty: function() {
-		return this.getSource() === '';
+		return !this.getSource();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	show: function() {
+		return this.isEmpty() ? this : this.parent();
 	},
 
 	/**
