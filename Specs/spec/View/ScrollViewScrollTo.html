@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=medium-dpi" />
+
+		<title></title>
+
+		<!-- moobile stylesheets -->
+		<link rel="stylesheet" href="../../../Styles/moobile.css" />
+		<link rel="stylesheet" href="../../../Styles/ios/css/moobile.ios.css" />
+
+		<!-- mootools -->
+		<script type="text/javascript" src="../../libs/mootools-core-1.4.5.js"></script>
+		<script type="text/javascript" src="../../libs/mootools-more-1.4.0.1.js"></script>
+
+		<!-- moobile -->
+		<script type="text/javascript" src="../../../moobile-0.2.js"></script>
+
+	</head>
+	<body>
+
+		<script type="text/javascript">
+
+			window.addEvent('ready', function() {
+
+				var window = new Moobile.Window(document.id('window'));
+				var view = new Moobile.ScrollView(document.id('view'));
+
+				var top = view.getChildComponent('top');
+				var mid = view.getChildComponent('mid');
+				var bot = view.getChildComponent('bot');
+
+				top.addEvent('tap', function() {
+					view.scrollToElement(mid);
+				});
+
+				mid.addEvent('tap', function() {
+					view.scrollToElement(bot);
+				});
+
+				bot.addEvent('tap', function() {
+					view.scrollToElement(top);
+				});
+
+			});
+
+		</script>
+
+
+		<div id="window">
+			<div id="view">
+
+				<div data-role="button" data-name="top" class="top">To Middle</div>
+
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+				<div data-role="button" data-name="mid" class="mid">To Bottom</div>
+
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+				<div data-role="button" data-name="bot" class="bot">To Top</div>
+
+			</div>
+		</div>
+
+	</body>
+</html>
