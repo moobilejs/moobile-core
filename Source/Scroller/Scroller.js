@@ -127,6 +127,8 @@ Moobile.Scroller = new Class({
 
 Moobile.Scroller.create = function(contentElement, contentWrapperElement, scrollers, options) {
 
+	var scroller = null;
+
 	scrollers = scrollers ? Array.from(scrollers) : ['IScroll.Android', 'Native', 'IScroll'];
 
 	for (var i = 0; i < scrollers.length; i++) {
