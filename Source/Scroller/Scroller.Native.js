@@ -216,8 +216,14 @@ Moobile.Scroller.Native = new Class({
 	 * @since  0.2.0
 	 */
 	scrollToElement: function(element, time) {
-		var postition = element.getPosition(this.contentScrollerElement);
-		return this.scrollTo(position.x, position.y, time);
+
+		var elem = document.id(element);
+		if (elem) {
+			var p = element.getPosition(this.contentElement);
+			this.scrollTo(p.x, p.y, time);
+		}
+
+		return this;
 	},
 
 	/**
