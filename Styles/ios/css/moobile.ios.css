@@ -1,3 +1,14 @@
+/* General Fixes
+-----------------------------------------------------------------------------*/
+
+* {
+	/* This prevents a lot a flicker, especially on iOS 6 */
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+}
 
 /* Body
 -----------------------------------------------------------------------------*/
