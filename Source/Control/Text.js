@@ -74,7 +74,7 @@ Moobile.Text = new Class({
 	 * @since  0.2.0
 	 */
 	isEmpty: function() {
-		return this.getText() === '';
+		return !this.getText();
 	}
 
 });
