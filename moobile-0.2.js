@@ -2928,9 +2928,7 @@ Moobile.Component = new Class({
 		this._visible = true;
 		this.element.show();
 		this.element.removeClass('hidden');
-
-	//	this._children.invoke('show');
-
+		this._children.invoke('show');
 		this.didShow();
 
 		return this.fireEvent('show');
@@ -2950,9 +2948,7 @@ Moobile.Component = new Class({
 		this._visible = false;
 		this.element.hide();
 		this.element.addClass('hidden');
-
-	//	this._children.invoke('hide');
-
+		this._children.invoke('hide');
 		this.didHide();
 
 		return this.fireEvent('hide');
@@ -6006,7 +6002,7 @@ Moobile.Image = new Class({
 	 */
 	setSource: function(source) {
 
-		this._source = source;
+		this._source = source || '';
 
 		if (this._image) {
 			this._image.removeEvent('load', this.bound('_onLoad'));
@@ -6071,7 +6067,16 @@ Moobile.Image = new Class({
 	 * @since  0.2.0
 	 */
 	isEmpty: function() {
-		return this.getSource() === '';
+		return !this.getSource();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	show: function() {
+		return this.isEmpty() ? this : this.parent();
 	},
 
 	/**
@@ -6200,7 +6205,7 @@ Moobile.Text = new Class({
 	 * @since  0.1.0
 	 */
 	setText: function(text) {
-		this.element.set('html', text instanceof Moobile.Text ? text.getText() : text);
+		this.element.set('html', text instanceof Moobile.Text ? text.getText() : (text || ''));
 		return this;
 	},
 
@@ -6219,7 +6224,7 @@ Moobile.Text = new Class({
 	 * @since  0.2.0
 	 */
 	isEmpty: function() {
-		return this.getText() === '';
+		return !this.getText();
 	}
 
 });
@@ -6388,6 +6393,17 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
+	didBuild: function() {
+		this.parent();
+		this.setTitle('');
+		this.setMessage('');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	destroy: function() {
 
 		this.removeEvent('animationend', this.bound('_onAnimationEnd'));
@@ -6502,21 +6518,21 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
 	getButtons: function() {
 		return this.getChildComponentsOfType(Moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentOfType(Moobile.Button, name);
 	},
 
 	/**
@@ -6542,7 +6558,7 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	removeAllButton: function() {
+	removeAllButtons: function() {
 		return this.removeAllChildComponentsOfType(Moobile.Button);
 	},
 
@@ -7480,23 +7496,17 @@ window.addEvent('domready', function(e) {
 	});
 
 	document.addEvent('touchmove', function(e) {
-
 		var touches = e.changedTouches;
-
 		for (var i = 0, l = touches.length; i < l; i++) {
 			if (scrolls[touches[i].identifier] === false) e.preventDefault();
 		}
-
 	});
 
 	document.addEvent('touchend', function(e) {
-
 		var touches = e.changedTouches;
-
 		for (var i = 0, l = touches.length; i < l; i++) {
 			delete scrolls[touches[i].identifier];
 		}
-
 	});
 
 });
@@ -7679,7 +7689,8 @@ Moobile.Scroller.IScroll = new Class({
 	_onBeforeScrollStart: function(e) {
 		var target = e.target.get('tag');
 		if (target !== 'input' &&
-			target !== 'select') {
+			target !== 'select' &&
+			target !== 'textarea') {
 			e.preventDefault();
 		}
 	},
