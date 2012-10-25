@@ -141,6 +141,17 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
+	didBuild: function() {
+		this.parent();
+		this.setTitle('');
+		this.setMessage('');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	destroy: function() {
 
 		this.removeEvent('animationend', this.bound('_onAnimationEnd'));
@@ -255,21 +266,21 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtons
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
 	getButtons: function() {
 		return this.getChildComponentsOfType(Moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentOfType(Moobile.Button, name);
 	},
 
 	/**
@@ -295,7 +306,7 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	removeAllButton: function() {
+	removeAllButtons: function() {
 		return this.removeAllChildComponentsOfType(Moobile.Button);
 	},
 
