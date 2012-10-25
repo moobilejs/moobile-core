@@ -28,7 +28,7 @@ describe('Control/Text', function() {
 		t.setText(undefined);
 		expect(t.getText()).toEqual('');
 		t.setText(0);
-		expect(t.getText()).toEqual('');
+		expect(t.getText()).toEqual('0');
 	});
 
 });

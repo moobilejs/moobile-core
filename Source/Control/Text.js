@@ -55,7 +55,7 @@ Moobile.Text = new Class({
 	 * @since  0.1.0
 	 */
 	setText: function(text) {
-		this.element.set('html', text instanceof Moobile.Text ? text.getText() : (text || ''));
+		this.element.set('html',  text instanceof Moobile.Text ? text.getText() : (text || typeof text === 'number' ? text + '' : ''));
 		return this;
 	},
 
