@@ -126,6 +126,15 @@ Moobile.ViewTransition.Cover.Box = new Class({
 		animation.addEvent('start', onStart);
 		animation.addEvent('end', onEnd);
 		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
+		return false;
 	}
 
 });

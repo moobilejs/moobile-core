@@ -10727,7 +10727,7 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	didEnter: function(viewToShow, viewToHide, parentView) {
-		viewToHide.hide();
+		if (this.shouldHideViewToHideOnEnter(viewToShow, viewToHide, parentView)) viewToHide.hide();
 		viewToHide.enableTouch();
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
@@ -10740,11 +10740,29 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
-		viewToHide.hide();
+		if (this.shouldHideViewToHideOnEnter(viewToShow, viewToHide, parentView)) viewToHide.hide();
 		viewToHide.enableTouch();
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
 		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#shouldHideViewToHideOnEnter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
+		return true;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#shouldHideViewToHideOnLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnLeave: function(viewToShow, viewToHide, parentView) {
+		return true;
 	},
 
 	/**
@@ -11133,6 +11151,15 @@ Moobile.ViewTransition.Cover.Box = new Class({
 		animation.addEvent('start', onStart);
 		animation.addEvent('end', onEnd);
 		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
+		return false;
 	}
 
 });
@@ -11266,6 +11293,15 @@ Moobile.ViewTransition.Cover.Page = new Class({
 		animation.addEvent('start', onStart);
 		animation.addEvent('end', onEnd);
 		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
+		return false;
 	}
 
 });
