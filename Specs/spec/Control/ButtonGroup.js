@@ -8,7 +8,7 @@ describe('Control/ButtonGroup', function() {
 		spyOn(g, 'didAddChildComponent');
 		var b1 = new Moobile.Button();
 		g.addButton(b1);
-		expect(g.getChildComponents()[0]).toEqual(b1);
+		expect(g.getButtons()[0]).toEqual(b1);
 		expect(g.willAddChildComponent).toHaveBeenCalledWith(b1);
 		expect(g.didAddChildComponent).toHaveBeenCalledWith(b1);
 	});

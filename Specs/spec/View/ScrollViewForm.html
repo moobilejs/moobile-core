@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=medium-dpi" />
+
+		<title></title>
+
+		<!-- moobile stylesheets -->
+		<link rel="stylesheet" href="../../../Styles/moobile.css" />
+		<link rel="stylesheet" href="../../../Styles/ios/css/moobile.ios.css" />
+
+		<!-- mootools -->
+		<script type="text/javascript" src="../../libs/mootools-core-1.4.5.js"></script>
+		<script type="text/javascript" src="../../libs/mootools-more-1.4.0.1.js"></script>
+
+		<!-- moobile -->
+		<script type="text/javascript" src="../../../moobile-0.2.js"></script>
+
+	</head>
+	<body>
+
+		<script type="text/javascript">
+
+			window.addEvent('ready', function() {
+
+				var window = new Moobile.Window(document.id('window'));
+				var view = new Moobile.ScrollView(document.id('view'));
+
+
+
+			});
+
+		</script>
+
+
+		<div id="window">
+			<div id="view">
+
+				<input type="text" />
+				<textarea></textarea>
+				<input type="button" value="Button" />
+
+			</div>
+		</div>
+
+	</body>
+</html>

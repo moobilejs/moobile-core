@@ -17,4 +17,18 @@ describe('Control/Text', function() {
 		expect(new Moobile.Text().setText('<b>foo</b>').getText()).toEqual('<b>foo</b>');
 	});
 
+	it('should set an empty string for bad inputs', function() {
+		var t = new Moobile.Text();
+		t.setText(false);
+		expect(t.getText()).toEqual('');
+		t.setText(null);
+		expect(t.getText()).toEqual('');
+		t.setText(false);
+		expect(t.getText()).toEqual('');
+		t.setText(undefined);
+		expect(t.getText()).toEqual('');
+		t.setText(0);
+		expect(t.getText()).toEqual('');
+	});
+
 });

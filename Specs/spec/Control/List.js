@@ -8,7 +8,7 @@ describe('Control/List', function() {
 		spyOn(l, 'willAddChildComponent');
 		spyOn(l, 'didAddChildComponent');
 		l.addItem(i1);
-		expect(l.getChildComponents()[0]).toEqual(i1);
+		expect(l.getItems()[0]).toEqual(i1);
 		expect(l.willAddChildComponent).toHaveBeenCalledWith(i1);
 		expect(l.didAddChildComponent).toHaveBeenCalledWith(i1);
 	});
