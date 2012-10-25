@@ -107,7 +107,7 @@ Moobile.Image = new Class({
 	 */
 	setSource: function(source) {
 
-		this._source = source;
+		this._source = source || '';
 
 		if (this._image) {
 			this._image.removeEvent('load', this.bound('_onLoad'));
