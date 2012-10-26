@@ -1280,17 +1280,20 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
 	 	context.__roles__ = {};
 	}
 
-	if (typeof options === 'function') {
-		handler = options;
-		options = {};
-	}
+	if (options) {
 
-	// <0.1-compat>
-	if (typeof handler === 'object') {
-		options.traversable = handler.traversable;
-		handler = handler.behavior;
+		switch (typeof options) {
+
+			case 'function':
+				handler = options;
+				options = {};
+				break;
+
+			case 'object':
+				if (typeof options.behavior === 'function') handler = options.behavior;
+				break;
+		}
 	}
-	// </0.1-compat>
 
 	context.__roles__[name] = {
 		handler: handler || function() {},
