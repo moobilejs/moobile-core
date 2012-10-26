@@ -95,7 +95,15 @@ Moobile.Image = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		this._image = null;
+
+		if (this._image) {
+			this._image.removeEvent('load', this.bound('_onLoad'));
+			this._image.src = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+			this._image = null;
+		}
+
+		this.element.set('src', 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+
 		this.parent();
 	},
 
