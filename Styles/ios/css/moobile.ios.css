@@ -64,10 +64,17 @@ input, select, textarea {
 	font-size: 12px;
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+	.view {
+		background: #fff url(../images/ios/view-background-2x.png);
+	}
+}
+
 /* Style Dark */
 
 .view.style-dark {
 	background: #000;
+	background-size: auto auto;
 	color: #fff;
 	text-shadow: none;
 }
@@ -77,10 +84,22 @@ input, select, textarea {
 	color: #fff;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
-	.view {
-		background: #fff url(../images/ios/view-background-2x.png);
-	}
+/* Style Light */
+
+.view.style-light {
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e2e5ea), color-stop(1, #d0d2d8)) !important;
+	background: -webkit-linear-gradient(bottom, #e2e5ea, #d0d2d8) !important;
+	background:    -moz-linear-gradient(bottom, #e2e5ea, #d0d2d8);
+	background:     -ms-linear-gradient(bottom, #e2e5ea, #d0d2d8);
+	background:      -o-linear-gradient(bottom, #e2e5ea, #d0d2d8);
+	background:         linear-gradient(bottom, #e2e5ea, #d0d2d8);
+	background-size: auto auto;
+	color: #576075;
+}
+
+.view.style-light h1,
+.view.style-light h2 {
+	color: #576075;
 }
 
 /* ScrollView
@@ -183,6 +202,7 @@ input, select, textarea {
 }
 
 .bar:after {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0, 0, 0, 0.25)), color-stop(1, rgba(255, 255, 255, 0.05)));
 	background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
 	background:    -moz-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
 	background:     -ms-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
@@ -193,6 +213,7 @@ input, select, textarea {
 }
 
 .bar:before {
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(0, 0, 0, 0.25)), color-stop(1, rgba(255, 255, 255, 0.05)));
 	background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
 	background:    -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
 	background:     -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
@@ -1227,7 +1248,7 @@ input, select, textarea {
 
 .list-item.is-selected,
 .list-item.is-highlighted {
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6)) !important;/
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #058DF5), color-stop(1, #0160E6)) !important;
 	background: -webkit-linear-gradient(bottom, #058DF5, #0160E6) !important;
 	background:    -moz-linear-gradient(bottom, #058DF5, #0160E6) !important;
 	background:     -ms-linear-gradient(bottom, #058DF5, #0160E6) !important;
@@ -1567,31 +1588,31 @@ input, select, textarea {
 
 /* Show Animation */
 
-@-webkit-keyframes anim-show-alert-ios {
+@-webkit-keyframes show-alert-ios {
 	0%   { -webkit-transform: scale(0.6); opacity: 0; }
 	45%  { -webkit-transform: scale(1.1); opacity: 1; }
 	75%  { -webkit-transform: scale(0.9); }
 	100% { -webkit-transform: scale(1.0); }
 }
-@-moz-keyframes anim-show-alert-ios {
+@-moz-keyframes show-alert-ios {
 	0%   { -webkit-transform: scale(0.6); opacity: 0; }
 	45%  { -webkit-transform: scale(1.1); opacity: 1; }
 	75%  { -webkit-transform: scale(0.9); }
 	100% { -webkit-transform: scale(1.0); }
 }
-@-ms-keyframes anim-show-alert-ios {
+@-ms-keyframes show-alert-ios {
 	0%   { -webkit-transform: scale(0.6); opacity: 0; }
 	45%  { -webkit-transform: scale(1.1); opacity: 1; }
 	75%  { -webkit-transform: scale(0.9); }
 	100% { -webkit-transform: scale(1.0); }
 }
-@-o-keyframes anim-show-alert-ios {
+@-o-keyframes show-alert-ios {
 	0%   { -webkit-transform: scale(0.6); opacity: 0; }
 	45%  { -webkit-transform: scale(1.1); opacity: 1; }
 	75%  { -webkit-transform: scale(0.9); }
 	100% { -webkit-transform: scale(1.0); }
 }
-@keyframes anim-show-alert-ios {
+@keyframes show-alert-ios {
 	0%   { -webkit-transform: scale(0.6); opacity: 0; }
 	45%  { -webkit-transform: scale(1.1); opacity: 1; }
 	75%  { -webkit-transform: scale(0.9); }
@@ -1599,42 +1620,42 @@ input, select, textarea {
 }
 
 .alert.show-animated .alert-box {
-	-webkit-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	   -moz-animation: show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	    -ms-animation: show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	     -o-animation: show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
+	        animation: show-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1);
 }
 
 /* Hide Animation */
 
-@-webkit-keyframes anim-hide-alert-ios {
+@-webkit-keyframes hide-alert-ios {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-moz-keyframes anim-hide-alert-ios {
+@-moz-keyframes hide-alert-ios {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-ms-keyframes anim-hide-alert-ios {
+@-ms-keyframes hide-alert-ios {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-o-keyframes anim-hide-alert-ios {
+@-o-keyframes hide-alert-ios {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@keyframes anim-hide-alert-ios {
+@keyframes hide-alert-ios {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
 
 .alert.hide-animated .alert-box {
-	-webkit-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	   -moz-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	    -ms-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	     -o-animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
-	        animation: anim-hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	-webkit-animation: hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	   -moz-animation: hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	    -ms-animation: hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	     -o-animation: hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
+	        animation: hide-alert-ios 400ms cubic-bezier(0.5, 0.1, 0.5, 1) 1;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
@@ -1676,7 +1697,7 @@ input, select, textarea {
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-activity-indicator-active-ios {
+@-webkit-keyframes rotate-activity-indicator-ios {
 	0.00%  { -webkit-transform: rotate(0deg);  }
 	8.32%  { -webkit-transform: rotate(0deg);  }
 	8.33%  { -webkit-transform: rotate(30deg); }
@@ -1702,7 +1723,7 @@ input, select, textarea {
 	91.66% { -webkit-transform: rotate(330deg); }
 	99.98% { -webkit-transform: rotate(330deg); }
 }
-@-moz-keyframes anim-activity-indicator-active-ios {
+@-moz-keyframes rotate-activity-indicator-ios {
 	0.00%  { -moz-transform: rotate(0deg);  }
 	8.32%  { -moz-transform: rotate(0deg);  }
 	8.33%  { -moz-transform: rotate(30deg); }
@@ -1728,7 +1749,7 @@ input, select, textarea {
 	91.66% { -moz-transform: rotate(330deg); }
 	99.98% { -moz-transform: rotate(330deg); }
 }
-@-ms-keyframes anim-activity-indicator-active-ios {
+@-ms-keyframes rotate-activity-indicator-ios {
 	0.00%  { -ms-transform: rotate(0deg);  }
 	8.32%  { -ms-transform: rotate(0deg);  }
 	8.33%  { -ms-transform: rotate(30deg); }
@@ -1754,7 +1775,7 @@ input, select, textarea {
 	91.66% { -ms-transform: rotate(330deg); }
 	99.98% { -ms-transform: rotate(330deg); }
 }
-@-o-keyframes anim-activity-indicator-active-ios {
+@-o-keyframes rotate-activity-indicator-ios {
 	0.00%  { -o-transform: rotate(0deg);  }
 	8.32%  { -o-transform: rotate(0deg);  }
 	8.33%  { -o-transform: rotate(30deg); }
@@ -1780,7 +1801,7 @@ input, select, textarea {
 	91.66% { -o-transform: rotate(330deg); }
 	99.98% { -o-transform: rotate(330deg); }
 }
-@keyframes anim-activity-indicator-active-ios {
+@keyframes rotate-activity-indicator-ios {
 	0.00%  { transform: rotate(0deg);  }
 	8.32%  { transform: rotate(0deg);  }
 	8.33%  { transform: rotate(30deg); }
@@ -1820,11 +1841,11 @@ input, select, textarea {
 }
 
 .activity-indicator.active {
-	-webkit-animation: anim-activity-indicator-active-ios 1s infinite linear;
-	   -moz-animation: anim-activity-indicator-active-ios 1s infinite linear;
-	    -ms-animation: anim-activity-indicator-active-ios 1s infinite linear;
-	     -o-animation: anim-activity-indicator-active-ios 1s infinite linear;
-	        animation: anim-activity-indicator-active-ios 1s infinite linear;
+	-webkit-animation: rotate-activity-indicator-ios 1s infinite linear;
+	   -moz-animation: rotate-activity-indicator-ios 1s infinite linear;
+	    -ms-animation: rotate-activity-indicator-ios 1s infinite linear;
+	     -o-animation: rotate-activity-indicator-ios 1s infinite linear;
+	        animation: rotate-activity-indicator-ios 1s infinite linear;
 	-webkit-animation-fill-mode: both;
 	   -moz-animation-fill-mode: both;
 	    -ms-animation-fill-mode: both;
@@ -2220,7 +2241,15 @@ input, select, textarea {
 	    -ms-box-shadow: 0px 0px 10px #000000;
 	     -o-box-shadow: 0px 0px 10px #000000;
 	        box-shadow: 0px 0px 10px #000000;
-	margin-left: auto;
-	margin-right: auto;
-	width: 768px;
+}
+
+/* Transition Cover Box (Enter)
+-----------------------------------------------------------------------------*/
+
+.transition-cover-box-foreground-view {
+	-webkit-box-shadow: 0px 0px 10px #000000;
+	   -moz-box-shadow: 0px 0px 10px #000000;
+	    -ms-box-shadow: 0px 0px 10px #000000;
+	     -o-box-shadow: 0px 0px 10px #000000;
+	        box-shadow: 0px 0px 10px #000000;
 }

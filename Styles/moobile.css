@@ -751,44 +751,44 @@ input, select, textarea {
 /* Overlay
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-show-overlay {
+@-webkit-keyframes show-overlay {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@-moz-keyframes anim-show-overlay {
+@-moz-keyframes show-overlay {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@-ms-keyframes anim-show-overlay {
+@-ms-keyframes show-overlay {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@-o-keyframes anim-show-overlay {
+@-o-keyframes show-overlay {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@keyframes anim-show-overlay {
+@keyframes show-overlay {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
 
-@-webkit-keyframes anim-hide-overlay {
+@-webkit-keyframes hide-overlay {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-moz-keyframes anim-hide-overlay {
+@-moz-keyframes hide-overlay {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-ms-keyframes anim-hide-overlay {
+@-ms-keyframes hide-overlay {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-o-keyframes anim-hide-overlay {
+@-o-keyframes hide-overlay {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@keyframes anim-hide-overlay {
+@keyframes hide-overlay {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
@@ -814,11 +814,11 @@ input, select, textarea {
 }
 
 .overlay.show-animated {
-	-webkit-animation: anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	   -moz-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	    -ms-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	     -o-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	        animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 	   -moz-animation-fill-mode: both;
 	    -ms-animation-fill-mode: both;
@@ -827,11 +827,11 @@ input, select, textarea {
 }
 
 .overlay.hide-animated {
-	-webkit-animation: anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	   -moz-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	    -ms-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	     -o-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	        animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 	   -moz-animation-fill-mode: both;
 	    -ms-animation-fill-mode: both;
@@ -952,33 +952,33 @@ input, select, textarea {
 
 /* Show Animation */
 
-@-webkit-keyframes anim-show-alert {
+@-webkit-keyframes show-alert {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@-moz-keyframes anim-show-alert {
+@-moz-keyframes show-alert {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@-ms-keyframes anim-show-alert {
+@-ms-keyframes show-alert {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@-o-keyframes anim-show-alert {
+@-o-keyframes show-alert {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
-@keyframes anim-show-alert {
+@keyframes show-alert {
 	from { opacity: 0; }
 	to   { opacity: 1; }
 }
 
 .alert.show-animated .alert-box {
-	-webkit-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	   -moz-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	    -ms-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	     -o-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	        animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 	   -moz-animation-fill-mode: both;
 	    -ms-animation-fill-mode: both;
@@ -988,33 +988,33 @@ input, select, textarea {
 
 /* Hide Animated */
 
-@-webkit-keyframes anim-hide-alert {
+@-webkit-keyframes hide-alert {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-moz-keyframes anim-hide-alert {
+@-moz-keyframes hide-alert {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-ms-keyframes anim-hide-alert {
+@-ms-keyframes hide-alert {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@-o-keyframes anim-hide-alert {
+@-o-keyframes hide-alert {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
-@keyframes anim-hide-alert {
+@keyframes hide-alert {
 	from { opacity: 1; }
 	to   { opacity: 0; }
 }
 
 .alert.hide-animated .alert-box {
-	-webkit-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	   -moz-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	    -ms-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	     -o-animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-	        animation: anim-hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	-webkit-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	   -moz-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	    -ms-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	     -o-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+	        animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
 	-webkit-animation-fill-mode: both;
 	   -moz-animation-fill-mode: both;
 	    -ms-animation-fill-mode: both;
@@ -1029,23 +1029,23 @@ input, select, textarea {
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-activity-indicator-active {
+@-webkit-keyframes rotate-activity-indicator {
 	from { -webkit-transform: rotate(0deg); }
 	to   { -webkit-transform: rotate(360deg); }
 }
-@-moz-keyframes anim-activity-indicator-active {
+@-moz-keyframes rotate-activity-indicator {
 	from { -moz-transform: rotate(0deg); }
 	to   { -moz-transform: rotate(360deg); }
 }
-@-ms-keyframes anim-activity-indicator-active {
+@-ms-keyframes rotate-activity-indicator {
 	from { -ms-transform: rotate(0deg); }
 	to   { -ms-transform: rotate(360deg); }
 }
-@-o-keyframes anim-activity-indicator-active {
+@-o-keyframes rotate-activity-indicator {
 	from { -o-transform: rotate(0deg); }
 	to   { -o-transform: rotate(360deg); }
 }
-@keyframes anim-activity-indicator-active {
+@keyframes rotate-activity-indicator {
 	from { transform: rotate(0deg); }
 	to   { transform: rotate(360deg); }
 }
@@ -1064,11 +1064,11 @@ input, select, textarea {
 }
 
 .activity-indicator.active {
-	-webkit-animation: anim-activity-indicator-active 1s infinite linear;
-	   -moz-animation: anim-activity-indicator-active 1s infinite linear;
-	    -ms-animation: anim-activity-indicator-active 1s infinite linear;
-	     -o-animation: anim-activity-indicator-active 1s infinite linear;
-	        animation: anim-activity-indicator-active 1s infinite linear;
+	-webkit-animation: rotate-activity-indicator 1s infinite linear;
+	   -moz-animation: rotate-activity-indicator 1s infinite linear;
+	    -ms-animation: rotate-activity-indicator 1s infinite linear;
+	     -o-animation: rotate-activity-indicator 1s infinite linear;
+	        animation: rotate-activity-indicator 1s infinite linear;
 	-webkit-animation-fill-mode: both;
 	   -moz-animation-fill-mode: both;
 	    -ms-animation-fill-mode: both;
@@ -1359,23 +1359,23 @@ input, select, textarea {
 /* Transition Cover (Leave)
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-cover-leave {
+@-webkit-keyframes transition-cover-leave {
 	from { -webkit-transform: translate3d(0, 0, 0); }
 	to   { -webkit-transform: translate3d(0, 100%, 0); }
 }
-@-moz-keyframes anim-cover-leave {
+@-moz-keyframes transition-cover-leave {
 	from { -moz-transform: translate3d(0, 0, 0); }
 	to   { -moz-transform: translate3d(0, 100%, 0); }
 }
-@-ms-keyframes anim-cover-leave {
+@-ms-keyframes transition-cover-leave {
 	from { -ms-transform: translate3d(0, 0, 0 }
 	to   { -ms-transform: translate3d(0, 100%, 0); }
 }
-@-o-keyframes anim-cover-leave {
+@-o-keyframes transition-cover-leave {
 	from { -o-transform: translate3d(0, 0, 0); }
 	to   { -o-transform: translate3d(0, 100%, 0); }
 }
-@keyframes anim-cover-leave {
+@keyframes transition-cover-leave {
 	from { transform: translate3d(0, 0, 0); }
 	to   { transform: translate3d(0, 100%, 0); }
 }
@@ -1390,11 +1390,11 @@ input, select, textarea {
 }
 
 .transition-cover-leave .transition-view-to-hide {
-	-webkit-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: anim-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	z-index: 75;
 }
 
@@ -1434,17 +1434,14 @@ input, select, textarea {
 }
 
 .transition-cover-page-foreground-view {
-	-webkit-box-shadow: 0px 0px 10px #000000;
-	   -moz-box-shadow: 0px 0px 10px #000000;
-		-ms-box-shadow: 0px 0px 10px #000000;
-		 -o-box-shadow: 0px 0px 10px #000000;
-			box-shadow: 0px 0px 10px #000000;
 	-webkit-box-flex: 0;                                         /* Important */
 	   -moz-box-flex: 0;                                         /* Important */
 		-ms-box-flex: 0;                                         /* Important */
 		 -o-box-flex: 0;                                         /* Important */
 			box-flex: 0;                                         /* Important */
 	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
 	width: 768px;
 }
 
@@ -1499,23 +1496,23 @@ input, select, textarea {
 /* Transition Cover Page Leave
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-cover-page-leave {
+@-webkit-keyframes transition-cover-page-leave {
 	from { -webkit-transform: translate3d(0, -100%, 0); }
 	to   { -webkit-transform: translate3d(0, 0, 0); }
 }
-@-moz-keyframes anim-cover-page-leave {
+@-moz-keyframes transition-cover-page-leave {
 	from { -moz-transform: translate3d(0, -100%, 0); }
 	to   { -moz-transform: translate3d(0, 0, 0); }
 }
-@-ms-keyframes anim-cover-page-leave {
+@-ms-keyframes transition-cover-page-leave {
 	from { -ms-transform: translate3d(0, -100%, 0); }
 	to   { -ms-transform: translate3d(0, 0, 0); }
 }
-@-o-keyframes anim-cover-page-leave {
+@-o-keyframes transition-cover-page-leave {
 	from { -o-transform: translate3d(0, -100%, 0); }
 	to   { -o-transform: translate3d(0, 0, 0); }
 }
-@keyframes anim-cover-page-leave {
+@keyframes transition-cover-page-leave {
 	from { transform: translate3d(0, -100%, 0); }
 	to   { transform: translate3d(0, 0, 0); }
 }
@@ -1525,22 +1522,22 @@ input, select, textarea {
 }
 
 .transition-cover-page-leave .transition-cover-page-foreground-view-wrapper {
-	-webkit-animation: anim-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: anim-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-		-ms-animation: anim-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-		 -o-animation: anim-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-			animation: anim-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Transition Cover Box (Shared)
 -----------------------------------------------------------------------------*/
 
 .transition-cover-box-foreground-view-wrapper {
-	-webkit-transform: translate3d(0, -100%, 0);                        /* Important */
-	   -moz-transform: translate3d(0, -100%, 0);                        /* Important */
-	    -ms-transform: translate3d(0, -100%, 0);                        /* Important */
-	     -o-transform: translate3d(0, -100%, 0);                        /* Important */
-	        transform: translate3d(0, -100%, 0);                        /* Important */
+	-webkit-transform: translate3d(0, -100%, 0);                 /* Important */
+	   -moz-transform: translate3d(0, -100%, 0);                 /* Important */
+	    -ms-transform: translate3d(0, -100%, 0);                 /* Important */
+	     -o-transform: translate3d(0, -100%, 0);                 /* Important */
+	        transform: translate3d(0, -100%, 0);                 /* Important */
 	-webkit-box-sizing: border-box;                              /* Important */
 	   -moz-box-sizing: border-box;                              /* Important */
 	    -ms-box-sizing: border-box;                              /* Important */
@@ -1568,11 +1565,6 @@ input, select, textarea {
 }
 
 .transition-cover-box-foreground-view {
-	-webkit-box-shadow: 0px 0px 10px #000000;
-	   -moz-box-shadow: 0px 0px 10px #000000;
-	    -ms-box-shadow: 0px 0px 10px #000000;
-	     -o-box-shadow: 0px 0px 10px #000000;
-	        box-shadow: 0px 0px 10px #000000;
 	-webkit-box-flex: 0;                                         /* Important */
 	   -moz-box-flex: 0;                                         /* Important */
 	    -ms-box-flex: 0;                                         /* Important */
@@ -1628,29 +1620,28 @@ input, select, textarea {
 	    -ms-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	     -o-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	        animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-
 }
 
 /* Transition - Cover Box Leave
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-cover-box-leave {
+@-webkit-keyframes transition-cover-box-leave {
 	from { -webkit-transform: translate3d(0, -100%, 0); }
 	to   { -webkit-transform: translate3d(0, 0, 0); }
 }
-@-moz-keyframes anim-cover-box-leave {
+@-moz-keyframes transition-cover-box-leave {
 	from { -moz-transform: translate3d(0, -100%, 0); }
 	to   { -moz-transform: translate3d(0, 0, 0); }
 }
-@-ms-keyframes anim-cover-box-leave {
+@-ms-keyframes transition-cover-box-leave {
 	from { -ms-transform: translate3d(0, -100%, 0); }
 	to   { -ms-transform: translate3d(0, 0, 0); }
 }
-@-o-keyframes anim-cover-box-leave {
+@-o-keyframes transition-cover-box-leave {
 	from { -o-transform: translate3d(0, -100%, 0); }
 	to   { -o-transform: translate3d(0, 0, 0); }
 }
-@keyframes anim-cover-box-leave {
+@keyframes transition-cover-box-leave {
 	from { transform: translate3d(0, -100%, 0); }
 	to   { transform: translate3d(0, 0, 0); }
 }
@@ -1660,11 +1651,11 @@ input, select, textarea {
 }
 
 .transition-cover-box-leave .transition-cover-box-foreground-view-wrapper {
-	-webkit-animation: anim-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: anim-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: anim-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: anim-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: anim-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Transition Cubic Enter
@@ -1901,33 +1892,33 @@ input, select, textarea {
 /* Transition Flip Leave
 -----------------------------------------------------------------------------*/
 
-@-webkit-keyframes anim-flip-leave {
+@-webkit-keyframes transition-flip-leave {
 	from { -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
 	to   { -webkit-transform: translate3d(100%, 0, 0) rotateY(180deg); }
 }
-@-moz-keyframes anim-flip-leave {
+@-moz-keyframes transition-flip-leave {
 	from { -moz-transform: translate3d(0, 0, 0) rotateY(0deg); }
 	to   { -moz-transform: translate3d(100%, 0, 0) rotateY(180deg); }
 }
-@-ms-keyframes anim-flip-leave {
+@-ms-keyframes transition-flip-leave {
 	from { -ms-transform: translate3d(0, 0, 0) rotateY(0deg); }
 	to   { -ms-transform: translate3d(100%, 0, 0) rotateY(180deg); }
 }
-@-o-keyframes anim-flip-leave {
+@-o-keyframes transition-flip-leave {
 	from { -o-transform: translate3d(0, 0, 0) rotateY(0deg); }
 	to   { -o-transform: translate3d(100%, 0, 0) rotateY(180deg); }
 }
-@keyframes anim-flip-leave {
+@keyframes transition-flip-leave {
 	from { transform: translate3d(0, 0, 0) rotateY(0deg); }
 	to   { transform: translate3d(100%, 0, 0) rotateY(180deg); }
 }
 
 .transition-flip-leave {
-	-webkit-animation: anim-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: anim-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: anim-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: anim-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: anim-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	-webkit-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform-style: preserve-3d;                        /* Important */
 	   -moz-transform-style: preserve-3d;                        /* Important */
 	    -ms-transform-style: preserve-3d;                        /* Important */
