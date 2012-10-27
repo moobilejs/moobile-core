@@ -615,10 +615,15 @@ input, select, textarea {
 	        box-flex: 1;                                         /* Important */
 	background: transparent;
 	border: none;
+	border-right: 1px solid #424542;
 	border-radius: 0px;
 	color: #ffffff;
 	height: 47px;
 	width: 0%;
+}
+
+.alert .button:last-child {
+	border-right: 1px solid #424542;
 }
 
 .alert .button.is-selected {
