@@ -3356,17 +3356,20 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
 	 	context.__roles__ = {};
 	}
 
-	if (typeof options === 'function') {
-		handler = options;
-		options = {};
-	}
+	if (options) {
 
-	// <0.1-compat>
-	if (typeof handler === 'object') {
-		options.traversable = handler.traversable;
-		handler = handler.behavior;
+		switch (typeof options) {
+
+			case 'function':
+				handler = options;
+				options = {};
+				break;
+
+			case 'object':
+				if (typeof options.behavior === 'function') handler = options.behavior;
+				break;
+		}
 	}
-	// </0.1-compat>
 
 	context.__roles__[name] = {
 		handler: handler || function() {},
@@ -4273,16 +4276,10 @@ Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Dark Style - iOS - Android */
+/* Light Style - iOS - Android */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
-});
-
-/* Contextual Style - Android */
-Moobile.Component.defineStyle('contextual', Moobile.Bar, {
-	attach: function(element) { element.addClass('style-contextual'); },
-	detach: function(element) { element.removeClass('style-contextual'); }
 });
 
 
@@ -5990,7 +5987,15 @@ Moobile.Image = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		this._image = null;
+
+		if (this._image) {
+			this._image.removeEvent('load', this.bound('_onLoad'));
+			this._image.src = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+			this._image = null;
+		}
+
+		this.element.set('src', 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+
 		this.parent();
 	},
 
@@ -8666,9 +8671,16 @@ Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, 
 // Styles
 //------------------------------------------------------------------------------
 
+/* Dark Style - iOS Android */
 Moobile.Component.defineStyle('dark', Moobile.View, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+/* Light Style - iOS Android */
+Moobile.Component.defineStyle('light', Moobile.View, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
 });
 
 
