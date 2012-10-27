@@ -368,7 +368,14 @@ Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, 
 // Styles
 //------------------------------------------------------------------------------
 
+/* Dark Style - iOS Android */
 Moobile.Component.defineStyle('dark', Moobile.View, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+/* Light Style - iOS Android */
+Moobile.Component.defineStyle('light', Moobile.View, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
 });
