@@ -50,7 +50,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		layout: null,
+		layout: 'horizontal',
 		selectable: true,
 		selectedButtonIndex: -1
 	},
@@ -176,7 +176,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	addButton: function(button, where) {
-		return this.addChildComponent(button, where);
+		return this.addChildComponent(Moobile.Button.from(button), where);
 	},
 
 	/**
@@ -185,7 +185,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	addButtonAfter: function(button, after) {
-		return this.addChildComponentAfter(button, after);
+		return this.addChildComponentAfter(Moobile.Button.from(button), after);
 	},
 
 	/**
@@ -194,7 +194,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	addButtonBefore: function(button, before) {
-		return this.addChildComponentBefore(button, before);
+		return this.addChildComponentBefore(Moobile.Button.from(button), before);
 	},
 
 	/**
