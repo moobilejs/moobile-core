@@ -2414,7 +2414,16 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	getChildComponentOfType: function(type, name) {
-		return this._children.find(function(child) { return child instanceof type && child.getName() === name; });
+
+		var types = Array.from(type);
+
+		var by = function(child) {
+			return types.some(function(type) {
+				return child instanceof type && child.getName() === name;
+			});
+		};
+
+		return this._children.find(by);
 	},
 
 	/**
@@ -2485,10 +2494,20 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentsOfType: function(type) {
-		return this._children.filter(function(child) { return child instanceof type });
+
+		var types = Array.from(type);
+
+		var by = function(child) {
+			return types.some(function(type) {
+				return child instanceof type;
+			});
+		};
+
+		return this._children.filter(by);
 	},
 
 	/**
@@ -2766,8 +2785,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	hasStyle: function(style) {
-		return this._style ? this._style.name === style : false;
+	hasStyle: function(name) {
+		return this._style ? this._style.name === name : false;
 	},
 
 	/**
@@ -3383,8 +3402,8 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.2.0
  */
-Moobile.Component.defineAttribute = function(name, target, handler) {
-	var context = (target || Moobile.Component).prototype;
+Moobile.Component.defineAttribute = function(name, context, handler) {
+	context = (context || Moobile.Component).prototype;
 	if (context.__attributes__ === undefined) {
 		context.__attributes__ = {};
 	}
@@ -3774,7 +3793,7 @@ Moobile.Button = new Class({
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Button#from
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
+ * @since  0.2.0
  */
 Moobile.Button.from = function(source) {
 	if (source instanceof Moobile.Button) return source;
@@ -3877,7 +3896,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		layout: null,
+		layout: 'horizontal',
 		selectable: true,
 		selectedButtonIndex: -1
 	},
@@ -4003,7 +4022,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	addButton: function(button, where) {
-		return this.addChildComponent(button, where);
+		return this.addChildComponent(Moobile.Button.from(button), where);
 	},
 
 	/**
@@ -4012,7 +4031,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	addButtonAfter: function(button, after) {
-		return this.addChildComponentAfter(button, after);
+		return this.addChildComponentAfter(Moobile.Button.from(button), after);
 	},
 
 	/**
@@ -4021,7 +4040,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	addButtonBefore: function(button, before) {
-		return this.addChildComponentBefore(button, before);
+		return this.addChildComponentBefore(Moobile.Button.from(button), before);
 	},
 
 	/**
@@ -4710,6 +4729,20 @@ Moobile.Slider = new Class({
 	thumbElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#rangeElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	rangeElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#valueElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	valueElement: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#hitAreaElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
@@ -4724,7 +4757,7 @@ Moobile.Slider = new Class({
 	 */
 	options: {
 		value: 0,
-		mode: null,
+		mode: 'horizontal',
 		snap: false,
 		min: 0,
 		max: 100
@@ -5225,7 +5258,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	addItem: function(item, where) {
-		return this.addChildComponent(item, where);
+		return this.addChildComponent(Moobile.ListItem.from(item), where);
 	},
 
 	/**
@@ -5234,7 +5267,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	addItemAfter: function(item, after) {
-		return this.addChildComponentAfter(item, after);
+		return this.addChildComponentAfter(Moobile.ListItem.from(item), after);
 	},
 
 	/**
@@ -5243,7 +5276,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	addItemBefore: function(item, before) {
-		return this.addChildComponentBefore(item, before);
+		return this.addChildComponentBefore(Moobile.ListItem.from(item), before);
 	},
 
 	/**
@@ -5339,12 +5372,12 @@ Moobile.List = new Class({
 			var prev = components[i - 1];
 			var next = components[i + 1];
 			var curr = components[i];
-			if (curr instanceof Moobile.ListHeader) {
+			if (curr.hasStyle('header')) {
 				if (next) next.addClass('list-section-header');
 				if (prev) prev.addClass('list-section-footer');
 			} else {
-				if (next && next instanceof Moobile.ListHeader ||
-					prev && prev instanceof Moobile.ListHeader) {
+				if (next && next.hasStyle('header') ||
+					prev && prev.hasStyle('header')) {
 					continue;
 				}
 				curr.removeClass('list-section-header');
@@ -5649,9 +5682,35 @@ Moobile.ListItem = new Class({
 	 */
 	getDetail: function() {
 		return this._detail;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldAllowState: function(state) {
+
+		if (this.hasStyle('header') && (state === 'highlighted' || state === 'selected' || state === 'disabled')) {
+			return false;
+		}
+
+		return this.parent(state);
 	}
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/ListItem#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.ListItem.from = function(source) {
+	if (source instanceof Moobile.ListItem) return source;
+	var item = new Moobile.ListItem();
+	item.setLabel(source);
+	return item;
+};
 
 //------------------------------------------------------------------------------
 // Roles
@@ -5659,6 +5718,10 @@ Moobile.ListItem = new Class({
 
 Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
+});
+
+Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item').setStyle('header'));
 });
 
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
@@ -5687,137 +5750,28 @@ Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) 
 // Styles
 //------------------------------------------------------------------------------
 
-/* iOS  */
+/* Header Style - iOS Android */
+Moobile.Component.defineStyle('header', Moobile.ListItem, {
+	attach: function(element) { element.addClass('style-header'); },
+	detach: function(element) { element.removeClass('style-header'); }
+});
 
+/* Checked Style - iOS */
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
 	detach: function(element) { element.removeClass('style-checked'); }
 });
 
+/* Disclosed Style - iOS */
 Moobile.Component.defineStyle('disclosed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-disclosed'); },
 	detach: function(element) { element.removeClass('style-disclosed'); }
 });
 
+/* Detailed Style - iOS */
 Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-detailed'); },
 	detach: function(element) { element.removeClass('style-detailed'); }
-});
-
-
-/*
----
-
-name: ListHeader
-
-description: Provides a list item header control.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- ListItem
-
-provides:
-	- ListHeader
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/Control/ListHeader
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.2.0
- */
-Moobile.ListHeader = new Class({
-
-	Extends: Moobile.Component,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_label: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	options: {
-		tagName: 'li'
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willBuild: function() {
-
-		this.parent();
-
-		this.addClass('list-header');
-
-		var label  = this.getRoleElement('label');
-		if (label === null) {
-			label = document.createElement('div');
-			label.ingest(this.element);
-			label.inject(this.element);
-			label.setRole('label');
-		}
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#setLabel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.2.0
-	 * @since  0.1.0
-	 */
-	setLabel: function(label) {
-
-		if (this._label === label)
-			return this;
-
-		label = Moobile.Text.from(label);
-
-		if (this._label) {
-			this._label.replaceWithComponent(label, true);
-		} else {
-			this.addChildComponent(label);
-		}
-
-		this._label = label;
-		this._label.addClass('list-header-label');
-		this.toggleClass('list-header-label-empty', this._label.isEmpty());
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#getLabel
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getLabel: function() {
-		return this._label;
-	},
-
-});
-
-//------------------------------------------------------------------------------
-// Roles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
-	this.addItem(Moobile.Component.create(Moobile.ListHeader, element, 'data-header'));
-});
-
-Moobile.Component.defineRole('label', Moobile.ListHeader, null, function(element) {
-	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
 
@@ -6350,7 +6304,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		layout: null
+		layout: 'horizontal'
 	},
 
 	/**
@@ -6505,7 +6459,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonAfter
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -6514,7 +6468,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonBefore
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -6554,8 +6508,8 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	removeButton: function(button) {
-		return this.removeChildComponent(button);
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
 	},
 
 	/**
@@ -6563,8 +6517,8 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	removeAllButtons: function() {
-		return this.removeAllChildComponentsOfType(Moobile.Button);
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponentsOfType(Moobile.Button, destroy);
 	},
 
 	/**
