@@ -127,7 +127,7 @@ Moobile.Button = new Class({
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Button#from
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
+ * @since  0.2.0
  */
 Moobile.Button.from = function(source) {
 	if (source instanceof Moobile.Button) return source;
