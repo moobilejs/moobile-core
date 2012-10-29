@@ -338,7 +338,16 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	getChildComponentOfType: function(type, name) {
-		return this._children.find(function(child) { return child instanceof type && child.getName() === name; });
+
+		var types = Array.from(type);
+
+		var by = function(child) {
+			return types.some(function(type) {
+				return child instanceof type && child.getName() === name;
+			});
+		};
+
+		return this._children.find(by);
 	},
 
 	/**
@@ -409,10 +418,20 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentsOfType: function(type) {
-		return this._children.filter(function(child) { return child instanceof type });
+
+		var types = Array.from(type);
+
+		var by = function(child) {
+			return types.some(function(type) {
+				return child instanceof type;
+			});
+		};
+
+		return this._children.filter(by);
 	},
 
 	/**
@@ -690,8 +709,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	hasStyle: function(style) {
-		return this._style ? this._style.name === style : false;
+	hasStyle: function(name) {
+		return this._style ? this._style.name === name : false;
 	},
 
 	/**
@@ -1307,8 +1326,8 @@ Moobile.Component.defineRole = function(name, context, options, handler) {
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.2.0
  */
-Moobile.Component.defineAttribute = function(name, target, handler) {
-	var context = (target || Moobile.Component).prototype;
+Moobile.Component.defineAttribute = function(name, context, handler) {
+	context = (context || Moobile.Component).prototype;
 	if (context.__attributes__ === undefined) {
 		context.__attributes__ = {};
 	}
