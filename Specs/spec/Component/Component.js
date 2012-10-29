@@ -4,6 +4,14 @@ describe('Component/Component', function() {
 		Extends: Moobile.Component
 	});
 
+	var MyComponentOne = new Class({
+		Extends: Moobile.Component
+	});
+
+	var MyComponentTwo = new Class({
+		Extends: Moobile.Component
+	});
+
 	// initialize
 
 	it('should create a component with a div element from a string', function() {
@@ -168,10 +176,11 @@ describe('Component/Component', function() {
 	it('should find a child of a given type using its name', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component(null, null, 'me');
-		var c2 = new MyComponent(null, null, 'me');
+		var c2 = new MyComponentOne(null, null, 'me');
+		var c3 = new MyComponentTwo(null, null, 'me');
 		p.addChildComponent(c1);
 		p.addChildComponent(c2);
-		expect(p.getChildComponentOfType(MyComponent, 'me')).toEqual(c2);
+		expect(p.getChildComponentOfType(MyComponentOne, 'me')).toEqual(c2);
 	});
 
 	// getChildComponentAt
@@ -228,6 +237,22 @@ describe('Component/Component', function() {
 		p.addChildComponent(c3);
 		var children = p.getChildComponentsOfType(MyComponent);
 		expect(children[0]).toEqual(c3);
+	});
+
+	it('should return all children multiple types', function() {
+		var p  = new Moobile.Component();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new MyComponentOne();
+		var c4 = new MyComponentTwo();
+		var c5 = new Moobile.Button();
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		p.addChildComponent(c3);
+		p.addChildComponent(c4);
+		p.addChildComponent(c5);
+		var children = p.getChildComponentsOfType([MyComponentOne, MyComponentTwo]);
+		expect(children.length).toEqual(2);
 	});
 
 	// hasChildComponent
