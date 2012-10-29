@@ -1267,6 +1267,18 @@ input, select, textarea {
 	width: 30px;
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+
+    /* Style Checked, Style Detailed, Style Disclosed */
+
+	.list-item.style-checked   .list-item-detail:after,
+	.list-item.style-detailed  .list-item-detail:after,
+	.list-item.style-disclosed .list-item-detail:after {
+		background-image: url(../images/ios/list-item-style-icon-2x.png);
+		background-size: 150px 30px;
+	}
+}
+
  /* Style Checked, Style Detailed, Style Disclosed */
 
 .list-item.style-checked   .list-item-detail,
@@ -1315,6 +1327,34 @@ input, select, textarea {
 	background-position: -30px center;
 }
 
+/* Style Header */
+
+.list-item.style-header {
+	background: url(../images/ios/list-header.png) repeat-x;
+	border: none;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	height: 23px;
+	padding: 0px 15px;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.list-item.style-header .list-item-label,
+.list-item.style-header .list-item-detail {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+
+	/* Style Header */
+
+	.list-item.style-header {
+		background: url(../images/ios/list-header-2x.png);
+	}
+}
+
 /* Inside a List Style Grouped */
 
 .list.style-grouped .list-item {
@@ -1351,7 +1391,7 @@ input, select, textarea {
 	margin-bottom: 0px;
 }
 
-.list.style-grouped .list-item::first-child:last-child,
+.list.style-grouped .list-item:first-child:last-child,
 .list.style-grouped .list-item.list-section-header.list-section-footer {
 	-webkit-box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
 	   -moz-box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
@@ -1360,37 +1400,11 @@ input, select, textarea {
 	        box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+/* Inside a List Style Grouped + Style Header */
 
-    /* Style Checked, Style Detailed, Style Disclosed */
-
-	.list-item.style-checked   .list-item-detail:after,
-	.list-item.style-detailed  .list-item-detail:after,
-	.list-item.style-disclosed .list-item-detail:after {
-		background-image: url(../images/ios/list-item-style-icon-2x.png);
-		background-size: 150px 30px;
-	}
-}
-
-/* List Header
------------------------------------------------------------------------------*/
-
-.list-header {
-	background: url(../images/ios/list-header.png) repeat-x;
-	color: #fff;
-	font-size: 18px;
-	font-weight: bold;
-	height: 23px;
-	padding: 0px 15px;
-	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
-}
-
-/* Inside a List Style Grouped */
-
-.list.style-grouped .list-header {
+.list.style-grouped .list-item.style-header {
 	background: none;
 	border: none;
-	border-bottom: none;
 	color: #4c596e;
 	font-size: 17px;
 	font-weight: bold;
@@ -1401,22 +1415,33 @@ input, select, textarea {
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.75);
 }
 
-.list.style-grouped .list-header:first-child {
+.list.style-grouped .list-item.style-header:first-child {
+	border: none;
 	margin-top: 10px;
 }
 
-.list.style-grouped .list-header.list-header-label-empty {
+.list.style-grouped .list-item.style-header.list-item-label-empty {
 	height: 20px;
 	margin: 0px;
 	padding: 0px;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+.list.style-grouped .list-item.style-header:first-child {
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	    -ms-box-shadow: none;
+	     -o-box-shadow: none;
+	        box-shadow: none;
+	border-radius: 0px;
+}
 
-	.list-header {
-		background: url(../images/ios/list-header-2x.png);
-	}
-
+.list.style-grouped .list-item.style-header:last-child {
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	    -ms-box-shadow: none;
+	     -o-box-shadow: none;
+	        box-shadow: none;
+	border-radius: 0px;
 }
 
 /* List

@@ -172,7 +172,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	addItem: function(item, where) {
-		return this.addChildComponent(item, where);
+		return this.addChildComponent(Moobile.ListItem.from(item), where);
 	},
 
 	/**
@@ -181,7 +181,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	addItemAfter: function(item, after) {
-		return this.addChildComponentAfter(item, after);
+		return this.addChildComponentAfter(Moobile.ListItem.from(item), after);
 	},
 
 	/**
@@ -190,7 +190,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	addItemBefore: function(item, before) {
-		return this.addChildComponentBefore(item, before);
+		return this.addChildComponentBefore(Moobile.ListItem.from(item), before);
 	},
 
 	/**
@@ -286,12 +286,12 @@ Moobile.List = new Class({
 			var prev = components[i - 1];
 			var next = components[i + 1];
 			var curr = components[i];
-			if (curr instanceof Moobile.ListHeader) {
+			if (curr.hasStyle('header')) {
 				if (next) next.addClass('list-section-header');
 				if (prev) prev.addClass('list-section-footer');
 			} else {
-				if (next && next instanceof Moobile.ListHeader ||
-					prev && prev instanceof Moobile.ListHeader) {
+				if (next && next.hasStyle('header') ||
+					prev && prev.hasStyle('header')) {
 					continue;
 				}
 				curr.removeClass('list-section-header');

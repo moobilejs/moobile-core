@@ -209,9 +209,35 @@ Moobile.ListItem = new Class({
 	 */
 	getDetail: function() {
 		return this._detail;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldAllowState: function(state) {
+
+		if (this.hasStyle('header') && (state === 'highlighted' || state === 'selected' || state === 'disabled')) {
+			return false;
+		}
+
+		return this.parent(state);
 	}
 
 });
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/ListItem#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Moobile.ListItem.from = function(source) {
+	if (source instanceof Moobile.ListItem) return source;
+	var item = new Moobile.ListItem();
+	item.setLabel(source);
+	return item;
+};
 
 //------------------------------------------------------------------------------
 // Roles
@@ -219,6 +245,10 @@ Moobile.ListItem = new Class({
 
 Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
+});
+
+Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
+	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item').setStyle('header'));
 });
 
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
@@ -247,18 +277,25 @@ Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) 
 // Styles
 //------------------------------------------------------------------------------
 
-/* iOS  */
+/* Header Style - iOS Android */
+Moobile.Component.defineStyle('header', Moobile.ListItem, {
+	attach: function(element) { element.addClass('style-header'); },
+	detach: function(element) { element.removeClass('style-header'); }
+});
 
+/* Checked Style - iOS */
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
 	detach: function(element) { element.removeClass('style-checked'); }
 });
 
+/* Disclosed Style - iOS */
 Moobile.Component.defineStyle('disclosed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-disclosed'); },
 	detach: function(element) { element.removeClass('style-disclosed'); }
 });
 
+/* Detailed Style - iOS */
 Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-detailed'); },
 	detach: function(element) { element.removeClass('style-detailed'); }

@@ -29,7 +29,6 @@ sources:
   - "Source/Control/Slider.js"
   - "Source/Control/List.js"
   - "Source/Control/ListItem.js"
-  - "Source/Control/ListHeader.js"
   - "Source/Control/ActivityIndicator.js"
   - "Source/Control/Image.js"
   - "Source/Control/Text.js"
