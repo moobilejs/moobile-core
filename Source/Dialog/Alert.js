@@ -93,7 +93,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		layout: null
+		layout: 'horizontal'
 	},
 
 	/**
@@ -248,7 +248,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonAfter
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonAfter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -257,7 +257,7 @@ Moobile.Alert = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonBefore
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
@@ -297,8 +297,8 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	removeButton: function(button) {
-		return this.removeChildComponent(button);
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
 	},
 
 	/**
@@ -306,8 +306,8 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	removeAllButtons: function() {
-		return this.removeAllChildComponentsOfType(Moobile.Button);
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponentsOfType(Moobile.Button, destroy);
 	},
 
 	/**
