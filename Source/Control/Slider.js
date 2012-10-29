@@ -93,13 +93,6 @@ Moobile.Slider = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_mode: 'horizontal',
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
 	_position: {x: -1, y: -1},
 
 	/**
@@ -108,6 +101,20 @@ Moobile.Slider = new Class({
 	 * @since  0.1.0
 	 */
 	_value: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_minimum: 0,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_maximum: 0,
 
 	/**
 	 * @hidden
@@ -172,11 +179,11 @@ Moobile.Slider = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		value: 0,
 		mode: 'horizontal',
 		snap: false,
-		min: 0,
-		max: 100
+		value: 0,
+		minimum: 0,
+		maximum: 100
 	},
 
 	/**
@@ -209,12 +216,21 @@ Moobile.Slider = new Class({
 
 		this.hitAreaElement = new Element('div.hit-area').inject(this.thumbElement);
 
+		// <0.1 compat>
+		if ('min' in this.options || 'max' in this.options) {
+			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
+			if ('min' in this.options) this.options.minimum = this.options.min;
+			if ('max' in this.options) this.options.maximum = this.options.max;
+		}
+		// </0.1 compat>
+
+		this.setMinimum(this.options.minimum);
+		this.setMaximum(this.options.maximum);
+
 		var mode = this.options.mode;
 		if (mode) {
 			this.addClass('slider-mode-' + mode);
 		}
-
-		this._mode = mode || 'horizontal';
 	},
 
 	/**
@@ -295,6 +311,48 @@ Moobile.Slider = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMinimum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setMinimum: function(minimum) {
+		if (this._value < minimum) this.setValue(minimum);
+		this._minimum = minimum;
+		this.refresh();
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#getMinimum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getMinimum: function() {
+		return this._minimum;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMaximum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setMaximum: function(maximum) {
+		if (this._value > maximum) this.setValue(maximum);
+		this._maximum = maximum;
+		this.refresh();
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMaximum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getMaximum: function() {
+		return this._maximum;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#refresh
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
@@ -306,7 +364,7 @@ Moobile.Slider = new Class({
 
 		var range = 0;
 
-		switch (this._mode) {
+		switch (this.options.mode) {
 			case 'horizontal':
 				range = trackSize.x - thumbSize.x;
 				break;
@@ -315,7 +373,8 @@ Moobile.Slider = new Class({
 				break;
 		}
 
-		this._valueRange = this.options.max - this.options.min;
+
+		this._valueRange = this._maximum - this._minimum;
 		this._trackRange = range;
 		this._trackLimit = {
 			min: 0,
@@ -332,7 +391,7 @@ Moobile.Slider = new Class({
 	 */
 	_move: function(x, y) {
 
-		switch (this._mode) {
+		switch (this.options.mode) {
 			case 'horizontal':
 				y = 0;
 				if (x < this._trackLimit.min) x = this._trackLimit.min;
@@ -377,7 +436,7 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	_valueFromPosition: function(x, y) {
-		return (this._mode === 'horizontal' ? x : y) * this._valueRange / this._trackRange + this.options.min;
+		return (this.options.mode === 'horizontal' ? x : y) * this._valueRange / this._trackRange + this._minimum;
 	},
 
 	/**
@@ -390,9 +449,9 @@ Moobile.Slider = new Class({
 		var x = 0;
 		var y = 0;
 
-		var pos = (value - this.options.min) * this._trackRange / this._valueRange;
+		var pos = (value - this._minimum) * this._trackRange / this._valueRange;
 
-		switch (this._mode) {
+		switch (this.options.mode) {
 			case 'horizontal': x = pos.round(2); break;
 			case 'vertical':   y = pos.round(2); break;
 		}
