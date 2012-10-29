@@ -145,6 +145,20 @@ Moobile.Slider = new Class({
 	thumbElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#rangeElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	rangeElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#valueElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	valueElement: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#hitAreaElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
@@ -159,7 +173,7 @@ Moobile.Slider = new Class({
 	 */
 	options: {
 		value: 0,
-		mode: null,
+		mode: 'horizontal',
 		snap: false,
 		min: 0,
 		max: 100
