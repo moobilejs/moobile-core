@@ -1022,9 +1022,9 @@ input, select, textarea {
 	        animation-fill-mode: both;
 }
 
-/* Horizontal Button Layout */
+/* Vertical Button Layout */
 
-.alert.button-layout-horizontal {}
+.alert.alert-layout-vertical {}
 
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
