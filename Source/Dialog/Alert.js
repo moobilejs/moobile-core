@@ -243,8 +243,8 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	addButton: function(button) {
-		return this.addChildComponentInside(Moobile.Button.from(button), this.footerElement);
+	addButton: function(button, where) {
+		return this.addChildComponentInside(Moobile.Button.from(button), this.footerElement, where);
 	},
 
 	/**
