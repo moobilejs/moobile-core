@@ -248,7 +248,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	getContentScroll: function() {
-		return this._scroller.getScroll();;
+		return this._scroller.getScroll();
 	},
 
 	/**
