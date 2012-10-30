@@ -6513,8 +6513,8 @@ Moobile.Alert = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	addButton: function(button) {
-		return this.addChildComponentInside(Moobile.Button.from(button), this.footerElement);
+	addButton: function(button, where) {
+		return this.addChildComponentInside(Moobile.Button.from(button), this.footerElement, where);
 	},
 
 	/**
@@ -8947,7 +8947,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	getContentScroll: function() {
-		return this._scroller.getScroll();;
+		return this._scroller.getScroll();
 	},
 
 	/**
