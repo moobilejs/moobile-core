@@ -870,7 +870,6 @@ Moobile.Component = new Class({
 
 		this.willShow();
 		this._visible = true;
-		this.element.show();
 		this.element.removeClass('hidden');
 		this._children.invoke('show');
 		this.didShow();
@@ -890,7 +889,6 @@ Moobile.Component = new Class({
 
 		this.willHide();
 		this._visible = false;
-		this.element.hide();
 		this.element.addClass('hidden');
 		this._children.invoke('hide');
 		this.didHide();
