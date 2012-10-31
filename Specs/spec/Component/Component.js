@@ -281,12 +281,21 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		var c3 = new Moobile.Component(null, null, 'me');
+		var c3 = new Moobile.Component();
+		var g  = new Moobile.ButtonGroup();
+		var b1 = new Moobile.Button();
+		var b2 = new Moobile.Button()
+		var b3 = new Moobile.Button(null, null, 'me');
 		p.addChildComponent(c1);
-		c1.addChildComponent(c2);
-		c2.addChildComponent(c3);
-		expect(p.getDescendantComponent('me')).toEqual(c3);
+		p.addChildComponent(c2);
+		p.addChildComponent(c3);
+		c3.addChildComponent(g);
+		g.addButton(b1);
+		g.addButton(b2);
+		g.addButton(b3);
+		expect(p.getDescendantComponent('me')).toEqual(b3);
 	});
+
 
 	// replaceChildComponent
 

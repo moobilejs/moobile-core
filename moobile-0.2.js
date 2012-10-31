@@ -2543,7 +2543,8 @@ Moobile.Component = new Class({
 	    var component = this.getChildComponent(name);
 	    if (component === null) {
 	    	for (var i = 0, len = this._children.length; i < len; i++) {
-	    		return this._children[i].getDescendantComponent(name);
+	    		var found = this._children[i].getDescendantComponent(name);
+	    		if (found) return found;
 	    	}
 	    }
 
