@@ -304,6 +304,16 @@ input, select, textarea {
 	width: 100%;
 }
 
+/* View Set
+-----------------------------------------------------------------------------*/
+
+.view.view-set > .view-content-wrapper > .view-content {
+	display: block;
+	height: 100%;
+	overflow: visible;
+	width: 100%;
+}
+
 /* Bar
 -----------------------------------------------------------------------------*/
 

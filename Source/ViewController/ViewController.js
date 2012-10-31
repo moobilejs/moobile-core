@@ -142,6 +142,26 @@ Moobile.ViewController = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#showView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	showView: function() {
+		this.view.show();
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#hideView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hideView: function() {
+		this.view.hide();
+		return this;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0

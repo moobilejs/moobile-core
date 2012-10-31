@@ -1,3 +1,5 @@
+
+Warning: file_get_contents(/Users/jpdery/Projects/lemieux-bedard/amgen-ios-nplate/moobile-core/Source/View/ViewSet.js): failed to open stream: No such file or directory in /Users/jpdery/Projects/lemieux-bedard/amgen-ios-nplate/moobile-core/Packager/packager.php on line 67
 /*!
  * iScroll v4.2.5 ~ Copyright (c) 2012 Matteo Spinelli, http://cubiq.org
  * Released under MIT license, http://cubiq.org/license
@@ -8701,6 +8703,60 @@ Moobile.Component.defineStyle('light', Moobile.View, {
 });
 
 
+
+
+/*
+---
+
+name: ViewStack
+
+description: Provides a view that handles an infinite number of views arrenged
+             as a stack, one on the top of each others.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- View
+
+provides:
+	- ViewStack
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/ViewStack
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+Moobile.ViewStack = new Class({
+
+	Extends: Moobile.View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('view-stack');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+Moobile.Component.defineRole('view-stack', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
+});
+
+
 /*
 ---
 
@@ -9255,58 +9311,6 @@ Moobile.ScrollView.at = function(path, options, name) {
 
 Moobile.Component.defineRole('scroll-view', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ScrollView, element, 'data-scroll-view'));
-});
-
-
-/*
----
-
-name: ViewStack
-
-description: Provides a view that handles an infinite number of views arrenged
-             as a stack, one on the top of each others.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- View
-
-provides:
-	- ViewStack
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/View/ViewStack
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
-Moobile.ViewStack = new Class({
-
-	Extends: Moobile.View,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willBuild: function() {
-		this.parent();
-		this.addClass('view-stack');
-	}
-
-});
-
-//------------------------------------------------------------------------------
-// Roles
-//------------------------------------------------------------------------------
-
-Moobile.Component.defineRole('view-stack', null, null, function(element) {
-	this.addChildComponent(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
 });
 
 
@@ -10151,6 +10155,329 @@ Moobile.ViewController = new Class({
 		// </0.1-compat>
 
 		this.viewDidRotate(name);
+	}
+
+});
+
+
+/*
+---
+
+name: ViewControllerSet
+
+description: Manages a view set.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ViewController
+
+provides:
+	- ViewControllerSet
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewControllerSet = new Class({
+
+	Extends: Moobile.ViewController,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_animating: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_tabBar: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_viewController: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_viewControllerToShow: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_viewControllerToHide: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	loadView: function() {
+		this.view = new Moobile.ViewSet();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	viewDidLoad: function() {
+		this.parent();
+		this._tabBar = this.view.getTabBar();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setViewControllers: function(viewControllers) {
+
+		for (var i = 0; i < viewControllers.length; i++) {
+			var viewController = viewControllers[i];
+			viewController.removeFromParentViewController();
+			viewController.setViewControllerSet(this);
+			this.addChildViewController(viewController);
+		}
+
+		return this.setCurrentViewController(viewControllers[0]);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedViewController: function(viewController, viewTransition) {
+
+		if (this._animating)
+			return this;
+
+		if (this._viewController === null) {
+			this.willSelectViewController(viewController);
+			this._selectedViewController = viewController;
+			this._selectedViewController.viewWillEnter();
+			this._selectedViewController.show();
+			this._selectedViewController.viewDidEnter();
+			this.didSelectViewController(viewController);
+			return this;
+		}
+
+		if (this._viewController === viewController)
+			return this;
+
+		this._viewControllerToShow = viewController;
+		this._viewControllerToHide = this._viewController;
+
+		var viewToShow = this._viewControllerToShow.getView();
+		var viewToHide = this._viewControllerToHide.getView();
+
+		this._animating = true; // needs to be set before the transition happens
+
+		viewTransition = viewTransition || new Moobile.ViewTransition.None();
+		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
+		viewTransition.enter(
+			viewToShow,
+			viewToHide,
+			this.view
+		);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewControllerIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedViewControllerIndex: function(index, viewTransition) {
+
+		var viewController = this.getChildViewControllerAt(index);
+		if (viewController) {
+			this.setSelectedViewController(viewController, viewTransition)
+		}
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	onPushTransitionStart: function(e) {
+		this.willSelectViewController(this._viewControllerToShow);
+		this._viewControllerToHide.viewWillLeave();
+		this._viewControllerToShow.viewWillEnter();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	onPushTransitionComplete: function(e) {
+
+		this._viewControllerToHide.viewDidLeave();
+		this._viewControllerToShow.viewDidEnter();
+		this.didSelectViewController(this._viewControllerToShow);
+
+		this._viewControllerToShow = null;
+		this._viewControllerToHide = null;
+
+		this._animating = false;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#getTopViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTopViewController: function() {
+		return this.getChildViewControllers().getLast();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		this._tabBar.addChildComponent(new Moobile.Button().setLabel(viewController.getTitle()));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#willSelectViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willSelectViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#didSelectViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didSelectViewController: function(viewController) {
+
+	},
+
+
+
+});
+
+Class.refactor(Moobile.ViewController, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_viewControllerSet: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setViewControllerSet
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setViewControllerSet: function(viewControllerSet) {
+
+		if (this._viewControllerStack === viewControllerStack)
+			return this;
+
+		this.parentViewControllerSetWillChange(viewControllerSet);
+		this._viewControllerSet = viewControllerSet;
+		this.parentViewControllerSetDidChange(viewControllerSet);
+
+		if (this instanceof Moobile.ViewControllerSet)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof Moobile.ViewControllerSet);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerSet', viewControllerSet);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#getViewControllerSet
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getViewControllerSet: function() {
+		return this._viewControllerSet;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#parentViewControllerSetWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	parentViewControllerSetWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#parentViewControllerSetDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	parentViewControllerSetDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerSet(this._viewControllerStack);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerSet(null);
 	}
 
 });
