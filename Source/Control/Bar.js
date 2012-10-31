@@ -122,3 +122,9 @@ Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
 });
+
+/* Tabbed Style - iOS - Android */
+Moobile.Component.defineStyle('tabbed', Moobile.Bar, {
+	attach: function(element) { element.addClass('style-tabbed'); },
+	detach: function(element) { element.removeClass('style-tabbed'); }
+});

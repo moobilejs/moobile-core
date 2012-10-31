@@ -47,6 +47,13 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
+	_tabBarItem: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
 	_selectedViewController: null,
 
 	/**
@@ -73,6 +80,7 @@ Moobile.ViewControllerSet = new Class({
 	viewDidLoad: function() {
 		this.parent();
 		this._tabBar = this.view.getTabBar();
+		this._tabBarItem = this._tabBar.getItem();
 	},
 
 	/**
@@ -198,10 +206,17 @@ Moobile.ViewControllerSet = new Class({
 	 * @since  0.3.0
 	 */
 	willAddChildViewController: function(viewController) {
+
 		this.parent(viewController);
+
 		viewController.setViewControllerSet(this);
-		viewController.getView().hide();
-		this._tabBar.addChildComponent(new Moobile.Button().setLabel(viewController.getTitle()));
+		viewController.hideView();
+
+		if (this._tabBarItem) {
+			console.log('WAT');
+			console.log('WAT');
+			this._tabBarItem.addChildComponent(new Moobile.Button().setLabel('test'));
+		}
 	},
 
 	/**
