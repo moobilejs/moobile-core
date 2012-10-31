@@ -47,4 +47,3 @@ Moobile.NavigationBar = new Class({
 Moobile.Component.defineRole('navigation-bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
 });
-
