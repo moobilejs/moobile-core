@@ -418,7 +418,7 @@ input, select, textarea {
 	    -ms-box-sizing: border-box;                              /* Important */
 	     -o-box-sizing: border-box;                              /* Important */
 	        box-sizing: border-box;                              /* Important */
-	display: block;
+	display: block;                                              /* Important */
 	width: 100%;
 }
 
@@ -693,6 +693,7 @@ input, select, textarea {
 	    -ms-box-flex: 1;                                         /* Important */
 	     -o-box-flex: 1;                                         /* Important */
 	        box-flex: 1;                                         /* Important */
+	display: block;                                              /* Important */
 }
 
 .list-item .list-item-detail {
@@ -711,6 +712,7 @@ input, select, textarea {
 	    -ms-box-flex: 0;                                         /* Important */
 	     -o-box-flex: 0;                                         /* Important */
 	        box-flex: 0;                                         /* Important */
+	display: block;                                              /* Important */
 }
 
 .list-item.is-disabled {}
@@ -725,6 +727,10 @@ input, select, textarea {
 	top: 0px;
 }
 
+/* Header */
+
+.list-item.style-header  {}
+
 /* Checked */
 
 .list-item.style-checked  {}
@@ -736,32 +742,6 @@ input, select, textarea {
 /* Style Detailed */
 
 .list-item.style-detailed {}
-
-/* List Header
------------------------------------------------------------------------------*/
-
-.list-header {
-	-webkit-box-sizing: border-box;                              /* Important */
-	   -moz-box-sizing: border-box;                              /* Important */
-	    -ms-box-sizing: border-box;                              /* Important */
-	     -o-box-sizing: border-box;                              /* Important */
-	        box-sizing: border-box;                              /* Important */
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
-	-webkit-box-pack: start;                                     /* Important */
-	   -moz-box-pack: start;                                     /* Important */
-	    -ms-box-pack: start;                                     /* Important */
-	     -o-box-pack: start;                                     /* Important */
-	        box-pack: start;                                     /* Important */
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
-}
 
 /* Overlay
 -----------------------------------------------------------------------------*/

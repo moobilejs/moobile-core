@@ -231,7 +231,6 @@ input, select, textarea {
 }
 
 .bar.navigation-bar .bar-item .bar-title {
-	display: block;
 	overflow: hidden;
 	padding-top: 5px;
 	padding-bottom: 5px;
