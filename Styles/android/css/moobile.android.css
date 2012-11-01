@@ -506,17 +506,7 @@ input, select, textarea {
 	background: rgba(51, 181, 229, 0.6);
 }
 
-/* Inside a View Style Dark */
-
-.view.style-dark .list-item {
-	border-bottom: 1px solid #292929;
-	color: #ffffff;
-}
-
-/* List Item Header
------------------------------------------------------------------------------*/
-
-.list-header {
+.list-item.style-header {
 	-webkit-box-orient: horizontal;
 	   -moz-box-orient: horizontal;
 	    -ms-box-orient: horizontal;
@@ -536,12 +526,11 @@ input, select, textarea {
 	text-transform: uppercase;
 }
 
-.list-header.is-selected {
-	background: inherit;
-}
+/* Inside a View Style Dark */
 
-.list-header.is-highlighted {
-	background: inherit;
+.view.style-dark .list-item {
+	border-bottom: 1px solid #292929;
+	color: #ffffff;
 }
 
 /* List
