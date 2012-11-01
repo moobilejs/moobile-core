@@ -110,7 +110,6 @@ Moobile.Alert = new Class({
 		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this.overlay = new Moobile.Overlay();
-		this.overlay.setStyle('radial');
 		this.addChildComponent(this.overlay);
 
 		this.headerElement = document.createElement('div');

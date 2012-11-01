@@ -6381,7 +6381,6 @@ Moobile.Alert = new Class({
 		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this.overlay = new Moobile.Overlay();
-		this.overlay.setStyle('radial');
 		this.addChildComponent(this.overlay);
 
 		this.headerElement = document.createElement('div');
@@ -8145,6 +8144,8 @@ provides:
 ...
 */
 
+// TODO: This component might be buggy since the change on how show/hide works
+
 /**
  * @see    http://moobilejs.com/doc/latest/Util/Overlay
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -8183,8 +8184,8 @@ Moobile.Overlay = new Class({
 	 */
 	showAnimated: function() {
 		this.willShow();
-		this.element.addClass('show-animated');
-		this.element.show();
+		this.addClass('show-animated');
+		this.removeClass('hidden');
 		return this;
 	},
 
@@ -8214,8 +8215,8 @@ Moobile.Overlay = new Class({
 		}
 
 		if (this.hasClass('hide-animated')) {
-			this.element.hide();
 			this.removeClass('hide-animated');
+			this.addClass('hidden');
 			this.didHide();
 		}
 	}
