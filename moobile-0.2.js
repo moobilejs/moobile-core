@@ -6290,8 +6290,6 @@ provides:
 ...
 */
 
-// TODO: Unit tests for buttons methods
-
 /**
  * @see    http://moobilejs.com/doc/latest/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -6381,6 +6379,7 @@ Moobile.Alert = new Class({
 		this.addEvent('animationend', this.bound('_onAnimationEnd'));
 
 		this.overlay = new Moobile.Overlay();
+		this.overlay.hide();
 		this.addChildComponent(this.overlay);
 
 		this.headerElement = document.createElement('div');
@@ -6606,8 +6605,7 @@ Moobile.Alert = new Class({
 	 */
 	showAnimated: function() {
 		this.willShow();
-		this.element.addClass('show-animated');
-		this.element.show();
+		this.element.addClass('show-animated').removeClass('hidden');
 		this.overlay.showAnimated();
 		return this;
 	},
@@ -6710,8 +6708,7 @@ Moobile.Alert = new Class({
 		}
 
 		if (this.hasClass('hide-animated')) {
-			this.removeClass('hide-animated');
-			this.element.hide();
+			this.addClass('hidden').removeClass('hide-animated');
 			this.didHide();
 		}
 	}
@@ -8184,8 +8181,7 @@ Moobile.Overlay = new Class({
 	 */
 	showAnimated: function() {
 		this.willShow();
-		this.addClass('show-animated');
-		this.removeClass('hidden');
+		this.addClass('show-animated').removeClass('hidden');
 		return this;
 	},
 

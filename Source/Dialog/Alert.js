@@ -19,8 +19,6 @@ provides:
 ...
 */
 
-// TODO: Unit tests for buttons methods
-
 /**
  * @see    http://moobilejs.com/doc/latest/Dialog/Alert
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
