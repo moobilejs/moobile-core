@@ -231,6 +231,7 @@ input, select, textarea {
 }
 
 .bar.navigation-bar .bar-item .bar-title {
+	display: block;
 	overflow: hidden;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -356,8 +357,8 @@ input, select, textarea {
 }
 
 .bar .button.style-back:before {
-	background: url(../images/android/bar-buttons.png) 0px 0px no-repeat;
-	background-size: 56px 56px;
+	background: url(../images/android/bar-button.png) 0px 0px no-repeat;
+	background-size: 56px 560px;
 	content: '';
 	display: block;
 	height: inherit;
@@ -375,8 +376,8 @@ input, select, textarea {
 }
 
 .bar .button.style-forward:before {
-	background: url(../images/android/bar-buttons.png) 0px -56px no-repeat;
-	background-size: 56px 56px;
+	background: url(../images/android/bar-button.png) 0px -56px no-repeat;
+	background-size: 56px 560px;
 	content: '';
 	display: block;
 	height: inherit;
@@ -389,13 +390,13 @@ input, select, textarea {
 /* Inside a Bar Style Dark + Style Back */
 
 .bar.style-dark .button.style-back:before {
-	background: url(../images/android/bar-buttons.png) 0px -112px no-repeat;
+	background: url(../images/android/bar-button.png) 0px -112px no-repeat;
 }
 
 /* Inside a Bar Style Dark + Style Forward */
 
 .bar.style-dark .button.style-forward:before {
-	background: url(../images/android/bar-buttons.png) 0px -168px no-repeat;
+	background: url(../images/android/bar-button.png) 0px -168px no-repeat;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 1.5/1), only screen and (min-device-pixel-ratio: 1.5) {
@@ -403,25 +404,25 @@ input, select, textarea {
 	/* Inside a Bar + Style Back */
 
 	.bar .button.style-back:before {
-		background: url(../images/android/bar-buttons-1.5x.png) 0px 0px no-repeat;
+		background: url(../images/android/bar-button-1.5x.png) 0px 0px no-repeat;
 	}
 
 	/* Inside a Bar + Style Forward */
 
 	.bar .button.style-forward:before {
-		background: url(../images/android/bar-buttons-1.5x.png) 0px -84px no-repeat;
+		background: url(../images/android/bar-button-1.5x.png) 0px -84px no-repeat;
 	}
 
 	/* Inside a Bar Style Dark + Style Back */
 
 	.bar.style-dark .button.style-back:before {
-		background: url(../images/android/bar-buttons-1.5x.png) 0px -168px no-repeat;
+		background: url(../images/android/bar-button-1.5x.png) 0px -168px no-repeat;
 	}
 
 	/* Inside a Bar Style Dark + Style Forward */
 
 	.bar.style-dark .button.style-forward:before {
-		background: url(../images/android/bar-buttons-1.5x.png) 0px -252px no-repeat;
+		background: url(../images/android/bar-button-1.5x.png) 0px -252px no-repeat;
 	}
 }
 
@@ -430,25 +431,25 @@ input, select, textarea {
 	/* Inside a Bar + Style Back */
 
 	.bar .button.style-back:before {
-		background: url(../images/android/bar-buttons-2x.png) 0px 0px no-repeat;
+		background: url(../images/android/bar-button-2x.png) 0px 0px no-repeat;
 	}
 
 	/* Inside a Bar + Style Forward */
 
 	.bar .button.style-forward:before {
-		background: url(../images/android/bar-buttons-2x.png) 0px -112px no-repeat;
+		background: url(../images/android/bar-button-2x.png) 0px -112px no-repeat;
 	}
 
 	/* Inside a Bar Style Dark + Style Back */
 
 	.bar.style-dark .button.style-back:before {
-		background: url(../images/android/bar-buttons-2x.png) 0px -224px no-repeat;
+		background: url(../images/android/bar-button-2x.png) 0px -224px no-repeat;
 	}
 
 	/* Inside a Bar Style Dark + Style Forward */
 
 	.bar.style-dark .button.style-forward:before {
-		background: url(../images/android/bar-buttons-2x.png) 0px -336px no-repeat;
+		background: url(../images/android/bar-button-2x.png) 0px -336px no-repeat;
 	}
 }
 
