@@ -160,6 +160,7 @@ Moobile.Scroller.Native = new Class({
 
 		x = x || 0;
 		y = y || 0;
+		time = time || 0;
 
 		if (this._animating) {
 			this._animating = false;

@@ -257,7 +257,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	scrollTo: function(x, y, time) {
-		this._scroller.scrollTo(x, y, time || 150);
+		this._scroller.scrollTo(x, y, time);
 		return this;
 	},
 
@@ -267,7 +267,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	scrollToElement: function(element, time) {
-		this._scroller.scrollToElement(element, time || 150);
+		this._scroller.scrollToElement(element);
 		return this;
 	},
 
@@ -278,8 +278,6 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	scrollToPage: function(pageX, pageY, time) {
-
-		time = time || 150;
 
 		pageX = pageX || 0;
 		pageY = pageY || 0;
