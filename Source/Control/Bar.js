@@ -67,6 +67,15 @@ Moobile.Bar = new Class({
 		this.parent();
 	},
 
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponent: function(component, where) {
+		return this.addChildComponentInside(component, this.contentElement, where);
+	},
+
 	// <0.2-compat>
 
 	/**
