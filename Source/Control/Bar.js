@@ -111,10 +111,18 @@ Moobile.Bar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
 Moobile.Component.defineRole('content', Moobile.Bar, {traversable: true}, function(element) {
 	this.contentElement = element;
 	this.contentElement.addClass('bar-content');

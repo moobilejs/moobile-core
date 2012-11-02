@@ -163,10 +163,18 @@ Moobile.NavigationBar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('navigation-bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
 Moobile.Component.defineRole('title', Moobile.NavigationBar, null, function(element) {
 	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });

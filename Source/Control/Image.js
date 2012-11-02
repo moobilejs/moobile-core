@@ -257,6 +257,10 @@ Moobile.Image.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('image', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });

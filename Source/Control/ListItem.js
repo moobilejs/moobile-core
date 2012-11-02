@@ -243,22 +243,42 @@ Moobile.ListItem.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item').setStyle('header'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
 	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
