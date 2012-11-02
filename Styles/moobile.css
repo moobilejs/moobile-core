@@ -343,7 +343,8 @@ input, select, textarea {
 	z-index: 75;                                                 /* Important */
 }
 
-.bar .bar-item {
+.bar .bar-item,                                                 /* Deprecated */
+.bar .bar-content {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */

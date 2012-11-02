@@ -178,7 +178,8 @@ input, select, textarea {
 	right: 0px;
 }
 
-.bar .bar-item {
+.bar .bar-item,                                                 /* Deprecated */
+.bar .bar-content {
 	height: 100%;
  }
 
@@ -204,7 +205,8 @@ input, select, textarea {
 /* Navigation Bar
 -----------------------------------------------------------------------------*/
 
-.bar.navigation-bar .bar-item .bar-title-wrapper {
+.bar.navigation-bar .bar-item .bar-title-wrapper,               /* Deprecated */
+.bar.navigation-bar .bar-content .bar-title-wrapper {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
@@ -230,7 +232,8 @@ input, select, textarea {
 	margin-right: 17px;
 }
 
-.bar.navigation-bar .bar-item .bar-title {
+.bar.navigation-bar .bar-item .bar-title,                       /* Deprecated */
+.bar.navigation-bar .bar-content .bar-title {
 	display: block;
 	overflow: hidden;
 	padding-top: 5px;

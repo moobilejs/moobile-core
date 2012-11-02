@@ -30,11 +30,11 @@ Moobile.Bar = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
-	_item: null,
+	contentElement: null,
 
 	/**
 	 * @overridden
@@ -47,12 +47,12 @@ Moobile.Bar = new Class({
 
 		this.addClass('bar');
 
-		var item = this.getRoleElement('item');
-		if (item === null) {
-			item = document.createElement('div');
-			item.ingest(this.element);
-			item.inject(this.element);
-			item.setRole('item');
+		var content = this.getRoleElement('content');
+		if (content === null) {
+			content = document.createElement('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			content.setRole('content');
 		}
 	},
 
@@ -63,15 +63,20 @@ Moobile.Bar = new Class({
 	 */
 	destroy: function() {
 		this._item = null;
+		this.contentElement = null;
 		this.parent();
 	},
 
+	// <0.2-compat>
+
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	setItem: function(item) {
+
+		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 
 		if (this._item === item)
 			return this;
@@ -79,7 +84,7 @@ Moobile.Bar = new Class({
 		if (this._item) {
 			this._item.replaceWithComponent(item, true);
 		} else {
-			this.addChildComponent(item);
+			this.addChildComponentInside(item, this.contentElement);
 		}
 
 		this._item = item;
@@ -89,13 +94,16 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	getItem: function() {
+		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 		return this._item;
 	}
+
+	// </0.2-compat>
 
 });
 
@@ -105,6 +113,11 @@ Moobile.Bar = new Class({
 
 Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
+});
+
+Moobile.Component.defineRole('content', Moobile.Bar, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('bar-content');
 });
 
 //------------------------------------------------------------------------------

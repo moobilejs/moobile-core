@@ -223,7 +223,8 @@ input, select, textarea {
 	width: 100%;
 }
 
-.bar .bar-item {
+.bar .bar-item,                                                 /* Deprecated */
+.bar .bar-content {
 	height: 100%;
 }
 
@@ -270,7 +271,8 @@ input, select, textarea {
 	height: 44px;
 }
 
-.bar.navigation-bar .bar-item .bar-title-wrapper {
+.bar.navigation-bar .bar-item .bar-title-wrapper,               /* Deprecated */
+.bar.navigation-bar .bar-content .bar-title-wrapper {
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
 	    -ms-box-align: center;                                   /* Important */
@@ -291,7 +293,8 @@ input, select, textarea {
 	height: inherit;
 }
 
-.bar.navigation-bar .bar-item .bar-title {
+.bar.navigation-bar .bar-item .bar-title,                       /* Deprecated */
+.bar.navigation-bar .bar-content .bar-title {
 	overflow: hidden;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -2236,7 +2239,8 @@ input, select, textarea {
 	to   { transform: translate3d(75%, 0, 10px); opacity: 0; }
 }
 
-.transition-slide-enter .transition-view-to-show .bar .bar-item {
+.transition-slide-enter .transition-view-to-show .bar .bar-item,/* Deprecated */
+.transition-slide-enter .transition-view-to-show .bar .bar-content {
 	-webkit-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	   -moz-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	    -ms-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
@@ -2249,7 +2253,8 @@ input, select, textarea {
 	        transform: translate3d(0, 0, 10px);                  /* Important */
 }
 
-.transition-slide-enter .transition-view-to-hide .bar .bar-item {
+.transition-slide-enter .transition-view-to-hide .bar .bar-item, /* Deprecated */
+.transition-slide-enter .transition-view-to-hide .bar .bar-content {
 	-webkit-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	   -moz-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	    -ms-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
@@ -2325,7 +2330,8 @@ input, select, textarea {
 	to   { transform: translate3d(-75%, 0, 10px); opacity: 0; }
 }
 
-.transition-slide-leave .transition-view-to-show .bar .bar-item {
+.transition-slide-leave .transition-view-to-show .bar .bar-item,/* Deprecated */
+.transition-slide-leave .transition-view-to-show .bar .bar-content {
 	-webkit-transform: translate3d(0, 0, 10px);
 	   -moz-transform: translate3d(0, 0, 10px);
 	    -ms-transform: translate3d(0, 0, 10px);
@@ -2338,7 +2344,8 @@ input, select, textarea {
 	        animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
-.transition-slide-leave .transition-view-to-hide .bar .bar-item {
+.transition-slide-leave .transition-view-to-hide .bar .bar-item,/* Deprecated */
+.transition-slide-leave .transition-view-to-hide .bar .bar-content {
 	-webkit-transform: translate3d(0, 0, 10px);
 	   -moz-transform: translate3d(0, 0, 10px);
 	    -ms-transform: translate3d(0, 0, 10px);

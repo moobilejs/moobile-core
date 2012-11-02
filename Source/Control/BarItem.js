@@ -36,6 +36,7 @@ Moobile.BarItem = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('bar-item');
+		console.log('[DEPRECATION NOTICE] The class "BarItem" will be removed in 0.5, all it’s methods were moved to the "Bar" class.');
 	}
 
 });

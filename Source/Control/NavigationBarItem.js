@@ -59,6 +59,8 @@ Moobile.NavigationBarItem = new Class({
 		var wrapper = document.createElement('div');
 		wrapper.addClass('bar-title-wrapper');
 		wrapper.wraps(title);
+
+		console.log('[DEPRECATION NOTICE] The class "NavigationBarItem" will be removed in 0.5, all it’s methods were moved to the "NavigationBar" class.');
 	},
 
 	/**
