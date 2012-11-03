@@ -160,25 +160,41 @@ Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-/* Active Style - iOS */
+/**
+ * Active Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('active', Moobile.Button, {
 	attach: function(element) { element.addClass('style-active'); },
 	detach: function(element) { element.removeClass('style-active'); }
 });
 
-/* Warning Style - iOS */
+/**
+ * Warning Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('warning', Moobile.Button, {
 	attach: function(element) { element.addClass('style-warning'); },
 	detach: function(element) { element.removeClass('style-warning'); }
 });
 
-/* Back Style - iOS Android */
+/**
+ * Back Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('back', Moobile.Button, {
 	attach: function(element) { element.addClass('style-back'); },
 	detach: function(element) { element.removeClass('style-back'); }
 });
 
-/* Forward Style - iOS Android */
+/**
+ * Forward Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('forward', Moobile.Button, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }

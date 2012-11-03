@@ -141,13 +141,21 @@ Moobile.Component.defineRole('content', Moobile.Bar, {traversable: true}, functi
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS - Android */
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS - Android */
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }

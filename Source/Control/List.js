@@ -383,6 +383,11 @@ Moobile.Component.defineRole('list', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/**
+ * Grouped - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('grouped', Moobile.List, {
 	attach: function(element) { element.addClass('style-grouped'); },
 	detach: function(element) { element.removeClass('style-grouped'); }
