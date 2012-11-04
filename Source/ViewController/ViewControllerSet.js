@@ -110,7 +110,7 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	setViewControllers: function(viewControllers) {
+	setChildViewControllers: function(viewControllers) {
 
 		this._selectedViewController = null;
 		this._incomingViewController = null;
@@ -370,7 +370,7 @@ Class.refactor(Moobile.ViewController, {
 	 */
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
-		viewController.setViewControllerSet(this._viewControllerStack);
+		viewController.setViewControllerSet(this._viewControllerSet);
 	},
 
 	/**
