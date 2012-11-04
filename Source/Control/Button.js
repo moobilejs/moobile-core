@@ -66,7 +66,7 @@ Moobile.Button = new Class({
 	destroy: function() {
 		this.removeEvent('tapstart', this.bound('_onTapStart'));
 		this.removeEvent('tapend', this.bound('_onTapEnd'));
-		this.label = null;
+		this._label = null;
 		this.parent();
 	},
 
