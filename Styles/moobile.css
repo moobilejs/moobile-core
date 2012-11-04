@@ -247,7 +247,7 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.view.view-layout-vertical .view-content {
+.view.view-layout-vertical > .view-content-wrapper > .view-content {
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
 	    -ms-box-orient: vertical;                                /* Important */
@@ -255,7 +255,7 @@ input, select, textarea {
 	        box-orient: vertical;                                /* Important */
 }
 
-.view.view-layout-horizontal .view-content {
+.view.view-layout-horizontal > .view-content-wrapper > .view-content {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
@@ -312,6 +312,17 @@ input, select, textarea {
 	height: 100%;
 	overflow: visible;
 	width: 100%;
+}
+
+/* View Collection
+-----------------------------------------------------------------------------*/
+
+.view.view-collection > .view-content-wrapper > .view-content > .view {
+	-webkit-box-flex: 1;                                         /* Important */
+	   -moz-box-flex: 1;                                         /* Important */
+	    -ms-box-flex: 1;                                         /* Important */
+	     -o-box-flex: 1;                                         /* Important */
+	        box-flex: 1;                                         /* Important */
 }
 
 /* Bar
