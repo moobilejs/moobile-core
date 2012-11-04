@@ -303,6 +303,80 @@ input, select, textarea {
 	white-space: nowrap;
 }
 
+/* Tab Bar
+-----------------------------------------------------------------------------*/
+
+.bar.tab-bar {
+	background: url(../images/ios/tab-bar.png) repeat-x;
+	height: 49px;
+	padding: 2px;
+	padding-top: 3px;
+}
+
+.bar.tab-bar .bar-content {
+	-webkit-box-align: stretch;
+	   -moz-box-align: stretch;
+	    -ms-box-align: stretch;
+	     -o-box-align: stretch;
+	        box-align: stretch;
+}
+
+.bar.tab-bar:after,
+.bar.tab-bar:before {
+	display: none;
+}
+
+/* Tab
+-----------------------------------------------------------------------------*/
+
+.tab {
+	-webkit-box-orient: vertical;
+	   -moz-box-orient: vertical;
+	    -ms-box-orient: vertical;
+	     -o-box-orient: vertical;
+	        box-orient: vertical;
+	-webkit-box-align: center;
+	   -moz-box-align: center;
+	    -ms-box-align: center;
+	     -o-box-align: center;
+	        box-align: center;
+	-webkit-box-pack: center;
+	   -moz-box-pack: center;
+	    -ms-box-pack: center;
+	     -o-box-pack: center;
+	        box-pack: center;
+}
+
+.tab .tab-label {
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	display: block;
+	overflow: hidden;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-overflow: ellipsis;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.tab .tab-image {
+	display: block;
+}
+
+.tab.is-selected,
+.tab.is-highlighted {
+	-webkit-box-shadow: 0px 0px -1 rgba(0, 0, 0, 0.3) inset;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+/* Inside a Tab Bar */
+
+.tab-bar .tab {
+	-webkit-box-flex: 1;
+	width: 0px;
+}
+
 /* Button
 -----------------------------------------------------------------------------*/
 

@@ -427,6 +427,28 @@ input, select, textarea {
 	width: 100%;
 }
 
+/* Tab Bar
+-----------------------------------------------------------------------------*/
+
+.bar.tab-bar {
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
+}
+
+/* Tab Bar
+-----------------------------------------------------------------------------*/
+
+.tab {
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+}
+
 /* Button Group
 -----------------------------------------------------------------------------*/
 
