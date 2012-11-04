@@ -3734,7 +3734,7 @@ Moobile.Button = new Class({
 	destroy: function() {
 		this.removeEvent('tapstart', this.bound('_onTapStart'));
 		this.removeEvent('tapend', this.bound('_onTapEnd'));
-		this.label = null;
+		this._label = null;
 		this.parent();
 	},
 
@@ -3808,10 +3808,18 @@ Moobile.Button.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('button', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Button, element, 'data-button'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
@@ -3820,25 +3828,41 @@ Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-/* Active Style - iOS */
+/**
+ * Active Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('active', Moobile.Button, {
 	attach: function(element) { element.addClass('style-active'); },
 	detach: function(element) { element.removeClass('style-active'); }
 });
 
-/* Warning Style - iOS */
+/**
+ * Warning Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('warning', Moobile.Button, {
 	attach: function(element) { element.addClass('style-warning'); },
 	detach: function(element) { element.removeClass('style-warning'); }
 });
 
-/* Back Style - iOS Android */
+/**
+ * Back Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('back', Moobile.Button, {
 	attach: function(element) { element.addClass('style-back'); },
 	detach: function(element) { element.removeClass('style-back'); }
 });
 
-/* Forward Style - iOS Android */
+/**
+ * Forward Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('forward', Moobile.Button, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }
@@ -4172,6 +4196,10 @@ Moobile.ButtonGroup = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('button-group', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });
@@ -4210,11 +4238,11 @@ Moobile.Bar = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.2.0
 	 */
-	_item: null,
+	contentElement: null,
 
 	/**
 	 * @overridden
@@ -4227,12 +4255,12 @@ Moobile.Bar = new Class({
 
 		this.addClass('bar');
 
-		var item = this.getRoleElement('item');
-		if (item === null) {
-			item = document.createElement('div');
-			item.ingest(this.element);
-			item.inject(this.element);
-			item.setRole('item');
+		var content = this.getRoleElement('content');
+		if (content === null) {
+			content = document.createElement('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			content.setRole('content');
 		}
 	},
 
@@ -4243,15 +4271,29 @@ Moobile.Bar = new Class({
 	 */
 	destroy: function() {
 		this._item = null;
+		this.contentElement = null;
 		this.parent();
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponent: function(component, where) {
+		return this.addChildComponentInside(component, this.contentElement, where);
+	},
+
+	// <0.2-compat>
+
+	/**
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	setItem: function(item) {
+
+		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 
 		if (this._item === item)
 			return this;
@@ -4259,7 +4301,7 @@ Moobile.Bar = new Class({
 		if (this._item) {
 			this._item.replaceWithComponent(item, true);
 		} else {
-			this.addChildComponent(item);
+			this.addChildComponentInside(item, this.contentElement);
 		}
 
 		this._item = item;
@@ -4269,13 +4311,16 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	getItem: function() {
+		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 		return this._item;
 	}
+
+	// </0.2-compat>
 
 });
 
@@ -4283,21 +4328,42 @@ Moobile.Bar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('content', Moobile.Bar, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('bar-content');
 });
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS - Android */
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS - Android */
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
@@ -4342,6 +4408,7 @@ Moobile.BarItem = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('bar-item');
+		console.log('[DEPRECATION NOTICE] The class "BarItem" will be removed in 0.5, all it’s methods were moved to the "Bar" class.');
 	}
 
 });
@@ -4350,6 +4417,10 @@ Moobile.BarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.Bar, null, function(element) {
 	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
 });
@@ -4386,13 +4457,134 @@ Moobile.NavigationBar = new Class({
 	Extends: Moobile.Bar,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_title: null,
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
 	willBuild: function() {
+
 		this.parent();
+
 		this.addClass('navigation-bar');
+
+		var content = this.getRoleElement('content');
+
+		var title = this.getRoleElement('title');
+		if (title === null) {
+			title = document.createElement('div');
+			title.ingest(content);
+			title.inject(content);
+			title.setRole('title');
+		}
+
+		var wrapper = document.createElement('div');
+		wrapper.addClass('bar-title-wrapper');
+		wrapper.wraps(title);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	destroy: function() {
+		this._title = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#setTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setTitle: function(title) {
+
+		if (this._title === title)
+			return this;
+
+		title = Moobile.Text.from(title);
+
+		if (this._title) {
+			this._title.replaceWithComponent(title, true);
+		} else {
+			this.addChildComponent(title);
+		}
+
+		this._title = title;
+		this._title.addClass('bar-title');
+		this.toggleClass('bar-title-empty', this._title.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#getTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTitle: function() {
+		return this._title;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#addLeftButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addLeftButton: function(button) {
+		return this.addChildComponent(button, 'top');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#addRightButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addRightButton: function(button) {
+		return this.addChildComponent(button, 'bottom');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentOfType(Moobile.Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponents(Moobile.Button, destroy);
 	}
 
 });
@@ -4401,8 +4593,20 @@ Moobile.NavigationBar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('navigation-bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('title', Moobile.NavigationBar, null, function(element) {
+	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });
 
 
@@ -4467,6 +4671,8 @@ Moobile.NavigationBarItem = new Class({
 		var wrapper = document.createElement('div');
 		wrapper.addClass('bar-title-wrapper');
 		wrapper.wraps(title);
+
+		console.log('[DEPRECATION NOTICE] The class "NavigationBarItem" will be removed in 0.5, all it’s methods were moved to the "NavigationBar" class.');
 	},
 
 	/**
@@ -4574,10 +4780,18 @@ Moobile.NavigationBarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.NavigationBar, null, function(element) {
 	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('title', Moobile.NavigationBarItem, null, function(element) {
 	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });
@@ -5139,6 +5353,10 @@ Moobile.Slider = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('slider', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Slider, element, 'data-slider'));
 });
@@ -5517,6 +5735,10 @@ Moobile.List = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('list', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.List, element, 'data-list'));
 });
@@ -5525,6 +5747,11 @@ Moobile.Component.defineRole('list', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/**
+ * Grouped - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('grouped', Moobile.List, {
 	attach: function(element) { element.addClass('style-grouped'); },
 	detach: function(element) { element.removeClass('style-grouped'); }
@@ -5776,27 +6003,48 @@ Moobile.ListItem.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item').setStyle('header'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
 	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
 
 // <0.1-compat>
+
 /**
  * @deprecated
  */
@@ -5804,31 +6052,48 @@ Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) 
 	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
 });
+
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/* Header Style - iOS Android */
+/**
+ * Header Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineStyle('header', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-header'); },
 	detach: function(element) { element.removeClass('style-header'); }
 });
 
-/* Checked Style - iOS */
+/**
+ * Checked Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
 	detach: function(element) { element.removeClass('style-checked'); }
 });
 
-/* Disclosed Style - iOS */
+/**
+ * Disclosed Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('disclosed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-disclosed'); },
 	detach: function(element) { element.removeClass('style-disclosed'); }
 });
 
-/* Detailed Style - iOS */
+/**
+ * Detailed Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-detailed'); },
 	detach: function(element) { element.removeClass('style-detailed'); }
@@ -5899,6 +6164,10 @@ Moobile.ActivityIndicator = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('activity-indicator', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ActivityIndicator, element, 'data-activity-indicator'));
 });
@@ -6163,6 +6432,10 @@ Moobile.Image.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('image', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
@@ -6264,8 +6537,484 @@ Moobile.Text.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('text', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Text, element, 'data-text'));
+});
+
+
+/*
+---
+
+name: Tab
+
+description: Provides a Tab control.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Control
+
+provides:
+	- Tab
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Tab
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Tab = new Class({
+
+	Extends: Moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_label: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_image: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('tab');
+
+		var image = this.getRoleElement('image');
+		var label = this.getRoleElement('label');
+
+		if (label === null) {
+			label = document.createElement('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+
+		if (image === null) {
+			image = document.createElement('div');
+			image.inject(this.element, 'top');
+			image.setRole('image');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	destroy: function() {
+		this._label = null;
+		this._image = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tab#setLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setLabel: function(label) {
+
+		if (this._label === label)
+			return this;
+
+		label = Moobile.Text.from(label);
+
+		if (this._label) {
+			this._label.replaceWithComponent(label, true);
+		} else {
+			this.addChildComponent(label);
+		}
+
+		this._label = label;
+		this._label.addClass('tab-label');
+		this.toggleClass('tab-label-empty', this._label.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tab#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getLabel: function() {
+		return this._label;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tab#setImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setImage: function(image) {
+
+		if (this._image === image)
+			return this;
+
+		image = Moobile.Image.from(image);
+
+		if (this._image) {
+			this._image.replaceWithComponent(image, true);
+		} else {
+			this.addChildComponent(image);
+		}
+
+		this._image = image;
+		this._image.addClass('tab-image');
+		this.toggleClass('tab-image-empty', this._image.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tab#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getImage: function() {
+		return this._image;
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Tab#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Tab.from = function(source) {
+	if (source instanceof Moobile.Tab) return source;
+	var tab = new Moobile.Tab();
+	tab.setLabel(source);
+	return tab;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('tab', Moobile.TabBar, null, function(element) {
+	this.addTab(Moobile.Component.create(Moobile.Tab, element, 'data-tab'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('label', Moobile.Tab, null, function(element) {
+	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('image', Moobile.Tab, null, function(element) {
+	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
+});
+
+
+
+/*
+---
+
+name: TabBar
+
+description: Provides a bar control used to navigate between views.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Bar
+
+provides:
+	- TabBar
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/TabBar
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.TabBar = new Class({
+
+	Extends: Moobile.Bar,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_selectedTab: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_selectedTabIndex: -1,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		selectedTabIndex: -1
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('tab-bar');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#setSelectedTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedTab: function(selectedTab) {
+
+		if (this._selectedTab === selectedTab)
+			return this;
+
+		if (this._selectedTab) {
+			this._selectedTab.setSelected(false);
+			this.fireEvent('deselect', this._selectedTab);
+			this._selectedTab = null;
+		}
+
+		this._selectedTabIndex = selectedTab ? this.getChildComponentIndex(selectedTab) : -1;
+
+		if (selectedTab) {
+			this._selectedTab = selectedTab;
+			this._selectedTab.setSelected(true);
+			this.fireEvent('select', this._selectedTab);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#getSelectedTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getSelectedTab: function() {
+		return this._selectedTab;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#setSelectedTabIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedTabIndex: function(index) {
+
+		var child = null;
+		if (index >= 0) {
+			child = this.getChildComponentOfTypeAt(Moobile.Tab, index);
+		}
+
+		return this.setSelectedTab(child);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#getSelectedTabIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getSelectedTabIndex: function() {
+		return this._selectedTabIndex;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#clearSelectedTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	clearSelectedTab: function() {
+		this.setSelectedTab(null);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTab: function(tab, where) {
+		return this.addChildComponent(Moobile.Tab.from(tab), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabAfter: function(tab, after) {
+		return this.addChildComponentAfter(Moobile.Tab.from(tab), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabBefore: function(tab, before) {
+		return this.addChildComponentBefore(Moobile.Tab.from(tab), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#getTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabs: function() {
+		return this.getChildComponentsOfType(Moobile.Tab);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#getTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTab: function(name) {
+		return this.getChildComponentOfType(Moobile.Tab, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#getTabAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabAt: function(index) {
+		return this.getChildComponentOfTypeAt(Moobile.Tab, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#removeTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeTab: function(tab, destroy) {
+		return this.removeChildComponent(tab, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#removeAllTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeAllTabs: function(destroy) {
+		return this.removeAllChildComponentsOfType(Moobile.Tab, destroy);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this._selectedTab === component) {
+			this.clearSelectedTab();
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didAddChildComponent: function(child) {
+		this.parent(child);
+		if (child instanceof Moobile.Tab) {
+			child.addEvent('tap', this.bound('onTabTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didRemoveChildComponent: function(child) {
+		this.parent(child);
+		if (child instanceof Moobile.Tab) {
+			child.removeEvent('tap', this.bound('onTabTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' || state == null) {
+			this.getChildComponents().invoke('setDisabled', state);
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	onTabTap: function(e, sender) {
+		this.setSelectedTab(sender);
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('tab-bar', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.TabBar, element, 'data-tab-bar'));
 });
 
 
@@ -8654,45 +9403,180 @@ Moobile.View.at = function(path, options, name) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('content', Moobile.View, {traversable: true}, function(element) {
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true}, function(element) {
 	this.contentWrapperElement = element
 	this.contentWrapperElement.addClass('view-content-wrapper');
 });
 
 // <0.1-compat>
+
 /**
  * @deprecated
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
  */
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
 });
+
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS Android */
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('dark', Moobile.View, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS Android */
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('light', Moobile.View, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
+});
+
+
+/*
+---
+
+name: ViewSet
+
+description: Provides a view that handles an infinite number of views arrenged
+             as a set.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- View
+
+provides:
+	- ViewSet
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/ViewSet
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewSet = new Class({
+
+	Extends: Moobile.View,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_tabBar: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('view-set');
+
+		var bar = this.getRoleElement('tab-bar');
+		if (bar === null) {
+			bar = document.createElement('div');
+			bar.inject(this.element);
+			bar.setRole('tab-bar');
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/ViewSet#setTabBar
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setTabBar: function(tabBar) {
+
+		if (this._tabBar === tabBar || !tabBar)
+			return this;
+
+		if (this._tabBar) {
+			this._tabBar.replaceWithComponent(tabBar, true);
+		} else {
+			this.addChildComponent(tabBar);
+		}
+
+		this._tabBar = tabBar;
+		this._tabBar.addClass('view-set-tab-bar');
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/ViewSet#getTabBar
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabBar: function() {
+		return this._tabBar;
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('view-set', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewSet, element, 'data-view-set'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('tab-bar', Moobile.ViewSet, null, function(element) {
+	this.setTabBar(Moobile.Component.create(Moobile.TabBar, element, 'data-tab-bar'));
 });
 
 
@@ -8743,8 +9627,78 @@ Moobile.ViewStack = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('view-stack', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
+});
+
+
+/*
+---
+
+name: ViewCollection
+
+description: Provides a view that handles an infinite number of views arrenged
+             as a collection.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- View
+
+provides:
+	- ViewCollection
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/ViewCollection
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewCollection = new Class({
+
+	Extends: Moobile.View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('view-collection');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+		this.parent();
+		this.setLayout('horizontal');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('view-collection', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewCollection, element, 'data-view-collection'));
 });
 
 
@@ -9298,6 +10252,10 @@ Moobile.ScrollView.at = function(path, options, name) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('scroll-view', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ScrollView, element, 'data-scroll-view'));
 });
@@ -9807,18 +10765,12 @@ Moobile.ViewController = new Class({
 		if (this._title === title)
 			return this;
 
-		if (typeof title === 'string') {
-			var text = title;
-			title = new Moobile.Text();
-			title.setText(text);
+		title = Moobile.Text.from(title);
+
+		if (this._title &&
+			this._title.hasParentComponent()) {
+			this._title.replaceWithComponent(title, true);
 		}
-
-		// Not totally sure about that yet
-		// var parent = this._title ? this._title.getParentComponent() : null;
-		// if (parent) {
-		// 	parent.replaceChildComponent(this._title, title);
-		// }
-
 
 		this._title = title;
 
@@ -9844,17 +10796,12 @@ Moobile.ViewController = new Class({
 		if (this._image === image)
 			return this;
 
-		if (typeof image === 'string') {
-			var source = image;
-			image = new Moobile.Image();
-			image.setSource(source);
-		}
+		image = Moobile.Text.from(image);
 
-		// Not totally sure about that yet
-		// var parent = this._image ? this._image.getParentComponent() : null;
-		// if (parent) {
-		//	parent.replaceChildComponent(this._image, image);
-		// }
+		if (this._image &&
+			this._image.hasParentComponent()) {
+			this._image.replaceWithComponent(image, true);
+		}
 
 		this._image = image;
 
@@ -10164,6 +11111,394 @@ Moobile.ViewController = new Class({
 		// </0.1-compat>
 
 		this.viewDidRotate(name);
+	}
+
+});
+
+
+/*
+---
+
+name: ViewControllerSet
+
+description: Manages a view set.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ViewController
+
+provides:
+	- ViewControllerSet
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewControllerSet = new Class({
+
+	Extends: Moobile.ViewController,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_animating: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_tabBar: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_selectedViewController: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_incomingViewController: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		viewTransition: null,
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	loadView: function() {
+		this.view = new Moobile.ViewSet();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	viewDidLoad: function() {
+		this.parent();
+		this._tabBar = this.view.getTabBar();
+		this._tabBar.addEvent('select', this.bound('_onTabSelect'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	viewDidBecomeReady: function() {
+		this.parent();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	destroy: function() {
+		this._tabBar.removeEvent('select', this.bound('_onTabSelect'));
+		this._tabBar = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setChildViewControllers: function(viewControllers) {
+
+		this._selectedViewController = null;
+		this._incomingViewController = null;
+		this.removeAllChildViewControllers(true);
+
+		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
+
+		return this.setSelectedViewController(viewControllers[0])
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedViewController: function(viewController, viewTransition) {
+
+		if (this._animating)
+			return this;
+
+		var index = this.getChildViewControllerIndex(viewController);
+
+		this._tabBar.setSelectedTabIndex(index);
+
+		if (this._selectedViewController === null) {
+			this.willSelectViewController(viewController);
+			this._selectedViewController = viewController;
+			this._selectedViewController.viewWillEnter();
+			this._selectedViewController.showView();
+			this._selectedViewController.viewDidEnter();
+			this.didSelectViewController(viewController);
+			return this;
+		}
+
+		if (this._selectedViewController === viewController)
+			return this;
+
+		this._upcomingViewController = viewController;
+
+		var upcomingViewIndex = this.getChildViewControllerIndex(this._upcomingViewController);
+		var selectedViewindex = this.getChildViewControllerIndex(this._selectedViewController);
+
+		var method = upcomingViewIndex > selectedViewindex
+		           ? 'enter'
+		           : 'leave';
+
+		var viewToShow = this._upcomingViewController.getView();
+		var viewToHide = this._selectedViewController.getView();
+
+		this._animating = true; // needs to be set before the transition happens
+
+		viewTransition = viewTransition || new Moobile.ViewTransition.None();
+		viewTransition.addEvent('start:once', this.bound('onSelectTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('onSelectTransitionComplete'));
+		viewTransition[method].call(
+			viewTransition,
+			viewToShow,
+			viewToHide,
+			this.view
+		);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewControllerIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedViewControllerIndex: function(index, viewTransition) {
+
+		var viewController = this.getChildViewControllerAt(index);
+		if (viewController) {
+			this.setSelectedViewController(viewController, viewTransition)
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#getSelectedViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getSelectedViewController: function() {
+		return this._selectedViewController;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	onSelectTransitionStart: function(e) {
+		this.willSelectViewController(this._upcomingViewController);
+		this._selectedViewController.viewWillLeave();
+		this._upcomingViewController.viewWillEnter();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	onSelectTransitionComplete: function(e) {
+
+		this._selectedViewController.viewDidLeave();
+		this._upcomingViewController.viewDidEnter();
+		this.didSelectViewController(this._upcomingViewController);
+
+		this._selectedViewController = this._upcomingViewController;
+		this._upcomingViewController = null;
+		this._animating = false;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willAddChildViewController: function(viewController) {
+
+		this.parent(viewController);
+
+		viewController.setViewControllerSet(this);
+
+		var tab = new Moobile.Tab;
+		tab.setLabel(viewController.getTitle());
+		tab.setImage(viewController.getImage());
+		this._tabBar.addTab(tab);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+
+		this.parent(viewController);
+
+		var index = this.getChildViewControllerIndex(viewController);
+
+		viewController.setViewControllerSet(null);
+
+		if (this._selectedViewController === viewController) {
+			this._selectedViewController = null;
+		}
+
+		var tab = this._tabBar.getTabAt(index);
+		if (tab) {
+			tab.removeFromParentComponent();
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#willSelectViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willSelectViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#didSelectViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didSelectViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_onTabSelect: function(tab) {
+
+		var index = this._tabBar.getChildComponentIndex(tab);
+
+		var viewController = this.getChildViewControllerAt(index);
+		if (viewController !== this._selectedViewController) {
+			this.setSelectedViewController(viewController, this.options.viewTransition);
+		}
+	}
+
+});
+
+Class.refactor(Moobile.ViewController, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_viewControllerSet: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setViewControllerSet
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setViewControllerSet: function(viewControllerSet) {
+
+		if (this._viewControllerSet === viewControllerSet)
+			return this;
+
+		this.parentViewControllerSetWillChange(viewControllerSet);
+		this._viewControllerSet = viewControllerSet;
+		this.parentViewControllerSetDidChange(viewControllerSet);
+
+		if (this instanceof Moobile.ViewControllerSet)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof Moobile.ViewControllerSet);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerSet', viewControllerSet);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#getViewControllerSet
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getViewControllerSet: function() {
+		return this._viewControllerSet;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#parentViewControllerSetWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	parentViewControllerSetWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#parentViewControllerSetDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	parentViewControllerSetDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerSet(this._viewControllerSet);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerSet(null);
 	}
 
 });
@@ -10652,6 +11987,163 @@ Moobile.ViewControllerStack.Navigation = new Class({
 	 */
 	_onBackButtonTap: function(e) {
 		this.popViewController();
+	}
+
+});
+
+
+/*
+---
+
+name: ViewControllerCollection
+
+description: Manages a view set.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ViewController
+
+provides:
+	- ViewControllerCollection
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerCollection
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewControllerCollection = new Class({
+
+	Extends: Moobile.ViewController,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	loadView: function() {
+		this.view = new Moobile.ViewCollection();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerCollection#setViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setChildViewControllers: function(viewControllers) {
+		this.removeAllChildViewControllers(true);
+		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerCollection(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerCollection(null);
+	}
+
+});
+
+Class.refactor(Moobile.ViewController, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_viewControllerCollection: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerCollection#setViewControllerCollection
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setViewControllerCollection: function(viewControllerSet) {
+
+		if (this._viewControllerCollection === viewControllerSet)
+			return this;
+
+		this.parentViewControllerCollectionWillChange(viewControllerSet);
+		this._viewControllerCollection = viewControllerSet;
+		this.parentViewControllerCollectionDidChange(viewControllerSet);
+
+		if (this instanceof Moobile.ViewControllerCollection)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof Moobile.ViewControllerCollection);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerCollection', viewControllerSet);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerCollection#getViewControllerCollection
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getViewControllerCollection: function() {
+		return this._viewControllerCollection;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerCollection#parentViewControllerCollectionWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	parentViewControllerCollectionWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerCollection#parentViewControllerCollectionDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	parentViewControllerCollectionDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerCollection(this._viewControllerCollection);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerCollection(null);
 	}
 
 });
