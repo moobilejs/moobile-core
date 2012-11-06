@@ -240,7 +240,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	willAddChildViewController: function(viewController) {
+	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(this);
 	},
@@ -250,7 +250,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	willRemoveChildViewController: function(viewController) {
+	didRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(null);
 	},
