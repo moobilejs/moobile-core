@@ -11228,7 +11228,7 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	setChildViewControllers: function(viewControllers) {
+	setViewControllers: function(viewControllers) {
 
 		this._selectedViewController = null;
 		this._incomingViewController = null;
@@ -11349,16 +11349,16 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	didAddChildViewController: function(viewController) {
+	willAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
+
+		viewController.setViewControllerSet(this);
 
 		var tab = new Moobile.Tab;
 		tab.setLabel(viewController.getTitle());
 		tab.setImage(viewController.getImage());
 		this._tabBar.addTab(tab);
-
-		viewController.setViewControllerSet(this);
 	},
 
 	/**
@@ -11366,7 +11366,7 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	didRemoveChildViewController: function(viewController) {
+	willRemoveChildViewController: function(viewController) {
 
 		this.parent(viewController);
 
@@ -11488,7 +11488,7 @@ Class.refactor(Moobile.ViewController, {
 	 */
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
-		viewController.setViewControllerSet(this._viewControllerSet);
+		viewController.setViewControllerSet(this._viewControllerStack);
 	},
 
 	/**
@@ -11746,7 +11746,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	didAddChildViewController: function(viewController) {
+	willAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(this);
 	},
@@ -11756,7 +11756,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	didRemoveChildViewController: function(viewController) {
+	willRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(null);
 	},
@@ -12047,7 +12047,7 @@ Moobile.ViewControllerCollection = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	didAddChildViewController: function(viewController) {
+	willAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerCollection(this);
 	},
@@ -12057,7 +12057,7 @@ Moobile.ViewControllerCollection = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	didRemoveChildViewController: function(viewController) {
+	willRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerCollection(null);
 	}

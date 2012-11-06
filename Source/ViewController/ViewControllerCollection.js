@@ -53,7 +53,7 @@ Moobile.ViewControllerCollection = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	didAddChildViewController: function(viewController) {
+	willAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerCollection(this);
 	},
@@ -63,7 +63,7 @@ Moobile.ViewControllerCollection = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	didRemoveChildViewController: function(viewController) {
+	willRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerCollection(null);
 	}
