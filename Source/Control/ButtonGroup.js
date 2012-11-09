@@ -324,10 +324,6 @@ Moobile.ButtonGroup = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Moobile.Component.defineRole('button-group', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });

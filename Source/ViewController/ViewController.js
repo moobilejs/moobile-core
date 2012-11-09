@@ -502,12 +502,18 @@ Moobile.ViewController = new Class({
 		if (this._title === title)
 			return this;
 
-		title = Moobile.Text.from(title);
-
-		if (this._title &&
-			this._title.hasParentComponent()) {
-			this._title.replaceWithComponent(title, true);
+		if (typeof title === 'string') {
+			var text = title;
+			title = new Moobile.Text();
+			title.setText(text);
 		}
+
+		// Not totally sure about that yet
+		// var parent = this._title ? this._title.getParentComponent() : null;
+		// if (parent) {
+		// 	parent.replaceChildComponent(this._title, title);
+		// }
+
 
 		this._title = title;
 
@@ -533,12 +539,17 @@ Moobile.ViewController = new Class({
 		if (this._image === image)
 			return this;
 
-		image = Moobile.Text.from(image);
-
-		if (this._image &&
-			this._image.hasParentComponent()) {
-			this._image.replaceWithComponent(image, true);
+		if (typeof image === 'string') {
+			var source = image;
+			image = new Moobile.Image();
+			image.setSource(source);
 		}
+
+		// Not totally sure about that yet
+		// var parent = this._image ? this._image.getParentComponent() : null;
+		// if (parent) {
+		//	parent.replaceChildComponent(this._image, image);
+		// }
 
 		this._image = image;
 

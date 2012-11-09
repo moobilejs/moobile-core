@@ -30,11 +30,11 @@ Moobile.Bar = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
+	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
+	 * @since  0.1.0
 	 */
-	contentElement: null,
+	_item: null,
 
 	/**
 	 * @overridden
@@ -47,12 +47,12 @@ Moobile.Bar = new Class({
 
 		this.addClass('bar');
 
-		var content = this.getRoleElement('content');
-		if (content === null) {
-			content = document.createElement('div');
-			content.ingest(this.element);
-			content.inject(this.element);
-			content.setRole('content');
+		var item = this.getRoleElement('item');
+		if (item === null) {
+			item = document.createElement('div');
+			item.ingest(this.element);
+			item.inject(this.element);
+			item.setRole('item');
 		}
 	},
 
@@ -63,29 +63,15 @@ Moobile.Bar = new Class({
 	 */
 	destroy: function() {
 		this._item = null;
-		this.contentElement = null;
 		this.parent();
 	},
 
 	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
-	addChildComponent: function(component, where) {
-		return this.addChildComponentInside(component, this.contentElement, where);
-	},
-
-	// <0.2-compat>
-
-	/**
-	 * @deprecated
+	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	setItem: function(item) {
-
-		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 
 		if (this._item === item)
 			return this;
@@ -93,7 +79,7 @@ Moobile.Bar = new Class({
 		if (this._item) {
 			this._item.replaceWithComponent(item, true);
 		} else {
-			this.addChildComponentInside(item, this.contentElement);
+			this.addChildComponent(item);
 		}
 
 		this._item = item;
@@ -103,16 +89,13 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @deprecated
+	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	getItem: function() {
-		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 		return this._item;
 	}
-
-	// </0.2-compat>
 
 });
 
@@ -120,42 +103,21 @@ Moobile.Bar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
-});
-
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.3.0
- */
-Moobile.Component.defineRole('content', Moobile.Bar, {traversable: true}, function(element) {
-	this.contentElement = element;
-	this.contentElement.addClass('bar-content');
 });
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/**
- * Dark Style - iOS & Android
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
+/* Dark Style - iOS - Android */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/**
- * Light Style - iOS & Android
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.2.0
- */
+/* Light Style - iOS - Android */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }

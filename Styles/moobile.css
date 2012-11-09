@@ -247,7 +247,7 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.view.view-layout-vertical > .view-content-wrapper > .view-content {
+.view.view-layout-vertical .view-content {
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
 	    -ms-box-orient: vertical;                                /* Important */
@@ -255,7 +255,7 @@ input, select, textarea {
 	        box-orient: vertical;                                /* Important */
 }
 
-.view.view-layout-horizontal > .view-content-wrapper > .view-content {
+.view.view-layout-horizontal .view-content {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
@@ -314,17 +314,6 @@ input, select, textarea {
 	width: 100%;
 }
 
-/* View Collection
------------------------------------------------------------------------------*/
-
-.view.view-collection > .view-content-wrapper > .view-content > .view {
-	-webkit-box-flex: 1;                                         /* Important */
-	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
-}
-
 /* Bar
 -----------------------------------------------------------------------------*/
 
@@ -354,8 +343,7 @@ input, select, textarea {
 	z-index: 75;                                                 /* Important */
 }
 
-.bar .bar-item,                                                 /* Deprecated */
-.bar .bar-content {
+.bar .bar-item {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */
@@ -385,13 +373,9 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-/* Style Dark */
+/* Dark */
 
 .bar.style-dark {}
-
-/* Style Light */
-
-.bar.style-light {}
 
 /* Navigation Bar
 -----------------------------------------------------------------------------*/
@@ -436,28 +420,6 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	display: block;                                              /* Important */
 	width: 100%;
-}
-
-/* Tab Bar
------------------------------------------------------------------------------*/
-
-.bar.tab-bar {
-	-webkit-box-sizing: border-box;                              /* Important */
-	   -moz-box-sizing: border-box;                              /* Important */
-	    -ms-box-sizing: border-box;                              /* Important */
-	     -o-box-sizing: border-box;                              /* Important */
-	        box-sizing: border-box;                              /* Important */
-}
-
-/* Tab Bar
------------------------------------------------------------------------------*/
-
-.tab {
-	display: -webkit-box;                                        /* Important */
-	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
-	display:         box;                                        /* Important */
 }
 
 /* Button Group

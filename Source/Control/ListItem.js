@@ -243,48 +243,27 @@ Moobile.ListItem.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
 });
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.2.0
- */
 Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item').setStyle('header'));
 });
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
 	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
 
 // <0.1-compat>
-
 /**
  * @deprecated
  */
@@ -292,48 +271,31 @@ Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) 
 	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
 });
-
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/**
- * Header Style - iOS & Android
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.2.0
- */
+/* Header Style - iOS Android */
 Moobile.Component.defineStyle('header', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-header'); },
 	detach: function(element) { element.removeClass('style-header'); }
 });
 
-/**
- * Checked Style - iOS
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
+/* Checked Style - iOS */
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
 	detach: function(element) { element.removeClass('style-checked'); }
 });
 
-/**
- * Disclosed Style - iOS
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
+/* Disclosed Style - iOS */
 Moobile.Component.defineStyle('disclosed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-disclosed'); },
 	detach: function(element) { element.removeClass('style-disclosed'); }
 });
 
-/**
- * Detailed Style - iOS
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
+/* Detailed Style - iOS */
 Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-detailed'); },
 	detach: function(element) { element.removeClass('style-detailed'); }
