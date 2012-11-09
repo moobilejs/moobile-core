@@ -1,7 +1,3 @@
-
-Warning: file_get_contents(/Users/jpdery/Projects/moobile-core/Source/Control/Tab.js): failed to open stream: No such file or directory in /Users/jpdery/Projects/moobile-core/Packager/packager.php on line 67
-
-Warning: file_get_contents(/Users/jpdery/Projects/moobile-core/Source/Control/TabBar.js): failed to open stream: No such file or directory in /Users/jpdery/Projects/moobile-core/Packager/packager.php on line 67
 /*!
  * iScroll v4.2.5 ~ Copyright (c) 2012 Matteo Spinelli, http://cubiq.org
  * Released under MIT license, http://cubiq.org/license
@@ -6271,10 +6267,6 @@ Moobile.Text.from = function(source) {
 Moobile.Component.defineRole('text', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Text, element, 'data-text'));
 });
-
-
-
-
 
 
 /*
