@@ -178,6 +178,7 @@ input, select, textarea {
 	right: 0px;
 }
 
+/* Deprecated */
 .bar .bar-item {
 	height: 100%;
  }
@@ -204,6 +205,7 @@ input, select, textarea {
 /* Navigation Bar
 -----------------------------------------------------------------------------*/
 
+/* Deprecated */
 .bar.navigation-bar .bar-item .bar-title-wrapper {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
@@ -230,6 +232,7 @@ input, select, textarea {
 	margin-right: 17px;
 }
 
+/* Deprecated */
 .bar.navigation-bar .bar-item .bar-title {
 	display: block;
 	overflow: hidden;

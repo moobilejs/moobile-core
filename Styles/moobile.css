@@ -304,16 +304,6 @@ input, select, textarea {
 	width: 100%;
 }
 
-/* View Set
------------------------------------------------------------------------------*/
-
-.view.view-set > .view-content-wrapper > .view-content {
-	display: block;
-	height: 100%;
-	overflow: visible;
-	width: 100%;
-}
-
 /* Bar
 -----------------------------------------------------------------------------*/
 
@@ -333,6 +323,11 @@ input, select, textarea {
 	    -ms-box-orient: horizontal;                              /* Important */
 	     -o-box-orient: horizontal;                              /* Important */
 	        box-orient: horizontal;                              /* Important */
+	-webkit-box-align: center;                                   /* Important */
+	   -moz-box-align: center;                                   /* Important */
+	    -ms-box-align: center;                                   /* Important */
+	     -o-box-align: center;                                   /* Important */
+	        box-align: center;                                   /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
 	display:     -ms-box;                                        /* Important */
@@ -343,6 +338,7 @@ input, select, textarea {
 	z-index: 75;                                                 /* Important */
 }
 
+/* Deprecated */
 .bar .bar-item {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
@@ -373,16 +369,38 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-/* Dark */
+/* Style Dark */
 
 .bar.style-dark {}
+
+/* Style Light */
+
+.bar.style-light {}
 
 /* Navigation Bar
 -----------------------------------------------------------------------------*/
 
-.bar.navigation-bar {}
+.bar.navigation-bar {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	position: relative;                                          /* Important */
+	width: 100%;                                                 /* Important */
+}
 
-.bar.navigation-bar .bar-title-wrapper {
+.bar.navigation-bar .bar-title-wrapper {                        /* Deprecated */
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */

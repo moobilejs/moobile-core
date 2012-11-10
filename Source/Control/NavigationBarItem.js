@@ -23,6 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -167,6 +168,7 @@ Moobile.NavigationBarItem = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('item', Moobile.NavigationBar, null, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "item" will be removed in 0.5, all the NavigationBar’s methods were moved to the "NavigationBar" class.');
 	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
 });
 

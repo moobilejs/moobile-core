@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Bar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -30,30 +31,13 @@ Moobile.Bar = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_item: null,
-
-	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
-
 		this.parent();
-
 		this.addClass('bar');
-
-		var item = this.getRoleElement('item');
-		if (item === null) {
-			item = document.createElement('div');
-			item.ingest(this.element);
-			item.inject(this.element);
-			item.setRole('item');
-		}
 	},
 
 	/**
@@ -66,12 +50,16 @@ Moobile.Bar = new Class({
 		this.parent();
 	},
 
+	// <0.2-compat>
+
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	setItem: function(item) {
+
+		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 
 		if (this._item === item)
 			return this;
@@ -79,7 +67,7 @@ Moobile.Bar = new Class({
 		if (this._item) {
 			this._item.replaceWithComponent(item, true);
 		} else {
-			this.addChildComponent(item);
+			this.addChildComponentInside(item, this.contentElement);
 		}
 
 		this._item = item;
@@ -89,13 +77,16 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	getItem: function() {
+		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 		return this._item;
 	}
+
+	// </0.2-compat>
 
 });
 
@@ -111,13 +102,11 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS - Android */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS - Android */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }

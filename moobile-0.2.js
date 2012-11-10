@@ -4465,6 +4465,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Bar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -4473,30 +4474,13 @@ Moobile.Bar = new Class({
 	Extends: Moobile.Control,
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_item: null,
-
-	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
-
 		this.parent();
-
 		this.addClass('bar');
-
-		var item = this.getRoleElement('item');
-		if (item === null) {
-			item = document.createElement('div');
-			item.ingest(this.element);
-			item.inject(this.element);
-			item.setRole('item');
-		}
 	},
 
 	/**
@@ -4509,12 +4493,16 @@ Moobile.Bar = new Class({
 		this.parent();
 	},
 
+	// <0.2-compat>
+
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#setItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	setItem: function(item) {
+
+		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 
 		if (this._item === item)
 			return this;
@@ -4522,7 +4510,7 @@ Moobile.Bar = new Class({
 		if (this._item) {
 			this._item.replaceWithComponent(item, true);
 		} else {
-			this.addChildComponent(item);
+			this.addChildComponentInside(item, this.contentElement);
 		}
 
 		this._item = item;
@@ -4532,13 +4520,16 @@ Moobile.Bar = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Bar#getItem
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	getItem: function() {
+		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
 		return this._item;
 	}
+
+	// </0.2-compat>
 
 });
 
@@ -4554,13 +4545,11 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS - Android */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS - Android */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
@@ -4591,6 +4580,7 @@ provides:
  /**
  * @see    http://moobilejs.com/doc/latest/Control/BarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.BarItem = new Class({
@@ -4614,6 +4604,7 @@ Moobile.BarItem = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('item', Moobile.Bar, null, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "item" will be removed in 0.5, all the BarItem’s methods were moved to the "Bar" class.');
 	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
 });
 
@@ -4642,6 +4633,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/NavigationBar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.NavigationBar = new Class({
@@ -4649,13 +4641,144 @@ Moobile.NavigationBar = new Class({
 	Extends: Moobile.Bar,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_title: null,
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
+
 		this.parent();
+
 		this.addClass('navigation-bar');
+
+		// <0.2-compat>
+		var item = this.getRoleElement('item');
+		if (item === null) {
+		// </0.2-compat>
+
+			var title = this.getRoleElement('title');
+			if (title === null) {
+				title = document.createElement('div');
+				title.ingest(this.element);
+				title.inject(this.element);
+				title.setRole('title');
+			}
+
+		// <0.2-compat>
+		}
+
+		if (item) {
+			item.dispose();
+			item.ingest(this.element);
+			item.inject(this.element);
+		}
+		// </0.2-compat>
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	destroy: function() {
+		this._title = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#setTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setTitle: function(title) {
+
+		if (this._title === title)
+			return this;
+
+		title = Moobile.Text.from(title);
+
+		if (this._title) {
+			this._title.replaceWithComponent(title, true);
+		} else {
+			this.addChildComponent(title);
+		}
+
+		this._title = title;
+		this._title.addClass('bar-title');
+		this.toggleClass('bar-title-empty', this._title.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#getTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTitle: function() {
+		return this._title;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#addLeftButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addLeftButton: function(button) {
+		return this.addChildComponent(button, 'top');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#addRightButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addRightButton: function(button) {
+		return this.addChildComponent(button, 'bottom');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentOfType(Moobile.Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponents(Moobile.Button, destroy);
 	}
 
 });
@@ -4666,6 +4789,10 @@ Moobile.NavigationBar = new Class({
 
 Moobile.Component.defineRole('navigation-bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
+});
+
+Moobile.Component.defineRole('title', Moobile.NavigationBar, null, function(element) {
+	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });
 
 
@@ -4694,6 +4821,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -4838,6 +4966,7 @@ Moobile.NavigationBarItem = new Class({
 //------------------------------------------------------------------------------
 
 Moobile.Component.defineRole('item', Moobile.NavigationBar, null, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "item" will be removed in 0.5, all the NavigationBar’s methods were moved to the "NavigationBar" class.');
 	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
 });
 
