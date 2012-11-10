@@ -606,6 +606,33 @@ describe('Component/Component', function() {
 		expect(c3.didShow.calls.length).toEqual(1);
 	});
 
+	// show, hide
+
+	it('should hide the root component and only toggle the visibility status of child elements', function() {
+
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		c1.hide();
+
+		expect(c1.element.hasClass('hidden')).toEqual(true);
+		expect(c2.element.hasClass('hidden')).toEqual(false);
+		expect(c3.element.hasClass('hidden')).toEqual(false);
+
+		expect(c1.isVisible()).toEqual(false);
+		expect(c2.isVisible()).toEqual(false);
+		expect(c3.isVisible()).toEqual(false);
+
+		c3.removeFromParentComponent();
+		expect(c3.isVisible()).toEqual(true);
+
+		c2.addChildComponent(c3);
+		expect(c3.isVisible()).toEqual(false);
+	});
+
 	// TODO: Test Size
 	// TODO: Test Position
 	// TODO: Test visibility
