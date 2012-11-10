@@ -554,6 +554,10 @@ Moobile.Slider = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('slider', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Slider, element, 'data-slider'));
 });

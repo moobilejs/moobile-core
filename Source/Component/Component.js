@@ -1678,6 +1678,10 @@ Moobile.Component.addNativeEvent('ownanimationend');
 
 })();
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineAttribute('data-style', null, function(value) {
 	this.options.styleName = value;
 });

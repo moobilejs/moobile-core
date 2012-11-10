@@ -3757,6 +3757,10 @@ Moobile.Component.addNativeEvent('ownanimationend');
 
 })();
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineAttribute('data-style', null, function(value) {
 	this.options.styleName = value;
 });
@@ -4071,10 +4075,18 @@ Moobile.Button.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('button', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Button, element, 'data-button'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
@@ -4083,30 +4095,45 @@ Moobile.Component.defineRole('label', Moobile.Button, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
-/* Active Style - iOS */
+/**
+ * Active Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('active', Moobile.Button, {
 	attach: function(element) { element.addClass('style-active'); },
 	detach: function(element) { element.removeClass('style-active'); }
 });
 
-/* Warning Style - iOS */
+/**
+ * Warning Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('warning', Moobile.Button, {
 	attach: function(element) { element.addClass('style-warning'); },
 	detach: function(element) { element.removeClass('style-warning'); }
 });
 
-/* Back Style - iOS Android */
+/**
+ * Back Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('back', Moobile.Button, {
 	attach: function(element) { element.addClass('style-back'); },
 	detach: function(element) { element.removeClass('style-back'); }
 });
 
-/* Forward Style - iOS Android */
+/**
+ * Forward Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('forward', Moobile.Button, {
 	attach: function(element) { element.addClass('style-forward'); },
 	detach: function(element) { element.removeClass('style-forward'); }
 });
-
 
 
 /*
@@ -4435,6 +4462,10 @@ Moobile.ButtonGroup = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('button-group', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ButtonGroup, element, 'data-button-group'));
 });
@@ -4537,6 +4568,10 @@ Moobile.Bar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Bar, element, 'data-bar'));
 });
@@ -4545,11 +4580,21 @@ Moobile.Component.defineRole('bar', null, null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('dark', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
@@ -4603,6 +4648,11 @@ Moobile.BarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.Bar, null, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "item" will be removed in 0.5, all the BarItem’s methods were moved to the "Bar" class.');
 	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
@@ -4787,13 +4837,22 @@ Moobile.NavigationBar = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('navigation-bar', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.NavigationBar, element, 'data-navigation-bar'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
 Moobile.Component.defineRole('title', Moobile.NavigationBar, null, function(element) {
 	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });
+
 
 
 /*
@@ -4965,15 +5024,21 @@ Moobile.NavigationBarItem = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.NavigationBar, null, function(element) {
-	console.log('[DEPRECATION NOTICE] The role "item" will be removed in 0.5, all the NavigationBar’s methods were moved to the "NavigationBar" class.');
 	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('title', Moobile.NavigationBarItem, null, function(element) {
 	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
 });
-
 
 /*
 ---
@@ -5531,6 +5596,10 @@ Moobile.Slider = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('slider', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Slider, element, 'data-slider'));
 });
@@ -5909,6 +5978,10 @@ Moobile.List = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('list', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.List, element, 'data-list'));
 });
@@ -5917,6 +5990,11 @@ Moobile.Component.defineRole('list', null, function(element) {
 // Styles
 //------------------------------------------------------------------------------
 
+/**
+ * Grouped - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('grouped', Moobile.List, {
 	attach: function(element) { element.addClass('style-grouped'); },
 	detach: function(element) { element.removeClass('style-grouped'); }
@@ -6168,59 +6246,100 @@ Moobile.ListItem.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('item', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('header', Moobile.List, null, function(element) {
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-item').setStyle('header'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('image', Moobile.ListItem, null, function(element) {
 	this.setImage(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('label', Moobile.ListItem, null, function(element) {
 	this.setLabel(Moobile.Component.create(Moobile.Text, element, 'data-label'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('detail', Moobile.ListItem, null, function(element) {
 	this.setDetail(Moobile.Component.create(Moobile.Text, element, 'data-detail'));
 });
 
 // <0.1-compat>
+
 /**
  * @deprecated
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
  */
 Moobile.Component.defineRole('list-item', Moobile.List, null, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
 	this.addItem(Moobile.Component.create(Moobile.ListItem, element, 'data-list-item'));
 });
+
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/* Header Style - iOS Android */
+/**
+ * Header Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineStyle('header', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-header'); },
 	detach: function(element) { element.removeClass('style-header'); }
 });
 
-/* Checked Style - iOS */
+/**
+ * Checked Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('checked', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-checked'); },
 	detach: function(element) { element.removeClass('style-checked'); }
 });
 
-/* Disclosed Style - iOS */
+/**
+ * Disclosed Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('disclosed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-disclosed'); },
 	detach: function(element) { element.removeClass('style-disclosed'); }
 });
 
-/* Detailed Style - iOS */
+/**
+ * Detailed Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('detailed', Moobile.ListItem, {
 	attach: function(element) { element.addClass('style-detailed'); },
 	detach: function(element) { element.removeClass('style-detailed'); }
@@ -6291,6 +6410,10 @@ Moobile.ActivityIndicator = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('activity-indicator', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ActivityIndicator, element, 'data-activity-indicator'));
 });
@@ -6555,6 +6678,10 @@ Moobile.Image.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('image', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Image, element, 'data-image'));
 });
@@ -6656,6 +6783,10 @@ Moobile.Text.from = function(source) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('text', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.Text, element, 'data-text'));
 });
@@ -9046,42 +9177,67 @@ Moobile.View.at = function(path, options, name) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('content', Moobile.View, {traversable: true}, function(element) {
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true}, function(element) {
 	this.contentWrapperElement = element
 	this.contentWrapperElement.addClass('view-content-wrapper');
 });
 
 // <0.1-compat>
+
 /**
  * @deprecated
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
  */
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
 });
+
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS Android */
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('dark', Moobile.View, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS Android */
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('light', Moobile.View, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
@@ -9135,6 +9291,10 @@ Moobile.ViewStack = new Class({
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('view-stack', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ViewStack, element, 'data-view-stack'));
 });
@@ -9692,9 +9852,14 @@ Moobile.ScrollView.at = function(path, options, name) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('scroll-view', null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.ScrollView, element, 'data-scroll-view'));
 });
+
 
 
 /*

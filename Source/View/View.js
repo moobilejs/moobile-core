@@ -339,42 +339,67 @@ Moobile.View.at = function(path, options, name) {
 // Roles
 //------------------------------------------------------------------------------
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineRole('view', null, null, function(element) {
 	this.addChildComponent(Moobile.Component.create(Moobile.View, element, 'data-view'));
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('content', Moobile.View, {traversable: true}, function(element) {
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
 });
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineRole('content-wrapper', Moobile.View, {traversable: true}, function(element) {
 	this.contentWrapperElement = element
 	this.contentWrapperElement.addClass('view-content-wrapper');
 });
 
 // <0.1-compat>
+
 /**
  * @deprecated
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
  */
 Moobile.Component.defineRole('view-content', Moobile.View, {traversable: true}, function(element) {
 	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
 	this.contentElement = element;
 	this.contentElement.addClass('view-content');
 });
+
 // </0.1-compat>
 
 //------------------------------------------------------------------------------
 // Styles
 //------------------------------------------------------------------------------
 
-/* Dark Style - iOS Android */
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('dark', Moobile.View, {
 	attach: function(element) { element.addClass('style-dark'); },
 	detach: function(element) { element.removeClass('style-dark'); }
 });
 
-/* Light Style - iOS Android */
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
 Moobile.Component.defineStyle('light', Moobile.View, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
