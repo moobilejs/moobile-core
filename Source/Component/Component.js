@@ -100,6 +100,13 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_size: {x: 0, y: 0},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -156,6 +163,9 @@ Moobile.Component = new Class({
 		this._didBuild();
 
 		if (exists) this.element.replaces(marker);
+
+		window.addEvent('resize', this.bound('_onWindowResize'));
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.element.store('moobile:component', this);
 
@@ -880,6 +890,18 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	setSize: function(x, y) {
+		if (x > 0 || x === null) this.element.setStyle('width', x);
+		if (y > 0 || y === null) this.element.setStyle('height', y);
+		this._didResize();
+		return this;
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -998,6 +1020,7 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didBecomeReady: function() {
+		this._size = this.getSize();
 		this.didBecomeReady();
 	},
 
@@ -1007,6 +1030,29 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	didBecomeReady: function() {
+
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didResize: function() {
+		var size = this.getSize();
+		if (size.x !== this._size.x ||
+			size.y !== this._size.y) {
+			this._size = size;
+			this._didResize(size.x, size.y);
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didResize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	didResize: function(x, y) {
 
 	},
 
@@ -1236,21 +1282,45 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#destroy
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+
+		window.addEvent('resize', this.bound('_onWindowResize'));
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
+
 		this.removeAllChildComponents(true);
 		this.removeFromParentComponent();
 		this.element.destroy();
 		this.element = null;
 		this._window = null;
 		this._parent = null;
+
 		return this;
 	},
 
 	toElement: function() {
 		return this.element;
 	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_onWindowResize: function() {
+		this._didResize();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_onWindowOrientationChange: function() {
+		this._didResize();
+	}
 
 	// <0.1-compat>
 
