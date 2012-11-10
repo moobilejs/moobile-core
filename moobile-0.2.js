@@ -3122,7 +3122,7 @@ Moobile.Component = new Class({
 		if (size.x !== this._size.x ||
 			size.y !== this._size.y) {
 			this._size = size;
-			this._didResize(size.x, size.y);
+			this.didResize(size.x, size.y);
 		}
 	},
 
