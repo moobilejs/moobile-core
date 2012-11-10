@@ -32,8 +32,6 @@ sources:
   - "Source/Control/ActivityIndicator.js"
   - "Source/Control/Image.js"
   - "Source/Control/Text.js"
-  - "Source/Control/Tab.js"
-  - "Source/Control/TabBar.js"
   - "Source/Dialog/Alert.js"
   - "Source/Element/Element.js"
   - "Source/Element/Element.From.js"
