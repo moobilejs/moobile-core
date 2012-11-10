@@ -1320,7 +1320,7 @@ Moobile.Component = new Class({
 	 */
 	_onWindowOrientationChange: function() {
 		this._didResize();
-	}
+	},
 
 	// <0.1-compat>
 
