@@ -698,6 +698,7 @@ Moobile.Component = new Class({
 		this._children.invoke('setReady', ready);
 
 		if (this._ready) {
+			this._didResize();
 			this._didBecomeReady();
 			this.fireEvent('ready');
 		}
@@ -1020,7 +1021,6 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didBecomeReady: function() {
-		this._size = this.getSize();
 		this.didBecomeReady();
 	},
 
