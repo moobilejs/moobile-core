@@ -9036,6 +9036,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.1
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -9229,11 +9230,12 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#setContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
-		if (x >= 0) this.contentElement.setStyle('width', x);
-		if (y >= 0) this.contentElement.setStyle('height', y);
+		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
+		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
 		return this;
 	},
 
@@ -9592,6 +9594,7 @@ if (!window.Moobile) window.Moobile = {};
 /**
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.1
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -9712,7 +9715,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#showView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @since  0.2.1
 	 */
 	showView: function() {
 		this.view.show();
@@ -9722,7 +9725,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#hideView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @since  0.2.1
 	 */
 	hideView: function() {
 		this.view.hide();
