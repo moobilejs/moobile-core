@@ -360,6 +360,74 @@ input, select, textarea {
 	display: none;
 }
 
+/* Tab
+-----------------------------------------------------------------------------*/
+
+.tab {
+	-webkit-box-orient: vertical;
+	   -moz-box-orient: vertical;
+	    -ms-box-orient: vertical;
+	     -o-box-orient: vertical;
+	        box-orient: vertical;
+	-webkit-box-align: center;
+	   -moz-box-align: center;
+	    -ms-box-align: center;
+	     -o-box-align: center;
+	        box-align: center;
+	-webkit-box-pack: center;
+	   -moz-box-pack: center;
+	    -ms-box-pack: center;
+	     -o-box-pack: center;
+	        box-pack: center;
+	border-radius: 2;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 4px;
+	text-align: center;
+}
+
+.tab.is-selected,
+.tab.is-highlighted {
+	-webkit-box-shadow: 0px 0px -1 rgba(0, 0, 0, 0.3) inset;
+	   -moz-box-shadow: 0px 0px -1 rgba(0, 0, 0, 0.3) inset;
+	    -ms-box-shadow: 0px 0px -1 rgba(0, 0, 0, 0.3) inset;
+	     -o-box-shadow: 0px 0px -1 rgba(0, 0, 0, 0.3) inset;
+	        box-shadow: 0px 0px -1 rgba(0, 0, 0, 0.3) inset;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.tab .tab-label {
+	margin-top: -1px;
+	overflow: hidden;
+	position: relative;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.tab .tab-image {
+	display: block;
+	height: 27px;
+	margin: 0px;
+	margin-bottom: 1px;
+	width: 27px;
+}
+
+/* Inside a Tab Bar */
+
+.tab-bar .tab {
+	-webkit-box-flex: 1;
+	   -moz-box-flex: 1;
+	    -ms-box-flex: 1;
+	     -o-box-flex: 1;
+	        box-flex: 1;
+	height: 100%;
+	width: 0px;
+}
+
 /* Button
 -----------------------------------------------------------------------------*/
 
