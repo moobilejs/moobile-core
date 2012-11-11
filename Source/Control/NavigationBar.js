@@ -144,21 +144,18 @@ Moobile.NavigationBar = new Class({
 	 */
 	shouldCenterTitle: function() {
 
-		if (Browser.Platform.ios) {
+		var content = this.contentElement;
+		if (content) {
 
-			var content = this.contentElement;
-			if (content) {
-
-				var display = content.getStyle('display');
-				if (display === '-webkit-box' ||
-					display ===    '-moz-box' ||
-					display ===     '-ms-box' ||
-					display ===      '-o-box' ||
-					display ===         'box') {
-					var orient = content.getStyle('box-orient');
-					if (orient) {
-						return content.getStyle(orient === 'horizontal' ? 'box-pack' : 'box-align') === 'center';
-					}
+			var display = content.getStyle('display');
+			if (display === '-webkit-box' ||
+				display ===    '-moz-box' ||
+				display ===     '-ms-box' ||
+				display ===      '-o-box' ||
+				display ===         'box') {
+				var orient = content.getStyle('box-orient');
+				if (orient) {
+					return content.getStyle(orient === 'horizontal' ? 'box-pack' : 'box-align') === 'center';
 				}
 			}
 		}
