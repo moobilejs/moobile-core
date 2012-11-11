@@ -177,7 +177,7 @@ Moobile.NavigationBar = new Class({
 			}
 		}
 
-		if (lc && lc.getPosition()) {
+		if (lc && lc.getPosition) {
 			var pos = lc.getPosition(element).x + lc.getSize().x + offset;
 			if (pos > contentPosition + contentSize) {
 				offset -= Math.abs(contentPosition + contentSize - pos);
