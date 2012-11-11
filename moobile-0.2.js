@@ -4845,7 +4845,6 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	shouldCenterTitle: function() {
-		console.log(Moobile.Theme.getName());
 		return Moobile.Theme.getName() === 'ios';
 	},
 
