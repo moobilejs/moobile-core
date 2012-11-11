@@ -7799,7 +7799,7 @@ window.addEvent('domready', function(e) {
 			var target = touch.target;
 			var identifier = touch.identifier;
 
-			if (target.tagName.match(/input|textarea|select/i)) {
+			if (target.tagName.match(/input|textarea|select|a/i)) {
 				scrolls[identifier] = false;
 				return;
 			}
