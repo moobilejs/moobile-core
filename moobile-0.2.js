@@ -3405,8 +3405,8 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		window.addEvent('resize', this.bound('_onWindowResize'));
-		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
+		window.removeEvent('resize', this.bound('_onWindowResize'));
+		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.removeAllChildComponents(true);
 		this.removeFromParentComponent();
@@ -8611,7 +8611,7 @@ window.addEvent('domready', function(e) {
 			var target = touch.target;
 			var identifier = touch.identifier;
 
-			if (target.tagName.match(/input|textarea|select/i)) {
+			if (target.tagName.match(/input|textarea|select|a/i)) {
 				scrolls[identifier] = false;
 				return;
 			}

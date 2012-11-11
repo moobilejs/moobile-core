@@ -1326,8 +1326,8 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		window.addEvent('resize', this.bound('_onWindowResize'));
-		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
+		window.removeEvent('resize', this.bound('_onWindowResize'));
+		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.removeAllChildComponents(true);
 		this.removeFromParentComponent();
