@@ -3160,7 +3160,7 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didUpdateLayout: function() {
-		if (this._built) this.didUpdateLayout();
+		if (this._built && this._ready) this.didUpdateLayout();
 	},
 
 	/**
