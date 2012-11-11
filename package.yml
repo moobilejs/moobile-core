@@ -52,6 +52,7 @@ sources:
   - "Source/Util/Overlay.js"
   - "Source/Types/String.js"
   - "Source/Types/Array.js"
+  - "Source/Theme/Theme.js"
   - "Source/View/View.js"
   - "Source/View/ViewSet.js"
   - "Source/View/ViewStack.js"

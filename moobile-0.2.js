@@ -9449,6 +9449,55 @@ Array.implement({
 /*
 ---
 
+name: Theme
+
+description:
+
+license: MIT-style license.
+
+requires:
+	- Core/Class
+
+provides:
+	- Theme
+
+...
+*/
+
+(function() {
+
+var element = null;
+var configs = null;
+
+Moobile.Theme = {
+
+	init: function() {
+		var content = element.getStyle('content');
+		if (content) {
+			configs = JSON.decode(content);
+			console.log(configs);
+		}
+	},
+
+	getName: function() {
+		return configs[name];
+	}
+
+};
+
+document.addEvent('domready', function() {
+	element = document.createElement('div');
+	element.addClass('theme');
+	element.inject(document.body);
+	Moobile.Theme.init();
+})
+
+})();
+
+
+/*
+---
+
 name: View
 
 description: Provides an child that handles an area in which a user can
