@@ -400,7 +400,33 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.bar.navigation-bar .bar-title-wrapper {                        /* Deprecated */
+.bar.navigation-bar .navigation-bar-content {
+	-webkit-backface-visibility: hidden;                         /* Important */
+	   -moz-backface-visibility: hidden;                         /* Important */
+	    -ms-backface-visibility: hidden;                         /* Important */
+	     -o-backface-visibility: hidden;                         /* Important */
+	        backface-visibility: hidden;                         /* Important */
+	-webkit-box-sizing: border-box;                              /* Important */
+	   -moz-box-sizing: border-box;                              /* Important */
+	    -ms-box-sizing: border-box;                              /* Important */
+	     -o-box-sizing: border-box;                              /* Important */
+	        box-sizing: border-box;                              /* Important */
+	-webkit-box-flex: 1;                                         /* Important */
+	   -moz-box-flex: 1;                                         /* Important */
+	    -ms-box-flex: 1;                                         /* Important */
+	     -o-box-flex: 1;                                         /* Important */
+	        box-flex: 1;                                         /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:     -ms-box;                                        /* Important */
+	display:      -o-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	position: relative;                                          /* Important */
+	width: 100%;
+}
+
+/* Deprecated */
+.bar.navigation-bar .bar-title-wrapper {
 	-webkit-backface-visibility: hidden;                         /* Important */
 	   -moz-backface-visibility: hidden;                         /* Important */
 	    -ms-backface-visibility: hidden;                         /* Important */
@@ -425,20 +451,6 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.bar.navigation-bar .bar-title {
-	-webkit-backface-visibility: hidden;                         /* Important */
-	   -moz-backface-visibility: hidden;                         /* Important */
-	    -ms-backface-visibility: hidden;                         /* Important */
-	     -o-backface-visibility: hidden;                         /* Important */
-	        backface-visibility: hidden;                         /* Important */
-	-webkit-box-sizing: border-box;                              /* Important */
-	   -moz-box-sizing: border-box;                              /* Important */
-	    -ms-box-sizing: border-box;                              /* Important */
-	     -o-box-sizing: border-box;                              /* Important */
-	        box-sizing: border-box;                              /* Important */
-	display: block;                                              /* Important */
-	width: 100%;
-}
 
 /* Button Group
 -----------------------------------------------------------------------------*/
