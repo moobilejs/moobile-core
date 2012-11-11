@@ -2122,6 +2122,13 @@ Moobile.Component = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_built: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	_window: null,
@@ -2247,6 +2254,8 @@ Moobile.Component = new Class({
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.element.store('moobile:component', this);
+
+		this._built = true;
 
 		return this;
 	},
@@ -2435,6 +2444,7 @@ Moobile.Component = new Class({
 		component.setParentComponent(this);
 		component.setWindow(this._window);
 		this._didAddChildComponent(component);
+		this._didUpdateLayout();
 
 		return this;
 	},
@@ -2638,6 +2648,8 @@ Moobile.Component = new Class({
 			component.destroy();
 		}
 
+		this._didUpdateLayout();
+
 		return this;
 	},
 
@@ -2689,9 +2701,10 @@ Moobile.Component = new Class({
 		this._parentComponentWillChange(parent);
 		this._parent = parent;
 
-		if (parent &&
-			this._display) {
-			this._visible = this._isVisible();
+		if (parent) {
+			if (this._display) {
+				this._visible = this._isVisible();
+			}
 		} else {
 			this._visible = this._display;
 		}
@@ -2777,8 +2790,8 @@ Moobile.Component = new Class({
 		this._children.invoke('setReady', ready);
 
 		if (this._ready) {
-			this._didResize();
 			this._didBecomeReady();
+			this._didUpdateLayout();
 			this.fireEvent('ready');
 		}
 
@@ -2822,6 +2835,8 @@ Moobile.Component = new Class({
 
 		this._style = style;
 
+		this._didUpdateLayout();
+
 		return this;
 	},
 
@@ -2850,6 +2865,7 @@ Moobile.Component = new Class({
 	 */
 	addClass: function(name) {
 		this.element.addClass(name);
+		this._didUpdateLayout();
 		return this;
 	},
 
@@ -2860,6 +2876,7 @@ Moobile.Component = new Class({
 	 */
 	removeClass: function(name) {
 		this.element.removeClass(name);
+		this._didUpdateLayout();
 		return this;
 	},
 
@@ -2871,6 +2888,7 @@ Moobile.Component = new Class({
 	 */
 	toggleClass: function(name, force) {
 		this.element.toggleClass(name, force);
+		this._didUpdateLayout();
 		return this;
 	},
 
@@ -2975,9 +2993,13 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	setSize: function(x, y) {
+
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
+
 		this._didResize();
+		this._didUpdateLayout();
+
 		return this;
 	},
 
@@ -3013,8 +3035,7 @@ Moobile.Component = new Class({
 		this.element.removeClass('hidden');
 		this._display = true;
 		this._didShow();
-
-		this.fireEvent('show');
+		this._didUpdateLayout();
 
 		return this;
 	},
@@ -3034,8 +3055,6 @@ Moobile.Component = new Class({
 		this.element.addClass('hidden');
 		this._display = false;
 		this._didHide();
-
-		this.fireEvent('hide');
 
 		return this;
 	},
@@ -3132,6 +3151,24 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	didResize: function(x, y) {
+
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didUpdateLayout: function() {
+		if (this._built) this.didUpdateLayout();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didUpdateLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	didUpdateLayout: function() {
 
 	},
 
@@ -3307,6 +3344,7 @@ Moobile.Component = new Class({
 		this._visible = true;
 		this.didShow();
 		this._children.invoke('_didShow');
+		this.fireEvent('show');
 	},
 
 	/**
@@ -3347,6 +3385,7 @@ Moobile.Component = new Class({
 		this._visible = false;
 		this.didHide();
 		this._children.invoke('_didHide');
+		this.fireEvent('hide');
 	},
 
 	/**
