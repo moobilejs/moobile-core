@@ -2327,56 +2327,35 @@ input, select, textarea {
 	        transform-style: preserve-3d;
 }
 
-/* Enter Navigation Bar */
-/*
-@-webkit-keyframes transition-slide-enter-bar-to-show {
-	from { -webkit-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-	to   { -webkit-transform: translate3d(0, 0, 10px); opacity: 1; }
+/* Enter Navigation Bar To Show */
+
+@-webkit-keyframes transition-slide-enter-navigation-bar-to-show {
+	from { -webkit-transform: translate3d(-100%, 0, 10px); opacity: 0; }
+	to   { -webkit-transform: translate3d(0%, 0, 10px); opacity: 1; }
 }
-@-moz-keyframes transition-slide-enter-bar-to-show {
-	from { -moz-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-	to   { -moz-transform: translate3d(0, 0, 10px); opacity: 1; }
+@-moz-keyframes transition-slide-enter-navigation-bar-to-show {
+	from { -moz-transform: translate3d(-100%, 0, 10px); opacity: 0; }
+	to   { -moz-transform: translate3d(0%, 0, 10px); opacity: 1; }
 }
-@-ms-keyframes transition-slide-enter-bar-to-show {
-	from { -ms-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-	to   { -ms-transform: translate3d(0, 0, 10px); opacity: 1; }
+@-ms-keyframes transition-slide-enter-navigation-bar-to-show {
+	from { -ms-transform: translate3d(-100%, 0, 10px); opacity: 0; }
+	to   { -ms-transform: translate3d(0%, 0, 10px); opacity: 1; }
 }
-@-o-keyframes transition-slide-enter-bar-to-show {
-	from { -o-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-	to   { -o-transform: translate3d(0, 0, 10px); opacity: 1; }
+@-o-keyframes transition-slide-enter-navigation-bar-to-show {
+	from { -o-transform: translate3d(-100%, 0, 10px); opacity: 0; }
+	to   { -o-transform: translate3d(0%, 0, 10px); opacity: 1; }
 }
-@keyframes transition-slide-enter-bar-to-show {
-	from { transform: translate3d(-75%, 0, 10px); opacity: 0; }
-	to   { transform: translate3d(0, 0, 10px); opacity: 1; }
+@keyframes transition-slide-enter-navigation-bar-to-show {
+	from { transform: translate3d(-100%, 0, 10px); opacity: 0; }
+	to   { transform: translate3d(0%, 0, 10px); opacity: 1; }
 }
 
-@-webkit-keyframes transition-slide-enter-bar-to-hide {
-	from { -webkit-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -webkit-transform: translate3d(75%, 0, 10px); opacity: 0; }
-}
-@-moz-keyframes transition-slide-enter-bar-to-hide {
-	from { -moz-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -moz-transform: translate3d(75%, 0, 10px); opacity: 0; }
-}
-@-ms-keyframes transition-slide-enter-bar-to-hide {
-	from { -ms-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -ms-transform: translate3d(75%, 0, 10px); opacity: 0; }
-}
-@-o-keyframes transition-slide-enter-bar-to-hide {
-	from { -o-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -o-transform: translate3d(75%, 0, 10px); opacity: 0; }
-}
-@keyframes transition-slide-enter-bar-to-hide {
-	from { transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { transform: translate3d(75%, 0, 10px); opacity: 0; }
-}
-
-.transition-slide-enter .transition-view-to-show .bar .bar-item {
-	-webkit-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-slide-enter-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+.transition-slide-enter .transition-view-to-show .bar.navigation-bar {
+	-webkit-animation: transition-slide-enter-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform: translate3d(0, 0, 10px);
 	   -moz-transform: translate3d(0, 0, 10px);
 	    -ms-transform: translate3d(0, 0, 10px);
@@ -2384,22 +2363,171 @@ input, select, textarea {
 	        transform: translate3d(0, 0, 10px);
 }
 
-.transition-slide-enter .transition-view-to-hide .bar .bar-item {
-	-webkit-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-slide-enter-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+/* Enter Navigation Bar To Hide */
+
+@-webkit-keyframes transition-slide-enter-navigation-bar-to-hide {
+	from { -webkit-transform: translate3d(0%, 0, 10px); }
+	to   { -webkit-transform: translate3d(100%, 0, 10px); }
+}
+@-moz-keyframes transition-slide-enter-navigation-bar-to-hide {
+	from { -moz-transform: translate3d(0%, 0, 10px); }
+	to   { -moz-transform: translate3d(100%, 0, 10px); }
+}
+@-ms-keyframes transition-slide-enter-navigation-bar-to-hide {
+	from { -ms-transform: translate3d(0%, 0, 10px); }
+	to   { -ms-transform: translate3d(100%, 0, 10px); }
+}
+@-o-keyframes transition-slide-enter-navigation-bar-to-hide {
+	from { -o-transform: translate3d(0%, 0, 10px); }
+	to   { -o-transform: translate3d(100%, 0, 10px); }
+}
+@keyframes transition-slide-enter-navigation-bar-to-hide {
+	from { transform: translate3d(0%, 0, 10px); }
+	to   { transform: translate3d(100%, 0, 10px); }
+}
+
+.transition-slide-enter .transition-view-to-hide .bar.navigation-bar {
+	-webkit-animation: transition-slide-enter-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform: translate3d(0, 0, 10px);
 	   -moz-transform: translate3d(0, 0, 10px);
 	    -ms-transform: translate3d(0, 0, 10px);
 	     -o-transform: translate3d(0, 0, 10px);
 	        transform: translate3d(0, 0, 10px);
 }
-*/
+
+/* Enter Navigation Bar Content To Show */
+
+@-webkit-keyframes transition-slide-enter-navigation-bar-content-to-show {
+	from { -webkit-transform: translate3d(50%, 0, 0); }
+	to   { -webkit-transform: translate3d(0%, 0, 0); }
+}
+@-moz-keyframes transition-slide-enter-navigation-bar-content-to-show {
+	from { -moz-transform: translate3d(50%, 0, 10px); }
+	to   { -moz-transform: translate3d(0%, 0, 10px); }
+}
+@-ms-keyframes transition-slide-enter-navigation-bar-content-to-show {
+	from { -ms-transform: translate3d(50%, 0, 0); }
+	to   { -ms-transform: translate3d(0%, 0, 0); }
+}
+@-o-keyframes transition-slide-enter-navigation-bar-content-to-show {
+	from { -o-transform: translate3d(50%, 0, 0); }
+	to   { -o-transform: translate3d(0%, 0, 0); }
+}
+@keyframes transition-slide-enter-navigation-bar-content-to-show {
+	from { transform: translate3d(50%, 0, 0);}
+	to   { transform: translate3d(0%, 0, 0); }
+}
+
+.transition-slide-enter .transition-view-to-show .bar.navigation-bar .navigation-bar-content {
+	-webkit-animation: transition-slide-enter-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Enter Navigation Bar Content To Hide */
+
+@-webkit-keyframes transition-slide-enter-navigation-bar-content-to-hide {
+	from { -webkit-transform: translate3d(0%, 0, 0); }
+	to   { -webkit-transform: translate3d(-50%, 0, 0); }
+}
+@-moz-keyframes transition-slide-enter-navigation-bar-content-to-hide {
+	from { -moz-transform: translate3d(0%, 0, 10px); }
+	to   { -moz-transform: translate3d(-50%, 0, 10px); }
+}
+@-ms-keyframes transition-slide-enter-navigation-bar-content-to-hide {
+	from { -ms-transform: translate3d(0%, 0, 0); }
+	to   { -ms-transform: translate3d(-50%, 0, 0); }
+}
+@-o-keyframes transition-slide-enter-navigation-bar-content-to-hide {
+	from { -o-transform: translate3d(0%, 0, 0); }
+	to   { -o-transform: translate3d(-50%, 0, 0); }
+}
+@keyframes transition-slide-enter-navigation-bar-content-to-hide {
+	from { transform: translate3d(0%, 0, 0);}
+	to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.transition-slide-enter .transition-view-to-hide .bar.navigation-bar .navigation-bar-content {
+	-webkit-animation: transition-slide-enter-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Enter Navigation Bar Back/Forward Buttons To Show (Improved Keyframes Are JS Generated) */
+
+@-webkit-keyframes transition-slide-enter-navigation-bar-button-to-show {
+	from { -webkit-transform: translate3d(100%, 0, 0); }
+	to   { -webkit-transform: translate3d(0%, 0, 0); }
+}
+@-moz-keyframes transition-slide-enter-navigation-bar-button-to-show {
+	from { -moz-transform: translate3d(100%, 0, 0); }
+	to   { -moz-transform: translate3d(0%, 0, 0); }
+}
+@-ms-keyframes transition-slide-enter-navigation-bar-button-to-show {
+	from { -ms-transform: translate3d(100%, 0, 0); }
+	to   { -ms-transform: translate3d(0%, 0, 0); }
+}
+@-o-keyframes transition-slide-enter-navigation-bar-button-to-show {
+	from { -o-transform: translate3d(100%, 0, 0); }
+	to   { -o-transform: translate3d(0%, 0, 0); }
+}
+@keyframes transition-slide-enter-navigation-bar-button-to-show {
+	from { transform: translate3d(100%, 0, 0); }
+	to   { transform: translate3d(0%, 0, 0); }
+}
+
+.transition-slide-enter .transition-view-to-show .bar.navigation-bar .button.style-back,
+.transition-slide-enter .transition-view-to-show .bar.navigation-bar .button.style-forward {
+	-webkit-animation: transition-slide-enter-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Enter Navigation Bar Back/Forward Buttons To Hide */
+
+@-webkit-keyframes transition-slide-enter-navigation-bar-button-to-hide {
+	from { -webkit-transform: translate3d(0%, 0, 0); }
+	to   { -webkit-transform: translate3d(-100%, 0, 0); }
+}
+@-moz-keyframes transition-slide-enter-navigation-bar-button-to-hide {
+	from { -moz-transform: translate3d(0%, 0, 0); }
+	to   { -moz-transform: translate3d(-100%, 0, 0); }
+}
+@-ms-keyframes transition-slide-enter-navigation-bar-button-to-hide {
+	from { -ms-transform: translate3d(0%, 0, 0); }
+	to   { -ms-transform: translate3d(-100%, 0, 0); }
+}
+@-o-keyframes transition-slide-enter-navigation-bar-button-to-hide {
+	from { -o-transform: translate3d(0%, 0, 0); }
+	to   { -o-transform: translate3d(-100%, 0, 0); }
+}
+@keyframes transition-slide-enter-navigation-bar-button-to-hide {
+	from { transform: translate3d(0%, 0, 0); }
+	to   { transform: translate3d(-100%, 0, 0); }
+}
+
+.transition-slide-enter .transition-view-to-hide .bar.navigation-bar .button.style-back,
+.transition-slide-enter .transition-view-to-hide .bar.navigation-bar .button.style-forward {
+	-webkit-animation: transition-slide-enter-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
 /* Transition Slide (Leave)
 -----------------------------------------------------------------------------*/
-/*
+
 .transition-slide-leave .transition-view-to-show {
 	-webkit-transform-style: preserve-3d;
 	   -moz-transform-style: preserve-3d;
@@ -2415,77 +2543,206 @@ input, select, textarea {
 	     -o-transform-style: preserve-3d;
 	        transform-style: preserve-3d;
 }
-*/
-/* Leave Navigation Bar View */
-/*
-@-webkit-keyframes transition-slide-leave-bar-to-show {
-	from { -webkit-transform: translate3d(75%, 0, 10px); opacity: 0; }
-	to   { -webkit-transform: translate3d(0, 0, 10px); opacity: 1; }
+
+/* Leave Navigation Bar To Hide */
+
+@-webkit-keyframes transition-slide-leave-navigation-bar-to-hide {
+	from { -webkit-transform: translate3d(0%, 0, 10px); opacity: 1; }
+	to   { -webkit-transform: translate3d(-100%, 0, 10px); opacity: 0; }
 }
-@-moz-keyframes transition-slide-leave-bar-to-show {
-	from { -moz-transform: translate3d(75%, 0, 10px); opacity: 0; }
-	to   { -moz-transform: translate3d(0, 0, 10px); opacity: 1; }
+@-moz-keyframes transition-slide-leave-navigation-bar-to-hide {
+	from { -moz-transform: translate3d(0%, 0, 10px); opacity: 1; }
+	to   { -moz-transform: translate3d(-100%, 0, 10px); opacity: 0; }
 }
-@-ms-keyframes transition-slide-leave-bar-to-show {
-	from { -ms-transform: translate3d(75%, 0, 10px); opacity: 0; }
-	to   { -ms-transform: translate3d(0, 0, 10px); opacity: 1; }
+@-ms-keyframes transition-slide-leave-navigation-bar-to-hide {
+	from { -ms-transform: translate3d(0%, 0, 10px); opacity: 1; }
+	to   { -ms-transform: translate3d(-100%, 0, 10px); opacity: 0; }
 }
-@-o-keyframes transition-slide-leave-bar-to-show {
-	from { -o-transform: translate3d(75%, 0, 10px); opacity: 0; }
-	to   { -o-transform: translate3d(0, 0, 10px); opacity: 1; }
+@-o-keyframes transition-slide-leave-navigation-bar-to-hide {
+	from { -o-transform: translate3d(0%, 0, 10px); opacity: 1; }
+	to   { -o-transform: translate3d(-100%, 0, 10px); opacity: 0; }
 }
-@keyframes transition-slide-leave-bar-to-show {
-	from { transform: translate3d(75%, 0, 10px); opacity: 0; }
-	to   { transform: translate3d(0, 0, 10px); opacity: 1; }
+@keyframes transition-slide-leave-navigation-bar-to-hide {
+	from { transform: translate3d(0%, 0, 10px); opacity: 1; }
+	to   { transform: translate3d(-100%, 0, 10px); opacity: 0; }
 }
 
-@-webkit-keyframes transition-slide-leave-bar-to-hide {
-	from { -webkit-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -webkit-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-}
-@-moz-keyframes transition-slide-leave-bar-to-hide {
-	from { -moz-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -moz-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-}
-@-ms-keyframes transition-slide-leave-bar-to-hide {
-	from { -ms-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -ms-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-}
-@-o-keyframes transition-slide-leave-bar-to-hide {
-	from { -o-transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { -o-transform: translate3d(-75%, 0, 10px); opacity: 0; }
-}
-@keyframes transition-slide-leave-bar-to-hide {
-	from { transform: translate3d(0, 0, 10px); opacity: 1; }
-	to   { transform: translate3d(-75%, 0, 10px); opacity: 0; }
-}
-
-.transition-slide-leave .transition-view-to-show .bar .bar-item {
+.transition-slide-leave .transition-view-to-hide .bar.navigation-bar {
+	-webkit-animation: transition-slide-leave-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-leave-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-leave-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-leave-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-leave-navigation-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform: translate3d(0, 0, 10px);
 	   -moz-transform: translate3d(0, 0, 10px);
 	    -ms-transform: translate3d(0, 0, 10px);
 	     -o-transform: translate3d(0, 0, 10px);
 	        transform: translate3d(0, 0, 10px);
-	-webkit-animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-slide-leave-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
-.transition-slide-leave .transition-view-to-hide .bar .bar-item {
+/* Leave Navigation Bar To Show */
+
+@-webkit-keyframes transition-slide-leave-navigation-bar-to-show {
+	from { -webkit-transform: translate3d(100%, 0, 10px); }
+	to   { -webkit-transform: translate3d(0%, 0, 10px); }
+}
+@-moz-keyframes transition-slide-leave-navigation-bar-to-show {
+	from { -moz-transform: translate3d(100%, 0, 10px); }
+	to   { -moz-transform: translate3d(0%, 0, 10px); }
+}
+@-ms-keyframes transition-slide-leave-navigation-bar-to-show {
+	from { -ms-transform: translate3d(100%, 0, 10px); }
+	to   { -ms-transform: translate3d(0%, 0, 10px); }
+}
+@-o-keyframes transition-slide-leave-navigation-bar-to-show {
+	from { -o-transform: translate3d(100%, 0, 10px); }
+	to   { -o-transform: translate3d(0%, 0, 10px); }
+}
+@keyframes transition-slide-leave-navigation-bar-to-show {
+	from { transform: translate3d(100%, 0, 10px); }
+	to   { transform: translate3d(0%, 0, 10px); }
+}
+
+.transition-slide-leave .transition-view-to-show .bar.navigation-bar {
+	-webkit-animation: transition-slide-leave-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-leave-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-leave-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-leave-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-leave-navigation-bar-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 	-webkit-transform: translate3d(0, 0, 10px);
 	   -moz-transform: translate3d(0, 0, 10px);
 	    -ms-transform: translate3d(0, 0, 10px);
 	     -o-transform: translate3d(0, 0, 10px);
 	        transform: translate3d(0, 0, 10px);
-	-webkit-animation: transition-slide-leave-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: transition-slide-leave-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-slide-leave-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-slide-leave-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-slide-leave-bar-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
-*/
+
+/* Leave Navigation Bar Content To Hide */
+
+@-webkit-keyframes transition-slide-leave-navigation-bar-content-to-hide {
+	from { -webkit-transform: translate3d(0%, 0, 0); }
+	to   { -webkit-transform: translate3d(50%, 0, 0); }
+}
+@-moz-keyframes transition-slide-leave-navigation-bar-content-to-hide {
+	from { -moz-transform: translate3d(0%, 0, 0); }
+	to   { -moz-transform: translate3d(50%, 0, 0); }
+}
+@-ms-keyframes transition-slide-leave-navigation-bar-content-to-hide {
+	from { -ms-transform: translate3d(0%, 0, 0); }
+	to   { -ms-transform: translate3d(50%, 0, 0); }
+}
+@-o-keyframes transition-slide-leave-navigation-bar-content-to-hide {
+	from { -o-transform: translate3d(0%, 0, 0); }
+	to   { -o-transform: translate3d(50%, 0, 0); }
+}
+@keyframes transition-slide-leave-navigation-bar-content-to-hide {
+	from { transform: translate3d(0%, 0, 0);}
+	to   { transform: translate3d(50%, 0, 0); }
+}
+
+.transition-slide-leave .transition-view-to-hide .bar.navigation-bar .navigation-bar-content {
+	-webkit-animation: transition-slide-leave-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-leave-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-leave-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-leave-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-leave-navigation-bar-content-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+
+}
+
+/* Leave Navigation Bar Content To Show */
+
+@-webkit-keyframes transition-slide-leave-navigation-bar-content-to-show {
+	from { -webkit-transform: translate3d(-50%, 0, 0); }
+	to   { -webkit-transform: translate3d(0%, 0, 0); }
+}
+@-moz-keyframes transition-slide-leave-navigation-bar-content-to-show {
+	from { -moz-transform:  translate3d(-50%, 0, 0); }
+	to   { -moz-transform: translate3d(0%, 0, 0); }
+}
+@-ms-keyframes transition-slide-leave-navigation-bar-content-to-show {
+	from { -ms-transform:  translate3d(-50%, 0, 0); }
+	to   { -ms-transform: translate3d(0%, 0, 0); }
+}
+@-o-keyframes transition-slide-leave-navigation-bar-content-to-show {
+	from { -o-transform:  translate3d(-50%, 0, 0); }
+	to   { -o-transform: translate3d(50%, 0, 0); }
+}
+@keyframes transition-slide-leave-navigation-bar-content-to-show {
+	from { transform:  translate3d(-50%, 0, 0); }
+	to   { transform: translate3d(0%, 0, 0); }
+}
+
+.transition-slide-leave .transition-view-to-show .bar.navigation-bar .navigation-bar-content {
+	-webkit-animation: transition-slide-leave-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-leave-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-leave-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-leave-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-leave-navigation-bar-content-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Leave Navigation Bar Back/Forward Buttons To Show */
+
+@-webkit-keyframes transition-slide-leave-navigation-bar-button-to-show {
+	from { -webkit-transform: translate3d(-100%, 0, 0); }
+	to   { -webkit-transform: translate3d(0%, 0, 0); }
+}
+@-moz-keyframes transition-slide-leave-navigation-bar-button-to-show {
+	from { -moz-transform: translate3d(-100%, 0, 0); }
+	to   { -moz-transform: translate3d(0%, 0, 0); }
+}
+@-ms-keyframes transition-slide-leave-navigation-bar-button-to-show {
+	from { -ms-transform: translate3d(-100%, 0, 0); }
+	to   { -ms-transform: translate3d(0%, 0, 0); }
+}
+@-o-keyframes transition-slide-leave-navigation-bar-button-to-show {
+	from { -o-transform: translate3d(-100%, 0, 0); }
+	to   { -o-transform: translate3d(0%, 0, 0); }
+}
+@keyframes transition-slide-leave-navigation-bar-button-to-show {
+	from { transform: translate3d(-100%, 0, 0); }
+	to   { transform: translate3d(0%, 0, 0); }
+}
+
+.transition-slide-leave .transition-view-to-show .bar.navigation-bar .button.style-back,
+.transition-slide-leave .transition-view-to-show .bar.navigation-bar .button.style-forward {
+	-webkit-animation: transition-slide-leave-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-leave-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-leave-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-leave-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-leave-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
+/* Leave Navigation Bar Back/Forward Buttons To Hide (Improved Keyframes Are JS Generated) */
+
+@-webkit-keyframes transition-slide-leave-navigation-bar-button-to-hide {
+	from { -webkit-transform: translate3d(0%, 0, 0); }
+	to   { -webkit-transform: translate3d(100%, 0, 0); }
+}
+@-moz-keyframes transition-slide-leave-navigation-bar-button-to-hide {
+	from { -moz-transform: translate3d(0%, 0, 0); }
+	to   { -moz-transform: translate3d(100%, 0, 0); }
+}
+@-ms-keyframes transition-slide-leave-navigation-bar-button-to-hide {
+	from { -ms-transform: translate3d(0%, 0, 0); }
+	to   { -ms-transform: translate3d(100%, 0, 0); }
+}
+@-o-keyframes transition-slide-leave-navigation-bar-button-to-hide {
+	from { -o-transform: translate3d(0%, 0, 0); }
+	to   { -o-transform: translate3d(100%, 0, 0); }
+}
+@keyframes transition-slide-leave-navigation-bar-button-to-hide {
+	from { transform: translate3d(0%, 0, 0); }
+	to   { transform: translate3d(100%, 0, 0); }
+}
+
+.transition-slide-leave .transition-view-to-hide .bar.navigation-bar .button.style-back,
+.transition-slide-leave .transition-view-to-hide .bar.navigation-bar .button.style-forward {
+	-webkit-animation: transition-slide-leave-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-leave-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-leave-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-leave-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-leave-navigation-bar-button-to-hide 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+}
+
 /* Transition Cover Page (Enter)
 -----------------------------------------------------------------------------*/
 

@@ -1320,29 +1320,29 @@ input, select, textarea {
 }
 
 .transition-slide-enter .transition-view-to-show {
-	-webkit-transform: translate3d(100%, -100%, 0); /* Important */
-	   -moz-transform: translate3d(100%, -100%, 0); /* Important */
-	    -ms-transform: translate3d(100%, -100%, 0); /* Important */
-	     -o-transform: translate3d(100%, -100%, 0); /* Important */
-	        transform: translate3d(100%, -100%, 0); /* Important */
+	-webkit-transform: translate3d(100%, -100%, 0);              /* Important */
+	   -moz-transform: translate3d(100%, -100%, 0);              /* Important */
+	    -ms-transform: translate3d(100%, -100%, 0);              /* Important */
+	     -o-transform: translate3d(100%, -100%, 0);              /* Important */
+	        transform: translate3d(100%, -100%, 0);              /* Important */
 		overflow: visible;                                       /* Important */
 }
 
 .transition-slide-enter .transition-view-to-hide {
-	-webkit-transform: translate3d(0, 0, 0); /* Important */
-	   -moz-transform: translate3d(0, 0, 0); /* Important */
-	    -ms-transform: translate3d(0, 0, 0); /* Important */
-	     -o-transform: translate3d(0, 0, 0); /* Important */
-	        transform: translate3d(0, 0, 0); /* Important */
+	-webkit-transform: translate3d(0, 0, 0);                     /* Important */
+	   -moz-transform: translate3d(0, 0, 0);                     /* Important */
+	    -ms-transform: translate3d(0, 0, 0);                     /* Important */
+	     -o-transform: translate3d(0, 0, 0);                     /* Important */
+	        transform: translate3d(0, 0, 0);                     /* Important */
 	overflow: visible;                                           /* Important */
 }
 
 .transition-slide-enter.first .transition-view-to-show {
-	-webkit-transform: translate3d(100%, 0, 0);  /* Important */
-	   -moz-transform: translate3d(100%, 0, 0);  /* Important */
-	    -ms-transform: translate3d(100%, 0, 0);  /* Important */
-	     -o-transform: translate3d(100%, 0, 0);  /* Important */
-	        transform: translate3d(100%, 0, 0);  /* Important */
+	-webkit-transform: translate3d(100%, 0, 0);                  /* Important */
+	   -moz-transform: translate3d(100%, 0, 0);                  /* Important */
+	    -ms-transform: translate3d(100%, 0, 0);                  /* Important */
+	     -o-transform: translate3d(100%, 0, 0);                  /* Important */
+	        transform: translate3d(100%, 0, 0);                  /* Important */
 }
 
 /* Transition Slide (Leave)
@@ -1379,20 +1379,20 @@ input, select, textarea {
 }
 
 .transition-slide-leave .transition-view-to-show {
-	-webkit-transform: translate3d(0, 0, 0); /* Important */
-	   -moz-transform: translate3d(0, 0, 0); /* Important */
-	    -ms-transform: translate3d(0, 0, 0); /* Important */
-	     -o-transform: translate3d(0, 0, 0); /* Important */
-	        transform: translate3d(0, 0, 0); /* Important */
+	-webkit-transform: translate3d(0, 0, 0);                     /* Important */
+	   -moz-transform: translate3d(0, 0, 0);                     /* Important */
+	    -ms-transform: translate3d(0, 0, 0);                     /* Important */
+	     -o-transform: translate3d(0, 0, 0);                     /* Important */
+	        transform: translate3d(0, 0, 0);                     /* Important */
 	overflow: visible;                                           /* Important */
 }
 
 .transition-slide-leave .transition-view-to-hide {
-	-webkit-transform: translate3d(100%, -100%, 0); /* Important */
-	   -moz-transform: translate3d(100%, -100%, 0); /* Important */
-	    -ms-transform: translate3d(100%, -100%, 0); /* Important */
-	     -o-transform: translate3d(100%, -100%, 0); /* Important */
-	        transform: translate3d(100%, -100%, 0); /* Important */
+	-webkit-transform: translate3d(100%, -100%, 0);              /* Important */
+	   -moz-transform: translate3d(100%, -100%, 0);              /* Important */
+	    -ms-transform: translate3d(100%, -100%, 0);              /* Important */
+	     -o-transform: translate3d(100%, -100%, 0);              /* Important */
+	        transform: translate3d(100%, -100%, 0);              /* Important */
 	overflow: visible;                                           /* Important */
 }
 
