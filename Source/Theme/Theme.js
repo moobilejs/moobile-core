@@ -19,7 +19,7 @@ provides:
 (function() {
 
 var element = null;
-var configs = null;
+var configs = {};
 
 Moobile.Theme = {
 
@@ -31,6 +31,8 @@ Moobile.Theme = {
 	init: function() {
 		var content = element.getStyle('content');
 		if (content) {
+			content = content.replace(/^\'/, '');
+			content = content.replace(/\'$/, '');
 			configs = JSON.decode(content);
 		}
 	},
@@ -41,7 +43,7 @@ Moobile.Theme = {
 	 * @since  0.3.0
 	 */
 	getName: function() {
-		return configs[name] || null;
+		return configs['name'] || null;
 	}
 
 };

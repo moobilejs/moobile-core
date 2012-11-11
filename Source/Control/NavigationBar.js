@@ -143,24 +143,8 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	shouldCenterTitle: function() {
-
-		var content = this.contentElement;
-		if (content) {
-
-			var display = content.getStyle('display');
-			if (display === '-webkit-box' ||
-				display ===    '-moz-box' ||
-				display ===     '-ms-box' ||
-				display ===      '-o-box' ||
-				display ===         'box') {
-				var orient = content.getStyle('box-orient');
-				if (orient) {
-					return content.getStyle(orient === 'horizontal' ? 'box-pack' : 'box-align') === 'center';
-				}
-			}
-		}
-
-		return false;
+		console.log(Moobile.Theme.getName());
+		return Moobile.Theme.getName() === 'ios';
 	},
 
 	/**

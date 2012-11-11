@@ -4845,24 +4845,8 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	shouldCenterTitle: function() {
-
-		var content = this.contentElement;
-		if (content) {
-
-			var display = content.getStyle('display');
-			if (display === '-webkit-box' ||
-				display ===    '-moz-box' ||
-				display ===     '-ms-box' ||
-				display ===      '-o-box' ||
-				display ===         'box') {
-				var orient = content.getStyle('box-orient');
-				if (orient) {
-					return content.getStyle(orient === 'horizontal' ? 'box-pack' : 'box-align') === 'center';
-				}
-			}
-		}
-
-		return false;
+		console.log(Moobile.Theme.getName());
+		return Moobile.Theme.getName() === 'ios';
 	},
 
 	/**
@@ -9467,20 +9451,31 @@ provides:
 (function() {
 
 var element = null;
-var configs = null;
+var configs = {};
 
 Moobile.Theme = {
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
 	init: function() {
 		var content = element.getStyle('content');
 		if (content) {
+			content = content.replace(/^\'/, '');
+			content = content.replace(/\'$/, '');
 			configs = JSON.decode(content);
-			console.log(configs);
 		}
 	},
 
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Theme/Theme#getName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
 	getName: function() {
-		return configs[name];
+		return configs['name'] || null;
 	}
 
 };
