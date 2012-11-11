@@ -177,6 +177,30 @@ input, select, textarea {
 	background: transparent;
 }
 
+/* View Set
+-----------------------------------------------------------------------------*/
+
+.view.view-set {
+	background: #000;
+}
+
+/* View Collection
+-----------------------------------------------------------------------------*/
+
+.view.view-collection {
+	background: #000;
+}
+
+.view.view-collection > .view-content-wrapper > .view-content > .view:first-child {
+	-webkit-box-flex: 0;
+	   -moz-box-flex: 0;
+	    -ms-box-flex: 0;
+	     -o-box-flex: 0;
+	        box-flex: 0;
+	border-right: 1px solid black;
+	width: 300px;
+}
+
 /* Bar
 -----------------------------------------------------------------------------*/
 
