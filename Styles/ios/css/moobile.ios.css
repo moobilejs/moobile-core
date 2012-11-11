@@ -307,6 +307,35 @@ input, select, textarea {
 	white-space: nowrap;
 }
 
+/* Tab Bar
+-----------------------------------------------------------------------------*/
+
+.bar.tab-bar {
+	background: url(../images/ios/tab-bar.png) repeat-x;
+	height: 49px;
+	padding: 2px;
+	padding-top: 3px;
+}
+
+.bar.tab-bar .bar-content {
+	-webkit-box-align: center;
+	   -moz-box-align: center;
+	    -ms-box-align: center;
+	     -o-box-align: center;
+	        box-align: center;
+	-webkit-box-pack: center;
+	   -moz-box-pack: center;
+	    -ms-box-pack: center;
+	     -o-box-pack: center;
+	        box-pack: center;
+	height: 100%;
+}
+
+.bar.tab-bar:after,
+.bar.tab-bar:before {
+	display: none;
+}
+
 /* Button
 -----------------------------------------------------------------------------*/
 
