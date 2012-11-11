@@ -1350,6 +1350,7 @@ Moobile.Component = new Class({
 	 */
 	_onWindowResize: function() {
 		this._didResize();
+		this._didUpdateLayout();
 	},
 
 	/**
@@ -1359,6 +1360,7 @@ Moobile.Component = new Class({
 	 */
 	_onWindowOrientationChange: function() {
 		this._didResize();
+		this._didUpdateLayout();
 	},
 
 	// <0.1-compat>
