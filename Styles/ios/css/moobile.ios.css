@@ -2327,6 +2327,13 @@ input, select, textarea {
 	        transform-style: preserve-3d;
 }
 
+/* Hides Shadow */
+
+.transition-slide-enter .transition-view-to-show .bar.navigation-bar:before,
+.transition-slide-enter .transition-view-to-show .bar.navigation-bar:after {
+	display: none !important;
+}
+
 /* Enter Navigation Bar To Show */
 
 @-webkit-keyframes transition-slide-enter-navigation-bar-to-show {
@@ -2542,6 +2549,13 @@ input, select, textarea {
 	    -ms-transform-style: preserve-3d;
 	     -o-transform-style: preserve-3d;
 	        transform-style: preserve-3d;
+}
+
+/* Hides Shadow */
+
+.transition-slide-leave .transition-view-to-hide .bar.navigation-bar:before,
+.transition-slide-leave .transition-view-to-hide .bar.navigation-bar:after {
+	display: none !important;
 }
 
 /* Leave Navigation Bar To Hide */
