@@ -3031,9 +3031,10 @@ Moobile.Component = new Class({
 		if (this._visible)
 			return this;
 
+		this._display = true;
+
 		this._willShow();
 		this.element.removeClass('hidden');
-		this._display = true;
 		this._didShow();
 		this._didUpdateLayout();
 
@@ -3051,9 +3052,10 @@ Moobile.Component = new Class({
 		if (this._visible === false)
 			return this;
 
+		this._display = false;
+
 		this._willHide();
 		this.element.addClass('hidden');
-		this._display = false;
 		this._didHide();
 
 		return this;
@@ -3322,6 +3324,10 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_willShow: function() {
+
+		if (this._display === false)
+			return;
+
 		this.willShow();
 		this._children.invoke('_willShow');
 	},
@@ -3341,6 +3347,10 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didShow: function() {
+
+		if (this._display === false)
+			return;
+
 		this._visible = true;
 		this.didShow();
 		this._children.invoke('_didShow');
@@ -4012,6 +4022,13 @@ Moobile.Button = new Class({
 	_label: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Slider#hitAreaElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hitAreaElement: null,
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -4032,6 +4049,17 @@ Moobile.Button = new Class({
 
 		this.addEvent('tapstart', this.bound('_onTapStart'));
 		this.addEvent('tapend', this.bound('_onTapEnd'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+		this.parent();
+		this.hitAreaElement = new Element('div.hit-area');
+		this.hitAreaElement.inject(this.element);
 	},
 
 	/**
