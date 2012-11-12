@@ -952,9 +952,10 @@ Moobile.Component = new Class({
 		if (this._visible)
 			return this;
 
+		this._display = true;
+
 		this._willShow();
 		this.element.removeClass('hidden');
-		this._display = true;
 		this._didShow();
 		this._didUpdateLayout();
 
@@ -972,9 +973,10 @@ Moobile.Component = new Class({
 		if (this._visible === false)
 			return this;
 
+		this._display = false;
+
 		this._willHide();
 		this.element.addClass('hidden');
-		this._display = false;
 		this._didHide();
 
 		return this;
@@ -1243,6 +1245,10 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_willShow: function() {
+
+		if (this._display === false)
+			return;
+
 		this.willShow();
 		this._children.invoke('_willShow');
 	},
@@ -1262,6 +1268,10 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didShow: function() {
+
+		if (this._display === false)
+			return;
+
 		this._visible = true;
 		this.didShow();
 		this._children.invoke('_didShow');
@@ -1719,6 +1729,10 @@ Moobile.Component.addNativeEvent('ownanimationend');
 
 })();
 
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
 Moobile.Component.defineAttribute('data-style', null, function(value) {
 	this.options.styleName = value;
 });
