@@ -65,6 +65,7 @@ sources:
   - "Source/ViewController/ViewControllerCollection.js"
   - "Source/ViewTransition/ViewTransition.js"
   - "Source/ViewTransition/ViewTransition.Slide.js"
+  - "Source/ViewTransition/ViewTransition.Drop.js"
   - "Source/ViewTransition/ViewTransition.Cover.js"
   - "Source/ViewTransition/ViewTransition.Cover.Box.js"
   - "Source/ViewTransition/ViewTransition.Cover.Page.js"
