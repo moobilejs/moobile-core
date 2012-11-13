@@ -47,13 +47,12 @@ Moobile.Window = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
 		this.parent();
 		this.element.set('class', 'window');
-		window.addEvent('load', this.bound('_onWindowLoad'));
-		window.addEvent('rotate', this.bound('_onWindowRotate'));
 	},
 
 	/**
@@ -72,20 +71,9 @@ Moobile.Window = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	destroy: function() {
-		window.removeEvent('load', this.bound('_onWindowLoad'));
-		window.removeEvent('rotate', this.bound('_onWindowRotate'));
-		this.parent();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	didAddChildComponent: function(component) {
 		this.parent(component);
-		component.setWindow(this);
+		component._setWindow(this);
 	},
 
 	/**
@@ -95,25 +83,7 @@ Moobile.Window = new Class({
 	 */
 	didRemoveChildComponent: function(component) {
 		this.parent(component);
-		component.setWindow(null);
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_onWindowLoad: function(e) {
-		(function() { window.scrollTo(0, 1) }).delay(250);
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_onWindowRotate: function(e) {
-		(function() { window.scrollTo(0, 1) }).delay(250);
+		component._setWindow(null);
 	}
 
 });
