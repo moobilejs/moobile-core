@@ -1695,7 +1695,7 @@ Moobile.Component.create = function(klass, element, descriptor, options, name) {
 		}
 	}
 
-	return new klass(element);
+	return new klass(element, options, name);
 };
 
 (function() {
