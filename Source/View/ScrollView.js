@@ -97,6 +97,13 @@ Moobile.ScrollView = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_scrollToPageTimer: null,
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
@@ -306,11 +313,16 @@ Moobile.ScrollView = new Class({
 			this.scrollTo(x, y, time);
 		}
 
+		if (this._scrollToPageTimer) {
+			clearTimeout(this.scrolltopage);
+			this._scrollToPageTimer = null;
+		}
+
 		if (this._page.x !== pageX ||
 			this._page.y !== pageY) {
 			this._pageOffset.x = Math.abs(x - pageX * pageSizeX);
 			this._pageOffset.y = Math.abs(y - pageY * pageSizeY);
-			this.fireEvent('scrolltopage', [pageX, pageY], time);
+			this._scrollToPageTimer = this.fireEvent.delay(time, this, ['scrolltopage', [pageX, pageY]]);
 		}
 
 		this._page.x = pageX;
