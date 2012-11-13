@@ -116,9 +116,9 @@ Moobile.ViewControllerSet = new Class({
 		this._incomingViewController = null;
 		this.removeAllChildViewControllers(true);
 
-		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
+		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i].hideView());
 
-		return this.setSelectedViewController(viewControllers[0])
+		return this.setSelectedViewController(viewControllers[0]);
 	},
 
 	/**
