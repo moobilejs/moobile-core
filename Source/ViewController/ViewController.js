@@ -123,6 +123,7 @@ Moobile.ViewController = new Class({
 		this.loadView();
 		if (this.view) {
 			this.view.addEvent('ready', this.bound('_onViewReady'));
+			this.view.addEvent('layout', this.bound('_onViewLayout'));
 			this.viewDidLoad();
 		}
 
@@ -739,6 +740,10 @@ Moobile.ViewController = new Class({
 
 	},
 
+	viewDidUpdateLayout: function() {
+
+	},
+
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewWillEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -802,6 +807,8 @@ Moobile.ViewController = new Class({
 			this._modalViewController = null;
 		}
 
+		this.view.removeEvent('ready', this.bound('_onViewReady'));
+		this.view.removeEvent('layout', this.bound('_onViewLayout'));
 		this.view.destroy();
 		this.view = null;
 
@@ -830,6 +837,15 @@ Moobile.ViewController = new Class({
 			this._viewReady = true;
 			this.viewDidBecomeReady();
 		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_onViewLayout: function() {
+		this.viewDidUpdateLayout();
 	},
 
 	/**

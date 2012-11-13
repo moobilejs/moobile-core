@@ -2640,7 +2640,6 @@ Moobile.Component = new Class({
 
 		component.setParentComponent(null);
 		component.setWindow(null);
-		component.setReady(false);
 
 		this._didRemoveChildComponent(component);
 
@@ -2750,7 +2749,8 @@ Moobile.Component = new Class({
 		this._children.invoke('setWindow', window);
 
 		if (this._window) {
-			this.setReady(true);
+			this._didBecomeReady();
+			this._didUpdateLayout();
 		}
 
 		return this;
@@ -2775,28 +2775,17 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#setReady
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
-	setReady: function(ready) {
-
-		if (this._ready === ready)
-			return this;
-
-		this._ready = ready;
-
-		this._children.invoke('setReady', ready);
-
-		if (this._ready) {
-			this._didBecomeReady();
-			this._didUpdateLayout();
-			this.fireEvent('ready');
-		}
-
+	setReady: function() {
+		console.log('[DEPRECATION NOTICE] The method "setReady" will be removed in 0.5, this is not part of the public API anymore');
+		this._didBecomeReady();
 		return this;
 	},
+
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#isReady
@@ -2805,6 +2794,15 @@ Moobile.Component = new Class({
 	 */
 	isReady: function() {
 		return this._ready;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#isBuilt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	isBuilt: function() {
+		return this._built;
 	},
 
 	/**
@@ -3121,7 +3119,14 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didBecomeReady: function() {
+
+		if (this._ready)
+			return this;
+
+		this._ready = true;
 		this.didBecomeReady();
+		this._children.invoke('_didBecomeReady');
+		this.fireEvent('ready');
 	},
 
 	/**
@@ -3139,12 +3144,16 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didResize: function() {
+
 		var size = this.getSize();
-		if (size.x !== this._size.x ||
-			size.y !== this._size.y) {
-			this._size = size;
-			this.didResize(size.x, size.y);
-		}
+		if (size.x === this._size.x &&
+			size.y === this._size.y)
+			return;
+
+		this._size = size;
+
+		this.didResize(size.x, size.y);
+		this.fireEvent('resize', [size.x, size.y]);
 	},
 
 	/**
@@ -3162,7 +3171,13 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didUpdateLayout: function() {
-		if (this._built && this._ready) this.didUpdateLayout();
+
+		if (this._built === false ||
+			this._ready === false)
+			return;
+
+		this.didUpdateLayout();
+		this.fireEvent('layout');
 	},
 
 	/**
@@ -10828,6 +10843,7 @@ Moobile.ViewController = new Class({
 		this.loadView();
 		if (this.view) {
 			this.view.addEvent('ready', this.bound('_onViewReady'));
+			this.view.addEvent('layout', this.bound('_onViewLayout'));
 			this.viewDidLoad();
 		}
 
@@ -11444,6 +11460,10 @@ Moobile.ViewController = new Class({
 
 	},
 
+	viewDidUpdateLayout: function() {
+
+	},
+
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewWillEnter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -11507,6 +11527,8 @@ Moobile.ViewController = new Class({
 			this._modalViewController = null;
 		}
 
+		this.view.removeEvent('ready', this.bound('_onViewReady'));
+		this.view.removeEvent('layout', this.bound('_onViewLayout'));
 		this.view.destroy();
 		this.view = null;
 
@@ -11535,6 +11557,15 @@ Moobile.ViewController = new Class({
 			this._viewReady = true;
 			this.viewDidBecomeReady();
 		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_onViewLayout: function() {
+		this.viewDidUpdateLayout();
 	},
 
 	/**
