@@ -167,7 +167,7 @@ window.addEvent('domready', function(e) {
 			var target = touch.target;
 			var identifier = touch.identifier;
 
-			if (target.tagName.match(/input|textarea|select|a/i)) {
+			if (target.tagName.match(/input|textarea|select/i)) {
 				scrolls[identifier] = false;
 				return;
 			}

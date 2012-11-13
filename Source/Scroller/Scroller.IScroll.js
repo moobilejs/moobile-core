@@ -21,25 +21,6 @@ provides:
 
 (function() {
 
-iScroll.prototype._currentSize = {x: 0, y: 0};
-
-var _checkDOMChanges = iScroll.prototype._checkDOMChanges;
-
-iScroll.prototype._checkDOMChanges = function() {
-
-	// TODO: Check if really necessary
-
-	_checkDOMChanges.call(this);
-
-	var size = this.wrapper.getScrollSize();
-	if (this._currentSize.x != size.x || this._currentSize.y != size.y) {
-		this._currentSize = size;
-		this.refresh();
-	}
-};
-
-})();
-
 var touchid = null;
 
 var fixtouch = function(e) {
@@ -249,3 +230,5 @@ Moobile.Scroller.IScroll = new Class({
 Moobile.Scroller.IScroll.supportsCurrentPlatform = function() {
 	return true;
 };
+
+})();
