@@ -25,6 +25,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.1
  * @edited 0.2.0
  * @since  0.1.0
@@ -362,8 +363,8 @@ Moobile.Component = new Class({
 		var index = this._getChildComponentIndexForElement(component) || 0;
 
 		this._children.splice(index, 0, component);
-		component.setParentComponent(this);
-		component.setWindow(this._window);
+		component._setParent(this);
+		component._setWindow(this._window);
 		this._didAddChildComponent(component);
 		this._didUpdateLayout();
 
@@ -558,10 +559,8 @@ Moobile.Component = new Class({
 		}
 
 		this._children.erase(component);
-
-		component.setParentComponent(null);
-		component.setWindow(null);
-
+		component._setParent(null);
+		component._setWindow(null);
 		this._didRemoveChildComponent(component);
 
 		if (destroy) {
@@ -608,12 +607,23 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setParentComponent: function(parent) {
+		console.log('[DEPRECATION NOTICE] The method "setParentComponent" will be removed in 0.5, this is not part of the public API anymore');
+		return this._setParent(parent);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_setParent: function(parent) {
 
 		if (this._parent === parent)
 			return this;
@@ -653,12 +663,23 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#setWindow
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setWindow: function(window) {
+		console.log('[DEPRECATION NOTICE] The method "setWindow" will be removed in 0.5, this is not part of the public API anymore');
+		return this._setWindow(window);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_setWindow: function(window) {
 
 		if (this._window === window)
 			return this;
@@ -698,6 +719,7 @@ Moobile.Component = new Class({
 	/**
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
@@ -1310,7 +1332,6 @@ Moobile.Component = new Class({
 	_willHide: function() {
 		this.willHide();
 		this._children.invoke('_willHide');
-		return this;
 	},
 
 	/**
@@ -1364,6 +1385,11 @@ Moobile.Component = new Class({
 		return this;
 	},
 
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	toElement: function() {
 		return this.element;
 	},
@@ -1386,231 +1412,7 @@ Moobile.Component = new Class({
 	_onWindowOrientationChange: function() {
 		this._didResize();
 		this._didUpdateLayout();
-	},
-
-	// <0.1-compat>
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	addChild: function() {
-		console.log('[DEPRECATION NOTICE] The method "addChild" will be removed in 0.3, use the method "addChildComponent" instead');
-		return this.addChildComponent.apply(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	addChildInside: function() {
-		console.log('[DEPRECATION NOTICE] The method "addChildInside" will be removed in 0.3, use the method "addChildComponentInside" instead');
-		return this.addChildComponentInside.apply(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	addChildAfter: function() {
-		console.log('[DEPRECATION NOTICE] The method "addChildAfter" will be removed in 0.3, use the method "addChildComponentAfter" instead');
-		return this.addChildComponentAfter.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	addChildBefore: function() {
-		console.log('[DEPRECATION NOTICE] The method "addChildBefore" will be removed in 0.3, use the method "addChildComponentBefore" instead');
-		return this.addChildComponentBefore.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChild: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChild" will be removed in 0.3, use the method "getChildComponent" instead');
-		return this.getChildComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChildOfType: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChildOfType" will be removed in 0.3, use the method "getChildComponentOfType" instead');
-		return this.getChildComponentOfType.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChildAt: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChildAt" will be removed in 0.3, use the method "getChildComponentAt" instead');
-		return this.getChildComponentAt.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChildOfTypeAt: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChildOfTypeAt" will be removed in 0.3, use the method "getChildComponentOfTypeAt" instead');
-		return this.getChildComponentOfTypeAt.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChildIndex: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChildIndex" will be removed in 0.3, use the method "getChildComponentIndex" instead');
-		return this.getChildComponentIndex.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChildren: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChildren" will be removed in 0.3, use the method "getChildComponents" instead');
-		return this.getChildComponents.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getChildrenOfType: function() {
-		console.log('[DEPRECATION NOTICE] The method "getChildrenOfType" will be removed in 0.3, use the method "getChildComponentsOfType" instead');
-		return this.getChildComponentsOfType.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	hasChild: function() {
-		console.log('[DEPRECATION NOTICE] The method "hasChild" will be removed in 0.3, use the method "hasChildComponent" instead');
-		return this.hasChildComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	hasChildOfType: function() {
-		console.log('[DEPRECATION NOTICE] The method "hasChildOfType" will be removed in 0.3, use the method "hasChildComponentOfType" instead');
-		return this.hasChildComponentOfType.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	replaceChild: function() {
-		console.log('[DEPRECATION NOTICE] The method "replaceChild" will be removed in 0.3, use the method "replaceChildComponent" instead');
-		return this.replaceChildComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	replaceWith: function() {
-		console.log('[DEPRECATION NOTICE] The method "replaceWith" will be removed in 0.3, use the method "replaceWithComponent" instead');
-		return this.replaceWithComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeChild: function() {
-		console.log('[DEPRECATION NOTICE] The method "removeChild" will be removed in 0.3, use the method "removeChildComponent" instead');
-		return this.removeChildComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeChildren: function() {
-		console.log('[DEPRECATION NOTICE] The method "removeChildren" will be removed in 0.3, use the method "removeAllChildComponents" instead');
-		return this.removeAllChildComponents.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeChildrenOfType: function() {
-		console.log('[DEPRECATION NOTICE] The method "removeChildrenOfType" will be removed in 0.3, use the method "removeAllChildComponentsOfType" instead');
-		return this.removeAllChildComponentsOfType.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeFromParent: function() {
-		console.log('[DEPRECATION NOTICE] The method "removeFromParent" will be removed in 0.3, use the method "removeFromParentComponent" instead');
-		return this.removeFromParentComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setParent: function() {
-		console.log('[DEPRECATION NOTICE] The method "setParent" will be removed in 0.3, use the method "setParentComponent" instead');
-		return this.setParentComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getParent: function() {
-		console.log('[DEPRECATION NOTICE] The method "getParent" will be removed in 0.3, use the method "getParentComponent" instead');
-		return this.getParentComponent.call(this, arguments);
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	hasParent: function() {
-		console.log('[DEPRECATION NOTICE] The method "hasParent" will be removed in 0.3, use the "hasParentComponent" instead');
-		return this.hasParentComponent.apply(this, arguments);
 	}
-
-	// </0.1-compat>
 
 });
 
