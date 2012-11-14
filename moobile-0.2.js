@@ -2700,15 +2700,6 @@ Moobile.Component = new Class({
 
 		this._parentComponentWillChange(parent);
 		this._parent = parent;
-
-		if (parent) {
-			if (this._display) {
-				this._visible = this._isVisible();
-			}
-		} else {
-			this._visible = this._display;
-		}
-
 		this._parentComponentDidChange(parent);
 
 		return this;
@@ -3076,7 +3067,15 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_isVisible: function() {
-		return this._visible ? (this._parent && this._parent._isVisible()) : false;
+
+		if (this._display) {
+
+			return this._parent
+			     ? this._parent._isVisible()
+			     : true;
+		}
+
+		return false;
 	},
 
 	/**
@@ -3270,6 +3269,16 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_parentComponentDidChange: function(parent) {
+
+		if (parent) {
+			if (this._display) {
+				this._visible = this._isVisible();
+				if (this instanceof Moobile.View) console.log('Setting view visibi to ' + this._visible);
+			}
+		} else {
+			this._visible = this._display;
+		}
+
 		this.parentComponentDidChange(parent);
 	},
 
