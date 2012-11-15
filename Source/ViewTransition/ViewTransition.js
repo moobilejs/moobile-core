@@ -30,6 +30,7 @@ if (!window.Moobile) window.Moobile = {};
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition = new Class({
@@ -55,22 +56,15 @@ Moobile.ViewTransition = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	enter: function(viewToShow, viewToHide, parentView, isFirstView) {
+	enter: function(viewToShow, viewToHide, parentView) {
 
+		this.enterAnimation(viewToShow, viewToHide, parentView);
+
+		viewToHide.disableTouch();
 		viewToShow.disableTouch();
-		if (viewToHide) {
-			viewToHide.disableTouch();
-		}
+		viewToShow.show();
 
 		this.fireEvent('start');
-
-		if (isFirstView) {
-			this.firstAnimation(viewToShow, parentView)
-		} else {
-			this.enterAnimation(viewToShow, viewToHide, parentView);
-		}
-
-		viewToShow.show();
 
 		return this;
 	},
@@ -82,25 +76,14 @@ Moobile.ViewTransition = new Class({
 	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
-		viewToShow.disableTouch();
-		viewToHide.disableTouch();
-
-		this.fireEvent('start');
 		this.leaveAnimation(viewToShow, viewToHide, parentView);
 
+		viewToShow.disableTouch();
+		viewToHide.disableTouch();
 		viewToShow.show();
 
-		return this;
-	},
+		this.fireEvent('start');
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#didEnterFirst
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didEnterFirst: function(viewToShow, parentView) {
-		viewToShow.enableTouch();
-		this.fireEvent('complete');
 		return this;
 	},
 
@@ -146,15 +129,6 @@ Moobile.ViewTransition = new Class({
 	 */
 	shouldHideViewToHideOnLeave: function(viewToShow, viewToHide, parentView) {
 		return true;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#firstAnimation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-		throw new Error('You must override this method');
 	},
 
 	/**

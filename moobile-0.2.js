@@ -2710,16 +2710,9 @@ Moobile.Component = new Class({
 
 		this._parentComponentWillChange(parent);
 		this._parent = parent;
-
-		if (parent) {
-			if (this._display) {
-				this._visible = this._isVisible();
-			}
-		} else {
-			this._visible = this._display;
-		}
-
 		this._parentComponentDidChange(parent);
+
+		if (this._parent) this._didUpdateLayout();
 
 		return this;
 	},
@@ -3101,7 +3094,15 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_isVisible: function() {
-		return this._visible ? (this._parent && this._parent._isVisible()) : false;
+
+		if (this._display) {
+
+			return this._parent
+				 ? this._parent._isVisible()
+				 : true;
+		}
+
+		return false;
 	},
 
 	/**
@@ -3315,6 +3316,15 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_parentComponentDidChange: function(parent) {
+
+		if (parent) {
+			if (this._display) {
+				this._visible = this._isVisible();
+			}
+		} else {
+			this._visible = this._display;
+		}
+
 		this.parentComponentDidChange(parent);
 	},
 
@@ -11865,14 +11875,19 @@ Moobile.ViewControllerStack = new Class({
 
 		this._animating = true; // needs to be set before the transition happens
 
+		if (childViewControllers.length === 1) {
+			this.onPushTransitionStart();
+			this.onPushTransitionComplete();
+			return this;
+		}
+
 		viewTransition = viewTransition || new Moobile.ViewTransition.None();
 		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
-			this.view,
-			childViewControllers.length === 1
+			this.view
 		);
 
 		viewControllerPushed.setViewTransition(viewTransition);
@@ -11885,7 +11900,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionStart: function(e) {
+	onPushTransitionStart: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -11902,7 +11917,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionComplete: function(e) {
+	onPushTransitionComplete: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -12466,6 +12481,7 @@ if (!window.Moobile) window.Moobile = {};
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition = new Class({
@@ -12491,22 +12507,15 @@ Moobile.ViewTransition = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	enter: function(viewToShow, viewToHide, parentView, isFirstView) {
+	enter: function(viewToShow, viewToHide, parentView) {
 
+		this.enterAnimation(viewToShow, viewToHide, parentView);
+
+		viewToHide.disableTouch();
 		viewToShow.disableTouch();
-		if (viewToHide) {
-			viewToHide.disableTouch();
-		}
+		viewToShow.show();
 
 		this.fireEvent('start');
-
-		if (isFirstView) {
-			this.firstAnimation(viewToShow, parentView)
-		} else {
-			this.enterAnimation(viewToShow, viewToHide, parentView);
-		}
-
-		viewToShow.show();
 
 		return this;
 	},
@@ -12518,25 +12527,14 @@ Moobile.ViewTransition = new Class({
 	 */
 	leave: function(viewToShow, viewToHide, parentView) {
 
-		viewToShow.disableTouch();
-		viewToHide.disableTouch();
-
-		this.fireEvent('start');
 		this.leaveAnimation(viewToShow, viewToHide, parentView);
 
+		viewToShow.disableTouch();
+		viewToHide.disableTouch();
 		viewToShow.show();
 
-		return this;
-	},
+		this.fireEvent('start');
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#didEnterFirst
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didEnterFirst: function(viewToShow, parentView) {
-		viewToShow.enableTouch();
-		this.fireEvent('complete');
 		return this;
 	},
 
@@ -12582,15 +12580,6 @@ Moobile.ViewTransition = new Class({
 	 */
 	shouldHideViewToHideOnLeave: function(viewToShow, viewToHide, parentView) {
 		return true;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#firstAnimation
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-		throw new Error('You must override this method');
 	},
 
 	/**
@@ -12661,38 +12650,12 @@ var unique = function(name) {
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Slide
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Slide = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('first');
-			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('first');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(parentElem);
-		animation.setAnimationClass('transition-slide-enter');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden
@@ -12968,38 +12931,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('transition-cover-enter');
-			parentElem.addClass('first');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('transition-cover-enter');
-			parentElem.removeClass('first');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(viewToShow);
-		animation.setAnimationClass('transition-view-to-show');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden
@@ -13082,6 +13019,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -13102,15 +13040,6 @@ Moobile.ViewTransition.Cover.Box = new Class({
 	 * @since  0.2.0
 	 */
 	wrapper: null,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-		throw new Error('You cannot use this transition for the first view of a stack');
-	},
 
 	/**
 	 * @overridden
@@ -13224,6 +13153,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Page
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -13244,15 +13174,6 @@ Moobile.ViewTransition.Cover.Page = new Class({
 	 * @since  0.2.0
 	 */
 	wrapper: null,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-		throw new Error('You cannot use this transition for the first view of a stack');
-	},
 
 	/**
 	 * @overridden
@@ -13366,41 +13287,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cubic
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cubic = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-		var parentWrap = parentView.getContentWrapperElement();
-
-		var onStart = function() {
-			parentWrap.addClass('transition-cubic-perspective');
-			parentElem.addClass('first');
-			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentWrap.removeClass('transition-cubic-perspective');
-			parentElem.removeClass('first');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(parentElem);
-		animation.setAnimationClass('transition-cubic-enter');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden
@@ -13490,38 +13382,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Fade
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Fade = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('transition-fade-enter');
-			parentElem.addClass('first');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('transition-fade-enter');
-			parentElem.removeClass('first');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(viewToShow);
-		animation.setAnimationClass('transition-view-to-show');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden
@@ -13605,41 +13471,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Flip
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Flip = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-		var parentWrap = parentView.getContentWrapperElement();
-
-		var onStart = function() {
-			parentWrap.addClass('transition-flip-perspective');
-			parentElem.addClass('first');
-			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentWrap.removeClass('transition-flip-perspective');
-			parentElem.removeClass('first');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(parentElem);
-		animation.setAnimationClass('transition-flip-enter');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden
@@ -13729,20 +13566,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.None
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.None = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-		this.didEnterFirst(viewToShow, parentView);
-	},
 
 	/**
 	 * @overridden

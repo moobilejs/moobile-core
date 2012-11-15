@@ -74,14 +74,19 @@ Moobile.ViewControllerStack = new Class({
 
 		this._animating = true; // needs to be set before the transition happens
 
+		if (childViewControllers.length === 1) {
+			this.onPushTransitionStart();
+			this.onPushTransitionComplete();
+			return this;
+		}
+
 		viewTransition = viewTransition || new Moobile.ViewTransition.None();
 		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
-			this.view,
-			childViewControllers.length === 1
+			this.view
 		);
 
 		viewControllerPushed.setViewTransition(viewTransition);
@@ -94,7 +99,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionStart: function(e) {
+	onPushTransitionStart: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -111,7 +116,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionComplete: function(e) {
+	onPushTransitionComplete: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);

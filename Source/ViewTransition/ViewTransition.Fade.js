@@ -23,38 +23,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Fade
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Fade = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('transition-fade-enter');
-			parentElem.addClass('first');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('transition-fade-enter');
-			parentElem.removeClass('first');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(viewToShow);
-		animation.setAnimationClass('transition-view-to-show');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden

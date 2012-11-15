@@ -23,20 +23,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.None
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.None = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-		this.didEnterFirst(viewToShow, parentView);
-	},
 
 	/**
 	 * @overridden

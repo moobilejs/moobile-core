@@ -22,41 +22,12 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cubic
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cubic = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-		var parentWrap = parentView.getContentWrapperElement();
-
-		var onStart = function() {
-			parentWrap.addClass('transition-cubic-perspective');
-			parentElem.addClass('first');
-			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentWrap.removeClass('transition-cubic-perspective');
-			parentElem.removeClass('first');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(parentElem);
-		animation.setAnimationClass('transition-cubic-enter');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden

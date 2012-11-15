@@ -45,38 +45,12 @@ var unique = function(name) {
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Slide
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Slide = new Class({
 
 	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	firstAnimation: function(viewToShow, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('first');
-			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('first');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnterFirst(viewToShow, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(parentElem);
-		animation.setAnimationClass('transition-slide-enter');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
 
 	/**
 	 * @overridden

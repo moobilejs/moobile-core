@@ -1244,14 +1244,6 @@ input, select, textarea {
 	z-index: 75;                                                 /* Important */
 }
 
-.transition-fade-enter.first .transition-view-to-show {
-	-webkit-transform: translate3d(0, 0, 0);
-	   -moz-transform: translate3d(0, 0, 0);
-	    -ms-transform: translate3d(0, 0, 0);
-	     -o-transform: translate3d(0, 0, 0);
-	        transform: translate3d(0, 0, 0);
-}
-
 /* Transition Fade (Leave)
 -----------------------------------------------------------------------------*/
 
@@ -1347,14 +1339,6 @@ input, select, textarea {
 	     -o-transform: translate3d(0, 0, 0);                     /* Important */
 	        transform: translate3d(0, 0, 0);                     /* Important */
 	overflow: visible;                                           /* Important */
-}
-
-.transition-slide-enter.first .transition-view-to-show {
-	-webkit-transform: translate3d(100%, 0, 0);                  /* Important */
-	   -moz-transform: translate3d(100%, 0, 0);                  /* Important */
-	    -ms-transform: translate3d(100%, 0, 0);                  /* Important */
-	     -o-transform: translate3d(100%, 0, 0);                  /* Important */
-	        transform: translate3d(100%, 0, 0);                  /* Important */
 }
 
 /* Transition Slide (Leave)
@@ -1533,14 +1517,6 @@ input, select, textarea {
 .transition-cover-enter .transition-view-to-hide {
 	position: absolute;
 	z-index: 50;
-}
-
-.transition-cover-enter.first {
-	-webkit-transform: translate3d(0, 100%, 0);
-	   -moz-transform: translate3d(0, 100%, 0);
-	    -ms-transform: translate3d(0, 100%, 0);
-	     -o-transform: translate3d(0, 100%, 0);
-	        transform: translate3d(0, 100%, 0);
 }
 
 /* Transition Cover (Leave)
@@ -1927,14 +1903,6 @@ input, select, textarea {
 	        transform: rotateY(0deg);
 }
 
-.transition-cubic-enter.first .transition-view-to-show {
-	-webkit-transform: translate3d(100%, 0, 0) rotateY(90deg);
-	   -moz-transform: translate3d(100%, 0, 0) rotateY(90deg);
-	    -ms-transform: translate3d(100%, 0, 0) rotateY(90deg);
-	     -o-transform: translate3d(100%, 0, 0) rotateY(90deg);
-	        transform: translate3d(100%, 0, 0) rotateY(90deg);
-}
-
 /* Transition Cubic Leave
 -----------------------------------------------------------------------------*/
 
@@ -2066,14 +2034,6 @@ input, select, textarea {
 	    -ms-transform: translate3d(0, -100%, 0) rotateY(-180deg);
 	     -o-transform: translate3d(0, -100%, 0) rotateY(-180deg);
 	        transform: translate3d(0, -100%, 0) rotateY(-180deg);
-}
-
-.transition-flip-enter.first .transition-view-to-show {
-	-webkit-transform: translate3d(0, 0, 0) rotateY(-180deg);
-	   -moz-transform: translate3d(0, 0, 0) rotateY(-180deg);
-	    -ms-transform: translate3d(0, 0, 0) rotateY(-180deg);
-	     -o-transform: translate3d(0, 0, 0) rotateY(-180deg);
-	        transform: translate3d(0, 0, 0) rotateY(-180deg);
 }
 
 /* Transition Flip Leave
