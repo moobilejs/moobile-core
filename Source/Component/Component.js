@@ -365,6 +365,7 @@ Moobile.Component = new Class({
 		component.setParentComponent(this);
 		component.setWindow(this._window);
 		this._didAddChildComponent(component);
+
 		this._didUpdateLayout();
 
 		return this;
@@ -909,7 +910,6 @@ Moobile.Component = new Class({
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
 
-		this._didResize();
 		this._didUpdateLayout();
 
 		return this;
@@ -940,17 +940,52 @@ Moobile.Component = new Class({
 	 */
 	show: function() {
 
-		if (this._visible)
+		if (this._display || this._visible)
 			return this;
+
+		this._willShow();
+		this.removeClass('hidden');
+		this._didShow();
 
 		this._display = true;
 
-		this._willShow();
-		this.element.removeClass('hidden');
-		this._didShow();
 		this._didUpdateLayout();
 
 		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_willShow: function() {
+
+		if (this._display === true ||
+			this._visible === true)
+			return;
+
+		this.willShow();
+
+		this._children.invoke('_willShow');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didShow: function() {
+
+		if (this._display === true ||
+			this._visible === true)
+			return;
+
+		this._visible = true;
+		this.didShow();
+		this.fireEvent('show');
+
+		this._children.invoke('_didShow');
 	},
 
 	/**
@@ -961,16 +996,50 @@ Moobile.Component = new Class({
 	 */
 	hide: function() {
 
-		if (this._visible === false)
+		if (this._display === false)
 			return this;
+
+		this._willHide();
+		this.addClass('hidden');
+		this._didHide();
 
 		this._display = false;
 
-		this._willHide();
-		this.element.addClass('hidden');
-		this._didHide();
-
 		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_willHide: function() {
+
+		if (this._display === false ||
+			this._visible === false)
+			return;
+
+		this.willHide();
+
+		this._children.invoke('_willHide');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didHide: function() {
+
+		if (this._display === false ||
+			this._visible === false)
+			return;
+
+		this._visible = false;
+		this.didHide();
+		this.fireEvent('hide');
+
+		this._children.invoke('_didHide');
 	},
 
 	/**
@@ -1058,31 +1127,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.1
 	 */
-	_didResize: function() {
-		var size = this.getSize();
-		if (size.x !== this._size.x ||
-			size.y !== this._size.y) {
-			this._size = size;
-			this.didResize(size.x, size.y);
-		}
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#didResize
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	didResize: function(x, y) {
-
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
 	_didUpdateLayout: function() {
-		if (this._built && this._ready) this.didUpdateLayout();
+		if (this._display && this._visible && this._built && this._ready) this.didUpdateLayout();
 	},
 
 	/**
@@ -1248,62 +1294,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_willShow: function() {
-
-		if (this._display === false)
-			return;
-
-		this.willShow();
-		this._children.invoke('_willShow');
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#willShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	willShow: function() {
 
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didShow: function() {
-
-		if (this._display === false)
-			return;
-
-		this._visible = true;
-		this.didShow();
-		this._children.invoke('_didShow');
-		this.fireEvent('show');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#didShow
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didShow: function() {
-
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_willHide: function() {
-		this.willHide();
-		this._children.invoke('_willHide');
-		return this;
 	},
 
 	/**
@@ -1316,15 +1312,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didShow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
+	 * @since  0.1.0
 	 */
-	_didHide: function() {
-		this._visible = false;
-		this.didHide();
-		this._children.invoke('_didHide');
-		this.fireEvent('hide');
+	didShow: function() {
+
 	},
 
 	/**
@@ -1367,7 +1360,6 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_onWindowResize: function() {
-		this._didResize();
 		this._didUpdateLayout();
 	},
 
@@ -1377,7 +1369,6 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_onWindowOrientationChange: function() {
-		this._didResize();
 		this._didUpdateLayout();
 	},
 
