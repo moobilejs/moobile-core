@@ -1194,7 +1194,6 @@ Moobile.Component = new Class({
 		if (parent) {
 			if (this._display) {
 				this._visible = this._isVisible();
-				if (this instanceof Moobile.View) console.log('Setting view visibi to ' + this._visible);
 			}
 		} else {
 			this._visible = this._display;
