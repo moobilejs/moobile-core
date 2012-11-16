@@ -465,22 +465,28 @@ Moobile.ScrollView = new Class({
 	 */
 	_onTouchEnd: function(e) {
 
-		var touch = e.changedTouches[0];
+		var touches = e.changedTouches;
 
-		if (this._activeTouch.identifier === touch.identifier) {
-			this._activeTouchDuration = Date.now() - this._activeTouchTime;
+		for (var i = 0; i < touches.length; i++) {
 
-			if (this.options.snapToPage) {
-				if (this._activeTouchStartX !== touch.pageX ||
-					this._activeTouchStartY !== touch.pageY) {
-					this._snapToPage();
+			var touch = touches[i];
+
+			if (this._activeTouch.identifier === touch.identifier) {
+				this._activeTouchDuration = Date.now() - this._activeTouchTime;
+
+				if (this.options.snapToPage) {
+					if (this._activeTouchStartX !== touch.pageX ||
+						this._activeTouchStartY !== touch.pageY) {
+						this._snapToPage();
+					}
 				}
-			}
 
-			this._activeTouch = null;
-			this._activeTouchTime = null;
-			this._activeTouchDuration = null;
-			this._activeTouchStartScroll = null;
+				this._activeTouch = null;
+				this._activeTouchTime = null;
+				this._activeTouchDuration = null;
+				this._activeTouchStartScroll = null;
+				break;
+			}
 		}
 	},
 
