@@ -2453,6 +2453,7 @@ Moobile.Component = new Class({
 
 		var found = this.hasElement(component);
 		if (found === false || where) {
+			console.log(component);
 			document.id(component).inject(context, where);
 		}
 
@@ -2460,7 +2461,6 @@ Moobile.Component = new Class({
 
 		component._setParent(this);
 		component._setWindow(this._window);
-		component._setReady(this._ready);
 
 		this._didAddChildComponent(component);
 		this._didUpdateLayout();
@@ -2682,7 +2682,6 @@ Moobile.Component = new Class({
 		this._children.erase(component);
 		component._setParent(null);
 		component._setWindow(null);
-		component._setReady(false);
 		this._didRemoveChildComponent(component);
 		this._didUpdateLayout();
 
@@ -2833,6 +2832,8 @@ Moobile.Component = new Class({
 		this._window = window;
 		this._windowDidChange(window);
 
+		this._ready = !!window;
+
 		this._children.invoke('_setWindow', window);
 
 		return this;
@@ -2887,22 +2888,6 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.3.0
-	 */
-	_setReady: function(ready) {
-
-		if (this._ready === ready)
-			return this;
-
-		this._ready = ready;
-		this._children.invoke('_setReady', ready);
-
-		return this
-	},
-
-	/**
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
@@ -2911,7 +2896,9 @@ Moobile.Component = new Class({
 	 */
 	setReady: function(ready) {
 		console.log('[DEPRECATION NOTICE] The method "setReady" will be removed in 0.5, this is not part of the public API anymore');
-		return this._setReady(ready);
+		this._ready = ready;
+		this._children.invoke('setReady', ready);
+		return this;
 	},
 
 	/**
@@ -3123,14 +3110,10 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	setSize: function(x, y) {
-
 		this._willUpdateLayout();
-
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
-
 		this._didUpdateLayout();
-
 		return this;
 	},
 
@@ -3190,7 +3173,6 @@ Moobile.Component = new Class({
 			return;
 
 		this.willShow();
-
 		this._children.invoke('_willShow');
 	},
 
@@ -3206,10 +3188,10 @@ Moobile.Component = new Class({
 			return;
 
 		this._visible = true;
-		this.didShow();
-		this.fireEvent('show');
 
+		this.didShow();
 		this._children.invoke('_didShow');
+		this.fireEvent('show');
 	},
 
 	/**
@@ -3245,7 +3227,6 @@ Moobile.Component = new Class({
 			return;
 
 		this.willHide();
-
 		this._children.invoke('_willHide');
 	},
 
@@ -3261,10 +3242,10 @@ Moobile.Component = new Class({
 			return;
 
 		this._visible = false;
-		this.didHide();
-		this.fireEvent('hide');
 
+		this.didHide();
 		this._children.invoke('_didHide');
+		this.fireEvent('hide');
 	},
 
 	/**
@@ -3293,21 +3274,19 @@ Moobile.Component = new Class({
 		return false;
 	},
 
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_updateLayout: 0,
-
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.1
 	 */
 	_willUpdateLayout: function() {
-		this._updateLayout++;
+
+		if (this._layouting === undefined) {
+			this._layouting = 0;
+		}
+
+		this._layouting++;
+
 		return this;
 	},
 
@@ -3318,22 +3297,18 @@ Moobile.Component = new Class({
 	 */
 	_didUpdateLayout: function() {
 
-		if (this._updateLayout > 0) {
-			this._updateLayout--;
+		if (this._layouting > 0) {
+			this._layouting--;
 		}
 
-		if (this._updateLayout > 0 ||
-			!this._built ||
-			!this._ready ||
-			!this._display ||
-			!this._visible)
+		if (this._layouting ||
+			!this._built    || !this._ready ||
+			!this._display  || !this._visible)
 			return;
 
 		this.didUpdateLayout();
-
 		this._children.invoke('_didUpdateLayout');
-
-		this.fireEvent('updatelayout');
+		this.fireEvent('layout');
 
 		return this;
 	},
@@ -3349,9 +3324,7 @@ Moobile.Component = new Class({
 			return this;
 
 		this.didBecomeReady();
-
-		this._children.invoke('_didBecomeReady', ready);
-
+		this._children.invoke('_didBecomeReady');
 		this.fireEvent('ready');
 	},
 
@@ -3515,6 +3488,15 @@ Moobile.Component = new Class({
 		this._parent = null;
 
 		return this;
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	toElement: function() {
+		return this.element;
 	}
 
 });
@@ -13646,6 +13628,8 @@ var instance = null;
 /**
  * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @edited 0.2.1
  * @since  0.1.0
  */
 Moobile.Window = new Class({
@@ -13676,6 +13660,8 @@ Moobile.Window = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
@@ -13684,7 +13670,8 @@ Moobile.Window = new Class({
 
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
-		this.setReady(true);
+
+		this._setWindow(this);
 
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
@@ -13697,26 +13684,6 @@ Moobile.Window = new Class({
 	destroy: function() {
 		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 		this.parent();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didAddChildComponent: function(component) {
-		this.parent(component);
-		component._setWindow(this);
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didRemoveChildComponent: function(component) {
-		this.parent(component);
-		component.setWindow(null);
 	},
 
 	/**
