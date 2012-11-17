@@ -172,11 +172,11 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
+		this._built = true;
+
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.element.store('moobile:component', this);
-
-		this._built = true;
 
 		return this;
 	},
@@ -383,8 +383,10 @@ Moobile.Component = new Class({
 		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
 		component._setParent(this);
 		component._setWindow(this._window);
+		component._setReady(this._ready);
 		this._didAddChildComponent(component);
 
+		this._didBecomeReady();
 		this._didUpdateLayout();
 
 		return this;
@@ -604,6 +606,7 @@ Moobile.Component = new Class({
 		this._children.erase(component);
 		component._setParent(null);
 		component._setWindow(null);
+		component._setReady(false);
 		this._didRemoveChildComponent(component);
 
 		if (destroy) {
@@ -668,18 +671,6 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.3.0
-	 * @edited 0.2.1
-	 * @since  0.1.0
-	 */
-	setParentComponent: function(parent) {
-		console.log('[DEPRECATION NOTICE] The method "setParentComponent" will be removed in 0.5, this is not part of the public API anymore');
-		return this._setParent(parent);
-	},
-
-	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
@@ -724,6 +715,18 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	setParentComponent: function(parent) {
+		console.log('[DEPRECATION NOTICE] The method "setParentComponent" will be removed in 0.5, this is not part of the public API anymore');
+		return this._setParent(parent);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -742,18 +745,6 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.3.0
-	 * @edited 0.2.1
-	 * @since  0.1.0
-	 */
-	setWindow: function(window) {
-		console.log('[DEPRECATION NOTICE] The method "setWindow" will be removed in 0.5, this is not part of the public API anymore');
-		return this._setWindow(window);
-	},
-
-	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
@@ -768,11 +759,6 @@ Moobile.Component = new Class({
 		this._windowDidChange(window);
 
 		this._children.invoke('_setWindow', window);
-
-		if (this._window) {
-			this._didBecomeReady();
-			this._didUpdateLayout();
-		}
 
 		return this;
 	},
@@ -796,6 +782,18 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	setWindow: function(window) {
+		console.log('[DEPRECATION NOTICE] The method "setWindow" will be removed in 0.5, this is not part of the public API anymore');
+		return this._setWindow(window);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -814,16 +812,31 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 */
+	_setReady: function(ready) {
+
+		if (this._ready === ready)
+			return this;
+
+		this._ready = ready;
+		this._children.invoke('_setReady', ready);
+
+		return this
+	},
+
+	/**
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
 	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
-	setReady: function() {
+	setReady: function(ready) {
 		console.log('[DEPRECATION NOTICE] The method "setReady" will be removed in 0.5, this is not part of the public API anymore');
-		this._didBecomeReady();
-		return this;
+		return this._setReady(ready);
 	},
 
 	/**
@@ -1205,47 +1218,6 @@ Moobile.Component = new Class({
 		return false;
 	},
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#willBuild
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willBuild: function() {
-
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBuild
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didBuild: function() {
-
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didBecomeReady: function() {
-
-		if (this._ready)
-			return this;
-
-		this._ready = true;
-		this.didBecomeReady();
-		this.fireEvent('ready');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBecomeReady
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didBecomeReady: function() {
-
-	},
 
 	/**
 	 * @hidden
@@ -1286,7 +1258,53 @@ Moobile.Component = new Class({
 
 		this._children.invoke('_didUpdateLayout');
 
+		this.fireEvent('updatelayout');
+
 		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didBecomeReady: function() {
+
+		if (this._ready === false)
+			return this;
+
+		this.didBecomeReady();
+
+		this._children.invoke('_didBecomeReady', ready);
+
+		this.fireEvent('ready');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willBuild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBuild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBecomeReady
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBecomeReady: function() {
+
 	},
 
 	/**
@@ -1566,8 +1584,6 @@ Moobile.Component.addNativeEvent('transitionend');
 Moobile.Component.addNativeEvent('owntransitionend');
 Moobile.Component.addNativeEvent('ownanimationend');
 
-})();
-
 /**
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.2.0
@@ -1575,3 +1591,5 @@ Moobile.Component.addNativeEvent('ownanimationend');
 Moobile.Component.defineAttribute('data-style', null, function(value) {
 	this.options.styleName = value;
 });
+
+})();
