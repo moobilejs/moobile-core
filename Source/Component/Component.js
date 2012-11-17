@@ -52,6 +52,13 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
+	_ready: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_window: null,
 
 	/**
@@ -81,13 +88,6 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_display: true,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_ready: false,
 
 	/**
 	 * @hidden
@@ -171,7 +171,6 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
-		window.addEvent('resize', this.bound('_onWindowResize'));
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.element.store('moobile:component', this);
@@ -232,6 +231,24 @@ Moobile.Component = new Class({
 			console.log('[DEPRECATION NOTICE] The method "build" will be removed in 0.5, use the "_build" method instead');
 		}
 		// </0.2-compat>
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_willBuild: function() {
+		this.willBuild();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didBuild: function() {
+		this.didBuild();
 	},
 
 	/**
@@ -344,6 +361,8 @@ Moobile.Component = new Class({
 	 */
 	_addChildComponent: function(component, context, where) {
 
+		this._willUpdateLayout();
+
 		component.removeFromParentComponent();
 
 		this._willAddChildComponent(component);
@@ -369,6 +388,24 @@ Moobile.Component = new Class({
 		this._didUpdateLayout();
 
 		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_willAddChildComponent: function(component) {
+		this.willAddChildComponent(component);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didAddChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didAddChildComponent: function(component) {
+		this.didAddChildComponent(component);
 	},
 
 	/**
@@ -511,11 +548,11 @@ Moobile.Component = new Class({
 
 	    var component = this.getChildComponent(name);
 	    if (component === null) {
-	    	for (var i = 0, len = this._children.length; i < len; i++) {
-	    		var found = this._children[i].getDescendantComponent(name);
-	    		if (found) return found;
-	    	}
-	    }
+			for (var i = 0, len = this._children.length; i < len; i++) {
+				var found = this._children[i].getDescendantComponent(name);
+				if (found) return found;
+			}
+		}
 
 	    return component;
 	},
@@ -526,7 +563,10 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	replaceChildComponent: function(component, replacement, destroy) {
-		return this.addChildComponentBefore(replacement, component).removeChildComponent(component, destroy);
+		this._willUpdateLayout();
+		this.addChildComponentBefore(replacement, component).removeChildComponent(component, destroy);
+		this._didUpdateLayout();
+		return this;
 	},
 
 	/**
@@ -548,8 +588,10 @@ Moobile.Component = new Class({
 	 */
 	removeChildComponent: function(component, destroy) {
 
-		if (!this.hasChildComponent(component))
+		if (this.hasChildComponent(component) === false)
 			return this;
+
+		this._willUpdateLayout();
 
 		this._willRemoveChildComponent(component);
 
@@ -610,6 +652,24 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_willRemoveChildComponent: function(component) {
+		this.willRemoveChildComponent(component);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didRemoveChildComponent: function(component) {
+		this.didRemoveChildComponent(component);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
@@ -625,6 +685,33 @@ Moobile.Component = new Class({
 		this._parentComponentDidChange(parent);
 
 		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_parentComponentWillChange: function(parent) {
+		this.parentComponentWillChange(parent);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_parentComponentDidChange: function(parent) {
+
+		if (parent) {
+			if (this._display) {
+				this._visible = this._isVisible();
+			}
+		} else {
+			this._visible = this._display;
+		}
+
+		this.parentComponentDidChange(parent);
 	},
 
 	/**
@@ -670,6 +757,24 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_windowWillChange: function(window) {
+		this.windowWillChange(window);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_windowDidChange: function(window) {
+		this.windowDidChange(window);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -703,9 +808,9 @@ Moobile.Component = new Class({
 		this._children.invoke('setReady', ready);
 
 		if (this._ready) {
+			this._willUpdateLayout();
 			this._didBecomeReady();
 			this._didUpdateLayout();
-			this.fireEvent('ready');
 		}
 
 		return this;
@@ -735,6 +840,8 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	setStyle: function(name) {
+
+		this._willUpdateLayout();
 
 		if (this._style) {
 			this._style.detach.call(this, this.element);
@@ -777,6 +884,7 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	addClass: function(name) {
+		this._willUpdateLayout();
 		this.element.addClass(name);
 		this._didUpdateLayout();
 		return this;
@@ -788,6 +896,7 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	removeClass: function(name) {
+		this._willUpdateLayout();
 		this.element.removeClass(name);
 		this._didUpdateLayout();
 		return this;
@@ -800,6 +909,7 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	toggleClass: function(name, force) {
+		this._willUpdateLayout();
 		this.element.toggleClass(name, force);
 		this._didUpdateLayout();
 		return this;
@@ -906,12 +1016,14 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	setSize: function(x, y) {
-
+		
+		this._willUpdateLayout();
+		
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
-
+		
 		this._didUpdateLayout();
-
+		
 		return this;
 	},
 
@@ -942,6 +1054,8 @@ Moobile.Component = new Class({
 
 		if (this._display || this._visible)
 			return this;
+
+		this._willUpdateLayout();
 
 		this._willShow();
 		this.removeClass('hidden');
@@ -1069,30 +1183,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_willBuild: function() {
-		this.willBuild();
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#willBuild
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
 
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didBuild: function() {
-		this.didBuild();
 	},
 
 	/**
@@ -1111,6 +1207,7 @@ Moobile.Component = new Class({
 	 */
 	_didBecomeReady: function() {
 		this.didBecomeReady();
+		this.fireEvent('ready');
 	},
 
 	/**
@@ -1127,8 +1224,55 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.1
 	 */
+	_updateLayoutStack: 0,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_willUpdateLayout: function() {
+
+		var execute = ++this._updateLayoutStack;
+		if (execute > 1)
+			return;
+
+		this.willUpdateLayout();
+		this._children.invoke('_willUpdateLayout');
+		
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
 	_didUpdateLayout: function() {
-		if (this._display && this._visible && this._built && this._ready) this.didUpdateLayout();
+
+		var execute = --this._updateLayoutStack;
+		if (execute > 0)
+			return;
+
+		if (this._built === false ||
+			this._ready === false ||
+			this._display === false ||
+			this._visible === false)
+			return;
+
+		this.didUpdateLayout();
+		this._children.invoke('_didUpdateLayout');
+		
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willUpdateLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	willUpdateLayout: function() {
+
 	},
 
 	/**
@@ -1138,15 +1282,6 @@ Moobile.Component = new Class({
 	 */
 	didUpdateLayout: function() {
 
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_willAddChildComponent: function(component) {
-		this.willAddChildComponent(component);
 	},
 
 	/**
@@ -1161,28 +1296,10 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#didAddChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didAddChildComponent: function(component) {
-		this.didAddChildComponent(component);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#didAddChildComponent
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	didAddChildComponent: function(component) {
 
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_willRemoveChildComponent: function(component) {
-		this.willRemoveChildComponent(component);
 	},
 
 	/**
@@ -1195,30 +1312,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didRemoveChildComponent: function(component) {
-		this.didRemoveChildComponent(component);
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#didRemoveChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	didRemoveChildComponent: function(component) {
 
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_parentComponentWillChange: function(parent) {
-		this.parentComponentWillChange(parent);
 	},
 
 	/**
@@ -1231,24 +1330,6 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_parentComponentDidChange: function(parent) {
-
-		if (parent) {
-			if (this._display) {
-				this._visible = this._isVisible();
-			}
-		} else {
-			this._visible = this._display;
-		}
-
-		this.parentComponentDidChange(parent);
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#parentComponentDidChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -1258,30 +1339,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_windowWillChange: function(window) {
-		this.windowWillChange(window);
-	},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#windowWillChange
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
 	windowWillChange: function(window) {
 
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_windowDidChange: function(window) {
-		this.windowDidChange(window);
 	},
 
 	/**
@@ -1337,7 +1400,6 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		window.removeEvent('resize', this.bound('_onWindowResize'));
 		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 
 		this.removeAllChildComponents(true);
@@ -1359,16 +1421,8 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.1
 	 */
-	_onWindowResize: function() {
-		this._didUpdateLayout();
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
 	_onWindowOrientationChange: function() {
+		this._willUpdateLayout();
 		this._didUpdateLayout();
 	},
 
@@ -1401,7 +1455,7 @@ Moobile.Component = new Class({
 	 */
 	addChildAfter: function() {
 		console.log('[DEPRECATION NOTICE] The method "addChildAfter" will be removed in 0.3, use the method "addChildComponentAfter" instead');
-		return this.addChildComponentAfter.call(this, arguments);
+		return this.addChildComponentAfter.apply(this, arguments);
 	},
 
 	/**
@@ -1411,7 +1465,7 @@ Moobile.Component = new Class({
 	 */
 	addChildBefore: function() {
 		console.log('[DEPRECATION NOTICE] The method "addChildBefore" will be removed in 0.3, use the method "addChildComponentBefore" instead');
-		return this.addChildComponentBefore.call(this, arguments);
+		return this.addChildComponentBefore.apply(this, arguments);
 	},
 
 	/**
@@ -1421,7 +1475,7 @@ Moobile.Component = new Class({
 	 */
 	getChild: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChild" will be removed in 0.3, use the method "getChildComponent" instead');
-		return this.getChildComponent.call(this, arguments);
+		return this.getChildComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1431,7 +1485,7 @@ Moobile.Component = new Class({
 	 */
 	getChildOfType: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChildOfType" will be removed in 0.3, use the method "getChildComponentOfType" instead');
-		return this.getChildComponentOfType.call(this, arguments);
+		return this.getChildComponentOfType.apply(this, arguments);
 	},
 
 	/**
@@ -1441,7 +1495,7 @@ Moobile.Component = new Class({
 	 */
 	getChildAt: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChildAt" will be removed in 0.3, use the method "getChildComponentAt" instead');
-		return this.getChildComponentAt.call(this, arguments);
+		return this.getChildComponentAt.apply(this, arguments);
 	},
 
 	/**
@@ -1451,7 +1505,7 @@ Moobile.Component = new Class({
 	 */
 	getChildOfTypeAt: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChildOfTypeAt" will be removed in 0.3, use the method "getChildComponentOfTypeAt" instead');
-		return this.getChildComponentOfTypeAt.call(this, arguments);
+		return this.getChildComponentOfTypeAt.apply(this, arguments);
 	},
 
 	/**
@@ -1461,7 +1515,7 @@ Moobile.Component = new Class({
 	 */
 	getChildIndex: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChildIndex" will be removed in 0.3, use the method "getChildComponentIndex" instead');
-		return this.getChildComponentIndex.call(this, arguments);
+		return this.getChildComponentIndex.apply(this, arguments);
 	},
 
 	/**
@@ -1471,7 +1525,7 @@ Moobile.Component = new Class({
 	 */
 	getChildren: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChildren" will be removed in 0.3, use the method "getChildComponents" instead');
-		return this.getChildComponents.call(this, arguments);
+		return this.getChildComponents.apply(this, arguments);
 	},
 
 	/**
@@ -1481,7 +1535,7 @@ Moobile.Component = new Class({
 	 */
 	getChildrenOfType: function() {
 		console.log('[DEPRECATION NOTICE] The method "getChildrenOfType" will be removed in 0.3, use the method "getChildComponentsOfType" instead');
-		return this.getChildComponentsOfType.call(this, arguments);
+		return this.getChildComponentsOfType.apply(this, arguments);
 	},
 
 	/**
@@ -1491,7 +1545,7 @@ Moobile.Component = new Class({
 	 */
 	hasChild: function() {
 		console.log('[DEPRECATION NOTICE] The method "hasChild" will be removed in 0.3, use the method "hasChildComponent" instead');
-		return this.hasChildComponent.call(this, arguments);
+		return this.hasChildComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1501,7 +1555,7 @@ Moobile.Component = new Class({
 	 */
 	hasChildOfType: function() {
 		console.log('[DEPRECATION NOTICE] The method "hasChildOfType" will be removed in 0.3, use the method "hasChildComponentOfType" instead');
-		return this.hasChildComponentOfType.call(this, arguments);
+		return this.hasChildComponentOfType.apply(this, arguments);
 	},
 
 	/**
@@ -1511,7 +1565,7 @@ Moobile.Component = new Class({
 	 */
 	replaceChild: function() {
 		console.log('[DEPRECATION NOTICE] The method "replaceChild" will be removed in 0.3, use the method "replaceChildComponent" instead');
-		return this.replaceChildComponent.call(this, arguments);
+		return this.replaceChildComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1521,7 +1575,7 @@ Moobile.Component = new Class({
 	 */
 	replaceWith: function() {
 		console.log('[DEPRECATION NOTICE] The method "replaceWith" will be removed in 0.3, use the method "replaceWithComponent" instead');
-		return this.replaceWithComponent.call(this, arguments);
+		return this.replaceWithComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1531,7 +1585,7 @@ Moobile.Component = new Class({
 	 */
 	removeChild: function() {
 		console.log('[DEPRECATION NOTICE] The method "removeChild" will be removed in 0.3, use the method "removeChildComponent" instead');
-		return this.removeChildComponent.call(this, arguments);
+		return this.removeChildComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1541,7 +1595,7 @@ Moobile.Component = new Class({
 	 */
 	removeChildren: function() {
 		console.log('[DEPRECATION NOTICE] The method "removeChildren" will be removed in 0.3, use the method "removeAllChildComponents" instead');
-		return this.removeAllChildComponents.call(this, arguments);
+		return this.removeAllChildComponents.apply(this, arguments);
 	},
 
 	/**
@@ -1551,7 +1605,7 @@ Moobile.Component = new Class({
 	 */
 	removeChildrenOfType: function() {
 		console.log('[DEPRECATION NOTICE] The method "removeChildrenOfType" will be removed in 0.3, use the method "removeAllChildComponentsOfType" instead');
-		return this.removeAllChildComponentsOfType.call(this, arguments);
+		return this.removeAllChildComponentsOfType.apply(this, arguments);
 	},
 
 	/**
@@ -1561,7 +1615,7 @@ Moobile.Component = new Class({
 	 */
 	removeFromParent: function() {
 		console.log('[DEPRECATION NOTICE] The method "removeFromParent" will be removed in 0.3, use the method "removeFromParentComponent" instead');
-		return this.removeFromParentComponent.call(this, arguments);
+		return this.removeFromParentComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1571,7 +1625,7 @@ Moobile.Component = new Class({
 	 */
 	setParent: function() {
 		console.log('[DEPRECATION NOTICE] The method "setParent" will be removed in 0.3, use the method "setParentComponent" instead');
-		return this.setParentComponent.call(this, arguments);
+		return this.setParentComponent.apply(this, arguments);
 	},
 
 	/**
@@ -1581,7 +1635,7 @@ Moobile.Component = new Class({
 	 */
 	getParent: function() {
 		console.log('[DEPRECATION NOTICE] The method "getParent" will be removed in 0.3, use the method "getParentComponent" instead');
-		return this.getParentComponent.call(this, arguments);
+		return this.getParentComponent.apply(this, arguments);
 	},
 
 	/**
