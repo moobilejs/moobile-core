@@ -168,7 +168,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollStart: function(e) {
-
+		// TODO: Is this really needed ?
 		if (!('touches' in e)) {
 
 			if (touchid)
