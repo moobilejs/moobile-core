@@ -68,6 +68,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 			parentElem.addClass('transition-cover-page-enter');
 			viewToHide.addClass('transition-cover-page-background-view');
 			viewToShow.addClass('transition-cover-page-foreground-view');
+			viewToShow.show();
 			this.overlay.showAnimated();
 		}.bind(this);
 
@@ -102,6 +103,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 			parentElem.removeClass('transition-cover-page-leave');
 			viewToShow.removeClass('transition-cover-page-background-view');
 			viewToHide.removeClass('transition-cover-page-foreground-view');
+			viewToHide.hide();
 
 			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();

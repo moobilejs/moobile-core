@@ -36,6 +36,8 @@ Moobile.ViewTransition.None = new Class({
 	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
+		viewToShow.show();
+		viewToHide.hide();
 		this.didEnter(viewToShow, viewToHide, parentView);
 	},
 
@@ -45,6 +47,8 @@ Moobile.ViewTransition.None = new Class({
 	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+		viewToShow.show();
+		viewToHide.hide();
 		this.didLeave(viewToShow, viewToHide, parentView);
 	}
 

@@ -41,11 +41,13 @@ Moobile.ViewTransition.Cover = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-cover-enter');
 			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-cover-enter');
 			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -68,11 +70,13 @@ Moobile.ViewTransition.Cover = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-cover-leave');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-cover-leave');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 

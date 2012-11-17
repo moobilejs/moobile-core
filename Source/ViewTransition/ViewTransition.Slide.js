@@ -65,31 +65,12 @@ Moobile.ViewTransition.Slide = new Class({
 		var items = [];
 
 		var onStart = function() {
+
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
+			viewToShow.show();
 
-		var onEnd = function() {
-
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnter(viewToShow, viewToHide, parentView);
-
-			if (items) {
-				items.invoke('setStyle', 'animation-name', null);
-				items = null;
-			}
-
-			if (style) {
-				style.destroy();
-				style = null;
-			}
-
-		}.bind(this);
-
-		if (Moobile.Theme.getName() === 'ios') {
-
-			viewToShow.addEvent('show:once', function() {
+			if (Moobile.Theme.getName() === 'ios') {
 
 				var kf = '';
 
@@ -121,9 +102,29 @@ Moobile.ViewTransition.Slide = new Class({
 				}, this);
 
 				style = document.createElement('style').set('text', kf).inject(document.head);
+			}
 
-			}.bind(this));
-		}
+		}.bind(this);
+
+		var onEnd = function() {
+
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+
+			this.didEnter(viewToShow, viewToHide, parentView);
+
+			if (items) {
+				items.invoke('setStyle', 'animation-name', null);
+				items = null;
+			}
+
+			if (style) {
+				style.destroy();
+				style = null;
+			}
+
+		}.bind(this);
 
 		var animation = new Moobile.Animation(parentElem);
 		animation.setAnimationClass('transition-slide-enter');
@@ -147,12 +148,14 @@ Moobile.ViewTransition.Slide = new Class({
 		var onStart = function() {
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didLeave(viewToShow, viewToHide, parentView);
 
 			if (items) {

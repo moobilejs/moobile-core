@@ -57,15 +57,10 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	enter: function(viewToShow, viewToHide, parentView) {
-
-		this.enterAnimation(viewToShow, viewToHide, parentView);
-
 		viewToHide.disableTouch();
 		viewToShow.disableTouch();
-		viewToShow.show();
-
+		this.enterAnimation(viewToShow, viewToHide, parentView);
 		this.fireEvent('start');
-
 		return this;
 	},
 
@@ -75,15 +70,10 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	leave: function(viewToShow, viewToHide, parentView) {
-
-		this.leaveAnimation(viewToShow, viewToHide, parentView);
-
 		viewToShow.disableTouch();
 		viewToHide.disableTouch();
-		viewToShow.show();
-
+		this.leaveAnimation(viewToShow, viewToHide, parentView);
 		this.fireEvent('start');
-
 		return this;
 	},
 
@@ -93,7 +83,6 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	didEnter: function(viewToShow, viewToHide, parentView) {
-		if (this.shouldHideViewToHideOnEnter(viewToShow, viewToHide, parentView)) viewToHide.hide();
 		viewToHide.enableTouch();
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
@@ -106,29 +95,10 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
-		if (this.shouldHideViewToHideOnEnter(viewToShow, viewToHide, parentView)) viewToHide.hide();
 		viewToHide.enableTouch();
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
 		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#shouldHideViewToHideOnEnter
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
-		return true;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#shouldHideViewToHideOnLeave
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	shouldHideViewToHideOnLeave: function(viewToShow, viewToHide, parentView) {
-		return true;
 	},
 
 	/**

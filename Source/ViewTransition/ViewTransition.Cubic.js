@@ -43,12 +43,14 @@ Moobile.ViewTransition.Cubic = new Class({
 			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentWrap.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -73,12 +75,14 @@ Moobile.ViewTransition.Cubic = new Class({
 			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentWrap.removeClass('transition-cubic-perspective');
-			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
 			this.didLeave(viewToShow, viewToHide, parentView);
 		}.bind(this);
 

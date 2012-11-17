@@ -68,6 +68,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			parentElem.addClass('transition-cover-box-enter');
 			viewToHide.addClass('transition-cover-box-background-view');
 			viewToShow.addClass('transition-cover-box-foreground-view');
+			viewToShow.show();
 			this.overlay.showAnimated();
 		}.bind(this);
 
@@ -102,6 +103,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			parentElem.removeClass('transition-cover-box-leave');
 			viewToShow.removeClass('transition-cover-box-background-view');
 			viewToHide.removeClass('transition-cover-box-foreground-view');
+			viewToHide.hide();
 
 			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();

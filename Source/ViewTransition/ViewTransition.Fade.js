@@ -42,11 +42,13 @@ Moobile.ViewTransition.Fade = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-fade-enter');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-fade-enter');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -69,11 +71,13 @@ Moobile.ViewTransition.Fade = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-fade-leave');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-fade-leave');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
