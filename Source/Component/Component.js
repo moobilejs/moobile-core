@@ -374,18 +374,16 @@ Moobile.Component = new Class({
 
 		var found = this.hasElement(component);
 		if (found === false || where) {
-			console.log(component);
 			document.id(component).inject(context, where);
 		}
 
 		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
-
 		component._setParent(this);
 		component._setWindow(this._window);
-
 		this._didAddChildComponent(component);
 		this._didUpdateLayout();
-		this._didBecomeReady();
+
+		component._setReady(this._ready);
 
 		return this;
 	},
@@ -606,6 +604,8 @@ Moobile.Component = new Class({
 		this._didRemoveChildComponent(component);
 		this._didUpdateLayout();
 
+		component._setReady(false);
+
 		if (destroy) {
 			component.destroy();
 		}
@@ -753,8 +753,6 @@ Moobile.Component = new Class({
 		this._window = window;
 		this._windowDidChange(window);
 
-		this._ready = !!window;
-
 		this._children.invoke('_setWindow', window);
 
 		return this;
@@ -809,6 +807,34 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @sinde 0.3.0
+	 */
+	_setReady: function(ready) {
+
+		if (this._ready === ready)
+			return this;
+
+		this._ready = ready;
+
+		this._children.invoke('_setReady', ready);
+		if (this._ready) this._didBecomeReady();
+		this.fireEvent('ready');
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didBecomeReady: function() {
+		this.didBecomeReady();
+	},
+
+	/**
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
@@ -817,9 +843,7 @@ Moobile.Component = new Class({
 	 */
 	setReady: function(ready) {
 		console.log('[DEPRECATION NOTICE] The method "setReady" will be removed in 0.5, this is not part of the public API anymore');
-		this._ready = ready;
-		this._children.invoke('setReady', ready);
-		return this;
+		return this._setReady(ready);
 	},
 
 	/**
@@ -1232,21 +1256,6 @@ Moobile.Component = new Class({
 		this.fireEvent('layout');
 
 		return this;
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didBecomeReady: function() {
-
-		if (this._ready === false)
-			return this;
-
-		this.didBecomeReady();
-		this._children.invoke('_didBecomeReady');
-		this.fireEvent('ready');
 	},
 
 	/**

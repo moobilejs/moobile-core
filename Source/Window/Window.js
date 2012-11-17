@@ -72,6 +72,7 @@ Moobile.Window = new Class({
 		this.contentWrapperElement.addClass('window-content-wrapper');
 
 		this._setWindow(this);
+		this._setReady(true);
 
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
