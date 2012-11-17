@@ -362,10 +362,9 @@ Moobile.Component = new Class({
 	_addChildComponent: function(component, context, where) {
 
 		this._willUpdateLayout();
+		this._willAddChildComponent(component);
 
 		component.removeFromParentComponent();
-
-		this._willAddChildComponent(component);
 
 		if (context) {
 			context = document.id(context) || this.element.getElement(context);
@@ -379,13 +378,14 @@ Moobile.Component = new Class({
 		}
 
 		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
+
 		component._setParent(this);
 		component._setWindow(this._window);
 		component._setReady(this._ready);
-		this._didAddChildComponent(component);
 
-		this._didBecomeReady();
+		this._didAddChildComponent(component);
 		this._didUpdateLayout();
+		this._didBecomeReady();
 
 		return this;
 	},
@@ -593,7 +593,6 @@ Moobile.Component = new Class({
 			return this;
 
 		this._willUpdateLayout();
-
 		this._willRemoveChildComponent(component);
 
 		var element = component.getElement();
@@ -606,12 +605,11 @@ Moobile.Component = new Class({
 		component._setWindow(null);
 		component._setReady(false);
 		this._didRemoveChildComponent(component);
+		this._didUpdateLayout();
 
 		if (destroy) {
 			component.destroy();
 		}
-
-		this._didUpdateLayout();
 
 		return this;
 	},
@@ -1438,8 +1436,6 @@ Moobile.Component = new Class({
 		this._parent = null;
 
 		return this;
-	},
-
 	}
 
 });
