@@ -1543,8 +1543,8 @@ Moobile.Animation = new Class({
 			return this;
 
 		this._running = true;
-		this.fireEvent('start');
 		this.attach();
+		this.fireEvent('start');
 
 		return this;
 	},
@@ -1560,8 +1560,8 @@ Moobile.Animation = new Class({
 			return this;
 
 		this._running = false;
-		this.fireEvent('stop');
 		this.detach();
+		this.fireEvent('stop');
 
 		return this;
 	},
@@ -2453,18 +2453,16 @@ Moobile.Component = new Class({
 
 		var found = this.hasElement(component);
 		if (found === false || where) {
-			console.log(component);
 			document.id(component).inject(context, where);
 		}
 
 		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
-
 		component._setParent(this);
 		component._setWindow(this._window);
-
 		this._didAddChildComponent(component);
 		this._didUpdateLayout();
-		this._didBecomeReady();
+
+		component._setReady(this._ready);
 
 		return this;
 	},
@@ -2685,6 +2683,8 @@ Moobile.Component = new Class({
 		this._didRemoveChildComponent(component);
 		this._didUpdateLayout();
 
+		component._setReady(false);
+
 		if (destroy) {
 			component.destroy();
 		}
@@ -2832,8 +2832,6 @@ Moobile.Component = new Class({
 		this._window = window;
 		this._windowDidChange(window);
 
-		this._ready = !!window;
-
 		this._children.invoke('_setWindow', window);
 
 		return this;
@@ -2888,6 +2886,34 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @sinde 0.3.0
+	 */
+	_setReady: function(ready) {
+
+		if (this._ready === ready)
+			return this;
+
+		this._ready = ready;
+
+		this._children.invoke('_setReady', ready);
+		if (this._ready) this._didBecomeReady();
+		this.fireEvent('ready');
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	_didBecomeReady: function() {
+		this.didBecomeReady();
+	},
+
+	/**
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
@@ -2896,9 +2922,7 @@ Moobile.Component = new Class({
 	 */
 	setReady: function(ready) {
 		console.log('[DEPRECATION NOTICE] The method "setReady" will be removed in 0.5, this is not part of the public API anymore');
-		this._ready = ready;
-		this._children.invoke('setReady', ready);
-		return this;
+		return this._setReady(ready);
 	},
 
 	/**
@@ -3311,21 +3335,6 @@ Moobile.Component = new Class({
 		this.fireEvent('layout');
 
 		return this;
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_didBecomeReady: function() {
-
-		if (this._ready === false)
-			return this;
-
-		this.didBecomeReady();
-		this._children.invoke('_didBecomeReady');
-		this.fireEvent('ready');
 	},
 
 	/**
@@ -8662,7 +8671,7 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollStart: function(e) {
-
+		// TODO: Is this really needed ?
 		if (!('touches' in e)) {
 
 			if (touchid)
@@ -10157,13 +10166,22 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	didBecomeReady: function() {
+
 		this.parent();
-		this._scroller.refresh();
+
+		var x = this.options.initialScrollX;
+		var y = this.options.initialScrollY;
+		var s = 'scrollTo';
+
 		if (this.options.snapToPage) {
-			this.scrollToPage(this.options.intialPageX, this.options.initialPageY);
-		} else {
-			this.scrollTo(this.options.initialScrollX, this.options.initialScrollY);
+			x = this.options.initialPageX;
+			y = this.options.initialPageY;
+			s = 'scrollToPage';
 		}
+
+		this._scroller.refresh();
+
+		this[s].call(this, x, y);
 	},
 
 	/**
@@ -12512,15 +12530,10 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	enter: function(viewToShow, viewToHide, parentView) {
-
-		this.enterAnimation(viewToShow, viewToHide, parentView);
-
 		viewToHide.disableTouch();
 		viewToShow.disableTouch();
-		viewToShow.show();
-
+		this.enterAnimation(viewToShow, viewToHide, parentView);
 		this.fireEvent('start');
-
 		return this;
 	},
 
@@ -12530,15 +12543,10 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	leave: function(viewToShow, viewToHide, parentView) {
-
-		this.leaveAnimation(viewToShow, viewToHide, parentView);
-
 		viewToShow.disableTouch();
 		viewToHide.disableTouch();
-		viewToShow.show();
-
+		this.leaveAnimation(viewToShow, viewToHide, parentView);
 		this.fireEvent('start');
-
 		return this;
 	},
 
@@ -12548,7 +12556,6 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	didEnter: function(viewToShow, viewToHide, parentView) {
-		if (this.shouldHideViewToHideOnEnter(viewToShow, viewToHide, parentView)) viewToHide.hide();
 		viewToHide.enableTouch();
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
@@ -12561,29 +12568,10 @@ Moobile.ViewTransition = new Class({
 	 * @since  0.1.0
 	 */
 	didLeave: function(viewToShow, viewToHide, parentView) {
-		if (this.shouldHideViewToHideOnEnter(viewToShow, viewToHide, parentView)) viewToHide.hide();
 		viewToHide.enableTouch();
 		viewToShow.enableTouch();
 		this.fireEvent('complete');
 		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#shouldHideViewToHideOnEnter
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
-		return true;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition#shouldHideViewToHideOnLeave
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	shouldHideViewToHideOnLeave: function(viewToShow, viewToHide, parentView) {
-		return true;
 	},
 
 	/**
@@ -12674,31 +12662,12 @@ Moobile.ViewTransition.Slide = new Class({
 		var items = [];
 
 		var onStart = function() {
+
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
+			viewToShow.show();
 
-		var onEnd = function() {
-
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnter(viewToShow, viewToHide, parentView);
-
-			if (items) {
-				items.invoke('setStyle', 'animation-name', null);
-				items = null;
-			}
-
-			if (style) {
-				style.destroy();
-				style = null;
-			}
-
-		}.bind(this);
-
-		if (Moobile.Theme.getName() === 'ios') {
-
-			viewToShow.addEvent('show:once', function() {
+			if (Moobile.Theme.getName() === 'ios') {
 
 				var kf = '';
 
@@ -12730,9 +12699,29 @@ Moobile.ViewTransition.Slide = new Class({
 				}, this);
 
 				style = document.createElement('style').set('text', kf).inject(document.head);
+			}
 
-			}.bind(this));
-		}
+		}.bind(this);
+
+		var onEnd = function() {
+
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+
+			this.didEnter(viewToShow, viewToHide, parentView);
+
+			if (items) {
+				items.invoke('setStyle', 'animation-name', null);
+				items = null;
+			}
+
+			if (style) {
+				style.destroy();
+				style = null;
+			}
+
+		}.bind(this);
 
 		var animation = new Moobile.Animation(parentElem);
 		animation.setAnimationClass('transition-slide-enter');
@@ -12756,12 +12745,14 @@ Moobile.ViewTransition.Slide = new Class({
 		var onStart = function() {
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didLeave(viewToShow, viewToHide, parentView);
 
 			if (items) {
@@ -12866,11 +12857,13 @@ Moobile.ViewTransition.Drop = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-drop-enter');
 			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-drop-enter');
 			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -12954,11 +12947,13 @@ Moobile.ViewTransition.Cover = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-cover-enter');
 			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-cover-enter');
 			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -12981,11 +12976,13 @@ Moobile.ViewTransition.Cover = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-cover-leave');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-cover-leave');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13069,6 +13066,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			parentElem.addClass('transition-cover-box-enter');
 			viewToHide.addClass('transition-cover-box-background-view');
 			viewToShow.addClass('transition-cover-box-foreground-view');
+			viewToShow.show();
 			this.overlay.showAnimated();
 		}.bind(this);
 
@@ -13103,6 +13101,7 @@ Moobile.ViewTransition.Cover.Box = new Class({
 			parentElem.removeClass('transition-cover-box-leave');
 			viewToShow.removeClass('transition-cover-box-background-view');
 			viewToHide.removeClass('transition-cover-box-foreground-view');
+			viewToHide.hide();
 
 			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();
@@ -13203,6 +13202,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 			parentElem.addClass('transition-cover-page-enter');
 			viewToHide.addClass('transition-cover-page-background-view');
 			viewToShow.addClass('transition-cover-page-foreground-view');
+			viewToShow.show();
 			this.overlay.showAnimated();
 		}.bind(this);
 
@@ -13237,6 +13237,7 @@ Moobile.ViewTransition.Cover.Page = new Class({
 			parentElem.removeClass('transition-cover-page-leave');
 			viewToShow.removeClass('transition-cover-page-background-view');
 			viewToHide.removeClass('transition-cover-page-foreground-view');
+			viewToHide.hide();
 
 			this.overlay.removeFromParentComponent();
 			this.overlay.destroy();
@@ -13312,12 +13313,14 @@ Moobile.ViewTransition.Cubic = new Class({
 			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentWrap.removeClass('transition-cubic-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13342,12 +13345,14 @@ Moobile.ViewTransition.Cubic = new Class({
 			parentWrap.addClass('transition-cubic-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentWrap.removeClass('transition-cubic-perspective');
-			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
 			this.didLeave(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13405,11 +13410,13 @@ Moobile.ViewTransition.Fade = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-fade-enter');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-fade-enter');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13432,11 +13439,13 @@ Moobile.ViewTransition.Fade = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-fade-leave');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-fade-leave');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13496,12 +13505,14 @@ Moobile.ViewTransition.Flip = new Class({
 			parentWrap.addClass('transition-flip-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentWrap.removeClass('transition-flip-perspective');
-			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13526,12 +13537,14 @@ Moobile.ViewTransition.Flip = new Class({
 			parentWrap.addClass('transition-flip-perspective');
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentWrap.removeClass('transition-flip-perspective');
 			viewToHide.removeClass('transition-view-to-hide');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didLeave(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13583,6 +13596,8 @@ Moobile.ViewTransition.None = new Class({
 	 * @since  0.1.0
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
+		viewToShow.show();
+		viewToHide.hide();
 		this.didEnter(viewToShow, viewToHide, parentView);
 	},
 
@@ -13592,6 +13607,8 @@ Moobile.ViewTransition.None = new Class({
 	 * @since  0.1.0
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+		viewToShow.show();
+		viewToHide.hide();
 		this.didLeave(viewToShow, viewToHide, parentView);
 	}
 
@@ -13672,6 +13689,7 @@ Moobile.Window = new Class({
 		this.contentWrapperElement.addClass('window-content-wrapper');
 
 		this._setWindow(this);
+		this._setReady(true);
 
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
