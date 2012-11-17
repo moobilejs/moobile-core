@@ -237,8 +237,10 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
+		this._willUpdateLayout();
 		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
 		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
+		this._didUpdateLayout();
 		return this;
 	},
 
@@ -544,7 +546,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	getScrollSize: function() {
-		console.log('[DEPRECATION NOTICE] The method "getScrollSize" will be removed in 0.3, use the method "getContentSize" instead');
+		console.log('[DEPRECATION NOTICE] The method "getScrollSize" will be removed in 0.4, use the method "getContentSize" instead');
 		return this.getContentSize();
 	},
 
@@ -554,7 +556,7 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	getScroll: function() {
-		console.log('[DEPRECATION NOTICE] The method "getScroll" will be removed in 0.3, use the method "getContentScroll" instead');
+		console.log('[DEPRECATION NOTICE] The method "getScroll" will be removed in 0.4, use the method "getContentScroll" instead');
 		return this.getContentScroll();
 	},
 
