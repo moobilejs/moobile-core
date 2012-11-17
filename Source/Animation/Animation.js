@@ -319,8 +319,8 @@ Moobile.Animation = new Class({
 			return this;
 
 		this._running = true;
-		this.fireEvent('start');
 		this.attach();
+		this.fireEvent('start');
 
 		return this;
 	},
@@ -336,8 +336,8 @@ Moobile.Animation = new Class({
 			return this;
 
 		this._running = false;
-		this.fireEvent('stop');
 		this.detach();
+		this.fireEvent('stop');
 
 		return this;
 	},
