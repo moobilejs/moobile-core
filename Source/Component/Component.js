@@ -1016,14 +1016,14 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	setSize: function(x, y) {
-		
+
 		this._willUpdateLayout();
-		
+
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
-		
+
 		this._didUpdateLayout();
-		
+
 		return this;
 	},
 
@@ -1052,16 +1052,17 @@ Moobile.Component = new Class({
 	 */
 	show: function() {
 
-		if (this._display || this._visible)
+		if (this._display === true ||
+			this._visible === true)
 			return this;
 
 		this._willUpdateLayout();
 
+		this._display = true;
+
 		this._willShow();
 		this.removeClass('hidden');
 		this._didShow();
-
-		this._display = true;
 
 		this._didUpdateLayout();
 
@@ -1075,7 +1076,7 @@ Moobile.Component = new Class({
 	 */
 	_willShow: function() {
 
-		if (this._display === true ||
+		if (this._display === false ||
 			this._visible === true)
 			return;
 
@@ -1091,7 +1092,7 @@ Moobile.Component = new Class({
 	 */
 	_didShow: function() {
 
-		if (this._display === true ||
+		if (this._display === false ||
 			this._visible === true)
 			return;
 
@@ -1239,7 +1240,7 @@ Moobile.Component = new Class({
 
 		this.willUpdateLayout();
 		this._children.invoke('_willUpdateLayout');
-		
+
 		return this;
 	},
 
@@ -1262,7 +1263,7 @@ Moobile.Component = new Class({
 
 		this.didUpdateLayout();
 		this._children.invoke('_didUpdateLayout');
-		
+
 		return this;
 	},
 

@@ -558,46 +558,98 @@ describe('Component/Component', function() {
 
 	// show, hide
 
-	it('should hide and show the component and its child components', function() {
+	it('should hide the component and its child components', function() {
+
 		var w = new Moobile.Window();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		var c3 = new Moobile.Component();
-		spyOn(c1, 'willHide');
-		spyOn(c1, 'didHide');
-		spyOn(c1, 'willShow');
-		spyOn(c1, 'didShow');
-		spyOn(c2, 'willHide');
-		spyOn(c2, 'didHide');
-		spyOn(c2, 'willShow');
-		spyOn(c2, 'didShow');
-		spyOn(c3, 'willHide');
-		spyOn(c3, 'didHide');
-		spyOn(c3, 'willShow');
-		spyOn(c3, 'didShow');
+
+		w.addChildComponent(c1);
 		c1.addChildComponent(c2);
 		c2.addChildComponent(c3);
+
+		w.hide();
+
+		expect(w.isVisible()).toEqual(false);
+		expect(c1.isVisible()).toEqual(false);
+		expect(c2.isVisible()).toEqual(false);
+		expect(c3.isVisible()).toEqual(false);
+	});
+
+	it('should show the component and its child components after being hidden', function() {
+
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+
 		w.addChildComponent(c1);
-		c1.hide();
-		c1.show();
-		expect(c1.willHide).toHaveBeenCalled();
-		expect(c1.didHide).toHaveBeenCalled();
-		expect(c2.willHide).toHaveBeenCalled();
-		expect(c2.didHide).toHaveBeenCalled();
-		expect(c3.willHide).toHaveBeenCalled();
-		expect(c3.didHide).toHaveBeenCalled();
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		w.hide();
+		w.show();
+
+		expect(w.isVisible()).toEqual(true);
+		expect(c1.isVisible()).toEqual(true);
+		expect(c2.isVisible()).toEqual(true);
+		expect(c3.isVisible()).toEqual(true);
+	});
+
+	it('should properly propagate willHide and didHide through all components', function() {
+
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+
+		spyOn(w, 'willHide');
+		spyOn(w, 'didHide');
+		spyOn(c1, 'willHide');
+		spyOn(c1, 'didHide');
+		spyOn(c2, 'willHide');
+		spyOn(c2, 'didHide');
+		spyOn(c3, 'willHide');
+		spyOn(c3, 'didHide');
+
+		w.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		w.hide();
+
 		expect(c1.willHide.calls.length).toEqual(1);
 		expect(c1.didHide.calls.length).toEqual(1);
 		expect(c2.willHide.calls.length).toEqual(1);
 		expect(c2.didHide.calls.length).toEqual(1);
 		expect(c3.willHide.calls.length).toEqual(1);
 		expect(c3.didHide.calls.length).toEqual(1);
-		expect(c1.willShow).toHaveBeenCalled();
-		expect(c1.didShow).toHaveBeenCalled();
-		expect(c2.willShow).toHaveBeenCalled();
-		expect(c2.didShow).toHaveBeenCalled();
-		expect(c3.willShow).toHaveBeenCalled();
-		expect(c3.didShow).toHaveBeenCalled();
+	});
+
+	it('should properly propagate willShow and didShow through all components', function() {
+
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+
+		spyOn(w, 'willShow');
+		spyOn(w, 'didShow');
+		spyOn(c1, 'willShow');
+		spyOn(c1, 'didShow');
+		spyOn(c2, 'willShow');
+		spyOn(c2, 'didShow');
+		spyOn(c3, 'willShow');
+		spyOn(c3, 'didShow');
+
+		w.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		w.hide();
+		w.show();
+
 		expect(c1.willShow.calls.length).toEqual(1);
 		expect(c1.didShow.calls.length).toEqual(1);
 		expect(c2.willShow.calls.length).toEqual(1);
@@ -606,8 +658,110 @@ describe('Component/Component', function() {
 		expect(c3.didShow.calls.length).toEqual(1);
 	});
 
-	// show, hide
+	it('should not re-propagate willHide and didHide through all components when already hidden', function() {
 
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+
+		spyOn(w, 'willHide');
+		spyOn(w, 'didHide');
+		spyOn(c1, 'willHide');
+		spyOn(c1, 'didHide');
+		spyOn(c2, 'willHide');
+		spyOn(c2, 'didHide');
+		spyOn(c3, 'willHide');
+		spyOn(c3, 'didHide');
+
+		w.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		w.hide();
+		w.hide();
+
+		expect(c1.willHide.calls.length).toEqual(1);
+		expect(c1.didHide.calls.length).toEqual(1);
+		expect(c2.willHide.calls.length).toEqual(1);
+		expect(c2.didHide.calls.length).toEqual(1);
+		expect(c3.willHide.calls.length).toEqual(1);
+		expect(c3.didHide.calls.length).toEqual(1);
+	});
+
+	it('should not re-propagate willShow and didShow through all components when already shown', function() {
+
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+
+		spyOn(w, 'willShow');
+		spyOn(w, 'didShow');
+		spyOn(c1, 'willShow');
+		spyOn(c1, 'didShow');
+		spyOn(c2, 'willShow');
+		spyOn(c2, 'didShow');
+		spyOn(c3, 'willShow');
+		spyOn(c3, 'didShow');
+
+		w.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		w.hide();
+		w.show();
+		w.show();
+
+		expect(c1.willShow.calls.length).toEqual(1);
+		expect(c1.didShow.calls.length).toEqual(1);
+		expect(c2.willShow.calls.length).toEqual(1);
+		expect(c2.didShow.calls.length).toEqual(1);
+		expect(c3.willShow.calls.length).toEqual(1);
+		expect(c3.didShow.calls.length).toEqual(1);
+	});
+
+	it('should not show a child that has been hidden when showing the parent', function() {
+
+		var w = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
+
+		w.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		c2.addChildComponent(c3);
+
+		spyOn(w, 'willShow');
+		spyOn(w, 'didShow');
+		spyOn(c1, 'willShow');
+		spyOn(c1, 'didShow');
+		spyOn(c2, 'willShow');
+		spyOn(c2, 'didShow');
+		spyOn(c3, 'willShow');
+		spyOn(c3, 'didShow');
+
+		w.hide();
+		c3.hide();
+		w.show();
+
+		expect(w.isVisible()).toEqual(true);
+		expect(c1.isVisible()).toEqual(true);
+		expect(c2.isVisible()).toEqual(true);
+		expect(c3.isVisible()).toEqual(false);
+
+		expect(c1.willShow.calls.length).toEqual(1);
+		expect(c1.didShow.calls.length).toEqual(1);
+		expect(c2.willShow.calls.length).toEqual(1);
+		expect(c2.didShow.calls.length).toEqual(1);
+		expect(c3.willShow.calls.length).toEqual(0);
+		expect(c3.didShow.calls.length).toEqual(0);
+	});
+
+
+
+	// show, hide
+	/*
 	it('should hide the root component and only toggle the visibility status of child elements', function() {
 
 		var c1 = new Moobile.Component();
@@ -632,7 +786,29 @@ describe('Component/Component', function() {
 		c2.addChildComponent(c3);
 		expect(c3.isVisible()).toEqual(false);
 	});
-
+	*/
+	// willUpdateLayout, didUpdateLayout
+	/*
+	it('should call willUpdateLayout and didUpdateLayout once after adding a component', function() {
+		var w  = new Moobile.Window();
+		var c1 = new Moobile.Component();
+		var c2 = new Moobile.Component();
+		spyOn(w, 'willUpdateLayout');
+		spyOn(w, 'didUpdateLayout');
+		spyOn(c1, 'willUpdateLayout');
+		spyOn(c1, 'didUpdateLayout');
+		spyOn(c2, 'willUpdateLayout');
+		spyOn(c2, 'didUpdateLayout');
+		w.addChildComponent(c1);
+		c1.addChildComponent(c2);
+		expect(w.willUpdateLayout.calls.length).toEqual(1);
+		expect(w.didUpdateLayout.calls.length).toEqual(1);
+		expect(c1.willUpdateLayout.calls.length).toEqual(1);
+		expect(c1.didUpdateLayout.calls.length).toEqual(1);
+		expect(c2.willUpdateLayout.calls.length).toEqual(1);
+		expect(c2.didUpdateLayout.calls.length).toEqual(1);
+	});
+*/
 	// TODO: Test Size
 	// TODO: Test Position
 	// TODO: Test visibility
