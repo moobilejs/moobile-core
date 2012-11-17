@@ -61,10 +61,24 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
 		this.setReady(true);
+
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
+		this.parent();
 	},
 
 	/**
@@ -84,7 +98,17 @@ Moobile.Window = new Class({
 	 */
 	didRemoveChildComponent: function(component) {
 		this.parent(component);
-		component._setWindow(null);
+		component.setWindow(null);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onWindowOrientationChange: function(e) {
+		this._willUpdateLayout();
+		this._didUpdateLayout();
 	}
 
 });

@@ -2251,8 +2251,6 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
-		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
-
 		this.element.store('moobile:component', this);
 
 		this._built = true;
@@ -3504,8 +3502,6 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
-
 		this.removeAllChildComponents(true);
 		this.removeFromParentComponent();
 		this.element.destroy();
@@ -3516,6 +3512,7 @@ Moobile.Component = new Class({
 		return this;
 	},
 
+<<<<<<< HEAD
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -3524,6 +3521,10 @@ Moobile.Component = new Class({
 	_onWindowOrientationChange: function() {
 		this._willUpdateLayout();
 		this._didUpdateLayout();
+=======
+	toElement: function() {
+		return this.element;
+>>>>>>> origin/0.2.1-wip
 	},
 
 	// <0.1-compat>
@@ -13911,10 +13912,14 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
 		this.setReady(true);
+
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
 
 	/**
@@ -13922,6 +13927,19 @@ Moobile.Window = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
+<<<<<<< HEAD
+=======
+	destroy: function() {
+		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
+		this.parent();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+>>>>>>> origin/0.2.1-wip
 	didAddChildComponent: function(component) {
 		this.parent(component);
 		component._setWindow(this);
@@ -13934,7 +13952,21 @@ Moobile.Window = new Class({
 	 */
 	didRemoveChildComponent: function(component) {
 		this.parent(component);
+<<<<<<< HEAD
 		component._setWindow(null);
+=======
+		component.setWindow(null);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onWindowOrientationChange: function(e) {
+		this._willUpdateLayout();
+		this._didUpdateLayout();
+>>>>>>> origin/0.2.1-wip
 	}
 
 });
