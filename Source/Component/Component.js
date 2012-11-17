@@ -378,9 +378,7 @@ Moobile.Component = new Class({
 			document.id(component).inject(context, where);
 		}
 
-		var index = this._getChildComponentIndexForElement(component) || 0;
-
-		this._children.splice(index, 0, component);
+		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
 		component.setParentComponent(this);
 		component.setWindow(this._window);
 		this._didAddChildComponent(component);
@@ -805,13 +803,11 @@ Moobile.Component = new Class({
 
 		this._ready = ready;
 
-		this._children.invoke('setReady', ready);
-
 		if (this._ready) {
-			this._willUpdateLayout();
 			this._didBecomeReady();
-			this._didUpdateLayout();
 		}
+
+		this._children.invoke('setReady', ready);
 
 		return this;
 	},
@@ -1225,7 +1221,7 @@ Moobile.Component = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.1
 	 */
-	_updateLayoutStack: 0,
+	_updateLayout: 0,
 
 	/**
 	 * @hidden
@@ -1233,14 +1229,7 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_willUpdateLayout: function() {
-
-		var execute = ++this._updateLayoutStack;
-		if (execute > 1)
-			return;
-
-		this.willUpdateLayout();
-		this._children.invoke('_willUpdateLayout');
-
+		this._updateLayout++;
 		return this;
 	},
 
@@ -1251,29 +1240,22 @@ Moobile.Component = new Class({
 	 */
 	_didUpdateLayout: function() {
 
-		var execute = --this._updateLayoutStack;
-		if (execute > 0)
-			return;
+		if (this._updateLayout > 0) {
+			this._updateLayout--;
+		}
 
-		if (this._built === false ||
-			this._ready === false ||
-			this._display === false ||
-			this._visible === false)
+		if (this._updateLayout > 0 ||
+			!this._built ||
+			!this._ready ||
+			!this._display ||
+			!this._visible)
 			return;
 
 		this.didUpdateLayout();
+
 		this._children.invoke('_didUpdateLayout');
 
 		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#willUpdateLayout
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	willUpdateLayout: function() {
-
 	},
 
 	/**

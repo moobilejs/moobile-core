@@ -758,59 +758,80 @@ describe('Component/Component', function() {
 		expect(c3.didShow.calls.length).toEqual(0);
 	});
 
+	// willUpdateLayout, didUpdateLayout
 
+	it('should call didUpdateLayout once after adding a component', function() {
 
-	// show, hide
-	/*
-	it('should hide the root component and only toggle the visibility status of child elements', function() {
-
+		var w  = new Moobile.Window();
+		var p = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
 		var c3 = new Moobile.Component();
-		c1.addChildComponent(c2);
-		c2.addChildComponent(c3);
 
-		c1.hide();
+		spyOn(p, 'didUpdateLayout');
+		spyOn(c1, 'didUpdateLayout');
+		spyOn(c2, 'didUpdateLayout');
+		spyOn(c3, 'didUpdateLayout');
 
-		expect(c1.element.hasClass('hidden')).toEqual(true);
-		expect(c2.element.hasClass('hidden')).toEqual(false);
-		expect(c3.element.hasClass('hidden')).toEqual(false);
+		p.addChildComponent(c1);
+		p.addChildComponent(c2);
+		w.addChildComponent(p);
 
-		expect(c1.isVisible()).toEqual(false);
-		expect(c2.isVisible()).toEqual(false);
-		expect(c3.isVisible()).toEqual(false);
+		expect(p.didUpdateLayout.calls.length).toEqual(1);
+		expect(c1.didUpdateLayout.calls.length).toEqual(1);
+		expect(c2.didUpdateLayout.calls.length).toEqual(1);
 
-		c3.removeFromParentComponent();
-		expect(c3.isVisible()).toEqual(true);
+		w.addChildComponent(c3);
 
-		c2.addChildComponent(c3);
-		expect(c3.isVisible()).toEqual(false);
+		expect(p.didUpdateLayout.calls.length).toEqual(2);
+		expect(c1.didUpdateLayout.calls.length).toEqual(2);
+		expect(c2.didUpdateLayout.calls.length).toEqual(2);
+		expect(c3.didUpdateLayout.calls.length).toEqual(1);
+
 	});
-	*/
-	// willUpdateLayout, didUpdateLayout
-	/*
-	it('should call willUpdateLayout and didUpdateLayout once after adding a component', function() {
+
+	it('should call didUpdateLayout once after replacing a component', function() {
+
 		var w  = new Moobile.Window();
+		var p = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		spyOn(w, 'willUpdateLayout');
-		spyOn(w, 'didUpdateLayout');
-		spyOn(c1, 'willUpdateLayout');
+
+		w.addChildComponent(p);
+		p.addChildComponent(c1);
+
+		spyOn(p, 'didUpdateLayout');
 		spyOn(c1, 'didUpdateLayout');
-		spyOn(c2, 'willUpdateLayout');
 		spyOn(c2, 'didUpdateLayout');
-		w.addChildComponent(c1);
-		c1.addChildComponent(c2);
-		expect(w.willUpdateLayout.calls.length).toEqual(1);
-		expect(w.didUpdateLayout.calls.length).toEqual(1);
-		expect(c1.willUpdateLayout.calls.length).toEqual(1);
-		expect(c1.didUpdateLayout.calls.length).toEqual(1);
-		expect(c2.willUpdateLayout.calls.length).toEqual(1);
+
+		p.replaceChildComponent(c1, c2);
+
+		expect(p.didUpdateLayout.calls.length).toEqual(1);
+		expect(c1.didUpdateLayout.calls.length).toEqual(0);
 		expect(c2.didUpdateLayout.calls.length).toEqual(1);
 	});
-*/
+
+	it('should call didUpdateLayout once after adding or removing a class', function() {
+
+		var w  = new Moobile.Window();
+		var c = new Moobile.Component();
+
+		w.addChildComponent(c);
+
+		spyOn(c, 'didUpdateLayout');
+
+		c.addClass('test')
+		expect(c.didUpdateLayout.calls.length).toEqual(1);
+
+		c.removeClass('test')
+		expect(c.didUpdateLayout.calls.length).toEqual(2);
+
+		c.toggleClass('test')
+		expect(c.didUpdateLayout.calls.length).toEqual(3);
+
+	});
+
 	// TODO: Test Size
 	// TODO: Test Position
-	// TODO: Test visibility
 
 });

@@ -65,6 +65,7 @@ Moobile.Window = new Class({
 		this.parent();
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
+		this.setReady(true);
 	},
 
 	/**
