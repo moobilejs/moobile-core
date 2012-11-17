@@ -2250,8 +2250,6 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
-		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
-
 		this.element.store('moobile:component', this);
 
 		this._built = true;
@@ -3462,8 +3460,6 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
-
 		this.removeAllChildComponents(true);
 		this.removeFromParentComponent();
 		this.element.destroy();
@@ -3476,16 +3472,6 @@ Moobile.Component = new Class({
 
 	toElement: function() {
 		return this.element;
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_onWindowOrientationChange: function() {
-		this._willUpdateLayout();
-		this._didUpdateLayout();
 	},
 
 	// <0.1-compat>
@@ -12172,8 +12158,6 @@ Moobile.Window = new Class({
 	willBuild: function() {
 		this.parent();
 		this.element.set('class', 'window');
-		window.addEvent('load', this.bound('_onWindowLoad'));
-		window.addEvent('rotate', this.bound('_onWindowRotate'));
 	},
 
 	/**
@@ -12182,10 +12166,14 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
 		this.setReady(true);
+
+		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
 
 	/**
@@ -12194,8 +12182,7 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
-		window.removeEvent('load', this.bound('_onWindowLoad'));
-		window.removeEvent('rotate', this.bound('_onWindowRotate'));
+		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 		this.parent();
 	},
 
@@ -12224,17 +12211,9 @@ Moobile.Window = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	_onWindowLoad: function(e) {
-		(function() { window.scrollTo(0, 1) }).delay(250);
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_onWindowRotate: function(e) {
-		(function() { window.scrollTo(0, 1) }).delay(250);
+	_onWindowOrientationChange: function(e) {
+		this._willUpdateLayout();
+		this._didUpdateLayout();
 	}
 
 });

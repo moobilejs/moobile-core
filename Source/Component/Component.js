@@ -171,8 +171,6 @@ Moobile.Component = new Class({
 
 		if (exists) this.element.replaces(marker);
 
-		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
-
 		this.element.store('moobile:component', this);
 
 		this._built = true;
@@ -1383,8 +1381,6 @@ Moobile.Component = new Class({
 	 */
 	destroy: function() {
 
-		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
-
 		this.removeAllChildComponents(true);
 		this.removeFromParentComponent();
 		this.element.destroy();
@@ -1397,16 +1393,6 @@ Moobile.Component = new Class({
 
 	toElement: function() {
 		return this.element;
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_onWindowOrientationChange: function() {
-		this._willUpdateLayout();
-		this._didUpdateLayout();
 	},
 
 	// <0.1-compat>
