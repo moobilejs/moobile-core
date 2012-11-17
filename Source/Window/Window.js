@@ -28,6 +28,8 @@ var instance = null;
 /**
  * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @edited 0.2.1
  * @since  0.1.0
  */
 Moobile.Window = new Class({
@@ -58,6 +60,8 @@ Moobile.Window = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
@@ -66,7 +70,8 @@ Moobile.Window = new Class({
 
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
-		this.setReady(true);
+
+		this._setWindow(this);
 
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
@@ -79,26 +84,6 @@ Moobile.Window = new Class({
 	destroy: function() {
 		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 		this.parent();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didAddChildComponent: function(component) {
-		this.parent(component);
-		component._setWindow(this);
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	didRemoveChildComponent: function(component) {
-		this.parent(component);
-		component.setWindow(null);
 	},
 
 	/**
