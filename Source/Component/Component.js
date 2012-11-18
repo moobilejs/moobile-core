@@ -551,18 +551,29 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getDescendantComponent
+	 * @deprecated
 	 * @author Tin LE GALL (imbibinebe@gmail.com)
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
 	 * @since  0.1.1
 	 */
 	getDescendantComponent: function(name) {
+		console.log('[DEPRECATION NOTICE] The method "getDescendantComponent" will be removed in 0.5, use the method "getComponent" instead.');
+		return this.getComponent(name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
+	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getComponent: function(name) {
 
 	    var component = this.getChildComponent(name);
 	    if (component === null) {
 			for (var i = 0, len = this._children.length; i < len; i++) {
-				var found = this._children[i].getDescendantComponent(name);
+				var found = this._children[i].getComponent(name);
 				if (found) return found;
 			}
 		}
@@ -570,24 +581,58 @@ Moobile.Component = new Class({
 	    return component;
 	},
 
-	getComponent: function(name) {
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponentOfType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getComponentOfType: function(type, name) {
 
+	    var component = this.getChildComponentOfType(type, name);
+	    if (component === null) {
+			for (var i = 0, len = this._children.length; i < len; i++) {
+				var found = this._children[i].getComponent(type, name);
+				if (found) return found;
+			}
+		}
+
+		return component;
 	},
 
-	getComponents: function() {
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasComponent: function(name) {
 
+	    var exists = this.hasChildComponent(name);
+	    if (exists === false) {
+			for (var i = 0, len = this._children.length; i < len; i++) {
+				var found = this._children[i].hasChildComponent(name);
+				if (found) return found;
+			}
+		}
+
+	    return exists;
 	},
 
-	getComponentsOfType: function(type) {
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasComponentOfType: function(type, name) {
 
-	},
+	    var exists = this.hasChildComponentOfType(type, name);
+	    if (exists === false) {
+			for (var i = 0, len = this._children.length; i < len; i++) {
+				var found = this._children[i].hasChildComponentOfType(type, name);
+				if (found) return found;
+			}
+		}
 
-	hasComponent: function() {
-
-	},
-
-	hasComponentOfType: function() {
-
+	    return exists;
 	},
 
 	/**
