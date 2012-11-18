@@ -71,6 +71,7 @@ Moobile.Window = new Class({
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
 
+		this._setParent(null);
 		this._setWindow(this);
 		this._setReady(true);
 
@@ -85,6 +86,17 @@ Moobile.Window = new Class({
 	destroy: function() {
 		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 		this.parent();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.1
+	 */
+	_setUpdateLayout: function(updateLayout) {
+		// this prevents the window from dispatching the update layout method
+		// because it would be called instanly
+		return this;
 	},
 
 	/**

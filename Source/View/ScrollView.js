@@ -237,10 +237,9 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
-		this._willUpdateLayout();
 		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
 		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
-		this._didUpdateLayout();
+		this._setUpdateLayout(true);
 		return this;
 	},
 

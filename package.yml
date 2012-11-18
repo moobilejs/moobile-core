@@ -15,6 +15,7 @@ authors: "Jean-Philippe Dery (jeanphilippe.dery@gmail.com)"
 sources:
 
   - "Vendor/iscroll/src/iscroll.js"
+  - "Source/Animation/RequestAnimationFrame.js"
   - "Source/Animation/Animation.js"
   - "Source/Browser/Browser.Platform.js"
   - "Source/Class/Class.Instantiate.js"
