@@ -22,7 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Drop
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.3.0
+ * @since  0.2.1
  */
 Moobile.ViewTransition.Drop = new Class({
 
@@ -31,7 +31,8 @@ Moobile.ViewTransition.Drop = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @edited 0.3.0
+	 * @since  0.2.1
 	 */
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 
@@ -60,7 +61,8 @@ Moobile.ViewTransition.Drop = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @edited 0.3.0
+	 * @since  0.2.1
 	 */
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 
