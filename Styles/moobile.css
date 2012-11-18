@@ -254,7 +254,8 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.view.view-layout-vertical > .view-content-wrapper > .view-content {
+.view.view-layout-vertical > .view-content-wrapper > .view-content,
+.view.view-layout-vertical > .view-content-wrapper > div > .view-content {
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
 	    -ms-box-orient: vertical;                                /* Important */
@@ -262,7 +263,8 @@ input, select, textarea {
 	        box-orient: vertical;                                /* Important */
 }
 
-.view.view-layout-horizontal > .view-content-wrapper > .view-content {
+.view.view-layout-horizontal > .view-content-wrapper > .view-content,
+.view.view-layout-horizontal > .view-content-wrapper > div > .view-content {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */

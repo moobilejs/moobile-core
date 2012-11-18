@@ -98,6 +98,9 @@ Moobile.Scroller.Native = new Class({
 			this.options.bounce = false;
 		}
 
+		this.contentWrapperElement.setStyle('overflow', 'auto');
+		this.contentWrapperElement.setStyle('overflow-scrolling', 'touch');
+
 		var styles = {
 			'top': 0, 'left': 0, 'bottom': 0, 'right': 0,
 			'position': 'absolute',
@@ -105,14 +108,10 @@ Moobile.Scroller.Native = new Class({
 			'overflow-scrolling': this.options.momentum ? 'touch' : 'auto'
 		};
 
-		var scrollFixOuterDiv = document.createElement('div');
-		var scrollFixInnerDiv = document.createElement('div');
-		scrollFixOuterDiv.setStyles(styles);
-		scrollFixInnerDiv.setStyles(styles);
-		scrollFixOuterDiv.wraps(contentElement);
-		scrollFixInnerDiv.wraps(contentElement);
+		this.contentScrollerElement = document.createElement('div');
+		this.contentScrollerElement.setStyles(styles);
+		this.contentScrollerElement.wraps(contentElement);
 
-		this.contentScrollerElement = scrollFixInnerDiv;
 		this.contentScrollerElement.addEvent('touchstart', this.bound('_onTouchStart'));
 		this.contentScrollerElement.addEvent('touchmove', this.bound('_onTouchMove'));
 		this.contentScrollerElement.addEvent('touchend', this.bound('_onTouchEnd'));

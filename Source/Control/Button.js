@@ -68,7 +68,7 @@ Moobile.Button = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @since  0.2.1
 	 */
 	didBuild: function() {
 		this.parent();
