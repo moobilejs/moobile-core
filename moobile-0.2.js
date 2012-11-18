@@ -3963,6 +3963,13 @@ Moobile.Button = new Class({
 	_label: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#hitAreaElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	hitAreaElement: null,
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -3983,6 +3990,17 @@ Moobile.Button = new Class({
 
 		this.addEvent('tapstart', this.bound('_onTapStart'));
 		this.addEvent('tapend', this.bound('_onTapEnd'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.hitAreaElement = new Element('div.hit-area');
+		this.hitAreaElement.inject(this.element);
 	},
 
 	/**
@@ -8120,6 +8138,9 @@ Moobile.Scroller.Native = new Class({
 			this.options.bounce = false;
 		}
 
+		this.contentWrapperElement.setStyle('overflow', 'auto');
+		this.contentWrapperElement.setStyle('overflow-scrolling', 'touch');
+
 		var styles = {
 			'top': 0, 'left': 0, 'bottom': 0, 'right': 0,
 			'position': 'absolute',
@@ -8127,14 +8148,10 @@ Moobile.Scroller.Native = new Class({
 			'overflow-scrolling': this.options.momentum ? 'touch' : 'auto'
 		};
 
-		var scrollFixOuterDiv = document.createElement('div');
-		var scrollFixInnerDiv = document.createElement('div');
-		scrollFixOuterDiv.setStyles(styles);
-		scrollFixInnerDiv.setStyles(styles);
-		scrollFixOuterDiv.wraps(contentElement);
-		scrollFixInnerDiv.wraps(contentElement);
+		this.contentScrollerElement = document.createElement('div');
+		this.contentScrollerElement.setStyles(styles);
+		this.contentScrollerElement.wraps(contentElement);
 
-		this.contentScrollerElement = scrollFixInnerDiv;
 		this.contentScrollerElement.addEvent('touchstart', this.bound('_onTouchStart'));
 		this.contentScrollerElement.addEvent('touchmove', this.bound('_onTouchMove'));
 		this.contentScrollerElement.addEvent('touchend', this.bound('_onTouchEnd'));
@@ -11715,6 +11732,95 @@ Moobile.ViewTransition.Cubic = new Class({
 
 		var animation = new Moobile.Animation(parentElem);
 		animation.setAnimationClass('transition-cubic-leave');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
+
+
+/*
+---
+
+name: ViewTransition.Drop
+
+description: Provides a view transition that covers the current view.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ViewTransition
+
+provides:
+	- ViewTransition.Drop
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Drop
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewTransition.Drop = new Class({
+
+	Extends: Moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-drop-enter');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-drop-enter');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new Moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-drop-leave');
+			viewToShow.addClass('transition-view-to-show');
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-drop-leave');
+			viewToShow.removeClass('transition-view-to-show');
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new Moobile.Animation(viewToHide);
+		animation.setAnimationClass('transition-view-to-hide');
 		animation.addEvent('start', onStart);
 		animation.addEvent('end', onEnd);
 		animation.start();
