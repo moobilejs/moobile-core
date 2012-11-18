@@ -36,9 +36,9 @@ Moobile.Button = new Class({
 	_label: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Slider#hitAreaElement
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#hitAreaElement
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @since  0.2.1
 	 */
 	hitAreaElement: null,
 

@@ -1313,6 +1313,90 @@ input, select, textarea {
 	overflow: visible;                                           /* Important */
 }
 
+/* Transition Drop (Enter)
+-----------------------------------------------------------------------------*/
+
+@-webkit-keyframes transition-drop-enter {
+	from { -webkit-transform: translate3d(0, -100%, 0); }
+	to   { -webkit-transform: translate3d(0, 0%, 0); }
+}
+@-moz-keyframes transition-drop-enter {
+	from { -moz-transform: translate3d(0, -100%, 0); }
+	to   { -moz-transform: translate3d(0, 0%, 0); }
+}
+@-ms-keyframes transition-drop-enter {
+	from { -ms-transform: translate3d(0, -100%, 0); }
+	to   { -ms-transform: translate3d(0, 0%, 0); }
+}
+@-o-keyframes transition-drop-enter {
+	from { -o-transform: translate3d(0, -100%, 0); }
+	to   { -o-transform: translate3d(0, 0%, 0); }
+}
+@keyframes transition-drop-enter {
+	from { transform: translate3d(0, -100%, 0); }
+	to   { transform: translate3d(0, 0%, 0); }
+}
+
+.transition-drop-enter {
+	display: block !important;
+}
+
+.transition-drop-enter .transition-view-to-show {
+	-webkit-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	z-index: 75;
+}
+
+.transition-drop-enter .transition-view-to-hide {
+	position: absolute;
+	z-index: 50;
+}
+
+/* Transition Drop (Leave)
+-----------------------------------------------------------------------------*/
+
+@-webkit-keyframes transition-drop-leave {
+	from { -webkit-transform: translate3d(0, 0, 0); }
+	to   { -webkit-transform: translate3d(0, -100%, 0); }
+}
+@-moz-keyframes transition-drop-leave {
+	from { -moz-transform: translate3d(0, 0, 0); }
+	to   { -moz-transform: translate3d(0, -100%, 0); }
+}
+@-ms-keyframes transition-drop-leave {
+	from { -ms-transform: translate3d(0, 0, 0 }
+	to   { -ms-transform: translate3d(0, -100%, 0); }
+}
+@-o-keyframes transition-drop-leave {
+	from { -o-transform: translate3d(0, 0, 0); }
+	to   { -o-transform: translate3d(0, -100%, 0); }
+}
+@keyframes transition-drop-leave {
+	from { transform: translate3d(0, 0, 0); }
+	to   { transform: translate3d(0, -100%, 0); }
+}
+
+.transition-drop-leave {
+	display: block !important;
+}
+
+.transition-drop-leave .transition-view-to-show {
+	position: absolute;
+	z-index: 50;
+}
+
+.transition-drop-leave .transition-view-to-hide {
+	-webkit-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	z-index: 75;
+}
+
 /* Transition Cover (Enter)
 -----------------------------------------------------------------------------*/
 
