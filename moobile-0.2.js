@@ -2305,9 +2305,10 @@ Moobile.Component = new Class({
 		this._willBuild();
 		this._build();
 		this._didBuild();
-		this._built = true;
 
 		if (exists) this.element.replaces(marker);
+
+		this._built = true;
 
 		this.element.store('moobile:component', this);
 
@@ -2555,19 +2556,12 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentOfType: function(type, name) {
-
-		var types = Array.from(type);
-
-		var by = function(child) {
-			return types.some(function(type) {
-				return child instanceof type && child.getName() === name;
-			});
-		};
-
-		return this._children.find(by);
+		return this._children.find(function(child) { return child instanceof type && child.getName() === name; });
 	},
 
 	/**
@@ -2638,20 +2632,12 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsOfType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentsOfType: function(type) {
-
-		var types = Array.from(type);
-
-		var by = function(child) {
-			return types.some(function(type) {
-				return child instanceof type;
-			});
-		};
-
-		return this._children.filter(by);
+		return this._children.filter(function(child) { return child instanceof type });
 	},
 
 	/**
@@ -2713,7 +2699,7 @@ Moobile.Component = new Class({
 	    var component = this.getChildComponentOfType(type, name);
 	    if (component === null) {
 			for (var i = 0, len = this._children.length; i < len; i++) {
-				var found = this._children[i].getComponent(type, name);
+				var found = this._children[i].getComponentOfType(type, name);
 				if (found) return found;
 			}
 		}
@@ -2731,7 +2717,7 @@ Moobile.Component = new Class({
 	    var exists = this.hasChildComponent(name);
 	    if (exists === false) {
 			for (var i = 0, len = this._children.length; i < len; i++) {
-				var found = this._children[i].hasChildComponent(name);
+				var found = this._children[i].hasComponent(name);
 				if (found) return found;
 			}
 		}
@@ -2749,7 +2735,7 @@ Moobile.Component = new Class({
 	    var exists = this.hasChildComponentOfType(type, name);
 	    if (exists === false) {
 			for (var i = 0, len = this._children.length; i < len; i++) {
-				var found = this._children[i].hasChildComponentOfType(type, name);
+				var found = this._children[i].hasComponentOfType(type, name);
 				if (found) return found;
 			}
 		}
@@ -2764,7 +2750,6 @@ Moobile.Component = new Class({
 	 */
 	replaceChildComponent: function(component, replacement, destroy) {
 		this.addChildComponentBefore(replacement, component).removeChildComponent(component, destroy);
-		this._setUpdateLayout(true);
 		return this;
 	},
 
