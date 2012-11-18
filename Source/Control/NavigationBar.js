@@ -161,9 +161,12 @@ Moobile.NavigationBar = new Class({
 		var element = this.element;
 		var content = this.contentElement;
 
-		var elementSize = element.getSize().x;
-		var contentSize = content.getSize().x;
-		var contentPosition = content.getPosition(element).x;
+		content.setStyle('padding-left', 0);
+		content.setStyle('padding-right', 0);
+
+		var elementSize = element.offsetWidth;
+		var contentSize = content.offsetWidth;
+		var contentPosition = content.offsetLeft;
 
 		var offset = ((elementSize / 2) - (contentPosition + contentSize / 2)) * 2;
 
@@ -171,16 +174,16 @@ Moobile.NavigationBar = new Class({
 		var lc = content.lastChild;
 
 		if (fc && fc.getPosition) {
-			var pos = fc.getPosition(element).x + offset;
-			if (pos < contentPosition) {
-				offset += Math.abs(contentPosition - pos);
+			var pos = fc.offsetLeft + offset;
+			if (pos < 0) {
+				offset += Math.abs(pos);
 			}
 		}
 
 		if (lc && lc.getPosition) {
-			var pos = lc.getPosition(element).x + lc.getSize().x + offset;
-			if (pos > contentPosition + contentSize) {
-				offset -= Math.abs(contentPosition + contentSize - pos);
+			var pos = lc.offsetLeft + lc.offsetWidth + offset;
+			if (pos > contentSize) {
+				offset -= Math.abs(contentSize - pos);
 			}
 		}
 
