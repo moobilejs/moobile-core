@@ -1647,3 +1647,5 @@ Moobile.Component.addNativeEvent('ownanimationend');
 Moobile.Component.defineAttribute('data-style', null, function(value) {
 	this.options.styleName = value;
 });
+
+})();

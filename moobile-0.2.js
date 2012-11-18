@@ -2517,6 +2517,12 @@ Moobile.Component = new Class({
 		component._setWindow(this._window);
 		this._didAddChildComponent(component);
 
+		if (this._ready) {
+			component._setReady(true);
+		}
+
+		this._setUpdateLayout(true);
+
 		return this;
 	},
 
@@ -2786,6 +2792,8 @@ Moobile.Component = new Class({
 		if (destroy) {
 			component.destroy();
 		}
+
+		this._setUpdateLayout(true);
 
 		return this;
 	},
@@ -3083,6 +3091,8 @@ Moobile.Component = new Class({
 
 		this._style = style;
 
+		this._setUpdateLayout(true);
+
 		return this;
 	},
 
@@ -3111,6 +3121,7 @@ Moobile.Component = new Class({
 	 */
 	addClass: function(name) {
 		this.element.addClass(name);
+		this._setUpdateLayout(true);
 		return this;
 	},
 
@@ -3121,6 +3132,7 @@ Moobile.Component = new Class({
 	 */
 	removeClass: function(name) {
 		this.element.removeClass(name);
+		this._setUpdateLayout(true);
 		return this;
 	},
 
@@ -3132,6 +3144,7 @@ Moobile.Component = new Class({
 	 */
 	toggleClass: function(name, force) {
 		this.element.toggleClass(name, force);
+		this._setUpdateLayout(true);
 		return this;
 	},
 
@@ -3238,6 +3251,7 @@ Moobile.Component = new Class({
 	setSize: function(x, y) {
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
+		this._setUpdateLayout(true);
 		return this;
 	},
 
@@ -3277,6 +3291,8 @@ Moobile.Component = new Class({
 		this._willShow();
 		this.removeClass('hidden');
 		this._didShow();
+
+		this._setUpdateLayout(true);
 
 		return this;
 	},
@@ -3451,6 +3467,33 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBuild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBecomeReady
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBecomeReady: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didUpdateLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
 
 	},
 
@@ -13435,95 +13478,6 @@ Moobile.ViewTransition.Cubic = new Class({
 
 		var animation = new Moobile.Animation(parentElem);
 		animation.setAnimationClass('transition-cubic-leave');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	}
-
-});
-
-
-/*
----
-
-name: ViewTransition.Drop
-
-description: Provides a view transition that covers the current view.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- ViewTransition
-
-provides:
-	- ViewTransition.Drop
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Drop
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.3.0
- */
-Moobile.ViewTransition.Drop = new Class({
-
-	Extends: Moobile.ViewTransition,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
-	enterAnimation: function(viewToShow, viewToHide, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('transition-drop-enter');
-			viewToHide.addClass('transition-view-to-hide');
-			viewToShow.show();
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('transition-drop-enter');
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToHide.hide();
-			this.didEnter(viewToShow, viewToHide, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(viewToShow);
-		animation.setAnimationClass('transition-view-to-show');
-		animation.addEvent('start', onStart);
-		animation.addEvent('end', onEnd);
-		animation.start();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
-	leaveAnimation: function(viewToShow, viewToHide, parentView) {
-
-		var parentElem = parentView.getContentElement();
-
-		var onStart = function() {
-			parentElem.addClass('transition-drop-leave');
-			viewToShow.addClass('transition-view-to-show');
-		}.bind(this);
-
-		var onEnd = function() {
-			parentElem.removeClass('transition-drop-leave');
-			viewToShow.removeClass('transition-view-to-show');
-			this.didEnter(viewToShow, viewToHide, parentView);
-		}.bind(this);
-
-		var animation = new Moobile.Animation(viewToHide);
-		animation.setAnimationClass('transition-view-to-hide');
 		animation.addEvent('start', onStart);
 		animation.addEvent('end', onEnd);
 		animation.start();
