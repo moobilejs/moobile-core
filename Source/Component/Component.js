@@ -361,7 +361,7 @@ Moobile.Component = new Class({
 	 */
 	_addChildComponent: function(component, context, where) {
 
-		this._willUpdateLayout();
+//		this._willUpdateLayout();
 		this._willAddChildComponent(component);
 
 		component.removeFromParentComponent();
@@ -378,10 +378,12 @@ Moobile.Component = new Class({
 		}
 
 		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
+
 		component._setParent(this);
 		component._setWindow(this._window);
+
 		this._didAddChildComponent(component);
-		this._didUpdateLayout();
+//		this._didUpdateLayout();
 
 		component._setReady(this._ready);
 
@@ -555,15 +557,35 @@ Moobile.Component = new Class({
 	    return component;
 	},
 
+	getComponent: function(name) {
+
+	},
+
+	getComponents: function() {
+
+	},
+
+	getComponentsOfType: function(type) {
+
+	},
+
+	hasComponent: function() {
+
+	},
+
+	hasComponentOfType: function() {
+
+	},
+
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#replaceChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	replaceChildComponent: function(component, replacement, destroy) {
-		this._willUpdateLayout();
+//		this._willUpdateLayout();
 		this.addChildComponentBefore(replacement, component).removeChildComponent(component, destroy);
-		this._didUpdateLayout();
+//		this._didUpdateLayout();
 		return this;
 	},
 
@@ -590,7 +612,7 @@ Moobile.Component = new Class({
 		if (this.hasChildComponent(component) === false)
 			return this;
 
-		this._willUpdateLayout();
+	//	this._willUpdateLayout();
 		this._willRemoveChildComponent(component);
 
 		var element = component.getElement();
@@ -599,10 +621,12 @@ Moobile.Component = new Class({
 		}
 
 		this._children.erase(component);
+
 		component._setParent(null);
 		component._setWindow(null);
+
 		this._didRemoveChildComponent(component);
-		this._didUpdateLayout();
+	//	this._didUpdateLayout();
 
 		component._setReady(false);
 
@@ -819,7 +843,13 @@ Moobile.Component = new Class({
 		this._ready = ready;
 
 		this._children.invoke('_setReady', ready);
-		if (this._ready) this._didBecomeReady();
+
+		if (this._ready) {
+			this._willUpdateLayout();
+			this._didUpdateLayout();
+			this._didBecomeReady();
+		}
+
 		this.fireEvent('ready');
 
 		return this;
@@ -880,7 +910,7 @@ Moobile.Component = new Class({
 	 */
 	setStyle: function(name) {
 
-		this._willUpdateLayout();
+//	this._willUpdateLayout();
 
 		if (this._style) {
 			this._style.detach.call(this, this.element);
@@ -894,7 +924,7 @@ Moobile.Component = new Class({
 
 		this._style = style;
 
-		this._didUpdateLayout();
+//		this._didUpdateLayout();
 
 		return this;
 	},
@@ -923,9 +953,9 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	addClass: function(name) {
-		this._willUpdateLayout();
+//		this._willUpdateLayout();
 		this.element.addClass(name);
-		this._didUpdateLayout();
+//		this._didUpdateLayout();
 		return this;
 	},
 
@@ -935,9 +965,9 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	removeClass: function(name) {
-		this._willUpdateLayout();
+//		this._willUpdateLayout();
 		this.element.removeClass(name);
-		this._didUpdateLayout();
+//		this._didUpdateLayout();
 		return this;
 	},
 
@@ -948,9 +978,9 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	toggleClass: function(name, force) {
-		this._willUpdateLayout();
+//		this._willUpdateLayout();
 		this.element.toggleClass(name, force);
-		this._didUpdateLayout();
+//		this._didUpdateLayout();
 		return this;
 	},
 
