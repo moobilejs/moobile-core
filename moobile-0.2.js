@@ -2239,14 +2239,14 @@ Moobile.Component = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
+	 * @since  0.3.0
 	 */
 	_updateLayout: false,
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
+	 * @since  0.3.0
 	 */
 	_updateLayoutTimer: null,
 
