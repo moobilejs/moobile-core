@@ -72,7 +72,7 @@ Moobile.ViewTransition.Slide = new Class({
 
 			if (Moobile.Theme.getName() === 'ios') {
 
-				var kf = '';
+				var keyframes = '';
 
 				viewToShow.getChildComponentsOfType(Moobile.NavigationBar).each(function(navigationBar) {
 
@@ -95,13 +95,13 @@ Moobile.ViewTransition.Slide = new Class({
 							elem.setStyle('animation-name', name)
 							items.push(elem);
 
-							kf += anim;
+							keyframes += anim;
 
 						}, this);
 					}
 				}, this);
 
-				style = document.createElement('style').set('text', kf).inject(document.head);
+				style = document.createElement('style').set('text', keyframes).inject(document.head);
 			}
 
 		}.bind(this);
@@ -146,35 +146,14 @@ Moobile.ViewTransition.Slide = new Class({
 		var items = [];
 
 		var onStart = function() {
+
 			viewToHide.addClass('transition-view-to-hide');
 			viewToShow.addClass('transition-view-to-show');
 			viewToShow.show();
-		}.bind(this);
 
-		var onEnd = function() {
+			if (Moobile.Theme.getName() === 'ios') {
 
-			viewToHide.removeClass('transition-view-to-hide');
-			viewToShow.removeClass('transition-view-to-show');
-			viewToHide.hide();
-			this.didLeave(viewToShow, viewToHide, parentView);
-
-			if (items) {
-				items.invoke('setStyle', 'animation-name', null);
-				items = null;
-			}
-
-			if (style) {
-				style.destroy();
-				style = null;
-			}
-
-		}.bind(this);
-
-		if (Moobile.Theme.getName() === 'ios') {
-
-			viewToShow.addEvent('show:once', function() {
-
-				var kf = '';
+				var keyframes = '';
 
 				viewToHide.getChildComponentsOfType(Moobile.NavigationBar).each(function(navigationBar) {
 
@@ -197,15 +176,34 @@ Moobile.ViewTransition.Slide = new Class({
 							elem.setStyle('animation-name', name)
 							items.push(elem);
 
-							kf += anim;
+							keyframes += anim;
 						});
 					}
 				});
 
-				style = document.createElement('style').set('text', kf).inject(document.head);
+				style = document.createElement('style').set('text', keyframes).inject(document.head);
+			}
 
-			}.bind(this));
-		}
+		}.bind(this);
+
+		var onEnd = function() {
+
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didLeave(viewToShow, viewToHide, parentView);
+
+			if (items) {
+				items.invoke('setStyle', 'animation-name', null);
+				items = null;
+			}
+
+			if (style) {
+				style.destroy();
+				style = null;
+			}
+
+		}.bind(this);
 
 		var animation = new Moobile.Animation(parentElem);
 		animation.setAnimationClass('transition-slide-leave');
