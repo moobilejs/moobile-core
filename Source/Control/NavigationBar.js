@@ -57,40 +57,33 @@ Moobile.NavigationBar = new Class({
 
 		// <0.2-compat>
 		var item = this.getRoleElement('item');
-		if (item === null) {
-		// </0.2-compat>
-
-			var content = this.getRoleElement('content');
-			if (content === null) {
-				content = document.createElement('div');
-				content.ingest(this.element);
-				content.inject(this.element);
-				content.setRole('content');
-			}
-
-			// contains only text
-			var fc = content.firstChild;
-			var lc = content.lastChild;
-			if (fc && fc.nodeType === 3 &&
-				lc && lc.nodeType === 3) {
-				var title = this.getRoleElement('title');
-				if (title === null) {
-					title = document.createElement('div');
-					title.ingest(content);
-					title.inject(content);
-					title.setRole('title');
-				}
-			}
-
-		// <0.2-compat>
-		}
-
 		if (item) {
-			item.dispose();
-			item.ingest(this.element);
-			item.inject(this.element);
+			console.log('[REMOVAL NOTICE] The role "item" has been removed in 0.3, use the role "content" instead or refer to the documentation.');
+			return;
 		}
 		// </0.2-compat>
+
+		var content = this.getRoleElement('content');
+		if (content === null) {
+			content = document.createElement('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			content.setRole('content');
+		}
+
+		// contains only text
+		var fc = content.firstChild;
+		var lc = content.lastChild;
+		if (fc && fc.nodeType === 3 &&
+			lc && lc.nodeType === 3) {
+			var title = this.getRoleElement('title');
+			if (title === null) {
+				title = document.createElement('div');
+				title.ingest(content);
+				title.inject(content);
+				title.setRole('title');
+			}
+		}
 	},
 
 	/**
