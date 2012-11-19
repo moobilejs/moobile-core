@@ -50,7 +50,7 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouchStartScroll: null,
+	_activeTouchScroll: null,
 
 	/**
 	 * @hidden
@@ -417,8 +417,8 @@ Moobile.ScrollView = new Class({
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
 
-		var moveX = scroll.x - this._activeTouchStartScroll.x;
-		var moveY = scroll.y - this._activeTouchStartScroll.y;
+		var moveX = scroll.x - this._activeTouchScroll.x;
+		var moveY = scroll.y - this._activeTouchScroll.y;
 		var absMoveX = Math.abs(moveX);
 		var absMoveY = Math.abs(moveY);
 
@@ -461,7 +461,7 @@ Moobile.ScrollView = new Class({
 		this._activeTouch = null;
 		this._activeTouchTime = null;
 		this._activeTouchDuration = null;
-		this._activeTouchStartScroll = null;
+		this._activeTouchScroll = null;
 	},
 
 	/**
@@ -476,7 +476,7 @@ Moobile.ScrollView = new Class({
 		if (this._activeTouch === null) {
 			this._activeTouch = touch;
 			this._activeTouchTime = Date.now();
-			this._activeTouchStartScroll = this.getContentScroll();
+			this._activeTouchScroll = this.getContentScroll();
 		}
 	},
 
@@ -487,29 +487,17 @@ Moobile.ScrollView = new Class({
 	 */
 	_onTouchEnd: function(e) {
 
-		var touches = e.changedTouches;
+		if (e.touches.length > 0)
+			return;
 
-		for (var i = 0; i < touches.length; i++) {
+		this._activeTouchDuration = Date.now() - this._activeTouchTime;
 
-			var touch = touches[i];
+		if (this.options.snapToPage) this._snapToPage();
 
-			if (this._activeTouch.identifier === touch.identifier) {
-				this._activeTouchDuration = Date.now() - this._activeTouchTime;
-
-				if (this.options.snapToPage) {
-					if (this._activeTouchStartX !== touch.pageX ||
-						this._activeTouchStartY !== touch.pageY) {
-						this._snapToPage();
-					}
-				}
-
-				this._activeTouch = null;
-				this._activeTouchTime = null;
-				this._activeTouchDuration = null;
-				this._activeTouchStartScroll = null;
-				break;
-			}
-		}
+		this._activeTouch = null;
+		this._activeTouchTime = null;
+		this._activeTouchScroll = null;
+		this._activeTouchDuration = null;
 	},
 
 	/**
