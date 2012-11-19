@@ -455,18 +455,20 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchCancel: function() {
 		this._activeTouch = null;
 		this._activeTouchTime = null;
-		this._activeTouchDuration = null;
 		this._activeTouchScroll = null;
+		this._activeTouchDuration = null;
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchStart: function(e) {
@@ -483,6 +485,7 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchEnd: function(e) {
