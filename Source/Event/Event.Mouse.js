@@ -20,8 +20,9 @@ provides:
 
 if (!Browser.Features.Touch) (function() {
 
-var target = null;
-var uniqid = null;
+var touch = null;
+var touchTarget = null;
+var touchIdentifier = null;
 
 var redispatch = function(e) {
 
@@ -36,26 +37,31 @@ var redispatch = function(e) {
     	e.clientX, e.clientY,
     	false, false, false, false, 0, null);
 
-	target.dispatchEvent(faked);
+	touchTarget.dispatchEvent(faked);
 };
 
 var onDocumentMouseDown = function(e) {
-	if (target === null) {
-		target = e.target;
-		uniqid = e.event.timeStamp;
+	if (touch === null) {
+		touchTarget = e.event.target;
+		touchIdentifier = e.event.timeStamp;
+		touch = {
+			target: touchTarget,
+			identifier: touchIdentifier
+		};
 		redispatch(e.event);
 	}
 };
 
 var onDocumentMouseMove = function(e) {
-	if (target) redispatch(e.event);
+	if (touch) redispatch(e.event);
 };
 
 var onDocumentMouseUp = function(e) {
-	if (target) {
+	if (touch) {
 		redispatch(e.event);
-		target = null
-		uniqid = null;
+		touch = null;
+		touchTarget = null;
+		touchIdentifier = null;
 	}
 };
 
@@ -65,16 +71,20 @@ document.addEvent('mouseup', onDocumentMouseUp);
 
 var condition = function(e) {
 
-	var touch = {
-		identifier: uniqid,
-		target: target,
-		pageX: e.page.x,
-		pageY: e.page.y,
-		clientX: e.client.x,
-		clientY: e.client.y
-	};
+	if (touch === null)
+		return false;
+
+	touch.pageX = e.page.x;
+	touch.pageY = e.page.y;
+	touch.clientX = e.client.x;
+	touch.clientY = e.client.y;
 
 	e.touches = e.targetTouches = e.changedTouches = [touch];
+
+	if (e.type === 'mouseup') {
+		e.touches = [];
+		e.targetTouches = [];
+	}
 
 	if (e.event.fake) {
 		return true;
