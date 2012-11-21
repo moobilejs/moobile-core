@@ -54,7 +54,7 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	_incomingViewController: null,
+	_enteringViewController: null,
 
 	/**
 	 * @overridden
@@ -90,15 +90,6 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	viewDidBecomeReady: function() {
-		this.parent();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
 	destroy: function() {
 		this._tabBar.removeEvent('select', this.bound('_onTabSelect'));
 		this._tabBar = null;
@@ -113,10 +104,10 @@ Moobile.ViewControllerSet = new Class({
 	setChildViewControllers: function(viewControllers) {
 
 		this._selectedViewController = null;
-		this._incomingViewController = null;
+		this._enteringViewController = null;
 		this.removeAllChildViewControllers(true);
 
-		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i].hideView());
+		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
 
 		return this.setSelectedViewController(viewControllers[0]);
 	},
@@ -138,8 +129,8 @@ Moobile.ViewControllerSet = new Class({
 		if (this._selectedViewController === null) {
 			this.willSelectViewController(viewController);
 			this._selectedViewController = viewController;
-			this._selectedViewController.viewWillEnter();
 			this._selectedViewController.showView();
+			this._selectedViewController.viewWillEnter();
 			this._selectedViewController.viewDidEnter();
 			this.didSelectViewController(viewController);
 			return this;
@@ -148,16 +139,16 @@ Moobile.ViewControllerSet = new Class({
 		if (this._selectedViewController === viewController)
 			return this;
 
-		this._upcomingViewController = viewController;
+		this._enteringViewController = viewController;
 
-		var upcomingViewIndex = this.getChildViewControllerIndex(this._upcomingViewController);
+		var enteringViewIndex = this.getChildViewControllerIndex(this._enteringViewController);
 		var selectedViewindex = this.getChildViewControllerIndex(this._selectedViewController);
 
-		var method = upcomingViewIndex > selectedViewindex
+		var method = enteringViewIndex > selectedViewindex
 		           ? 'enter'
 		           : 'leave';
 
-		var viewToShow = this._upcomingViewController.getView();
+		var viewToShow = this._enteringViewController.getView();
 		var viewToHide = this._selectedViewController.getView();
 
 		this._animating = true; // needs to be set before the transition happens
@@ -168,8 +159,7 @@ Moobile.ViewControllerSet = new Class({
 		viewTransition[method].call(
 			viewTransition,
 			viewToShow,
-			viewToHide,
-			this.view
+			viewToHide
 		);
 
 		return this;
@@ -200,14 +190,23 @@ Moobile.ViewControllerSet = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#getTabBar
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabBar: function() {
+		return this._tabBar;
+	},
+
+	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
 	onSelectTransitionStart: function(e) {
-		this.willSelectViewController(this._upcomingViewController);
+		this.willSelectViewController(this._enteringViewController);
 		this._selectedViewController.viewWillLeave();
-		this._upcomingViewController.viewWillEnter();
+		this._enteringViewController.viewWillEnter();
 	},
 
 	/**
@@ -218,11 +217,11 @@ Moobile.ViewControllerSet = new Class({
 	onSelectTransitionComplete: function(e) {
 
 		this._selectedViewController.viewDidLeave();
-		this._upcomingViewController.viewDidEnter();
-		this.didSelectViewController(this._upcomingViewController);
+		this._enteringViewController.viewDidEnter();
+		this.didSelectViewController(this._enteringViewController);
 
-		this._selectedViewController = this._upcomingViewController;
-		this._upcomingViewController = null;
+		this._selectedViewController = this._enteringViewController;
+		this._enteringViewController = null;
 		this._animating = false;
 	},
 
@@ -234,6 +233,8 @@ Moobile.ViewControllerSet = new Class({
 	didAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
+
+		viewController.hideView();
 
 		var tab = new Moobile.Tab;
 		tab.setLabel(viewController.getTitle());
@@ -252,9 +253,10 @@ Moobile.ViewControllerSet = new Class({
 
 		this.parent(viewController);
 
-		var index = this.getChildViewControllerIndex(viewController);
-
 		viewController.setViewControllerSet(null);
+		viewController.showView();
+
+		var index = this.getChildViewControllerIndex(viewController);
 
 		if (this._selectedViewController === viewController) {
 			this._selectedViewController = null;
