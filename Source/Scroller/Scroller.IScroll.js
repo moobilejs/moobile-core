@@ -21,21 +21,7 @@ provides:
 
 (function() {
 
-var touchid = null;
-
-var fixtouch = function(e) {
-
-	var touch = {
-		identifier: touchid,
-		target: e.target,
-		pageX: e.pageX,
-		pageY: e.pageY,
-		clientX: e.clientX,
-		clientY: e.clientY
-	};
-
-	e.touches = e.targetTouches = e.changedTouches = [touch];
-};
+var touch = null;
 
 /**
  * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll
@@ -168,18 +154,20 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollStart: function(e) {
-		// TODO: Is this really needed ?
-		if (!('touches' in e)) {
 
-			if (touchid)
-				return this;
+		if (!Browser.Features.Touch) {
 
-			if (touchid === null) {
-				touchid = String.uniqueID();
-				fixtouch(e);
-			}
+			touch = {
+				identifier: String.uniqueID(),
+				target: e.target,
+				pageX: e.pageX,
+				pageY: e.pageY,
+				clientX: e.clientX,
+				clientY: e.clientY
+			};
+
+			e.touches = e.targetTouches = e.changedTouches = [touch];
 		}
-
 
 		this.fireEvent('touchstart', e);
 		this.fireEvent('scrollstart');
@@ -192,8 +180,14 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	_onScrollMove: function(e) {
 
-		if (touchid) {
-			fixtouch(e);
+		if (!Browser.Features.Touch) {
+
+			touch.pageX = e.pageX;
+			touch.pageY = e.pageY;
+			touch.clientX = e.clientX;
+			touch.clientY = e.clientY;
+
+			e.touches = e.targetTouches = e.changedTouches = [touch];
 		}
 
 		this.fireEvent('touchmove', e);
@@ -217,9 +211,18 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	_onTouchEnd:  function(e) {
 
-		if (touchid) {
-			fixtouch(e);
-			touchid = null;
+		if (!Browser.Features.Touch) {
+
+			touch.pageX = e.pageX;
+			touch.pageY = e.pageY;
+			touch.clientX = e.clientX;
+			touch.clientY = e.clientY;
+
+			e.touches = [];
+			e.targetTouches = [];
+			e.changedTouches = [touch];
+
+			touch = null;
 		}
 
 		this.fireEvent('touchend', e);
