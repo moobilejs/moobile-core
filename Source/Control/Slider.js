@@ -24,6 +24,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -196,9 +197,9 @@ Moobile.Slider = new Class({
 
 		// <0.1 compat>
 		if ('min' in this.options || 'max' in this.options) {
-			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
 			if ('min' in this.options) this.options.minimum = this.options.min;
 			if ('max' in this.options) this.options.maximum = this.options.max;
+			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
 		}
 		// </0.1 compat>
 
@@ -211,6 +212,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
@@ -226,20 +228,52 @@ Moobile.Slider = new Class({
 		this.thumbElement.addEvent('touchstart', this.bound('_onThumbTouchStart'));
 		this.thumbElement.addEvent('touchmove', this.bound('_onThumbTouchMove'));
 		this.thumbElement.addEvent('touchend', this.bound('_onThumbTouchEnd'));
+
+		this.setMinimum(this.options.minimum);
+		this.setMaximum(this.options.maximum);
+
+		var value = this.options.value;
+		if (value !== null) {
+			this.setValue(value);
+		}
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.2.0
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	didBecomeReady: function() {
+	didUpdateLayout: function() {
+
 		this.parent();
-		this.refresh();
-		this.setMinimum(this.options.minimum);
-		this.setMaximum(this.options.maximum);
-		this.setValue(this.options.value);
+
+		var trackSize = this.trackElement.getSize();
+		var thumbSize = this.thumbElement.getSize();
+
+		var range = 0;
+
+		switch (this.options.mode) {
+			case 'horizontal':
+				range = trackSize.x - thumbSize.x;
+				break;
+			case 'vertical':
+				range = trackSize.y - thumbSize.y;
+				break;
+		}
+
+		this._valueRange = this._maximum - this._minimum;
+		this._trackRange = range;
+		this._trackLimit = {
+			min: 0,
+			max: range
+		};
+
+		var pos = this._positionFromValue(this._value);
+		if (pos.x === this._position.x &&
+			pos.y === this._position.y)
+			return;
+
+		this._move(pos.x, pos.y);
 	},
 
 	/**
@@ -269,12 +303,27 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setValue: function(value) {
+
+		value = this.options.snap ? value.round() : value;
+
+		if (this._value === value)
+			return this;
+
+		this._value = value;
+
 		var pos = this._positionFromValue(value);
-		this._move(pos.x, pos.y);
+		if (pos.x !== this._position.x ||
+			pos.y !== this._position.y) {
+			this._move(pos.x, pos.y);
+		}
+
+		this.fireEvent('change', value);
+
 		return this;
 	},
 
@@ -290,18 +339,19 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMinimum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	setMinimum: function(minimum) {
-		if (this._value < minimum) this.setValue(minimum);
 		this._minimum = minimum;
-		this.refresh();
+		if (this._value < minimum) this.setValue(minimum);
 		return this;
 	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#getMinimum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	getMinimum: function() {
@@ -311,18 +361,19 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMaximum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	setMaximum: function(maximum) {
-		if (this._value > maximum) this.setValue(maximum);
 		this._maximum = maximum;
-		this.refresh();
+		if (this._value > maximum) this.setValue(maximum);
 		return this;
 	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMaximum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	getMaximum: function() {
@@ -330,43 +381,17 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Slider#refresh
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	refresh: function() {
-
-		var trackSize = this.trackElement.getSize();
-		var thumbSize = this.thumbElement.getSize();
-
-		var range = 0;
-
-		switch (this.options.mode) {
-			case 'horizontal':
-				range = trackSize.x - thumbSize.x;
-				break;
-			case 'vertical':
-				range = trackSize.y - thumbSize.y;
-				break;
-		}
-
-
-		this._valueRange = this._maximum - this._minimum;
-		this._trackRange = range;
-		this._trackLimit = {
-			min: 0,
-			max: range
-		};
-
-		return this;
-	},
-
-	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	_move: function(x, y) {
+
+		if (!this.isBuilt() ||
+			!this.isReady() ||
+			!this.isVisible())
+			return this;
 
 		switch (this.options.mode) {
 			case 'horizontal':
@@ -381,28 +406,10 @@ Moobile.Slider = new Class({
 				break;
 		}
 
-		var value = this._valueFromPosition(x, y);
-
-		if (this.options.snap) {
-			value = value.round();
-			var pos = this._positionFromValue(value);
-			x = pos.x;
-			y = pos.y;
-		}
-
-		if (this._position.x === x &&
-			this._position.y === y) {
-			return this;
-		}
-
-		this._value = value;
-
 		this._position.x = x;
 		this._position.y = y;
 		this.thumbElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
 		this.valueElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
-
-		this.fireEvent('change', value);
 
 		return this;
 	},
@@ -489,16 +496,13 @@ Moobile.Slider = new Class({
 			this._activeTouchOffsetY = touch.pageY;
 			this._activeTouchInitialThumbX = this._position.x;
 			this._activeTouchInitialThumbY = this._position.y;
-			this._bounds = {
-				min: 0,
-				max: this._trackRange
-			};
 		}
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	_onThumbTouchMove: function(e) {
@@ -506,7 +510,7 @@ Moobile.Slider = new Class({
 		if (this._activeTouch.identifier === touch.identifier) {
 			var x = touch.pageX - this._activeTouchOffsetX + this._activeTouchInitialThumbX;
 			var y = touch.pageY - this._activeTouchOffsetY + this._activeTouchInitialThumbY;
-			this._move(x, y);
+			this.setValue(this._valueFromPosition(x, y));
 		}
 	},
 
