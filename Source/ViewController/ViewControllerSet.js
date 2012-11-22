@@ -262,9 +262,13 @@ Moobile.ViewControllerSet = new Class({
 			this._selectedViewController = null;
 		}
 
-		var tab = this._tabBar.getTabAt(index);
-		if (tab) {
-			tab.removeFromParentComponent();
+		if (this._tabBar) {
+			// the tab bar might be destroyed at this point when the view is
+			// going to be destroyed
+			var tab = this._tabBar.getTabAt(index);
+			if (tab) {
+				tab.removeFromParentComponent();
+			}
 		}
 	},
 
