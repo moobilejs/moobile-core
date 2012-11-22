@@ -21,28 +21,6 @@ provides:
 ...
 */
 
-
-/*
----
-
-name: Scale
-
-description:
-
-license:
-
-authors:
-	- Jean-Philippe Dery (jean-philippe.dery@lemieuxbedard.com)
-
-requires:
-	- Init
-
-provides:
-	- Scale
-
-...
-*/
-
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
