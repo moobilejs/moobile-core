@@ -104,6 +104,16 @@ Moobile.ScrollView = new Class({
 	_scrollToPageTimer: null,
 
 	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_contentSize: {
+		x: null,
+		y: null
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
@@ -237,9 +247,18 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
+
 		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
 		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
-		this._setUpdateLayout(true);
+
+		if (this._contentSize.x !== x ||
+			this._contentSize.y !== y) {
+			this._setUpdateLayout(true);
+		}
+
+		this._contentSize.x = x;
+		this._contentSize.y = y;
+
 		return this;
 	},
 

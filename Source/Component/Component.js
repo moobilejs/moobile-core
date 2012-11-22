@@ -1127,9 +1127,18 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	setSize: function(x, y) {
+
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
-		this._setUpdateLayout(true);
+
+		if (this._size.x !== x ||
+			this._size.y !== y) {
+			this._setUpdateLayout(true);
+		}
+
+		this._size.x = x;
+		this._size.y = y;
+
 		return this;
 	},
 
