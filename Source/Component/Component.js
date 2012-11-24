@@ -143,7 +143,8 @@ Moobile.Component = new Class({
 	options: {
 		className: null,
 		styleName: null,
-		tagName: 'div'
+		tagName: 'div',
+		children: null
 	},
 
 	/**
@@ -261,6 +262,14 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didBuild: function() {
+
+		var children = this.options.children;
+		if (children) {
+			children.each(function(component) {
+				this.addChildComponent(component);
+			}, this);
+		}
+
 		this.didBuild();
 	},
 
