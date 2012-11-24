@@ -38,55 +38,7 @@ Moobile.Bar = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('bar');
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	destroy: function() {
-		this._item = null;
-		this.parent();
-	},
-
-	// <0.2-compat>
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setItem: function(item) {
-
-		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
-
-		if (this._item === item)
-			return this;
-
-		if (this._item) {
-			this._item.replaceWithComponent(item, true);
-		} else {
-			this.addChildComponentInside(item, this.contentElement);
-		}
-
-		this._item = item;
-		this._item.addClass('bar-item');
-
-		return this;
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getItem: function() {
-		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
-		return this._item;
 	}
-
-	// </0.2-compat>
 
 });
 

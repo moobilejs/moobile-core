@@ -71,7 +71,7 @@ Moobile.NavigationBar = new Class({
 			content.setRole('content');
 		}
 
-		// contains only text
+		// creates a title element if the content is text only
 		var fc = content.firstChild;
 		var lc = content.lastChild;
 		if (fc && fc.nodeType === 3 &&

@@ -1845,6 +1845,24 @@ var adopt = Element.prototype.adopt;
 Element.implement({
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#setRole
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+ 	 */
+	 setRole: function(role) {
+	 	return this.set('data-role', role);
+	 },
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRole
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	 getRole: function(role) {
+	 	return this.get('data-role');
+	 },
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Element/Element#ingest
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -1950,173 +1968,6 @@ Element.at = function(path, async, fn) {
 
 	return !async ? element.clone(true, true) : null;
 };
-
-})();
-
-/*
----
-
-name: Element.Role
-
-description: Provides extra methods to the Element prototype.
-
-license: MIT-style license.
-
-author:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	Element
-
-provides:
-	- Element.Role
-
-...
-*/
-
-(function() {
-
-/**
- * @see    http://moobilejs.com/doc/latest/Element/Element.Role#defineRole
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @eduted 0.2.0
- * @since  0.1.0
- * @deprecated 0.2.0
- */
-Element.defineRole = function(name, context, behavior) {
-
-	console.log("[DEPRECATION NOTICE] Element.defineRole will be removed in version 0.3.");
-
-	context = (context || Element).prototype;
-	if (context.__roles__ === undefined) {
-		context.__roles__ = {};
-	}
-
-	if (behavior instanceof Function) {
-		behavior = {behavior: behavior};
-	}
-
-	context.__roles__[name] = Object.append({traversable: false}, behavior);
-};
-
-Element.implement({
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#setRole
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 */
-	 setRole: function(role) {
-	 	return this.set('data-role', role);
-	 },
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRole
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	 getRole: function(role) {
-	 	return this.get('data-role');
-	 },
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleDefinition
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 * @deprecated 0.2.0
-	 */
-	 getRoleDefinition: function(context) {
-	 	console.log("[DEPRECATION NOTICE] Element.getRoleDefinition will be removed in version 0.3.");
-	 	return (context || this).__roles__
-	 	     ? (context || this).__roles__[this.getRole()]
-	 	     : null;
-	 },
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 * @deprecated 0.2.0
-	 */
-	getRoleElement: function(role) {
-		console.log("[DEPRECATION NOTICE] Element.getRoleElement will be removed in version 0.3.");
-		return this.getRoleElements(role)[0] || null;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRoleElements
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 * @deprecated 0.2.0
-	 */
-	getRoleElements: function(role) {
-
-		console.log("[DEPRECATION NOTICE] Element.getRoleElements will be removed in version 0.3.");
-
-		var validate = this.ownsRoleElement.bind(this);
-		var selector = role
-		             ? '[data-role=' + role + ']'
-		             : '[data-role]';
-
-		return this.getElements(selector).filter(validate);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#ownsRoleElement
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 * @deprecated 0.2.0
-	 */
-	ownsRoleElement: function(element) {
-
-		console.log("[DEPRECATION NOTICE] Element.ownsRoleElement will be removed in version 0.3.");
-
-		var parent = element.parentNode;
-		if (parent) {
-
-			if (parent === this)
-				return true;
-
-			if (parent.get('data-role'))
-				return false;
-
-			return this.ownsRoleElement(parent);
-		}
-
-		return false;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#executeDefinedRoles
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 * @deprecated 0.2.0
-	 */
-	executeDefinedRoles: function(context) {
-
-		console.log("[DEPRECATION NOTICE] Element.executeDefinedRoles will be removed in version 0.3.");
-
-		context = context || this;
-
-		this.getRoleElements().each(function(element) {
-			var role = element.getRoleDefinition(context);
-			if (role) {
-				var func = role.behavior;
-				if (func instanceof Function) {
-					func.call(context, element);
-				}
-				if (role.traversable) {
-					element.executeDefinedRoles(context);
-				}
-			} else {
-				throw new Error('Role ' + element.getRole() + ' is undefined');
-			}
-		}, this);
-
-		return this;
-	}
-
-});
 
 })();
 
@@ -2265,7 +2116,8 @@ Moobile.Component = new Class({
 	options: {
 		className: null,
 		styleName: null,
-		tagName: 'div'
+		tagName: 'div',
+		children: null
 	},
 
 	/**
@@ -2383,12 +2235,21 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	_didBuild: function() {
+
+		var children = this.options.children;
+		if (children) {
+			children.each(function(component) {
+				this.addChildComponent(component);
+			}, this);
+		}
+
 		this.didBuild();
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
@@ -2396,7 +2257,7 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (this.eventIsNative(name)) {
+		if (this.shouldSupportNativeEvent(name)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
@@ -2419,11 +2280,12 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(type) && this.eventIsNative(type)) {
+		if (this.shouldSupportNativeEvent(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
 			if (callbacks[type] && callbacks[type].contains(fn)) {
@@ -2440,12 +2302,32 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#eventIsNative
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	eventIsNative: function(name) {
-		return Moobile.Component.hasNativeEvent(name);
+		console.log('[DEPRECATION NOTICE] The method "eventIsNative" will be removed in 0.6, use the method "shouldSupportNativeEvent" instead.');
+		return this.shouldSupportNativeEvent(name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldSupportNativeEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	shouldSupportNativeEvent: function(name) {
+		return [
+			'click', 'dblclick', 'mouseup', 'mousedown',
+			'mouseover', 'mouseout','mousemove',
+			'keydown', 'keypress', 'keyup',
+			'touchstart', 'touchmove', 'touchend', 'touchcancel',
+			'gesturestart', 'gesturechange', 'gestureend',
+			'tap', 'tapstart', 'tapmove', 'tapend',
+			'pinch', 'swipe', 'touchold',
+			'animationend', 'transitionend', 'owntransitionend', 'ownanimationend'
+		].contains(name);
 	},
 
 	/**
@@ -3249,9 +3131,18 @@ Moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	setSize: function(x, y) {
+
 		if (x > 0 || x === null) this.element.setStyle('width', x);
 		if (y > 0 || y === null) this.element.setStyle('height', y);
-		this._setUpdateLayout(true);
+
+		if (this._size.x !== x ||
+			this._size.y !== y) {
+			this._setUpdateLayout(true);
+		}
+
+		this._size.x = x;
+		this._size.y = y;
+
 		return this;
 	},
 
@@ -3734,33 +3625,6 @@ Moobile.Component.create = function(klass, element, descriptor, options, name) {
 };
 
 (function() {
-
-// TODO: Also add native events to Element.NativeEvent when using addNativeEvent
-
-var events = Object.keys(Element.NativeEvents);
-
-Moobile.Component.addNativeEvent = function(name) {
-	events.include(name);
-};
-
-Moobile.Component.hasNativeEvent = function(name) {
-	return events.contains(name);
-};
-
-Moobile.Component.removeNativeEvent = function(name) {
-	events.erase(name);
-};
-
-Moobile.Component.addNativeEvent('tapstart');
-Moobile.Component.addNativeEvent('tapmove');
-Moobile.Component.addNativeEvent('tapend');
-Moobile.Component.addNativeEvent('tap');
-Moobile.Component.addNativeEvent('pinch');
-Moobile.Component.addNativeEvent('swipe');
-Moobile.Component.addNativeEvent('animationend');
-Moobile.Component.addNativeEvent('transitionend');
-Moobile.Component.addNativeEvent('owntransitionend');
-Moobile.Component.addNativeEvent('ownanimationend');
 
 /**
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -4536,55 +4400,7 @@ Moobile.Bar = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('bar');
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	destroy: function() {
-		this._item = null;
-		this.parent();
-	},
-
-	// <0.2-compat>
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	setItem: function(item) {
-
-		console.log('[DEPRECATION NOTICE] The method "setItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
-
-		if (this._item === item)
-			return this;
-
-		if (this._item) {
-			this._item.replaceWithComponent(item, true);
-		} else {
-			this.addChildComponentInside(item, this.contentElement);
-		}
-
-		this._item = item;
-		this._item.addClass('bar-item');
-
-		return this;
-	},
-
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getItem: function() {
-		console.log('[DEPRECATION NOTICE] The method "getItem" will be removed in 0.5, all the methods from the "BarItem" class were moved to "Bar" class');
-		return this._item;
 	}
-
-	// </0.2-compat>
 
 });
 
@@ -4622,64 +4438,6 @@ Moobile.Component.defineStyle('dark', Moobile.Bar, {
 Moobile.Component.defineStyle('light', Moobile.Bar, {
 	attach: function(element) { element.addClass('style-light'); },
 	detach: function(element) { element.removeClass('style-light'); }
-});
-
-
-/*
----
-
-name: BarItem
-
-description: Provides a control that represents the content of a bar.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- Control
-
-provides:
-	- BarItem
-
-...
-*/
-
- /**
- * @see    http://moobilejs.com/doc/latest/Control/BarItem
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @edited 0.3.0
- * @since  0.1.0
- */
-Moobile.BarItem = new Class({
-
-	Extends: Moobile.Control,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willBuild: function() {
-		this.parent();
-		this.addClass('bar-item');
-	}
-
-});
-
-//------------------------------------------------------------------------------
-// Roles
-//------------------------------------------------------------------------------
-
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @edited 0.3.0
- * @since  0.1.0
- */
-Moobile.Component.defineRole('item', Moobile.Bar, null, function(element) {
-	console.log('[DEPRECATION NOTICE] The role "item" will be removed in 0.5, all the BarItem’s methods were moved to the "Bar" class.');
-	this.setItem(Moobile.Component.create(Moobile.BarItem, element, 'data-item'));
 });
 
 
@@ -4756,7 +4514,7 @@ Moobile.NavigationBar = new Class({
 			content.setRole('content');
 		}
 
-		// contains only text
+		// creates a title element if the content is text only
 		var fc = content.firstChild;
 		var lc = content.lastChild;
 		if (fc && fc.nodeType === 3 &&
@@ -4958,191 +4716,6 @@ Moobile.Component.defineRole('title', Moobile.NavigationBar, null, function(elem
 /*
 ---
 
-name: NavigationBarItem
-
-description: Provides the navigation bar item that contains the title and
-             buttons at the left and right of it.
-
-license: MIT-style license.
-
-authors:
-	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-
-requires:
-	- BarItem
-
-provides:
-	- NavigationBarItem
-
-...
-*/
-
-/**
- * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @edited 0.3.0
- * @edited 0.2.0
- * @since  0.1.0
- */
-Moobile.NavigationBarItem = new Class({
-
-	Extends: Moobile.BarItem,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	_title: null,
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	willBuild: function() {
-
-		this.parent();
-
-		this.addClass('navigation-bar-item');
-
-		var title = this.getRoleElement('title');
-		if (title === null) {
-			title = document.createElement('div');
-			title.ingest(this.element);
-			title.inject(this.element);
-			title.setRole('title');
-		}
-
-		var wrapper = document.createElement('div');
-		wrapper.addClass('bar-title-wrapper');
-		wrapper.wraps(title);
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	destroy: function() {
-		this._title = null;
-		this.parent();
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#setTitle
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.2.0
-	 * @since  0.1.0
-	 */
-	setTitle: function(title) {
-
-		if (this._title === title)
-			return this;
-
-		title = Moobile.Text.from(title);
-
-		if (this._title) {
-			this._title.replaceWithComponent(title, true);
-		} else {
-			this.addChildComponent(title);
-		}
-
-		this._title = title;
-		this._title.addClass('bar-title');
-		this.toggleClass('bar-title-empty', this._title.isEmpty());
-
-		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getTitle
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getTitle: function() {
-		return this._title;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#addLeftButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	addLeftButton: function(button) {
-		return this.addChildComponent(button, 'top');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#addRightButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	addRightButton: function(button) {
-		return this.addChildComponent(button, 'bottom');
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#getButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	getButtonAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Button, index);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#removeButton
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeButton: function(button, destroy) {
-		return this.removeChildComponent(button, destroy);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBarItem#removeAllButtons
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
-	removeAllButtons: function(destroy) {
-		return this.removeAllChildComponents(Moobile.Button, destroy);
-	}
-
-});
-
-//------------------------------------------------------------------------------
-// Roles
-//------------------------------------------------------------------------------
-
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
-Moobile.Component.defineRole('item', Moobile.NavigationBar, null, function(element) {
-	this.setItem(Moobile.Component.create(Moobile.NavigationBarItem, element, 'data-item'));
-});
-
-/**
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
-Moobile.Component.defineRole('title', Moobile.NavigationBarItem, null, function(element) {
-	this.setTitle(Moobile.Component.create(Moobile.Text, element, 'data-title'));
-});
-
-/*
----
-
 name: Slider
 
 description: Provides a slider control with a knob.
@@ -5163,31 +4736,10 @@ provides:
 ...
 */
 
-
-/*
----
-
-name: Scale
-
-description:
-
-license:
-
-authors:
-	- Jean-Philippe Dery (jean-philippe.dery@lemieuxbedard.com)
-
-requires:
-	- Init
-
-provides:
-	- Scale
-
-...
-*/
-
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -5360,9 +4912,9 @@ Moobile.Slider = new Class({
 
 		// <0.1 compat>
 		if ('min' in this.options || 'max' in this.options) {
-			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
 			if ('min' in this.options) this.options.minimum = this.options.min;
 			if ('max' in this.options) this.options.maximum = this.options.max;
+			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
 		}
 		// </0.1 compat>
 
@@ -5375,6 +4927,7 @@ Moobile.Slider = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
@@ -5390,20 +4943,52 @@ Moobile.Slider = new Class({
 		this.thumbElement.addEvent('touchstart', this.bound('_onThumbTouchStart'));
 		this.thumbElement.addEvent('touchmove', this.bound('_onThumbTouchMove'));
 		this.thumbElement.addEvent('touchend', this.bound('_onThumbTouchEnd'));
+
+		this.setMinimum(this.options.minimum);
+		this.setMaximum(this.options.maximum);
+
+		var value = this.options.value;
+		if (value !== null) {
+			this.setValue(value);
+		}
 	},
 
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.2.0
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	didBecomeReady: function() {
+	didUpdateLayout: function() {
+
 		this.parent();
-		this.refresh();
-		this.setMinimum(this.options.minimum);
-		this.setMaximum(this.options.maximum);
-		this.setValue(this.options.value);
+
+		var trackSize = this.trackElement.getSize();
+		var thumbSize = this.thumbElement.getSize();
+
+		var range = 0;
+
+		switch (this.options.mode) {
+			case 'horizontal':
+				range = trackSize.x - thumbSize.x;
+				break;
+			case 'vertical':
+				range = trackSize.y - thumbSize.y;
+				break;
+		}
+
+		this._valueRange = this._maximum - this._minimum;
+		this._trackRange = range;
+		this._trackLimit = {
+			min: 0,
+			max: range
+		};
+
+		var pos = this._positionFromValue(this._value);
+		if (pos.x === this._position.x &&
+			pos.y === this._position.y)
+			return;
+
+		this._move(pos.x, pos.y);
 	},
 
 	/**
@@ -5433,12 +5018,27 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setValue: function(value) {
+
+		value = this.options.snap ? value.round() : value;
+
+		if (this._value === value)
+			return this;
+
+		this._value = value;
+
 		var pos = this._positionFromValue(value);
-		this._move(pos.x, pos.y);
+		if (pos.x !== this._position.x ||
+			pos.y !== this._position.y) {
+			this._move(pos.x, pos.y);
+		}
+
+		this.fireEvent('change', value);
+
 		return this;
 	},
 
@@ -5454,18 +5054,19 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMinimum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	setMinimum: function(minimum) {
-		if (this._value < minimum) this.setValue(minimum);
 		this._minimum = minimum;
-		this.refresh();
+		if (this._value < minimum) this.setValue(minimum);
 		return this;
 	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#getMinimum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	getMinimum: function() {
@@ -5475,18 +5076,19 @@ Moobile.Slider = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMaximum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	setMaximum: function(maximum) {
-		if (this._value > maximum) this.setValue(maximum);
 		this._maximum = maximum;
-		this.refresh();
+		if (this._value > maximum) this.setValue(maximum);
 		return this;
 	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setMaximum
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	getMaximum: function() {
@@ -5494,43 +5096,17 @@ Moobile.Slider = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/Slider#refresh
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	refresh: function() {
-
-		var trackSize = this.trackElement.getSize();
-		var thumbSize = this.thumbElement.getSize();
-
-		var range = 0;
-
-		switch (this.options.mode) {
-			case 'horizontal':
-				range = trackSize.x - thumbSize.x;
-				break;
-			case 'vertical':
-				range = trackSize.y - thumbSize.y;
-				break;
-		}
-
-
-		this._valueRange = this._maximum - this._minimum;
-		this._trackRange = range;
-		this._trackLimit = {
-			min: 0,
-			max: range
-		};
-
-		return this;
-	},
-
-	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	_move: function(x, y) {
+
+		if (!this.isBuilt() ||
+			!this.isReady() ||
+			!this.isVisible())
+			return this;
 
 		switch (this.options.mode) {
 			case 'horizontal':
@@ -5545,28 +5121,10 @@ Moobile.Slider = new Class({
 				break;
 		}
 
-		var value = this._valueFromPosition(x, y);
-
-		if (this.options.snap) {
-			value = value.round();
-			var pos = this._positionFromValue(value);
-			x = pos.x;
-			y = pos.y;
-		}
-
-		if (this._position.x === x &&
-			this._position.y === y) {
-			return this;
-		}
-
-		this._value = value;
-
 		this._position.x = x;
 		this._position.y = y;
 		this.thumbElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
 		this.valueElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
-
-		this.fireEvent('change', value);
 
 		return this;
 	},
@@ -5653,16 +5211,13 @@ Moobile.Slider = new Class({
 			this._activeTouchOffsetY = touch.pageY;
 			this._activeTouchInitialThumbX = this._position.x;
 			this._activeTouchInitialThumbY = this._position.y;
-			this._bounds = {
-				min: 0,
-				max: this._trackRange
-			};
 		}
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	_onThumbTouchMove: function(e) {
@@ -5670,7 +5225,7 @@ Moobile.Slider = new Class({
 		if (this._activeTouch.identifier === touch.identifier) {
 			var x = touch.pageX - this._activeTouchOffsetX + this._activeTouchInitialThumbX;
 			var y = touch.pageY - this._activeTouchOffsetY + this._activeTouchInitialThumbY;
-			this._move(x, y);
+			this.setValue(this._valueFromPosition(x, y));
 		}
 	},
 
@@ -8124,8 +7679,9 @@ provides:
 
 if (!Browser.Features.Touch) (function() {
 
-var target = null;
-var uniqid = null;
+var touch = null;
+var touchTarget = null;
+var touchIdentifier = null;
 
 var redispatch = function(e) {
 
@@ -8140,26 +7696,31 @@ var redispatch = function(e) {
     	e.clientX, e.clientY,
     	false, false, false, false, 0, null);
 
-	target.dispatchEvent(faked);
+	touchTarget.dispatchEvent(faked);
 };
 
 var onDocumentMouseDown = function(e) {
-	if (target === null) {
-		target = e.target;
-		uniqid = e.event.timeStamp;
+	if (touch === null) {
+		touchTarget = e.event.target;
+		touchIdentifier = e.event.timeStamp;
+		touch = {
+			target: touchTarget,
+			identifier: touchIdentifier
+		};
 		redispatch(e.event);
 	}
 };
 
 var onDocumentMouseMove = function(e) {
-	if (target) redispatch(e.event);
+	if (touch) redispatch(e.event);
 };
 
 var onDocumentMouseUp = function(e) {
-	if (target) {
+	if (touch) {
 		redispatch(e.event);
-		target = null
-		uniqid = null;
+		touch = null;
+		touchTarget = null;
+		touchIdentifier = null;
 	}
 };
 
@@ -8169,16 +7730,20 @@ document.addEvent('mouseup', onDocumentMouseUp);
 
 var condition = function(e) {
 
-	var touch = {
-		identifier: uniqid,
-		target: target,
-		pageX: e.page.x,
-		pageY: e.page.y,
-		clientX: e.client.x,
-		clientY: e.client.y
-	};
+	if (touch === null)
+		return false;
+
+	touch.pageX = e.page.x;
+	touch.pageY = e.page.y;
+	touch.clientX = e.client.x;
+	touch.clientY = e.client.y;
 
 	e.touches = e.targetTouches = e.changedTouches = [touch];
+
+	if (e.type === 'mouseup') {
+		e.touches = [];
+		e.targetTouches = [];
+	}
 
 	if (e.event.fake) {
 		return true;
@@ -8644,21 +8209,7 @@ provides:
 
 (function() {
 
-var touchid = null;
-
-var fixtouch = function(e) {
-
-	var touch = {
-		identifier: touchid,
-		target: e.target,
-		pageX: e.pageX,
-		pageY: e.pageY,
-		clientX: e.clientX,
-		clientY: e.clientY
-	};
-
-	e.touches = e.targetTouches = e.changedTouches = [touch];
-};
+var touch = null;
 
 /**
  * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll
@@ -8791,18 +8342,20 @@ Moobile.Scroller.IScroll = new Class({
 	 * @since  0.2.0
 	 */
 	_onScrollStart: function(e) {
-		// TODO: Is this really needed ?
-		if (!('touches' in e)) {
 
-			if (touchid)
-				return this;
+		if (!Browser.Features.Touch) {
 
-			if (touchid === null) {
-				touchid = String.uniqueID();
-				fixtouch(e);
-			}
+			touch = {
+				identifier: String.uniqueID(),
+				target: e.target,
+				pageX: e.pageX,
+				pageY: e.pageY,
+				clientX: e.clientX,
+				clientY: e.clientY
+			};
+
+			e.touches = e.targetTouches = e.changedTouches = [touch];
 		}
-
 
 		this.fireEvent('touchstart', e);
 		this.fireEvent('scrollstart');
@@ -8815,8 +8368,14 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	_onScrollMove: function(e) {
 
-		if (touchid) {
-			fixtouch(e);
+		if (!Browser.Features.Touch) {
+
+			touch.pageX = e.pageX;
+			touch.pageY = e.pageY;
+			touch.clientX = e.clientX;
+			touch.clientY = e.clientY;
+
+			e.touches = e.targetTouches = e.changedTouches = [touch];
 		}
 
 		this.fireEvent('touchmove', e);
@@ -8840,9 +8399,18 @@ Moobile.Scroller.IScroll = new Class({
 	 */
 	_onTouchEnd:  function(e) {
 
-		if (touchid) {
-			fixtouch(e);
-			touchid = null;
+		if (!Browser.Features.Touch) {
+
+			touch.pageX = e.pageX;
+			touch.pageY = e.pageY;
+			touch.clientX = e.clientX;
+			touch.clientY = e.clientY;
+
+			e.touches = [];
+			e.targetTouches = [];
+			e.changedTouches = [touch];
+
+			touch = null;
 		}
 
 		this.fireEvent('touchend', e);
@@ -10141,7 +9709,7 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouchStartScroll: null,
+	_activeTouchScroll: null,
 
 	/**
 	 * @hidden
@@ -10193,6 +9761,16 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	_scrollToPageTimer: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_contentSize: {
+		x: null,
+		y: null
+	},
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#options
@@ -10328,9 +9906,18 @@ Moobile.ScrollView = new Class({
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
+
 		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
 		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
-		this._setUpdateLayout(true);
+
+		if (this._contentSize.x !== x ||
+			this._contentSize.y !== y) {
+			this._setUpdateLayout(true);
+		}
+
+		this._contentSize.x = x;
+		this._contentSize.y = y;
+
 		return this;
 	},
 
@@ -10508,8 +10095,8 @@ Moobile.ScrollView = new Class({
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
 
-		var moveX = scroll.x - this._activeTouchStartScroll.x;
-		var moveY = scroll.y - this._activeTouchStartScroll.y;
+		var moveX = scroll.x - this._activeTouchScroll.x;
+		var moveY = scroll.y - this._activeTouchScroll.y;
 		var absMoveX = Math.abs(moveX);
 		var absMoveY = Math.abs(moveY);
 
@@ -10546,18 +10133,20 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchCancel: function() {
 		this._activeTouch = null;
 		this._activeTouchTime = null;
+		this._activeTouchScroll = null;
 		this._activeTouchDuration = null;
-		this._activeTouchStartScroll = null;
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchStart: function(e) {
@@ -10567,40 +10156,29 @@ Moobile.ScrollView = new Class({
 		if (this._activeTouch === null) {
 			this._activeTouch = touch;
 			this._activeTouchTime = Date.now();
-			this._activeTouchStartScroll = this.getContentScroll();
+			this._activeTouchScroll = this.getContentScroll();
 		}
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchEnd: function(e) {
 
-		var touches = e.changedTouches;
+		if (e.touches.length > 0)
+			return;
 
-		for (var i = 0; i < touches.length; i++) {
+		this._activeTouchDuration = Date.now() - this._activeTouchTime;
 
-			var touch = touches[i];
+		if (this.options.snapToPage) this._snapToPage();
 
-			if (this._activeTouch.identifier === touch.identifier) {
-				this._activeTouchDuration = Date.now() - this._activeTouchTime;
-
-				if (this.options.snapToPage) {
-					if (this._activeTouchStartX !== touch.pageX ||
-						this._activeTouchStartY !== touch.pageY) {
-						this._snapToPage();
-					}
-				}
-
-				this._activeTouch = null;
-				this._activeTouchTime = null;
-				this._activeTouchDuration = null;
-				this._activeTouchStartScroll = null;
-				break;
-			}
-		}
+		this._activeTouch = null;
+		this._activeTouchTime = null;
+		this._activeTouchScroll = null;
+		this._activeTouchDuration = null;
 	},
 
 	/**
@@ -11609,7 +11187,7 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	_incomingViewController: null,
+	_enteringViewController: null,
 
 	/**
 	 * @overridden
@@ -11645,15 +11223,6 @@ Moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	viewDidBecomeReady: function() {
-		this.parent();
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
 	destroy: function() {
 		this._tabBar.removeEvent('select', this.bound('_onTabSelect'));
 		this._tabBar = null;
@@ -11668,10 +11237,10 @@ Moobile.ViewControllerSet = new Class({
 	setChildViewControllers: function(viewControllers) {
 
 		this._selectedViewController = null;
-		this._incomingViewController = null;
+		this._enteringViewController = null;
 		this.removeAllChildViewControllers(true);
 
-		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i].hideView());
+		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
 
 		return this.setSelectedViewController(viewControllers[0]);
 	},
@@ -11693,8 +11262,8 @@ Moobile.ViewControllerSet = new Class({
 		if (this._selectedViewController === null) {
 			this.willSelectViewController(viewController);
 			this._selectedViewController = viewController;
-			this._selectedViewController.viewWillEnter();
 			this._selectedViewController.showView();
+			this._selectedViewController.viewWillEnter();
 			this._selectedViewController.viewDidEnter();
 			this.didSelectViewController(viewController);
 			return this;
@@ -11703,16 +11272,16 @@ Moobile.ViewControllerSet = new Class({
 		if (this._selectedViewController === viewController)
 			return this;
 
-		this._upcomingViewController = viewController;
+		this._enteringViewController = viewController;
 
-		var upcomingViewIndex = this.getChildViewControllerIndex(this._upcomingViewController);
+		var enteringViewIndex = this.getChildViewControllerIndex(this._enteringViewController);
 		var selectedViewindex = this.getChildViewControllerIndex(this._selectedViewController);
 
-		var method = upcomingViewIndex > selectedViewindex
+		var method = enteringViewIndex > selectedViewindex
 		           ? 'enter'
 		           : 'leave';
 
-		var viewToShow = this._upcomingViewController.getView();
+		var viewToShow = this._enteringViewController.getView();
 		var viewToHide = this._selectedViewController.getView();
 
 		this._animating = true; // needs to be set before the transition happens
@@ -11723,8 +11292,7 @@ Moobile.ViewControllerSet = new Class({
 		viewTransition[method].call(
 			viewTransition,
 			viewToShow,
-			viewToHide,
-			this.view
+			viewToHide
 		);
 
 		return this;
@@ -11755,14 +11323,23 @@ Moobile.ViewControllerSet = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#getTabBar
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabBar: function() {
+		return this._tabBar;
+	},
+
+	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
 	onSelectTransitionStart: function(e) {
-		this.willSelectViewController(this._upcomingViewController);
+		this.willSelectViewController(this._enteringViewController);
 		this._selectedViewController.viewWillLeave();
-		this._upcomingViewController.viewWillEnter();
+		this._enteringViewController.viewWillEnter();
 	},
 
 	/**
@@ -11773,11 +11350,11 @@ Moobile.ViewControllerSet = new Class({
 	onSelectTransitionComplete: function(e) {
 
 		this._selectedViewController.viewDidLeave();
-		this._upcomingViewController.viewDidEnter();
-		this.didSelectViewController(this._upcomingViewController);
+		this._enteringViewController.viewDidEnter();
+		this.didSelectViewController(this._enteringViewController);
 
-		this._selectedViewController = this._upcomingViewController;
-		this._upcomingViewController = null;
+		this._selectedViewController = this._enteringViewController;
+		this._enteringViewController = null;
 		this._animating = false;
 	},
 
@@ -11789,6 +11366,8 @@ Moobile.ViewControllerSet = new Class({
 	didAddChildViewController: function(viewController) {
 
 		this.parent(viewController);
+
+		viewController.hideView();
 
 		var tab = new Moobile.Tab;
 		tab.setLabel(viewController.getTitle());
@@ -11807,17 +11386,22 @@ Moobile.ViewControllerSet = new Class({
 
 		this.parent(viewController);
 
-		var index = this.getChildViewControllerIndex(viewController);
-
 		viewController.setViewControllerSet(null);
+		viewController.showView();
+
+		var index = this.getChildViewControllerIndex(viewController);
 
 		if (this._selectedViewController === viewController) {
 			this._selectedViewController = null;
 		}
 
-		var tab = this._tabBar.getTabAt(index);
-		if (tab) {
-			tab.removeFromParentComponent();
+		if (this._tabBar) {
+			// the tab bar might be destroyed at this point when the view is
+			// going to be destroyed
+			var tab = this._tabBar.getTabAt(index);
+			if (tab) {
+				tab.removeFromParentComponent();
+			}
 		}
 	},
 
@@ -12002,8 +11586,6 @@ Moobile.ViewControllerStack = new Class({
 
 		var childViewControllers = this.getChildViewControllers();
 
-		viewController.removeFromParentViewController();
-		viewController.setViewControllerStack(this);
 		this.willPushViewController(viewController);
 		this.addChildViewController(viewController);
 
@@ -12188,7 +11770,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	willAddChildViewController: function(viewController) {
+	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(this);
 	},
@@ -12198,7 +11780,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	willRemoveChildViewController: function(viewController) {
+	didRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
 		viewController.setViewControllerStack(null);
 	},
@@ -13718,7 +13300,7 @@ Moobile.ViewTransition.None = new Class({
 	enterAnimation: function(viewToShow, viewToHide, parentView) {
 		viewToShow.show();
 		viewToHide.hide();
-		this.didEnter(viewToShow, viewToHide, parentView);
+		this.didEnter.delay(50, this, [viewToShow, viewToHide, parentView]);
 	},
 
 	/**
@@ -13729,7 +13311,7 @@ Moobile.ViewTransition.None = new Class({
 	leaveAnimation: function(viewToShow, viewToHide, parentView) {
 		viewToShow.show();
 		viewToHide.hide();
-		this.didLeave(viewToShow, viewToHide, parentView);
+		this.didLeave.delay(50, this, [viewToShow, viewToHide, parentView]);
 	}
 
 });
