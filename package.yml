@@ -38,7 +38,6 @@ sources:
   - "Source/Dialog/Alert.js"
   - "Source/Element/Element.js"
   - "Source/Element/Element.From.js"
-  - "Source/Element/Element.Role.js"
   - "Source/Element/Element.Style.Vendor.js"
   - "Source/Event/EventFirer.js"
   - "Source/Event/Event.Ready.js"
