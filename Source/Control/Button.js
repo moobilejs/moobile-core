@@ -43,6 +43,15 @@ Moobile.Button = new Class({
 	hitAreaElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		label: null
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -71,9 +80,16 @@ Moobile.Button = new Class({
 	 * @since  0.2.1
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.hitAreaElement = new Element('div.hit-area');
 		this.hitAreaElement.inject(this.element);
+
+		var label = this.options.label;
+		if (label) {
+			this.setLabel(label);
+		}
 	},
 
 	/**

@@ -51,12 +51,16 @@ Moobile.ListItem = new Class({
 	_detail: null,
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
-		tagName: 'li'
+		tagName: 'li',
+		image: null,
+		label: null,
+		detail: null,
 	},
 
 	/**
@@ -91,6 +95,31 @@ Moobile.ListItem = new Class({
 			detail = document.createElement('div');
 			detail.inject(this.element);
 			detail.setRole('detail');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var image = this.options.image;
+		if (image) {
+			this.setImage(image);
+		}
+
+		var label = this.options.label;
+		if (label) {
+			this.setLabel(label);
+		}
+
+		var detail = this.options.detail;
+		if (detail) {
+			this.setDetail(detail);
 		}
 	},
 

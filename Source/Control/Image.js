@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -61,13 +62,15 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'img',
-		preload: false
+		preload: false,
+		source: null
 	},
 
 	/**
@@ -84,6 +87,21 @@ Moobile.Image = new Class({
 		this.addClass('image');
 
 		var source = this.element.get('src');
+		if (source) {
+			this.setSource(source);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var source = this.options.source;
 		if (source) {
 			this.setSource(source);
 		}

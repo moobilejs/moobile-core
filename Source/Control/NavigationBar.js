@@ -44,6 +44,15 @@ Moobile.NavigationBar = new Class({
 	contentElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		title: null,
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
@@ -83,6 +92,21 @@ Moobile.NavigationBar = new Class({
 				title.inject(content);
 				title.setRole('title');
 			}
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var title = this.options.title;
+		if (title) {
+			this.setTitle(title);
 		}
 	},
 

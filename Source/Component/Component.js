@@ -265,9 +265,9 @@ Moobile.Component = new Class({
 
 		var children = this.options.children;
 		if (children) {
-			children.each(function(component) {
-				this.addChildComponent(component);
-			}, this);
+			for (var i = 0, l = children.length >>> 0; i < l; i++) {
+				this.addChildComponent(children[i]);
+			}
 		}
 
 		this.didBuild();

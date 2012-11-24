@@ -43,6 +43,16 @@ Moobile.Tab = new Class({
 	_image: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tab#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		label: null,
+		image: null
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
@@ -67,6 +77,26 @@ Moobile.Tab = new Class({
 			image = document.createElement('div');
 			image.inject(this.element, 'top');
 			image.setRole('image');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		var image = this.options.image;
+		if (image) {
+			this.setImage(image);
+		}
+
+		var label = this.options.label;
+		if (label) {
+			this.setLabel(label);
 		}
 	},
 

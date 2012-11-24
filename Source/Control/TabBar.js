@@ -48,7 +48,8 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	options: {
-		selectedTabIndex: -1
+		selectedTabIndex: -1,
+		tabs: null,
 	},
 
 	/**
@@ -59,6 +60,23 @@ Moobile.TabBar = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('tab-bar');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		var tabs = this.options.tabs;
+		if (tabs) {
+			for (var i = 0, l = tabs.length >>> 0; i < l; i++) {
+				this.addTab(tabs[i]);
+			}
+		}
 	},
 
 	/**

@@ -32,10 +32,12 @@ Moobile.Text = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Text#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
-		tagName: 'span'
+		tagName: 'span',
+		text: null,
 	},
 
 	/**
@@ -46,6 +48,21 @@ Moobile.Text = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('text');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		var text = this.options.text;
+		if (text) {
+			this.setText(text);
+		}
 	},
 
 	/**

@@ -52,7 +52,8 @@ Moobile.ButtonGroup = new Class({
 	options: {
 		layout: 'horizontal',
 		selectable: true,
-		selectedButtonIndex: -1
+		selectedButtonIndex: -1,
+		buttons: null,
 	},
 
 	/**
@@ -80,9 +81,18 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.setSelectable(this.options.selectable);
 		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
+
+		var buttons = this.options.buttons;
+		if (buttons) {
+			for (var i = 0, l = buttons.length >>> 0; i < l; i++) {
+				this.addButton(buttons[i]);
+			}
+		}
 	},
 
 	/**

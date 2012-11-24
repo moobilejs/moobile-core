@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -53,12 +54,14 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'ul',
 		selectable: true,
-		selectedItemIndex: -1
+		selectedItemIndex: -1,
+		items: null,
 	},
 
 	/**
@@ -74,12 +77,22 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.setSelectable(this.options.selectable);
 		this.setSelectedItemIndex(this.options.selectedItemIndex);
+
+		var items = this.options.items;
+		if (items) {
+			for (var i = 0, l = items.length >>> 0; i < l; i++) {
+				this.addItem(items[i]);
+			}
+		}
 	},
 
 	/**

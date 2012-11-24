@@ -2238,9 +2238,9 @@ Moobile.Component = new Class({
 
 		var children = this.options.children;
 		if (children) {
-			children.each(function(component) {
-				this.addChildComponent(component);
-			}, this);
+			for (var i = 0, l = children.length >>> 0; i < l; i++) {
+				this.addChildComponent(children[i]);
+			}
 		}
 
 		this.didBuild();
@@ -3848,6 +3848,15 @@ Moobile.Button = new Class({
 	hitAreaElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		label: null
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -3876,9 +3885,16 @@ Moobile.Button = new Class({
 	 * @since  0.2.1
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.hitAreaElement = new Element('div.hit-area');
 		this.hitAreaElement.inject(this.element);
+
+		var label = this.options.label;
+		if (label) {
+			this.setLabel(label);
+		}
 	},
 
 	/**
@@ -4078,7 +4094,8 @@ Moobile.ButtonGroup = new Class({
 	options: {
 		layout: 'horizontal',
 		selectable: true,
-		selectedButtonIndex: -1
+		selectedButtonIndex: -1,
+		buttons: null,
 	},
 
 	/**
@@ -4106,9 +4123,18 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.setSelectable(this.options.selectable);
 		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
+
+		var buttons = this.options.buttons;
+		if (buttons) {
+			for (var i = 0, l = buttons.length >>> 0; i < l; i++) {
+				this.addButton(buttons[i]);
+			}
+		}
 	},
 
 	/**
@@ -4487,6 +4513,15 @@ Moobile.NavigationBar = new Class({
 	contentElement: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/NavigationBar#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		title: null,
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
@@ -4526,6 +4561,21 @@ Moobile.NavigationBar = new Class({
 				title.inject(content);
 				title.setRole('title');
 			}
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var title = this.options.title;
+		if (title) {
+			this.setTitle(title);
 		}
 	},
 
@@ -5283,6 +5333,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -5314,12 +5365,14 @@ Moobile.List = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/List#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'ul',
 		selectable: true,
-		selectedItemIndex: -1
+		selectedItemIndex: -1,
+		items: null,
 	},
 
 	/**
@@ -5335,12 +5388,22 @@ Moobile.List = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
+
 		this.setSelectable(this.options.selectable);
 		this.setSelectedItemIndex(this.options.selectedItemIndex);
+
+		var items = this.options.items;
+		if (items) {
+			for (var i = 0, l = items.length >>> 0; i < l; i++) {
+				this.addItem(items[i]);
+			}
+		}
 	},
 
 	/**
@@ -5708,12 +5771,16 @@ Moobile.ListItem = new Class({
 	_detail: null,
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Control/ListItem#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
-		tagName: 'li'
+		tagName: 'li',
+		image: null,
+		label: null,
+		detail: null,
 	},
 
 	/**
@@ -5748,6 +5815,31 @@ Moobile.ListItem = new Class({
 			detail = document.createElement('div');
 			detail.inject(this.element);
 			detail.setRole('detail');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var image = this.options.image;
+		if (image) {
+			this.setImage(image);
+		}
+
+		var label = this.options.label;
+		if (label) {
+			this.setLabel(label);
+		}
+
+		var detail = this.options.detail;
+		if (detail) {
+			this.setDetail(detail);
 		}
 	},
 
@@ -6097,6 +6189,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -6136,13 +6229,15 @@ Moobile.Image = new Class({
 	},
 
 	/**
-	 * @hidden
+	 * @see    http://moobilejs.com/doc/latest/Control/Image#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
 		tagName: 'img',
-		preload: false
+		preload: false,
+		source: null
 	},
 
 	/**
@@ -6159,6 +6254,21 @@ Moobile.Image = new Class({
 		this.addClass('image');
 
 		var source = this.element.get('src');
+		if (source) {
+			this.setSource(source);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var source = this.options.source;
 		if (source) {
 			this.setSource(source);
 		}
@@ -6374,10 +6484,12 @@ Moobile.Text = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Control/Text#options
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	options: {
-		tagName: 'span'
+		tagName: 'span',
+		text: null,
 	},
 
 	/**
@@ -6388,6 +6500,21 @@ Moobile.Text = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('text');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		var text = this.options.text;
+		if (text) {
+			this.setText(text);
+		}
 	},
 
 	/**
@@ -6491,6 +6618,16 @@ Moobile.Tab = new Class({
 	_image: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tab#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		label: null,
+		image: null
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
@@ -6515,6 +6652,26 @@ Moobile.Tab = new Class({
 			image = document.createElement('div');
 			image.inject(this.element, 'top');
 			image.setRole('image');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		var image = this.options.image;
+		if (image) {
+			this.setImage(image);
+		}
+
+		var label = this.options.label;
+		if (label) {
+			this.setLabel(label);
 		}
 	},
 
@@ -6691,7 +6848,8 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	options: {
-		selectedTabIndex: -1
+		selectedTabIndex: -1,
+		tabs: null,
 	},
 
 	/**
@@ -6702,6 +6860,23 @@ Moobile.TabBar = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('tab-bar');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		var tabs = this.options.tabs;
+		if (tabs) {
+			for (var i = 0, l = tabs.length >>> 0; i < l; i++) {
+				this.addTab(tabs[i]);
+			}
+		}
 	},
 
 	/**
