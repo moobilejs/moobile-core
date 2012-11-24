@@ -267,6 +267,7 @@ Moobile.Component = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
@@ -274,7 +275,7 @@ Moobile.Component = new Class({
 
 		var name = type.split(':')[0];
 
-		if (this.eventIsNative(name)) {
+		if (this.shouldSupportNativeEvent(name)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
@@ -297,11 +298,12 @@ Moobile.Component = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.1.0
 	 */
 	removeEvent: function(type, fn) {
 
-		if (Moobile.Component.hasNativeEvent(type) && this.eventIsNative(type)) {
+		if (this.shouldSupportNativeEvent(type)) {
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
 			if (callbacks[type] && callbacks[type].contains(fn)) {
@@ -318,12 +320,32 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#eventIsNative
+	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
 	 * @since  0.2.0
 	 */
 	eventIsNative: function(name) {
-		return Moobile.Component.hasNativeEvent(name);
+		console.log('[DEPRECATION NOTICE] The method "eventIsNative" will be removed in 0.6, use the method "shouldSupportNativeEvent" instead.');
+		return this.shouldSupportNativeEvent(name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldSupportNativeEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	shouldSupportNativeEvent: function(name) {
+		return [
+			'click', 'dblclick', 'mouseup', 'mousedown',
+			'mouseover', 'mouseout','mousemove',
+			'keydown', 'keypress', 'keyup',
+			'touchstart', 'touchmove', 'touchend', 'touchcancel',
+			'gesturestart', 'gesturechange', 'gestureend',
+			'tap', 'tapstart', 'tapmove', 'tapend',
+			'pinch', 'swipe', 'touchold',
+			'animationend', 'transitionend', 'owntransitionend', 'ownanimationend'
+		].contains(name);
 	},
 
 	/**
@@ -1621,33 +1643,6 @@ Moobile.Component.create = function(klass, element, descriptor, options, name) {
 };
 
 (function() {
-
-// TODO: Also add native events to Element.NativeEvent when using addNativeEvent
-
-var events = Object.keys(Element.NativeEvents);
-
-Moobile.Component.addNativeEvent = function(name) {
-	events.include(name);
-};
-
-Moobile.Component.hasNativeEvent = function(name) {
-	return events.contains(name);
-};
-
-Moobile.Component.removeNativeEvent = function(name) {
-	events.erase(name);
-};
-
-Moobile.Component.addNativeEvent('tapstart');
-Moobile.Component.addNativeEvent('tapmove');
-Moobile.Component.addNativeEvent('tapend');
-Moobile.Component.addNativeEvent('tap');
-Moobile.Component.addNativeEvent('pinch');
-Moobile.Component.addNativeEvent('swipe');
-Moobile.Component.addNativeEvent('animationend');
-Moobile.Component.addNativeEvent('transitionend');
-Moobile.Component.addNativeEvent('owntransitionend');
-Moobile.Component.addNativeEvent('ownanimationend');
 
 /**
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
