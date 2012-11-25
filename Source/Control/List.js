@@ -89,9 +89,7 @@ Moobile.List = new Class({
 
 		var items = this.options.items;
 		if (items) {
-			for (var i = 0, l = items.length >>> 0; i < l; i++) {
-				this.addItem(items[i]);
-			}
+			this.addItems(items);
 		}
 	},
 
@@ -204,6 +202,39 @@ Moobile.List = new Class({
 	 */
 	addItemBefore: function(item, before) {
 		return this.addChildComponentBefore(Moobile.ListItem.from(item), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItems
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItems: function(items) {
+		return this.addChildComponents(items.map(function(item) {
+			return Moobile.ListItem.from(item);
+		}));
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItemsAfter: function(items, after) {
+		return this.addChildComponentsAfter(items.map(function(item) {
+			return Moobile.ListItem.from(item);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItemsBefore: function(items, before) {
+		return this.addChildComponentsBefore(items.map(function(item) {
+			return Moobile.ListItem.from(item);
+		}), before);
 	},
 
 	/**
