@@ -152,6 +152,17 @@ Moobile.View = new Class({
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponents: function(components, where) {
+		if (where === 'header') return this.parent(components, 'top');
+		if (where === 'footer') return this.parent(components, 'bottom');
+		return this.addChildComponentsInside(components, this.contentElement, where);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	willAddChildComponent: function(component) {
