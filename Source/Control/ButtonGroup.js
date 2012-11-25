@@ -22,6 +22,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -89,9 +90,7 @@ Moobile.ButtonGroup = new Class({
 
 		var buttons = this.options.buttons;
 		if (buttons) {
-			for (var i = 0, l = buttons.length >>> 0; i < l; i++) {
-				this.addButton(buttons[i]);
-			}
+			this.addButtons(buttons);
 		}
 	},
 
@@ -205,6 +204,39 @@ Moobile.ButtonGroup = new Class({
 	 */
 	addButtonBefore: function(button, before) {
 		return this.addChildComponentBefore(Moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtons: function(buttons, where) {
+		return this.addChildComponents(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsAfter: function(buttons, after) {
+		return this.addChildComponentsAfter(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsBefore: function(buttons, before) {
+		return this.addChildComponentsBefore(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), before);
 	},
 
 	/**
