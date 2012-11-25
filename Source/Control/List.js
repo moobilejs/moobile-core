@@ -209,10 +209,10 @@ Moobile.List = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	addItems: function(items) {
+	addItems: function(items, where) {
 		return this.addChildComponents(items.map(function(item) {
 			return Moobile.ListItem.from(item);
-		}));
+		}), where);
 	},
 
 	/**
@@ -227,7 +227,7 @@ Moobile.List = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemsAfter
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemsBefore
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
