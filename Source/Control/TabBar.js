@@ -67,14 +67,10 @@ Moobile.TabBar = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	willBuild: function() {
-
+	didBuild: function() {
 		this.parent();
-
 		var tabs = this.options.tabs;
-		if (tabs) {
-			this.addTabs(tabs);
-		}
+		if (tabs) this.addTabs(tabs);
 	},
 
 	/**

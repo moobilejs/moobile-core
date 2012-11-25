@@ -4044,9 +4044,7 @@ Moobile.Button = new Class({
 		this.hitAreaElement.inject(this.element);
 
 		var label = this.options.label;
-		if (label) {
-			this.setLabel(label);
-		}
+		if (label) this.setLabel(label);
 	},
 
 	/**
@@ -4283,9 +4281,7 @@ Moobile.ButtonGroup = new Class({
 		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
 
 		var buttons = this.options.buttons;
-		if (buttons) {
-			this.addButtons(buttons);
-		}
+		if (buttons) this.addButtons(buttons);
 	},
 
 	/**
@@ -5583,9 +5579,7 @@ Moobile.List = new Class({
 		this.setSelectedItemIndex(this.options.selectedItemIndex);
 
 		var items = this.options.items;
-		if (items) {
-			this.addItems(items);
-		}
+		if (items) this.addItems(items);
 	},
 
 	/**
@@ -6043,19 +6037,12 @@ Moobile.ListItem = new Class({
 		this.parent();
 
 		var image = this.options.image;
-		if (image) {
-			this.setImage(image);
-		}
-
 		var label = this.options.label;
-		if (label) {
-			this.setLabel(label);
-		}
-
 		var detail = this.options.detail;
-		if (detail) {
-			this.setDetail(detail);
-		}
+
+		if (image) this.setImage(image);
+		if (label) this.setLabel(label);
+		if (detail) this.setDetail(detail);
 	},
 
 	/**
@@ -6462,16 +6449,9 @@ Moobile.Image = new Class({
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
-
 		this.parent();
-
 		this.hide();
 		this.addClass('image');
-
-		var source = this.element.get('src');
-		if (source) {
-			this.setSource(source);
-		}
 	},
 
 	/**
@@ -6480,13 +6460,9 @@ Moobile.Image = new Class({
 	 * @since  0.3.0
 	 */
 	didBuild: function() {
-
 		this.parent();
-
-		var source = this.options.source;
-		if (source) {
-			this.setSource(source);
-		}
+		var source = this.options.source || this.element.get('src');
+		if (source) this.setSource(source);
 	},
 
 	/**
@@ -6722,14 +6698,10 @@ Moobile.Text = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	willBuild: function() {
-
+	didBuild: function() {
 		this.parent();
-
 		var text = this.options.text;
-		if (text) {
-			this.setText(text);
-		}
+		if (text) this.setText(text);
 	},
 
 	/**
@@ -6875,19 +6847,15 @@ Moobile.Tab = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	willBuild: function() {
+	didBuild: function() {
 
 		this.parent();
 
 		var image = this.options.image;
-		if (image) {
-			this.setImage(image);
-		}
-
 		var label = this.options.label;
-		if (label) {
-			this.setLabel(label);
-		}
+
+		if (image) this.setImage(image);
+		if (label) this.setLabel(label);
 	},
 
 	/**
@@ -7082,14 +7050,10 @@ Moobile.TabBar = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	willBuild: function() {
-
+	didBuild: function() {
 		this.parent();
-
 		var tabs = this.options.tabs;
-		if (tabs) {
-			this.addTabs(tabs);
-		}
+		if (tabs) this.addTabs(tabs);
 	},
 
 	/**
@@ -9967,7 +9931,7 @@ Moobile.ViewSet = new Class({
 		if (this._tabBar) {
 			this._tabBar.replaceWithComponent(tabBar, true);
 		} else {
-			this.addChildComponent(tabBar);
+			this.addChildComponent(tabBar, 'footer');
 		}
 
 		this._tabBar = tabBar;
@@ -10483,7 +10447,7 @@ Moobile.ScrollView = new Class({
 			this._page.y !== pageY) {
 			this._pageOffset.x = Math.abs(x - pageX * pageSizeX);
 			this._pageOffset.y = Math.abs(y - pageY * pageSizeY);
-			this._scrollToPageTimer = this.fireEvent.delay(time, this, ['scrolltopage', [pageX, pageY]]);
+			this._scrollToPageTimer = this.fireEvent.delay(time + 5, this, ['scrolltopage', [pageX, pageY]]);
 		}
 
 		this._page.x = pageX;
@@ -10564,6 +10528,7 @@ Moobile.ScrollView = new Class({
 	 */
 	_snapToPage: function() {
 
+		var size = this.getContentSize();
 		var scroll = this.getContentScroll();
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
@@ -10595,6 +10560,11 @@ Moobile.ScrollView = new Class({
 
 		if (absMoveX >= 10 && (pageMoveX >= snapToPageAt || this._activeTouchDuration < snapToPageDelay)) page.x += moveX > 0 ? 1 : -1;
 		if (absMoveY >= 10 && (pageMoveY >= snapToPageAt || this._activeTouchDuration < snapToPageDelay)) page.y += moveY > 0 ? 1 : -1;
+
+		if (page.x < 0) page.x = 0;
+		if (page.y < 0) page.y = 0;
+		if ((page.x + 1) * pageSizeX > size.x) page.x = Math.floor(size.x / pageSizeX) - 1;
+		if ((page.y + 1) * pageSizeY > size.y) page.y = Math.floor(size.y / pageSizeY) - 1;
 
 		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
 

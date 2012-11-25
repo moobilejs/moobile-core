@@ -68,7 +68,7 @@ Moobile.ViewSet = new Class({
 		if (this._tabBar) {
 			this._tabBar.replaceWithComponent(tabBar, true);
 		} else {
-			this.addChildComponent(tabBar);
+			this.addChildComponent(tabBar, 'footer');
 		}
 
 		this._tabBar = tabBar;

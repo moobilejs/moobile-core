@@ -85,19 +85,15 @@ Moobile.Tab = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	willBuild: function() {
+	didBuild: function() {
 
 		this.parent();
 
 		var image = this.options.image;
-		if (image) {
-			this.setImage(image);
-		}
-
 		var label = this.options.label;
-		if (label) {
-			this.setLabel(label);
-		}
+
+		if (image) this.setImage(image);
+		if (label) this.setLabel(label);
 	},
 
 	/**

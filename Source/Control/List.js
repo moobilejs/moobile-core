@@ -88,9 +88,7 @@ Moobile.List = new Class({
 		this.setSelectedItemIndex(this.options.selectedItemIndex);
 
 		var items = this.options.items;
-		if (items) {
-			this.addItems(items);
-		}
+		if (items) this.addItems(items);
 	},
 
 	/**

@@ -87,9 +87,7 @@ Moobile.Button = new Class({
 		this.hitAreaElement.inject(this.element);
 
 		var label = this.options.label;
-		if (label) {
-			this.setLabel(label);
-		}
+		if (label) this.setLabel(label);
 	},
 
 	/**

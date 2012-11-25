@@ -108,19 +108,12 @@ Moobile.ListItem = new Class({
 		this.parent();
 
 		var image = this.options.image;
-		if (image) {
-			this.setImage(image);
-		}
-
 		var label = this.options.label;
-		if (label) {
-			this.setLabel(label);
-		}
-
 		var detail = this.options.detail;
-		if (detail) {
-			this.setDetail(detail);
-		}
+
+		if (image) this.setImage(image);
+		if (label) this.setLabel(label);
+		if (detail) this.setDetail(detail);
 	},
 
 	/**

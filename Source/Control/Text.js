@@ -55,14 +55,10 @@ Moobile.Text = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	willBuild: function() {
-
+	didBuild: function() {
 		this.parent();
-
 		var text = this.options.text;
-		if (text) {
-			this.setText(text);
-		}
+		if (text) this.setText(text);
 	},
 
 	/**

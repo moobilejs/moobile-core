@@ -80,16 +80,9 @@ Moobile.Image = new Class({
 	 * @since  0.1.0
 	 */
 	willBuild: function() {
-
 		this.parent();
-
 		this.hide();
 		this.addClass('image');
-
-		var source = this.element.get('src');
-		if (source) {
-			this.setSource(source);
-		}
 	},
 
 	/**
@@ -98,13 +91,9 @@ Moobile.Image = new Class({
 	 * @since  0.3.0
 	 */
 	didBuild: function() {
-
 		this.parent();
-
-		var source = this.options.source;
-		if (source) {
-			this.setSource(source);
-		}
+		var source = this.options.source || this.element.get('src');
+		if (source) this.setSource(source);
 	},
 
 	/**

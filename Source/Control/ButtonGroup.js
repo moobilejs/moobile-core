@@ -89,9 +89,7 @@ Moobile.ButtonGroup = new Class({
 		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
 
 		var buttons = this.options.buttons;
-		if (buttons) {
-			this.addButtons(buttons);
-		}
+		if (buttons) this.addButtons(buttons);
 	},
 
 	/**
