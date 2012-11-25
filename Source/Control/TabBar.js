@@ -73,9 +73,7 @@ Moobile.TabBar = new Class({
 
 		var tabs = this.options.tabs;
 		if (tabs) {
-			for (var i = 0, l = tabs.length >>> 0; i < l; i++) {
-				this.addTab(tabs[i]);
-			}
+			this.addTabs(tabs);
 		}
 	},
 
@@ -174,6 +172,37 @@ Moobile.TabBar = new Class({
 	 */
 	addTabBefore: function(tab, before) {
 		return this.addChildComponentBefore(Moobile.Tab.from(tab), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabs: function(tabs, where) {
+		return this.addChildComponents(Moobile.Tab.from(tab), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabsAfter: function(tabs, after) {
+		return this.addChildComponentsAfter(tabs.map(function(tab) {
+			return Moobile.Tab.from(tab);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabsBefore: function(tabs, before) {
+		return this.addChildComponentsBefore(tabs.map(function(tab) {
+			return Moobile.Tab.from(tab);
+		}), before);
 	},
 
 	/**
