@@ -2388,19 +2388,140 @@ Moobile.Component = new Class({
 		}
 
 		this._willAddChildComponent(component);
-
-		var found = this.hasElement(component);
-		if (found === false || where) {
-			document.id(component).inject(context, where);
-		}
-
-		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
+		this._inject(component, context, where);
+		this._insert(component);
 		component._setParent(this);
 		component._setWindow(this._window);
 		this._didAddChildComponent(component);
 
 		if (this._ready) {
 			component._setReady(true);
+		}
+
+		this._setUpdateLayout(true);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponents
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponents: function(components, where) {
+		return this._addChildComponents(components, null, where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentsInside
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentsInside: function(component, context, where) {
+		return this._addChildComponents(component,  document.id(context) || this.getElement(context), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentsAfter: function(component, after) {
+		return this._addChildComponents(component, after, 'after');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentsBefore: function(component, before) {
+		return this._addChildComponents(component, before, 'before');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_addChildComponents: function(components, context, where) {
+
+		components.invoke('removeFromParentComponent');
+
+		if (context) {
+			context = document.id(context) || this.element.getElement(context);
+		} else {
+			context = this.element;
+		}
+
+		var fragment = document.createDocumentFragment();
+
+		for (var i = 0, l = components.length; i < l; i++) {
+			var component = components[i];
+			this._willAddChildComponent(component);
+			this._inject(component, context, null, fragment);
+		}
+
+		switch (where) {
+
+			case 'top':
+
+				var first = context.firstChild;
+				if (first) {
+					context.insertBefore(fragment, first);
+					break;
+				}
+
+				context.appendChild(fragment);
+
+				break;
+
+			case 'after':
+
+				var parent = context.parentNode;
+				if (parent) {
+
+					var next = context.nextSibling;
+					if (next) {
+						parent.insertBefore(fragment, next);
+						break;
+					}
+
+					parent.appendChild(fragment);
+				}
+
+				break;
+
+			case 'before':
+
+				var parent = context.parentNode;
+				if (parent) {
+					parent.insertBefore(fragment, context);
+				}
+
+				break;
+
+			case 'bottom':
+				context.appendChild(fragment);
+				break;
+
+			default:
+				context.appendChild(fragment);
+				break;
+		}
+
+		for (var i = 0, l = components.length; i < l; i++) {
+
+			var component = components[i];
+
+			this._insert(component);
+			component._setParent(this);
+			component._setWindow(this._window);
+			this._didAddChildComponent(component);
+
+			if (this._ready) {
+				component._setReady(true);
+			}
 		}
 
 		this._setUpdateLayout(true);
@@ -2424,6 +2545,37 @@ Moobile.Component = new Class({
 	 */
 	_didAddChildComponent: function(component) {
 		this.didAddChildComponent(component);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_inject: function(component, context, where, fragment) {
+
+		var element = component.getElement();
+
+		var found = context === element || context.contains(element);
+		if (found === false || where) {
+			if (fragment) {
+				fragment.appendChild(element);
+			} else {
+				element.inject(context, where);
+			}
+		}
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_insert: function(component) {
+		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
+		return
 	},
 
 	/**
@@ -4064,6 +4216,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -4131,9 +4284,7 @@ Moobile.ButtonGroup = new Class({
 
 		var buttons = this.options.buttons;
 		if (buttons) {
-			for (var i = 0, l = buttons.length >>> 0; i < l; i++) {
-				this.addButton(buttons[i]);
-			}
+			this.addButtons(buttons);
 		}
 	},
 
@@ -4247,6 +4398,39 @@ Moobile.ButtonGroup = new Class({
 	 */
 	addButtonBefore: function(button, before) {
 		return this.addChildComponentBefore(Moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtons: function(buttons, where) {
+		return this.addChildComponents(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsAfter: function(buttons, after) {
+		return this.addChildComponentsAfter(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup#addButtonsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsBefore: function(buttons, before) {
+		return this.addChildComponentsBefore(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), before);
 	},
 
 	/**
@@ -5400,9 +5584,7 @@ Moobile.List = new Class({
 
 		var items = this.options.items;
 		if (items) {
-			for (var i = 0, l = items.length >>> 0; i < l; i++) {
-				this.addItem(items[i]);
-			}
+			this.addItems(items);
 		}
 	},
 
@@ -5515,6 +5697,39 @@ Moobile.List = new Class({
 	 */
 	addItemBefore: function(item, before) {
 		return this.addChildComponentBefore(Moobile.ListItem.from(item), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItems
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItems: function(items, where) {
+		return this.addChildComponents(items.map(function(item) {
+			return Moobile.ListItem.from(item);
+		}), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItemsAfter: function(items, after) {
+		return this.addChildComponentsAfter(items.map(function(item) {
+			return Moobile.ListItem.from(item);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/List#addItemsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItemsBefore: function(items, before) {
+		return this.addChildComponentsBefore(items.map(function(item) {
+			return Moobile.ListItem.from(item);
+		}), before);
 	},
 
 	/**
@@ -6873,9 +7088,7 @@ Moobile.TabBar = new Class({
 
 		var tabs = this.options.tabs;
 		if (tabs) {
-			for (var i = 0, l = tabs.length >>> 0; i < l; i++) {
-				this.addTab(tabs[i]);
-			}
+			this.addTabs(tabs);
 		}
 	},
 
@@ -6974,6 +7187,37 @@ Moobile.TabBar = new Class({
 	 */
 	addTabBefore: function(tab, before) {
 		return this.addChildComponentBefore(Moobile.Tab.from(tab), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabs: function(tabs, where) {
+		return this.addChildComponents(Moobile.Tab.from(tab), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabsAfter: function(tabs, after) {
+		return this.addChildComponentsAfter(tabs.map(function(tab) {
+			return Moobile.Tab.from(tab);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/TabBar#addTabsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabsBefore: function(tabs, before) {
+		return this.addChildComponentsBefore(tabs.map(function(tab) {
+			return Moobile.Tab.from(tab);
+		}), before);
 	},
 
 	/**
@@ -7186,7 +7430,10 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		layout: 'horizontal'
+		layout: 'horizontal',
+		title: null,
+		message: null,
+		buttons: null
 	},
 
 	/**
@@ -7235,9 +7482,16 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
-		this.setTitle('');
-		this.setMessage('');
+
+		this.setTitle(this.options.title);
+		this.setMessage(this.options.message);
+
+		var buttons = this.options.buttons;
+		if (buttons) {
+			this.addButtons(buttons);
+		}
 	},
 
 	/**
@@ -7356,6 +7610,39 @@ Moobile.Alert = new Class({
 	 */
 	addButtonBefore: function(button, before) {
 		return this.addChildComponentBefore(Moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtons: function(buttons, where) {
+		return this.addChildComponentsInside(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), this.footerElement, where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsAfter: function(buttons, after) {
+		return this.addChildComponentsAfter(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsBefore: function(buttons, before) {
+		return this.addChildComponentBefore(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), before);
 	},
 
 	/**
@@ -9340,6 +9627,17 @@ Moobile.View = new Class({
 		if (where === 'header') return this.parent(component, 'top');
 		if (where === 'footer') return this.parent(component, 'bottom');
 		return this.addChildComponentInside(component, this.contentElement, where);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponents: function(components, where) {
+		if (where === 'header') return this.parent(components, 'top');
+		if (where === 'footer') return this.parent(components, 'bottom');
+		return this.addChildComponentsInside(components, this.contentElement, where);
 	},
 
 	/**
@@ -13599,7 +13897,6 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	_onWindowOrientationChange: function(e) {
-		this._willUpdateLayout();
 		this._didUpdateLayout();
 	}
 
