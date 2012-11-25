@@ -91,7 +91,10 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	options: {
-		layout: 'horizontal'
+		layout: 'horizontal',
+		title: null,
+		message: null,
+		buttons: null
 	},
 
 	/**
@@ -140,9 +143,16 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
+
 		this.parent();
-		this.setTitle('');
-		this.setMessage('');
+
+		this.setTitle(this.options.title);
+		this.setMessage(this.options.message);
+
+		var buttons = this.options.buttons;
+		if (buttons) {
+			this.addButtons(buttons);
+		}
 	},
 
 	/**
@@ -261,6 +271,39 @@ Moobile.Alert = new Class({
 	 */
 	addButtonBefore: function(button, before) {
 		return this.addChildComponentBefore(Moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtons: function(buttons, where) {
+		return this.addChildComponentsInside(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), this.footerElement, where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsAfter: function(buttons, after) {
+		return this.addChildComponentsAfter(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsBefore: function(buttons, before) {
+		return this.addChildComponentBefore(buttons.map(function(button) {
+			return Moobile.Button.from(button);
+		}), before);
 	},
 
 	/**
