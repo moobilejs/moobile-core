@@ -11,6 +11,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core
 	- Class-Extras/Class.Binds
 
 provides:

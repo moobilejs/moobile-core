@@ -1188,6 +1188,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core
 	- Class-Extras/Class.Binds
 
 provides:
@@ -1984,6 +1985,7 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
+	- Core
 	- Element
 	- Element.From
 	- Element.Role
@@ -2117,7 +2119,7 @@ Moobile.Component = new Class({
 		className: null,
 		styleName: null,
 		tagName: 'div',
-		children: null
+		components: null
 	},
 
 	/**
@@ -2236,11 +2238,9 @@ Moobile.Component = new Class({
 	 */
 	_didBuild: function() {
 
-		var children = this.options.children;
-		if (children) {
-			for (var i = 0, l = children.length >>> 0; i < l; i++) {
-				this.addChildComponent(children[i]);
-			}
+		var components = this.options.components;
+		if (components) {
+			this.addChildComponents(components);
 		}
 
 		this.didBuild();
