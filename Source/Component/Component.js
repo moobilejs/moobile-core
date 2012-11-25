@@ -415,19 +415,140 @@ Moobile.Component = new Class({
 		}
 
 		this._willAddChildComponent(component);
-
-		var found = this.hasElement(component);
-		if (found === false || where) {
-			document.id(component).inject(context, where);
-		}
-
-		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
+		this._inject(component, context, where);
+		this._insert(component);
 		component._setParent(this);
 		component._setWindow(this._window);
 		this._didAddChildComponent(component);
 
 		if (this._ready) {
 			component._setReady(true);
+		}
+
+		this._setUpdateLayout(true);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponents
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponents: function(components, where) {
+		return this._addChildComponents(components, null, where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentsInside
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentsInside: function(component, context, where) {
+		return this._addChildComponents(component,  document.id(context) || this.getElement(context), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentsAfter: function(component, after) {
+		return this._addChildComponents(component, after, 'after');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentsBefore: function(component, before) {
+		return this._addChildComponents(component, before, 'before');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_addChildComponents: function(components, context, where) {
+
+		components.invoke('removeFromParentComponent');
+
+		if (context) {
+			context = document.id(context) || this.element.getElement(context);
+		} else {
+			context = this.element;
+		}
+
+		var fragment = document.createDocumentFragment();
+
+		for (var i = 0, l = components.length; i < l; i++) {
+			var component = components[i];
+			this._willAddChildComponent(component);
+			this._inject(component, context, null, fragment);
+		}
+
+		switch (where) {
+
+			case 'top':
+
+				var first = context.firstChild;
+				if (first) {
+					context.insertBefore(fragment, first);
+					break;
+				}
+
+				context.appendChild(fragment);
+
+				break;
+
+			case 'after':
+
+				var parent = context.parentNode;
+				if (parent) {
+
+					var next = context.nextSibling;
+					if (next) {
+						parent.insertBefore(fragment, next);
+						break;
+					}
+
+					parent.appendChild(fragment);
+				}
+
+				break;
+
+			case 'before':
+
+				var parent = context.parentNode;
+				if (parent) {
+					parent.insertBefore(fragment, context);
+				}
+
+				break;
+
+			case 'bottom':
+				context.appendChild(fragment);
+				break;
+
+			default:
+				context.appendChild(fragment);
+				break;
+		}
+
+		for (var i = 0, l = components.length; i < l; i++) {
+
+			var component = components[i];
+
+			this._insert(component);
+			component._setParent(this);
+			component._setWindow(this._window);
+			this._didAddChildComponent(component);
+
+			if (this._ready) {
+				component._setReady(true);
+			}
 		}
 
 		this._setUpdateLayout(true);
@@ -451,6 +572,37 @@ Moobile.Component = new Class({
 	 */
 	_didAddChildComponent: function(component) {
 		this.didAddChildComponent(component);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_inject: function(component, context, where, fragment) {
+
+		var element = component.getElement();
+
+		var found = context === element || context.contains(element);
+		if (found === false || where) {
+			if (fragment) {
+				fragment.appendChild(element);
+			} else {
+				element.inject(context, where);
+			}
+		}
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_insert: function(component) {
+		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
+		return
 	},
 
 	/**
