@@ -351,7 +351,7 @@ Moobile.ScrollView = new Class({
 			this._page.y !== pageY) {
 			this._pageOffset.x = Math.abs(x - pageX * pageSizeX);
 			this._pageOffset.y = Math.abs(y - pageY * pageSizeY);
-			this._scrollToPageTimer = this.fireEvent.delay(time, this, ['scrolltopage', [pageX, pageY]]);
+			this._scrollToPageTimer = this.fireEvent.delay(time + 5, this, ['scrolltopage', [pageX, pageY]]);
 		}
 
 		this._page.x = pageX;
@@ -432,6 +432,7 @@ Moobile.ScrollView = new Class({
 	 */
 	_snapToPage: function() {
 
+		var size = this.getContentSize();
 		var scroll = this.getContentScroll();
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
@@ -463,6 +464,11 @@ Moobile.ScrollView = new Class({
 
 		if (absMoveX >= 10 && (pageMoveX >= snapToPageAt || this._activeTouchDuration < snapToPageDelay)) page.x += moveX > 0 ? 1 : -1;
 		if (absMoveY >= 10 && (pageMoveY >= snapToPageAt || this._activeTouchDuration < snapToPageDelay)) page.y += moveY > 0 ? 1 : -1;
+
+		if (page.x < 0) page.x = 0;
+		if (page.y < 0) page.y = 0;
+		if ((page.x + 1) * pageSizeX > size.x) page.x = Math.floor(size.x / pageSizeX) - 1;
+		if ((page.y + 1) * pageSizeY > size.y) page.y = Math.floor(size.y / pageSizeY) - 1;
 
 		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
 
