@@ -105,7 +105,6 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	_onWindowOrientationChange: function(e) {
-		this._willUpdateLayout();
 		this._didUpdateLayout();
 	}
 
