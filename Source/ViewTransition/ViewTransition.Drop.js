@@ -71,11 +71,13 @@ Moobile.ViewTransition.Drop = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-drop-leave');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-drop-leave');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
