@@ -107,9 +107,9 @@ describe('Component/Component', function() {
 		var p = new Moobile.Component(
 			'<div>' +
 				'<div data-role="button" data-name="b1">B1</div>' +
-					'<div>' +
-						'<div data-role="button" data-name="b2">B2</div>' +
-					'</div>' +
+				'<div>' +
+					'<div data-role="button" data-name="b2">B2</div>' +
+				'</div>' +
 				'<div data-role="button" data-name="b3">B1</div>' +
 			'</div>'
 		);
@@ -239,21 +239,21 @@ describe('Component/Component', function() {
 		expect(children[0]).toEqual(c3);
 	});
 
-	it('should return all children multiple types', function() {
-		var p  = new Moobile.Component();
-		var c1 = new Moobile.Component();
-		var c2 = new Moobile.Component();
-		var c3 = new MyComponentOne();
-		var c4 = new MyComponentTwo();
-		var c5 = new Moobile.Button();
-		p.addChildComponent(c1);
-		p.addChildComponent(c2);
-		p.addChildComponent(c3);
-		p.addChildComponent(c4);
-		p.addChildComponent(c5);
-		var children = p.getChildComponentsOfType([MyComponentOne, MyComponentTwo]);
-		expect(children.length).toEqual(2);
-	});
+	// it('should return all children multiple types', function() {
+	// 	var p  = new Moobile.Component();
+	// 	var c1 = new Moobile.Component();
+	// 	var c2 = new Moobile.Component();
+	// 	var c3 = new MyComponentOne();
+	// 	var c4 = new MyComponentTwo();
+	// 	var c5 = new Moobile.Button();
+	// 	p.addChildComponent(c1);
+	// 	p.addChildComponent(c2);
+	// 	p.addChildComponent(c3);
+	// 	p.addChildComponent(c4);
+	// 	p.addChildComponent(c5);
+	// 	var children = p.getChildComponentsOfType([MyComponentOne, MyComponentTwo]);
+	// 	expect(children.length).toEqual(2);
+	// });
 
 	// hasChildComponent
 
