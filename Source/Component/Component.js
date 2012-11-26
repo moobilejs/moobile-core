@@ -612,7 +612,7 @@ Moobile.Component = new Class({
 			var prev = node.previousSibling;
 			if (prev === null) {
 				node = node.parentNode;
-				if (node === this.element) return 0;
+				if (node === this.element) break;
 				continue;
 			}
 
@@ -621,17 +621,17 @@ Moobile.Component = new Class({
 			if (node.nodeType !== 1)
 				continue;
 
-			var component = node.retrieve('moobile:component');
-			if (component) {
-				index = this.getChildComponentIndex(component) + 1;
+			var previous = node.retrieve('moobile:component');
+			if (previous) {
+				index = this.getChildComponentIndex(previous) + 1;
 				break;
 			}
 
 			var children = node.childNodes;
 			if (children.length) {
-				var candidate = getLastComponentIndex.call(this, node);
-				if (candidate >= 0) {
-					index = candidate;
+				var idx = getLastComponentIndex.call(this, node);
+				if (idx !== null) {
+					index = idx;
 					break;
 				}
 			}
@@ -1723,6 +1723,12 @@ var getLastComponentIndex = function(root) {
 	var node = root.lastChild;
 
 	do {
+
+		if (node.nodeType !== 1) {
+			node = node.previousSibling;
+			if (node === null) return 0;
+			continue;
+		}
 
 		var component = node.retrieve('moobile:component');
 		if (component) {
