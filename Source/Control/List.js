@@ -323,23 +323,6 @@ Moobile.List = new Class({
 			component.addEvent('tap', this.bound('_onItemTap'));
 		}
 
-		var components = this.getChildComponents();
-		for (var i = 0; i < components.length; i++) {
-			var prev = components[i - 1];
-			var next = components[i + 1];
-			var curr = components[i];
-			if (curr.hasStyle('header')) {
-				if (next) next.addClass('list-section-header');
-				if (prev) prev.addClass('list-section-footer');
-			} else {
-				if (next && next.hasStyle('header') ||
-					prev && prev.hasStyle('header')) {
-					continue;
-				}
-				curr.removeClass('list-section-header');
-				curr.removeClass('list-section-footer');
-			}
-		}
 	},
 
 	/**
@@ -377,6 +360,35 @@ Moobile.List = new Class({
 		this.parent(state)
 		if (state === 'disabled' || state == null) {
 			this.getChildComponents().invoke('setDisabled', state);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
+
+		this.parent();
+
+		// TODO: this piece of code needs to be optimized, probably move to didUpdateLayout
+		var components = this.getChildComponents();
+		for (var i = 0; i < components.length; i++) {
+			var prev = components[i - 1];
+			var next = components[i + 1];
+			var curr = components[i];
+			if (curr.hasStyle('header')) {
+				if (next) next.addClass('list-section-header');
+				if (prev) prev.addClass('list-section-footer');
+			} else {
+				if (next && next.hasStyle('header') ||
+					prev && prev.hasStyle('header')) {
+					continue;
+				}
+				curr.removeClass('list-section-header');
+				curr.removeClass('list-section-footer');
+			}
 		}
 	},
 
