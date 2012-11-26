@@ -1171,36 +1171,6 @@ var Moobile = {
 	version: '0.3-dev'
 };
 
-/* Temp stuff */
-
-(function() {
-
-	var times = {};
-	var dates = {};
-
-	console.monitor = function(label) {
-		if (dates[label] === undefined) {
-			dates[label] = Date.now();
-			if (times[label] === undefined) {
-				times[label] = 0;
-			}
-		} else {
-			console.log('WTF', label);
-		}
-	};
-
-	console.monitorEnd = function(label) {
-		times[label] += Date.now() - dates[label];
-		dates[label] = undefined;
-	};
-
-	console.monitorLog = function() {
-		for (var k in times) {
-			console.log(k + ' ' + times[k] + 'ms');
-		}
-	}
-
-})()
 
 /*
 ---
@@ -2435,8 +2405,6 @@ Moobile.Component = new Class({
 	 */
 	_addChildComponent: function(component, context, where) {
 
-console.monitor('_addChildComponent');
-
 		component.removeFromParentComponent();
 
 		if (context) {
@@ -2447,9 +2415,7 @@ console.monitor('_addChildComponent');
 
 		this._willAddChildComponent(component);
     	this._inject(component, context, where);
-    	console.monitor('_insert');
 		this._insert(component);
-		console.monitorEnd('_insert');
 		component._setParent(this);
 		component._setWindow(this._window);
 		this._didAddChildComponent(component);
@@ -2459,8 +2425,6 @@ console.monitor('_addChildComponent');
 		}
 
 		this._setUpdateLayout(true);
-
-console.monitorEnd('_addChildComponent');
 
 		return this;
 	},

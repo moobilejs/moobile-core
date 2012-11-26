@@ -406,8 +406,6 @@ Moobile.Component = new Class({
 	 */
 	_addChildComponent: function(component, context, where) {
 
-console.monitor('_addChildComponent');
-
 		component.removeFromParentComponent();
 
 		if (context) {
@@ -418,9 +416,7 @@ console.monitor('_addChildComponent');
 
 		this._willAddChildComponent(component);
     	this._inject(component, context, where);
-    	console.monitor('_insert');
 		this._insert(component);
-		console.monitorEnd('_insert');
 		component._setParent(this);
 		component._setWindow(this._window);
 		this._didAddChildComponent(component);
@@ -430,8 +426,6 @@ console.monitor('_addChildComponent');
 		}
 
 		this._setUpdateLayout(true);
-
-console.monitorEnd('_addChildComponent');
 
 		return this;
 	},
