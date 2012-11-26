@@ -36,6 +36,8 @@ Moobile.Window = new Class({
 
 	Extends: Moobile.View,
 
+	_orientationChanged: false,
+
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -94,8 +96,12 @@ Moobile.Window = new Class({
 	 * @since  0.3.1
 	 */
 	_setUpdateLayout: function(updateLayout) {
-		// this prevents the window from dispatching the update layout method
-		// because it would be called instanly
+
+		if (this._orientationChanged === true) {
+			this._orientationChanged = false;
+			this.parent(updateLayout);
+		}
+
 		return this;
 	},
 
@@ -105,7 +111,8 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	_onWindowOrientationChange: function(e) {
-		this._didUpdateLayout();
+		this._orientationChanged = true;
+		this._setUpdateLayout(true);
 	}
 
 });
