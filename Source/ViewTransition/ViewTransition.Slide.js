@@ -53,6 +53,16 @@ Moobile.ViewTransition.Slide = new Class({
 	Extends: Moobile.ViewTransition,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Slide#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		enhanceBackButtonOnEnter: true,
+		enhanceBackButtonOnLeave: true
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -70,7 +80,7 @@ Moobile.ViewTransition.Slide = new Class({
 			viewToShow.addClass('transition-view-to-show');
 			viewToShow.show();
 
-			if (Moobile.Theme.getName() === 'ios') {
+			if (this.options.enhanceBackButtonOnEnter) {
 
 				var keyframes = '';
 
@@ -151,7 +161,7 @@ Moobile.ViewTransition.Slide = new Class({
 			viewToShow.addClass('transition-view-to-show');
 			viewToShow.show();
 
-			if (Moobile.Theme.getName() === 'ios') {
+			if (this.options.enhanceBackButtonOnLeave) {
 
 				var keyframes = '';
 
