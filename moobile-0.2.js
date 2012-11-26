@@ -1150,6 +1150,61 @@ provides:
 /*
 ---
 
+name: Core
+
+description:
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- Core
+
+...
+*/
+
+var Moobile = {
+	version: '0.3-dev'
+};
+
+/* Temp stuff */
+
+(function() {
+
+	var times = {};
+	var dates = {};
+
+	console.monitor = function(label) {
+		if (dates[label] === undefined) {
+			dates[label] = Date.now();
+			if (times[label] === undefined) {
+				times[label] = 0;
+			}
+		} else {
+			console.log('WTF', label);
+		}
+	};
+
+	console.monitorEnd = function(label) {
+		times[label] += Date.now() - dates[label];
+		dates[label] = undefined;
+	};
+
+	console.monitorLog = function() {
+		for (var k in times) {
+			console.log(k + ' ' + times[k] + 'ms');
+		}
+	}
+
+})()
+
+/*
+---
+
 name: Class.Binds
 
 description: A clean Class.Binds Implementation
@@ -1997,6 +2052,8 @@ provides:
 ...
 */
 
+(function() {
+
 /**
  * @see    http://moobilejs.com/doc/latest/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -2152,19 +2209,18 @@ Moobile.Component = new Class({
 
 		this.setOptions(options);
 
+		this.element.store('moobile:component', this);
+
 		var marker = this.element;
 		var exists = document.contains(this.element);
 		if (exists) this.element = this.element.clone(true, true);
 
 		this._willBuild();
 		this._build();
+		this._built = true;
 		this._didBuild();
 
 		if (exists) this.element.replaces(marker);
-
-		this._built = true;
-
-		this.element.store('moobile:component', this);
 
 		return this;
 	},
@@ -2379,6 +2435,8 @@ Moobile.Component = new Class({
 	 */
 	_addChildComponent: function(component, context, where) {
 
+console.monitor('_addChildComponent');
+
 		component.removeFromParentComponent();
 
 		if (context) {
@@ -2388,8 +2446,10 @@ Moobile.Component = new Class({
 		}
 
 		this._willAddChildComponent(component);
-		this._inject(component, context, where);
+    	this._inject(component, context, where);
+    	console.monitor('_insert');
 		this._insert(component);
+		console.monitorEnd('_insert');
 		component._setParent(this);
 		component._setWindow(this._window);
 		this._didAddChildComponent(component);
@@ -2399,6 +2459,8 @@ Moobile.Component = new Class({
 		}
 
 		this._setUpdateLayout(true);
+
+console.monitorEnd('_addChildComponent');
 
 		return this;
 	},
@@ -2556,7 +2618,8 @@ Moobile.Component = new Class({
 
 		var element = component.getElement();
 
-		var found = context === element || context.contains(element);
+		// var found = context === element || context.contains(element); <-- This will have to be though...
+		var found = this.hasElement(element);
 		if (found === false || where) {
 			if (fragment) {
 				fragment.appendChild(element);
@@ -2574,8 +2637,45 @@ Moobile.Component = new Class({
 	 * @since  0.3.0
 	 */
 	_insert: function(component) {
-		this._children.splice(this._getChildComponentIndexForElement(component) || 0, 0, component);
-		return
+
+		var index = 0;
+
+		var node = document.id(component);
+
+		do {
+
+			var prev = node.previousSibling;
+			if (prev === null) {
+				node = node.parentNode;
+				if (node === this.element) return 0;
+				continue;
+			}
+
+			node = prev;
+
+			if (node.nodeType !== 1)
+				continue;
+
+			var component = node.retrieve('moobile:component');
+			if (component) {
+				index = this.getChildComponentIndex(component) + 1;
+				break;
+			}
+
+			var children = node.childNodes;
+			if (children.length) {
+				var candidate = getLastComponentIndex.call(this, node);
+				if (candidate >= 0) {
+					index = candidate;
+					break;
+				}
+			}
+
+		} while (node)
+
+		this._children.splice(index, 0, component);
+
+		return this;
 	},
 
 	/**
@@ -2623,35 +2723,6 @@ Moobile.Component = new Class({
 	 */
 	getChildComponentIndex: function(component) {
 		return this._children.indexOf(component);
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.0
-	 */
-	_getChildComponentIndexForElement: function(element) {
-
-		element = document.id(element);
-
-		var index = -1;
-		var nodes = this.element.querySelectorAll('*');
-		for (var i = 0; i < nodes.length; i++) {
-			var node = nodes[i];
-			if (node === element) {
-				return index + 1;
-			} else {
-				var component = node.retrieve('moobile:component');
-				if (component) {
-					var value = this.getChildComponentIndex(component);
-					if (index < value) {
-						index = value;
-					}
-				}
-			}
-		}
-
-		return null;
 	},
 
 	/**
@@ -3678,6 +3749,37 @@ Moobile.Component = new Class({
 });
 
 /**
+ * @hidden
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+var getLastComponentIndex = function(root) {
+
+	var node = root.lastChild;
+
+	do {
+
+		var component = node.retrieve('moobile:component');
+		if (component) {
+			return this.getChildComponentIndex(component) + 1;
+		}
+
+		var children = node.childNodes;
+		if (children.length) {
+			var found = getLastComponentIndex.call(this, node);
+			if (found >= 0) {
+				return found;
+			}
+		}
+
+		node = node.previousSibling;
+
+	} while (node);
+
+	return null;
+};
+
+/**
  * @see    http://moobilejs.com/doc/latest/Component/Component#defineRole
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.2.0
@@ -3775,8 +3877,6 @@ Moobile.Component.create = function(klass, element, descriptor, options, name) {
 
 	return new klass(element, options, name);
 };
-
-(function() {
 
 /**
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -5814,23 +5914,6 @@ Moobile.List = new Class({
 			component.addEvent('tap', this.bound('_onItemTap'));
 		}
 
-		var components = this.getChildComponents();
-		for (var i = 0; i < components.length; i++) {
-			var prev = components[i - 1];
-			var next = components[i + 1];
-			var curr = components[i];
-			if (curr.hasStyle('header')) {
-				if (next) next.addClass('list-section-header');
-				if (prev) prev.addClass('list-section-footer');
-			} else {
-				if (next && next.hasStyle('header') ||
-					prev && prev.hasStyle('header')) {
-					continue;
-				}
-				curr.removeClass('list-section-header');
-				curr.removeClass('list-section-footer');
-			}
-		}
 	},
 
 	/**
@@ -5868,6 +5951,35 @@ Moobile.List = new Class({
 		this.parent(state)
 		if (state === 'disabled' || state == null) {
 			this.getChildComponents().invoke('setDisabled', state);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
+
+		this.parent();
+
+		// TODO: this piece of code needs to be optimized, probably move to didUpdateLayout
+		var components = this.getChildComponents();
+		for (var i = 0; i < components.length; i++) {
+			var prev = components[i - 1];
+			var next = components[i + 1];
+			var curr = components[i];
+			if (curr.hasStyle('header')) {
+				if (next) next.addClass('list-section-header');
+				if (prev) prev.addClass('list-section-footer');
+			} else {
+				if (next && next.hasStyle('header') ||
+					prev && prev.hasStyle('header')) {
+					continue;
+				}
+				curr.removeClass('list-section-header');
+				curr.removeClass('list-section-footer');
+			}
 		}
 	},
 
