@@ -224,6 +224,16 @@ Moobile.ScrollView = new Class({
 
 	/**
 	 * @overridden
+	 * @author Jean-Philippe Dery (jean-philippe.dery@lemieuxbedard.com)
+	 * @since 3.0.0
+	 */
+	didUpdateLayout: function() {
+		this.parent();
+		this._scroller.refresh();
+	},
+
+	/**
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
 	 * @since  0.1.0
