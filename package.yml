@@ -18,6 +18,7 @@ sources:
   - "Source/Animation/RequestAnimationFrame.js"
   - "Source/Animation/Animation.js"
   - "Source/Browser/Browser.Platform.js"
+  - "Source/Core/Core.js"
   - "Source/Class/Class.Instantiate.js"
   - "Source/Component/Component.js"
   - "Source/Control/Control.js"
