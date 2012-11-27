@@ -583,9 +583,7 @@ Moobile.Component = new Class({
 
 		var element = component.getElement();
 
-		// var found = context === element || context.contains(element); <-- This will have to be though...
-		var found = this.hasElement(element);
-		if (found === false || where) {
+		if (where || this.hasElement(element) === false) {
 			if (fragment) {
 				fragment.appendChild(element);
 			} else {
@@ -1503,19 +1501,17 @@ Moobile.Component = new Class({
 		if (this._updateLayout === updateLayout)
 			return this;
 
-		dispatcher = dispatcher || this;
-
 		this._updateLayout = updateLayout;
 
 		if (this._updateLayoutTimer) {
 			this._updateLayoutTimer = cancelAnimationFrame(this._updateLayoutTimer);
 		}
 
-		this._children.invoke('_setUpdateLayout', updateLayout, this);
-
-		if (this._updateLayout && dispatcher === this) {
+		if (this._updateLayout && !dispatcher) {
 			this._updateLayoutTimer = requestAnimationFrame(this._didUpdateLayout.bind(this));
 		}
+
+		this._children.invoke('_setUpdateLayout', updateLayout, this);
 
 		return this;
 	},

@@ -2582,9 +2582,7 @@ Moobile.Component = new Class({
 
 		var element = component.getElement();
 
-		// var found = context === element || context.contains(element); <-- This will have to be though...
-		var found = this.hasElement(element);
-		if (found === false || where) {
+		if (where || this.hasElement(element) === false) {
 			if (fragment) {
 				fragment.appendChild(element);
 			} else {
@@ -2611,7 +2609,7 @@ Moobile.Component = new Class({
 			var prev = node.previousSibling;
 			if (prev === null) {
 				node = node.parentNode;
-				if (node === this.element) return 0;
+				if (node === this.element) break;
 				continue;
 			}
 
@@ -2620,17 +2618,17 @@ Moobile.Component = new Class({
 			if (node.nodeType !== 1)
 				continue;
 
-			var component = node.retrieve('moobile:component');
-			if (component) {
-				index = this.getChildComponentIndex(component) + 1;
+			var previous = node.retrieve('moobile:component');
+			if (previous) {
+				index = this.getChildComponentIndex(previous) + 1;
 				break;
 			}
 
 			var children = node.childNodes;
 			if (children.length) {
-				var candidate = getLastComponentIndex.call(this, node);
-				if (candidate >= 0) {
-					index = candidate;
+				var idx = getLastComponentIndex.call(this, node);
+				if (idx !== null) {
+					index = idx;
 					break;
 				}
 			}
@@ -3502,19 +3500,17 @@ Moobile.Component = new Class({
 		if (this._updateLayout === updateLayout)
 			return this;
 
-		dispatcher = dispatcher || this;
-
 		this._updateLayout = updateLayout;
 
 		if (this._updateLayoutTimer) {
 			this._updateLayoutTimer = cancelAnimationFrame(this._updateLayoutTimer);
 		}
 
-		this._children.invoke('_setUpdateLayout', updateLayout, this);
-
-		if (this._updateLayout && dispatcher === this) {
+		if (this._updateLayout && !dispatcher) {
 			this._updateLayoutTimer = requestAnimationFrame(this._didUpdateLayout.bind(this));
 		}
+
+		this._children.invoke('_setUpdateLayout', updateLayout, this);
 
 		return this;
 	},
@@ -3722,6 +3718,12 @@ var getLastComponentIndex = function(root) {
 	var node = root.lastChild;
 
 	do {
+
+		if (node.nodeType !== 1) {
+			node = node.previousSibling;
+			if (node === null) return 0;
+			continue;
+		}
 
 		var component = node.retrieve('moobile:component');
 		if (component) {
@@ -10396,6 +10398,16 @@ Moobile.ScrollView = new Class({
 
 	/**
 	 * @overridden
+	 * @author Jean-Philippe Dery (jean-philippe.dery@lemieuxbedard.com)
+	 * @since 3.0.0
+	 */
+	didUpdateLayout: function() {
+		this.parent();
+		this._scroller.refresh();
+	},
+
+	/**
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.0
 	 * @since  0.1.0
@@ -12871,6 +12883,16 @@ Moobile.ViewTransition.Slide = new Class({
 	Extends: Moobile.ViewTransition,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Slide#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		enhanceBackButtonOnEnter: true,
+		enhanceBackButtonOnLeave: true
+	},
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -12888,7 +12910,7 @@ Moobile.ViewTransition.Slide = new Class({
 			viewToShow.addClass('transition-view-to-show');
 			viewToShow.show();
 
-			if (Moobile.Theme.getName() === 'ios') {
+			if (this.options.enhanceBackButtonOnEnter) {
 
 				var keyframes = '';
 
@@ -12969,7 +12991,7 @@ Moobile.ViewTransition.Slide = new Class({
 			viewToShow.addClass('transition-view-to-show');
 			viewToShow.show();
 
-			if (Moobile.Theme.getName() === 'ios') {
+			if (this.options.enhanceBackButtonOnLeave) {
 
 				var keyframes = '';
 
@@ -13107,11 +13129,13 @@ Moobile.ViewTransition.Drop = new Class({
 		var onStart = function() {
 			parentElem.addClass('transition-drop-leave');
 			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
 		}.bind(this);
 
 		var onEnd = function() {
 			parentElem.removeClass('transition-drop-leave');
 			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
 			this.didEnter(viewToShow, viewToHide, parentView);
 		}.bind(this);
 
@@ -13874,6 +13898,8 @@ Moobile.Window = new Class({
 
 	Extends: Moobile.View,
 
+	_orientationChanged: false,
+
 	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -13932,8 +13958,12 @@ Moobile.Window = new Class({
 	 * @since  0.3.1
 	 */
 	_setUpdateLayout: function(updateLayout) {
-		// this prevents the window from dispatching the update layout method
-		// because it would be called instanly
+
+		if (this._orientationChanged === true) {
+			this._orientationChanged = false;
+			this.parent(updateLayout);
+		}
+
 		return this;
 	},
 
@@ -13943,7 +13973,8 @@ Moobile.Window = new Class({
 	 * @since  0.1.0
 	 */
 	_onWindowOrientationChange: function(e) {
-		this._didUpdateLayout();
+		this._orientationChanged = true;
+		this._setUpdateLayout(true);
 	}
 
 });
