@@ -25,7 +25,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Slider = new Class({
@@ -213,7 +212,6 @@ Moobile.Slider = new Class({
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
@@ -304,7 +302,6 @@ Moobile.Slider = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setValue: function(value) {

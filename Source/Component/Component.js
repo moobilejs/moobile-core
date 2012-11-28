@@ -29,8 +29,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.1
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Component = new Class({
@@ -154,7 +152,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#initialization
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	initialize: function(element, options, name) {
@@ -209,7 +206,6 @@ Moobile.Component = new Class({
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	_build: function() {
@@ -277,7 +273,6 @@ Moobile.Component = new Class({
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	addEvent: function(type, fn, internal) {
@@ -392,7 +387,6 @@ Moobile.Component = new Class({
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_addChildComponent: function(component, context, where) {
@@ -823,7 +817,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	removeChildComponent: function(component, destroy) {
@@ -953,7 +946,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setParentComponent: function(parent) {
@@ -1020,7 +1012,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setWindow: function(window) {
@@ -1092,7 +1083,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setReady: function(ready) {
@@ -1341,7 +1331,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#show
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	show: function() {
@@ -1398,7 +1387,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#hide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	hide: function() {
@@ -1711,7 +1699,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentOfType: function(type, name) {
@@ -1734,7 +1721,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentsOfType: function(type) {

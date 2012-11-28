@@ -2028,8 +2028,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Component/Component
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.1
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Component = new Class({
@@ -2153,7 +2151,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#initialization
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	initialize: function(element, options, name) {
@@ -2208,7 +2205,6 @@ Moobile.Component = new Class({
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	_build: function() {
@@ -2276,7 +2272,6 @@ Moobile.Component = new Class({
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	addEvent: function(type, fn, internal) {
@@ -2391,7 +2386,6 @@ Moobile.Component = new Class({
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_addChildComponent: function(component, context, where) {
@@ -2822,7 +2816,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeChildComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	removeChildComponent: function(component, destroy) {
@@ -2952,7 +2945,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setParentComponent: function(parent) {
@@ -3019,7 +3011,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setWindow: function(window) {
@@ -3091,7 +3082,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	setReady: function(ready) {
@@ -3340,7 +3330,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#show
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	show: function() {
@@ -3397,7 +3386,6 @@ Moobile.Component = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#hide
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.2.1
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	hide: function() {
@@ -3710,7 +3698,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentOfType: function(type, name) {
@@ -3733,7 +3720,6 @@ Moobile.Component = new Class({
 	 * @deprecated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	getChildComponentsOfType: function(type) {
@@ -4346,7 +4332,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Control/ButtonGroup
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ButtonGroup = new Class({
@@ -4722,7 +4707,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Control/Bar
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Bar = new Class({
@@ -5101,7 +5085,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Control/Slider
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Slider = new Class({
@@ -5289,7 +5272,6 @@ Moobile.Slider = new Class({
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	didBuild: function() {
@@ -5380,7 +5362,6 @@ Moobile.Slider = new Class({
 	 * @see    http://moobilejs.com/doc/latest/Control/Slider#setValue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.0
 	 * @since  0.1.0
 	 */
 	setValue: function(value) {
@@ -5645,7 +5626,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Control/List
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.List = new Class({
@@ -6535,7 +6515,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/Control/Image
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.Image = new Class({
@@ -10263,7 +10242,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.2.1
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ScrollView = new Class({
@@ -10882,7 +10860,6 @@ if (!window.Moobile) window.Moobile = {};
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewController = new Class({
@@ -13331,7 +13308,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover.Box = new Class({
@@ -13467,7 +13443,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Page
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover.Page = new Class({
@@ -13956,7 +13931,6 @@ var instance = null;
  * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.1
  * @since  0.1.0
  */
 Moobile.Window = new Class({
@@ -13990,7 +13964,6 @@ Moobile.Window = new Class({
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	didBuild: function() {

@@ -29,7 +29,6 @@ var instance = null;
  * @see    http://moobilejs.com/doc/latest/Window/Window
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.1
  * @since  0.1.0
  */
 Moobile.Window = new Class({
@@ -63,7 +62,6 @@ Moobile.Window = new Class({
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
-	 * @edited 0.2.1
 	 * @since  0.1.0
 	 */
 	didBuild: function() {

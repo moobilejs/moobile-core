@@ -23,7 +23,6 @@ provides:
  * @see    http://moobilejs.com/doc/latest/ViewTransition/ViewTransition.Cover.Box
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @edited 0.3.0
- * @edited 0.2.0
  * @since  0.1.0
  */
 Moobile.ViewTransition.Cover.Box = new Class({
