@@ -194,13 +194,13 @@ Moobile.Slider = new Class({
 
 		this.hitAreaElement = new Element('div.hit-area').inject(this.thumbElement);
 
-		// <0.1 compat>
+		// <deprecated>
 		if ('min' in this.options || 'max' in this.options) {
 			if ('min' in this.options) this.options.minimum = this.options.min;
 			if ('max' in this.options) this.options.maximum = this.options.max;
 			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
 		}
-		// </0.1 compat>
+		// </deprecated>
 
 		var mode = this.options.mode;
 		if (mode) {

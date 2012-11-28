@@ -237,12 +237,12 @@ Moobile.Component = new Class({
 			}
 		});
 
-		// <0.2-compat>
+		// <deprecated>
 		if (this.build) {
 			this.build.call(this);
 			console.log('[DEPRECATION NOTICE] The method "build" will be removed in 0.5, use the "_build" method instead');
 		}
-		// </0.2-compat>
+		// </deprecated>
 	},
 
 	/**

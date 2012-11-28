@@ -2236,12 +2236,12 @@ Moobile.Component = new Class({
 			}
 		});
 
-		// <0.2-compat>
+		// <deprecated>
 		if (this.build) {
 			this.build.call(this);
 			console.log('[DEPRECATION NOTICE] The method "build" will be removed in 0.5, use the "_build" method instead');
 		}
-		// </0.2-compat>
+		// </deprecated>
 	},
 
 	/**
@@ -4838,13 +4838,13 @@ Moobile.NavigationBar = new Class({
 
 		this.addClass('navigation-bar');
 
-		// <0.2-compat>
+		// <deprecated>
 		var item = this.getRoleElement('item');
 		if (item) {
 			console.log('[REMOVAL NOTICE] The role "item" has been removed in 0.3, use the role "content" instead or refer to the documentation.');
 			return;
 		}
-		// </0.2-compat>
+		// </deprecated>
 
 		var content = this.getRoleElement('content');
 		if (content === null) {
@@ -5264,13 +5264,13 @@ Moobile.Slider = new Class({
 
 		this.hitAreaElement = new Element('div.hit-area').inject(this.thumbElement);
 
-		// <0.1 compat>
+		// <deprecated>
 		if ('min' in this.options || 'max' in this.options) {
 			if ('min' in this.options) this.options.minimum = this.options.min;
 			if ('max' in this.options) this.options.maximum = this.options.max;
 			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
 		}
-		// </0.1 compat>
+		// </deprecated>
 
 		var mode = this.options.mode;
 		if (mode) {
@@ -10384,7 +10384,7 @@ Moobile.ScrollView = new Class({
 
 		this.parent();
 
-		// <0.1 compat>
+		// <deprecated>
 		if ('scrollX' in this.options || 'scrollY' in this.options) {
 			console.log('[DEPRECATION NOTICE] The options "scrollX" and "scrollY" will be removed in 0.4, use the "scroll" option instead');
 			if (this.options.scrollX &&
@@ -10395,7 +10395,7 @@ Moobile.ScrollView = new Class({
 				if (this.options.scrollY) this.options.scroll = 'vertical';
 			}
 		}
-		// </0.1 compat>
+		// </deprecated>
 
 		var options = {
 			scroll: this.options.scroll,

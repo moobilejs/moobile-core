@@ -156,7 +156,7 @@ Moobile.ScrollView = new Class({
 
 		this.parent();
 
-		// <0.1 compat>
+		// <deprecated>
 		if ('scrollX' in this.options || 'scrollY' in this.options) {
 			console.log('[DEPRECATION NOTICE] The options "scrollX" and "scrollY" will be removed in 0.4, use the "scroll" option instead');
 			if (this.options.scrollX &&
@@ -167,7 +167,7 @@ Moobile.ScrollView = new Class({
 				if (this.options.scrollY) this.options.scroll = 'vertical';
 			}
 		}
-		// </0.1 compat>
+		// </deprecated>
 
 		var options = {
 			scroll: this.options.scroll,

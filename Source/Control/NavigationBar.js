@@ -64,13 +64,13 @@ Moobile.NavigationBar = new Class({
 
 		this.addClass('navigation-bar');
 
-		// <0.2-compat>
+		// <deprecated>
 		var item = this.getRoleElement('item');
 		if (item) {
 			console.log('[REMOVAL NOTICE] The role "item" has been removed in 0.3, use the role "content" instead or refer to the documentation.');
 			return;
 		}
-		// </0.2-compat>
+		// </deprecated>
 
 		var content = this.getRoleElement('content');
 		if (content === null) {
