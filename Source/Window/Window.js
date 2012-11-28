@@ -73,7 +73,6 @@ Moobile.Window = new Class({
 
 		this._setParent(null);
 		this._setWindow(this);
-		this._setReady(true);
 
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
@@ -86,21 +85,6 @@ Moobile.Window = new Class({
 	destroy: function() {
 		window.removeEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 		this.parent();
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.1
-	 */
-	_setUpdateLayout: function(updateLayout) {
-
-		if (this._orientationChanged === true) {
-			this._orientationChanged = false;
-			this.parent(updateLayout);
-		}
-
-		return this;
 	},
 
 	/**
