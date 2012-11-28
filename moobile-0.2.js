@@ -2327,16 +2327,7 @@ Moobile.Component = new Class({
 		return this.parent(type, fn);
 	},
 
-	/**
-	 * @deprecated
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.3.0
-	 * @since  0.2.0
-	 */
-	eventIsNative: function(name) {
-		console.log('[DEPRECATION NOTICE] The method "eventIsNative" will be removed in 0.6, use the method "shouldSupportNativeEvent" instead.');
-		return this.shouldSupportNativeEvent(name);
-	},
+
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldSupportNativeEvent
@@ -2650,13 +2641,11 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentByType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.3.0
-	 * @edited 0.2.0
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	getChildComponentOfType: function(type, name) {
+	getChildComponentByType: function(type, name) {
 		return this._children.find(function(child) { return child instanceof type && child.getName() === name; });
 	},
 
@@ -2670,12 +2659,12 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentOfTypeAt
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentByTypeAt
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	getChildComponentOfTypeAt: function(type, index) {
-		return this.getChildComponentsOfType(type)[index] || null;
+	getChildComponentByTypeAt: function(type, index) {
+		return this.getChildComponentsByType(type)[index] || null;
 	},
 
 	/**
@@ -2697,13 +2686,11 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsByType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @edited 0.3.0
-	 * @edited 0.2.0
-	 * @since  0.1.0
+	 * @since 0.3.0
 	 */
-	getChildComponentsOfType: function(type) {
+	getChildComponentsByType: function(type) {
 		return this._children.filter(function(child) { return child instanceof type });
 	},
 
@@ -2717,11 +2704,11 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasChildComponentOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasChildComponentByType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	hasChildComponentOfType: function(type) {
+	hasChildComponentByType: function(type) {
 		return this._children.some(function(child) { return child instanceof type; });
 	},
 
@@ -2757,16 +2744,16 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponentOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponentByType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	getComponentOfType: function(type, name) {
+	getComponentByType: function(type, name) {
 
-	    var component = this.getChildComponentOfType(type, name);
+	    var component = this.getChildComponentByType(type, name);
 	    if (component === null) {
 			for (var i = 0, len = this._children.length; i < len; i++) {
-				var found = this._children[i].getComponentOfType(type, name);
+				var found = this._children[i].getComponentByType(type, name);
 				if (found) return found;
 			}
 		}
@@ -2793,16 +2780,16 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasComponentByType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	hasComponentOfType: function(type, name) {
+	hasComponentByType: function(type, name) {
 
-	    var exists = this.hasChildComponentOfType(type, name);
+	    var exists = this.hasChildComponentByType(type, name);
 	    if (exists === false) {
 			for (var i = 0, len = this._children.length; i < len; i++) {
-				var found = this._children[i].hasComponentOfType(type, name);
+				var found = this._children[i].hasComponentByType(type, name);
 				if (found) return found;
 			}
 		}
@@ -2871,15 +2858,15 @@ Moobile.Component = new Class({
 	 * @since  0.1.0
 	 */
 	removeAllChildComponents: function(destroy) {
-		return this.removeAllChildComponentsOfType(Moobile.Component, destroy);
+		return this.removeAllChildComponentsByType(Moobile.Component, destroy);
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeChildComponentsOfType
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeAllChildComponentsByType
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	removeAllChildComponentsOfType: function(type, destroy) {
+	removeAllChildComponentsByType: function(type, destroy) {
 
 		this._children.filter(function(child) {
 			return child instanceof type;
@@ -3704,6 +3691,84 @@ Moobile.Component = new Class({
 	 */
 	toElement: function() {
 		return this.element;
+	},
+
+	/* Deprecated */
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	eventIsNative: function(name) {
+		console.log('[DEPRECATION NOTICE] The method "eventIsNative" will be removed in 0.6, use the method "shouldSupportNativeEvent" instead.');
+		return this.shouldSupportNativeEvent(name);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	getChildComponentOfType: function(type, name) {
+		console.log('[DEPRECATION NOTICE] The method "getChildComponentOfType" will be removed in 0.5, use the method "getChildComponentByType" instead.');
+		return this.getChildComponentByType(type, name);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	getChildComponentOfTypeAt: function(type, index) {
+		console.log('[DEPRECATION NOTICE] The method "getChildComponentOfTypeAt" will be removed in 0.5, use the method "getChildComponentByTypeAt" instead.');
+		return this.getChildComponentByTypeAt(type, index);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	getChildComponentsOfType: function(type) {
+		console.log('[DEPRECATION NOTICE] The method "getChildComponentsOfType" will be removed in 0.5, use the method "getChildComponentsByType" instead.');
+		return this.getChildComponentsByType(type);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasChildComponentOfType: function(type) {
+		console.log('[DEPRECATION NOTICE] The method "hasChildComponentOfType" will be removed in 0.5, use the method "hasChildComponentByType" instead.');
+		return this.hasChildComponentByType(type);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getComponentOfType: function(type, name) {
+		console.log('[DEPRECATION NOTICE] The method "getComponentOfType" will be removed in 0.5, use the method "getComponentByType" instead.');
+		return this.getComponentByType(type, name);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasComponentOfType: function(type, name) {
+		console.log('[DEPRECATION NOTICE] The method "hasComponentOfType" will be removed in 0.5, use the method "hasComponentByType" instead.');
+		return this.hasComponentByType(type, name);
 	}
 
 });
