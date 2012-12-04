@@ -157,7 +157,7 @@ Moobile.ViewControllerCarousel = new Class({
 	 */
 	didAddChildViewController: function(viewController) {
 		this.parent(viewController);
-		viewController.setViewControllerSet(this);
+		viewController.setViewControllerCarousel(this);
 	},
 
 	/**
@@ -167,7 +167,7 @@ Moobile.ViewControllerCarousel = new Class({
 	 */
 	didRemoveChildViewController: function(viewController) {
 		this.parent(viewController);
-		viewController.setViewControllerSet(null);
+		viewController.setViewControllerCarousel(null);
 	},
 
 	/**
