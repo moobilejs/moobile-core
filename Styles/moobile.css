@@ -323,6 +323,16 @@ input, select, textarea {
 	width: 100%;
 }
 
+/* View Carousel
+-----------------------------------------------------------------------------*/
+
+.view.view-carousel > .view-content-wrapper > .view-content {
+	display: block;
+	height: 100%;
+	overflow: visible;
+	width: 100%;
+}
+
 /* View Collection
 -----------------------------------------------------------------------------*/
 

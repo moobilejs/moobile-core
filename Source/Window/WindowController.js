@@ -69,7 +69,7 @@ Moobile.WindowController = new Class({
 
 		this._rootViewController = rootViewController;
 
-		this.view.setReady(true);
+		this.view._setReady(true);
 
 		return this;
 	},

@@ -123,6 +123,8 @@ Moobile.ViewControllerSet = new Class({
 			return this;
 
 		var index = this.getChildViewControllerIndex(viewController);
+		if (index === -1)
+			return this;
 
 		this._tabBar.setSelectedTabIndex(index);
 
