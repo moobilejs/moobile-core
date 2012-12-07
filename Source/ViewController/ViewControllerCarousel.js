@@ -63,7 +63,7 @@ Moobile.ViewControllerCarousel = new Class({
 		if (this._animating)
 			return this;
 
-		if (viewTransitionDirection !== 'enter' ||
+		if (viewTransitionDirection !== 'enter' &&
 			viewTransitionDirection !== 'leave') {
 			viewTransitionDirection = 'enter';
 		}
