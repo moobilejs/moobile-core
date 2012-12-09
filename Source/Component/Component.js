@@ -323,8 +323,6 @@ Moobile.Component = new Class({
 		return this.parent(type, fn);
 	},
 
-
-
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldSupportNativeEvent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -612,9 +610,9 @@ Moobile.Component = new Class({
 
 			var children = node.childNodes;
 			if (children.length) {
-				var idx = getLastComponentIndex.call(this, node);
-				if (idx !== null) {
-					index = idx;
+				var found = getLastComponentIndex.call(this, node);
+				if (found !== null) {
+					index = found;
 					break;
 				}
 			}
@@ -706,8 +704,6 @@ Moobile.Component = new Class({
 	hasChildComponentByType: function(type) {
 		return this._children.some(function(child) { return child instanceof type; });
 	},
-
-
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
