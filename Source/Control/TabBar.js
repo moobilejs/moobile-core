@@ -118,7 +118,7 @@ Moobile.TabBar = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildComponentOfTypeAt(Moobile.Tab, index);
+			child = this.getChildComponentByTypeAt(Moobile.Tab, index);
 		}
 
 		return this.setSelectedTab(child);
@@ -207,7 +207,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	getTabs: function() {
-		return this.getChildComponentsOfType(Moobile.Tab);
+		return this.getChildComponentsByType(Moobile.Tab);
 	},
 
 	/**
@@ -216,7 +216,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	getTab: function(name) {
-		return this.getChildComponentOfType(Moobile.Tab, name);
+		return this.getChildComponentByType(Moobile.Tab, name);
 	},
 
 	/**
@@ -225,7 +225,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	getTabAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Tab, index);
+		return this.getChildComponentByTypeAt(Moobile.Tab, index);
 	},
 
 	/**
@@ -243,7 +243,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	removeAllTabs: function(destroy) {
-		return this.removeAllChildComponentsOfType(Moobile.Tab, destroy);
+		return this.removeAllChildComponentsByType(Moobile.Tab, destroy);
 	},
 
 	/**

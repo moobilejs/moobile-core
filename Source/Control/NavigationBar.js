@@ -231,7 +231,7 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
+		return this.getChildComponentByType(Moobile.Button, name);
 	},
 
 	/**
@@ -240,7 +240,7 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	getButtonAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentByTypeAt(Moobile.Button, index);
 	},
 
 	/**

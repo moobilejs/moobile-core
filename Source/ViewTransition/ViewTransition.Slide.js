@@ -84,12 +84,12 @@ Moobile.ViewTransition.Slide = new Class({
 
 				var keyframes = '';
 
-				viewToShow.getChildComponentsOfType(Moobile.NavigationBar).each(function(navigationBar) {
+				viewToShow.getChildComponentsByType(Moobile.NavigationBar).each(function(navigationBar) {
 
 					var width = navigationBar.getSize().x;
 					if (width) {
 
-						navigationBar.getChildComponentsOfType(Moobile.Button).each(function(button) {
+						navigationBar.getChildComponentsByType(Moobile.Button).each(function(button) {
 
 							var style = button.getStyle();
 							if (style !== 'back' &&
@@ -165,12 +165,12 @@ Moobile.ViewTransition.Slide = new Class({
 
 				var keyframes = '';
 
-				viewToHide.getChildComponentsOfType(Moobile.NavigationBar).each(function(navigationBar) {
+				viewToHide.getChildComponentsByType(Moobile.NavigationBar).each(function(navigationBar) {
 
 					var width = navigationBar.getSize().x;
 					if (width) {
 
-						navigationBar.getChildComponentsOfType(Moobile.Button).each(function(button) {
+						navigationBar.getChildComponentsByType(Moobile.Button).each(function(button) {
 
 							var style = button.getStyle();
 							if (style !== 'back' &&

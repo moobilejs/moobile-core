@@ -312,7 +312,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	getButtons: function() {
-		return this.getChildComponentsOfType(Moobile.Button);
+		return this.getChildComponentsByType(Moobile.Button);
 	},
 
 	/**
@@ -321,7 +321,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
+		return this.getChildComponentByType(Moobile.Button, name);
 	},
 
 	/**
@@ -330,7 +330,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	getButtonAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentByTypeAt(Moobile.Button, index);
 	},
 
 	/**
@@ -348,7 +348,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	removeAllButtons: function(destroy) {
-		return this.removeAllChildComponentsOfType(Moobile.Button, destroy);
+		return this.removeAllChildComponentsByType(Moobile.Button, destroy);
 	},
 
 	/**
@@ -367,7 +367,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	setDefaultButtonIndex: function(index) {
-		return this.setDefaultButton(this.getChildComponentOfTypeAt(Moobile.Button, index));
+		return this.setDefaultButton(this.getChildComponentByTypeAt(Moobile.Button, index));
 	},
 
 	/**
@@ -457,7 +457,7 @@ Moobile.Alert = new Class({
 	 */
 	_onButtonTap: function(e, sender) {
 
-		var index = this.getChildComponentsOfType(Moobile.Button).indexOf(sender);
+		var index = this.getChildComponentsByType(Moobile.Button).indexOf(sender);
 		if (index >= 0) {
 			this.fireEvent('dismiss', [sender, index]);
 		}

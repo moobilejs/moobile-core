@@ -149,7 +149,7 @@ Moobile.List = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildComponentOfTypeAt(Moobile.ListItem, index);
+			child = this.getChildComponentByTypeAt(Moobile.ListItem, index);
 		}
 
 		return this.setSelectedItem(child);
@@ -240,7 +240,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	getItem: function(name) {
-		return this.getChildComponentOfType(Moobile.ListItem, name);
+		return this.getChildComponentByType(Moobile.ListItem, name);
 	},
 
 	/**
@@ -249,7 +249,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	getItemAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.ListItem, index)
+		return this.getChildComponentByTypeAt(Moobile.ListItem, index)
 	},
 
 	/**
@@ -267,7 +267,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	getItems: function() {
-		return this.getChildComponentsOfType(Moobile.ListItem);
+		return this.getChildComponentsByType(Moobile.ListItem);
 	},
 
 	/**
@@ -285,7 +285,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	removeAllItems: function() {
-		return this.removeAllChildComponentsOfType(Moobile.ListItem);
+		return this.removeAllChildComponentsByType(Moobile.ListItem);
 	},
 
 	/**
@@ -371,7 +371,6 @@ Moobile.List = new Class({
 
 		this.parent();
 
-		// TODO: this piece of code needs to be optimized, probably move to didUpdateLayout
 		var components = this.getChildComponents();
 		for (var i = 0; i < components.length; i++) {
 			var prev = components[i - 1];

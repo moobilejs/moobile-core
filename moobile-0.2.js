@@ -2322,8 +2322,6 @@ Moobile.Component = new Class({
 		return this.parent(type, fn);
 	},
 
-
-
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#shouldSupportNativeEvent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
@@ -2611,9 +2609,9 @@ Moobile.Component = new Class({
 
 			var children = node.childNodes;
 			if (children.length) {
-				var idx = getLastComponentIndex.call(this, node);
-				if (idx !== null) {
-					index = idx;
+				var found = getLastComponentIndex.call(this, node);
+				if (found !== null) {
+					index = found;
 					break;
 				}
 			}
@@ -2705,8 +2703,6 @@ Moobile.Component = new Class({
 	hasChildComponentByType: function(type) {
 		return this._children.some(function(child) { return child instanceof type; });
 	},
-
-
 
 	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
@@ -3020,6 +3016,8 @@ Moobile.Component = new Class({
 
 		this._children.invoke('_setReady', ready);
 
+		this.fireEvent('ready');
+
 		this._setUpdateLayout(ready);
 
 		return this;
@@ -3040,10 +3038,7 @@ Moobile.Component = new Class({
 	 * @since  0.3.0
 	 */
 	_didChangeReadyState: function() {
-		if (this._ready) {
-			this.didBecomeReady();
-			this.fireEvent('ready');
-		}
+		if (this._ready) this.didBecomeReady();
 	},
 
 	/**
@@ -4470,7 +4465,7 @@ Moobile.ButtonGroup = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildComponentOfTypeAt(Moobile.Button, index);
+			child = this.getChildComponentByTypeAt(Moobile.Button, index);
 		}
 
 		return this.setSelectedButton(child);
@@ -4561,7 +4556,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	getButtons: function() {
-		return this.getChildComponentsOfType(Moobile.Button);
+		return this.getChildComponentsByType(Moobile.Button);
 	},
 
 	/**
@@ -4570,7 +4565,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
+		return this.getChildComponentByType(Moobile.Button, name);
 	},
 
 	/**
@@ -4579,7 +4574,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	getButtonAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentByTypeAt(Moobile.Button, index);
 	},
 
 	/**
@@ -4597,7 +4592,7 @@ Moobile.ButtonGroup = new Class({
 	 * @since  0.1.0
 	 */
 	removeAllButtons: function(destroy) {
-		return this.removeAllChildComponentsOfType(Moobile.Button, destroy);
+		return this.removeAllChildComponentsByType(Moobile.Button, destroy);
 	},
 
 	/**
@@ -5005,7 +5000,7 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
+		return this.getChildComponentByType(Moobile.Button, name);
 	},
 
 	/**
@@ -5014,7 +5009,7 @@ Moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	getButtonAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentByTypeAt(Moobile.Button, index);
 	},
 
 	/**
@@ -5762,7 +5757,7 @@ Moobile.List = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildComponentOfTypeAt(Moobile.ListItem, index);
+			child = this.getChildComponentByTypeAt(Moobile.ListItem, index);
 		}
 
 		return this.setSelectedItem(child);
@@ -5853,7 +5848,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	getItem: function(name) {
-		return this.getChildComponentOfType(Moobile.ListItem, name);
+		return this.getChildComponentByType(Moobile.ListItem, name);
 	},
 
 	/**
@@ -5862,7 +5857,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	getItemAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.ListItem, index)
+		return this.getChildComponentByTypeAt(Moobile.ListItem, index)
 	},
 
 	/**
@@ -5880,7 +5875,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	getItems: function() {
-		return this.getChildComponentsOfType(Moobile.ListItem);
+		return this.getChildComponentsByType(Moobile.ListItem);
 	},
 
 	/**
@@ -5898,7 +5893,7 @@ Moobile.List = new Class({
 	 * @since  0.1.0
 	 */
 	removeAllItems: function() {
-		return this.removeAllChildComponentsOfType(Moobile.ListItem);
+		return this.removeAllChildComponentsByType(Moobile.ListItem);
 	},
 
 	/**
@@ -5984,7 +5979,6 @@ Moobile.List = new Class({
 
 		this.parent();
 
-		// TODO: this piece of code needs to be optimized, probably move to didUpdateLayout
 		var components = this.getChildComponents();
 		for (var i = 0; i < components.length; i++) {
 			var prev = components[i - 1];
@@ -7233,7 +7227,7 @@ Moobile.TabBar = new Class({
 
 		var child = null;
 		if (index >= 0) {
-			child = this.getChildComponentOfTypeAt(Moobile.Tab, index);
+			child = this.getChildComponentByTypeAt(Moobile.Tab, index);
 		}
 
 		return this.setSelectedTab(child);
@@ -7322,7 +7316,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	getTabs: function() {
-		return this.getChildComponentsOfType(Moobile.Tab);
+		return this.getChildComponentsByType(Moobile.Tab);
 	},
 
 	/**
@@ -7331,7 +7325,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	getTab: function(name) {
-		return this.getChildComponentOfType(Moobile.Tab, name);
+		return this.getChildComponentByType(Moobile.Tab, name);
 	},
 
 	/**
@@ -7340,7 +7334,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	getTabAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Tab, index);
+		return this.getChildComponentByTypeAt(Moobile.Tab, index);
 	},
 
 	/**
@@ -7358,7 +7352,7 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	removeAllTabs: function(destroy) {
-		return this.removeAllChildComponentsOfType(Moobile.Tab, destroy);
+		return this.removeAllChildComponentsByType(Moobile.Tab, destroy);
 	},
 
 	/**
@@ -7747,7 +7741,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	getButtons: function() {
-		return this.getChildComponentsOfType(Moobile.Button);
+		return this.getChildComponentsByType(Moobile.Button);
 	},
 
 	/**
@@ -7756,7 +7750,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	getButton: function(name) {
-		return this.getChildComponentOfType(Moobile.Button, name);
+		return this.getChildComponentByType(Moobile.Button, name);
 	},
 
 	/**
@@ -7765,7 +7759,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	getButtonAt: function(index) {
-		return this.getChildComponentOfTypeAt(Moobile.Button, index);
+		return this.getChildComponentByTypeAt(Moobile.Button, index);
 	},
 
 	/**
@@ -7783,7 +7777,7 @@ Moobile.Alert = new Class({
 	 * @since  0.2.0
 	 */
 	removeAllButtons: function(destroy) {
-		return this.removeAllChildComponentsOfType(Moobile.Button, destroy);
+		return this.removeAllChildComponentsByType(Moobile.Button, destroy);
 	},
 
 	/**
@@ -7802,7 +7796,7 @@ Moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	setDefaultButtonIndex: function(index) {
-		return this.setDefaultButton(this.getChildComponentOfTypeAt(Moobile.Button, index));
+		return this.setDefaultButton(this.getChildComponentByTypeAt(Moobile.Button, index));
 	},
 
 	/**
@@ -7892,7 +7886,7 @@ Moobile.Alert = new Class({
 	 */
 	_onButtonTap: function(e, sender) {
 
-		var index = this.getChildComponentsOfType(Moobile.Button).indexOf(sender);
+		var index = this.getChildComponentsByType(Moobile.Button).indexOf(sender);
 		if (index >= 0) {
 			this.fireEvent('dismiss', [sender, index]);
 		}
@@ -10229,6 +10223,61 @@ Moobile.Component.defineRole('view-collection', null, null, function(element) {
 /*
 ---
 
+name: ViewCarousel
+
+description: Provides a view that handles an a single view.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- View
+
+provides:
+	- ViewCarousel
+
+...
+*/
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/ViewCarousel
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.ViewCarousel = new Class({
+
+	Extends: Moobile.View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('view-carousel');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Moobile.Component.defineRole('view-carousel', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewCarousel, element, 'data-view-carousel'));
+});
+
+
+/*
+---
+
 name: ScrollView
 
 description: Provides a view that scrolls when its content is larger than the
@@ -11217,7 +11266,7 @@ Moobile.ViewController = new Class({
 		this._modalViewController.setModal(true);
 
 		var viewToShow = this._modalViewController.getView();
-		var viewToHide = parentView.getChildComponentsOfType(Moobile.View).getLastItemAtOffset(0);
+		var viewToHide = parentView.getChildComponentsByType(Moobile.View).getLastItemAtOffset(0);
 
 		parentView.addChildComponent(viewToShow);
 
@@ -11271,7 +11320,7 @@ Moobile.ViewController = new Class({
 
 		this.willDismissModalViewController()
 
-		var viewToShow = parentView.getChildComponentsOfType(Moobile.View).getLastItemAtOffset(1);
+		var viewToShow = parentView.getChildComponentsByType(Moobile.View).getLastItemAtOffset(1);
 		var viewToHide = this._modalViewController.getView();
 
 		var viewTransition = this._modalViewController.getViewTransition();
@@ -11839,6 +11888,8 @@ Moobile.ViewControllerSet = new Class({
 			return this;
 
 		var index = this.getChildViewControllerIndex(viewController);
+		if (index === -1)
+			return this;
 
 		this._tabBar.setSelectedTabIndex(index);
 
@@ -12759,6 +12810,280 @@ Class.refactor(Moobile.ViewController, {
 /*
 ---
 
+name: ViewControllerCarousel
+
+description: Manages a view set.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ViewController
+
+provides:
+	- ViewControllerCarousel
+
+...
+*/
+
+Moobile.ViewControllerCarousel = new Class({
+
+	Extends: Moobile.ViewController,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	_animating: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	_currentViewController: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	_loadingViewController: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	loadView: function() {
+		this.view = new Moobile.ViewCarousel();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/presentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	presentViewController: function(viewController, viewTransition, viewTransitionDirection) {
+
+		if (this._animating)
+			return this;
+
+		if (viewTransitionDirection !== 'enter' &&
+			viewTransitionDirection !== 'leave') {
+			viewTransitionDirection = 'enter';
+		}
+
+		if (this._currentViewController === null) {
+			this.addChildViewController(viewController);
+			this.willPresentViewController(viewController);
+			this._currentViewController = viewController;
+			this._currentViewController.showView();
+			this._currentViewController.viewWillEnter();
+			this._currentViewController.viewDidEnter();
+			this.didPresentViewController(viewController);
+			return this;
+		}
+
+		this._loadingViewController = viewController;
+
+		switch (viewTransitionDirection) {
+			case 'enter':
+				this.addChildViewControllerAfter(viewController, this._currentViewController);
+				break;
+			case 'leave':
+				this.addChildViewControllerBefore(viewController, this._currentViewController);
+				break;
+			default:
+				throw new Error('Invalid direction');
+				break;
+		}
+
+		var viewToShow = this._loadingViewController.getView();
+		var viewToHide = this._currentViewController.getView();
+
+		this._animating = true; // needs to be set before the transition happens
+
+		viewTransition = viewTransition || new Moobile.ViewTransition.None();
+		viewTransition.addEvent('start:once', this.bound('_onSelectTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onSelectTransitionComplete'));
+		viewTransition[viewTransitionDirection].call(
+			viewTransition,
+			viewToShow,
+			viewToHide,
+			this.view
+		);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/getCurrentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	getCurrentViewController: function() {
+		return this._currentViewController;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	_onSelectTransitionStart: function(e) {
+		this.willPresentViewController(this._loadingViewController);
+		this._currentViewController.viewWillLeave();
+		this._loadingViewController.viewWillEnter();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	_onSelectTransitionComplete: function(e) {
+
+		this._currentViewController.viewDidLeave();
+		this._loadingViewController.viewDidEnter();
+		this.didPresentViewController(this._loadingViewController);
+
+		this._currentViewController.destroy();
+		this._currentViewController = null;
+
+		this._currentViewController = this._loadingViewController;
+		this._loadingViewController = null;
+		this._animating = false;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	didAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerCarousel(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	didRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerCarousel(null);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/willPresentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	willPresentViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/didPresentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	didPresentViewController: function(viewController) {
+
+	}
+
+});
+
+Class.refactor(Moobile.ViewController, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	_viewControllerCarousel: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/setViewControllerCarousel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	setViewControllerCarousel: function(viewControllerCarousel) {
+
+		if (this._viewControllerCarousel === viewControllerCarousel)
+			return this;
+
+		this.viewControllerCarouselWillChange(viewControllerCarousel);
+		this._viewControllerCarousel = viewControllerCarousel;
+		this.viewControllerCarouselDidChange(viewControllerCarousel);
+
+		if (this instanceof Moobile.ViewControllerCarousel)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof Moobile.ViewControllerCarousel);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerCarousel', viewControllerCarousel);
+
+		return this;
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	getViewControllerCarousel: function() {
+		return this._viewControllerCarousel;
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	viewControllerCarouselWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	viewControllerCarouselDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerCarousel(this._viewControllerCarousel);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerCarousel(null);
+	}
+
+});
+
+
+/*
+---
+
 name: ViewTransition
 
 description: Provides the base class that applies view transition.
@@ -12966,12 +13291,12 @@ Moobile.ViewTransition.Slide = new Class({
 
 				var keyframes = '';
 
-				viewToShow.getChildComponentsOfType(Moobile.NavigationBar).each(function(navigationBar) {
+				viewToShow.getChildComponentsByType(Moobile.NavigationBar).each(function(navigationBar) {
 
 					var width = navigationBar.getSize().x;
 					if (width) {
 
-						navigationBar.getChildComponentsOfType(Moobile.Button).each(function(button) {
+						navigationBar.getChildComponentsByType(Moobile.Button).each(function(button) {
 
 							var style = button.getStyle();
 							if (style !== 'back' &&
@@ -13047,12 +13372,12 @@ Moobile.ViewTransition.Slide = new Class({
 
 				var keyframes = '';
 
-				viewToHide.getChildComponentsOfType(Moobile.NavigationBar).each(function(navigationBar) {
+				viewToHide.getChildComponentsByType(Moobile.NavigationBar).each(function(navigationBar) {
 
 					var width = navigationBar.getSize().x;
 					if (width) {
 
-						navigationBar.getChildComponentsOfType(Moobile.Button).each(function(button) {
+						navigationBar.getChildComponentsByType(Moobile.Button).each(function(button) {
 
 							var style = button.getStyle();
 							if (style !== 'back' &&
@@ -14089,7 +14414,7 @@ Moobile.WindowController = new Class({
 
 		this._rootViewController = rootViewController;
 
-		this.view.setReady(true);
+		this.view._setReady(true);
 
 		return this;
 	},
