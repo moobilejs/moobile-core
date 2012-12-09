@@ -168,15 +168,7 @@ Moobile.ViewController = new Class({
 	 * @since  0.1.0
 	 */
 	addChildViewController: function(viewController) {
-
-		var viewHandler = function() {
-			var view = viewController.getView();
-			if (view) {
-				this.view.addChildComponent(view);
-			}
-		};
-
-		return this._addChildViewControllerAt(viewController, this._children.length, viewHandler);
+		return this._addChildViewController(viewController);
 	},
 
 	/**
@@ -190,17 +182,7 @@ Moobile.ViewController = new Class({
 		if (index === -1)
 			return this;
 
-		var viewHandler = function() {
-			var view = viewController.getView();
-			if (view) {
-				var afterView = after.getView();
-				if (afterView) {
-					this.view.addChildComponentAfter(view, afterView);
-				}
-			}
-		};
-
-		return this._addChildViewControllerAt(viewController, index + 1, viewHandler);
+		return this._addChildViewController(viewController, after, 'after');
 	},
 
 	/**
@@ -214,39 +196,60 @@ Moobile.ViewController = new Class({
 		if (index === -1)
 			return this;
 
-		var viewHandler = function() {
-			var view = viewController.getView();
-			if (view) {
-				var beforeView = before.getView();
-				if (beforeView) {
-					this.view.addChildComponentBefore(view, beforeView);
-				}
-			}
-		};
+		return this._addChildViewController(viewController, before, 'before');
+	},
 
-		return this._addChildViewControllerAt(viewController, index, viewHandler);
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildViewControllerAt: function(viewController, index) {
+
+		if (index > this._children.length) {
+			index = this._children.length;
+		} else if (index < 0) {
+			index = 0;
+		}
+
+		var before = this.getChildViewControllerAt(index);
+		if (before) {
+			return this.addChildViewControllerBefore(component, before);
+		}
+
+		return this.addChildViewController(viewController);
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	_addChildViewControllerAt: function(viewController, index, viewHandler) {
-
-		if (this.hasChildViewController(viewController))
-			return this;
+	_addChildViewController: function(viewController, context, where) {
 
 		viewController.removeFromParentViewController();
 
 		this.willAddChildViewController(viewController);
-		this._children.splice(index, 0, viewController);
-		viewController.setParentViewController(this);
 
-		if (viewHandler) {
-			viewHandler.call(this)
+		if (context) {
+
+			this._children.splice(this.getChildViewControllerIndex(context), 0, viewController);
+
+			switch (where) {
+				case 'before':
+					this.view.addChildComponentBefore(view, context.view);
+					break;
+				case 'after':
+					this.view.addChildComponentAfter(view, context.view);
+					break;
+			}
+
+		} else {
+			this._children.push(viewController);
+			this.view.addChildComponent(viewController.view);
 		}
 
+		viewController.setParentViewController(this);
 		this.didAddChildViewController(viewController);
 
 		return this;

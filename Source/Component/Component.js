@@ -382,6 +382,27 @@ Moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentAt: function(component, index) {
+
+		if (index > this._children.length) {
+			index = this._children.length;
+		} else if (index < 0) {
+			index = 0;
+		}
+
+		var before = this.getChildComponentAt(index);
+		if (before) {
+			return this.addChildComponentBefore(component, before);
+		}
+
+		return this.addChildComponent(component, 'bottom');
+	},
+
+	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @edited 0.3.0
