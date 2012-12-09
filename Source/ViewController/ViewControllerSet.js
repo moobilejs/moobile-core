@@ -109,15 +109,15 @@ Moobile.ViewControllerSet = new Class({
 
 		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
 
-		return this.setSelectedViewController(viewControllers[0]);
+		return this.showViewController(viewControllers[0]);
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#showViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	setSelectedViewController: function(viewController, viewTransition) {
+	showViewController: function(viewController, viewTransition) {
 
 		if (this._animating)
 			return this;
@@ -168,15 +168,15 @@ Moobile.ViewControllerSet = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewControllerIndex
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#showViewControllerIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	setSelectedViewControllerIndex: function(index, viewTransition) {
+	showViewControllerAt: function(index, viewTransition) {
 
 		var viewController = this.getChildViewControllerAt(index);
 		if (viewController) {
-			this.setSelectedViewController(viewController, viewTransition)
+			this.showViewController(viewController, viewTransition)
 		}
 
 		return this;
@@ -303,7 +303,7 @@ Moobile.ViewControllerSet = new Class({
 
 		var viewController = this.getChildViewControllerAt(index);
 		if (viewController !== this._selectedViewController) {
-			this.setSelectedViewController(viewController, this.options.viewTransition);
+			this.showViewController(viewController, this.options.viewTransition);
 		}
 	}
 

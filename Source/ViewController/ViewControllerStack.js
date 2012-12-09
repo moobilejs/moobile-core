@@ -73,14 +73,14 @@ Moobile.ViewControllerStack = new Class({
 		this._animating = true; // needs to be set before the transition happens
 
 		if (childViewControllers.length === 1) {
-			this.onPushTransitionStart();
-			this.onPushTransitionComplete();
+			this._onPushTransitionStart();
+			this._onPushTransitionComplete();
 			return this;
 		}
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.None();
-		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
+		viewTransition.addEvent('start:once', this.bound('_onPushTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPushTransitionComplete'));
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
@@ -97,7 +97,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionStart: function() {
+	_onPushTransitionStart: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -114,7 +114,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionComplete: function() {
+	_onPushTransitionComplete: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -152,8 +152,8 @@ Moobile.ViewControllerStack = new Class({
 		this._animating = true; // needs to be set before the transition happens
 
 		var viewTransition = viewControllerPopped.getViewTransition();
-		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('onPopTransitionComplete'));
+		viewTransition.addEvent('start:once', this.bound('_onPopTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPopTransitionComplete'));
 		viewTransition.leave(
 			viewControllerBefore.getView(),
 			viewControllerPopped.getView(),
@@ -199,7 +199,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPopTransitionStart: function(e) {
+	_onPopTransitionStart: function(e) {
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
@@ -212,7 +212,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPopTransitionComplete: function(e) {
+	_onPopTransitionComplete: function(e) {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
