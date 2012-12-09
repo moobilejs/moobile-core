@@ -1,7 +1,26 @@
-/*!
- * iScroll v4.2.5 ~ Copyright (c) 2012 Matteo Spinelli, http://cubiq.org
- * Released under MIT license, http://cubiq.org/license
- */
+
+Warning: file_get_contents(/Users/jpdery/Projects/moobile-core/Source/View/ViewCarousel.js): failed to open stream: No such file or directory in /Users/jpdery/Projects/moobile-core/Packager/packager.php on line 67
+
+Warning: file_get_contents(/Users/jpdery/Projects/moobile-core/Source/ViewController/ViewControllerCarousel.js): failed to open stream: No such file or directory in /Users/jpdery/Projects/moobile-core/Packager/packager.php on line 67
+/*
+---
+
+name: IScroll
+
+description:
+
+license: MIT license, http://cubiq.org/license
+
+authors:
+	-  Matteo Spinelli, http://cubiq.org
+
+requires:
+
+provides:
+	- IScroll
+
+...
+*/
 (function(window, doc){
 var m = Math,
 	dummyStyle = doc.createElement('div').style,
@@ -141,7 +160,7 @@ var m = Math,
 
 		// User defined options
 		for (i in options) that.options[i] = options[i];
-		
+
 		// Set starting position
 		that.x = that.options.x;
 		that.y = that.options.y;
@@ -159,13 +178,13 @@ var m = Math,
 		if ( that.options.zoom && isAndroid ){
 			translateZ = '';
 		}
-		
+
 		// Set some default styles
 		that.scroller.style[transitionProperty] = that.options.useTransform ? cssVendor + 'transform' : 'top left';
 		that.scroller.style[transitionDuration] = '0';
 		that.scroller.style[transformOrigin] = '0 0';
 		if (that.options.useTransition) that.scroller.style[transitionTimingFunction] = 'cubic-bezier(0.33,0.66,0.66,1)';
-		
+
 		if (that.options.useTransform) that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px)' + translateZ;
 		else that.scroller.style.cssText += ';position:absolute;top:' + that.y + 'px;left:' + that.x + 'px';
 
@@ -198,7 +217,7 @@ iScroll.prototype = {
 	pagesX: [], pagesY: [],
 	aniTime: null,
 	wheelZoomCount: 0,
-	
+
 	handleEvent: function (e) {
 		var that = this;
 		switch(e.type) {
@@ -214,14 +233,14 @@ iScroll.prototype = {
 			case TRNEND_EV: that._transitionEnd(e); break;
 		}
 	},
-	
+
 	_checkDOMChanges: function () {
 		if (this.moved || this.zoomed || this.animating ||
 			(this.scrollerW == this.scroller.offsetWidth * this.scale && this.scrollerH == this.scroller.offsetHeight * this.scale)) return;
 
 		this.refresh();
 	},
-	
+
 	_scrollbar: function (dir) {
 		var that = this,
 			bar;
@@ -278,12 +297,12 @@ iScroll.prototype = {
 		// Reset position
 		that._scrollbarPos(dir, true);
 	},
-	
+
 	_resize: function () {
 		var that = this;
 		setTimeout(function () { that.refresh(); }, isAndroid ? 200 : 0);
 	},
-	
+
 	_pos: function (x, y) {
 		if (this.zoomed) return;
 
@@ -337,7 +356,7 @@ iScroll.prototype = {
 		that[dir + 'ScrollbarWrapper'].style.opacity = hidden && that.options.hideScrollbar ? '0' : '1';
 		that[dir + 'ScrollbarIndicator'].style[transform] = 'translate(' + (dir == 'h' ? pos + 'px,0)' : '0,' + pos + 'px)') + translateZ;
 	},
-	
+
 	_start: function (e) {
 		var that = this,
 			point = hasTouch ? e.touches[0] : e,
@@ -382,7 +401,7 @@ iScroll.prototype = {
 				x = +getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g, '');
 				y = +getComputedStyle(that.scroller, null).top.replace(/[^0-9-]/g, '');
 			}
-			
+
 			if (x != that.x || y != that.y) {
 				if (that.options.useTransition) that._unbind(TRNEND_EV);
 				else cancelFrame(that.aniTime);
@@ -408,7 +427,7 @@ iScroll.prototype = {
 		that._bind(END_EV, window);
 		that._bind(CANCEL_EV, window);
 	},
-	
+
 	_move: function (e) {
 		var that = this,
 			point = hasTouch ? e.touches[0] : e,
@@ -486,10 +505,10 @@ iScroll.prototype = {
 			that.startX = that.x;
 			that.startY = that.y;
 		}
-		
+
 		if (that.options.onScrollMove) that.options.onScrollMove.call(that, e);
 	},
-	
+
 	_end: function (e) {
 		if (hasTouch && e.touches.length !== 0) return;
 
@@ -521,10 +540,10 @@ iScroll.prototype = {
 
 			that.x = that.originX - that.originX * that.lastScale + that.x;
 			that.y = that.originY - that.originY * that.lastScale + that.y;
-			
+
 			that.scroller.style[transitionDuration] = '200ms';
 			that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px) scale(' + that.scale + ')' + translateZ;
-			
+
 			that.zoomed = false;
 			that.refresh();
 
@@ -622,7 +641,7 @@ iScroll.prototype = {
 		that._resetPos(200);
 		if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
 	},
-	
+
 	_resetPos: function (time) {
 		var that = this,
 			resetX = that.x >= 0 ? 0 : that.x < that.maxScrollX ? that.maxScrollX : that.x,
@@ -665,27 +684,27 @@ iScroll.prototype = {
 		} else {
 			return;
 		}
-		
+
 		if (that.options.wheelAction == 'zoom') {
 			deltaScale = that.scale * Math.pow(2, 1/3 * (wheelDeltaY ? wheelDeltaY / Math.abs(wheelDeltaY) : 0));
 			if (deltaScale < that.options.zoomMin) deltaScale = that.options.zoomMin;
 			if (deltaScale > that.options.zoomMax) deltaScale = that.options.zoomMax;
-			
+
 			if (deltaScale != that.scale) {
 				if (!that.wheelZoomCount && that.options.onZoomStart) that.options.onZoomStart.call(that, e);
 				that.wheelZoomCount++;
-				
+
 				that.zoom(e.pageX, e.pageY, deltaScale, 400);
-				
+
 				setTimeout(function() {
 					that.wheelZoomCount--;
 					if (!that.wheelZoomCount && that.options.onZoomEnd) that.options.onZoomEnd.call(that, e);
 				}, 400);
 			}
-			
+
 			return;
 		}
-		
+
 		deltaX = that.x + wheelDeltaX;
 		deltaY = that.y + wheelDeltaY;
 
@@ -694,19 +713,19 @@ iScroll.prototype = {
 
 		if (deltaY > that.minScrollY) deltaY = that.minScrollY;
 		else if (deltaY < that.maxScrollY) deltaY = that.maxScrollY;
-    
+
 		if (that.maxScrollY < 0) {
 			that.scrollTo(deltaX, deltaY, 0);
 		}
 	},
-	
+
 	_transitionEnd: function (e) {
 		var that = this;
 
 		if (e.target != that.scroller) return;
 
 		that._unbind(TRNEND_EV);
-		
+
 		that._startAni();
 	},
 
@@ -724,19 +743,19 @@ iScroll.prototype = {
 			animate;
 
 		if (that.animating) return;
-		
+
 		if (!that.steps.length) {
 			that._resetPos(400);
 			return;
 		}
-		
+
 		step = that.steps.shift();
-		
+
 		if (step.x == startX && step.y == startY) step.time = 0;
 
 		that.animating = true;
 		that.moved = true;
-		
+
 		if (that.options.useTransition) {
 			that._transitionTime(step.time);
 			that._pos(step.x, step.y);
@@ -804,12 +823,12 @@ iScroll.prototype = {
 	_offset: function (el) {
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
-			
+
 		while (el = el.offsetParent) {
 			left -= el.offsetLeft;
 			top -= el.offsetTop;
 		}
-		
+
 		if (el != this.wrapper) {
 			left *= this.scale;
 			top *= this.scale;
@@ -889,16 +908,16 @@ iScroll.prototype = {
 		that._unbind(MOVE_EV, window);
 		that._unbind(END_EV, window);
 		that._unbind(CANCEL_EV, window);
-		
+
 		if (!that.options.hasTouch) {
 			that._unbind('DOMMouseScroll');
 			that._unbind('mousewheel');
 		}
-		
+
 		if (that.options.useTransition) that._unbind(TRNEND_EV);
-		
+
 		if (that.options.checkDOMChanges) clearInterval(that.checkDOMTime);
-		
+
 		if (that.options.onDestroy) that.options.onDestroy.call(that);
 	},
 
@@ -984,7 +1003,7 @@ iScroll.prototype = {
 		that.stop();
 
 		if (!step.length) step = [{ x: x, y: y, time: time, relative: relative }];
-		
+
 		for (i=0, l=step.length; i<l; i++) {
 			if (step[i].relative) { step[i].x = that.x - step[i].x; step[i].y = that.y - step[i].y; }
 			that.steps.push({ x: step[i].x, y: step[i].y, time: step[i].time || 0 });
@@ -1011,7 +1030,7 @@ iScroll.prototype = {
 
 	scrollToPage: function (pageX, pageY, time) {
 		var that = this, x, y;
-		
+
 		time = time === undefined ? 400 : time;
 
 		if (that.options.onScrollStart) that.options.onScrollStart.call(that);
@@ -1047,11 +1066,11 @@ iScroll.prototype = {
 		this._unbind(END_EV, window);
 		this._unbind(CANCEL_EV, window);
 	},
-	
+
 	enable: function () {
 		this.enabled = true;
 	},
-	
+
 	stop: function () {
 		if (this.options.useTransition) this._unbind(TRNEND_EV);
 		else cancelFrame(this.aniTime);
@@ -1059,7 +1078,7 @@ iScroll.prototype = {
 		this.moved = false;
 		this.animating = false;
 	},
-	
+
 	zoom: function (x, y, scale, time) {
 		var that = this,
 			relScale = scale / that.scale;
@@ -1083,7 +1102,7 @@ iScroll.prototype = {
 		that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px) scale(' + scale + ')' + translateZ;
 		that.zoomed = false;
 	},
-	
+
 	isReady: function () {
 		return !this.moved && !this.zoomed && !this.animating;
 	}
@@ -1102,6 +1121,1566 @@ if (typeof exports !== 'undefined') exports.iScroll = iScroll;
 else window.iScroll = iScroll;
 
 })(window, document);
+
+
+/*
+---
+
+name: ZyngaAnimate
+
+description:
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+
+provides:
+	- ZyngaAnimate
+
+...
+*/
+/*
+ * Scroller
+ * http://github.com/zynga/scroller
+ *
+ * Copyright 2011, Zynga Inc.
+ * Licensed under the MIT License.
+ * https://raw.github.com/zynga/scroller/master/MIT-LICENSE.txt
+ *
+ * Based on the work of: Unify Project (unify-project.org)
+ * http://unify-project.org
+ * Copyright 2011, Deutsche Telekom AG
+ * License: MIT + Apache (V2)
+ */
+
+/**
+ * Generic animation class with support for dropped frames both optional easing and duration.
+ *
+ * Optional duration is useful when the lifetime is defined by another condition than time
+ * e.g. speed of an animating object, etc.
+ *
+ * Dropped frame logic allows to keep using the same updater logic independent from the actual
+ * rendering. This eases a lot of cases where it might be pretty complex to break down a state
+ * based on the pure time difference.
+ */
+(function(global) {
+	var time = Date.now || function() {
+		return +new Date();
+	};
+	var desiredFrames = 60;
+	var millisecondsPerSecond = 1000;
+	var running = {};
+	var counter = 1;
+
+	// Create namespaces
+	if (!global.core) {
+		global.core = { effect : {} };
+
+	} else if (!core.effect) {
+		core.effect = {};
+	}
+
+	core.effect.Animate = {
+
+		/**
+		 * A requestAnimationFrame wrapper / polyfill.
+		 *
+		 * @param callback {Function} The callback to be invoked before the next repaint.
+		 * @param root {HTMLElement} The root element for the repaint
+		 */
+		requestAnimationFrame: (function() {
+
+			// Check for request animation Frame support
+			var requestFrame = global.requestAnimationFrame || global.webkitRequestAnimationFrame || global.mozRequestAnimationFrame || global.oRequestAnimationFrame;
+			var isNative = !!requestFrame;
+
+			if (requestFrame && !/requestAnimationFrame\(\)\s*\{\s*\[native code\]\s*\}/i.test(requestFrame.toString())) {
+				isNative = false;
+			}
+
+			if (isNative) {
+				return function(callback, root) {
+					requestFrame(callback, root)
+				};
+			}
+
+			var TARGET_FPS = 60;
+			var requests = {};
+			var requestCount = 0;
+			var rafHandle = 1;
+			var intervalHandle = null;
+			var lastActive = +new Date();
+
+			return function(callback, root) {
+				var callbackHandle = rafHandle++;
+
+				// Store callback
+				requests[callbackHandle] = callback;
+				requestCount++;
+
+				// Create timeout at first request
+				if (intervalHandle === null) {
+
+					intervalHandle = setInterval(function() {
+
+						var time = +new Date();
+						var currentRequests = requests;
+
+						// Reset data structure before executing callbacks
+						requests = {};
+						requestCount = 0;
+
+						for(var key in currentRequests) {
+							if (currentRequests.hasOwnProperty(key)) {
+								currentRequests[key](time);
+								lastActive = time;
+							}
+						}
+
+						// Disable the timeout when nothing happens for a certain
+						// period of time
+						if (time - lastActive > 2500) {
+							clearInterval(intervalHandle);
+							intervalHandle = null;
+						}
+
+					}, 1000 / TARGET_FPS);
+				}
+
+				return callbackHandle;
+			};
+
+		})(),
+
+
+		/**
+		 * Stops the given animation.
+		 *
+		 * @param id {Integer} Unique animation ID
+		 * @return {Boolean} Whether the animation was stopped (aka, was running before)
+		 */
+		stop: function(id) {
+			var cleared = running[id] != null;
+			if (cleared) {
+				running[id] = null;
+			}
+
+			return cleared;
+		},
+
+
+		/**
+		 * Whether the given animation is still running.
+		 *
+		 * @param id {Integer} Unique animation ID
+		 * @return {Boolean} Whether the animation is still running
+		 */
+		isRunning: function(id) {
+			return running[id] != null;
+		},
+
+
+		/**
+		 * Start the animation.
+		 *
+		 * @param stepCallback {Function} Pointer to function which is executed on every step.
+		 *   Signature of the method should be `function(percent, now, virtual) { return continueWithAnimation; }`
+		 * @param verifyCallback {Function} Executed before every animation step.
+		 *   Signature of the method should be `function() { return continueWithAnimation; }`
+		 * @param completedCallback {Function}
+		 *   Signature of the method should be `function(droppedFrames, finishedAnimation) {}`
+		 * @param duration {Integer} Milliseconds to run the animation
+		 * @param easingMethod {Function} Pointer to easing function
+		 *   Signature of the method should be `function(percent) { return modifiedValue; }`
+		 * @param root {Element ? document.body} Render root, when available. Used for internal
+		 *   usage of requestAnimationFrame.
+		 * @return {Integer} Identifier of animation. Can be used to stop it any time.
+		 */
+		start: function(stepCallback, verifyCallback, completedCallback, duration, easingMethod, root) {
+
+			var start = time();
+			var lastFrame = start;
+			var percent = 0;
+			var dropCounter = 0;
+			var id = counter++;
+
+			if (!root) {
+				root = document.body;
+			}
+
+			// Compacting running db automatically every few new animations
+			if (id % 20 === 0) {
+				var newRunning = {};
+				for (var usedId in running) {
+					newRunning[usedId] = true;
+				}
+				running = newRunning;
+			}
+
+			// This is the internal step method which is called every few milliseconds
+			var step = function(virtual) {
+
+				// Normalize virtual value
+				var render = virtual !== true;
+
+				// Get current time
+				var now = time();
+
+				// Verification is executed before next animation step
+				if (!running[id] || (verifyCallback && !verifyCallback(id))) {
+
+					running[id] = null;
+					completedCallback && completedCallback(desiredFrames - (dropCounter / ((now - start) / millisecondsPerSecond)), id, false);
+					return;
+
+				}
+
+				// For the current rendering to apply let's update omitted steps in memory.
+				// This is important to bring internal state variables up-to-date with progress in time.
+				if (render) {
+
+					var droppedFrames = Math.round((now - lastFrame) / (millisecondsPerSecond / desiredFrames)) - 1;
+					for (var j = 0; j < Math.min(droppedFrames, 4); j++) {
+						step(true);
+						dropCounter++;
+					}
+
+				}
+
+				// Compute percent value
+				if (duration) {
+					percent = (now - start) / duration;
+					if (percent > 1) {
+						percent = 1;
+					}
+				}
+
+				// Execute step callback, then...
+				var value = easingMethod ? easingMethod(percent) : percent;
+				if ((stepCallback(value, now, render) === false || percent === 1) && render) {
+					running[id] = null;
+					completedCallback && completedCallback(desiredFrames - (dropCounter / ((now - start) / millisecondsPerSecond)), id, percent === 1 || duration == null);
+				} else if (render) {
+					lastFrame = now;
+					core.effect.Animate.requestAnimationFrame(step, root);
+				}
+			};
+
+			// Mark as running
+			running[id] = true;
+
+			// Init first step
+			core.effect.Animate.requestAnimationFrame(step, root);
+
+			// Return unique animation ID
+			return id;
+		}
+	};
+})(this);
+
+
+
+/*
+---
+
+name: Zynga
+
+description:
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- ZyngaAnimate
+
+provides:
+	- Zynga
+
+...
+*/
+/*
+ * Scroller
+ * http://github.com/zynga/scroller
+ *
+ * Copyright 2011, Zynga Inc.
+ * Licensed under the MIT License.
+ * https://raw.github.com/zynga/scroller/master/MIT-LICENSE.txt
+ *
+ * Based on the work of: Unify Project (unify-project.org)
+ * http://unify-project.org
+ * Copyright 2011, Deutsche Telekom AG
+ * License: MIT + Apache (V2)
+ */
+
+var Scroller;
+
+(function() {
+
+	/**
+	 * A pure logic 'component' for 'virtual' scrolling/zooming.
+	 */
+	Scroller = function(callback, options) {
+
+		this.__callback = callback;
+
+		this.options = {
+
+			/** Enable scrolling on x-axis */
+			scrollingX: true,
+
+			/** Enable scrolling on y-axis */
+			scrollingY: true,
+
+			/** Enable animations for deceleration, snap back, zooming and scrolling */
+			animating: true,
+
+			/** duration for animations triggered by scrollTo/zoomTo */
+			animationDuration: 250,
+
+			/** Enable bouncing (content can be slowly moved outside and jumps back after releasing) */
+			bouncing: true,
+
+			/** Enable locking to the main axis if user moves only slightly on one of them at start */
+			locking: true,
+
+			/** Enable pagination mode (switching between full page content panes) */
+			paging: false,
+
+			/** Enable snapping of content to a configured pixel grid */
+			snapping: false,
+
+			/** Enable zooming of content via API, fingers and mouse wheel */
+			zooming: false,
+
+			/** Minimum zoom level */
+			minZoom: 0.5,
+
+			/** Maximum zoom level */
+			maxZoom: 3
+
+		};
+
+		for (var key in options) {
+			this.options[key] = options[key];
+		}
+
+	};
+
+
+	// Easing Equations (c) 2003 Robert Penner, all rights reserved.
+	// Open source under the BSD License.
+
+	/**
+	 * @param pos {Number} position between 0 (start of effect) and 1 (end of effect)
+	**/
+	var easeOutCubic = function(pos) {
+		return (Math.pow((pos - 1), 3) + 1);
+	};
+
+	/**
+	 * @param pos {Number} position between 0 (start of effect) and 1 (end of effect)
+	**/
+	var easeInOutCubic = function(pos) {
+		if ((pos /= 0.5) < 1) {
+			return 0.5 * Math.pow(pos, 3);
+		}
+
+		return 0.5 * (Math.pow((pos - 2), 3) + 2);
+	};
+
+
+	var members = {
+
+		/*
+		---------------------------------------------------------------------------
+			INTERNAL FIELDS :: STATUS
+		---------------------------------------------------------------------------
+		*/
+
+		/** {Boolean} Whether only a single finger is used in touch handling */
+		__isSingleTouch: false,
+
+		/** {Boolean} Whether a touch event sequence is in progress */
+		__isTracking: false,
+
+		/**
+		 * {Boolean} Whether a gesture zoom/rotate event is in progress. Activates when
+		 * a gesturestart event happens. This has higher priority than dragging.
+		 */
+		__isGesturing: false,
+
+		/**
+		 * {Boolean} Whether the user has moved by such a distance that we have enabled
+		 * dragging mode. Hint: It's only enabled after some pixels of movement to
+		 * not interrupt with clicks etc.
+		 */
+		__isDragging: false,
+
+		/**
+		 * {Boolean} Not touching and dragging anymore, and smoothly animating the
+		 * touch sequence using deceleration.
+		 */
+		__isDecelerating: false,
+
+		/**
+		 * {Boolean} Smoothly animating the currently configured change
+		 */
+		__isAnimating: false,
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			INTERNAL FIELDS :: DIMENSIONS
+		---------------------------------------------------------------------------
+		*/
+
+		/** {Integer} Available outer left position (from document perspective) */
+		__clientLeft: 0,
+
+		/** {Integer} Available outer top position (from document perspective) */
+		__clientTop: 0,
+
+		/** {Integer} Available outer width */
+		__clientWidth: 0,
+
+		/** {Integer} Available outer height */
+		__clientHeight: 0,
+
+		/** {Integer} Outer width of content */
+		__contentWidth: 0,
+
+		/** {Integer} Outer height of content */
+		__contentHeight: 0,
+
+		/** {Integer} Snapping width for content */
+		__snapWidth: 100,
+
+		/** {Integer} Snapping height for content */
+		__snapHeight: 100,
+
+		/** {Integer} Height to assign to refresh area */
+		__refreshHeight: null,
+
+		/** {Boolean} Whether the refresh process is enabled when the event is released now */
+		__refreshActive: false,
+
+		/** {Function} Callback to execute on activation. This is for signalling the user about a refresh is about to happen when he release */
+		__refreshActivate: null,
+
+		/** {Function} Callback to execute on deactivation. This is for signalling the user about the refresh being cancelled */
+		__refreshDeactivate: null,
+
+		/** {Function} Callback to execute to start the actual refresh. Call {@link #refreshFinish} when done */
+		__refreshStart: null,
+
+		/** {Number} Zoom level */
+		__zoomLevel: 1,
+
+		/** {Number} Scroll position on x-axis */
+		__scrollLeft: 0,
+
+		/** {Number} Scroll position on y-axis */
+		__scrollTop: 0,
+
+		/** {Integer} Maximum allowed scroll position on x-axis */
+		__maxScrollLeft: 0,
+
+		/** {Integer} Maximum allowed scroll position on y-axis */
+		__maxScrollTop: 0,
+
+		/* {Number} Scheduled left position (final position when animating) */
+		__scheduledLeft: 0,
+
+		/* {Number} Scheduled top position (final position when animating) */
+		__scheduledTop: 0,
+
+		/* {Number} Scheduled zoom level (final scale when animating) */
+		__scheduledZoom: 0,
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			INTERNAL FIELDS :: LAST POSITIONS
+		---------------------------------------------------------------------------
+		*/
+
+		/** {Number} Left position of finger at start */
+		__lastTouchLeft: null,
+
+		/** {Number} Top position of finger at start */
+		__lastTouchTop: null,
+
+		/** {Date} Timestamp of last move of finger. Used to limit tracking range for deceleration speed. */
+		__lastTouchMove: null,
+
+		/** {Array} List of positions, uses three indexes for each state: left, top, timestamp */
+		__positions: null,
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			INTERNAL FIELDS :: DECELERATION SUPPORT
+		---------------------------------------------------------------------------
+		*/
+
+		/** {Integer} Minimum left scroll position during deceleration */
+		__minDecelerationScrollLeft: null,
+
+		/** {Integer} Minimum top scroll position during deceleration */
+		__minDecelerationScrollTop: null,
+
+		/** {Integer} Maximum left scroll position during deceleration */
+		__maxDecelerationScrollLeft: null,
+
+		/** {Integer} Maximum top scroll position during deceleration */
+		__maxDecelerationScrollTop: null,
+
+		/** {Number} Current factor to modify horizontal scroll position with on every step */
+		__decelerationVelocityX: null,
+
+		/** {Number} Current factor to modify vertical scroll position with on every step */
+		__decelerationVelocityY: null,
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			PUBLIC API
+		---------------------------------------------------------------------------
+		*/
+
+		/**
+		 * Configures the dimensions of the client (outer) and content (inner) elements.
+		 * Requires the available space for the outer element and the outer size of the inner element.
+		 * All values which are falsy (null or zero etc.) are ignored and the old value is kept.
+		 *
+		 * @param clientWidth {Integer ? null} Inner width of outer element
+		 * @param clientHeight {Integer ? null} Inner height of outer element
+		 * @param contentWidth {Integer ? null} Outer width of inner element
+		 * @param contentHeight {Integer ? null} Outer height of inner element
+		 */
+		setDimensions: function(clientWidth, clientHeight, contentWidth, contentHeight) {
+
+			var self = this;
+
+			// Only update values which are defined
+			if (clientWidth) {
+				self.__clientWidth = clientWidth;
+			}
+
+			if (clientHeight) {
+				self.__clientHeight = clientHeight;
+			}
+
+			if (contentWidth) {
+				self.__contentWidth = contentWidth;
+			}
+
+			if (contentHeight) {
+				self.__contentHeight = contentHeight;
+			}
+
+			// Refresh maximums
+			self.__computeScrollMax();
+
+			// Refresh scroll position
+			self.scrollTo(self.__scrollLeft, self.__scrollTop, true);
+
+		},
+
+
+		/**
+		 * Sets the client coordinates in relation to the document.
+		 *
+		 * @param left {Integer ? 0} Left position of outer element
+		 * @param top {Integer ? 0} Top position of outer element
+		 */
+		setPosition: function(left, top) {
+
+			var self = this;
+
+			self.__clientLeft = left || 0;
+			self.__clientTop = top || 0;
+
+		},
+
+
+		/**
+		 * Configures the snapping (when snapping is active)
+		 *
+		 * @param width {Integer} Snapping width
+		 * @param height {Integer} Snapping height
+		 */
+		setSnapSize: function(width, height) {
+
+			var self = this;
+
+			self.__snapWidth = width;
+			self.__snapHeight = height;
+
+		},
+
+
+		/**
+		 * Activates pull-to-refresh. A special zone on the top of the list to start a list refresh whenever
+		 * the user event is released during visibility of this zone. This was introduced by some apps on iOS like
+		 * the official Twitter client.
+		 *
+		 * @param height {Integer} Height of pull-to-refresh zone on top of rendered list
+		 * @param activateCallback {Function} Callback to execute on activation. This is for signalling the user about a refresh is about to happen when he release.
+		 * @param deactivateCallback {Function} Callback to execute on deactivation. This is for signalling the user about the refresh being cancelled.
+		 * @param startCallback {Function} Callback to execute to start the real async refresh action. Call {@link #finishPullToRefresh} after finish of refresh.
+		 */
+		activatePullToRefresh: function(height, activateCallback, deactivateCallback, startCallback) {
+
+			var self = this;
+
+			self.__refreshHeight = height;
+			self.__refreshActivate = activateCallback;
+			self.__refreshDeactivate = deactivateCallback;
+			self.__refreshStart = startCallback;
+
+		},
+
+
+		/**
+		 * Signalizes that pull-to-refresh is finished.
+		 */
+		finishPullToRefresh: function() {
+
+			var self = this;
+
+			self.__refreshActive = false;
+			if (self.__refreshDeactivate) {
+				self.__refreshDeactivate();
+			}
+
+			self.scrollTo(self.__scrollLeft, self.__scrollTop, true);
+
+		},
+
+
+		/**
+		 * Returns the scroll position and zooming values
+		 *
+		 * @return {Map} `left` and `top` scroll position and `zoom` level
+		 */
+		getValues: function() {
+
+			var self = this;
+
+			return {
+				left: self.__scrollLeft,
+				top: self.__scrollTop,
+				zoom: self.__zoomLevel
+			};
+
+		},
+
+
+		/**
+		 * Returns the maximum scroll values
+		 *
+		 * @return {Map} `left` and `top` maximum scroll values
+		 */
+		getScrollMax: function() {
+
+			var self = this;
+
+			return {
+				left: self.__maxScrollLeft,
+				top: self.__maxScrollTop
+			};
+
+		},
+
+
+		/**
+		 * Zooms to the given level. Supports optional animation. Zooms
+		 * the center when no coordinates are given.
+		 *
+		 * @param level {Number} Level to zoom to
+		 * @param animate {Boolean ? false} Whether to use animation
+		 * @param originLeft {Number ? null} Zoom in at given left coordinate
+		 * @param originTop {Number ? null} Zoom in at given top coordinate
+		 */
+		zoomTo: function(level, animate, originLeft, originTop) {
+
+			var self = this;
+
+			if (!self.options.zooming) {
+				throw new Error("Zooming is not enabled!");
+			}
+
+			// Stop deceleration
+			if (self.__isDecelerating) {
+				core.effect.Animate.stop(self.__isDecelerating);
+				self.__isDecelerating = false;
+			}
+
+			var oldLevel = self.__zoomLevel;
+
+			// Normalize input origin to center of viewport if not defined
+			if (originLeft == null) {
+				originLeft = self.__clientWidth / 2;
+			}
+
+			if (originTop == null) {
+				originTop = self.__clientHeight / 2;
+			}
+
+			// Limit level according to configuration
+			level = Math.max(Math.min(level, self.options.maxZoom), self.options.minZoom);
+
+			// Recompute maximum values while temporary tweaking maximum scroll ranges
+			self.__computeScrollMax(level);
+
+			// Recompute left and top coordinates based on new zoom level
+			var left = ((originLeft + self.__scrollLeft) * level / oldLevel) - originLeft;
+			var top = ((originTop + self.__scrollTop) * level / oldLevel) - originTop;
+
+			// Limit x-axis
+			if (left > self.__maxScrollLeft) {
+				left = self.__maxScrollLeft;
+			} else if (left < 0) {
+				left = 0;
+			}
+
+			// Limit y-axis
+			if (top > self.__maxScrollTop) {
+				top = self.__maxScrollTop;
+			} else if (top < 0) {
+				top = 0;
+			}
+
+			// Push values out
+			self.__publish(left, top, level, animate);
+
+		},
+
+
+		/**
+		 * Zooms the content by the given factor.
+		 *
+		 * @param factor {Number} Zoom by given factor
+		 * @param animate {Boolean ? false} Whether to use animation
+		 * @param originLeft {Number ? 0} Zoom in at given left coordinate
+		 * @param originTop {Number ? 0} Zoom in at given top coordinate
+		 */
+		zoomBy: function(factor, animate, originLeft, originTop) {
+
+			var self = this;
+
+			self.zoomTo(self.__zoomLevel * factor, animate, originLeft, originTop);
+
+		},
+
+
+		/**
+		 * Scrolls to the given position. Respect limitations and snapping automatically.
+		 *
+		 * @param left {Number?null} Horizontal scroll position, keeps current if value is <code>null</code>
+		 * @param top {Number?null} Vertical scroll position, keeps current if value is <code>null</code>
+		 * @param animate {Boolean?false} Whether the scrolling should happen using an animation
+		 * @param zoom {Number?null} Zoom level to go to
+		 */
+		scrollTo: function(left, top, animate, zoom) {
+
+			var self = this;
+
+			// Stop deceleration
+			if (self.__isDecelerating) {
+				core.effect.Animate.stop(self.__isDecelerating);
+				self.__isDecelerating = false;
+			}
+
+			// Correct coordinates based on new zoom level
+			if (zoom != null && zoom !== self.__zoomLevel) {
+
+				if (!self.options.zooming) {
+					throw new Error("Zooming is not enabled!");
+				}
+
+				left *= zoom;
+				top *= zoom;
+
+				// Recompute maximum values while temporary tweaking maximum scroll ranges
+				self.__computeScrollMax(zoom);
+
+			} else {
+
+				// Keep zoom when not defined
+				zoom = self.__zoomLevel;
+
+			}
+
+			if (!self.options.scrollingX) {
+
+				left = self.__scrollLeft;
+
+			} else {
+
+				if (self.options.paging) {
+					left = Math.round(left / self.__clientWidth) * self.__clientWidth;
+				} else if (self.options.snapping) {
+					left = Math.round(left / self.__snapWidth) * self.__snapWidth;
+				}
+
+			}
+
+			if (!self.options.scrollingY) {
+
+				top = self.__scrollTop;
+
+			} else {
+
+				if (self.options.paging) {
+					top = Math.round(top / self.__clientHeight) * self.__clientHeight;
+				} else if (self.options.snapping) {
+					top = Math.round(top / self.__snapHeight) * self.__snapHeight;
+				}
+
+			}
+
+			// Limit for allowed ranges
+			left = Math.max(Math.min(self.__maxScrollLeft, left), 0);
+			top = Math.max(Math.min(self.__maxScrollTop, top), 0);
+
+			// Don't animate when no change detected, still call publish to make sure
+			// that rendered position is really in-sync with internal data
+			if (left === self.__scrollLeft && top === self.__scrollTop) {
+				animate = false;
+			}
+
+			// Publish new values
+			self.__publish(left, top, zoom, animate);
+
+		},
+
+
+		/**
+		 * Scroll by the given offset
+		 *
+		 * @param left {Number ? 0} Scroll x-axis by given offset
+		 * @param top {Number ? 0} Scroll x-axis by given offset
+		 * @param animate {Boolean ? false} Whether to animate the given change
+		 */
+		scrollBy: function(left, top, animate) {
+
+			var self = this;
+
+			var startLeft = self.__isAnimating ? self.__scheduledLeft : self.__scrollLeft;
+			var startTop = self.__isAnimating ? self.__scheduledTop : self.__scrollTop;
+
+			self.scrollTo(startLeft + (left || 0), startTop + (top || 0), animate);
+
+		},
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			EVENT CALLBACKS
+		---------------------------------------------------------------------------
+		*/
+
+		/**
+		 * Mouse wheel handler for zooming support
+		 */
+		doMouseZoom: function(wheelDelta, timeStamp, pageX, pageY) {
+
+			var self = this;
+			var change = wheelDelta > 0 ? 0.97 : 1.03;
+
+			return self.zoomTo(self.__zoomLevel * change, false, pageX - self.__clientLeft, pageY - self.__clientTop);
+
+		},
+
+
+		/**
+		 * Touch start handler for scrolling support
+		 */
+		doTouchStart: function(touches, timeStamp) {
+
+			// Array-like check is enough here
+			if (touches.length == null) {
+				throw new Error("Invalid touch list: " + touches);
+			}
+
+			if (timeStamp instanceof Date) {
+				timeStamp = timeStamp.valueOf();
+			}
+			if (typeof timeStamp !== "number") {
+				throw new Error("Invalid timestamp value: " + timeStamp);
+			}
+
+			var self = this;
+
+			// Stop deceleration
+			if (self.__isDecelerating) {
+				core.effect.Animate.stop(self.__isDecelerating);
+				self.__isDecelerating = false;
+			}
+
+			// Stop animation
+			if (self.__isAnimating) {
+				core.effect.Animate.stop(self.__isAnimating);
+				self.__isAnimating = false;
+			}
+
+			// Use center point when dealing with two fingers
+			var currentTouchLeft, currentTouchTop;
+			var isSingleTouch = touches.length === 1;
+			if (isSingleTouch) {
+				currentTouchLeft = touches[0].pageX;
+				currentTouchTop = touches[0].pageY;
+			} else {
+				currentTouchLeft = Math.abs(touches[0].pageX + touches[1].pageX) / 2;
+				currentTouchTop = Math.abs(touches[0].pageY + touches[1].pageY) / 2;
+			}
+
+			// Store initial positions
+			self.__initialTouchLeft = currentTouchLeft;
+			self.__initialTouchTop = currentTouchTop;
+
+			// Store current zoom level
+			self.__zoomLevelStart = self.__zoomLevel;
+
+			// Store initial touch positions
+			self.__lastTouchLeft = currentTouchLeft;
+			self.__lastTouchTop = currentTouchTop;
+
+			// Store initial move time stamp
+			self.__lastTouchMove = timeStamp;
+
+			// Reset initial scale
+			self.__lastScale = 1;
+
+			// Reset locking flags
+			self.__enableScrollX = !isSingleTouch && self.options.scrollingX;
+			self.__enableScrollY = !isSingleTouch && self.options.scrollingY;
+
+			// Reset tracking flag
+			self.__isTracking = true;
+
+			// Dragging starts directly with two fingers, otherwise lazy with an offset
+			self.__isDragging = !isSingleTouch;
+
+			// Some features are disabled in multi touch scenarios
+			self.__isSingleTouch = isSingleTouch;
+
+			// Clearing data structure
+			self.__positions = [];
+
+		},
+
+
+		/**
+		 * Touch move handler for scrolling support
+		 */
+		doTouchMove: function(touches, timeStamp, scale) {
+
+			// Array-like check is enough here
+			if (touches.length == null) {
+				throw new Error("Invalid touch list: " + touches);
+			}
+
+			if (timeStamp instanceof Date) {
+				timeStamp = timeStamp.valueOf();
+			}
+			if (typeof timeStamp !== "number") {
+				throw new Error("Invalid timestamp value: " + timeStamp);
+			}
+
+			var self = this;
+
+			// Ignore event when tracking is not enabled (event might be outside of element)
+			if (!self.__isTracking) {
+				return;
+			}
+
+
+			var currentTouchLeft, currentTouchTop;
+
+			// Compute move based around of center of fingers
+			if (touches.length === 2) {
+				currentTouchLeft = Math.abs(touches[0].pageX + touches[1].pageX) / 2;
+				currentTouchTop = Math.abs(touches[0].pageY + touches[1].pageY) / 2;
+			} else {
+				currentTouchLeft = touches[0].pageX;
+				currentTouchTop = touches[0].pageY;
+			}
+
+			var positions = self.__positions;
+
+			// Are we already is dragging mode?
+			if (self.__isDragging) {
+
+				// Compute move distance
+				var moveX = currentTouchLeft - self.__lastTouchLeft;
+				var moveY = currentTouchTop - self.__lastTouchTop;
+
+				// Read previous scroll position and zooming
+				var scrollLeft = self.__scrollLeft;
+				var scrollTop = self.__scrollTop;
+				var level = self.__zoomLevel;
+
+				// Work with scaling
+				if (scale != null && self.options.zooming) {
+
+					var oldLevel = level;
+
+					// Recompute level based on previous scale and new scale
+					level = level / self.__lastScale * scale;
+
+					// Limit level according to configuration
+					level = Math.max(Math.min(level, self.options.maxZoom), self.options.minZoom);
+
+					// Only do further compution when change happened
+					if (oldLevel !== level) {
+
+						// Compute relative event position to container
+						var currentTouchLeftRel = currentTouchLeft - self.__clientLeft;
+						var currentTouchTopRel = currentTouchTop - self.__clientTop;
+
+						// Recompute left and top coordinates based on new zoom level
+						scrollLeft = ((currentTouchLeftRel + scrollLeft) * level / oldLevel) - currentTouchLeftRel;
+						scrollTop = ((currentTouchTopRel + scrollTop) * level / oldLevel) - currentTouchTopRel;
+
+						// Recompute max scroll values
+						self.__computeScrollMax(level);
+
+					}
+				}
+
+				if (self.__enableScrollX) {
+
+					scrollLeft -= moveX;
+					var maxScrollLeft = self.__maxScrollLeft;
+
+					if (scrollLeft > maxScrollLeft || scrollLeft < 0) {
+
+						// Slow down on the edges
+						if (self.options.bouncing) {
+
+							scrollLeft += (moveX / 2);
+
+						} else if (scrollLeft > maxScrollLeft) {
+
+							scrollLeft = maxScrollLeft;
+
+						} else {
+
+							scrollLeft = 0;
+
+						}
+					}
+				}
+
+				// Compute new vertical scroll position
+				if (self.__enableScrollY) {
+
+					scrollTop -= moveY;
+					var maxScrollTop = self.__maxScrollTop;
+
+					if (scrollTop > maxScrollTop || scrollTop < 0) {
+
+						// Slow down on the edges
+						if (self.options.bouncing) {
+
+							scrollTop += (moveY / 2);
+
+							// Support pull-to-refresh (only when only y is scrollable)
+							if (!self.__enableScrollX && self.__refreshHeight != null) {
+
+								if (!self.__refreshActive && scrollTop <= -self.__refreshHeight) {
+
+									self.__refreshActive = true;
+									if (self.__refreshActivate) {
+										self.__refreshActivate();
+									}
+
+								} else if (self.__refreshActive && scrollTop > -self.__refreshHeight) {
+
+									self.__refreshActive = false;
+									if (self.__refreshDeactivate) {
+										self.__refreshDeactivate();
+									}
+
+								}
+							}
+
+						} else if (scrollTop > maxScrollTop) {
+
+							scrollTop = maxScrollTop;
+
+						} else {
+
+							scrollTop = 0;
+
+						}
+					}
+				}
+
+				// Keep list from growing infinitely (holding min 10, max 20 measure points)
+				if (positions.length > 60) {
+					positions.splice(0, 30);
+				}
+
+				// Track scroll movement for decleration
+				positions.push(scrollLeft, scrollTop, timeStamp);
+
+				// Sync scroll position
+				self.__publish(scrollLeft, scrollTop, level);
+
+			// Otherwise figure out whether we are switching into dragging mode now.
+			} else {
+
+				var minimumTrackingForScroll = self.options.locking ? 3 : 0;
+				var minimumTrackingForDrag = 5;
+
+				var distanceX = Math.abs(currentTouchLeft - self.__initialTouchLeft);
+				var distanceY = Math.abs(currentTouchTop - self.__initialTouchTop);
+
+				self.__enableScrollX = self.options.scrollingX && distanceX >= minimumTrackingForScroll;
+				self.__enableScrollY = self.options.scrollingY && distanceY >= minimumTrackingForScroll;
+
+				positions.push(self.__scrollLeft, self.__scrollTop, timeStamp);
+
+				self.__isDragging = (self.__enableScrollX || self.__enableScrollY) && (distanceX >= minimumTrackingForDrag || distanceY >= minimumTrackingForDrag);
+
+			}
+
+			// Update last touch positions and time stamp for next event
+			self.__lastTouchLeft = currentTouchLeft;
+			self.__lastTouchTop = currentTouchTop;
+			self.__lastTouchMove = timeStamp;
+			self.__lastScale = scale;
+
+		},
+
+
+		/**
+		 * Touch end handler for scrolling support
+		 */
+		doTouchEnd: function(timeStamp) {
+
+			if (timeStamp instanceof Date) {
+				timeStamp = timeStamp.valueOf();
+			}
+			if (typeof timeStamp !== "number") {
+				throw new Error("Invalid timestamp value: " + timeStamp);
+			}
+
+			var self = this;
+
+			// Ignore event when tracking is not enabled (no touchstart event on element)
+			// This is required as this listener ('touchmove') sits on the document and not on the element itself.
+			if (!self.__isTracking) {
+				return;
+			}
+
+			// Not touching anymore (when two finger hit the screen there are two touch end events)
+			self.__isTracking = false;
+
+			// Be sure to reset the dragging flag now. Here we also detect whether
+			// the finger has moved fast enough to switch into a deceleration animation.
+			if (self.__isDragging) {
+
+				// Reset dragging flag
+				self.__isDragging = false;
+
+				// Start deceleration
+				// Verify that the last move detected was in some relevant time frame
+				if (self.__isSingleTouch && self.options.animating && (timeStamp - self.__lastTouchMove) <= 100) {
+
+					// Then figure out what the scroll position was about 100ms ago
+					var positions = self.__positions;
+					var endPos = positions.length - 1;
+					var startPos = endPos;
+
+					// Move pointer to position measured 100ms ago
+					for (var i = endPos; i > 0 && positions[i] > (self.__lastTouchMove - 100); i -= 3) {
+						startPos = i;
+					}
+
+					// If start and stop position is identical in a 100ms timeframe,
+					// we cannot compute any useful deceleration.
+					if (startPos !== endPos) {
+
+						// Compute relative movement between these two points
+						var timeOffset = positions[endPos] - positions[startPos];
+						var movedLeft = self.__scrollLeft - positions[startPos - 2];
+						var movedTop = self.__scrollTop - positions[startPos - 1];
+
+						// Based on 50ms compute the movement to apply for each render step
+						self.__decelerationVelocityX = movedLeft / timeOffset * (1000 / 60);
+						self.__decelerationVelocityY = movedTop / timeOffset * (1000 / 60);
+
+						// How much velocity is required to start the deceleration
+						var minVelocityToStartDeceleration = self.options.paging || self.options.snapping ? 4 : 1;
+
+						// Verify that we have enough velocity to start deceleration
+						if (Math.abs(self.__decelerationVelocityX) > minVelocityToStartDeceleration || Math.abs(self.__decelerationVelocityY) > minVelocityToStartDeceleration) {
+
+							// Deactivate pull-to-refresh when decelerating
+							if (!self.__refreshActive) {
+
+								self.__startDeceleration(timeStamp);
+
+							}
+						}
+					}
+				}
+			}
+
+			// If this was a slower move it is per default non decelerated, but this
+			// still means that we want snap back to the bounds which is done here.
+			// This is placed outside the condition above to improve edge case stability
+			// e.g. touchend fired without enabled dragging. This should normally do not
+			// have modified the scroll positions or even showed the scrollbars though.
+			if (!self.__isDecelerating) {
+
+				if (self.__refreshActive && self.__refreshStart) {
+
+					// Use publish instead of scrollTo to allow scrolling to out of boundary position
+					// We don't need to normalize scrollLeft, zoomLevel, etc. here because we only y-scrolling when pull-to-refresh is enabled
+					self.__publish(self.__scrollLeft, -self.__refreshHeight, self.__zoomLevel, true);
+
+					if (self.__refreshStart) {
+						self.__refreshStart();
+					}
+
+				} else {
+
+					self.scrollTo(self.__scrollLeft, self.__scrollTop, true, self.__zoomLevel);
+
+					// Directly signalize deactivation (nothing todo on refresh?)
+					if (self.__refreshActive) {
+
+						self.__refreshActive = false;
+						if (self.__refreshDeactivate) {
+							self.__refreshDeactivate();
+						}
+
+					}
+				}
+			}
+
+			// Fully cleanup list
+			self.__positions.length = 0;
+
+		},
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			PRIVATE API
+		---------------------------------------------------------------------------
+		*/
+
+		/**
+		 * Applies the scroll position to the content element
+		 *
+		 * @param left {Number} Left scroll position
+		 * @param top {Number} Top scroll position
+		 * @param animate {Boolean?false} Whether animation should be used to move to the new coordinates
+		 */
+		__publish: function(left, top, zoom, animate) {
+
+			var self = this;
+
+			// Remember whether we had an animation, then we try to continue based on the current "drive" of the animation
+			var wasAnimating = self.__isAnimating;
+			if (wasAnimating) {
+				core.effect.Animate.stop(wasAnimating);
+				self.__isAnimating = false;
+			}
+
+			if (animate && self.options.animating) {
+
+				// Keep scheduled positions for scrollBy/zoomBy functionality
+				self.__scheduledLeft = left;
+				self.__scheduledTop = top;
+				self.__scheduledZoom = zoom;
+
+				var oldLeft = self.__scrollLeft;
+				var oldTop = self.__scrollTop;
+				var oldZoom = self.__zoomLevel;
+
+				var diffLeft = left - oldLeft;
+				var diffTop = top - oldTop;
+				var diffZoom = zoom - oldZoom;
+
+				var step = function(percent, now, render) {
+
+					if (render) {
+
+						self.__scrollLeft = oldLeft + (diffLeft * percent);
+						self.__scrollTop = oldTop + (diffTop * percent);
+						self.__zoomLevel = oldZoom + (diffZoom * percent);
+
+						// Push values out
+						if (self.__callback) {
+							self.__callback(self.__scrollLeft, self.__scrollTop, self.__zoomLevel);
+						}
+
+					}
+				};
+
+				var verify = function(id) {
+					return self.__isAnimating === id;
+				};
+
+				var completed = function(renderedFramesPerSecond, animationId, wasFinished) {
+					if (animationId === self.__isAnimating) {
+						self.__isAnimating = false;
+					}
+
+					if (self.options.zooming) {
+						self.__computeScrollMax();
+					}
+				};
+
+				// When continuing based on previous animation we choose an ease-out animation instead of ease-in-out
+				self.__isAnimating = core.effect.Animate.start(step, verify, completed, self.options.animationDuration, wasAnimating ? easeOutCubic : easeInOutCubic);
+
+			} else {
+
+				self.__scheduledLeft = self.__scrollLeft = left;
+				self.__scheduledTop = self.__scrollTop = top;
+				self.__scheduledZoom = self.__zoomLevel = zoom;
+
+				// Push values out
+				if (self.__callback) {
+					self.__callback(left, top, zoom);
+				}
+
+				// Fix max scroll ranges
+				if (self.options.zooming) {
+					self.__computeScrollMax();
+				}
+			}
+		},
+
+
+		/**
+		 * Recomputes scroll minimum values based on client dimensions and content dimensions.
+		 */
+		__computeScrollMax: function(zoomLevel) {
+
+			var self = this;
+
+			if (zoomLevel == null) {
+				zoomLevel = self.__zoomLevel;
+			}
+
+			self.__maxScrollLeft = Math.max((self.__contentWidth * zoomLevel) - self.__clientWidth, 0);
+			self.__maxScrollTop = Math.max((self.__contentHeight * zoomLevel) - self.__clientHeight, 0);
+
+		},
+
+
+
+		/*
+		---------------------------------------------------------------------------
+			ANIMATION (DECELERATION) SUPPORT
+		---------------------------------------------------------------------------
+		*/
+
+		/**
+		 * Called when a touch sequence end and the speed of the finger was high enough
+		 * to switch into deceleration mode.
+		 */
+		__startDeceleration: function(timeStamp) {
+
+			var self = this;
+
+			if (self.options.paging) {
+
+				var scrollLeft = Math.max(Math.min(self.__scrollLeft, self.__maxScrollLeft), 0);
+				var scrollTop = Math.max(Math.min(self.__scrollTop, self.__maxScrollTop), 0);
+				var clientWidth = self.__clientWidth;
+				var clientHeight = self.__clientHeight;
+
+				// We limit deceleration not to the min/max values of the allowed range, but to the size of the visible client area.
+				// Each page should have exactly the size of the client area.
+				self.__minDecelerationScrollLeft = Math.floor(scrollLeft / clientWidth) * clientWidth;
+				self.__minDecelerationScrollTop = Math.floor(scrollTop / clientHeight) * clientHeight;
+				self.__maxDecelerationScrollLeft = Math.ceil(scrollLeft / clientWidth) * clientWidth;
+				self.__maxDecelerationScrollTop = Math.ceil(scrollTop / clientHeight) * clientHeight;
+
+			} else {
+
+				self.__minDecelerationScrollLeft = 0;
+				self.__minDecelerationScrollTop = 0;
+				self.__maxDecelerationScrollLeft = self.__maxScrollLeft;
+				self.__maxDecelerationScrollTop = self.__maxScrollTop;
+
+			}
+
+			// Wrap class method
+			var step = function(percent, now, render) {
+				self.__stepThroughDeceleration(render);
+			};
+
+			// How much velocity is required to keep the deceleration running
+			var minVelocityToKeepDecelerating = self.options.snapping ? 4 : 0.1;
+
+			// Detect whether it's still worth to continue animating steps
+			// If we are already slow enough to not being user perceivable anymore, we stop the whole process here.
+			var verify = function() {
+				return Math.abs(self.__decelerationVelocityX) >= minVelocityToKeepDecelerating || Math.abs(self.__decelerationVelocityY) >= minVelocityToKeepDecelerating;
+			};
+
+			var completed = function(renderedFramesPerSecond, animationId, wasFinished) {
+				self.__isDecelerating = false;
+
+				// Animate to grid when snapping is active, otherwise just fix out-of-boundary positions
+				self.scrollTo(self.__scrollLeft, self.__scrollTop, self.options.snapping);
+			};
+
+			// Start animation and switch on flag
+			self.__isDecelerating = core.effect.Animate.start(step, verify, completed);
+
+		},
+
+
+		/**
+		 * Called on every step of the animation
+		 *
+		 * @param inMemory {Boolean?false} Whether to not render the current step, but keep it in memory only. Used internally only!
+		 */
+		__stepThroughDeceleration: function(render) {
+
+			var self = this;
+
+
+			//
+			// COMPUTE NEXT SCROLL POSITION
+			//
+
+			// Add deceleration to scroll position
+			var scrollLeft = self.__scrollLeft + self.__decelerationVelocityX;
+			var scrollTop = self.__scrollTop + self.__decelerationVelocityY;
+
+
+			//
+			// HARD LIMIT SCROLL POSITION FOR NON BOUNCING MODE
+			//
+
+			if (!self.options.bouncing) {
+
+				var scrollLeftFixed = Math.max(Math.min(self.__maxDecelerationScrollLeft, scrollLeft), self.__minDecelerationScrollLeft);
+				if (scrollLeftFixed !== scrollLeft) {
+					scrollLeft = scrollLeftFixed;
+					self.__decelerationVelocityX = 0;
+				}
+
+				var scrollTopFixed = Math.max(Math.min(self.__maxDecelerationScrollTop, scrollTop), self.__minDecelerationScrollTop);
+				if (scrollTopFixed !== scrollTop) {
+					scrollTop = scrollTopFixed;
+					self.__decelerationVelocityY = 0;
+				}
+
+			}
+
+
+			//
+			// UPDATE SCROLL POSITION
+			//
+
+			if (render) {
+
+				self.__publish(scrollLeft, scrollTop, self.__zoomLevel);
+
+			} else {
+
+				self.__scrollLeft = scrollLeft;
+				self.__scrollTop = scrollTop;
+
+			}
+
+
+			//
+			// SLOW DOWN
+			//
+
+			// Slow down velocity on every iteration
+			if (!self.options.paging) {
+
+				// This is the factor applied to every iteration of the animation
+				// to slow down the process. This should emulate natural behavior where
+				// objects slow down when the initiator of the movement is removed
+				var frictionFactor = 0.95;
+
+				self.__decelerationVelocityX *= frictionFactor;
+				self.__decelerationVelocityY *= frictionFactor;
+
+			}
+
+
+			//
+			// BOUNCING SUPPORT
+			//
+
+			if (self.options.bouncing) {
+
+				var scrollOutsideX = 0;
+				var scrollOutsideY = 0;
+
+				// This configures the amount of change applied to deceleration/acceleration when reaching boundaries
+				var penetrationDeceleration = 0.03;
+				var penetrationAcceleration = 0.08;
+
+				// Check limits
+				if (scrollLeft < self.__minDecelerationScrollLeft) {
+					scrollOutsideX = self.__minDecelerationScrollLeft - scrollLeft;
+				} else if (scrollLeft > self.__maxDecelerationScrollLeft) {
+					scrollOutsideX = self.__maxDecelerationScrollLeft - scrollLeft;
+				}
+
+				if (scrollTop < self.__minDecelerationScrollTop) {
+					scrollOutsideY = self.__minDecelerationScrollTop - scrollTop;
+				} else if (scrollTop > self.__maxDecelerationScrollTop) {
+					scrollOutsideY = self.__maxDecelerationScrollTop - scrollTop;
+				}
+
+				// Slow down until slow enough, then flip back to snap position
+				if (scrollOutsideX !== 0) {
+					if (scrollOutsideX * self.__decelerationVelocityX <= 0) {
+						self.__decelerationVelocityX += scrollOutsideX * penetrationDeceleration;
+					} else {
+						self.__decelerationVelocityX = scrollOutsideX * penetrationAcceleration;
+					}
+				}
+
+				if (scrollOutsideY !== 0) {
+					if (scrollOutsideY * self.__decelerationVelocityY <= 0) {
+						self.__decelerationVelocityY += scrollOutsideY * penetrationDeceleration;
+					} else {
+						self.__decelerationVelocityY = scrollOutsideY * penetrationAcceleration;
+					}
+				}
+			}
+		}
+	};
+
+	// Copy over members to prototype
+	for (var key in members) {
+		Scroller.prototype[key] = members[key];
+	}
+
+})();
 
 
 /*
@@ -2378,6 +3957,27 @@ Moobile.Component = new Class({
 	 */
 	addChildComponentBefore: function(component, before) {
 		return this._addChildComponent(component, before, 'before');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentAt: function(component, index) {
+
+		if (index > this._children.length) {
+			index = this._children.length;
+		} else if (index < 0) {
+			index = 0;
+		}
+
+		var before = this.getChildComponentAt(index);
+		if (before) {
+			return this.addChildComponentBefore(component, before);
+		}
+
+		return this.addChildComponent(component, 'bottom');
 	},
 
 	/**
@@ -10220,10 +11820,12 @@ Moobile.Component.defineRole('view-collection', null, null, function(element) {
 });
 
 
+
+
 /*
 ---
 
-name: ViewCarousel
+name: ViewQueue
 
 description: Provides a view that handles an a single view.
 
@@ -10236,17 +11838,17 @@ requires:
 	- View
 
 provides:
-	- ViewCarousel
+	- ViewQueue
 
 ...
 */
 
 /**
- * @see    http://moobilejs.com/doc/latest/View/ViewCarousel
+ * @see    http://moobilejs.com/doc/latest/View/ViewQueue
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.3.0
  */
-Moobile.ViewCarousel = new Class({
+Moobile.ViewQueue = new Class({
 
 	Extends: Moobile.View,
 
@@ -10257,7 +11859,7 @@ Moobile.ViewCarousel = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.addClass('view-carousel');
+		this.addClass('view-queue');
 	}
 
 });
@@ -10270,8 +11872,8 @@ Moobile.ViewCarousel = new Class({
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.3.0
  */
-Moobile.Component.defineRole('view-carousel', null, null, function(element) {
-	this.addChildComponent(Moobile.Component.create(Moobile.ViewCarousel, element, 'data-view-carousel'));
+Moobile.Component.defineRole('view-queue', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewQueue, element, 'data-view-queue'));
 });
 
 
@@ -11062,15 +12664,7 @@ Moobile.ViewController = new Class({
 	 * @since  0.1.0
 	 */
 	addChildViewController: function(viewController) {
-
-		var viewHandler = function() {
-			var view = viewController.getView();
-			if (view) {
-				this.view.addChildComponent(view);
-			}
-		};
-
-		return this._addChildViewControllerAt(viewController, this._children.length, viewHandler);
+		return this._addChildViewController(viewController);
 	},
 
 	/**
@@ -11084,17 +12678,7 @@ Moobile.ViewController = new Class({
 		if (index === -1)
 			return this;
 
-		var viewHandler = function() {
-			var view = viewController.getView();
-			if (view) {
-				var afterView = after.getView();
-				if (afterView) {
-					this.view.addChildComponentAfter(view, afterView);
-				}
-			}
-		};
-
-		return this._addChildViewControllerAt(viewController, index + 1, viewHandler);
+		return this._addChildViewController(viewController, after, 'after');
 	},
 
 	/**
@@ -11108,38 +12692,60 @@ Moobile.ViewController = new Class({
 		if (index === -1)
 			return this;
 
-		var viewHandler = function() {
-			var view = viewController.getView();
-			if (view) {
-				var beforeView = before.getView();
-				if (beforeView) {
-					this.view.addChildComponentBefore(view, beforeView);
-				}
-			}
-		};
+		return this._addChildViewController(viewController, before, 'before');
+	},
 
-		return this._addChildViewControllerAt(viewController, index, viewHandler);
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildViewControllerAt: function(viewController, index) {
+
+		if (index > this._children.length) {
+			index = this._children.length;
+		} else if (index < 0) {
+			index = 0;
+		}
+
+		var before = this.getChildViewControllerAt(index);
+		if (before) {
+			return this.addChildViewControllerBefore(component, before);
+		}
+
+		return this.addChildViewController(viewController);
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 */
-	_addChildViewControllerAt: function(viewController, index, viewHandler) {
-
-		if (this.hasChildViewController(viewController))
-			return this;
+	_addChildViewController: function(viewController, context, where) {
 
 		viewController.removeFromParentViewController();
 
 		this.willAddChildViewController(viewController);
-		this._children.splice(index, 0, viewController);
-		viewController.setParentViewController(this);
 
-		if (viewHandler) {
-			viewHandler.call(this)
+		if (context) {
+
+			this._children.splice(this.getChildViewControllerIndex(context), 0, viewController);
+
+			switch (where) {
+				case 'before':
+					this.view.addChildComponentBefore(view, context.view);
+					break;
+				case 'after':
+					this.view.addChildComponentAfter(view, context.view);
+					break;
+			}
+
+		} else {
+			this._children.push(viewController);
+			this.view.addChildComponent(viewController.view);
 		}
+
+		viewController.setParentViewController(this);
 
 		this.didAddChildViewController(viewController);
 
@@ -11827,6 +13433,7 @@ Moobile.ViewControllerSet = new Class({
 	 * @since  0.3.0
 	 */
 	options: {
+
 		viewTransition: null,
 	},
 
@@ -11874,15 +13481,15 @@ Moobile.ViewControllerSet = new Class({
 
 		for (var i = 0; i < viewControllers.length; i++) this.addChildViewController(viewControllers[i]);
 
-		return this.setSelectedViewController(viewControllers[0]);
+		return this.showViewController(viewControllers[0]);
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewController
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#showViewController
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	setSelectedViewController: function(viewController, viewTransition) {
+	showViewController: function(viewController, viewTransition) {
 
 		if (this._animating)
 			return this;
@@ -11933,15 +13540,15 @@ Moobile.ViewControllerSet = new Class({
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#setSelectedViewControllerIndex
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewControllerSet#showViewControllerIndex
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	setSelectedViewControllerIndex: function(index, viewTransition) {
+	showViewControllerAt: function(index, viewTransition) {
 
 		var viewController = this.getChildViewControllerAt(index);
 		if (viewController) {
-			this.setSelectedViewController(viewController, viewTransition)
+			this.showViewController(viewController, viewTransition)
 		}
 
 		return this;
@@ -12068,7 +13675,7 @@ Moobile.ViewControllerSet = new Class({
 
 		var viewController = this.getChildViewControllerAt(index);
 		if (viewController !== this._selectedViewController) {
-			this.setSelectedViewController(viewController, this.options.viewTransition);
+			this.showViewController(viewController, this.options.viewTransition);
 		}
 	}
 
@@ -12234,14 +13841,14 @@ Moobile.ViewControllerStack = new Class({
 		this._animating = true; // needs to be set before the transition happens
 
 		if (childViewControllers.length === 1) {
-			this.onPushTransitionStart();
-			this.onPushTransitionComplete();
+			this._onPushTransitionStart();
+			this._onPushTransitionComplete();
 			return this;
 		}
 
 		viewTransition = viewTransition || new Moobile.ViewTransition.None();
-		viewTransition.addEvent('start:once', this.bound('onPushTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('onPushTransitionComplete'));
+		viewTransition.addEvent('start:once', this.bound('_onPushTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPushTransitionComplete'));
 		viewTransition.enter(
 			viewToShow,
 			viewToHide,
@@ -12258,7 +13865,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionStart: function() {
+	_onPushTransitionStart: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -12275,7 +13882,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPushTransitionComplete: function() {
+	_onPushTransitionComplete: function() {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
@@ -12313,8 +13920,8 @@ Moobile.ViewControllerStack = new Class({
 		this._animating = true; // needs to be set before the transition happens
 
 		var viewTransition = viewControllerPopped.getViewTransition();
-		viewTransition.addEvent('start:once', this.bound('onPopTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('onPopTransitionComplete'));
+		viewTransition.addEvent('start:once', this.bound('_onPopTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPopTransitionComplete'));
 		viewTransition.leave(
 			viewControllerBefore.getView(),
 			viewControllerPopped.getView(),
@@ -12360,7 +13967,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPopTransitionStart: function(e) {
+	_onPopTransitionStart: function(e) {
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
 		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
@@ -12373,7 +13980,7 @@ Moobile.ViewControllerStack = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	onPopTransitionComplete: function(e) {
+	_onPopTransitionComplete: function(e) {
 
 		var childViewControllers = this.getChildViewControllers();
 		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
@@ -12807,12 +14414,14 @@ Class.refactor(Moobile.ViewController, {
 });
 
 
+
+
 /*
 ---
 
-name: ViewControllerCarousel
+name: ViewControllerQueue
 
-description: Manages a view set.
+description: Manage a limited or unlimited queue of view controllers.
 
 license: MIT-style license.
 
@@ -12820,38 +14429,26 @@ authors:
 	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 
 requires:
-	- ViewController
+	- ViewControllerStack
 
 provides:
-	- ViewControllerCarousel
+	- ViewControllerQueue
 
 ...
 */
 
-Moobile.ViewControllerCarousel = new Class({
+Moobile.ViewControllerQueue = new Class({
 
-	Extends: Moobile.ViewController,
+	Extends: Moobile.ViewControllerStack,
 
 	/**
-	 * @hidden
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3
 	 */
-	_animating: false,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3
-	 */
-	_currentViewController: null,
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3
-	 */
-	_loadingViewController: null,
+	options: {
+		length: Infinity
+	},
 
 	/**
 	 * @overridden
@@ -12859,143 +14456,41 @@ Moobile.ViewControllerCarousel = new Class({
 	 * @since  0.3
 	 */
 	loadView: function() {
-		this.view = new Moobile.ViewCarousel();
+		this.view = new Moobile.ViewQueue();
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/presentViewController
+	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
+	 * @since  0.3
 	 */
-	presentViewController: function(viewController, viewTransition, viewTransitionDirection) {
-
-		if (this._animating)
-			return this;
-
-		if (viewTransitionDirection !== 'enter' &&
-			viewTransitionDirection !== 'leave') {
-			viewTransitionDirection = 'enter';
-		}
-
-		if (this._currentViewController === null) {
-			this.addChildViewController(viewController);
-			this.willPresentViewController(viewController);
-			this._currentViewController = viewController;
-			this._currentViewController.showView();
-			this._currentViewController.viewWillEnter();
-			this._currentViewController.viewDidEnter();
-			this.didPresentViewController(viewController);
-			return this;
-		}
-
-		this._loadingViewController = viewController;
-
-		switch (viewTransitionDirection) {
-			case 'enter':
-				this.addChildViewControllerAfter(viewController, this._currentViewController);
-				break;
-			case 'leave':
-				this.addChildViewControllerBefore(viewController, this._currentViewController);
-				break;
-			default:
-				throw new Error('Invalid direction');
-				break;
-		}
-
-		var viewToShow = this._loadingViewController.getView();
-		var viewToHide = this._currentViewController.getView();
-
-		this._animating = true; // needs to be set before the transition happens
-
-		viewTransition = viewTransition || new Moobile.ViewTransition.None();
-		viewTransition.addEvent('start:once', this.bound('_onSelectTransitionStart'));
-		viewTransition.addEvent('complete:once', this.bound('_onSelectTransitionComplete'));
-		viewTransition[viewTransitionDirection].call(
-			viewTransition,
-			viewToShow,
-			viewToHide,
-			this.view
-		);
-
+	unshiftViewController: function(viewController) {
+		this.addChildViewControllerAt(0);
+		this.popViewController();
 		return this;
 	},
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/getCurrentViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
-	 */
-	getCurrentViewController: function() {
-		return this._currentViewController;
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
-	 */
-	_onSelectTransitionStart: function(e) {
-		this.willPresentViewController(this._loadingViewController);
-		this._currentViewController.viewWillLeave();
-		this._loadingViewController.viewWillEnter();
-	},
-
-	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
-	 */
-	_onSelectTransitionComplete: function(e) {
-
-		this._currentViewController.viewDidLeave();
-		this._loadingViewController.viewDidEnter();
-		this.didPresentViewController(this._loadingViewController);
-
-		this._currentViewController.destroy();
-		this._currentViewController = null;
-
-		this._currentViewController = this._loadingViewController;
-		this._loadingViewController = null;
-		this._animating = false;
-	},
-
-	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
+	 * @since  0.1.0
 	 */
-	didAddChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setViewControllerCarousel(this);
+	_onPushTransitionComplete: function() {
+
+		this.parent();
+
+		var length = this.options.length;
+		if (length === Infinity)
+			return;
+
+		var children = this.getChildViewControllers();
+		if (children.length > length) {
+			var diff = children.length - length;
+			for (var i = 0; i < diff; i++) {
+				children[i].removeFromParentViewController(true);
+			}
+		}
 	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
-	 */
-	didRemoveChildViewController: function(viewController) {
-		this.parent(viewController);
-		viewController.setViewControllerCarousel(null);
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/willPresentViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
-	 */
-	willPresentViewController: function(viewController) {
-
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewControllerCarousel/didPresentViewController
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  1.0
-	 */
-	didPresentViewController: function(viewController) {
-
-	}
 
 });
 
@@ -13006,30 +14501,30 @@ Class.refactor(Moobile.ViewController, {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  1.0
 	 */
-	_viewControllerCarousel: null,
+	_viewControllerQueue: null,
 
 	/**
-	 * @see    http://moobilejs.com/doc/latest/ViewController/setViewControllerCarousel
+	 * @see    http://moobilejs.com/doc/latest/ViewController/setViewControllerQueue
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  1.0
 	 */
-	setViewControllerCarousel: function(viewControllerCarousel) {
+	setViewControllerQueue: function(viewControllerQueue) {
 
-		if (this._viewControllerCarousel === viewControllerCarousel)
+		if (this._viewControllerQueue === viewControllerQueue)
 			return this;
 
-		this.viewControllerCarouselWillChange(viewControllerCarousel);
-		this._viewControllerCarousel = viewControllerCarousel;
-		this.viewControllerCarouselDidChange(viewControllerCarousel);
+		this.viewControllerQueueWillChange(viewControllerQueue);
+		this._viewControllerQueue = viewControllerQueue;
+		this.viewControllerQueueDidChange(viewControllerQueue);
 
-		if (this instanceof Moobile.ViewControllerCarousel)
+		if (this instanceof Moobile.ViewControllerQueue)
 			return this;
 
 		var by = function(component) {
-			return !(component instanceof Moobile.ViewControllerCarousel);
+			return !(component instanceof Moobile.ViewControllerQueue);
 		};
 
-		this.getChildViewControllers().filter(by).invoke('setViewControllerCarousel', viewControllerCarousel);
+		this.getChildViewControllers().filter(by).invoke('setViewControllerQueue', viewControllerQueue);
 
 		return this;
 	},
@@ -13038,15 +14533,15 @@ Class.refactor(Moobile.ViewController, {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  1.0
 	 */
-	getViewControllerCarousel: function() {
-		return this._viewControllerCarousel;
+	getViewControllerQueue: function() {
+		return this._viewControllerQueue;
 	},
 
 	/**
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  1.0
 	 */
-	viewControllerCarouselWillChange: function(viewController) {
+	viewControllerQueueWillChange: function(viewController) {
 
 	},
 
@@ -13054,7 +14549,7 @@ Class.refactor(Moobile.ViewController, {
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  1.0
 	 */
-	viewControllerCarouselDidChange: function(viewController) {
+	viewControllerQueueDidChange: function(viewController) {
 
 	},
 
@@ -13065,7 +14560,7 @@ Class.refactor(Moobile.ViewController, {
 	 */
 	willAddChildViewController: function(viewController) {
 		this.previous(viewController);
-		viewController.setViewControllerCarousel(this._viewControllerCarousel);
+		viewController.setViewControllerQueue(this._viewControllerQueue);
 	},
 
 	/**
@@ -13075,7 +14570,7 @@ Class.refactor(Moobile.ViewController, {
 	 */
 	willRemoveChildViewController: function(viewController) {
 		this.previous(viewController);
-		viewController.setViewControllerCarousel(null);
+		viewController.setViewControllerQueue(null);
 	}
 
 });

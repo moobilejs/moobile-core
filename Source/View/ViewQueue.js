@@ -1,7 +1,7 @@
 /*
 ---
 
-name: ViewCarousel
+name: ViewQueue
 
 description: Provides a view that handles an a single view.
 
@@ -14,17 +14,17 @@ requires:
 	- View
 
 provides:
-	- ViewCarousel
+	- ViewQueue
 
 ...
 */
 
 /**
- * @see    http://moobilejs.com/doc/latest/View/ViewCarousel
+ * @see    http://moobilejs.com/doc/latest/View/ViewQueue
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.3.0
  */
-Moobile.ViewCarousel = new Class({
+Moobile.ViewQueue = new Class({
 
 	Extends: Moobile.View,
 
@@ -35,7 +35,7 @@ Moobile.ViewCarousel = new Class({
 	 */
 	willBuild: function() {
 		this.parent();
-		this.addClass('view-carousel');
+		this.addClass('view-queue');
 	}
 
 });
@@ -48,6 +48,6 @@ Moobile.ViewCarousel = new Class({
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
  * @since  0.3.0
  */
-Moobile.Component.defineRole('view-carousel', null, null, function(element) {
-	this.addChildComponent(Moobile.Component.create(Moobile.ViewCarousel, element, 'data-view-carousel'));
+Moobile.Component.defineRole('view-queue', null, null, function(element) {
+	this.addChildComponent(Moobile.Component.create(Moobile.ViewQueue, element, 'data-view-queue'));
 });

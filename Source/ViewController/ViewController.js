@@ -250,6 +250,7 @@ Moobile.ViewController = new Class({
 		}
 
 		viewController.setParentViewController(this);
+
 		this.didAddChildViewController(viewController);
 
 		return this;
