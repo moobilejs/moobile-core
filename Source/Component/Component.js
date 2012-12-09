@@ -1017,6 +1017,8 @@ Moobile.Component = new Class({
 
 		this._children.invoke('_setReady', ready);
 
+		this.fireEvent('ready');
+
 		this._setUpdateLayout(ready);
 
 		return this;
@@ -1037,10 +1039,7 @@ Moobile.Component = new Class({
 	 * @since  0.3.0
 	 */
 	_didChangeReadyState: function() {
-		if (this._ready) {
-			this.didBecomeReady();
-			this.fireEvent('ready');
-		}
+		if (this._ready) this.didBecomeReady();
 	},
 
 	/**
