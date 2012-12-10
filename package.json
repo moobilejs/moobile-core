@@ -1,0 +1,25 @@
+{
+    "name": "Moobile",
+    "description": "A Mobile MVC Framework",
+    "version": "0.3.0",
+    "license": "MIT (http://moobilejs.com/license.txt)",
+    "main": "src/main.js",
+    "keywords": [
+        "moobile",
+        "mobile"
+    ],
+    "author": "Jean-Philippe Dery <jeanphilippe.dery@gmail.com>",
+    "bugs": "https://github.com/jpdery/moobile-core/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jpdery/moobile-core.git"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "mocha": "1.6",
+        "wrapup": "0.10"
+  },
+    "engines": {
+        "node": "*"
+    }
+}
