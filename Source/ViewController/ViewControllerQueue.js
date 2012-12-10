@@ -47,7 +47,7 @@ Moobile.ViewControllerQueue = new Class({
 	 * @since  0.3
 	 */
 	unshiftViewController: function(viewController) {
-		this.addChildViewControllerAt(0);
+		this.addChildViewControllerAt(viewController, 0);
 		this.popViewController();
 		return this;
 	},

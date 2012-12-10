@@ -214,7 +214,7 @@ Moobile.ViewController = new Class({
 
 		var before = this.getChildViewControllerAt(index);
 		if (before) {
-			return this.addChildViewControllerBefore(component, before);
+			return this.addChildViewControllerBefore(viewController, before);
 		}
 
 		return this.addChildViewController(viewController);
@@ -237,10 +237,10 @@ Moobile.ViewController = new Class({
 
 			switch (where) {
 				case 'before':
-					this.view.addChildComponentBefore(view, context.view);
+					this.view.addChildComponentBefore(viewController.view, context.view);
 					break;
 				case 'after':
-					this.view.addChildComponentAfter(view, context.view);
+					this.view.addChildComponentAfter(viewController.view, context.view);
 					break;
 			}
 
