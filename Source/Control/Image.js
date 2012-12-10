@@ -119,7 +119,10 @@ Moobile.Image = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	setSource: function(source) {
+	setSource: function(source, media) {
+
+		if (media && window.matchMedia(media).matches === false)
+			return this;
 
 		this._source = source || '';
 
