@@ -1,18 +1,6 @@
-[submodule "Packager"]
-	path = Packager
-	url = git://github.com/kamicane/packager.git
 [submodule "mootools-custom-event"]
 	path = Vendor/mootools-custom-event
 	url = git://github.com/cpojer/mootools-custom-event.git
 [submodule "mootools-class-extras"]
 	path = Vendor/mootools-class-extras
 	url = git://github.com/cpojer/mootools-class-extras.git
-[submodule "Vendor/mootools-mobile"]
-	path = Vendor/mootools-mobile
-	url = git://github.com/cpojer/mootools-mobile.git
-[submodule "Vendor/scroller-iscroll"]
-	path = Vendor/scroller-iscroll
-	url = https://github.com/jpdery/scroller-iscroll
-[submodule "Vendor/scroller-zynga"]
-	path = Vendor/scroller-zynga
-	url = https://github.com/jpdery/scroller-zynga.git
