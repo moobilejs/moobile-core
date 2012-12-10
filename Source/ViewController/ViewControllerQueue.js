@@ -57,6 +57,26 @@ Moobile.ViewControllerQueue = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
+	didAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerQueue(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerQueue(null);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
 	_onPushTransitionComplete: function() {
 
 		this.parent();
