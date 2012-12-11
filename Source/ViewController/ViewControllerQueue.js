@@ -46,9 +46,24 @@ Moobile.ViewControllerQueue = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3
 	 */
-	unshiftViewController: function(viewController) {
+	prependViewController: function(viewController, viewTransition) {
+
+		// todo do not pop if not necessary
+
+		if (!viewTransition) {
+			var childViewController = this.getChildViewControllerAt(0);
+			if (childViewController) {
+				viewTransition = childViewController.getViewTransition();
+			} else {
+				viewTransition = new Moobile.ViewTransition.None;
+			}
+		}
+
+		viewController.setViewTransition(viewTransition);
+
 		this.addChildViewControllerAt(viewController, 0);
 		this.popViewController();
+
 		return this;
 	},
 
