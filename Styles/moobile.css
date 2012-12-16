@@ -247,7 +247,8 @@ input, select, textarea {
 	width: 100%;                                                 /* Important */
 }
 
-.view.view-layout-vertical .view-content {
+.view.view-layout-vertical > .view-content-wrapper > .view-content,
+.view.view-layout-vertical > .view-content-wrapper > div > .view-content {
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
 	    -ms-box-orient: vertical;                                /* Important */
@@ -255,7 +256,8 @@ input, select, textarea {
 	        box-orient: vertical;                                /* Important */
 }
 
-.view.view-layout-horizontal .view-content {
+.view.view-layout-horizontal > .view-content-wrapper > .view-content,
+.view.view-layout-horizontal > .view-content-wrapper > div > .view-content {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
 	    -ms-box-orient: horizontal;                              /* Important */
@@ -510,6 +512,18 @@ input, select, textarea {
 .button.is-selected {}
 .button.is-disabled {}
 .button.is-highlighted {}
+
+/* Hit Area */
+
+.button .hit-area {
+	bottom: 0px;
+	content: '';
+	display: block;
+	left: 0px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
 
 /* Inside a Group (Horizontal) */
 
@@ -1299,6 +1313,90 @@ input, select, textarea {
 	     -o-transform: translate3d(100%, -100%, 0); /* Important */
 	        transform: translate3d(100%, -100%, 0); /* Important */
 	overflow: visible;                                           /* Important */
+}
+
+/* Transition Drop (Enter)
+-----------------------------------------------------------------------------*/
+
+@-webkit-keyframes transition-drop-enter {
+	from { -webkit-transform: translate3d(0, -100%, 0); }
+	to   { -webkit-transform: translate3d(0, 0%, 0); }
+}
+@-moz-keyframes transition-drop-enter {
+	from { -moz-transform: translate3d(0, -100%, 0); }
+	to   { -moz-transform: translate3d(0, 0%, 0); }
+}
+@-ms-keyframes transition-drop-enter {
+	from { -ms-transform: translate3d(0, -100%, 0); }
+	to   { -ms-transform: translate3d(0, 0%, 0); }
+}
+@-o-keyframes transition-drop-enter {
+	from { -o-transform: translate3d(0, -100%, 0); }
+	to   { -o-transform: translate3d(0, 0%, 0); }
+}
+@keyframes transition-drop-enter {
+	from { transform: translate3d(0, -100%, 0); }
+	to   { transform: translate3d(0, 0%, 0); }
+}
+
+.transition-drop-enter {
+	display: block !important;
+}
+
+.transition-drop-enter .transition-view-to-show {
+	-webkit-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	z-index: 75;
+}
+
+.transition-drop-enter .transition-view-to-hide {
+	position: absolute;
+	z-index: 50;
+}
+
+/* Transition Drop (Leave)
+-----------------------------------------------------------------------------*/
+
+@-webkit-keyframes transition-drop-leave {
+	from { -webkit-transform: translate3d(0, 0, 0); }
+	to   { -webkit-transform: translate3d(0, -100%, 0); }
+}
+@-moz-keyframes transition-drop-leave {
+	from { -moz-transform: translate3d(0, 0, 0); }
+	to   { -moz-transform: translate3d(0, -100%, 0); }
+}
+@-ms-keyframes transition-drop-leave {
+	from { -ms-transform: translate3d(0, 0, 0 }
+	to   { -ms-transform: translate3d(0, -100%, 0); }
+}
+@-o-keyframes transition-drop-leave {
+	from { -o-transform: translate3d(0, 0, 0); }
+	to   { -o-transform: translate3d(0, -100%, 0); }
+}
+@keyframes transition-drop-leave {
+	from { transform: translate3d(0, 0, 0); }
+	to   { transform: translate3d(0, -100%, 0); }
+}
+
+.transition-drop-leave {
+	display: block !important;
+}
+
+.transition-drop-leave .transition-view-to-show {
+	position: absolute;
+	z-index: 50;
+}
+
+.transition-drop-leave .transition-view-to-hide {
+	-webkit-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		-ms-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+		 -o-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+			animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	z-index: 75;
 }
 
 /* Transition Cover (Enter)

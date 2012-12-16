@@ -36,6 +36,13 @@ Moobile.Button = new Class({
 	_label: null,
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Button#hitAreaElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	hitAreaElement: null,
+
+	/**
 	 * @overridden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -56,6 +63,17 @@ Moobile.Button = new Class({
 
 		this.addEvent('tapstart', this.bound('_onTapStart'));
 		this.addEvent('tapend', this.bound('_onTapEnd'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	didBuild: function() {
+		this.parent();
+		this.hitAreaElement = new Element('div.hit-area');
+		this.hitAreaElement.inject(this.element);
 	},
 
 	/**

@@ -224,9 +224,6 @@ Moobile.Slider = new Class({
 		}
 		// </0.1 compat>
 
-		this.setMinimum(this.options.minimum);
-		this.setMaximum(this.options.maximum);
-
 		var mode = this.options.mode;
 		if (mode) {
 			this.addClass('slider-mode-' + mode);
@@ -262,6 +259,8 @@ Moobile.Slider = new Class({
 	didBecomeReady: function() {
 		this.parent();
 		this.refresh();
+		this.setMinimum(this.options.minimum);
+		this.setMaximum(this.options.maximum);
 		this.setValue(this.options.value);
 	},
 

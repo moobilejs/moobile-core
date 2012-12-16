@@ -62,6 +62,7 @@ sources:
   - "Source/ViewTransition/ViewTransition.Cover.Box.js"
   - "Source/ViewTransition/ViewTransition.Cover.Page.js"
   - "Source/ViewTransition/ViewTransition.Cubic.js"
+  - "Source/ViewTransition/ViewTransition.Drop.js"
   - "Source/ViewTransition/ViewTransition.Fade.js"
   - "Source/ViewTransition/ViewTransition.Flip.js"
   - "Source/ViewTransition/ViewTransition.None.js"

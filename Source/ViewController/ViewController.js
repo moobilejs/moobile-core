@@ -24,6 +24,7 @@ if (!window.Moobile) window.Moobile = {};
 /**
  * @see    http://moobilejs.com/doc/latest/ViewController/ViewController
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.1
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -144,7 +145,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#showView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @since  0.2.1
 	 */
 	showView: function() {
 		this.view.show();
@@ -154,7 +155,7 @@ Moobile.ViewController = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#hideView
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
+	 * @since  0.2.1
 	 */
 	hideView: function() {
 		this.view.hide();

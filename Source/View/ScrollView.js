@@ -23,6 +23,7 @@ provides:
 /**
  * @see    http://moobilejs.com/doc/latest/View/ScrollView
  * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.1
  * @edited 0.2.0
  * @since  0.1.0
  */
@@ -49,7 +50,7 @@ Moobile.ScrollView = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_activeTouchStartScroll: null,
+	_activeTouchScroll: null,
 
 	/**
 	 * @hidden
@@ -216,11 +217,12 @@ Moobile.ScrollView = new Class({
 	/**
 	 * @see    http://moobilejs.com/doc/latest/View/ScrollView#setContentSize
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	setContentSize: function(x, y) {
-		if (x >= 0) this.contentElement.setStyle('width', x);
-		if (y >= 0) this.contentElement.setStyle('height', y);
+		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
+		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
 		return this;
 	},
 
@@ -308,7 +310,7 @@ Moobile.ScrollView = new Class({
 			this._page.y !== pageY) {
 			this._pageOffset.x = Math.abs(x - pageX * pageSizeX);
 			this._pageOffset.y = Math.abs(y - pageY * pageSizeY);
-			this.fireEvent('scrolltopage', [this._page.x, this._page.y], time);
+			this.fireEvent('scrolltopage', [pageX, pageY], time);
 		}
 
 		this._page.x = pageX;
@@ -393,8 +395,8 @@ Moobile.ScrollView = new Class({
 		scroll.x = scroll.x > 0 ? scroll.x : 0;
 		scroll.y = scroll.y > 0 ? scroll.y : 0;
 
-		var moveX = scroll.x - this._activeTouchStartScroll.x;
-		var moveY = scroll.y - this._activeTouchStartScroll.y;
+		var moveX = scroll.x - this._activeTouchScroll.x;
+		var moveY = scroll.y - this._activeTouchScroll.y;
 		var absMoveX = Math.abs(moveX);
 		var absMoveY = Math.abs(moveY);
 
@@ -423,24 +425,28 @@ Moobile.ScrollView = new Class({
 
 		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
 
+		this.fireEvent('snaptopage', [page.x, page.y]);
+
 		return this;
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchCancel: function() {
 		this._activeTouch = null;
 		this._activeTouchTime = null;
+		this._activeTouchScroll = null;
 		this._activeTouchDuration = null;
-		this._activeTouchStartScroll = null;
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchStart: function(e) {
@@ -450,34 +456,29 @@ Moobile.ScrollView = new Class({
 		if (this._activeTouch === null) {
 			this._activeTouch = touch;
 			this._activeTouchTime = Date.now();
-			this._activeTouchStartScroll = this.getContentScroll();
+			this._activeTouchScroll = this.getContentScroll();
 		}
 	},
 
 	/**
 	 * @hidden
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
 	 * @since  0.2.0
 	 */
 	_onTouchEnd: function(e) {
 
-		var touch = e.changedTouches[0];
+		if (e.touches.length > 0)
+			return;
 
-		if (this._activeTouch.identifier === touch.identifier) {
-			this._activeTouchDuration = Date.now() - this._activeTouchTime;
+		this._activeTouchDuration = Date.now() - this._activeTouchTime;
 
-			if (this.options.snapToPage) {
-				if (this._activeTouchStartX !== touch.pageX ||
-					this._activeTouchStartY !== touch.pageY) {
-					this._snapToPage();
-				}
-			}
+		if (this.options.snapToPage) this._snapToPage();
 
-			this._activeTouch = null;
-			this._activeTouchTime = null;
-			this._activeTouchDuration = null;
-			this._activeTouchStartScroll = null;
-		}
+		this._activeTouch = null;
+		this._activeTouchTime = null;
+		this._activeTouchScroll = null;
+		this._activeTouchDuration = null;
 	},
 
 	/**
