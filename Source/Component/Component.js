@@ -107,13 +107,6 @@ Moobile.Component = new Class({
 	},
 
 	/**
-	 * @hidden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	_size: {x: 0, y: 0},
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#element
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
@@ -142,7 +135,7 @@ Moobile.Component = new Class({
 
 		this.element = Element.from(element);
 		if (this.element === null) {
-			this.element = this.create();
+			this.element = document.createElement(this.options.tagName);
 		}
 
 		this._name = name || this.element.get('data-name');
@@ -176,15 +169,6 @@ Moobile.Component = new Class({
 		this._built = true;
 
 		return this;
-	},
-
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Component/Component#create
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.2.1
-	 */
-	create: function() {
-		return document.createElement(this.options.tagName);
 	},
 
 	/**
