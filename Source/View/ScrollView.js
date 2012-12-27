@@ -187,13 +187,22 @@ Moobile.ScrollView = new Class({
 	 * @since  0.1.0
 	 */
 	didBecomeReady: function() {
+
 		this.parent();
-		this._scroller.refresh();
+
+		var x = this.options.initialScrollX;
+		var y = this.options.initialScrollY;
+		var s = 'scrollTo';
+
 		if (this.options.snapToPage) {
-			this.scrollToPage(this.options.intialPageX, this.options.initialPageY);
-		} else {
-			this.scrollTo(this.options.initialScrollX, this.options.initialScrollY);
+			x = this.options.initialPageX;
+			y = this.options.initialPageY;
+			s = 'scrollToPage';
 		}
+
+		this._scroller.refresh();
+
+		this[s].call(this, x, y);
 	},
 
 	/**
