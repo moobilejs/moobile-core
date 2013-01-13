@@ -1,0 +1,32 @@
+{
+	"name": "moobile",
+	"description": "web application framework for engineering mobile and touch applications",
+	"version": "0.3.0",
+	"main": "lib/main.js",
+	"license": "MIT",
+	"keywords": ["mobile", "touch", "mootools"],
+	"author": "Jean-Philippe Dery <jeanphilippe.dery@gmail.com>",
+	"bugs": "https://github.com/jpdery/moobile-core/issues",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jpdery/moobile-core.git"
+	},
+	"dependencies": {
+		"event-util": "0.0.1",
+		"touch-util": "0.0.1",
+		"mootools-request-local": "git://github.com/jpdery/mootools-request-local.git",
+		"mootools-element-at": "git://github.com/jpdery/mootools-element-at.git",
+		"mootools-element-from": "git://github.com/jpdery/mootools-element-from.git",
+		"mootools-element-style-prefix": "git://github.com/jpdery/mootools-element-style-prefix.git"
+	},
+	"devDependencies": {
+		"mocha": "1.6",
+		"sinon": "1.5.2",
+		"expect.js": "0.1",
+		"wrapup": "0.10",
+		"wrapup": "0.10.3"
+	},
+	"engines": {
+		"node": "*"
+	}
+}
