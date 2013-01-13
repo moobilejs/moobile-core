@@ -174,7 +174,7 @@ var Type = this.Type = function(name, object){
 			object.prototype.$family = (function(){
 				return lower;
 			}).hide();
-			
+
 		}
 	}
 
@@ -1410,7 +1410,7 @@ this.Events = new Class({
 	addEvent: function(type, fn, internal){
 		type = removeOn(type);
 
-		
+
 
 		this.$events[type] = (this.$events[type] || []).include(fn);
 		if (internal) fn.internal = true;
@@ -3964,6 +3964,7 @@ Element.Properties.events = {set: function(events){
 	},
 
 	fireEvent: function(type, args, delay){
+		if (!this.retrieve) console.log(this)
 		var events = this.retrieve('events');
 		if (!events || !events[type]) return this;
 		args = Array.from(args);
