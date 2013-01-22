@@ -51,3 +51,7 @@ This release focuses on making a solid foundation for future releases. Here are 
 #### ViewTransitions
 
  - Added a Cover.Box and Cover.Page transitions.
+
+ ### 0.2.1
+
+ - Fixed an issue that made all child components visible when the parent's show method was called, even if they were manually hidden.
