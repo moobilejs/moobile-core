@@ -295,6 +295,17 @@ Moobile.Slider = new Class({
 	 * @since  0.1.0
 	 */
 	setValue: function(value) {
+		
+		// Check that value is in range
+		if( value < this._minimum ) {
+			value = this._minimum;
+		} else if ( value > this._maximum ) {
+			value = this._maximum;
+		}
+		
+		// Persists the value
+		this._value = value;
+		
 		var pos = this._positionFromValue(value);
 		this._move(pos.x, pos.y);
 		return this;
@@ -403,6 +414,7 @@ Moobile.Slider = new Class({
 				break;
 		}
 
+		// Get the value from position
 		var value = this._valueFromPosition(x, y);
 
 		if (this.options.snap) {
@@ -417,14 +429,15 @@ Moobile.Slider = new Class({
 			return this;
 		}
 
-		this._value = value;
+		// Persists the new value
+		this.setValue(value);
 
 		this._position.x = x;
 		this._position.y = y;
 		this.thumbElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
 		this.valueElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
 
-		this.fireEvent('change', value);
+		this.fireEvent('change', this.getValue());
 
 		return this;
 	},
