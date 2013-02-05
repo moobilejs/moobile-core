@@ -258,7 +258,7 @@ Moobile.Slider = new Class({
 	 */
 	didBecomeReady: function() {
 		this.parent();
-		this.refresh();
+		//this.refresh(); // This will be called by setMinimum and setMaximum
 		this.setMinimum(this.options.minimum);
 		this.setMaximum(this.options.maximum);
 		this.setValue(this.options.value);
@@ -297,7 +297,7 @@ Moobile.Slider = new Class({
 	setValue: function(value) {
 		
 		// Check that value is in range
-		if( value < this._minimum ) {
+		if( value > this._minimum ) {
 			value = this._minimum;
 		} else if ( value > this._maximum ) {
 			value = this._maximum;
@@ -307,7 +307,7 @@ Moobile.Slider = new Class({
 		this._value = value;
 		
 		var pos = this._positionFromValue(value);
-		this._move(pos.x, pos.y);
+		this._move(pos.x, pos.y, true);
 		return this;
 	},
 
@@ -326,7 +326,8 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	setMinimum: function(minimum) {
-		if (this._value < minimum) this.setValue(minimum);
+		// Reset the current value in case its below the new minimum
+		this.setValue(this._value);
 		this._minimum = minimum;
 		this.refresh();
 		return this;
@@ -347,7 +348,8 @@ Moobile.Slider = new Class({
 	 * @since  0.2.0
 	 */
 	setMaximum: function(maximum) {
-		if (this._value > maximum) this.setValue(maximum);
+		// Reset the current value in case its above the new miximum
+		this.setValue(this._value);
 		this._maximum = maximum;
 		this.refresh();
 		return this;
@@ -399,7 +401,9 @@ Moobile.Slider = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.2.0
 	 */
-	_move: function(x, y) {
+	_move: function(x, y, toValue) {
+
+		toValue = toValue || false;
 
 		switch (this.options.mode) {
 			case 'horizontal':
@@ -429,8 +433,11 @@ Moobile.Slider = new Class({
 			return this;
 		}
 
-		// Persists the new value
-		this.setValue(value);
+		// Persists the new value only if it was set by a touch move
+		// and not by the setValue > _move
+		if( ! toValue ) {
+			this.setValue(value);
+		}
 
 		this._position.x = x;
 		this._position.y = y;
