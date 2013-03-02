@@ -3,16 +3,143 @@
 var expect = require('expect.js')
 var sinon  = require('sinon')
 
-var Component = require('../lib/component')
-var Window = require('../lib/window')
+var Component = require('../../../lib/component')
+var Window    = require('../../../lib/window')
 
 describe('Component/Component', function() {
 
-	// TODO: Set style via data-style
+	describe('invokeRecursively, assignAll, invokeAllChildren, assignAllChildren', function() {
 
-	var MyComponent = new Class({
-		Extends: Component
+		// it('should invoke a method recursively through all children', function() {
+
+		// 	var TestComponent = new Class({
+		// 		Extends: Component,
+		// 		specialMethod: function(){}
+		// 	})
+
+		// 	var p  = new TestComponent()
+		// 	var c1 = new TestComponent()
+		// 	var c2 = new TestComponent()
+		// 	var c3 = new TestComponent()
+
+		// 	p.process = true;
+		// 	c2.process = true;
+
+		// 	p.addChildComponent(c1)
+		// 	c1.addChildComponent(c2)
+		// 	c2.addChildComponent(c3)
+
+		// 	sinon.spy(p, 'specialMethod')
+		// 	sinon.spy(c1, 'specialMethod')
+		// 	sinon.spy(c2, 'specialMethod')
+		// 	sinon.spy(c3, 'specialMethod')
+
+		// 	p.invokeRecursively('specialMethod')
+
+		// 	expect(p.specialMethod.calledOnce).to.be.ok()
+		// 	expect(c1.specialMethod.calledOnce).to.be.ok()
+		// 	expect(c2.specialMethod.calledOnce).to.be.ok()
+		// 	expect(c3.specialMethod.calledOnce).to.be.ok()
+		// })
+
+		// it('should invoke a method recursively through some children', function() {
+
+		// 	var TestComponent = new Class({
+		// 		Extends: Component,
+		// 		specialMethod: function(){}
+		// 	})
+
+		// 	var p  = new TestComponent()
+		// 	var c1 = new TestComponent()
+		// 	var c2 = new TestComponent()
+		// 	var c3 = new TestComponent()
+
+		// 	p.addChildComponent(c1)
+		// 	c1.addChildComponent(c2)
+		// 	c2.addChildComponent(c3)
+
+		// 	p.process = true;
+		// 	c2.process = true;
+
+		// 	sinon.spy(p, 'specialMethod')
+		// 	sinon.spy(c1, 'specialMethod')
+		// 	sinon.spy(c2, 'specialMethod')
+		// 	sinon.spy(c3, 'specialMethod')
+
+		// 	var filter = function(component) {
+		// 		return component.process;
+		// 	}
+
+		// 	p.invokeRecursively(filter, 'specialMethod')
+
+		// 	expect(p.specialMethod.calledOnce).to.be.ok()
+		// 	expect(c1.specialMethod.calledOnce).to.not.be.ok()
+		// 	expect(c2.specialMethod.calledOnce).to.be.ok()
+		// 	expect(c3.specialMethod.calledOnce).to.not.be.ok()
+		// })
+
+		// it('should assign a value recursively through all children', function() {
+
+		// 	var TestComponent = new Class({
+		// 		Extends: Component,
+		// 		specialMethod: function(){}
+		// 	})
+
+		// 	var p  = new TestComponent()
+		// 	var c1 = new TestComponent()
+		// 	var c2 = new TestComponent()
+		// 	var c3 = new TestComponent()
+
+		// 	p.addChildComponent(c1)
+		// 	c1.addChildComponent(c2)
+		// 	c2.addChildComponent(c3)
+
+		// 	p.process = true;
+		// 	c2.process = true;
+
+		// 	p.assignRecursively('__test', 'wat')
+
+		// 	expect(p.__test).to.be('wat')
+		// 	expect(c1.__test).to.be('wat')
+		// 	expect(c2.__test).to.be('wat')
+		// 	expect(c3.__test).to.be('wat')
+		// })
+
+		// it('should assign a value recursively through some children', function() {
+
+		// 	var TestComponent = new Class({
+		// 		Extends: Component,
+		// 		specialMethod: function(){}
+		// 	})
+
+		// 	var p  = new TestComponent()
+		// 	var c1 = new TestComponent()
+		// 	var c2 = new TestComponent()
+		// 	var c3 = new TestComponent()
+
+		// 	p.addChildComponent(c1)
+		// 	c1.addChildComponent(c2)
+		// 	c2.addChildComponent(c3)
+
+		// 	p.process = true;
+		// 	c2.process = true;
+
+		// 	var filter = function(component) {
+		// 		console.log('WAT');
+		// 		return component.process;
+		// 	}
+
+		// 	p.assignRecursively(filter, '__test', 'wat')
+
+		// 	expect(p.__test).to.be('wat')
+		// 	expect(c1.__test).to.be(undefined)
+		// 	expect(c2.__test).to.be('wat')
+		// 	expect(c3.__test).to.be(undefined)
+		// })
+
 	})
+
+	// TODO: Set style via data-style
 
 	var ComponentOne = new Class({
 		Extends: Component
@@ -263,6 +390,245 @@ describe('Component/Component', function() {
 			expect(child3.element).to.be(p.element.childNodes[2])
 		})
 
+		it('should remove the child component from its previous parent', function() {
+
+			var p1 = new Component()
+			var p2 = new Component()
+			var c  = new Component()
+
+			p1.addChildComponent(c)
+			p2.addChildComponent(c)
+
+			expect(p1.hasChildComponent(c)).to.be(false)
+			expect(p2.hasChildComponent(c)).to.be(true)
+		})
+
+		it ('should properly set the parent to the child component', function() {
+
+			var p = new Component()
+			var c = new Component()
+
+			p.addChildComponent(c)
+
+			expect(c.getParentComponent()).to.be(p)
+		})
+
+		it('should properly set the window to each child components', function() {
+
+			var w    = new Window()
+			var p    = new Component()
+			var c1   = new Component()
+			var c2   = new Component()
+			var c1c1 = new Component()
+			var c1c2 = new Component()
+			var c2c1 = new Component()
+			var c2c2 = new Component()
+
+			w.addChildComponent(p)
+
+			p.addChildComponent(c1)
+			p.addChildComponent(c2)
+
+			c1.addChildComponent(c1c1)
+			c1.addChildComponent(c1c2)
+
+			c2.addChildComponent(c2c1)
+			c2.addChildComponent(c2c2)
+
+			expect(p.getWindow()).to.be(w)
+			expect(c1.getWindow()).to.be(w)
+			expect(c2.getWindow()).to.be(w)
+			expect(c1c1.getWindow()).to.be(w)
+			expect(c1c2.getWindow()).to.be(w)
+			expect(c2c1.getWindow()).to.be(w)
+			expect(c2c2.getWindow()).to.be(w)
+		})
+
+		it('should property set the ready state to each child components', function() {
+
+			var w    = new Window()
+			var p    = new Component()
+			var c1   = new Component()
+			var c2   = new Component()
+			var c1c1 = new Component()
+			var c1c2 = new Component()
+			var c2c1 = new Component()
+			var c2c2 = new Component()
+
+			w.addChildComponent(p)
+
+			p.addChildComponent(c1)
+			p.addChildComponent(c2)
+
+			c1.addChildComponent(c1c1)
+			c1.addChildComponent(c1c2)
+
+			c2.addChildComponent(c2c1)
+			c2.addChildComponent(c2c2)
+
+			expect(p.isReady()).to.be(true)
+			expect(c1.isReady()).to.be(true)
+			expect(c2.isReady()).to.be(true)
+			expect(c1c1.isReady()).to.be(true)
+			expect(c1c2.isReady()).to.be(true)
+			expect(c2c1.isReady()).to.be(true)
+			expect(c2c2.isReady()).to.be(true)
+		})
+
+		it('should properly map indexes to components', function() {
+
+			Component.defineRole('button', null, null, function(element) {
+				this.addChildComponent(new Component(element));
+			});
+
+			var p = new Component(
+				'<div>' +
+					'<div data-role="button" data-name="b1">B1</div>' +
+					'<div>' +
+						'<div></div>' +
+						'<div data-role="button" data-name="b2">B2</div>' +
+						'<div>' +
+							'<div data-role="button" data-name="b3">B3</div>' +
+						'</div>' +
+					'</div>' +
+					'<div data-role="button" data-name="b4">B4</div>' +
+					'<div></div>' +
+					'<div>' +
+						'<div data-role="button" data-name="b5">B5</div>' +
+					'</div>' +
+				'</div>'
+			)
+
+			var child1 = p.getChildComponent('b1')
+			var child2 = p.getChildComponent('b2')
+			var child3 = p.getChildComponent('b3')
+			var child4 = p.getChildComponent('b4')
+			var child5 = p.getChildComponent('b5')
+
+			expect(p.getChildComponentIndex(child1)).to.be(0)
+			expect(p.getChildComponentIndex(child2)).to.be(1)
+			expect(p.getChildComponentIndex(child3)).to.be(2)
+			expect(p.getChildComponentIndex(child4)).to.be(3)
+			expect(p.getChildComponentIndex(child5)).to.be(4)
+		})
+
+		it('should properly call willAddChildComponent and didAddChildComponent on the parent component', function() {
+
+			var p    = new Component()
+			var c1   = new Component()
+			var c2   = new Component()
+
+			sinon.spy(p, 'willAddChildComponent')
+			sinon.spy(p, 'didAddChildComponent')
+
+			p.addChildComponent(c1)
+			p.addChildComponent(c2)
+
+			expect(p.willAddChildComponent.calledWith(c1)).to.be.ok()
+			expect(p.willAddChildComponent.calledWith(c2)).to.be.ok()
+			expect(p.willAddChildComponent.callCount).to.be(2)
+
+			expect(p.didAddChildComponent.calledWith(c1)).to.be.ok()
+			expect(p.didAddChildComponent.calledWith(c2)).to.be.ok()
+			expect(p.didAddChildComponent.callCount).to.be(2)
+		})
+
+		it('should properly call willRemoveChildComponent and didRemoveChildComponent on the parent component', function() {
+
+			var p    = new Component()
+			var c1   = new Component()
+			var c2   = new Component()
+
+			sinon.spy(p, 'willRemoveChildComponent')
+			sinon.spy(p, 'didRemoveChildComponent')
+
+			p.addChildComponent(c1)
+			p.addChildComponent(c2)
+			p.removeChildComponent(c1)
+			p.removeChildComponent(c2)
+
+			expect(p.willRemoveChildComponent.calledWith(c1)).to.be.ok()
+			expect(p.willRemoveChildComponent.calledWith(c2)).to.be.ok()
+			expect(p.willRemoveChildComponent.callCount).to.be(2)
+
+			expect(p.didRemoveChildComponent.calledWith(c1)).to.be.ok()
+			expect(p.didRemoveChildComponent.calledWith(c2)).to.be.ok()
+			expect(p.didRemoveChildComponent.callCount).to.be(2)
+		})
+
+		it('should properly call parentWillChange and parentDidChange on the child component', function() {
+
+			var p    = new Component()
+			var c1   = new Component()
+			var c2   = new Component()
+
+			sinon.spy(c1, 'parentComponentWillChange')
+			sinon.spy(c1, 'parentComponentDidChange')
+			sinon.spy(c2, 'parentComponentWillChange')
+			sinon.spy(c2, 'parentComponentDidChange')
+
+			p.addChildComponent(c1)
+			p.addChildComponent(c2)
+
+			expect(c1.parentComponentWillChange.calledWith(p)).to.be.ok()
+			expect(c1.parentComponentDidChange.calledWith(p)).to.be.ok()
+
+			expect(c2.parentComponentWillChange.calledWith(p)).to.be.ok()
+			expect(c2.parentComponentDidChange.calledWith(p)).to.be.ok()
+
+			p.removeChildComponent(c1)
+			p.removeChildComponent(c2)
+
+			expect(c1.parentComponentWillChange.calledWith(null)).to.be.ok()
+			expect(c1.parentComponentDidChange.calledWith(null)).to.be.ok()
+
+			expect(c2.parentComponentWillChange.calledWith(null)).to.be.ok()
+			expect(c2.parentComponentDidChange.calledWith(null)).to.be.ok()
+		})
+
+		it('should properly call didBecomeReady on each child components', function() {
+
+			var w    = new Window()
+			var p    = new Component()
+			var c1   = new Component()
+			var c2   = new Component()
+			var c1c1 = new Component()
+			var c1c2 = new Component()
+			var c2c1 = new Component()
+			var c2c2 = new Component()
+
+			sinon.spy(p, 'didBecomeReady')
+			sinon.spy(c1, 'didBecomeReady')
+			sinon.spy(c2, 'didBecomeReady')
+			sinon.spy(c1c1, 'didBecomeReady')
+			sinon.spy(c1c2, 'didBecomeReady')
+			sinon.spy(c2c1, 'didBecomeReady')
+			sinon.spy(c2c2, 'didBecomeReady')
+
+			w.addChildComponent(p)
+
+			p.addChildComponent(c1)
+			p.addChildComponent(c2)
+
+			c1.addChildComponent(c1c1)
+			c1.addChildComponent(c1c2)
+
+			c2.addChildComponent(c2c1)
+			c2.addChildComponent(c2c2)
+
+			expect(p.didBecomeReady.called).to.be.ok()
+			expect(c1.didBecomeReady.called).to.be.ok()
+			expect(c2.didBecomeReady.called).to.be.ok()
+			expect(c1c1.didBecomeReady.called).to.be.ok()
+			expect(c1c2.didBecomeReady.called).to.be.ok()
+			expect(c2c1.didBecomeReady.called).to.be.ok()
+			expect(c2c2.didBecomeReady.called).to.be.ok()
+		})
+
+		// it('should properly call didUpdateLayout once', function() {
+
+		// })
+
 	})
 
 	// -------------------------------------------------------------------------
@@ -466,257 +832,6 @@ describe('Component/Component', function() {
 	})
 
 	// -------------------------------------------------------------------------
-	// _addChildComponent
-	// -------------------------------------------------------------------------
-
-	describe('_addChildComponent', function() {
-
-		it('should remove the child component from its previous parent', function() {
-
-			var p1 = new Component()
-			var p2 = new Component()
-			var c  = new Component()
-
-			p1.addChildComponent(c)
-			p2.addChildComponent(c)
-
-			expect(p1.hasChildComponent(c)).to.be(false)
-			expect(p2.hasChildComponent(c)).to.be(true)
-		})
-
-		it ('should properly set the parent to the child component', function() {
-
-			var p = new Component()
-			var c = new Component()
-
-			p.addChildComponent(c)
-
-			expect(c.getParentComponent()).to.be(p)
-		})
-
-		it('should properly set the window to each child components', function() {
-
-			var w    = new Window()
-			var p    = new Component()
-			var c1   = new Component()
-			var c2   = new Component()
-			var c1c1 = new Component()
-			var c1c2 = new Component()
-			var c2c1 = new Component()
-			var c2c2 = new Component()
-
-			w.addChildComponent(p)
-
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-
-			c1.addChildComponent(c1c1)
-			c1.addChildComponent(c1c2)
-
-			c2.addChildComponent(c2c1)
-			c2.addChildComponent(c2c2)
-
-			expect(p.getWindow()).to.be(w)
-			expect(c1.getWindow()).to.be(w)
-			expect(c2.getWindow()).to.be(w)
-			expect(c1c1.getWindow()).to.be(w)
-			expect(c1c2.getWindow()).to.be(w)
-			expect(c2c1.getWindow()).to.be(w)
-			expect(c2c2.getWindow()).to.be(w)
-		})
-
-		it('should property set the ready state to each child components', function() {
-
-			var w    = new Window()
-			var p    = new Component()
-			var c1   = new Component()
-			var c2   = new Component()
-			var c1c1 = new Component()
-			var c1c2 = new Component()
-			var c2c1 = new Component()
-			var c2c2 = new Component()
-
-			w._setReady(true)
-
-			w.addChildComponent(p)
-
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-
-			c1.addChildComponent(c1c1)
-			c1.addChildComponent(c1c2)
-
-			c2.addChildComponent(c2c1)
-			c2.addChildComponent(c2c2)
-
-			expect(p.isReady()).to.be(true)
-			expect(c1.isReady()).to.be(true)
-			expect(c2.isReady()).to.be(true)
-			expect(c1c1.isReady()).to.be(true)
-			expect(c1c2.isReady()).to.be(true)
-			expect(c2c1.isReady()).to.be(true)
-			expect(c2c2.isReady()).to.be(true)
-		})
-
-		it('should properly map indexes to components', function() {
-
-			Component.defineRole('button', null, null, function(element) {
-				this.addChildComponent(new Component(element));
-			});
-
-			var p = new Component(
-				'<div>' +
-					'<div data-role="button" data-name="b1">B1</div>' +
-					'<div>' +
-						'<div></div>' +
-						'<div data-role="button" data-name="b2">B2</div>' +
-						'<div>' +
-							'<div data-role="button" data-name="b3">B3</div>' +
-						'</div>' +
-					'</div>' +
-					'<div data-role="button" data-name="b4">B4</div>' +
-					'<div></div>' +
-					'<div>' +
-						'<div data-role="button" data-name="b5">B5</div>' +
-					'</div>' +
-				'</div>'
-			)
-
-			var child1 = p.getChildComponent('b1')
-			var child2 = p.getChildComponent('b2')
-			var child3 = p.getChildComponent('b3')
-			var child4 = p.getChildComponent('b4')
-			var child5 = p.getChildComponent('b5')
-
-			expect(p.getChildComponentIndex(child1)).to.be(0)
-			expect(p.getChildComponentIndex(child2)).to.be(1)
-			expect(p.getChildComponentIndex(child3)).to.be(2)
-			expect(p.getChildComponentIndex(child4)).to.be(3)
-			expect(p.getChildComponentIndex(child5)).to.be(4)
-		})
-
-		it('should properly call willAddChildComponent and didAddChildComponent on the parent component', function() {
-
-			var p    = new Component()
-			var c1   = new Component()
-			var c2   = new Component()
-
-			sinon.spy(p, 'willAddChildComponent')
-			sinon.spy(p, 'didAddChildComponent')
-
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-
-			expect(p.willAddChildComponent.calledWith(c1)).to.be.ok()
-			expect(p.willAddChildComponent.calledWith(c2)).to.be.ok()
-			expect(p.willAddChildComponent.callCount).to.be(2)
-
-			expect(p.didAddChildComponent.calledWith(c1)).to.be.ok()
-			expect(p.didAddChildComponent.calledWith(c2)).to.be.ok()
-			expect(p.didAddChildComponent.callCount).to.be(2)
-		})
-
-		it('should properly call willRemoveChildComponent and didRemoveChildComponent on the parent component', function() {
-
-			var p    = new Component()
-			var c1   = new Component()
-			var c2   = new Component()
-
-			sinon.spy(p, 'willRemoveChildComponent')
-			sinon.spy(p, 'didRemoveChildComponent')
-
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-			p.removeChildComponent(c1)
-			p.removeChildComponent(c2)
-
-			expect(p.willRemoveChildComponent.calledWith(c1)).to.be.ok()
-			expect(p.willRemoveChildComponent.calledWith(c2)).to.be.ok()
-			expect(p.willRemoveChildComponent.callCount).to.be(2)
-
-			expect(p.didRemoveChildComponent.calledWith(c1)).to.be.ok()
-			expect(p.didRemoveChildComponent.calledWith(c2)).to.be.ok()
-			expect(p.didRemoveChildComponent.callCount).to.be(2)
-		})
-
-		it('should properly call parentWillChange and parentDidChange on the child component', function() {
-
-			var p    = new Component()
-			var c1   = new Component()
-			var c2   = new Component()
-
-			sinon.spy(c1, 'parentComponentWillChange')
-			sinon.spy(c1, 'parentComponentDidChange')
-			sinon.spy(c2, 'parentComponentWillChange')
-			sinon.spy(c2, 'parentComponentDidChange')
-
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-
-			expect(c1.parentComponentWillChange.calledWith(p)).to.be.ok()
-			expect(c1.parentComponentDidChange.calledWith(p)).to.be.ok()
-
-			expect(c2.parentComponentWillChange.calledWith(p)).to.be.ok()
-			expect(c2.parentComponentDidChange.calledWith(p)).to.be.ok()
-
-			p.removeChildComponent(c1)
-			p.removeChildComponent(c2)
-
-			expect(c1.parentComponentWillChange.calledWith(null)).to.be.ok()
-			expect(c1.parentComponentDidChange.calledWith(null)).to.be.ok()
-
-			expect(c2.parentComponentWillChange.calledWith(null)).to.be.ok()
-			expect(c2.parentComponentDidChange.calledWith(null)).to.be.ok()
-		})
-
-		it('should properly call didBecomeReady on each child components', function() {
-
-			var w    = new Window()
-			var p    = new Component()
-			var c1   = new Component()
-			var c2   = new Component()
-			var c1c1 = new Component()
-			var c1c2 = new Component()
-			var c2c1 = new Component()
-			var c2c2 = new Component()
-
-			sinon.spy(p, 'didBecomeReady')
-			sinon.spy(c1, 'didBecomeReady')
-			sinon.spy(c2, 'didBecomeReady')
-			sinon.spy(c1c1, 'didBecomeReady')
-			sinon.spy(c1c2, 'didBecomeReady')
-			sinon.spy(c2c1, 'didBecomeReady')
-			sinon.spy(c2c2, 'didBecomeReady')
-
-			w._setReady(true)
-
-			w.addChildComponent(p)
-
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-
-			c1.addChildComponent(c1c1)
-			c1.addChildComponent(c1c2)
-
-			c2.addChildComponent(c2c1)
-			c2.addChildComponent(c2c2)
-
-			expect(p.didBecomeReady.called).to.be.ok()
-			expect(c1.didBecomeReady.called).to.be.ok()
-			expect(c2.didBecomeReady.called).to.be.ok()
-			expect(c1c1.didBecomeReady.called).to.be.ok()
-			expect(c1c2.didBecomeReady.called).to.be.ok()
-			expect(c2c1.didBecomeReady.called).to.be.ok()
-			expect(c2c2.didBecomeReady.called).to.be.ok()
-		})
-
-		it('should properly call didUpdateLayout once', function() {
-
-		})
-
-	})
-
-	// -------------------------------------------------------------------------
 	// addChildComponents
 	// -------------------------------------------------------------------------
 
@@ -908,7 +1023,7 @@ describe('Component/Component', function() {
 			var p  = new Component()
 			var c1 = new Component()
 			var c2 = new Component()
-			var c2 = new Component()
+			var c3 = new Component()
 
 			p.addChildComponent(c1)
 			p.addChildComponent(c2)
@@ -1208,7 +1323,9 @@ describe('Component/Component', function() {
 
 			p.removeChildComponent(c1)
 
-			expect(p.getChildComponentAt(0)).to.be(null)
+			expect(p.hasChildComponent(c1)).to.be(false);
+			expect(p.hasChildComponent(c2)).to.be.ok();
+			expect(p.getChildComponentAt(1)).to.be(null)
 			expect(p.willRemoveChildComponent.calledWith(c1)).to.be.ok()
 			expect(p.didRemoveChildComponent.calledWith(c1)).to.be.ok()
 		})
@@ -1242,10 +1359,10 @@ describe('Component/Component', function() {
 		it('should remove all children of a given type', function() {
 			var p  = new Component()
 			var c1 = new Component()
-			var c2 = new MyComponent()
+			var c2 = new ComponentOne()
 			p.addChildComponent(c1)
 			p.addChildComponent(c2)
-			p.removeAllChildComponentsOfType(MyComponent)
+			p.removeAllChildComponentsByType(ComponentOne)
 			expect(p.getChildComponents().length).to.be(1)
 		})
 
@@ -1263,86 +1380,6 @@ describe('Component/Component', function() {
 			p.addChildComponent(c1)
 			c1.removeFromParentComponent()
 			expect(p.getChildComponents().length).to.be(0)
-		})
-
-	})
-
-	// -------------------------------------------------------------------------
-	// setParentComponent, getParentComponent, hasParentComponent
-	// -------------------------------------------------------------------------
-
-	describe('setParentComponent, getParentComponent, hasParentComponent', function() {
-
-		it('should set the parent', function() {
-			var p  = new Component()
-			var c1 = new Component()
-			sinon.spy(c1, 'parentComponentWillChange')
-			sinon.spy(c1, 'parentComponentDidChange')
-			c1.setParentComponent(p)
-			expect(c1.getParentComponent()).to.be(p)
-			expect(c1.hasParentComponent()).to.be(true)
-			expect(c1.parentComponentWillChange.calledWith(p)).to.be.ok()
-			expect(c1.parentComponentDidChange.calledWith(p)).to.be.ok()
-		})
-
-	})
-
-	// -------------------------------------------------------------------------
-	// setWindow, getWindow, hasWindow
-	// -------------------------------------------------------------------------
-
-	describe('setWindow, getWindow, hasWindow', function() {
-
-		it('should set the window through all child', function() {
-			var w  = new Window()
-			var p  = new Component()
-			var c1 = new Component()
-			var c2 = new Component()
-			sinon.spy(c1, 'windowWillChange')
-			sinon.spy(c1, 'windowDidChange')
-			sinon.spy(c2, 'windowWillChange')
-			sinon.spy(c2, 'windowDidChange')
-			p.addChildComponent(c1)
-			p.addChildComponent(c2)
-			p.setWindow(w)
-			expect(p.getWindow()).to.be(w)
-			expect(p.hasWindow()).to.be(true)
-			expect(c1.getWindow()).to.be(w)
-			expect(c2.getWindow()).to.be(w)
-			expect(c1.windowWillChange.calledWith(w)).to.be.ok()
-			expect(c1.windowDidChange.calledWith(w)).to.be.ok()
-			expect(c2.windowWillChange.calledWith(w)).to.be.ok()
-			expect(c2.windowDidChange.calledWith(w)).to.be.ok()
-		})
-
-	})
-
-	// -------------------------------------------------------------------------
-	// setReady, isReady
-	// -------------------------------------------------------------------------
-
-	describe('setReady, isReady', function() {
-
-		it('should handle the ready flag through all child', function() {
-			var w = new Window()
-			var c1 = new Component()
-			var c2 = new Component()
-			var c3 = new Component()
-			sinon.spy(c1, 'didBecomeReady')
-			sinon.spy(c2, 'didBecomeReady')
-			sinon.spy(c3, 'didBecomeReady')
-			c1.addChildComponent(c2)
-			c2.addChildComponent(c3)
-			w.addChildComponent(c1)
-			expect(c1.didBecomeReady.called).to.be.ok()
-			expect(c2.didBecomeReady.called).to.be.ok()
-			expect(c3.didBecomeReady.called).to.be.ok()
-			expect(c1.didBecomeReady.callCount).to.be(1)
-			expect(c2.didBecomeReady.callCount).to.be(1)
-			expect(c3.didBecomeReady.callCount).to.be(1)
-			expect(c1.isReady()).to.be(true)
-			expect(c2.isReady()).to.be(true)
-			expect(c3.isReady()).to.be(true)
 		})
 
 	})
@@ -1603,6 +1640,8 @@ describe('Component/Component', function() {
 
 			w.hide()
 
+			expect(w.willHide.callCount).to.be(1)
+			expect(w.didHide.callCount).to.be(1)
 			expect(c1.willHide.callCount).to.be(1)
 			expect(c1.didHide.callCount).to.be(1)
 			expect(c2.willHide.callCount).to.be(1)
@@ -1728,11 +1767,13 @@ describe('Component/Component', function() {
 			w.hide()
 			c3.hide()
 			w.show()
-
+		//	console.log('Visible', c3.isVisible())
 			expect(w.isVisible()).to.be(true)
 			expect(c1.isVisible()).to.be(true)
 			expect(c2.isVisible()).to.be(true)
 			expect(c3.isVisible()).to.be(false)
+
+
 
 			expect(c1.willShow.callCount).to.be(1)
 			expect(c1.didShow.callCount).to.be(1)

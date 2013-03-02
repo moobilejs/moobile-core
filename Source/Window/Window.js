@@ -71,8 +71,8 @@ Moobile.Window = new Class({
 		this.contentElement.addClass('window-content');
 		this.contentWrapperElement.addClass('window-content-wrapper');
 
-		this._setParent(null);
-		this._setWindow(this);
+		this.__setParent(null);
+		this.__setWindow(this);
 
 		window.addEvent('orientationchange', this.bound('_onWindowOrientationChange'));
 	},
@@ -94,7 +94,7 @@ Moobile.Window = new Class({
 	 */
 	_onWindowOrientationChange: function(e) {
 		this._orientationChanged = true;
-		this._setUpdateLayout(true);
+		this.updateLayout(true);
 	}
 
 });

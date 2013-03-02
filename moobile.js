@@ -19,35 +19,40 @@
     },
     "1": function(require, module, exports, global) {
         "use strict";
-        require("2");
-        require("7");
-        require("a");
+        module.exports = require("2");
+    },
+    "2": function(require, module, exports, global) {
+        "use strict";
+        require("3");
+        require("8");
         require("b");
         require("c");
         require("d");
+        require("g");
+        require("h");
+        require("i");
         require("e");
-        var Emitter = require("f");
-        var Component = new Class({
-            Extends: Emitter,
-            _name: null,
-            _built: null,
-            _ready: false,
-            _window: null,
-            _parent: null,
-            _children: [],
-            _visible: true,
-            _display: true,
-            _style: null,
-            _events: {
-                listeners: {},
-                callbacks: {}
-            },
-            _size: {
+        var requestAnimationFrame = require("j").request;
+        var cancelAnimationFrame = require("j").cancel;
+        var EventFirer = require("o");
+        var Component = module.exports = new Class({
+            Extends: EventFirer,
+            __name: null,
+            __ready: false,
+            __window: null,
+            __parent: null,
+            __children: [],
+            __visible: true,
+            __display: true,
+            __style: null,
+            __listeners: {},
+            __callbacks: {},
+            __size: {
                 x: 0,
                 y: 0
             },
-            _updateLayout: false,
-            _updateLayoutTimer: null,
+            __updateLayout: false,
+            __updateTimeout: null,
             element: null,
             options: {
                 className: null,
@@ -58,9 +63,10 @@
             initialize: function(element, options, name) {
                 this.element = Element.from(element);
                 if (this.element === null) {
-                    this.element = this.create();
+                    this.element = document.createElement(this.options.tagName);
                 }
-                this._name = name || this.element.get("data-name");
+                this.__name = name || this.element.get("data-name");
+                this.element.store("moobile:component", this);
                 options = options || {};
                 for (var option in this.options) {
                     if (options[option] === undefined) {
@@ -74,64 +80,35 @@
                     }
                 }
                 this.setOptions(options);
-                this.element.store("moobile:component", this);
                 var marker = this.element;
                 var exists = document.contains(this.element);
                 if (exists) this.element = this.element.clone(true, true);
-                this._willBuild();
-                this._build();
-                this._built = true;
-                this._didBuild();
+                this.__willBuild();
+                this.__build();
+                this.__didBuild();
                 if (exists) this.element.replaces(marker);
                 return this;
             },
-            create: function() {
-                return document.createElement(this.options.tagName);
-            },
-            _build: function() {
-                var owner = this;
-                var roles = this.__roles__;
-                var attrs = this.__attributes__;
-                for (var key in attrs) {
-                    var value = this.element.get(key);
-                    if (value !== null) {
-                        var handler = attrs[key];
-                        if (handler instanceof Function) {
-                            handler.call(this, value);
-                        }
-                    }
-                }
-                var className = this.options.className;
-                if (className) this.addClass(className);
-                var styleName = this.options.styleName;
-                if (styleName) this.setStyle(styleName);
-                this.getRoleElements().each(function(element) {
-                    var handler = roles[element.getRole()].handler;
-                    if (handler instanceof Function) {
-                        handler.call(owner, element);
-                    }
-                });
-                if (this.build) {
-                    this.build.call(this);
-                    console.log('[DEPRECATION NOTICE] The method "build" will be removed in 0.5, use the "_build" method instead');
-                }
-            },
-            _willBuild: function() {
-                this.willBuild();
-            },
-            _didBuild: function() {
-                var components = this.options.components;
-                if (components) {
-                    this.addChildComponents(components);
-                }
-                this.didBuild();
+            destroy: function() {
+                this.removeEvents();
+                this.removeFromParentComponent();
+                this.removeAllChildComponents(true);
+                this.element.destroy();
+                this.element = null;
+                this.__window = null;
+                this.__parent = null;
+                this.__children = null;
+                this.__callbacks = null;
+                this.__listeners = null;
+                this.__updateTimeout = clearTimeout(this.__updateTimeout);
+                return this;
             },
             addEvent: function(type, fn, internal) {
                 var name = type.split(":")[0];
-                if (this.shouldSupportNativeEvent(name)) {
+                if (this.supportNativeEvent(name)) {
                     var self = this;
-                    var listeners = this._events.listeners;
-                    var callbacks = this._events.callbacks;
+                    var listeners = this.__listeners;
+                    var callbacks = this.__callbacks;
                     if (callbacks[name] === undefined) {
                         callbacks[name] = [];
                         listeners[name] = function(e) {
@@ -144,9 +121,9 @@
                 return this.parent(type, fn, internal);
             },
             removeEvent: function(type, fn) {
-                if (this.shouldSupportNativeEvent(type)) {
-                    var listeners = this._events.listeners;
-                    var callbacks = this._events.callbacks;
+                if (this.supportNativeEvent(type)) {
+                    var listeners = this.__listeners;
+                    var callbacks = this.__callbacks;
                     if (callbacks[type] && callbacks[type].contains(fn)) {
                         callbacks[type].erase(fn);
                         if (callbacks[type].length === 0) {
@@ -158,24 +135,41 @@
                 }
                 return this.parent(type, fn);
             },
-            shouldSupportNativeEvent: function(name) {
+            supportNativeEvent: function(name) {
                 return [ "click", "dblclick", "mouseup", "mousedown", "mouseover", "mouseout", "mousemove", "keydown", "keypress", "keyup", "touchstart", "touchmove", "touchend", "touchcancel", "gesturestart", "gesturechange", "gestureend", "tap", "tapstart", "tapmove", "tapend", "pinch", "swipe", "touchold", "animationend", "transitionend", "owntransitionend", "ownanimationend" ].contains(name);
             },
-            addChildComponent: function(component, where) {
-                return this._addChildComponent(component, null, where);
+            addChildComponent: function(component, where, context) {
+                component.removeFromParentComponent();
+                if (context) {
+                    context = document.id(context) || this.element.getElement(context);
+                } else {
+                    context = this.element;
+                }
+                this.__willAddChildComponent(component);
+                var element = document.id(component);
+                if (where || !this.hasElement(element)) {
+                    element.inject(context, where);
+                }
+                insert.call(this, component);
+                component.__setParent(this);
+                component.__setWindow(this.__window);
+                this.__didAddChildComponent(component);
+                this.updateLayout();
+                return this;
             },
             addChildComponentInside: function(component, context, where) {
-                return this._addChildComponent(component, document.id(context) || this.getElement(context), where);
+                return this.addChildComponent(component, where, document.id(context) || this.getElement(context));
             },
             addChildComponentAfter: function(component, after) {
-                return this._addChildComponent(component, after, "after");
+                return this.addChildComponent(component, "after", after);
             },
             addChildComponentBefore: function(component, before) {
-                return this._addChildComponent(component, before, "before");
+                return this.addChildComponent(component, "before", before);
             },
             addChildComponentAt: function(component, index) {
-                if (index > this._children.length) {
-                    index = this._children.length;
+                var children = this.__children;
+                if (index > children.length) {
+                    index = children.length;
                 } else if (index < 0) {
                     index = 0;
                 }
@@ -185,182 +179,46 @@
                 }
                 return this.addChildComponent(component, "bottom");
             },
-            _addChildComponent: function(component, context, where) {
-                component.removeFromParentComponent();
-                if (context) {
-                    context = document.id(context) || this.element.getElement(context);
-                } else {
-                    context = this.element;
-                }
-                this._willAddChildComponent(component);
-                this._inject(component, context, where);
-                this._insert(component);
-                component._setParent(this);
-                component._setWindow(this._window);
-                this._didAddChildComponent(component);
-                if (this._ready) {
-                    component._setReady(true);
-                }
-                this._setUpdateLayout(true);
-                return this;
-            },
-            addChildComponents: function(components, where) {
-                return this._addChildComponents(components, null, where);
-            },
-            addChildComponentsInside: function(component, context, where) {
-                return this._addChildComponents(component, document.id(context) || this.getElement(context), where);
-            },
-            addChildComponentsAfter: function(component, after) {
-                return this._addChildComponents(component, after, "after");
-            },
-            addChildComponentsBefore: function(component, before) {
-                return this._addChildComponents(component, before, "before");
-            },
-            _addChildComponents: function(components, context, where) {
-                components.invoke("removeFromParentComponent");
-                if (context) {
-                    context = document.id(context) || this.element.getElement(context);
-                } else {
-                    context = this.element;
-                }
-                var fragment = document.createDocumentFragment();
-                for (var i = 0, l = components.length; i < l; i++) {
-                    var component = components[i];
-                    this._willAddChildComponent(component);
-                    this._inject(component, context, null, fragment);
-                }
-                switch (where) {
-                  case "top":
-                    var first = context.firstChild;
-                    if (first) {
-                        context.insertBefore(fragment, first);
-                        break;
-                    }
-                    context.appendChild(fragment);
-                    break;
-                  case "after":
-                    var parent = context.parentNode;
-                    if (parent) {
-                        var next = context.nextSibling;
-                        if (next) {
-                            parent.insertBefore(fragment, next);
-                            break;
-                        }
-                        parent.appendChild(fragment);
-                    }
-                    break;
-                  case "before":
-                    var parent = context.parentNode;
-                    if (parent) {
-                        parent.insertBefore(fragment, context);
-                    }
-                    break;
-                  case "bottom":
-                    context.appendChild(fragment);
-                    break;
-                  default:
-                    context.appendChild(fragment);
-                    break;
-                }
-                for (var i = 0, l = components.length; i < l; i++) {
-                    var component = components[i];
-                    this._insert(component);
-                    component._setParent(this);
-                    component._setWindow(this._window);
-                    this._didAddChildComponent(component);
-                    if (this._ready) {
-                        component._setReady(true);
-                    }
-                }
-                this._setUpdateLayout(true);
-                return this;
-            },
-            _willAddChildComponent: function(component) {
-                this.willAddChildComponent(component);
-            },
-            _didAddChildComponent: function(component) {
-                this.didAddChildComponent(component);
-            },
-            _inject: function(component, context, where, fragment) {
-                var element = component.getElement();
-                if (where || this.hasElement(element) === false) {
-                    if (fragment) {
-                        fragment.appendChild(element);
-                    } else {
-                        element.inject(context, where);
-                    }
-                }
-                return this;
-            },
-            _insert: function(component) {
-                var index = 0;
-                var node = document.id(component);
-                do {
-                    var prev = node.previousSibling;
-                    if (prev === null) {
-                        node = node.parentNode;
-                        if (node === this.element) break;
-                        continue;
-                    }
-                    node = prev;
-                    if (node.nodeType !== 1) continue;
-                    var previous = node.retrieve("moobile:component");
-                    if (previous) {
-                        index = this.getChildComponentIndex(previous) + 1;
-                        break;
-                    }
-                    var children = node.childNodes;
-                    if (children.length) {
-                        var found = getLastComponentIndex.call(this, node);
-                        if (found !== null) {
-                            index = found;
-                            break;
-                        }
-                    }
-                } while (node);
-                this._children.splice(index, 0, component);
-                return this;
-            },
             getChildComponent: function(name) {
-                return this._children.find(function(child) {
+                return this.__children.find(function(child) {
                     return child.getName() === name;
                 });
             },
             getChildComponentByType: function(type, name) {
-                return this._children.find(function(child) {
+                return this.__children.find(function(child) {
                     return child instanceof type && child.getName() === name;
                 });
             },
             getChildComponentAt: function(index) {
-                return this._children[index] || null;
+                return this.__children[index] || null;
             },
             getChildComponentByTypeAt: function(type, index) {
                 return this.getChildComponentsByType(type)[index] || null;
             },
             getChildComponentIndex: function(component) {
-                return this._children.indexOf(component);
+                return this.__children.indexOf(component);
             },
             getChildComponents: function() {
-                return this._children;
+                return this.__children;
             },
             getChildComponentsByType: function(type) {
-                return this._children.filter(function(child) {
+                return this.__children.filter(function(child) {
                     return child instanceof type;
                 });
             },
             hasChildComponent: function(component) {
-                return this._children.contains(component);
+                return this.__children.contains(component);
             },
             hasChildComponentByType: function(type) {
-                return this._children.some(function(child) {
+                return this.__children.some(function(child) {
                     return child instanceof type;
                 });
             },
             getComponent: function(name) {
                 var component = this.getChildComponent(name);
                 if (component === null) {
-                    for (var i = 0, len = this._children.length; i < len; i++) {
-                        var found = this._children[i].getComponent(name);
+                    for (var i = 0, len = this.__children.length; i < len; i++) {
+                        var found = this.__children[i].getComponent(name);
                         if (found) return found;
                     }
                 }
@@ -369,8 +227,8 @@
             getComponentByType: function(type, name) {
                 var component = this.getChildComponentByType(type, name);
                 if (component === null) {
-                    for (var i = 0, len = this._children.length; i < len; i++) {
-                        var found = this._children[i].getComponentByType(type, name);
+                    for (var i = 0, len = this.__children.length; i < len; i++) {
+                        var found = this.__children[i].getComponentByType(type, name);
                         if (found) return found;
                     }
                 }
@@ -379,8 +237,8 @@
             hasComponent: function(name) {
                 var exists = this.hasChildComponent(name);
                 if (exists === false) {
-                    for (var i = 0, len = this._children.length; i < len; i++) {
-                        var found = this._children[i].hasComponent(name);
+                    for (var i = 0, len = this.__children.length; i < len; i++) {
+                        var found = this.__children[i].hasComponent(name);
                         if (found) return found;
                     }
                 }
@@ -389,8 +247,8 @@
             hasComponentByType: function(type, name) {
                 var exists = this.hasChildComponentByType(type, name);
                 if (exists === false) {
-                    for (var i = 0, len = this._children.length; i < len; i++) {
-                        var found = this._children[i].hasComponentByType(type, name);
+                    for (var i = 0, len = this.__children.length; i < len; i++) {
+                        var found = this.__children[i].hasComponentByType(type, name);
                         if (found) return found;
                     }
                 }
@@ -407,27 +265,26 @@
             },
             removeChildComponent: function(component, destroy) {
                 if (this.hasChildComponent(component) === false) return this;
-                this._willRemoveChildComponent(component);
+                this.__willRemoveChildComponent(component);
                 var element = component.getElement();
                 if (element) {
                     element.dispose();
                 }
-                this._children.erase(component);
-                component._setParent(null);
-                component._setWindow(null);
-                component._setReady(false);
-                this._didRemoveChildComponent(component);
+                this.__children.erase(component);
+                component.__setParent(null);
+                component.__setWindow(null);
+                this.__didRemoveChildComponent(component);
                 if (destroy) {
                     component.destroy();
                 }
-                this._setUpdateLayout(true);
+                this.updateLayout();
                 return this;
             },
             removeAllChildComponents: function(destroy) {
                 return this.removeAllChildComponentsByType(Component, destroy);
             },
             removeAllChildComponentsByType: function(type, destroy) {
-                this._children.filter(function(child) {
+                this.__children.filter(function(child) {
                     return child instanceof type;
                 }).invoke("removeFromParentComponent", destroy);
                 return this;
@@ -437,117 +294,68 @@
                 if (parent) parent.removeChildComponent(this, destroy);
                 return this;
             },
-            _willRemoveChildComponent: function(component) {
-                this.willRemoveChildComponent(component);
-            },
-            _didRemoveChildComponent: function(component) {
-                this.didRemoveChildComponent(component);
-            },
-            _setParent: function(parent) {
-                if (this._parent === parent) return this;
-                this._parentComponentWillChange(parent);
-                this._parent = parent;
-                this._parentComponentDidChange(parent);
-                return this;
-            },
-            _parentComponentWillChange: function(parent) {
-                this.parentComponentWillChange(parent);
-            },
-            _parentComponentDidChange: function(parent) {
-                if (parent) {
-                    if (this._display) {
-                        this._visible = this._isVisible();
-                    }
-                } else {
-                    this._visible = this._display;
-                }
-                this.parentComponentDidChange(parent);
-            },
             getParentComponent: function() {
-                return this._parent;
+                return this.__parent;
             },
             hasParentComponent: function() {
-                return !!this._parent;
-            },
-            _setWindow: function(window) {
-                if (this._window === window) return this;
-                this._windowWillChange(window);
-                this._window = window;
-                this._windowDidChange(window);
-                this._children.invoke("_setWindow", window);
-                return this;
-            },
-            _windowWillChange: function(window) {
-                this.windowWillChange(window);
-            },
-            _windowDidChange: function(window) {
-                this.windowDidChange(window);
+                return !!this.__parent;
             },
             getWindow: function() {
-                return this._window;
+                return this.__window;
             },
             hasWindow: function() {
-                return !!this._window;
-            },
-            _setReady: function(ready) {
-                if (this._ready === ready) return this;
-                this._willChangeReadyState();
-                this._ready = ready;
-                this._didChangeReadyState();
-                this._children.invoke("_setReady", ready);
-                this.fireEvent("ready");
-                this._setUpdateLayout(ready);
-                return this;
-            },
-            _willChangeReadyState: function() {},
-            _didChangeReadyState: function() {
-                if (this._ready) this.didBecomeReady();
+                return !!this.__window;
             },
             isReady: function() {
-                return this._ready;
-            },
-            isBuilt: function() {
-                return this._built;
+                return this.__ready;
             },
             getName: function() {
-                return this._name;
+                return this.__name;
             },
             setStyle: function(name) {
-                if (this._style) {
-                    this._style.detach.call(this, this.element);
-                    this._style = null;
+                if (arguments.length === 2) {
+                    var key = arguments[0];
+                    var val = arguments[1];
+                    this.element.setStyle(key, val);
+                } else {
+                    if (this.__style) {
+                        this.__style.detach.call(this, this.element);
+                        this.__style = null;
+                    }
+                    var style = Component.getStyle(name, this);
+                    if (style) {
+                        style.attach.call(this, this.element);
+                    }
+                    this.__style = style;
                 }
-                var style = Component.getStyle(name, this);
-                if (style) {
-                    style.attach.call(this, this.element);
-                }
-                this._style = style;
-                this._setUpdateLayout(true);
+                this.updateLayout();
                 return this;
             },
             getStyle: function() {
-                return this._style ? this._style.name : null;
+                return this.__style ? this.__style.name : null;
             },
             hasStyle: function(name) {
-                return this._style ? this._style.name === name : false;
+                return this.__style ? this.__style.name === name : false;
             },
             addClass: function(name) {
-                if (this.element.hasClass(name) === false) {
-                    this.element.addClass(name);
-                    this._setUpdateLayout(true);
+                var element = this.element;
+                if (element.hasClass(name) === false) {
+                    element.addClass(name);
+                    this.updateLayout();
                 }
                 return this;
             },
             removeClass: function(name) {
-                if (this.element.hasClass(name) === true) {
-                    this.element.removeClass(name);
-                    this._setUpdateLayout(true);
+                var element = this.element;
+                if (element.hasClass(name) === true) {
+                    element.removeClass(name);
+                    this.updateLayout();
                 }
                 return this;
             },
             toggleClass: function(name, force) {
                 this.element.toggleClass(name, force);
-                this._setUpdateLayout(true);
+                this.updateLayout();
                 return this;
             },
             hasClass: function(name) {
@@ -595,96 +403,82 @@
             setSize: function(x, y) {
                 if (x > 0 || x === null) this.element.setStyle("width", x);
                 if (y > 0 || y === null) this.element.setStyle("height", y);
-                if (this._size.x !== x || this._size.y !== y) {
-                    this._setUpdateLayout(true);
+                if (this.__size.x !== x || this.__size.y !== y) {
+                    this.updateLayout();
                 }
-                this._size.x = x;
-                this._size.y = y;
+                this.__size.x = x;
+                this.__size.y = y;
                 return this;
             },
             getSize: function() {
                 return this.element.getSize();
             },
             getPosition: function(relative) {
-                return this.element.getPosition(document.id(relative) || this._parent);
+                return this.element.getPosition(document.id(relative) || this.__parent);
             },
             show: function() {
-                if (this._display === true || this._visible === true) return this;
-                this._display = true;
-                this._willShow();
+                if (this.__display === true) return;
+                if (this.__display === true && this.__visible === false) return;
+                var items = [];
+                var filter = function(child) {
+                    if (child === this || child.__display) {
+                        items.push(child);
+                        return true;
+                    }
+                }.bind(this);
+                invokeSome.call(this, filter, "__willShow");
                 this.removeClass("hidden");
-                this._didShow();
-                this._setUpdateLayout(true);
+                this.__display = true;
+                this.__visible = true;
+                var children = function(child) {
+                    return items.contains(child);
+                };
+                assignSome.call(this, children, "__visible", true);
+                invokeSome.call(this, children, "__didShow");
+                this.updateLayout();
                 return this;
-            },
-            _willShow: function() {
-                if (this._display === false || this._visible === true) return;
-                this.willShow();
-                this._children.invoke("_willShow");
-            },
-            _didShow: function() {
-                if (this._display === false || this._visible === true) return;
-                this._visible = true;
-                this.didShow();
-                this.fireEvent("show");
-                this._children.invoke("_didShow");
             },
             hide: function() {
-                if (this._display === false) return this;
-                this._willHide();
+                if (this.__display === false) return this;
+                var items = [];
+                var filter = function(child) {
+                    if (child === this || child.__display === true && child.__visible === true) {
+                        items.push(child);
+                        return true;
+                    }
+                }.bind(this);
+                var children = function(child) {
+                    return items.contains(child);
+                };
+                invokeSome.call(this, filter, "__willHide");
                 this.addClass("hidden");
-                this._didHide();
-                this._display = false;
-                this._setUpdateLayout(false);
+                this.__visible = false;
+                this.__display = false;
+                assignSome.call(this, children, "__visible", false);
+                invokeSome.call(this, children, "__didHide");
+                this.updateLayout(false);
                 return this;
-            },
-            _willHide: function() {
-                if (this._display === false || this._visible === false) return;
-                this.willHide();
-                this._children.invoke("_willHide");
-            },
-            _didHide: function() {
-                if (this._display === false || this._visible === false) return;
-                this._visible = false;
-                this.didHide();
-                this.fireEvent("hide");
-                this._children.invoke("_didHide");
             },
             isVisible: function() {
-                return this._visible;
+                return this.__visible;
             },
-            _isVisible: function() {
-                if (this._display) {
-                    return this._parent ? this._parent._isVisible() : true;
+            updateLayout: function(update, dispatcher) {
+                update = update && this.__ready && this.__display && this.__visible;
+                if (this.__updateLayout === update) return this;
+                this.__updateLayout = update;
+                if (this.__updateTimeout) {
+                    this.__updateTimeout = cancelAnimationFrame(this.__updateTimeout);
                 }
-                return false;
-            },
-            _setUpdateLayout: function(updateLayout, dispatcher) {
-                updateLayout = updateLayout && this._built && this._ready && this._display && this._visible;
-                if (this._updateLayout === updateLayout) return this;
-                this._updateLayout = updateLayout;
-                if (this._updateLayoutTimer) {
-                    this._updateLayoutTimer = cancelAnimationFrame(this._updateLayoutTimer);
+                if (this.__updateLayout && !dispatcher) {
+                    this.__updateTimeout = requestAnimationFrame(this.__didUpdateLayout.bind(this));
                 }
-                if (this._updateLayout && !dispatcher) {
-                    this._updateLayoutTimer = requestAnimationFrame(this._didUpdateLayout.bind(this));
-                }
-                this._children.invoke("_setUpdateLayout", updateLayout, this);
+                this.__children.invoke("updateLayout", update, this);
                 return this;
-            },
-            _didUpdateLayout: function() {
-                if (this._updateLayoutTimer) {
-                    this._updateLayoutTimer = cancelAnimationFrame(this._updateLayoutTimer);
-                }
-                if (this._updateLayout) {
-                    this._updateLayout = false;
-                    this.didUpdateLayout();
-                    this.fireEvent("layout");
-                }
-                this._children.invoke("_didUpdateLayout");
             },
             willBuild: function() {},
             didBuild: function() {},
+            willChangeReadyState: function(ready) {},
+            didChangeReadyState: function(ready) {},
             didBecomeReady: function() {},
             didUpdateLayout: function() {},
             willAddChildComponent: function(component) {},
@@ -699,64 +493,224 @@
             willHide: function() {},
             didShow: function() {},
             didHide: function() {},
-            destroy: function() {
-                this.removeAllChildComponents(true);
-                this.removeFromParentComponent();
-                this.element.destroy();
-                this.element = null;
-                this._window = null;
-                this._parent = null;
-                return this;
-            },
             toElement: function() {
                 return this.element;
             },
-            setParentComponent: function(parent) {
-                console.log('[DEPRECATION NOTICE] The method "setParentComponent" will be removed in 0.5, this is not part of the public API anymore');
-                return this._setParent(parent);
+            __setParent: function(parent) {
+                if (this.__parent === parent) return this;
+                this.__parentComponentWillChange(parent);
+                this.__parent = parent;
+                this.__parentComponentDidChange(parent);
+                if (parent) {
+                    if (this.__display) {
+                        this.__visible = this.__isVisible();
+                    }
+                } else {
+                    this.__visible = this.__display;
+                }
+                return this;
             },
-            setWindow: function(window) {
-                console.log('[DEPRECATION NOTICE] The method "setWindow" will be removed in 0.5, this is not part of the public API anymore');
-                return this._setWindow(window);
+            __setWindow: function(window) {
+                if (this.__window === window) return this;
+                invokeAll.call(this, "__windowWillChange", [ window ]);
+                assignAll.call(this, "__window", window);
+                invokeAll.call(this, "__windowDidChange", [ window ]);
+                var ready = !!window;
+                invokeAll.call(this, "__willChangeReadyState", [ ready ]);
+                assignAll.call(this, "__ready", ready);
+                invokeAll.call(this, "__didChangeReadyState", [ ready ]);
+                if (ready) invokeAll.call(this, "__didBecomeReady");
+                return this;
             },
-            setReady: function(ready) {
-                console.log('[DEPRECATION NOTICE] The method "setReady" will be removed in 0.5, this is not part of the public API anymore');
-                return this._setReady(ready);
+            __build: function() {
+                var owner = this;
+                var roles = this.__roles__;
+                var attrs = this.__attributes__;
+                for (var key in attrs) {
+                    var value = this.element.get(key);
+                    if (value !== null) {
+                        var handler = attrs[key];
+                        if (handler instanceof Function) {
+                            handler.call(this, value);
+                        }
+                    }
+                }
+                var className = this.options.className;
+                if (className) this.addClass(className);
+                var styleName = this.options.styleName;
+                if (styleName) this.setStyle(styleName);
+                this.getRoleElements().each(function(element) {
+                    var handler = roles[element.getRole()].handler;
+                    if (typeof handler === "function") {
+                        handler.call(owner, element);
+                    }
+                });
             },
-            eventIsNative: function(name) {
-                console.log('[DEPRECATION NOTICE] The method "eventIsNative" will be removed in 0.6, use the method "shouldSupportNativeEvent" instead.');
-                return this.shouldSupportNativeEvent(name);
+            __willBuild: function() {
+                this.willBuild();
+            },
+            __didBuild: function() {
+                var components = this.options.components;
+                if (components) {
+                    this.addChildComponents(components);
+                }
+                this.didBuild();
+            },
+            __willAddChildComponent: function(component) {
+                this.willAddChildComponent(component);
+                this.fireEvent("willaddchildcomponent", component);
+            },
+            __didAddChildComponent: function(component) {
+                this.didAddChildComponent(component);
+                this.fireEvent("didaddchildcomponent", component);
+            },
+            __willRemoveChildComponent: function(component) {
+                this.willRemoveChildComponent(component);
+                this.fireEvent("willremovechildcomponent", component);
+            },
+            __didRemoveChildComponent: function(component) {
+                this.didRemoveChildComponent(component);
+                this.fireEvent("didremovechildcomponent", component);
+            },
+            __parentComponentWillChange: function(parent) {
+                this.parentComponentWillChange(parent);
+                this.fireEvent("parentcomponentwillchange", parent);
+            },
+            __parentComponentDidChange: function(parent) {
+                this.parentComponentDidChange(parent);
+                this.fireEvent("parentcomponentdidchange", parent);
+            },
+            __windowWillChange: function(window) {
+                this.windowWillChange(window);
+                this.fireEvent("windowwillchange", window);
+            },
+            __windowDidChange: function(window) {
+                this.windowDidChange(window);
+                this.fireEvent("windowdidchange", window);
+            },
+            __willChangeReadyState: function(ready) {
+                this.willChangeReadyState(ready);
+                this.fireEvent("willchangereadystate", ready);
+            },
+            __didChangeReadyState: function(ready) {
+                this.didChangeReadyState(ready);
+                this.fireEvent("didchangereadystate", ready);
+            },
+            __didBecomeReady: function() {
+                this.didBecomeReady();
+                this.fireEvent("didbecomeready");
+            },
+            __didUpdateLayout: function() {
+                if (this.__updateTimeout) {
+                    this.__updateTimeout = cancelAnimationFrame(this.__updateTimeout);
+                }
+                if (this.__updateLayout) {
+                    this.__updateLayout = false;
+                    this.didUpdateLayout();
+                    this.fireEvent("didupdatelayout");
+                }
+                this.__children.invoke("__didUpdateLayout");
+            },
+            __willShow: function() {
+                this.willShow();
+            },
+            __didShow: function() {
+                this.didShow();
+                this.fireEvent("show");
+            },
+            __willHide: function() {
+                this.willHide();
+            },
+            __didHide: function() {
+                this.didHide();
+                this.fireEvent("hide");
+            },
+            __isVisible: function() {
+                if (this.__display) {
+                    return this.__parent ? this.__parent.__isVisible() : true;
+                }
+                return false;
             },
             getChildComponentOfType: function(type, name) {
-                console.log('[DEPRECATION NOTICE] The method "getChildComponentOfType" will be removed in 0.5, use the method "getChildComponentByType" instead.');
                 return this.getChildComponentByType(type, name);
             },
             getChildComponentOfTypeAt: function(type, index) {
-                console.log('[DEPRECATION NOTICE] The method "getChildComponentOfTypeAt" will be removed in 0.5, use the method "getChildComponentByTypeAt" instead.');
                 return this.getChildComponentByTypeAt(type, index);
             },
             getChildComponentsOfType: function(type) {
-                console.log('[DEPRECATION NOTICE] The method "getChildComponentsOfType" will be removed in 0.5, use the method "getChildComponentsByType" instead.');
                 return this.getChildComponentsByType(type);
             },
             hasChildComponentOfType: function(type) {
-                console.log('[DEPRECATION NOTICE] The method "hasChildComponentOfType" will be removed in 0.5, use the method "hasChildComponentByType" instead.');
                 return this.hasChildComponentByType(type);
             },
             getDescendantComponent: function(name) {
-                console.log('[DEPRECATION NOTICE] The method "getDescendantComponent" will be removed in 0.5, use the method "getComponent" instead.');
                 return this.getComponent(name);
             },
             getComponentOfType: function(type, name) {
-                console.log('[DEPRECATION NOTICE] The method "getComponentOfType" will be removed in 0.5, use the method "getComponentByType" instead.');
                 return this.getComponentByType(type, name);
             },
             hasComponentOfType: function(type, name) {
-                console.log('[DEPRECATION NOTICE] The method "hasComponentOfType" will be removed in 0.5, use the method "hasComponentByType" instead.');
                 return this.hasComponentByType(type, name);
             }
         });
-        var getLastComponentIndex = function(root) {
+        var invokeAll = function(method, args) {
+            this[method].apply(this, args);
+            var each = function(child) {
+                invokeAll.apply(child, [ method, args ]);
+            };
+            this.__children.each(each);
+        };
+        var assignAll = function(key, val) {
+            this[key] = val;
+            var each = function(child) {
+                assignAll.apply(child, [ key, val ]);
+            };
+            this.__children.each(each);
+        };
+        var invokeSome = function(filter, method, args) {
+            if (filter(this)) this[method].apply(this, args);
+            var each = function(child) {
+                invokeSome.apply(child, [ filter, method, args ]);
+            };
+            this.__children.each(each);
+        };
+        var assignSome = function(filter, key, val) {
+            if (filter(this)) this[key] = val;
+            var each = function(child) {
+                assignSome.apply(child, [ filter, key, val ]);
+            };
+            this.__children.each(each);
+        };
+        var insert = function(component) {
+            var index = 0;
+            var node = document.id(component);
+            do {
+                var prev = node.previousSibling;
+                if (prev === null) {
+                    node = node.parentNode;
+                    if (node === this.element) break;
+                    continue;
+                }
+                node = prev;
+                if (node.nodeType !== 1) continue;
+                var previous = node.retrieve("moobile:component");
+                if (previous) {
+                    index = this.getChildComponentIndex(previous) + 1;
+                    break;
+                }
+                var children = node.childNodes;
+                if (children.length) {
+                    var found = position.call(this, node);
+                    if (found !== null) {
+                        index = found;
+                        break;
+                    }
+                }
+            } while (node);
+            this.__children.splice(index, 0, component);
+            return this;
+        };
+        var position = function(root) {
             var node = root.lastChild;
             do {
                 if (node.nodeType !== 1) {
@@ -770,7 +724,7 @@
                 }
                 var children = node.childNodes;
                 if (children.length) {
-                    var found = getLastComponentIndex.call(this, node);
+                    var found = position.call(this, node);
                     if (found >= 0) {
                         return found;
                     }
@@ -837,17 +791,16 @@
         Component.defineAttribute("data-style", null, function(value) {
             this.options.styleName = value;
         });
-        module.exports = Component;
-    },
-    "2": function(require, module, exports, global) {
-        "use strict";
-        require("3");
-        require("5");
-        require("6");
     },
     "3": function(require, module, exports, global) {
         "use strict";
-        var storage = require("4").createStorage();
+        require("4");
+        require("6");
+        require("7");
+    },
+    "4": function(require, module, exports, global) {
+        "use strict";
+        var storage = require("5").createStorage();
         var customs = {};
         var dispatchEvent = Element.prototype.dispatchEvent;
         var addEventListener = Element.prototype.addEventListener;
@@ -975,7 +928,7 @@
         };
         module.exports = global.defineCustomEvent = defineCustomEvent;
     },
-    "4": function(require, module, exports, global) {
+    "5": function(require, module, exports, global) {
         void function(global, undefined_, undefined) {
             var getProps = Object.getOwnPropertyNames, defProp = Object.defineProperty, toSource = Function.prototype.toString, create = Object.create, hasOwn = Object.prototype.hasOwnProperty, funcName = /^\n?function\s?(\w*)?_?\(/;
             function define(object, key, value) {
@@ -1141,9 +1094,9 @@
             if (global.WeakMap) global.WeakMap.createStorage = createStorage;
         }((0, eval)("this"));
     },
-    "5": function(require, module, exports, global) {
+    "6": function(require, module, exports, global) {
         "use strict";
-        var defineCustomEvent = require("3");
+        var defineCustomEvent = require("4");
         var elem = document.createElement("div");
         var base = null;
         var keys = {
@@ -1172,9 +1125,9 @@
             }
         });
     },
-    "6": function(require, module, exports, global) {
+    "7": function(require, module, exports, global) {
         "use strict";
-        var defineCustomEvent = require("3");
+        var defineCustomEvent = require("4");
         var elem = document.createElement("div");
         var base = null;
         var keys = {
@@ -1202,12 +1155,12 @@
             }
         });
     },
-    "7": function(require, module, exports, global) {
-        "use strict";
-        require("8");
-        require("9");
-    },
     "8": function(require, module, exports, global) {
+        "use strict";
+        require("9");
+        require("a");
+    },
+    "9": function(require, module, exports, global) {
         "use strict";
         var hasTouchEvent = "ontouchstart" in global;
         var hasTouchList = "TouchList" in global;
@@ -1300,10 +1253,10 @@
             document.addEventListener("mouseup", onDocumentMouseUp);
         }
     },
-    "9": function(require, module, exports, global) {
+    a: function(require, module, exports, global) {
         "use strict";
-        var map = require("4")();
-        var defineCustomEvent = require("3");
+        var map = require("5")();
+        var defineCustomEvent = require("4");
         var onDispatch = function(custom, data) {
             custom.view = data.view;
             custom.touches = data.touches;
@@ -1437,8 +1390,38 @@
             onRemove: detach("tapend", leave)
         }));
     },
-    a: function(require, module, exports, global) {
+    b: function(require, module, exports, global) {
         "use strict";
+        String.implement({
+            toCamelCase: function() {
+                return this.camelCase().replace("-", "").replace(/\s\D/g, function(match) {
+                    return match.charAt(1).toUpperCase();
+                });
+            }
+        });
+    },
+    c: function(require, module, exports, global) {
+        "use strict";
+        Array.implement({
+            find: function(fn) {
+                for (var i = 0; i < this.length; i++) {
+                    var found = fn.call(this, this[i]);
+                    if (found === true) {
+                        return this[i];
+                    }
+                }
+                return null;
+            },
+            getLastItemAtOffset: function(offset) {
+                offset = offset ? offset : 0;
+                return this[this.length - 1 - offset] ? this[this.length - 1 - offset] : null;
+            }
+        });
+    },
+    d: function(require, module, exports, global) {
+        "use strict";
+        require("e");
+        require("g");
         var cache = {};
         Element.at = function(path, async, fn) {
             var element = cache[path];
@@ -1462,7 +1445,18 @@
             return !async ? element.clone(true, true) : null;
         };
     },
-    b: function(require, module, exports, global) {
+    e: function(require, module, exports, global) {
+        "use strict";
+        module.exports = require("f");
+    },
+    f: function(require, module, exports, global) {
+        "use strict";
+        Request.prototype.options.isSuccess = function() {
+            var status = this.status;
+            return status === 0 || status >= 200 && status < 300;
+        };
+    },
+    g: function(require, module, exports, global) {
         "use strict";
         Element.from = function(text) {
             switch (typeof text) {
@@ -1476,7 +1470,21 @@
             return null;
         };
     },
-    c: function(require, module, exports, global) {
+    h: function(require, module, exports, global) {
+        "use strict";
+        Element.implement({
+            setRole: function(role) {
+                return this.set("data-role", role);
+            },
+            getRole: function(role) {
+                return this.get("data-role");
+            },
+            ingest: function(element) {
+                return this.adopt(document.id(element).childNodes);
+            }
+        });
+    },
+    i: function(require, module, exports, global) {
         "use strict";
         var setStyle = Element.prototype.setStyle;
         var getStyle = Element.prototype.getStyle;
@@ -1506,37 +1514,234 @@
             }
         });
     },
-    d: function(require, module, exports, global) {
+    j: function(require, module, exports, global) {
         "use strict";
-        Request.prototype.options.isSuccess = function() {
-            var status = this.status;
-            return status === 0 || status >= 200 && status < 300;
+        var array = require("k");
+        var requestFrame = global.requestAnimationFrame || global.webkitRequestAnimationFrame || global.mozRequestAnimationFrame || global.oRequestAnimationFrame || global.msRequestAnimationFrame || function(callback) {
+            return setTimeout(callback, 1e3 / 60);
         };
+        var callbacks = [];
+        var iterator = function(time) {
+            var split = callbacks.splice(0, callbacks.length);
+            for (var i = 0, l = split.length; i < l; i++) split[i](time || (time = +(new Date)));
+        };
+        var cancel = function(callback) {
+            var io = array.indexOf(callbacks, callback);
+            if (io > -1) callbacks.splice(io, 1);
+        };
+        var request = function(callback) {
+            var i = callbacks.push(callback);
+            if (i === 1) requestFrame(iterator);
+            return function() {
+                cancel(callback);
+            };
+        };
+        exports.request = request;
+        exports.cancel = cancel;
     },
-    e: function(require, module, exports, global) {
+    k: function(require, module, exports, global) {
         "use strict";
-        Element.implement({
-            setRole: function(role) {
-                return this.set("data-role", role);
-            },
-            getRole: function(role) {
-                return this.get("data-role");
-            },
-            ingest: function(element) {
-                return this.adopt(document.id(element).childNodes);
+        var array = require("l")["array"];
+        var names = ("pop,push,reverse,shift,sort,splice,unshift,concat,join,slice,toString,indexOf,lastIndexOf,forEach,every,some" + ",filter,map,reduce,reduceRight").split(",");
+        for (var methods = {}, i = 0, name, method; name = names[i++]; ) if (method = Array.prototype[name]) methods[name] = method;
+        if (!methods.filter) methods.filter = function(fn, context) {
+            var results = [];
+            for (var i = 0, l = this.length >>> 0; i < l; i++) if (i in this) {
+                var value = this[i];
+                if (fn.call(context, value, i, this)) results.push(value);
+            }
+            return results;
+        };
+        if (!methods.indexOf) methods.indexOf = function(item, from) {
+            for (var l = this.length >>> 0, i = from < 0 ? Math.max(0, l + from) : from || 0; i < l; i++) {
+                if (i in this && this[i] === item) return i;
+            }
+            return -1;
+        };
+        if (!methods.map) methods.map = function(fn, context) {
+            var length = this.length >>> 0, results = Array(length);
+            for (var i = 0, l = length; i < l; i++) {
+                if (i in this) results[i] = fn.call(context, this[i], i, this);
+            }
+            return results;
+        };
+        if (!methods.every) methods.every = function(fn, context) {
+            for (var i = 0, l = this.length >>> 0; i < l; i++) {
+                if (i in this && !fn.call(context, this[i], i, this)) return false;
+            }
+            return true;
+        };
+        if (!methods.some) methods.some = function(fn, context) {
+            for (var i = 0, l = this.length >>> 0; i < l; i++) {
+                if (i in this && fn.call(context, this[i], i, this)) return true;
+            }
+            return false;
+        };
+        if (!methods.forEach) methods.forEach = function(fn, context) {
+            for (var i = 0, l = this.length >>> 0; i < l; i++) {
+                if (i in this) fn.call(context, this[i], i, this);
+            }
+        };
+        var toString = Object.prototype.toString;
+        array.isArray = Array.isArray || function(self) {
+            return toString.call(self) === "[object Array]";
+        };
+        module.exports = array.implement(methods);
+    },
+    l: function(require, module, exports, global) {
+        "use strict";
+        var prime = require("m"), type = require("n");
+        var slice = Array.prototype.slice;
+        var ghost = prime({
+            constructor: function ghost(self) {
+                this.valueOf = function() {
+                    return self;
+                };
+                this.toString = function() {
+                    return self + "";
+                };
+                this.is = function(object) {
+                    return self === object;
+                };
             }
         });
+        var shell = function(self) {
+            if (self == null || self instanceof ghost) return self;
+            var g = shell[type(self)];
+            return g ? new g(self) : self;
+        };
+        var register = function() {
+            var g = prime({
+                inherits: ghost
+            });
+            return prime({
+                constructor: function(self) {
+                    return new g(self);
+                },
+                define: function(key, descriptor) {
+                    var method = descriptor.value;
+                    this[key] = function(self) {
+                        return arguments.length > 1 ? method.apply(self, slice.call(arguments, 1)) : method.call(self);
+                    };
+                    g.prototype[key] = function() {
+                        return shell(method.apply(this.valueOf(), arguments));
+                    };
+                    prime.define(this.prototype, key, descriptor);
+                    return this;
+                }
+            });
+        };
+        for (var types = "string,number,array,object,date,function,regexp".split(","), i = types.length; i--; ) shell[types[i]] = register();
+        module.exports = shell;
     },
-    f: function(require, module, exports, global) {
+    m: function(require, module, exports, global) {
         "use strict";
+        var has = function(self, key) {
+            return Object.hasOwnProperty.call(self, key);
+        };
+        var each = function(object, method, context) {
+            for (var key in object) if (method.call(context, object[key], key, object) === false) break;
+            return object;
+        };
+        if (!{
+            valueOf: 0
+        }.propertyIsEnumerable("valueOf")) {
+            var buggy = "constructor,toString,valueOf,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString".split(",");
+            var proto = Object.prototype;
+            each = function(object, method, context) {
+                for (var key in object) if (method.call(context, object[key], key, object) === false) return object;
+                for (var i = 0; key = buggy[i]; i++) {
+                    var value = object[key];
+                    if ((value !== proto[key] || has(object, key)) && method.call(context, value, key, object) === false) break;
+                }
+                return object;
+            };
+        }
+        var create = Object.create || function(self) {
+            var constructor = function() {};
+            constructor.prototype = self;
+            return new constructor;
+        };
+        var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+        var define = Object.defineProperty;
+        try {
+            var obj = {
+                a: 1
+            };
+            getOwnPropertyDescriptor(obj, "a");
+            define(obj, "a", {
+                value: 2
+            });
+        } catch (e) {
+            getOwnPropertyDescriptor = function(object, key) {
+                return {
+                    value: object[key]
+                };
+            };
+            define = function(object, key, descriptor) {
+                object[key] = descriptor.value;
+                return object;
+            };
+        }
+        var implement = function(proto) {
+            each(proto, function(value, key) {
+                if (key !== "constructor" && key !== "define" && key !== "inherits") this.define(key, getOwnPropertyDescriptor(proto, key) || {
+                    writable: true,
+                    enumerable: true,
+                    configurable: true,
+                    value: value
+                });
+            }, this);
+            return this;
+        };
+        var prime = function(proto) {
+            var superprime = proto.inherits;
+            var constructor = has(proto, "constructor") ? proto.constructor : superprime ? function() {
+                return superprime.apply(this, arguments);
+            } : function() {};
+            if (superprime) {
+                var superproto = superprime.prototype;
+                var cproto = constructor.prototype = create(superproto);
+                constructor.parent = superproto;
+                cproto.constructor = constructor;
+            }
+            constructor.define = proto.define || superprime && superprime.define || function(key, descriptor) {
+                define(this.prototype, key, descriptor);
+                return this;
+            };
+            constructor.implement = implement;
+            return constructor.implement(proto);
+        };
+        prime.has = has;
+        prime.each = each;
+        prime.create = create;
+        prime.define = define;
+        module.exports = prime;
+    },
+    n: function(require, module, exports, global) {
+        "use strict";
+        var toString = Object.prototype.toString, types = /number|object|array|string|function|date|regexp|boolean/;
+        var type = function(object) {
+            if (object == null) return "null";
+            var string = toString.call(object).slice(8, -1).toLowerCase();
+            if (string === "number" && isNaN(object)) return "null";
+            if (types.test(string)) return string;
+            return "object";
+        };
+        module.exports = type;
+    },
+    o: function(require, module, exports, global) {
+        "use strict";
+        require("p");
+        console.log(Class.Binds);
         var fireEvent = Events.prototype.fireEvent;
-        var Emitter = new Class({
-            Implements: [ Events, Options ],
-            __bound: {},
-            bound: function(name) {
-                var func = this[name];
-                if (typeof func === "function") return this.__bound[name] ? this.__bound[name] : this.__bound[name] = func.bind(this);
-                throw new Error("Cannot bind function " + name);
+        var EventFirer = module.exports = new Class({
+            Implements: [ Events, Options, Class.Binds ],
+            on: function() {
+                return this.addEvent.apply(this, arguments);
+            },
+            off: function() {
+                return this.removeEvent.apply(this, arguments);
             },
             fireEvent: function(type, args, delay) {
                 args = Array.from(args).include(this);
@@ -1552,6 +1757,14 @@
             willFireEvent: function(type, args) {},
             didFireEvent: function(type, args) {}
         });
-        module.exports = Emitter;
+    },
+    p: function(require, module, exports, global) {
+        "use strict";
+        Class.Binds = new Class({
+            $bound: {},
+            bound: function(name) {
+                return this.$bound[name] ? this.$bound[name] : this.$bound[name] = this[name].bind(this);
+            }
+        });
     }
 });
