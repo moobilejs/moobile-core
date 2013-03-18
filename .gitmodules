@@ -7,9 +7,3 @@
 [submodule "Vendor/mootools-mobile"]
 	path = Vendor/mootools-mobile
 	url = git://github.com/cpojer/mootools-mobile.git
-[submodule "Vendor/scroller-iscroll"]
-	path = Vendor/scroller-iscroll
-	url = https://github.com/jpdery/scroller-iscroll
-[submodule "Vendor/scroller-zynga"]
-	path = Vendor/scroller-zynga
-	url = https://github.com/jpdery/scroller-zynga.git
