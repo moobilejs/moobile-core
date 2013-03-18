@@ -14,15 +14,13 @@
 	"dependencies": {
 		"event-util": "0.0.1",
 		"touch-util": "0.0.1",
-		"mootools-request-local": "git://github.com/jpdery/mootools-request-local.git",
-		"mootools-element-at": "git://github.com/jpdery/mootools-element-at.git",
-		"mootools-element-from": "git://github.com/jpdery/mootools-element-from.git",
-		"mootools-element-style-prefix": "git://github.com/jpdery/mootools-element-style-prefix.git"
+		"moofx": "3.1.0",
+		"iscroll": "4.2.5"
 	},
 	"devDependencies": {
 		"mocha": "1.6",
 		"sinon": "1.5.2",
-		"expect.js": "0.1",
+		"expect.js": "0.2",
 		"wrapup": "0.10",
 		"wrapup": "0.10.3"
 	},
