@@ -2,11 +2,6 @@
 
 Array.implement({
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Types/Array#find
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	find: function(fn) {
 		for (var i = 0; i < this.length; i++) {
 			var found = fn.call(this, this[i]);
@@ -17,16 +12,15 @@ Array.implement({
 		return null;
 	},
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Types/Array#getLastItemAtOffset
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	getLastItemAtOffset: function(offset) {
 		offset = offset ? offset : 0;
 		return this[this.length - 1 - offset] ?
 			   this[this.length - 1 - offset] :
 			   null;
+	},
+
+	last: function() {
+		return this.getLastItemAtOffset.apply(this, arguments);
 	}
 
 });

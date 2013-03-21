@@ -34,47 +34,22 @@ var prefix = function(property) {
 
 Element.implement({
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#setRole
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
- 	 */
 	 setRole: function(role) {
 	 	return this.set('data-role', role);
 	 },
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#getRole
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	 getRole: function(role) {
 	 	return this.get('data-role');
 	 },
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#setStyle
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	setStyle: function (property, value) {
 		return setStyle.call(this, prefix.call(this, property), value);
 	},
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#getStyle
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	getStyle: function (property) {
 		return getStyle.call(this, prefix.call(this, property));
 	},
 
-	/**
-	 * @see    http://moobilejs.com/doc/latest/Element/Element#ingest
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.1.0
-	 */
 	ingest: function(element) {
 		return this.adopt(document.id(element).childNodes);
 	}

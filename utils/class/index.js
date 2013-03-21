@@ -1,10 +1,5 @@
 "use strict"
 
-/**
- * @see    http://moobilejs.com/doc/latest/Class/Class.Instantiate#parse
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Class.parse = function(name) {
 	name = name.trim();
 	name = name.split('.');
@@ -13,11 +8,6 @@ Class.parse = function(name) {
 	return typeof func === 'function' ? func : null;
 },
 
-/**
- * @see    http://moobilejs.com/doc/latest/Class/Class.Instantiate#instantiate
- * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
- * @since  0.1.0
- */
 Class.instantiate = function(klass) {
 	if (typeof klass === 'string') klass = Class.parse(klass);
 	if (klass === null) return null;
