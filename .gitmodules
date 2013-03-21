@@ -4,6 +4,3 @@
 [submodule "mootools-class-extras"]
 	path = Vendor/mootools-class-extras
 	url = git://github.com/cpojer/mootools-class-extras.git
-[submodule "Vendor/mootools-mobile"]
-	path = Vendor/mootools-mobile
-	url = git://github.com/cpojer/mootools-mobile.git
