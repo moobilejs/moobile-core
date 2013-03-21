@@ -75,6 +75,10 @@
         require("1t");
         require("1u");
         require("1v");
+        moobile.Request = Request;
+        moobile.EventFirer = moobile.Emitter;
+        moobile.ViewTransition.Cover.Box = moobile.ViewTransition.Box;
+        moobile.ViewTransition.Cover.Page = moobile.ViewTransition.Page;
         module.exports = global.Moobile = global.moobile;
     },
     "1": function(require, module, exports, global) {
@@ -307,53 +311,53 @@
                 hasEvent: function(event) {
                     var events = this.retrieve("events"), list = events && events[event] ? events[event].values : null;
                     if (list) {
-                        for (var i = list.length; i--; ) if (i in list) {
+                        var i = list.length;
+                        while (i--) if (i in list) {
                             return true;
                         }
                     }
                     return false;
                 }
             });
-            var wrap = function(custom, method, extended, name) {
+            var wrap = function(custom, method, extended) {
                 method = custom[method];
                 extended = custom[extended];
-                return function(fn, customName) {
-                    if (!customName) customName = name;
-                    if (extended && !this.hasEvent(customName)) extended.call(this, fn, customName);
-                    if (method) method.call(this, fn, customName);
+                return function(fn, name) {
+                    if (extended && !this.hasEvent(name)) extended.call(this, fn, name);
+                    if (method) method.call(this, fn, name);
                 };
             };
-            var inherit = function(custom, base, method, name) {
-                return function(fn, customName) {
-                    base[method].call(this, fn, customName || name);
-                    custom[method].call(this, fn, customName || name);
+            var inherit = function(custom, base, method) {
+                return function(fn, name) {
+                    base[method].call(this, fn, name);
+                    custom[method].call(this, fn, name);
                 };
             };
             var events = Element.Events;
             Element.defineCustomEvent = function(name, custom) {
                 var base = events[custom.base];
-                custom.onAdd = wrap(custom, "onAdd", "onSetup", name);
-                custom.onRemove = wrap(custom, "onRemove", "onTeardown", name);
+                custom.onAdd = wrap(custom, "onAdd", "onSetup");
+                custom.onRemove = wrap(custom, "onRemove", "onTeardown");
                 events[name] = base ? Object.append({}, custom, {
                     base: base.base,
-                    condition: function(event) {
-                        return (!base.condition || base.condition.call(this, event)) && (!custom.condition || custom.condition.call(this, event));
+                    condition: function(event, name) {
+                        return (!base.condition || base.condition.call(this, event, name)) && (!custom.condition || custom.condition.call(this, event, name));
                     },
-                    onAdd: inherit(custom, base, "onAdd", name),
-                    onRemove: inherit(custom, base, "onRemove", name)
+                    onAdd: inherit(custom, base, "onAdd"),
+                    onRemove: inherit(custom, base, "onRemove")
                 }) : custom;
                 return this;
             };
-            var loop = function(name) {
-                var method = "on" + name.capitalize();
-                Element[name + "CustomEvents"] = function() {
-                    Object.each(events, function(event, name) {
-                        if (event[method]) event[method].call(event, name);
-                    });
-                };
-                return loop;
+            Element.enableCustomEvents = function() {
+                Object.each(events, function(event, name) {
+                    if (event.onEnable) event.onEnable.call(event, name);
+                });
             };
-            loop("enable")("disable");
+            Element.disableCustomEvents = function() {
+                Object.each(events, function(event, name) {
+                    if (event.onDisable) event.onDisable.call(event, name);
+                });
+            };
         })();
     },
     "8": function(require, module, exports, global) {
@@ -491,6 +495,12 @@
     },
     d: function(require, module, exports, global) {
         "use strict";
+        Events.prototype.on = Events.prototype.addEvent;
+        Events.prototype.off = Events.prototype.removeEvent;
+        Events.prototype.emit = Events.prototype.fireEvent;
+    },
+    e: function(require, module, exports, global) {
+        "use strict";
         Class.parse = function(name) {
             name = name.trim();
             name = name.split(".");
@@ -508,7 +518,7 @@
             return instance;
         };
     },
-    e: function(require, module, exports, global) {
+    f: function(require, module, exports, global) {
         "use strict";
         var setStyle = Element.prototype.setStyle;
         var getStyle = Element.prototype.getStyle;
@@ -585,14 +595,14 @@
             return element;
         };
     },
-    f: function(require, module, exports, global) {
+    g: function(require, module, exports, global) {
         "use strict";
         Request.prototype.options.isSuccess = function() {
             var status = this.status;
             return status === 0 || status >= 200 && status < 300;
         };
     },
-    g: function(require, module, exports, global) {
+    h: function(require, module, exports, global) {
         "use strict";
         Array.implement({
             find: function(fn) {
@@ -607,10 +617,13 @@
             getLastItemAtOffset: function(offset) {
                 offset = offset ? offset : 0;
                 return this[this.length - 1 - offset] ? this[this.length - 1 - offset] : null;
+            },
+            last: function() {
+                return this.getLastItemAtOffset.apply(this, arguments);
             }
         });
     },
-    h: function(require, module, exports, global) {
+    i: function(require, module, exports, global) {
         "use strict";
         String.implement({
             toCamelCase: function() {
@@ -620,13 +633,13 @@
             }
         });
     },
-    i: function(require, module, exports, global) {
+    j: function(require, module, exports, global) {
         "use strict";
         var moobile = global.moobile = global.Moobile = {
             version: "0.3.0-dev"
         };
     },
-    j: function(require, module, exports, global) {
+    k: function(require, module, exports, global) {
         "use strict";
         var fireEvent = Events.prototype.fireEvent;
         var Emitter = moobile.Emitter = new Class({
@@ -655,7 +668,7 @@
             didFireEvent: function(type, args) {}
         });
     },
-    k: function(require, module, exports, global) {
+    l: function(require, module, exports, global) {
         "use strict";
         var onReady = function() {
             window.fireEvent("ready");
@@ -682,7 +695,166 @@
             }
         });
     },
-    l: function(require, module, exports, global) {
+    m: function(require, module, exports, global) {
+        "use strict";
+        var hasTouchEvent = "ontouchstart" in global;
+        var hasTouchList = "TouchList" in global;
+        var hasTouch = "Touch" in global;
+        if (!hasTouchList) {
+            var TouchList = function() {
+                this.length = 0;
+            };
+            TouchList.prototype.identifiedTouch = function(id) {
+                return this[0] && this[0].identifier === id ? this[0] : null;
+            };
+            TouchList.prototype.item = function(index) {
+                return this[index] || null;
+            };
+        }
+        if (!hasTouch) {
+            var Touch = function() {};
+        }
+        var touch = null;
+        var target = null;
+        var onDocumentMouseDown = function(e) {
+            if (target === null) {
+                target = e.target;
+                touch = new Touch;
+                touch.identifier = Date.now();
+                touch.screenX = e.screenX;
+                touch.screenY = e.screenY;
+                touch.clientX = e.clientX;
+                touch.clientY = e.clientY;
+                touch.pageX = e.pageX;
+                touch.pageY = e.pageY;
+                touch.radiusX = 0;
+                touch.radiusY = 0;
+                touch.rotationAngle = 0;
+                touch.force = 0;
+                touch.target = target;
+                var list = new TouchList;
+                list.length = 1;
+                list[0] = touch;
+                var event = document.createEvent("CustomEvent");
+                event.initCustomEvent("touchstart", true, true);
+                event.touches = list;
+                event.targetTouches = list;
+                event.changedTouches = list;
+                target.dispatchEvent(event);
+            }
+        };
+        var onDocumentMouseMove = function(e) {
+            if (target) {
+                touch.screenX = e.screenX;
+                touch.screenY = e.screenY;
+                touch.clientX = e.clientX;
+                touch.clientY = e.clientY;
+                touch.pageX = e.pageX;
+                touch.pageY = e.pageY;
+                var list = new TouchList;
+                list.length = 1;
+                list[0] = touch;
+                var event = document.createEvent("CustomEvent");
+                event.initCustomEvent("touchmove", true, true);
+                event.touches = list;
+                event.targetTouches = list;
+                event.changedTouches = list;
+                target.dispatchEvent(event);
+            }
+        };
+        var onDocumentMouseUp = function(e) {
+            if (target) {
+                touch.screenX = e.screenX;
+                touch.screenY = e.screenY;
+                touch.clientX = e.clientX;
+                touch.clientY = e.clientY;
+                touch.pageX = e.pageX;
+                touch.pageY = e.pageY;
+                var list = new TouchList;
+                list.length = 1;
+                list[0] = touch;
+                var event = document.createEvent("CustomEvent");
+                event.initCustomEvent("touchend", true, true);
+                event.touches = new TouchList;
+                event.targetTouches = new TouchList;
+                event.changedTouches = list;
+                target.dispatchEvent(event);
+                target = null;
+            }
+        };
+        if (!hasTouchEvent) {
+            document.addEventListener("mousedown", onDocumentMouseDown);
+            document.addEventListener("mousemove", onDocumentMouseMove);
+            document.addEventListener("mouseup", onDocumentMouseUp);
+        } else {
+            delete Element.NativeEvents["mousedown"];
+            delete Element.NativeEvents["mousemove"];
+            delete Element.NativeEvents["mouseup"];
+            Element.defineCustomEvent("mousedown", {
+                base: "touchstart"
+            }).defineCustomEvent("mousemove", {
+                base: "touchmove"
+            }).defineCustomEvent("mouseup", {
+                base: "touchend"
+            });
+        }
+    },
+    n: function(require, module, exports, global) {
+        "use strict";
+        var tapValid = true;
+        var tapTouch = null;
+        var onTapTouchStart = function(e) {
+            tapTouch = e.changedTouches[0];
+            tapValid = true;
+        };
+        var onTapTouchCancel = function(e) {
+            tapValid = false;
+        };
+        Element.defineCustomEvent("tap", {
+            base: "touchend",
+            condition: function(e) {
+                if (tapValid) {
+                    var element = document.elementFromPoint(tapTouch.pageX, tapTouch.pageY);
+                    if (element) {
+                        return this === element || this.contains(element);
+                    }
+                    return false;
+                }
+                return tapValid;
+            },
+            onSetup: function() {
+                this.addEvent("touchcancel", onTapTouchCancel);
+                this.addEvent("touchstart", onTapTouchStart);
+            },
+            onTeardown: function() {
+                this.removeEvent("touchcancel", onTapTouchCancel);
+                this.removeEvent("touchstart", onTapTouchStart);
+            }
+        });
+        Element.defineCustomEvent("tapstart", {
+            base: "touchstart",
+            condition: function(e) {
+                console.log("Tap start");
+                return e.changedTouches.length === 1;
+            }
+        });
+        Element.defineCustomEvent("tapmove", {
+            base: "touchmove",
+            condition: function(e) {
+                return e.changedTouches.length === 1;
+            }
+        });
+        Element.defineCustomEvent("tapend", {
+            base: "touchend",
+            condition: function(e) {
+                return e.changedTouches.length === 0;
+            }
+        });
+        Element.defineCustomEvent("tapcancel", {
+            base: "touchcancel"
+        });
+    },
+    o: function(require, module, exports, global) {
         (function() {
             var prefix = "";
             if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
@@ -718,156 +890,6 @@
                 condition: function(e) {
                     e.stop();
                     return e.target === this;
-                }
-            });
-        })();
-    },
-    m: function(require, module, exports, global) {
-        if (!Browser.Features.Touch) (function() {
-            var touch = null;
-            var touchTarget = null;
-            var touchIdentifier = null;
-            var redispatch = function(e) {
-                if (e.fake) return;
-                var faked = document.createEvent("MouseEvent");
-                faked.fake = true;
-                faked.initMouseEvent(e.type, true, true, window, 0, e.screenX, e.screenY, e.clientX, e.clientY, false, false, false, false, 0, null);
-                touchTarget.dispatchEvent(faked);
-            };
-            var onDocumentMouseDown = function(e) {
-                if (touch === null) {
-                    touchTarget = e.event.target;
-                    touchIdentifier = e.event.timeStamp;
-                    touch = {
-                        target: touchTarget,
-                        identifier: touchIdentifier
-                    };
-                    redispatch(e.event);
-                }
-            };
-            var onDocumentMouseMove = function(e) {
-                if (touch) redispatch(e.event);
-            };
-            var onDocumentMouseUp = function(e) {
-                if (touch) {
-                    redispatch(e.event);
-                    touch = null;
-                    touchTarget = null;
-                    touchIdentifier = null;
-                }
-            };
-            document.addEvent("mousedown", onDocumentMouseDown);
-            document.addEvent("mousemove", onDocumentMouseMove);
-            document.addEvent("mouseup", onDocumentMouseUp);
-            var condition = function(e) {
-                if (touch === null) return false;
-                touch.pageX = e.page.x;
-                touch.pageY = e.page.y;
-                touch.clientX = e.client.x;
-                touch.clientY = e.client.y;
-                e.touches = e.targetTouches = e.changedTouches = [ touch ];
-                if (e.type === "mouseup") {
-                    e.touches = [];
-                    e.targetTouches = [];
-                }
-                if (e.event.fake) {
-                    return true;
-                }
-                return false;
-            };
-            Element.defineCustomEvent("touchstart", {
-                base: "mousedown",
-                condition: condition
-            });
-            Element.defineCustomEvent("touchmove", {
-                base: "mousemove",
-                condition: condition
-            });
-            Element.defineCustomEvent("touchend", {
-                base: "mouseup",
-                condition: condition
-            });
-        })();
-    },
-    n: function(require, module, exports, global) {
-        if (Browser.Features.Touch) (function() {
-            delete Element.NativeEvents["mousedown"];
-            delete Element.NativeEvents["mousemove"];
-            delete Element.NativeEvents["mouseup"];
-            Element.defineCustomEvent("mousedown", {
-                base: "touchstart"
-            }).defineCustomEvent("mousemove", {
-                base: "touchmove"
-            }).defineCustomEvent("mouseup", {
-                base: "touchend"
-            });
-        })();
-    },
-    o: function(require, module, exports, global) {
-        (function() {
-            var tapStartX = 0;
-            var tapStartY = 0;
-            var tapMaxX = 0;
-            var tapMinX = 0;
-            var tapMaxY = 0;
-            var tapMinY = 0;
-            var tapValid = true;
-            var onTapTouchStart = function(e) {
-                if (e.changedTouches.length > 1) {
-                    tapValid = false;
-                    return;
-                }
-                tapValid = true;
-                tapStartX = e.changedTouches[0].clientX;
-                tapStartY = e.changedTouches[0].clientY;
-                tapMaxX = tapStartX + 10;
-                tapMinX = tapStartX - 10;
-                tapMaxY = tapStartY + 10;
-                tapMinY = tapStartY - 10;
-            };
-            var onTapTouchMove = function(e) {
-                if (e.changedTouches.length > 1) {
-                    tapValid = false;
-                    return;
-                }
-                if (tapValid) {
-                    var x = e.changedTouches[0].clientX;
-                    var y = e.changedTouches[0].clientY;
-                    tapValid = !(x > tapMaxX || x < tapMinX || y > tapMaxY || y < tapMinY);
-                } else {
-                    this.fireEvent("tapend", e);
-                }
-            };
-            Element.defineCustomEvent("tap", {
-                base: "touchend",
-                condition: function(e) {
-                    return tapValid;
-                },
-                onSetup: function() {
-                    this.addEvent("touchstart", onTapTouchStart);
-                    this.addEvent("touchmove", onTapTouchMove);
-                },
-                onTeardown: function() {
-                    this.removeEvent("touchstart", onTapTouchStart);
-                    this.removeEvent("touchmove", onTapTouchMove);
-                }
-            });
-            Element.defineCustomEvent("tapstart", {
-                base: "touchstart",
-                condition: function(e) {
-                    return e.changedTouches.length === 1;
-                }
-            });
-            Element.defineCustomEvent("tapmove", {
-                base: "touchmove",
-                condition: function(e) {
-                    return e.changedTouches.length === 1;
-                }
-            });
-            Element.defineCustomEvent("tapend", {
-                base: "touchend",
-                condition: function(e) {
-                    return e.changedTouches.length === 1;
                 }
             });
         })();
@@ -1741,7 +1763,6 @@
                 }
                 return;
             }
-            console.log("Setting new root");
             updateLayoutRoot = component;
         };
         var onUpdateLayout = function() {
@@ -1802,7 +1823,33 @@
                 className: null,
                 styleName: null
             },
-            _setState: function(state, value) {
+            setDisabled: function(disabled) {
+                return this.__setState(disabled !== false ? "disabled" : null);
+            },
+            isDisabled: function() {
+                return this._getState() == "disabled";
+            },
+            setSelected: function(selected) {
+                return this.__setState(selected !== false ? "selected" : null);
+            },
+            isSelected: function() {
+                return this._getState() == "selected";
+            },
+            setHighlighted: function(highlighted) {
+                return this.__setState(highlighted !== false ? "highlighted" : null);
+            },
+            isHighlighted: function() {
+                return this._getState() == "highlighted";
+            },
+            willChangeState: function(state) {},
+            didChangeState: function(state) {},
+            shouldAllowState: function(state) {
+                return [ "highlighted", "selected", "disabled" ].contains(state);
+            },
+            shouldFireEvent: function(type, args) {
+                return !this.isDisabled();
+            },
+            __setState: function(state, value) {
                 if (this.__state === state) return this;
                 if (this.shouldAllowState(state) || state == null) {
                     this.willChangeState(state);
@@ -1815,32 +1862,6 @@
             },
             _getState: function() {
                 return this.__state;
-            },
-            shouldAllowState: function(state) {
-                return [ "highlighted", "selected", "disabled" ].contains(state);
-            },
-            setDisabled: function(disabled) {
-                return this._setState(disabled !== false ? "disabled" : null);
-            },
-            isDisabled: function() {
-                return this._getState() == "disabled";
-            },
-            setSelected: function(selected) {
-                return this._setState(selected !== false ? "selected" : null);
-            },
-            isSelected: function() {
-                return this._getState() == "selected";
-            },
-            setHighlighted: function(highlighted) {
-                return this._setState(highlighted !== false ? "highlighted" : null);
-            },
-            isHighlighted: function() {
-                return this._getState() == "highlighted";
-            },
-            willChangeState: function(state) {},
-            didChangeState: function(state) {},
-            shouldFireEvent: function(type, args) {
-                return !this.isDisabled();
             }
         });
     },
@@ -1938,9 +1959,9 @@
             __selectedButtonIndex: -1,
             options: {
                 layout: "horizontal",
+                buttons: null,
                 selectable: true,
-                selectedButtonIndex: -1,
-                buttons: null
+                selectedButtonIndex: -1
             },
             willBuild: function() {
                 this.parent();
@@ -2092,8 +2113,9 @@
                     label.inject(this.element);
                     label.setRole("label");
                 }
-                this.addEvent("tapstart", this.bound("_onTapStart"));
-                this.addEvent("tapend", this.bound("_onTapEnd"));
+                this.addEvent("tapcancel", this.bound("__onTapCancel"));
+                this.addEvent("tapstart", this.bound("__onTapStart"));
+                this.addEvent("tapend", this.bound("__onTapEnd"));
             },
             didBuild: function() {
                 this.parent();
@@ -2103,8 +2125,9 @@
                 if (label) this.setLabel(label);
             },
             destroy: function() {
-                this.removeEvent("tapstart", this.bound("_onTapStart"));
-                this.removeEvent("tapend", this.bound("_onTapEnd"));
+                this.removeEvent("tapcancel", this.bound("__onTapCancel"));
+                this.removeEvent("tapstart", this.bound("__onTapStart"));
+                this.removeEvent("tapend", this.bound("__onTapEnd"));
                 this.label = null;
                 this.parent();
             },
@@ -2124,10 +2147,13 @@
             getLabel: function() {
                 return this.__label;
             },
-            _onTapStart: function(e) {
+            __onTapCancel: function(e) {
+                if (this.isSelected()) this.setHighlighted(false);
+            },
+            __onTapStart: function(e) {
                 if (!this.isSelected()) this.setHighlighted(true);
             },
-            _onTapEnd: function(e) {
+            __onTapEnd: function(e) {
                 if (!this.isSelected()) this.setHighlighted(false);
             }
         });
@@ -2398,6 +2424,7 @@
             didAddChildComponent: function(component) {
                 this.parent(component);
                 if (component instanceof moobile.ListItem) {
+                    component.addEvent("tapcancel", this.bound("__onItemTapCancel"));
                     component.addEvent("tapstart", this.bound("__onItemTapStart"));
                     component.addEvent("tapend", this.bound("__onItemTapEnd"));
                     component.addEvent("tap", this.bound("__onItemTap"));
@@ -2412,6 +2439,7 @@
             didRemoveChildComponent: function(component) {
                 this.parent(component);
                 if (component instanceof moobile.ListItem) {
+                    component.removeEvent("tapcancel", this.bound("__onItemTapCancel"));
                     component.removeEvent("tapstart", this.bound("__onItemTapStart"));
                     component.removeEvent("tapend", this.bound("__onItemTapEnd"));
                     component.removeEvent("tap", this.bound("__onItemTap"));
@@ -2441,6 +2469,9 @@
                         curr.removeClass("list-section-footer");
                     }
                 }
+            },
+            __onItemTapCancel: function(e, sender) {
+                if (this.__selectable && sender.isSelected()) sender.setHighlighted(false);
             },
             __onItemTapStart: function(e, sender) {
                 if (this.__selectable && !sender.isSelected()) sender.setHighlighted(true);
@@ -2896,7 +2927,7 @@
                 return this._maximum;
             },
             _move: function(x, y) {
-                if (!this.isBuilt() || !this.isReady() || !this.isVisible()) return this;
+                if (!this.isReady() || !this.isVisible()) return this;
                 switch (this.options.mode) {
                   case "horizontal":
                     y = 0;
@@ -4419,6 +4450,7 @@
                 this.contentScrollerElement.addEvent("touchstart", this.bound("_onTouchStart"));
                 this.contentScrollerElement.addEvent("touchmove", this.bound("_onTouchMove"));
                 this.contentScrollerElement.addEvent("touchend", this.bound("_onTouchEnd"));
+                this.contentScrollerElement.addEvent("scroll", this.bound("_onScroll"));
                 window.addEvent("orientationchange", this.bound("_onOrientationChange"));
                 return this;
             },
@@ -4490,14 +4522,6 @@
                     if (scrollY && contentSize.y <= wrapperSize.y) this.contentElement.setStyle("min-height", wrapperSize.y + 1);
                     if (scrollX && contentSize.x <= wrapperSize.x) this.contentElement.setStyle("min-width", wrapperSize.x + 1);
                 }
-                return this;
-            },
-            _attachEvents: function() {
-                this.contentScrollerElement.addEvent("scroll", this.bound("_onScroll"));
-                return this;
-            },
-            _detachEvents: function() {
-                this.contentScrollerElement.removeEvent("scroll", this.bound("_onScroll"));
                 return this;
             },
             getSize: function() {
@@ -4721,6 +4745,7 @@
             __activeTouchTime: null,
             __activeTouchScroll: null,
             __activeTouchDuration: null,
+            __activeTouchCanceled: false,
             __scroller: null,
             __offset: {
                 x: null,
@@ -4754,7 +4779,9 @@
                 initialPageX: 0,
                 initialPageY: 0,
                 initialScrollX: 0,
-                initialScrollY: 0
+                initialScrollY: 0,
+                cancelTouchThresholdX: 10,
+                cancelTouchThresholdY: 10
             },
             willBuild: function() {
                 this.parent();
@@ -4946,6 +4973,13 @@
                 this.fireEvent("snaptopage", [ page.x, page.y ]);
                 return this;
             },
+            __cancelTouch: function() {
+                this.contentElement.getElements("*").each(function(element) {
+                    var event = document.createEvent("CustomEvent");
+                    event.initCustomEvent("touchcancel", false, false);
+                    element.dispatchEvent(event);
+                });
+            },
             __onTouchCancel: function() {
                 this.__activeTouch = null;
                 this.__activeTouchTime = null;
@@ -4958,6 +4992,7 @@
                     this.__activeTouch = touch;
                     this.__activeTouchTime = Date.now();
                     this.__activeTouchScroll = this.getContentScroll();
+                    this.__activeTouchCanceled = false;
                 }
             },
             __onTouchEnd: function(e) {
@@ -4968,8 +5003,18 @@
                 this.__activeTouchTime = null;
                 this.__activeTouchScroll = null;
                 this.__activeTouchDuration = null;
+                this.__activeTouchCanceled = false;
             },
             __onScroll: function() {
+                if (this.__activeTouch && this.__activeTouchCanceled === false) {
+                    var scroll = this.getContentScroll();
+                    var x = Math.abs(this.__activeTouchScroll.x - scroll.x);
+                    var y = Math.abs(this.__activeTouchScroll.y - scroll.y);
+                    if (x >= this.options.cancelTouchThresholdX || y >= this.options.cancelTouchThresholdY) {
+                        this.__activeTouchCanceled = true;
+                        this.__cancelTouch();
+                    }
+                }
                 this.fireEvent("scroll");
             },
             __onScrollStart: function() {
