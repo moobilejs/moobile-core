@@ -1,4 +1,4 @@
-all: build build-compress
+all: build
 
 build:
 	@wrup -r moobile ./ > moobile.js

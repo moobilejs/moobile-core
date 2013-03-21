@@ -12,8 +12,11 @@
 })({
     "0": function(require, module, exports, global) {
         "use strict";
-        require("1");
+        global.requestAnimationFrame = require("1").request;
+        global.cancelAnimationFrame = require("1").cancel;
         require("6");
+        require("7");
+        require("8");
         require("9");
         require("a");
         require("b");
@@ -26,6 +29,11 @@
         require("i");
         require("j");
         require("k");
+        require("l");
+        require("m");
+        require("n");
+        require("o");
+        require("p");
         require("q");
         require("r");
         require("s");
@@ -43,7 +51,7 @@
         require("14");
         require("15");
         require("16");
-        require("18");
+        require("17");
         require("19");
         require("1a");
         require("1b");
@@ -66,607 +74,226 @@
         require("1s");
         require("1t");
         require("1u");
+        require("1v");
         module.exports = global.Moobile = global.moobile;
     },
     "1": function(require, module, exports, global) {
         "use strict";
-        require("2");
-        require("4");
-        require("5");
+        var array = require("2");
+        var requestFrame = global.requestAnimationFrame || global.webkitRequestAnimationFrame || global.mozRequestAnimationFrame || global.oRequestAnimationFrame || global.msRequestAnimationFrame || function(callback) {
+            return setTimeout(callback, 1e3 / 60);
+        };
+        var callbacks = [];
+        var iterator = function(time) {
+            var split = callbacks.splice(0, callbacks.length);
+            for (var i = 0, l = split.length; i < l; i++) split[i](time || (time = +(new Date)));
+        };
+        var cancel = function(callback) {
+            var io = array.indexOf(callbacks, callback);
+            if (io > -1) callbacks.splice(io, 1);
+        };
+        var request = function(callback) {
+            var i = callbacks.push(callback);
+            if (i === 1) requestFrame(iterator);
+            return function() {
+                cancel(callback);
+            };
+        };
+        exports.request = request;
+        exports.cancel = cancel;
     },
     "2": function(require, module, exports, global) {
         "use strict";
-        var storage = require("3").createStorage();
-        var customs = {};
-        var dispatchEvent = Element.prototype.dispatchEvent;
-        var addEventListener = Element.prototype.addEventListener;
-        var removeEventListener = Element.prototype.removeEventListener;
-        Element.prototype.dispatchEvent = function(event, data) {
-            var custom = customs[event];
-            if (custom) {
-                data = data || {};
-                if (fail(custom.condition, this, data)) return;
-                var name = event;
-                event = document.createEvent("CustomEvent");
-                event.initCustomEvent(name, custom.bubbleable, custom.cancelable);
-                custom.onDispatch.call(this, event, data);
+        var array = require("3")["array"];
+        var names = ("pop,push,reverse,shift,sort,splice,unshift,concat,join,slice,toString,indexOf,lastIndexOf,forEach,every,some" + ",filter,map,reduce,reduceRight").split(",");
+        for (var methods = {}, i = 0, name, method; name = names[i++]; ) if (method = Array.prototype[name]) methods[name] = method;
+        if (!methods.filter) methods.filter = function(fn, context) {
+            var results = [];
+            for (var i = 0, l = this.length >>> 0; i < l; i++) if (i in this) {
+                var value = this[i];
+                if (fn.call(context, value, i, this)) results.push(value);
             }
-            return dispatchEvent.call(this, event);
+            return results;
         };
-        Element.prototype.addEventListener = function(type, listener, capture) {
-            var custom = customs[type];
-            if (custom) {
-                custom.onAdd.call(this);
-                listener = validate(this, type, listener);
-                var name = root(custom);
-                if (name) addEventListener.call(this, name, dispatch(this, type, listener), capture);
+        if (!methods.indexOf) methods.indexOf = function(item, from) {
+            for (var l = this.length >>> 0, i = from < 0 ? Math.max(0, l + from) : from || 0; i < l; i++) {
+                if (i in this && this[i] === item) return i;
             }
-            return addEventListener.call(this, type, listener, capture);
+            return -1;
         };
-        Element.prototype.removeEventListener = function(type, listener, capture) {
-            var custom = customs[type];
-            if (custom) {
-                custom.onRemove.call(this);
-                listener = validate(this, type, listener);
-                var name = root(custom);
-                if (name) removeEventListener.call(this, name, dispatch(this, type, listener), capture);
-                detach(this, type, listener);
+        if (!methods.map) methods.map = function(fn, context) {
+            var length = this.length >>> 0, results = Array(length);
+            for (var i = 0, l = length; i < l; i++) {
+                if (i in this) results[i] = fn.call(context, this[i], i, this);
             }
-            return removeEventListener.call(this, type, listener, capture);
+            return results;
         };
-        var defineCustomEvent = function(name, custom) {
-            custom.base = "base" in custom ? custom.base : null;
-            custom.condition = "condition" in custom ? custom.condition : true;
-            custom.bubbleable = "bubbleable" in custom ? custom.bubbleable : true;
-            custom.cancelable = "cancelable" in custom ? custom.cancelable : true;
-            custom.onAdd = custom.onAdd || function() {};
-            custom.onRemove = custom.onRemove || function() {};
-            custom.onDispatch = custom.onDispatch || function() {};
-            var base = customs[custom.base];
-            var condition = function(e) {
-                return pass(base.condition, this, e) && pass(custom.condition, this, e);
-            };
-            customs[name] = base ? {
-                base: base.base,
-                bubbleable: custom.bubbleable,
-                cancelable: custom.cancelable,
-                condition: condition,
-                onAdd: inherit(custom, base, "onAdd"),
-                onRemove: inherit(custom, base, "onRemove"),
-                onDispatch: inherit(custom, base, "onDispatch")
-            } : custom;
-        };
-        var inherit = function(custom, base, method) {
-            return function() {
-                base[method].apply(this, arguments);
-                custom[method].apply(this, arguments);
-            };
-        };
-        var root = function(custom) {
-            var base = custom.base;
-            if (base === null) return null;
-            var parent = customs[base];
-            if (parent) return root(parent);
-            return base;
-        };
-        var pass = function(condition, element, e) {
-            return typeof condition === "function" ? condition.call(element, e) : condition;
-        };
-        var fail = function(condition, element, e) {
-            return !pass(condition, element, e);
-        };
-        var handler = function(element, type, listener) {
-            var events = storage(element);
-            if (events[type] === undefined) {
-                events[type] = [];
+        if (!methods.every) methods.every = function(fn, context) {
+            for (var i = 0, l = this.length >>> 0; i < l; i++) {
+                if (i in this && !fn.call(context, this[i], i, this)) return false;
             }
-            events = events[type];
-            for (var i = 0, l = events.length; i < l; i++) {
-                var event = events[i];
-                if (event.listener === listener) return event;
-            }
-            event = events[events.length] = {
-                dispatch: null,
-                validate: null,
-                listener: listener
-            };
-            return event;
+            return true;
         };
-        var detach = function(element, type, listener) {
-            var events = storage(element);
-            if (events[type] === undefined) return;
-            events = events[type];
-            for (var i = 0, l = events.length; i < l; i++) {
-                var event = events[i];
-                if (event.listener === listener) {
-                    events.splice(i, 1);
-                }
+        if (!methods.some) methods.some = function(fn, context) {
+            for (var i = 0, l = this.length >>> 0; i < l; i++) {
+                if (i in this && fn.call(context, this[i], i, this)) return true;
             }
-            return event;
+            return false;
         };
-        var dispatch = function(element, type, listener) {
-            var event = handler(element, type, listener);
-            if (event.dispatch === null) {
-                event.dispatch = function(e) {
-                    element.dispatchEvent(type, e);
-                };
+        if (!methods.forEach) methods.forEach = function(fn, context) {
+            for (var i = 0, l = this.length >>> 0; i < l; i++) {
+                if (i in this) fn.call(context, this[i], i, this);
             }
-            return event.dispatch;
         };
-        var validate = function(element, type, listener) {
-            var event = handler(element, type, listener);
-            if (event.validate === null) {
-                event.validate = function(e) {
-                    if (e instanceof CustomEvent) listener.call(this, e);
-                };
-            }
-            return event.validate;
+        var toString = Object.prototype.toString;
+        array.isArray = Array.isArray || function(self) {
+            return toString.call(self) === "[object Array]";
         };
-        module.exports = global.defineCustomEvent = defineCustomEvent;
+        module.exports = array.implement(methods);
     },
     "3": function(require, module, exports, global) {
-        void function(global, undefined_, undefined) {
-            var getProps = Object.getOwnPropertyNames, defProp = Object.defineProperty, toSource = Function.prototype.toString, create = Object.create, hasOwn = Object.prototype.hasOwnProperty, funcName = /^\n?function\s?(\w*)?_?\(/;
-            function define(object, key, value) {
-                if (typeof key === "function") {
-                    value = key;
-                    key = nameOf(value).replace(/_$/, "");
-                }
-                return defProp(object, key, {
-                    configurable: true,
-                    writable: true,
-                    value: value
-                });
-            }
-            function nameOf(func) {
-                return typeof func !== "function" ? "" : "name" in func ? func.name : toSource.call(func).match(funcName)[1];
-            }
-            var Data = function() {
-                var dataDesc = {
-                    value: {
-                        writable: true,
-                        value: undefined
-                    }
-                }, datalock = "return function(k){if(k===s)return l}", uids = create(null), createUID = function() {
-                    var key = Math.random().toString(36).slice(2);
-                    return key in uids ? createUID() : uids[key] = key;
-                }, globalID = createUID(), storage = function(obj) {
-                    if (hasOwn.call(obj, globalID)) return obj[globalID];
-                    if (!Object.isExtensible(obj)) throw new TypeError("Object must be extensible");
-                    var store = create(null);
-                    defProp(obj, globalID, {
-                        value: store
-                    });
-                    return store;
+        "use strict";
+        var prime = require("4"), type = require("5");
+        var slice = Array.prototype.slice;
+        var ghost = prime({
+            constructor: function ghost(self) {
+                this.valueOf = function() {
+                    return self;
                 };
-                define(Object, function getOwnPropertyNames(obj) {
-                    var props = getProps(obj);
-                    if (hasOwn.call(obj, globalID)) props.splice(props.indexOf(globalID), 1);
-                    return props;
-                });
-                function Data() {
-                    var puid = createUID(), secret = {};
-                    this.unlock = function(obj) {
-                        var store = storage(obj);
-                        if (hasOwn.call(store, puid)) return store[puid](secret);
-                        var data = create(null, dataDesc);
-                        defProp(store, puid, {
-                            value: (new Function("s", "l", datalock))(secret, data)
-                        });
-                        return data;
+                this.toString = function() {
+                    return self + "";
+                };
+                this.is = function(object) {
+                    return self === object;
+                };
+            }
+        });
+        var shell = function(self) {
+            if (self == null || self instanceof ghost) return self;
+            var g = shell[type(self)];
+            return g ? new g(self) : self;
+        };
+        var register = function() {
+            var g = prime({
+                inherits: ghost
+            });
+            return prime({
+                constructor: function(self) {
+                    return new g(self);
+                },
+                define: function(key, descriptor) {
+                    var method = descriptor.value;
+                    this[key] = function(self) {
+                        return arguments.length > 1 ? method.apply(self, slice.call(arguments, 1)) : method.call(self);
                     };
+                    g.prototype[key] = function() {
+                        return shell(method.apply(this.valueOf(), arguments));
+                    };
+                    prime.define(this.prototype, key, descriptor);
+                    return this;
                 }
-                define(Data.prototype, function get(o) {
-                    return this.unlock(o).value;
-                });
-                define(Data.prototype, function set(o, v) {
-                    this.unlock(o).value = v;
-                });
-                return Data;
-            }();
-            var WM = function(data) {
-                var validate = function(key) {
-                    if (key == null || typeof key !== "object" && typeof key !== "function") throw new TypeError("Invalid WeakMap key");
-                };
-                var wrap = function(collection, value) {
-                    var store = data.unlock(collection);
-                    if (store.value) throw new TypeError("Object is already a WeakMap");
-                    store.value = value;
-                };
-                var unwrap = function(collection) {
-                    var storage = data.unlock(collection).value;
-                    if (!storage) throw new TypeError("WeakMap is not generic");
-                    return storage;
-                };
-                var initialize = function(weakmap, iterable) {
-                    if (iterable !== null && typeof iterable === "object" && typeof iterable.forEach === "function") {
-                        iterable.forEach(function(item, i) {
-                            if (item instanceof Array && item.length === 2) set.call(weakmap, iterable[i][0], iterable[i][1]);
-                        });
-                    }
-                };
-                function WeakMap(iterable) {
-                    if (this === global || this == null || this === WeakMap.prototype) return new WeakMap(iterable);
-                    wrap(this, new Data);
-                    initialize(this, iterable);
-                }
-                function get(key) {
-                    validate(key);
-                    var value = unwrap(this).get(key);
-                    return value === undefined_ ? undefined : value;
-                }
-                function set(key, value) {
-                    validate(key);
-                    unwrap(this).set(key, value === undefined ? undefined_ : value);
-                }
-                function has(key) {
-                    validate(key);
-                    return unwrap(this).get(key) !== undefined;
-                }
-                function delete_(key) {
-                    validate(key);
-                    var data = unwrap(this), had = data.get(key) !== undefined;
-                    data.set(key, undefined);
-                    return had;
-                }
-                function toString() {
-                    unwrap(this);
-                    return "[object WeakMap]";
-                }
-                try {
-                    var src = ("return " + delete_).replace("e_", "\\u0065"), del = (new Function("unwrap", "validate", src))(unwrap, validate);
-                } catch (e) {
-                    var del = delete_;
-                }
-                var src = ("" + Object).split("Object");
-                var stringifier = function toString() {
-                    return src[0] + nameOf(this) + src[1];
-                };
-                define(stringifier, stringifier);
-                var prep = {
-                    __proto__: []
-                } instanceof Array ? function(f) {
-                    f.__proto__ = stringifier;
-                } : function(f) {
-                    define(f, stringifier);
-                };
-                prep(WeakMap);
-                [ toString, get, set, has, del ].forEach(function(method) {
-                    define(WeakMap.prototype, method);
-                    prep(method);
-                });
-                return WeakMap;
-            }(new Data);
-            var defaultCreator = Object.create ? function() {
-                return Object.create(null);
-            } : function() {
-                return {};
-            };
-            function createStorage(creator) {
-                var weakmap = new WM;
-                creator || (creator = defaultCreator);
-                function storage(object, value) {
-                    if (value || arguments.length === 2) {
-                        weakmap.set(object, value);
-                    } else {
-                        value = weakmap.get(object);
-                        if (value === undefined) {
-                            value = creator(object);
-                            weakmap.set(object, value);
-                        }
-                    }
-                    return value;
-                }
-                return storage;
-            }
-            if (typeof module !== "undefined") {
-                module.exports = WM;
-            } else if (typeof exports !== "undefined") {
-                exports.WeakMap = WM;
-            } else if (!("WeakMap" in global)) {
-                global.WeakMap = WM;
-            }
-            WM.createStorage = createStorage;
-            if (global.WeakMap) global.WeakMap.createStorage = createStorage;
-        }((0, eval)("this"));
+            });
+        };
+        for (var types = "string,number,array,object,date,function,regexp".split(","), i = types.length; i--; ) shell[types[i]] = register();
+        module.exports = shell;
     },
     "4": function(require, module, exports, global) {
         "use strict";
-        var defineCustomEvent = require("2");
-        var elem = document.createElement("div");
-        var base = null;
-        var keys = {
-            WebkitTransition: "webkitTransitionEnd",
-            MozTransition: "transitionend",
-            OTransition: "oTransitionEnd",
-            msTransition: "MSTransitionEnd",
-            transition: "transitionend"
+        var has = function(self, key) {
+            return Object.hasOwnProperty.call(self, key);
         };
-        for (var key in keys) {
-            if (key in elem.style) base = keys[key];
+        var each = function(object, method, context) {
+            for (var key in object) if (method.call(context, object[key], key, object) === false) break;
+            return object;
+        };
+        if (!{
+            valueOf: 0
+        }.propertyIsEnumerable("valueOf")) {
+            var buggy = "constructor,toString,valueOf,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString".split(",");
+            var proto = Object.prototype;
+            each = function(object, method, context) {
+                for (var key in object) if (method.call(context, object[key], key, object) === false) return object;
+                for (var i = 0; key = buggy[i]; i++) {
+                    var value = object[key];
+                    if ((value !== proto[key] || has(object, key)) && method.call(context, value, key, object) === false) break;
+                }
+                return object;
+            };
         }
-        var onDispatch = function(custom, data) {
-            custom.propertyName = data.propertyName;
-            custom.elapsedTime = data.elapsedTime;
-            custom.pseudoElement = data.pseudoElement;
+        var create = Object.create || function(self) {
+            var constructor = function() {};
+            constructor.prototype = self;
+            return new constructor;
         };
-        defineCustomEvent("transitionend", {
-            base: base,
-            onDispatch: onDispatch
-        });
-        defineCustomEvent("owntransitionend", {
-            base: "transitionend",
-            condition: function(e) {
-                return e.target === this;
+        var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+        var define = Object.defineProperty;
+        try {
+            var obj = {
+                a: 1
+            };
+            getOwnPropertyDescriptor(obj, "a");
+            define(obj, "a", {
+                value: 2
+            });
+        } catch (e) {
+            getOwnPropertyDescriptor = function(object, key) {
+                return {
+                    value: object[key]
+                };
+            };
+            define = function(object, key, descriptor) {
+                object[key] = descriptor.value;
+                return object;
+            };
+        }
+        var implement = function(proto) {
+            each(proto, function(value, key) {
+                if (key !== "constructor" && key !== "define" && key !== "inherits") this.define(key, getOwnPropertyDescriptor(proto, key) || {
+                    writable: true,
+                    enumerable: true,
+                    configurable: true,
+                    value: value
+                });
+            }, this);
+            return this;
+        };
+        var prime = function(proto) {
+            var superprime = proto.inherits;
+            var constructor = has(proto, "constructor") ? proto.constructor : superprime ? function() {
+                return superprime.apply(this, arguments);
+            } : function() {};
+            if (superprime) {
+                var superproto = superprime.prototype;
+                var cproto = constructor.prototype = create(superproto);
+                constructor.parent = superproto;
+                cproto.constructor = constructor;
             }
-        });
+            constructor.define = proto.define || superprime && superprime.define || function(key, descriptor) {
+                define(this.prototype, key, descriptor);
+                return this;
+            };
+            constructor.implement = implement;
+            return constructor.implement(proto);
+        };
+        prime.has = has;
+        prime.each = each;
+        prime.create = create;
+        prime.define = define;
+        module.exports = prime;
     },
     "5": function(require, module, exports, global) {
         "use strict";
-        var defineCustomEvent = require("2");
-        var elem = document.createElement("div");
-        var base = null;
-        var keys = {
-            WebkitAnimation: "webkitAnimationEnd",
-            MozAnimation: "animationend",
-            OAnimation: "oAnimationEnd",
-            msAnimation: "MSAnimationEnd",
-            animation: "animationend"
+        var toString = Object.prototype.toString, types = /number|object|array|string|function|date|regexp|boolean/;
+        var type = function(object) {
+            if (object == null) return "null";
+            var string = toString.call(object).slice(8, -1).toLowerCase();
+            if (string === "number" && isNaN(object)) return "null";
+            if (types.test(string)) return string;
+            return "object";
         };
-        for (var key in keys) {
-            if (key in elem.style) base = keys[key];
-        }
-        var onDispatch = function(custom, data) {
-            custom.animationName = data.animationName;
-            custom.elapsedTime = data.elapsedTime;
-        };
-        defineCustomEvent("animationend", {
-            base: base,
-            onDispatch: onDispatch
-        });
-        defineCustomEvent("ownanimationend", {
-            base: "animationend",
-            condition: function(e) {
-                return e.target === this;
-            }
-        });
+        module.exports = type;
     },
     "6": function(require, module, exports, global) {
-        "use strict";
-        require("7");
-        require("8");
-    },
-    "7": function(require, module, exports, global) {
-        "use strict";
-        var hasTouchEvent = "ontouchstart" in global;
-        var hasTouchList = "TouchList" in global;
-        var hasTouch = "Touch" in global;
-        if (!hasTouchList) {
-            var TouchList = function() {
-                this.length = 0;
-            };
-            TouchList.prototype.identifiedTouch = function(id) {
-                return this[0] && this[0].identifier === id ? this[0] : null;
-            };
-            TouchList.prototype.item = function(index) {
-                return this[index] || null;
-            };
-        }
-        if (!hasTouch) {
-            var Touch = function() {};
-        }
-        var touch = null;
-        var target = null;
-        var onDocumentMouseDown = function(e) {
-            if (target === null) {
-                target = e.target;
-                touch = new Touch;
-                touch.identifier = Date.now();
-                touch.screenX = e.screenX;
-                touch.screenY = e.screenY;
-                touch.clientX = e.clientX;
-                touch.clientY = e.clientY;
-                touch.pageX = e.pageX;
-                touch.pageY = e.pageY;
-                touch.radiusX = 0;
-                touch.radiusY = 0;
-                touch.rotationAngle = 0;
-                touch.force = 0;
-                touch.target = target;
-                var list = new TouchList;
-                list.length = 1;
-                list[0] = touch;
-                var event = document.createEvent("CustomEvent");
-                event.initCustomEvent("touchstart", true, true);
-                event.touches = list;
-                event.targetTouches = list;
-                event.changedTouches = list;
-                target.dispatchEvent(event);
-            }
-        };
-        var onDocumentMouseMove = function(e) {
-            if (target) {
-                touch.screenX = e.screenX;
-                touch.screenY = e.screenY;
-                touch.clientX = e.clientX;
-                touch.clientY = e.clientY;
-                touch.pageX = e.pageX;
-                touch.pageY = e.pageY;
-                var list = new TouchList;
-                list.length = 1;
-                list[0] = touch;
-                var event = document.createEvent("CustomEvent");
-                event.initCustomEvent("touchmove", true, true);
-                event.touches = list;
-                event.targetTouches = list;
-                event.changedTouches = list;
-                target.dispatchEvent(event);
-            }
-        };
-        var onDocumentMouseUp = function(e) {
-            if (target) {
-                touch.screenX = e.screenX;
-                touch.screenY = e.screenY;
-                touch.clientX = e.clientX;
-                touch.clientY = e.clientY;
-                touch.pageX = e.pageX;
-                touch.pageY = e.pageY;
-                var list = new TouchList;
-                list.length = 1;
-                list[0] = touch;
-                var event = document.createEvent("CustomEvent");
-                event.initCustomEvent("touchend", true, true);
-                event.touches = new TouchList;
-                event.targetTouches = new TouchList;
-                event.changedTouches = list;
-                target.dispatchEvent(event);
-                target = null;
-            }
-        };
-        if (!hasTouchEvent) {
-            document.addEventListener("mousedown", onDocumentMouseDown);
-            document.addEventListener("mousemove", onDocumentMouseMove);
-            document.addEventListener("mouseup", onDocumentMouseUp);
-        }
-    },
-    "8": function(require, module, exports, global) {
-        "use strict";
-        var map = require("3")();
-        var defineCustomEvent = require("2");
-        var onDispatch = function(custom, data) {
-            custom.view = data.view;
-            custom.touches = data.touches;
-            custom.targetTouches = data.targetTouches;
-            custom.changedTouches = data.changedTouches;
-            custom.ctrlKey = data.ctrlKey;
-            custom.shiftKey = data.shiftKey;
-            custom.altKey = data.altKey;
-            custom.metaKey = data.metaKey;
-        };
-        var is = function(parent, node) {
-            return parent === node || parent.contains(node);
-        };
-        var inside = function(x, y, node) {
-            var element = document.elementFromPoint(x, y);
-            if (element) return is(node, element);
-            return false;
-        };
-        var outside = function(x, y, node) {
-            var element = document.elementFromPoint(x, y);
-            if (element) return !is(node, element);
-            return true;
-        };
-        var append = function(parent, object) {
-            var merge = {};
-            for (var k in parent) merge[k] = parent[k];
-            for (var k in object) merge[k] = object[k];
-            return merge;
-        };
-        var attach = function(name, func) {
-            return function() {
-                this.addEventListener(name, func);
-            };
-        };
-        var detach = function(name, func) {
-            return function() {
-                this.removeEventListener(name, func);
-            };
-        };
-        var storage = function(element, touch) {
-            var data = map.get(element);
-            if (!data) map.set(element, data = {});
-            return data;
-        };
-        var enters = function(element, touch) {
-            var data = storage(element);
-            var name = touch.identifier;
-            if (data[name] === undefined || data[name] === "out") {
-                data[name] = "in";
-                return true;
-            }
-            return false;
-        };
-        var leaves = function(element, touch) {
-            var data = storage(element);
-            var name = touch.identifier;
-            if (data[name] === undefined || data[name] === "in") {
-                data[name] = "out";
-                return true;
-            }
-            return false;
-        };
-        var enter = function(e) {
-            this.dispatchEvent("tapenter", e);
-        };
-        var leave = function(e) {
-            this.dispatchEvent("tapleave", e);
-        };
-        var custom = {
-            onDispatch: onDispatch
-        };
-        defineCustomEvent("tapstart", append(custom, {
-            base: "touchstart",
-            condition: function(e) {
-                return e.targetTouches.length === 1;
-            }
-        }));
-        defineCustomEvent("tapmove", append(custom, {
-            base: "touchmove",
-            condition: function(e) {
-                return e.targetTouches[0] === e.changedTouches[0];
-            }
-        }));
-        defineCustomEvent("tapend", append(custom, {
-            base: "touchend",
-            condition: function(e) {
-                return e.targetTouches.length === 0;
-            }
-        }));
-        defineCustomEvent("tapcancel", append(custom, {
-            base: "touchcancel",
-            condition: function(e) {
-                return true;
-            }
-        }));
-        defineCustomEvent("tap", append(custom, {
-            base: "tapend",
-            condition: function(e) {
-                var touch = e.changedTouches[0];
-                return inside(touch.pageX, touch.pageY, this);
-            }
-        }));
-        defineCustomEvent("tapinside", append(custom, {
-            base: "tapmove",
-            condition: function(e) {
-                var touch = e.targetTouches[0];
-                return inside(touch.pageX, touch.pageY, this);
-            }
-        }));
-        defineCustomEvent("tapoutside", append(custom, {
-            base: "tapmove",
-            condition: function(e) {
-                var touch = e.targetTouches[0];
-                return outside(touch.pageX, touch.pageY, this);
-            }
-        }));
-        defineCustomEvent("tapenter", append(custom, {
-            base: "tapinside",
-            condition: function(e) {
-                return enters(this, e.targetTouches[0]);
-            },
-            onAdd: attach("tapstart", enter),
-            onRemove: detach("tapstart", enter)
-        }));
-        defineCustomEvent("tapleave", append(custom, {
-            base: "tapoutside",
-            condition: function(e) {
-                return leaves(this, e.targetTouches[0]);
-            },
-            onAdd: attach("tapend", leave),
-            onRemove: detach("tapend", leave)
-        }));
-    },
-    "9": function(require, module, exports, global) {
         Class.Binds = new Class({
             $bound: {},
             bound: function(name) {
@@ -674,7 +301,7 @@
             }
         });
     },
-    a: function(require, module, exports, global) {
+    "7": function(require, module, exports, global) {
         (function() {
             [ Element, Window, Document ].invoke("implement", {
                 hasEvent: function(event) {
@@ -729,11 +356,140 @@
             loop("enable")("disable");
         })();
     },
+    "8": function(require, module, exports, global) {
+        Browser.Features.Touch = function() {
+            try {
+                document.createEvent("TouchEvent").initTouchEvent("touchstart");
+                return true;
+            } catch (exception) {}
+            return false;
+        }();
+        Browser.Features.iOSTouch = function() {
+            var name = "cantouch", html = document.html, hasTouch = false;
+            if (!html.addEventListener) return false;
+            var handler = function() {
+                html.removeEventListener(name, handler, true);
+                hasTouch = true;
+            };
+            try {
+                html.addEventListener(name, handler, true);
+                var event = document.createEvent("TouchEvent");
+                event.initTouchEvent(name);
+                html.dispatchEvent(event);
+                return hasTouch;
+            } catch (exception) {}
+            handler();
+            return false;
+        }();
+    },
+    "9": function(require, module, exports, global) {
+        (function() {
+            Browser.Device = {
+                name: "other"
+            };
+            if (Browser.Platform.ios) {
+                var device = navigator.userAgent.toLowerCase().match(/(ip(ad|od|hone))/)[0];
+                Browser.Device[device] = true;
+                Browser.Device.name = device;
+            }
+            if (this.devicePixelRatio == 2) Browser.hasHighResolution = true;
+            Browser.isMobile = ![ "mac", "linux", "win" ].contains(Browser.Platform.name);
+        }).call(this);
+    },
+    a: function(require, module, exports, global) {
+        if (Browser.Features.Touch) (function() {
+            var name = "pinch", thresholdKey = name + ":threshold", disabled, active;
+            var events = {
+                touchstart: function(event) {
+                    if (event.targetTouches.length == 2) active = true;
+                },
+                touchmove: function(event) {
+                    if (disabled || !active) return;
+                    event.preventDefault();
+                    var threshold = this.retrieve(thresholdKey, .5);
+                    if (event.scale < 1 + threshold && event.scale > 1 - threshold) return;
+                    active = false;
+                    event.pinch = event.scale > 1 ? "in" : "out";
+                    this.fireEvent(name, event);
+                }
+            };
+            Element.defineCustomEvent(name, {
+                onSetup: function() {
+                    this.addEvents(events);
+                },
+                onTeardown: function() {
+                    this.removeEvents(events);
+                },
+                onEnable: function() {
+                    disabled = false;
+                },
+                onDisable: function() {
+                    disabled = true;
+                }
+            });
+        })();
+    },
     b: function(require, module, exports, global) {
+        (function() {
+            var name = "swipe", distanceKey = name + ":distance", cancelKey = name + ":cancelVertical", dflt = 50;
+            var start = {}, disabled, active;
+            var clean = function() {
+                active = false;
+            };
+            var events = {
+                touchstart: function(event) {
+                    if (event.touches.length > 1) return;
+                    var touch = event.touches[0];
+                    active = true;
+                    start = {
+                        x: touch.pageX,
+                        y: touch.pageY
+                    };
+                },
+                touchmove: function(event) {
+                    if (disabled || !active) return;
+                    var touch = event.changedTouches[0], end = {
+                        x: touch.pageX,
+                        y: touch.pageY
+                    };
+                    if (this.retrieve(cancelKey) && Math.abs(start.y - end.y) > 10) {
+                        active = false;
+                        return;
+                    }
+                    var distance = this.retrieve(distanceKey, dflt), delta = end.x - start.x, isLeftSwipe = delta < -distance, isRightSwipe = delta > distance;
+                    if (!isRightSwipe && !isLeftSwipe) return;
+                    event.preventDefault();
+                    active = false;
+                    event.direction = isLeftSwipe ? "left" : "right";
+                    event.start = start;
+                    event.end = end;
+                    this.fireEvent(name, event);
+                },
+                touchend: clean,
+                touchcancel: clean
+            };
+            Element.defineCustomEvent(name, {
+                onSetup: function() {
+                    this.addEvents(events);
+                },
+                onTeardown: function() {
+                    this.removeEvents(events);
+                },
+                onEnable: function() {
+                    disabled = false;
+                },
+                onDisable: function() {
+                    disabled = true;
+                    clean();
+                }
+            });
+        })();
+    },
+    c: function(require, module, exports, global) {
         "use strict";
         Browser.Platform.cordova = (window.Phonegap || window.Cordova || window.cordova) && Browser.isMobile && !Browser.safari;
     },
-    c: function(require, module, exports, global) {
+    d: function(require, module, exports, global) {
         "use strict";
         Class.parse = function(name) {
             name = name.trim();
@@ -752,7 +508,7 @@
             return instance;
         };
     },
-    d: function(require, module, exports, global) {
+    e: function(require, module, exports, global) {
         "use strict";
         var setStyle = Element.prototype.setStyle;
         var getStyle = Element.prototype.getStyle;
@@ -829,14 +585,14 @@
             return element;
         };
     },
-    e: function(require, module, exports, global) {
+    f: function(require, module, exports, global) {
         "use strict";
         Request.prototype.options.isSuccess = function() {
             var status = this.status;
             return status === 0 || status >= 200 && status < 300;
         };
     },
-    f: function(require, module, exports, global) {
+    g: function(require, module, exports, global) {
         "use strict";
         Array.implement({
             find: function(fn) {
@@ -854,7 +610,7 @@
             }
         });
     },
-    g: function(require, module, exports, global) {
+    h: function(require, module, exports, global) {
         "use strict";
         String.implement({
             toCamelCase: function() {
@@ -864,13 +620,13 @@
             }
         });
     },
-    h: function(require, module, exports, global) {
+    i: function(require, module, exports, global) {
         "use strict";
         var moobile = global.moobile = global.Moobile = {
             version: "0.3.0-dev"
         };
     },
-    i: function(require, module, exports, global) {
+    j: function(require, module, exports, global) {
         "use strict";
         var fireEvent = Events.prototype.fireEvent;
         var Emitter = moobile.Emitter = new Class({
@@ -899,7 +655,7 @@
             didFireEvent: function(type, args) {}
         });
     },
-    j: function(require, module, exports, global) {
+    k: function(require, module, exports, global) {
         "use strict";
         var onReady = function() {
             window.fireEvent("ready");
@@ -926,10 +682,332 @@
             }
         });
     },
-    k: function(require, module, exports, global) {
+    l: function(require, module, exports, global) {
+        (function() {
+            var prefix = "";
+            if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
+                prefix = "webkit";
+            } else if (Browser.firefox) {
+                prefix = "Moz";
+            } else if (Browser.opera) {
+                prefix = "o";
+            } else if (Browser.ie) {
+                prefix = "ms";
+            }
+            Element.NativeEvents[prefix + "TransitionEnd"] = 2;
+            Element.Events["transitionend"] = {
+                base: prefix + "TransitionEnd",
+                onAdd: function() {},
+                onRemove: function() {}
+            };
+            Element.NativeEvents[prefix + "AnimationEnd"] = 2;
+            Element.Events["animationend"] = {
+                base: prefix + "AnimationEnd",
+                onAdd: function() {},
+                onRemove: function() {}
+            };
+            Element.defineCustomEvent("owntransitionend", {
+                base: "transitionend",
+                condition: function(e) {
+                    e.stop();
+                    return e.target === this;
+                }
+            });
+            Element.defineCustomEvent("ownanimationend", {
+                base: "animationend",
+                condition: function(e) {
+                    e.stop();
+                    return e.target === this;
+                }
+            });
+        })();
+    },
+    m: function(require, module, exports, global) {
+        if (!Browser.Features.Touch) (function() {
+            var touch = null;
+            var touchTarget = null;
+            var touchIdentifier = null;
+            var redispatch = function(e) {
+                if (e.fake) return;
+                var faked = document.createEvent("MouseEvent");
+                faked.fake = true;
+                faked.initMouseEvent(e.type, true, true, window, 0, e.screenX, e.screenY, e.clientX, e.clientY, false, false, false, false, 0, null);
+                touchTarget.dispatchEvent(faked);
+            };
+            var onDocumentMouseDown = function(e) {
+                if (touch === null) {
+                    touchTarget = e.event.target;
+                    touchIdentifier = e.event.timeStamp;
+                    touch = {
+                        target: touchTarget,
+                        identifier: touchIdentifier
+                    };
+                    redispatch(e.event);
+                }
+            };
+            var onDocumentMouseMove = function(e) {
+                if (touch) redispatch(e.event);
+            };
+            var onDocumentMouseUp = function(e) {
+                if (touch) {
+                    redispatch(e.event);
+                    touch = null;
+                    touchTarget = null;
+                    touchIdentifier = null;
+                }
+            };
+            document.addEvent("mousedown", onDocumentMouseDown);
+            document.addEvent("mousemove", onDocumentMouseMove);
+            document.addEvent("mouseup", onDocumentMouseUp);
+            var condition = function(e) {
+                if (touch === null) return false;
+                touch.pageX = e.page.x;
+                touch.pageY = e.page.y;
+                touch.clientX = e.client.x;
+                touch.clientY = e.client.y;
+                e.touches = e.targetTouches = e.changedTouches = [ touch ];
+                if (e.type === "mouseup") {
+                    e.touches = [];
+                    e.targetTouches = [];
+                }
+                if (e.event.fake) {
+                    return true;
+                }
+                return false;
+            };
+            Element.defineCustomEvent("touchstart", {
+                base: "mousedown",
+                condition: condition
+            });
+            Element.defineCustomEvent("touchmove", {
+                base: "mousemove",
+                condition: condition
+            });
+            Element.defineCustomEvent("touchend", {
+                base: "mouseup",
+                condition: condition
+            });
+        })();
+    },
+    n: function(require, module, exports, global) {
+        if (Browser.Features.Touch) (function() {
+            delete Element.NativeEvents["mousedown"];
+            delete Element.NativeEvents["mousemove"];
+            delete Element.NativeEvents["mouseup"];
+            Element.defineCustomEvent("mousedown", {
+                base: "touchstart"
+            }).defineCustomEvent("mousemove", {
+                base: "touchmove"
+            }).defineCustomEvent("mouseup", {
+                base: "touchend"
+            });
+        })();
+    },
+    o: function(require, module, exports, global) {
+        (function() {
+            var tapStartX = 0;
+            var tapStartY = 0;
+            var tapMaxX = 0;
+            var tapMinX = 0;
+            var tapMaxY = 0;
+            var tapMinY = 0;
+            var tapValid = true;
+            var onTapTouchStart = function(e) {
+                if (e.changedTouches.length > 1) {
+                    tapValid = false;
+                    return;
+                }
+                tapValid = true;
+                tapStartX = e.changedTouches[0].clientX;
+                tapStartY = e.changedTouches[0].clientY;
+                tapMaxX = tapStartX + 10;
+                tapMinX = tapStartX - 10;
+                tapMaxY = tapStartY + 10;
+                tapMinY = tapStartY - 10;
+            };
+            var onTapTouchMove = function(e) {
+                if (e.changedTouches.length > 1) {
+                    tapValid = false;
+                    return;
+                }
+                if (tapValid) {
+                    var x = e.changedTouches[0].clientX;
+                    var y = e.changedTouches[0].clientY;
+                    tapValid = !(x > tapMaxX || x < tapMinX || y > tapMaxY || y < tapMinY);
+                } else {
+                    this.fireEvent("tapend", e);
+                }
+            };
+            Element.defineCustomEvent("tap", {
+                base: "touchend",
+                condition: function(e) {
+                    return tapValid;
+                },
+                onSetup: function() {
+                    this.addEvent("touchstart", onTapTouchStart);
+                    this.addEvent("touchmove", onTapTouchMove);
+                },
+                onTeardown: function() {
+                    this.removeEvent("touchstart", onTapTouchStart);
+                    this.removeEvent("touchmove", onTapTouchMove);
+                }
+            });
+            Element.defineCustomEvent("tapstart", {
+                base: "touchstart",
+                condition: function(e) {
+                    return e.changedTouches.length === 1;
+                }
+            });
+            Element.defineCustomEvent("tapmove", {
+                base: "touchmove",
+                condition: function(e) {
+                    return e.changedTouches.length === 1;
+                }
+            });
+            Element.defineCustomEvent("tapend", {
+                base: "touchend",
+                condition: function(e) {
+                    return e.changedTouches.length === 1;
+                }
+            });
+        })();
+    },
+    p: function(require, module, exports, global) {
+        moobile.Animation = new Class({
+            Extends: moobile.Emitter,
+            _name: null,
+            _running: false,
+            element: null,
+            animationClass: null,
+            animationProperties: {
+                name: null,
+                duration: null,
+                "iteration-count": null,
+                "animation-direction": null,
+                "animation-timing-function": null,
+                "animation-fill-mode": null,
+                "animation-delay": null
+            },
+            initialize: function(element, options) {
+                this.setElement(element);
+                this.setOptions(options);
+                return this;
+            },
+            setName: function(name) {
+                this._name = name;
+                return this;
+            },
+            getName: function() {
+                return this._name;
+            },
+            setElement: function(element) {
+                this.element = document.id(element);
+                return this;
+            },
+            getElement: function() {
+                return this.element;
+            },
+            setAnimationClass: function(value) {
+                this.animationClass = value;
+                return this;
+            },
+            getAnimationClass: function() {
+                return this.animationClass;
+            },
+            setAnimationName: function(value) {
+                this.animationProperties["name"] = value;
+                return this;
+            },
+            getAnimationName: function() {
+                return this.animationProperties["name"];
+            },
+            setAnimationDuration: function(value) {
+                this.animationProperties["duration"] = value;
+                return this;
+            },
+            getAnimationDuration: function() {
+                return this.animationProperties["duration"];
+            },
+            setAnimationIterationCount: function(value) {
+                this.animationProperties["iteration-count"] = value;
+                return this;
+            },
+            getAnimationIterationCount: function() {
+                return this.animationProperties["iteration-count"];
+            },
+            setAnimationDirection: function(value) {
+                this.animationProperties["direction"] = value;
+                return this;
+            },
+            getAnimationDirection: function() {
+                return this.animationProperties["direction"];
+            },
+            setAnimationTimingFunction: function(value) {
+                this.animationProperties["timing-function"] = value;
+                return this;
+            },
+            getAnimationTimingFunction: function() {
+                return this.animationProperties["timing-function"];
+            },
+            setAnimationFillMode: function(value) {
+                this.animationProperties["fill-mode"] = value;
+                return this;
+            },
+            getAnimationFillMode: function() {
+                return this.animationProperties["fill-mode"];
+            },
+            setAnimationDelay: function(value) {
+                this.animationProperties["delay"] = value;
+                return this;
+            },
+            getAnimationDelay: function() {
+                return this.animationProperties["delay"];
+            },
+            attach: function() {
+                this.element.addEvent("ownanimationend", this.bound("onAnimationEnd"));
+                this.element.addClass(this.animationClass);
+                Object.each(this.animationProperties, function(val, key) {
+                    this.element.setStyle("animation-" + key, val);
+                }, this);
+                return this;
+            },
+            detach: function() {
+                this.element.removeEvent("ownanimationend", this.bound("onAnimationEnd"));
+                this.element.removeClass(this.animationClass);
+                Object.each(this.animationProperties, function(val, key) {
+                    this.element.setStyle("animation-" + key, null);
+                }, this);
+                return this;
+            },
+            start: function() {
+                if (this._running) return this;
+                this._running = true;
+                this.attach();
+                this.fireEvent("start");
+                return this;
+            },
+            stop: function() {
+                if (this._running === false) return this;
+                this._running = false;
+                this.detach();
+                this.fireEvent("stop");
+                return this;
+            },
+            isRunning: function() {
+                return this._running;
+            },
+            onAnimationEnd: function(e) {
+                if (this._running === false) return;
+                if (this.element !== e.target) return;
+                e.stop();
+                this._running = false;
+                this.fireEvent("end");
+                this.detach();
+            }
+        });
+    },
+    q: function(require, module, exports, global) {
         "use strict";
-        var requestFrame = require("l").request;
-        var cancelFrame = require("l").cancel;
         var Component = moobile.Component = new Class({
             Extends: moobile.Emitter,
             __name: null,
@@ -938,7 +1016,6 @@
             __parent: null,
             __children: [],
             __visible: true,
-            __display: true,
             __style: null,
             __listeners: {},
             __callbacks: {},
@@ -947,7 +1024,6 @@
                 y: 0
             },
             __updateLayout: false,
-            __updateTimeout: null,
             element: null,
             options: {
                 className: null,
@@ -956,25 +1032,9 @@
                 components: null
             },
             initialize: function(element, options, name) {
-                this.element = Element.from(element);
-                if (this.element === null) {
-                    this.element = document.createElement(this.options.tagName);
-                }
-                this.__name = name || this.element.get("data-name");
-                this.element.store("moobile:component", this);
-                options = options || {};
-                for (var option in this.options) {
-                    if (options[option] === undefined) {
-                        var value = this.element.get("data-option-" + option.hyphenate());
-                        if (value !== null) {
-                            try {
-                                value = JSON.parse(value);
-                            } catch (e) {}
-                            options[option] = value;
-                        }
-                    }
-                }
+                this.setElement(element);
                 this.setOptions(options);
+                this.__name = name || this.element.get("data-name");
                 var marker = this.element;
                 var exists = document.contains(this.element);
                 if (exists) this.element = this.element.clone(true, true);
@@ -995,8 +1055,35 @@
                 this.__children = null;
                 this.__callbacks = null;
                 this.__listeners = null;
-                this.__updateTimeout = clearTimeout(this.__updateTimeout);
+                this.__updateRefresh = clearTimeout(this.__updateRefresh);
                 return this;
+            },
+            setElement: function(element) {
+                if (this.element) {
+                    this.element.destroy();
+                    this.element = null;
+                }
+                this.element = Element.from(element);
+                if (this.element === null) {
+                    this.element = document.createElement(this.options.tagName);
+                }
+                this.element.store("moobile:component", this);
+                return this;
+            },
+            setOptions: function(options) {
+                options = options || {};
+                for (var option in this.options) {
+                    if (options[option] === undefined) {
+                        var value = this.element.get("data-option-" + option.hyphenate());
+                        if (value !== null) {
+                            try {
+                                value = JSON.parse(value);
+                            } catch (e) {}
+                            options[option] = value;
+                        }
+                    }
+                }
+                return this.parent(options);
             },
             addEvent: function(type, fn, internal) {
                 var name = type.split(":")[0];
@@ -1031,15 +1118,11 @@
                 return this.parent(type, fn);
             },
             supportNativeEvent: function(name) {
-                return [ "click", "dblclick", "mouseup", "mousedown", "mouseover", "mouseout", "mousemove", "keydown", "keypress", "keyup", "touchstart", "touchmove", "touchend", "touchcancel", "gesturestart", "gesturechange", "gestureend", "tap", "tapstart", "tapmove", "tapend", "pinch", "swipe", "touchold", "animationend", "transitionend", "owntransitionend", "ownanimationend" ].contains(name);
+                return [ "click", "dblclick", "mouseup", "mousedown", "mouseover", "mouseout", "mousemove", "keydown", "keypress", "keyup", "touchstart", "touchmove", "touchend", "touchcancel", "gesturestart", "gesturechange", "gestureend", "tap", "tapstart", "tapmove", "tapend", "tapcancel", "pinch", "swipe", "touchold", "animationend", "transitionend", "owntransitionend", "ownanimationend" ].contains(name);
             },
             addChildComponent: function(component, where, context) {
                 component.removeFromParentComponent();
-                if (context) {
-                    context = document.id(context) || this.element.getElement(context);
-                } else {
-                    context = this.element;
-                }
+                context = context ? document.id(context) || this.element.getElement(context) : this.element;
                 this.__willAddChildComponent(component);
                 var element = document.id(component);
                 if (where || !this.hasElement(element)) {
@@ -1209,25 +1292,22 @@
             },
             setStyle: function(name) {
                 if (arguments.length === 2) {
-                    var key = arguments[0];
-                    var val = arguments[1];
-                    this.element.setStyle(key, val);
-                } else {
-                    if (this.__style) {
-                        this.__style.detach.call(this, this.element);
-                        this.__style = null;
-                    }
-                    var style = Component.getStyle(name, this);
-                    if (style) {
-                        style.attach.call(this, this.element);
-                    }
-                    this.__style = style;
+                    this.element.setStyle(arguments[0], arguments[1]);
+                    return this.updateLayout();
                 }
-                this.updateLayout();
-                return this;
+                if (this.__style) {
+                    this.__style.detach.call(this, this.element);
+                    this.__style = null;
+                }
+                var style = Component.getStyle(name, this);
+                if (style) {
+                    style.attach.call(this, this.element);
+                }
+                this.__style = style;
+                return this.updateLayout();
             },
             getStyle: function() {
-                return this.__style ? this.__style.name : null;
+                return arguments.length === 1 ? this.element.getStyle(arguments[0]) : this.__style && this.__style.name || null;
             },
             hasStyle: function(name) {
                 return this.__style ? this.__style.name === name : false;
@@ -1312,62 +1392,34 @@
                 return this.element.getPosition(document.id(relative) || this.__parent);
             },
             show: function() {
-                if (this.__display === true) return;
-                if (this.__display === true && this.__visible === false) return;
-                var items = [];
-                var filter = function(child) {
-                    if (child === this || child.__display) {
-                        items.push(child);
-                        return true;
-                    }
-                }.bind(this);
-                invokeSome.call(this, filter, "__willShow");
+                if (this.__visible === true) return this;
                 this.removeClass("hidden");
-                this.__display = true;
                 this.__visible = true;
-                var children = function(child) {
-                    return items.contains(child);
-                };
-                assignSome.call(this, children, "__visible", true);
-                invokeSome.call(this, children, "__didShow");
+                this.__didShow();
                 this.updateLayout();
                 return this;
             },
             hide: function() {
-                if (this.__display === false) return this;
-                var items = [];
-                var filter = function(child) {
-                    if (child === this || child.__display === true && child.__visible === true) {
-                        items.push(child);
-                        return true;
-                    }
-                }.bind(this);
-                var children = function(child) {
-                    return items.contains(child);
-                };
-                invokeSome.call(this, filter, "__willHide");
+                if (this.__visible === false) return this;
                 this.addClass("hidden");
                 this.__visible = false;
-                this.__display = false;
-                assignSome.call(this, children, "__visible", false);
-                invokeSome.call(this, children, "__didHide");
+                this.__didHide();
                 this.updateLayout(false);
                 return this;
             },
             isVisible: function() {
                 return this.__visible;
             },
-            updateLayout: function(update, dispatcher) {
-                update = update && this.__ready && this.__display && this.__visible;
-                if (this.__updateLayout === update) return this;
-                this.__updateLayout = update;
-                if (this.__updateTimeout) {
-                    this.__updateTimeout = cancelFrame(this.__updateTimeout);
+            updateLayout: function(update) {
+                if (this.__updateLayout === false) {
+                    this.__updateLayout = true;
+                    updateLayout(this);
                 }
-                if (this.__updateLayout && !dispatcher) {
-                    this.__updateTimeout = requestFrame(this.__didUpdateLayout.bind(this));
-                }
-                this.__children.invoke("updateLayout", update, this);
+                return this;
+            },
+            cascade: function(func) {
+                func.call(this, this);
+                this.__children.invoke("cascade", func);
                 return this;
             },
             willBuild: function() {},
@@ -1396,13 +1448,6 @@
                 this.__parentComponentWillChange(parent);
                 this.__parent = parent;
                 this.__parentComponentDidChange(parent);
-                if (parent) {
-                    if (this.__display) {
-                        this.__visible = this.__isVisible();
-                    }
-                } else {
-                    this.__visible = this.__display;
-                }
                 return this;
             },
             __setWindow: function(window) {
@@ -1496,15 +1541,11 @@
                 this.fireEvent("didbecomeready");
             },
             __didUpdateLayout: function() {
-                if (this.__updateTimeout) {
-                    this.__updateTimeout = cancelFrame(this.__updateTimeout);
-                }
                 if (this.__updateLayout) {
                     this.__updateLayout = false;
                     this.didUpdateLayout();
                     this.fireEvent("didupdatelayout");
                 }
-                this.__children.invoke("__didUpdateLayout");
             },
             __willShow: function() {
                 this.willShow();
@@ -1519,12 +1560,6 @@
             __didHide: function() {
                 this.didHide();
                 this.fireEvent("hide");
-            },
-            __isVisible: function() {
-                if (this.__display) {
-                    return this.__parent ? this.__parent.__isVisible() : true;
-                }
-                return false;
             },
             getChildComponentOfType: function(type, name) {
                 return this.getChildComponentByType(type, name);
@@ -1548,86 +1583,6 @@
                 return this.hasComponentByType(type, name);
             }
         });
-        var invokeAll = function(method, args) {
-            this[method].apply(this, args);
-            var each = function(child) {
-                invokeAll.apply(child, [ method, args ]);
-            };
-            this.__children.each(each);
-        };
-        var assignAll = function(key, val) {
-            this[key] = val;
-            var each = function(child) {
-                assignAll.apply(child, [ key, val ]);
-            };
-            this.__children.each(each);
-        };
-        var invokeSome = function(filter, method, args) {
-            if (filter(this)) this[method].apply(this, args);
-            var each = function(child) {
-                invokeSome.apply(child, [ filter, method, args ]);
-            };
-            this.__children.each(each);
-        };
-        var assignSome = function(filter, key, val) {
-            if (filter(this)) this[key] = val;
-            var each = function(child) {
-                assignSome.apply(child, [ filter, key, val ]);
-            };
-            this.__children.each(each);
-        };
-        var insert = function(component) {
-            var index = 0;
-            var node = document.id(component);
-            do {
-                var prev = node.previousSibling;
-                if (prev === null) {
-                    node = node.parentNode;
-                    if (node === this.element) break;
-                    continue;
-                }
-                node = prev;
-                if (node.nodeType !== 1) continue;
-                var previous = node.retrieve("moobile:component");
-                if (previous) {
-                    index = this.getChildComponentIndex(previous) + 1;
-                    break;
-                }
-                var children = node.childNodes;
-                if (children.length) {
-                    var found = position.call(this, node);
-                    if (found !== null) {
-                        index = found;
-                        break;
-                    }
-                }
-            } while (node);
-            this.__children.splice(index, 0, component);
-            return this;
-        };
-        var position = function(root) {
-            var node = root.lastChild;
-            do {
-                if (node.nodeType !== 1) {
-                    node = node.previousSibling;
-                    if (node === null) return 0;
-                    continue;
-                }
-                var component = node.retrieve("moobile:component");
-                if (component) {
-                    return this.getChildComponentIndex(component) + 1;
-                }
-                var children = node.childNodes;
-                if (children.length) {
-                    var found = position.call(this, node);
-                    if (found >= 0) {
-                        return found;
-                    }
-                }
-                node = node.previousSibling;
-            } while (node);
-            return null;
-        };
         Component.defineRole = function(name, context, options, handler) {
             context = (context || Component).prototype;
             if (context.__roles__ === undefined) {
@@ -1686,224 +1641,122 @@
         Component.defineAttribute("data-style", null, function(value) {
             this.options.styleName = value;
         });
-    },
-    l: function(require, module, exports, global) {
-        "use strict";
-        var array = require("m");
-        var requestFrame = global.requestAnimationFrame || global.webkitRequestAnimationFrame || global.mozRequestAnimationFrame || global.oRequestAnimationFrame || global.msRequestAnimationFrame || function(callback) {
-            return setTimeout(callback, 1e3 / 60);
-        };
-        var callbacks = [];
-        var iterator = function(time) {
-            var split = callbacks.splice(0, callbacks.length);
-            for (var i = 0, l = split.length; i < l; i++) split[i](time || (time = +(new Date)));
-        };
-        var cancel = function(callback) {
-            var io = array.indexOf(callbacks, callback);
-            if (io > -1) callbacks.splice(io, 1);
-        };
-        var request = function(callback) {
-            var i = callbacks.push(callback);
-            if (i === 1) requestFrame(iterator);
-            return function() {
-                cancel(callback);
+        var updateLayoutTime = null;
+        var updateLayoutRoot = null;
+        var assignAll = function(key, val) {
+            this[key] = val;
+            var each = function(child) {
+                assignAll.apply(child, [ key, val ]);
             };
+            this.__children.each(each);
         };
-        exports.request = request;
-        exports.cancel = cancel;
-    },
-    m: function(require, module, exports, global) {
-        "use strict";
-        var array = require("n")["array"];
-        var names = ("pop,push,reverse,shift,sort,splice,unshift,concat,join,slice,toString,indexOf,lastIndexOf,forEach,every,some" + ",filter,map,reduce,reduceRight").split(",");
-        for (var methods = {}, i = 0, name, method; name = names[i++]; ) if (method = Array.prototype[name]) methods[name] = method;
-        if (!methods.filter) methods.filter = function(fn, context) {
-            var results = [];
-            for (var i = 0, l = this.length >>> 0; i < l; i++) if (i in this) {
-                var value = this[i];
-                if (fn.call(context, value, i, this)) results.push(value);
-            }
-            return results;
+        var invokeSome = function(filter, method, args) {
+            if (filter(this)) this[method].apply(this, args);
+            var each = function(child) {
+                invokeSome.apply(child, [ filter, method, args ]);
+            };
+            this.__children.each(each);
         };
-        if (!methods.indexOf) methods.indexOf = function(item, from) {
-            for (var l = this.length >>> 0, i = from < 0 ? Math.max(0, l + from) : from || 0; i < l; i++) {
-                if (i in this && this[i] === item) return i;
-            }
-            return -1;
+        var assignSome = function(filter, key, val) {
+            if (filter(this)) this[key] = val;
+            var each = function(child) {
+                assignSome.apply(child, [ filter, key, val ]);
+            };
+            this.__children.each(each);
         };
-        if (!methods.map) methods.map = function(fn, context) {
-            var length = this.length >>> 0, results = Array(length);
-            for (var i = 0, l = length; i < l; i++) {
-                if (i in this) results[i] = fn.call(context, this[i], i, this);
-            }
-            return results;
+        var invokeAll = function(method, args) {
+            this[method].apply(this, args);
+            var each = function(child) {
+                invokeAll.apply(child, [ method, args ]);
+            };
+            this.__children.each(each);
         };
-        if (!methods.every) methods.every = function(fn, context) {
-            for (var i = 0, l = this.length >>> 0; i < l; i++) {
-                if (i in this && !fn.call(context, this[i], i, this)) return false;
-            }
-            return true;
-        };
-        if (!methods.some) methods.some = function(fn, context) {
-            for (var i = 0, l = this.length >>> 0; i < l; i++) {
-                if (i in this && fn.call(context, this[i], i, this)) return true;
-            }
-            return false;
-        };
-        if (!methods.forEach) methods.forEach = function(fn, context) {
-            for (var i = 0, l = this.length >>> 0; i < l; i++) {
-                if (i in this) fn.call(context, this[i], i, this);
-            }
-        };
-        var toString = Object.prototype.toString;
-        array.isArray = Array.isArray || function(self) {
-            return toString.call(self) === "[object Array]";
-        };
-        module.exports = array.implement(methods);
-    },
-    n: function(require, module, exports, global) {
-        "use strict";
-        var prime = require("o"), type = require("p");
-        var slice = Array.prototype.slice;
-        var ghost = prime({
-            constructor: function ghost(self) {
-                this.valueOf = function() {
-                    return self;
-                };
-                this.toString = function() {
-                    return self + "";
-                };
-                this.is = function(object) {
-                    return self === object;
-                };
-            }
-        });
-        var shell = function(self) {
-            if (self == null || self instanceof ghost) return self;
-            var g = shell[type(self)];
-            return g ? new g(self) : self;
-        };
-        var register = function() {
-            var g = prime({
-                inherits: ghost
-            });
-            return prime({
-                constructor: function(self) {
-                    return new g(self);
-                },
-                define: function(key, descriptor) {
-                    var method = descriptor.value;
-                    this[key] = function(self) {
-                        return arguments.length > 1 ? method.apply(self, slice.call(arguments, 1)) : method.call(self);
-                    };
-                    g.prototype[key] = function() {
-                        return shell(method.apply(this.valueOf(), arguments));
-                    };
-                    prime.define(this.prototype, key, descriptor);
-                    return this;
+        var insert = function(component) {
+            var index = 0;
+            var node = document.id(component);
+            do {
+                var prev = node.previousSibling;
+                if (prev === null) {
+                    node = node.parentNode;
+                    if (node === this.element) break;
+                    continue;
                 }
-            });
-        };
-        for (var types = "string,number,array,object,date,function,regexp".split(","), i = types.length; i--; ) shell[types[i]] = register();
-        module.exports = shell;
-    },
-    o: function(require, module, exports, global) {
-        "use strict";
-        var has = function(self, key) {
-            return Object.hasOwnProperty.call(self, key);
-        };
-        var each = function(object, method, context) {
-            for (var key in object) if (method.call(context, object[key], key, object) === false) break;
-            return object;
-        };
-        if (!{
-            valueOf: 0
-        }.propertyIsEnumerable("valueOf")) {
-            var buggy = "constructor,toString,valueOf,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString".split(",");
-            var proto = Object.prototype;
-            each = function(object, method, context) {
-                for (var key in object) if (method.call(context, object[key], key, object) === false) return object;
-                for (var i = 0; key = buggy[i]; i++) {
-                    var value = object[key];
-                    if ((value !== proto[key] || has(object, key)) && method.call(context, value, key, object) === false) break;
+                node = prev;
+                if (node.nodeType !== 1) continue;
+                var previous = node.retrieve("moobile:component");
+                if (previous) {
+                    index = this.getChildComponentIndex(previous) + 1;
+                    break;
                 }
-                return object;
-            };
-        }
-        var create = Object.create || function(self) {
-            var constructor = function() {};
-            constructor.prototype = self;
-            return new constructor;
-        };
-        var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-        var define = Object.defineProperty;
-        try {
-            var obj = {
-                a: 1
-            };
-            getOwnPropertyDescriptor(obj, "a");
-            define(obj, "a", {
-                value: 2
-            });
-        } catch (e) {
-            getOwnPropertyDescriptor = function(object, key) {
-                return {
-                    value: object[key]
-                };
-            };
-            define = function(object, key, descriptor) {
-                object[key] = descriptor.value;
-                return object;
-            };
-        }
-        var implement = function(proto) {
-            each(proto, function(value, key) {
-                if (key !== "constructor" && key !== "define" && key !== "inherits") this.define(key, getOwnPropertyDescriptor(proto, key) || {
-                    writable: true,
-                    enumerable: true,
-                    configurable: true,
-                    value: value
-                });
-            }, this);
+                var children = node.childNodes;
+                if (children.length) {
+                    var found = position.call(this, node);
+                    if (found !== null) {
+                        index = found;
+                        break;
+                    }
+                }
+            } while (node);
+            this.__children.splice(index, 0, component);
             return this;
         };
-        var prime = function(proto) {
-            var superprime = proto.inherits;
-            var constructor = has(proto, "constructor") ? proto.constructor : superprime ? function() {
-                return superprime.apply(this, arguments);
-            } : function() {};
-            if (superprime) {
-                var superproto = superprime.prototype;
-                var cproto = constructor.prototype = create(superproto);
-                constructor.parent = superproto;
-                cproto.constructor = constructor;
+        var position = function(root) {
+            var node = root.lastChild;
+            do {
+                if (node.nodeType !== 1) {
+                    node = node.previousSibling;
+                    if (node === null) return 0;
+                    continue;
+                }
+                var component = node.retrieve("moobile:component");
+                if (component) {
+                    return this.getChildComponentIndex(component) + 1;
+                }
+                var children = node.childNodes;
+                if (children.length) {
+                    var found = position.call(this, node);
+                    if (found >= 0) {
+                        return found;
+                    }
+                }
+                node = node.previousSibling;
+            } while (node);
+            return null;
+        };
+        var updateLayout = function(component) {
+            if (!(component instanceof moobile.Window) && component.hasWindow() === false) return;
+            updateLayoutTime = cancelAnimationFrame(updateLayoutTime);
+            updateLayoutTime = requestAnimationFrame(onUpdateLayout);
+            if (updateLayoutRoot === null) {
+                updateLayoutRoot = component;
+                return;
+            } else if (updateLayoutRoot instanceof moobile.Window) {
+                return;
             }
-            constructor.define = proto.define || superprime && superprime.define || function(key, descriptor) {
-                define(this.prototype, key, descriptor);
-                return this;
-            };
-            constructor.implement = implement;
-            return constructor.implement(proto);
+            var parent = component.getParentComponent();
+            while (parent) {
+                if (parent !== updateLayoutRoot) {
+                    parent = parent.getParentComponent();
+                    continue;
+                }
+                return;
+            }
+            console.log("Setting new root");
+            updateLayoutRoot = component;
         };
-        prime.has = has;
-        prime.each = each;
-        prime.create = create;
-        prime.define = define;
-        module.exports = prime;
-    },
-    p: function(require, module, exports, global) {
-        "use strict";
-        var toString = Object.prototype.toString, types = /number|object|array|string|function|date|regexp|boolean/;
-        var type = function(object) {
-            if (object == null) return "null";
-            var string = toString.call(object).slice(8, -1).toLowerCase();
-            if (string === "number" && isNaN(object)) return "null";
-            if (types.test(string)) return string;
-            return "object";
+        var onUpdateLayout = function() {
+            if (updateLayoutRoot) {
+                updateLayoutRoot.cascade(function(component) {
+                    if (component.__updateLayout) {
+                        component.__didUpdateLayout();
+                        component.__updateLayout = false;
+                    }
+                });
+                updateLayoutRoot = null;
+            }
         };
-        module.exports = type;
     },
-    q: function(require, module, exports, global) {
+    r: function(require, module, exports, global) {
         "use strict";
         var Overlay = moobile.Overlay = new Class({
             Extends: moobile.Component,
@@ -1940,7 +1793,7 @@
             }
         });
     },
-    r: function(require, module, exports, global) {
+    s: function(require, module, exports, global) {
         "use strict";
         var Control = moobile.Control = new Class({
             Extends: moobile.Component,
@@ -1991,7 +1844,7 @@
             }
         });
     },
-    s: function(require, module, exports, global) {
+    t: function(require, module, exports, global) {
         "use strict";
         var Text = moobile.Text = new Class({
             Extends: moobile.Control,
@@ -2029,7 +1882,7 @@
             this.addChildComponent(moobile.Component.create(Text, element, "data-text"));
         });
     },
-    t: function(require, module, exports, global) {
+    u: function(require, module, exports, global) {
         "use strict";
         var ActivityIndicator = moobile.ActivityIndicator = new Class({
             Extends: moobile.Control,
@@ -2048,7 +1901,7 @@
             this.addChildComponent(moobile.Component.create(ActivityIndicator, element, "data-activity-indicator"));
         });
     },
-    u: function(require, module, exports, global) {
+    v: function(require, module, exports, global) {
         "use strict";
         var Bar = moobile.Bar = new Class({
             Extends: moobile.Control,
@@ -2077,7 +1930,7 @@
             }
         });
     },
-    v: function(require, module, exports, global) {
+    w: function(require, module, exports, global) {
         "use strict";
         var ButtonGroup = moobile.ButtonGroup = new Class({
             Extends: moobile.Control,
@@ -2131,7 +1984,7 @@
             setSelectedButtonIndex: function(index) {
                 var child = null;
                 if (index >= 0) {
-                    child = this.getChildComponentByTypeAt(Button, index);
+                    child = this.getChildComponentByTypeAt(moobile.Button, index);
                 }
                 return this.setSelectedButton(child);
             },
@@ -2143,43 +1996,43 @@
                 return this;
             },
             addButton: function(button, where) {
-                return this.addChildComponent(Button.from(button), where);
+                return this.addChildComponent(moobile.Button.from(button), where);
             },
             addButtonAfter: function(button, after) {
-                return this.addChildComponentAfter(Button.from(button), after);
+                return this.addChildComponentAfter(moobile.Button.from(button), after);
             },
             addButtonBefore: function(button, before) {
-                return this.addChildComponentBefore(Button.from(button), before);
+                return this.addChildComponentBefore(moobile.Button.from(button), before);
             },
             addButtons: function(buttons, where) {
                 return this.addChildComponents(buttons.map(function(button) {
-                    return Button.from(button);
+                    return moobile.Button.from(button);
                 }), where);
             },
             addButtonsAfter: function(buttons, after) {
                 return this.addChildComponentsAfter(buttons.map(function(button) {
-                    return Button.from(button);
+                    return moobile.Button.from(button);
                 }), after);
             },
             addButtonsBefore: function(buttons, before) {
                 return this.addChildComponentsBefore(buttons.map(function(button) {
-                    return Button.from(button);
+                    return moobile.Button.from(button);
                 }), before);
             },
             getButtons: function() {
-                return this.getChildComponentsByType(Button);
+                return this.getChildComponentsByType(moobile.Button);
             },
             getButton: function(name) {
-                return this.getChildComponentByType(Button, name);
+                return this.getChildComponentByType(moobile.Button, name);
             },
             getButtonAt: function(index) {
-                return this.getChildComponentByTypeAt(Button, index);
+                return this.getChildComponentByTypeAt(moobile.Button, index);
             },
             removeButton: function(button, destroy) {
                 return this.removeChildComponent(button, destroy);
             },
             removeAllButtons: function(destroy) {
-                return this.removeAllChildComponentsByType(Button, destroy);
+                return this.removeAllChildComponentsByType(moobile.Button, destroy);
             },
             setSelectable: function(selectable) {
                 this.__selectable = selectable;
@@ -2196,13 +2049,13 @@
             },
             didAddChildComponent: function(child) {
                 this.parent(child);
-                if (child instanceof Button) {
+                if (child instanceof moobile.Button) {
                     child.addEvent("tap", this.bound("onButtonTap"));
                 }
             },
             didRemoveChildComponent: function(child) {
                 this.parent(child);
-                if (child instanceof Button) {
+                if (child instanceof moobile.Button) {
                     child.removeEvent("tap", this.bound("onButtonTap"));
                 }
             },
@@ -2220,7 +2073,7 @@
             this.addChildComponent(moobile.Component.create(ButtonGroup, element, "data-button-group"));
         });
     },
-    w: function(require, module, exports, global) {
+    x: function(require, module, exports, global) {
         "use strict";
         var Button = moobile.Button = new Class({
             Extends: moobile.Control,
@@ -2323,7 +2176,7 @@
             }
         });
     },
-    x: function(require, module, exports, global) {
+    y: function(require, module, exports, global) {
         "use strict";
         var Image = moobile.Image = new Class({
             Extends: moobile.Control,
@@ -2431,7 +2284,7 @@
             this.addChildComponent(moobile.Component.create(Image, element, "data-image"));
         });
     },
-    y: function(require, module, exports, global) {
+    z: function(require, module, exports, global) {
         "use strict";
         var List = moobile.List = new Class({
             Extends: moobile.Control,
@@ -2611,7 +2464,7 @@
             }
         });
     },
-    z: function(require, module, exports, global) {
+    "10": function(require, module, exports, global) {
         "use strict";
         var ListItem = moobile.ListItem = new Class({
             Extends: moobile.Control,
@@ -2775,14 +2628,15 @@
             }
         });
     },
-    "10": function(require, module, exports, global) {
+    "11": function(require, module, exports, global) {
         "use strict";
         var NavigationBar = moobile.NavigationBar = new Class({
             Extends: moobile.Bar,
             __title: null,
             contentElement: null,
             options: {
-                title: null
+                title: null,
+                centerTitle: true
             },
             willBuild: function() {
                 this.parent();
@@ -2838,12 +2692,10 @@
             getTitle: function() {
                 return this.__title;
             },
-            shouldCenterTitle: function() {
-                return Theme.getName() === "ios";
-            },
             didUpdateLayout: function() {
+                console.log("Update Layout et CENTER TITLE");
                 this.parent();
-                if (this.shouldCenterTitle() === false) return this;
+                if (!this.options.centerTitle) return this;
                 var element = this.element;
                 var content = this.contentElement;
                 content.setStyle("padding-left", 0);
@@ -2900,7 +2752,7 @@
             this.setTitle(moobile.Component.create(moobile.Text, element, "data-title"));
         });
     },
-    "11": function(require, module, exports, global) {
+    "12": function(require, module, exports, global) {
         "use strict";
         var Slider = moobile.Slider = new Class({
             Extends: moobile.Control,
@@ -3131,7 +2983,7 @@
             this.addChildComponent(moobile.Component.create(Slider, element, "data-slider"));
         });
     },
-    "12": function(require, module, exports, global) {
+    "13": function(require, module, exports, global) {
         "use strict";
         var TabBar = moobile.TabBar = new Class({
             Extends: moobile.Bar,
@@ -3251,7 +3103,7 @@
             this.addChildComponent(moobile.Component.create(Tabmoobile.Bar, element, "data-tab-bar"));
         });
     },
-    "13": function(require, module, exports, global) {
+    "14": function(require, module, exports, global) {
         "use strict";
         var Tab = moobile.Tab = new Class({
             Extends: moobile.Control,
@@ -3339,7 +3191,7 @@
             this.setImage(moobile.Component.create(moobile.Image, element, "data-image"));
         });
     },
-    "14": function(require, module, exports, global) {
+    "15": function(require, module, exports, global) {
         "use strict";
         var Alert = moobile.Alert = new Class({
             Extends: moobile.Component,
@@ -3540,7 +3392,7 @@
             }
         });
     },
-    "15": function(require, module, exports, global) {
+    "16": function(require, module, exports, global) {
         "use strict";
         var Scroller = moobile.Scroller = new Class({
             Extends: moobile.Emitter,
@@ -3632,9 +3484,9 @@
             });
         });
     },
-    "16": function(require, module, exports, global) {
+    "17": function(require, module, exports, global) {
         "use strict";
-        var iScroll = require("17").iScroll;
+        var iScroll = require("18").iScroll;
         var touch = null;
         var IScroll = moobile.Scroller.IScroll = new Class({
             Extends: moobile.Scroller,
@@ -3742,7 +3594,7 @@
             return true;
         };
     },
-    "17": function(require, module, exports, global) {
+    "18": function(require, module, exports, global) {
         (function(window, doc) {
             var m = Math, dummyStyle = doc.createElement("div").style, vendor = function() {
                 var vendors = "t,webkitT,MozT,msT,OT".split(","), t, i = 0, l = vendors.length;
@@ -4535,10 +4387,10 @@
             if (typeof exports !== "undefined") exports.iScroll = iScroll; else window.iScroll = iScroll;
         })(window, document);
     },
-    "18": function(require, module, exports, global) {
+    "19": function(require, module, exports, global) {
         "use strict";
-        var requestFrame = require("l").request;
-        var cancelFrame = require("l").cancel;
+        var requestFrame = require("1").request;
+        var cancelFrame = require("1").cancel;
         var Native = moobile.Scroller.Native = new Class({
             Extends: moobile.Scroller,
             _animating: false,
@@ -4674,7 +4526,7 @@
             return Browser.Platform.ios && "WebkitOverflowScrolling" in document.createElement("div").style;
         };
     },
-    "19": function(require, module, exports, global) {
+    "1a": function(require, module, exports, global) {
         "use strict";
         var element = null;
         var configs = {};
@@ -4698,11 +4550,11 @@
             Theme.init();
         });
     },
-    "1a": function(require, module, exports, global) {
+    "1b": function(require, module, exports, global) {
         "use strict";
         var View = moobile.View = new Class({
             Extends: moobile.Component,
-            _layout: null,
+            __layout: null,
             contentElement: null,
             contentWrapperElement: null,
             options: {
@@ -4711,7 +4563,7 @@
             willBuild: function() {
                 this.parent();
                 this.addClass("view");
-                var content = this.getRoleElement("content") || this.getRoleElement("view-content");
+                var content = this.getRoleElement("content");
                 if (content === null) {
                     content = document.createElement("div");
                     content.ingest(this.element);
@@ -4773,26 +4625,26 @@
                 return this.contentWrapperElement;
             },
             setLayout: function(layout) {
-                if (this._layout === layout) return this;
+                if (this.__layout === layout) return this;
                 this.willChangeLayout(layout);
-                if (this._layout) this.removeClass("view-layout-" + this._layout);
-                this._layout = layout;
-                if (this._layout) this.addClass("view-layout-" + this._layout);
+                if (this.__layout) this.removeClass("view-layout-" + this.__layout);
+                this.__layout = layout;
+                if (this.__layout) this.addClass("view-layout-" + this.__layout);
                 this.didChangeLayout(layout);
                 return this;
             },
             getLayout: function() {
-                return this._layout;
+                return this.__layout;
             },
             willChangeLayout: function(layout) {},
             didChangeLayout: function(layout) {}
         });
         Class.refactor(moobile.Component, {
-            _parentView: null,
+            __parentView: null,
             setParentView: function(parentView) {
-                if (this._parentView === parentView) return this;
+                if (this.__parentView === parentView) return this;
                 this.parentViewWillChange(parentView);
-                this._parentView = parentView;
+                this.__parentView = parentView;
                 this.parentViewDidChange(parentView);
                 if (this instanceof View) return this;
                 var by = function(component) {
@@ -4802,13 +4654,13 @@
                 return this;
             },
             getParentView: function() {
-                return this._parentView;
+                return this.__parentView;
             },
             parentViewWillChange: function(parentView) {},
             parentViewDidChange: function(parentView) {},
             willAddChildComponent: function(component) {
                 this.previous(component);
-                component.setParentView(this._parentView);
+                component.setParentView(this.__parentView);
             },
             willRemoveChildComponent: function(component) {
                 this.previous(component);
@@ -4861,7 +4713,7 @@
             }
         });
     },
-    "1b": function(require, module, exports, global) {
+    "1c": function(require, module, exports, global) {
         "use strict";
         var ScrollView = moobile.ScrollView = new Class({
             Extends: moobile.View,
@@ -4874,16 +4726,16 @@
                 x: null,
                 y: null
             },
-            _page: {
+            __page: {
                 x: null,
                 y: null
             },
-            _pageOffset: {
+            __pageOffset: {
                 x: 0,
                 y: 0
             },
-            _scrollToPageTimer: null,
-            _contentSize: {
+            __scrollToPageTimer: null,
+            __contentSize: {
                 x: null,
                 y: null
             },
@@ -4932,12 +4784,12 @@
                     snapToPageDelay: this.options.snapToPageDelay
                 };
                 this.__scroller = moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
-                this.__scroller.addEvent("scroll", this.bound("_onScroll"));
-                this.__scroller.addEvent("scrollend", this.bound("_onScrollEnd"));
-                this.__scroller.addEvent("scrollstart", this.bound("_onScrollStart"));
-                this.__scroller.addEvent("touchcancel", this.bound("_onTouchCancel"));
-                this.__scroller.addEvent("touchstart", this.bound("_onTouchStart"));
-                this.__scroller.addEvent("touchend", this.bound("_onTouchEnd"));
+                this.__scroller.addEvent("scroll", this.bound("__onScroll"));
+                this.__scroller.addEvent("scrollend", this.bound("__onScrollEnd"));
+                this.__scroller.addEvent("scrollstart", this.bound("__onScrollStart"));
+                this.__scroller.addEvent("touchcancel", this.bound("__onTouchCancel"));
+                this.__scroller.addEvent("touchstart", this.bound("__onTouchStart"));
+                this.__scroller.addEvent("touchend", this.bound("__onTouchEnd"));
                 var name = this.__scroller.getName();
                 if (name) {
                     this.addClass(name + "-engine");
@@ -4961,12 +4813,12 @@
                 this.__scroller.refresh();
             },
             destroy: function() {
-                this.__scroller.removeEvent("scroll", this.bound("_onScroll"));
-                this.__scroller.removeEvent("scrollend", this.bound("_onScrollEnd"));
-                this.__scroller.removeEvent("scrollstart", this.bound("_onScrollStart"));
-                this.__scroller.removeEvent("touchcancel", this.bound("_onTouchCancel"));
-                this.__scroller.removeEvent("touchstart", this.bound("_onTouchStart"));
-                this.__scroller.removeEvent("touchend", this.bound("_onTouchEnd"));
+                this.__scroller.removeEvent("scroll", this.bound("__onScroll"));
+                this.__scroller.removeEvent("scrollend", this.bound("__onScrollEnd"));
+                this.__scroller.removeEvent("scrollstart", this.bound("__onScrollStart"));
+                this.__scroller.removeEvent("touchcancel", this.bound("__onTouchCancel"));
+                this.__scroller.removeEvent("touchstart", this.bound("__onTouchStart"));
+                this.__scroller.removeEvent("touchend", this.bound("__onTouchEnd"));
                 this.__scroller.destroy();
                 this.__scroller = null;
                 this.parent();
@@ -4974,11 +4826,11 @@
             setContentSize: function(x, y) {
                 if (x >= 0 || x === null) this.contentElement.setStyle("width", x);
                 if (y >= 0 || y === null) this.contentElement.setStyle("height", y);
-                if (this._contentSize.x !== x || this._contentSize.y !== y) {
-                    this._setUpdateLayout(true);
+                if (this.__contentSize.x !== x || this.__contentSize.y !== y) {
+                    this.updateLayout();
                 }
-                this._contentSize.x = x;
-                this._contentSize.y = y;
+                this.__contentSize.x = x;
+                this.__contentSize.y = y;
                 return this;
             },
             getContentSize: function() {
@@ -5017,17 +4869,17 @@
                 if (scroll.x !== x || scroll.y !== y) {
                     this.scrollTo(x, y, time);
                 }
-                if (this._scrollToPageTimer) {
+                if (this.__scrollToPageTimer) {
                     clearTimeout(this.scrolltopage);
-                    this._scrollToPageTimer = null;
+                    this.__scrollToPageTimer = null;
                 }
-                if (this._page.x !== pageX || this._page.y !== pageY) {
-                    this._pageOffset.x = Math.abs(x - pageX * pageSizeX);
-                    this._pageOffset.y = Math.abs(y - pageY * pageSizeY);
-                    this._scrollToPageTimer = this.fireEvent.delay(time + 5, this, [ "scrolltopage", [ pageX, pageY ] ]);
+                if (this.__page.x !== pageX || this.__page.y !== pageY) {
+                    this.__pageOffset.x = Math.abs(x - pageX * pageSizeX);
+                    this.__pageOffset.y = Math.abs(y - pageY * pageSizeY);
+                    this.__scrollToPageTimer = this.fireEvent.delay(time + 5, this, [ "scrolltopage", [ pageX, pageY ] ]);
                 }
-                this._page.x = pageX;
-                this._page.y = pageY;
+                this.__page.x = pageX;
+                this.__page.y = pageY;
                 return this;
             },
             getPage: function() {
@@ -5048,7 +4900,7 @@
                 };
             },
             getPageOffset: function() {
-                return this._pageOffset;
+                return this.__pageOffset;
             },
             getScroller: function() {
                 return this.__scroller;
@@ -5062,7 +4914,7 @@
                 this.__scroller.refresh();
                 this.__scroller.scrollTo(this.__offset.x, this.__offset.y);
             },
-            _snapToPage: function() {
+            __snapToPage: function() {
                 var size = this.getContentSize();
                 var scroll = this.getContentScroll();
                 scroll.x = scroll.x > 0 ? scroll.x : 0;
@@ -5082,8 +4934,8 @@
                 var pageMoveX = (absMoveX - Math.floor(absMoveX / pageSizeX) * pageSizeX) * 100 / pageSizeX;
                 var pageMoveY = (absMoveY - Math.floor(absMoveY / pageSizeY) * pageSizeY) * 100 / pageSizeY;
                 var page = this.getPage();
-                if (moveX < 0 || this._pageOffset.x > 0) page.x += 1;
-                if (moveY < 0 || this._pageOffset.y > 0) page.y += 1;
+                if (moveX < 0 || this.__pageOffset.x > 0) page.x += 1;
+                if (moveY < 0 || this.__pageOffset.y > 0) page.y += 1;
                 if (absMoveX >= 10 && (pageMoveX >= snapToPageAt || this.__activeTouchDuration < snapToPageDelay)) page.x += moveX > 0 ? 1 : -1;
                 if (absMoveY >= 10 && (pageMoveY >= snapToPageAt || this.__activeTouchDuration < snapToPageDelay)) page.y += moveY > 0 ? 1 : -1;
                 if (page.x < 0) page.x = 0;
@@ -5094,13 +4946,13 @@
                 this.fireEvent("snaptopage", [ page.x, page.y ]);
                 return this;
             },
-            _onTouchCancel: function() {
+            __onTouchCancel: function() {
                 this.__activeTouch = null;
                 this.__activeTouchTime = null;
                 this.__activeTouchScroll = null;
                 this.__activeTouchDuration = null;
             },
-            _onTouchStart: function(e) {
+            __onTouchStart: function(e) {
                 var touch = e.changedTouches[0];
                 if (this.__activeTouch === null) {
                     this.__activeTouch = touch;
@@ -5108,22 +4960,22 @@
                     this.__activeTouchScroll = this.getContentScroll();
                 }
             },
-            _onTouchEnd: function(e) {
+            __onTouchEnd: function(e) {
                 if (e.touches.length > 0) return;
                 this.__activeTouchDuration = Date.now() - this.__activeTouchTime;
-                if (this.options.snapToPage) this._snapToPage();
+                if (this.options.snapToPage) this.__snapToPage();
                 this.__activeTouch = null;
                 this.__activeTouchTime = null;
                 this.__activeTouchScroll = null;
                 this.__activeTouchDuration = null;
             },
-            _onScroll: function() {
+            __onScroll: function() {
                 this.fireEvent("scroll");
             },
-            _onScrollStart: function() {
+            __onScrollStart: function() {
                 this.fireEvent("scrollstart");
             },
-            _onScrollEnd: function() {
+            __onScrollEnd: function() {
                 this.fireEvent("scrollend");
             },
             getScrollSize: function() {
@@ -5146,7 +4998,7 @@
             this.addChildComponent(moobile.Component.create(ScrollView, element, "data-scroll-view"));
         });
     },
-    "1c": function(require, module, exports, global) {
+    "1d": function(require, module, exports, global) {
         "use strict";
         var View = moobile.View;
         var Component = moobile.Component;
@@ -5165,7 +5017,7 @@
             this.addChildComponent(Component.create(ViewCollection, element, "data-view-collection"));
         });
     },
-    "1d": function(require, module, exports, global) {
+    "1e": function(require, module, exports, global) {
         "use strict";
         var View = moobile.View;
         var Component = moobile.Component;
@@ -5180,7 +5032,7 @@
             this.addChildComponent(Component.create(ViewQueue, element, "data-view-queue"));
         });
     },
-    "1e": function(require, module, exports, global) {
+    "1f": function(require, module, exports, global) {
         "use strict";
         var ViewSet = moobile.ViewSet = new Class({
             Extends: moobile.View,
@@ -5217,7 +5069,7 @@
             this.setTabBar(moobile.Component.create(TabBar, element, "data-tab-bar"));
         });
     },
-    "1f": function(require, module, exports, global) {
+    "1g": function(require, module, exports, global) {
         "use strict";
         var ViewStack = moobile.ViewStack = new Class({
             Extends: moobile.View,
@@ -5230,36 +5082,36 @@
             this.addChildComponent(moobile.Component.create(moobile.ViewStack, element, "data-view-stack"));
         });
     },
-    "1g": function(require, module, exports, global) {
+    "1h": function(require, module, exports, global) {
         "use strict";
         var ViewController = moobile.ViewController = new Class({
             Extends: moobile.Emitter,
-            _id: null,
-            _name: null,
-            _title: null,
-            _image: null,
-            _viewReady: false,
-            _viewTransition: null,
-            _parent: null,
-            _children: [],
-            _modal: false,
-            _modalViewController: null,
+            __id: null,
+            __name: null,
+            __title: null,
+            __image: null,
+            __viewReady: false,
+            __viewTransition: null,
+            __parent: null,
+            __children: [],
+            __modal: false,
+            __modalViewController: null,
             view: null,
             initialize: function(options, name) {
-                this._name = name;
+                this.__name = name;
                 this.setOptions(options);
                 this.loadView();
                 if (this.view) {
-                    this.view.addEvent("ready", this.bound("_onViewReady"));
-                    this.view.addEvent("layout", this.bound("_onViewLayout"));
+                    this.view.addEvent("ready", this.bound("__onViewDidBecomeReady"));
+                    this.view.addEvent("layout", this.bound("__onViewDidUpdateLayout"));
                     this.viewDidLoad();
                 }
-                window.addEvent("orientationchange", this.bound("_onWindowOrientationChange"));
+                window.addEvent("orientationchange", this.bound("__onWindowOrientationChange"));
                 return this;
             },
             loadView: function() {
                 if (this.view === null) {
-                    this.view = new View;
+                    this.view = new moobile.View;
                 }
             },
             showView: function() {
@@ -5284,8 +5136,8 @@
                 return this._addChildViewController(viewController, before, "before");
             },
             addChildViewControllerAt: function(viewController, index) {
-                if (index > this._children.length) {
-                    index = this._children.length;
+                if (index > this.__children.length) {
+                    index = this.__children.length;
                 } else if (index < 0) {
                     index = 0;
                 }
@@ -5299,7 +5151,7 @@
                 viewController.removeFromParentViewController();
                 this.willAddChildViewController(viewController);
                 if (context) {
-                    this._children.splice(this.getChildViewControllerIndex(context), 0, viewController);
+                    this.__children.splice(this.getChildViewControllerIndex(context), 0, viewController);
                     switch (where) {
                       case "before":
                         this.view.addChildComponentBefore(viewController.view, context.view);
@@ -5309,7 +5161,7 @@
                         break;
                     }
                 } else {
-                    this._children.push(viewController);
+                    this.__children.push(viewController);
                     this.view.addChildComponent(viewController.view);
                 }
                 viewController.setParentViewController(this);
@@ -5317,26 +5169,26 @@
                 return this;
             },
             getChildViewController: function(name) {
-                return this._children.find(function(viewController) {
+                return this.__children.find(function(viewController) {
                     return viewController.getName() === name;
                 });
             },
             getChildViewControllerAt: function(index) {
-                return this._children[index] || null;
+                return this.__children[index] || null;
             },
             getChildViewControllerIndex: function(viewController) {
-                return this._children.indexOf(viewController);
+                return this.__children.indexOf(viewController);
             },
             getChildViewControllers: function() {
-                return this._children;
+                return this.__children;
             },
             hasChildViewController: function(viewController) {
-                return this._children.contains(viewController);
+                return this.__children.contains(viewController);
             },
             removeChildViewController: function(viewController, destroy) {
                 if (!this.hasChildViewController(viewController)) return this;
                 this.willRemoveChildViewController(viewController);
-                this._children.erase(viewController);
+                this.__children.erase(viewController);
                 viewController.setParentViewController(null);
                 var view = viewController.getView();
                 if (view) {
@@ -5349,128 +5201,110 @@
                 return this;
             },
             removeFromParentViewController: function(destroy) {
-                if (this._parent) this._parent.removeChildViewController(this, destroy);
+                if (this.__parent) this.__parent.removeChildViewController(this, destroy);
                 return this;
             },
             removeAllChildViewControllers: function(destroy) {
-                this._children.filter(function() {
+                this.__children.filter(function() {
                     return true;
                 }).invoke("removeFromParentViewController", destroy);
                 return this;
             },
             presentModalViewController: function(viewController, viewTransition) {
-                if (this._modalViewController) return this;
+                if (this.__modalViewController) return this;
                 var parentView = this.view.getWindow();
                 if (parentView === null) throw new Error("The view to present is not ready");
                 this.willPresentModalViewController(viewController);
-                this._modalViewController = viewController;
-                this._modalViewController.setParentViewController(this);
-                this._modalViewController.setModal(true);
-                var viewToShow = this._modalViewController.getView();
+                this.__modalViewController = viewController;
+                this.__modalViewController.setParentViewController(this);
+                this.__modalViewController.setModal(true);
+                var viewToShow = this.__modalViewController.getView();
                 var viewToHide = parentView.getChildComponentsByType(View).getLastItemAtOffset(0);
                 parentView.addChildComponent(viewToShow);
                 viewTransition = viewTransition || new ViewTransition.Cover;
-                viewTransition.addEvent("start:once", this.bound("_onPresentTransitionStart"));
-                viewTransition.addEvent("complete:once", this.bound("_onPresentTransitionCompleted"));
+                viewTransition.addEvent("start:once", this.bound("__onPresentTransitionStart"));
+                viewTransition.addEvent("complete:once", this.bound("__onPresentTransitionCompleted"));
                 viewTransition.enter(viewToShow, viewToHide, parentView);
                 viewController.setViewTransition(viewTransition);
                 return this;
             },
-            _onPresentTransitionStart: function() {
-                this._modalViewController.viewWillEnter();
-            },
-            _onPresentTransitionCompleted: function() {
-                this._modalViewController.viewDidEnter();
-                this.didPresentModalViewController();
-            },
             dismissModalViewController: function() {
-                if (this._modalViewController === null) return this;
+                if (this.__modalViewController === null) return this;
                 var parentView = this.view.getWindow();
                 if (parentView === null) throw new Error("The view to dismiss is not ready");
                 this.willDismissModalViewController();
                 var viewToShow = parentView.getChildComponentsByType(View).getLastItemAtOffset(1);
-                var viewToHide = this._modalViewController.getView();
-                var viewTransition = this._modalViewController.getViewTransition();
-                viewTransition.addEvent("start:once", this.bound("_onDismissTransitionStart"));
-                viewTransition.addEvent("complete:once", this.bound("_onDismissTransitionCompleted"));
+                var viewToHide = this.__modalViewController.getView();
+                var viewTransition = this.__modalViewController.getViewTransition();
+                viewTransition.addEvent("start:once", this.bound("__onDismissTransitionStart"));
+                viewTransition.addEvent("complete:once", this.bound("__onDismissTransitionCompleted"));
                 viewTransition.leave(viewToShow, viewToHide, parentView);
                 return this;
             },
-            _onDismissTransitionStart: function() {
-                this._modalViewController.viewWillLeave();
-            },
-            _onDismissTransitionCompleted: function() {
-                this._modalViewController.viewDidLeave();
-                this._modalViewController.setParentViewController(this);
-                this._modalViewController.setModal(false);
-                this._modalViewController.destroy();
-                this._modalViewController = null;
-                this.didDismissModalViewController();
-            },
             getName: function() {
-                return this._name;
+                return this.__name;
             },
             getId: function() {
                 var name = this.getName();
                 if (name) {
                     return name;
                 }
-                if (this._id === null) {
-                    this._id = String.uniqueID();
+                if (this.__id === null) {
+                    this.__id = String.uniqueID();
                 }
-                return this._id;
+                return this.__id;
             },
             setTitle: function(title) {
-                if (this._title === title) return this;
+                if (this.__title === title) return this;
                 title = moobile.Text.from(title);
-                if (this._title && this._title.hasParentComponent()) {
-                    this._title.replaceWithComponent(title, true);
+                if (this.__title && this.__title.hasParentComponent()) {
+                    this.__title.replaceWithComponent(title, true);
                 }
-                this._title = title;
+                this.__title = title;
                 return this;
             },
             getTitle: function() {
-                return this._title;
+                return this.__title;
             },
             setImage: function(image) {
-                if (this._image === image) return this;
+                if (this.__image === image) return this;
                 image = moobile.Image.from(image);
-                if (this._image && this._image.hasParentComponent()) {
-                    this._image.replaceWithComponent(image, true);
+                if (this.__image && this.__image.hasParentComponent()) {
+                    this.__image.replaceWithComponent(image, true);
                 }
-                this._image = image;
+                this.__image = image;
                 return this;
             },
             getImage: function() {
-                return this._image;
+                return this.__image;
             },
             setModal: function(modal) {
-                this._modal = modal;
+                this.__modal = modal;
             },
             isModal: function() {
-                return this._modal;
+                return this.__modal;
             },
             isViewReady: function() {
-                return this._viewReady;
+                return this.__viewReady;
             },
             getView: function() {
                 return this.view;
             },
             setViewTransition: function(viewTransition) {
-                this._viewTransition = viewTransition;
+                this.__viewTransition = viewTransition;
                 return this;
             },
             getViewTransition: function() {
-                return this._viewTransition;
+                return this.__viewTransition;
             },
             setParentViewController: function(viewController) {
                 this.parentViewControllerWillChange(viewController);
-                this._parent = viewController;
+                this.__parent = viewController;
                 this.parentViewControllerDidChange(viewController);
                 return this;
             },
             getParentViewController: function() {
-                return this._parent;
+                return this.__parent;
             },
             willAddChildViewController: function(viewController) {},
             didAddChildViewController: function(viewController) {},
@@ -5491,39 +5325,54 @@
             viewDidLeave: function() {},
             viewDidRotate: function(orientation) {},
             destroy: function() {
-                window.removeEvent("orientationchange", this.bound("_onWindowOrientationChange"));
+                window.removeEvent("orientationchange", this.bound("__onWindowOrientationChange"));
                 this.removeAllChildViewControllers(true);
                 this.removeFromParentViewController();
-                if (this._modalViewController) {
-                    this._modalViewController.destroy();
-                    this._modalViewController = null;
+                if (this.__modalViewController) {
+                    this.__modalViewController.destroy();
+                    this.__modalViewController = null;
                 }
-                this.view.removeEvent("ready", this.bound("_onViewReady"));
-                this.view.removeEvent("layout", this.bound("_onViewLayout"));
+                this.view.removeEvent("ready", this.bound("__onViewDidBecomeReady"));
+                this.view.removeEvent("layout", this.bound("__onViewDidUpdateLayout"));
                 this.view.destroy();
                 this.view = null;
-                if (this._title) {
-                    this._title.destroy();
-                    this._title = null;
+                if (this.__title) {
+                    this.__title.destroy();
+                    this.__title = null;
                 }
-                if (this._image) {
-                    this._image.destroy();
-                    this._image = null;
+                if (this.__image) {
+                    this.__image.destroy();
+                    this.__image = null;
                 }
-                this._parent = null;
-                this._children = null;
-                this._viewTransition = null;
+                this.__parent = null;
+                this.__children = null;
+                this.__viewTransition = null;
             },
-            _onViewReady: function() {
-                if (this._viewReady === false) {
-                    this._viewReady = true;
-                    this.viewDidBecomeReady();
-                }
+            __onPresentTransitionStart: function() {
+                this.__modalViewController.viewWillEnter();
             },
-            _onViewLayout: function() {
+            __onPresentTransitionCompleted: function() {
+                this.__modalViewController.viewDidEnter();
+                this.didPresentModalViewController();
+            },
+            __onDismissTransitionStart: function() {
+                this.__modalViewController.viewWillLeave();
+            },
+            __onDismissTransitionCompleted: function() {
+                this.__modalViewController.viewDidLeave();
+                this.__modalViewController.setParentViewController(this);
+                this.__modalViewController.setModal(false);
+                this.__modalViewController.destroy();
+                this.__modalViewController = null;
+                this.didDismissModalViewController();
+            },
+            __onViewDidBecomeReady: function() {
+                this.viewDidBecomeReady();
+            },
+            __onViewDidUpdateLayout: function() {
                 this.viewDidUpdateLayout();
             },
-            _onWindowOrientationChange: function(e) {
+            __onWindowOrientationChange: function(e) {
                 var name = Math.abs(window.orientation) === 90 ? "landscape" : "portrait";
                 if (this.didRotate) {
                     this.didRotate(name);
@@ -5533,7 +5382,7 @@
             }
         });
     },
-    "1h": function(require, module, exports, global) {
+    "1i": function(require, module, exports, global) {
         "use strict";
         var ViewControllerStack = moobile.ViewControllerStack = new Class({
             Extends: moobile.ViewController,
@@ -5590,7 +5439,7 @@
                 if (childViewControllers.length <= 1) return this;
                 var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
                 var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
-                this.willPopmoobile.ViewController(viewControllerPopped);
+                this.willPopViewController(viewControllerPopped);
                 this._animating = true;
                 var viewTransition = viewControllerPopped.getViewTransition();
                 viewTransition.addEvent("start:once", this.bound("_onPopTransitionStart"));
@@ -5608,7 +5457,7 @@
                         var viewControllerToRemove = this.getChildViewControllerAt(i);
                         viewControllerToRemove.viewWillLeave();
                         viewControllerToRemove.viewDidLeave();
-                        viewControllerToRemove.removeFromParentmoobile.ViewController();
+                        viewControllerToRemove.removeFromParentViewController();
                         viewControllerToRemove.destroy();
                         viewControllerToRemove = null;
                     }
@@ -5629,8 +5478,8 @@
                 var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
                 viewControllerBefore.viewDidEnter();
                 viewControllerPopped.viewDidLeave();
-                viewControllerPopped.removeFromParentmoobile.ViewController();
-                this.didPopmoobile.ViewController(viewControllerPopped);
+                viewControllerPopped.removeFromParentViewController();
+                this.didPopViewController(viewControllerPopped);
                 viewControllerPopped.destroy();
                 viewControllerPopped = null;
                 this._animating = false;
@@ -5680,7 +5529,7 @@
             }
         });
     },
-    "1i": function(require, module, exports, global) {
+    "1j": function(require, module, exports, global) {
         "use strict";
         var ViewControllerQueue = moobile.ViewControllerQueue = new Class({
             Extends: moobile.ViewControllerStack,
@@ -5720,7 +5569,7 @@
                 if (children.length > length) {
                     var diff = children.length - length;
                     for (var i = 0; i < diff; i++) {
-                        children[i].removeFromParentmoobile.ViewController(true);
+                        children[i].removeFromParentViewController(true);
                     }
                 }
             }
@@ -5754,7 +5603,7 @@
             }
         });
     },
-    "1j": function(require, module, exports, global) {
+    "1k": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition = new Class({
             Implements: [ Events, Options, Class.Binds ],
@@ -5796,7 +5645,7 @@
             }
         });
     },
-    "1k": function(require, module, exports, global) {
+    "1l": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var CoverBox = moobile.ViewTransition.Box = new Class({
@@ -5823,7 +5672,7 @@
                     parentElem.removeClass("transition-cover-box-enter");
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(this.wrapper);
+                var animation = new moobile.Animation(this.wrapper);
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
                 animation.start();
@@ -5846,7 +5695,7 @@
                     this.wrapper.destroy();
                     this.wrapper = null;
                 }.bind(this);
-                var animation = new Animation(this.wrapper);
+                var animation = new moobile.Animation(this.wrapper);
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
                 animation.start();
@@ -5856,7 +5705,7 @@
             }
         });
     },
-    "1l": function(require, module, exports, global) {
+    "1m": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var Cover = moobile.ViewTransition.Cover = new Class({
@@ -5874,7 +5723,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(viewToShow);
+                var animation = new moobile.Animation(viewToShow);
                 animation.setAnimationClass("transition-view-to-show");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -5893,7 +5742,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(viewToHide);
+                var animation = new moobile.Animation(viewToHide);
                 animation.setAnimationClass("transition-view-to-hide");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -5901,7 +5750,7 @@
             }
         });
     },
-    "1m": function(require, module, exports, global) {
+    "1n": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var Cubic = moobile.ViewTransition.Cubic = new Class({
@@ -5922,7 +5771,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(parentElem);
+                var animation = new moobile.Animation(parentElem);
                 animation.setAnimationClass("transition-cubic-enter");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -5944,7 +5793,7 @@
                     viewToHide.hide();
                     this.didLeave(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(parentElem);
+                var animation = new moobile.Animation(parentElem);
                 animation.setAnimationClass("transition-cubic-leave");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -5952,7 +5801,7 @@
             }
         });
     },
-    "1n": function(require, module, exports, global) {
+    "1o": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var Drop = moobile.ViewTransition.Drop = new Class({
@@ -5970,7 +5819,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(viewToShow);
+                var animation = new moobile.Animation(viewToShow);
                 animation.setAnimationClass("transition-view-to-show");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -5989,7 +5838,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(viewToHide);
+                var animation = new moobile.Animation(viewToHide);
                 animation.setAnimationClass("transition-view-to-hide");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -5997,7 +5846,7 @@
             }
         });
     },
-    "1o": function(require, module, exports, global) {
+    "1p": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var Fade = moobile.ViewTransition.Fade = new Class({
@@ -6015,7 +5864,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(viewToShow);
+                var animation = new moobile.Animation(viewToShow);
                 animation.setAnimationClass("transition-view-to-show");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -6034,7 +5883,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(viewToHide);
+                var animation = new moobile.Animation(viewToHide);
                 animation.setAnimationClass("transition-view-to-hide");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -6042,7 +5891,7 @@
             }
         });
     },
-    "1p": function(require, module, exports, global) {
+    "1q": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var Flip = moobile.ViewTransition.Flip = new Class({
@@ -6063,7 +5912,7 @@
                     viewToHide.hide();
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(parentElem);
+                var animation = new moobile.Animation(parentElem);
                 animation.setAnimationClass("transition-flip-enter");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -6085,7 +5934,7 @@
                     viewToHide.hide();
                     this.didLeave(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(parentElem);
+                var animation = new moobile.Animation(parentElem);
                 animation.setAnimationClass("transition-flip-leave");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -6093,7 +5942,7 @@
             }
         });
     },
-    "1q": function(require, module, exports, global) {
+    "1r": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var None = moobile.ViewTransition.None = new Class({
@@ -6110,7 +5959,7 @@
             }
         });
     },
-    "1r": function(require, module, exports, global) {
+    "1s": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var Page = moobile.ViewTransition.Page = new Class({
@@ -6137,7 +5986,7 @@
                     parentElem.removeClass("transition-cover-page-enter");
                     this.didEnter(viewToShow, viewToHide, parentView);
                 }.bind(this);
-                var animation = new Animation(this.wrapper);
+                var animation = new moobile.Animation(this.wrapper);
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
                 animation.start();
@@ -6160,7 +6009,7 @@
                     this.wrapper.destroy();
                     this.wrapper = null;
                 }.bind(this);
-                var animation = new Animation(this.wrapper);
+                var animation = new moobile.Animation(this.wrapper);
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
                 animation.start();
@@ -6170,7 +6019,7 @@
             }
         });
     },
-    "1s": function(require, module, exports, global) {
+    "1t": function(require, module, exports, global) {
         "use strict";
         var ViewTransition = moobile.ViewTransition;
         var prefix = "";
@@ -6203,27 +6052,6 @@
                     viewToHide.addClass("transition-view-to-hide");
                     viewToShow.addClass("transition-view-to-show");
                     viewToShow.show();
-                    if (this.options.enhanceBackButtonOnEnter) {
-                        var keyframes = "";
-                        viewToShow.getChildComponentsByType(NavigationBar).each(function(navigationBar) {
-                            var width = navigationBar.getSize().x;
-                            if (width) {
-                                navigationBar.getChildComponentsByType(Button).each(function(button) {
-                                    var style = button.getStyle();
-                                    if (style !== "back" && style !== "forward") return;
-                                    var x1 = width / 2;
-                                    var x2 = 0;
-                                    var name = unique("transition-slide-enter-navigation-button-to-show");
-                                    var anim = create(name, x1, x2);
-                                    var elem = button.getElement();
-                                    elem.setStyle("animation-name", name);
-                                    items.push(elem);
-                                    keyframes += anim;
-                                }, this);
-                            }
-                        }, this);
-                        style = document.createElement("style").set("text", keyframes).inject(document.head);
-                    }
                 }.bind(this);
                 var onEnd = function() {
                     viewToShow.removeClass("transition-view-to-show");
@@ -6239,7 +6067,7 @@
                         style = null;
                     }
                 }.bind(this);
-                var animation = new Animation(parentElem);
+                var animation = new moobile.Animation(parentElem);
                 animation.setAnimationClass("transition-slide-enter");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -6253,27 +6081,6 @@
                     viewToHide.addClass("transition-view-to-hide");
                     viewToShow.addClass("transition-view-to-show");
                     viewToShow.show();
-                    if (this.options.enhanceBackButtonOnLeave) {
-                        var keyframes = "";
-                        viewToHide.getChildComponentsByType(NavigationBar).each(function(navigationBar) {
-                            var width = navigationBar.getSize().x;
-                            if (width) {
-                                navigationBar.getChildComponentsByType(Button).each(function(button) {
-                                    var style = button.getStyle();
-                                    if (style !== "back" && style !== "forward") return;
-                                    var x1 = 0;
-                                    var x2 = width / 2 - button.getSize().x / 2;
-                                    var name = unique("transition-slide-leave-navigation-button-to-hide");
-                                    var anim = create(name, x1, x2);
-                                    var elem = button.getElement();
-                                    elem.setStyle("animation-name", name);
-                                    items.push(elem);
-                                    keyframes += anim;
-                                });
-                            }
-                        });
-                        style = document.createElement("style").set("text", keyframes).inject(document.head);
-                    }
                 }.bind(this);
                 var onEnd = function() {
                     viewToHide.removeClass("transition-view-to-hide");
@@ -6289,7 +6096,7 @@
                         style = null;
                     }
                 }.bind(this);
-                var animation = new Animation(parentElem);
+                var animation = new moobile.Animation(parentElem);
                 animation.setAnimationClass("transition-slide-leave");
                 animation.addEvent("start", onStart);
                 animation.addEvent("end", onEnd);
@@ -6297,29 +6104,24 @@
             }
         });
     },
-    "1t": function(require, module, exports, global) {
+    "1u": function(require, module, exports, global) {
         "use strict";
         var View = moobile.View;
         var Window = moobile.Window = new Class({
             Extends: View,
             initialize: function(element, options, name) {
-                window.addEvent("orientationchange", this.bound("__onWindowOrientationChange"));
                 instance = this;
+                window.addEvent("orientationchange", this.bound("__onWindowOrientationChange"));
                 return this.parent(element, options, name);
             },
             destroy: function() {
-                window.removeEvent("orientationchange", this.bound("__onWindowOrientationChange"));
                 instance = null;
+                window.removeEvent("orientationchange", this.bound("__onWindowOrientationChange"));
                 this.parent();
             },
             willBuild: function() {
                 this.parent();
-                this.element.set("class", "window");
-            },
-            didBuild: function() {
-                this.parent();
-                this.contentElement.addClass("window-content");
-                this.contentWrapperElement.addClass("window-content-wrapper");
+                this.element.addClass("window");
             },
             didAddChildComponent: function(component) {
                 this.parent();
@@ -6335,33 +6137,33 @@
             return instance;
         };
     },
-    "1u": function(require, module, exports, global) {
+    "1v": function(require, module, exports, global) {
         "use strict";
         var ViewController = moobile.ViewController;
         var WindowController = moobile.WindowController = new Class({
             Extends: ViewController,
-            _rootViewController: null,
+            __rootViewController: null,
             loadView: function() {
                 var element = document.id("window");
                 if (element === null) {
                     element = document.createElement("div");
                     element.inject(document.body);
                 }
-                this.view = new Moobile.Window(element);
+                this.view = new moobile.Window(element);
             },
             setRootViewController: function(rootViewController) {
-                if (this._rootViewController) {
-                    this._rootViewController.destroy();
-                    this._rootViewController = null;
+                if (this.__rootViewController) {
+                    this.__rootViewController.destroy();
+                    this.__rootViewController = null;
                 }
                 if (rootViewController) {
                     this.addChildViewController(rootViewController);
                 }
-                this._rootViewController = rootViewController;
+                this.__rootViewController = rootViewController;
                 return this;
             },
             getRootViewController: function() {
-                return this._rootViewController;
+                return this.__rootViewController;
             }
         });
     }
