@@ -76,7 +76,7 @@
         require("1u");
         require("1v");
         moobile.Request = Request;
-        moobile.EventFirer = moobile.Emitter;
+        moobile.EventFirer = moobile.Firer;
         moobile.ViewTransition.Cover.Box = moobile.ViewTransition.Box;
         moobile.ViewTransition.Cover.Page = moobile.ViewTransition.Page;
         module.exports = global.Moobile = global.moobile;
@@ -642,7 +642,7 @@
     k: function(require, module, exports, global) {
         "use strict";
         var fireEvent = Events.prototype.fireEvent;
-        var Emitter = moobile.Emitter = new Class({
+        var Firer = moobile.Firer = new Class({
             Implements: [ Events, Options, Class.Binds ],
             on: function() {
                 return this.addEvent.apply(this, arguments);
@@ -676,14 +676,14 @@
         Element.defineCustomEvent("ready", {
             onSetup: function() {
                 if (Browser.Platform.cordova) {
-                    document.addEventListener("deviceready", onReady);
+                    document.onListener("deviceready", onReady);
                     return;
                 }
                 window.addEvent("domready", onReady);
             },
             onTeardown: function() {
                 if (Browser.Platform.cordova) {
-                    document.removeEventListener("deviceready", onReady);
+                    document.offListener("deviceready", onReady);
                     return;
                 }
                 window.removeEvent("domready", onReady);
@@ -834,7 +834,6 @@
         Element.defineCustomEvent("tapstart", {
             base: "touchstart",
             condition: function(e) {
-                console.log("Tap start");
                 return e.changedTouches.length === 1;
             }
         });
@@ -847,7 +846,8 @@
         Element.defineCustomEvent("tapend", {
             base: "touchend",
             condition: function(e) {
-                return e.changedTouches.length === 0;
+                console.log("Touch End", e.touches.length === 0);
+                return e.touches.length === 0;
             }
         });
         Element.defineCustomEvent("tapcancel", {
@@ -897,7 +897,7 @@
     p: function(require, module, exports, global) {
         "use strict";
         moobile.Animation = new Class({
-            Extends: moobile.Emitter,
+            Extends: moobile.Firer,
             __name: null,
             __running: false,
             element: null,
@@ -1032,13 +1032,15 @@
     q: function(require, module, exports, global) {
         "use strict";
         var Component = moobile.Component = new Class({
-            Extends: moobile.Emitter,
+            Extends: moobile.Firer,
             __name: null,
             __ready: false,
             __window: null,
             __parent: null,
             __children: [],
             __visible: true,
+            __showAnimation: null,
+            __hideAnimation: null,
             __style: null,
             __listeners: {},
             __callbacks: {},
@@ -1144,13 +1146,17 @@
             },
             addChildComponent: function(component, where, context) {
                 component.removeFromParentComponent();
-                context = context ? document.id(context) || this.element.getElement(context) : this.element;
+                if (context) {
+                    context = document.id(context) || this.element.getElement(context);
+                } else {
+                    context = this.element;
+                }
                 this.__willAddChildComponent(component);
                 var element = document.id(component);
                 if (where || !this.hasElement(element)) {
                     element.inject(context, where);
                 }
-                insert.call(this, component);
+                setComponentIndex.call(this, component);
                 component.__setParent(this);
                 component.__setWindow(this.__window);
                 this.__didAddChildComponent(component);
@@ -1412,29 +1418,61 @@
             getPosition: function(relative) {
                 return this.element.getPosition(document.id(relative) || this.__parent);
             },
-            show: function() {
+            show: function(animation, element) {
                 if (this.__visible === true) return this;
-                this.removeClass("hidden");
-                this.__visible = true;
-                this.__didShow();
-                this.updateLayout();
+                if (this.__showAnimation) {
+                    this.__showAnimation.stop();
+                    this.__showAnimation.removeEvent("start", this.bound("__willShow"));
+                    this.__showAnimation.removeEvent("stop", this.bound("__didShow"));
+                }
+                if (animation) {
+                    if (!element) element = this.element;
+                    if (typeof animation === "string") {
+                        animation = (new moobile.Animation(element)).setAnimationClass(animation);
+                    }
+                    this.__showAnimation = animation;
+                    this.__showAnimation.addEvent("start", this.bound("__willShow"));
+                    this.__showAnimation.addEvent("end", this.bound("__didShow"));
+                    this.__showAnimation.start();
+                    this.removeClass("hidden");
+                } else {
+                    this.__willShow();
+                    this.removeClass("hidden");
+                    this.__didShow();
+                }
                 return this;
             },
-            hide: function() {
+            hide: function(animation, element) {
                 if (this.__visible === false) return this;
-                this.addClass("hidden");
-                this.__visible = false;
-                this.__didHide();
-                this.updateLayout(false);
+                if (this.__hideAnimation) {
+                    this.__hideAnimation.stop();
+                    this.__hideAnimation.removeEvent("start", this.bound("__willHide"));
+                    this.__hideAnimation.removeEvent("stop", this.bound("__didHide"));
+                }
+                if (animation) {
+                    if (!element) element = this.element;
+                    if (typeof animation === "string") {
+                        animation = (new moobile.Animation(element)).setAnimationClass(animation);
+                    }
+                    this.__showAnimation = animation;
+                    this.__showAnimation.addEvent("start", this.bound("__willHide"));
+                    this.__showAnimation.addEvent("end", this.bound("__didHide"));
+                    this.__showAnimation.start();
+                } else {
+                    this.__willHide();
+                    this.addClass("hidden");
+                    this.__didHide();
+                }
                 return this;
             },
             isVisible: function() {
                 return this.__visible;
             },
             updateLayout: function(update) {
-                if (this.__updateLayout === false) {
-                    this.__updateLayout = true;
-                    updateLayout(this);
+                update = update === false ? false : true;
+                if (this.__updateLayout !== update) {
+                    this.__updateLayout = update;
+                    if (update) updateLayout(this);
                 }
                 return this;
             },
@@ -1477,17 +1515,11 @@
                 this.cascade(function(component) {
                     if (component.__window !== window) {
                         component.__windowWillChange(window);
-                    }
-                    if (component.__ready !== ready) {
-                        component.__willChangeReadyState(ready);
-                    }
-                });
-                this.cascade(function(component) {
-                    if (component.__window !== window) {
                         component.__window = window;
                         component.__windowDidChange(window);
                     }
                     if (component.__ready !== ready) {
+                        component.__willChangeReadyState(ready);
                         component.__ready = ready;
                         component.__didChangeReadyState(ready);
                         if (ready) component.__didBecomeReady();
@@ -1582,16 +1614,43 @@
             },
             __willShow: function() {
                 this.willShow();
+                var self = this;
+                this.cascade(function(component) {
+                    if (component !== self) {
+                        component.__willShow();
+                    }
+                });
             },
             __didShow: function() {
                 this.didShow();
+                var self = this;
+                this.cascade(function(component) {
+                    component.__visible = true;
+                    if (component !== self) {
+                        component.__didShow();
+                        component.updateLayout();
+                    }
+                });
                 this.fireEvent("show");
             },
             __willHide: function() {
                 this.willHide();
+                var self = this;
+                this.cascade(function(component) {
+                    if (component) {
+                        component.__didHide();
+                    }
+                });
             },
             __didHide: function() {
                 this.didHide();
+                var self = this;
+                this.cascade(function(component) {
+                    component.__visible = false;
+                    if (component !== self) {
+                        component.__didHide();
+                    }
+                });
                 this.fireEvent("hide");
             },
             getChildComponentOfType: function(type, name) {
@@ -1674,7 +1733,7 @@
         Component.defineAttribute("data-style", null, function(value) {
             this.options.styleName = value;
         });
-        var insert = function(component) {
+        var setComponentIndex = function(component) {
             var index = 0;
             var node = document.id(component);
             do {
@@ -1693,7 +1752,7 @@
                 }
                 var children = node.childNodes;
                 if (children.length) {
-                    var found = position.call(this, node);
+                    var found = getComponentIndex.call(this, node);
                     if (found !== null) {
                         index = found;
                         break;
@@ -1703,7 +1762,7 @@
             this.__children.splice(index, 0, component);
             return this;
         };
-        var position = function(root) {
+        var getComponentIndex = function(root) {
             var node = root.lastChild;
             do {
                 if (node.nodeType !== 1) {
@@ -1717,7 +1776,7 @@
                 }
                 var children = node.childNodes;
                 if (children.length) {
-                    var found = position.call(this, node);
+                    var found = getComponentIndex.call(this, node);
                     if (found >= 0) {
                         return found;
                     }
@@ -1735,7 +1794,7 @@
             if (updateLayoutRoot === null) {
                 updateLayoutRoot = component;
                 return;
-            } else if (updateLayoutRoot instanceof moobile.Window) {
+            } else if (updateLayoutRoot instanceof moobile.Window || updateLayoutRoot === component) {
                 return;
             }
             var parent = component.getParentComponent();
@@ -1751,7 +1810,7 @@
         var onUpdateLayout = function() {
             if (updateLayoutRoot) {
                 updateLayoutRoot.cascade(function(component) {
-                    if (component.__updateLayout) {
+                    if (component.__updateLayout && component.__visible) {
                         component.__didUpdateLayout();
                         component.__updateLayout = false;
                     }
@@ -1767,32 +1826,27 @@
             willBuild: function() {
                 this.parent();
                 this.addClass("overlay");
-                this.addEvent("animationend", this.bound("__onAnimationEnd"));
             },
-            destroy: function() {
-                this.removeEvent("animationend", this.bound("__onAnimationEnd"));
+            didBuild: function() {
                 this.parent();
+                this.hide();
             },
             showAnimated: function() {
-                this.willShow();
-                this.addClass("show-animated").removeClass("hidden");
+                this.show("show-animated");
                 return this;
             },
             hideAnimated: function() {
-                this.willHide();
-                this.element.addClass("hide-animated");
+                this.hide("hide-animated");
                 return this;
             },
             __onAnimationEnd: function(e) {
                 e.stop();
                 if (this.hasClass("show-animated")) {
                     this.removeClass("show-animated");
-                    this.didShow();
                 }
                 if (this.hasClass("hide-animated")) {
                     this.removeClass("hide-animated");
-                    this.addClass("hidden");
-                    this.didHide();
+                    this.hide();
                 }
             }
         });
@@ -2454,7 +2508,7 @@
                 }
             },
             __onItemTapCancel: function(e, sender) {
-                if (this.__selectable && sender.isSelected()) sender.setHighlighted(false);
+                sender.setHighlighted(false);
             },
             __onItemTapStart: function(e, sender) {
                 if (this.__selectable && !sender.isSelected()) sender.setHighlighted(true);
@@ -3208,9 +3262,9 @@
         "use strict";
         var Alert = moobile.Alert = new Class({
             Extends: moobile.Component,
-            _title: null,
-            _message: null,
-            _buttons: [],
+            __title: null,
+            __message: null,
+            __buttons: [],
             boxElement: null,
             contentElement: null,
             headerElement: null,
@@ -3225,8 +3279,8 @@
             willBuild: function() {
                 this.parent();
                 this.addClass("alert");
-                this.addEvent("animationend", this.bound("_onAnimationEnd"));
-                this.overlay = new Overlay;
+                this.addEvent("animationend", this.bound("__onAnimationEnd"));
+                this.overlay = new moobile.Overlay;
                 this.overlay.hide();
                 this.addChildComponent(this.overlay);
                 this.headerElement = document.createElement("div");
@@ -3256,9 +3310,9 @@
                 }
             },
             destroy: function() {
-                this.removeEvent("animationend", this.bound("_onAnimationEnd"));
-                this._title = null;
-                this._message = null;
+                this.removeEvent("animationend", this.bound("__onAnimationEnd"));
+                this.__title = null;
+                this.__message = null;
                 this.boxElement = null;
                 this.headerElement = null;
                 this.footerElement = null;
@@ -3268,36 +3322,36 @@
                 this.parent();
             },
             setTitle: function(title) {
-                if (this._title === title) return this;
+                if (this.__title === title) return this;
                 title = moobile.Text.from(title);
-                if (this._title) {
-                    this._title.replaceWithComponent(title, true);
+                if (this.__title) {
+                    this.__title.replaceWithComponent(title, true);
                 } else {
                     this.addChildComponentInside(title, this.headerElement);
                 }
-                this._title = title;
-                this._title.addClass("alert-title");
-                this.toggleClass("alert-title-empty", this._title.isEmpty());
+                this.__title = title;
+                this.__title.addClass("alert-title");
+                this.toggleClass("alert-title-empty", this.__title.isEmpty());
                 return this;
             },
             getTitle: function() {
-                return this._title;
+                return this.__title;
             },
             setMessage: function(message) {
-                if (this._message === message) return this;
+                if (this.__message === message) return this;
                 message = moobile.Text.from(message);
-                if (this._message) {
-                    this._message.replaceWithComponent(message, true);
+                if (this.__message) {
+                    this.__message.replaceWithComponent(message, true);
                 } else {
                     this.addChildComponentInside(message, this.contentElement);
                 }
-                this._message = message;
-                this._message.addClass("alert-message");
-                this.toggleClass("alert-message-empty", this._message.isEmpty());
+                this.__message = message;
+                this.__message.addClass("alert-message");
+                this.toggleClass("alert-message-empty", this.__message.isEmpty());
                 return this;
             },
             getMessage: function() {
-                return this._message;
+                return this.__message;
             },
             addButton: function(button, where) {
                 return this.addChildComponentInside(moobile.Button.from(button), this.footerElement, where);
@@ -3346,53 +3400,51 @@
                 return this.setDefaultButton(this.getChildComponentByTypeAt(moobile.Button, index));
             },
             showAnimated: function() {
-                this.willShow();
-                this.element.addClass("show-animated").removeClass("hidden");
+                this.show("show-animated");
                 this.overlay.showAnimated();
                 return this;
             },
             hideAnimated: function() {
-                this.willHide();
-                this.element.addClass("hide-animated");
+                this.hide("hide-animated");
                 this.overlay.hideAnimated();
                 return this;
             },
             didAddChildComponent: function(component) {
                 this.parent(component);
                 if (component instanceof moobile.Button) {
-                    component.addEvent("tap", this.bound("_onButtonTap"));
-                    this._buttons.include(component);
+                    component.addEvent("tap", this.bound("__onButtonTap"));
+                    this.__buttons.include(component);
                 }
             },
             didRemoveChildComponent: function(component) {
                 this.parent(component);
                 if (component instanceof moobile.Button) {
-                    component.removeEvent("tap", this.bound("_onButtonTap"));
-                    this._buttons.erase(component);
+                    component.removeEvent("tap", this.bound("__onButtonTap"));
+                    this.__buttons.erase(component);
                 }
             },
             willShow: function() {
                 this.parent();
                 if (this.getParentView() === null) {
-                    var instance = Window.getCurrentInstance();
+                    var instance = moobile.Window.getCurrentInstance();
                     if (instance) {
                         instance.addChildComponent(this);
                     }
                 }
-                if (this._buttons.length === 0) this.addButton("OK");
+                if (this.__buttons.length === 0) this.addButton("OK");
             },
             didHide: function() {
                 this.parent();
-                this.removeFromParentmoobile.Component();
+                this.removeFromParentComponent();
             },
-            _onButtonTap: function(e, sender) {
+            __onButtonTap: function(e, sender) {
                 var index = this.getChildComponentsByType(moobile.Button).indexOf(sender);
                 if (index >= 0) {
                     this.fireEvent("dismiss", [ sender, index ]);
                 }
                 this.hideAnimated();
             },
-            _onAnimationEnd: function(e) {
+            __onAnimationEnd: function(e) {
                 e.stop();
                 if (this.hasClass("show-animated")) {
                     this.removeClass("show-animated");
@@ -3408,7 +3460,7 @@
     "16": function(require, module, exports, global) {
         "use strict";
         var Scroller = moobile.Scroller = new Class({
-            Extends: moobile.Emitter,
+            Extends: moobile.Firer,
             contentElement: null,
             contentWrapperElement: null,
             options: {
@@ -4955,13 +5007,6 @@
                 this.fireEvent("snaptopage", [ page.x, page.y ]);
                 return this;
             },
-            __cancelTouch: function() {
-                this.contentElement.getElements("*").each(function(element) {
-                    var event = document.createEvent("CustomEvent");
-                    event.initCustomEvent("touchcancel", false, false);
-                    element.dispatchEvent(event);
-                });
-            },
             __onTouchCancel: function() {
                 this.__activeTouch = null;
                 this.__activeTouchTime = null;
@@ -4994,7 +5039,11 @@
                     var y = Math.abs(this.__activeTouchScroll.y - scroll.y);
                     if (x >= this.options.cancelTouchThresholdX || y >= this.options.cancelTouchThresholdY) {
                         this.__activeTouchCanceled = true;
-                        this.__cancelTouch();
+                        this.contentElement.getElements("*").each(function(element) {
+                            var event = document.createEvent("CustomEvent");
+                            event.initCustomEvent("touchcancel", false, false);
+                            element.dispatchEvent(event);
+                        });
                     }
                 }
                 this.fireEvent("scroll");
@@ -5112,7 +5161,7 @@
     "1h": function(require, module, exports, global) {
         "use strict";
         var ViewController = moobile.ViewController = new Class({
-            Extends: moobile.Emitter,
+            Extends: moobile.Firer,
             __id: null,
             __name: null,
             __title: null,
@@ -5129,8 +5178,8 @@
                 this.setOptions(options);
                 this.loadView();
                 if (this.view) {
-                    this.view.addEvent("ready", this.bound("__onViewDidBecomeReady"));
-                    this.view.addEvent("layout", this.bound("__onViewDidUpdateLayout"));
+                    this.view.addEvent("didbecomeready", this.bound("__onViewDidBecomeReady"));
+                    this.view.addEvent("didupdatelayout", this.bound("__onViewDidUpdateLayout"));
                     this.viewDidLoad();
                 }
                 window.addEvent("orientationchange", this.bound("__onWindowOrientationChange"));
@@ -5359,8 +5408,8 @@
                     this.__modalViewController.destroy();
                     this.__modalViewController = null;
                 }
-                this.view.removeEvent("ready", this.bound("__onViewDidBecomeReady"));
-                this.view.removeEvent("layout", this.bound("__onViewDidUpdateLayout"));
+                this.view.removeEvent("didbecomeready", this.bound("__onViewDidBecomeReady"));
+                this.view.removeEvent("didupdatelayout", this.bound("__onViewDidUpdateLayout"));
                 this.view.destroy();
                 this.view = null;
                 if (this.__title) {
