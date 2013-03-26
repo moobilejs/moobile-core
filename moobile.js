@@ -834,19 +834,18 @@
         Element.defineCustomEvent("tapstart", {
             base: "touchstart",
             condition: function(e) {
-                return e.changedTouches.length === 1;
+                return e.touches.length === 1;
             }
         });
         Element.defineCustomEvent("tapmove", {
             base: "touchmove",
             condition: function(e) {
-                return e.changedTouches.length === 1;
+                return e.touches.length === 1;
             }
         });
         Element.defineCustomEvent("tapend", {
             base: "touchend",
             condition: function(e) {
-                console.log("Touch End", e.touches.length === 0);
                 return e.touches.length === 0;
             }
         });
@@ -910,6 +909,9 @@
                 "animation-timing-function": null,
                 "animation-fill-mode": null,
                 "animation-delay": null
+            },
+            options: {
+                validate: null
             },
             initialize: function(element, options) {
                 this.setElement(element);
@@ -987,7 +989,7 @@
                 return this.animationProperties["delay"];
             },
             attach: function() {
-                this.element.addEvent("ownanimationend", this.bound("onAnimationEnd"));
+                this.element.addEvent("animationend", this.bound("__onAnimationEnd"));
                 this.element.addClass(this.animationClass);
                 Object.each(this.animationProperties, function(val, key) {
                     this.element.setStyle("animation-" + key, val);
@@ -995,7 +997,7 @@
                 return this;
             },
             detach: function() {
-                this.element.removeEvent("ownanimationend", this.bound("onAnimationEnd"));
+                this.element.removeEvent("animationend", this.bound("__onAnimationEnd"));
                 this.element.removeClass(this.animationClass);
                 Object.each(this.animationProperties, function(val, key) {
                     this.element.setStyle("animation-" + key, null);
@@ -1019,9 +1021,16 @@
             isRunning: function() {
                 return this.__running;
             },
-            onAnimationEnd: function(e) {
+            __onAnimationEnd: function(e) {
                 if (this.__running === false) return;
-                if (this.element !== e.target) return;
+                var valid = true;
+                var validate = this.options.validate;
+                if (validate && typeof validate === "function") {
+                    valid = validate(e, this.element);
+                } else {
+                    valid = e.target === this.element;
+                }
+                if (!valid) return;
                 e.stop();
                 this.__running = false;
                 this.fireEvent("end");
@@ -1039,8 +1048,7 @@
             __parent: null,
             __children: [],
             __visible: true,
-            __showAnimation: null,
-            __hideAnimation: null,
+            __visibleAnimation: null,
             __style: null,
             __listeners: {},
             __callbacks: {},
@@ -1418,49 +1426,50 @@
             getPosition: function(relative) {
                 return this.element.getPosition(document.id(relative) || this.__parent);
             },
-            show: function(animation, element) {
+            show: function(animation) {
                 if (this.__visible === true) return this;
-                if (this.__showAnimation) {
-                    this.__showAnimation.stop();
-                    this.__showAnimation.removeEvent("start", this.bound("__willShow"));
-                    this.__showAnimation.removeEvent("stop", this.bound("__didShow"));
+                if (this.__visibleAnimation) {
+                    this.__visibleAnimation.stop();
+                    this.__visibleAnimation.removeEvents();
                 }
                 if (animation) {
-                    if (!element) element = this.element;
                     if (typeof animation === "string") {
-                        animation = (new moobile.Animation(element)).setAnimationClass(animation);
+                        animation = (new moobile.Animation(this.element, {
+                            validate: function(e, element) {
+                                return e.target === this.boxElement;
+                            }.bind(this)
+                        })).setAnimationClass(animation);
                     }
-                    this.__showAnimation = animation;
-                    this.__showAnimation.addEvent("start", this.bound("__willShow"));
-                    this.__showAnimation.addEvent("end", this.bound("__didShow"));
-                    this.__showAnimation.start();
-                    this.removeClass("hidden");
+                    this.__visibleAnimation = animation;
+                    this.__visibleAnimation.addEvent("start", this.bound("__willShow"));
+                    this.__visibleAnimation.addEvent("end", this.bound("__didShow"));
+                    this.__visibleAnimation.start();
                 } else {
                     this.__willShow();
-                    this.removeClass("hidden");
                     this.__didShow();
                 }
                 return this;
             },
-            hide: function(animation, element) {
+            hide: function(animation) {
                 if (this.__visible === false) return this;
-                if (this.__hideAnimation) {
-                    this.__hideAnimation.stop();
-                    this.__hideAnimation.removeEvent("start", this.bound("__willHide"));
-                    this.__hideAnimation.removeEvent("stop", this.bound("__didHide"));
+                if (this.__visibleAnimation) {
+                    this.__visibleAnimation.stop();
+                    this.__visibleAnimation.removeEvents();
                 }
                 if (animation) {
-                    if (!element) element = this.element;
                     if (typeof animation === "string") {
-                        animation = (new moobile.Animation(element)).setAnimationClass(animation);
+                        animation = (new moobile.Animation(this.element, {
+                            validate: function(e, element) {
+                                return e.target === this.boxElement;
+                            }.bind(this)
+                        })).setAnimationClass(animation);
                     }
-                    this.__showAnimation = animation;
-                    this.__showAnimation.addEvent("start", this.bound("__willHide"));
-                    this.__showAnimation.addEvent("end", this.bound("__didHide"));
-                    this.__showAnimation.start();
+                    this.__visibleAnimation = animation;
+                    this.__visibleAnimation.addEvent("start", this.bound("__willHide"));
+                    this.__visibleAnimation.addEvent("end", this.bound("__didHide"));
+                    this.__visibleAnimation.start();
                 } else {
                     this.__willHide();
-                    this.addClass("hidden");
                     this.__didHide();
                 }
                 return this;
@@ -1614,6 +1623,7 @@
             },
             __willShow: function() {
                 this.willShow();
+                this.removeClass("hidden");
                 var self = this;
                 this.cascade(function(component) {
                     if (component !== self) {
@@ -1637,12 +1647,13 @@
                 this.willHide();
                 var self = this;
                 this.cascade(function(component) {
-                    if (component) {
-                        component.__didHide();
+                    if (component !== self) {
+                        component.__willHide();
                     }
                 });
             },
             __didHide: function() {
+                this.addClass("hidden");
                 this.didHide();
                 var self = this;
                 this.cascade(function(component) {
@@ -3279,9 +3290,7 @@
             willBuild: function() {
                 this.parent();
                 this.addClass("alert");
-                this.addEvent("animationend", this.bound("__onAnimationEnd"));
                 this.overlay = new moobile.Overlay;
-                this.overlay.hide();
                 this.addChildComponent(this.overlay);
                 this.headerElement = document.createElement("div");
                 this.headerElement.addClass("alert-header");
@@ -3308,9 +3317,9 @@
                 if (buttons) {
                     this.addButtons(buttons);
                 }
+                this.hide();
             },
             destroy: function() {
-                this.removeEvent("animationend", this.bound("__onAnimationEnd"));
                 this.__title = null;
                 this.__message = null;
                 this.boxElement = null;
@@ -3399,15 +3408,27 @@
             setDefaultButtonIndex: function(index) {
                 return this.setDefaultButton(this.getChildComponentByTypeAt(moobile.Button, index));
             },
+            show: function(animation, element) {
+                if (animation) {
+                    this.overlay.showAnimated();
+                } else {
+                    this.overlay.show();
+                }
+                return this.parent(animation, element);
+            },
+            hide: function(animation, element) {
+                if (animation) {
+                    this.overlay.hideAnimated();
+                } else {
+                    this.overlay.hide();
+                }
+                return this.parent(animation, element);
+            },
             showAnimated: function() {
-                this.show("show-animated");
-                this.overlay.showAnimated();
-                return this;
+                return this.show("show-animated");
             },
             hideAnimated: function() {
-                this.hide("hide-animated");
-                this.overlay.hideAnimated();
-                return this;
+                return this.hide("hide-animated");
             },
             didAddChildComponent: function(component) {
                 this.parent(component);
@@ -3443,17 +3464,6 @@
                     this.fireEvent("dismiss", [ sender, index ]);
                 }
                 this.hideAnimated();
-            },
-            __onAnimationEnd: function(e) {
-                e.stop();
-                if (this.hasClass("show-animated")) {
-                    this.removeClass("show-animated");
-                    this.didShow();
-                }
-                if (this.hasClass("hide-animated")) {
-                    this.addClass("hidden").removeClass("hide-animated");
-                    this.didHide();
-                }
             }
         });
     },
