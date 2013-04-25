@@ -12,8 +12,6 @@
 		"url": "https://github.com/jpdery/moobile-core.git"
 	},
 	"dependencies": {
-		"event-util": "0.0.1",
-		"touch-util": "0.0.1",
 		"moofx": "3.1.0",
 		"iscroll": "4.2.5"
 	},
@@ -21,7 +19,6 @@
 		"mocha": "1.6",
 		"sinon": "1.5.2",
 		"expect.js": "0.2",
-		"wrapup": "0.10",
 		"wrapup": "0.10.3"
 	},
 	"engines": {
