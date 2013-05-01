@@ -96,7 +96,12 @@ Element.at = function(path, callback) {
 	}
 
 	var onSuccess = function(response) {
-		dispatch(element = cache[path] = Element.from(response));
+		var el = Element.from(response);
+		if (el) {
+			cache[path] = el;
+			element = cache[path].clone(true, true);
+			dispatch(element);
+		}
 	};
 
 	var onFailure = function() {
