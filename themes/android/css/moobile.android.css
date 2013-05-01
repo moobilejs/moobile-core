@@ -215,19 +215,19 @@ input, select, textarea {
 .bar.navigation-bar .bar-item .bar-title-wrapper {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	-webkit-flex-align: center;                                  /* Important */
+	    -ms-flex-align: center;                                  /* Important */
+	        flex-align: center;                                  /* Important */
 	-webkit-box-pack: start;                                     /* Important */
 	   -moz-box-pack: start;                                     /* Important */
-	    -ms-box-pack: start;                                     /* Important */
-	     -o-box-pack: start;                                     /* Important */
-	        box-pack: start;                                     /* Important */
+	-webkit-flex-pack: start;                                    /* Important */
+	    -ms-flex-pack: start;                                    /* Important */
+	        flex-pack: start;                                    /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
 	display:     -ms-box;                                        /* Important */
@@ -288,19 +288,19 @@ input, select, textarea {
 .button .button-label {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	-webkit-flex-align: center;                                  /* Important */
+	    -ms-flex-align: center;                                  /* Important */
+	        flex-align: center;                                  /* Important */
 	-webkit-box-pack: center;                                    /* Important */
 	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
+	-webkit-flex-pack: center;                                   /* Important */
+	    -ms-flex-pack: center;                                   /* Important */
+	        flex-pack: center;                                   /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
 	display:     -ms-box;                                        /* Important */
@@ -651,9 +651,9 @@ input, select, textarea {
 .alert .alert-footer {
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
 	display:     -ms-box;                                        /* Important */
@@ -664,9 +664,9 @@ input, select, textarea {
 .alert .button {
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	background: transparent;
 	border: none;
 	border-right: 1px solid #424542;
@@ -762,9 +762,9 @@ input, select, textarea {
 .alert.alert-layout-vertical .alert-footer {
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-flex-direction: column;                              /* Important */
+	    -ms-flex-direction: column;                              /* Important */
+	        flex-direction: column;                              /* Important */
 }
 
 .alert.alert-layout-vertical .alert-footer .button {

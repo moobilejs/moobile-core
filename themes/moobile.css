@@ -183,19 +183,21 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-flex-direction: column;                              /* Important */
+	    -ms-flex-direction: column;                              /* Important */
+	        flex-direction: column;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	height: 100%;                                                /* Important */
 	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
@@ -211,10 +213,10 @@ input, select, textarea {
 	        backface-visibility: hidden;                         /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
-	height: 100%;                                                /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
+/*	height: 100%;                                                /* Important */
 	overflow: hidden;                                            /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
@@ -234,19 +236,21 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-flex-direction: column;                              /* Important */
+	    -ms-flex-direction: column;                              /* Important */
+	        flex-direction: column;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	left: 0px;                                                   /* Important */
 	height: 100%;                                                /* Important */
 	position: absolute;                                          /* Important */
@@ -255,21 +259,21 @@ input, select, textarea {
 }
 
 .view.view-layout-vertical > .view-content-wrapper > .view-content,
-.view.view-layout-vertical > .view-content-wrapper > div > .view-content {
+.view.view-layout-vertical > .view-content-wrapper > div > .view-content { /* TODO: Is this line necessary ? */
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-flex-direction: column;                              /* Important */
+	    -ms-flex-direction: column;                              /* Important */
+	        flex-direction: column;                              /* Important */
 }
 
 .view.view-layout-horizontal > .view-content-wrapper > .view-content,
-.view.view-layout-horizontal > .view-content-wrapper > div > .view-content {
+.view.view-layout-horizontal > .view-content-wrapper > div > .view-content { /* TODO: Is this line necessary ? */
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 }
 
 .view.enable {
@@ -339,9 +343,9 @@ input, select, textarea {
 .view.view-collection > .view-content-wrapper > .view-content > .view {
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 }
 
 /* Bar
@@ -360,19 +364,21 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	   -ms-flex-align: center;                                   /* Important */
+	-webkit-align-items: center;                                 /* Important */
+	        align-items: center;                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
 	z-index: 75;                                                 /* Important */
@@ -392,19 +398,21 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	   -ms-flex-align: center;                                   /* Important */
+	-webkit-justify-content: center;                             /* Important */
+	        justify-content: center;                             /* Important */
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
 }
@@ -433,9 +441,11 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
 }
@@ -453,14 +463,16 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;
 }
@@ -479,14 +491,16 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
 }
@@ -514,9 +528,11 @@ input, select, textarea {
 	cursor: pointer;
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 }
 
@@ -545,30 +561,32 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 }
 
 .button-group.button-group-layout-vertical {
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-flex-direction: column;                              /* Important */
+	    -ms-flex-direction: column;                              /* Important */
+	        flex-direction: column;                              /* Important */
 	-webkit-box-pack: start;                                     /* Important */
 	   -moz-box-pack: start;                                     /* Important */
-	    -ms-box-pack: start;                                     /* Important */
-	     -o-box-pack: start;                                     /* Important */
-	        box-pack: start;                                     /* Important */
+	   -ms-flex-pack: start;                                     /* Important */
+	-webkit-align-items: flex-start;                             /* Important */
+	        align-items: flex-start;                             /* Important */
 }
 
 .button-group .button {
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 }
 
 /* Button
@@ -588,9 +606,11 @@ input, select, textarea {
 	cursor: pointer;
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	position: relative;                                          /* Important */
 	width: auto;                                                 /* Important */
 }
@@ -608,9 +628,9 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	display: block;                                              /* Important */
 }
 
@@ -759,19 +779,21 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-orient: horizontal;                              /* Important */
 	   -moz-box-orient: horizontal;                              /* Important */
-	    -ms-box-orient: horizontal;                              /* Important */
-	     -o-box-orient: horizontal;                              /* Important */
-	        box-orient: horizontal;                              /* Important */
+	-webkit-flex-direction: row;                                 /* Important */
+	    -ms-flex-direction: row;                                 /* Important */
+	        flex-direction: row;                                 /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	   -ms-flex-align: center;                                   /* Important */
+	-webkit-align-items: center;                                 /* Important */
+	        align-items: center;                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	list-style: none;
 	list-style-position: outside;
 	position: relative;                                          /* Important */
@@ -809,9 +831,9 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-flex: 1;                                         /* Important */
 	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	    -webkit-flex: 1;                                         /* Important */
+	        -ms-flex: 1;                                         /* Important */
+	            flex: 1;                                         /* Important */
 	display: block;                                              /* Important */
 }
 
@@ -828,9 +850,9 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-flex: 0;                                         /* Important */
 	   -moz-box-flex: 0;                                         /* Important */
-	    -ms-box-flex: 0;                                         /* Important */
-	     -o-box-flex: 0;                                         /* Important */
-	        box-flex: 0;                                         /* Important */
+	    -webkit-flex: 0;                                         /* Important */
+	        -ms-flex: 0;                                         /* Important */
+	            flex: 0;                                         /* Important */
 	display: block;                                              /* Important */
 }
 
@@ -973,25 +995,27 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-orient: vertical;                                /* Important */
 	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-flex-direction: column;                              /* Important */
+	    -ms-flex-direction: column;                              /* Important */
+	        flex-direction: column;                              /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	   -ms-flex-align: center;                                   /* Important */
+	-webkit-justify-content: center;                             /* Important */
+	        justify-content: center;                             /* Important */
 	-webkit-box-pack: center;                                    /* Important */
 	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
+	   -ms-flex-pack: center;                                    /* Important */
+	-webkit-align-items: center;                                 /* Important */
+	        align-items: center;                                 /* Important */
 	bottom: 0px;                                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	left: 0px;                                                   /* Important */
 	position: absolute;                                          /* Important */
 	right: 0px;                                                  /* Important */
@@ -1588,19 +1612,21 @@ input, select, textarea {
 			box-sizing: border-box;                              /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-		-ms-box-align: center;                                   /* Important */
-		 -o-box-align: center;                                   /* Important */
-			box-align: center;                                   /* Important */
+	   -ms-flex-align: center;                                   /* Important */
+	-webkit-justify-content: center;                             /* Important */
+	        justify-content: center;                             /* Important */
 	-webkit-box-pack: center;                                    /* Important */
 	   -moz-box-pack: center;                                    /* Important */
-		-ms-box-pack: center;                                    /* Important */
-		 -o-box-pack: center;                                    /* Important */
-			box-pack: center;                                    /* Important */
+	   -ms-flex-pack: center;                                    /* Important */
+	-webkit-align-items: center;                                 /* Important */
+	        align-items: center;                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	height: 100%;                                                /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
@@ -1620,11 +1646,13 @@ input, select, textarea {
 }
 
 .transition-cover-page-background-view {
-	display: -webkit-box !important;                             /* Important */
-	display:    -moz-box !important;                             /* Important */
-	display:     -ms-box !important;                             /* Important */
-	display:      -o-box !important;                             /* Important */
-	display:         box !important;                             /* Important */
+	display: -webkit-box;                                        /* Important */
+	display:    -moz-box;                                        /* Important */
+	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 }
 
 .transition-cover-page-overlay {
@@ -1719,19 +1747,21 @@ input, select, textarea {
 	        box-sizing: border-box;                              /* Important */
 	-webkit-box-align: center;                                   /* Important */
 	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
+	   -ms-flex-align: center;                                   /* Important */
+	-webkit-justify-content: center;                             /* Important */
+	        justify-content: center;                             /* Important */
 	-webkit-box-pack: center;                                    /* Important */
 	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
+	   -ms-flex-pack: center;                                    /* Important */
+	-webkit-align-items: center;                                 /* Important */
+	        align-items: center;                                 /* Important */
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	height: 100%;                                                /* Important */
 	position: relative;                                          /* Important */
 	width: 100%;                                                 /* Important */
@@ -1751,9 +1781,11 @@ input, select, textarea {
 .transition-cover-box-background-view {
 	display: -webkit-box !important;                             /* Important */
 	display:    -moz-box !important;                             /* Important */
-	display:     -ms-box !important;                             /* Important */
-	display:      -o-box !important;                             /* Important */
 	display:         box !important;                             /* Important */
+	display:     -ms-flex !important;                            /* Important */
+	display:         flex !important;                            /* Important */
+	display: -webkit-flex !important;                            /* Important */
+	display:         flex !important;                            /* Important */
 }
 
 .transition-cover-box-overlay {

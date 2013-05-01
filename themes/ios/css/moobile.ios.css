@@ -201,9 +201,9 @@ input, select, textarea {
 .view.view-collection > .view-content-wrapper > .view-content > .view:first-child {
 	-webkit-box-flex: 0;
 	   -moz-box-flex: 0;
-	    -ms-box-flex: 0;
-	     -o-box-flex: 0;
-	        box-flex: 0;
+	    -webkit-flex: 0;
+	        -ms-flex: 0;
+	            flex: 0;
 	border-right: 1px solid black;
 	width: 300px;
 }
@@ -311,14 +311,14 @@ input, select, textarea {
 .bar.navigation-bar > .navigation-bar-content {
 	-webkit-box-align: center;
 	   -moz-box-align: center;
-	    -ms-box-align: center;
-	     -o-box-align: center;
-	        box-align: center;
+	   -ms-flex-align: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
 	-webkit-box-pack: center;
 	   -moz-box-pack: center;
-	    -ms-box-pack: center;
-	     -o-box-pack: center;
-	        box-pack: center;
+	   -ms-flex-pack: center;
+	-webkit-align-items: center;
+	   	    align-items: center;
 }
 
 .bar.navigation-bar > .navigation-bar-content > .navigation-bar-title {
@@ -351,14 +351,14 @@ input, select, textarea {
 .bar.tab-bar .bar-content {
 	-webkit-box-align: center;
 	   -moz-box-align: center;
-	    -ms-box-align: center;
-	     -o-box-align: center;
-	        box-align: center;
+	   -ms-flex-align: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
 	-webkit-box-pack: center;
 	   -moz-box-pack: center;
-	    -ms-box-pack: center;
-	     -o-box-pack: center;
-	        box-pack: center;
+	   -ms-flex-pack: center;
+	-webkit-align-items: center;
+	        align-items: center;
 	height: 100%;
 }
 
@@ -373,19 +373,19 @@ input, select, textarea {
 .tab {
 	-webkit-box-orient: vertical;
 	   -moz-box-orient: vertical;
-	    -ms-box-orient: vertical;
-	     -o-box-orient: vertical;
-	        box-orient: vertical;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 	-webkit-box-align: center;
 	   -moz-box-align: center;
-	    -ms-box-align: center;
-	     -o-box-align: center;
-	        box-align: center;
+	   -ms-flex-align: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
 	-webkit-box-pack: center;
 	   -moz-box-pack: center;
-	    -ms-box-pack: center;
-	     -o-box-pack: center;
-	        box-pack: center;
+	   -ms-flex-pack: center;
+	-webkit-align-items: center;
+	        align-items: center;
 	border-radius: 2;
 	color: #fff;
 	font-size: 10px;
@@ -428,9 +428,9 @@ input, select, textarea {
 .tab-bar .tab {
 	-webkit-box-flex: 1;
 	   -moz-box-flex: 1;
-	    -ms-box-flex: 1;
-	     -o-box-flex: 1;
-	        box-flex: 1;
+	    -webkit-flex: 1;
+	        -ms-flex: 1;
+	            flex: 1;
 	height: 100%;
 	width: 0px;
 }
@@ -444,16 +444,16 @@ input, select, textarea {
 	    -ms-box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
 	     -o-box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
 	        box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
-	-webkit-box-align: center;                                   /* Important */
-	   -moz-box-align: center;                                   /* Important */
-	    -ms-box-align: center;                                   /* Important */
-	     -o-box-align: center;                                   /* Important */
-	        box-align: center;                                   /* Important */
-	-webkit-box-pack: center;                                    /* Important */
-	   -moz-box-pack: center;                                    /* Important */
-	    -ms-box-pack: center;                                    /* Important */
-	     -o-box-pack: center;                                    /* Important */
-	        box-pack: center;                                    /* Important */
+	-webkit-box-align: center;
+	   -moz-box-align: center;
+	   -ms-flex-align: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-pack: center;
+	   -moz-box-pack: center;
+	   -ms-flex-pack: center;
+	-webkit-align-items: center;
+	        align-items: center;
 	background: #fff;
 	border: 1px solid #ababab;
 	border-radius: 10px;
@@ -1729,20 +1729,22 @@ input, select, textarea {
 .alert .alert-footer {
 	display: -webkit-box;                                        /* Important */
 	display:    -moz-box;                                        /* Important */
-	display:     -ms-box;                                        /* Important */
-	display:      -o-box;                                        /* Important */
 	display:         box;                                        /* Important */
+	display: -ms-flexbox;                                        /* Important */
+	display:     flexbox;                                        /* Important */
+	display: -webkit-flex;                                       /* Important */
+	display:         flex;                                       /* Important */
 	margin-left: -5px;
 	margin-right: -5px;
 	margin-bottom: -5px;
 }
 
 .alert .alert-footer .button {
-	-webkit-box-flex: 1;                                         /* Important */
-	   -moz-box-flex: 1;                                         /* Important */
-	    -ms-box-flex: 1;                                         /* Important */
-	     -o-box-flex: 1;                                         /* Important */
-	        box-flex: 1;                                         /* Important */
+	-webkit-box-flex: 1;
+	   -moz-box-flex: 1;
+	    -webkit-flex: 1;
+	        -ms-flex: 1;
+	            flex: 1;
 	-webkit-box-shadow: none;
 	   -moz-box-shadow: none;
 	    -ms-box-shadow: none;
@@ -1799,11 +1801,11 @@ input, select, textarea {
 /* Vertical Layout */
 
 .alert.alert-layout-vertical .alert-footer {
-	-webkit-box-orient: vertical;                                /* Important */
-	   -moz-box-orient: vertical;                                /* Important */
-	    -ms-box-orient: vertical;                                /* Important */
-	     -o-box-orient: vertical;                                /* Important */
-	        box-orient: vertical;                                /* Important */
+	-webkit-box-orient: vertical;
+	   -moz-box-orient: vertical;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 }
 
 .alert.alert-layout-vertical .alert-footer .button {
@@ -2331,7 +2333,8 @@ input, select, textarea {
 
 .transition-slide-enter .transition-view-to-show .bar.navigation-bar:before,
 .transition-slide-enter .transition-view-to-show .bar.navigation-bar:after {
-	display: none !important;
+	visibility: hidden !important;
+	/*display: none !important;*/
 }
 
 /* Enter Navigation Bar To Show */
@@ -2494,10 +2497,10 @@ input, select, textarea {
 .transition-slide-enter .transition-view-to-show .bar.navigation-bar .button.style-back,
 .transition-slide-enter .transition-view-to-show .bar.navigation-bar .button.style-forward {
 	-webkit-animation: transition-slide-enter-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	   -moz-animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	    -ms-animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	     -o-animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
-	        animation: transition-slide-enter-navigation-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	   -moz-animation: transition-slide-enter-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	    -ms-animation: transition-slide-enter-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	     -o-animation: transition-slide-enter-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
+	        animation: transition-slide-enter-navigation-bar-button-to-show 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1.0);
 }
 
 /* Enter Navigation Bar Back/Forward Buttons To Hide */
@@ -2555,7 +2558,7 @@ input, select, textarea {
 
 .transition-slide-leave .transition-view-to-hide .bar.navigation-bar:before,
 .transition-slide-leave .transition-view-to-hide .bar.navigation-bar:after {
-	display: none !important;
+	visibility: hidden !important;
 }
 
 /* Leave Navigation Bar To Hide */
@@ -2669,19 +2672,19 @@ input, select, textarea {
 	to   { -webkit-transform: translate3d(0%, 0, 0); }
 }
 @-moz-keyframes transition-slide-leave-navigation-bar-content-to-show {
-	from { -moz-transform:  translate3d(-50%, 0, 0); }
+	from { -moz-transform: translate3d(-50%, 0, 0); }
 	to   { -moz-transform: translate3d(0%, 0, 0); }
 }
 @-ms-keyframes transition-slide-leave-navigation-bar-content-to-show {
-	from { -ms-transform:  translate3d(-50%, 0, 0); }
+	from { -ms-transform:  ranslate3d(-50%, 0, 0); }
 	to   { -ms-transform: translate3d(0%, 0, 0); }
 }
 @-o-keyframes transition-slide-leave-navigation-bar-content-to-show {
-	from { -o-transform:  translate3d(-50%, 0, 0); }
+	from { -o-transform: translate3d(-50%, 0, 0); }
 	to   { -o-transform: translate3d(50%, 0, 0); }
 }
 @keyframes transition-slide-leave-navigation-bar-content-to-show {
-	from { transform:  translate3d(-50%, 0, 0); }
+	from { transform: translate3d(-50%, 0, 0); }
 	to   { transform: translate3d(0%, 0, 0); }
 }
 
