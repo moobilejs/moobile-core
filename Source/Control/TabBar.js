@@ -176,7 +176,9 @@ Moobile.TabBar = new Class({
 	 * @since  0.3.0
 	 */
 	addTabs: function(tabs, where) {
-		return this.addChildComponents(Moobile.Tab.from(tab), where);
+		return this.addChildComponents(tabs.map(function(tab) {
+			return Moobile.Tab.from(tab);
+		}), where);
 	},
 
 	/**
