@@ -241,23 +241,21 @@ Moobile.Component = new Class({
 	 */
 	addEvent: function(type, fn, internal) {
 
-		var name = type.split(':')[0];
-
-		if (this.eventIsNative(name)) {
+		if (this.eventIsNative(type)) {
 
 			var self = this;
 			var listeners = this._events.listeners;
 			var callbacks = this._events.callbacks;
-			if (callbacks[name] === undefined) {
-				callbacks[name] = [];
-				listeners[name] = function(e) {
-					self.fireEvent(name, e);
+			if (callbacks[type] === undefined) {
+				callbacks[type] = [];
+				listeners[type] = function(e) {
+					self.fireEvent(type, e);
 				};
 			}
 
-			callbacks[name].include(fn);
+			callbacks[type].include(fn);
 
-			if (callbacks[name].length === 1) this.element.addEvent(name, listeners[name]);
+			if (callbacks[type].length === 1) this.element.addEvent(type, listeners[type]);
 		}
 
 		return this.parent(type, fn, internal);
@@ -1633,7 +1631,8 @@ Moobile.Component.addNativeEvent = function(name) {
 	events.include(name);
 };
 
-Moobile.Component.hasNativeEvent = function(name) {
+Moobile.Component.hasNativeEvent = function(type) {
+	var name = type.split(':')[0];
 	return events.contains(name);
 };
 
