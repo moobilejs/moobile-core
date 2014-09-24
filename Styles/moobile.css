@@ -1369,7 +1369,7 @@ input, select, textarea {
 	to   { -moz-transform: translate3d(0, -100%, 0); }
 }
 @-ms-keyframes transition-drop-leave {
-	from { -ms-transform: translate3d(0, 0, 0 }
+	from { -ms-transform: translate3d(0, 0, 0); }
 	to   { -ms-transform: translate3d(0, -100%, 0); }
 }
 @-o-keyframes transition-drop-leave {
