@@ -1,9 +1,9 @@
 [submodule "vendor/mootools-custom-event"]
 	path = vendor/mootools-custom-event
-	url = git://github.com/cpojer/mootools-custom-event.git
+	url = https://github.com/cpojer/mootools-custom-event.git
 [submodule "vendor/mootools-class-extras"]
 	path = vendor/mootools-class-extras
-	url = git://github.com/cpojer/mootools-class-extras.git
+	url = https://github.com/cpojer/mootools-class-extras.git
 [submodule "vendor/mootools-mobile"]
 	path = vendor/mootools-mobile
-	url = git://github.com/cpojer/mootools-mobile.git
+	url = https://github.com/cpojer/mootools-mobile.git
