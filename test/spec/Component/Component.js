@@ -1087,7 +1087,7 @@ describe('Component/Component', function() {
 
 		p.removeChildComponent(c1);
 
-		expect(p.getChildComponentAt(0)).toEqual(null);
+		expect(p.getChildComponents().length).toEqual(1);
 		expect(p.willRemoveChildComponent).toHaveBeenCalledWith(c1);
 		expect(p.didRemoveChildComponent).toHaveBeenCalledWith(c1);
 	});
