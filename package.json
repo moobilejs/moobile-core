@@ -20,11 +20,11 @@
     "iscroll": "4.2.5"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "expect.js": "0.2",
     "mocha": "1.6",
     "sinon": "1.5.2",
-    "wrapup": "0.10.3"
+    "expect.js": "0.2",
+    "browserify": "~13.0",
+    "uglifyify": "~3.0.1"
   },
   "engines": {
     "node": "*"
