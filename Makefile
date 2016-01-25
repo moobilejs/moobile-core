@@ -1,9 +1,9 @@
-all: build
+all: build build-compress
 
 build:
-	@browserify -s moobile -r ./lib/main.js -o moobile.js
+	@browserify -s moobile -r ./src/main.js -o moobile.js
 	@echo "File written to 'moobile.js'"
 
 build-compress:
-	@browserify -s moobile -g uglifyify -r ./lib/main.js -o moobile.js
+	@browserify -s moobile -g uglifyify -r ./src/main.js -o moobile.js
 	@echo "File written to 'moobile.min.js'"
