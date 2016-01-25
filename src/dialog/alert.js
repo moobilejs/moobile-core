@@ -164,7 +164,7 @@ var Alert = moobile.Alert = new Class({
 	 */
 	setTitle: function(title) {
 
-		if (this.__title === title)
+		if (this.__title !== null && this.__title === title)
 			return this;
 
 		title = moobile.Text.from(title);
@@ -198,7 +198,7 @@ var Alert = moobile.Alert = new Class({
 	 */
 	setMessage: function(message) {
 
-		if (this.__message === message)
+		if (this.__message !== null && this.__message === message)
 			return this;
 
 		message = moobile.Text.from(message);
