@@ -1,27 +1,32 @@
 {
-	"name": "moobile",
-	"description": "web application framework for engineering mobile and touch applications",
-	"version": "0.3.0",
-	"main": "lib/main.js",
-	"license": "MIT",
-	"keywords": ["mobile", "touch", "mootools"],
-	"author": "Jean-Philippe Dery <jeanphilippe.dery@gmail.com>",
-	"bugs": "https://github.com/jpdery/moobile-core/issues",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jpdery/moobile-core.git"
-	},
-	"dependencies": {
-		"moofx": "3.1.0",
-		"iscroll": "4.2.5"
-	},
-	"devDependencies": {
-		"mocha": "1.6",
-		"sinon": "1.5.2",
-		"expect.js": "0.2",
-		"wrapup": "0.10.3"
-	},
-	"engines": {
-		"node": "*"
-	}
+  "name": "moobile",
+  "description": "web application framework for engineering mobile and touch applications",
+  "version": "0.3.0",
+  "main": "lib/main.js",
+  "license": "MIT",
+  "keywords": [
+    "mobile",
+    "touch",
+    "mootools"
+  ],
+  "author": "Jean-Philippe Dery <jeanphilippe.dery@gmail.com>",
+  "bugs": "https://github.com/jpdery/moobile-core/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpdery/moobile-core.git"
+  },
+  "dependencies": {
+    "moofx": "3.1.0",
+    "iscroll": "4.2.5"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "expect.js": "0.2",
+    "mocha": "1.6",
+    "sinon": "1.5.2",
+    "wrapup": "0.10.3"
+  },
+  "engines": {
+    "node": "*"
+  }
 }

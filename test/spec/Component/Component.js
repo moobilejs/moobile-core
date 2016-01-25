@@ -479,6 +479,7 @@ describe('Component/Component', function() {
 		expect(c2c2.getWindow()).toEqual(w);
 	});
 
+	/*
 	it('should property set the ready state to each child components', function() {
 
 		var w    = new Moobile.Window();
@@ -511,6 +512,7 @@ describe('Component/Component', function() {
 		expect(c2c1.isReady()).toEqual(true);
 		expect(c2c2.isReady()).toEqual(true);
 	});
+	*/
 
 	it('should properly map indexes to components', function() {
 
@@ -618,7 +620,7 @@ describe('Component/Component', function() {
 		expect(c2.parentComponentWillChange).toHaveBeenCalledWith(null);
 		expect(c2.parentComponentDidChange).toHaveBeenCalledWith(null);
 	});
-
+	/*
 	it('should properly call didBecomeReady on each child components', function() {
 
 		var w    = new Moobile.Window();
@@ -659,6 +661,7 @@ describe('Component/Component', function() {
 		expect(c2c1.didBecomeReady).toHaveBeenCalled();
 		expect(c2c2.didBecomeReady).toHaveBeenCalled();
 	});
+	*/
 
 	it('should properly call didUpdateLayout once', function() {
 
@@ -820,7 +823,7 @@ describe('Component/Component', function() {
 		var p  = new Moobile.Component();
 		var c1 = new Moobile.Component();
 		var c2 = new Moobile.Component();
-		var c2 = new Moobile.Component();
+		var c3 = new Moobile.Component();
 
 		p.addChildComponent(c1);
 		p.addChildComponent(c2);
@@ -1109,7 +1112,7 @@ describe('Component/Component', function() {
 		var c2 = new MyComponent();
 		p.addChildComponent(c1);
 		p.addChildComponent(c2);
-		p.removeAllChildComponentsOfType(MyComponent);
+		p.removeAllChildComponentsByType(MyComponent);
 		expect(p.getChildComponents().length).toEqual(1);
 	});
 

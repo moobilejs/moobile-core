@@ -1,12 +1,7 @@
 all: build
 
 build:
-	@wrup -r moobile ./ > moobile.js
+	@browserify -r ./lib/main.js -s moobile -o moobile.js
 	@echo "File written to 'moobile.js'"
 
-build-compress:
-	@wrup -r moobile ./ > moobile.min.js --compress
-	@echo "File written to 'moobile.min.js'"
-
-test-server:
-	@node ./test/server.js
+.PHONY:
