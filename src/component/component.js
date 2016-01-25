@@ -620,6 +620,17 @@ var Component = moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.0
+	 */
+	setParentComponent: function(parentComponent) {
+		this.parentComponentWillChange(parentComponent);
+		this.__parent = parentComponent;
+		this.parentComponentDidChange(parentComponent);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getParentComponent
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
