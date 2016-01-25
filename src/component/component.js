@@ -647,6 +647,18 @@ var Component = moobile.Component = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setWindow
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.0
+	 */
+	setWindow: function(window) {
+		this.__setWindow(window);
+		this.getChildComponents().each(function(component) {
+			component.setWindow(window);
+		}, this);
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/Component/Component#getWindow
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
