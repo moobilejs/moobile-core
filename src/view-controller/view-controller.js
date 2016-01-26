@@ -212,13 +212,13 @@ var ViewController = moobile.ViewController = new Class({
 
 		if (context) {
 
-			this.__children.splice(this.getChildViewControllerIndex(context), 0, viewController);
-
 			switch (where) {
 				case 'before':
+					this.__children.splice(this.getChildViewControllerIndex(context), 1, viewController, context);
 					this.view.addChildComponentBefore(viewController.view, context.view);
 					break;
 				case 'after':
+					this.__children.splice(this.getChildViewControllerIndex(context), 1, context, viewController);
 					this.view.addChildComponentAfter(viewController.view, context.view);
 					break;
 			}
