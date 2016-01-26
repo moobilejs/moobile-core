@@ -9095,7 +9095,7 @@ var ViewControllerStack = moobile.ViewControllerStack = new Class({
 	 * @since  0.1.0
 	 */
 	willPopViewController: function(viewController) {
-		
+
 	},
 
 	/**
@@ -12748,12 +12748,7 @@ provides: Browser.Features.Touch
 */
 
 Browser.Features.Touch = (function(){
-	try {
-		document.createEvent('TouchEvent').initTouchEvent('touchstart');
-		return true;
-	} catch (exception){}
-	
-	return false;
+	return true == ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch);
 })();
 
 // Android doesn't have a touch delay and dispatchEvent does not fire the handler
@@ -12806,7 +12801,7 @@ Browser.Device = {
 	name: 'other'
 };
 
-if (Browser.Platform.ios){
+if (Browser.ios){
 	var device = navigator.userAgent.toLowerCase().match(/(ip(ad|od|hone))/)[0];
 	
 	Browser.Device[device] = true;
@@ -12816,7 +12811,7 @@ if (Browser.Platform.ios){
 if (this.devicePixelRatio == 2)
 	Browser.hasHighResolution = true;
 
-Browser.isMobile = !['mac', 'linux', 'win'].contains(Browser.Platform.name);
+Browser.isMobile = !['mac', 'linux', 'win'].contains(Browser.name);
 
 }).call(this);
 
