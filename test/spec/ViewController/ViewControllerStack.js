@@ -39,14 +39,24 @@ describe('ViewController/ViewControllerStack', function() {
 		var vs  = new Moobile.ViewControllerStack();
 		var vc1 = new Moobile.ViewController();
 		var vc2 = new Moobile.ViewController();
+
+		var didPushViewController = function(viewController) {
+			didPushViewController = function(viewController) {};
+
+			if(viewController !== vc2) {
+				return;
+			}
+
+			vs.popViewController();
+			expect(vs.getTopViewController()).toEqual(vc1);
+			expect(vs.willPopViewController).toHaveBeenCalledWith(vc2);
+			expect(vs.didPopViewController).toHaveBeenCalledWith(vc2);
+		};
+
 		spyOn(vs, 'willPopViewController');
 		spyOn(vs, 'didPopViewController');
 		vs.pushViewController(vc1);
 		vs.pushViewController(vc2);
-		vs.popViewController();
-		expect(vs.getTopViewController()).toEqual(vc1);
-		expect(vs.willPopViewController).toHaveBeenCalledWith(vc2);
-		expect(vs.didPopViewController).toHaveBeenCalledWith(vc2);
 	});
 
 	// popViewControllerUntil
@@ -56,13 +66,23 @@ describe('ViewController/ViewControllerStack', function() {
 		var vc1 = new Moobile.ViewController();
 		var vc2 = new Moobile.ViewController();
 		var vc3 = new Moobile.ViewController();
+
+		var didPushViewController = function(viewController) {
+			didPushViewController = function(viewController) {};
+
+			if(viewController !== vc3) {
+				return;
+			}
+			
+			vs.popViewControllerUntil(vc1);
+			expect(vs.getChildViewControllerAt(0)).toEqual(vc1);
+			expect(vs.getChildViewControllerAt(1)).toEqual(null);
+			expect(vs.getChildViewControllerAt(2)).toEqual(null);
+		};
+
 		vs.pushViewController(vc1);
 		vs.pushViewController(vc2);
 		vs.pushViewController(vc3);
-		vs.popViewControllerUntil(vc1);
-		expect(vs.getChildViewControllerAt(0)).toEqual(vc1);
-		expect(vs.getChildViewControllerAt(1)).toEqual(null);
-		expect(vs.getChildViewControllerAt(2)).toEqual(null);
 	});
 
 	// getTopViewController

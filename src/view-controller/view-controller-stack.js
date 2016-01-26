@@ -59,7 +59,7 @@ var ViewControllerStack = moobile.ViewControllerStack = new Class({
 			return this;
 		}
 
-		viewTransition = viewTransition || new ViewTransition.None();
+		viewTransition = viewTransition || new Moobile.ViewTransition.None();
 		viewTransition.addEvent('start:once', this.bound('_onPushTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('_onPushTransitionComplete'));
 		viewTransition.enter(

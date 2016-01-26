@@ -1,213 +1,13101 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.moobile = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-!function(o,t){function r(o){return""===n?o:(o=o.charAt(0).toUpperCase()+o.substr(1),n+o)}var e=Math,l=t.createElement("div").style,n=function(){for(var o,t="t,webkitT,MozT,msT,OT".split(","),r=0,e=t.length;e>r;r++)if(o=t[r]+"ransform",o in l)return t[r].substr(0,t[r].length-1);return!1}(),s=n?"-"+n.toLowerCase()+"-":"",i=r("transform"),a=r("transitionProperty"),c=r("transitionDuration"),p=r("transformOrigin"),m=r("transitionTimingFunction"),h=r("transitionDelay"),u=/android/gi.test(navigator.appVersion),S=/iphone|ipad/gi.test(navigator.appVersion),d=/hp-tablet/gi.test(navigator.appVersion),b=r("perspective")in l,f="ontouchstart"in o&&!d,x=n!==!1,g=r("transition")in l,y="onorientationchange"in o?"orientationchange":"resize",v=f?"touchstart":"mousedown",Y=f?"touchmove":"mousemove",T=f?"touchend":"mouseup",X=f?"touchcancel":"mouseup",w=function(){if(n===!1)return!1;var o={"":"transitionend",webkit:"webkitTransitionEnd",Moz:"transitionend",O:"otransitionend",ms:"MSTransitionEnd"};return o[n]}(),_=function(){return o.requestAnimationFrame||o.webkitRequestAnimationFrame||o.mozRequestAnimationFrame||o.oRequestAnimationFrame||o.msRequestAnimationFrame||function(o){return setTimeout(o,1)}}(),z=function(){return o.cancelRequestAnimationFrame||o.webkitCancelAnimationFrame||o.webkitCancelRequestAnimationFrame||o.mozCancelRequestAnimationFrame||o.oCancelRequestAnimationFrame||o.msCancelRequestAnimationFrame||clearTimeout}(),M=b?" translateZ(0)":"",E=function(r,e){var l,n=this;n.wrapper="object"==typeof r?r:t.getElementById(r),n.wrapper.style.overflow="hidden",n.scroller=n.wrapper.children[0],n.options={hScroll:!0,vScroll:!0,x:0,y:0,bounce:!0,bounceLock:!1,momentum:!0,lockDirection:!0,useTransform:!0,useTransition:!1,topOffset:0,checkDOMChanges:!1,handleClick:!0,hScrollbar:!0,vScrollbar:!0,fixedScrollbar:u,hideScrollbar:S,fadeScrollbar:S&&b,scrollbarClass:"",zoom:!1,zoomMin:1,zoomMax:4,doubleTapZoom:2,wheelAction:"scroll",snap:!1,snapThreshold:1,onRefresh:null,onBeforeScrollStart:function(o){o.preventDefault()},onScrollStart:null,onBeforeScrollMove:null,onScrollMove:null,onBeforeScrollEnd:null,onScrollEnd:null,onTouchEnd:null,onDestroy:null,onZoomStart:null,onZoom:null,onZoomEnd:null};for(l in e)n.options[l]=e[l];n.x=n.options.x,n.y=n.options.y,n.options.useTransform=x&&n.options.useTransform,n.options.hScrollbar=n.options.hScroll&&n.options.hScrollbar,n.options.vScrollbar=n.options.vScroll&&n.options.vScrollbar,n.options.zoom=n.options.useTransform&&n.options.zoom,n.options.useTransition=g&&n.options.useTransition,n.options.zoom&&u&&(M=""),n.scroller.style[a]=n.options.useTransform?s+"transform":"top left",n.scroller.style[c]="0",n.scroller.style[p]="0 0",n.options.useTransition&&(n.scroller.style[m]="cubic-bezier(0.33,0.66,0.66,1)"),n.options.useTransform?n.scroller.style[i]="translate("+n.x+"px,"+n.y+"px)"+M:n.scroller.style.cssText+=";position:absolute;top:"+n.y+"px;left:"+n.x+"px",n.options.useTransition&&(n.options.fixedScrollbar=!0),n.refresh(),n._bind(y,o),n._bind(v),f||"none"!=n.options.wheelAction&&(n._bind("DOMMouseScroll"),n._bind("mousewheel")),n.options.checkDOMChanges&&(n.checkDOMTime=setInterval(function(){n._checkDOMChanges()},500))};E.prototype={enabled:!0,x:0,y:0,steps:[],scale:1,currPageX:0,currPageY:0,pagesX:[],pagesY:[],aniTime:null,wheelZoomCount:0,handleEvent:function(o){var t=this;switch(o.type){case v:if(!f&&0!==o.button)return;t._start(o);break;case Y:t._move(o);break;case T:case X:t._end(o);break;case y:t._resize();break;case"DOMMouseScroll":case"mousewheel":t._wheel(o);break;case w:t._transitionEnd(o)}},_checkDOMChanges:function(){this.moved||this.zoomed||this.animating||this.scrollerW==this.scroller.offsetWidth*this.scale&&this.scrollerH==this.scroller.offsetHeight*this.scale||this.refresh()},_scrollbar:function(o){var r,l=this;return l[o+"Scrollbar"]?(l[o+"ScrollbarWrapper"]||(r=t.createElement("div"),l.options.scrollbarClass?r.className=l.options.scrollbarClass+o.toUpperCase():r.style.cssText="position:absolute;z-index:100;"+("h"==o?"height:7px;bottom:1px;left:2px;right:"+(l.vScrollbar?"7":"2")+"px":"width:7px;bottom:"+(l.hScrollbar?"7":"2")+"px;top:2px;right:1px"),r.style.cssText+=";pointer-events:none;"+s+"transition-property:opacity;"+s+"transition-duration:"+(l.options.fadeScrollbar?"350ms":"0")+";overflow:hidden;opacity:"+(l.options.hideScrollbar?"0":"1"),l.wrapper.appendChild(r),l[o+"ScrollbarWrapper"]=r,r=t.createElement("div"),l.options.scrollbarClass||(r.style.cssText="position:absolute;z-index:100;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);"+s+"background-clip:padding-box;"+s+"box-sizing:border-box;"+("h"==o?"height:100%":"width:100%")+";"+s+"border-radius:3px;border-radius:3px"),r.style.cssText+=";pointer-events:none;"+s+"transition-property:"+s+"transform;"+s+"transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);"+s+"transition-duration:0;"+s+"transform: translate(0,0)"+M,l.options.useTransition&&(r.style.cssText+=";"+s+"transition-timing-function:cubic-bezier(0.33,0.66,0.66,1)"),l[o+"ScrollbarWrapper"].appendChild(r),l[o+"ScrollbarIndicator"]=r),"h"==o?(l.hScrollbarSize=l.hScrollbarWrapper.clientWidth,l.hScrollbarIndicatorSize=e.max(e.round(l.hScrollbarSize*l.hScrollbarSize/l.scrollerW),8),l.hScrollbarIndicator.style.width=l.hScrollbarIndicatorSize+"px",l.hScrollbarMaxScroll=l.hScrollbarSize-l.hScrollbarIndicatorSize,l.hScrollbarProp=l.hScrollbarMaxScroll/l.maxScrollX):(l.vScrollbarSize=l.vScrollbarWrapper.clientHeight,l.vScrollbarIndicatorSize=e.max(e.round(l.vScrollbarSize*l.vScrollbarSize/l.scrollerH),8),l.vScrollbarIndicator.style.height=l.vScrollbarIndicatorSize+"px",l.vScrollbarMaxScroll=l.vScrollbarSize-l.vScrollbarIndicatorSize,l.vScrollbarProp=l.vScrollbarMaxScroll/l.maxScrollY),void l._scrollbarPos(o,!0)):void(l[o+"ScrollbarWrapper"]&&(x&&(l[o+"ScrollbarIndicator"].style[i]=""),l[o+"ScrollbarWrapper"].parentNode.removeChild(l[o+"ScrollbarWrapper"]),l[o+"ScrollbarWrapper"]=null,l[o+"ScrollbarIndicator"]=null))},_resize:function(){var o=this;setTimeout(function(){o.refresh()},u?200:0)},_pos:function(o,t){this.zoomed||(o=this.hScroll?o:0,t=this.vScroll?t:0,this.options.useTransform?this.scroller.style[i]="translate("+o+"px,"+t+"px) scale("+this.scale+")"+M:(o=e.round(o),t=e.round(t),this.scroller.style.left=o+"px",this.scroller.style.top=t+"px"),this.x=o,this.y=t,this._scrollbarPos("h"),this._scrollbarPos("v"))},_scrollbarPos:function(o,t){var r,l=this,n="h"==o?l.x:l.y;l[o+"Scrollbar"]&&(n=l[o+"ScrollbarProp"]*n,0>n?(l.options.fixedScrollbar||(r=l[o+"ScrollbarIndicatorSize"]+e.round(3*n),8>r&&(r=8),l[o+"ScrollbarIndicator"].style["h"==o?"width":"height"]=r+"px"),n=0):n>l[o+"ScrollbarMaxScroll"]&&(l.options.fixedScrollbar?n=l[o+"ScrollbarMaxScroll"]:(r=l[o+"ScrollbarIndicatorSize"]-e.round(3*(n-l[o+"ScrollbarMaxScroll"])),8>r&&(r=8),l[o+"ScrollbarIndicator"].style["h"==o?"width":"height"]=r+"px",n=l[o+"ScrollbarMaxScroll"]+(l[o+"ScrollbarIndicatorSize"]-r))),l[o+"ScrollbarWrapper"].style[h]="0",l[o+"ScrollbarWrapper"].style.opacity=t&&l.options.hideScrollbar?"0":"1",l[o+"ScrollbarIndicator"].style[i]="translate("+("h"==o?n+"px,0)":"0,"+n+"px)")+M)},_start:function(t){var r,l,n,s,a,c=this,p=f?t.touches[0]:t;c.enabled&&(c.options.onBeforeScrollStart&&c.options.onBeforeScrollStart.call(c,t),(c.options.useTransition||c.options.zoom)&&c._transitionTime(0),c.moved=!1,c.animating=!1,c.zoomed=!1,c.distX=0,c.distY=0,c.absDistX=0,c.absDistY=0,c.dirX=0,c.dirY=0,c.options.zoom&&f&&t.touches.length>1&&(s=e.abs(t.touches[0].pageX-t.touches[1].pageX),a=e.abs(t.touches[0].pageY-t.touches[1].pageY),c.touchesDistStart=e.sqrt(s*s+a*a),c.originX=e.abs(t.touches[0].pageX+t.touches[1].pageX-2*c.wrapperOffsetLeft)/2-c.x,c.originY=e.abs(t.touches[0].pageY+t.touches[1].pageY-2*c.wrapperOffsetTop)/2-c.y,c.options.onZoomStart&&c.options.onZoomStart.call(c,t)),c.options.momentum&&(c.options.useTransform?(r=getComputedStyle(c.scroller,null)[i].replace(/[^0-9\-.,]/g,"").split(","),l=+(r[12]||r[4]),n=+(r[13]||r[5])):(l=+getComputedStyle(c.scroller,null).left.replace(/[^0-9-]/g,""),n=+getComputedStyle(c.scroller,null).top.replace(/[^0-9-]/g,"")),(l!=c.x||n!=c.y)&&(c.options.useTransition?c._unbind(w):z(c.aniTime),c.steps=[],c._pos(l,n),c.options.onScrollEnd&&c.options.onScrollEnd.call(c))),c.absStartX=c.x,c.absStartY=c.y,c.startX=c.x,c.startY=c.y,c.pointX=p.pageX,c.pointY=p.pageY,c.startTime=t.timeStamp||Date.now(),c.options.onScrollStart&&c.options.onScrollStart.call(c,t),c._bind(Y,o),c._bind(T,o),c._bind(X,o))},_move:function(o){var t,r,l,n=this,s=f?o.touches[0]:o,a=s.pageX-n.pointX,c=s.pageY-n.pointY,p=n.x+a,m=n.y+c,h=o.timeStamp||Date.now();return n.options.onBeforeScrollMove&&n.options.onBeforeScrollMove.call(n,o),n.options.zoom&&f&&o.touches.length>1?(t=e.abs(o.touches[0].pageX-o.touches[1].pageX),r=e.abs(o.touches[0].pageY-o.touches[1].pageY),n.touchesDist=e.sqrt(t*t+r*r),n.zoomed=!0,l=1/n.touchesDistStart*n.touchesDist*this.scale,l<n.options.zoomMin?l=.5*n.options.zoomMin*Math.pow(2,l/n.options.zoomMin):l>n.options.zoomMax&&(l=2*n.options.zoomMax*Math.pow(.5,n.options.zoomMax/l)),n.lastScale=l/this.scale,p=this.originX-this.originX*n.lastScale+this.x,m=this.originY-this.originY*n.lastScale+this.y,this.scroller.style[i]="translate("+p+"px,"+m+"px) scale("+l+")"+M,void(n.options.onZoom&&n.options.onZoom.call(n,o))):(n.pointX=s.pageX,n.pointY=s.pageY,(p>0||p<n.maxScrollX)&&(p=n.options.bounce?n.x+a/2:p>=0||n.maxScrollX>=0?0:n.maxScrollX),(m>n.minScrollY||m<n.maxScrollY)&&(m=n.options.bounce?n.y+c/2:m>=n.minScrollY||n.maxScrollY>=0?n.minScrollY:n.maxScrollY),n.distX+=a,n.distY+=c,n.absDistX=e.abs(n.distX),n.absDistY=e.abs(n.distY),void(n.absDistX<6&&n.absDistY<6||(n.options.lockDirection&&(n.absDistX>n.absDistY+5?(m=n.y,c=0):n.absDistY>n.absDistX+5&&(p=n.x,a=0)),n.moved=!0,n._pos(p,m),n.dirX=a>0?-1:0>a?1:0,n.dirY=c>0?-1:0>c?1:0,h-n.startTime>300&&(n.startTime=h,n.startX=n.x,n.startY=n.y),n.options.onScrollMove&&n.options.onScrollMove.call(n,o))))},_end:function(r){if(!f||0===r.touches.length){var l,n,s,a,p,m,h,u=this,S=f?r.changedTouches[0]:r,d={dist:0,time:0},b={dist:0,time:0},x=(r.timeStamp||Date.now())-u.startTime,g=u.x,y=u.y;if(u._unbind(Y,o),u._unbind(T,o),u._unbind(X,o),u.options.onBeforeScrollEnd&&u.options.onBeforeScrollEnd.call(u,r),u.zoomed)return h=u.scale*u.lastScale,h=Math.max(u.options.zoomMin,h),h=Math.min(u.options.zoomMax,h),u.lastScale=h/u.scale,u.scale=h,u.x=u.originX-u.originX*u.lastScale+u.x,u.y=u.originY-u.originY*u.lastScale+u.y,u.scroller.style[c]="200ms",u.scroller.style[i]="translate("+u.x+"px,"+u.y+"px) scale("+u.scale+")"+M,u.zoomed=!1,u.refresh(),void(u.options.onZoomEnd&&u.options.onZoomEnd.call(u,r));if(!u.moved)return f&&(u.doubleTapTimer&&u.options.zoom?(clearTimeout(u.doubleTapTimer),u.doubleTapTimer=null,u.options.onZoomStart&&u.options.onZoomStart.call(u,r),u.zoom(u.pointX,u.pointY,1==u.scale?u.options.doubleTapZoom:1),u.options.onZoomEnd&&setTimeout(function(){u.options.onZoomEnd.call(u,r)},200)):this.options.handleClick&&(u.doubleTapTimer=setTimeout(function(){for(u.doubleTapTimer=null,l=S.target;1!=l.nodeType;)l=l.parentNode;"SELECT"!=l.tagName&&"INPUT"!=l.tagName&&"TEXTAREA"!=l.tagName&&(n=t.createEvent("MouseEvents"),n.initMouseEvent("click",!0,!0,r.view,1,S.screenX,S.screenY,S.clientX,S.clientY,r.ctrlKey,r.altKey,r.shiftKey,r.metaKey,0,null),n._fake=!0,l.dispatchEvent(n))},u.options.zoom?250:0))),u._resetPos(400),void(u.options.onTouchEnd&&u.options.onTouchEnd.call(u,r));if(300>x&&u.options.momentum&&(d=g?u._momentum(g-u.startX,x,-u.x,u.scrollerW-u.wrapperW+u.x,u.options.bounce?u.wrapperW:0):d,b=y?u._momentum(y-u.startY,x,-u.y,u.maxScrollY<0?u.scrollerH-u.wrapperH+u.y-u.minScrollY:0,u.options.bounce?u.wrapperH:0):b,g=u.x+d.dist,y=u.y+b.dist,(u.x>0&&g>0||u.x<u.maxScrollX&&g<u.maxScrollX)&&(d={dist:0,time:0}),(u.y>u.minScrollY&&y>u.minScrollY||u.y<u.maxScrollY&&y<u.maxScrollY)&&(b={dist:0,time:0})),d.dist||b.dist)return p=e.max(e.max(d.time,b.time),10),u.options.snap&&(s=g-u.absStartX,a=y-u.absStartY,e.abs(s)<u.options.snapThreshold&&e.abs(a)<u.options.snapThreshold?u.scrollTo(u.absStartX,u.absStartY,200):(m=u._snap(g,y),g=m.x,y=m.y,p=e.max(m.time,p))),u.scrollTo(e.round(g),e.round(y),p),void(u.options.onTouchEnd&&u.options.onTouchEnd.call(u,r));if(u.options.snap)return s=g-u.absStartX,a=y-u.absStartY,e.abs(s)<u.options.snapThreshold&&e.abs(a)<u.options.snapThreshold?u.scrollTo(u.absStartX,u.absStartY,200):(m=u._snap(u.x,u.y),(m.x!=u.x||m.y!=u.y)&&u.scrollTo(m.x,m.y,m.time)),void(u.options.onTouchEnd&&u.options.onTouchEnd.call(u,r));u._resetPos(200),u.options.onTouchEnd&&u.options.onTouchEnd.call(u,r)}},_resetPos:function(o){var t=this,r=t.x>=0?0:t.x<t.maxScrollX?t.maxScrollX:t.x,e=t.y>=t.minScrollY||t.maxScrollY>0?t.minScrollY:t.y<t.maxScrollY?t.maxScrollY:t.y;return r==t.x&&e==t.y?(t.moved&&(t.moved=!1,t.options.onScrollEnd&&t.options.onScrollEnd.call(t)),t.hScrollbar&&t.options.hideScrollbar&&("webkit"==n&&(t.hScrollbarWrapper.style[h]="300ms"),t.hScrollbarWrapper.style.opacity="0"),void(t.vScrollbar&&t.options.hideScrollbar&&("webkit"==n&&(t.vScrollbarWrapper.style[h]="300ms"),t.vScrollbarWrapper.style.opacity="0"))):void t.scrollTo(r,e,o||0)},_wheel:function(o){var t,r,e,l,n,s=this;if("wheelDeltaX"in o)t=o.wheelDeltaX/12,r=o.wheelDeltaY/12;else if("wheelDelta"in o)t=r=o.wheelDelta/12;else{if(!("detail"in o))return;t=r=3*-o.detail}return"zoom"==s.options.wheelAction?(n=s.scale*Math.pow(2,1/3*(r?r/Math.abs(r):0)),n<s.options.zoomMin&&(n=s.options.zoomMin),n>s.options.zoomMax&&(n=s.options.zoomMax),void(n!=s.scale&&(!s.wheelZoomCount&&s.options.onZoomStart&&s.options.onZoomStart.call(s,o),s.wheelZoomCount++,s.zoom(o.pageX,o.pageY,n,400),setTimeout(function(){s.wheelZoomCount--,!s.wheelZoomCount&&s.options.onZoomEnd&&s.options.onZoomEnd.call(s,o)},400)))):(e=s.x+t,l=s.y+r,e>0?e=0:e<s.maxScrollX&&(e=s.maxScrollX),l>s.minScrollY?l=s.minScrollY:l<s.maxScrollY&&(l=s.maxScrollY),void(s.maxScrollY<0&&s.scrollTo(e,l,0)))},_transitionEnd:function(o){var t=this;o.target==t.scroller&&(t._unbind(w),t._startAni())},_startAni:function(){var o,t,r,l=this,n=l.x,s=l.y,i=Date.now();if(!l.animating){if(!l.steps.length)return void l._resetPos(400);if(o=l.steps.shift(),o.x==n&&o.y==s&&(o.time=0),l.animating=!0,l.moved=!0,l.options.useTransition)return l._transitionTime(o.time),l._pos(o.x,o.y),l.animating=!1,void(o.time?l._bind(w):l._resetPos(0));r=function(){var a,c,p=Date.now();return p>=i+o.time?(l._pos(o.x,o.y),l.animating=!1,l.options.onAnimationEnd&&l.options.onAnimationEnd.call(l),void l._startAni()):(p=(p-i)/o.time-1,t=e.sqrt(1-p*p),a=(o.x-n)*t+n,c=(o.y-s)*t+s,l._pos(a,c),void(l.animating&&(l.aniTime=_(r))))},r()}},_transitionTime:function(o){o+="ms",this.scroller.style[c]=o,this.hScrollbar&&(this.hScrollbarIndicator.style[c]=o),this.vScrollbar&&(this.vScrollbarIndicator.style[c]=o)},_momentum:function(o,t,r,l,n){var s=6e-4,i=e.abs(o)/t,a=i*i/(2*s),c=0,p=0;return o>0&&a>r?(p=n/(6/(a/i*s)),r+=p,i=i*r/a,a=r):0>o&&a>l&&(p=n/(6/(a/i*s)),l+=p,i=i*l/a,a=l),a*=0>o?-1:1,c=i/s,{dist:a,time:e.round(c)}},_offset:function(o){for(var t=-o.offsetLeft,r=-o.offsetTop;o=o.offsetParent;)t-=o.offsetLeft,r-=o.offsetTop;return o!=this.wrapper&&(t*=this.scale,r*=this.scale),{left:t,top:r}},_snap:function(o,t){var r,l,n,s,i,a,c=this;for(n=c.pagesX.length-1,r=0,l=c.pagesX.length;l>r;r++)if(o>=c.pagesX[r]){n=r;break}for(n==c.currPageX&&n>0&&c.dirX<0&&n--,o=c.pagesX[n],i=e.abs(o-c.pagesX[c.currPageX]),i=i?e.abs(c.x-o)/i*500:0,c.currPageX=n,n=c.pagesY.length-1,r=0;n>r;r++)if(t>=c.pagesY[r]){n=r;break}return n==c.currPageY&&n>0&&c.dirY<0&&n--,t=c.pagesY[n],a=e.abs(t-c.pagesY[c.currPageY]),a=a?e.abs(c.y-t)/a*500:0,c.currPageY=n,s=e.round(e.max(i,a))||200,{x:o,y:t,time:s}},_bind:function(o,t,r){(t||this.scroller).addEventListener(o,this,!!r)},_unbind:function(o,t,r){(t||this.scroller).removeEventListener(o,this,!!r)},destroy:function(){var t=this;t.scroller.style[i]="",t.hScrollbar=!1,t.vScrollbar=!1,t._scrollbar("h"),t._scrollbar("v"),t._unbind(y,o),t._unbind(v),t._unbind(Y,o),t._unbind(T,o),t._unbind(X,o),t.options.hasTouch||(t._unbind("DOMMouseScroll"),t._unbind("mousewheel")),t.options.useTransition&&t._unbind(w),t.options.checkDOMChanges&&clearInterval(t.checkDOMTime),t.options.onDestroy&&t.options.onDestroy.call(t)},refresh:function(){var o,t,r,l,n=this,s=0,i=0;if(n.scale<n.options.zoomMin&&(n.scale=n.options.zoomMin),n.wrapperW=n.wrapper.clientWidth||1,n.wrapperH=n.wrapper.clientHeight||1,n.minScrollY=-n.options.topOffset||0,n.scrollerW=e.round(n.scroller.offsetWidth*n.scale),n.scrollerH=e.round((n.scroller.offsetHeight+n.minScrollY)*n.scale),n.maxScrollX=n.wrapperW-n.scrollerW,n.maxScrollY=n.wrapperH-n.scrollerH+n.minScrollY,n.dirX=0,n.dirY=0,n.options.onRefresh&&n.options.onRefresh.call(n),n.hScroll=n.options.hScroll&&n.maxScrollX<0,n.vScroll=n.options.vScroll&&(!n.options.bounceLock&&!n.hScroll||n.scrollerH>n.wrapperH),n.hScrollbar=n.hScroll&&n.options.hScrollbar,n.vScrollbar=n.vScroll&&n.options.vScrollbar&&n.scrollerH>n.wrapperH,o=n._offset(n.wrapper),n.wrapperOffsetLeft=-o.left,n.wrapperOffsetTop=-o.top,"string"==typeof n.options.snap)for(n.pagesX=[],n.pagesY=[],l=n.scroller.querySelectorAll(n.options.snap),t=0,r=l.length;r>t;t++)s=n._offset(l[t]),s.left+=n.wrapperOffsetLeft,s.top+=n.wrapperOffsetTop,n.pagesX[t]=s.left<n.maxScrollX?n.maxScrollX:s.left*n.scale,n.pagesY[t]=s.top<n.maxScrollY?n.maxScrollY:s.top*n.scale;else if(n.options.snap){for(n.pagesX=[];s>=n.maxScrollX;)n.pagesX[i]=s,s-=n.wrapperW,i++;for(n.maxScrollX%n.wrapperW&&(n.pagesX[n.pagesX.length]=n.maxScrollX-n.pagesX[n.pagesX.length-1]+n.pagesX[n.pagesX.length-1]),s=0,i=0,n.pagesY=[];s>=n.maxScrollY;)n.pagesY[i]=s,s-=n.wrapperH,i++;n.maxScrollY%n.wrapperH&&(n.pagesY[n.pagesY.length]=n.maxScrollY-n.pagesY[n.pagesY.length-1]+n.pagesY[n.pagesY.length-1])}n._scrollbar("h"),n._scrollbar("v"),n.zoomed||(n.scroller.style[c]="0",n._resetPos(400))},scrollTo:function(o,t,r,e){var l,n,s=this,i=o;for(s.stop(),i.length||(i=[{x:o,y:t,time:r,relative:e}]),l=0,n=i.length;n>l;l++)i[l].relative&&(i[l].x=s.x-i[l].x,i[l].y=s.y-i[l].y),s.steps.push({x:i[l].x,y:i[l].y,time:i[l].time||0});s._startAni()},scrollToElement:function(o,t){var r,l=this;o=o.nodeType?o:l.scroller.querySelector(o),o&&(r=l._offset(o),r.left+=l.wrapperOffsetLeft,r.top+=l.wrapperOffsetTop,r.left=r.left>0?0:r.left<l.maxScrollX?l.maxScrollX:r.left,r.top=r.top>l.minScrollY?l.minScrollY:r.top<l.maxScrollY?l.maxScrollY:r.top,t=void 0===t?e.max(2*e.abs(r.left),2*e.abs(r.top)):t,l.scrollTo(r.left,r.top,t))},scrollToPage:function(o,t,r){var e,l,n=this;r=void 0===r?400:r,n.options.onScrollStart&&n.options.onScrollStart.call(n),n.options.snap?(o="next"==o?n.currPageX+1:"prev"==o?n.currPageX-1:o,t="next"==t?n.currPageY+1:"prev"==t?n.currPageY-1:t,o=0>o?0:o>n.pagesX.length-1?n.pagesX.length-1:o,t=0>t?0:t>n.pagesY.length-1?n.pagesY.length-1:t,n.currPageX=o,n.currPageY=t,e=n.pagesX[o],l=n.pagesY[t]):(e=-n.wrapperW*o,l=-n.wrapperH*t,e<n.maxScrollX&&(e=n.maxScrollX),l<n.maxScrollY&&(l=n.maxScrollY)),n.scrollTo(e,l,r)},disable:function(){this.stop(),this._resetPos(0),this.enabled=!1,this._unbind(Y,o),this._unbind(T,o),this._unbind(X,o)},enable:function(){this.enabled=!0},stop:function(){this.options.useTransition?this._unbind(w):z(this.aniTime),this.steps=[],this.moved=!1,this.animating=!1},zoom:function(o,t,r,e){var l=this,n=r/l.scale;l.options.useTransform&&(l.zoomed=!0,e=void 0===e?200:e,o=o-l.wrapperOffsetLeft-l.x,t=t-l.wrapperOffsetTop-l.y,l.x=o-o*n+l.x,l.y=t-t*n+l.y,l.scale=r,l.refresh(),l.x=l.x>0?0:l.x<l.maxScrollX?l.maxScrollX:l.x,l.y=l.y>l.minScrollY?l.minScrollY:l.y<l.maxScrollY?l.maxScrollY:l.y,l.scroller.style[c]=e+"ms",l.scroller.style[i]="translate("+l.x+"px,"+l.y+"px) scale("+r+")"+M,l.zoomed=!1)},isReady:function(){return!this.moved&&!this.zoomed&&!this.animating}},l=null,"undefined"!=typeof exports?exports.iScroll=E:o.iScroll=E}(window,document);
+/*!
+ * iScroll v4.2.5 ~ Copyright (c) 2012 Matteo Spinelli, http://cubiq.org
+ * Released under MIT license, http://cubiq.org/license
+ */
+(function(window, doc){
+var m = Math,
+	dummyStyle = doc.createElement('div').style,
+	vendor = (function () {
+		var vendors = 't,webkitT,MozT,msT,OT'.split(','),
+			t,
+			i = 0,
+			l = vendors.length;
+
+		for ( ; i < l; i++ ) {
+			t = vendors[i] + 'ransform';
+			if ( t in dummyStyle ) {
+				return vendors[i].substr(0, vendors[i].length - 1);
+			}
+		}
+
+		return false;
+	})(),
+	cssVendor = vendor ? '-' + vendor.toLowerCase() + '-' : '',
+
+	// Style properties
+	transform = prefixStyle('transform'),
+	transitionProperty = prefixStyle('transitionProperty'),
+	transitionDuration = prefixStyle('transitionDuration'),
+	transformOrigin = prefixStyle('transformOrigin'),
+	transitionTimingFunction = prefixStyle('transitionTimingFunction'),
+	transitionDelay = prefixStyle('transitionDelay'),
+
+    // Browser capabilities
+	isAndroid = (/android/gi).test(navigator.appVersion),
+	isIDevice = (/iphone|ipad/gi).test(navigator.appVersion),
+	isTouchPad = (/hp-tablet/gi).test(navigator.appVersion),
+
+    has3d = prefixStyle('perspective') in dummyStyle,
+    hasTouch = 'ontouchstart' in window && !isTouchPad,
+    hasTransform = vendor !== false,
+    hasTransitionEnd = prefixStyle('transition') in dummyStyle,
+
+	RESIZE_EV = 'onorientationchange' in window ? 'orientationchange' : 'resize',
+	START_EV = hasTouch ? 'touchstart' : 'mousedown',
+	MOVE_EV = hasTouch ? 'touchmove' : 'mousemove',
+	END_EV = hasTouch ? 'touchend' : 'mouseup',
+	CANCEL_EV = hasTouch ? 'touchcancel' : 'mouseup',
+	TRNEND_EV = (function () {
+		if ( vendor === false ) return false;
+
+		var transitionEnd = {
+				''			: 'transitionend',
+				'webkit'	: 'webkitTransitionEnd',
+				'Moz'		: 'transitionend',
+				'O'			: 'otransitionend',
+				'ms'		: 'MSTransitionEnd'
+			};
+
+		return transitionEnd[vendor];
+	})(),
+
+	nextFrame = (function() {
+		return window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function(callback) { return setTimeout(callback, 1); };
+	})(),
+	cancelFrame = (function () {
+		return window.cancelRequestAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.webkitCancelRequestAnimationFrame ||
+			window.mozCancelRequestAnimationFrame ||
+			window.oCancelRequestAnimationFrame ||
+			window.msCancelRequestAnimationFrame ||
+			clearTimeout;
+	})(),
+
+	// Helpers
+	translateZ = has3d ? ' translateZ(0)' : '',
+
+	// Constructor
+	iScroll = function (el, options) {
+		var that = this,
+			i;
+
+		that.wrapper = typeof el == 'object' ? el : doc.getElementById(el);
+		that.wrapper.style.overflow = 'hidden';
+		that.scroller = that.wrapper.children[0];
+
+		// Default options
+		that.options = {
+			hScroll: true,
+			vScroll: true,
+			x: 0,
+			y: 0,
+			bounce: true,
+			bounceLock: false,
+			momentum: true,
+			lockDirection: true,
+			useTransform: true,
+			useTransition: false,
+			topOffset: 0,
+			checkDOMChanges: false,		// Experimental
+			handleClick: true,
+
+			// Scrollbar
+			hScrollbar: true,
+			vScrollbar: true,
+			fixedScrollbar: isAndroid,
+			hideScrollbar: isIDevice,
+			fadeScrollbar: isIDevice && has3d,
+			scrollbarClass: '',
+
+			// Zoom
+			zoom: false,
+			zoomMin: 1,
+			zoomMax: 4,
+			doubleTapZoom: 2,
+			wheelAction: 'scroll',
+
+			// Snap
+			snap: false,
+			snapThreshold: 1,
+
+			// Events
+			onRefresh: null,
+			onBeforeScrollStart: function (e) { e.preventDefault(); },
+			onScrollStart: null,
+			onBeforeScrollMove: null,
+			onScrollMove: null,
+			onBeforeScrollEnd: null,
+			onScrollEnd: null,
+			onTouchEnd: null,
+			onDestroy: null,
+			onZoomStart: null,
+			onZoom: null,
+			onZoomEnd: null
+		};
+
+		// User defined options
+		for (i in options) that.options[i] = options[i];
+		
+		// Set starting position
+		that.x = that.options.x;
+		that.y = that.options.y;
+
+		// Normalize options
+		that.options.useTransform = hasTransform && that.options.useTransform;
+		that.options.hScrollbar = that.options.hScroll && that.options.hScrollbar;
+		that.options.vScrollbar = that.options.vScroll && that.options.vScrollbar;
+		that.options.zoom = that.options.useTransform && that.options.zoom;
+		that.options.useTransition = hasTransitionEnd && that.options.useTransition;
+
+		// Helpers FIX ANDROID BUG!
+		// translate3d and scale doesn't work together!
+		// Ignoring 3d ONLY WHEN YOU SET that.options.zoom
+		if ( that.options.zoom && isAndroid ){
+			translateZ = '';
+		}
+		
+		// Set some default styles
+		that.scroller.style[transitionProperty] = that.options.useTransform ? cssVendor + 'transform' : 'top left';
+		that.scroller.style[transitionDuration] = '0';
+		that.scroller.style[transformOrigin] = '0 0';
+		if (that.options.useTransition) that.scroller.style[transitionTimingFunction] = 'cubic-bezier(0.33,0.66,0.66,1)';
+		
+		if (that.options.useTransform) that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px)' + translateZ;
+		else that.scroller.style.cssText += ';position:absolute;top:' + that.y + 'px;left:' + that.x + 'px';
+
+		if (that.options.useTransition) that.options.fixedScrollbar = true;
+
+		that.refresh();
+
+		that._bind(RESIZE_EV, window);
+		that._bind(START_EV);
+		if (!hasTouch) {
+			if (that.options.wheelAction != 'none') {
+				that._bind('DOMMouseScroll');
+				that._bind('mousewheel');
+			}
+		}
+
+		if (that.options.checkDOMChanges) that.checkDOMTime = setInterval(function () {
+			that._checkDOMChanges();
+		}, 500);
+	};
+
+// Prototype
+iScroll.prototype = {
+	enabled: true,
+	x: 0,
+	y: 0,
+	steps: [],
+	scale: 1,
+	currPageX: 0, currPageY: 0,
+	pagesX: [], pagesY: [],
+	aniTime: null,
+	wheelZoomCount: 0,
+	
+	handleEvent: function (e) {
+		var that = this;
+		switch(e.type) {
+			case START_EV:
+				if (!hasTouch && e.button !== 0) return;
+				that._start(e);
+				break;
+			case MOVE_EV: that._move(e); break;
+			case END_EV:
+			case CANCEL_EV: that._end(e); break;
+			case RESIZE_EV: that._resize(); break;
+			case 'DOMMouseScroll': case 'mousewheel': that._wheel(e); break;
+			case TRNEND_EV: that._transitionEnd(e); break;
+		}
+	},
+	
+	_checkDOMChanges: function () {
+		if (this.moved || this.zoomed || this.animating ||
+			(this.scrollerW == this.scroller.offsetWidth * this.scale && this.scrollerH == this.scroller.offsetHeight * this.scale)) return;
+
+		this.refresh();
+	},
+	
+	_scrollbar: function (dir) {
+		var that = this,
+			bar;
+
+		if (!that[dir + 'Scrollbar']) {
+			if (that[dir + 'ScrollbarWrapper']) {
+				if (hasTransform) that[dir + 'ScrollbarIndicator'].style[transform] = '';
+				that[dir + 'ScrollbarWrapper'].parentNode.removeChild(that[dir + 'ScrollbarWrapper']);
+				that[dir + 'ScrollbarWrapper'] = null;
+				that[dir + 'ScrollbarIndicator'] = null;
+			}
+
+			return;
+		}
+
+		if (!that[dir + 'ScrollbarWrapper']) {
+			// Create the scrollbar wrapper
+			bar = doc.createElement('div');
+
+			if (that.options.scrollbarClass) bar.className = that.options.scrollbarClass + dir.toUpperCase();
+			else bar.style.cssText = 'position:absolute;z-index:100;' + (dir == 'h' ? 'height:7px;bottom:1px;left:2px;right:' + (that.vScrollbar ? '7' : '2') + 'px' : 'width:7px;bottom:' + (that.hScrollbar ? '7' : '2') + 'px;top:2px;right:1px');
+
+			bar.style.cssText += ';pointer-events:none;' + cssVendor + 'transition-property:opacity;' + cssVendor + 'transition-duration:' + (that.options.fadeScrollbar ? '350ms' : '0') + ';overflow:hidden;opacity:' + (that.options.hideScrollbar ? '0' : '1');
+
+			that.wrapper.appendChild(bar);
+			that[dir + 'ScrollbarWrapper'] = bar;
+
+			// Create the scrollbar indicator
+			bar = doc.createElement('div');
+			if (!that.options.scrollbarClass) {
+				bar.style.cssText = 'position:absolute;z-index:100;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);' + cssVendor + 'background-clip:padding-box;' + cssVendor + 'box-sizing:border-box;' + (dir == 'h' ? 'height:100%' : 'width:100%') + ';' + cssVendor + 'border-radius:3px;border-radius:3px';
+			}
+			bar.style.cssText += ';pointer-events:none;' + cssVendor + 'transition-property:' + cssVendor + 'transform;' + cssVendor + 'transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);' + cssVendor + 'transition-duration:0;' + cssVendor + 'transform: translate(0,0)' + translateZ;
+			if (that.options.useTransition) bar.style.cssText += ';' + cssVendor + 'transition-timing-function:cubic-bezier(0.33,0.66,0.66,1)';
+
+			that[dir + 'ScrollbarWrapper'].appendChild(bar);
+			that[dir + 'ScrollbarIndicator'] = bar;
+		}
+
+		if (dir == 'h') {
+			that.hScrollbarSize = that.hScrollbarWrapper.clientWidth;
+			that.hScrollbarIndicatorSize = m.max(m.round(that.hScrollbarSize * that.hScrollbarSize / that.scrollerW), 8);
+			that.hScrollbarIndicator.style.width = that.hScrollbarIndicatorSize + 'px';
+			that.hScrollbarMaxScroll = that.hScrollbarSize - that.hScrollbarIndicatorSize;
+			that.hScrollbarProp = that.hScrollbarMaxScroll / that.maxScrollX;
+		} else {
+			that.vScrollbarSize = that.vScrollbarWrapper.clientHeight;
+			that.vScrollbarIndicatorSize = m.max(m.round(that.vScrollbarSize * that.vScrollbarSize / that.scrollerH), 8);
+			that.vScrollbarIndicator.style.height = that.vScrollbarIndicatorSize + 'px';
+			that.vScrollbarMaxScroll = that.vScrollbarSize - that.vScrollbarIndicatorSize;
+			that.vScrollbarProp = that.vScrollbarMaxScroll / that.maxScrollY;
+		}
+
+		// Reset position
+		that._scrollbarPos(dir, true);
+	},
+	
+	_resize: function () {
+		var that = this;
+		setTimeout(function () { that.refresh(); }, isAndroid ? 200 : 0);
+	},
+	
+	_pos: function (x, y) {
+		if (this.zoomed) return;
+
+		x = this.hScroll ? x : 0;
+		y = this.vScroll ? y : 0;
+
+		if (this.options.useTransform) {
+			this.scroller.style[transform] = 'translate(' + x + 'px,' + y + 'px) scale(' + this.scale + ')' + translateZ;
+		} else {
+			x = m.round(x);
+			y = m.round(y);
+			this.scroller.style.left = x + 'px';
+			this.scroller.style.top = y + 'px';
+		}
+
+		this.x = x;
+		this.y = y;
+
+		this._scrollbarPos('h');
+		this._scrollbarPos('v');
+	},
+
+	_scrollbarPos: function (dir, hidden) {
+		var that = this,
+			pos = dir == 'h' ? that.x : that.y,
+			size;
+
+		if (!that[dir + 'Scrollbar']) return;
+
+		pos = that[dir + 'ScrollbarProp'] * pos;
+
+		if (pos < 0) {
+			if (!that.options.fixedScrollbar) {
+				size = that[dir + 'ScrollbarIndicatorSize'] + m.round(pos * 3);
+				if (size < 8) size = 8;
+				that[dir + 'ScrollbarIndicator'].style[dir == 'h' ? 'width' : 'height'] = size + 'px';
+			}
+			pos = 0;
+		} else if (pos > that[dir + 'ScrollbarMaxScroll']) {
+			if (!that.options.fixedScrollbar) {
+				size = that[dir + 'ScrollbarIndicatorSize'] - m.round((pos - that[dir + 'ScrollbarMaxScroll']) * 3);
+				if (size < 8) size = 8;
+				that[dir + 'ScrollbarIndicator'].style[dir == 'h' ? 'width' : 'height'] = size + 'px';
+				pos = that[dir + 'ScrollbarMaxScroll'] + (that[dir + 'ScrollbarIndicatorSize'] - size);
+			} else {
+				pos = that[dir + 'ScrollbarMaxScroll'];
+			}
+		}
+
+		that[dir + 'ScrollbarWrapper'].style[transitionDelay] = '0';
+		that[dir + 'ScrollbarWrapper'].style.opacity = hidden && that.options.hideScrollbar ? '0' : '1';
+		that[dir + 'ScrollbarIndicator'].style[transform] = 'translate(' + (dir == 'h' ? pos + 'px,0)' : '0,' + pos + 'px)') + translateZ;
+	},
+	
+	_start: function (e) {
+		var that = this,
+			point = hasTouch ? e.touches[0] : e,
+			matrix, x, y,
+			c1, c2;
+
+		if (!that.enabled) return;
+
+		if (that.options.onBeforeScrollStart) that.options.onBeforeScrollStart.call(that, e);
+
+		if (that.options.useTransition || that.options.zoom) that._transitionTime(0);
+
+		that.moved = false;
+		that.animating = false;
+		that.zoomed = false;
+		that.distX = 0;
+		that.distY = 0;
+		that.absDistX = 0;
+		that.absDistY = 0;
+		that.dirX = 0;
+		that.dirY = 0;
+
+		// Gesture start
+		if (that.options.zoom && hasTouch && e.touches.length > 1) {
+			c1 = m.abs(e.touches[0].pageX-e.touches[1].pageX);
+			c2 = m.abs(e.touches[0].pageY-e.touches[1].pageY);
+			that.touchesDistStart = m.sqrt(c1 * c1 + c2 * c2);
+
+			that.originX = m.abs(e.touches[0].pageX + e.touches[1].pageX - that.wrapperOffsetLeft * 2) / 2 - that.x;
+			that.originY = m.abs(e.touches[0].pageY + e.touches[1].pageY - that.wrapperOffsetTop * 2) / 2 - that.y;
+
+			if (that.options.onZoomStart) that.options.onZoomStart.call(that, e);
+		}
+
+		if (that.options.momentum) {
+			if (that.options.useTransform) {
+				// Very lame general purpose alternative to CSSMatrix
+				matrix = getComputedStyle(that.scroller, null)[transform].replace(/[^0-9\-.,]/g, '').split(',');
+				x = +(matrix[12] || matrix[4]);
+				y = +(matrix[13] || matrix[5]);
+			} else {
+				x = +getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g, '');
+				y = +getComputedStyle(that.scroller, null).top.replace(/[^0-9-]/g, '');
+			}
+			
+			if (x != that.x || y != that.y) {
+				if (that.options.useTransition) that._unbind(TRNEND_EV);
+				else cancelFrame(that.aniTime);
+				that.steps = [];
+				that._pos(x, y);
+				if (that.options.onScrollEnd) that.options.onScrollEnd.call(that);
+			}
+		}
+
+		that.absStartX = that.x;	// Needed by snap threshold
+		that.absStartY = that.y;
+
+		that.startX = that.x;
+		that.startY = that.y;
+		that.pointX = point.pageX;
+		that.pointY = point.pageY;
+
+		that.startTime = e.timeStamp || Date.now();
+
+		if (that.options.onScrollStart) that.options.onScrollStart.call(that, e);
+
+		that._bind(MOVE_EV, window);
+		that._bind(END_EV, window);
+		that._bind(CANCEL_EV, window);
+	},
+	
+	_move: function (e) {
+		var that = this,
+			point = hasTouch ? e.touches[0] : e,
+			deltaX = point.pageX - that.pointX,
+			deltaY = point.pageY - that.pointY,
+			newX = that.x + deltaX,
+			newY = that.y + deltaY,
+			c1, c2, scale,
+			timestamp = e.timeStamp || Date.now();
+
+		if (that.options.onBeforeScrollMove) that.options.onBeforeScrollMove.call(that, e);
+
+		// Zoom
+		if (that.options.zoom && hasTouch && e.touches.length > 1) {
+			c1 = m.abs(e.touches[0].pageX - e.touches[1].pageX);
+			c2 = m.abs(e.touches[0].pageY - e.touches[1].pageY);
+			that.touchesDist = m.sqrt(c1*c1+c2*c2);
+
+			that.zoomed = true;
+
+			scale = 1 / that.touchesDistStart * that.touchesDist * this.scale;
+
+			if (scale < that.options.zoomMin) scale = 0.5 * that.options.zoomMin * Math.pow(2.0, scale / that.options.zoomMin);
+			else if (scale > that.options.zoomMax) scale = 2.0 * that.options.zoomMax * Math.pow(0.5, that.options.zoomMax / scale);
+
+			that.lastScale = scale / this.scale;
+
+			newX = this.originX - this.originX * that.lastScale + this.x,
+			newY = this.originY - this.originY * that.lastScale + this.y;
+
+			this.scroller.style[transform] = 'translate(' + newX + 'px,' + newY + 'px) scale(' + scale + ')' + translateZ;
+
+			if (that.options.onZoom) that.options.onZoom.call(that, e);
+			return;
+		}
+
+		that.pointX = point.pageX;
+		that.pointY = point.pageY;
+
+		// Slow down if outside of the boundaries
+		if (newX > 0 || newX < that.maxScrollX) {
+			newX = that.options.bounce ? that.x + (deltaX / 2) : newX >= 0 || that.maxScrollX >= 0 ? 0 : that.maxScrollX;
+		}
+		if (newY > that.minScrollY || newY < that.maxScrollY) {
+			newY = that.options.bounce ? that.y + (deltaY / 2) : newY >= that.minScrollY || that.maxScrollY >= 0 ? that.minScrollY : that.maxScrollY;
+		}
+
+		that.distX += deltaX;
+		that.distY += deltaY;
+		that.absDistX = m.abs(that.distX);
+		that.absDistY = m.abs(that.distY);
+
+		if (that.absDistX < 6 && that.absDistY < 6) {
+			return;
+		}
+
+		// Lock direction
+		if (that.options.lockDirection) {
+			if (that.absDistX > that.absDistY + 5) {
+				newY = that.y;
+				deltaY = 0;
+			} else if (that.absDistY > that.absDistX + 5) {
+				newX = that.x;
+				deltaX = 0;
+			}
+		}
+
+		that.moved = true;
+		that._pos(newX, newY);
+		that.dirX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+		that.dirY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+
+		if (timestamp - that.startTime > 300) {
+			that.startTime = timestamp;
+			that.startX = that.x;
+			that.startY = that.y;
+		}
+		
+		if (that.options.onScrollMove) that.options.onScrollMove.call(that, e);
+	},
+	
+	_end: function (e) {
+		if (hasTouch && e.touches.length !== 0) return;
+
+		var that = this,
+			point = hasTouch ? e.changedTouches[0] : e,
+			target, ev,
+			momentumX = { dist:0, time:0 },
+			momentumY = { dist:0, time:0 },
+			duration = (e.timeStamp || Date.now()) - that.startTime,
+			newPosX = that.x,
+			newPosY = that.y,
+			distX, distY,
+			newDuration,
+			snap,
+			scale;
+
+		that._unbind(MOVE_EV, window);
+		that._unbind(END_EV, window);
+		that._unbind(CANCEL_EV, window);
+
+		if (that.options.onBeforeScrollEnd) that.options.onBeforeScrollEnd.call(that, e);
+
+		if (that.zoomed) {
+			scale = that.scale * that.lastScale;
+			scale = Math.max(that.options.zoomMin, scale);
+			scale = Math.min(that.options.zoomMax, scale);
+			that.lastScale = scale / that.scale;
+			that.scale = scale;
+
+			that.x = that.originX - that.originX * that.lastScale + that.x;
+			that.y = that.originY - that.originY * that.lastScale + that.y;
+			
+			that.scroller.style[transitionDuration] = '200ms';
+			that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px) scale(' + that.scale + ')' + translateZ;
+			
+			that.zoomed = false;
+			that.refresh();
+
+			if (that.options.onZoomEnd) that.options.onZoomEnd.call(that, e);
+			return;
+		}
+
+		if (!that.moved) {
+			if (hasTouch) {
+				if (that.doubleTapTimer && that.options.zoom) {
+					// Double tapped
+					clearTimeout(that.doubleTapTimer);
+					that.doubleTapTimer = null;
+					if (that.options.onZoomStart) that.options.onZoomStart.call(that, e);
+					that.zoom(that.pointX, that.pointY, that.scale == 1 ? that.options.doubleTapZoom : 1);
+					if (that.options.onZoomEnd) {
+						setTimeout(function() {
+							that.options.onZoomEnd.call(that, e);
+						}, 200); // 200 is default zoom duration
+					}
+				} else if (this.options.handleClick) {
+					that.doubleTapTimer = setTimeout(function () {
+						that.doubleTapTimer = null;
+
+						// Find the last touched element
+						target = point.target;
+						while (target.nodeType != 1) target = target.parentNode;
+
+						if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
+							ev = doc.createEvent('MouseEvents');
+							ev.initMouseEvent('click', true, true, e.view, 1,
+								point.screenX, point.screenY, point.clientX, point.clientY,
+								e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+								0, null);
+							ev._fake = true;
+							target.dispatchEvent(ev);
+						}
+					}, that.options.zoom ? 250 : 0);
+				}
+			}
+
+			that._resetPos(400);
+
+			if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
+			return;
+		}
+
+		if (duration < 300 && that.options.momentum) {
+			momentumX = newPosX ? that._momentum(newPosX - that.startX, duration, -that.x, that.scrollerW - that.wrapperW + that.x, that.options.bounce ? that.wrapperW : 0) : momentumX;
+			momentumY = newPosY ? that._momentum(newPosY - that.startY, duration, -that.y, (that.maxScrollY < 0 ? that.scrollerH - that.wrapperH + that.y - that.minScrollY : 0), that.options.bounce ? that.wrapperH : 0) : momentumY;
+
+			newPosX = that.x + momentumX.dist;
+			newPosY = that.y + momentumY.dist;
+
+			if ((that.x > 0 && newPosX > 0) || (that.x < that.maxScrollX && newPosX < that.maxScrollX)) momentumX = { dist:0, time:0 };
+			if ((that.y > that.minScrollY && newPosY > that.minScrollY) || (that.y < that.maxScrollY && newPosY < that.maxScrollY)) momentumY = { dist:0, time:0 };
+		}
+
+		if (momentumX.dist || momentumY.dist) {
+			newDuration = m.max(m.max(momentumX.time, momentumY.time), 10);
+
+			// Do we need to snap?
+			if (that.options.snap) {
+				distX = newPosX - that.absStartX;
+				distY = newPosY - that.absStartY;
+				if (m.abs(distX) < that.options.snapThreshold && m.abs(distY) < that.options.snapThreshold) { that.scrollTo(that.absStartX, that.absStartY, 200); }
+				else {
+					snap = that._snap(newPosX, newPosY);
+					newPosX = snap.x;
+					newPosY = snap.y;
+					newDuration = m.max(snap.time, newDuration);
+				}
+			}
+
+			that.scrollTo(m.round(newPosX), m.round(newPosY), newDuration);
+
+			if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
+			return;
+		}
+
+		// Do we need to snap?
+		if (that.options.snap) {
+			distX = newPosX - that.absStartX;
+			distY = newPosY - that.absStartY;
+			if (m.abs(distX) < that.options.snapThreshold && m.abs(distY) < that.options.snapThreshold) that.scrollTo(that.absStartX, that.absStartY, 200);
+			else {
+				snap = that._snap(that.x, that.y);
+				if (snap.x != that.x || snap.y != that.y) that.scrollTo(snap.x, snap.y, snap.time);
+			}
+
+			if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
+			return;
+		}
+
+		that._resetPos(200);
+		if (that.options.onTouchEnd) that.options.onTouchEnd.call(that, e);
+	},
+	
+	_resetPos: function (time) {
+		var that = this,
+			resetX = that.x >= 0 ? 0 : that.x < that.maxScrollX ? that.maxScrollX : that.x,
+			resetY = that.y >= that.minScrollY || that.maxScrollY > 0 ? that.minScrollY : that.y < that.maxScrollY ? that.maxScrollY : that.y;
+
+		if (resetX == that.x && resetY == that.y) {
+			if (that.moved) {
+				that.moved = false;
+				if (that.options.onScrollEnd) that.options.onScrollEnd.call(that);		// Execute custom code on scroll end
+			}
+
+			if (that.hScrollbar && that.options.hideScrollbar) {
+				if (vendor == 'webkit') that.hScrollbarWrapper.style[transitionDelay] = '300ms';
+				that.hScrollbarWrapper.style.opacity = '0';
+			}
+			if (that.vScrollbar && that.options.hideScrollbar) {
+				if (vendor == 'webkit') that.vScrollbarWrapper.style[transitionDelay] = '300ms';
+				that.vScrollbarWrapper.style.opacity = '0';
+			}
+
+			return;
+		}
+
+		that.scrollTo(resetX, resetY, time || 0);
+	},
+
+	_wheel: function (e) {
+		var that = this,
+			wheelDeltaX, wheelDeltaY,
+			deltaX, deltaY,
+			deltaScale;
+
+		if ('wheelDeltaX' in e) {
+			wheelDeltaX = e.wheelDeltaX / 12;
+			wheelDeltaY = e.wheelDeltaY / 12;
+		} else if('wheelDelta' in e) {
+			wheelDeltaX = wheelDeltaY = e.wheelDelta / 12;
+		} else if ('detail' in e) {
+			wheelDeltaX = wheelDeltaY = -e.detail * 3;
+		} else {
+			return;
+		}
+		
+		if (that.options.wheelAction == 'zoom') {
+			deltaScale = that.scale * Math.pow(2, 1/3 * (wheelDeltaY ? wheelDeltaY / Math.abs(wheelDeltaY) : 0));
+			if (deltaScale < that.options.zoomMin) deltaScale = that.options.zoomMin;
+			if (deltaScale > that.options.zoomMax) deltaScale = that.options.zoomMax;
+			
+			if (deltaScale != that.scale) {
+				if (!that.wheelZoomCount && that.options.onZoomStart) that.options.onZoomStart.call(that, e);
+				that.wheelZoomCount++;
+				
+				that.zoom(e.pageX, e.pageY, deltaScale, 400);
+				
+				setTimeout(function() {
+					that.wheelZoomCount--;
+					if (!that.wheelZoomCount && that.options.onZoomEnd) that.options.onZoomEnd.call(that, e);
+				}, 400);
+			}
+			
+			return;
+		}
+		
+		deltaX = that.x + wheelDeltaX;
+		deltaY = that.y + wheelDeltaY;
+
+		if (deltaX > 0) deltaX = 0;
+		else if (deltaX < that.maxScrollX) deltaX = that.maxScrollX;
+
+		if (deltaY > that.minScrollY) deltaY = that.minScrollY;
+		else if (deltaY < that.maxScrollY) deltaY = that.maxScrollY;
+    
+		if (that.maxScrollY < 0) {
+			that.scrollTo(deltaX, deltaY, 0);
+		}
+	},
+	
+	_transitionEnd: function (e) {
+		var that = this;
+
+		if (e.target != that.scroller) return;
+
+		that._unbind(TRNEND_EV);
+		
+		that._startAni();
+	},
+
+
+	/**
+	*
+	* Utilities
+	*
+	*/
+	_startAni: function () {
+		var that = this,
+			startX = that.x, startY = that.y,
+			startTime = Date.now(),
+			step, easeOut,
+			animate;
+
+		if (that.animating) return;
+		
+		if (!that.steps.length) {
+			that._resetPos(400);
+			return;
+		}
+		
+		step = that.steps.shift();
+		
+		if (step.x == startX && step.y == startY) step.time = 0;
+
+		that.animating = true;
+		that.moved = true;
+		
+		if (that.options.useTransition) {
+			that._transitionTime(step.time);
+			that._pos(step.x, step.y);
+			that.animating = false;
+			if (step.time) that._bind(TRNEND_EV);
+			else that._resetPos(0);
+			return;
+		}
+
+		animate = function () {
+			var now = Date.now(),
+				newX, newY;
+
+			if (now >= startTime + step.time) {
+				that._pos(step.x, step.y);
+				that.animating = false;
+				if (that.options.onAnimationEnd) that.options.onAnimationEnd.call(that);			// Execute custom code on animation end
+				that._startAni();
+				return;
+			}
+
+			now = (now - startTime) / step.time - 1;
+			easeOut = m.sqrt(1 - now * now);
+			newX = (step.x - startX) * easeOut + startX;
+			newY = (step.y - startY) * easeOut + startY;
+			that._pos(newX, newY);
+			if (that.animating) that.aniTime = nextFrame(animate);
+		};
+
+		animate();
+	},
+
+	_transitionTime: function (time) {
+		time += 'ms';
+		this.scroller.style[transitionDuration] = time;
+		if (this.hScrollbar) this.hScrollbarIndicator.style[transitionDuration] = time;
+		if (this.vScrollbar) this.vScrollbarIndicator.style[transitionDuration] = time;
+	},
+
+	_momentum: function (dist, time, maxDistUpper, maxDistLower, size) {
+		var deceleration = 0.0006,
+			speed = m.abs(dist) / time,
+			newDist = (speed * speed) / (2 * deceleration),
+			newTime = 0, outsideDist = 0;
+
+		// Proportinally reduce speed if we are outside of the boundaries
+		if (dist > 0 && newDist > maxDistUpper) {
+			outsideDist = size / (6 / (newDist / speed * deceleration));
+			maxDistUpper = maxDistUpper + outsideDist;
+			speed = speed * maxDistUpper / newDist;
+			newDist = maxDistUpper;
+		} else if (dist < 0 && newDist > maxDistLower) {
+			outsideDist = size / (6 / (newDist / speed * deceleration));
+			maxDistLower = maxDistLower + outsideDist;
+			speed = speed * maxDistLower / newDist;
+			newDist = maxDistLower;
+		}
+
+		newDist = newDist * (dist < 0 ? -1 : 1);
+		newTime = speed / deceleration;
+
+		return { dist: newDist, time: m.round(newTime) };
+	},
+
+	_offset: function (el) {
+		var left = -el.offsetLeft,
+			top = -el.offsetTop;
+			
+		while (el = el.offsetParent) {
+			left -= el.offsetLeft;
+			top -= el.offsetTop;
+		}
+		
+		if (el != this.wrapper) {
+			left *= this.scale;
+			top *= this.scale;
+		}
+
+		return { left: left, top: top };
+	},
+
+	_snap: function (x, y) {
+		var that = this,
+			i, l,
+			page, time,
+			sizeX, sizeY;
+
+		// Check page X
+		page = that.pagesX.length - 1;
+		for (i=0, l=that.pagesX.length; i<l; i++) {
+			if (x >= that.pagesX[i]) {
+				page = i;
+				break;
+			}
+		}
+		if (page == that.currPageX && page > 0 && that.dirX < 0) page--;
+		x = that.pagesX[page];
+		sizeX = m.abs(x - that.pagesX[that.currPageX]);
+		sizeX = sizeX ? m.abs(that.x - x) / sizeX * 500 : 0;
+		that.currPageX = page;
+
+		// Check page Y
+		page = that.pagesY.length-1;
+		for (i=0; i<page; i++) {
+			if (y >= that.pagesY[i]) {
+				page = i;
+				break;
+			}
+		}
+		if (page == that.currPageY && page > 0 && that.dirY < 0) page--;
+		y = that.pagesY[page];
+		sizeY = m.abs(y - that.pagesY[that.currPageY]);
+		sizeY = sizeY ? m.abs(that.y - y) / sizeY * 500 : 0;
+		that.currPageY = page;
+
+		// Snap with constant speed (proportional duration)
+		time = m.round(m.max(sizeX, sizeY)) || 200;
+
+		return { x: x, y: y, time: time };
+	},
+
+	_bind: function (type, el, bubble) {
+		(el || this.scroller).addEventListener(type, this, !!bubble);
+	},
+
+	_unbind: function (type, el, bubble) {
+		(el || this.scroller).removeEventListener(type, this, !!bubble);
+	},
+
+
+	/**
+	*
+	* Public methods
+	*
+	*/
+	destroy: function () {
+		var that = this;
+
+		that.scroller.style[transform] = '';
+
+		// Remove the scrollbars
+		that.hScrollbar = false;
+		that.vScrollbar = false;
+		that._scrollbar('h');
+		that._scrollbar('v');
+
+		// Remove the event listeners
+		that._unbind(RESIZE_EV, window);
+		that._unbind(START_EV);
+		that._unbind(MOVE_EV, window);
+		that._unbind(END_EV, window);
+		that._unbind(CANCEL_EV, window);
+		
+		if (!that.options.hasTouch) {
+			that._unbind('DOMMouseScroll');
+			that._unbind('mousewheel');
+		}
+		
+		if (that.options.useTransition) that._unbind(TRNEND_EV);
+		
+		if (that.options.checkDOMChanges) clearInterval(that.checkDOMTime);
+		
+		if (that.options.onDestroy) that.options.onDestroy.call(that);
+	},
+
+	refresh: function () {
+		var that = this,
+			offset,
+			i, l,
+			els,
+			pos = 0,
+			page = 0;
+
+		if (that.scale < that.options.zoomMin) that.scale = that.options.zoomMin;
+		that.wrapperW = that.wrapper.clientWidth || 1;
+		that.wrapperH = that.wrapper.clientHeight || 1;
+
+		that.minScrollY = -that.options.topOffset || 0;
+		that.scrollerW = m.round(that.scroller.offsetWidth * that.scale);
+		that.scrollerH = m.round((that.scroller.offsetHeight + that.minScrollY) * that.scale);
+		that.maxScrollX = that.wrapperW - that.scrollerW;
+		that.maxScrollY = that.wrapperH - that.scrollerH + that.minScrollY;
+		that.dirX = 0;
+		that.dirY = 0;
+
+		if (that.options.onRefresh) that.options.onRefresh.call(that);
+
+		that.hScroll = that.options.hScroll && that.maxScrollX < 0;
+		that.vScroll = that.options.vScroll && (!that.options.bounceLock && !that.hScroll || that.scrollerH > that.wrapperH);
+
+		that.hScrollbar = that.hScroll && that.options.hScrollbar;
+		that.vScrollbar = that.vScroll && that.options.vScrollbar && that.scrollerH > that.wrapperH;
+
+		offset = that._offset(that.wrapper);
+		that.wrapperOffsetLeft = -offset.left;
+		that.wrapperOffsetTop = -offset.top;
+
+		// Prepare snap
+		if (typeof that.options.snap == 'string') {
+			that.pagesX = [];
+			that.pagesY = [];
+			els = that.scroller.querySelectorAll(that.options.snap);
+			for (i=0, l=els.length; i<l; i++) {
+				pos = that._offset(els[i]);
+				pos.left += that.wrapperOffsetLeft;
+				pos.top += that.wrapperOffsetTop;
+				that.pagesX[i] = pos.left < that.maxScrollX ? that.maxScrollX : pos.left * that.scale;
+				that.pagesY[i] = pos.top < that.maxScrollY ? that.maxScrollY : pos.top * that.scale;
+			}
+		} else if (that.options.snap) {
+			that.pagesX = [];
+			while (pos >= that.maxScrollX) {
+				that.pagesX[page] = pos;
+				pos = pos - that.wrapperW;
+				page++;
+			}
+			if (that.maxScrollX%that.wrapperW) that.pagesX[that.pagesX.length] = that.maxScrollX - that.pagesX[that.pagesX.length-1] + that.pagesX[that.pagesX.length-1];
+
+			pos = 0;
+			page = 0;
+			that.pagesY = [];
+			while (pos >= that.maxScrollY) {
+				that.pagesY[page] = pos;
+				pos = pos - that.wrapperH;
+				page++;
+			}
+			if (that.maxScrollY%that.wrapperH) that.pagesY[that.pagesY.length] = that.maxScrollY - that.pagesY[that.pagesY.length-1] + that.pagesY[that.pagesY.length-1];
+		}
+
+		// Prepare the scrollbars
+		that._scrollbar('h');
+		that._scrollbar('v');
+
+		if (!that.zoomed) {
+			that.scroller.style[transitionDuration] = '0';
+			that._resetPos(400);
+		}
+	},
+
+	scrollTo: function (x, y, time, relative) {
+		var that = this,
+			step = x,
+			i, l;
+
+		that.stop();
+
+		if (!step.length) step = [{ x: x, y: y, time: time, relative: relative }];
+		
+		for (i=0, l=step.length; i<l; i++) {
+			if (step[i].relative) { step[i].x = that.x - step[i].x; step[i].y = that.y - step[i].y; }
+			that.steps.push({ x: step[i].x, y: step[i].y, time: step[i].time || 0 });
+		}
+
+		that._startAni();
+	},
+
+	scrollToElement: function (el, time) {
+		var that = this, pos;
+		el = el.nodeType ? el : that.scroller.querySelector(el);
+		if (!el) return;
+
+		pos = that._offset(el);
+		pos.left += that.wrapperOffsetLeft;
+		pos.top += that.wrapperOffsetTop;
+
+		pos.left = pos.left > 0 ? 0 : pos.left < that.maxScrollX ? that.maxScrollX : pos.left;
+		pos.top = pos.top > that.minScrollY ? that.minScrollY : pos.top < that.maxScrollY ? that.maxScrollY : pos.top;
+		time = time === undefined ? m.max(m.abs(pos.left)*2, m.abs(pos.top)*2) : time;
+
+		that.scrollTo(pos.left, pos.top, time);
+	},
+
+	scrollToPage: function (pageX, pageY, time) {
+		var that = this, x, y;
+		
+		time = time === undefined ? 400 : time;
+
+		if (that.options.onScrollStart) that.options.onScrollStart.call(that);
+
+		if (that.options.snap) {
+			pageX = pageX == 'next' ? that.currPageX+1 : pageX == 'prev' ? that.currPageX-1 : pageX;
+			pageY = pageY == 'next' ? that.currPageY+1 : pageY == 'prev' ? that.currPageY-1 : pageY;
+
+			pageX = pageX < 0 ? 0 : pageX > that.pagesX.length-1 ? that.pagesX.length-1 : pageX;
+			pageY = pageY < 0 ? 0 : pageY > that.pagesY.length-1 ? that.pagesY.length-1 : pageY;
+
+			that.currPageX = pageX;
+			that.currPageY = pageY;
+			x = that.pagesX[pageX];
+			y = that.pagesY[pageY];
+		} else {
+			x = -that.wrapperW * pageX;
+			y = -that.wrapperH * pageY;
+			if (x < that.maxScrollX) x = that.maxScrollX;
+			if (y < that.maxScrollY) y = that.maxScrollY;
+		}
+
+		that.scrollTo(x, y, time);
+	},
+
+	disable: function () {
+		this.stop();
+		this._resetPos(0);
+		this.enabled = false;
+
+		// If disabled after touchstart we make sure that there are no left over events
+		this._unbind(MOVE_EV, window);
+		this._unbind(END_EV, window);
+		this._unbind(CANCEL_EV, window);
+	},
+	
+	enable: function () {
+		this.enabled = true;
+	},
+	
+	stop: function () {
+		if (this.options.useTransition) this._unbind(TRNEND_EV);
+		else cancelFrame(this.aniTime);
+		this.steps = [];
+		this.moved = false;
+		this.animating = false;
+	},
+	
+	zoom: function (x, y, scale, time) {
+		var that = this,
+			relScale = scale / that.scale;
+
+		if (!that.options.useTransform) return;
+
+		that.zoomed = true;
+		time = time === undefined ? 200 : time;
+		x = x - that.wrapperOffsetLeft - that.x;
+		y = y - that.wrapperOffsetTop - that.y;
+		that.x = x - x * relScale + that.x;
+		that.y = y - y * relScale + that.y;
+
+		that.scale = scale;
+		that.refresh();
+
+		that.x = that.x > 0 ? 0 : that.x < that.maxScrollX ? that.maxScrollX : that.x;
+		that.y = that.y > that.minScrollY ? that.minScrollY : that.y < that.maxScrollY ? that.maxScrollY : that.y;
+
+		that.scroller.style[transitionDuration] = time + 'ms';
+		that.scroller.style[transform] = 'translate(' + that.x + 'px,' + that.y + 'px) scale(' + scale + ')' + translateZ;
+		that.zoomed = false;
+	},
+	
+	isReady: function () {
+		return !this.moved && !this.zoomed && !this.animating;
+	}
+};
+
+function prefixStyle (style) {
+	if ( vendor === '' ) return style;
+
+	style = style.charAt(0).toUpperCase() + style.substr(1);
+	return vendor + style;
+}
+
+dummyStyle = null;	// for the sake of it
+
+if (typeof exports !== 'undefined') exports.iScroll = iScroll;
+else window.iScroll = iScroll;
+
+})(window, document);
 
 },{}],2:[function(require,module,exports){
 (function (global){
-"use strict";var array=require("prime/es5/array"),requestFrame=global.requestAnimationFrame||global.webkitRequestAnimationFrame||global.mozRequestAnimationFrame||global.oRequestAnimationFrame||global.msRequestAnimationFrame||function(e){return setTimeout(e,1e3/60)},callbacks=[],iterator=function(e){for(var a=callbacks.splice(0,callbacks.length),r=0,t=a.length;t>r;r++)a[r](e||(e=+new Date))},cancel=function(e){var a=array.indexOf(callbacks,e);a>-1&&callbacks.splice(a,1)},request=function(e){var a=callbacks.push(e);return 1===a&&requestFrame(iterator),function(){cancel(e)}};exports.request=request,exports.cancel=cancel;
+/*
+requestFrame / cancelFrame
+*/"use strict"
+
+var array = require("prime/es5/array")
+
+var requestFrame = global.requestAnimationFrame ||
+                   global.webkitRequestAnimationFrame ||
+                   global.mozRequestAnimationFrame ||
+                   global.oRequestAnimationFrame ||
+                   global.msRequestAnimationFrame ||
+                   function(callback){
+                       return setTimeout(callback, 1e3 / 60)
+                   }
+
+var callbacks = []
+
+var iterator = function(time){
+    var split = callbacks.splice(0, callbacks.length)
+    for (var i = 0, l = split.length; i < l; i++) split[i](time || (time = +(new Date)))
+}
+
+var cancel = function(callback){
+    var io = array.indexOf(callbacks, callback)
+    if (io > -1) callbacks.splice(io, 1)
+}
+
+var request = function(callback){
+    var i = callbacks.push(callback)
+    if (i === 1) requestFrame(iterator)
+    return function(){
+        cancel(callback)
+    }
+}
+
+exports.request = request
+exports.cancel = cancel
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"prime/es5/array":3}],3:[function(require,module,exports){
-"use strict";for(var array=require("../shell").array,names="pop,push,reverse,shift,sort,splice,unshift,concat,join,slice,toString,indexOf,lastIndexOf,forEach,every,some,filter,map,reduce,reduceRight".split(","),methods={},i=0,name,method;name=names[i++];)(method=Array.prototype[name])&&(methods[name]=method);methods.filter||(methods.filter=function(t,r){for(var e=[],i=0,s=this.length>>>0;s>i;i++)if(i in this){var h=this[i];t.call(r,h,i,this)&&e.push(h)}return e}),methods.indexOf||(methods.indexOf=function(t,r){for(var e=this.length>>>0,i=0>r?Math.max(0,e+r):r||0;e>i;i++)if(i in this&&this[i]===t)return i;return-1}),methods.map||(methods.map=function(t,r){for(var e=this.length>>>0,i=Array(e),s=0,h=e;h>s;s++)s in this&&(i[s]=t.call(r,this[s],s,this));return i}),methods.every||(methods.every=function(t,r){for(var e=0,i=this.length>>>0;i>e;e++)if(e in this&&!t.call(r,this[e],e,this))return!1;return!0}),methods.some||(methods.some=function(t,r){for(var e=0,i=this.length>>>0;i>e;e++)if(e in this&&t.call(r,this[e],e,this))return!0;return!1}),methods.forEach||(methods.forEach=function(t,r){for(var e=0,i=this.length>>>0;i>e;e++)e in this&&t.call(r,this[e],e,this)});var toString=Object.prototype.toString;array.isArray=Array.isArray||function(t){return"[object Array]"===toString.call(t)},module.exports=array.implement(methods);
+/*
+array
+ - array es5 shell
+*/"use strict"
+
+var array = require("../shell")["array"]
+
+var names = (
+    "pop,push,reverse,shift,sort,splice,unshift,concat,join,slice,toString,indexOf,lastIndexOf,forEach,every,some" +
+    ",filter,map,reduce,reduceRight"
+).split(",")
+
+for (var methods = {}, i = 0, name, method; name = names[i++];) if ((method = Array.prototype[name])) methods[name] = method
+
+if (!methods.filter) methods.filter = function(fn, context){
+    var results = []
+    for (var i = 0, l = this.length >>> 0; i < l; i++) if (i in this){
+        var value = this[i]
+        if (fn.call(context, value, i, this)) results.push(value)
+    }
+    return results
+}
+
+if (!methods.indexOf) methods.indexOf = function(item, from){
+    for (var l = this.length >>> 0, i = (from < 0) ? Math.max(0, l + from) : from || 0; i < l; i++){
+        if ((i in this) && this[i] === item) return i
+    }
+    return -1
+}
+
+if (!methods.map) methods.map = function(fn, context){
+    var length = this.length >>> 0, results = Array(length)
+    for (var i = 0, l = length; i < l; i++){
+        if (i in this) results[i] = fn.call(context, this[i], i, this)
+    }
+    return results
+}
+
+if (!methods.every) methods.every = function(fn, context){
+    for (var i = 0, l = this.length >>> 0; i < l; i++){
+        if ((i in this) && !fn.call(context, this[i], i, this)) return false
+    }
+    return true
+}
+
+if (!methods.some) methods.some = function(fn, context){
+    for (var i = 0, l = this.length >>> 0; i < l; i++){
+        if ((i in this) && fn.call(context, this[i], i, this)) return true
+    }
+    return false
+}
+
+if (!methods.forEach) methods.forEach = function(fn, context){
+    for (var i = 0, l = this.length >>> 0; i < l; i++){
+        if (i in this) fn.call(context, this[i], i, this)
+    }
+}
+
+var toString = Object.prototype.toString
+
+array.isArray = Array.isArray || function(self){
+    return toString.call(self) === "[object Array]"
+}
+
+module.exports = array.implement(methods)
 
 },{"../shell":5}],4:[function(require,module,exports){
-"use strict";var has=function(e,r){return Object.hasOwnProperty.call(e,r)},each=function(e,r,t){for(var n in e)if(r.call(t,e[n],n,e)===!1)break;return e};if(!{valueOf:0}.propertyIsEnumerable("valueOf")){var buggy="constructor,toString,valueOf,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString".split(","),proto=Object.prototype;each=function(e,r,t){for(var n in e)if(r.call(t,e[n],n,e)===!1)return e;for(var o=0;n=buggy[o];o++){var i=e[n];if((i!==proto[n]||has(e,n))&&r.call(t,i,n,e)===!1)break}return e}}var create=Object.create||function(e){var r=function(){};return r.prototype=e,new r},getOwnPropertyDescriptor=Object.getOwnPropertyDescriptor,define=Object.defineProperty;try{var obj={a:1};getOwnPropertyDescriptor(obj,"a"),define(obj,"a",{value:2})}catch(e){getOwnPropertyDescriptor=function(e,r){return{value:e[r]}},define=function(e,r,t){return e[r]=t.value,e}}var implement=function(e){return each(e,function(r,t){"constructor"!==t&&"define"!==t&&"inherits"!==t&&this.define(t,getOwnPropertyDescriptor(e,t)||{writable:!0,enumerable:!0,configurable:!0,value:r})},this),this},prime=function(e){var r=e.inherits,t=has(e,"constructor")?e.constructor:r?function(){return r.apply(this,arguments)}:function(){};if(r){var n=r.prototype,o=t.prototype=create(n);t.parent=n,o.constructor=t}return t.define=e.define||r&&r.define||function(e,r){return define(this.prototype,e,r),this},t.implement=implement,t.implement(e)};prime.has=has,prime.each=each,prime.create=create,prime.define=define,module.exports=prime;
+/*
+prime
+ - prototypal inheritance
+*/"use strict"
+
+var has = function(self, key){
+    return Object.hasOwnProperty.call(self, key)
+}
+
+var each = function(object, method, context){
+    for (var key in object) if (method.call(context, object[key], key, object) === false) break
+    return object
+}
+
+if (!({valueOf: 0}).propertyIsEnumerable("valueOf")){ // fix for stupid IE enumeration bug
+
+    var buggy = "constructor,toString,valueOf,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString".split(",")
+    var proto = Object.prototype
+
+    each = function(object, method, context){
+        for (var key in object) if (method.call(context, object[key], key, object) === false) return object
+        for (var i = 0; key = buggy[i]; i++){
+            var value = object[key]
+            if ((value !== proto[key] || has(object, key)) && method.call(context, value, key, object) === false) break
+        }
+        return object
+    }
+
+}
+
+var create = Object.create || function(self){
+    var constructor = function(){}
+    constructor.prototype = self
+    return new constructor
+}
+
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor
+var define = Object.defineProperty
+
+try {
+    var obj = {a: 1}
+    getOwnPropertyDescriptor(obj, "a")
+    define(obj, "a", {value: 2})
+} catch (e){
+    getOwnPropertyDescriptor = function(object, key){
+        return {value: object[key]}
+    }
+    define = function(object, key, descriptor){
+        object[key] = descriptor.value
+        return object
+    }
+}
+
+var implement = function(proto){
+    each(proto, function(value, key){
+        if (key !== "constructor" && key !== "define" && key !== "inherits")
+            this.define(key, getOwnPropertyDescriptor(proto, key) || {
+                writable: true,
+                enumerable: true,
+                configurable: true,
+                value: value
+            })
+    }, this)
+    return this
+}
+
+var prime = function(proto){
+
+    var superprime = proto.inherits
+
+    // if our nice proto object has no own constructor property
+    // then we proceed using a ghosting constructor that all it does is
+    // call the parent's constructor if it has a superprime, else an empty constructor
+    // proto.constructor becomes the effective constructor
+    var constructor = (has(proto, "constructor")) ? proto.constructor : (superprime) ? function(){
+        return superprime.apply(this, arguments)
+    } : function(){}
+
+    if (superprime){
+
+        var superproto = superprime.prototype
+        // inherit from superprime
+        var cproto = constructor.prototype = create(superproto)
+
+        // setting constructor.parent to superprime.prototype
+        // because it's the shortest possible absolute reference
+        constructor.parent = superproto
+        cproto.constructor = constructor
+    }
+
+    // inherit (kindof inherit) define
+    constructor.define = proto.define || (superprime && superprime.define) || function(key, descriptor){
+        define(this.prototype, key, descriptor)
+        return this
+    }
+
+    // copy implement (this should never change)
+    constructor.implement = implement
+
+    // finally implement proto and return constructor
+    return constructor.implement(proto)
+
+}
+
+prime.has    = has
+prime.each   = each
+prime.create = create
+prime.define = define
+
+module.exports = prime
 
 },{}],5:[function(require,module,exports){
-"use strict";for(var prime=require("./index"),type=require("./type"),slice=Array.prototype.slice,ghost=prime({constructor:function(e){this.valueOf=function(){return e},this.toString=function(){return e+""},this.is=function(t){return e===t}}}),shell=function(e){if(null==e||e instanceof ghost)return e;var t=shell[type(e)];return t?new t(e):e},register=function(){var e=prime({inherits:ghost});return prime({constructor:function(t){return new e(t)},define:function(t,r){var n=r.value;return this[t]=function(e){return arguments.length>1?n.apply(e,slice.call(arguments,1)):n.call(e)},e.prototype[t]=function(){return shell(n.apply(this.valueOf(),arguments))},prime.define(this.prototype,t,r),this}})},types="string,number,array,object,date,function,regexp".split(","),i=types.length;i--;)shell[types[i]]=register();module.exports=shell;
+/*
+shell
+*/"use strict"
+
+var prime = require("./index"),
+    type  = require("./type")
+
+var slice = Array.prototype.slice
+
+var ghost = prime({
+
+    constructor: function ghost(self){
+
+        this.valueOf = function(){
+            return self
+        }
+
+        this.toString = function(){
+            return self + ""
+        }
+
+        this.is = function(object){
+            return self === object
+        }
+    }
+
+})
+
+var shell = function(self){
+    if (self == null || self instanceof ghost) return self
+    var g = shell[type(self)]
+    return (g) ? new g(self) : self
+}
+
+var register = function(){
+
+    var g = prime({inherits: ghost})
+
+    return prime({
+
+        constructor: function(self){
+            return new g(self)
+        },
+
+        define: function(key, descriptor){
+            var method = descriptor.value
+
+            this[key] = function(self){
+                return (arguments.length > 1) ? method.apply(self, slice.call(arguments, 1)) : method.call(self)
+            }
+
+            g.prototype[key] = function(){
+                return shell(method.apply(this.valueOf(), arguments))
+            }
+
+            prime.define(this.prototype, key, descriptor)
+
+            return this
+        }
+
+    })
+
+}
+
+for (var types = "string,number,array,object,date,function,regexp".split(","), i = types.length; i--;) shell[types[i]] = register()
+
+module.exports = shell
 
 },{"./index":4,"./type":6}],6:[function(require,module,exports){
-"use strict";var toString=Object.prototype.toString,types=/number|object|array|string|function|date|regexp|boolean/,type=function(t){if(null==t)return"null";var e=toString.call(t).slice(8,-1).toLowerCase();return"number"===e&&isNaN(t)?"null":types.test(e)?e:"object"};module.exports=type;
+/*
+type
+*/"use strict"
+
+var toString = Object.prototype.toString,
+    types = /number|object|array|string|function|date|regexp|boolean/
+
+var type = function(object){
+    if (object == null) return "null"
+    var string = toString.call(object).slice(8, -1).toLowerCase()
+    if (string === "number" && isNaN(object)) return "null"
+    if (types.test(string)) return string
+    return "object"
+}
+
+module.exports = type
 
 },{}],7:[function(require,module,exports){
-"use strict";moobile.Animation=new Class({Extends:moobile.Firer,__name:null,__running:!1,element:null,animationClass:null,animationProperties:{name:null,duration:null,"iteration-count":null,"animation-direction":null,"animation-timing-function":null,"animation-fill-mode":null,"animation-delay":null},options:{validate:null},initialize:function(n,t){return this.setElement(n),this.setOptions(t),this},setName:function(n){return this.__name=n,this},getName:function(){return this.__name},setElement:function(n){return this.element=document.id(n),this},getElement:function(){return this.element},setAnimationClass:function(n){return this.animationClass=n,this},getAnimationClass:function(){return this.animationClass},setAnimationName:function(n){return this.animationProperties.name=n,this},getAnimationName:function(){return this.animationProperties.name},setAnimationDuration:function(n){return this.animationProperties.duration=n,this},getAnimationDuration:function(){return this.animationProperties.duration},setAnimationIterationCount:function(n){return this.animationProperties["iteration-count"]=n,this},getAnimationIterationCount:function(){return this.animationProperties["iteration-count"]},setAnimationDirection:function(n){return this.animationProperties.direction=n,this},getAnimationDirection:function(){return this.animationProperties.direction},setAnimationTimingFunction:function(n){return this.animationProperties["timing-function"]=n,this},getAnimationTimingFunction:function(){return this.animationProperties["timing-function"]},setAnimationFillMode:function(n){return this.animationProperties["fill-mode"]=n,this},getAnimationFillMode:function(){return this.animationProperties["fill-mode"]},setAnimationDelay:function(n){return this.animationProperties.delay=n,this},getAnimationDelay:function(){return this.animationProperties.delay},attach:function(){return this.element.addEvent("animationend",this.bound("__onAnimationEnd")),this.element.addClass(this.animationClass),Object.each(this.animationProperties,function(n,t){this.element.setStyle("animation-"+t,n)},this),this},detach:function(){return this.element.removeEvent("animationend",this.bound("__onAnimationEnd")),this.element.removeClass(this.animationClass),Object.each(this.animationProperties,function(n,t){this.element.setStyle("animation-"+t,null)},this),this},start:function(){return this.__running?this:(this.__running=!0,this.attach(),this.fireEvent("start"),this)},stop:function(){return this.__running===!1?this:(this.__running=!1,this.detach(),this.fireEvent("stop"),this)},isRunning:function(){return this.__running},__onAnimationEnd:function(n){if(this.__running!==!1){var t=!0,i=this.options.validate;t=i?i(n,this.element):n.target===this.element,t&&(n.stop(),this.__running=!1,this.fireEvent("end"),this.detach())}}});
+"use strict"
 
+/**
+ * @see    http://moobilejs.com/doc/0.1/Animation/Animation
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1
+ */
+moobile.Animation = new Class({
+
+	Extends: moobile.Firer,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	__name: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	__running: false,
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#element
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	element: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	animationClass: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#animationProperties
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	animationProperties: {
+		'name': null,
+		'duration': null,
+		'iteration-count': null,
+		'animation-direction': null,
+		'animation-timing-function': null,
+		'animation-fill-mode': null,
+		'animation-delay': null,
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	options: {
+		validate: null
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#initialize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	initialize: function(element, options) {
+		this.setElement(element);
+		this.setOptions(options);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setName: function(name) {
+		this.__name = name;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getName: function() {
+		return this.__name;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setElement: function(element) {
+		this.element = document.id(element);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getElement: function() {
+		return this.element;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationClass: function(value) {
+		this.animationClass = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationClass: function() {
+		return this.animationClass;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationName: function(value) {
+		this.animationProperties['name'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationName: function() {
+		return this.animationProperties['name'];
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDuration
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationDuration: function(value) {
+		this.animationProperties['duration'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDuration
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationDuration: function() {
+		return this.animationProperties['duration'];
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationIterationCount
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationIterationCount: function(value) {
+		this.animationProperties['iteration-count'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationIterationCount
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationIterationCount: function() {
+		return this.animationProperties['iteration-count'];
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDirection
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationDirection: function(value) {
+		this.animationProperties['direction'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDirection
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationDirection: function() {
+		return this.animationProperties['direction'];
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationTimingFunction
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationTimingFunction: function(value) {
+		this.animationProperties['timing-function'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationTimingFunction
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationTimingFunction: function() {
+		return this.animationProperties['timing-function'];
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationFillMode
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationFillMode: function(value) {
+		this.animationProperties['fill-mode'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationFillMode
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationFillMode: function() {
+		return this.animationProperties['fill-mode'];
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#setAnimationDelay
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	setAnimationDelay: function(value) {
+		this.animationProperties['delay'] = value;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#getAnimationDelay
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	getAnimationDelay: function() {
+		return this.animationProperties['delay'];
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	attach: function() {
+
+		this.element.addEvent('animationend', this.bound('__onAnimationEnd'));
+		this.element.addClass(this.animationClass);
+
+		Object.each(this.animationProperties, function(val, key) {
+			this.element.setStyle('animation-' + key, val);
+		}, this);
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	detach: function() {
+
+		this.element.removeEvent('animationend', this.bound('__onAnimationEnd'));
+		this.element.removeClass(this.animationClass);
+
+		Object.each(this.animationProperties, function(val, key) {
+			this.element.setStyle('animation-' + key, null);
+		}, this);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#start
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	start: function() {
+
+		if (this.__running)
+			return this;
+
+		this.__running = true;
+		this.attach();
+		this.fireEvent('start');
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#stop
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	stop: function() {
+
+		if (this.__running === false)
+			return this;
+
+		this.__running = false;
+		this.detach();
+		this.fireEvent('stop');
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/0.1/Animation/Animation#isRunning
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	isRunning: function() {
+		return this.__running;
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1
+	 */
+	__onAnimationEnd: function(e) {
+
+		if (this.__running === false)
+			return;
+
+		var valid = true;
+
+		var validate = this.options.validate;
+		if (validate) {
+			valid = validate(e, this.element)
+		} else {
+			valid = e.target === this.element;
+		}
+
+		if (!valid) return;
+
+		e.stop();
+
+		this.__running = false;
+		this.fireEvent('end');
+		this.detach();
+	}
+
+});
 },{}],8:[function(require,module,exports){
-"use strict";var updateLayoutTime=null,updateLayoutRoot=null,Component=moobile.Component=new Class({Extends:moobile.Firer,__name:null,__ready:!1,__window:null,__parent:null,__children:[],__display:!0,__visible:!0,__visibleAnimation:null,__style:null,__listeners:{},__callbacks:{},__size:{x:0,y:0},__updateLayout:!1,element:null,options:{className:null,styleName:null,tagName:"div",components:null},initialize:function(t,e,n){this.setElement(t),this.setOptions(e),this.__name=n||this.element.get("data-name");var i=this.element,o=document.contains(this.element);return o&&(this.element=this.element.clone(!0,!0)),this.__willBuild(),this.__build(),this.__didBuild(),o&&this.element.replaces(i),this},destroy:function(){return this.removeEvents(),this.removeFromParentComponent(),this.removeAllChildComponents(!0),this.element.destroy(),this.element=null,this.__window=null,this.__parent=null,this.__children=null,this.__callbacks=null,this.__listeners=null,this},setElement:function(t){return this.element&&(this.element.destroy(),this.element=null),this.element=Element.from(t),null===this.element&&(this.element=document.createElement(this.options.tagName)),this.element.store("moobile:component",this),this},setOptions:function(t){t=t||{};for(var e in this.options)if(void 0===t[e]){var n=this.element.get("data-option-"+e.hyphenate());if(null!==n){try{n=JSON.parse(n)}catch(i){}t[e]=n}}return this.parent(t)},addEvent:function(t,e,n){var i=t.split(":")[0];if(this.supportNativeEvent(i)){var o=this,s=this.__listeners,h=this.__callbacks;void 0===h[i]&&(h[i]=[],s[i]=function(t){o.fireEvent(i,t)}),h[i].include(e),1===h[i].length&&this.element.addEvent(i,s[i])}return this.parent(t,e,n)},removeEvent:function(t,e){if(this.supportNativeEvent(t)){var n=this.__listeners,i=this.__callbacks;i[t]&&i[t].contains(e)&&(i[t].erase(e),0===i[t].length&&(this.element.removeEvent(t,n[t]),delete n[t],delete i[t]))}return this.parent(t,e)},supportNativeEvent:function(t){return["click","dblclick","mouseup","mousedown","mouseover","mouseout","mousemove","keydown","keypress","keyup","touchstart","touchmove","touchend","touchcancel","gesturestart","gesturechange","gestureend","tap","tapstart","tapmove","tapend","tapcancel","pinch","swipe","touchold","animationend","transitionend","owntransitionend","ownanimationend"].contains(t)},addChildComponent:function(t,e,n){t.removeFromParentComponent(),n=n?document.id(n)||this.element.getElement(n):this.element,this.__willAddChildComponent(t);var i=document.id(t);return(e||!this.hasElement(i))&&i.inject(n,e),setComponentIndex.call(this,t),t.__setParent(this),t.__setWindow(this.__window),this.__didAddChildComponent(t),this.updateLayout(),this},addChildComponentInside:function(t,e,n){return this.addChildComponent(t,n,document.id(e)||this.getElement(e))},addChildComponentAfter:function(t,e){return this.addChildComponent(t,"after",e)},addChildComponentBefore:function(t,e){return this.addChildComponent(t,"before",e)},addChildComponentAt:function(t,e){var n=this.__children;e>n.length?e=n.length:0>e&&(e=0);var i=this.getChildComponentAt(e);return i?this.addChildComponentBefore(t,i):this.addChildComponent(t,"bottom")},getChildComponent:function(t){return this.__children.find(function(e){return e.getName()===t})},getChildComponentByType:function(t,e){return this.__children.find(function(n){return n instanceof t&&n.getName()===e})},getChildComponentAt:function(t){return this.__children[t]||null},getChildComponentByTypeAt:function(t,e){return this.getChildComponentsByType(t)[e]||null},getChildComponentIndex:function(t){return this.__children.indexOf(t)},getChildComponents:function(){return this.__children},getChildComponentsByType:function(t){return this.__children.filter(function(e){return e instanceof t})},hasChildComponent:function(t){return this.__children.contains(t)},hasChildComponentByType:function(t){return this.__children.some(function(e){return e instanceof t})},getComponent:function(t){var e=this.getChildComponent(t);if(null===e)for(var n=0,i=this.__children.length;i>n;n++){var o=this.__children[n].getComponent(t);if(o)return o}return e},getComponentByType:function(t,e){var n=this.getChildComponentByType(t,e);if(null===n)for(var i=0,o=this.__children.length;o>i;i++){var s=this.__children[i].getComponentByType(t,e);if(s)return s}return n},hasComponent:function(t){var e=this.hasChildComponent(t);if(e===!1)for(var n=0,i=this.__children.length;i>n;n++){var o=this.__children[n].hasComponent(t);if(o)return o}return e},hasComponentByType:function(t,e){var n=this.hasChildComponentByType(t,e);if(n===!1)for(var i=0,o=this.__children.length;o>i;i++){var s=this.__children[i].hasComponentByType(t,e);if(s)return s}return n},replaceChildComponent:function(t,e,n){return this.addChildComponentBefore(e,t).removeChildComponent(t,n)},replaceWithComponent:function(t,e){var n=this.getParentComponent();return n&&n.replaceChildComponent(this,t,e),this},removeChildComponent:function(t,e){if(this.hasChildComponent(t)===!1)return this;this.__willRemoveChildComponent(t);var n=t.getElement();return n&&n.dispose(),this.__children.erase(t),t.__setParent(null),t.__setWindow(null),this.__didRemoveChildComponent(t),e&&t.destroy(),this.updateLayout(),this},removeAllChildComponents:function(t){return this.removeAllChildComponentsByType(Component,t)},removeAllChildComponentsByType:function(t,e){return this.__children.filter(function(e){return e instanceof t}).invoke("removeFromParentComponent",e),this},removeFromParentComponent:function(t){var e=this.getParentComponent();return e&&e.removeChildComponent(this,t),this},setParentComponent:function(t){this.__setParent(t)},getParentComponent:function(){return this.__parent},hasParentComponent:function(){return!!this.__parent},setWindow:function(t){this.__setWindow(t),this.getChildComponents().each(function(e){e.setWindow(t)},this)},getWindow:function(){return this.__window},hasWindow:function(){return!!this.__window},isReady:function(){return this.__ready},getName:function(){return this.__name},setStyle:function(t){if(2===arguments.length)return this.element.setStyle(arguments[0],arguments[1]),this.updateLayout();this.__style&&(this.__style.detach.call(this,this.element),this.__style=null);var e=Component.getStyle(t,this);return e&&e.attach.call(this,this.element),this.__style=e,this.updateLayout()},getStyle:function(){return 1===arguments.length?this.element.getStyle(arguments[0]):this.__style&&this.__style.name||null},hasStyle:function(t){return this.__style?this.__style.name===t:!1},addClass:function(t){var e=this.element;return e.hasClass(t)===!1&&(e.addClass(t),this.updateLayout()),this},removeClass:function(t){var e=this.element;return e.hasClass(t)===!0&&(e.removeClass(t),this.updateLayout()),this},toggleClass:function(t,e){return this.element.toggleClass(t,e),this.updateLayout(),this},hasClass:function(t){return this.element.hasClass(t)},getElements:function(t){return this.element.getElements(t||"*")},getElement:function(t){return t?this.element.getElement(t):this.element},hasElement:function(t){return this.element===document.id(t)||this.element.contains(document.id(t))},getRoleElement:function(t){return this.getRoleElements(t,1)[0]||null},getRoleElements:function(t,e){var n=this.__roles__,i=[],o=function(s){if(!(e&&e<=i.length))for(var h=s.childNodes,l=0,a=h.length;a>l;l++){var d=h[l];if(1===d.nodeType){var r=d.getRole();if(null!==r){var u=n[r];u&&(t!==r&&t||i.push(d),u.options.traversable)&&o(d)}else o(d)}}};return o(this.element),i},setSize:function(t,e){return(t>0||null===t)&&this.element.setStyle("width",t),(e>0||null===e)&&this.element.setStyle("height",e),(this.__size.x!==t||this.__size.y!==e)&&this.updateLayout(),this.__size.x=t,this.__size.y=e,this},getSize:function(){return this.element.getSize()},getPosition:function(t){return this.element.getPosition(document.id(t)||this.__parent)},show:function(t){return this.__display===!0||this.__visible===!0?this:(this.__visibleAnimation&&(this.__visibleAnimation.stop(),this.__visibleAnimation.removeEvents()),t?("string"==typeof t&&(t=new moobile.Animation(this.element).setAnimationClass(t)),this.__visibleAnimation=t,this.__visibleAnimation.addEvent("start",this.bound("__willShow")),this.__visibleAnimation.addEvent("end",this.bound("__didShow")),this.__visibleAnimation.start()):(this.__willShow(),this.__didShow()),this)},hide:function(t){return this.__display===!1?this:(this.__visibleAnimation&&(this.__visibleAnimation.stop(),this.__visibleAnimation.removeEvents()),t&&this.__visible?("string"==typeof t&&(t=new moobile.Animation(this.element).setAnimationClass(t)),this.__visibleAnimation=t,this.__visibleAnimation.addEvent("start",this.bound("__willHide")),this.__visibleAnimation.addEvent("end",this.bound("__didHide")),this.__visibleAnimation.start()):(this.__willHide(),this.__didHide()),this)},isVisible:function(){return this.__display&&this.__visible},updateLayout:function(t){if(t=t===!1?!1:!0,this.__updateLayout===t)return this;if(this.__updateLayout=t,t){var e=this.getParentComponent();if(e&&e.__updateLayout)return this;if(this instanceof moobile.Window)return null===updateLayoutTime&&(updateLayoutTime=requestAnimationFrame(triggerLayoutUpdate)),updateLayoutRoot=this,this;if(this.hasWindow()===!1)return this;if(null===updateLayoutTime&&(updateLayoutTime=requestAnimationFrame(triggerLayoutUpdate)),null===updateLayoutRoot)return updateLayoutRoot=this,this;for(var e=this.getParentComponent();e;){if(e===updateLayoutRoot)return this;e=e.getParentComponent()}updateLayoutRoot=this}return this},cascade:function(t){return t.call(this,this),this.__children.invoke("cascade",t),this},willBuild:function(){},didBuild:function(){},willChangeReadyState:function(t){},didChangeReadyState:function(t){},didBecomeReady:function(){},didUpdateLayout:function(){},willAddChildComponent:function(t){},didAddChildComponent:function(t){},willRemoveChildComponent:function(t){},didRemoveChildComponent:function(t){},parentComponentWillChange:function(t){},parentComponentDidChange:function(t){},windowWillChange:function(t){},windowDidChange:function(t){},willShow:function(){},willHide:function(){},didShow:function(){},didHide:function(){},toElement:function(){return this.element},__setParent:function(t){return this.__parent===t?this:(this.__parentComponentWillChange(t),this.__parent=t,this.__parentComponentDidChange(t),this)},__setWindow:function(t){if(this.__window===t)return this;this.cascade(function(){this.__window!==t&&(this.__windowWillChange(t),this.__window=t,this.__windowDidChange(t))});var e=!!t;return this.cascade(function(){this.__ready!==e&&(this.__willChangeReadyState(e),this.__ready=e,this.__didChangeReadyState(e),e&&this.__didBecomeReady())}),this},__build:function(){var t=this,e=this.__roles__,n=this.__attributes__;for(var i in n){var o=this.element.get(i);if(null!==o){var s=n[i];s instanceof Function&&s.call(this,o)}}var h=this.options.className;h&&this.addClass(h);var l=this.options.styleName;l&&this.setStyle(l),this.getRoleElements().each(function(n){var i=e[n.getRole()].handler;"function"==typeof i&&i.call(t,n)})},__willBuild:function(){this.willBuild()},__didBuild:function(){var t=this.options.components;t&&this.addChildComponents(t),this.didBuild()},__willAddChildComponent:function(t){this.willAddChildComponent(t),this.fireEvent("willaddchildcomponent",t)},__didAddChildComponent:function(t){t.__visible=this.__visible,this.didAddChildComponent(t),this.fireEvent("didaddchildcomponent",t)},__willRemoveChildComponent:function(t){this.willRemoveChildComponent(t),this.fireEvent("willremovechildcomponent",t)},__didRemoveChildComponent:function(t){this.didRemoveChildComponent(t),this.fireEvent("didremovechildcomponent",t)},__parentComponentWillChange:function(t){this.parentComponentWillChange(t),this.fireEvent("parentcomponentwillchange",t)},__parentComponentDidChange:function(t){this.parentComponentDidChange(t),this.fireEvent("parentcomponentdidchange",t)},__windowWillChange:function(t){this.windowWillChange(t),this.fireEvent("windowwillchange",t)},__windowDidChange:function(t){this.windowDidChange(t),this.fireEvent("windowdidchange",t)},__willChangeReadyState:function(t){this.willChangeReadyState(t),this.fireEvent("willchangereadystate",t)},__didChangeReadyState:function(t){this.didChangeReadyState(t),this.fireEvent("didchangereadystate",t)},__didBecomeReady:function(){this.didBecomeReady(),this.fireEvent("didbecomeready")},__didUpdateLayout:function(){this.__updateLayout&&(this.__updateLayout=!1,this.didUpdateLayout(),this.fireEvent("didupdatelayout"))},__willShow:function(){var t=this.__parent?this.__parent.isVisible():this instanceof moobile.Window;if(t){this.willShow();var e=this;this.cascade(function(){this!==e&&this.__display===!0&&this.__visible===!1&&this.willShow()})}this.removeClass("hidden")},__didShow:function(){var t=this.__parent?this.__parent.isVisible():this instanceof moobile.Window;if(this.__display=!0,this.__visible=t,t){this.didShow();var e=this;this.cascade(function(){this!==e&&this.__display===!0&&this.__visible===!1&&(this.__visible=!0,this.__updateLayout=!0,this.didShow())}),this.updateLayout()}},__willHide:function(){var t=this.__parent?this.__parent.isVisible():this instanceof moobile.Window;if(t){this.willHide();var e=this;this.cascade(function(){this!==e&&this.__visible===!0&&this.__display===!0&&this.willHide()})}this.addClass("hidden"),this.__display=!1,this.__visible=!1},__didHide:function(){var t=this.__parent?this.__parent.isVisible():this instanceof moobile.Window;if(t){this.didHide();var e=this;this.cascade(function(){this!==e&&this.__display===!0&&this.__visible===!0&&(this.__visible=!1,this.didHide())}),this.fireEvent("hide")}},getChildComponentOfType:function(t,e){return this.getChildComponentByType(t,e)},getChildComponentOfTypeAt:function(t,e){return this.getChildComponentByTypeAt(t,e)},getChildComponentsOfType:function(t){return this.getChildComponentsByType(t)},hasChildComponentOfType:function(t){return this.hasChildComponentByType(t)},getDescendantComponent:function(t){return this.getComponent(t)},getComponentOfType:function(t,e){return this.getComponentByType(t,e)},hasComponentOfType:function(t,e){return this.hasComponentByType(t,e)}});Component.defineRole=function(t,e,n,i){if(e=(e||Component).prototype,void 0===e.__roles__&&(e.__roles__={}),n)switch(typeof n){case"function":i=n,n={};break;case"object":"function"==typeof n.behavior&&(i=n.behavior)}e.__roles__[t]={handler:i||function(){},options:n||{}}},Component.defineAttribute=function(t,e,n){e=(e||Component).prototype,void 0===e.__attributes__&&(e.__attributes__={}),e.__attributes__[t]=n},Component.defineStyle=function(t,e,n){var i=(e||Component).prototype;void 0===i.__styles__&&(i.__styles__={}),i.__styles__[t]=Object.append({name:t,attach:function(){},detach:function(){}},n)},Component.getStyle=function(t,e){return e.__styles__?e.__styles__[t]:null},Component.create=function(t,e,n,i,o){if(e=Element.from(e),n){var s=e.get(n);if(s){var h=Class.instantiate(s,e,i,o);if(h instanceof t)return h}}return new t(e,i,o)},Component.defineAttribute("data-style",null,function(t){this.options.styleName=t});var setComponentIndex=function(t){var e=0,n=document.id(t);do{var i=n.previousSibling;if(null!==i){if(n=i,1===n.nodeType){var o=n.retrieve("moobile:component");if(o){e=this.getChildComponentIndex(o)+1;break}var s=n.childNodes;if(s.length){var h=getComponentIndex.call(this,n);if(null!==h){e=h;break}}}}else if(n=n.parentNode,n===this.element)break}while(n);return this.__children.splice(e,0,t),this},getComponentIndex=function(t){var e=t.lastChild;do if(1===e.nodeType){var n=e.retrieve("moobile:component");if(n)return this.getChildComponentIndex(n)+1;var i=e.childNodes;if(i.length){var o=getComponentIndex.call(this,e);if(o>=0)return o}e=e.previousSibling}else if(e=e.previousSibling,null===e)return 0;while(e);return null},triggerLayoutUpdate=function(){updateLayoutRoot&&(updateLayoutRoot.cascade(function(){this.__didUpdateLayout()}),updateLayoutRoot=null,updateLayoutTime=null)};
+"use strict"
+
+var updateLayoutTime = null;
+var updateLayoutRoot = null;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Component = moobile.Component = new Class({
+
+	Extends: moobile.Firer,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__name: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__ready: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__window: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__parent: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__children: [],
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__display: true,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__visible: true,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__visibleAnimation: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__style: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__listeners: {},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__callbacks: {},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__size: {
+		x: 0,
+		y: 0
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__updateLayout: false,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#element
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	element: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	options: {
+		className: null,
+		styleName: null,
+		tagName: 'div',
+		components: null
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#initialization
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	initialize: function(element, options, name) {
+
+		this.setElement(element);
+		this.setOptions(options);
+
+		this.__name = name || this.element.get('data-name');
+
+		var marker = this.element;
+		var exists = document.contains(this.element);
+		if (exists) this.element = this.element.clone(true, true);
+
+		this.__willBuild();
+		this.__build();
+		this.__didBuild();
+
+		if (exists) this.element.replaces(marker);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#destroy
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+
+		this.removeEvents();
+		this.removeFromParentComponent();
+		this.removeAllChildComponents(true);
+
+		this.element.destroy();
+		this.element = null;
+
+		this.__window = null;
+		this.__parent = null;
+		this.__children = null;
+		this.__callbacks = null;
+		this.__listeners = null;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#destroy
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	setElement: function(element) {
+
+		if (this.element) {
+			this.element.destroy();
+			this.element = null;
+		}
+
+		this.element = Element.from(element);
+		if (this.element === null) {
+			this.element = document.createElement(this.options.tagName);
+		}
+
+		this.element.store('moobile:component', this);
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setOptions: function(options) {
+
+		options = options || {};
+
+		for (var option in this.options) {
+			if (options[option] === undefined) {
+				var value = this.element.get('data-option-' + option.hyphenate());
+				if (value !== null) {
+					try { value = JSON.parse(value) } catch (e) {}
+					options[option] = value;
+				}
+			}
+		}
+
+		return this.parent(options)
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	addEvent: function(type, fn, internal) {
+
+		var name = type.split(':')[0];
+
+		if (this.supportNativeEvent(name)) {
+
+			var self = this;
+			var listeners = this.__listeners;
+			var callbacks = this.__callbacks;
+			if (callbacks[name] === undefined) {
+				callbacks[name] = [];
+				listeners[name] = function(e) {
+					self.fireEvent(name, e);
+				};
+			}
+
+			callbacks[name].include(fn);
+
+			if (callbacks[name].length === 1) this.element.addEvent(name, listeners[name]);
+		}
+
+		return this.parent(type, fn, internal);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	removeEvent: function(type, fn) {
+
+		if (this.supportNativeEvent(type)) {
+			var listeners = this.__listeners;
+			var callbacks = this.__callbacks;
+			if (callbacks[type] && callbacks[type].contains(fn)) {
+				callbacks[type].erase(fn);
+				if (callbacks[type].length === 0) {
+					this.element.removeEvent(type, listeners[type]);
+					delete listeners[type];
+					delete callbacks[type];
+				}
+			}
+		}
+
+		return this.parent(type, fn);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#supportNativeEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	supportNativeEvent: function(name) {
+		return [
+			'click', 'dblclick', 'mouseup', 'mousedown',
+			'mouseover', 'mouseout','mousemove',
+			'keydown', 'keypress', 'keyup',
+			'touchstart', 'touchmove', 'touchend', 'touchcancel',
+			'gesturestart', 'gesturechange', 'gestureend',
+			'tap', 'tapstart', 'tapmove', 'tapend', 'tapcancel',
+			'pinch', 'swipe', 'touchold',
+			'animationend', 'transitionend', 'owntransitionend', 'ownanimationend'
+		].contains(name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	addChildComponent: function(component, where, context) {
+
+		component.removeFromParentComponent();
+
+		if (context) {
+			context = document.id(context) || this.element.getElement(context);
+		} else {
+			context = this.element;
+		}
+
+		this.__willAddChildComponent(component);
+
+		var element = document.id(component)
+		if (where || !this.hasElement(element)) {
+			element.inject(context, where);
+		}
+
+		setComponentIndex.call(this, component);
+		component.__setParent(this);
+		component.__setWindow(this.__window);
+		this.__didAddChildComponent(component);
+
+		this.updateLayout();
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentInside
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	addChildComponentInside: function(component, context, where) {
+		return this.addChildComponent(component,  where, document.id(context) || this.getElement(context));
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	addChildComponentAfter: function(component, after) {
+		return this.addChildComponent(component, 'after', after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	addChildComponentBefore: function(component, before) {
+		return this.addChildComponent(component, 'before', before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addChildComponentAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponentAt: function(component, index) {
+
+		var children = this.__children;
+
+		if (index > children.length) {
+			index = children.length;
+		} else if (index < 0) {
+			index = 0;
+		}
+
+		var before = this.getChildComponentAt(index);
+		if (before) {
+			return this.addChildComponentBefore(component, before);
+		}
+
+		return this.addChildComponent(component, 'bottom');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildComponent: function(name) {
+		return this.__children.find(function(child) { return child.getName() === name; });
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentByType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getChildComponentByType: function(type, name) {
+		return this.__children.find(function(child) { return child instanceof type && child.getName() === name; });
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildComponentAt: function(index) {
+		return this.__children[index] || null;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentByTypeAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getChildComponentByTypeAt: function(type, index) {
+		return this.getChildComponentsByType(type)[index] || null;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildComponentIndex: function(component) {
+		return this.__children.indexOf(component);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponents
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildComponents: function() {
+		return this.__children;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getChildComponentsByType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since 0.3.0
+	 */
+	getChildComponentsByType: function(type) {
+		return this.__children.filter(function(child) { return child instanceof type });
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasChildComponent: function(component) {
+		return this.__children.contains(component);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasChildComponentByType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasChildComponentByType: function(type) {
+		return this.__children.some(function(child) { return child instanceof type; });
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
+	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getComponent: function(name) {
+
+	    var component = this.getChildComponent(name);
+	    if (component === null) {
+			for (var i = 0, len = this.__children.length; i < len; i++) {
+				var found = this.__children[i].getComponent(name);
+				if (found) return found;
+			}
+		}
+
+	    return component;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponentByType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getComponentByType: function(type, name) {
+
+	    var component = this.getChildComponentByType(type, name);
+	    if (component === null) {
+			for (var i = 0, len = this.__children.length; i < len; i++) {
+				var found = this.__children[i].getComponentByType(type, name);
+				if (found) return found;
+			}
+		}
+
+		return component;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasComponent: function(name) {
+
+	    var exists = this.hasChildComponent(name);
+	    if (exists === false) {
+			for (var i = 0, len = this.__children.length; i < len; i++) {
+				var found = this.__children[i].hasComponent(name);
+				if (found) return found;
+			}
+		}
+
+	    return exists;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasComponentByType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasComponentByType: function(type, name) {
+
+	    var exists = this.hasChildComponentByType(type, name);
+	    if (exists === false) {
+			for (var i = 0, len = this.__children.length; i < len; i++) {
+				var found = this.__children[i].hasComponentByType(type, name);
+				if (found) return found;
+			}
+		}
+
+	    return exists;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#replaceChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	replaceChildComponent: function(component, replacement, destroy) {
+		return this.addChildComponentBefore(replacement, component).removeChildComponent(component, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#replaceWithComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	replaceWithComponent: function(component, destroy) {
+		var parent = this.getParentComponent();
+		if (parent) parent.replaceChildComponent(this, component, destroy);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	removeChildComponent: function(component, destroy) {
+
+		if (this.hasChildComponent(component) === false)
+			return this;
+
+		this.__willRemoveChildComponent(component);
+
+		var element = component.getElement();
+		if (element) {
+			element.dispose();
+		}
+
+		this.__children.erase(component);
+		component.__setParent(null);
+		component.__setWindow(null);
+		this.__didRemoveChildComponent(component);
+
+		if (destroy) {
+			component.destroy();
+		}
+
+		this.updateLayout();
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeAllChildComponents
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeAllChildComponents: function(destroy) {
+		return this.removeAllChildComponentsByType(Component, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeAllChildComponentsByType
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeAllChildComponentsByType: function(type, destroy) {
+
+		this.__children.filter(function(child) {
+			return child instanceof type;
+		}).invoke('removeFromParentComponent', destroy);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#removeFromParentComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeFromParentComponent: function(destroy) {
+		var parent = this.getParentComponent();
+		if (parent) parent.removeChildComponent(this, destroy);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setParentComponent
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.0
+	 */
+	setParentComponent: function(parentComponent) {
+		this.__setParent(parentComponent);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getParentComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getParentComponent: function() {
+		return this.__parent;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasParentComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasParentComponent: function() {
+		return !!this.__parent;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setWindow
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.0
+	 */
+	setWindow: function(window) {
+		this.__setWindow(window);
+		this.getChildComponents().each(function(component) {
+			component.setWindow(window);
+		}, this);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getWindow
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getWindow: function() {
+		return this.__window;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasWindow
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasWindow: function() {
+		return !!this.__window;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#isReady
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isReady: function() {
+		return this.__ready;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getName: function() {
+		return this.__name;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setStyle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	setStyle: function(name) {
+
+		if (arguments.length === 2) {
+
+			this.element.setStyle(
+				arguments[0],
+				arguments[1]
+			);
+
+			return this.updateLayout();
+		}
+
+		if (this.__style) {
+			this.__style.detach.call(this, this.element);
+			this.__style = null;
+		}
+
+		var style = Component.getStyle(name, this);
+		if (style) {
+			style.attach.call(this, this.element);
+		}
+
+		this.__style = style;
+
+		return this.updateLayout();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getStyle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getStyle: function() {
+		return arguments.length === 1 ? this.element.getStyle(arguments[0]) : this.__style && this.__style.name || null
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasStyle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	hasStyle: function(name) {
+		return this.__style ? this.__style.name === name : false;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addClass: function(name) {
+
+		var element = this.element;
+		if (element.hasClass(name) === false) {
+			element.addClass(name);
+			this.updateLayout();
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#addClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeClass: function(name) {
+
+		var element = this.element;
+		if (element.hasClass(name) === true) {
+			element.removeClass(name);
+			this.updateLayout();
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#toggleClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	toggleClass: function(name, force) {
+		this.element.toggleClass(name, force);
+		this.updateLayout();
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasClass
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	hasClass: function(name) {
+		return this.element.hasClass(name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElements
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getElements: function(selector) {
+		return this.element.getElements(selector || '*');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getElement: function(selector) {
+		return selector
+			? this.element.getElement(selector)
+			: this.element;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hasElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasElement: function(element) {
+		return this.element === document.id(element) || this.element.contains(document.id(element));
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	getRoleElement: function(name) {
+		return this.getRoleElements(name, 1)[0] || null;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getRoleElements
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	getRoleElements: function(name, limit) {
+
+		var roles = this.__roles__;
+		var found = [];
+
+		var walk = function(element) {
+
+			if (limit && limit <= found.length)
+				return;
+
+			var nodes = element.childNodes;
+			for (var i = 0, len = nodes.length; i < len; i++) {
+
+				var node = nodes[i];
+				if (node.nodeType !== 1)
+					continue;
+
+				var role = node.getRole();
+				if (role === null) {
+					walk(node);
+					continue;
+				}
+
+				var behavior = roles[role];
+				if (behavior) {
+
+					if (name === role || !name) found.push(node);
+
+					if (behavior.options.traversable) {
+						walk(node);
+						continue;
+					}
+				}
+			}
+		};
+
+		walk(this.element);
+
+		return found;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#setSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	setSize: function(x, y) {
+
+		if (x > 0 || x === null) this.element.setStyle('width', x);
+		if (y > 0 || y === null) this.element.setStyle('height', y);
+
+		if (this.__size.x !== x ||
+			this.__size.y !== y) {
+			this.updateLayout();
+		}
+
+		this.__size.x = x;
+		this.__size.y = y;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSize: function() {
+		return this.element.getSize();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#getPosition
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getPosition: function(relative) {
+		return this.element.getPosition(document.id(relative) || this.__parent);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#show
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	show: function(animation) {
+
+		if (this.__display === true ||
+			this.__visible === true)
+			return this;
+
+		if (this.__visibleAnimation) {
+			this.__visibleAnimation.stop();
+			this.__visibleAnimation.removeEvents();
+		}
+
+		if (animation) {
+
+			if (typeof animation === 'string') {
+				animation = new moobile.Animation(this.element).setAnimationClass(animation);
+			}
+
+			this.__visibleAnimation = animation;
+			this.__visibleAnimation.addEvent('start', this.bound('__willShow'));
+			this.__visibleAnimation.addEvent('end', this.bound('__didShow'));
+			this.__visibleAnimation.start()
+
+		} else {
+			this.__willShow();
+			this.__didShow();
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#hide
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	hide: function(animation) {
+
+		if (this.__display === false)
+			return this;
+
+		if (this.__visibleAnimation) {
+			this.__visibleAnimation.stop();
+			this.__visibleAnimation.removeEvents();
+		}
+
+		if (animation && this.__visible) {
+
+			if (typeof animation === 'string') {
+				animation = new moobile.Animation(this.element).setAnimationClass(animation);
+			}
+
+			this.__visibleAnimation = animation;
+			this.__visibleAnimation.addEvent('start', this.bound('__willHide'));
+			this.__visibleAnimation.addEvent('end', this.bound('__didHide'));
+			this.__visibleAnimation.start()
+
+		} else {
+			this.__willHide();
+			this.__didHide();
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#isVisible
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isVisible: function() {
+		return this.__display && this.__visible;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	updateLayout: function(update) {
+
+		update = update === false
+			? false
+			: true;
+
+		if (this.__updateLayout === update)
+			return this;
+
+		this.__updateLayout = update;
+
+		if (update) {
+
+			var parent = this.getParentComponent();
+			if (parent && parent.__updateLayout)
+				return this;
+
+			if (this instanceof moobile.Window) {
+
+				if (updateLayoutTime === null) {
+					updateLayoutTime = requestAnimationFrame(triggerLayoutUpdate);
+				}
+
+				updateLayoutRoot = this;
+
+				return this;
+			}
+
+			if (this.hasWindow() === false)
+				return this;
+
+			if (updateLayoutTime === null) {
+				updateLayoutTime = requestAnimationFrame(triggerLayoutUpdate);
+			}
+
+			if (updateLayoutRoot === null) {
+				updateLayoutRoot = this;
+				return this;
+			}
+
+			var parent = this.getParentComponent();
+			while (parent) {
+				if (parent === updateLayoutRoot) return this;
+				parent = parent.getParentComponent();
+			}
+
+			updateLayoutRoot = this;
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#cascade
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	cascade: function(func) {
+		func.call(this, this);
+		this.__children.invoke('cascade', func)
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willBuild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBuild
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willChangeReadyState
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willChangeReadyState: function(ready) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didChangeReadyState
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didChangeReadyState: function(ready) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didBecomeReady
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBecomeReady: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didUpdateLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willAddChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willAddChildComponent: function(component) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didAddChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildComponent: function(component) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willRemoveChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willRemoveChildComponent: function(component) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didRemoveChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildComponent: function(component) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#parentComponentWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentComponentWillChange: function(parent) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#parentComponentDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentComponentDidChange: function(parent) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#windowWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	windowWillChange: function(window) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#windowDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	windowDidChange: function(window) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willShow
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willShow: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#willHide
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willHide: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didShow
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didShow: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didHide
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didHide: function() {
+
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	toElement: function() {
+		return this.element;
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__setParent: function(parent) {
+
+		if (this.__parent === parent)
+			return this;
+
+		this.__parentComponentWillChange(parent);
+		this.__parent = parent;
+		this.__parentComponentDidChange(parent);
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__setWindow: function(window) {
+
+		if (this.__window === window)
+			return this;
+
+		this.cascade(function() {
+
+			if (this.__window === window)
+				return;
+
+			this.__windowWillChange(window);
+			this.__window = window;
+			this.__windowDidChange(window);
+
+		});
+
+		var ready = !!window;
+
+		this.cascade(function() {
+
+			if (this.__ready === ready)
+				return;
+
+			this.__willChangeReadyState(ready);
+			this.__ready = ready;
+			this.__didChangeReadyState(ready);
+
+			if (ready) this.__didBecomeReady();
+
+		});
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.1.0
+	 */
+	__build: function() {
+
+		var owner = this;
+		var roles = this.__roles__;
+		var attrs = this.__attributes__;
+
+		for (var key in attrs) {
+			var value = this.element.get(key);
+			if (value !== null) {
+				var handler = attrs[key];
+				if (handler instanceof Function) {
+					handler.call(this, value);
+				}
+			}
+		}
+
+		var className = this.options.className;
+		if (className) this.addClass(className);
+
+		var styleName = this.options.styleName
+		if (styleName) this.setStyle(styleName);
+
+		this.getRoleElements().each(function(element) {
+			var handler = roles[element.getRole()].handler;
+			if (typeof handler === 'function') {
+				handler.call(owner, element);
+			}
+		});
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__willBuild: function() {
+		this.willBuild();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__didBuild: function() {
+
+		var components = this.options.components;
+		if (components) {
+			this.addChildComponents(components);
+		}
+
+		this.didBuild();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__willAddChildComponent: function(component) {
+		this.willAddChildComponent(component);
+		this.fireEvent('willaddchildcomponent', component);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Component/Component#didAddChildComponent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__didAddChildComponent: function(component) {
+		component.__visible = this.__visible;
+		this.didAddChildComponent(component);
+		this.fireEvent('didaddchildcomponent', component);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__willRemoveChildComponent: function(component) {
+		this.willRemoveChildComponent(component);
+		this.fireEvent('willremovechildcomponent', component)
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__didRemoveChildComponent: function(component) {
+		this.didRemoveChildComponent(component);
+		this.fireEvent('didremovechildcomponent', component)
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__parentComponentWillChange: function(parent) {
+		this.parentComponentWillChange(parent);
+		this.fireEvent('parentcomponentwillchange', parent)
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__parentComponentDidChange: function(parent) {
+		this.parentComponentDidChange(parent);
+		this.fireEvent('parentcomponentdidchange', parent);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__windowWillChange: function(window) {
+		this.windowWillChange(window);
+		this.fireEvent('windowwillchange', window);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__windowDidChange: function(window) {
+		this.windowDidChange(window);
+		this.fireEvent('windowdidchange', window);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__willChangeReadyState: function(ready) {
+		this.willChangeReadyState(ready);
+		this.fireEvent('willchangereadystate', ready)
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__didChangeReadyState: function(ready) {
+		this.didChangeReadyState(ready)
+		this.fireEvent('didchangereadystate', ready);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__didBecomeReady: function() {
+		this.didBecomeReady();
+		this.fireEvent('didbecomeready')
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__didUpdateLayout: function() {
+		if (this.__updateLayout) {
+			this.__updateLayout = false;
+			this.didUpdateLayout();
+			this.fireEvent('didupdatelayout')
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.1
+	 */
+	__willShow: function() {
+
+		var visible = this.__parent
+		            ? this.__parent.isVisible()
+		            : this instanceof moobile.Window;
+
+		if (visible) {
+
+			this.willShow();
+
+			var self = this;
+			this.cascade(function() {
+				if (this === self) return;
+				if (this.__display === true &&
+					this.__visible === false) {
+					this.willShow();
+				}
+			});
+		}
+
+		this.removeClass('hidden');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.1
+	 */
+	__didShow: function() {
+
+		var visible = this.__parent
+		            ? this.__parent.isVisible()
+		            : this instanceof moobile.Window;
+
+		this.__display = true;
+		this.__visible = visible;
+
+		if (visible) {
+
+			this.didShow();
+
+			var self = this
+			this.cascade(function() {
+				if (this === self) return;
+				if (this.__display === true &&
+					this.__visible === false) {
+					this.__visible = true;
+					this.__updateLayout = true;
+					this.didShow();
+				}
+			});
+
+			this.updateLayout();
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.1
+	 */
+	__willHide: function() {
+
+		var visible = this.__parent
+		            ? this.__parent.isVisible()
+		            : this instanceof moobile.Window;
+
+		if (visible) {
+
+			this.willHide();
+
+			var self = this;
+			this.cascade(function() {
+				if (this === self) return;
+				if (this.__visible === true &&
+					this.__display === true) {
+					this.willHide();
+				}
+			});
+		}
+
+		this.addClass('hidden');
+		this.__display = false;
+		this.__visible = false;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	__didHide: function() {
+
+		var visible = this.__parent
+		            ? this.__parent.isVisible()
+		            : this instanceof moobile.Window;
+
+		if (visible) {
+
+			this.didHide();
+
+			var self = this;
+			this.cascade(function() {
+				if (this === self) return;
+				if (this.__display === true &&
+					this.__visible === true) {
+					this.__visible = false;
+					this.didHide();
+				}
+			});
+
+			this.fireEvent('hide');
+		}
+	},
+
+	/* Deprecated */
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	getChildComponentOfType: function(type, name) {
+		return this.getChildComponentByType(type, name);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	getChildComponentOfTypeAt: function(type, index) {
+		return this.getChildComponentByTypeAt(type, index);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	getChildComponentsOfType: function(type) {
+		return this.getChildComponentsByType(type);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasChildComponentOfType: function(type) {
+		return this.hasChildComponentByType(type);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Tin LE GALL (imbibinebe@gmail.com)
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.1
+	 */
+	getDescendantComponent: function(name) {
+		return this.getComponent(name);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getComponentOfType: function(type, name) {
+		return this.getComponentByType(type, name);
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hasComponentOfType: function(type, name) {
+		return this.hasComponentByType(type, name);
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineRole
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+Component.defineRole = function(name, context, options, handler) {
+	context = (context || Component).prototype;
+	if (context.__roles__ === undefined) {
+	 	context.__roles__ = {};
+	}
+	if (options) {
+		switch (typeof options) {
+			case 'function':
+				handler = options;
+				options = {};
+				break;
+			case 'object':
+				if (typeof options.behavior === 'function') handler = options.behavior;
+				break;
+		}
+	}
+	context.__roles__[name] = {
+		handler: handler || function() {},
+		options: options || {}
+	};
+};
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineAttribute
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Component.defineAttribute = function(name, context, handler) {
+	context = (context || Component).prototype;
+	if (context.__attributes__ === undefined) {
+		context.__attributes__ = {};
+	}
+	context.__attributes__[name] = handler;
+};
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#defineStyle
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+Component.defineStyle = function(name, target, handler) {
+	var context = (target || Component).prototype;
+	if (context.__styles__ === undefined) {
+		context.__styles__ = {};
+	}
+	context.__styles__[name] = Object.append({
+		name: name,
+		attach: function() {},
+		detach: function() {}
+	}, handler);
+};
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#getRole
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+Component.getStyle = function(name, target) {
+	return target.__styles__
+		 ? target.__styles__[name]
+		 : null;
+};
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Component/Component#create
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+Component.create = function(klass, element, descriptor, options, name) {
+
+	element = Element.from(element);
+
+	if (descriptor) {
+		var subclass = element.get(descriptor);
+		if (subclass) {
+			var instance = Class.instantiate(subclass, element, options, name);
+			if (instance instanceof klass) {
+				return instance;
+			}
+		}
+	}
+
+	return new klass(element, options, name);
+};
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Component.defineAttribute('data-style', null, function(value) {
+	this.options.styleName = value;
+});
+
+// rethink/refactor
+var setComponentIndex = function(component) {
+
+	var index = 0;
+
+	var node = document.id(component);
+
+	do {
+
+		var prev = node.previousSibling;
+		if (prev === null) {
+			node = node.parentNode;
+			if (node === this.element) break;
+			continue;
+		}
+
+		node = prev;
+
+		if (node.nodeType !== 1)
+			continue;
+
+		var previous = node.retrieve('moobile:component');
+		if (previous) {
+			index = this.getChildComponentIndex(previous) + 1;
+			break;
+		}
+
+		var children = node.childNodes;
+		if (children.length) {
+			var found = getComponentIndex.call(this, node);
+			if (found !== null) {
+				index = found;
+				break;
+			}
+		}
+
+	} while (node)
+
+	this.__children.splice(index, 0, component);
+
+	return this;
+};
+
+// rethink/refactor
+var getComponentIndex = function(root) {
+
+	var node = root.lastChild;
+
+	do {
+
+		if (node.nodeType !== 1) {
+			node = node.previousSibling;
+			if (node === null) return 0;
+			continue;
+		}
+
+		var component = node.retrieve('moobile:component');
+		if (component) {
+			return this.getChildComponentIndex(component) + 1;
+		}
+
+		var children = node.childNodes;
+		if (children.length) {
+			var found = getComponentIndex.call(this, node);
+			if (found >= 0) {
+				return found;
+			}
+		}
+
+		node = node.previousSibling;
+
+	} while (node);
+
+	return null;
+};
+
+var triggerLayoutUpdate = function() {
+	if (updateLayoutRoot) {
+		updateLayoutRoot.cascade(function() {
+			this.__didUpdateLayout();
+		})
+		updateLayoutRoot = null;
+		updateLayoutTime = null;
+	}
+}
+
 
 },{}],9:[function(require,module,exports){
-"use strict";var Overlay=moobile.Overlay=new Class({Extends:moobile.Component,willBuild:function(){this.parent(),this.addClass("overlay")},didBuild:function(){this.parent(),this.hide()},showAnimated:function(){return this.show("show-animated"),this},hideAnimated:function(){return this.hide("hide-animated"),this},__onAnimationEnd:function(i){i.stop(),this.hasClass("show-animated")&&this.removeClass("show-animated"),this.hasClass("hide-animated")&&(this.removeClass("hide-animated"),this.hide())}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Util/Overlay
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+var Overlay = moobile.Overlay = new Class({
+
+	Extends: moobile.Component,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('overlay');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+		this.parent();
+		this.hide();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#showAnimated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	showAnimated: function() {
+		this.show('show-animated');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#hideAnimated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hideAnimated: function() {
+		this.hide('hide-animated');
+		return this;
+	},
+
+	/* Private API */
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Util/Overlay#__onAnimationEnd
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onAnimationEnd: function(e) {
+
+		e.stop();
+
+		if (this.hasClass('show-animated')) {
+			this.removeClass('show-animated');
+		}
+
+		if (this.hasClass('hide-animated')) {
+			this.removeClass('hide-animated');
+			this.hide();
+		}
+	}
+
+});
 
 },{}],10:[function(require,module,exports){
-"use strict";var ActivityIndicator=moobile.ActivityIndicator=new Class({Extends:moobile.Control,willBuild:function(){this.parent(),this.addClass("activity-indicator")},start:function(){return this.addClass("active")},stop:function(){return this.removeClass("active")}});moobile.Component.defineRole("activity-indicator",null,null,function(t){this.addChildComponent(moobile.Component.create(ActivityIndicator,t,"data-activity-indicator"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/ActivityIndicator
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var ActivityIndicator = moobile.ActivityIndicator = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('activity-indicator');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ActivityIndicator#start
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	start: function() {
+		return this.addClass('active');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ActivityIndicator#stop
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	stop: function() {
+		return this.removeClass('active');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('activity-indicator', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(ActivityIndicator, element, 'data-activity-indicator'));
+});
 
 },{}],11:[function(require,module,exports){
-"use strict";var Bar=moobile.Bar=new Class({Extends:moobile.Control,willBuild:function(){this.parent(),this.addClass("bar")}});moobile.Component.defineRole("bar",null,null,function(e){this.addChildComponent(moobile.Component.create(Bar,e,"data-bar"))}),moobile.Component.defineStyle("dark",Bar,{attach:function(e){e.addClass("style-dark")},detach:function(e){e.removeClass("style-dark")}}),moobile.Component.defineStyle("light",Bar,{attach:function(e){e.addClass("style-light")},detach:function(e){e.removeClass("style-light")}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Bar
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Bar = moobile.Bar = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('bar');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('bar', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(Bar, element, 'data-bar'));
+});
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('dark', Bar, {
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+moobile.Component.defineStyle('light', Bar, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
+});
 
 },{}],12:[function(require,module,exports){
-"use strict";var ButtonGroup=moobile.ButtonGroup=new Class({Extends:moobile.Control,__selectedButton:null,__selectedButtonIndex:-1,options:{layout:"horizontal",buttons:null,selectable:!0,selectedButtonIndex:-1},willBuild:function(){this.parent(),this.addClass("button-group");var t=this.options.layout;t&&this.addClass("button-group-layout-"+t)},didBuild:function(){this.parent(),this.setSelectable(this.options.selectable),this.setSelectedButtonIndex(this.options.selectedButtonIndex);var t=this.options.buttons;t&&this.addButtons(t)},destroy:function(){this.__selectedButton=null,this.__selectedButtonIndex=-1,this.parent()},setSelectedButton:function(t){return this.__selectable===!1?this:this.__selectedButton===t?this:(this.__selectedButton&&(this.__selectedButton.setSelected(!1),this.fireEvent("deselect",this.__selectedButton),this.__selectedButton=null),this.__selectedButtonIndex=t?this.getChildComponentIndex(t):-1,t&&(this.__selectedButton=t,this.__selectedButton.setSelected(!0),this.fireEvent("select",this.__selectedButton)),this)},getSelectedButton:function(){return this.__selectedButton},setSelectedButtonIndex:function(t){var e=null;return t>=0&&(e=this.getChildComponentByTypeAt(moobile.Button,t)),this.setSelectedButton(e)},getSelectedButtonIndex:function(){return this.__selectedButtonIndex},clearSelectedButton:function(){return this.setSelectedButton(null),this},addButton:function(t,e){return this.addChildComponent(moobile.Button.from(t),e)},addButtonAfter:function(t,e){return this.addChildComponentAfter(moobile.Button.from(t),e)},addButtonBefore:function(t,e){return this.addChildComponentBefore(moobile.Button.from(t),e)},addButtons:function(t,e){return this.addChildComponents(t.map(function(t){return moobile.Button.from(t)}),e)},addButtonsAfter:function(t,e){return this.addChildComponentsAfter(t.map(function(t){return moobile.Button.from(t)}),e)},addButtonsBefore:function(t,e){return this.addChildComponentsBefore(t.map(function(t){return moobile.Button.from(t)}),e)},getButtons:function(){return this.getChildComponentsByType(moobile.Button)},getButton:function(t){return this.getChildComponentByType(moobile.Button,t)},getButtonAt:function(t){return this.getChildComponentByTypeAt(moobile.Button,t)},removeButton:function(t,e){return this.removeChildComponent(t,e)},removeAllButtons:function(t){return this.removeAllChildComponentsByType(moobile.Button,t)},setSelectable:function(t){return this.__selectable=t,this},isSelectable:function(){return this.__selectable},willRemoveChildComponent:function(t){this.parent(t),this.__selectedButton===t&&this.clearSelectedButton()},didAddChildComponent:function(t){this.parent(t),t instanceof moobile.Button&&t.addEvent("tap",this.bound("onButtonTap"))},didRemoveChildComponent:function(t){this.parent(t),t instanceof moobile.Button&&t.removeEvent("tap",this.bound("onButtonTap"))},didChangeState:function(t){this.parent(t),("disabled"===t||null==t)&&this.getChildComponents().invoke("setDisabled",t)},onButtonTap:function(t,e){this.setSelectedButton(e)}});moobile.Component.defineRole("button-group",null,function(t){this.addChildComponent(moobile.Component.create(ButtonGroup,t,"data-button-group"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var ButtonGroup = moobile.ButtonGroup = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__selectedButton: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__selectedButtonIndex: -1,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	options: {
+		layout: 'horizontal',
+		buttons: null,
+		selectable: true,
+		selectedButtonIndex: -1
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('button-group');
+
+		var layout = this.options.layout;
+		if (layout) {
+			this.addClass('button-group-layout-' + layout);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		this.setSelectable(this.options.selectable);
+		this.setSelectedButtonIndex(this.options.selectedButtonIndex);
+
+		var buttons = this.options.buttons;
+		if (buttons) this.addButtons(buttons);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.__selectedButton = null;
+		this.__selectedButtonIndex = -1;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#setSelectedButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	setSelectedButton: function(selectedButton) {
+
+		if (this.__selectable === false)
+			return this;
+
+		if (this.__selectedButton === selectedButton)
+			return this;
+
+		if (this.__selectedButton) {
+			this.__selectedButton.setSelected(false);
+			this.fireEvent('deselect', this.__selectedButton);
+			this.__selectedButton = null;
+		}
+
+		this.__selectedButtonIndex = selectedButton ? this.getChildComponentIndex(selectedButton) : -1;
+
+		if (selectedButton) {
+			this.__selectedButton = selectedButton;
+			this.__selectedButton.setSelected(true);
+			this.fireEvent('select', this.__selectedButton);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#getSelectedButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSelectedButton: function() {
+		return this.__selectedButton;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#setSelectedButtonIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSelectedButtonIndex: function(index) {
+
+		var child = null;
+		if (index >= 0) {
+			child = this.getChildComponentByTypeAt(moobile.Button, index);
+		}
+
+		return this.setSelectedButton(child);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#getSelectedButtonIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSelectedButtonIndex: function() {
+		return this.__selectedButtonIndex;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#clearSelectedButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	clearSelectedButton: function() {
+		this.setSelectedButton(null);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#addButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButton: function(button, where) {
+		return this.addChildComponent(moobile.Button.from(button), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#addButtonAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonAfter: function(button, after) {
+		return this.addChildComponentAfter(moobile.Button.from(button), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#addButtonBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonBefore: function(button, before) {
+		return this.addChildComponentBefore(moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#addButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtons: function(buttons, where) {
+		return this.addChildComponents(buttons.map(function(button) {
+			return moobile.Button.from(button);
+		}), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#addButtonsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsAfter: function(buttons, after) {
+		return this.addChildComponentsAfter(buttons.map(function(button) {
+			return moobile.Button.from(button);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#addButtonsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsBefore: function(buttons, before) {
+		return this.addChildComponentsBefore(buttons.map(function(button) {
+			return moobile.Button.from(button);
+		}), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#getButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getButtons: function() {
+		return this.getChildComponentsByType(moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentByType(moobile.Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#getButtonAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentByTypeAt(moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponentsByType(moobile.Button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#setSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setSelectable: function(selectable) {
+		this.__selectable = selectable;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ButtonGroup#isSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isSelectable: function() {
+		return this.__selectable;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this.__selectedButton === component) {
+			this.clearSelectedButton();
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildComponent: function(child) {
+		this.parent(child);
+		if (child instanceof moobile.Button) {
+			child.addEvent('tap', this.bound('onButtonTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildComponent: function(child) {
+		this.parent(child);
+		if (child instanceof moobile.Button) {
+			child.removeEvent('tap', this.bound('onButtonTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' || state == null) {
+			this.getChildComponents().invoke('setDisabled', state);
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	onButtonTap: function(e, sender) {
+		this.setSelectedButton(sender);
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('button-group', null, function(element) {
+	this.addChildComponent(moobile.Component.create(ButtonGroup, element, 'data-button-group'));
+});
+
 
 },{}],13:[function(require,module,exports){
-"use strict";var Button=moobile.Button=new Class({Extends:moobile.Control,__label:null,hitAreaElement:null,options:{label:null},willBuild:function(){this.parent(),this.addClass("button");var t=this.getRoleElement("label");null===t&&(t=document.createElement("div"),t.ingest(this.element),t.inject(this.element),t.setRole("label")),this.addEvent("tapcancel",this.bound("__onTapCancel")),this.addEvent("tapstart",this.bound("__onTapStart")),this.addEvent("tapend",this.bound("__onTapEnd"))},didBuild:function(){this.parent(),this.hitAreaElement=new Element("div.hit-area"),this.hitAreaElement.inject(this.element);var t=this.options.label;t&&this.setLabel(t)},destroy:function(){this.removeEvent("tapcancel",this.bound("__onTapCancel")),this.removeEvent("tapstart",this.bound("__onTapStart")),this.removeEvent("tapend",this.bound("__onTapEnd")),this.label=null,this.parent()},setLabel:function(t){return this.__label===t?this:(t=moobile.Text.from(t),this.__label?this.__label.replaceWithComponent(t,!0):this.addChildComponent(t),this.__label=t,this.__label.addClass("button-label"),this.toggleClass("button-label-empty",this.__label.isEmpty()),this)},getLabel:function(){return this.__label},__onTapCancel:function(t){this.isSelected()&&this.setHighlighted(!1)},__onTapStart:function(t){this.isSelected()||this.setHighlighted(!0)},__onTapEnd:function(t){this.isSelected()||this.setHighlighted(!1)}});Button.from=function(t){if(t instanceof Button)return t;var e=new Button;return e.setLabel(t),e},moobile.Component.defineRole("button",null,null,function(t){this.addChildComponent(moobile.Component.create(Button,t,"data-button"))}),moobile.Component.defineRole("label",Button,null,function(t){this.setLabel(moobile.Component.create(moobile.Text,t,"data-label"))}),moobile.Component.defineStyle("active",Button,{attach:function(t){t.addClass("style-active")},detach:function(t){t.removeClass("style-active")}}),moobile.Component.defineStyle("warning",Button,{attach:function(t){t.addClass("style-warning")},detach:function(t){t.removeClass("style-warning")}}),moobile.Component.defineStyle("back",Button,{attach:function(t){t.addClass("style-back")},detach:function(t){t.removeClass("style-back")}}),moobile.Component.defineStyle("forward",Button,{attach:function(t){t.addClass("style-forward")},detach:function(t){t.removeClass("style-forward")}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Button
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var Button = moobile.Button = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__label: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Button#hitAreaElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	hitAreaElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Button#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		label: null
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('button');
+
+		var label = this.getRoleElement('label');
+		if (label === null) {
+			label = document.createElement('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+
+		this.addEvent('tapcancel', this.bound('__onTapCancel'));
+		this.addEvent('tapstart', this.bound('__onTapStart'));
+		this.addEvent('tapend', this.bound('__onTapEnd'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		this.hitAreaElement = new Element('div.hit-area');
+		this.hitAreaElement.inject(this.element);
+
+		var label = this.options.label;
+		if (label) this.setLabel(label);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.removeEvent('tapcancel', this.bound('__onTapCancel'));
+		this.removeEvent('tapstart', this.bound('__onTapStart'));
+		this.removeEvent('tapend', this.bound('__onTapEnd'));
+		this.label = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Button#setLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setLabel: function(label) {
+
+		if (this.__label === label)
+			return this;
+
+		label = moobile.Text.from(label);
+
+		if (this.__label) {
+			this.__label.replaceWithComponent(label, true);
+		} else {
+			this.addChildComponent(label);
+		}
+
+		this.__label = label;
+		this.__label.addClass('button-label');
+		this.toggleClass('button-label-empty', this.__label.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Button#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getLabel: function() {
+		return this.__label;
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onTapCancel: function(e) {
+		if (this.isSelected()) this.setHighlighted(false);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onTapStart: function(e) {
+		if (!this.isSelected()) this.setHighlighted(true);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onTapEnd: function(e) {
+		if (!this.isSelected()) this.setHighlighted(false);
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Button#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Button.from = function(source) {
+	if (source instanceof Button) return source;
+	var button = new Button();
+	button.setLabel(source);
+	return button;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('button', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(Button, element, 'data-button'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('label', Button, null, function(element) {
+	this.setLabel(moobile.Component.create(moobile.Text, element, 'data-label'));
+});
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+/**
+ * Active Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('active', Button, {
+	attach: function(element) { element.addClass('style-active'); },
+	detach: function(element) { element.removeClass('style-active'); }
+});
+
+/**
+ * Warning Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('warning', Button, {
+	attach: function(element) { element.addClass('style-warning'); },
+	detach: function(element) { element.removeClass('style-warning'); }
+});
+
+/**
+ * Back Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('back', Button, {
+	attach: function(element) { element.addClass('style-back'); },
+	detach: function(element) { element.removeClass('style-back'); }
+});
+
+/**
+ * Forward Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('forward', Button, {
+	attach: function(element) { element.addClass('style-forward'); },
+	detach: function(element) { element.removeClass('style-forward'); }
+});
 
 },{}],14:[function(require,module,exports){
-"use strict";var Control=moobile.Control=new Class({Extends:moobile.Component,__state:null,options:{className:null,styleName:null},setDisabled:function(t){return this.__setState(t!==!1?"disabled":null)},isDisabled:function(){return"disabled"==this._getState()},setSelected:function(t){return this.__setState(t!==!1?"selected":null)},isSelected:function(){return"selected"==this._getState()},setHighlighted:function(t){return this.__setState(t!==!1?"highlighted":null)},isHighlighted:function(){return"highlighted"==this._getState()},willChangeState:function(t){},didChangeState:function(t){},shouldAllowState:function(t){return["highlighted","selected","disabled"].contains(t)},shouldFireEvent:function(t,e){return!this.isDisabled()},__setState:function(t,e){return this.__state===t?this:((this.shouldAllowState(t)||null==t)&&(this.willChangeState(t),this.__state&&this.removeClass("is-"+this.__state),this.__state=t,this.__state&&this.addClass("is-"+this.__state),this.didChangeState(t)),this)},_getState:function(){return this.__state}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Control
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var Control = moobile.Control = new Class({
+
+	Extends: moobile.Component,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__state: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	options: {
+		className: null,
+		styleName: null
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#setDisabled
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setDisabled: function(disabled) {
+		return this.__setState(disabled !== false ? 'disabled' : null);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#isDisabled
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isDisabled: function() {
+		return this._getState() == 'disabled';
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#setSelected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSelected: function(selected) {
+		return this.__setState(selected !== false ? 'selected' : null);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#isSelected
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isSelected: function() {
+		return this._getState() == 'selected';
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#setHighlighted
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setHighlighted: function(highlighted) {
+		return this.__setState(highlighted !== false ? 'highlighted' : null);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#isHighlighted
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isHighlighted: function() {
+		return this._getState() == 'highlighted';
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#willChangeState
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willChangeState: function(state) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#didChangeState
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didChangeState: function(state) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Control#shouldAllowState
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	shouldAllowState: function(state) {
+		return ['highlighted', 'selected', 'disabled'].contains(state);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	shouldFireEvent: function(type, args) {
+		return !this.isDisabled();
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__setState: function(state, value) {
+
+		if (this.__state === state)
+			return this;
+
+		if (this.shouldAllowState(state) || state == null) {
+			this.willChangeState(state)
+			if (this.__state) this.removeClass('is-' + this.__state);
+			this.__state = state;
+			if (this.__state) this.addClass('is-' + this.__state);
+			this.didChangeState(state)
+		}
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_getState: function() {
+		return this.__state;
+	}
+
+});
 
 },{}],15:[function(require,module,exports){
-"use strict";var Image=moobile.Image=new Class({Extends:moobile.Control,__image:null,__source:null,__loaded:!1,__originalSize:{x:0,y:0},options:{tagName:"img",preload:!1,source:null},willBuild:function(){this.parent(),this.hide(),this.addClass("image")},didBuild:function(){this.parent();var i=this.options.source||this.element.get("src");i&&this.setSource(i)},destroy:function(){this.__image&&(this.__image.removeEvent("load",this.bound("__onLoad")),this.__image.src="data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",this.__image=null),this.element.set("src","data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="),this.parent()},setSource:function(i,e){return e&&window.matchMedia&&window.matchMedia(e).matches===!1?this:(this.__source=i||"",this.__image&&(this.__image.removeEvent("load",this.bound("__onLoad")),this.__image=null),i?this.options.preload?(this.__loaded=!1,this.__image=new Image,this.__image.src=i,this.__image.addEvent("load",this.bound("__onLoad"))):this.__load():this.__unload(),this)},getSource:function(){return this.__source},getImage:function(){return this.__image},getOriginalSize:function(){return this.__originalSize},isLoaded:function(){return this.__loaded},isEmpty:function(){return!this.getSource()},show:function(){return this.isEmpty()?this:this.parent()},__load:function(){this.__loaded=!0,this.options.preload&&(this.__originalSize.x=this.__image.width,this.__originalSize.y=this.__image.height),this.element.set("src",this.__source),this.show()},__unload:function(){this.__loaded=!1,this.options.preload&&(this.__originalSize.x=0,this.__originalSize.y=0),this.element.erase("src"),this.fireEvent("unload"),this.hide()},__onLoad:function(){this.fireEvent("preload"),this.__load()}});Image.from=function(i){if(i instanceof Image)return i;var e=new Image;return e.setSource(i),e},moobile.Component.defineRole("image",null,null,function(i){this.addChildComponent(moobile.Component.create(Image,i,"data-image"))});
+"use strict"
 
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Image
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Image = moobile.Image = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__image: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__source: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__loaded: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__originalSize: {
+		x: 0,
+		y: 0
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	options: {
+		tagName: 'img',
+		preload: false,
+		source: null
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.hide();
+		this.addClass('image');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+		this.parent();
+		var source = this.options.source || this.element.get('src');
+		if (source) this.setSource(source);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+
+		if (this.__image) {
+			this.__image.removeEvent('load', this.bound('__onLoad'));
+			this.__image.src = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+			this.__image = null;
+		}
+
+		this.element.set('src', 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#setSource
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSource: function(source, media) {
+
+		if (media &&
+			window.matchMedia &&
+			window.matchMedia(media).matches === false)
+			return this;
+
+		this.__source = source || '';
+
+		if (this.__image) {
+			this.__image.removeEvent('load', this.bound('__onLoad'));
+			this.__image = null;
+		}
+
+		if (source) {
+			if (this.options.preload) {
+				this.__loaded = false;
+				this.__image = new Image();
+				this.__image.src = source;
+				this.__image.addEvent('load', this.bound('__onLoad'));
+			} else {
+				this.__load();
+			}
+		} else {
+			this.__unload();
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#getSource
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSource: function() {
+		return this.__source;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#getImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getImage: function() {
+		return this.__image;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#getOriginalSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getOriginalSize: function() {
+		return this.__originalSize;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#isLoaded
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isLoaded: function() {
+		return this.__loaded;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#isEmpty
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isEmpty: function() {
+		return !this.getSource();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	show: function() {
+		return this.isEmpty() ? this : this.parent();
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__load: function() {
+
+		this.__loaded = true;
+
+		if (this.options.preload) {
+			this.__originalSize.x = this.__image.width;
+			this.__originalSize.y = this.__image.height;
+		}
+
+		this.element.set('src', this.__source);
+		this.show();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__unload: function() {
+
+		this.__loaded = false;
+
+		if (this.options.preload) {
+			this.__originalSize.x = 0;
+			this.__originalSize.y = 0;
+		}
+
+		this.element.erase('src');
+		this.fireEvent('unload');
+		this.hide();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onLoad: function() {
+		this.fireEvent('preload');
+		this.__load();
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Image#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Image.from = function(source) {
+	if (source instanceof Image) return source;
+	var image = new Image();
+	image.setSource(source);
+	return image;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('image', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(Image, element, 'data-image'));
+});
 },{}],16:[function(require,module,exports){
-"use strict";var ListItem=moobile.ListItem=new Class({Extends:moobile.Control,__image:null,__label:null,__detail:null,options:{tagName:"li",image:null,label:null,detail:null},willBuild:function(){this.parent(),this.addClass("list-item");var e=this.getRoleElement("image"),t=this.getRoleElement("label"),i=this.getRoleElement("detail");null===t&&(t=document.createElement("div"),t.ingest(this.element),t.inject(this.element),t.setRole("label")),null===e&&(e=document.createElement("img"),e.inject(this.element,"top"),e.setRole("image")),null===i&&(i=document.createElement("div"),i.inject(this.element),i.setRole("detail"))},didBuild:function(){this.parent();var e=this.options.image,t=this.options.label,i=this.options.detail;e&&this.setImage(e),t&&this.setLabel(t),i&&this.setDetail(i)},destroy:function(){this.__label=null,this.__image=null,this.__detail=null,this.parent()},setLabel:function(e){return this.__label===e?this:(e=moobile.Text.from(e),this.__label?this.__label.replaceWithComponent(e,!0):this.addChildComponent(e),this.__label=e,this.__label.addClass("list-item-label"),this.toggleClass("list-item-label-empty",this.__label.isEmpty()),this)},getLabel:function(){return this.__label},setImage:function(e){return this.__image===e?this:(e=moobile.Image.from(e),this.__image?this.__image.replaceWithComponent(e,!0):this.addChildComponent(e),this.__image=e,this.__image.addClass("list-item-image"),this.toggleClass("list-item-image-empty",this.__image.isEmpty()),this)},getImage:function(){return this.__image},setDetail:function(e){return this.__detail===e?this:(e=moobile.Text.from(e),this.__detail?this.__detail.replaceWithComponent(e,!0):this.addChildComponent(e),this.__detail=e,this.__detail.addClass("list-item-detail"),this.toggleClass("list-item-detail-empty",this.__detail.isEmpty()),this)},getDetail:function(){return this.__detail},shouldAllowState:function(e){return!this.hasStyle("header")||"highlighted"!==e&&"selected"!==e&&"disabled"!==e?this.parent(e):!1}});moobile.ListItem.from=function(e){if(e instanceof moobile.ListItem)return e;var t=new moobile.ListItem;return t.setLabel(e),t},moobile.Component.defineRole("item",moobile.List,null,function(e){this.addItem(moobile.Component.create(moobile.ListItem,e,"data-item"))}),moobile.Component.defineRole("header",moobile.List,null,function(e){this.addItem(moobile.Component.create(moobile.ListItem,e,"data-item").setStyle("header"))}),moobile.Component.defineRole("image",moobile.ListItem,null,function(e){this.setImage(moobile.Component.create(moobile.Image,e,"data-image"))}),moobile.Component.defineRole("label",moobile.ListItem,null,function(e){this.setLabel(moobile.Component.create(moobile.Text,e,"data-label"))}),moobile.Component.defineRole("detail",moobile.ListItem,null,function(e){this.setDetail(moobile.Component.create(moobile.Text,e,"data-detail"))}),moobile.Component.defineRole("list-item",moobile.List,null,function(e){console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead'),this.addItem(moobile.Component.create(moobile.ListItem,e,"data-list-item"))}),moobile.Component.defineStyle("header",moobile.ListItem,{attach:function(e){e.addClass("style-header")},detach:function(e){e.removeClass("style-header")}}),moobile.Component.defineStyle("checked",moobile.ListItem,{attach:function(e){e.addClass("style-checked")},detach:function(e){e.removeClass("style-checked")}}),moobile.Component.defineStyle("disclosed",moobile.ListItem,{attach:function(e){e.addClass("style-disclosed")},detach:function(e){e.removeClass("style-disclosed")}}),moobile.Component.defineStyle("detailed",moobile.ListItem,{attach:function(e){e.addClass("style-detailed")},detach:function(e){e.removeClass("style-detailed")}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+var ListItem = moobile.ListItem = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__image: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__label: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__detail: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	options: {
+		tagName: 'li',
+		image: null,
+		label: null,
+		detail: null,
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('list-item');
+
+		var image  = this.getRoleElement('image');
+		var label  = this.getRoleElement('label');
+		var detail = this.getRoleElement('detail');
+
+		if (label === null) {
+			label = document.createElement('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+
+		if (image === null) {
+			image = document.createElement('img');
+			image.inject(this.element, 'top');
+			image.setRole('image');
+		}
+
+		if (detail === null) {
+			detail = document.createElement('div');
+			detail.inject(this.element);
+			detail.setRole('detail');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var image = this.options.image;
+		var label = this.options.label;
+		var detail = this.options.detail;
+
+		if (image) this.setImage(image);
+		if (label) this.setLabel(label);
+		if (detail) this.setDetail(detail);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.__label = null;
+		this.__image = null;
+		this.__detail = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#setLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	setLabel: function(label) {
+
+		if (this.__label === label)
+			return this;
+
+		label = moobile.Text.from(label);
+
+		if (this.__label) {
+			this.__label.replaceWithComponent(label, true);
+		} else {
+			this.addChildComponent(label);
+		}
+
+		this.__label = label;
+		this.__label.addClass('list-item-label');
+		this.toggleClass('list-item-label-empty', this.__label.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getLabel: function() {
+		return this.__label;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#setImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	setImage: function(image) {
+
+		if (this.__image === image)
+			return this;
+
+		image = moobile.Image.from(image);
+
+		if (this.__image) {
+			this.__image.replaceWithComponent(image, true);
+		} else {
+			this.addChildComponent(image);
+		}
+
+		this.__image = image;
+		this.__image.addClass('list-item-image');
+		this.toggleClass('list-item-image-empty', this.__image.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#getImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getImage: function() {
+		return this.__image;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#setDetail
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	setDetail: function(detail) {
+
+		if (this.__detail === detail)
+			return this;
+
+		detail = moobile.Text.from(detail);
+
+		if (this.__detail) {
+			this.__detail.replaceWithComponent(detail, true);
+		} else {
+			this.addChildComponent(detail);
+		}
+
+		this.__detail = detail;
+		this.__detail.addClass('list-item-detail');
+		this.toggleClass('list-item-detail-empty', this.__detail.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#getDetail
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getDetail: function() {
+		return this.__detail;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldAllowState: function(state) {
+
+		if (this.hasStyle('header') && (state === 'highlighted' || state === 'selected' || state === 'disabled')) {
+			return false;
+		}
+
+		return this.parent(state);
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/moobile.ListItem#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+moobile.ListItem.from = function(source) {
+	if (source instanceof moobile.ListItem) return source;
+	var item = new moobile.ListItem();
+	item.setLabel(source);
+	return item;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('item', moobile.List, null, function(element) {
+	this.addItem(moobile.Component.create(moobile.ListItem, element, 'data-item'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+moobile.Component.defineRole('header', moobile.List, null, function(element) {
+	this.addItem(moobile.Component.create(moobile.ListItem, element, 'data-item').setStyle('header'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('image', moobile.ListItem, null, function(element) {
+	this.setImage(moobile.Component.create(moobile.Image, element, 'data-image'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('label', moobile.ListItem, null, function(element) {
+	this.setLabel(moobile.Component.create(moobile.Text, element, 'data-label'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('detail', moobile.ListItem, null, function(element) {
+	this.setDetail(moobile.Component.create(moobile.Text, element, 'data-detail'));
+});
+
+// <0.1-compat>
+
+/**
+ * @deprecated
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('list-item', moobile.List, null, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "list-item" will be removed in 0.4, use the role "item" instead');
+	this.addItem(moobile.Component.create(moobile.ListItem, element, 'data-list-item'));
+});
+
+// </0.1-compat>
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+/**
+ * Header Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+moobile.Component.defineStyle('header', moobile.ListItem, {
+	attach: function(element) { element.addClass('style-header'); },
+	detach: function(element) { element.removeClass('style-header'); }
+});
+
+/**
+ * Checked Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('checked', moobile.ListItem, {
+	attach: function(element) { element.addClass('style-checked'); },
+	detach: function(element) { element.removeClass('style-checked'); }
+});
+
+/**
+ * Disclosed Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('disclosed', moobile.ListItem, {
+	attach: function(element) { element.addClass('style-disclosed'); },
+	detach: function(element) { element.removeClass('style-disclosed'); }
+});
+
+/**
+ * Detailed Style - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('detailed', moobile.ListItem, {
+	attach: function(element) { element.addClass('style-detailed'); },
+	detach: function(element) { element.removeClass('style-detailed'); }
+});
 
 },{}],17:[function(require,module,exports){
-"use strict";var List=moobile.List=new Class({Extends:moobile.Control,__selectable:!0,__selectedItem:null,__selectedItemIndex:-1,options:{tagName:"ul",selectable:!0,selectedItemIndex:-1,items:null},willBuild:function(){this.parent(),this.addClass("list")},didBuild:function(){this.parent(),this.setSelectable(this.options.selectable),this.setSelectedItemIndex(this.options.selectedItemIndex);var e=this.options.items;e&&this.addItems(e)},destroy:function(){this.__selectedItem=null,this.__selectedItemIndex=-1,this.parent()},setSelectedItem:function(e){return 0==this.__selectable?this:this.__selectedItem===e?this:(this.__selectedItem&&(this.__selectedItem.setSelected(!1),this.fireEvent("deselect",this.__selectedItem),this.__selectedItem=null),this.__selectedItemIndex=e?this.getChildComponentIndex(e):-1,e&&(this.__selectedItem=e,this.__selectedItem.setSelected(!0),this.fireEvent("select",this.__selectedItem)),this)},getSelectedItem:function(){return this.__selectedItem},setSelectedItemIndex:function(e){var t=null;return e>=0&&(t=this.getChildComponentByTypeAt(moobile.ListItem,e)),this.setSelectedItem(t)},getSelectedItemIndex:function(){return this.__selectedItemIndex},clearSelectedItem:function(){return this.setSelectedItem(null),this},addItem:function(e,t){return this.addChildComponent(moobile.ListItem.from(e),t)},addItemAfter:function(e,t){return this.addChildComponentAfter(moobile.ListItem.from(e),t)},addItemBefore:function(e,t){return this.addChildComponentBefore(moobile.ListItem.from(e),t)},addItems:function(e,t){return this.addChildComponents(e.map(function(e){return moobile.ListItem.from(e)}),t)},addItemsAfter:function(e,t){return this.addChildComponentsAfter(e.map(function(e){return moobile.ListItem.from(e)}),t)},addItemsBefore:function(e,t){return this.addChildComponentsBefore(e.map(function(e){return moobile.ListItem.from(e)}),t)},getItem:function(e){return this.getChildComponentByType(moobile.ListItem,e)},getItemAt:function(e){return this.getChildComponentByTypeAt(moobile.ListItem,e)},getItemIndex:function(e){return this.getChildComponentIndex(e)},getItems:function(){return this.getChildComponentsByType(moobile.ListItem)},removeItem:function(e){return this.removeChildComponent(e)},removeAllItems:function(){return this.removeAllChildComponentsByType(moobile.ListItem)},setSelectable:function(e){return this.__selectable=e,this},isSelectable:function(){return this.__selectable},didAddChildComponent:function(e){this.parent(e),e instanceof moobile.ListItem&&(e.addEvent("tapcancel",this.bound("__onItemTapCancel")),e.addEvent("tapstart",this.bound("__onItemTapStart")),e.addEvent("tapend",this.bound("__onItemTapEnd")),e.addEvent("tap",this.bound("__onItemTap")))},willRemoveChildComponent:function(e){this.parent(e),this.__selectedItem===e&&this.clearSelectedItem()},didRemoveChildComponent:function(e){this.parent(e),e instanceof moobile.ListItem&&(e.removeEvent("tapcancel",this.bound("__onItemTapCancel")),e.removeEvent("tapstart",this.bound("__onItemTapStart")),e.removeEvent("tapend",this.bound("__onItemTapEnd")),e.removeEvent("tap",this.bound("__onItemTap")))},didChangeState:function(e){this.parent(e),("disabled"===e||null==e)&&this.getChildComponents().invoke("setDisabled",e)},didUpdateLayout:function(){this.parent();for(var e=this.getChildComponents(),t=0;t<e.length;t++){var n=e[t-1],i=e[t+1],s=e[t];if(s.hasStyle("header"))i&&i.addClass("list-section-header"),n&&n.addClass("list-section-footer");else{if(i&&i.hasStyle("header")||n&&n.hasStyle("header"))continue;s.removeClass("list-section-header"),s.removeClass("list-section-footer")}}},__onItemTapCancel:function(e,t){t.setHighlighted(!1)},__onItemTapStart:function(e,t){this.__selectable&&!t.isSelected()&&t.setHighlighted(!0)},__onItemTapEnd:function(e,t){this.__selectable&&!t.isSelected()&&t.setHighlighted(!1)},__onItemTap:function(e,t){this.__selectable&&this.setSelectedItem(t)}});moobile.Component.defineRole("list",null,function(e){this.addChildComponent(moobile.Component.create(List,e,"data-list"))}),moobile.Component.defineStyle("grouped",List,{attach:function(e){e.addClass("style-grouped")},detach:function(e){e.removeClass("style-grouped")}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/List
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var List = moobile.List = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__selectable: true,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__selectedItem: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__selectedItemIndex: -1,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	options: {
+		tagName: 'ul',
+		selectable: true,
+		selectedItemIndex: -1,
+		items: null,
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('list');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		this.setSelectable(this.options.selectable);
+		this.setSelectedItemIndex(this.options.selectedItemIndex);
+
+		var items = this.options.items;
+		if (items) this.addItems(items);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.__selectedItem = null;
+		this.__selectedItemIndex = -1;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#setSelectedItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSelectedItem: function(selectedItem) {
+
+		if (this.__selectable == false)
+			return this;
+
+		if (this.__selectedItem === selectedItem)
+			return this;
+
+		if (this.__selectedItem) {
+			this.__selectedItem.setSelected(false);
+			this.fireEvent('deselect', this.__selectedItem);
+			this.__selectedItem = null;
+		}
+
+		this.__selectedItemIndex = selectedItem ? this.getChildComponentIndex(selectedItem) : -1;
+
+		if (selectedItem) {
+			this.__selectedItem = selectedItem;
+			this.__selectedItem.setSelected(true);
+			this.fireEvent('select', this.__selectedItem);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#getSelectedItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSelectedItem: function() {
+		return this.__selectedItem;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#setSelectedItemIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSelectedItemIndex: function(index) {
+
+		var child = null;
+		if (index >= 0) {
+			child = this.getChildComponentByTypeAt(moobile.ListItem, index);
+		}
+
+		return this.setSelectedItem(child);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#getSelectedItemIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getSelectedItemIndex: function() {
+		return this.__selectedItemIndex
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#clearSelectedItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	clearSelectedItem: function() {
+		this.setSelectedItem(null);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#addItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addItem: function(item, where) {
+		return this.addChildComponent(moobile.ListItem.from(item), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#addItemAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addItemAfter: function(item, after) {
+		return this.addChildComponentAfter(moobile.ListItem.from(item), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#addItemBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addItemBefore: function(item, before) {
+		return this.addChildComponentBefore(moobile.ListItem.from(item), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#addItems
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItems: function(items, where) {
+		return this.addChildComponents(items.map(function(item) {
+			return moobile.ListItem.from(item);
+		}), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#addItemsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItemsAfter: function(items, after) {
+		return this.addChildComponentsAfter(items.map(function(item) {
+			return moobile.ListItem.from(item);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#addItemsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addItemsBefore: function(items, before) {
+		return this.addChildComponentsBefore(items.map(function(item) {
+			return moobile.ListItem.from(item);
+		}), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#getItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getItem: function(name) {
+		return this.getChildComponentByType(moobile.ListItem, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#getItemAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getItemAt: function(index) {
+		return this.getChildComponentByTypeAt(moobile.ListItem, index)
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#getItemIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getItemIndex: function(item) {
+		return this.getChildComponentIndex(item);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#getItems
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getItems: function() {
+		return this.getChildComponentsByType(moobile.ListItem);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#removeItem
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeItem: function(item) {
+		return this.removeChildComponent(item);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/List#removeAllItems
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeAllItems: function() {
+		return this.removeAllChildComponentsByType(moobile.ListItem);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ListItem#setSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setSelectable: function(selectable) {
+		this.__selectable = selectable;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/ListItem#isSelectable
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isSelectable: function() {
+		return this.__selectable;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildComponent: function(component) {
+
+		this.parent(component);
+
+		if (component instanceof moobile.ListItem) {
+			component.addEvent('tapcancel', this.bound('__onItemTapCancel'));
+			component.addEvent('tapstart', this.bound('__onItemTapStart'));
+			component.addEvent('tapend', this.bound('__onItemTapEnd'));
+			component.addEvent('tap', this.bound('__onItemTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this.__selectedItem === component) {
+			this.clearSelectedItem();
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof moobile.ListItem) {
+			component.removeEvent('tapcancel', this.bound('__onItemTapCancel'));
+			component.removeEvent('tapstart', this.bound('__onItemTapStart'));
+			component.removeEvent('tapend', this.bound('__onItemTapEnd'));
+			component.removeEvent('tap', this.bound('__onItemTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' || state == null) {
+			this.getChildComponents().invoke('setDisabled', state);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
+
+		this.parent();
+
+		var components = this.getChildComponents();
+		for (var i = 0; i < components.length; i++) {
+			var prev = components[i - 1];
+			var next = components[i + 1];
+			var curr = components[i];
+			if (curr.hasStyle('header')) {
+				if (next) next.addClass('list-section-header');
+				if (prev) prev.addClass('list-section-footer');
+			} else {
+				if (next && next.hasStyle('header') ||
+					prev && prev.hasStyle('header')) {
+					continue;
+				}
+				curr.removeClass('list-section-header');
+				curr.removeClass('list-section-footer');
+			}
+		}
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onItemTapCancel: function(e, sender) {
+		// checker plus ici
+		sender.setHighlighted(false);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onItemTapStart: function(e, sender) {
+		if (this.__selectable && !sender.isSelected()) sender.setHighlighted(true);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onItemTapEnd: function(e, sender) {
+		if (this.__selectable && !sender.isSelected()) sender.setHighlighted(false);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onItemTap: function(e, sender) {
+		if (this.__selectable) this.setSelectedItem(sender);
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('list', null, function(element) {
+	this.addChildComponent(moobile.Component.create(List, element, 'data-list'));
+});
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+/**
+ * Grouped - iOS
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('grouped', List, {
+	attach: function(element) { element.addClass('style-grouped'); },
+	detach: function(element) { element.removeClass('style-grouped'); }
+});
 
 },{}],18:[function(require,module,exports){
-"use strict";var NavigationBar=moobile.NavigationBar=new Class({Extends:moobile.Bar,__title:null,contentElement:null,options:{title:null,titleCentered:!0},willBuild:function(){this.parent(),this.addClass("navigation-bar");var t=this.getRoleElement("item");if(t)return void console.log('[REMOVAL NOTICE] The role "item" has been removed in 0.3, use the role "content" instead and refer to the documentation.');var e=this.getRoleElement("content");null===e&&(e=document.createElement("div"),e.ingest(this.element),e.inject(this.element),e.setRole("content"));var n=e.firstChild,i=e.lastChild;if(n&&3===n.nodeType&&i&&3===i.nodeType){var o=this.getRoleElement("title");null===o&&(o=document.createElement("div"),o.ingest(e),o.inject(e),o.setRole("title"))}},didBuild:function(){this.parent();var t=this.options.title;t&&this.setTitle(t)},destroy:function(){this.__title=null,this.parent()},setTitle:function(t){return this.__title===t?this:(t=moobile.Text.from(t),this.__title?this.__title.replaceWithComponent(t,!0):this.addChildComponentInside(t,this.contentElement),this.__title=t,this.__title.addClass("navigation-bar-title"),this.toggleClass("navigation-bar-title-empty",this.__title.isEmpty()),this)},getTitle:function(){return this.__title},didUpdateLayout:function(){if(this.parent(),this.options.titleCentered===!1)return this;var t=this.element,e=this.contentElement;e.setStyle("padding-left",0),e.setStyle("padding-right",0);var n=t.offsetWidth,i=e.offsetWidth,o=e.offsetLeft,l=2*(n/2-(o+i/2)),a=e.firstChild,s=e.lastChild;if(a&&a.getPosition){var r=a.offsetLeft+l;0>r&&(l+=Math.abs(r))}if(s&&s.getPosition){var r=s.offsetLeft+s.offsetWidth+l;r>i&&(l-=Math.abs(i-r))}e.setStyle(0>l?"padding-right":"padding-left",Math.abs(l))},addLeftButton:function(t){return this.addChildComponent(t,"top")},addRightButton:function(t){return this.addChildComponent(t,"bottom")},getButton:function(t){return this.getChildComponentByType(Button,t)},getButtonAt:function(t){return this.getChildComponentByTypeAt(Button,t)},removeButton:function(t,e){return this.removeChildComponent(t,e)},removeAllButtons:function(t){return this.removeAllChildComponents(Button,t)}});moobile.Component.defineRole("navigation-bar",null,null,function(t){this.addChildComponent(moobile.Component.create(NavigationBar,t,"data-navigation-bar"))}),moobile.Component.defineRole("content",NavigationBar,{traversable:!0},function(t){this.contentElement=t,this.contentElement.addClass("navigation-bar-content")}),moobile.Component.defineRole("title",NavigationBar,null,function(t){this.setTitle(moobile.Component.create(moobile.Text,t,"data-title"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var NavigationBar = moobile.NavigationBar = new Class({
+
+	Extends: moobile.Bar,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__title: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#contentElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	contentElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		title: null,
+		titleCentered: true // moobile.Theme.getName() === 'ios'
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('navigation-bar');
+
+		// <deprecated>
+		var item = this.getRoleElement('item');
+		if (item) {
+			console.log('[REMOVAL NOTICE] The role "item" has been removed in 0.3, use the role "content" instead and refer to the documentation.');
+			return;
+		}
+		// </deprecated>
+
+		var content = this.getRoleElement('content');
+		if (content === null) {
+			content = document.createElement('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			content.setRole('content');
+		}
+
+		// creates a title element if the content is text only
+		var fc = content.firstChild;
+		var lc = content.lastChild;
+		if (fc && fc.nodeType === 3 &&
+			lc && lc.nodeType === 3) {
+			var title = this.getRoleElement('title');
+			if (title === null) {
+				title = document.createElement('div');
+				title.ingest(content);
+				title.inject(content);
+				title.setRole('title');
+			}
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var title = this.options.title;
+		if (title) {
+			this.setTitle(title);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	destroy: function() {
+		this.__title = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#setTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setTitle: function(title) {
+
+		if (this.__title === title)
+			return this;
+
+		title = moobile.Text.from(title);
+
+		if (this.__title) {
+			this.__title.replaceWithComponent(title, true);
+		} else {
+			this.addChildComponentInside(title, this.contentElement);
+		}
+
+		this.__title = title;
+		this.__title.addClass('navigation-bar-title');
+		this.toggleClass('navigation-bar-title-empty', this.__title.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#getTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTitle: function() {
+		return this.__title;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
+
+		this.parent();
+
+		if (this.options.titleCentered === false)
+			return this;
+
+		var element = this.element;
+		var content = this.contentElement;
+
+		content.setStyle('padding-left', 0);
+		content.setStyle('padding-right', 0);
+
+		var elementSize = element.offsetWidth;
+		var contentSize = content.offsetWidth;
+		var contentPosition = content.offsetLeft;
+
+		var offset = ((elementSize / 2) - (contentPosition + contentSize / 2)) * 2;
+
+		var fc = content.firstChild;
+		var lc = content.lastChild;
+
+		if (fc && fc.getPosition) {
+			var pos = fc.offsetLeft + offset;
+			if (pos < 0) {
+				offset += Math.abs(pos);
+			}
+		}
+
+		if (lc && lc.getPosition) {
+			var pos = lc.offsetLeft + lc.offsetWidth + offset;
+			if (pos > contentSize) {
+				offset -= Math.abs(contentSize - pos);
+			}
+		}
+
+		content.setStyle(offset < 0 ? 'padding-right' : 'padding-left', Math.abs(offset));
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#addLeftButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addLeftButton: function(button) {
+		return this.addChildComponent(button, 'top');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#addRightButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addRightButton: function(button) {
+		return this.addChildComponent(button, 'bottom');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentByType(Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentByTypeAt(Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/NavigationBar#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponents(Button, destroy);
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('navigation-bar', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(NavigationBar, element, 'data-navigation-bar'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('content', NavigationBar, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('navigation-bar-content');
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('title', NavigationBar, null, function(element) {
+	this.setTitle(moobile.Component.create(moobile.Text, element, 'data-title'));
+});
+
 
 },{}],19:[function(require,module,exports){
-"use strict";var Slider=moobile.Slider=new Class({Extends:moobile.Control,__activeTouch:null,__activeTouchOffsetX:null,__activeTouchOffsetY:null,__activeTouchInitialThumbX:null,__activeTouchInitialThumbY:null,_position:{x:-1,y:-1},_value:null,_minimum:0,_maximum:0,_valueRange:null,_trackRange:null,_trackLimit:{min:0,max:0},trackElement:null,thumbElement:null,rangeElement:null,valueElement:null,hitAreaElement:null,options:{mode:"horizontal",snap:!1,value:0,minimum:0,maximum:100},willBuild:function(){this.parent(),this.addClass("slider"),this.trackElement=document.createElement("div"),this.trackElement.addClass("slider-track"),this.trackElement.inject(this.element),this.thumbElement=document.createElement("div"),this.thumbElement.addClass("slider-thumb"),this.thumbElement.inject(this.trackElement),this.rangeElement=document.createElement("div"),this.rangeElement.addClass("slider-range"),this.rangeElement.inject(this.trackElement),this.valueElement=document.createElement("div"),this.valueElement.addClass("slider-value"),this.valueElement.inject(this.rangeElement),this.hitAreaElement=new Element("div.hit-area").inject(this.thumbElement),("min"in this.options||"max"in this.options)&&("min"in this.options&&(this.options.minimum=this.options.min),"max"in this.options&&(this.options.maximum=this.options.max),console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead'));var t=this.options.mode;t&&this.addClass("slider-mode-"+t)},didBuild:function(){this.parent(),this.element.addEvent("touchstart",this.bound("_onTouchStart")),this.element.addEvent("touchmove",this.bound("_onTouchMove")),this.element.addEvent("touchend",this.bound("_onTouchEnd")),this.thumbElement.addEvent("touchcancel",this.bound("_onThumbTouchCancel")),this.thumbElement.addEvent("touchstart",this.bound("_onThumbTouchStart")),this.thumbElement.addEvent("touchmove",this.bound("_onThumbTouchMove")),this.thumbElement.addEvent("touchend",this.bound("_onThumbTouchEnd")),this.setMinimum(this.options.minimum),this.setMaximum(this.options.maximum);var t=this.options.value;null!==t&&this.setValue(t)},didUpdateLayout:function(){this.parent();var t=this.trackElement.getSize(),i=this.thumbElement.getSize(),e=0;switch(this.options.mode){case"horizontal":e=t.x-i.x;break;case"vertical":e=t.y-i.y}this._valueRange=this._maximum-this._minimum,this._trackRange=e,this._trackLimit={min:0,max:e};var n=this._positionFromValue(this._value);(n.x!==this._position.x||n.y!==this._position.y)&&this._move(n.x,n.y)},destroy:function(){this.element.removeEvent("touchstart",this.bound("_onTouchStart")),this.element.removeEvent("touchmove",this.bound("_onTouchMove")),this.element.removeEvent("touchend",this.bound("_onTouchEnd")),this.thumbElement.removeEvent("touchcancel",this.bound("_onThumbTouchCancel")),this.thumbElement.removeEvent("touchstart",this.bound("_onThumbTouchStart")),this.thumbElement.removeEvent("touchmove",this.bound("_onThumbTouchMove")),this.thumbElement.removeEvent("touchend",this.bound("_onThumbTouchEnd")),this.thumbElement=null,this.trackElement=null,this.valueElement=null,this.rangeElement=null,this.parent()},setValue:function(t){if(t=this.options.snap?t.round():t,this._value===t)return this;this._value=t;var i=this._positionFromValue(t);return(i.x!==this._position.x||i.y!==this._position.y)&&this._move(i.x,i.y),this.fireEvent("change",t),this},getValue:function(){return this._value},setMinimum:function(t){return this._minimum=t,this._value<t&&this.setValue(t),this},getMinimum:function(){return this._minimum},setMaximum:function(t){return this._maximum=t,this._value>t&&this.setValue(t),this},getMaximum:function(){return this._maximum},_move:function(t,i){if(!this.isReady()||!this.isVisible())return this;switch(this.options.mode){case"horizontal":i=0,t<this._trackLimit.min&&(t=this._trackLimit.min),t>this._trackLimit.max&&(t=this._trackLimit.max);break;case"vertical":t=0,i<this._trackLimit.min&&(i=this._trackLimit.min),i>this._trackLimit.max&&(i=this._trackLimit.max)}return this._position.x=t,this._position.y=i,this.thumbElement.setStyle("transform","translate3d("+t+"px, "+i+"px, 0)"),this.valueElement.setStyle("transform","translate3d("+t+"px, "+i+"px, 0)"),this},_valueFromPosition:function(t,i){return("horizontal"===this.options.mode?t:i)*this._valueRange/this._trackRange+this._minimum},_positionFromValue:function(t){var i=0,e=0,n=(t-this._minimum)*this._trackRange/this._valueRange;switch(this.options.mode){case"horizontal":i=n.round(2);break;case"vertical":e=n.round(2)}return{x:i,y:e}},_onTouchStart:function(t){t.stop()},_onTouchMove:function(t){t.stop()},_onTouchEnd:function(t){t.stop()},_onThumbTouchCancel:function(t){this.__activeTouch=null,this.__activeTouchOffsetX=null,this.__activeTouchOffsetY=null,this.__activeTouchInitialThumbX=null,this.__activeTouchInitialThumbY=null},_onThumbTouchStart:function(t){var i=t.changedTouches[0];null===this.__activeTouch&&(this.__activeTouch=i,this.__activeTouchOffsetX=i.pageX,this.__activeTouchOffsetY=i.pageY,this.__activeTouchInitialThumbX=this._position.x,this.__activeTouchInitialThumbY=this._position.y)},_onThumbTouchMove:function(t){var i=t.changedTouches[0];if(this.__activeTouch.identifier===i.identifier){var e=i.pageX-this.__activeTouchOffsetX+this.__activeTouchInitialThumbX,n=i.pageY-this.__activeTouchOffsetY+this.__activeTouchInitialThumbY;this.setValue(this._valueFromPosition(e,n))}},_onThumbTouchEnd:function(t){this.__activeTouch.identifier===t.changedTouches[0].identifier&&(this.__activeTouch=null,this.__activeTouchOffsetX=null,this.__activeTouchOffsetY=null,this.__activeTouchInitialThumbX=null,this.__activeTouchInitialThumbY=null)}});moobile.Component.defineRole("slider",null,function(t){this.addChildComponent(moobile.Component.create(Slider,t,"data-slider"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Slider = moobile.Slider = new Class({
+
+	// TODO ajouter les importations de yannick
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouch: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchOffsetX: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchOffsetY: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchInitialThumbX: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchInitialThumbY: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_position: {x: -1, y: -1},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_value: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_minimum: 0,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_maximum: 0,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_valueRange: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_trackRange: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_trackLimit: {min: 0, max: 0},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#trackElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	trackElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#thumbElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	thumbElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#rangeElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	rangeElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#valueElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	valueElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#hitAreaElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	hitAreaElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	options: {
+		mode: 'horizontal',
+		snap: false,
+		value: 0,
+		minimum: 0,
+		maximum: 100
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('slider');
+
+		this.trackElement = document.createElement('div');
+		this.trackElement.addClass('slider-track');
+		this.trackElement.inject(this.element);
+
+		this.thumbElement = document.createElement('div')
+		this.thumbElement.addClass('slider-thumb');
+		this.thumbElement.inject(this.trackElement);
+
+		this.rangeElement = document.createElement('div');
+		this.rangeElement.addClass('slider-range');
+		this.rangeElement.inject(this.trackElement);
+
+		this.valueElement = document.createElement('div');
+		this.valueElement.addClass('slider-value');
+		this.valueElement.inject(this.rangeElement);
+
+		this.hitAreaElement = new Element('div.hit-area').inject(this.thumbElement);
+
+		// <deprecated>
+		if ('min' in this.options || 'max' in this.options) {
+			if ('min' in this.options) this.options.minimum = this.options.min;
+			if ('max' in this.options) this.options.maximum = this.options.max;
+			console.log('[DEPRECATION NOTICE] The options "min" and "max" will be removed in 0.4, use the "minimum" and "maximum" options instead');
+		}
+		// </deprecated>
+
+		var mode = this.options.mode;
+		if (mode) {
+			this.addClass('slider-mode-' + mode);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		this.element.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.element.addEvent('touchmove', this.bound('_onTouchMove'));
+		this.element.addEvent('touchend', this.bound('_onTouchEnd'));
+
+		this.thumbElement.addEvent('touchcancel', this.bound('_onThumbTouchCancel'));
+		this.thumbElement.addEvent('touchstart', this.bound('_onThumbTouchStart'));
+		this.thumbElement.addEvent('touchmove', this.bound('_onThumbTouchMove'));
+		this.thumbElement.addEvent('touchend', this.bound('_onThumbTouchEnd'));
+
+		this.setMinimum(this.options.minimum);
+		this.setMaximum(this.options.maximum);
+
+		var value = this.options.value;
+		if (value !== null) {
+			this.setValue(value);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didUpdateLayout: function() {
+
+		this.parent();
+
+		var trackSize = this.trackElement.getSize();
+		var thumbSize = this.thumbElement.getSize();
+
+		var range = 0;
+
+		switch (this.options.mode) {
+			case 'horizontal':
+				range = trackSize.x - thumbSize.x;
+				break;
+			case 'vertical':
+				range = trackSize.y - thumbSize.y;
+				break;
+		}
+
+		this._valueRange = this._maximum - this._minimum;
+		this._trackRange = range;
+		this._trackLimit = {
+			min: 0,
+			max: range
+		};
+
+		var pos = this._positionFromValue(this._value);
+		if (pos.x === this._position.x &&
+			pos.y === this._position.y)
+			return;
+
+		this._move(pos.x, pos.y);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+
+		this.element.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.element.removeEvent('touchmove', this.bound('_onTouchMove'));
+		this.element.removeEvent('touchend', this.bound('_onTouchEnd'));
+
+		this.thumbElement.removeEvent('touchcancel', this.bound('_onThumbTouchCancel'));
+		this.thumbElement.removeEvent('touchstart', this.bound('_onThumbTouchStart'));
+		this.thumbElement.removeEvent('touchmove', this.bound('_onThumbTouchMove'));
+		this.thumbElement.removeEvent('touchend', this.bound('_onThumbTouchEnd'));
+
+		this.thumbElement = null;
+		this.trackElement = null;
+		this.valueElement = null;
+		this.rangeElement = null;
+
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#setValue
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	setValue: function(value) {
+
+		value = this.options.snap ? value.round() : value;
+
+		if (this._value === value)
+			return this;
+
+		this._value = value;
+
+		var pos = this._positionFromValue(value);
+		if (pos.x !== this._position.x ||
+			pos.y !== this._position.y) {
+			this._move(pos.x, pos.y);
+		}
+
+		this.fireEvent('change', value);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#setValue
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getValue: function() {
+		return this._value;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#setMinimum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	setMinimum: function(minimum) {
+		this._minimum = minimum;
+		if (this._value < minimum) this.setValue(minimum);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#getMinimum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	getMinimum: function() {
+		return this._minimum;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#setMaximum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	setMaximum: function(maximum) {
+		this._maximum = maximum;
+		if (this._value > maximum) this.setValue(maximum);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Slider#setMaximum
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	getMaximum: function() {
+		return this._maximum;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	_move: function(x, y) {
+
+		if (!this.isReady() ||
+			!this.isVisible())
+			return this;
+
+		switch (this.options.mode) {
+			case 'horizontal':
+				y = 0;
+				if (x < this._trackLimit.min) x = this._trackLimit.min;
+				if (x > this._trackLimit.max) x = this._trackLimit.max;
+				break;
+			case 'vertical':
+				x = 0;
+				if (y < this._trackLimit.min) y = this._trackLimit.min;
+				if (y > this._trackLimit.max) y = this._trackLimit.max;
+				break;
+		}
+
+		this._position.x = x;
+		this._position.y = y;
+		this.thumbElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
+		this.valueElement.setStyle('transform', 'translate3d(' + x + 'px, ' + y + 'px, 0)');
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_valueFromPosition: function(x, y) {
+		return (this.options.mode === 'horizontal' ? x : y) * this._valueRange / this._trackRange + this._minimum;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_positionFromValue: function(value) {
+
+		var x = 0;
+		var y = 0;
+
+		var pos = (value - this._minimum) * this._trackRange / this._valueRange;
+
+		switch (this.options.mode) {
+			case 'horizontal': x = pos.round(2); break;
+			case 'vertical':   y = pos.round(2); break;
+		}
+
+		return {x: x, y: y};
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchStart: function(e) {
+		e.stop();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchMove: function(e) {
+		e.stop();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd: function(e) {
+		e.stop();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onThumbTouchCancel: function(e) {
+		this.__activeTouch = null;
+		this.__activeTouchOffsetX = null;
+		this.__activeTouchOffsetY = null;
+		this.__activeTouchInitialThumbX = null;
+		this.__activeTouchInitialThumbY = null;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onThumbTouchStart: function(e) {
+		var touch = e.changedTouches[0];
+		if (this.__activeTouch === null) {
+			this.__activeTouch = touch
+			this.__activeTouchOffsetX = touch.pageX;
+			this.__activeTouchOffsetY = touch.pageY;
+			this.__activeTouchInitialThumbX = this._position.x;
+			this.__activeTouchInitialThumbY = this._position.y;
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.0
+	 */
+	_onThumbTouchMove: function(e) {
+		var touch = e.changedTouches[0];
+		if (this.__activeTouch.identifier === touch.identifier) {
+			var x = touch.pageX - this.__activeTouchOffsetX + this.__activeTouchInitialThumbX;
+			var y = touch.pageY - this.__activeTouchOffsetY + this.__activeTouchInitialThumbY;
+			this.setValue(this._valueFromPosition(x, y));
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onThumbTouchEnd: function(e) {
+		if (this.__activeTouch.identifier === e.changedTouches[0].identifier) {
+			this.__activeTouch = null;
+			this.__activeTouchOffsetX = null;
+			this.__activeTouchOffsetY = null;
+			this.__activeTouchInitialThumbX = null;
+			this.__activeTouchInitialThumbY = null;
+		}
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('slider', null, function(element) {
+	this.addChildComponent(moobile.Component.create(Slider, element, 'data-slider'));
+});
 
 },{}],20:[function(require,module,exports){
-"use strict";var TabBar=moobile.TabBar=new Class({Extends:moobile.Bar,__selectedTab:null,__selectedTabIndex:-1,options:{selectedTabIndex:-1,tabs:null},willBuild:function(){this.parent(),this.addClass("tab-bar")},didBuild:function(){this.parent();var e=this.options.tabs;e&&this.addTabs(e)},setSelectedTab:function(e){return this.__selectedTab===e?this:(this.__selectedTab&&(this.__selectedTab.setSelected(!1),this.fireEvent("deselect",this.__selectedTab),this.__selectedTab=null),this.__selectedTabIndex=e?this.getChildComponentIndex(e):-1,e&&(this.__selectedTab=e,this.__selectedTab.setSelected(!0),this.fireEvent("select",this.__selectedTab)),this)},getSelectedTab:function(){return this.__selectedTab},setSelectedTabIndex:function(e){var t=null;return e>=0&&(t=this.getChildComponentByTypeAt(Tab,e)),this.setSelectedTab(t)},getSelectedTabIndex:function(){return this.__selectedTabIndex},clearSelectedTab:function(){return this.setSelectedTab(null),this},addTab:function(e,t){return this.addChildComponent(Tab.from(e),t)},addTabAfter:function(e,t){return this.addChildComponentAfter(Tab.from(e),t)},addTabBefore:function(e,t){return this.addChildComponentBefore(Tab.from(e),t)},addTabs:function(e,t){return this.addChildComponents(e.map(function(e){return Moobile.Tab.from(e)}),t)},addTabsAfter:function(e,t){return this.addChildComponentsAfter(e.map(function(e){return Tab.from(e)}),t)},addTabsBefore:function(e,t){return this.addChildComponentsBefore(e.map(function(e){return Tab.from(e)}),t)},getTabs:function(){return this.getChildComponentsByType(Tab)},getTab:function(e){return this.getChildComponentByType(Tab,e)},getTabAt:function(e){return this.getChildComponentByTypeAt(Tab,e)},removeTab:function(e,t){return this.removeChildComponent(e,t)},removeAllTabs:function(e){return this.removeAllChildComponentsByType(Tab,e)},willRemoveChildComponent:function(e){this.parent(e),this.__selectedTab===e&&this.clearSelectedTab()},didAddChildComponent:function(e){this.parent(e),e instanceof moobile.Tab&&e.addEvent("tap",this.bound("__onTabTap"))},didRemoveChildComponent:function(e){this.parent(e),e instanceof moobile.Tab&&e.removeEvent("tap",this.bound("__onTabTap"))},didChangeState:function(e){this.parent(e),("disabled"===e||null==e)&&this.getChildComponents().invoke("setDisabled",e)},__onTabTap:function(e,t){this.setSelectedTab(t)}});moobile.Component.defineRole("tab-bar",null,null,function(e){this.addChildComponent(moobile.Component.create(Tabmoobile.Bar,e,"data-tab-bar"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+var TabBar = moobile.TabBar = new Class({
+
+	Extends: moobile.Bar,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__selectedTab: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__selectedTabIndex: -1,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		selectedTabIndex: -1,
+		tabs: null,
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('tab-bar');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+		this.parent();
+		var tabs = this.options.tabs;
+		if (tabs) this.addTabs(tabs);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#setSelectedTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedTab: function(selectedTab) {
+
+		if (this.__selectedTab === selectedTab)
+			return this;
+
+		if (this.__selectedTab) {
+			this.__selectedTab.setSelected(false);
+			this.fireEvent('deselect', this.__selectedTab);
+			this.__selectedTab = null;
+		}
+
+		this.__selectedTabIndex = selectedTab ? this.getChildComponentIndex(selectedTab) : -1;
+
+		if (selectedTab) {
+			this.__selectedTab = selectedTab;
+			this.__selectedTab.setSelected(true);
+			this.fireEvent('select', this.__selectedTab);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#getSelectedTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getSelectedTab: function() {
+		return this.__selectedTab;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#setSelectedTabIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setSelectedTabIndex: function(index) {
+
+		var child = null;
+		if (index >= 0) {
+			child = this.getChildComponentByTypeAt(Tab, index);
+		}
+
+		return this.setSelectedTab(child);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#getSelectedTabIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getSelectedTabIndex: function() {
+		return this.__selectedTabIndex;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#clearSelectedTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	clearSelectedTab: function() {
+		this.setSelectedTab(null);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#addTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTab: function(tab, where) {
+		return this.addChildComponent(Tab.from(tab), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#addTabAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabAfter: function(tab, after) {
+		return this.addChildComponentAfter(Tab.from(tab), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#addTabBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabBefore: function(tab, before) {
+		return this.addChildComponentBefore(Tab.from(tab), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#addTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabs: function(tabs, where) {
+		return this.addChildComponents(tabs.map(function(tab) {
+			return Moobile.Tab.from(tab);
+		}), where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#addTabsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabsAfter: function(tabs, after) {
+		return this.addChildComponentsAfter(tabs.map(function(tab) {
+			return Tab.from(tab);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#addTabsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addTabsBefore: function(tabs, before) {
+		return this.addChildComponentsBefore(tabs.map(function(tab) {
+			return Tab.from(tab);
+		}), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#getTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabs: function() {
+		return this.getChildComponentsByType(Tab);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#getTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTab: function(name) {
+		return this.getChildComponentByType(Tab, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#getTabAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabAt: function(index) {
+		return this.getChildComponentByTypeAt(Tab, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#removeTab
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeTab: function(tab, destroy) {
+		return this.removeChildComponent(tab, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Control/Tabmoobile.Bar#removeAllTabs
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	removeAllTabs: function(destroy) {
+		return this.removeAllChildComponentsByType(Tab, destroy);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (this.__selectedTab === component) {
+			this.clearSelectedTab();
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didAddChildComponent: function(child) {
+		this.parent(child);
+		if (child instanceof moobile.Tab) {
+			child.addEvent('tap', this.bound('__onTabTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didRemoveChildComponent: function(child) {
+		this.parent(child);
+		if (child instanceof moobile.Tab) {
+			child.removeEvent('tap', this.bound('__onTabTap'));
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didChangeState: function(state) {
+		this.parent(state)
+		if (state === 'disabled' || state == null) {
+			this.getChildComponents().invoke('setDisabled', state);
+		}
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__onTabTap: function(e, sender) {
+		this.setSelectedTab(sender);
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('tab-bar', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(Tabmoobile.Bar, element, 'data-tab-bar'));
+});
 
 },{}],21:[function(require,module,exports){
-"use strict";var Tab=moobile.Tab=new Class({Extends:moobile.Control,__label:null,__image:null,options:{label:null,image:null},willBuild:function(){this.parent(),this.addClass("tab");var e=this.getRoleElement("image"),t=this.getRoleElement("label");null===t&&(t=document.createElement("div"),t.ingest(this.element),t.inject(this.element),t.setRole("label")),null===e&&(e=document.createElement("div"),e.inject(this.element,"top"),e.setRole("image"))},didBuild:function(){this.parent();var e=this.options.image,t=this.options.label;e&&this.setImage(e),t&&this.setLabel(t)},destroy:function(){this.__label=null,this.__image=null,this.parent()},setLabel:function(e){return this.__label===e?this:(e=moobile.Text.from(e),this.__label?this.__label.replaceWithComponent(e,!0):this.addChildComponent(e),this.__label=e,this.__label.addClass("tab-label"),this.toggleClass("tab-label-empty",this.__label.isEmpty()),this)},getLabel:function(){return this.__label},setImage:function(e){return this.__image===e?this:(e=moobile.Image.from(e),this.__image?this.__image.replaceWithComponent(e,!0):this.addChildComponent(e),this.__image=e,this.__image.addClass("tab-image"),this.toggleClass("tab-image-empty",this.__image.isEmpty()),this)},getImage:function(){return this.__image}});Tab.from=function(e){if(e instanceof Tab)return e;var t=new Tab;return t.setLabel(e),t},moobile.Component.defineRole("tab",moobile.TabBar,null,function(e){this.addTab(moobile.Component.create(Tab,e,"data-tab"))}),moobile.Component.defineRole("label",Tab,null,function(e){this.setLabel(moobile.Component.create(moobile.Text,e,"data-label"))}),moobile.Component.defineRole("image",Tab,null,function(e){this.setImage(moobile.Component.create(moobile.Image,e,"data-image"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+var Tab = moobile.Tab = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__label: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__image: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		label: null,
+		image: null
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('tab');
+
+		var image = this.getRoleElement('image');
+		var label = this.getRoleElement('label');
+
+		if (label === null) {
+			label = document.createElement('div');
+			label.ingest(this.element);
+			label.inject(this.element);
+			label.setRole('label');
+		}
+
+		if (image === null) {
+			image = document.createElement('div');
+			image.inject(this.element, 'top');
+			image.setRole('image');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var image = this.options.image;
+		var label = this.options.label;
+
+		if (image) this.setImage(image);
+		if (label) this.setLabel(label);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	destroy: function() {
+		this.__label = null;
+		this.__image = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab#setLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setLabel: function(label) {
+
+		if (this.__label === label)
+			return this;
+
+		label = moobile.Text.from(label);
+
+		if (this.__label) {
+			this.__label.replaceWithComponent(label, true);
+		} else {
+			this.addChildComponent(label);
+		}
+
+		this.__label = label;
+		this.__label.addClass('tab-label');
+		this.toggleClass('tab-label-empty', this.__label.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getLabel: function() {
+		return this.__label;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab#setImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setImage: function(image) {
+
+		if (this.__image === image)
+			return this;
+
+		image = moobile.Image.from(image);
+
+		if (this.__image) {
+			this.__image.replaceWithComponent(image, true);
+		} else {
+			this.addChildComponent(image);
+		}
+
+		this.__image = image;
+		this.__image.addClass('tab-image');
+		this.toggleClass('tab-image-empty', this.__image.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab#getLabel
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getImage: function() {
+		return this.__image;
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Tab#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Tab.from = function(source) {
+	if (source instanceof Tab) return source;
+	var tab = new Tab();
+	tab.setLabel(source);
+	return tab;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('tab', moobile.TabBar, null, function(element) {
+	this.addTab(moobile.Component.create(Tab, element, 'data-tab'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('label', Tab, null, function(element) {
+	this.setLabel(moobile.Component.create(moobile.Text, element, 'data-label'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('image', Tab, null, function(element) {
+	this.setImage(moobile.Component.create(moobile.Image, element, 'data-image'));
+});
+
 
 },{}],22:[function(require,module,exports){
-"use strict";var Text=moobile.Text=new Class({Extends:moobile.Control,options:{tagName:"span",text:null},willBuild:function(){this.parent(),this.addClass("text")},didBuild:function(){this.parent();var t=this.options.text;t&&this.setText(t)},setText:function(t){return this.element.set("html",t instanceof Text?t.getText():t||"number"==typeof t?t+"":""),this},getText:function(){return this.element.get("html")},isEmpty:function(){return!this.getText()}});Text.from=function(t){if(t instanceof Text)return t;var e=new Text;return e.setText(t),e},moobile.Component.defineRole("text",null,function(t){this.addChildComponent(moobile.Component.create(Text,t,"data-text"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Text
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+var Text = moobile.Text = new Class({
+
+	Extends: moobile.Control,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Text#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	options: {
+		tagName: 'span',
+		text: null,
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('text');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didBuild: function() {
+		this.parent();
+		var text = this.options.text;
+		if (text) this.setText(text);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Text#setText
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	setText: function(text) {
+		this.element.set('html',  text instanceof Text ? text.getText() : (text || typeof text === 'number' ? text + '' : ''));
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Text#getText
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getText: function() {
+		return this.element.get('html');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.Control/Text#isEmpty
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	isEmpty: function() {
+		return !this.getText();
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.Control/Text#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+Text.from = function(source) {
+	if (source instanceof Text) return source;
+	var text = new Text();
+	text.setText(source);
+	return text;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('text', null, function(element) {
+	this.addChildComponent(moobile.Component.create(Text, element, 'data-text'));
+});
 
 },{}],23:[function(require,module,exports){
 (function (global){
-"use strict";var moobile=global.moobile=global.Moobile={version:"0.3.0-dev"};
+"use strict"
 
+var moobile = global.moobile = global.Moobile = {
+	version: '0.3.0-dev'
+};
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
-"use strict";var Alert=moobile.Alert=new Class({Extends:moobile.Component,__title:null,__message:null,__buttons:[],boxElement:null,contentElement:null,headerElement:null,footerElement:null,overlay:null,options:{layout:"horizontal",title:null,message:null,buttons:null},willBuild:function(){this.parent(),this.addClass("alert"),this.overlay=new moobile.Overlay,this.addChildComponent(this.overlay),this.headerElement=document.createElement("div"),this.headerElement.addClass("alert-header"),this.footerElement=document.createElement("div"),this.footerElement.addClass("alert-footer"),this.contentElement=document.createElement("div"),this.contentElement.addClass("alert-content"),this.boxElement=document.createElement("div"),this.boxElement.addClass("alert-box"),this.boxElement.grab(this.headerElement),this.boxElement.grab(this.contentElement),this.boxElement.grab(this.footerElement),this.element.grab(this.boxElement);var t=this.options.layout;t&&this.addClass("alert-layout-"+t)},didBuild:function(){this.parent(),this.setTitle(this.options.title),this.setMessage(this.options.message);var t=this.options.buttons;t&&this.addButtons(t),this.hide()},destroy:function(){this.__title=null,this.__message=null,this.boxElement=null,this.headerElement=null,this.footerElement=null,this.contentElement=null,this.overlay.destroy(),this.overlay=null,this.parent()},setTitle:function(t){return null!==this.__title&&this.__title===t?this:(t=moobile.Text.from(t),this.__title?this.__title.replaceWithComponent(t,!0):this.addChildComponentInside(t,this.headerElement),this.__title=t,this.__title.addClass("alert-title"),this.toggleClass("alert-title-empty",this.__title.isEmpty()),this)},getTitle:function(){return this.__title},setMessage:function(t){return null!==this.__message&&this.__message===t?this:(t=moobile.Text.from(t),this.__message?this.__message.replaceWithComponent(t,!0):this.addChildComponentInside(t,this.contentElement),this.__message=t,this.__message.addClass("alert-message"),this.toggleClass("alert-message-empty",this.__message.isEmpty()),this)},getMessage:function(){return this.__message},addButton:function(t,e){return this.addChildComponentInside(moobile.Button.from(t),this.footerElement,e)},addButtonAfter:function(t,e){return this.addChildComponentAfter(moobile.Button.from(t),e)},addButtonBefore:function(t,e){return this.addChildComponentBefore(moobile.Button.from(t),e)},addButtons:function(t,e){return this.addChildComponentsInside(t.map(function(t){return moobile.Button.from(t)}),this.footerElement,e)},addButtonsAfter:function(t,e){return this.addChildComponentsAfter(t.map(function(t){return moobile.Button.from(t)}),e)},addButtonsBefore:function(t,e){return this.addChildComponentBefore(t.map(function(t){return moobile.Button.from(t)}),e)},getButtons:function(){return this.getChildComponentsByType(moobile.Button)},getButton:function(t){return this.getChildComponentByType(moobile.Button,t)},getButtonAt:function(t){return this.getChildComponentByTypeAt(moobile.Button,t)},removeButton:function(t,e){return this.removeChildComponent(t,e)},removeAllButtons:function(t){return this.removeAllChildComponentsByType(moobile.Button,t)},setDefaultButton:function(t){return this.hasChildComponent(t)&&t.addClass("is-default"),this},setDefaultButtonIndex:function(t){return this.setDefaultButton(this.getChildComponentByTypeAt(moobile.Button,t))},show:function(t){return t?this.overlay.showAnimated():this.overlay.show(),this.parent(t)},hide:function(t){return t?this.overlay.hideAnimated():this.overlay.hide(),this.parent(t)},showAnimated:function(){return this.show("show-animated")},hideAnimated:function(){return this.hide("hide-animated")},didAddChildComponent:function(t){this.parent(t),t instanceof moobile.Button&&(t.addEvent("tap",this.bound("__onButtonTap")),this.__buttons.include(t))},didRemoveChildComponent:function(t){this.parent(t),t instanceof moobile.Button&&(t.removeEvent("tap",this.bound("__onButtonTap")),this.__buttons.erase(t))},willShow:function(){if(this.parent(),null===this.getParentView()){var t=moobile.Window.getCurrentInstance();t&&t.addChildComponent(this)}0===this.__buttons.length&&this.addButton("OK")},didHide:function(){this.parent(),this.removeFromParentComponent()},__onButtonTap:function(t,e){var n=this.getChildComponentsByType(moobile.Button).indexOf(e);n>=0&&this.fireEvent("dismiss",[e,n]),this.hideAnimated()}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Dialog/Alert
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+var Alert = moobile.Alert = new Class({
+
+	Extends: moobile.Component,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__title: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__message: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__buttons: [],
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#boxElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	boxElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#contentElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	contentElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#headerElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	headerElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#footerElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	footerElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#overlay
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	overlay: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	options: {
+		layout: 'horizontal',
+		title: null,
+		message: null,
+		buttons: null
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('alert');
+
+		this.overlay = new moobile.Overlay();
+		this.addChildComponent(this.overlay);
+
+		this.headerElement = document.createElement('div');
+		this.headerElement.addClass('alert-header');
+
+		this.footerElement = document.createElement('div');
+		this.footerElement.addClass('alert-footer');
+
+		this.contentElement = document.createElement('div');
+		this.contentElement.addClass('alert-content');
+
+		this.boxElement = document.createElement('div');
+		this.boxElement.addClass('alert-box');
+		this.boxElement.grab(this.headerElement);
+		this.boxElement.grab(this.contentElement);
+		this.boxElement.grab(this.footerElement);
+
+		this.element.grab(this.boxElement);
+
+		var layout = this.options.layout;
+		if (layout) {
+			this.addClass('alert-layout-' + layout);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		this.setTitle(this.options.title);
+		this.setMessage(this.options.message);
+
+		var buttons = this.options.buttons;
+		if (buttons) {
+			this.addButtons(buttons);
+		}
+
+		this.hide();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+
+		this.__title = null;
+		this.__message = null;
+
+		this.boxElement = null;
+		this.headerElement = null;
+		this.footerElement = null;
+		this.contentElement = null;
+
+		this.overlay.destroy();
+		this.overlay = null;
+
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setTitle: function(title) {
+
+		if (this.__title !== null && this.__title === title)
+			return this;
+
+		title = moobile.Text.from(title);
+
+		if (this.__title) {
+			this.__title.replaceWithComponent(title, true);
+		} else {
+			this.addChildComponentInside(title, this.headerElement);
+		}
+
+		this.__title = title;
+		this.__title.addClass('alert-title');
+		this.toggleClass('alert-title-empty', this.__title.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getTitle: function() {
+		return this.__title;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setMessage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setMessage: function(message) {
+
+		if (this.__message !== null && this.__message === message)
+			return this;
+
+		message = moobile.Text.from(message);
+
+		if (this.__message) {
+			this.__message.replaceWithComponent(message, true);
+		} else {
+			this.addChildComponentInside(message, this.contentElement);
+		}
+
+		this.__message = message;
+		this.__message.addClass('alert-message');
+		this.toggleClass('alert-message-empty', this.__message.isEmpty());
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getMessage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getMessage: function() {
+		return this.__message;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButton: function(button, where) {
+		return this.addChildComponentInside(moobile.Button.from(button), this.footerElement, where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonAfter: function(button, after) {
+		return this.addChildComponentAfter(moobile.Button.from(button), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addButtonBefore: function(button, before) {
+		return this.addChildComponentBefore(moobile.Button.from(button), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtons: function(buttons, where) {
+		return this.addChildComponentsInside(buttons.map(function(button) {
+			return moobile.Button.from(button);
+		}), this.footerElement, where);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonsAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsAfter: function(buttons, after) {
+		return this.addChildComponentsAfter(buttons.map(function(button) {
+			return moobile.Button.from(button);
+		}), after);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#addButtonsBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addButtonsBefore: function(buttons, before) {
+		return this.addChildComponentBefore(buttons.map(function(button) {
+			return moobile.Button.from(button);
+		}), before);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButtons: function() {
+		return this.getChildComponentsByType(moobile.Button);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButton: function(name) {
+		return this.getChildComponentByType(moobile.Button, name);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#getButtonAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getButtonAt: function(index) {
+		return this.getChildComponentByTypeAt(moobile.Button, index);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#removeButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	removeButton: function(button, destroy) {
+		return this.removeChildComponent(button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#removeAllButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	removeAllButtons: function(destroy) {
+		return this.removeAllChildComponentsByType(moobile.Button, destroy);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setDefaultButton
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setDefaultButton: function(button) {
+		if (this.hasChildComponent(button)) button.addClass('is-default');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#setDefaultButtons
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setDefaultButtonIndex: function(index) {
+		return this.setDefaultButton(this.getChildComponentByTypeAt(moobile.Button, index));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	show: function(animation) {
+
+		if (animation) {
+			this.overlay.showAnimated();
+		} else {
+			this.overlay.show();
+		}
+
+		return this.parent(animation);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	hide: function(animation) {
+
+		if (animation) {
+			this.overlay.hideAnimated();
+		} else {
+			this.overlay.hide();
+		}
+
+		return this.parent(animation);
+	},
+
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#showAnimated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	showAnimated: function() {
+		return this.show('show-animated');
+		/*new moobile.Animation(this.element, {
+					validate: function(e, element) {
+						return e.target === this.boxElement;
+					}.bind(this)
+				}).setAnimationClass(animation);*/
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#hideAnimated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hideAnimated: function() {
+		return this.hide('hide-animated');
+		/*new moobile.Animation(this.element, {
+					validate: function(e, element) {
+						return e.target === this.boxElement;
+					}.bind(this)
+				}).setAnimationClass(animation);*/
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof moobile.Button) {
+			component.addEvent('tap', this.bound('__onButtonTap'));
+			this.__buttons.include(component);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildComponent: function(component) {
+		this.parent(component);
+		if (component instanceof moobile.Button) {
+			component.removeEvent('tap', this.bound('__onButtonTap'));
+			this.__buttons.erase(component);
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	willShow: function() {
+
+		this.parent();
+
+		if (this.getParentView() === null) {
+			var instance = moobile.Window.getCurrentInstance();
+			if (instance) {
+				instance.addChildComponent(this);
+			}
+		}
+
+		if (this.__buttons.length === 0) this.addButton('OK');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didHide: function() {
+		this.parent();
+		this.removeFromParentComponent();
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onButtonTap: function(e, sender) {
+
+		var index = this.getChildComponentsByType(moobile.Button).indexOf(sender);
+		if (index >= 0) {
+			this.fireEvent('dismiss', [sender, index]);
+		}
+
+		this.hideAnimated();
+	}
+
+});
 
 },{}],25:[function(require,module,exports){
-!function(){var n="",e="";Browser.safari||Browser.chrome||Browser.Platform.ios?(n="webkitAnimationEnd",e="webkitTransitionEnd"):Browser.firefox?(n="animationend",e="transitionend"):Browser.opera?(n="oAnimationEnd",e="oTransitionEnd"):Browser.ie&&(n="msAnimationEnd",e="msTransitionEnd"),Element.NativeEvents[n]=2,Element.NativeEvents[e]=2,Element.Events.transitionend={base:e,onAdd:function(){},onRemove:function(){}},Element.Events.animationend={base:n,onAdd:function(){},onRemove:function(){}},Element.defineCustomEvent("owntransitionend",{base:"transitionend",condition:function(n){return n.stop(),n.target===this}}),Element.defineCustomEvent("ownanimationend",{base:"animationend",condition:function(n){return n.stop(),n.target===this}})}();
+/*
+---
+
+name: Event.CSS3
+
+description: Provides CSS3 events.
+
+license: MIT-style license.
+
+authors:
+	- Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+
+requires:
+	- Custom-Event/Element.defineCustomEvent
+
+provides:
+	- Event.CSS3
+
+...
+*/
+
+(function() {
+
+// TODO: Property detect if a prefix-less version is available
+
+var a = '';
+var t = '';
+
+if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
+	a = 'webkitAnimationEnd';
+	t = 'webkitTransitionEnd';
+} else if (Browser.firefox) {
+	a = 'animationend';
+	t = 'transitionend';
+} else if (Browser.opera) {
+	a = 'oAnimationEnd';
+	t = 'oTransitionEnd';
+} else if (Browser.ie) {
+	a = 'msAnimationEnd';
+	t = 'msTransitionEnd';
+}
+
+Element.NativeEvents[a] = 2;
+Element.NativeEvents[t] = 2;
+Element.Events['transitionend'] = { base: t, onAdd: function(){}, onRemove: function(){} };
+Element.Events['animationend'] = { base: a, onAdd: function(){}, onRemove: function(){} };
+
+Element.defineCustomEvent('owntransitionend', {
+	base: 'transitionend',
+	condition: function(e) {
+		e.stop();
+		return e.target === this;
+	}
+});
+
+Element.defineCustomEvent('ownanimationend', {
+	base: 'animationend',
+	condition: function(e) {
+		e.stop();
+		return e.target === this;
+	}
+})
+
+})();
 
 },{}],26:[function(require,module,exports){
-"use strict";var fireEvent=Events.prototype.fireEvent,Firer=moobile.Firer=new Class({Implements:[Events,Options,Class.Binds],on:function(){return this.addEvent.apply(this,arguments)},off:function(){return this.removeEvent.apply(this,arguments)},emit:function(){return this.fireEvent.apply(this,arguments)},fireEvent:function(t,e,i){return e=Array.from(e).include(this),this.shouldFireEvent(t,e)?(this.willFireEvent(t,e),fireEvent.call(this,t,e,i),this.didFireEvent(t,e),this):this},shouldFireEvent:function(t,e){return!0},willFireEvent:function(t,e){},didFireEvent:function(t,e){}});
+"use strict"
+
+var fireEvent = Events.prototype.fireEvent
+
+/**
+ * @see http://moobilejs.com/doc/latest/Event/EventFirer
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var Firer = moobile.Firer = new Class({
+
+	Implements: [
+		Events,
+		Options,
+		Class.Binds
+	],
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#on
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	on: function() {
+		return this.addEvent.apply(this, arguments)
+	},
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#off
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	off: function() {
+		return this.removeEvent.apply(this, arguments)
+	},
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#emit
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	emit: function() {
+		return this.fireEvent.apply(this, arguments)
+	},
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#fireEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	fireEvent: function(type, args, delay) {
+
+		args = Array.from(args).include(this);
+
+		if (!this.shouldFireEvent(type, args))
+			return this;
+
+		this.willFireEvent(type, args);
+		fireEvent.call(this, type, args, delay);
+		this.didFireEvent(type, args);
+
+		return this;
+	},
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#shouldFireEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	shouldFireEvent: function(type, args) {
+		return true;
+	},
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#willFireEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willFireEvent: function(type, args) {
+
+	},
+
+	/**
+	 * @see http://moobilejs.com/doc/latest/event/Firer#didFireEvent
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didFireEvent: function(type, args) {
+
+	}
+
+});
 
 },{}],27:[function(require,module,exports){
-"use strict";var onReady=function(){window.fireEvent("ready")};Element.defineCustomEvent("ready",{onSetup:function(){return Browser.Platform.cordova?void document.onListener("deviceready",onReady):void window.addEvent("domready",onReady)},onTeardown:function(){return Browser.Platform.cordova?void document.offListener("deviceready",onReady):void window.removeEvent("domready",onReady)}}),window.addEvent("ready",function(){parent&&parent.fireEvent&&parent.fireEvent("appready")});
+"use strict"
+
+var onReady = function() {
+	window.fireEvent('ready');
+};
+
+Element.defineCustomEvent('ready', {
+
+	onSetup: function() {
+
+		if (Browser.Platform.cordova) {
+			document.onListener('deviceready', onReady);
+			return;
+		}
+
+		window.addEvent('domready', onReady);
+	},
+
+	onTeardown: function() {
+
+		if (Browser.Platform.cordova) {
+			document.offListener('deviceready', onReady);
+			return;
+		}
+
+		window.removeEvent('domready', onReady);
+	}
+
+});
+
+// simulator hook
+window.addEvent('ready', function() {
+	if (parent &&
+		parent.fireEvent) {
+		parent.fireEvent('appready');
+	}
+});
 
 },{}],28:[function(require,module,exports){
-"use strict";var tapValid=!0,tapTouch=null,onTapTouchStart=function(t){tapTouch=t.changedTouches[0],tapValid=!0},onTapTouchCancel=function(t){tapValid=!1};Element.defineCustomEvent("tap",{base:"touchend",condition:function(t){if(tapValid){var n=document.elementFromPoint(tapTouch.pageX,tapTouch.pageY);return n?this===n||this.contains(n):!1}return tapValid},onSetup:function(){this.addEvent("touchcancel",onTapTouchCancel),this.addEvent("touchstart",onTapTouchStart)},onTeardown:function(){this.removeEvent("touchcancel",onTapTouchCancel),this.removeEvent("touchstart",onTapTouchStart)}}),Element.defineCustomEvent("tapstart",{base:"touchstart",condition:function(t){return 1===t.touches.length}}),Element.defineCustomEvent("tapmove",{base:"touchmove",condition:function(t){return 1===t.touches.length}}),Element.defineCustomEvent("tapend",{base:"touchend",condition:function(t){return 0===t.touches.length}}),Element.defineCustomEvent("tapcancel",{base:"touchcancel"});
+"use strict"
+
+var tapValid = true;
+var tapTouch = null;
+
+var onTapTouchStart = function(e) {
+	tapTouch = e.changedTouches[0]
+	tapValid = true;
+};
+
+var onTapTouchCancel = function(e) {
+	tapValid = false;
+};
+
+Element.defineCustomEvent('tap', {
+
+	base: 'touchend',
+
+	condition: function(e) {
+
+		if (tapValid) {
+
+			var element = document.elementFromPoint(tapTouch.pageX, tapTouch.pageY);
+			if (element) {
+				return this === element || this.contains(element);
+			}
+
+			return false;
+		}
+
+		return tapValid;
+	},
+
+	onSetup: function() {
+		this.addEvent('touchcancel', onTapTouchCancel);
+		this.addEvent('touchstart', onTapTouchStart);
+	},
+
+	onTeardown: function() {
+		this.removeEvent('touchcancel', onTapTouchCancel);
+		this.removeEvent('touchstart', onTapTouchStart);
+	}
+
+});
+
+// pasmal de truc à réfléchir avec ça...
+
+Element.defineCustomEvent('tapstart', {
+
+	base: 'touchstart',
+
+	condition: function(e) {
+		return e.touches.length === 1;
+	}
+
+});
+
+Element.defineCustomEvent('tapmove', {
+
+	base: 'touchmove',
+
+	condition: function(e) {
+		return e.touches.length === 1;
+	}
+
+});
+
+Element.defineCustomEvent('tapend', {
+
+	base: 'touchend',
+
+	condition: function(e) {
+		return e.touches.length === 0;
+	}
+
+});
+
+Element.defineCustomEvent('tapcancel', {
+	base: 'touchcancel',
+});
 
 },{}],29:[function(require,module,exports){
 (function (global){
-"use strict";var hasTouchEvent="ontouchstart"in global,hasTouchList="TouchList"in global,hasTouch="Touch"in global;if(!hasTouchList){var TouchList=function(){this.length=0};TouchList.prototype.identifiedTouch=function(e){return this[0]&&this[0].identifier===e?this[0]:null},TouchList.prototype.item=function(e){return this[e]||null}}if(!hasTouch)var Touch=function(){};var touch=null,target=null,onDocumentMouseDown=function(e){if(null===target){target=e.target,touch=new Touch,touch.identifier=Date.now(),touch.screenX=e.screenX,touch.screenY=e.screenY,touch.clientX=e.clientX,touch.clientY=e.clientY,touch.pageX=e.pageX,touch.pageY=e.pageY,touch.radiusX=0,touch.radiusY=0,touch.rotationAngle=0,touch.force=0,touch.target=target;var t=new TouchList;t.length=1,t[0]=touch;var o=document.createEvent("CustomEvent");o.initCustomEvent("touchstart",!0,!0,null),o.touches=t,o.targetTouches=t,o.changedTouches=t,target.dispatchEvent(o)}},onDocumentMouseMove=function(e){if(target){touch.screenX=e.screenX,touch.screenY=e.screenY,touch.clientX=e.clientX,touch.clientY=e.clientY,touch.pageX=e.pageX,touch.pageY=e.pageY;var t=new TouchList;t.length=1,t[0]=touch;var o=document.createEvent("CustomEvent");o.initCustomEvent("touchmove",!0,!0,null),o.touches=t,o.targetTouches=t,o.changedTouches=t,target.dispatchEvent(o)}},onDocumentMouseUp=function(e){if(target){touch.screenX=e.screenX,touch.screenY=e.screenY,touch.clientX=e.clientX,touch.clientY=e.clientY,touch.pageX=e.pageX,touch.pageY=e.pageY;var t=new TouchList;t.length=1,t[0]=touch;var o=document.createEvent("CustomEvent");o.initCustomEvent("touchend",!0,!0,null),o.touches=new TouchList,o.targetTouches=new TouchList,o.changedTouches=t,target.dispatchEvent(o),target=null}};hasTouchEvent?(delete Element.NativeEvents.mousedown,delete Element.NativeEvents.mousemove,delete Element.NativeEvents.mouseup,Element.defineCustomEvent("mousedown",{base:"touchstart"}).defineCustomEvent("mousemove",{base:"touchmove"}).defineCustomEvent("mouseup",{base:"touchend"})):(document.addEventListener("mousedown",onDocumentMouseDown),document.addEventListener("mousemove",onDocumentMouseMove),document.addEventListener("mouseup",onDocumentMouseUp));
+"use strict"
+
+var hasTouchEvent = 'ontouchstart' in global
+var hasTouchList  = 'TouchList' in global
+var hasTouch      = 'Touch' in global
+
+if (!hasTouchList) {
+
+	var TouchList = function() {
+		this.length = 0
+	}
+
+	TouchList.prototype.identifiedTouch = function(id) {
+		return this[0] && this[0].identifier === id ? this[0] : null
+	}
+
+	TouchList.prototype.item = function(index) {
+		return this[index] || null;
+	}
+}
+
+if (!hasTouch) {
+	var Touch = function() {}
+}
+
+var touch = null
+var target = null
+
+var onDocumentMouseDown = function(e) {
+
+	if (target === null) {
+		target = e.target
+
+		touch = new Touch()
+		touch.identifier = Date.now()
+		touch.screenX = e.screenX
+		touch.screenY = e.screenY
+		touch.clientX = e.clientX
+		touch.clientY = e.clientY
+		touch.pageX = e.pageX
+		touch.pageY = e.pageY
+		touch.radiusX = 0
+		touch.radiusY = 0
+		touch.rotationAngle = 0
+		touch.force = 0
+		touch.target = target
+
+		var list = new TouchList
+		list.length = 1
+		list[0] = touch
+
+		var event = document.createEvent('CustomEvent')
+		event.initCustomEvent('touchstart', true, true, null)
+		event.touches = list
+		event.targetTouches = list
+		event.changedTouches = list
+
+		target.dispatchEvent(event)
+	}
+};
+
+var onDocumentMouseMove = function(e) {
+
+	if (target) {
+
+		touch.screenX = e.screenX
+		touch.screenY = e.screenY
+		touch.clientX = e.clientX
+		touch.clientY = e.clientY
+		touch.pageX = e.pageX
+		touch.pageY = e.pageY
+
+		var list = new TouchList
+		list.length = 1
+		list[0] = touch
+
+		var event = document.createEvent('CustomEvent')
+		event.initCustomEvent('touchmove', true, true, null)
+		event.touches = list
+		event.targetTouches = list
+		event.changedTouches = list
+
+		target.dispatchEvent(event)
+	}
+};
+
+var onDocumentMouseUp = function(e) {
+
+	if (target) {
+
+		touch.screenX = e.screenX
+		touch.screenY = e.screenY
+		touch.clientX = e.clientX
+		touch.clientY = e.clientY
+		touch.pageX = e.pageX
+		touch.pageY = e.pageY
+
+		var list = new TouchList
+		list.length = 1
+		list[0] = touch
+
+		var event = document.createEvent('CustomEvent')
+		event.initCustomEvent('touchend', true, true, null)
+		event.touches = new TouchList
+		event.targetTouches = new TouchList
+		event.changedTouches = list
+
+		target.dispatchEvent(event)
+		target = null
+	}
+};
+
+if (!hasTouchEvent) {
+	document.addEventListener('mousedown', onDocumentMouseDown)
+	document.addEventListener('mousemove', onDocumentMouseMove)
+	document.addEventListener('mouseup', onDocumentMouseUp)
+} else {
+	delete Element.NativeEvents['mousedown'];
+	delete Element.NativeEvents['mousemove'];
+	delete Element.NativeEvents['mouseup'];
+	Element.defineCustomEvent('mousedown', {
+		base: 'touchstart',
+	}).defineCustomEvent('mousemove', {
+		base: 'touchmove'
+	}).defineCustomEvent('mouseup', {
+		base: 'touchend',
+	});
+}
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],30:[function(require,module,exports){
-"use strict";var iScroll=require("iscroll").iScroll,touch=null,IScroll=moobile.Scroller.IScroll=new Class({Extends:moobile.Scroller,scroller:null,initialize:function(o,t,r){return this.parent(o,t,r),this.scroller=new iScroll(t,{scrollbarClass:"scrollbar-",hScroll:"both"===this.options.scroll||"horizontal"===this.options.scroll,vScroll:"both"===this.options.scroll||"vertical"===this.options.scroll,hScrollbar:"both"===this.options.scrollbar||"horizontal"===this.options.scrollbar,vScrollbar:"both"===this.options.scrollbar||"vertical"===this.options.scrollbar,momentum:this.options.momentum,bounce:this.options.bounce,hideScrollbar:!0,fadeScrollbar:!0,checkDOMChanges:!0,onBeforeScrollStart:this.bound("_onBeforeScrollStart"),onScrollStart:this.bound("_onScrollStart"),onScrollMove:this.bound("_onScrollMove"),onScrollEnd:this.bound("_onScrollEnd"),onTouchEnd:this.bound("_onTouchEnd")}),window.addEvent("resize",this.bound("refresh")),this},destroy:function(){return window.removeEvent("resize",this.bound("refresh")),this.scroller.destroy(),this.scroller=null,this.parent()},getName:function(){return"iscroll"},scrollTo:function(o,t,r){return this.scroller.scrollTo(-o,-t,r||0),this},scrollToElement:function(o,t){return this.scroller.scrollToElement(document.id(o),t||0),this},refresh:function(){return this.scroller.refresh(),this},getScroll:function(){return{x:-this.scroller.x,y:-this.scroller.y}},_onBeforeScrollStart:function(o){var t=o.target.get("tag");"input"!==t&&"select"!==t&&"textarea"!==t&&o.preventDefault()},_onScrollStart:function(o){Browser.Features.Touch||(touch={identifier:String.uniqueID(),target:o.target,pageX:o.pageX,pageY:o.pageY,clientX:o.clientX,clientY:o.clientY},o.touches=o.targetTouches=o.changedTouches=[touch]),this.fireEvent("touchstart",o),this.fireEvent("scrollstart")},_onScrollMove:function(o){Browser.Features.Touch||(touch.pageX=o.pageX,touch.pageY=o.pageY,touch.clientX=o.clientX,touch.clientY=o.clientY,o.touches=o.targetTouches=o.changedTouches=[touch]),this.fireEvent("touchmove",o),this.fireEvent("scroll")},_onScrollEnd:function(){this.fireEvent("scroll"),this.fireEvent("scrollend")},_onTouchEnd:function(o){Browser.Features.Touch||(touch.pageX=o.pageX,touch.pageY=o.pageY,touch.clientX=o.clientX,touch.clientY=o.clientY,o.touches=[],o.targetTouches=[],o.changedTouches=[touch],touch=null),this.fireEvent("touchend",o)}});moobile.Scroller.IScroll.supportsCurrentPlatform=function(){return!0};
+"use strict"
+
+var iScroll = require('iscroll').iScroll;
+
+var touch = null;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+var IScroll = moobile.Scroller.IScroll = new Class({
+
+	Extends: moobile.Scroller,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.IScroll#scroller
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scroller: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	initialize: function(contentElement, contentWrapperElement, options) {
+
+		this.parent(contentElement, contentWrapperElement, options)
+
+		this.scroller = new iScroll(contentWrapperElement, {
+			scrollbarClass: 'scrollbar-',
+			hScroll: this.options.scroll === 'both' || this.options.scroll === 'horizontal',
+			vScroll: this.options.scroll === 'both' || this.options.scroll === 'vertical',
+			hScrollbar: this.options.scrollbar === 'both' || this.options.scrollbar === 'horizontal',
+			vScrollbar: this.options.scrollbar === 'both' || this.options.scrollbar === 'vertical',
+			momentum: this.options.momentum,
+			bounce: this.options.bounce,
+			hideScrollbar: true,
+			fadeScrollbar: true,
+			checkDOMChanges: true,
+			onBeforeScrollStart: this.bound('_onBeforeScrollStart'),
+			onScrollStart: this.bound('_onScrollStart'),
+			onScrollMove: this.bound('_onScrollMove'),
+			onScrollEnd: this.bound('_onScrollEnd'),
+			onTouchEnd: this.bound('_onTouchEnd')
+		});
+
+		window.addEvent('resize', this.bound('refresh'));
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	destroy: function() {
+		window.removeEvent('resize', this.bound('refresh'));
+		this.scroller.destroy();
+		this.scroller = null;
+		return this.parent();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getName: function() {
+		return 'iscroll';
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scrollTo: function(x, y, time) {
+		this.scroller.scrollTo(-x, -y, time || 0);
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scrollToElement: function(element, time) {
+		this.scroller.scrollToElement(document.id(element), time || 0);
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	refresh: function() {
+		this.scroller.refresh();
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getScroll: function() {
+		return {
+			x: -this.scroller.x,
+			y: -this.scroller.y
+		};
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onBeforeScrollStart: function(e) {
+		var target = e.target.get('tag');
+		if (target !== 'input' &&
+			target !== 'select' &&
+			target !== 'textarea') {
+			e.preventDefault();
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollStart: function(e) {
+
+		if (!Browser.Features.Touch) {
+
+			touch = {
+				identifier: String.uniqueID(),
+				target: e.target,
+				pageX: e.pageX,
+				pageY: e.pageY,
+				clientX: e.clientX,
+				clientY: e.clientY
+			};
+
+			e.touches = e.targetTouches = e.changedTouches = [touch];
+		}
+
+		this.fireEvent('touchstart', e);
+		this.fireEvent('scrollstart');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollMove: function(e) {
+
+		if (!Browser.Features.Touch) {
+
+			touch.pageX = e.pageX;
+			touch.pageY = e.pageY;
+			touch.clientX = e.clientX;
+			touch.clientY = e.clientY;
+
+			e.touches = e.targetTouches = e.changedTouches = [touch];
+		}
+
+		this.fireEvent('touchmove', e);
+		this.fireEvent('scroll');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScrollEnd: function() {
+		this.fireEvent('scroll');
+		this.fireEvent('scrollend');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd:  function(e) {
+
+		if (!Browser.Features.Touch) {
+
+			touch.pageX = e.pageX;
+			touch.pageY = e.pageY;
+			touch.clientX = e.clientX;
+			touch.clientY = e.clientY;
+
+			e.touches = [];
+			e.targetTouches = [];
+			e.changedTouches = [touch];
+
+			touch = null;
+		}
+
+		this.fireEvent('touchend', e);
+	}
+
+});
+
+moobile.Scroller.IScroll.supportsCurrentPlatform = function() {
+	return true;
+};
 
 },{"iscroll":1}],31:[function(require,module,exports){
-"use strict";var requestFrame=require("moofx/lib/frame").request,cancelFrame=require("moofx/lib/frame").cancel,Native=moobile.Scroller.Native=new Class({Extends:moobile.Scroller,_animating:!1,_animation:null,contentScrollerElement:null,initialize:function(t,e,n){this.parent(t,e,n),this.options.snapToPage&&(this.options.momentum=!1,this.options.bounce=!1),this.contentWrapperElement.setStyle("overflow","auto"),this.contentWrapperElement.setStyle("overflow-scrolling","touch");var o={top:0,left:0,bottom:0,right:0,position:"absolute",overflow:"auto","overflow-scrolling":this.options.momentum?"touch":"auto"};return this.contentScrollerElement=document.createElement("div"),this.contentScrollerElement.setStyles(o),this.contentScrollerElement.wraps(t),this.contentScrollerElement.addEvent("touchstart",this.bound("_onTouchStart")),this.contentScrollerElement.addEvent("touchmove",this.bound("_onTouchMove")),this.contentScrollerElement.addEvent("touchend",this.bound("_onTouchEnd")),this.contentScrollerElement.addEvent("scroll",this.bound("_onScroll")),window.addEvent("orientationchange",this.bound("_onOrientationChange")),this},destroy:function(){this.contentScrollerElement.removeEvent("touchstart",this.bound("_onTouchStart")),this.contentScrollerElement.removeEvent("touchend",this.bound("_onTouchMove")),this.contentScrollerElement.removeEvent("touchend",this.bound("_onTouchEnd")),this.contentScrollerElement.removeEvent("scroll",this.bound("_onScroll")),this.contentScrollerElement=null,this.contentScroller=null,window.addEvent("orientationchange",this.bound("_onOrientationChange")),this.parent()},getName:function(){return"native"},scrollTo:function(t,e,n){t=t||0,e=e||0,n=n||0,this._animating&&(this._animating=!1,cancelFrame(this._animation));var o=Date.now(),i=this,r=this.contentScrollerElement,l=(Math.abs(t),Math.abs(e),r.scrollLeft),c=r.scrollTop,s=t-l,h=e-c,a=function(){if(r.scrollLeft===t&&r.scrollTop===e)return i.fireEvent("scroll"),i._animating=!1,void(i._animation=null);var u=(Date.now()-o)*(t-l)/n,m=(Date.now()-o)*(e-c)/n,v=u+l,E=m+c;(v>=t&&s>=0||t>v&&0>s)&&(v=t),(E>=e&&h>=0||e>E&&0>h)&&(E=e),r.scrollLeft=v,r.scrollTop=E,i._animating=!0,i._animation=requestFrame(a)};return this._animation=requestFrame(a),this},scrollToElement:function(t,e){var n=document.id(t);if(n){var o=t.getPosition(this.contentElement);this.scrollTo(o.x,o.y,e)}return this},refresh:function(){var t=this.contentWrapperElement.getSize(),e=this.contentElement.getScrollSize();if(this.options.momentum){var n="both"===this.options.scroll||"horizontal"===this.options.scroll,o="both"===this.options.scroll||"vertical"===this.options.scroll;o&&e.y<=t.y&&this.contentElement.setStyle("min-height",t.y+1),n&&e.x<=t.x&&this.contentElement.setStyle("min-width",t.x+1)}return this},getSize:function(){return this.contentScrollerElement.getSize()},getScroll:function(){return this.contentScrollerElement.getScroll()},_onScroll:function(){this.fireEvent("scroll")},_onTouchStart:function(t){this.fireEvent("touchstart",t)},_onTouchMove:function(t){this.fireEvent("touchmove",t)},_onTouchEnd:function(t){this.fireEvent("touchend",t)},_onOrientationChange:function(){this.refresh()}});moobile.Scroller.Native.supportsCurrentPlatform=function(){return Browser.Platform.ios&&"WebkitOverflowScrolling"in document.createElement("div").style};
+"use strict"
+
+var requestFrame = require('moofx/lib/frame').request;
+var cancelFrame  = require('moofx/lib/frame').cancel;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+var Native = moobile.Scroller.Native = new Class({
+
+	Extends: moobile.Scroller,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_animating: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_animation: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller.Native#contentScrollerElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	contentScrollerElement: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	initialize: function(contentElement, contentWrapperElement, options) {
+
+		this.parent(contentElement, contentWrapperElement, options);
+
+		if (this.options.snapToPage) {
+			this.options.momentum = false;
+			this.options.bounce = false;
+		}
+
+		this.contentWrapperElement.setStyle('overflow', 'auto');
+		this.contentWrapperElement.setStyle('overflow-scrolling', 'touch');
+
+		var styles = {
+			'top': 0, 'left': 0, 'bottom': 0, 'right': 0,
+			'position': 'absolute',
+			'overflow': 'auto',
+			'overflow-scrolling': this.options.momentum ? 'touch' : 'auto'
+		};
+
+		this.contentScrollerElement = document.createElement('div');
+		this.contentScrollerElement.setStyles(styles);
+		this.contentScrollerElement.wraps(contentElement);
+
+		this.contentScrollerElement.addEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentScrollerElement.addEvent('touchmove', this.bound('_onTouchMove'));
+		this.contentScrollerElement.addEvent('touchend', this.bound('_onTouchEnd'));
+		this.contentScrollerElement.addEvent('scroll', this.bound('_onScroll'));
+
+		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	destroy: function() {
+
+		this.contentScrollerElement.removeEvent('touchstart', this.bound('_onTouchStart'));
+		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchMove'));
+		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchEnd'));
+		this.contentScrollerElement.removeEvent('scroll', this.bound('_onScroll'));
+		this.contentScrollerElement = null;
+
+		this.contentScroller = null;
+
+		window.addEvent('orientationchange', this.bound('_onOrientationChange'));
+
+		this.parent();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getName: function() {
+		return 'native';
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scrollTo: function(x, y, time) {
+
+		x = x || 0;
+		y = y || 0;
+		time = time || 0;
+
+		if (this._animating) {
+			this._animating = false;
+			cancelFrame(this._animation);
+		}
+
+		var now = Date.now();
+
+		var self = this;
+		var elem = this.contentScrollerElement;
+
+		var absX = Math.abs(x);
+		var absY = Math.abs(y);
+
+		var currX = elem.scrollLeft;
+		var currY = elem.scrollTop;
+
+		var dirX = x - currX;
+		var dirY = y - currY;
+
+		var update = function() {
+
+			if (elem.scrollLeft === x &&
+				elem.scrollTop === y) {
+				self.fireEvent('scroll');
+				self._animating = false;
+				self._animation = null;
+				return;
+			}
+
+			var valueX = ((Date.now() - now) * (x - currX) / time);
+			var valueY = ((Date.now() - now) * (y - currY) / time);
+			var scrollX = valueX + currX;
+			var scrollY = valueY + currY;
+
+			if ((scrollX >= x && dirX >= 0) || (scrollX < x && dirX < 0)) scrollX = x;
+			if ((scrollY >= y && dirY >= 0) || (scrollY < y && dirY < 0)) scrollY = y;
+
+			elem.scrollLeft = scrollX;
+			elem.scrollTop  = scrollY;
+
+			self._animating = true;
+			self._animation = requestFrame(update);
+		};
+
+		this._animation = requestFrame(update);
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scrollToElement: function(element, time) {
+
+		var elem = document.id(element);
+		if (elem) {
+			var p = element.getPosition(this.contentElement);
+			this.scrollTo(p.x, p.y, time);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	refresh: function() {
+
+		var wrapperSize = this.contentWrapperElement.getSize();
+		var contentSize = this.contentElement.getScrollSize();
+
+		if (this.options.momentum) {
+			var scrollX = this.options.scroll === 'both' || this.options.scroll === 'horizontal';
+			var scrollY = this.options.scroll === 'both' || this.options.scroll === 'vertical';
+			if (scrollY && contentSize.y <= wrapperSize.y) this.contentElement.setStyle('min-height', wrapperSize.y + 1);
+			if (scrollX && contentSize.x <= wrapperSize.x) this.contentElement.setStyle('min-width',  wrapperSize.x + 1);
+		}
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getSize: function() {
+		return this.contentScrollerElement.getSize();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getScroll: function() {
+		return this.contentScrollerElement.getScroll();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onScroll: function() {
+		this.fireEvent('scroll');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchStart: function(e) {
+		this.fireEvent('touchstart', e);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchMove: function(e) {
+		this.fireEvent('touchmove', e);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onTouchEnd: function(e) {
+		this.fireEvent('touchend', e);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	_onOrientationChange: function() {
+		this.refresh();
+	}
+
+});
+
+moobile.Scroller.Native.supportsCurrentPlatform = function() {
+	return Browser.Platform.ios && 'WebkitOverflowScrolling' in document.createElement('div').style;
+};
 
 },{"moofx/lib/frame":2}],32:[function(require,module,exports){
-"use strict";var Scroller=moobile.Scroller=new Class({Extends:moobile.Firer,contentElement:null,contentWrapperElement:null,options:{scroll:"vertial",scrollbar:"vertical",momentum:!0,bounce:!0},initialize:function(e,r,t){return this.contentElement=document.id(e),this.contentWrapperElement=document.id(r),this.contentWrapperElement.addClass("scrollable"),this.setOptions(t),this},destroy:function(){return this.contentElement=null,this.contentWrapperElement=null,this},getName:function(){throw new Error("You must override this method")},scrollTo:function(e,r,t){throw new Error("You must override this method")},scrollToElement:function(e,r){throw new Error("You must override this method")},refresh:function(){throw new Error("You must override this method")},getScroll:function(){throw new Error("You must override this method")}});Scroller.create=function(e,r,t,o){var n=null;t=t?Array.from(t):["IScroll.Android","Native","IScroll"];for(var l=0;l<t.length;l++){var i=Class.parse("moobile.Scroller."+t[l]);if(null===i)throw new Error("The scroller scroller "+t[l]+" does not exists");if(void 0===i.supportsCurrentPlatform||i.supportsCurrentPlatform&&i.supportsCurrentPlatform.call(this)){n=i;break}}if(null===n)throw new Error("A proper scroller was not found");return new n(e,r,o)},window.addEvent("domready",function(e){var r={};document.addEvent("touchstart",function(e){for(var t=e.changedTouches,o=0,n=t.length;n>o;o++){var l=t[o],i=l.target,s=l.identifier;if(i.tagName.match(/input|textarea|select/i))return void(r[s]=!1);i.hasClass("scrollable")||i.getParent(".scrollable")?r[s]=!0:(scroll[s]=!1,e.preventDefault())}}),document.addEvent("touchmove",function(e){for(var t=e.changedTouches,o=0,n=t.length;n>o;o++)r[t[o].identifier]===!1&&e.preventDefault()}),document.addEvent("touchend",function(e){for(var t=e.changedTouches,o=0,n=t.length;n>o;o++)delete r[t[o].identifier]})});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Scroller/Scroller
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+var Scroller = moobile.Scroller = new Class({
+
+	Extends: moobile.Firer,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#contentElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	contentElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#contentWrapperElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	contentWrapperElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		scroll: 'vertial',
+		scrollbar: 'vertical',
+		momentum: true,
+		bounce: true
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#initialize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	initialize: function(contentElement, contentWrapperElement, options) {
+		this.contentElement = document.id(contentElement);
+		this.contentWrapperElement = document.id(contentWrapperElement);
+		this.contentWrapperElement.addClass('scrollable');
+		this.setOptions(options);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#destroy
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	destroy: function() {
+		this.contentElement = null;
+		this.contentWrapperElement = null;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getName: function() {
+		throw new Error('You must override this method');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#scrollTo
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scrollTo: function(x, y, time) {
+		throw new Error('You must override this method');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#scrollToElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	scrollToElement: function(element, time) {
+		throw new Error('You must override this method');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#refresh
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	refresh: function() {
+		throw new Error('You must override this method');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Scroller/Scroller#getScroll
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getScroll: function() {
+		throw new Error('You must override this method');
+	}
+
+});
+
+Scroller.create = function(contentElement, contentWrapperElement, scrollers, options) {
+
+	var scroller = null;
+
+	scrollers = scrollers ? Array.from(scrollers) : ['IScroll.Android', 'Native', 'IScroll'];
+
+	for (var i = 0; i < scrollers.length; i++) {
+
+		var candidate = Class.parse('moobile.Scroller.' + scrollers[i]);
+		if (candidate === null) {
+			throw new Error('The scroller scroller ' + scrollers[i] + ' does not exists');
+		}
+
+		if (candidate.supportsCurrentPlatform === undefined ||
+			candidate.supportsCurrentPlatform &&
+			candidate.supportsCurrentPlatform.call(this)) {
+			scroller = candidate;
+			break;
+		}
+	}
+
+	if (scroller === null) {
+		throw new Error('A proper scroller was not found');
+	}
+
+	return new scroller(contentElement, contentWrapperElement, options);
+};
+
+window.addEvent('domready', function(e) {
+
+	var scrolls = {};
+
+	document.addEvent('touchstart', function(e) {
+
+		var touches = e.changedTouches;
+
+		for (var i = 0, l = touches.length; i < l; i++) {
+
+			var touch = touches[i];
+			var target = touch.target;
+			var identifier = touch.identifier;
+
+			if (target.tagName.match(/input|textarea|select/i)) {
+				scrolls[identifier] = false;
+				return;
+			}
+
+			if (target.hasClass('scrollable') ||
+				target.getParent('.scrollable')) {
+				scrolls[identifier] = true;
+			} else {
+				scroll[identifier] = false;
+				e.preventDefault();
+			}
+		}
+	});
+
+	document.addEvent('touchmove', function(e) {
+		var touches = e.changedTouches;
+		for (var i = 0, l = touches.length; i < l; i++) {
+			if (scrolls[touches[i].identifier] === false) e.preventDefault();
+		}
+	});
+
+	document.addEvent('touchend', function(e) {
+		var touches = e.changedTouches;
+		for (var i = 0, l = touches.length; i < l; i++) {
+			delete scrolls[touches[i].identifier];
+		}
+	});
+
+});
 
 },{}],33:[function(require,module,exports){
-"use strict";var element=null,configs={},Theme=moobile.Theme={init:function(){var e=element.getStyle("content");e&&(e=e.replace(/^\'/,""),e=e.replace(/\'$/,""),configs=JSON.decode(e))},getName:function(){return configs.name||null}};document.addEvent("domready",function(){element=document.createElement("div"),element.addClass("theme"),element.inject(document.body),Theme.init()});
+"use strict"
+
+var element = null;
+var configs = {};
+
+var Theme = moobile.Theme = {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	init: function() {
+		var content = element.getStyle('content');
+		if (content) {
+			content = content.replace(/^\'/, '');
+			content = content.replace(/\'$/, '');
+			configs = JSON.decode(content);
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Theme/Theme#getName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getName: function() {
+		return configs['name'] || null;
+	}
+
+};
+
+document.addEvent('domready', function() {
+	element = document.createElement('div');
+	element.addClass('theme');
+	element.inject(document.body);
+	Theme.init();
+})
+
 
 },{}],34:[function(require,module,exports){
-"use strict";var ViewControllerQueue=moobile.ViewControllerQueue=new Class({Extends:moobile.ViewControllerStack,options:{length:1/0},loadView:function(){this.view=new moobile.ViewQueue},prependViewController:function(e,i){if(!i){var o=this.getChildViewControllerAt(0);i=o?o.getViewTransition():new ViewTransition.None}return e.setViewTransition(i),this.addChildViewControllerAt(e,0),this.popViewController(),this},didAddChildViewController:function(e){this.parent(e),e.setViewControllerQueue(this)},didRemoveChildViewController:function(e){this.parent(e),e.setViewControllerQueue(null)},_onPushTransitionComplete:function(){this.parent();var e=this.options.length;if(e!==1/0){var i=this.getChildViewControllers();if(i.length>e)for(var o=i.length-e,t=0;o>t;t++)i[t].removeFromParentViewController(!0)}}});Class.refactor(moobile.ViewController,{_viewControllerQueue:null,setViewControllerQueue:function(e){if(this._viewControllerQueue===e)return this;if(this.viewControllerQueueWillChange(e),this._viewControllerQueue=e,this.viewControllerQueueDidChange(e),this instanceof moobile.ViewControllerQueue)return this;var i=function(e){return!(e instanceof moobile.ViewControllerQueue)};return this.getChildViewControllers().filter(i).invoke("setViewControllerQueue",e),this},getViewControllerQueue:function(){return this._viewControllerQueue},viewControllerQueueWillChange:function(e){},viewControllerQueueDidChange:function(e){},willAddChildViewController:function(e){this.previous(e),e.setViewControllerQueue(this._viewControllerQueue)},willRemoveChildViewController:function(e){this.previous(e),e.setViewControllerQueue(null)}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerQueue
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var ViewControllerQueue = moobile.ViewControllerQueue = new Class({
+
+	Extends: moobile.ViewControllerStack,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	options: {
+		length: Infinity
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	loadView: function() {
+		this.view = new moobile.ViewQueue();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3
+	 */
+	prependViewController: function(viewController, viewTransition) {
+
+		// todo do not pop if not necessary
+
+		if (!viewTransition) {
+			var childViewController = this.getChildViewControllerAt(0);
+			if (childViewController) {
+				viewTransition = childViewController.getViewTransition();
+			} else {
+				viewTransition = new ViewTransition.None;
+			}
+		}
+
+		viewController.setViewTransition(viewTransition);
+
+		this.addChildViewControllerAt(viewController, 0);
+		this.popViewController();
+
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerQueue(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerQueue(null);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onPushTransitionComplete: function() {
+
+		this.parent();
+
+		var length = this.options.length;
+		if (length === Infinity)
+			return;
+
+		var children = this.getChildViewControllers();
+		if (children.length > length) {
+			var diff = children.length - length;
+			for (var i = 0; i < diff; i++) {
+				children[i].removeFromParentViewController(true);
+			}
+		}
+	},
+
+});
+
+Class.refactor(moobile.ViewController, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	_viewControllerQueue: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/setViewControllerQueue
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	setViewControllerQueue: function(viewControllerQueue) {
+
+		if (this._viewControllerQueue === viewControllerQueue)
+			return this;
+
+		this.viewControllerQueueWillChange(viewControllerQueue);
+		this._viewControllerQueue = viewControllerQueue;
+		this.viewControllerQueueDidChange(viewControllerQueue);
+
+		if (this instanceof moobile.ViewControllerQueue)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof moobile.ViewControllerQueue);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerQueue', viewControllerQueue);
+
+		return this;
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	getViewControllerQueue: function() {
+		return this._viewControllerQueue;
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	viewControllerQueueWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	viewControllerQueueDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerQueue(this._viewControllerQueue);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  1.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerQueue(null);
+	}
+
+});
 
 },{}],35:[function(require,module,exports){
-"use strict";var ViewControllerStack=moobile.ViewControllerStack=new Class({Extends:moobile.ViewController,_animating:!1,loadView:function(){this.view=new moobile.ViewStack},pushViewController:function(t,e){if(this._animating)return this;if(this.getTopViewController()===t)return this;var i=this.getChildViewControllers();this.willPushViewController(t),this.addChildViewController(t);var n=t,o=i.getLastItemAtOffset(1),r=n.getView(),l=o?o.getView():null;return this._animating=!0,1===i.length?(this._onPushTransitionStart(),this._onPushTransitionComplete(),this):(e=e||new ViewTransition.None,e.addEvent("start:once",this.bound("_onPushTransitionStart")),e.addEvent("complete:once",this.bound("_onPushTransitionComplete")),e.enter(r,l,this.view),n.setViewTransition(e),this)},_onPushTransitionStart:function(){var t=this.getChildViewControllers(),e=t.getLastItemAtOffset(0),i=t.getLastItemAtOffset(1);i&&i.viewWillLeave(),e.viewWillEnter()},_onPushTransitionComplete:function(){var t=this.getChildViewControllers(),e=t.getLastItemAtOffset(0),i=t.getLastItemAtOffset(1);i&&i.viewDidLeave(),this.didPushViewController(e),e.viewDidEnter(),this._animating=!1},popViewController:function(){if(this._animating)return this;var t=this.getChildViewControllers();if(t.length<=1)return this;var e=t.getLastItemAtOffset(0),i=t.getLastItemAtOffset(1);this.willPopViewController(e),this._animating=!0;var n=e.getViewTransition();return n.addEvent("start:once",this.bound("_onPopTransitionStart")),n.addEvent("complete:once",this.bound("_onPopTransitionComplete")),n.leave(i.getView(),e.getView(),this.view),this},popViewControllerUntil:function(t){if(this._animating)return this;var e=this.getChildViewControllers();if(e.length<=1)return this;var i=this.getChildViewControllerIndex(t);if(i>-1)for(var n=e.length-2;n>i;n--){var o=this.getChildViewControllerAt(n);o.viewWillLeave(),o.viewDidLeave(),o.removeFromParentViewController(),o.destroy(),o=null}return this.popViewController(),this},_onPopTransitionStart:function(t){var e=this.getChildViewControllers(),i=e.getLastItemAtOffset(1),n=e.getLastItemAtOffset(0);i.viewWillEnter(),n.viewWillLeave()},_onPopTransitionComplete:function(t){var e=this.getChildViewControllers(),i=e.getLastItemAtOffset(0),n=e.getLastItemAtOffset(1);n.viewDidEnter(),i.viewDidLeave(),i.removeFromParentViewController(),this.didPopViewController(i),i.destroy(),i=null,this._animating=!1},getTopViewController:function(){return this.getChildViewControllers().getLast()},didAddChildViewController:function(t){this.parent(t),t.setViewControllerStack(this)},didRemoveChildViewController:function(t){this.parent(t),t.setViewControllerStack(null)},willPushViewController:function(t){},didPushViewController:function(t){},willPopViewController:function(t){},didPopViewController:function(t){}});Class.refactor(moobile.ViewController,{_viewControllerStack:null,setViewControllerStack:function(t){if(this._viewControllerStack===t)return this;if(this.parentViewControllerStackWillChange(t),this._viewControllerStack=t,this.parentViewControllerStackDidChange(t),this instanceof moobile.ViewControllerStack)return this;var e=function(t){return!(t instanceof moobile.ViewControllerStack)};return this.getChildViewControllers().filter(e).invoke("setViewControllerStack",t),this},getViewControllerStack:function(){return this._viewControllerStack},parentViewControllerStackWillChange:function(t){},parentViewControllerStackDidChange:function(t){},willAddChildViewController:function(t){this.previous(t),t.setViewControllerStack(this._viewControllerStack)},willRemoveChildViewController:function(t){this.previous(t),t.setViewControllerStack(null)}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var ViewControllerStack = moobile.ViewControllerStack = new Class({
+
+	Extends: moobile.ViewController,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_animating: false,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	loadView: function() {
+		this.view = new moobile.ViewStack();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#pushmoobile.ViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	pushViewController: function(viewController, viewTransition) {
+
+		if (this._animating)
+			return this;
+
+		if (this.getTopViewController() === viewController)
+			return this;
+
+		var childViewControllers = this.getChildViewControllers();
+
+		this.willPushViewController(viewController);
+		this.addChildViewController(viewController);
+
+		var viewControllerPushed = viewController;
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+
+		var viewToShow = viewControllerPushed.getView();
+		var viewToHide = viewControllerBefore
+					   ? viewControllerBefore.getView()
+					   : null;
+
+		this._animating = true; // needs to be set before the transition happens
+
+		if (childViewControllers.length === 1) {
+			this._onPushTransitionStart();
+			this._onPushTransitionComplete();
+			return this;
+		}
+
+		viewTransition = viewTransition || new Moobile.ViewTransition.None();
+		viewTransition.addEvent('start:once', this.bound('_onPushTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPushTransitionComplete'));
+		viewTransition.enter(
+			viewToShow,
+			viewToHide,
+			this.view
+		);
+
+		viewControllerPushed.setViewTransition(viewTransition);
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onPushTransitionStart: function() {
+
+		var childViewControllers = this.getChildViewControllers();
+		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+		if (viewControllerBefore) {
+			viewControllerBefore.viewWillLeave();
+		}
+
+		viewControllerPushed.viewWillEnter();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onPushTransitionComplete: function() {
+
+		this._animating = false;
+		console.log('_onPushTransitionComplete');
+
+		var childViewControllers = this.getChildViewControllers();
+		var viewControllerPushed = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+		if (viewControllerBefore) {
+			viewControllerBefore.viewDidLeave();
+		}
+
+		this.didPushViewController(viewControllerPushed);
+
+		viewControllerPushed.viewDidEnter();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#popViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	popViewController: function() {
+
+		if (this._animating)
+			return this;
+
+		var childViewControllers = this.getChildViewControllers();
+		if (childViewControllers.length <= 1)
+			return this;
+
+		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+
+		this.willPopViewController(viewControllerPopped);
+
+		this._animating = true; // needs to be set before the transition happens
+
+		var viewTransition = viewControllerPopped.getViewTransition();
+		viewTransition.addEvent('start:once', this.bound('_onPopTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('_onPopTransitionComplete'));
+		viewTransition.leave(
+			viewControllerBefore.getView(),
+			viewControllerPopped.getView(),
+			this.view
+		);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#popViewControllerUntil
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	popViewControllerUntil: function(viewController) {
+
+		if (this._animating)
+			return this;
+
+		var childViewControllers = this.getChildViewControllers();
+		if (childViewControllers.length <= 1)
+			return this;
+
+		var viewControllerIndex = this.getChildViewControllerIndex(viewController);
+		if (viewControllerIndex > -1) {
+			for (var i = childViewControllers.length - 2; i > viewControllerIndex; i--) {
+				var viewControllerToRemove = this.getChildViewControllerAt(i);
+				viewControllerToRemove.viewWillLeave();
+				viewControllerToRemove.viewDidLeave();
+				viewControllerToRemove.removeFromParentViewController();
+				viewControllerToRemove.destroy();
+				viewControllerToRemove = null;
+			}
+		}
+
+		this.popViewController();
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onPopTransitionStart: function(e) {
+		var childViewControllers = this.getChildViewControllers();
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
+		viewControllerBefore.viewWillEnter();
+		viewControllerPopped.viewWillLeave();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_onPopTransitionComplete: function(e) {
+
+		var childViewControllers = this.getChildViewControllers();
+		var viewControllerPopped = childViewControllers.getLastItemAtOffset(0);
+		var viewControllerBefore = childViewControllers.getLastItemAtOffset(1);
+		viewControllerBefore.viewDidEnter();
+		viewControllerPopped.viewDidLeave();
+		viewControllerPopped.removeFromParentViewController();
+
+		this.didPopViewController(viewControllerPopped);
+
+		viewControllerPopped.destroy();
+		viewControllerPopped = null;
+
+		this._animating = false;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#getTopViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getTopViewController: function() {
+		return this.getChildViewControllers().getLast();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerStack(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildViewController: function(viewController) {
+		this.parent(viewController);
+		viewController.setViewControllerStack(null);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#willPushViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willPushViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#didPushViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didPushViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#willPopViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willPopViewController: function(viewController) {
+		
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#didPopViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didPopViewController: function(viewController) {
+
+	}
+
+});
+
+Class.refactor(moobile.ViewController, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	_viewControllerStack: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#setViewControllerStack
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setViewControllerStack: function(viewControllerStack) {
+
+		if (this._viewControllerStack === viewControllerStack)
+			return this;
+
+		this.parentViewControllerStackWillChange(viewControllerStack);
+		this._viewControllerStack = viewControllerStack;
+		this.parentViewControllerStackDidChange(viewControllerStack);
+
+		if (this instanceof moobile.ViewControllerStack)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof moobile.ViewControllerStack);
+		};
+
+		this.getChildViewControllers().filter(by).invoke('setViewControllerStack', viewControllerStack);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#getViewControllerStack
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getViewControllerStack: function() {
+		return this._viewControllerStack;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#parentViewControllerStackWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentViewControllerStackWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewController/moobile.ViewControllerStack#parentViewControllerStackDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentViewControllerStackDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willAddChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerStack(this._viewControllerStack);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+		this.previous(viewController);
+		viewController.setViewControllerStack(null);
+	}
+
+});
 
 },{}],36:[function(require,module,exports){
-"use strict";var ViewController=moobile.ViewController=new Class({Extends:moobile.Firer,__id:null,__name:null,__title:null,__image:null,__viewReady:!1,__viewTransition:null,__parent:null,__children:[],__modal:!1,__modalViewController:null,view:null,initialize:function(e,i){return this.__name=i,this.setOptions(e),this.loadView(),this.view&&(this.view.addEvent("didbecomeready",this.bound("__onViewDidBecomeReady")),this.view.addEvent("didupdatelayout",this.bound("__onViewDidUpdateLayout")),this.viewDidLoad()),window.addEvent("orientationchange",this.bound("__onWindowOrientationChange")),this},loadView:function(){null===this.view&&(this.view=new moobile.View)},showView:function(){return this.view.show(),this},hideView:function(){return this.view.hide(),this},addChildViewController:function(e){return this._addChildViewController(e)},addChildViewControllerAfter:function(e,i){var t=this.getChildViewControllerIndex(i);return-1===t?this:this._addChildViewController(e,i,"after")},addChildViewControllerBefore:function(e,i){var t=this.getChildViewControllerIndex(i);return-1===t?this:this._addChildViewController(e,i,"before")},addChildViewControllerAt:function(e,i){i>this.__children.length?i=this.__children.length:0>i&&(i=0);var t=this.getChildViewControllerAt(i);return t?this.addChildViewControllerBefore(e,t):this.addChildViewController(e)},_addChildViewController:function(e,i,t){if(e.removeFromParentViewController(),this.willAddChildViewController(e),i)switch(this.__children.splice(this.getChildViewControllerIndex(i),0,e),t){case"before":this.view.addChildComponentBefore(e.view,i.view);break;case"after":this.view.addChildComponentAfter(e.view,i.view)}else this.__children.push(e),this.view.addChildComponent(e.view);return e.setParentViewController(this),this.didAddChildViewController(e),this},getChildViewController:function(e){return this.__children.find(function(i){return i.getName()===e})},getChildViewControllerAt:function(e){return this.__children[e]||null},getChildViewControllerIndex:function(e){return this.__children.indexOf(e)},getChildViewControllers:function(){return this.__children},hasChildViewController:function(e){return this.__children.contains(e)},removeChildViewController:function(e,i){if(!this.hasChildViewController(e))return this;this.willRemoveChildViewController(e),this.__children.erase(e),e.setParentViewController(null);var t=e.getView();return t&&t.removeFromParentComponent(),this.didRemoveChildViewController(e),i&&e.destroy(),this},removeFromParentViewController:function(e){return this.__parent&&this.__parent.removeChildViewController(this,e),this},removeAllChildViewControllers:function(e){return this.__children.filter(function(){return!0}).invoke("removeFromParentViewController",e),this},presentModalViewController:function(e,i){if(this.__modalViewController)return this;var t=this.view.getWindow();if(null===t)throw new Error("The view to present is not ready");this.willPresentModalViewController(e),this.__modalViewController=e,this.__modalViewController.setParentViewController(this),this.__modalViewController.setModal(!0);var n=this.__modalViewController.getView(),o=t.getChildComponentsByType(View).getLastItemAtOffset(0);return t.addChildComponent(n),i=i||new ViewTransition.Cover,i.addEvent("start:once",this.bound("__onPresentTransitionStart")),i.addEvent("complete:once",this.bound("__onPresentTransitionCompleted")),i.enter(n,o,t),e.setViewTransition(i),this},dismissModalViewController:function(){if(null===this.__modalViewController)return this;var e=this.view.getWindow();if(null===e)throw new Error("The view to dismiss is not ready");this.willDismissModalViewController();var i=e.getChildComponentsByType(View).getLastItemAtOffset(1),t=this.__modalViewController.getView(),n=this.__modalViewController.getViewTransition();return n.addEvent("start:once",this.bound("__onDismissTransitionStart")),n.addEvent("complete:once",this.bound("__onDismissTransitionCompleted")),n.leave(i,t,e),this},getName:function(){return this.__name},getId:function(){var e=this.getName();return e?e:(null===this.__id&&(this.__id=String.uniqueID()),this.__id)},setTitle:function(e){return this.__title===e?this:(e=moobile.Text.from(e),this.__title&&this.__title.hasParentComponent()&&this.__title.replaceWithComponent(e,!0),this.__title=e,this)},getTitle:function(){return this.__title},setImage:function(e){return this.__image===e?this:(e=moobile.Image.from(e),this.__image&&this.__image.hasParentComponent()&&this.__image.replaceWithComponent(e,!0),this.__image=e,this)},getImage:function(){return this.__image},setModal:function(e){this.__modal=e},isModal:function(){return this.__modal},isViewReady:function(){return this.__viewReady},getView:function(){return this.view},setViewTransition:function(e){return this.__viewTransition=e,this},getViewTransition:function(){return this.__viewTransition},setParentViewController:function(e){return this.parentViewControllerWillChange(e),this.__parent=e,this.parentViewControllerDidChange(e),this},getParentViewController:function(){return this.__parent},willAddChildViewController:function(e){},didAddChildViewController:function(e){},willRemoveChildViewController:function(e){},didRemoveChildViewController:function(e){},parentViewControllerWillChange:function(e){},parentViewControllerDidChange:function(e){},willPresentModalViewController:function(e){},didPresentModalViewController:function(e){},willDismissModalViewController:function(){},didDismissModalViewController:function(){},viewDidLoad:function(){},viewDidBecomeReady:function(){},viewDidUpdateLayout:function(){},viewWillEnter:function(){},viewDidEnter:function(){},viewWillLeave:function(){},viewDidLeave:function(){},viewDidRotate:function(e){},destroy:function(){window.removeEvent("orientationchange",this.bound("__onWindowOrientationChange")),this.removeAllChildViewControllers(!0),this.removeFromParentViewController(),this.__modalViewController&&(this.__modalViewController.destroy(),this.__modalViewController=null),this.view.removeEvent("didbecomeready",this.bound("__onViewDidBecomeReady")),this.view.removeEvent("didupdatelayout",this.bound("__onViewDidUpdateLayout")),this.view.destroy(),this.view=null,this.__title&&(this.__title.destroy(),this.__title=null),this.__image&&(this.__image.destroy(),this.__image=null),this.__parent=null,this.__children=null,this.__viewTransition=null},__onPresentTransitionStart:function(){this.__modalViewController.viewWillEnter()},__onPresentTransitionCompleted:function(){this.__modalViewController.viewDidEnter(),this.didPresentModalViewController()},__onDismissTransitionStart:function(){this.__modalViewController.viewWillLeave()},__onDismissTransitionCompleted:function(){this.__modalViewController.viewDidLeave(),this.__modalViewController.setParentViewController(this),this.__modalViewController.setModal(!1),this.__modalViewController.destroy(),this.__modalViewController=null,this.didDismissModalViewController()},__onViewDidBecomeReady:function(){this.viewDidBecomeReady()},__onViewDidUpdateLayout:function(){this.viewDidUpdateLayout()},__onWindowOrientationChange:function(e){var i=90===Math.abs(window.orientation)?"landscape":"portrait";this.didRotate&&(this.didRotate(i),console.log('[DEPRECATION NOTICE] The method "didRotate" will be removed in 0.4, use the method "viewDidRotate" instead')),this.viewDidRotate(i)}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/ViewController/ViewController
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var ViewController = moobile.ViewController = new Class({
+
+	Extends: moobile.Firer,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__id: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__name: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__title: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__image: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__viewReady: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__viewTransition: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__parent: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__children: [],
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#modal
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__modal: false,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#modalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__modalViewController: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#view
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	view: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#initialize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	initialize: function(options, name) {
+
+		this.__name = name;
+
+		this.setOptions(options);
+
+		this.loadView();
+		if (this.view) {
+			this.view.addEvent('didbecomeready', this.bound('__onViewDidBecomeReady'));
+			this.view.addEvent('didupdatelayout', this.bound('__onViewDidUpdateLayout'));
+			this.viewDidLoad();
+		}
+
+		window.addEvent('orientationchange', this.bound('__onWindowOrientationChange'));
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#loadView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	loadView: function() {
+		if (this.view === null) {
+			this.view = new moobile.View();
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#showView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	showView: function() {
+		this.view.show();
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#hideView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.1
+	 */
+	hideView: function() {
+		this.view.hide();
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildViewController: function(viewController) {
+		return this._addChildViewController(viewController);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerAfter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildViewControllerAfter: function(viewController, after) {
+
+		var index = this.getChildViewControllerIndex(after);
+		if (index === -1)
+			return this;
+
+		return this._addChildViewController(viewController, after, 'after');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerBefore
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildViewControllerBefore: function(viewController, before) {
+
+		var index = this.getChildViewControllerIndex(before);
+		if (index === -1)
+			return this;
+
+		return this._addChildViewController(viewController, before, 'before');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#addChildViewControllerAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildViewControllerAt: function(viewController, index) {
+
+		if (index > this.__children.length) {
+			index = this.__children.length;
+		} else if (index < 0) {
+			index = 0;
+		}
+
+		var before = this.getChildViewControllerAt(index);
+		if (before) {
+			return this.addChildViewControllerBefore(viewController, before);
+		}
+
+		return this.addChildViewController(viewController);
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_addChildViewController: function(viewController, context, where) {
+
+		viewController.removeFromParentViewController();
+
+		this.willAddChildViewController(viewController);
+
+		if (context) {
+
+			switch (where) {
+				case 'before':
+					this.__children.splice(this.getChildViewControllerIndex(context), 1, viewController, context);
+					this.view.addChildComponentBefore(viewController.view, context.view);
+					break;
+				case 'after':
+					this.__children.splice(this.getChildViewControllerIndex(context), 1, context, viewController);
+					this.view.addChildComponentAfter(viewController.view, context.view);
+					break;
+			}
+
+		} else {
+			this.__children.push(viewController);
+			this.view.addChildComponent(viewController.view);
+		}
+
+		viewController.setParentViewController(this);
+
+		this.didAddChildViewController(viewController);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildViewController: function(name) {
+		return this.__children.find(function(viewController) { return viewController.getName() === name; });
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewControllerAt
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildViewControllerAt: function(index) {
+		return this.__children[index] || null;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewControllerIndex
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildViewControllerIndex: function(viewController) {
+		return this.__children.indexOf(viewController);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getChildViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getChildViewControllers: function() {
+		return this.__children;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#hasChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	hasChildViewController: function(viewController) {
+		return this.__children.contains(viewController);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeChildViewController: function(viewController, destroy) {
+
+		if (!this.hasChildViewController(viewController))
+			return this;
+
+		this.willRemoveChildViewController(viewController);
+		this.__children.erase(viewController);
+		viewController.setParentViewController(null);
+
+		var view = viewController.getView();
+		if (view) {
+			view.removeFromParentComponent();
+		}
+
+		this.didRemoveChildViewController(viewController);
+
+		if (destroy) {
+			viewController.destroy();
+		}
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeFromParentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	removeFromParentViewController: function(destroy) {
+		if (this.__parent) this.__parent.removeChildViewController(this, destroy);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#removeAllChildViewControllers
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	removeAllChildViewControllers: function(destroy) {
+
+		this.__children.filter(function() {
+			return true;
+		}).invoke('removeFromParentViewController', destroy);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#presentModalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	presentModalViewController: function(viewController, viewTransition) {
+
+		if (this.__modalViewController)
+			return this;
+
+		var parentView = this.view.getWindow();
+		if (parentView === null)
+			throw new Error('The view to present is not ready');
+
+		this.willPresentModalViewController(viewController);
+
+		this.__modalViewController = viewController;
+		this.__modalViewController.setParentViewController(this);
+		this.__modalViewController.setModal(true);
+
+		var viewToShow = this.__modalViewController.getView();
+		var viewToHide = parentView.getChildComponentsByType(View).getLastItemAtOffset(0);
+
+		parentView.addChildComponent(viewToShow);
+
+		viewTransition = viewTransition || new ViewTransition.Cover;
+		viewTransition.addEvent('start:once', this.bound('__onPresentTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('__onPresentTransitionCompleted'));
+		viewTransition.enter(
+			viewToShow,
+			viewToHide,
+			parentView
+		);
+
+		viewController.setViewTransition(viewTransition);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#dismissModalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	dismissModalViewController: function() {
+
+		if (this.__modalViewController === null)
+			return this;
+
+		var parentView = this.view.getWindow();
+		if (parentView === null)
+			throw new Error('The view to dismiss is not ready');
+
+		this.willDismissModalViewController()
+
+		var viewToShow = parentView.getChildComponentsByType(View).getLastItemAtOffset(1);
+		var viewToHide = this.__modalViewController.getView();
+
+		var viewTransition = this.__modalViewController.getViewTransition();
+		viewTransition.addEvent('start:once', this.bound('__onDismissTransitionStart'));
+		viewTransition.addEvent('complete:once', this.bound('__onDismissTransitionCompleted'));
+		viewTransition.leave(
+			viewToShow,
+			viewToHide,
+			parentView
+		);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getName
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getName: function() {
+		return this.__name;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getId
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getId: function() {
+
+		var name = this.getName();
+		if (name) {
+			return name;
+		}
+
+		if (this.__id === null) {
+			this.__id = String.uniqueID();
+		}
+
+		return this.__id;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setTitle: function(title) {
+
+		if (this.__title === title)
+			return this;
+
+		title = moobile.Text.from(title);
+
+		if (this.__title &&
+			this.__title.hasParentComponent()) {
+			this.__title.replaceWithComponent(title, true);
+		}
+
+		this.__title = title;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getTitle
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getTitle: function() {
+		return this.__title;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setImage: function(image) {
+
+		if (this.__image === image)
+			return this;
+
+		image = moobile.Image.from(image);
+
+		if (this.__image &&
+			this.__image.hasParentComponent()) {
+			this.__image.replaceWithComponent(image, true);
+		}
+
+		this.__image = image;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getImage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getImage: function() {
+		return this.__image;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setModal
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setModal: function(modal) {
+		this.__modal = modal;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#isModal
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isModal: function() {
+		return this.__modal;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#isViewReady
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	isViewReady: function() {
+		return this.__viewReady;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getView: function() {
+		return this.view;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setViewTransition
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setViewTransition: function(viewTransition) {
+		this.__viewTransition = viewTransition;
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getViewTransition
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getViewTransition: function() {
+		return this.__viewTransition;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#setParentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setParentViewController: function(viewController) {
+		this.parentViewControllerWillChange(viewController);
+		this.__parent = viewController;
+		this.parentViewControllerDidChange(viewController);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#getParentViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getParentViewController: function() {
+		return this.__parent;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willAddChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willAddChildViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didAddChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didAddChildViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willRemoveChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willRemoveChildViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didRemoveChildViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didRemoveChildViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#parentViewControllerWillChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentViewControllerWillChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#parentViewControllerDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentViewControllerDidChange: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willPresentModalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willPresentModalViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didPresentModalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didPresentModalViewController: function(viewController) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#willDismissModalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willDismissModalViewController: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#didDismissModalViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didDismissModalViewController: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidLoad
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewDidLoad: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidBecomeReady
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewDidBecomeReady: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidUpdateLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	viewDidUpdateLayout: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewWillEnter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewWillEnter: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidEnter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewDidEnter: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewWillLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewWillLeave: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	viewDidLeave: function() {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#viewDidRotate
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	viewDidRotate: function(orientation) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/ViewController/ViewController#destroy
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+
+		window.removeEvent('orientationchange', this.bound('__onWindowOrientationChange'));
+
+		this.removeAllChildViewControllers(true);
+
+		this.removeFromParentViewController();
+
+		if (this.__modalViewController) {
+			this.__modalViewController.destroy();
+			this.__modalViewController = null;
+		}
+
+		this.view.removeEvent('didbecomeready', this.bound('__onViewDidBecomeReady'));
+		this.view.removeEvent('didupdatelayout', this.bound('__onViewDidUpdateLayout'));
+		this.view.destroy();
+		this.view = null;
+
+		if (this.__title) {
+			this.__title.destroy();
+			this.__title = null;
+		}
+
+		if (this.__image) {
+			this.__image.destroy();
+			this.__image = null;
+		}
+
+		this.__parent = null;
+		this.__children = null
+		this.__viewTransition = null;
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onPresentTransitionStart: function() {
+		this.__modalViewController.viewWillEnter();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onPresentTransitionCompleted: function() {
+		this.__modalViewController.viewDidEnter();
+		this.didPresentModalViewController()
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onDismissTransitionStart: function() {
+		this.__modalViewController.viewWillLeave();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	__onDismissTransitionCompleted: function() {
+		this.__modalViewController.viewDidLeave();
+		this.__modalViewController.setParentViewController(this);
+		this.__modalViewController.setModal(false);
+		this.__modalViewController.destroy();
+		this.__modalViewController = null;
+		this.didDismissModalViewController();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onViewDidBecomeReady: function() {
+		this.viewDidBecomeReady();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__onViewDidUpdateLayout: function() {
+		this.viewDidUpdateLayout();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__onWindowOrientationChange: function(e) {
+
+		var name = Math.abs(window.orientation) === 90 ? 'landscape' : 'portrait';
+
+		// <0.1-compat>
+		if (this.didRotate) {
+			this.didRotate(name);
+			console.log('[DEPRECATION NOTICE] The method "didRotate" will be removed in 0.4, use the method "viewDidRotate" instead');
+		}
+		// </0.1-compat>
+
+		this.viewDidRotate(name);
+	}
+
+});
 
 },{}],37:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,CoverBox=moobile.ViewTransition.Box=new Class({Extends:moobile.ViewTransition,overlay:null,wrapper:null,enterAnimation:function(e,i,n){var o=n.getContentElement();this.overlay=new Overlay,this.overlay.addClass("transition-cover-box-overlay"),this.overlay.hide(),n.addChildComponent(this.overlay),this.wrapper=document.createElement("div"),this.wrapper.addClass("transition-cover-box-foreground-view-wrapper"),this.wrapper.wraps(e);var t=function(){o.addClass("transition-cover-box-enter"),i.addClass("transition-cover-box-background-view"),e.addClass("transition-cover-box-foreground-view"),e.show(),this.overlay.showAnimated()}.bind(this),r=function(){o.removeClass("transition-cover-box-enter"),this.didEnter(e,i,n)}.bind(this),a=new moobile.Animation(this.wrapper);a.addEvent("start",t),a.addEvent("end",r),a.start()},leaveAnimation:function(e,i,n){var o=n.getContentElement(),t=function(){o.addClass("transition-cover-box-leave"),this.overlay.hideAnimated()}.bind(this),r=function(){o.removeClass("transition-cover-box-leave"),e.removeClass("transition-cover-box-background-view"),i.removeClass("transition-cover-box-foreground-view"),i.hide(),this.overlay.removeFromParentComponent(),this.overlay.destroy(),this.overlay=null,this.didLeave(e,i,n),this.wrapper.destroy(),this.wrapper=null}.bind(this),a=new moobile.Animation(this.wrapper);a.addEvent("start",t),a.addEvent("end",r),a.start()},shouldHideViewToHideOnEnter:function(e,i,n){return!1}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Cover.Box
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var CoverBox = moobile.ViewTransition.Box = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	overlay: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	wrapper: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		this.overlay = new Overlay();
+		this.overlay.addClass('transition-cover-box-overlay');
+		this.overlay.hide();
+
+		parentView.addChildComponent(this.overlay);
+
+		this.wrapper = document.createElement('div');
+		this.wrapper.addClass('transition-cover-box-foreground-view-wrapper');
+		this.wrapper.wraps(viewToShow);
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-box-enter');
+			viewToHide.addClass('transition-cover-box-background-view');
+			viewToShow.addClass('transition-cover-box-foreground-view');
+			viewToShow.show();
+			this.overlay.showAnimated();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-cover-box-enter');
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-box-leave');
+			this.overlay.hideAnimated();
+		}.bind(this);
+
+		var onEnd = function() {
+
+			parentElem.removeClass('transition-cover-box-leave');
+			viewToShow.removeClass('transition-cover-box-background-view');
+			viewToHide.removeClass('transition-cover-box-foreground-view');
+			viewToHide.hide();
+
+			this.overlay.removeFromParentComponent();
+			this.overlay.destroy();
+			this.overlay = null;
+
+			this.didLeave(viewToShow, viewToHide, parentView);
+
+			this.wrapper.destroy();
+			this.wrapper = null;
+
+		}.bind(this);
+
+		var animation = new moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
+		return false;
+	}
+
+});
 
 },{}],38:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,Cover=moobile.ViewTransition.Cover=new Class({Extends:moobile.ViewTransition,enterAnimation:function(i,t,n){var e=n.getContentElement(),o=function(){e.addClass("transition-cover-enter"),t.addClass("transition-view-to-hide"),i.show()}.bind(this),s=function(){e.removeClass("transition-cover-enter"),t.removeClass("transition-view-to-hide"),t.hide(),this.didEnter(i,t,n)}.bind(this),a=new moobile.Animation(i);a.setAnimationClass("transition-view-to-show"),a.addEvent("start",o),a.addEvent("end",s),a.start()},leaveAnimation:function(i,t,n){var e=n.getContentElement(),o=function(){e.addClass("transition-cover-leave"),i.addClass("transition-view-to-show"),i.show()}.bind(this),s=function(){e.removeClass("transition-cover-leave"),i.removeClass("transition-view-to-show"),t.hide(),this.didEnter(i,t,n)}.bind(this),a=new moobile.Animation(t);a.setAnimationClass("transition-view-to-hide"),a.addEvent("start",o),a.addEvent("end",s),a.start()}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Cover
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Cover = moobile.ViewTransition.Cover = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-enter');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-cover-enter');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-leave');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-cover-leave');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(viewToHide);
+		animation.setAnimationClass('transition-view-to-hide');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
 
 },{}],39:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,Cubic=moobile.ViewTransition.Cubic=new Class({Extends:moobile.ViewTransition,enterAnimation:function(i,t,e){var n=e.getContentElement(),s=e.getContentWrapperElement(),o=function(){s.addClass("transition-cubic-perspective"),t.addClass("transition-view-to-hide"),i.addClass("transition-view-to-show"),i.show()}.bind(this),a=function(){s.removeClass("transition-cubic-perspective"),t.removeClass("transition-view-to-hide"),i.removeClass("transition-view-to-show"),t.hide(),this.didEnter(i,t,e)}.bind(this),r=new moobile.Animation(n);r.setAnimationClass("transition-cubic-enter"),r.addEvent("start",o),r.addEvent("end",a),r.start()},leaveAnimation:function(i,t,e){var n=e.getContentElement(),s=e.getContentWrapperElement(),o=function(){s.addClass("transition-cubic-perspective"),t.addClass("transition-view-to-hide"),i.addClass("transition-view-to-show"),i.show()}.bind(this),a=function(){s.removeClass("transition-cubic-perspective"),i.removeClass("transition-view-to-show"),t.removeClass("transition-view-to-hide"),t.hide(),this.didLeave(i,t,e)}.bind(this),r=new moobile.Animation(n);r.setAnimationClass("transition-cubic-leave"),r.addEvent("start",o),r.addEvent("end",a),r.start()}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Cubic
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Cubic = moobile.ViewTransition.Cubic = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
+
+		var onStart = function() {
+			parentWrap.addClass('transition-cubic-perspective');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentWrap.removeClass('transition-cubic-perspective');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(parentElem);
+		animation.setAnimationClass('transition-cubic-enter');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
+
+		var onStart = function() {
+			parentWrap.addClass('transition-cubic-perspective');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentWrap.removeClass('transition-cubic-perspective');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+			this.didLeave(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(parentElem);
+		animation.setAnimationClass('transition-cubic-leave');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
 
 },{}],40:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,Drop=moobile.ViewTransition.Drop=new Class({Extends:moobile.ViewTransition,enterAnimation:function(i,t,n){var e=n.getContentElement(),o=function(){e.addClass("transition-drop-enter"),t.addClass("transition-view-to-hide"),i.show()}.bind(this),s=function(){e.removeClass("transition-drop-enter"),t.removeClass("transition-view-to-hide"),t.hide(),this.didEnter(i,t,n)}.bind(this),a=new moobile.Animation(i);a.setAnimationClass("transition-view-to-show"),a.addEvent("start",o),a.addEvent("end",s),a.start()},leaveAnimation:function(i,t,n){var e=n.getContentElement(),o=function(){e.addClass("transition-drop-leave"),i.addClass("transition-view-to-show"),i.show()}.bind(this),s=function(){e.removeClass("transition-drop-leave"),i.removeClass("transition-view-to-show"),t.hide(),this.didEnter(i,t,n)}.bind(this),a=new moobile.Animation(t);a.setAnimationClass("transition-view-to-hide"),a.addEvent("start",o),a.addEvent("end",s),a.start()}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Drop
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.1
+ */
+var Drop = moobile.ViewTransition.Drop = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.1
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-drop-enter');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-drop-enter');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.2.1
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-drop-leave');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-drop-leave');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(viewToHide);
+		animation.setAnimationClass('transition-view-to-hide');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
 
 },{}],41:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,Fade=moobile.ViewTransition.Fade=new Class({Extends:moobile.ViewTransition,enterAnimation:function(t,i,n){var e=n.getContentElement(),s=function(){e.addClass("transition-fade-enter"),t.addClass("transition-view-to-show"),t.show()}.bind(this),a=function(){e.removeClass("transition-fade-enter"),t.removeClass("transition-view-to-show"),i.hide(),this.didEnter(t,i,n)}.bind(this),o=new moobile.Animation(t);o.setAnimationClass("transition-view-to-show"),o.addEvent("start",s),o.addEvent("end",a),o.start()},leaveAnimation:function(t,i,n){var e=n.getContentElement(),s=function(){e.addClass("transition-fade-leave"),t.addClass("transition-view-to-show"),t.show()}.bind(this),a=function(){e.removeClass("transition-fade-leave"),t.removeClass("transition-view-to-show"),i.hide(),this.didEnter(t,i,n)}.bind(this),o=new moobile.Animation(i);o.setAnimationClass("transition-view-to-hide"),o.addEvent("start",s),o.addEvent("end",a),o.start()}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Fade
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Fade = moobile.ViewTransition.Fade = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-fade-enter');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-fade-enter');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(viewToShow);
+		animation.setAnimationClass('transition-view-to-show');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-fade-leave');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-fade-leave');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(viewToHide);
+		animation.setAnimationClass('transition-view-to-hide');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
 
 },{}],42:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,Flip=moobile.ViewTransition.Flip=new Class({Extends:moobile.ViewTransition,enterAnimation:function(i,t,e){var n=e.getContentElement(),s=e.getContentWrapperElement(),o=function(){s.addClass("transition-flip-perspective"),t.addClass("transition-view-to-hide"),i.addClass("transition-view-to-show"),i.show()}.bind(this),a=function(){s.removeClass("transition-flip-perspective"),i.removeClass("transition-view-to-show"),t.removeClass("transition-view-to-hide"),t.hide(),this.didEnter(i,t,e)}.bind(this),r=new moobile.Animation(n);r.setAnimationClass("transition-flip-enter"),r.addEvent("start",o),r.addEvent("end",a),r.start()},leaveAnimation:function(i,t,e){var n=e.getContentElement(),s=e.getContentWrapperElement(),o=function(){s.addClass("transition-flip-perspective"),t.addClass("transition-view-to-hide"),i.addClass("transition-view-to-show"),i.show()}.bind(this),a=function(){s.removeClass("transition-flip-perspective"),t.removeClass("transition-view-to-hide"),i.removeClass("transition-view-to-show"),t.hide(),this.didLeave(i,t,e)}.bind(this),r=new moobile.Animation(n);r.setAnimationClass("transition-flip-leave"),r.addEvent("start",o),r.addEvent("end",a),r.start()}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Flip
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Flip = moobile.ViewTransition.Flip = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
+
+		var onStart = function() {
+			parentWrap.addClass('transition-flip-perspective');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentWrap.removeClass('transition-flip-perspective');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(parentElem);
+		animation.setAnimationClass('transition-flip-enter');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+		var parentWrap = parentView.getContentWrapperElement();
+
+		var onStart = function() {
+			parentWrap.addClass('transition-flip-perspective');
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentWrap.removeClass('transition-flip-perspective');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didLeave(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(parentElem);
+		animation.setAnimationClass('transition-flip-leave');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
 
 },{}],43:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,None=moobile.ViewTransition.None=new Class({Extends:moobile.ViewTransition,enterAnimation:function(i,e,n){i.show(),e.hide(),this.didEnter.delay(50,this,[i,e,n])},leaveAnimation:function(i,e,n){i.show(),e.hide(),this.didLeave.delay(50,this,[i,e,n])}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.None
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var None = moobile.ViewTransition.None = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+		viewToShow.show();
+		viewToHide.hide();
+		this.didEnter(viewToShow, viewToHide, parentView);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+		viewToShow.show();
+		viewToHide.hide();
+		this.didLeave(viewToShow, viewToHide, parentView);
+	}
+
+});
 
 },{}],44:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition,Page=moobile.ViewTransition.Page=new Class({Extends:moobile.ViewTransition,overlay:null,wrapper:null,enterAnimation:function(e,i,n){var t=n.getContentElement();this.overlay=new Overlay,this.overlay.addClass("transition-cover-page-overlay"),this.overlay.hide(),n.addChildComponent(this.overlay),this.wrapper=document.createElement("div"),this.wrapper.addClass("transition-cover-page-foreground-view-wrapper"),this.wrapper.wraps(e);var a=function(){t.addClass("transition-cover-page-enter"),i.addClass("transition-cover-page-background-view"),e.addClass("transition-cover-page-foreground-view"),e.show(),this.overlay.showAnimated()}.bind(this),r=function(){t.removeClass("transition-cover-page-enter"),this.didEnter(e,i,n)}.bind(this),o=new moobile.Animation(this.wrapper);o.addEvent("start",a),o.addEvent("end",r),o.start()},leaveAnimation:function(e,i,n){var t=n.getContentElement(),a=function(){t.addClass("transition-cover-page-leave"),this.overlay.hideAnimated()}.bind(this),r=function(){t.removeClass("transition-cover-page-leave"),e.removeClass("transition-cover-page-background-view"),i.removeClass("transition-cover-page-foreground-view"),i.hide(),this.overlay.removeFromParentComponent(),this.overlay.destroy(),this.overlay=null,this.didLeave(e,i,n),this.wrapper.destroy(),this.wrapper=null}.bind(this),o=new moobile.Animation(this.wrapper);o.addEvent("start",a),o.addEvent("end",r),o.start()},shouldHideViewToHideOnEnter:function(e,i,n){return!1}});
+"use strict"
+
+var ViewTransition = moobile.ViewTransition;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Cover.Page
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Page = moobile.ViewTransition.Page = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	overlay: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	wrapper: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		this.overlay = new Overlay();
+		this.overlay.addClass('transition-cover-page-overlay');
+		this.overlay.hide();
+
+		parentView.addChildComponent(this.overlay);
+
+		this.wrapper = document.createElement('div');
+		this.wrapper.addClass('transition-cover-page-foreground-view-wrapper');
+		this.wrapper.wraps(viewToShow);
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-page-enter');
+			viewToHide.addClass('transition-cover-page-background-view');
+			viewToShow.addClass('transition-cover-page-foreground-view');
+			viewToShow.show();
+			this.overlay.showAnimated();
+		}.bind(this);
+
+		var onEnd = function() {
+			parentElem.removeClass('transition-cover-page-enter');
+			this.didEnter(viewToShow, viewToHide, parentView);
+		}.bind(this);
+
+		var animation = new moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var onStart = function() {
+			parentElem.addClass('transition-cover-page-leave');
+			this.overlay.hideAnimated();
+		}.bind(this);
+
+		var onEnd = function() {
+
+			parentElem.removeClass('transition-cover-page-leave');
+			viewToShow.removeClass('transition-cover-page-background-view');
+			viewToHide.removeClass('transition-cover-page-foreground-view');
+			viewToHide.hide();
+
+			this.overlay.removeFromParentComponent();
+			this.overlay.destroy();
+			this.overlay = null;
+
+			this.didLeave(viewToShow, viewToHide, parentView);
+
+			this.wrapper.destroy();
+			this.wrapper = null;
+
+		}.bind(this);
+
+		var animation = new moobile.Animation(this.wrapper);
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
+		return false;
+	}
+
+});
 
 },{}],45:[function(require,module,exports){
-"use strict";for(var ViewTransition=moobile.ViewTransition,prefix="",vendor=["Webkit","Moz","O","ms","Khtml"],test=document.createElement("div"),i=0;i<vendor.length;i++){var name=vendor[i]+"AnimationName";if(name in test.style){prefix="-"+vendor[i].toLowerCase()+"-";break}}var create=function(n,e,t){return"@"+prefix+"keyframes "+n+" { from { "+prefix+"transform: translate3d("+e+"px, 0, 0); } to { "+prefix+"transform: translate3d("+t+"px, 0, 0); }}"},unique=function(n){return n+"-"+String.uniqueID()},Slide=moobile.ViewTransition.Slide=new Class({Extends:moobile.ViewTransition,options:{enhanceBackButtonOnEnter:!0,enhanceBackButtonOnLeave:!0},enterAnimation:function(n,e,t){var i=t.getContentElement(),o=null,a=[],s=function(){e.addClass("transition-view-to-hide"),n.addClass("transition-view-to-show"),n.show()}.bind(this),r=function(){n.removeClass("transition-view-to-show"),e.removeClass("transition-view-to-hide"),e.hide(),this.didEnter(n,e,t),a&&(a.invoke("setStyle","animation-name",null),a=null),o&&(o.destroy(),o=null)}.bind(this),l=new moobile.Animation(i);l.setAnimationClass("transition-slide-enter"),l.addEvent("start",s),l.addEvent("end",r),l.start()},leaveAnimation:function(n,e,t){var i=t.getContentElement(),o=null,a=[],s=function(){e.addClass("transition-view-to-hide"),n.addClass("transition-view-to-show"),n.show()}.bind(this),r=function(){e.removeClass("transition-view-to-hide"),n.removeClass("transition-view-to-show"),e.hide(),this.didLeave(n,e,t),a&&(a.invoke("setStyle","animation-name",null),a=null),o&&(o.destroy(),o=null)}.bind(this),l=new moobile.Animation(i);l.setAnimationClass("transition-slide-leave"),l.addEvent("start",s),l.addEvent("end",r),l.start()}});
+"use strict"
 
+var ViewTransition = moobile.ViewTransition;
+
+var prefix = '';
+var vendor = ['Webkit',  'Moz',  'O',  'ms', 'Khtml'];
+
+var test = document.createElement('div');
+
+for (var i = 0; i < vendor.length; i++) {
+	var name = vendor[i] + 'AnimationName';
+	if (name in test.style) {
+		prefix = '-' + vendor[i].toLowerCase() + '-';
+		break;
+	}
+}
+
+var create = function(name, x1, x2) {
+	return  '@' + prefix + 'keyframes ' + name + ' { from { ' + prefix + 'transform: translate3d(' + x1 + 'px, 0, 0); } to { ' + prefix + 'transform: translate3d(' + x2 + 'px, 0, 0); }}';
+};
+
+var unique = function(name) {
+	return name + '-' + String.uniqueID();
+}
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Slide
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Slide = moobile.ViewTransition.Slide = new Class({
+
+	Extends: moobile.ViewTransition,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition.Slide#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	options: {
+		enhanceBackButtonOnEnter: true,
+		enhanceBackButtonOnLeave: true
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var style = null;
+		var items = [];
+
+		var onStart = function() {
+
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+
+			// if (this.options.enhanceBackButtonOnEnter) {
+
+			// 	var keyframes = '';
+
+			// 	viewToShow.getChildComponentsByType(NavigationBar).each(function(navigationBar) {
+
+			// 		var width = navigationBar.getSize().x;
+			// 		if (width) {
+
+			// 			navigationBar.getChildComponentsByType(Button).each(function(button) {
+
+			// 				var style = button.getStyle();
+			// 				if (style !== 'back' &&
+			// 					style !== 'forward')
+			// 					return;
+
+			// 				var x1 = width / 2;
+			// 				var x2 = 0;
+
+			// 				var name = unique('transition-slide-enter-navigation-button-to-show');
+			// 				var anim = create(name, x1, x2);
+			// 				var elem = button.getElement();
+			// 				elem.setStyle('animation-name', name)
+			// 				items.push(elem);
+
+			// 				keyframes += anim;
+
+			// 			}, this);
+			// 		}
+			// 	}, this);
+
+			// 	style = document.createElement('style').set('text', keyframes).inject(document.head);
+			// }
+
+		}.bind(this);
+
+		var onEnd = function() {
+
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToHide.hide();
+
+			this.didEnter(viewToShow, viewToHide, parentView);
+
+			if (items) {
+				items.invoke('setStyle', 'animation-name', null);
+				items = null;
+			}
+
+			if (style) {
+				style.destroy();
+				style = null;
+			}
+
+		}.bind(this);
+
+		var animation = new moobile.Animation(parentElem);
+		animation.setAnimationClass('transition-slide-enter');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+
+		var parentElem = parentView.getContentElement();
+
+		var style = null;
+		var items = [];
+
+		var onStart = function() {
+
+			viewToHide.addClass('transition-view-to-hide');
+			viewToShow.addClass('transition-view-to-show');
+			viewToShow.show();
+
+			// if (this.options.enhanceBackButtonOnLeave) {
+
+			// 	var keyframes = '';
+
+			// 	viewToHide.getChildComponentsByType(NavigationBar).each(function(navigationBar) {
+
+			// 		var width = navigationBar.getSize().x;
+			// 		if (width) {
+
+			// 			navigationBar.getChildComponentsByType(Button).each(function(button) {
+
+			// 				var style = button.getStyle();
+			// 				if (style !== 'back' &&
+			// 					style !== 'forward')
+			// 					return;
+
+			// 				var x1 = 0;
+			// 				var x2 = width / 2 - button.getSize().x / 2;
+
+			// 				var name = unique('transition-slide-leave-navigation-button-to-hide');
+			// 				var anim = create(name, x1, x2);
+			// 				var elem = button.getElement();
+			// 				elem.setStyle('animation-name', name)
+			// 				items.push(elem);
+
+			// 				keyframes += anim;
+			// 			});
+			// 		}
+			// 	});
+
+			// 	style = document.createElement('style').set('text', keyframes).inject(document.head);
+			// }
+
+		}.bind(this);
+
+		var onEnd = function() {
+
+			viewToHide.removeClass('transition-view-to-hide');
+			viewToShow.removeClass('transition-view-to-show');
+			viewToHide.hide();
+			this.didLeave(viewToShow, viewToHide, parentView);
+
+			if (items) {
+				items.invoke('setStyle', 'animation-name', null);
+				items = null;
+			}
+
+			if (style) {
+				style.destroy();
+				style = null;
+			}
+
+		}.bind(this);
+
+		var animation = new moobile.Animation(parentElem);
+		animation.setAnimationClass('transition-slide-leave');
+		animation.addEvent('start', onStart);
+		animation.addEvent('end', onEnd);
+		animation.start();
+	}
+
+});
 },{}],46:[function(require,module,exports){
-"use strict";var ViewTransition=moobile.ViewTransition=new Class({Implements:[Events,Options,Class.Binds],initialize:function(e){return this.setOptions(e),this},enter:function(e,t,i){return t.disableTouch(),e.disableTouch(),this.enterAnimation(e,t,i),this.fireEvent("start"),this},leave:function(e,t,i){return e.disableTouch(),t.disableTouch(),this.leaveAnimation(e,t,i),this.fireEvent("start"),this},didEnter:function(e,t,i){return t.enableTouch(),e.enableTouch(),this.fireEvent("complete"),this},didLeave:function(e,t,i){return t.enableTouch(),e.enableTouch(),this.fireEvent("complete"),this},enterAnimation:function(e,t,i){throw new Error("You must override this method")},leaveAnimation:function(e,t,i){throw new Error("You must override this method")}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var ViewTransition = moobile.ViewTransition = new Class({
+
+	Implements: [
+		Events,
+		Options,
+		Class.Binds
+	],
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#initialize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	initialize: function(options) {
+		this.setOptions(options);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#enter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enter: function(viewToShow, viewToHide, parentView) {
+		viewToHide.disableTouch();
+		viewToShow.disableTouch();
+		this.enterAnimation(viewToShow, viewToHide, parentView);
+		this.fireEvent('start');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#leave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leave: function(viewToShow, viewToHide, parentView) {
+		viewToShow.disableTouch();
+		viewToHide.disableTouch();
+		this.leaveAnimation(viewToShow, viewToHide, parentView);
+		this.fireEvent('start');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#didEnter
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didEnter: function(viewToShow, viewToHide, parentView) {
+		viewToHide.enableTouch();
+		viewToShow.enableTouch();
+		this.fireEvent('complete');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#didLeave
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didLeave: function(viewToShow, viewToHide, parentView) {
+		viewToHide.enableTouch();
+		viewToShow.enableTouch();
+		this.fireEvent('complete');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#enterAnimation
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enterAnimation: function(viewToShow, viewToHide, parentView) {
+		throw new Error('You must override this method');
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#leaveAnimation
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	leaveAnimation: function(viewToShow, viewToHide, parentView) {
+		throw new Error('You must override this method');
+	}
+
+});
 
 },{}],47:[function(require,module,exports){
-"use strict";var ScrollView=moobile.ScrollView=new Class({Extends:moobile.View,__activeTouch:null,__activeTouchTime:null,__activeTouchScroll:null,__activeTouchDuration:null,__activeTouchCanceled:!1,__scroller:null,__offset:{x:null,y:null},__page:{x:null,y:null},__pageOffset:{x:0,y:0},__scrollToPageTimer:null,__contentSize:{x:null,y:null},options:{scroller:["Native","IScroll"],scroll:"vertical",scrollbar:"vertical",bounce:Browser.Platform.ios,momentum:!0,snapToPage:!1,snapToPageAt:20,snapToPageSizeX:null,snapToPageSizeY:null,snapToPageDuration:150,snapToPageDelay:150,initialPageX:0,initialPageY:0,initialScrollX:0,initialScrollY:0,cancelTouchThresholdX:10,cancelTouchThresholdY:10},willBuild:function(){this.parent(),this.addClass("scroll-view")},didBuild:function(){this.parent(),("scrollX"in this.options||"scrollY"in this.options)&&(console.log('[DEPRECATION NOTICE] The options "scrollX" and "scrollY" will be removed in 0.4, use the "scroll" option instead'),this.options.scrollX&&this.options.scrollY?this.options.scroll="both":(this.options.scrollX&&(this.options.scroll="horizontal"),this.options.scrollY&&(this.options.scroll="vertical")));var t={scroll:this.options.scroll,scrollbar:this.options.scrollbar,bounce:this.options.bounce,momentum:this.options.momentum,snapToPage:this.options.snapToPage,snapToPageAt:this.options.snapToPageAt,snapToPageSizeX:this.options.snapToPageSizeX,snapToPageSizeY:this.options.snapToPageSizeY,snapToPageDuration:this.options.snapToPageDuration,snapToPageDelay:this.options.snapToPageDelay};this.__scroller=moobile.Scroller.create(this.contentElement,this.contentWrapperElement,this.options.scroller,t),this.__scroller.addEvent("scroll",this.bound("__onScroll")),this.__scroller.addEvent("scrollend",this.bound("__onScrollEnd")),this.__scroller.addEvent("scrollstart",this.bound("__onScrollStart")),this.__scroller.addEvent("touchcancel",this.bound("__onTouchCancel")),this.__scroller.addEvent("touchstart",this.bound("__onTouchStart")),this.__scroller.addEvent("touchend",this.bound("__onTouchEnd"));var o=this.__scroller.getName();o&&this.addClass(o+"-engine")},didBecomeReady:function(){this.parent();var t=this.options.initialScrollX,o=this.options.initialScrollY,e="scrollTo";this.options.snapToPage&&(t=this.options.initialPageX,o=this.options.initialPageY,e="scrollToPage"),this.__scroller.refresh(),this[e].call(this,t,o)},didUpdateLayout:function(){this.parent(),this.__scroller.refresh()},destroy:function(){this.__scroller.removeEvent("scroll",this.bound("__onScroll")),this.__scroller.removeEvent("scrollend",this.bound("__onScrollEnd")),this.__scroller.removeEvent("scrollstart",this.bound("__onScrollStart")),this.__scroller.removeEvent("touchcancel",this.bound("__onTouchCancel")),this.__scroller.removeEvent("touchstart",this.bound("__onTouchStart")),this.__scroller.removeEvent("touchend",this.bound("__onTouchEnd")),this.__scroller.destroy(),this.__scroller=null,this.parent()},setContentSize:function(t,o){return(t>=0||null===t)&&this.contentElement.setStyle("width",t),(o>=0||null===o)&&this.contentElement.setStyle("height",o),(this.__contentSize.x!==t||this.__contentSize.y!==o)&&this.updateLayout(),this.__contentSize.x=t,this.__contentSize.y=o,this},getContentSize:function(){return this.contentElement.getScrollSize()},getContentWrapperSize:function(){return this.contentWrapperElement.getSize()},getContentScroll:function(){return this.__scroller.getScroll()},scrollTo:function(t,o,e){return this.__scroller.scrollTo(t,o,e),this},scrollToElement:function(t,o){return this.__scroller.scrollToElement(t),this},scrollToPage:function(t,o,e){t=t||0,o=o||0,0>t&&(t=0),0>o&&(o=0);var i=this.getContentWrapperSize(),n=this.getContentSize(),l=this.options.snapToPageSizeX||this.getContentWrapperSize().x,s=this.options.snapToPageSizeY||this.getContentWrapperSize().y,r=n.x-i.x,c=n.y-i.y,h=l*t,a=s*o;h>r&&(h=r),a>c&&(a=c);var _=this.getContentScroll();return(_.x!==h||_.y!==a)&&this.scrollTo(h,a,e),this.__scrollToPageTimer&&(clearTimeout(this.scrolltopage),this.__scrollToPageTimer=null),(this.__page.x!==t||this.__page.y!==o)&&(this.__pageOffset.x=Math.abs(h-t*l),this.__pageOffset.y=Math.abs(a-o*s),this.__scrollToPageTimer=this.fireEvent.delay(e+5,this,["scrolltopage",[t,o]])),this.__page.x=t,this.__page.y=o,this},getPage:function(){var t=0,o=0,e=this.options.snapToPageSizeX||this.getContentWrapperSize().x,i=this.options.snapToPageSizeY||this.getContentWrapperSize().y;if(e&&i){var n=this.getContentScroll();n.x=n.x>0?n.x:0,n.y=n.y>0?n.y:0,t=Math.floor(n.x/e),o=Math.floor(n.y/i)}return{x:t,y:o}},getPageOffset:function(){return this.__pageOffset},getScroller:function(){return this.__scroller},willHide:function(){this.parent(),this.__offset=this.__scroller.getScroll()},didShow:function(){this.parent(),this.__scroller.refresh(),this.__scroller.scrollTo(this.__offset.x,this.__offset.y)},__snapToPage:function(){var t=this.getContentSize(),o=this.getContentScroll();o.x=o.x>0?o.x:0,o.y=o.y>0?o.y:0;var e=o.x-this.__activeTouchScroll.x,i=o.y-this.__activeTouchScroll.y,n=Math.abs(e),l=Math.abs(i);if(0===e&&0===i)return this;var s=("both"===this.options.scroll||"horizontal"===this.options.scroll,"both"===this.options.scroll||"vertical"===this.options.scroll,this.options.snapToPageAt),r=this.options.snapToPageDelay,c=(this.options.snapToPageDuration,this.options.snapToPageSizeX||this.getContentWrapperSize().x),h=this.options.snapToPageSizeY||this.getContentWrapperSize().y,a=100*(n-Math.floor(n/c)*c)/c,_=100*(l-Math.floor(l/h)*h)/h,u=this.getPage();return(0>e||this.__pageOffset.x>0)&&(u.x+=1),(0>i||this.__pageOffset.y>0)&&(u.y+=1),n>=10&&(a>=s||this.__activeTouchDuration<r)&&(u.x+=e>0?1:-1),l>=10&&(_>=s||this.__activeTouchDuration<r)&&(u.y+=i>0?1:-1),u.x<0&&(u.x=0),u.y<0&&(u.y=0),(u.x+1)*c>t.x&&(u.x=Math.floor(t.x/c)-1),(u.y+1)*h>t.y&&(u.y=Math.floor(t.y/h)-1),this.scrollToPage(u.x,u.y,this.options.snapToPageDuration),this.fireEvent("snaptopage",[u.x,u.y]),this},__onTouchCancel:function(){this.__activeTouch=null,this.__activeTouchTime=null,this.__activeTouchScroll=null,this.__activeTouchDuration=null},__onTouchStart:function(t){var o=t.changedTouches[0];null===this.__activeTouch&&(this.__activeTouch=o,this.__activeTouchTime=Date.now(),this.__activeTouchScroll=this.getContentScroll(),this.__activeTouchCanceled=!1)},__onTouchEnd:function(t){t.touches.length>0||(this.__activeTouchDuration=Date.now()-this.__activeTouchTime,this.options.snapToPage&&this.__snapToPage(),this.__activeTouch=null,this.__activeTouchTime=null,this.__activeTouchScroll=null,this.__activeTouchDuration=null,this.__activeTouchCanceled=!1)},__onScroll:function(){if(this.__activeTouch&&this.__activeTouchCanceled===!1){var t=this.getContentScroll(),o=Math.abs(this.__activeTouchScroll.x-t.x),e=Math.abs(this.__activeTouchScroll.y-t.y);(o>=this.options.cancelTouchThresholdX||e>=this.options.cancelTouchThresholdY)&&(this.__activeTouchCanceled=!0,this.contentElement.getElements("*").each(function(t){var o=document.createEvent("CustomEvent");o.initCustomEvent("touchcancel",!1,!1),t.dispatchEvent(o)}))}this.fireEvent("scroll")},__onScrollStart:function(){this.fireEvent("scrollstart")},__onScrollEnd:function(){this.fireEvent("scrollend")},getScrollSize:function(){return console.log('[DEPRECATION NOTICE] The method "getScrollSize" will be removed in 0.4, use the method "getContentSize" instead'),this.getContentSize()},getScroll:function(){return console.log('[DEPRECATION NOTICE] The method "getScroll" will be removed in 0.4, use the method "getContentScroll" instead'),this.getContentScroll()}});ScrollView.at=function(t,o,e){var i=Element.at(t);return i?moobile.Component.create(ScrollView,i,"data-view",o,e):null},moobile.Component.defineRole("scroll-view",null,function(t){this.addChildComponent(moobile.Component.create(ScrollView,t,"data-scroll-view"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.1
+ * @since  0.1.0
+ */
+var ScrollView = moobile.ScrollView = new Class({
+
+	Extends: moobile.View,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouch: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchTime: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchScroll: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__activeTouchDuration: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__activeTouchCanceled: false,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__scroller: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__offset: {
+		x: null,
+		y: null,
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__page: {
+		x: null,
+		y: null,
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__pageOffset: {
+		x: 0,
+		y: 0,
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__scrollToPageTimer: null,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	__contentSize: {
+		x: null,
+		y: null
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	options: {
+		scroller: ['Native', 'IScroll'],
+		scroll: 'vertical',
+		scrollbar: 'vertical',
+		bounce: Browser.Platform.ios,
+		momentum: true,
+		snapToPage: false,
+		snapToPageAt: 20,
+		snapToPageSizeX: null,
+		snapToPageSizeY: null,
+		snapToPageDuration: 150,
+		snapToPageDelay: 150,
+		initialPageX: 0,
+		initialPageY: 0,
+		initialScrollX: 0,
+		initialScrollY: 0,
+		cancelTouchThresholdX: 10,
+		cancelTouchThresholdY: 10
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('scroll-view');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		// <deprecated>
+		if ('scrollX' in this.options || 'scrollY' in this.options) {
+			console.log('[DEPRECATION NOTICE] The options "scrollX" and "scrollY" will be removed in 0.4, use the "scroll" option instead');
+			if (this.options.scrollX &&
+				this.options.scrollY) {
+				this.options.scroll = 'both';
+			} else {
+				if (this.options.scrollX) this.options.scroll = 'horizontal';
+				if (this.options.scrollY) this.options.scroll = 'vertical';
+			}
+		}
+		// </deprecated>
+
+		var options = {
+			scroll: this.options.scroll,
+			scrollbar: this.options.scrollbar,
+			bounce: this.options.bounce,
+			momentum: this.options.momentum,
+			snapToPage: this.options.snapToPage,
+			snapToPageAt: this.options.snapToPageAt,
+			snapToPageSizeX: this.options.snapToPageSizeX,
+			snapToPageSizeY: this.options.snapToPageSizeY,
+			snapToPageDuration: this.options.snapToPageDuration,
+			snapToPageDelay: this.options.snapToPageDelay
+		};
+
+		this.__scroller = moobile.Scroller.create(this.contentElement, this.contentWrapperElement, this.options.scroller, options);
+		this.__scroller.addEvent('scroll', this.bound('__onScroll'));
+		this.__scroller.addEvent('scrollend', this.bound('__onScrollEnd'));
+		this.__scroller.addEvent('scrollstart', this.bound('__onScrollStart'));
+		this.__scroller.addEvent('touchcancel', this.bound('__onTouchCancel'));
+		this.__scroller.addEvent('touchstart', this.bound('__onTouchStart'));
+		this.__scroller.addEvent('touchend', this.bound('__onTouchEnd'));
+
+		var name = this.__scroller.getName();
+		if (name) {
+			this.addClass(name + '-engine');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	didBecomeReady: function() {
+
+		this.parent();
+
+		var x = this.options.initialScrollX;
+		var y = this.options.initialScrollY;
+		var s = 'scrollTo';
+
+		if (this.options.snapToPage) {
+			x = this.options.initialPageX;
+			y = this.options.initialPageY;
+			s = 'scrollToPage';
+		}
+
+		this.__scroller.refresh();
+
+		this[s].call(this, x, y);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jean-philippe.dery@lemieuxbedard.com)
+	 * @since 3.0.0
+	 */
+	didUpdateLayout: function() {
+		this.parent();
+		this.__scroller.refresh();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.__scroller.removeEvent('scroll', this.bound('__onScroll'));
+		this.__scroller.removeEvent('scrollend', this.bound('__onScrollEnd'));
+		this.__scroller.removeEvent('scrollstart', this.bound('__onScrollStart'));
+		this.__scroller.removeEvent('touchcancel', this.bound('__onTouchCancel'));
+		this.__scroller.removeEvent('touchstart', this.bound('__onTouchStart'));
+		this.__scroller.removeEvent('touchend', this.bound('__onTouchEnd'));
+		this.__scroller.destroy();
+		this.__scroller = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#setContentSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.2.0
+	 */
+	setContentSize: function(x, y) {
+
+		if (x >= 0 || x === null) this.contentElement.setStyle('width', x);
+		if (y >= 0 || y === null) this.contentElement.setStyle('height', y);
+
+		if (this.__contentSize.x !== x ||
+			this.__contentSize.y !== y) {
+			this.updateLayout();
+		}
+
+		this.__contentSize.x = x;
+		this.__contentSize.y = y;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#getContentSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentSize: function() {
+		return this.contentElement.getScrollSize();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#getContentWrapperSize
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentWrapperSize: function() {
+		return this.contentWrapperElement.getSize();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#getContentScroll
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentScroll: function() {
+		return this.__scroller.getScroll();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#scrollTo
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	scrollTo: function(x, y, time) {
+		this.__scroller.scrollTo(x, y, time);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#scrollToElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	scrollToElement: function(element, time) {
+		this.__scroller.scrollToElement(element);
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#scrollToPage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	scrollToPage: function(pageX, pageY, time) {
+
+		pageX = pageX || 0;
+		pageY = pageY || 0;
+
+		if (pageX < 0) pageX = 0;
+		if (pageY < 0) pageY = 0;
+
+		var frame = this.getContentWrapperSize();
+		var total = this.getContentSize();
+
+		var pageSizeX = this.options.snapToPageSizeX || this.getContentWrapperSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getContentWrapperSize().y;
+
+		var xmax = total.x - frame.x;
+		var ymax = total.y - frame.y;
+		var x = pageSizeX * pageX;
+		var y = pageSizeY * pageY;
+		if (x > xmax) x = xmax;
+		if (y > ymax) y = ymax;
+
+		var scroll = this.getContentScroll();
+		if (scroll.x !== x ||
+			scroll.y !== y) {
+			this.scrollTo(x, y, time);
+		}
+
+		if (this.__scrollToPageTimer) {
+			clearTimeout(this.scrolltopage);
+			this.__scrollToPageTimer = null;
+		}
+
+		if (this.__page.x !== pageX ||
+			this.__page.y !== pageY) {
+			this.__pageOffset.x = Math.abs(x - pageX * pageSizeX);
+			this.__pageOffset.y = Math.abs(y - pageY * pageSizeY);
+			this.__scrollToPageTimer = this.fireEvent.delay(time + 5, this, ['scrolltopage', [pageX, pageY]]);
+		}
+
+		this.__page.x = pageX;
+		this.__page.y = pageY;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#getPage
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getPage: function() {
+
+		var x = 0;
+		var y = 0;
+
+		var pageSizeX = this.options.snapToPageSizeX || this.getContentWrapperSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getContentWrapperSize().y;
+
+		if (pageSizeX && pageSizeY) {
+
+			var scroll = this.getContentScroll();
+			scroll.x = scroll.x > 0 ? scroll.x : 0;
+			scroll.y = scroll.y > 0 ? scroll.y : 0;
+
+			x = Math.floor(scroll.x / pageSizeX);
+			y = Math.floor(scroll.y / pageSizeY);
+		}
+
+		return {x: x, y: y};
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#getPageOffset
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getPageOffset: function() {
+		return this.__pageOffset;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/ScrollView#getScroller
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getScroller: function() {
+		return this.__scroller;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willHide: function() {
+		this.parent();
+		this.__offset = this.__scroller.getScroll();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didShow: function() {
+		this.parent();
+		this.__scroller.refresh();
+		this.__scroller.scrollTo(this.__offset.x, this.__offset.y);
+	},
+
+	/* Private API */
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__snapToPage: function() {
+
+		var size = this.getContentSize();
+		var scroll = this.getContentScroll();
+		scroll.x = scroll.x > 0 ? scroll.x : 0;
+		scroll.y = scroll.y > 0 ? scroll.y : 0;
+
+		var moveX = scroll.x - this.__activeTouchScroll.x;
+		var moveY = scroll.y - this.__activeTouchScroll.y;
+		var absMoveX = Math.abs(moveX);
+		var absMoveY = Math.abs(moveY);
+
+		if (moveX === 0 && moveY === 0)
+			return this;
+
+		var scrollX = this.options.scroll === 'both' || this.options.scroll === 'horizontal';
+		var scrollY = this.options.scroll === 'both' || this.options.scroll === 'vertical';
+
+		var snapToPageAt = this.options.snapToPageAt;
+		var snapToPageDelay = this.options.snapToPageDelay;
+		var snapToPageDuration = this.options.snapToPageDuration
+
+		var pageSizeX = this.options.snapToPageSizeX || this.getContentWrapperSize().x;
+		var pageSizeY = this.options.snapToPageSizeY || this.getContentWrapperSize().y;
+		var pageMoveX = (absMoveX - Math.floor(absMoveX / pageSizeX) * pageSizeX) * 100 / pageSizeX;
+		var pageMoveY = (absMoveY - Math.floor(absMoveY / pageSizeY) * pageSizeY) * 100 / pageSizeY;
+
+		var page = this.getPage();
+
+		if (moveX < 0 || this.__pageOffset.x > 0) page.x += 1;
+		if (moveY < 0 || this.__pageOffset.y > 0) page.y += 1;
+
+		if (absMoveX >= 10 && (pageMoveX >= snapToPageAt || this.__activeTouchDuration < snapToPageDelay)) page.x += moveX > 0 ? 1 : -1;
+		if (absMoveY >= 10 && (pageMoveY >= snapToPageAt || this.__activeTouchDuration < snapToPageDelay)) page.y += moveY > 0 ? 1 : -1;
+
+		if (page.x < 0) page.x = 0;
+		if (page.y < 0) page.y = 0;
+		if ((page.x + 1) * pageSizeX > size.x) page.x = Math.floor(size.x / pageSizeX) - 1;
+		if ((page.y + 1) * pageSizeY > size.y) page.y = Math.floor(size.y / pageSizeY) - 1;
+
+		this.scrollToPage(page.x, page.y, this.options.snapToPageDuration);
+
+		this.fireEvent('snaptopage', [page.x, page.y]);
+
+		return this;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.2.0
+	 */
+	__onTouchCancel: function() {
+		this.__activeTouch = null;
+		this.__activeTouchTime = null;
+		this.__activeTouchScroll = null;
+		this.__activeTouchDuration = null;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.2.0
+	 */
+	__onTouchStart: function(e) {
+
+		var touch = e.changedTouches[0];
+
+		if (this.__activeTouch === null) {
+			this.__activeTouch = touch;
+			this.__activeTouchTime = Date.now();
+			this.__activeTouchScroll = this.getContentScroll();
+			this.__activeTouchCanceled = false;
+		}
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.1
+	 * @since  0.2.0
+	 */
+	__onTouchEnd: function(e) {
+
+		if (e.touches.length > 0)
+			return;
+
+		this.__activeTouchDuration = Date.now() - this.__activeTouchTime;
+
+		if (this.options.snapToPage) this.__snapToPage();
+
+		this.__activeTouch = null;
+		this.__activeTouchTime = null;
+		this.__activeTouchScroll = null;
+		this.__activeTouchDuration = null;
+		this.__activeTouchCanceled = false;
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onScroll: function() {
+
+		if (this.__activeTouch &&
+			this.__activeTouchCanceled === false) {
+			var scroll = this.getContentScroll();
+			var x = Math.abs(this.__activeTouchScroll.x - scroll.x);
+			var y = Math.abs(this.__activeTouchScroll.y - scroll.y);
+			if (x >= this.options.cancelTouchThresholdX ||
+				y >= this.options.cancelTouchThresholdY) {
+				this.__activeTouchCanceled = true
+				this.contentElement.getElements('*').each(function(element) {
+					var event = document.createEvent('CustomEvent');
+					event.initCustomEvent('touchcancel', false, false);
+					element.dispatchEvent(event);
+				});
+			}
+		}
+
+		this.fireEvent('scroll');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__onScrollStart: function() {
+		this.fireEvent('scrollstart');
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__onScrollEnd: function() {
+		this.fireEvent('scrollend');
+	},
+
+	/* Deprecated */
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getScrollSize: function() {
+		console.log('[DEPRECATION NOTICE] The method "getScrollSize" will be removed in 0.4, use the method "getContentSize" instead');
+		return this.getContentSize();
+	},
+
+	/**
+	 * @deprecated
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getScroll: function() {
+		console.log('[DEPRECATION NOTICE] The method "getScroll" will be removed in 0.4, use the method "getContentScroll" instead');
+		return this.getContentScroll();
+	},
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.View/moobile.View#Moobilemoobile.ViewAt
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+ScrollView.at = function(path, options, name) {
+
+	var element = Element.at(path);
+	if (element) {
+		return moobile.Component.create(ScrollView, element, 'data-view', options, name);
+	}
+
+	return null;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('scroll-view', null, function(element) {
+	this.addChildComponent(moobile.Component.create(ScrollView, element, 'data-scroll-view'));
+});
+
 
 },{}],48:[function(require,module,exports){
-"use strict";var View=moobile.View,Component=moobile.Component,ViewCollection=moobile.ViewCollection=new Class({Extends:View,willBuild:function(){this.parent(),this.addClass("view-collection")},didBuild:function(){this.parent(),this.setLayout("horizontal")}});Component.defineRole("view-collection",null,null,function(o){this.addChildComponent(Component.create(ViewCollection,o,"data-view-collection"))});
+"use strict"
+
+var View      = moobile.View;
+var Component = moobile.Component;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/ViewCollection
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+var ViewCollection = moobile.ViewCollection = new Class({
+
+	Extends: View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('view-collection');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didBuild: function() {
+		this.parent();
+		this.setLayout('horizontal');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Component.defineRole('view-collection', null, null, function(element) {
+	this.addChildComponent(Component.create(ViewCollection, element, 'data-view-collection'));
+});
 
 },{}],49:[function(require,module,exports){
-"use strict";var View=moobile.View,Component=moobile.Component,ViewQueue=moobile.ViewQueue=new Class({Extends:View,willBuild:function(){this.parent(),this.addClass("view-queue")}});Component.defineRole("view-queue",null,null,function(e){this.addChildComponent(Component.create(ViewQueue,e,"data-view-queue"))});
+"use strict"
+
+var View      = moobile.View;
+var Component = moobile.Component;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/ViewQueue
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+var ViewQueue = moobile.ViewQueue = new Class({
+
+	Extends: View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('view-queue');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+Component.defineRole('view-queue', null, null, function(element) {
+	this.addChildComponent(Component.create(ViewQueue, element, 'data-view-queue'));
+});
 
 },{}],50:[function(require,module,exports){
-"use strict";var ViewSet=moobile.ViewSet=new Class({Extends:moobile.View,_tabBar:null,willBuild:function(){this.parent(),this.addClass("view-set");var e=this.getRoleElement("tab-bar");null===e&&(e=document.createElement("div"),e.inject(this.element),e.setRole("tab-bar"))},setTabBar:function(e){return this._tabBar!==e&&e?(this._tabBar?this._tabBar.replaceWithmoobile.Component(e,!0):this.addChildComponent(e,"footer"),this._tabBar=e,this._tabBar.addClass("view-set-tab-bar"),this):this},getTabBar:function(){return this._tabBar}});moobile.Component.defineRole("view-set",null,null,function(e){this.addChildComponent(moobile.Component.create(moobile.ViewSet,e,"data-view-set"))}),moobile.Component.defineRole("tab-bar",moobile.ViewSet,null,function(e){this.setTabBar(moobile.Component.create(TabBar,e,"data-tab-bar"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.View/moobile.ViewSet
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+var ViewSet = moobile.ViewSet = new Class({
+
+	Extends: moobile.View,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	_tabBar: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('view-set');
+
+		var bar = this.getRoleElement('tab-bar');
+		if (bar === null) {
+			bar = document.createElement('div');
+			bar.inject(this.element);
+			bar.setRole('tab-bar');
+		}
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/moobile.ViewSet#setTabBar
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	setTabBar: function(tabBar) {
+
+		if (this._tabBar === tabBar || !tabBar)
+			return this;
+
+		if (this._tabBar) {
+			this._tabBar.replaceWithmoobile.Component(tabBar, true);
+		} else {
+			this.addChildComponent(tabBar, 'footer');
+		}
+
+		this._tabBar = tabBar;
+		this._tabBar.addClass('view-set-tab-bar');
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.View/moobile.ViewSet#getTabBar
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	getTabBar: function() {
+		return this._tabBar;
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('view-set', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(moobile.ViewSet, element, 'data-view-set'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.3.0
+ */
+moobile.Component.defineRole('tab-bar', moobile.ViewSet, null, function(element) {
+	this.setTabBar(moobile.Component.create(TabBar, element, 'data-tab-bar'));
+});
 
 },{}],51:[function(require,module,exports){
-"use strict";var ViewStack=moobile.ViewStack=new Class({Extends:moobile.View,willBuild:function(){this.parent(),this.addClass("view-stack")}});moobile.Component.defineRole("view-stack",null,null,function(e){this.addChildComponent(moobile.Component.create(moobile.ViewStack,e,"data-view-stack"))});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/moobile.View/moobile.ViewStack
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var ViewStack = moobile.ViewStack = new Class({
+
+	Extends: moobile.View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.addClass('view-stack');
+	}
+
+});
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('view-stack', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(moobile.ViewStack, element, 'data-view-stack'));
+});
 
 },{}],52:[function(require,module,exports){
-"use strict";var View=moobile.View=new Class({Extends:moobile.Component,__layout:null,contentElement:null,contentWrapperElement:null,options:{layout:"vertical"},willBuild:function(){this.parent(),this.addClass("view");var t=this.getRoleElement("content");null===t&&(t=document.createElement("div"),t.ingest(this.element),t.inject(this.element),t.setRole("content"));var e=this.getRoleElement("content-wrapper");null===e&&(e=document.createElement("div"),e.wraps(t),e.setRole("content-wrapper"))},didBuild:function(){this.parent();var t=this.element.get("class");t&&t.split(" ").each(function(t){t=t.trim(),t&&this.contentElement.addClass(t+"-content")},this),this.setLayout(this.options.layout)},destroy:function(){this.contentElement=null,this.parent()},enableTouch:function(){return this.removeClass("disable").addClass("enable"),this},disableTouch:function(){return this.removeClass("enable").addClass("disable"),this},addChildComponent:function(t,e){return"header"===e?this.parent(t,"top"):"footer"===e?this.parent(t,"bottom"):this.parent(t,e,this.contentElement)},addChildComponents:function(t,e){return"header"===e?this.parent(t,"top"):"footer"===e?this.parent(t,"bottom"):this.addChildComponentsInside(t,this.contentElement,e)},willAddChildComponent:function(t){this.parent(t),t.setParentView(this)},willRemoveChildComponent:function(t){this.parent(t),t.setParentView(null)},getContentElement:function(){return this.contentElement},getContentWrapperElement:function(){return this.contentWrapperElement},setLayout:function(t){return this.__layout===t?this:(this.willChangeLayout(t),this.__layout&&this.removeClass("view-layout-"+this.__layout),this.__layout=t,this.__layout&&this.addClass("view-layout-"+this.__layout),this.didChangeLayout(t),this)},getLayout:function(){return this.__layout},willChangeLayout:function(t){},didChangeLayout:function(t){}});Class.refactor(moobile.Component,{__parentView:null,setParentView:function(t){if(this.__parentView===t)return this;if(this.parentViewWillChange(t),this.__parentView=t,this.parentViewDidChange(t),this instanceof View)return this;var e=function(t){return!(t instanceof View)};return this.getChildComponents().filter(e).invoke("setParentView",t),this},getParentView:function(){return this.__parentView},parentViewWillChange:function(t){},parentViewDidChange:function(t){},willAddChildComponent:function(t){this.previous(t),t.setParentView(this.__parentView)},willRemoveChildComponent:function(t){this.previous(t),t.setParentView(null)}}),View.at=function(t,e,n){var i=Element.at(t);return i?moobile.Component.create(View,i,"data-view",e,n):null},moobile.Component.defineRole("view",null,null,function(t){this.addChildComponent(moobile.Component.create(View,t,"data-view"))}),moobile.Component.defineRole("content",View,{traversable:!0},function(t){this.contentElement=t,this.contentElement.addClass("view-content")}),moobile.Component.defineRole("content-wrapper",View,{traversable:!0},function(t){this.contentWrapperElement=t,this.contentWrapperElement.addClass("view-content-wrapper")}),moobile.Component.defineRole("view-content",View,{traversable:!0},function(t){console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead'),this.contentElement=t,this.contentElement.addClass("view-content")}),moobile.Component.defineStyle("dark",View,{attach:function(t){t.addClass("style-dark")},detach:function(t){t.removeClass("style-dark")}}),moobile.Component.defineStyle("light",View,{attach:function(t){t.addClass("style-light")},detach:function(t){t.removeClass("style-light")}});
+"use strict"
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/View
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+var View = moobile.View = new Class({
+
+	Extends: moobile.Component,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	__layout: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#contentElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	contentElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#contentWrapperElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	contentWrapperElement: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#options
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	options: {
+		layout: 'vertical'
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.2.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+
+		this.parent();
+
+		this.addClass('view');
+
+		var content = this.getRoleElement('content');
+		if (content === null) {
+			content = document.createElement('div');
+			content.ingest(this.element);
+			content.inject(this.element);
+			content.setRole('content');
+		}
+
+		var wrapper = this.getRoleElement('content-wrapper');
+		if (wrapper === null) {
+			wrapper = document.createElement('div');
+			wrapper.wraps(content);
+			wrapper.setRole('content-wrapper');
+		}
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	didBuild: function() {
+
+		this.parent();
+
+		var classes = this.element.get('class');
+		if (classes) {
+			classes.split(' ').each(function(klass) {
+				klass = klass.trim();
+				if (klass) this.contentElement.addClass(klass + '-content');
+			}, this);
+		}
+
+		this.setLayout(this.options.layout);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.contentElement = null;
+		this.parent();
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#enableTouch
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	enableTouch: function() {
+		this.removeClass('disable').addClass('enable');
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#disableTouch
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	disableTouch: function() {
+		this.removeClass('enable').addClass('disable');
+		return this;
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	addChildComponent: function(component, where) {
+		if (where === 'header') return this.parent(component, 'top');
+		if (where === 'footer') return this.parent(component, 'bottom');
+		return this.parent(component, where, this.contentElement);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	addChildComponents: function(components, where) {
+		if (where === 'header') return this.parent(components, 'top');
+		if (where === 'footer') return this.parent(components, 'bottom');
+		return this.addChildComponentsInside(components, this.contentElement, where);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willAddChildComponent: function(component) {
+		this.parent(component);
+		component.setParentView(this);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.parent(component);
+		component.setParentView(null);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#getContentElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getContentElement: function() {
+		return this.contentElement;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#getContentWrapperElement
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getContentWrapperElement: function() {
+		return this.contentWrapperElement;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	setLayout: function(layout) {
+
+		if (this.__layout === layout)
+			return this;
+
+		this.willChangeLayout(layout);
+		if (this.__layout) this.removeClass('view-layout-' + this.__layout);
+		this.__layout = layout;
+		if (this.__layout) this.addClass('view-layout-' + this.__layout);
+		this.didChangeLayout(layout);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	getLayout: function() {
+		return this.__layout;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#willChangeLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	willChangeLayout: function(layout) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#didChangeLayout
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	didChangeLayout: function(layout) {
+
+	}
+
+});
+
+Class.refactor(moobile.Component, {
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__parentView: null,
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#setParentView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setParentView: function(parentView) {
+
+		if (this.__parentView === parentView)
+			return this;
+
+		this.parentViewWillChange(parentView);
+		this.__parentView = parentView;
+		this.parentViewDidChange(parentView);
+
+		if (this instanceof View)
+			return this;
+
+		var by = function(component) {
+			return !(component instanceof View);
+		};
+
+		this.getChildComponents().filter(by).invoke('setParentView', parentView);
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#getParentView
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getParentView: function() {
+		return this.__parentView;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#parentViewDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentViewWillChange: function(parentView) {
+
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/View/View#parentViewDidChange
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	parentViewDidChange: function(parentView) {
+
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willAddChildComponent: function(component) {
+		this.previous(component);
+		component.setParentView(this.__parentView);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	willRemoveChildComponent: function(component) {
+		this.previous(component);
+		component.setParentView(null);
+	}
+
+});
+
+/**
+ * @see    http://moobilejs.com/doc/latest/View/View#MoobileViewAt
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+View.at = function(path, options, name) {
+
+	var element = Element.at(path);
+	if (element) {
+		return moobile.Component.create(View, element, 'data-view', options, name);
+	}
+
+	return null;
+};
+
+//------------------------------------------------------------------------------
+// Roles
+//------------------------------------------------------------------------------
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('view', null, null, function(element) {
+	this.addChildComponent(moobile.Component.create(View, element, 'data-view'));
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+moobile.Component.defineRole('content', View, {traversable: true}, function(element) {
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
+});
+
+/**
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.2.0
+ */
+moobile.Component.defineRole('content-wrapper', View, {traversable: true}, function(element) {
+	this.contentWrapperElement = element
+	this.contentWrapperElement.addClass('view-content-wrapper');
+});
+
+// <0.1-compat>
+
+/**
+ * @deprecated
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.2.0
+ * @since  0.1.0
+ */
+moobile.Component.defineRole('view-content', View, {traversable: true}, function(element) {
+	console.log('[DEPRECATION NOTICE] The role "view-content" will be removed in 0.4, use the role "content" instead');
+	this.contentElement = element;
+	this.contentElement.addClass('view-content');
+});
+
+// </0.1-compat>
+
+//------------------------------------------------------------------------------
+// Styles
+//------------------------------------------------------------------------------
+
+/**
+ * Dark Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('dark', View, {
+	attach: function(element) { element.addClass('style-dark'); },
+	detach: function(element) { element.removeClass('style-dark'); }
+});
+
+/**
+ * Light Style - iOS & Android
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+moobile.Component.defineStyle('light', View, {
+	attach: function(element) { element.addClass('style-light'); },
+	detach: function(element) { element.removeClass('style-light'); }
+});
 
 },{}],53:[function(require,module,exports){
-"use strict";var ViewController=moobile.ViewController,WindowController=moobile.WindowController=new Class({Extends:ViewController,__rootViewController:null,loadView:function(){var o=document.id("window");null===o&&(o=document.createElement("div"),o.inject(document.body)),this.view=new moobile.Window(o)},setRootViewController:function(o){return this.__rootViewController&&(this.__rootViewController.destroy(),this.__rootViewController=null),o&&this.addChildViewController(o),this.__rootViewController=o,this},getRootViewController:function(){return this.__rootViewController}});
+"use strict"
+
+var ViewController = moobile.ViewController;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Window/WindowController
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+var WindowController = moobile.WindowController = new Class({
+
+	Extends: ViewController,
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__rootViewController: null,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	loadView: function() {
+
+		var element = document.id('window');
+		if (element === null) {
+			element = document.createElement('div');
+			element.inject(document.body);
+		}
+
+		this.view = new moobile.Window(element);
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#setRootViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	setRootViewController: function(rootViewController) {
+
+		if (this.__rootViewController) {
+			this.__rootViewController.destroy();
+			this.__rootViewController = null;
+		}
+
+		if (rootViewController) {
+ 			this.addChildViewController(rootViewController);
+		}
+
+		this.__rootViewController = rootViewController;
+
+		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/Window/WindowController#getRootViewController
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	getRootViewController: function() {
+		return this.__rootViewController;
+	}
+
+});
 
 },{}],54:[function(require,module,exports){
-"use strict";var View=moobile.View,Window=moobile.Window=new Class({Extends:View,initialize:function(n,i,t){return instance=this,window.addEvent("orientationchange",this.bound("__onWindowOrientationChange")),this.parent(n,i,t)},destroy:function(){instance=null,window.removeEvent("orientationchange",this.bound("__onWindowOrientationChange")),this.parent()},willBuild:function(){this.parent(),this.element.addClass("window")},didAddChildComponent:function(n){this.parent(),n.__setParent(this),n.__setWindow(this)},__onWindowOrientationChange:function(n){this.updateLayout()}}),instance=null;Window.getCurrentInstance=function(){return instance};
+"use strict"
+
+var View = moobile.View;
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Window/Window
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+var Window = moobile.Window = new Class({
+
+	Extends: View,
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.2.0
+	 */
+	initialize: function(element, options, name) {
+		instance = this;
+		window.addEvent('orientationchange', this.bound('__onWindowOrientationChange'));
+		return this.parent(element, options, name);
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		instance = null;
+		window.removeEvent('orientationchange', this.bound('__onWindowOrientationChange'));
+		this.parent();
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @edited 0.3.0
+	 * @since  0.1.0
+	 */
+	willBuild: function() {
+		this.parent();
+		this.element.addClass('window');
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.3.0
+	 */
+	didAddChildComponent: function(component) {
+		this.parent();
+		component.__setParent(this)
+		component.__setWindow(this)
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onWindowOrientationChange: function(e) {
+		this.updateLayout()
+	}
+
+});
+
+var instance = null;
+
+Window.getCurrentInstance = function() {
+	return instance;
+};
 
 },{}],55:[function(require,module,exports){
-"use strict";Browser.Platform.cordova=(window.Phonegap||window.Cordova||window.cordova)&&Browser.isMobile&&!Browser.safari;
+"use strict"
+Browser.Platform.cordova = (window.Phonegap || window.Cordova || window.cordova) && Browser.isMobile && !Browser.safari;
 
 },{}],56:[function(require,module,exports){
-"use strict";Class.parse=function(t){t=t.trim(),t=t.split(".");for(var n=window,i=0;i<t.length;i++){if(!n[t[i]])return null;n=n[t[i]]}return"function"==typeof n?n:null},Class.instantiate=function(t){if("string"==typeof t&&(t=Class.parse(t)),null===t)return null;t.$prototyping=!0;var n=new t;delete t.$prototyping;var i=Array.prototype.slice.call(arguments,1);return n.initialize&&n.initialize.apply(n,i),n};
+"use strict"
 
+Class.parse = function(name) {
+	name = name.trim();
+	name = name.split('.');
+	var func = window;
+	for (var i = 0; i < name.length; i++) if (func[name[i]]) func = func[name[i]]; else return null;
+	return typeof func === 'function' ? func : null;
+},
+
+Class.instantiate = function(klass) {
+	if (typeof klass === 'string') klass = Class.parse(klass);
+	if (klass === null) return null;
+	klass.$prototyping = true;
+	var instance = new klass;
+	delete klass.$prototyping;
+	var params = Array.prototype.slice.call(arguments, 1);
+	if (instance.initialize) instance.initialize.apply(instance, params);
+	return instance;
+}
 },{}],57:[function(require,module,exports){
-"use strict";var setStyle=Element.prototype.setStyle,getStyle=Element.prototype.getStyle,vendors=["Khtml","O","Ms","Moz","Webkit"],prefixes={},prefix=function(e){if(e=e.camelCase(),e in this.style)return e;if(void 0!==prefixes[e])return prefixes[e];for(var t=e.charAt(0).toUpperCase()+e.slice(1),n=0;n<vendors.length;n++){var r=vendors[n]+t;if(r in this.style){prefixes[e]=r;break}}return void 0===prefixes[e]&&(prefixes[e]=e),prefixes[e]};Element.implement({setRole:function(e){return this.set("data-role",e)},getRole:function(e){return this.get("data-role")},setStyle:function(e,t){return setStyle.call(this,prefix.call(this,e),t)},getStyle:function(e){return getStyle.call(this,prefix.call(this,e))},ingest:function(e){return this.adopt(document.id(e).childNodes)}});var cache={};Element.from=function(e){switch(typeof e){case"object":return document.id(e);case"string":var t=document.createElement("div");return t.innerHTML=e,t.childNodes[0]||null}return null},Element.at=function(e,t){var n=function(e){t&&t(e)},r=cache[e]||null;if(r)return r=r.clone(!0,!0),n(r),r;var i=function(t){var i=Element.from(t);i&&(cache[e]=i,r=cache[e].clone(!0,!0),n(r))},l=function(){n(null)},s="function"==typeof t;return new Request({url:e,async:s,method:"get",onSuccess:i,onFailure:l}).send(),r};
+"use strict"
+
+var setStyle = Element.prototype.setStyle;
+var getStyle = Element.prototype.getStyle;
+
+var vendors = ['Khtml', 'O', 'Ms', 'Moz', 'Webkit'];
+var prefixes = {};
+
+var prefix = function(property) {
+
+	property = property.camelCase();
+
+	if (property in this.style)
+		return property;
+
+	if (prefixes[property] !== undefined)
+		return prefixes[property];
+
+	var suffix = property.charAt(0).toUpperCase() + property.slice(1);
+
+	for (var i = 0; i < vendors.length; i++) {
+		var prefixed = vendors[i] + suffix;
+		if (prefixed in this.style) {
+			prefixes[property] = prefixed;
+			break
+		}
+	}
+
+	if (prefixes[property] === undefined)
+		prefixes[property] = property;
+
+	return prefixes[property];
+};
+
+Element.implement({
+
+	 setRole: function(role) {
+	 	return this.set('data-role', role);
+	 },
+
+	 getRole: function(role) {
+	 	return this.get('data-role');
+	 },
+
+	setStyle: function (property, value) {
+		return setStyle.call(this, prefix.call(this, property), value);
+	},
+
+	getStyle: function (property) {
+		return getStyle.call(this, prefix.call(this, property));
+	},
+
+	ingest: function(element) {
+		return this.adopt(document.id(element).childNodes);
+	}
+
+});
+
+var cache = {};
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Element/Element#from
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @since  0.1.0
+ */
+Element.from = function(text) {
+
+	switch (typeof text) {
+		case 'object': return document.id(text);
+		case 'string':
+			var element = document.createElement('div');
+			element.innerHTML = text;
+			return element.childNodes[0] || null;
+	}
+
+	return null;
+};
+
+/**
+ * @see    http://moobilejs.com/doc/latest/Element/Element#at
+ * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+ * @edited 0.3.0
+ * @since  0.1.0
+ */
+Element.at = function(path, callback) {
+
+	var dispatch = function(element) {
+		if (callback) callback(element);
+	};
+
+	var element = cache[path] || null;
+	if (element) {
+		element = element.clone(true, true);
+		dispatch(element);
+		return element;
+	}
+
+	var onSuccess = function(response) {
+		var el = Element.from(response);
+		if (el) {
+			cache[path] = el;
+			element = cache[path].clone(true, true);
+			dispatch(element);
+		}
+	};
+
+	var onFailure = function() {
+		dispatch(null);
+	};
+
+	var async = typeof callback === 'function';
+
+	new Request({
+		url: path,
+		async: async,
+		method: 'get',
+		onSuccess: onSuccess,
+		onFailure: onFailure
+	}).send();
+
+	return element;
+};
 
 },{}],58:[function(require,module,exports){
-"use strict";Events.prototype.on=Events.prototype.addEvent,Events.prototype.off=Events.prototype.removeEvent,Events.prototype.emit=Events.prototype.fireEvent;
-
+"use strict"
+Events.prototype.on = Events.prototype.addEvent;
+Events.prototype.off = Events.prototype.removeEvent;
+Events.prototype.emit = Events.prototype.fireEvent;
 },{}],59:[function(require,module,exports){
-"use strict";Request.prototype.options.isSuccess=function(){var t=this.status;return 0===t||t>=200&&300>t};
+"use strict"
 
+Request.prototype.options.isSuccess = function() {
+	var status = this.status;
+	return (status === 0 || (status >= 200 && status < 300));
+}
 },{}],60:[function(require,module,exports){
-"use strict";Array.implement({find:function(t){for(var n=0;n<this.length;n++){var s=t.call(this,this[n]);if(s===!0)return this[n]}return null},getLastItemAtOffset:function(t){return t=t?t:0,this[this.length-1-t]?this[this.length-1-t]:null},last:function(){return this.getLastItemAtOffset.apply(this,arguments)}});
+"use strict"
+
+Array.implement({
+
+	find: function(fn) {
+		for (var i = 0; i < this.length; i++) {
+			var found = fn.call(this, this[i]);
+			if (found === true) {
+				return this[i];
+			}
+		}
+		return null;
+	},
+
+	getLastItemAtOffset: function(offset) {
+		offset = offset ? offset : 0;
+		return this[this.length - 1 - offset] ?
+			   this[this.length - 1 - offset] :
+			   null;
+	},
+
+	last: function() {
+		return this.getLastItemAtOffset.apply(this, arguments);
+	}
+
+});
 
 },{}],61:[function(require,module,exports){
-"use strict";String.implement({toCamelCase:function(){return this.camelCase().replace("-","").replace(/\s\D/g,function(e){return e.charAt(1).toUpperCase()})}});
+"use strict"
+
+String.implement({
+
+	toCamelCase: function() {
+		return this.camelCase().replace('-', '').replace(/\s\D/g, function(match){
+            return match.charAt(1).toUpperCase();
+        });
+	}
+
+});
 
 },{}],62:[function(require,module,exports){
-Class.Binds=new Class({$bound:{},bound:function(n){return this.$bound[n]?this.$bound[n]:this.$bound[n]=this[n].bind(this)}});
+/*
+---
 
+name: Class.Binds
+
+description: A clean Class.Binds Implementation
+
+authors: Scott Kyle (@appden), Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Class, Core/Function]
+
+provides: Class.Binds
+
+...
+*/
+
+Class.Binds = new Class({
+
+	$bound: {},
+
+	bound: function(name){
+		return this.$bound[name] ? this.$bound[name] : this.$bound[name] = this[name].bind(this);
+	}
+
+});
 },{}],63:[function(require,module,exports){
-!function(){[Element,Window,Document].invoke("implement",{hasEvent:function(n){var e=this.retrieve("events"),t=e&&e[n]?e[n].values:null;if(t)for(var o=t.length;o--;)if(o in t)return!0;return!1}});var n=function(n,e,t,o){return e=n[e],t=n[t],function(n,i){i||(i=o),t&&!this.hasEvent(i)&&t.call(this,n,i),e&&e.call(this,n,i)}},e=function(n,e,t,o){return function(i,c){e[t].call(this,i,c||o),n[t].call(this,i,c||o)}},t=Element.Events;Element.defineCustomEvent=function(o,i){var c=t[i.base];return i.onAdd=n(i,"onAdd","onSetup",o),i.onRemove=n(i,"onRemove","onTeardown",o),t[o]=c?Object.append({},i,{base:c.base,condition:function(n){return(!c.condition||c.condition.call(this,n))&&(!i.condition||i.condition.call(this,n))},onAdd:e(i,c,"onAdd",o),onRemove:e(i,c,"onRemove",o)}):i,this};var o=function(n){var e="on"+n.capitalize();return Element[n+"CustomEvents"]=function(){Object.each(t,function(n,t){n[e]&&n[e].call(n,t)})},o};o("enable")("disable")}();
+/*
+---
+
+name: Element.defineCustomEvent
+
+description: Allows to create custom events based on other custom events.
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Element.Event]
+
+provides: Element.defineCustomEvent
+
+...
+*/
+
+(function(){
+
+[Element, Window, Document].invoke('implement', {hasEvent: function(event){
+	var events = this.retrieve('events'),
+		list = (events && events[event]) ? events[event].values : null;
+	if (list){
+		for (var i = list.length; i--;) if (i in list){
+			return true;
+		}
+	}
+	return false;
+}});
+
+var wrap = function(custom, method, extended, name){
+	method = custom[method];
+	extended = custom[extended];
+
+	return function(fn, customName){
+		if (!customName) customName = name;
+
+		if (extended && !this.hasEvent(customName)) extended.call(this, fn, customName);
+		if (method) method.call(this, fn, customName);
+	};
+};
+
+var inherit = function(custom, base, method, name){
+	return function(fn, customName){
+		base[method].call(this, fn, customName || name);
+		custom[method].call(this, fn, customName || name);
+	};
+};
+
+var events = Element.Events;
+
+Element.defineCustomEvent = function(name, custom){
+
+	var base = events[custom.base];
+
+	custom.onAdd = wrap(custom, 'onAdd', 'onSetup', name);
+	custom.onRemove = wrap(custom, 'onRemove', 'onTeardown', name);
+
+	events[name] = base ? Object.append({}, custom, {
+
+		base: base.base,
+
+		condition: function(event){
+			return (!base.condition || base.condition.call(this, event)) &&
+				(!custom.condition || custom.condition.call(this, event));
+		},
+
+		onAdd: inherit(custom, base, 'onAdd', name),
+		onRemove: inherit(custom, base, 'onRemove', name)
+
+	}) : custom;
+
+	return this;
+
+};
+
+var loop = function(name){
+	var method = 'on' + name.capitalize();
+	Element[name + 'CustomEvents'] = function(){
+		Object.each(events, function(event, name){
+			if (event[method]) event[method].call(event, name);
+		});
+	};
+	return loop;
+};
+
+loop('enable')('disable');
+
+})();
 
 },{}],64:[function(require,module,exports){
-Browser.Features.Touch=function(){try{return document.createEvent("TouchEvent").initTouchEvent("touchstart"),!0}catch(t){}return!1}(),Browser.Features.iOSTouch=function(){var t="cantouch",e=document.html,n=!1;if(!e.addEventListener)return!1;var r=function(){e.removeEventListener(t,r,!0),n=!0};try{e.addEventListener(t,r,!0);var c=document.createEvent("TouchEvent");return c.initTouchEvent(t),e.dispatchEvent(c),n}catch(u){}return r(),!1}();
+/*
+---
+
+name: Browser.Features.Touch
+
+description: Checks whether the used Browser has touch events
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Browser]
+
+provides: Browser.Features.Touch
+
+...
+*/
+
+Browser.Features.Touch = (function(){
+	try {
+		document.createEvent('TouchEvent').initTouchEvent('touchstart');
+		return true;
+	} catch (exception){}
+	
+	return false;
+})();
+
+// Android doesn't have a touch delay and dispatchEvent does not fire the handler
+Browser.Features.iOSTouch = (function(){
+	var name = 'cantouch', // Name does not matter
+		html = document.html,
+		hasTouch = false;
+
+	if (!html.addEventListener) return false;
+
+	var handler = function(){
+		html.removeEventListener(name, handler, true);
+		hasTouch = true;
+	};
+
+	try {
+		html.addEventListener(name, handler, true);
+		var event = document.createEvent('TouchEvent');
+		event.initTouchEvent(name);
+		html.dispatchEvent(event);
+		return hasTouch;
+	} catch (exception){}
+
+	handler(); // Remove listener
+	return false;
+})();
 
 },{}],65:[function(require,module,exports){
-(function(){if(Browser.Device={name:"other"},Browser.Platform.ios){var e=navigator.userAgent.toLowerCase().match(/(ip(ad|od|hone))/)[0];Browser.Device[e]=!0,Browser.Device.name=e}2==this.devicePixelRatio&&(Browser.hasHighResolution=!0),Browser.isMobile=!["mac","linux","win"].contains(Browser.Platform.name)}).call(this);
+/*
+---
+
+name: Browser.Mobile
+
+description: Provides useful information about the browser environment
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Browser]
+
+provides: Browser.Mobile
+
+...
+*/
+
+(function(){
+
+Browser.Device = {
+	name: 'other'
+};
+
+if (Browser.Platform.ios){
+	var device = navigator.userAgent.toLowerCase().match(/(ip(ad|od|hone))/)[0];
+	
+	Browser.Device[device] = true;
+	Browser.Device.name = device;
+}
+
+if (this.devicePixelRatio == 2)
+	Browser.hasHighResolution = true;
+
+Browser.isMobile = !['mac', 'linux', 'win'].contains(Browser.Platform.name);
+
+}).call(this);
 
 },{}],66:[function(require,module,exports){
-Browser.Features.Touch&&function(){var e,n,t="pinch",o=t+":threshold",i={touchstart:function(e){2==e.targetTouches.length&&(n=!0)},touchmove:function(i){if(!e&&n){i.preventDefault();var c=this.retrieve(o,.5);i.scale<1+c&&i.scale>1-c||(n=!1,i.pinch=i.scale>1?"in":"out",this.fireEvent(t,i))}}};Element.defineCustomEvent(t,{onSetup:function(){this.addEvents(i)},onTeardown:function(){this.removeEvents(i)},onEnable:function(){e=!1},onDisable:function(){e=!0}})}();
+/*
+---
+
+name: Pinch
+
+description: Provides a custom pinch event for touch devices
+
+authors: Christopher Beloch (@C_BHole), Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Element.Event, Custom-Event/Element.defineCustomEvent, Browser.Features.Touch]
+
+provides: Pinch
+
+...
+*/
+
+if (Browser.Features.Touch) (function(){
+
+var name = 'pinch',
+	thresholdKey = name + ':threshold',
+	disabled, active;
+
+var events = {
+
+	touchstart: function(event){
+		if (event.targetTouches.length == 2) active = true;
+	},
+
+	touchmove: function(event){
+		if (disabled || !active) return;
+
+		event.preventDefault();
+
+		var threshold = this.retrieve(thresholdKey, 0.5);
+		if (event.scale < (1 + threshold) && event.scale > (1 - threshold)) return;
+
+		active = false;
+		event.pinch = (event.scale > 1) ? 'in' : 'out';
+		this.fireEvent(name, event);
+	}
+
+};
+
+Element.defineCustomEvent(name, {
+
+	onSetup: function(){
+		this.addEvents(events);
+	},
+
+	onTeardown: function(){
+		this.removeEvents(events);
+	},
+
+	onEnable: function(){
+		disabled = false;
+	},
+
+	onDisable: function(){
+		disabled = true;
+	}
+
+});
+
+})();
 
 },{}],67:[function(require,module,exports){
-!function(){var e,t,n="swipe",i=n+":distance",o=n+":cancelVertical",c=50,a={},r=function(){t=!1},u={touchstart:function(e){if(!(e.touches.length>1)){var n=e.touches[0];t=!0,a={x:n.pageX,y:n.pageY}}},touchmove:function(r){if(!e&&t){var u=r.changedTouches[0],s={x:u.pageX,y:u.pageY};if(this.retrieve(o)&&Math.abs(a.y-s.y)>10)return void(t=!1);var h=this.retrieve(i,c),f=s.x-a.x,v=-h>f,d=f>h;(d||v)&&(r.preventDefault(),t=!1,r.direction=v?"left":"right",r.start=a,r.end=s,this.fireEvent(n,r))}},touchend:r,touchcancel:r};Element.defineCustomEvent(n,{onSetup:function(){this.addEvents(u)},onTeardown:function(){this.removeEvents(u)},onEnable:function(){e=!1},onDisable:function(){e=!0,r()}})}();
+/*
+---
+
+name: Swipe
+
+description: Provides a custom swipe event for touch devices
+
+authors: Christopher Beloch (@C_BHole), Christoph Pojer (@cpojer), Ian Collins (@3n)
+
+license: MIT-style license.
+
+requires: [Core/Element.Event, Custom-Event/Element.defineCustomEvent, Browser.Features.Touch]
+
+provides: Swipe
+
+...
+*/
+
+(function(){
+
+var name = 'swipe',
+	distanceKey = name + ':distance',
+	cancelKey = name + ':cancelVertical',
+	dflt = 50;
+
+var start = {}, disabled, active;
+
+var clean = function(){
+	active = false;
+};
+
+var events = {
+
+	touchstart: function(event){
+		if (event.touches.length > 1) return;
+
+		var touch = event.touches[0];
+		active = true;
+		start = {x: touch.pageX, y: touch.pageY};
+	},
+	
+	touchmove: function(event){
+		if (disabled || !active) return;
+		
+		var touch = event.changedTouches[0],
+			end = {x: touch.pageX, y: touch.pageY};
+		if (this.retrieve(cancelKey) && Math.abs(start.y - end.y) > 10){
+			active = false;
+			return;
+		}
+		
+		var distance = this.retrieve(distanceKey, dflt),
+			delta = end.x - start.x,
+			isLeftSwipe = delta < -distance,
+			isRightSwipe = delta > distance;
+
+		if (!isRightSwipe && !isLeftSwipe)
+			return;
+		
+		event.preventDefault();
+		active = false;
+		event.direction = (isLeftSwipe ? 'left' : 'right');
+		event.start = start;
+		event.end = end;
+		
+		this.fireEvent(name, event);
+	},
+
+	touchend: clean,
+	touchcancel: clean
+
+};
+
+Element.defineCustomEvent(name, {
+
+	onSetup: function(){
+		this.addEvents(events);
+	},
+
+	onTeardown: function(){
+		this.removeEvents(events);
+	},
+
+	onEnable: function(){
+		disabled = false;
+	},
+
+	onDisable: function(){
+		disabled = true;
+		clean();
+	}
+
+});
+
+})();
 
 },{}],"/src/main.js":[function(require,module,exports){
 (function (global){
-"use strict";global.requestAnimationFrame=require("moofx/lib/frame").request,global.cancelAnimationFrame=require("moofx/lib/frame").cancel,require("../vendor/mootools-class-extras/Source/Class.Binds.js"),require("../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js"),require("../vendor/mootools-mobile/Source/Browser/Features.Touch.js"),require("../vendor/mootools-mobile/Source/Browser/Mobile.js"),require("../vendor/mootools-mobile/Source/Touch/Pinch.js"),require("../vendor/mootools-mobile/Source/Touch/Swipe.js"),require("../utils/browser"),require("../utils/event"),require("../utils/class"),require("../utils/element"),require("../utils/request"),require("../utils/type/array"),require("../utils/type/string"),require("./core"),require("./event/firer"),require("./event/ready"),require("./event/touch"),require("./event/tap"),require("./event/css"),require("./animation/animation"),require("./component/component"),require("./component/overlay"),require("./control/control"),require("./control/text"),require("./control/activity-indicator"),require("./control/bar"),require("./control/button-group"),require("./control/button"),require("./control/image"),require("./control/list"),require("./control/list-item"),require("./control/navigation-bar"),require("./control/slider"),require("./control/tab-bar"),require("./control/tab"),require("./dialog/alert"),require("./scroller/scroller"),require("./scroller/scroller-iscroll"),require("./scroller/scroller-native"),require("./theme/theme"),require("./view/view"),require("./view/scroll-view"),require("./view/view-collection"),require("./view/view-queue"),require("./view/view-set"),require("./view/view-stack"),require("./view-controller/view-controller"),require("./view-controller/view-controller-stack"),require("./view-controller/view-controller-queue"),require("./view-transition/view-transition"),require("./view-transition/view-transition-box"),require("./view-transition/view-transition-cover"),require("./view-transition/view-transition-cubic"),require("./view-transition/view-transition-drop"),require("./view-transition/view-transition-fade"),require("./view-transition/view-transition-flip"),require("./view-transition/view-transition-none"),require("./view-transition/view-transition-page"),require("./view-transition/view-transition-slide"),require("./window/window"),require("./window/window-controller"),moobile.Request=Request,moobile.EventFirer=moobile.Firer,moobile.ViewTransition.Cover.Box=moobile.ViewTransition.Box,moobile.ViewTransition.Cover.Page=moobile.ViewTransition.Page,module.exports=global.Moobile=global.moobile;
+"use strict"
+
+// request animation frame
+global.requestAnimationFrame = require('moofx/lib/frame').request;
+global.cancelAnimationFrame = require('moofx/lib/frame').cancel;
+
+// mootools class extra
+require('../vendor/mootools-class-extras/Source/Class.Binds.js');
+
+// mootools define custom event
+require('../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js');
+
+// mootools mobiule
+require('../vendor/mootools-mobile/Source/Browser/Features.Touch.js');
+require('../vendor/mootools-mobile/Source/Browser/Mobile.js')
+require('../vendor/mootools-mobile/Source/Touch/Pinch.js')
+require('../vendor/mootools-mobile/Source/Touch/Swipe.js')
+
+// mootools utilities
+require('../utils/browser');
+require('../utils/event');
+require('../utils/class');
+require('../utils/element');
+require('../utils/request');
+require('../utils/type/array');
+require('../utils/type/string');
+
+// core
+require('./core');
+
+// event
+require('./event/firer');
+require('./event/ready');
+require('./event/touch');
+require('./event/tap');
+require('./event/css');
+
+// animation
+require('./animation/animation');
+
+// component
+require('./component/component');
+require('./component/overlay');
+
+// control
+require('./control/control');
+require('./control/text');
+require('./control/activity-indicator');
+require('./control/bar');
+require('./control/button-group');
+require('./control/button');
+require('./control/image');
+require('./control/list');
+require('./control/list-item');
+require('./control/navigation-bar');
+require('./control/slider');
+require('./control/tab-bar');
+require('./control/tab');
+
+// dialog
+require('./dialog/alert')
+
+// scroller
+require('./scroller/scroller');
+require('./scroller/scroller-iscroll');
+require('./scroller/scroller-native');
+
+// theme
+require('./theme/theme');
+
+// view
+require('./view/view');
+require('./view/scroll-view');
+require('./view/view-collection');
+require('./view/view-queue');
+require('./view/view-set');
+require('./view/view-stack');
+
+// view controller
+require('./view-controller/view-controller');
+require('./view-controller/view-controller-stack');
+require('./view-controller/view-controller-queue');
+// require('./view-controller/view-controller-collection');
+// require('./view-controller/view-controller-set');
+
+// view transition
+require('./view-transition/view-transition');
+require('./view-transition/view-transition-box');
+require('./view-transition/view-transition-cover');
+require('./view-transition/view-transition-cubic');
+require('./view-transition/view-transition-drop');
+require('./view-transition/view-transition-fade');
+require('./view-transition/view-transition-flip');
+require('./view-transition/view-transition-none');
+require('./view-transition/view-transition-page');
+require('./view-transition/view-transition-slide');
+
+// window
+require('./window/window')
+require('./window/window-controller')
+
+// aliases
+moobile.Request = Request;
+moobile.EventFirer = moobile.Firer;
+moobile.ViewTransition.Cover.Box = moobile.ViewTransition.Box;
+moobile.ViewTransition.Cover.Page = moobile.ViewTransition.Page;
+
+module.exports = global.Moobile = global.moobile
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../utils/browser":55,"../utils/class":56,"../utils/element":57,"../utils/event":58,"../utils/request":59,"../utils/type/array":60,"../utils/type/string":61,"../vendor/mootools-class-extras/Source/Class.Binds.js":62,"../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js":63,"../vendor/mootools-mobile/Source/Browser/Features.Touch.js":64,"../vendor/mootools-mobile/Source/Browser/Mobile.js":65,"../vendor/mootools-mobile/Source/Touch/Pinch.js":66,"../vendor/mootools-mobile/Source/Touch/Swipe.js":67,"./animation/animation":7,"./component/component":8,"./component/overlay":9,"./control/activity-indicator":10,"./control/bar":11,"./control/button":13,"./control/button-group":12,"./control/control":14,"./control/image":15,"./control/list":17,"./control/list-item":16,"./control/navigation-bar":18,"./control/slider":19,"./control/tab":21,"./control/tab-bar":20,"./control/text":22,"./core":23,"./dialog/alert":24,"./event/css":25,"./event/firer":26,"./event/ready":27,"./event/tap":28,"./event/touch":29,"./scroller/scroller":32,"./scroller/scroller-iscroll":30,"./scroller/scroller-native":31,"./theme/theme":33,"./view-controller/view-controller":36,"./view-controller/view-controller-queue":34,"./view-controller/view-controller-stack":35,"./view-transition/view-transition":46,"./view-transition/view-transition-box":37,"./view-transition/view-transition-cover":38,"./view-transition/view-transition-cubic":39,"./view-transition/view-transition-drop":40,"./view-transition/view-transition-fade":41,"./view-transition/view-transition-flip":42,"./view-transition/view-transition-none":43,"./view-transition/view-transition-page":44,"./view-transition/view-transition-slide":45,"./view/scroll-view":47,"./view/view":52,"./view/view-collection":48,"./view/view-queue":49,"./view/view-set":50,"./view/view-stack":51,"./window/window":54,"./window/window-controller":53,"moofx/lib/frame":2}]},{},[])("/src/main.js")
 });
