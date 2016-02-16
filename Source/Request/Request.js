@@ -41,7 +41,7 @@ Moobile.Request = new Class({
 	options: {
 		isSuccess: function() {
 			var status = this.status;
-			return (status === 0 || (status >= 200 && status < 300));
+			return (status === 0 || (status >= 200 && status <= 304));
 		}
 	}
 
