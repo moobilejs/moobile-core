@@ -15,20 +15,20 @@ require('../vendor/mootools-class-extras/Source/Class.Binds.js');
 // mootools define custom event
 require('../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js');
 
-// mootools mobiule
+// mootools mobile
 require('../vendor/mootools-mobile/Source/Browser/Features.Touch.js');
 require('../vendor/mootools-mobile/Source/Browser/Mobile.js')
 require('../vendor/mootools-mobile/Source/Touch/Pinch.js')
 require('../vendor/mootools-mobile/Source/Touch/Swipe.js')
 
 // mootools utilities
-// require('../utils/browser');
-require('../utils/event');
-require('../utils/class');
-require('../utils/element');
-require('../utils/request');
-require('../utils/type/array');
-require('../utils/type/string');
+// require('./utils/browser');
+require('./utils/event');
+require('./utils/class');
+require('./utils/element');
+require('./utils/request');
+require('./utils/type/array');
+require('./utils/type/string');
 
 // core
 require('./core');
