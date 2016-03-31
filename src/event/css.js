@@ -26,7 +26,7 @@ provides:
 var a = '';
 var t = '';
 
-if (Browser.safari || Browser.chrome || Browser.Platform.ios) {
+if (Browser.safari || Browser.chrome || Browser.platform.ios) {
 	a = 'webkitAnimationEnd';
 	t = 'webkitTransitionEnd';
 } else if (Browser.firefox) {

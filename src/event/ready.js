@@ -8,7 +8,7 @@ Element.defineCustomEvent('ready', {
 
 	onSetup: function() {
 
-		if (Browser.Platform.cordova) {
+		if (Browser.platform.cordova) {
 			document.onListener('deviceready', onReady);
 			return;
 		}
@@ -18,7 +18,7 @@ Element.defineCustomEvent('ready', {
 
 	onTeardown: function() {
 
-		if (Browser.Platform.cordova) {
+		if (Browser.platform.cordova) {
 			document.offListener('deviceready', onReady);
 			return;
 		}

@@ -1,5 +1,10 @@
 "use strict"
 
+// Requires Mootools Core/More 1.5.x and up
+if(parseFloat(MooTools.version) < 1.5) {
+	console.log('[ERROR] Moobile now requires Mootools v1.6+');
+}
+
 // request animation frame
 global.requestAnimationFrame = require('moofx/lib/frame').request;
 global.cancelAnimationFrame = require('moofx/lib/frame').cancel;
@@ -17,7 +22,7 @@ require('../vendor/mootools-mobile/Source/Touch/Pinch.js')
 require('../vendor/mootools-mobile/Source/Touch/Swipe.js')
 
 // mootools utilities
-require('../utils/browser');
+// require('../utils/browser');
 require('../utils/event');
 require('../utils/class');
 require('../utils/element');
@@ -71,15 +76,15 @@ require('./theme/theme');
 // view
 require('./view/view');
 require('./view/scroll-view');
-require('./view/view-collection');
-require('./view/view-queue');
-require('./view/view-set');
+// require('./view/view-collection');
+// require('./view/view-queue');
+// require('./view/view-set');
 require('./view/view-stack');
 
 // view controller
 require('./view-controller/view-controller');
 require('./view-controller/view-controller-stack');
-require('./view-controller/view-controller-queue');
+// require('./view-controller/view-controller-queue');
 // require('./view-controller/view-controller-collection');
 // require('./view-controller/view-controller-set');
 

@@ -109,7 +109,7 @@ var ScrollView = moobile.ScrollView = new Class({
 		scroller: ['Native', 'IScroll'],
 		scroll: 'vertical',
 		scrollbar: 'vertical',
-		bounce: Browser.Platform.ios,
+		bounce: Browser.platform.ios,
 		momentum: true,
 		snapToPage: false,
 		snapToPageAt: 20,

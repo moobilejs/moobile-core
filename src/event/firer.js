@@ -49,7 +49,7 @@ var Firer = moobile.Firer = new Class({
 	 */
 	fireEvent: function(type, args, delay) {
 
-		args = Array.from(args).include(this);
+		args = Array.from(args || []).include(this);
 
 		if (!this.shouldFireEvent(type, args))
 			return this;
