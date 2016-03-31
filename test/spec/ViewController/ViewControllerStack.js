@@ -85,17 +85,17 @@ describe('ViewController/ViewControllerStack', function() {
 		vs.pushViewController(vc3);
 	});
 
-	// getTopViewController
-
 	it('should retrieve the top view controller', function() {
 		var vs  = new Moobile.ViewControllerStack();
 		var vc1 = new Moobile.ViewController();
-		var vc2 = new Moobile.ViewController();
-		var vc3 = new Moobile.ViewController();
+
 		vs.pushViewController(vc1);
-		vs.pushViewController(vc2);
-		vs.pushViewController(vc3);
-		expect(vs.getTopViewController()).toEqual(vc3);
+
+		vs.didPushViewController = function() {
+			vs.didPushViewController = function() {};
+
+			expect(vs.getTopViewController()).toEqual(vc1);
+		}
 	});
 
 });
