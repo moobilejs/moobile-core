@@ -1,15 +1,9 @@
-[submodule "Packager"]
-	path = Packager
-	url = git://github.com/kamicane/packager.git
-[submodule "mootools-custom-event"]
-	path = Vendor/mootools-custom-event
-	url = git://github.com/cpojer/mootools-custom-event.git
-[submodule "mootools-class-extras"]
-	path = Vendor/mootools-class-extras
-	url = git://github.com/cpojer/mootools-class-extras.git
-[submodule "iscroll"]
-	path = Vendor/iscroll
-	url = git://github.com/cubiq/iscroll.git
-[submodule "Vendor/mootools-mobile"]
-	path = Vendor/mootools-mobile
-	url = git://github.com/cpojer/mootools-mobile.git
+[submodule "vendor/mootools-custom-event"]
+	path = vendor/mootools-custom-event
+	url = https://github.com/cpojer/mootools-custom-event.git
+[submodule "vendor/mootools-class-extras"]
+	path = vendor/mootools-class-extras
+	url = https://github.com/cpojer/mootools-class-extras.git
+[submodule "vendor/mootools-mobile"]
+	path = vendor/mootools-mobile
+	url = https://github.com/cpojer/mootools-mobile.git

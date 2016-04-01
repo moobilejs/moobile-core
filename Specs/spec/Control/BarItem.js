@@ -1,3 +1,0 @@
-describe('Control/BarItem', function() {
-
-});

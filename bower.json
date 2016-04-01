@@ -1,0 +1,35 @@
+{
+  "name": "moobilejs",
+  "description": "web application framework for engineering mobile and touch applications",
+  "main": "dist/js/moobile.min.js",
+  "authors": [
+    {
+      "name": "Jean-Philippe Dery",
+      "email": "jeanphilippe.dery@gmail.com"
+    },
+    {
+      "name": "Yannick Gagnon",
+      "email": "yannick.gagnon@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "mobile",
+    "touch",
+    "mootools"
+  ],
+  "homepage": "https://github.com/moobilejs/moobile-core",
+  "moduleType": [],
+  "dependencies": {},
+  "ignore": [
+    "**/.*",
+    "src",
+    "themes",
+    "vendor",
+    "node_modules",
+    "bower_components",
+    "test",
+    "Gruntfile.js",
+    "package.json"
+  ]
+}

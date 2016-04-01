@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Moobile Spec Runner</title>
+
+	<link rel="shortcut icon" type="image/png" href="jasmine/jasmine_favicon.png">
+
+	<link rel="stylesheet" type="text/css" href="jasmine/jasmine.css">
+	<script type="text/javascript" src="jasmine/jasmine.js"></script>
+	<script type="text/javascript" src="jasmine/jasmine-html.js"></script>
+	<script type="text/javascript" src="../dist/js/libs/mootools-core-1.6.0.min.js"></script>
+	<script type="text/javascript" src="../dist/js/libs/mootools-more-1.6.0.min.js"></script>
+
+	<!-- include source files here... -->
+
+	<script type="text/javascript" src="../vendor/mootools-class-extras/Source/Class.Binds.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-class-extras/Source/Class.Instantiate.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-class-extras/Source/Class.Singleton.js"></script>
+
+	<script type="text/javascript" src="../vendor/mootools-custom-event/Source/Element.defineCustomevent.js"></script>
+
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Browser/Features.Touch.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Browser/Mobile.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Desktop/Mouse.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Touch/Click.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Touch/Pinch.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Touch/Swipe.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Touch/Touch.js"></script>
+	<script type="text/javascript" src="../vendor/mootools-mobile/Source/Touch/Touchhold.js"></script>
+
+	<!-- include library here -->
+	<script type="text/javascript" src="../dist/js/moobile.js"></script>
+
+	<!-- include spec files here... -->
+	<script type="text/javascript" src="spec/Class/Class.Instantiate.js"></script>
+	<script type="text/javascript" src="spec/Types/Array.js"></script>
+	<script type="text/javascript" src="spec/Types/String.js"></script>
+	<script type="text/javascript" src="spec/Component/Component.js"></script>
+	<script type="text/javascript" src="spec/Control/Control.js"></script>
+	<script type="text/javascript" src="spec/Control/Bar.js"></script>
+	<script type="text/javascript" src="spec/Control/Button.js"></script>
+	<script type="text/javascript" src="spec/Control/ButtonGroup.js"></script>
+	<script type="text/javascript" src="spec/Control/Image.js"></script>
+	<script type="text/javascript" src="spec/Control/List.js"></script>
+	<script type="text/javascript" src="spec/Control/ListItem.js"></script>
+	<script type="text/javascript" src="spec/Control/Text.js"></script>
+	<script type="text/javascript" src="spec/Control/Slider.js"></script>
+	<script type="text/javascript" src="spec/Dialog/Alert.js"></script>
+	<script type="text/javascript" src="spec/View/view.js"></script>
+	<script type="text/javascript" src="spec/View/Scrollview.js"></script>
+	<script type="text/javascript" src="spec/ViewController/ViewController.js"></script>
+	<script type="text/javascript" src="spec/ViewController/ViewControllerStack.js"></script>
+	<script type="text/javascript" src="spec/Window/Windowcontroller.js"></script>
+
+	<script type="text/javascript">
+
+		(function() {
+			var jasmineEnv = jasmine.getEnv();
+			jasmineEnv.updateInterval = 1000;
+
+			var htmlReporter = new jasmine.HtmlReporter();
+
+			jasmineEnv.addReporter(htmlReporter);
+
+			jasmineEnv.specFilter = function(spec) {
+				return htmlReporter.specFilter(spec);
+			};
+
+			var currentWindowOnload = window.onload;
+
+			window.onload = function() {
+				if (currentWindowOnload) {
+					currentWindowOnload();
+				}
+				execJasmine();
+			};
+
+			function execJasmine() {
+				jasmineEnv.execute();
+			}
+
+		})();
+	</script>
+
+</head>
+
+<body>
+</body>
+</html>
