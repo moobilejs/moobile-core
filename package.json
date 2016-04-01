@@ -10,6 +10,10 @@
     "mootools"
   ],
   "author": "Jean-Philippe Dery <jeanphilippe.dery@gmail.com>",
+  "contributors": [{
+    "name": "Yannick Gagnon",
+    "email": "yannick.gagnon@gmail.com"
+  }],
   "bugs": "https://github.com/moobilejs/moobile-core/issues",
   "repository": {
     "type": "git",
