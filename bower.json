@@ -1,6 +1,8 @@
 {
   "name": "moobilejs",
+  "version": "0.3.0",
   "description": "web application framework for engineering mobile and touch applications",
+  "homepage": "https://github.com/moobilejs/moobile-core",
   "main": "dist/js/moobile.min.js",
   "authors": [
     {
@@ -18,9 +20,6 @@
     "touch",
     "mootools"
   ],
-  "homepage": "https://github.com/moobilejs/moobile-core",
-  "moduleType": [],
-  "dependencies": {},
   "ignore": [
     "**/.*",
     "src",
