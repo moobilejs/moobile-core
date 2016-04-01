@@ -5,17 +5,13 @@ Visit [http://moobilejs.com](http://moobilejs.com) for more informations.
 
 ## Changelog
 
-### 0.1.1
+### 0.3
 
-- Fixed a flicker that occured when showing an alert.
-- Added a `getDescendantComponent` method to the `Moobile.Component` class.
-- Fixed an issue that made some events fire more than once.
-- Added micro-optimizations.
-- Moved the presentation logic into a separate CSS file.
-- Added CSS vendor prefixes.
-- Fixed a few scroller issues that prevented scrolling on android devices.
-- Fixed slider
-- Added retina display images
+ This release focuses on making a solid foundation for future releases.
+
+### 0.2.1
+
+ - Fixed an issue that made all child components visible when the parent's show method was called, even if they were manually hidden.
 
 ### 0.2
 
@@ -51,3 +47,15 @@ This release focuses on making a solid foundation for future releases. Here are 
 #### ViewTransitions
 
  - Added a Cover.Box and Cover.Page transitions.
+
+### 0.1.1
+
+- Fixed a flicker that occured when showing an alert.
+- Added a `getDescendantComponent` method to the `Moobile.Component` class.
+- Fixed an issue that made some events fire more than once.
+- Added micro-optimizations.
+- Moved the presentation logic into a separate CSS file.
+- Added CSS vendor prefixes.
+- Fixed a few scroller issues that prevented scrolling on android devices.
+- Fixed slider
+- Added retina display images
