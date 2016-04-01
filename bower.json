@@ -22,6 +22,7 @@
   ],
   "ignore": [
     "**/.*",
+    "dist/css/*.map",
     "src",
     "themes",
     "vendor",
