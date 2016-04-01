@@ -9,6 +9,8 @@ if(parseFloat(MooTools.version) < 1.5) {
 global.requestAnimationFrame = require('moofx/lib/frame').request;
 global.cancelAnimationFrame = require('moofx/lib/frame').cancel;
 
+require('../node_modules/iscroll/src/iscroll.js');
+
 // mootools class extra
 require('../vendor/mootools-class-extras/Source/Class.Binds.js');
 
