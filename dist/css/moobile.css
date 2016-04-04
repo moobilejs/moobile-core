@@ -104,9 +104,7 @@ html {
 body {
   -webkit-user-select: none;
   /* Important */
-  -moz-user-select: none;
   /* Important */
-  -ms-user-select: none;
   /* Important */
   -o-user-select: none;
   /* Important */
@@ -114,9 +112,7 @@ body {
   /* Important */
   -webkit-text-size-adjust: 100%;
   /* Important */
-  -moz-text-size-adjust: 100%;
   /* Important */
-  -ms-text-size-adjust: 100%;
   /* Important */
   -o-text-size-adjust: 100%;
   /* Important */
@@ -138,11 +134,8 @@ input, select, textarea {
 .window {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
@@ -173,17 +166,12 @@ input, select, textarea {
 .view {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -193,21 +181,17 @@ input, select, textarea {
   /* Important */
   -webkit-box-orient: vertical;
   /* Important */
-  -moz-box-orient: vertical;
   /* Important */
   -webkit-flex-direction: column;
   /* Important */
-  -ms-flex-direction: column;
   /* Important */
   flex-direction: column;
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -217,7 +201,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -239,21 +222,16 @@ input, select, textarea {
 .view .view-content-wrapper {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -270,17 +248,12 @@ input, select, textarea {
 .view .view-content {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -290,21 +263,17 @@ input, select, textarea {
   /* Important */
   -webkit-box-orient: vertical;
   /* Important */
-  -moz-box-orient: vertical;
   /* Important */
   -webkit-flex-direction: column;
   /* Important */
-  -ms-flex-direction: column;
   /* Important */
   flex-direction: column;
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -314,7 +283,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -338,11 +306,9 @@ input, select, textarea {
   /* TODO: Is this line necessary ? */
   -webkit-box-orient: vertical;
   /* Important */
-  -moz-box-orient: vertical;
   /* Important */
   -webkit-flex-direction: column;
   /* Important */
-  -ms-flex-direction: column;
   /* Important */
   flex-direction: column;
   /* Important */ }
@@ -352,11 +318,9 @@ input, select, textarea {
   /* TODO: Is this line necessary ? */
   -webkit-box-orient: horizontal;
   /* Important */
-  -moz-box-orient: horizontal;
   /* Important */
   -webkit-flex-direction: row;
   /* Important */
-  -ms-flex-direction: row;
   /* Important */
   flex-direction: row;
   /* Important */ }
@@ -388,11 +352,8 @@ input, select, textarea {
 .view.scroll-view.iscroll-engine .scrollbar-V > div {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */ }
@@ -426,11 +387,9 @@ input, select, textarea {
 .view.view-collection > .view-content-wrapper > .view-content > .view {
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */ }
@@ -440,17 +399,12 @@ input, select, textarea {
 .bar {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -460,19 +414,15 @@ input, select, textarea {
   /* Important */
   -webkit-box-orient: horizontal;
   /* Important */
-  -moz-box-orient: horizontal;
   /* Important */
   -webkit-flex-direction: row;
   /* Important */
-  -ms-flex-direction: row;
   /* Important */
   flex-direction: row;
   /* Important */
   -webkit-box-align: center;
   /* Important */
-  -moz-box-align: center;
   /* Important */
-  -ms-flex-align: center;
   /* Important */
   -webkit-align-items: center;
   /* Important */
@@ -484,7 +434,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -503,17 +452,12 @@ input, select, textarea {
 .bar .bar-item {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -529,15 +473,14 @@ input, select, textarea {
   /* Important */
   -webkit-justify-content: center;
   /* Important */
-  justify-content: center;
+  -webkit-box-pack: center;
+          justify-content: center;
   /* Important */
   -webkit-box-orient: horizontal;
   /* Important */
-  -moz-box-orient: horizontal;
   /* Important */
   -webkit-flex-direction: row;
   /* Important */
-  -ms-flex-direction: row;
   /* Important */
   flex-direction: row;
   /* Important */
@@ -547,7 +490,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -567,17 +509,12 @@ input, select, textarea {
 .bar.navigation-bar {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -591,7 +528,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -607,17 +543,12 @@ input, select, textarea {
 .bar.navigation-bar .navigation-bar-content {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -627,11 +558,9 @@ input, select, textarea {
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -641,7 +570,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -657,17 +585,12 @@ input, select, textarea {
 .bar.navigation-bar .bar-title-wrapper {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -677,11 +600,9 @@ input, select, textarea {
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -691,7 +612,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -707,9 +627,7 @@ input, select, textarea {
 /* Tab Bar
 -----------------------------------------------------------------------------*/
 .bar.tab-bar {
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -721,9 +639,7 @@ input, select, textarea {
 /* Tab
 -----------------------------------------------------------------------------*/
 .tab {
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -738,7 +654,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -750,9 +665,7 @@ input, select, textarea {
   /* Important */ }
 
 .tab .tab-label {
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -767,17 +680,12 @@ input, select, textarea {
 .button-group {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -791,7 +699,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -803,11 +710,9 @@ input, select, textarea {
 .button-group.button-group-layout-vertical {
   -webkit-box-orient: vertical;
   /* Important */
-  -moz-box-orient: vertical;
   /* Important */
   -webkit-flex-direction: column;
   /* Important */
-  -ms-flex-direction: column;
   /* Important */
   flex-direction: column;
   /* Important */
@@ -819,17 +724,16 @@ input, select, textarea {
   /* Important */
   -webkit-align-items: flex-start;
   /* Important */
-  align-items: flex-start;
+  -webkit-box-align: start;
+          align-items: flex-start;
   /* Important */ }
 
 .button-group .button {
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */ }
@@ -839,17 +743,12 @@ input, select, textarea {
 .button {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -864,7 +763,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -880,17 +778,12 @@ input, select, textarea {
 .button .button-label {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -900,11 +793,9 @@ input, select, textarea {
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -943,11 +834,8 @@ input, select, textarea {
 .list {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */ }
@@ -958,17 +846,12 @@ input, select, textarea {
 .list-item {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -978,19 +861,15 @@ input, select, textarea {
   /* Important */
   -webkit-box-orient: horizontal;
   /* Important */
-  -moz-box-orient: horizontal;
   /* Important */
   -webkit-flex-direction: row;
   /* Important */
-  -ms-flex-direction: row;
   /* Important */
   flex-direction: row;
   /* Important */
   -webkit-box-align: center;
   /* Important */
-  -moz-box-align: center;
   /* Important */
-  -ms-flex-align: center;
   /* Important */
   -webkit-align-items: center;
   /* Important */
@@ -1002,7 +881,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -1018,17 +896,12 @@ input, select, textarea {
 .list-item .list-item-image {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1038,7 +911,6 @@ input, select, textarea {
   /* Important */
   -webkit-box-flex: 0;
   /* Important */
-  -moz-box-flex: 0;
   /* Important */
   -ms-box-flex: 0;
   /* Important */
@@ -1052,17 +924,12 @@ input, select, textarea {
 .list-item .list-item-label {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1072,11 +939,9 @@ input, select, textarea {
   /* Important */
   -webkit-box-flex: 1;
   /* Important */
-  -moz-box-flex: 1;
   /* Important */
   -webkit-flex: 1;
   /* Important */
-  -ms-flex: 1;
   /* Important */
   flex: 1;
   /* Important */
@@ -1086,17 +951,12 @@ input, select, textarea {
 .list-item .list-item-detail {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1106,11 +966,9 @@ input, select, textarea {
   /* Important */
   -webkit-box-flex: 0;
   /* Important */
-  -moz-box-flex: 0;
   /* Important */
   -webkit-flex: 0;
   /* Important */
-  -ms-flex: 0;
   /* Important */
   flex: 0;
   /* Important */
@@ -1135,42 +993,12 @@ input, select, textarea {
     opacity: 0; }
   to {
     opacity: 1; } }
-@-moz-keyframes show-overlay {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-ms-keyframes show-overlay {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-o-keyframes show-overlay {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
 @keyframes show-overlay {
   from {
     opacity: 0; }
   to {
     opacity: 1; } }
 @-webkit-keyframes hide-overlay {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-moz-keyframes hide-overlay {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-ms-keyframes hide-overlay {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-o-keyframes hide-overlay {
   from {
     opacity: 1; }
   to {
@@ -1183,21 +1011,15 @@ input, select, textarea {
 .overlay {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
   -webkit-transform: translate3d(0, 0, 0);
   /* Important */
-  -moz-transform: translate3d(0, 0, 0);
   /* Important */
-  -ms-transform: translate3d(0, 0, 0);
   /* Important */
-  -o-transform: translate3d(0, 0, 0);
   /* Important */
   transform: translate3d(0, 0, 0);
   /* Important */
@@ -1217,26 +1039,14 @@ input, select, textarea {
 
 .overlay.show-animated {
   -webkit-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
   animation-fill-mode: both; }
 
 .overlay.hide-animated {
   -webkit-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
   animation-fill-mode: both; }
 
 /* Radial */
@@ -1245,17 +1055,12 @@ input, select, textarea {
 .alert {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1265,11 +1070,9 @@ input, select, textarea {
   /* Important */
   -webkit-box-orient: vertical;
   /* Important */
-  -moz-box-orient: vertical;
   /* Important */
   -webkit-flex-direction: column;
   /* Important */
-  -ms-flex-direction: column;
   /* Important */
   flex-direction: column;
   /* Important */
@@ -1301,7 +1104,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -1323,17 +1125,12 @@ input, select, textarea {
 .alert .alert-box {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1349,17 +1146,12 @@ input, select, textarea {
 .alert .alert-header {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1371,17 +1163,12 @@ input, select, textarea {
 .alert .alert-content {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1393,17 +1180,12 @@ input, select, textarea {
 .alert .alert-footer {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1412,28 +1194,12 @@ input, select, textarea {
   box-sizing: border-box;
   /* Important */
   -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
   -ms-box-orient: horizontal;
   -o-box-orient: horizontal;
   box-orient: horizontal; }
 
 /* Show Animation */
 @-webkit-keyframes show-alert {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-moz-keyframes show-alert {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-ms-keyframes show-alert {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-o-keyframes show-alert {
   from {
     opacity: 0; }
   to {
@@ -1445,33 +1211,12 @@ input, select, textarea {
     opacity: 1; } }
 .alert.show-animated .alert-box {
   -webkit-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
   animation-fill-mode: both; }
 
 /* Hide Animated */
 @-webkit-keyframes hide-alert {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-moz-keyframes hide-alert {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-ms-keyframes hide-alert {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-o-keyframes hide-alert {
   from {
     opacity: 1; }
   to {
@@ -1483,14 +1228,8 @@ input, select, textarea {
     opacity: 0; } }
 .alert.hide-animated .alert-box {
   -webkit-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
   animation-fill-mode: both; }
 
 /* Vertical Button Layout */
@@ -1501,40 +1240,22 @@ input, select, textarea {
     -webkit-transform: rotate(0deg); }
   to {
     -webkit-transform: rotate(360deg); } }
-@-moz-keyframes rotate-activity-indicator {
-  from {
-    -moz-transform: rotate(0deg); }
-  to {
-    -moz-transform: rotate(360deg); } }
-@-ms-keyframes rotate-activity-indicator {
-  from {
-    -ms-transform: rotate(0deg); }
-  to {
-    -ms-transform: rotate(360deg); } }
-@-o-keyframes rotate-activity-indicator {
-  from {
-    -o-transform: rotate(0deg); }
-  to {
-    -o-transform: rotate(360deg); } }
 @keyframes rotate-activity-indicator {
   from {
-    transform: rotate(0deg); }
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
   to {
-    transform: rotate(360deg); } }
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 .activity-indicator {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1545,14 +1266,8 @@ input, select, textarea {
 
 .activity-indicator.active {
   -webkit-animation: rotate-activity-indicator 1s infinite linear;
-  -moz-animation: rotate-activity-indicator 1s infinite linear;
-  -ms-animation: rotate-activity-indicator 1s infinite linear;
-  -o-animation: rotate-activity-indicator 1s infinite linear;
   animation: rotate-activity-indicator 1s infinite linear;
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
   animation-fill-mode: both; }
 
 /* Slider
@@ -1564,17 +1279,12 @@ input, select, textarea {
 .slider-value {
   -webkit-backface-visibility: hidden;
   /* Important */
-  -moz-backface-visibility: hidden;
   /* Important */
-  -ms-backface-visibility: hidden;
   /* Important */
-  -o-backface-visibility: hidden;
   /* Important */
   backface-visibility: hidden;
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -1590,21 +1300,6 @@ input, select, textarea {
     opacity: 0; }
   to {
     opacity: 1; } }
-@-moz-keyframes transition-fade-enter {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-ms-keyframes transition-fade-enter {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-o-keyframes transition-fade-enter {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
 @keyframes transition-fade-enter {
   from {
     opacity: 0; }
@@ -1615,14 +1310,8 @@ input, select, textarea {
 
 .transition-fade-enter .transition-view-to-show {
   -webkit-transform: translate3d(0, -100%, 0);
-  -moz-transform: translate3d(0, -100%, 0);
-  -ms-transform: translate3d(0, -100%, 0);
-  -o-transform: translate3d(0, -100%, 0);
   transform: translate3d(0, -100%, 0);
   -webkit-animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 100;
   /* Important */ }
@@ -1634,21 +1323,6 @@ input, select, textarea {
 /* Transition Fade (Leave)
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-fade-leave {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-moz-keyframes transition-fade-leave {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-ms-keyframes transition-fade-leave {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-o-keyframes transition-fade-leave {
   from {
     opacity: 1; }
   to {
@@ -1667,14 +1341,8 @@ input, select, textarea {
 
 .transition-fade-leave .transition-view-to-hide {
   -webkit-transform: translate3d(0, -100%, 0);
-  -moz-transform: translate3d(0, -100%, 0);
-  -ms-transform: translate3d(0, -100%, 0);
-  -o-transform: translate3d(0, -100%, 0);
   transform: translate3d(0, -100%, 0);
   -webkit-animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 100;
   /* Important */ }
@@ -1686,31 +1354,15 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0); }
   to {
     -webkit-transform: translate3d(-100%, 0, 0); } }
-@-moz-keyframes transition-slide-enter {
-  from {
-    -moz-transform: translate3d(0, 0, 0); }
-  to {
-    -moz-transform: translate3d(-100%, 0, 0); } }
-@-ms-keyframes transition-slide-enter {
-  from {
-    -ms-transform: translate3d(0, 0, 0); }
-  to {
-    -ms-transform: translate3d(-100%, 0, 0); } }
-@-o-keyframes transition-slide-enter {
-  from {
-    -o-transform: translate3d(0, 0, 0); }
-  to {
-    -o-transform: translate3d(-100%, 0, 0); } }
 @keyframes transition-slide-enter {
   from {
-    transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    transform: translate3d(-100%, 0, 0); } }
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0); } }
 .transition-slide-enter {
   -webkit-animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   display: block;
   /* Important */ }
@@ -1718,11 +1370,8 @@ input, select, textarea {
 .transition-slide-enter .transition-view-to-show {
   -webkit-transform: translate3d(100%, -100%, 0);
   /* Important */
-  -moz-transform: translate3d(100%, -100%, 0);
   /* Important */
-  -ms-transform: translate3d(100%, -100%, 0);
   /* Important */
-  -o-transform: translate3d(100%, -100%, 0);
   /* Important */
   transform: translate3d(100%, -100%, 0);
   /* Important */
@@ -1732,11 +1381,8 @@ input, select, textarea {
 .transition-slide-enter .transition-view-to-hide {
   -webkit-transform: translate3d(0, 0, 0);
   /* Important */
-  -moz-transform: translate3d(0, 0, 0);
   /* Important */
-  -ms-transform: translate3d(0, 0, 0);
   /* Important */
-  -o-transform: translate3d(0, 0, 0);
   /* Important */
   transform: translate3d(0, 0, 0);
   /* Important */
@@ -1750,31 +1396,15 @@ input, select, textarea {
     -webkit-transform: translate3d(-100%, 0, 0); }
   to {
     -webkit-transform: translate3d(0, 0, 0); } }
-@-moz-keyframes transition-slide-leave {
-  from {
-    -moz-transform: translate3d(-100%, 0, 0); }
-  to {
-    -moz-transform: translate3d(0, 0, 0); } }
-@-ms-keyframes transition-slide-leave {
-  from {
-    -ms-transform: translate3d(-100%, 0, 0); }
-  to {
-    -ms-transform: translate3d(0, 0, 0); } }
-@-o-keyframes transition-slide-leave {
-  from {
-    -o-transform: translate3d(-100%, 0, 0); }
-  to {
-    -o-transform: translate3d(0, 0, 0); } }
 @keyframes transition-slide-leave {
   from {
-    transform: translate3d(-100%, 0, 0); }
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0); }
   to {
-    transform: translate3d(0, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 .transition-slide-leave {
   -webkit-animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   display: block;
   /* Important */ }
@@ -1782,11 +1412,8 @@ input, select, textarea {
 .transition-slide-leave .transition-view-to-show {
   -webkit-transform: translate3d(0, 0, 0);
   /* Important */
-  -moz-transform: translate3d(0, 0, 0);
   /* Important */
-  -ms-transform: translate3d(0, 0, 0);
   /* Important */
-  -o-transform: translate3d(0, 0, 0);
   /* Important */
   transform: translate3d(0, 0, 0);
   /* Important */
@@ -1796,11 +1423,8 @@ input, select, textarea {
 .transition-slide-leave .transition-view-to-hide {
   -webkit-transform: translate3d(100%, -100%, 0);
   /* Important */
-  -moz-transform: translate3d(100%, -100%, 0);
   /* Important */
-  -ms-transform: translate3d(100%, -100%, 0);
   /* Important */
-  -o-transform: translate3d(100%, -100%, 0);
   /* Important */
   transform: translate3d(100%, -100%, 0);
   /* Important */
@@ -1814,34 +1438,18 @@ input, select, textarea {
     -webkit-transform: translate3d(0, -100%, 0); }
   to {
     -webkit-transform: translate3d(0, 0%, 0); } }
-@-moz-keyframes transition-drop-enter {
-  from {
-    -moz-transform: translate3d(0, -100%, 0); }
-  to {
-    -moz-transform: translate3d(0, 0%, 0); } }
-@-ms-keyframes transition-drop-enter {
-  from {
-    -ms-transform: translate3d(0, -100%, 0); }
-  to {
-    -ms-transform: translate3d(0, 0%, 0); } }
-@-o-keyframes transition-drop-enter {
-  from {
-    -o-transform: translate3d(0, -100%, 0); }
-  to {
-    -o-transform: translate3d(0, 0%, 0); } }
 @keyframes transition-drop-enter {
   from {
-    transform: translate3d(0, -100%, 0); }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
   to {
-    transform: translate3d(0, 0%, 0); } }
+    -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0); } }
 .transition-drop-enter {
   display: block !important; }
 
 .transition-drop-enter .transition-view-to-show {
   -webkit-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
@@ -1856,26 +1464,13 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0); }
   to {
     -webkit-transform: translate3d(0, -100%, 0); } }
-@-moz-keyframes transition-drop-leave {
-  from {
-    -moz-transform: translate3d(0, 0, 0); }
-  to {
-    -moz-transform: translate3d(0, -100%, 0); } }
-@-ms-keyframes transition-drop-leave {
-  from {
-    -ms-transform: translate3d(0, 0, 0); }
-  to {
-    -ms-transform: translate3d(0, -100%, 0); } }
-@-o-keyframes transition-drop-leave {
-  from {
-    -o-transform: translate3d(0, 0, 0); }
-  to {
-    -o-transform: translate3d(0, -100%, 0); } }
 @keyframes transition-drop-leave {
   from {
-    transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); } }
 .transition-drop-leave {
   display: block !important; }
 
@@ -1885,9 +1480,6 @@ input, select, textarea {
 
 .transition-drop-leave .transition-view-to-hide {
   -webkit-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
@@ -1898,34 +1490,18 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 100%, 0); }
   to {
     -webkit-transform: translate3d(0, 0%, 0); } }
-@-moz-keyframes transition-cover-enter {
-  from {
-    -moz-transform: translate3d(0, 100%, 0); }
-  to {
-    -moz-transform: translate3d(0, 0%, 0); } }
-@-ms-keyframes transition-cover-enter {
-  from {
-    -ms-transform: translate3d(0, 100%, 0); }
-  to {
-    -ms-transform: translate3d(0, 0%, 0); } }
-@-o-keyframes transition-cover-enter {
-  from {
-    -o-transform: translate3d(0, 100%, 0); }
-  to {
-    -o-transform: translate3d(0, 0%, 0); } }
 @keyframes transition-cover-enter {
   from {
-    transform: translate3d(0, 100%, 0); }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
   to {
-    transform: translate3d(0, 0%, 0); } }
+    -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0); } }
 .transition-cover-enter {
   display: block !important; }
 
 .transition-cover-enter .transition-view-to-show {
   -webkit-animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
@@ -1940,26 +1516,13 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0); }
   to {
     -webkit-transform: translate3d(0, 100%, 0); } }
-@-moz-keyframes transition-cover-leave {
-  from {
-    -moz-transform: translate3d(0, 0, 0); }
-  to {
-    -moz-transform: translate3d(0, 100%, 0); } }
-@-ms-keyframes transition-cover-leave {
-  from {
-    -ms-transform: translate3d(0, 0, 0); }
-  to {
-    -ms-transform: translate3d(0, 100%, 0); } }
-@-o-keyframes transition-cover-leave {
-  from {
-    -o-transform: translate3d(0, 0, 0); }
-  to {
-    -o-transform: translate3d(0, 100%, 0); } }
 @keyframes transition-cover-leave {
   from {
-    transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    transform: translate3d(0, 100%, 0); } }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); } }
 .transition-cover-leave {
   display: block !important; }
 
@@ -1969,9 +1532,6 @@ input, select, textarea {
 
 .transition-cover-leave .transition-view-to-hide {
   -webkit-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
@@ -1980,17 +1540,12 @@ input, select, textarea {
 .transition-cover-page-foreground-view-wrapper {
   -webkit-transform: translate3d(0, -100%, 0);
   /* Important */
-  -moz-transform: translate3d(0, -100%, 0);
   /* Important */
-  -ms-transform: translate3d(0, -100%, 0);
   /* Important */
-  -o-transform: translate3d(0, -100%, 0);
   /* Important */
   transform: translate3d(0, -100%, 0);
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -2024,7 +1579,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -2044,7 +1598,6 @@ input, select, textarea {
 .transition-cover-page-foreground-view {
   -webkit-box-flex: 0;
   /* Important */
-  -moz-box-flex: 0;
   /* Important */
   -ms-box-flex: 0;
   /* Important */
@@ -2064,7 +1617,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -2083,34 +1635,18 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0); }
   to {
     -webkit-transform: translate3d(0, -100%, 0); } }
-@-moz-keyframes transition-cover-page-enter {
-  from {
-    -moz-transform: translate3d(0, 0, 0); }
-  to {
-    -moz-transform: translate3d(0, -100%, 0); } }
-@-ms-keyframes transition-cover-page-enter {
-  from {
-    -ms-transform: translate3d(0, 0, 0); }
-  to {
-    -ms-transform: translate3d(0, -100%, 0); } }
-@-o-keyframes transition-cover-page-enter {
-  from {
-    -o-transform: translate3d(0, 0, 0); }
-  to {
-    -o-transform: translate3d(0, -100%, 0); } }
 @keyframes transition-cover-page-enter {
   from {
-    transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); } }
 .transition-cover-page-enter {
   display: block !important; }
 
 .transition-cover-page-enter .transition-cover-page-foreground-view-wrapper {
   -webkit-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition Cover Page Leave
@@ -2120,34 +1656,18 @@ input, select, textarea {
     -webkit-transform: translate3d(0, -100%, 0); }
   to {
     -webkit-transform: translate3d(0, 0, 0); } }
-@-moz-keyframes transition-cover-page-leave {
-  from {
-    -moz-transform: translate3d(0, -100%, 0); }
-  to {
-    -moz-transform: translate3d(0, 0, 0); } }
-@-ms-keyframes transition-cover-page-leave {
-  from {
-    -ms-transform: translate3d(0, -100%, 0); }
-  to {
-    -ms-transform: translate3d(0, 0, 0); } }
-@-o-keyframes transition-cover-page-leave {
-  from {
-    -o-transform: translate3d(0, -100%, 0); }
-  to {
-    -o-transform: translate3d(0, 0, 0); } }
 @keyframes transition-cover-page-leave {
   from {
-    transform: translate3d(0, -100%, 0); }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
   to {
-    transform: translate3d(0, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 .transition-cover-page-leave {
   display: block !important; }
 
 .transition-cover-page-leave .transition-cover-page-foreground-view-wrapper {
   -webkit-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition Cover Box (Shared)
@@ -2155,17 +1675,12 @@ input, select, textarea {
 .transition-cover-box-foreground-view-wrapper {
   -webkit-transform: translate3d(0, -100%, 0);
   /* Important */
-  -moz-transform: translate3d(0, -100%, 0);
   /* Important */
-  -ms-transform: translate3d(0, -100%, 0);
   /* Important */
-  -o-transform: translate3d(0, -100%, 0);
   /* Important */
   transform: translate3d(0, -100%, 0);
   /* Important */
-  -webkit-box-sizing: border-box;
   /* Important */
-  -moz-box-sizing: border-box;
   /* Important */
   -ms-box-sizing: border-box;
   /* Important */
@@ -2199,7 +1714,6 @@ input, select, textarea {
   /* Important */
   display: box;
   /* Important */
-  display: -ms-flexbox;
   /* Important */
   display: flexbox;
   /* Important */
@@ -2219,7 +1733,6 @@ input, select, textarea {
 .transition-cover-box-foreground-view {
   -webkit-box-flex: 0;
   /* Important */
-  -moz-box-flex: 0;
   /* Important */
   -ms-box-flex: 0;
   /* Important */
@@ -2256,34 +1769,18 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0); }
   to {
     -webkit-transform: translate3d(0, -100%, 0); } }
-@-moz-keyframes transition-cover-box-enter {
-  from {
-    -moz-transform: translate3d(0, 0, 0); }
-  to {
-    -moz-transform: translate3d(0, -100%, 0); } }
-@-ms-keyframes transition-cover-box-enter {
-  from {
-    -ms-transform: translate3d(0, 0, 0); }
-  to {
-    -ms-transform: translate3d(0, -100%, 0); } }
-@-o-keyframes transition-cover-box-enter {
-  from {
-    -o-transform: translate3d(0, 0, 0); }
-  to {
-    -o-transform: translate3d(0, -100%, 0); } }
 @keyframes transition-cover-box-enter {
   from {
-    transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); } }
 .transition-cover-box-enter {
   display: block !important; }
 
 .transition-cover-box-enter .transition-cover-box-foreground-view-wrapper {
   -webkit-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition - Cover Box Leave
@@ -2293,54 +1790,23 @@ input, select, textarea {
     -webkit-transform: translate3d(0, -100%, 0); }
   to {
     -webkit-transform: translate3d(0, 0, 0); } }
-@-moz-keyframes transition-cover-box-leave {
-  from {
-    -moz-transform: translate3d(0, -100%, 0); }
-  to {
-    -moz-transform: translate3d(0, 0, 0); } }
-@-ms-keyframes transition-cover-box-leave {
-  from {
-    -ms-transform: translate3d(0, -100%, 0); }
-  to {
-    -ms-transform: translate3d(0, 0, 0); } }
-@-o-keyframes transition-cover-box-leave {
-  from {
-    -o-transform: translate3d(0, -100%, 0); }
-  to {
-    -o-transform: translate3d(0, 0, 0); } }
 @keyframes transition-cover-box-leave {
   from {
-    transform: translate3d(0, -100%, 0); }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
   to {
-    transform: translate3d(0, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 .transition-cover-box-leave {
   display: block !important; }
 
 .transition-cover-box-leave .transition-cover-box-foreground-view-wrapper {
   -webkit-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition Cubic Enter
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cubic-enter {
-  from {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); } }
-@-moz-keyframes transition-cubic-enter {
-  from {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); } }
-@-ms-keyframes transition-cubic-enter {
-  from {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); } }
-@-o-keyframes transition-cubic-enter {
   from {
     -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
@@ -2352,39 +1818,28 @@ input, select, textarea {
     -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); } }
 .transition-cubic-perspective {
   -webkit-perspective: 800;
-  -moz-perspective: 800;
   -ms-perspective: 800;
   -o-perspective: 800;
   perspective: 800;
   -webkit-perspective-origin: 50% 50%;
-  -moz-perspective-origin: 50% 50%;
   -ms-perspective-origin: 50% 50%;
   -o-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
 
 .transition-cubic-enter {
   -webkit-animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
   /* Important */
-  -moz-transform-style: preserve-3d;
   /* Important */
-  -ms-transform-style: preserve-3d;
   /* Important */
-  -o-transform-style: preserve-3d;
   /* Important */
   transform-style: preserve-3d;
   /* Important */
   -webkit-transform-origin: 100% 50%;
   /* Important */
-  -moz-transform-origin: 100% 50%;
   /* Important */
-  -ms-transform-origin: 100% 50%;
   /* Important */
-  -o-transform-origin: 100% 50%;
   /* Important */
   transform-origin: 100% 50%;
   /* Important */
@@ -2393,26 +1848,14 @@ input, select, textarea {
 
 .transition-cubic-enter .transition-view-to-show {
   -webkit-transform-origin: center left;
-  -moz-transform-origin: center left;
-  -ms-transform-origin: center left;
-  -o-transform-origin: center left;
   transform-origin: center left;
   -webkit-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  -moz-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  -ms-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  -o-transform: translate3d(100%, -100%, 0) rotateY(90deg);
   transform: translate3d(100%, -100%, 0) rotateY(90deg); }
 
 .transition-cubic-enter .transition-view-to-hide {
   -webkit-transform-origin: center left;
-  -moz-transform-origin: center left;
-  -ms-transform-origin: center left;
-  -o-transform-origin: center left;
   transform-origin: center left;
   -webkit-transform: rotateY(0deg);
-  -moz-transform: rotateY(0deg);
-  -ms-transform: rotateY(0deg);
-  -o-transform: rotateY(0deg);
   transform: rotateY(0deg); }
 
 /* Transition Cubic Leave
@@ -2444,45 +1887,24 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); } }
 .transition-cubic-leave {
   -webkit-animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
-  -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transform-origin: 100% 50%;
-  -moz-transform-origin: 100% 50%;
-  -ms-transform-origin: 100% 50%;
-  -o-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
   display: block !important;
   /* Important */ }
 
 .transition-cubic-leave .transition-view-to-show {
   -webkit-transform-origin: center left;
-  -moz-transform-origin: center left;
-  -ms-transform-origin: center left;
-  -o-transform-origin: center left;
   transform-origin: center left;
   -webkit-transform: rotateY(0deg);
-  -moz-transform: rotateY(0deg);
-  -ms-transform: rotateY(0deg);
-  -o-transform: rotateY(0deg);
   transform: rotateY(0deg); }
 
 .transition-cubic-leave .transition-view-to-hide {
   -webkit-transform-origin: center left;
-  -moz-transform-origin: center left;
-  -ms-transform-origin: center left;
-  -o-transform-origin: center left;
   transform-origin: center left;
   -webkit-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  -moz-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  -ms-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  -o-transform: translate3d(100%, -100%, 0) rotateY(90deg);
   transform: translate3d(100%, -100%, 0) rotateY(90deg); }
 
 /* Transition Flip Enter
@@ -2492,66 +1914,39 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
     -webkit-transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
-@-moz-keyframes transition-flip-enter {
-  from {
-    -moz-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -moz-transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
-@-ms-keyframes transition-flip-enter {
-  from {
-    -ms-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -ms-transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
-@-o-keyframes transition-flip-enter {
-  from {
-    -o-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -o-transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
 @keyframes transition-flip-enter {
   from {
-    transform: translate3d(0, 0, 0) rotateY(0deg); }
+    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
-    transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-180deg);
+            transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
 .transition-flip-perspective {
   -webkit-perspective: 800;
-  -moz-perspective: 800;
   -ms-perspective: 800;
   -o-perspective: 800;
   perspective: 800;
   -webkit-perspective-origin: 50% 50%;
-  -moz-perspective-origin: 50% 50%;
   -ms-perspective-origin: 50% 50%;
   -o-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%; }
 
 .transition-flip-enter {
   -webkit-animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
   /* Important */
-  -moz-transform-style: preserve-3d;
   /* Important */
-  -ms-transform-style: preserve-3d;
   /* Important */
-  -o-transform-style: preserve-3d;
   /* Important */
   transform-style: preserve-3d;
   /* Important */
   -webkit-transform-origin: 100% 50%;
-  -moz-transform-origin: 100% 50%;
-  -ms-transform-origin: 100% 50%;
-  -o-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
   display: block !important; }
 
 .transition-flip-enter .transition-view-to-show {
   -webkit-transform: translate3d(0, -100%, 0) rotateY(-180deg);
-  -moz-transform: translate3d(0, -100%, 0) rotateY(-180deg);
-  -ms-transform: translate3d(0, -100%, 0) rotateY(-180deg);
-  -o-transform: translate3d(0, -100%, 0) rotateY(-180deg);
   transform: translate3d(0, -100%, 0) rotateY(-180deg); }
 
 /* Transition Flip Leave
@@ -2561,61 +1956,32 @@ input, select, textarea {
     -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
     -webkit-transform: translate3d(100%, 0, 0) rotateY(180deg); } }
-@-moz-keyframes transition-flip-leave {
-  from {
-    -moz-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -moz-transform: translate3d(100%, 0, 0) rotateY(180deg); } }
-@-ms-keyframes transition-flip-leave {
-  from {
-    -ms-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -ms-transform: translate3d(100%, 0, 0) rotateY(180deg); } }
-@-o-keyframes transition-flip-leave {
-  from {
-    -o-transform: translate3d(0, 0, 0) rotateY(0deg); }
-  to {
-    -o-transform: translate3d(100%, 0, 0) rotateY(180deg); } }
 @keyframes transition-flip-leave {
   from {
-    transform: translate3d(0, 0, 0) rotateY(0deg); }
+    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
-    transform: translate3d(100%, 0, 0) rotateY(180deg); } }
+    -webkit-transform: translate3d(100%, 0, 0) rotateY(180deg);
+            transform: translate3d(100%, 0, 0) rotateY(180deg); } }
 .transition-flip-leave {
   -webkit-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -moz-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -ms-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  -o-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
   /* Important */
-  -moz-transform-style: preserve-3d;
   /* Important */
-  -ms-transform-style: preserve-3d;
   /* Important */
-  -o-transform-style: preserve-3d;
   /* Important */
   transform-style: preserve-3d;
   /* Important */
   -webkit-transform-origin: 0% 50%;
-  -moz-transform-origin: 0% 50%;
-  -ms-transform-origin: 0% 50%;
-  -o-transform-origin: 0% 50%;
   transform-origin: 0% 50%;
   display: block !important; }
 
 .transition-flip-leave .transition-view-to-show {
   -webkit-transform: translate3d(0, 0, 0) rotateY(180deg);
-  -moz-transform: translate3d(0, 0, 0) rotateY(180deg);
-  -ms-transform: translate3d(0, 0, 0) rotateY(180deg);
-  -o-transform: translate3d(0, 0, 0) rotateY(180deg);
   transform: translate3d(0, 0, 0) rotateY(180deg); }
 
 .transition-flip-leave .transition-view-to-hide {
   -webkit-transform: translate3d(0, -100%, 0) rotateY(0deg);
-  -moz-transform: translate3d(0, -100%, 0) rotateY(0deg);
-  -ms-transform: translate3d(0, -100%, 0) rotateY(0deg);
-  -o-transform: translate3d(0, -100%, 0) rotateY(0deg);
   transform: translate3d(0, -100%, 0) rotateY(0deg); }
-
 /*# sourceMappingURL=moobile.css.map */
