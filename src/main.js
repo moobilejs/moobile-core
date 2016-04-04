@@ -21,8 +21,12 @@ require('../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js');
 // mootools mobile
 require('../vendor/mootools-mobile/Source/Browser/Features.Touch.js');
 require('../vendor/mootools-mobile/Source/Browser/Mobile.js')
+require('../vendor/mootools-mobile/Source/Desktop/Mouse.js')
+require('../vendor/mootools-mobile/Source/Touch/Click.js')
 require('../vendor/mootools-mobile/Source/Touch/Pinch.js')
 require('../vendor/mootools-mobile/Source/Touch/Swipe.js')
+require('../vendor/mootools-mobile/Source/Touch/Touch.js')
+require('../vendor/mootools-mobile/Source/Touch/TouchHold.js')
 
 // mootools utilities
 // require('./utils/browser');

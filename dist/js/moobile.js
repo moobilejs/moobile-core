@@ -7645,7 +7645,7 @@ var Firer = moobile.Firer = new Class({
 	 */
 	fireEvent: function(type, args, delay) {
 
-		args = Array.from(args || []).include(this);
+		args = Array.convert(args).include(this);
 
 		if (!this.shouldFireEvent(type, args))
 			return this;
@@ -12455,6 +12455,97 @@ Browser.isMobile = !['mac', 'linux', 'win'].contains(Browser.name);
 /*
 ---
 
+name: Mouse
+
+description: Maps mouse events to their touch counterparts
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Custom-Event/Element.defineCustomEvent, Browser.Features.Touch]
+
+provides: Mouse
+
+...
+*/
+
+if (!Browser.Features.Touch) (function(){
+
+var down = false;
+var condition = function(event, type){
+	if (type == 'touchstart') down = true;
+	else if (type == 'touchend') down = false;
+	else if (type == 'touchmove' && !down) return false;
+
+	event.targetTouches = [];
+	event.changedTouches = event.touches = [{
+		pageX: event.page.x, pageY: event.page.y,
+		clientX: event.client.x, clientY: event.client.y
+	}];
+
+	return true;
+};
+
+Element.defineCustomEvent('touchstart', {
+
+	base: 'mousedown',
+	condition: condition
+
+}).defineCustomEvent('touchmove', {
+
+	base: 'mousemove',
+	condition: condition
+
+}).defineCustomEvent('touchend', {
+
+	base: 'mouseup',
+	condition: condition
+
+});
+
+document.addEvent('mouseup', function() {
+	down = false;
+});
+
+})();
+
+},{}],62:[function(require,module,exports){
+/*
+---
+
+name: Click
+
+description: Provides a replacement for click events on mobile devices
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Touch]
+
+provides: Click
+
+...
+*/
+
+if (Browser.Features.iOSTouch) (function(){
+
+var name = 'click';
+delete Element.NativeEvents[name];
+
+Element.defineCustomEvent(name, {
+
+	base: 'touch'
+
+});
+
+})();
+
+},{}],63:[function(require,module,exports){
+/*
+---
+
 name: Pinch
 
 description: Provides a custom pinch event for touch devices
@@ -12519,7 +12610,7 @@ Element.defineCustomEvent(name, {
 
 })();
 
-},{}],62:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 /*
 ---
 
@@ -12616,6 +12707,129 @@ Element.defineCustomEvent(name, {
 
 })();
 
+},{}],65:[function(require,module,exports){
+/*
+---
+
+name: Touch
+
+description: Provides a custom touch event on mobile devices
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Element.Event, Custom-Event/Element.defineCustomEvent, Browser.Features.Touch]
+
+provides: Touch
+
+...
+*/
+
+(function(){
+
+var disabled;
+
+Element.defineCustomEvent('touch', {
+
+	base: 'touchend',
+
+	condition: function(event){
+		if (disabled || event.targetTouches.length !== 0) return false;
+
+		var touch = event.changedTouches[0],
+			target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+		do {
+			if (target == this) return true;
+		} while (target && (target = target.parentNode));
+
+		return false;
+	},
+
+	onEnable: function(){
+		disabled = false;
+	},
+
+	onDisable: function(){
+		disabled = true;
+	}
+
+});
+
+})();
+
+},{}],66:[function(require,module,exports){
+/*
+---
+
+name: Touchhold
+
+description: Provides a custom touchhold event for touch devices
+
+authors: Christoph Pojer (@cpojer)
+
+license: MIT-style license.
+
+requires: [Core/Element.Event, Custom-Event/Element.defineCustomEvent, Browser.Features.Touch]
+
+provides: Touchhold
+
+...
+*/
+
+(function(){
+
+var name = 'touchhold',
+	delayKey = name + ':delay',
+	disabled, timer;
+
+var clear = function(e){
+	clearTimeout(timer);
+};
+
+var events = {
+
+	touchstart: function(event){
+		if (event.touches.length > 1){
+			clear();
+			return;
+		}
+		
+		timer = (function(){
+			this.fireEvent(name, event);
+		}).delay(this.retrieve(delayKey) || 750, this);
+	},
+
+	touchmove: clear,
+	touchcancel: clear,
+	touchend: clear
+
+};
+
+Element.defineCustomEvent(name, {
+
+	onSetup: function(){
+		this.addEvents(events);
+	},
+
+	onTeardown: function(){
+		this.removeEvents(events);
+	},
+
+	onEnable: function(){
+		disabled = false;
+	},
+
+	onDisable: function(){
+		disabled = true;
+		clear();
+	}
+
+});
+
+})();
+
 },{}],"/src/main.js":[function(require,module,exports){
 (function (global){
 "use strict"
@@ -12641,8 +12855,12 @@ require('../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js');
 // mootools mobile
 require('../vendor/mootools-mobile/Source/Browser/Features.Touch.js');
 require('../vendor/mootools-mobile/Source/Browser/Mobile.js')
+require('../vendor/mootools-mobile/Source/Desktop/Mouse.js')
+require('../vendor/mootools-mobile/Source/Touch/Click.js')
 require('../vendor/mootools-mobile/Source/Touch/Pinch.js')
 require('../vendor/mootools-mobile/Source/Touch/Swipe.js')
+require('../vendor/mootools-mobile/Source/Touch/Touch.js')
+require('../vendor/mootools-mobile/Source/Touch/TouchHold.js')
 
 // mootools utilities
 // require('./utils/browser');
@@ -12735,5 +12953,5 @@ moobile.ViewTransition.Cover.Page = moobile.ViewTransition.Page;
 
 module.exports = global.Moobile = global.moobile
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../node_modules/iscroll/src/iscroll.js":1,"../vendor/mootools-class-extras/Source/Class.Binds.js":57,"../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js":58,"../vendor/mootools-mobile/Source/Browser/Features.Touch.js":59,"../vendor/mootools-mobile/Source/Browser/Mobile.js":60,"../vendor/mootools-mobile/Source/Touch/Pinch.js":61,"../vendor/mootools-mobile/Source/Touch/Swipe.js":62,"./animation/animation":7,"./component/component":8,"./component/overlay":9,"./control/activity-indicator":10,"./control/bar":11,"./control/button":13,"./control/button-group":12,"./control/control":14,"./control/image":15,"./control/list":17,"./control/list-item":16,"./control/navigation-bar":18,"./control/slider":19,"./control/tab":21,"./control/tab-bar":20,"./control/text":22,"./core":23,"./dialog/alert":24,"./event/css":25,"./event/firer":26,"./event/ready":27,"./event/tap":28,"./event/touch":29,"./scroller/scroller":32,"./scroller/scroller-iscroll":30,"./scroller/scroller-native":31,"./theme/theme":33,"./utils/class":34,"./utils/element":35,"./utils/event":36,"./utils/request":37,"./utils/type/array":38,"./utils/type/string":39,"./view-controller/view-controller":41,"./view-controller/view-controller-stack":40,"./view-transition/view-transition":51,"./view-transition/view-transition-box":42,"./view-transition/view-transition-cover":43,"./view-transition/view-transition-cubic":44,"./view-transition/view-transition-drop":45,"./view-transition/view-transition-fade":46,"./view-transition/view-transition-flip":47,"./view-transition/view-transition-none":48,"./view-transition/view-transition-page":49,"./view-transition/view-transition-slide":50,"./view/scroll-view":52,"./view/view":54,"./view/view-stack":53,"./window/window":56,"./window/window-controller":55,"moofx/lib/frame":2}]},{},[])("/src/main.js")
+},{"../node_modules/iscroll/src/iscroll.js":1,"../vendor/mootools-class-extras/Source/Class.Binds.js":57,"../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js":58,"../vendor/mootools-mobile/Source/Browser/Features.Touch.js":59,"../vendor/mootools-mobile/Source/Browser/Mobile.js":60,"../vendor/mootools-mobile/Source/Desktop/Mouse.js":61,"../vendor/mootools-mobile/Source/Touch/Click.js":62,"../vendor/mootools-mobile/Source/Touch/Pinch.js":63,"../vendor/mootools-mobile/Source/Touch/Swipe.js":64,"../vendor/mootools-mobile/Source/Touch/Touch.js":65,"../vendor/mootools-mobile/Source/Touch/TouchHold.js":66,"./animation/animation":7,"./component/component":8,"./component/overlay":9,"./control/activity-indicator":10,"./control/bar":11,"./control/button":13,"./control/button-group":12,"./control/control":14,"./control/image":15,"./control/list":17,"./control/list-item":16,"./control/navigation-bar":18,"./control/slider":19,"./control/tab":21,"./control/tab-bar":20,"./control/text":22,"./core":23,"./dialog/alert":24,"./event/css":25,"./event/firer":26,"./event/ready":27,"./event/tap":28,"./event/touch":29,"./scroller/scroller":32,"./scroller/scroller-iscroll":30,"./scroller/scroller-native":31,"./theme/theme":33,"./utils/class":34,"./utils/element":35,"./utils/event":36,"./utils/request":37,"./utils/type/array":38,"./utils/type/string":39,"./view-controller/view-controller":41,"./view-controller/view-controller-stack":40,"./view-transition/view-transition":51,"./view-transition/view-transition-box":42,"./view-transition/view-transition-cover":43,"./view-transition/view-transition-cubic":44,"./view-transition/view-transition-drop":45,"./view-transition/view-transition-fade":46,"./view-transition/view-transition-flip":47,"./view-transition/view-transition-none":48,"./view-transition/view-transition-page":49,"./view-transition/view-transition-slide":50,"./view/scroll-view":52,"./view/view":54,"./view/view-stack":53,"./window/window":56,"./window/window-controller":55,"moofx/lib/frame":2}]},{},[])("/src/main.js")
 });
