@@ -269,7 +269,7 @@ moobile.Animation = new Class({
 	 */
 	attach: function() {
 
-		this.element.addEvent('animationend', this.bound('__onAnimationEnd'));
+		this.element.addEvent('ownanimationend', this.bound('__onAnimationEnd'));
 		this.element.addClass(this.animationClass);
 
 		Object.each(this.animationProperties, function(val, key) {
@@ -286,7 +286,7 @@ moobile.Animation = new Class({
 	 */
 	detach: function() {
 
-		this.element.removeEvent('animationend', this.bound('__onAnimationEnd'));
+		this.element.removeEvent('ownanimationend', this.bound('__onAnimationEnd'));
 		this.element.removeClass(this.animationClass);
 
 		Object.each(this.animationProperties, function(val, key) {
