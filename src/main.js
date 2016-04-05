@@ -85,7 +85,7 @@ require('./view/view');
 require('./view/scroll-view');
 // require('./view/view-collection');
 // require('./view/view-queue');
-// require('./view/view-set');
+require('./view/view-set');
 require('./view/view-stack');
 
 // view controller
@@ -93,7 +93,7 @@ require('./view-controller/view-controller');
 require('./view-controller/view-controller-stack');
 // require('./view-controller/view-controller-queue');
 // require('./view-controller/view-controller-collection');
-// require('./view-controller/view-controller-set');
+require('./view-controller/view-controller-set');
 
 // view transition
 require('./view-transition/view-transition');
