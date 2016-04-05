@@ -103,20 +103,10 @@ html {
 
 body {
   -webkit-user-select: none;
-  /* Important */
-  /* Important */
-  /* Important */
-  -o-user-select: none;
-  /* Important */
-  user-select: none;
+          user-select: none;
   /* Important */
   -webkit-text-size-adjust: 100%;
-  /* Important */
-  /* Important */
-  /* Important */
-  -o-text-size-adjust: 100%;
-  /* Important */
-  text-size-adjust: 100%;
+          text-size-adjust: 100%;
   /* Important */
   font-size: 15px;
   font-weight: normal;
@@ -133,11 +123,7 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .window {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   /* Important */
   display: block;
   /* Important */
@@ -165,47 +151,21 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .view {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-orient: vertical;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  /* Important */
-  /* Important */
-  flex-direction: column;
+          flex-direction: column;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   height: 100%;
@@ -221,19 +181,11 @@ input, select, textarea {
 
 .view .view-content-wrapper {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   /*	height: 100%;                                                /* Important */
   overflow: hidden;
@@ -247,47 +199,21 @@ input, select, textarea {
 
 .view .view-content {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-orient: vertical;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  /* Important */
-  /* Important */
-  flex-direction: column;
+          flex-direction: column;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   left: 0px;
@@ -305,24 +231,18 @@ input, select, textarea {
 .view.view-layout-vertical > .view-content-wrapper > div > .view-content {
   /* TODO: Is this line necessary ? */
   -webkit-box-orient: vertical;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  /* Important */
-  /* Important */
-  flex-direction: column;
+          flex-direction: column;
   /* Important */ }
 
 .view.view-layout-horizontal > .view-content-wrapper > .view-content,
 .view.view-layout-horizontal > .view-content-wrapper > div > .view-content {
   /* TODO: Is this line necessary ? */
   -webkit-box-orient: horizontal;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  /* Important */
-  /* Important */
-  flex-direction: row;
+          flex-direction: row;
   /* Important */ }
 
 .view.enable {
@@ -351,11 +271,7 @@ input, select, textarea {
 .view.scroll-view.iscroll-engine .scrollbar-H > div,
 .view.scroll-view.iscroll-engine .scrollbar-V > div {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   /* Important */ }
 
 /* View Stack
@@ -386,59 +302,29 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .view.view-collection > .view-content-wrapper > .view-content > .view {
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */ }
 
 /* Bar
 -----------------------------------------------------------------------------*/
 .bar {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-orient: horizontal;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  /* Important */
-  /* Important */
-  flex-direction: row;
+          flex-direction: row;
   /* Important */
   -webkit-box-align: center;
-  /* Important */
-  /* Important */
-  /* Important */
   -webkit-align-items: center;
-  /* Important */
-  align-items: center;
+          align-items: center;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
@@ -451,50 +337,21 @@ input, select, textarea {
 /* Deprecated */
 .bar .bar-item {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
-  -webkit-box-align: center;
-  /* Important */
-  -moz-box-align: center;
-  /* Important */
-  -ms-flex-align: center;
-  /* Important */
-  -webkit-justify-content: center;
-  /* Important */
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
           justify-content: center;
   /* Important */
   -webkit-box-orient: horizontal;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  /* Important */
-  /* Important */
-  flex-direction: row;
+          flex-direction: row;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
@@ -508,31 +365,12 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .bar.navigation-bar {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
@@ -542,39 +380,16 @@ input, select, textarea {
 
 .bar.navigation-bar .navigation-bar-content {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
@@ -584,39 +399,16 @@ input, select, textarea {
 /* Deprecated */
 .bar.navigation-bar .bar-title-wrapper {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
@@ -627,50 +419,23 @@ input, select, textarea {
 /* Tab Bar
 -----------------------------------------------------------------------------*/
 .bar.tab-bar {
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
-  /* Important */
   box-sizing: border-box;
   /* Important */ }
 
 /* Tab
 -----------------------------------------------------------------------------*/
 .tab {
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
-  /* Important */
   box-sizing: border-box;
   /* Important */
   cursor: pointer;
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
   /* Important */ }
 
 .tab .tab-label {
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
-  /* Important */
   box-sizing: border-box;
   /* Important */
   display: block; }
@@ -679,95 +444,43 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .button-group {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */ }
 
 .button-group.button-group-layout-vertical {
   -webkit-box-orient: vertical;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  /* Important */
-  /* Important */
-  flex-direction: column;
-  /* Important */
-  -webkit-box-pack: start;
-  /* Important */
-  -moz-box-pack: start;
-  /* Important */
-  -ms-flex-pack: start;
-  /* Important */
-  -webkit-align-items: flex-start;
+          flex-direction: column;
   /* Important */
   -webkit-box-align: start;
+  -webkit-align-items: flex-start;
           align-items: flex-start;
   /* Important */ }
 
 .button-group .button {
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */ }
 
 /* Button
 -----------------------------------------------------------------------------*/
 .button {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   cursor: pointer;
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   position: relative;
@@ -777,27 +490,13 @@ input, select, textarea {
 
 .button .button-label {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   display: block;
   /* Important */ }
@@ -833,11 +532,7 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .list {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   /* Important */ }
 
 /* Style Gouped */
@@ -845,47 +540,21 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .list-item {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-orient: horizontal;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  /* Important */
-  /* Important */
-  flex-direction: row;
+          flex-direction: row;
   /* Important */
   -webkit-box-align: center;
-  /* Important */
-  /* Important */
-  /* Important */
   -webkit-align-items: center;
-  /* Important */
-  align-items: center;
+          align-items: center;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   list-style: none;
@@ -895,26 +564,9 @@ input, select, textarea {
 
 .list-item .list-item-image {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
-  /* Important */
-  -webkit-box-flex: 0;
-  /* Important */
-  /* Important */
-  -ms-box-flex: 0;
-  /* Important */
-  -o-box-flex: 0;
   /* Important */
   box-flex: 0;
   /* Important */
@@ -923,54 +575,26 @@ input, select, textarea {
 
 .list-item .list-item-label {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-flex: 1;
-  /* Important */
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   display: block;
   /* Important */ }
 
 .list-item .list-item-detail {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-flex: 0;
-  /* Important */
-  /* Important */
   -webkit-flex: 0;
-  /* Important */
-  /* Important */
-  flex: 0;
+          flex: 0;
   /* Important */
   display: block;
   /* Important */ }
@@ -1010,18 +634,10 @@ input, select, textarea {
     opacity: 0; } }
 .overlay {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   /* Important */
   -webkit-transform: translate3d(0, 0, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   /* Important */
   background: rgba(0, 0, 0, 0.3);
   bottom: 0px;
@@ -1039,76 +655,42 @@ input, select, textarea {
 
 .overlay.show-animated {
   -webkit-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both; }
+          animation-fill-mode: both; }
 
 .overlay.hide-animated {
   -webkit-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both; }
+          animation-fill-mode: both; }
 
 /* Radial */
 /* Alert
 -----------------------------------------------------------------------------*/
 .alert {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
   -webkit-box-orient: vertical;
-  /* Important */
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  /* Important */
-  /* Important */
-  flex-direction: column;
-  /* Important */
-  -webkit-box-align: center;
-  /* Important */
-  -moz-box-align: center;
-  /* Important */
-  -ms-flex-align: center;
-  /* Important */
-  -webkit-justify-content: center;
-  /* Important */
-  justify-content: center;
+          flex-direction: column;
   /* Important */
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   /* Important */
-  -moz-box-pack: center;
-  /* Important */
-  -ms-flex-pack: center;
-  /* Important */
+  -webkit-box-align: center;
   -webkit-align-items: center;
-  /* Important */
-  align-items: center;
+          align-items: center;
   /* Important */
   bottom: 0px;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   left: 0px;
@@ -1124,17 +706,7 @@ input, select, textarea {
 
 .alert .alert-box {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
@@ -1145,57 +717,24 @@ input, select, textarea {
 
 .alert .alert-header {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */ }
 
 .alert .alert-content {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */ }
 
 .alert .alert-footer {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */
-  -webkit-box-orient: horizontal;
-  -ms-box-orient: horizontal;
-  -o-box-orient: horizontal;
   box-orient: horizontal; }
 
 /* Show Animation */
@@ -1211,9 +750,9 @@ input, select, textarea {
     opacity: 1; } }
 .alert.show-animated .alert-box {
   -webkit-animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: show-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both; }
+          animation-fill-mode: both; }
 
 /* Hide Animated */
 @-webkit-keyframes hide-alert {
@@ -1228,18 +767,20 @@ input, select, textarea {
     opacity: 0; } }
 .alert.hide-animated .alert-box {
   -webkit-animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: hide-alert 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both; }
+          animation-fill-mode: both; }
 
 /* Vertical Button Layout */
 /* Activity Indicator
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes rotate-activity-indicator {
   from {
-    -webkit-transform: rotate(0deg); }
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
   to {
-    -webkit-transform: rotate(360deg); } }
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 @keyframes rotate-activity-indicator {
   from {
     -webkit-transform: rotate(0deg);
@@ -1249,26 +790,16 @@ input, select, textarea {
             transform: rotate(360deg); } }
 .activity-indicator {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */ }
 
 .activity-indicator.active {
   -webkit-animation: rotate-activity-indicator 1s infinite linear;
-  animation: rotate-activity-indicator 1s infinite linear;
+          animation: rotate-activity-indicator 1s infinite linear;
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both; }
+          animation-fill-mode: both; }
 
 /* Slider
 -----------------------------------------------------------------------------*/
@@ -1278,17 +809,7 @@ input, select, textarea {
 .slider-range,
 .slider-value {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  backface-visibility: hidden;
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          backface-visibility: hidden;
   /* Important */
   box-sizing: border-box;
   /* Important */ }
@@ -1310,9 +831,9 @@ input, select, textarea {
 
 .transition-fade-enter .transition-view-to-show {
   -webkit-transform: translate3d(0, -100%, 0);
-  transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
   -webkit-animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-fade-enter 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 100;
   /* Important */ }
 
@@ -1341,9 +862,9 @@ input, select, textarea {
 
 .transition-fade-leave .transition-view-to-hide {
   -webkit-transform: translate3d(0, -100%, 0);
-  transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
   -webkit-animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-fade-leave 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 100;
   /* Important */ }
 
@@ -1351,9 +872,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-slide-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    -webkit-transform: translate3d(-100%, 0, 0); } }
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0); } }
 @keyframes transition-slide-enter {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1363,28 +886,20 @@ input, select, textarea {
             transform: translate3d(-100%, 0, 0); } }
 .transition-slide-enter {
   -webkit-animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-slide-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   display: block;
   /* Important */ }
 
 .transition-slide-enter .transition-view-to-show {
   -webkit-transform: translate3d(100%, -100%, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(100%, -100%, 0);
+          transform: translate3d(100%, -100%, 0);
   /* Important */
   overflow: visible;
   /* Important */ }
 
 .transition-slide-enter .transition-view-to-hide {
   -webkit-transform: translate3d(0, 0, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   /* Important */
   overflow: visible;
   /* Important */ }
@@ -1393,9 +908,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-slide-leave {
   from {
-    -webkit-transform: translate3d(-100%, 0, 0); }
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0); }
   to {
-    -webkit-transform: translate3d(0, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 @keyframes transition-slide-leave {
   from {
     -webkit-transform: translate3d(-100%, 0, 0);
@@ -1405,28 +922,20 @@ input, select, textarea {
             transform: translate3d(0, 0, 0); } }
 .transition-slide-leave {
   -webkit-animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-slide-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   display: block;
   /* Important */ }
 
 .transition-slide-leave .transition-view-to-show {
   -webkit-transform: translate3d(0, 0, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   /* Important */
   overflow: visible;
   /* Important */ }
 
 .transition-slide-leave .transition-view-to-hide {
   -webkit-transform: translate3d(100%, -100%, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(100%, -100%, 0);
+          transform: translate3d(100%, -100%, 0);
   /* Important */
   overflow: visible;
   /* Important */ }
@@ -1435,9 +944,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-drop-enter {
   from {
-    -webkit-transform: translate3d(0, -100%, 0); }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
   to {
-    -webkit-transform: translate3d(0, 0%, 0); } }
+    -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0); } }
 @keyframes transition-drop-enter {
   from {
     -webkit-transform: translate3d(0, -100%, 0);
@@ -1450,7 +961,7 @@ input, select, textarea {
 
 .transition-drop-enter .transition-view-to-show {
   -webkit-animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-drop-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
 .transition-drop-enter .transition-view-to-hide {
@@ -1461,9 +972,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-drop-leave {
   from {
-    -webkit-transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); } }
 @keyframes transition-drop-leave {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1480,16 +993,18 @@ input, select, textarea {
 
 .transition-drop-leave .transition-view-to-hide {
   -webkit-animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-drop-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
 /* Transition Cover (Enter)
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-enter {
   from {
-    -webkit-transform: translate3d(0, 100%, 0); }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
   to {
-    -webkit-transform: translate3d(0, 0%, 0); } }
+    -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0); } }
 @keyframes transition-cover-enter {
   from {
     -webkit-transform: translate3d(0, 100%, 0);
@@ -1502,7 +1017,7 @@ input, select, textarea {
 
 .transition-cover-enter .transition-view-to-show {
   -webkit-animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-cover-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
 .transition-cover-enter .transition-view-to-hide {
@@ -1513,9 +1028,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-leave {
   from {
-    -webkit-transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    -webkit-transform: translate3d(0, 100%, 0); } }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); } }
 @keyframes transition-cover-leave {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1532,58 +1049,27 @@ input, select, textarea {
 
 .transition-cover-leave .transition-view-to-hide {
   -webkit-animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-cover-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   z-index: 75; }
 
 /* Transition Cover Page (Shared)
 -----------------------------------------------------------------------------*/
 .transition-cover-page-foreground-view-wrapper {
   -webkit-transform: translate3d(0, -100%, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(0, -100%, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          transform: translate3d(0, -100%, 0);
   /* Important */
   box-sizing: border-box;
   /* Important */
-  -webkit-box-align: center;
-  /* Important */
-  -moz-box-align: center;
-  /* Important */
-  -ms-flex-align: center;
-  /* Important */
-  -webkit-justify-content: center;
-  /* Important */
-  justify-content: center;
-  /* Important */
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   /* Important */
-  -moz-box-pack: center;
-  /* Important */
-  -ms-flex-pack: center;
-  /* Important */
+  -webkit-box-align: center;
   -webkit-align-items: center;
-  /* Important */
-  align-items: center;
+          align-items: center;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   height: 100%;
@@ -1596,13 +1082,6 @@ input, select, textarea {
   /* Important */ }
 
 .transition-cover-page-foreground-view {
-  -webkit-box-flex: 0;
-  /* Important */
-  /* Important */
-  -ms-box-flex: 0;
-  /* Important */
-  -o-box-flex: 0;
-  /* Important */
   box-flex: 0;
   /* Important */
   height: 100%;
@@ -1612,16 +1091,7 @@ input, select, textarea {
 
 .transition-cover-page-background-view {
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */ }
 
@@ -1632,9 +1102,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-page-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); } }
 @keyframes transition-cover-page-enter {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1647,15 +1119,17 @@ input, select, textarea {
 
 .transition-cover-page-enter .transition-cover-page-foreground-view-wrapper {
   -webkit-animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
+          animation: transition-cover-page-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition Cover Page Leave
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-page-leave {
   from {
-    -webkit-transform: translate3d(0, -100%, 0); }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
   to {
-    -webkit-transform: translate3d(0, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 @keyframes transition-cover-page-leave {
   from {
     -webkit-transform: translate3d(0, -100%, 0);
@@ -1668,57 +1142,26 @@ input, select, textarea {
 
 .transition-cover-page-leave .transition-cover-page-foreground-view-wrapper {
   -webkit-animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
+          animation: transition-cover-page-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition Cover Box (Shared)
 -----------------------------------------------------------------------------*/
 .transition-cover-box-foreground-view-wrapper {
   -webkit-transform: translate3d(0, -100%, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform: translate3d(0, -100%, 0);
-  /* Important */
-  /* Important */
-  /* Important */
-  -ms-box-sizing: border-box;
-  /* Important */
-  -o-box-sizing: border-box;
+          transform: translate3d(0, -100%, 0);
   /* Important */
   box-sizing: border-box;
   /* Important */
-  -webkit-box-align: center;
-  /* Important */
-  -moz-box-align: center;
-  /* Important */
-  -ms-flex-align: center;
-  /* Important */
-  -webkit-justify-content: center;
-  /* Important */
-  justify-content: center;
-  /* Important */
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   /* Important */
-  -moz-box-pack: center;
-  /* Important */
-  -ms-flex-pack: center;
-  /* Important */
+  -webkit-box-align: center;
   -webkit-align-items: center;
-  /* Important */
-  align-items: center;
+          align-items: center;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: box;
-  /* Important */
-  /* Important */
-  display: flexbox;
-  /* Important */
   display: -webkit-flex;
-  /* Important */
   display: flex;
   /* Important */
   height: 100%;
@@ -1731,13 +1174,6 @@ input, select, textarea {
   /* Important */ }
 
 .transition-cover-box-foreground-view {
-  -webkit-box-flex: 0;
-  /* Important */
-  /* Important */
-  -ms-box-flex: 0;
-  /* Important */
-  -o-box-flex: 0;
-  /* Important */
   box-flex: 0;
   /* Important */
   height: 620px;
@@ -1745,17 +1181,7 @@ input, select, textarea {
 
 .transition-cover-box-background-view {
   display: -webkit-box !important;
-  /* Important */
-  display: -moz-box !important;
-  /* Important */
-  display: box !important;
-  /* Important */
-  display: -ms-flex !important;
-  /* Important */
-  display: flex !important;
-  /* Important */
   display: -webkit-flex !important;
-  /* Important */
   display: flex !important;
   /* Important */ }
 
@@ -1766,9 +1192,11 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-box-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); } }
 @keyframes transition-cover-box-enter {
   from {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1781,15 +1209,17 @@ input, select, textarea {
 
 .transition-cover-box-enter .transition-cover-box-foreground-view-wrapper {
   -webkit-animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
+          animation: transition-cover-box-enter 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition - Cover Box Leave
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-box-leave {
   from {
-    -webkit-transform: translate3d(0, -100%, 0); }
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0); }
   to {
-    -webkit-transform: translate3d(0, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 @keyframes transition-cover-box-leave {
   from {
     -webkit-transform: translate3d(0, -100%, 0);
@@ -1802,7 +1232,7 @@ input, select, textarea {
 
 .transition-cover-box-leave .transition-cover-box-foreground-view-wrapper {
   -webkit-animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
+          animation: transition-cover-box-leave 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1); }
 
 /* Transition Cubic Enter
 -----------------------------------------------------------------------------*/
@@ -1818,102 +1248,81 @@ input, select, textarea {
     -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); } }
 .transition-cubic-perspective {
   -webkit-perspective: 800;
-  -ms-perspective: 800;
-  -o-perspective: 800;
-  perspective: 800;
+          perspective: 800;
   -webkit-perspective-origin: 50% 50%;
-  -ms-perspective-origin: 50% 50%;
-  -o-perspective-origin: 50% 50%;
-  perspective-origin: 50% 50%; }
+          perspective-origin: 50% 50%; }
 
 .transition-cubic-enter {
   -webkit-animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-cubic-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform-style: preserve-3d;
+          transform-style: preserve-3d;
   /* Important */
   -webkit-transform-origin: 100% 50%;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
   /* Important */
   display: block !important;
   /* Important */ }
 
 .transition-cubic-enter .transition-view-to-show {
   -webkit-transform-origin: center left;
-  transform-origin: center left;
+          transform-origin: center left;
   -webkit-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  transform: translate3d(100%, -100%, 0) rotateY(90deg); }
+          transform: translate3d(100%, -100%, 0) rotateY(90deg); }
 
 .transition-cubic-enter .transition-view-to-hide {
   -webkit-transform-origin: center left;
-  transform-origin: center left;
+          transform-origin: center left;
   -webkit-transform: rotateY(0deg);
-  transform: rotateY(0deg); }
+          transform: rotateY(0deg); }
 
 /* Transition Cubic Leave
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cubic-leave {
   from {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+            transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
   to {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); } }
-@-webkit-keyframes transition-cubic-leave {
+    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) rotateY(0deg); } }
+@keyframes transition-cubic-leave {
   from {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+            transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
   to {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); } }
-@-webkit-keyframes transition-cubic-leave {
-  from {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
-  to {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); } }
-@-webkit-keyframes transition-cubic-leave {
-  from {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
-  to {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); } }
-@-webkit-keyframes transition-cubic-leave {
-  from {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
-  to {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); } }
+    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) rotateY(0deg); } }
 .transition-cubic-leave {
   -webkit-animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-cubic-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
+          transform-style: preserve-3d;
   -webkit-transform-origin: 100% 50%;
-  transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
   display: block !important;
   /* Important */ }
 
 .transition-cubic-leave .transition-view-to-show {
   -webkit-transform-origin: center left;
-  transform-origin: center left;
+          transform-origin: center left;
   -webkit-transform: rotateY(0deg);
-  transform: rotateY(0deg); }
+          transform: rotateY(0deg); }
 
 .transition-cubic-leave .transition-view-to-hide {
   -webkit-transform-origin: center left;
-  transform-origin: center left;
+          transform-origin: center left;
   -webkit-transform: translate3d(100%, -100%, 0) rotateY(90deg);
-  transform: translate3d(100%, -100%, 0) rotateY(90deg); }
+          transform: translate3d(100%, -100%, 0) rotateY(90deg); }
 
 /* Transition Flip Enter
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-flip-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
+    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
-    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-180deg);
+            transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
 @keyframes transition-flip-enter {
   from {
     -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
@@ -1923,39 +1332,33 @@ input, select, textarea {
             transform: translate3d(-100%, 0, 0) rotateY(-180deg); } }
 .transition-flip-perspective {
   -webkit-perspective: 800;
-  -ms-perspective: 800;
-  -o-perspective: 800;
-  perspective: 800;
+          perspective: 800;
   -webkit-perspective-origin: 50% 50%;
-  -ms-perspective-origin: 50% 50%;
-  -o-perspective-origin: 50% 50%;
-  perspective-origin: 50% 50%; }
+          perspective-origin: 50% 50%; }
 
 .transition-flip-enter {
   -webkit-animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-flip-enter 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform-style: preserve-3d;
+          transform-style: preserve-3d;
   /* Important */
   -webkit-transform-origin: 100% 50%;
-  transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
   display: block !important; }
 
 .transition-flip-enter .transition-view-to-show {
   -webkit-transform: translate3d(0, -100%, 0) rotateY(-180deg);
-  transform: translate3d(0, -100%, 0) rotateY(-180deg); }
+          transform: translate3d(0, -100%, 0) rotateY(-180deg); }
 
 /* Transition Flip Leave
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-flip-leave {
   from {
-    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg); }
+    -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) rotateY(0deg); }
   to {
-    -webkit-transform: translate3d(100%, 0, 0) rotateY(180deg); } }
+    -webkit-transform: translate3d(100%, 0, 0) rotateY(180deg);
+            transform: translate3d(100%, 0, 0) rotateY(180deg); } }
 @keyframes transition-flip-leave {
   from {
     -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
@@ -1965,23 +1368,20 @@ input, select, textarea {
             transform: translate3d(100%, 0, 0) rotateY(180deg); } }
 .transition-flip-leave {
   -webkit-animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-  animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: transition-flip-leave 750ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-transform-style: preserve-3d;
-  /* Important */
-  /* Important */
-  /* Important */
-  /* Important */
-  transform-style: preserve-3d;
+          transform-style: preserve-3d;
   /* Important */
   -webkit-transform-origin: 0% 50%;
-  transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
   display: block !important; }
 
 .transition-flip-leave .transition-view-to-show {
   -webkit-transform: translate3d(0, 0, 0) rotateY(180deg);
-  transform: translate3d(0, 0, 0) rotateY(180deg); }
+          transform: translate3d(0, 0, 0) rotateY(180deg); }
 
 .transition-flip-leave .transition-view-to-hide {
   -webkit-transform: translate3d(0, -100%, 0) rotateY(0deg);
-  transform: translate3d(0, -100%, 0) rotateY(0deg); }
+          transform: translate3d(0, -100%, 0) rotateY(0deg); }
+
 /*# sourceMappingURL=moobile.css.map */
