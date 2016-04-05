@@ -153,7 +153,7 @@ var ViewControllerSet = moobile.ViewControllerSet = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.3.0
 	 */
-	showmoobile.ViewControllerAt: function(index, viewTransition) {
+	showViewControllerAt: function(index, viewTransition) {
 
 		var viewController = this.getChildViewControllerAt(index);
 		if (viewController) {
