@@ -237,8 +237,6 @@ ViewController.Button = new Class({
 
 	navigationBar: null,
 
-	navigationBarItem: null,
-
 	backButton: null,
 
 	tempButton: null,
@@ -252,10 +250,9 @@ ViewController.Button = new Class({
 	viewDidLoad: function() {
 
 		this.navigationBar = this.view.getChildComponent('navigation-bar');
-		this.navigationBarItem = this.navigationBar.getItem();
 
-		this.tempButton = this.navigationBarItem.getChildComponent('temp-button');
-		this.backButton = this.navigationBarItem.getChildComponent('back-button');
+		this.tempButton = this.navigationBar.getButton('temp-button');
+		this.backButton = this.navigationBar.getButton('back-button');
 		this.backButton.addEvent('tap', this.bound('onBackButtonTap'));
 
 		this.styleList = this.view.getChildComponent('style-list');
@@ -265,7 +262,6 @@ ViewController.Button = new Class({
 	destroy: function() {
 
 		this.navigationBar = null;
-		this.navigationBarItem = null;
 
 		this.backButton.removeEvent('tap', this.bound('onBackButtonTap'));
 		this.backButton = null;
@@ -315,8 +311,6 @@ ViewController.Bar = new Class({
 
 	navigationBar: null,
 
-	navigationBarItem: null,
-
 	backButton: null,
 
 	styleList: null,
@@ -328,9 +322,8 @@ ViewController.Bar = new Class({
 	viewDidLoad: function() {
 
 		this.navigationBar = this.view.getChildComponent('navigation-bar');
-		this.navigationBarItem = this.navigationBar.getItem();
 
-		this.backButton = this.navigationBarItem.getChildComponent('back-button');
+		this.backButton = this.navigationBar.getButton('back-button');
 		this.backButton.addEvent('tap', this.bound('onBackButtonTap'));
 
 		this.styleList = this.view.getChildComponent('style-list');
@@ -340,7 +333,6 @@ ViewController.Bar = new Class({
 	destroy: function() {
 
 		this.navigationBar = null;
-		this.navigationBarItem = null;
 
 		this.backButton.removeEvent('tap', this.bound('onBackButtonTap'));
 		this.backButton = null;
@@ -389,8 +381,6 @@ ViewController.List = new Class({
 
 	navigationBar: null,
 
-	navigationBarItem: null,
-
 	backButton: null,
 
 	loadView: function() {
@@ -400,16 +390,14 @@ ViewController.List = new Class({
 	viewDidLoad: function() {
 
 		this.navigationBar = this.view.getChildComponent('navigation-bar');
-		this.navigationBarItem = this.navigationBar.getItem();
 
-		this.backButton = this.navigationBarItem.getChildComponent('back-button');
+		this.backButton = this.navigationBar.getButton('back-button');
 		this.backButton.addEvent('tap', this.bound('onBackButtonTap'));
 	},
 
 	destroy: function() {
 
 		this.navigationBar = null;
-		this.navigationBarItem = null;
 
 		this.backButton.removeEvent('tap', this.bound('onBackButtonTap'));
 		this.backButton = null;
