@@ -23,22 +23,8 @@ provides:
 
 // TODO: Property detect if a prefix-less version is available
 
-var a = '';
-var t = '';
-
-if (Browser.safari || Browser.chrome || Browser.platform.ios) {
-	a = 'webkitAnimationEnd';
-	t = 'webkitTransitionEnd';
-} else if (Browser.firefox) {
-	a = 'animationend';
-	t = 'transitionend';
-} else if (Browser.opera) {
-	a = 'oAnimationEnd';
-	t = 'oTransitionEnd';
-} else if (Browser.ie) {
-	a = 'msAnimationEnd';
-	t = 'msTransitionEnd';
-}
+var a = 'animationend';
+var t = 'transitionend';
 
 Element.NativeEvents[a] = 2;
 Element.NativeEvents[t] = 2;
