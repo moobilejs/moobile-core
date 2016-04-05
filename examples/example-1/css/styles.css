@@ -1,0 +1,48 @@
+/* Home View
+-----------------------------------------------------------------------------*/
+
+.view.home-view .home-view-content {
+	padding: 12px;
+}
+
+.view.home-view  h1 + p + .list {
+	margin-bottom: 24px;
+}
+
+.view.home-view  .button {
+	margin-bottom: 24px;
+}
+
+.view.home-view .button.tap-me-button,
+.view.home-view .button.pinch-me-button {
+	margin-bottom: 6px;
+}
+
+/* Transition View
+-----------------------------------------------------------------------------*/
+
+.view.transition-view .transition-view-content {
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	padding: 12px;
+}
+
+
+/* Button View
+-----------------------------------------------------------------------------*/
+
+.view.button-view .button-view-content {
+	padding: 12px;
+}
+
+.view.button-view .button-view-content h1 + p + .button,
+.view.button-view .button-view-content .button-group {
+	margin-bottom: 24px;
+}
+
+/* Bar View
+-----------------------------------------------------------------------------*/
+
+.view.bar-view .bar-view-content {
+	padding: 12px;
+}
