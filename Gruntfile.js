@@ -23,11 +23,7 @@ module.exports = function(grunt) {
       },
       'sass': {
         files: ['themes/**/*.scss'],
-        tasks: ['sass'],
-      },
-      'css': {
-        files: ['dist/css/*.css'],
-        tasks: ['postcss', 'dataUri'],
+        tasks: ['sass','postcss', 'dataUri'],
       },
       'tests': {
         options: {
