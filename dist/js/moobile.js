@@ -5839,7 +5839,7 @@ var NavigationBar = moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	getButton: function(name) {
-		return this.getChildComponentByType(Button, name);
+		return this.getChildComponentByType(moobile.Button, name);
 	},
 
 	/**
@@ -5848,7 +5848,7 @@ var NavigationBar = moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	getButtonAt: function(index) {
-		return this.getChildComponentByTypeAt(Button, index);
+		return this.getChildComponentByTypeAt(moobile.Button, index);
 	},
 
 	/**
@@ -5866,7 +5866,7 @@ var NavigationBar = moobile.NavigationBar = new Class({
 	 * @since  0.3.0
 	 */
 	removeAllButtons: function(destroy) {
-		return this.removeAllChildComponents(Button, destroy);
+		return this.removeAllChildComponents(moobile.Button, destroy);
 	}
 
 });
