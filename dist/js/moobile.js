@@ -3163,7 +3163,6 @@ var Component = moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	__didAddChildComponent: function(component) {
-		component.__visible = this.__visible;
 		this.didAddChildComponent(component);
 		this.fireEvent('didaddchildcomponent', component);
 	},
@@ -3674,6 +3673,17 @@ var Overlay = moobile.Overlay = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('overlay');
+		this.addEvent('animationend', this.bound('__onAnimationEnd'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.removeEvent('animationend', this.bound('__onAnimationEnd'))
+		this.parent()
 	},
 
 	/**
@@ -3692,7 +3702,8 @@ var Overlay = moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	showAnimated: function() {
-		this.show('show-animated');
+		this.willShow();
+		this.addClass('show-animated').removeClass('hidden');
 		return this;
 	},
 
@@ -3702,7 +3713,8 @@ var Overlay = moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	hideAnimated: function() {
-		this.hide('hide-animated');
+		this.willHide();
+		this.element.addClass('hide-animated');
 		return this;
 	},
 
@@ -7131,6 +7143,7 @@ var Alert = moobile.Alert = new Class({
 		this.parent();
 
 		this.addClass('alert');
+		this.addEvent('animationend', this.bound('__onAnimationEnd'))
 
 		this.overlay = new moobile.Overlay();
 		this.addChildComponent(this.overlay);
@@ -7174,8 +7187,6 @@ var Alert = moobile.Alert = new Class({
 		if (buttons) {
 			this.addButtons(buttons);
 		}
-
-		this.hide();
 	},
 
 	/**
@@ -7184,6 +7195,8 @@ var Alert = moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	destroy: function() {
+
+		this.removeEvent('animationend', this.bound('__onAnimationEnd'));
 
 		this.__title = null;
 		this.__message = null;
@@ -7392,50 +7405,15 @@ var Alert = moobile.Alert = new Class({
 	},
 
 	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
-	show: function(animation) {
-
-		if (animation) {
-			this.overlay.showAnimated();
-		} else {
-			this.overlay.show();
-		}
-
-		return this.parent(animation);
-	},
-
-	/**
-	 * @overridden
-	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
-	 * @since  0.3.0
-	 */
-	hide: function(animation) {
-
-		if (animation) {
-			this.overlay.hideAnimated();
-		} else {
-			this.overlay.hide();
-		}
-
-		return this.parent(animation);
-	},
-
-
-	/**
 	 * @see    http://moobilejs.com/doc/latest/Dialog/Alert#showAnimated
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
 	showAnimated: function() {
-		return this.show('show-animated');
-		/*new moobile.Animation(this.element, {
-					validate: function(e, element) {
-						return e.target === this.boxElement;
-					}.bind(this)
-				}).setAnimationClass(animation);*/
+		this.willShow();
+		this.element.addClass('show-animated').removeClass('hidden');
+		this.overlay.showAnimated();
+		return this;
 	},
 
 	/**
@@ -7444,12 +7422,10 @@ var Alert = moobile.Alert = new Class({
 	 * @since  0.1.0
 	 */
 	hideAnimated: function() {
-		return this.hide('hide-animated');
-		/*new moobile.Animation(this.element, {
-					validate: function(e, element) {
-						return e.target === this.boxElement;
-					}.bind(this)
-				}).setAnimationClass(animation);*/
+		this.willHide();
+		this.element.addClass('hide-animated');
+		this.overlay.hideAnimated();
+		return this;
 	},
 
 	/**
@@ -7486,8 +7462,6 @@ var Alert = moobile.Alert = new Class({
 	 */
 	willShow: function() {
 
-		this.parent();
-
 		if (this.getParentView() === null) {
 			var instance = moobile.Window.getCurrentInstance();
 			if (instance) {
@@ -7496,6 +7470,8 @@ var Alert = moobile.Alert = new Class({
 		}
 
 		if (this.__buttons.length === 0) this.addButton('OK');
+
+		this.parent();
 	},
 
 	/**
@@ -7523,6 +7499,26 @@ var Alert = moobile.Alert = new Class({
 		}
 
 		this.hideAnimated();
+	},
+
+	/**
+	 * @hidden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	__onAnimationEnd: function(e) {
+
+		e.stop()
+
+		if (this.hasClass('show-animated')) {
+			this.removeClass('show-animated')
+			this.didShow()
+		}
+
+		if (this.hasClass('hide-animated')) {
+			this.addClass('hidden').removeClass('hide-animated')
+			this.didHide()
+		}
 	}
 
 });

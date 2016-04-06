@@ -1376,7 +1376,6 @@ var Component = moobile.Component = new Class({
 	 * @since  0.2.1
 	 */
 	__didAddChildComponent: function(component) {
-		component.__visible = this.__visible;
 		this.didAddChildComponent(component);
 		this.fireEvent('didaddchildcomponent', component);
 	},
