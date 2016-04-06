@@ -36,7 +36,7 @@ var Page = moobile.ViewTransition.Page = new Class({
 
 		var parentElem = parentView.getContentElement();
 
-		this.overlay = new Overlay();
+		this.overlay = new moobile.Overlay();
 		this.overlay.addClass('transition-cover-page-overlay');
 		this.overlay.hide();
 
