@@ -90,7 +90,7 @@ input, select, textarea {
 /* Style Light */
 
 .view.style-light {
-	background: linear-gradient(bottom, #e2e5ea, #d0d2d8);
+	background: linear-gradient(to bottom, #e2e5ea, #d0d2d8);
 	background-size: auto auto;
 	color: #576075;
 }
@@ -198,13 +198,13 @@ input, select, textarea {
 }
 
 .bar:after {
-	background: linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
 	bottom: -3px;
 	width: 100%;
 }
 
 .bar:before {
-	background: linear-gradient(bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.05));
 	top: -3px;
 	width: 100%;
 }
@@ -946,7 +946,7 @@ input, select, textarea {
 
 .list-item.is-selected,
 .list-item.is-highlighted {
-	background: linear-gradient(bottom, #058DF5, #0160E6) !important;
+	background: linear-gradient(to bottom, #058DF5, #0160E6) !important;
 	color: #fff;
 	text-shadow: none;
 }
