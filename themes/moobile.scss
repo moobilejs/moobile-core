@@ -523,24 +523,24 @@ input, select, textarea {
 	box-sizing: border-box;                              /* Important */
 	flex-direction: row;                                 /* Important */
 	align-items: center;                                 /* Important */
-	display:         flex;                                       /* Important */
+	display: flex;                                       /* Important */
 	list-style: none;
 	list-style-position: outside;
-	position: relative;                                          /* Important */
+	position: relative;                                  /* Important */
 }
 
 .list-item .list-item-image {
     backface-visibility: hidden;                         /* Important */
     box-sizing: border-box;                              /* Important */
-    box-flex: 0;                                         /* Important */
-	display: block;                                              /* Important */
+    flex: 0;                                         	 /* Important */
+	display: block;                                      /* Important */
 }
 
 .list-item .list-item-label {
 	backface-visibility: hidden;                         /* Important */
 	box-sizing: border-box;                              /* Important */
-	flex: 1;                                         /* Important */
-	display: block;                                              /* Important */
+	flex: 1;                                         	 /* Important */
+	display: block;                                      /* Important */
 }
 
 .list-item .list-item-detail {

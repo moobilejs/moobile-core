@@ -568,7 +568,9 @@ input, select, textarea {
   /* Important */
   box-sizing: border-box;
   /* Important */
-  box-flex: 0;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0;
+          flex: 0;
   /* Important */
   display: block;
   /* Important */ }
