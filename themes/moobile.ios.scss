@@ -277,7 +277,9 @@ input, select, textarea {
  	  won't kick in. The navigation bar need to measure the content of the
  	  content element to center it properly.
  	 */
-
+	display: flex;
+	flex-grow: 1;
+	justify-content: center;
  	max-width: 100%;
  	overflow: hidden;
 	padding-top: 5px;
@@ -1480,6 +1482,7 @@ input, select, textarea {
 
 	.slider .slider-thumb {
 		background: url(../images/ios/slider-thumb-2x.png) no-repeat center center;
+		background-size: 24px 24px;
 	}
 
 	.slider .slider-value {

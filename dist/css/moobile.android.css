@@ -161,6 +161,37 @@ input, select, textarea {
 
 /* Navigation Bar
 -----------------------------------------------------------------------------*/
+.bar.navigation-bar > .navigation-bar-content {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center; }
+
+.bar.navigation-bar > .navigation-bar-content > .navigation-bar-title {
+  /**
+    The max-width is very important. If no width is defined, the text-overflow
+    won't kick in. The navigation bar need to measure the content of the
+    content element to center it properly.
+   */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+  text-align: center;
+  white-space: nowrap; }
+
 /* Deprecated */
 .bar.navigation-bar .bar-item .bar-title-wrapper {
   -webkit-box-orient: horizontal;
