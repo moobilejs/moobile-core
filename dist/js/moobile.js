@@ -6208,6 +6208,12 @@ var Slider = moobile.Slider = new Class({
 		if (this._value === value)
 			return this;
 
+		if( value > this._maximum ) {
+			value = this._maximum;
+		} else if( value < this._minimum ) {
+			value = this._minimum;
+		}
+
 		this._value = value;
 
 		var pos = this._positionFromValue(value);
