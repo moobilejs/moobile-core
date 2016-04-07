@@ -1,8 +1,8 @@
 "use strict"
 
 var hasTouchEvent = 'ontouchstart' in global
-var hasTouchList  = 'TouchList' in global
-var hasTouch      = 'Touch' in global
+var hasTouchList  = hasTouchEvent && 'TouchList' in global
+var hasTouch      = hasTouchEvent && 'Touch' in global
 
 if (!hasTouchList) {
 
