@@ -8410,7 +8410,7 @@ var Native = moobile.Scroller.Native = new Class({
 });
 
 moobile.Scroller.Native.supportsCurrentPlatform = function() {
-	return Browser.platform.ios && 'WebkitOverflowScrolling' in document.createElement('div').style;
+	return Browser.platform === 'ios' && 'WebkitOverflowScrolling' in document.createElement('div').style;
 };
 
 },{"moofx/lib/frame":2}],32:[function(require,module,exports){
