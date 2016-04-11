@@ -110,7 +110,7 @@ Scroller.create = function(contentElement, contentWrapperElement, scrollers, opt
 
 	var scroller = null;
 
-	scrollers = scrollers ? Array.from(scrollers) : ['IScroll.Android', 'Native', 'IScroll'];
+	scrollers = scrollers ? Array.convert(scrollers) : ['IScroll.Android', 'Native', 'IScroll'];
 
 	for (var i = 0; i < scrollers.length; i++) {
 

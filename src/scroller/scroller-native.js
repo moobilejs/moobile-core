@@ -79,7 +79,7 @@ var Native = moobile.Scroller.Native = new Class({
 	destroy: function() {
 
 		this.contentScrollerElement.removeEvent('touchstart', this.bound('_onTouchStart'));
-		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchMove'));
+		this.contentScrollerElement.removeEvent('touchmove', this.bound('_onTouchMove'));
 		this.contentScrollerElement.removeEvent('touchend', this.bound('_onTouchEnd'));
 		this.contentScrollerElement.removeEvent('scroll', this.bound('_onScroll'));
 		this.contentScrollerElement = null;
@@ -262,5 +262,5 @@ var Native = moobile.Scroller.Native = new Class({
 });
 
 moobile.Scroller.Native.supportsCurrentPlatform = function() {
-	return Browser.platform.ios && 'WebkitOverflowScrolling' in document.createElement('div').style;
+	return Browser.platform === 'ios' && 'WebkitOverflowScrolling' in document.createElement('div').style;
 };

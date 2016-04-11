@@ -18,6 +18,17 @@ var Overlay = moobile.Overlay = new Class({
 	willBuild: function() {
 		this.parent();
 		this.addClass('overlay');
+		this.addEvent('animationend', this.bound('__onAnimationEnd'));
+	},
+
+	/**
+	 * @overridden
+	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
+	 * @since  0.1.0
+	 */
+	destroy: function() {
+		this.removeEvent('animationend', this.bound('__onAnimationEnd'))
+		this.parent()
 	},
 
 	/**
@@ -36,7 +47,8 @@ var Overlay = moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	showAnimated: function() {
-		this.show('show-animated');
+		this.willShow();
+		this.addClass('show-animated').removeClass('hidden');
 		return this;
 	},
 
@@ -46,7 +58,8 @@ var Overlay = moobile.Overlay = new Class({
 	 * @since  0.1.0
 	 */
 	hideAnimated: function() {
-		this.hide('hide-animated');
+		this.willHide();
+		this.element.addClass('hide-animated');
 		return this;
 	},
 

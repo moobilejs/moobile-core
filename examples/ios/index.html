@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=medium-dpi" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+
+		<title></title>
+
+		<link rel="stylesheet" href="../../dist/css/moobile.css" />
+		<link rel="stylesheet" href="../../dist/css/moobile.ios.css" />
+		<!-- <link rel="stylesheet" href="../dist/css/moobile.android.css" /> -->
+
+		<!-- your own styles -->
+		<link rel="stylesheet" href="css/app.css" />
+		<!--link rel="stylesheet" href="css/app.min.css" /-->
+
+		<!-- mootools -->
+		<script type="text/javascript" src="../../dist/js/libs/mootools-core.min.js"></script>
+		<script type="text/javascript" src="../../dist/js/libs/mootools-more.min.js"></script>
+
+		<!-- moobile -->
+		<script type="text/javascript" src="../../dist/js/moobile.js"></script>
+		<!-- <script type="text/javascript" src="../dist/js/moobile.min.js"></script> -->
+
+		<!-- your app code -->
+		<script type="text/javascript" src="js/app.js"></script>
+		<!--script type="text/javascript" src="js/app.min.js"></script -->
+
+	</head>
+	<body>
+
+		<script type="text/javascript">
+
+			window.addEvent('ready', function() {
+
+				new Moobile.WindowController()
+					.setRootViewController(new Moobile.ViewControllerStack)
+					.getRootViewController()
+					.pushViewController(new ViewController.Home);
+			});
+
+		</script>
+
+	</body>
+</html>

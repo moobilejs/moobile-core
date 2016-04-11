@@ -20,9 +20,9 @@ require('../vendor/mootools-custom-event/Source/Element.defineCustomEvent.js');
 
 // mootools mobile
 require('../vendor/mootools-mobile/Source/Browser/Features.Touch.js');
-require('../vendor/mootools-mobile/Source/Browser/Mobile.js')
-require('../vendor/mootools-mobile/Source/Touch/Pinch.js')
-require('../vendor/mootools-mobile/Source/Touch/Swipe.js')
+require('../vendor/mootools-mobile/Source/Browser/Mobile.js');
+require('../vendor/mootools-mobile/Source/Touch/Pinch.js');
+require('../vendor/mootools-mobile/Source/Touch/Swipe.js');
 
 // mootools utilities
 // require('./utils/browser');
@@ -81,7 +81,7 @@ require('./view/view');
 require('./view/scroll-view');
 // require('./view/view-collection');
 // require('./view/view-queue');
-// require('./view/view-set');
+require('./view/view-set');
 require('./view/view-stack');
 
 // view controller
@@ -89,7 +89,7 @@ require('./view-controller/view-controller');
 require('./view-controller/view-controller-stack');
 // require('./view-controller/view-controller-queue');
 // require('./view-controller/view-controller-collection');
-// require('./view-controller/view-controller-set');
+require('./view-controller/view-controller-set');
 
 // view transition
 require('./view-transition/view-transition');

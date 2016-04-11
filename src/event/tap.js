@@ -20,7 +20,7 @@ Element.defineCustomEvent('tap', {
 
 		if (tapValid) {
 
-			var element = document.elementFromPoint(tapTouch.pageX, tapTouch.pageY);
+			var element = tapTouch ? document.elementFromPoint(tapTouch.pageX, tapTouch.pageY) : null;
 			if (element) {
 				return this === element || this.contains(element);
 			}

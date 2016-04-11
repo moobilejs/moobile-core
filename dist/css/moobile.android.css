@@ -67,14 +67,7 @@ input, select, textarea {
 .view.scroll-view.iscroll-engine .scrollbar-H > div,
 .view.scroll-view.iscroll-engine .scrollbar-V > div {
   -webkit-backface-visibility: hidden;
-  /* Important */
-  -moz-backface-visibility: hidden;
-  /* Important */
-  -ms-backface-visibility: hidden;
-  /* Important */
-  -o-backface-visibility: hidden;
-  /* Important */
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   /* Important */
   pointer-events: none;
   position: absolute;
@@ -88,15 +81,7 @@ input, select, textarea {
   width: 4px; }
 
 .view.scroll-view.iscroll-engine .scrollbar-V > div {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding-box;
-  -ms-background-clip: padding-box;
-  -o-background-clip: padding-box;
   background-clip: padding-box;
   background: rgba(0, 0, 0, 0.3);
   width: 100%; }
@@ -109,15 +94,7 @@ input, select, textarea {
   right: 2px; }
 
 .view.scroll-view.iscroll-engine .scrollbar-H > div {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding-box;
-  -ms-background-clip: padding-box;
-  -o-background-clip: padding-box;
   background-clip: padding-box;
   background: rgba(0, 0, 0, 0.3);
   height: 100%; }
@@ -137,11 +114,8 @@ input, select, textarea {
 /* Bar
 -----------------------------------------------------------------------------*/
 .bar {
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -o-linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), linear-gradient(bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
+  background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 3px, transparent 3px);
   background-color: #ddd;
   color: #222;
   font-size: 18px;
@@ -149,11 +123,8 @@ input, select, textarea {
   height: 56px; }
 
 .bar:after {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
-  background: linear-gradient(top, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
+  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.24) 0px, rgba(0, 0, 0, 0.24) 1px, rgba(0, 0, 0, 0.13) 1px, rgba(0, 0, 0, 0.13) 2px, rgba(0, 0, 0, 0.07) 2px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.03) 4px, rgba(0, 0, 0, 0.02) 5px, rgba(0, 0, 0, 0.01) 6px, transparent 7px);
   bottom: -10px;
   content: "";
   display: block;
@@ -173,70 +144,42 @@ input, select, textarea {
 
 /* Style Light */
 .bar.style-light {
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -webkit-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -moz-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -ms-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -o-linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), linear-gradient(bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
+  background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), -webkit-linear-gradient(top, #33b5e5 0px, #33b5e5 3px, transparent 3px);
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 1px, transparent 2px), linear-gradient(to bottom, #33b5e5 0px, #33b5e5 3px, transparent 3px);
   background-color: #fff;
   color: #222; }
 
 /* Navigation Bar
 -----------------------------------------------------------------------------*/
-/* Deprecated */
-.bar.navigation-bar .bar-item .bar-title-wrapper {
-  -webkit-box-orient: horizontal;
-  /* Important */
-  -moz-box-orient: horizontal;
-  /* Important */
-  -webkit-flex-direction: row;
-  /* Important */
-  -ms-flex-direction: row;
-  /* Important */
-  flex-direction: row;
-  /* Important */
+.bar.navigation-bar > .navigation-bar-content {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   -webkit-box-align: center;
-  /* Important */
-  -moz-box-align: center;
-  /* Important */
-  -webkit-flex-align: center;
-  /* Important */
-  -ms-flex-align: center;
-  /* Important */
-  flex-align: center;
-  /* Important */
-  -webkit-box-pack: start;
-  /* Important */
-  -moz-box-pack: start;
-  /* Important */
-  -webkit-flex-pack: start;
-  /* Important */
-  -ms-flex-pack: start;
-  /* Important */
-  flex-pack: start;
-  /* Important */
-  display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: -ms-box;
-  /* Important */
-  display: -o-box;
-  /* Important */
-  display: box;
-  /* Important */
-  height: inherit;
-  margin-left: 17px;
-  margin-right: 17px; }
+  -webkit-align-items: center;
+          align-items: center; }
 
-/* Deprecated */
-.bar.navigation-bar .bar-item .bar-title {
-  display: block;
+.bar.navigation-bar > .navigation-bar-content > .navigation-bar-title {
+  /**
+    The max-width is very important. If no width is defined, the text-overflow
+    won't kick in. The navigation bar need to measure the content of the
+    content element to center it properly.
+   */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  max-width: 100%;
   overflow: hidden;
   padding-top: 5px;
   padding-bottom: 5px;
   text-overflow: ellipsis;
-  text-align: left;
+  text-align: center;
   white-space: nowrap; }
 
 /* Button
@@ -262,54 +205,27 @@ input, select, textarea {
   border: 2px solid #30abd4; }
 
 .button.is-highlighted {
-  -webkit-box-shadow: 0px 0px 0px 5px rgba(51, 181, 229, 0.4);
-  -moz-box-shadow: 0px 0px 0px 5px rgba(51, 181, 229, 0.4);
-  -ms-box-shadow: 0px 0px 0px 5px rgba(51, 181, 229, 0.4);
-  -o-box-shadow: 0px 0px 0px 5px rgba(51, 181, 229, 0.4);
   box-shadow: 0px 0px 0px 5px rgba(51, 181, 229, 0.4);
   background: rgba(51, 181, 229, 0.8);
   color: #333333; }
 
 .button .button-label {
   -webkit-box-orient: horizontal;
-  /* Important */
-  -moz-box-orient: horizontal;
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  /* Important */
-  -ms-flex-direction: row;
-  /* Important */
-  flex-direction: row;
+          flex-direction: row;
   /* Important */
   -webkit-box-align: center;
-  /* Important */
-  -moz-box-align: center;
-  /* Important */
-  -webkit-flex-align: center;
-  /* Important */
-  -ms-flex-align: center;
-  /* Important */
-  flex-align: center;
+  -webkit-align-items: center;
+          align-items: center;
   /* Important */
   -webkit-box-pack: center;
-  /* Important */
-  -moz-box-pack: center;
-  /* Important */
-  -webkit-flex-pack: center;
-  /* Important */
-  -ms-flex-pack: center;
-  /* Important */
-  flex-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: -ms-box;
-  /* Important */
-  display: -o-box;
-  /* Important */
-  display: box;
+  display: -webkit-flex;
+  display: flex;
   /* Important */
   height: 100%;
   overflow: hidden;
@@ -321,10 +237,6 @@ input, select, textarea {
 
 /* Inside a Bar */
 .bar .button {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
-  -o-box-shadow: none;
   box-shadow: none;
   background: none;
   border: none;
@@ -432,8 +344,15 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 .list-item {
   -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: start;
+  -webkit-align-items: start;
+          align-items: start;
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   border-bottom: 1px solid #d9d9d9;
   color: #222;
   font-size: 18px;
@@ -473,17 +392,13 @@ input, select, textarea {
   background: rgba(51, 181, 229, 0.6); }
 
 .list-item.style-header {
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -ms-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  box-orient: horizontal;
-  box-orient: horizontal;
-  -webkit-box-align: end;
-  -moz-box-align: end;
-  -ms-box-align: end;
-  -o-box-align: end;
-  box-align: end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: end;
+          justify-content: end;
   border-bottom: 2px solid #bababa;
   color: #999999;
   font-size: 14px;
@@ -499,10 +414,6 @@ input, select, textarea {
 /* List
 -----------------------------------------------------------------------------*/
 .list {
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding-box;
-  -ms-background-clip: padding-box;
-  -o-background-clip: padding-box;
   background-clip: padding-box;
   margin-bottom: 20px;
   padding: 0px 16px; }
@@ -510,21 +421,6 @@ input, select, textarea {
 /* Overlay
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes android-show-overlay {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-moz-keyframes android-show-overlay {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-ms-keyframes android-show-overlay {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-@-o-keyframes android-show-overlay {
   from {
     opacity: 0; }
   to {
@@ -539,21 +435,6 @@ input, select, textarea {
     opacity: 1; }
   to {
     opacity: 0; } }
-@-moz-keyframes android-hide-overlay {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-ms-keyframes android-hide-overlay {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
-@-o-keyframes android-hide-overlay {
-  from {
-    opacity: 1; }
-  to {
-    opacity: 0; } }
 @keyframes android-hide-overlay {
   from {
     opacity: 1; }
@@ -561,17 +442,11 @@ input, select, textarea {
     opacity: 0; } }
 .overlay.show-animated {
   -webkit-animation: android-show-overlay 100ms ease-out 1;
-  -moz-animation: android-show-overlay 100ms ease-out 1;
-  -ms-animation: android-show-overlay 100ms ease-out 1;
-  -o-animation: android-show-overlay 100ms ease-out 1;
-  animation: android-show-overlay 100ms ease-out 1; }
+          animation: android-show-overlay 100ms ease-out 1; }
 
 .overlay.hide-animated {
   -webkit-animation: android-hide-overlay 100ms ease-out 1;
-  -moz-animation: android-hide-overlay 100ms ease-out 1;
-  -ms-animation: android-hide-overlay 100ms ease-out 1;
-  -o-animation: android-hide-overlay 100ms ease-out 1;
-  animation: android-hide-overlay 100ms ease-out 1; }
+          animation: android-hide-overlay 100ms ease-out 1; }
 
 .overlay {
   background: rgba(0, 0, 0, 0.6); }
@@ -602,36 +477,19 @@ input, select, textarea {
 
 .alert .alert-footer {
   -webkit-box-orient: horizontal;
-  /* Important */
-  -moz-box-orient: horizontal;
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  /* Important */
-  -ms-flex-direction: row;
-  /* Important */
-  flex-direction: row;
+          flex-direction: row;
   /* Important */
   display: -webkit-box;
-  /* Important */
-  display: -moz-box;
-  /* Important */
-  display: -ms-box;
-  /* Important */
-  display: -o-box;
-  /* Important */
-  display: box;
+  display: -webkit-flex;
+  display: flex;
   /* Important */ }
 
 .alert .button {
   -webkit-box-flex: 1;
-  /* Important */
-  -moz-box-flex: 1;
-  /* Important */
   -webkit-flex: 1;
-  /* Important */
-  -ms-flex: 1;
-  /* Important */
-  flex: 1;
+          flex: 1;
   /* Important */
   background: transparent;
   border: none;
@@ -649,37 +507,12 @@ input, select, textarea {
   border: 2px solid #30abd4; }
 
 .alert .button.is-highlighted {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
-  -o-box-shadow: none;
   box-shadow: none;
   background: rgba(51, 181, 229, 0.8);
   color: #333333; }
 
 /* Show Animation */
 @-webkit-keyframes show-alert-android {
-  from {
-    -webkit-transform: scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1; } }
-@-moz-keyframes show-alert-android {
-  from {
-    -webkit-transform: scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1; } }
-@-ms-keyframes show-alert-android {
-  from {
-    -webkit-transform: scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1; } }
-@-o-keyframes show-alert-android {
   from {
     -webkit-transform: scale(0.95);
     opacity: 0; }
@@ -695,34 +528,10 @@ input, select, textarea {
     opacity: 1; } }
 .alert.show-animated .alert-box {
   -webkit-animation: show-alert-android 100ms ease-out 1;
-  -moz-animation: show-alert-android 100ms ease-out 1;
-  -ms-animation: show-alert-android 100ms ease-out 1;
-  -o-animation: show-alert-android 100ms ease-out 1;
-  animation: show-alert-android 100ms ease-out 1; }
+          animation: show-alert-android 100ms ease-out 1; }
 
 /* Hide Animation */
 @-webkit-keyframes hide-alert-android {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: scale(0.95);
-    opacity: 0; } }
-@-moz-keyframes hide-alert-android {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: scale(0.95);
-    opacity: 0; } }
-@-ms-keyframes hide-alert-android {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: scale(0.95);
-    opacity: 0; } }
-@-o-keyframes hide-alert-android {
   from {
     -webkit-transform: scale(1);
     opacity: 1; }
@@ -738,22 +547,14 @@ input, select, textarea {
     opacity: 0; } }
 .alert.hide-animated .alert-box {
   -webkit-animation: hide-alert-android 100ms ease-out 1;
-  -moz-animation: hide-alert-android 100ms ease-out 1;
-  -ms-animation: hide-alert-android 100ms ease-out 1;
-  -o-animation: hide-alert-android 100ms ease-out 1;
-  animation: hide-alert-android 100ms ease-out 1; }
+          animation: hide-alert-android 100ms ease-out 1; }
 
 /* Vertical Button Layout */
 .alert.alert-layout-vertical .alert-footer {
   -webkit-box-orient: vertical;
-  /* Important */
-  -moz-box-orient: vertical;
-  /* Important */
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  /* Important */
-  -ms-flex-direction: column;
-  /* Important */
-  flex-direction: column;
+          flex-direction: column;
   /* Important */ }
 
 .alert.alert-layout-vertical .alert-footer .button {
@@ -767,50 +568,30 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes rotate-activity-indicator-android {
   from {
-    -webkit-transform: rotate(0deg); }
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
   to {
-    -webkit-transform: rotate(360deg); } }
-@-moz-keyframes rotate-activity-indicator-android {
-  from {
-    -moz-transform: rotate(0deg); }
-  to {
-    -moz-transform: rotate(360deg); } }
-@-ms-keyframes rotate-activity-indicator-android {
-  from {
-    -ms-transform: rotate(0deg); }
-  to {
-    -ms-transform: rotate(360deg); } }
-@-o-keyframes rotate-activity-indicator-android {
-  from {
-    -o-transform: rotate(0deg); }
-  to {
-    -o-transform: rotate(360deg); } }
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 @keyframes rotate-activity-indicator-android {
   from {
-    transform: rotate(0deg); }
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
   to {
-    transform: rotate(360deg); } }
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 .activity-indicator {
   -webkit-transform-origin: 50% 50%;
-  -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%;
-  -o-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
-  background: url(../images/android/activity-indicator.png);
+          transform-origin: 50% 50%;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDMDJERkE3MzE3QkUxMUUyOTkyNjlFMEQ4MkYxMEE0QSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDMDJERkE3NDE3QkUxMUUyOTkyNjlFMEQ4MkYxMEE0QSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkMwMkRGQTcxMTdCRTExRTI5OTI2OUUwRDgyRjEwQTRBIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkMwMkRGQTcyMTdCRTExRTI5OTI2OUUwRDgyRjEwQTRBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+LlR/sQAAAe9JREFUeNp0kz1LHFEUhu/MzrK7nbCgohgSFFS0VFiQYKGVREgaSRUwCP4AMb2ghYjNFrKClYEQUiiEgK2gTar4AUZkAyoYV1Cxc8l+jM87zl2uEA88nHPPnPveM/fDy+fzJgzDBvV6vRmfg1fETZ8w4jPibXwBDogb9YHneSa2gMQbxoPEV8SH+Bv4A53wltxHWCOexd+7AkmY9H2/HfVvWoVxGH/bj1ebI36HX6GmBz8G/5jjGxin+AUUYB9Cp7OGMWEThqEXlvQrPoWtMITIBlzGgkYCVsTZH3EC0/CBXH9AsTbsFn6pyFktmuDGDj/I7WlPJNBHzUH4aE9WdgVqtVqEFSEnkYkgkUhkCa5todq33lqlUomQgHPkJ3xqVQcJAt/8xzKZjCmVSuYZU3u+OrgjaLFty2t18iaVSplisWiy2WwUK2c3WHcDf6oOjggGYFPHZycHQWDS6XQkWi6XH28aOUdkFHZ8ErvQBjkVWJLJZFQs079rD6rVqmWUXDd8VgcXKG3jpxTDuSbalexpSCQev2QDF+Ar49/2Jn6BU5hn4mvwnH+198BDZATWiY9hXsJBXKg7vQh6DzPwntxP+Kt9RaADRpjQRe47LOt0o32xK+Elskq8BXobw3zvUAN6lQjoUc3p/O0Fkz0IMABlAHBvu72UCwAAAABJRU5ErkJggg==);
   height: 16px;
   width: 16px; }
 
 .activity-indicator.active {
   -webkit-animation: rotate-activity-indicator-android 750ms infinite linear;
-  -moz-animation: rotate-activity-indicator-android 750ms infinite linear;
-  -ms-animation: rotate-activity-indicator-android 750ms infinite linear;
-  -o-animation: rotate-activity-indicator-android 750ms infinite linear;
-  animation: rotate-activity-indicator-android 750ms infinite linear;
+          animation: rotate-activity-indicator-android 750ms infinite linear;
   -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both; }
+          animation-fill-mode: both; }
 
 /* Slider
 -----------------------------------------------------------------------------*/
@@ -830,10 +611,6 @@ input, select, textarea {
   right: -11px; }
 
 .slider .slider-thumb {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
   box-sizing: border-box;
   border: 2px solid transparent;
   background: rgba(51, 181, 229, 0.3);
@@ -926,27 +703,6 @@ input, select, textarea {
   to {
     -webkit-transform: scale(1);
     opacity: 1; } }
-@-moz-keyframes transition-cover-enter-android {
-  from {
-    -webkit-transform: scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1; } }
-@-ms-keyframes transition-cover-enter-android {
-  from {
-    -webkit-transform: scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1; } }
-@-o-keyframes transition-cover-enter-android {
-  from {
-    -webkit-transform: scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1; } }
 @keyframes transition-cover-enter-android {
   from {
     -webkit-transform: scale(0.95);
@@ -956,36 +712,12 @@ input, select, textarea {
     opacity: 1; } }
 .transition-cover-enter .transition-view-to-show {
   -webkit-animation: transition-cover-enter-android 100ms ease-out 1;
-  -moz-animation: transition-cover-enter-android 100ms ease-out 1;
-  -ms-animation: transition-cover-enter-android 100ms ease-out 1;
-  -o-animation: transition-cover-enter-android 100ms ease-out 1;
-  animation: transition-cover-enter-android 100ms ease-out 1;
+          animation: transition-cover-enter-android 100ms ease-out 1;
   z-index: 75; }
 
 /* Transition Cover (Leave)
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-leave-android {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: scale(0.95);
-    opacity: 0; } }
-@-moz-keyframes transition-cover-leave-android {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: scale(0.95);
-    opacity: 0; } }
-@-ms-keyframes transition-cover-leave-android {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: scale(0.95);
-    opacity: 0; } }
-@-o-keyframes transition-cover-leave-android {
   from {
     -webkit-transform: scale(1);
     opacity: 1; }
@@ -1001,10 +733,7 @@ input, select, textarea {
     opacity: 0; } }
 .transition-cover-leave .transition-view-to-hide {
   -webkit-animation: transition-cover-leave-android 100ms ease-out 1;
-  -moz-animation: transition-cover-leave-android 100ms ease-out 1;
-  -ms-animation: transition-cover-leave-android 100ms ease-out 1;
-  -o-animation: transition-cover-leave-android 100ms ease-out 1;
-  animation: transition-cover-leave-android 100ms ease-out 1;
+          animation: transition-cover-leave-android 100ms ease-out 1;
   z-index: 75; }
 
 /* Transition Cover Page (Enter)
@@ -1012,178 +741,98 @@ input, select, textarea {
 @-webkit-keyframes transition-cover-page-enter-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; } }
-@-moz-keyframes transition-cover-page-enter-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; } }
-@-ms-keyframes transition-cover-page-enter-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; } }
-@-o-keyframes transition-cover-page-enter-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; } }
 @keyframes transition-cover-page-enter-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; } }
 .transition-cover-page-enter {
   display: block !important; }
 
 .transition-cover-page-enter .transition-cover-page-foreground-view-wrapper {
   -webkit-animation: transition-cover-page-enter-android 100ms ease-out 1;
-  -moz-animation: transition-cover-page-enter-android 100ms ease-out 1;
-  -ms-animation: transition-cover-page-enter-android 100ms ease-out 1;
-  -o-animation: transition-cover-page-enter-android 100ms ease-out 1;
-  animation: transition-cover-page-enter-android 100ms ease-out 1; }
+          animation: transition-cover-page-enter-android 100ms ease-out 1; }
 
 /* Transition Cover Page Leave
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-page-leave-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; } }
-@-moz-keyframes transition-cover-page-leave-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; } }
-@-ms-keyframes transition-cover-page-leave-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; } }
-@-o-keyframes transition-cover-page-leave-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; } }
 @keyframes transition-cover-page-leave-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; } }
 .transition-cover-page-leave .transition-cover-page-foreground-view-wrapper {
   -webkit-animation: transition-cover-page-leave-android 100ms ease-out 1;
-  -moz-animation: transition-cover-page-leave-android 100ms ease-out 1;
-  -ms-animation: transition-cover-page-leave-android 100ms ease-out 1;
-  -o-animation: transition-cover-page-leave-android 100ms ease-out 1;
-  animation: transition-cover-page-leave-android 100ms ease-out 1; }
+          animation: transition-cover-page-leave-android 100ms ease-out 1; }
 
 /* Transition Cover Box (Enter)
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-box-enter-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; } }
-@-moz-keyframes transition-cover-box-enter-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; } }
-@-ms-keyframes transition-cover-box-enter-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; } }
-@-o-keyframes transition-cover-box-enter-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; } }
 @keyframes transition-cover-box-enter-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; } }
 .transition-cover-box-enter .transition-cover-box-foreground-view-wrapper {
   -webkit-animation: transition-cover-box-enter-android 100ms ease-out 1;
-  -moz-animation: transition-cover-box-enter-android 100ms ease-out 1;
-  -ms-animation: transition-cover-box-enter-android 100ms ease-out 1;
-  -o-animation: transition-cover-box-enter-android 100ms ease-out 1;
-  animation: transition-cover-box-enter-android 100ms ease-out 1; }
+          animation: transition-cover-box-enter-android 100ms ease-out 1; }
 
 /* Transition - Cover Box Leave
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-box-leave-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; } }
-@-moz-keyframes transition-cover-box-leave-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; } }
-@-ms-keyframes transition-cover-box-leave-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
-    opacity: 0; } }
-@-o-keyframes transition-cover-box-leave-android {
-  from {
-    -webkit-transform: translate3d(0, -100%, 0) scale(1);
-    opacity: 1; }
-  to {
-    -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; } }
 @keyframes transition-cover-box-leave-android {
   from {
     -webkit-transform: translate3d(0, -100%, 0) scale(1);
+            transform: translate3d(0, -100%, 0) scale(1);
     opacity: 1; }
   to {
     -webkit-transform: translate3d(0, -100%, 0) scale(0.95);
+            transform: translate3d(0, -100%, 0) scale(0.95);
     opacity: 0; } }
 .transition-cover-box-leave .transition-cover-box-foreground-view-wrapper {
   -webkit-animation: transition-cover-box-leave-android 100ms ease-out 1;
-  -moz-animation: transition-cover-box-leave-android 100ms ease-out 1;
-  -ms-animation: transition-cover-box-leave-android 100ms ease-out 1;
-  -o-animation: transition-cover-box-leave-android 100ms ease-out 1;
-  animation: transition-cover-box-leave-android 100ms ease-out 1; }
+          animation: transition-cover-box-leave-android 100ms ease-out 1; }
 
 /*# sourceMappingURL=moobile.android.css.map */

@@ -39,4 +39,28 @@ describe('View/View', function() {
 		expect(v2.getParentView()).toEqual(v1);
 	});
 
+	it('should add a child view after another', function() {
+		var p  = new Moobile.View();
+		var v1 = new Moobile.View();
+		var v2 = new Moobile.View();
+
+		p.addChildComponent(v1);
+		p.addChildComponentAfter(v2, v1);
+
+		expect(p.contentElement.contains(v1.element)).toBe(true);
+		expect(p.contentElement.contains(v2.element)).toBe(true);
+	});
+
+	it('should add a child view before another', function() {
+		var p  = new Moobile.View();
+		var v1 = new Moobile.View();
+		var v2 = new Moobile.View();
+
+		p.addChildComponent(v1);
+		p.addChildComponentBefore(v2, v1);
+
+		expect(p.contentElement.contains(v1.element)).toBe(true);
+		expect(p.contentElement.contains(v2.element)).toBe(true);
+	});
+
 });
