@@ -12282,10 +12282,10 @@ var View = moobile.View = new Class({
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
 	 */
-	addChildComponent: function(component, where) {
+	addChildComponent: function(component, where, context) {
 		if (where === 'header') return this.parent(component, 'top');
 		if (where === 'footer') return this.parent(component, 'bottom');
-		return this.parent(component, where, this.contentElement);
+		return this.parent(component, where, context || this.contentElement);
 	},
 
 	/**
