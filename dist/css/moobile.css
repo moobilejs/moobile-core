@@ -277,7 +277,8 @@ input, select, textarea {
 /* View Stack
 -----------------------------------------------------------------------------*/
 .view.view-stack > .view-content-wrapper > .view-content {
-  display: block;
+  display: -webkit-box;
+  display: box;
   height: 100%;
   overflow: visible;
   width: 100%; }
