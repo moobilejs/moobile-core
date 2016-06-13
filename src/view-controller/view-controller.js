@@ -355,7 +355,7 @@ var ViewController = moobile.ViewController = new Class({
 		this.__modalViewController.setModal(true);
 
 		var viewToShow = this.__modalViewController.getView();
-		var viewToHide = parentView.getChildComponentsByType(View).getLastItemAtOffset(0);
+		var viewToHide = parentView.getChildComponentsByType(moobile.View).getLastItemAtOffset(0);
 
 		parentView.addChildComponent(viewToShow);
 
@@ -390,7 +390,7 @@ var ViewController = moobile.ViewController = new Class({
 
 		this.willDismissModalViewController()
 
-		var viewToShow = parentView.getChildComponentsByType(View).getLastItemAtOffset(1);
+		var viewToShow = parentView.getChildComponentsByType(moobile.View).getLastItemAtOffset(1);
 		var viewToHide = this.__modalViewController.getView();
 
 		var viewTransition = this.__modalViewController.getViewTransition();
