@@ -359,7 +359,7 @@ var ViewController = moobile.ViewController = new Class({
 
 		parentView.addChildComponent(viewToShow);
 
-		viewTransition = viewTransition || new ViewTransition.Cover;
+		viewTransition = viewTransition || new moobile.ViewTransition.Cover;
 		viewTransition.addEvent('start:once', this.bound('__onPresentTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('__onPresentTransitionCompleted'));
 		viewTransition.enter(
