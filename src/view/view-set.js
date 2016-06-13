@@ -85,5 +85,5 @@ moobile.Component.defineRole('view-set', null, null, function(element) {
  * @since  0.3.0
  */
 moobile.Component.defineRole('tab-bar', moobile.ViewSet, null, function(element) {
-	this.setTabBar(moobile.Component.create(TabBar, element, 'data-tab-bar'));
+	this.setTabBar(moobile.Component.create(moobile.TabBar, element, 'data-tab-bar'));
 });
