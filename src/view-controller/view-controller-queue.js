@@ -41,7 +41,7 @@ var ViewControllerQueue = moobile.ViewControllerQueue = new Class({
 			if (childViewController) {
 				viewTransition = childViewController.getViewTransition();
 			} else {
-				viewTransition = new ViewTransition.None;
+				viewTransition = new moobile.ViewTransition.None;
 			}
 		}
 

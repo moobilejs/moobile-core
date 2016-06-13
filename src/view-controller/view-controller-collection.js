@@ -15,7 +15,7 @@ var ViewControllerCollection = moobile.ViewControllerCollection = new Class({
 	 * @since  0.3.0
 	 */
 	loadView: function() {
-		this.view = new ViewCollection();
+		this.view = new moobile.ViewCollection();
 	},
 
 	/**

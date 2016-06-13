@@ -136,7 +136,7 @@ var ViewControllerSet = moobile.ViewControllerSet = new Class({
 
 		this._animating = true; // needs to be set before the transition happens
 
-		viewTransition = viewTransition || new ViewTransition.None();
+		viewTransition = viewTransition || new moobile.ViewTransition.None();
 		viewTransition.addEvent('start:once', this.bound('onSelectTransitionStart'));
 		viewTransition.addEvent('complete:once', this.bound('onSelectTransitionComplete'));
 		viewTransition[method].call(
@@ -219,7 +219,7 @@ var ViewControllerSet = moobile.ViewControllerSet = new Class({
 
 		viewController.hideView();
 
-		var tab = new Tab;
+		var tab = new moobile.Tab;
 		tab.setLabel(viewController.getTitle());
 		tab.setImage(viewController.getImage());
 		this._tabBar.addTab(tab);

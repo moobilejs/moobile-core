@@ -53,7 +53,7 @@ ViewControllerStack.Navigation = new Class({
 
 		var navigationBar = view.getChildComponent('navigation-bar');
 		if (navigationBar === null) {
-			navigationBar = new NavigationBar(null, null, 'navigation-bar');
+			navigationBar = new moobile.NavigationBar(null, null, 'navigation-bar');
 			view.addChildComponent(navigationBar, 'header');
 		}
 
@@ -65,7 +65,7 @@ ViewControllerStack.Navigation = new Class({
 			var backButtonLabel = this.topViewController.getTitle() || this.options.backButtonLabel;
 			if (backButtonLabel) {
 
-				var backButton = new Button(null, null, 'back');
+				var backButton = new moobile.Button(null, null, 'back');
 				backButton.setStyle('back');
 				backButton.setLabel(backButtonLabel);
 				backButton.addEvent('tap', this.bound('_onBackButtonTap'));
