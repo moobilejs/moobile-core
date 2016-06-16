@@ -38,7 +38,9 @@ provides:
 		})();
 
 	function prefixStyle (style) {
-		if ( vendor === '' ) return style;
+		if ( vendor === '' ) {
+			return style.toLowerCase();
+		}
 
 		style = style.charAt(0).toUpperCase() + style.substr(1);
 		return vendor + style;

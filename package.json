@@ -1,7 +1,7 @@
 {
   "name": "moobile",
   "description": "web application framework for engineering mobile and touch applications",
-  "version": "0.3.3",
+  "version": "0.3.6",
   "main": "src/main.js",
   "license": "MIT",
   "keywords": [
