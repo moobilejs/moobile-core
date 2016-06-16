@@ -7552,11 +7552,32 @@ provides:
 */
 
 (function() {
+	var dummyStyle = document.createElement('div').style,
+		vendor = (function () {
+			var vendors = 't,webkitT,MozT,msT,OT'.split(','),
+				t,
+				i = 0,
+				l = vendors.length;
 
-// TODO: Property detect if a prefix-less version is available
+			for ( ; i < l; i++ ) {
+				t = vendors[i] + 'ransform';
+				if ( t in dummyStyle ) {
+					return vendors[i].substr(0, vendors[i].length - 1);
+				}
+			}
 
-var a = 'animationend';
-var t = 'transitionend';
+			return false;
+		})();
+
+	function prefixStyle (style) {
+		if ( vendor === '' ) return style;
+
+		style = style.charAt(0).toUpperCase() + style.substr(1);
+		return vendor + style;
+	}
+
+var a = prefixStyle('AnimationEnd');
+var t = prefixStyle('TransitionEnd');
 
 Element.NativeEvents[a] = 2;
 Element.NativeEvents[t] = 2;
