@@ -7054,7 +7054,7 @@ moobile.Component.defineRole('text', null, function(element) {
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.5'
+	version: '0.3.6'
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
@@ -7570,7 +7570,9 @@ provides:
 		})();
 
 	function prefixStyle (style) {
-		if ( vendor === '' ) return style;
+		if ( vendor === '' ) {
+			return style.toLowerCase();
+		}
 
 		style = style.charAt(0).toUpperCase() + style.substr(1);
 		return vendor + style;
