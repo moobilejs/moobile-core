@@ -1150,6 +1150,7 @@ input, select, textarea {
 .alert .alert-box {
 	box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.45);
 	border-image: url(../images/ios/alert.png) 35 15 15 15 fill stretch stretch;
+	border-style: solid;
 	border-radius: 12px;
 	border-width: 15px;
 	border-top-width: 35px;
