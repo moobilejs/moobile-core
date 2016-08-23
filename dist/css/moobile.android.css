@@ -1,7 +1,7 @@
 /* Theme Config
 -----------------------------------------------------------------------------*/
 .theme {
-  content: '{"name": "android"}'; }
+  content: 'android'; }
 
 /* Body
 -----------------------------------------------------------------------------*/
@@ -154,9 +154,12 @@ input, select, textarea {
 .bar.navigation-bar > .navigation-bar-content {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
           align-items: center; }
 
 .bar.navigation-bar > .navigation-bar-content > .navigation-bar-title {
@@ -167,12 +170,15 @@ input, select, textarea {
    */
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
           flex-grow: 1;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   max-width: 100%;
   overflow: hidden;
@@ -213,18 +219,22 @@ input, select, textarea {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
+      -ms-flex-direction: row;
           flex-direction: row;
   /* Important */
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
           align-items: center;
   /* Important */
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   /* Important */
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   /* Important */
   height: 100%;
@@ -346,12 +356,16 @@ input, select, textarea {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
+      -ms-flex-direction: column;
           flex-direction: column;
   -webkit-box-align: start;
   -webkit-align-items: start;
+      -ms-flex-align: start;
+              -ms-grid-row-align: start;
           align-items: start;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   border-bottom: 1px solid #d9d9d9;
   color: #222;
@@ -395,9 +409,11 @@ input, select, textarea {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
+      -ms-flex-direction: column;
           flex-direction: column;
   -webkit-box-pack: end;
   -webkit-justify-content: end;
+      -ms-flex-pack: end;
           justify-content: end;
   border-bottom: 2px solid #bababa;
   color: #999999;
@@ -479,16 +495,19 @@ input, select, textarea {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
+      -ms-flex-direction: row;
           flex-direction: row;
   /* Important */
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   /* Important */ }
 
 .alert .button {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+      -ms-flex: 1;
           flex: 1;
   /* Important */
   background: transparent;
@@ -554,6 +573,7 @@ input, select, textarea {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
+      -ms-flex-direction: column;
           flex-direction: column;
   /* Important */ }
 
