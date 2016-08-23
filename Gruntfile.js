@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         map: true, // inline sourcemaps
 
         processors: [
-          require('autoprefixer')({browsers: 'ios >= 7, android >= 4'}), // add vendor prefixes
+          require('autoprefixer')({browsers: 'ios >= 7, android >= 4, IE >= 10, Firefox > 40'}), // add vendor prefixes
         ]
       },
       dist: {

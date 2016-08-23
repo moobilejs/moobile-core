@@ -13,9 +13,7 @@ var Theme = moobile.Theme = {
 	init: function() {
 		var content = element.getStyle('content');
 		if (content) {
-			content = content.replace(/^\'/, '');
-			content = content.replace(/\'$/, '');
-			configs = JSON.decode(content);
+			configs = {name: content}
 		}
 	},
 

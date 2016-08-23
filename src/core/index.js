@@ -1,5 +1,5 @@
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.6'
+	version: '0.3.7'
 };

@@ -1,7 +1,7 @@
 /* Theme Config
 -----------------------------------------------------------------------------*/
 .theme {
-  content: '{"name": "ios"}'; }
+  content: 'ios'; }
 
 /* General Fixes
 -----------------------------------------------------------------------------*/
@@ -140,6 +140,7 @@ input, select, textarea {
 .view.view-collection > .view-content-wrapper > .view-content > .view:first-child {
   -webkit-box-flex: 0;
   -webkit-flex: 0;
+      -ms-flex: 0;
           flex: 0;
   border-right: 1px solid black;
   width: 300px; }
@@ -217,9 +218,12 @@ input, select, textarea {
 .bar.navigation-bar > .navigation-bar-content {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
           align-items: center; }
 
 .bar.navigation-bar > .navigation-bar-content > .navigation-bar-title {
@@ -230,12 +234,15 @@ input, select, textarea {
    */
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
           flex-grow: 1;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   max-width: 100%;
   overflow: hidden;
@@ -256,9 +263,12 @@ input, select, textarea {
 .bar.tab-bar .bar-content {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
           align-items: center;
   height: 100%; }
 
@@ -272,12 +282,16 @@ input, select, textarea {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
+      -ms-flex-direction: column;
           flex-direction: column;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
           align-items: center;
   border-radius: 2;
   color: #fff;
@@ -312,6 +326,7 @@ input, select, textarea {
 .tab-bar .tab {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+      -ms-flex: 1;
           flex: 1;
   height: 100%;
   width: 0px; }
@@ -322,9 +337,12 @@ input, select, textarea {
   box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 0px #fff;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
+      -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
           align-items: center;
   background: #fff;
   border: 1px solid #ababab;
@@ -1047,6 +1065,7 @@ input, select, textarea {
 .alert .alert-footer {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   /* Important */
   margin-left: -5px;
@@ -1056,6 +1075,7 @@ input, select, textarea {
 .alert .alert-footer .button {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+      -ms-flex: 1;
           flex: 1;
   box-shadow: none;
   -webkit-border-image: url(../images/ios/alert-button.png) 0 5 86 5 stretch stretch;
@@ -1094,6 +1114,7 @@ input, select, textarea {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
+      -ms-flex-direction: column;
           flex-direction: column; }
 
 .alert.alert-layout-vertical .alert-footer .button {
