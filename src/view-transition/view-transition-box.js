@@ -111,6 +111,25 @@ var CoverBox = moobile.ViewTransition.Box = new Class({
 	 */
 	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
 		return false;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#destroy
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.8
+	 */
+	destroy: function() {
+		
+		if(this.overlay) {
+			this.overlay.hide();
+			this.overlay.destroy();	
+		}
+		
+		if(this.wrapper) {
+			this.wrapper.remove();
+		}
+		
+		this.parent();
 	}
 
 });

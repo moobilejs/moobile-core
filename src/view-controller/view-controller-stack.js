@@ -104,11 +104,11 @@ var ViewControllerStack = moobile.ViewControllerStack = new Class({
 			viewControllerBefore.viewDidLeave();
 		}
 
+		this._animating = false;
+
 		this.didPushViewController(viewControllerPushed);
 
 		viewControllerPushed.viewDidEnter();
-
-		this._animating = false;
 	},
 
 	/**
@@ -202,12 +202,12 @@ var ViewControllerStack = moobile.ViewControllerStack = new Class({
 		viewControllerPopped.viewDidLeave();
 		viewControllerPopped.removeFromParentViewController();
 
+		this._animating = false;
+
 		this.didPopViewController(viewControllerPopped);
 
 		viewControllerPopped.destroy();
 		viewControllerPopped = null;
-
-		this._animating = false;
 	},
 
 	/**

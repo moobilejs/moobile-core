@@ -766,9 +766,13 @@ var ViewController = moobile.ViewController = new Class({
 			this.__image = null;
 		}
 
+		if(this.__viewTransition) {
+			this.__viewTransition.destroy();
+			this.__viewTransition = null;
+		}
+
 		this.__parent = null;
-		this.__children = null
-		this.__viewTransition = null;
+		this.__children = null;
 	},
 
 	/* Private API */
