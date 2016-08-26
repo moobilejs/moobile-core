@@ -7054,7 +7054,7 @@ moobile.Component.defineRole('text', null, function(element) {
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.7'
+	version: '0.3.8'
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
@@ -9339,11 +9339,11 @@ var ViewControllerStack = moobile.ViewControllerStack = new Class({
 			viewControllerBefore.viewDidLeave();
 		}
 
+		this._animating = false;
+
 		this.didPushViewController(viewControllerPushed);
 
 		viewControllerPushed.viewDidEnter();
-
-		this._animating = false;
 	},
 
 	/**
@@ -9437,12 +9437,12 @@ var ViewControllerStack = moobile.ViewControllerStack = new Class({
 		viewControllerPopped.viewDidLeave();
 		viewControllerPopped.removeFromParentViewController();
 
+		this._animating = false;
+
 		this.didPopViewController(viewControllerPopped);
 
 		viewControllerPopped.destroy();
 		viewControllerPopped = null;
-
-		this._animating = false;
 	},
 
 	/**
@@ -10365,9 +10365,13 @@ var ViewController = moobile.ViewController = new Class({
 			this.__image = null;
 		}
 
+		if(this.__viewTransition) {
+			this.__viewTransition.destroy();
+			this.__viewTransition = null;
+		}
+
 		this.__parent = null;
-		this.__children = null
-		this.__viewTransition = null;
+		this.__children = null;
 	},
 
 	/* Private API */
@@ -10568,6 +10572,25 @@ var CoverBox = moobile.ViewTransition.Box = new Class({
 	 */
 	shouldHideViewToHideOnEnter: function(viewToShow, viewToHide, parentView) {
 		return false;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#destroy
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.8
+	 */
+	destroy: function() {
+		
+		if(this.overlay) {
+			this.overlay.hide();
+			this.overlay.destroy();	
+		}
+		
+		if(this.wrapper) {
+			this.wrapper.remove();
+		}
+		
+		this.parent();
 	}
 
 });
@@ -11349,6 +11372,15 @@ var ViewTransition = moobile.ViewTransition = new Class({
 	initialize: function(options) {
 		this.setOptions(options);
 		return this;
+	},
+
+	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#destroy
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.8
+	 */
+	destroy: function() {
+
 	},
 
 	/**

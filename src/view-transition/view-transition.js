@@ -25,6 +25,15 @@ var ViewTransition = moobile.ViewTransition = new Class({
 	},
 
 	/**
+	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#destroy
+	 * @author Yannick Gagnon (yannick.gagnon@gmail.com)
+	 * @since  0.3.8
+	 */
+	destroy: function() {
+
+	},
+
+	/**
 	 * @see    http://moobilejs.com/doc/latest/moobile.ViewTransition/moobile.ViewTransition#enter
 	 * @author Jean-Philippe Dery (jeanphilippe.dery@gmail.com)
 	 * @since  0.1.0
