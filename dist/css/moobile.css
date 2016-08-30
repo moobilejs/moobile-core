@@ -287,6 +287,12 @@ input, select, textarea {
 
 /* View Stack
 -----------------------------------------------------------------------------*/
+.window > .view-content-wrapper > .view-content > div {
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none; }
+
 .view.view-stack > .view-content-wrapper > .view-content {
   display: block;
   height: 100%;
