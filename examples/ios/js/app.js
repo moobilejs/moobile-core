@@ -174,6 +174,12 @@ ViewController.Home = new Class({
 			case 'transition-cover-box':
 				viewControllerStack.pushViewController(new ViewController.Transition, new Moobile.ViewTransition.Cover.Box);
 				return;
+			case 'modal-transition-cover-page':
+				viewControllerStack.presentModalViewController(new ViewController.Modal, new Moobile.ViewTransition.Cover.Page);
+				return;
+			case 'modal-transition-cover-box':
+				viewControllerStack.presentModalViewController(new ViewController.Modal, new Moobile.ViewTransition.Cover.Box);
+				return;
 
 			//
 			// Events
@@ -238,6 +244,55 @@ ViewController.Transition = new Class({
 
 	onBackButtonTap: function() {
 		this.getViewControllerStack().popViewController();
+	}
+
+});
+
+/*
+---
+
+name: ViewController.Transition
+
+description:
+
+license:
+
+authors:
+	- Your name
+
+requires:
+
+provides:
+	- ViewController.Transition
+
+...
+*/
+
+if (!window.ViewController) window.ViewController = {};
+
+ViewController.Modal = new Class({
+
+	Extends: Moobile.ViewController,
+
+	backButton: null,
+
+	loadView: function() {
+		this.view = Moobile.View.at('templates/views/transition-view.html');
+	},
+
+	viewDidLoad: function() {
+		this.backButton = this.view.getDescendantComponent('back-button');
+		this.backButton.addEvent('tap', this.bound('onBackButtonTap'));
+	},
+
+	destroy: function() {
+		this.backButton.removeEvent('tap', this.bound('onBackButtonTap'));
+		this.backButton = null;
+		this.parent();
+	},
+
+	onBackButtonTap: function() {
+		this.getViewControllerStack().dismissModalViewController();
 	}
 
 });
