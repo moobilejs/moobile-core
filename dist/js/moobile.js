@@ -7054,7 +7054,7 @@ moobile.Component.defineRole('text', null, function(element) {
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.8'
+	version: '0.3.9'
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
@@ -10587,7 +10587,7 @@ var CoverBox = moobile.ViewTransition.Box = new Class({
 		}
 		
 		if(this.wrapper) {
-			this.wrapper.remove();
+			this.wrapper.destroy();
 		}
 		
 		this.parent();
