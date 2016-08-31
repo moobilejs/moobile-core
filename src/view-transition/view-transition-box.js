@@ -126,7 +126,7 @@ var CoverBox = moobile.ViewTransition.Box = new Class({
 		}
 		
 		if(this.wrapper) {
-			this.wrapper.remove();
+			this.wrapper.destroy();
 		}
 		
 		this.parent();
