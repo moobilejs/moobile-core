@@ -905,13 +905,14 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .transition-cover-page-foreground-view-wrapper {
-	transform: translate3d(0, -100%, 0);                 /* Important */
+	transform: translate3d(0, 0, 0);                 /* Important */
 	box-sizing: border-box;                              /* Important */
     justify-content: center;                             /* Important */
     align-items: center;                                 /* Important */
 	display: flex;                                       /* Important */
 	height: 100%;                                                /* Important */
-	position: relative;                                          /* Important */
+	position: absolute;                                       	 /* Important */
+	top: 0;														 /* Important */
 	width: 100%;                                                 /* Important */
 	z-index: 75;                                                 /* Important */
 }
@@ -936,8 +937,8 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 @keyframes transition-cover-page-enter {
-	from { transform: translate3d(0, 0, 0); }
-	to   { transform: translate3d(0, -100%, 0); }
+	from { transform: translate3d(0, 100%, 0); }
+	to   { transform: translate3d(0, 0, 0); }
 }
 
 .transition-cover-page-enter {
@@ -952,8 +953,8 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 @keyframes transition-cover-page-leave {
-	from { transform: translate3d(0, -100%, 0); }
-	to   { transform: translate3d(0, 0, 0); }
+	from { transform: translate3d(0, 0, 0); }
+	to   { transform: translate3d(0, 100%, 0); }
 }
 
 .transition-cover-page-leave {
@@ -968,13 +969,14 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 .transition-cover-box-foreground-view-wrapper {
-    transform: translate3d(0, -100%, 0);                 /* Important */
+    transform: translate3d(0, 0, 0);                  	 /* Important */
     box-sizing: border-box;                              /* Important */
     justify-content: center;                             /* Important */
     align-items: center;                                 /* Important */
 	display: flex;                                       /* Important */
 	height: 100%;                                                /* Important */
-	position: relative;                                          /* Important */
+	position: absolute;                                          /* Important */
+	top: 0;														 /* Important */
 	width: 100%;                                                 /* Important */
 	z-index: 75;                                                 /* Important */
 }
@@ -998,8 +1000,8 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 @keyframes transition-cover-box-enter {
-	from { transform: translate3d(0, 0, 0); }
-	to   { transform: translate3d(0, -100%, 0); }
+	from { transform: translate3d(0, 100%, 0); }
+	to   { transform: translate3d(0, 0, 0); }
 }
 
 .transition-cover-box-enter {
@@ -1014,8 +1016,8 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 
 @keyframes transition-cover-box-leave {
-	from { transform: translate3d(0, -100%, 0); }
-	to   { transform: translate3d(0, 0, 0); }
+	from { transform: translate3d(0, 0, 0); }
+	to   { transform: translate3d(0, 100%, 0); }
 }
 
 .transition-cover-box-leave {

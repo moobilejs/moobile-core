@@ -1104,8 +1104,8 @@ input, select, textarea {
 /* Transition Cover Page (Shared)
 -----------------------------------------------------------------------------*/
 .transition-cover-page-foreground-view-wrapper {
-  -webkit-transform: translate3d(0, -100%, 0);
-          transform: translate3d(0, -100%, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   /* Important */
   box-sizing: border-box;
   /* Important */
@@ -1126,7 +1126,9 @@ input, select, textarea {
   /* Important */
   height: 100%;
   /* Important */
-  position: relative;
+  position: absolute;
+  /* Important */
+  top: 0;
   /* Important */
   width: 100%;
   /* Important */
@@ -1155,18 +1157,18 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-page-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 @keyframes transition-cover-page-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 .transition-cover-page-enter {
   display: block !important; }
 
@@ -1178,18 +1180,18 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-page-leave {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); }
-  to {
     -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); } }
+            transform: translate3d(0, 0, 0); }
+  to {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); } }
 @keyframes transition-cover-page-leave {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); }
-  to {
     -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); } }
+            transform: translate3d(0, 0, 0); }
+  to {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); } }
 .transition-cover-page-leave {
   display: block !important; }
 
@@ -1200,8 +1202,8 @@ input, select, textarea {
 /* Transition Cover Box (Shared)
 -----------------------------------------------------------------------------*/
 .transition-cover-box-foreground-view-wrapper {
-  -webkit-transform: translate3d(0, -100%, 0);
-          transform: translate3d(0, -100%, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   /* Important */
   box-sizing: border-box;
   /* Important */
@@ -1222,7 +1224,9 @@ input, select, textarea {
   /* Important */
   height: 100%;
   /* Important */
-  position: relative;
+  position: absolute;
+  /* Important */
+  top: 0;
   /* Important */
   width: 100%;
   /* Important */
@@ -1249,18 +1253,18 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-box-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 @keyframes transition-cover-box-enter {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); }
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); }
   to {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); } }
 .transition-cover-box-enter {
   display: block !important; }
 
@@ -1272,18 +1276,18 @@ input, select, textarea {
 -----------------------------------------------------------------------------*/
 @-webkit-keyframes transition-cover-box-leave {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); }
-  to {
     -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); } }
+            transform: translate3d(0, 0, 0); }
+  to {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); } }
 @keyframes transition-cover-box-leave {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0); }
-  to {
     -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); } }
+            transform: translate3d(0, 0, 0); }
+  to {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0); } }
 .transition-cover-box-leave {
   display: block !important; }
 
