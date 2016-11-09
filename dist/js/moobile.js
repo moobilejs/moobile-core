@@ -7054,7 +7054,7 @@ moobile.Component.defineRole('text', null, function(element) {
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.11'
+	version: '0.3.12'
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
@@ -12003,7 +12003,7 @@ var ScrollView = moobile.ScrollView = new Class({
 				this.__activeTouchCanceled = true
 				this.contentElement.getElements('*').each(function(element) {
 					var event = document.createEvent('CustomEvent');
-					event.initCustomEvent('touchcancel', false, false);
+					event.initCustomEvent('touchcancel', false, false, null);
 					element.dispatchEvent(event);
 				});
 			}

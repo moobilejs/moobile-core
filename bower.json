@@ -1,6 +1,6 @@
 {
   "name": "moobilejs",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "web application framework for engineering mobile and touch applications",
   "homepage": "https://github.com/moobilejs/moobile-core",
   "main": "dist/js/moobile.min.js",
