@@ -547,7 +547,7 @@ var ScrollView = moobile.ScrollView = new Class({
 				this.__activeTouchCanceled = true
 				this.contentElement.getElements('*').each(function(element) {
 					var event = document.createEvent('CustomEvent');
-					event.initCustomEvent('touchcancel', false, false);
+					event.initCustomEvent('touchcancel', false, false, null);
 					element.dispatchEvent(event);
 				});
 			}
