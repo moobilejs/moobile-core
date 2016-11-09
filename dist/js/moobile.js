@@ -7054,7 +7054,7 @@ moobile.Component.defineRole('text', null, function(element) {
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.13'
+	version: '0.3.14'
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
@@ -7758,8 +7758,9 @@ Element.defineCustomEvent('tap', {
 	condition: function(e) {
 
 		if (tapValid) {
-
-			var element = tapTouch ? document.elementFromPoint(tapTouch.pageX - window.scrollX, tapTouch.pageY - window.scrollY) : null;
+			var offsetX = window.scrollX === undefined ? window.pageXOffset : window.scrollX,
+				offsetY = window.scrollY === undefined ? window.pageYOffset : window.scrollY,
+				element = tapTouch ? document.elementFromPoint(tapTouch.pageX - offsetX, tapTouch.pageY - offsetY) : null;
 			if (element) {
 				return this === element || this.contains(element);
 			}
