@@ -7759,7 +7759,7 @@ Element.defineCustomEvent('tap', {
 
 		if (tapValid) {
 
-			var element = tapTouch ? document.elementFromPoint(tapTouch.pageX, tapTouch.pageY) : null;
+			var element = tapTouch ? document.elementFromPoint(tapTouch.pageX - window.scrollX, tapTouch.pageY - window.scrollY) : null;
 			if (element) {
 				return this === element || this.contains(element);
 			}
