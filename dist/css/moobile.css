@@ -699,14 +699,14 @@ input, select, textarea {
   /* Important */ }
 
 .overlay.show-animated {
-  -webkit-animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-          animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+  -webkit-animation: show-overlay 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: show-overlay 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both; }
 
 .overlay.hide-animated {
-  -webkit-animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
-          animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+  -webkit-animation: hide-overlay 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+          animation: hide-overlay 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both; }
 

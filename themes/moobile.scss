@@ -601,16 +601,16 @@ input, select, textarea {
 	position: absolute;                                          /* Important */
 	right: 0px;                                                  /* Important */
 	top: 0px;                                                    /* Important */
-	z-index: 100;                                                /* Important */
+	z-index: 100;												 /* Important */
 }
 
 .overlay.show-animated {
-    animation: show-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+    animation: show-overlay 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
     animation-fill-mode: both;
 }
 
 .overlay.hide-animated {
-    animation: hide-overlay 350ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
+    animation: hide-overlay 400ms 1 cubic-bezier(0.5, 0.1, 0.5, 1);
     animation-fill-mode: both;
 }
 
