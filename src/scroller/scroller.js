@@ -148,7 +148,7 @@ window.addEvent('domready', function(e) {
 			var target = touch.target;
 			var identifier = touch.identifier;
 
-			if (target === undefined || target.tagName === undefined || target.tagName.match(/input|textarea|select|a/i)) {
+			if (target === undefined || target.tagName === undefined || target.tagName.match(/input|textarea|select|a|svg|polygon/i)) {
 				scrolls[identifier] = false;
 				return;
 			}
