@@ -7054,7 +7054,7 @@ moobile.Component.defineRole('text', null, function(element) {
 "use strict"
 
 var moobile = global.moobile = global.Moobile = {
-	version: '0.3.15'
+	version: '0.3.17'
 };
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],24:[function(require,module,exports){
@@ -8588,7 +8588,7 @@ window.addEvent('domready', function(e) {
 			var target = touch.target;
 			var identifier = touch.identifier;
 
-			if (target === undefined || target.tagName === undefined || target.tagName.match(/input|textarea|select|a/i)) {
+			if (target === undefined || target.tagName === undefined || target.tagName.match(/input|textarea|select|a|svg|polygon/i)) {
 				scrolls[identifier] = false;
 				return;
 			}
@@ -13032,100 +13032,117 @@ Element.defineCustomEvent(name, {
 },{}],64:[function(require,module,exports){
 /*
 ---
-
 name: Swipe
-
 description: Provides a custom swipe event for touch devices
-
 authors: Christopher Beloch (@C_BHole), Christoph Pojer (@cpojer), Ian Collins (@3n)
-
 license: MIT-style license.
-
 requires: [Core/Element.Event, Custom-Event/Element.defineCustomEvent, Browser.Features.Touch]
-
 provides: Swipe
-
 ...
 */
-
 (function(){
+	var name = 'swipe',
+		distanceKey = name + ':distance',
+		cancelKey = name + ':cancelVertical',
+		dflt = 50,
+		start = {},
+		disabled,
+		active;
 
-var name = 'swipe',
-	distanceKey = name + ':distance',
-	cancelKey = name + ':cancelVertical',
-	dflt = 50;
+	var clean = function() {
+		active = false;
+	};
 
-var start = {}, disabled, active;
+	var events = {
 
-var clean = function(){
-	active = false;
-};
+		touchstart: function(event){
+			if (event.touches.length > 1) {
+				return;
+			}
 
-var events = {
-
-	touchstart: function(event){
-		if (event.touches.length > 1) return;
-
-		var touch = event.touches[0];
-		active = true;
-		start = {x: touch.pageX, y: touch.pageY};
-	},
-	
-	touchmove: function(event){
-		if (disabled || !active) return;
+			var touch = event.touches[0];
+			active = true;
+			start = {x: touch.pageX, y: touch.pageY};
+		},
 		
-		var touch = event.changedTouches[0],
-			end = {x: touch.pageX, y: touch.pageY};
-		if (this.retrieve(cancelKey) && Math.abs(start.y - end.y) > 10){
+		touchmove: function(event){
+			if (disabled || !active) {
+				return;
+			}
+			
+			var touch = event.changedTouches[0],
+
+				end = {
+					x: touch.pageX,
+					y: touch.pageY
+				};
+
+			if (this.retrieve(cancelKey) && Math.abs(start.y - end.y) > 10) {
+				active = false;
+				return;
+			}
+
+			var distance = this.retrieve(distanceKey, dflt),
+				direction = null,
+				deltaX = end.x - start.x,
+				deltaY = end.y - start.y;
+
+				if(Math.abs(deltaX) > Math.abs(deltaY)) {
+
+					if(deltaX < -distance) {
+						direction = 'left';
+					} else if(deltaX > distance) {
+						direction = 'right';
+					}
+
+				} else {
+
+					if(deltaY < -distance) {
+						direction = 'up';
+					} else if(deltaY > distance) {
+						direction = 'down';
+					}
+
+				}
+
+			if (!direction) {
+				return;
+			}
+				
+			event.preventDefault();
 			active = false;
-			return;
+			event.direction = direction;
+			event.start = start;
+			event.end = end;
+			
+			this.fireEvent(name, event);
+		},
+		touchend: clean,
+		touchcancel: clean
+	};
+
+	Element.defineCustomEvent(name, {
+
+		onSetup: function(){
+			this.addEvents(events);
+		},
+
+		onTeardown: function(){
+			this.removeEvents(events);
+		},
+
+		onEnable: function(){
+			disabled = false;
+		},
+
+		onDisable: function(){
+			disabled = true;
+			clean();
 		}
 		
-		var distance = this.retrieve(distanceKey, dflt),
-			delta = end.x - start.x,
-			isLeftSwipe = delta < -distance,
-			isRightSwipe = delta > distance;
-
-		if (!isRightSwipe && !isLeftSwipe)
-			return;
-		
-		event.preventDefault();
-		active = false;
-		event.direction = (isLeftSwipe ? 'left' : 'right');
-		event.start = start;
-		event.end = end;
-		
-		this.fireEvent(name, event);
-	},
-
-	touchend: clean,
-	touchcancel: clean
-
-};
-
-Element.defineCustomEvent(name, {
-
-	onSetup: function(){
-		this.addEvents(events);
-	},
-
-	onTeardown: function(){
-		this.removeEvents(events);
-	},
-
-	onEnable: function(){
-		disabled = false;
-	},
-
-	onDisable: function(){
-		disabled = true;
-		clean();
-	}
-
-});
+	});
 
 })();
-
 },{}],"/src/main.js":[function(require,module,exports){
 (function (global){
 "use strict"
